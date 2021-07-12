@@ -1,16 +1,11 @@
-# hakondate_v2
+# はこんだて
+## サービス概要
 
-はこんだて開発用プロジェクト
+## 利用技術・依存関係
+### 状態管理
+- [flutter_riverpod](https://pub.dev/packages/riverpod) : 状態管理パッケージ，コンパイル時のエラー検知や無駄なクラスのネストを回避できる
+- [state_notifier](https://pub.dev/packages/state_notifier) : 状態値をimmutableに扱うためのパッケージ
+- [freezed](https://pub.dev/packages/freezed/install) : State Notifierをより簡素に実装するためのパッケージ
+  - freezed_annotation
+  - build_runner
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
