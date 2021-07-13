@@ -9,3 +9,9 @@
   - freezed_annotation
   - build_runner
 
+## コーディング規約
+基本的には[Effective Dart](https://dart.dev/guides/language/effective-dart)と[Style guide for Flutter repo](https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo)に従う  
+###### 翻訳してくれているサイト
+> [Effective Dartまとめ](https://qiita.com/mkosuke/items/42c19d7edbf111f7fb71)
+
+**実際にあったミス**
