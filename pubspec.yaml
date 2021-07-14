@@ -30,7 +30,6 @@ dependencies:
 
   # 状態管理関連
   flutter_riverpod: ^1.0.0-dev.5
-  state_notifier: ^0.7.0
   freezed_annotation: ^0.14.2
 
 dev_dependencies:
