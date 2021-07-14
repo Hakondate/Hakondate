@@ -32,6 +32,9 @@ dependencies:
   flutter_riverpod: ^1.0.0-dev.5
   freezed_annotation: ^0.14.2
 
+  # Json変換用
+  json_annotation: ^4.0.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -39,6 +42,7 @@ dev_dependencies:
   build_runner: ^2.0.6
   freezed: ^0.14.2
 
+  json_serializable: ^4.1.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
