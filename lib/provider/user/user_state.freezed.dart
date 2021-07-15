@@ -22,8 +22,8 @@ class _$UserStateTearOff {
     );
   }
 
-  _UserStateLoding loading() {
-    return const _UserStateLoding();
+  _UserStateLoading loading() {
+    return const _UserStateLoading();
   }
 }
 
@@ -48,13 +48,13 @@ mixin _$UserState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_UserState value) $default, {
-    required TResult Function(_UserStateLoding value) loading,
+    required TResult Function(_UserStateLoading value) loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
     TResult Function(_UserState value)? $default, {
-    TResult Function(_UserStateLoding value)? loading,
+    TResult Function(_UserStateLoading value)? loading,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -169,7 +169,7 @@ class _$_UserState with DiagnosticableTreeMixin implements _UserState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_UserState value) $default, {
-    required TResult Function(_UserStateLoding value) loading,
+    required TResult Function(_UserStateLoading value) loading,
   }) {
     return $default(this);
   }
@@ -178,7 +178,7 @@ class _$_UserState with DiagnosticableTreeMixin implements _UserState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
     TResult Function(_UserState value)? $default, {
-    TResult Function(_UserStateLoding value)? loading,
+    TResult Function(_UserStateLoading value)? loading,
     required TResult orElse(),
   }) {
     if ($default != null) {
@@ -198,29 +198,30 @@ abstract class _UserState implements UserState {
 }
 
 /// @nodoc
-abstract class _$UserStateLodingCopyWith<$Res> {
-  factory _$UserStateLodingCopyWith(
-          _UserStateLoding value, $Res Function(_UserStateLoding) then) =
-      __$UserStateLodingCopyWithImpl<$Res>;
+abstract class _$UserStateLoadingCopyWith<$Res> {
+  factory _$UserStateLoadingCopyWith(
+          _UserStateLoading value, $Res Function(_UserStateLoading) then) =
+      __$UserStateLoadingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$UserStateLodingCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
-    implements _$UserStateLodingCopyWith<$Res> {
-  __$UserStateLodingCopyWithImpl(
-      _UserStateLoding _value, $Res Function(_UserStateLoding) _then)
-      : super(_value, (v) => _then(v as _UserStateLoding));
+class __$UserStateLoadingCopyWithImpl<$Res>
+    extends _$UserStateCopyWithImpl<$Res>
+    implements _$UserStateLoadingCopyWith<$Res> {
+  __$UserStateLoadingCopyWithImpl(
+      _UserStateLoading _value, $Res Function(_UserStateLoading) _then)
+      : super(_value, (v) => _then(v as _UserStateLoading));
 
   @override
-  _UserStateLoding get _value => super._value as _UserStateLoding;
+  _UserStateLoading get _value => super._value as _UserStateLoading;
 }
 
 /// @nodoc
 
-class _$_UserStateLoding
+class _$_UserStateLoading
     with DiagnosticableTreeMixin
-    implements _UserStateLoding {
-  const _$_UserStateLoding();
+    implements _UserStateLoading {
+  const _$_UserStateLoading();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -235,7 +236,7 @@ class _$_UserStateLoding
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _UserStateLoding);
+    return identical(this, other) || (other is _UserStateLoading);
   }
 
   @override
@@ -267,7 +268,7 @@ class _$_UserStateLoding
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_UserState value) $default, {
-    required TResult Function(_UserStateLoding value) loading,
+    required TResult Function(_UserStateLoading value) loading,
   }) {
     return loading(this);
   }
@@ -276,7 +277,7 @@ class _$_UserStateLoding
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
     TResult Function(_UserState value)? $default, {
-    TResult Function(_UserStateLoding value)? loading,
+    TResult Function(_UserStateLoading value)? loading,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -286,6 +287,6 @@ class _$_UserStateLoding
   }
 }
 
-abstract class _UserStateLoding implements UserState {
-  const factory _UserStateLoding() = _$_UserStateLoding;
+abstract class _UserStateLoading implements UserState {
+  const factory _UserStateLoading() = _$_UserStateLoading;
 }

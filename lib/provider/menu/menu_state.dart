@@ -28,5 +28,5 @@ abstract class MenuState with _$MenuState {
   const factory MenuState({
     @Default(<MenuModel>[]) List<MenuModel> menus
   }) = _MenuState;
-  const factory MenuState.loading() = _MenuStateLoding;
+  const factory MenuState.loading() = _MenuStateLoading;
 }

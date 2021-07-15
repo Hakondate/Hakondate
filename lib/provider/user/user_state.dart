@@ -10,5 +10,5 @@ abstract class UserState with _$UserState {
   const factory UserState({
     required UserModel user
   }) = _UserState;
-  const factory UserState.loading() = _UserStateLoding;
+  const factory UserState.loading() = _UserStateLoading;
 }

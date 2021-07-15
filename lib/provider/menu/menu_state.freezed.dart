@@ -22,8 +22,8 @@ class _$MenuStateTearOff {
     );
   }
 
-  _MenuStateLoding loading() {
-    return const _MenuStateLoding();
+  _MenuStateLoading loading() {
+    return const _MenuStateLoading();
   }
 }
 
@@ -48,13 +48,13 @@ mixin _$MenuState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_MenuState value) $default, {
-    required TResult Function(_MenuStateLoding value) loading,
+    required TResult Function(_MenuStateLoading value) loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
     TResult Function(_MenuState value)? $default, {
-    TResult Function(_MenuStateLoding value)? loading,
+    TResult Function(_MenuStateLoading value)? loading,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -170,7 +170,7 @@ class _$_MenuState with DiagnosticableTreeMixin implements _MenuState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_MenuState value) $default, {
-    required TResult Function(_MenuStateLoding value) loading,
+    required TResult Function(_MenuStateLoading value) loading,
   }) {
     return $default(this);
   }
@@ -179,7 +179,7 @@ class _$_MenuState with DiagnosticableTreeMixin implements _MenuState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
     TResult Function(_MenuState value)? $default, {
-    TResult Function(_MenuStateLoding value)? loading,
+    TResult Function(_MenuStateLoading value)? loading,
     required TResult orElse(),
   }) {
     if ($default != null) {
@@ -199,29 +199,30 @@ abstract class _MenuState implements MenuState {
 }
 
 /// @nodoc
-abstract class _$MenuStateLodingCopyWith<$Res> {
-  factory _$MenuStateLodingCopyWith(
-          _MenuStateLoding value, $Res Function(_MenuStateLoding) then) =
-      __$MenuStateLodingCopyWithImpl<$Res>;
+abstract class _$MenuStateLoadingCopyWith<$Res> {
+  factory _$MenuStateLoadingCopyWith(
+          _MenuStateLoading value, $Res Function(_MenuStateLoading) then) =
+      __$MenuStateLoadingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$MenuStateLodingCopyWithImpl<$Res> extends _$MenuStateCopyWithImpl<$Res>
-    implements _$MenuStateLodingCopyWith<$Res> {
-  __$MenuStateLodingCopyWithImpl(
-      _MenuStateLoding _value, $Res Function(_MenuStateLoding) _then)
-      : super(_value, (v) => _then(v as _MenuStateLoding));
+class __$MenuStateLoadingCopyWithImpl<$Res>
+    extends _$MenuStateCopyWithImpl<$Res>
+    implements _$MenuStateLoadingCopyWith<$Res> {
+  __$MenuStateLoadingCopyWithImpl(
+      _MenuStateLoading _value, $Res Function(_MenuStateLoading) _then)
+      : super(_value, (v) => _then(v as _MenuStateLoading));
 
   @override
-  _MenuStateLoding get _value => super._value as _MenuStateLoding;
+  _MenuStateLoading get _value => super._value as _MenuStateLoading;
 }
 
 /// @nodoc
 
-class _$_MenuStateLoding
+class _$_MenuStateLoading
     with DiagnosticableTreeMixin
-    implements _MenuStateLoding {
-  const _$_MenuStateLoding();
+    implements _MenuStateLoading {
+  const _$_MenuStateLoading();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -236,7 +237,7 @@ class _$_MenuStateLoding
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _MenuStateLoding);
+    return identical(this, other) || (other is _MenuStateLoading);
   }
 
   @override
@@ -268,7 +269,7 @@ class _$_MenuStateLoding
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_MenuState value) $default, {
-    required TResult Function(_MenuStateLoding value) loading,
+    required TResult Function(_MenuStateLoading value) loading,
   }) {
     return loading(this);
   }
@@ -277,7 +278,7 @@ class _$_MenuStateLoding
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
     TResult Function(_MenuState value)? $default, {
-    TResult Function(_MenuStateLoding value)? loading,
+    TResult Function(_MenuStateLoading value)? loading,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -287,6 +288,6 @@ class _$_MenuStateLoding
   }
 }
 
-abstract class _MenuStateLoding implements MenuState {
-  const factory _MenuStateLoding() = _$_MenuStateLoding;
+abstract class _MenuStateLoading implements MenuState {
+  const factory _MenuStateLoading() = _$_MenuStateLoading;
 }
