@@ -16,6 +16,7 @@ MVVMを採用
 **概要**
 - view : Widgetの描画
 - view_model : viewで受け取った入力の処理
+- provider : modelを実際にviewmodel内で利用されるクラスに格納したもの
 - model : view_modelで扱うクラスの管理
 - repository : 保存データへのアクセス管理
   - local : ローカルデータとの通信処理
