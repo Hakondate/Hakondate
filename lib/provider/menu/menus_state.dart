@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:hakondate_v2/model/menu/menu_model.dart';
 
-part 'menu_state.freezed.dart';
+part 'menus_state.freezed.dart';
 
 /// freezedを用いたState定義
 ///
@@ -24,9 +24,8 @@ part 'menu_state.freezed.dart';
 /// A. menusのデータを読み込む際や，DBとの通信中を表現する
 
 @freezed
-abstract class MenuState with _$MenuState {
-  const factory MenuState({
-    @Default(<MenuModel>[]) List<MenuModel> menus
-  }) = _MenuState;
-  const factory MenuState.loading() = _MenuStateLoading;
+abstract class MenusState with _$MenusState {
+  const factory MenusState({
+    @Default(<MenuModel>[]) List<MenuModel> menus,
+  }) = _MenusState;
 }
