@@ -8,9 +8,11 @@ part of 'user_model.dart';
 
 UserModel _$UserModelFromJson(Map<String, dynamic> json) {
   return UserModel(
-    name: json['name'] as String,
-    school: SchoolModel.fromJson(json['school'] as Map<String, dynamic>),
-    schoolYear: json['schoolYear'] as int,
+    name: json['name'] as String?,
+    school: json['school'] == null
+        ? null
+        : SchoolModel.fromJson(json['school'] as Map<String, dynamic>),
+    schoolYear: json['schoolYear'] as int?,
   );
 }
 

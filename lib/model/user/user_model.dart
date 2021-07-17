@@ -7,16 +7,16 @@ part 'user_model.g.dart';
 @JsonSerializable()
 class UserModel {
   UserModel({
-    required this.name,
-    required this.school,
-    required this.schoolYear
+    this.name,
+    this.school,
+    this.schoolYear
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
 
-  final String name;        // ニックネーム
-  final SchoolModel school; // 学校
-  final int schoolYear;     // 学年(年齢)
+  final String? name;        // ニックネーム
+  final SchoolModel? school; // 学校
+  final int? schoolYear;     // 学年(年齢)
 }

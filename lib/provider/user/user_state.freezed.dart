@@ -21,10 +21,6 @@ class _$UserStateTearOff {
       user: user,
     );
   }
-
-  _UserStateLoading loading() {
-    return const _UserStateLoading();
-  }
 }
 
 /// @nodoc
@@ -32,31 +28,10 @@ const $UserState = _$UserStateTearOff();
 
 /// @nodoc
 mixin _$UserState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(UserModel user) $default, {
-    required TResult Function() loading,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(UserModel user)? $default, {
-    TResult Function()? loading,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_UserState value) $default, {
-    required TResult Function(_UserStateLoading value) loading,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_UserState value)? $default, {
-    TResult Function(_UserStateLoading value)? loading,
-    required TResult orElse(),
-  }) =>
+  UserModel get user => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $UserStateCopyWith<UserState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -64,6 +39,7 @@ mixin _$UserState {
 abstract class $UserStateCopyWith<$Res> {
   factory $UserStateCopyWith(UserState value, $Res Function(UserState) then) =
       _$UserStateCopyWithImpl<$Res>;
+  $Res call({UserModel user});
 }
 
 /// @nodoc
@@ -73,13 +49,26 @@ class _$UserStateCopyWithImpl<$Res> implements $UserStateCopyWith<$Res> {
   final UserState _value;
   // ignore: unused_field
   final $Res Function(UserState) _then;
+
+  @override
+  $Res call({
+    Object? user = freezed,
+  }) {
+    return _then(_value.copyWith(
+      user: user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserModel,
+    ));
+  }
 }
 
 /// @nodoc
-abstract class _$UserStateCopyWith<$Res> {
+abstract class _$UserStateCopyWith<$Res> implements $UserStateCopyWith<$Res> {
   factory _$UserStateCopyWith(
           _UserState value, $Res Function(_UserState) then) =
       __$UserStateCopyWithImpl<$Res>;
+  @override
   $Res call({UserModel user});
 }
 
@@ -142,151 +131,15 @@ class _$_UserState with DiagnosticableTreeMixin implements _UserState {
   @override
   _$UserStateCopyWith<_UserState> get copyWith =>
       __$UserStateCopyWithImpl<_UserState>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(UserModel user) $default, {
-    required TResult Function() loading,
-  }) {
-    return $default(user);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(UserModel user)? $default, {
-    TResult Function()? loading,
-    required TResult orElse(),
-  }) {
-    if ($default != null) {
-      return $default(user);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_UserState value) $default, {
-    required TResult Function(_UserStateLoading value) loading,
-  }) {
-    return $default(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_UserState value)? $default, {
-    TResult Function(_UserStateLoading value)? loading,
-    required TResult orElse(),
-  }) {
-    if ($default != null) {
-      return $default(this);
-    }
-    return orElse();
-  }
 }
 
 abstract class _UserState implements UserState {
   const factory _UserState({required UserModel user}) = _$_UserState;
 
+  @override
   UserModel get user => throw _privateConstructorUsedError;
+  @override
   @JsonKey(ignore: true)
   _$UserStateCopyWith<_UserState> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$UserStateLoadingCopyWith<$Res> {
-  factory _$UserStateLoadingCopyWith(
-          _UserStateLoading value, $Res Function(_UserStateLoading) then) =
-      __$UserStateLoadingCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$UserStateLoadingCopyWithImpl<$Res>
-    extends _$UserStateCopyWithImpl<$Res>
-    implements _$UserStateLoadingCopyWith<$Res> {
-  __$UserStateLoadingCopyWithImpl(
-      _UserStateLoading _value, $Res Function(_UserStateLoading) _then)
-      : super(_value, (v) => _then(v as _UserStateLoading));
-
-  @override
-  _UserStateLoading get _value => super._value as _UserStateLoading;
-}
-
-/// @nodoc
-
-class _$_UserStateLoading
-    with DiagnosticableTreeMixin
-    implements _UserStateLoading {
-  const _$_UserStateLoading();
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserState.loading()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('type', 'UserState.loading'));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _UserStateLoading);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(UserModel user) $default, {
-    required TResult Function() loading,
-  }) {
-    return loading();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(UserModel user)? $default, {
-    TResult Function()? loading,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_UserState value) $default, {
-    required TResult Function(_UserStateLoading value) loading,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_UserState value)? $default, {
-    TResult Function(_UserStateLoading value)? loading,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _UserStateLoading implements UserState {
-  const factory _UserStateLoading() = _$_UserStateLoading;
 }
