@@ -16,7 +16,7 @@ class UserViewModel extends StateNotifier<UserState> {
       school: school ?? _user.school,
       schoolYear: schoolYear ?? _user.schoolYear,
     );
-    await writeUser(newUser);
+    await _writeUser(newUser);
     state = state.copyWith(user: newUser);
   }
 
@@ -26,7 +26,7 @@ class UserViewModel extends StateNotifier<UserState> {
     state = state.copyWith(user: user);
   }
 
-  Future<void> writeUser(UserModel user) async {
+  Future<void> _writeUser(UserModel user) async {
     // TODO: ローカルファイルにユーザ情報を書き込む
   }
 }
