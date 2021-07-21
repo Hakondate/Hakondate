@@ -11,11 +11,11 @@ class MenusViewModel extends StateNotifier<MenusState> {
   void _addMenus(dynamic menus) {
     if (menus is! MenuModel && menus is! List<MenuModel>)
       throw UnsupportedError('The menus argument can only be MenuModel or List<MenuModel> type.');
-    final List<MenuModel> newMenus = [
+    final List<MenuModel> _newMenus = [
       ...state.menus,
       menus
     ];
-    state = state.copyWith(menus: newMenus);
+    state = state.copyWith(menus: _newMenus);
   }
 
   Future<void> updateLocalMenus() async {

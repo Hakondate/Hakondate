@@ -11,19 +11,19 @@ class UserViewModel extends StateNotifier<UserState> {
 
   Future<void> updateUser({String? name, SchoolModel? school, int? schoolYear}) async {
     UserModel _user = state.user;
-    UserModel newUser = UserModel(
+    UserModel _newUser = UserModel(
       name: name ?? _user.name,
       school: school ?? _user.school,
       schoolYear: schoolYear ?? _user.schoolYear,
     );
-    await _writeUser(newUser);
-    state = state.copyWith(user: newUser);
+    await _writeUser(_newUser);
+    state = state.copyWith(user: _newUser);
   }
 
   Future<void> getUser() async {
-    UserModel user = UserModel();
+    UserModel _user = UserModel();
     // TODO: ローカルファイルからユーザ情報を読み込みuserに格納
-    state = state.copyWith(user: user);
+    state = state.copyWith(user: _user);
   }
 
   Future<void> _writeUser(UserModel user) async {
