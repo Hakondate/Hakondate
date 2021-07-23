@@ -1,9 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hakondate_v2/model/school/users_school_model.dart';
 
 import 'package:hakondate_v2/provider/user/user_state.dart';
 import 'package:hakondate_v2/model/user/user_model.dart';
-import 'package:hakondate_v2/model/school/school_model.dart';
+import 'package:hakondate_v2/model/school/users_school_model.dart';
 
 final userProvider = StateNotifierProvider<UserViewModel, UserState>((ref) => UserViewModel());
 
@@ -23,6 +24,7 @@ class UserViewModel extends StateNotifier<UserState> {
   Future<void> getUser() async {
     UserModel _user = UserModel();
     // TODO: ローカルファイルからユーザ情報を読み込みuserに格納
+    await _user.getSLNS();
     state = state.copyWith(user: _user);
   }
 
