@@ -17,9 +17,9 @@ class UsersSchoolModel extends SchoolModel {
     classification: classification
   );
 
-  factory SLNSModel.fromJson(Map<String, dynamic> json) =>
-      _$SLNSModelFromJson(json);
-  Map<String, dynamic> toJson() => _$SLNSModelToJson(this);
+  factory UsersSchoolModel.fromJson(Map<String, dynamic> json) =>
+      _$UsersSchoolModelFromJson(json);
+  Map<String, dynamic> toJson() => _$UsersSchoolModelToJson(this);
 
   final int? schoolYear;  // 学年(年齢)
 
