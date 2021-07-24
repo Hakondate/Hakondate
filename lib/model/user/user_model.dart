@@ -33,7 +33,7 @@ class UserModel {
 
     final String _pathSLNS = 'assets/slns/${school!.schoolGrade()}.json';
     final String _jsonSLNS = await rootBundle.loadString(_pathSLNS);
-    final _decodeSLNS = json.decode(_jsonSLNS);
+    final Map<String, dynamic> _decodeSLNS = json.decode(_jsonSLNS);
 
     this.slns = NutrientsModel.fromJson(_decodeSLNS);
   }

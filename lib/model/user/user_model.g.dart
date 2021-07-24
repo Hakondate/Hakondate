@@ -12,10 +12,13 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
     school: json['school'] == null
         ? null
         : UsersSchoolModel.fromJson(json['school'] as Map<String, dynamic>),
-  );
+  )..slns = json['slns'] == null
+      ? null
+      : NutrientsModel.fromJson(json['slns'] as Map<String, dynamic>);
 }
 
 Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'name': instance.name,
       'school': instance.school,
+      'slns': instance.slns,
     };

@@ -18,6 +18,7 @@ class UserViewModel extends StateNotifier<UserState> {
       school: school ?? _user.school
     );
     await _writeUser(_newUser);
+    await _newUser.getSLNS();
     state = state.copyWith(user: _newUser);
   }
 
