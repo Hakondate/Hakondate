@@ -3,7 +3,7 @@ import 'package:moor/moor.dart';
 @DataClassName('FoodstuffsSchema')
 class FoodstuffsTable extends Table {
   IntColumn get id => integer().autoIncrement()();
-  IntColumn get foodID => integer()();
+  IntColumn get foodId => integer()();
   IntColumn get piece => integer().nullable()();
   RealColumn get gram => real()();
 

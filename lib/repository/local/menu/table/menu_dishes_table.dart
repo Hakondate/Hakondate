@@ -2,8 +2,8 @@ import 'package:moor/moor.dart';
 
 @DataClassName('MenuDishesSchema')
 class MenuDishesTable extends Table {
-  IntColumn get menuID => integer()();
-  IntColumn get dishID => integer()();
+  IntColumn get menuId => integer()();
+  IntColumn get dishId => integer()();
 
   @override
   List<String> get customConstraints => [
