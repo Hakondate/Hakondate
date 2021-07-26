@@ -8,4 +8,9 @@ class MenusTable extends Table {
 
   @override
   Set<Column> get primaryKey => {id};
+
+  @override
+  List<String> get customConstraints => [
+    'FOREIGN KEY(school_id) REFERENCES schools_table(id)'
+  ];
 }
