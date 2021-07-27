@@ -18,7 +18,7 @@ part 'menus_database.g.dart';
 LazyDatabase _openConnection() {
   return LazyDatabase(() async {
     final dbFolder = await getApplicationDocumentsDirectory();
-    final file = File(p.join(dbFolder.path, 'db.sqlite'));
+    final file = File(p.join(dbFolder.path + '/database', 'menus.sqlite'));
     return VmDatabase(file);
   });
 }
@@ -37,4 +37,36 @@ class MenusDatabase extends _$MenusDatabase {
 
   @override
   int get schemaVersion => 1;
+
+  /* SELECT */
+  // MenusSchemaの全データ取得
+  Future<List<MenusSchema>> get allMenusSchemas => select(menusTable).get();
+
+  // IDからMenusSchemaを取得(Streamで変更監視し，変更があれば新しい結果を返す)
+  Stream<MenusSchema> getMenusSchemaById(int id) =>
+      (select(menusTable)..where((t) => t.id.equals(id))).watchSingle();
+
+  // IDからSchoolSchemaを取得
+  Stream<SchoolsSchema> getSchoolsSchemaById(int id) =>
+      (select(schoolsTable)..where((t) => t.id.equals(id))).watchSingle();
+
+  // MenuIDから献立の料理IDが格納されているリストを取得
+  Stream<List<MenuDishesSchema>> getMenuDishesSchemasByMenuId(int id) =>
+      (select(menuDishesTable)..where((t) => t.menuId.equals(id))).watch();
+
+  // IDからDishesSchemaを取得
+  Stream<DishesSchema> getDishesSchemaById(int id) =>
+      (select(dishesTable)..where((t) => t.id.equals(id))).watchSingle();
+
+  // DishIDから料理の食材IDが格納されているリストを取得
+  Stream<List<DishFoodstuffsSchema>> getDishFoodstuffsSchemasByDishId(int id) =>
+      (select(dishFoodstuffsTable)..where((t) => t.dishId.equals(id))).watch();
+
+  // IDからFoodstuffsSchemaを取得
+  Stream<FoodstuffsSchema> getFoodstuffsSchemaById(int id) =>
+      (select(foodstuffsTable)..where((t) => t.id.equals(id))).watchSingle();
+
+  // IDからFoodsSchemaを取得
+  Stream<FoodsSchema> getFoodsSchemaById(int id) =>
+      (select(foodsTable)..where((t) => t.id.equals(id))).watchSingle();
 }
