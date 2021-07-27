@@ -42,31 +42,60 @@ class MenusDatabase extends _$MenusDatabase {
   // MenusSchemaの全データ取得
   Future<List<MenusSchema>> get allMenusSchemas => select(menusTable).get();
 
-  // IDからMenusSchemaを取得(Streamで変更監視し，変更があれば新しい結果を返す)
-  Stream<MenusSchema> getMenusSchemaById(int id) =>
-      (select(menusTable)..where((t) => t.id.equals(id))).watchSingle();
+  // IDからMenusSchemaを取得
+  Future<MenusSchema> getMenusSchemaById(int id) =>
+      (select(menusTable)..where((t) => t.id.equals(id))).getSingle();
 
   // IDからSchoolSchemaを取得
-  Stream<SchoolsSchema> getSchoolsSchemaById(int id) =>
-      (select(schoolsTable)..where((t) => t.id.equals(id))).watchSingle();
+  Future<SchoolsSchema> getSchoolsSchemaById(int id) =>
+      (select(schoolsTable)..where((t) => t.id.equals(id))).getSingle();
 
   // MenuIDから献立の料理IDが格納されているリストを取得
-  Stream<List<MenuDishesSchema>> getMenuDishesSchemasByMenuId(int id) =>
-      (select(menuDishesTable)..where((t) => t.menuId.equals(id))).watch();
+  Future<List<MenuDishesSchema>> getMenuDishesSchemasByMenuId(int id) =>
+      (select(menuDishesTable)..where((t) => t.menuId.equals(id))).get();
 
   // IDからDishesSchemaを取得
-  Stream<DishesSchema> getDishesSchemaById(int id) =>
-      (select(dishesTable)..where((t) => t.id.equals(id))).watchSingle();
+  Future<DishesSchema> getDishesSchemaById(int id) =>
+      (select(dishesTable)..where((t) => t.id.equals(id))).getSingle();
 
   // DishIDから料理の食材IDが格納されているリストを取得
-  Stream<List<DishFoodstuffsSchema>> getDishFoodstuffsSchemasByDishId(int id) =>
-      (select(dishFoodstuffsTable)..where((t) => t.dishId.equals(id))).watch();
+  Future<List<DishFoodstuffsSchema>> getDishFoodstuffsSchemasByDishId(int id) =>
+      (select(dishFoodstuffsTable)..where((t) => t.dishId.equals(id))).get();
 
   // IDからFoodstuffsSchemaを取得
-  Stream<FoodstuffsSchema> getFoodstuffsSchemaById(int id) =>
-      (select(foodstuffsTable)..where((t) => t.id.equals(id))).watchSingle();
+  Future<FoodstuffsSchema> getFoodstuffsSchemaById(int id) =>
+      (select(foodstuffsTable)..where((t) => t.id.equals(id))).getSingle();
 
   // IDからFoodsSchemaを取得
-  Stream<FoodsSchema> getFoodsSchemaById(int id) =>
-      (select(foodsTable)..where((t) => t.id.equals(id))).watchSingle();
+  Future<FoodsSchema> getFoodsSchemaById(int id) =>
+      (select(foodsTable)..where((t) => t.id.equals(id))).getSingle();
+
+  /* INSERT */
+  // MenusSchemaを追加
+  Future<int> addMenusSchema(MenusTableCompanion entry) =>
+      into(menusTable).insert(entry);
+
+  // SchoolsSchemaを追加
+  Future<int> addSchoolsSchema(SchoolsTableCompanion entry) =>
+      into(schoolsTable).insert(entry);
+
+  // MenuDishesSchemaを追加
+  Future<int> addMenuDishesSchema(MenuDishesTableCompanion entry) =>
+      into(menuDishesTable).insert(entry);
+
+  // DishesSchemaを追加
+  Future<int> addDishesSchema(DishesTableCompanion entry) =>
+      into(dishesTable).insert(entry);
+
+  // DishFoodstuffsSchemaを追加
+  Future<int> addDishFoodstuffsSchema(DishFoodstuffsTableCompanion entry) =>
+      into(dishFoodstuffsTable).insert(entry);
+
+  // FoodstuffsSchemaを追加
+  Future<int> addFoodstuffsSchema(FoodstuffsTableCompanion entry) =>
+      into(foodstuffsTable).insert(entry);
+
+  // FoodsSchemaを追加
+  Future<int> addFoodsSchema(FoodsTableCompanion entry) =>
+      into(foodsTable).insert(entry);
 }

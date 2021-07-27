@@ -8,7 +8,7 @@ part of 'menu_model.dart';
 
 MenuModel _$MenuModelFromJson(Map<String, dynamic> json) {
   return MenuModel(
-    id: json['id'] as String,
+    id: json['id'] as int,
     day: DateTime.parse(json['day'] as String),
     school: SchoolModel.fromJson(json['school'] as Map<String, dynamic>),
     dishes: (json['dishes'] as List<dynamic>)

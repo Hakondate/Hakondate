@@ -18,7 +18,7 @@ class MenuModel {
       _$MenuModelFromJson(json);
   Map<String, dynamic> toJson() => _$MenuModelToJson(this);
 
-  final String id;              // ID: 2021/06/30 LB1 → '2021063001'
+  final int id;                 // ID: 2021/06/30 LB1 → 2021063001
   final DateTime day;           // 日付
   final SchoolModel school;     // 学校
   final List<DishModel> dishes; // 料理
