@@ -13,6 +13,17 @@ class MenusRepository {
 
   late final MenusDatabase repository;
 
+  Future<List<MenuModel>> getAllMenus() async {
+    List<MenuModel> _menus = [];
+    final List<MenusSchema> _menusSchemas = await repository.allMenusSchemas;
+    await Future.forEach(_menusSchemas, (MenusSchema menusSchema) async {
+      final MenuModel _menu = await getMenuById(menusSchema.id);
+      _menus.add(_menu);
+    });
+
+    return _menus;
+  }
+
   Future<MenuModel> getMenuById(int menuId) async {
     final MenusSchema _menusSchema = await repository.getMenusSchemaById(menuId);
     final SchoolsSchema _schoolsSchema = await repository.getSchoolsSchemaById(_menusSchema.schoolId);
