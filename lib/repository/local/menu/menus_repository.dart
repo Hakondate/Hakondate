@@ -68,33 +68,32 @@ class MenusRepository {
 
   Future<FoodstuffModel> _getFoodstuffById(int foodstuffId) async {
     final FoodstuffsSchema _foodstuffsSchema = await repository.getFoodstuffsSchemaById(foodstuffId);
-    final FoodsSchema _foodsSchema = await repository.getFoodsSchemaById(_foodstuffsSchema.foodId);
 
     return FoodstuffModel(
-      name: _foodsSchema.name,
+      name: _foodstuffsSchema.name,
       quantity: QuantityModel(
         piece: _foodstuffsSchema.piece,
         gram: _foodstuffsSchema.gram
       ),
       nutrients: NutrientsModel(
-        energy: _foodsSchema.energy,
-        protein: _foodsSchema.protein,
-        lipid: _foodsSchema.lipid,
-        carbohydrate: _foodsSchema.carbohydrate,
-        sodium: _foodsSchema.sodium,
-        calcium: _foodsSchema.calcium,
-        magnesium: _foodsSchema.magnesium,
-        iron: _foodsSchema.iron,
-        zinc: _foodsSchema.zinc,
-        retinol: _foodsSchema.retinol,
-        vitaminB1: _foodsSchema.vitaminB1,
-        vitaminB2: _foodsSchema.vitaminB2,
-        vitaminC: _foodsSchema.vitaminC,
-        dietaryFiber: _foodsSchema.dietaryFiber,
-        salt: _foodsSchema.salt
+        energy: _foodstuffsSchema.energy,
+        protein: _foodstuffsSchema.protein,
+        lipid: _foodstuffsSchema.lipid,
+        carbohydrate: _foodstuffsSchema.carbohydrate,
+        sodium: _foodstuffsSchema.sodium,
+        calcium: _foodstuffsSchema.calcium,
+        magnesium: _foodstuffsSchema.magnesium,
+        iron: _foodstuffsSchema.iron,
+        zinc: _foodstuffsSchema.zinc,
+        retinol: _foodstuffsSchema.retinol,
+        vitaminB1: _foodstuffsSchema.vitaminB1,
+        vitaminB2: _foodstuffsSchema.vitaminB2,
+        vitaminC: _foodstuffsSchema.vitaminC,
+        dietaryFiber: _foodstuffsSchema.dietaryFiber,
+        salt: _foodstuffsSchema.salt
       ),
-      isAllergy: _foodsSchema.isAllergy,
-      isHeat: _foodsSchema.isHeat
+      isAllergy: _foodstuffsSchema.isAllergy,
+      isHeat: _foodstuffsSchema.isHeat
     );
   }
 }

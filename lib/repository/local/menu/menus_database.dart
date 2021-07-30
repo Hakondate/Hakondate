@@ -7,7 +7,6 @@ import 'package:path/path.dart' as p;
 
 import 'package:hakondate_v2/repository/local/menu/table/dish_foodstuffs_table.dart';
 import 'package:hakondate_v2/repository/local/menu/table/dishes_table.dart';
-import 'package:hakondate_v2/repository/local/menu/table/foods_table.dart';
 import 'package:hakondate_v2/repository/local/menu/table/foodstuffs_table.dart';
 import 'package:hakondate_v2/repository/local/menu/table/menu_dishes_table.dart';
 import 'package:hakondate_v2/repository/local/menu/table/menus_table.dart';
@@ -30,7 +29,6 @@ LazyDatabase _openConnection() {
   DishesTable,
   DishFoodstuffsTable,
   FoodstuffsTable,
-  FoodsTable
 ])
 class MenusDatabase extends _$MenusDatabase {
   MenusDatabase() : super(_openConnection());
@@ -66,10 +64,6 @@ class MenusDatabase extends _$MenusDatabase {
   Future<FoodstuffsSchema> getFoodstuffsSchemaById(int id) =>
       (select(foodstuffsTable)..where((t) => t.id.equals(id))).getSingle();
 
-  // IDからFoodsSchemaを取得
-  Future<FoodsSchema> getFoodsSchemaById(int id) =>
-      (select(foodsTable)..where((t) => t.id.equals(id))).getSingle();
-
   /* INSERT */
   // MenusSchemaを追加
   Future<int> addMenusSchema(MenusTableCompanion entry) =>
@@ -94,8 +88,4 @@ class MenusDatabase extends _$MenusDatabase {
   // FoodstuffsSchemaを追加
   Future<int> addFoodstuffsSchema(FoodstuffsTableCompanion entry) =>
       into(foodstuffsTable).insert(entry);
-
-  // FoodsSchemaを追加
-  Future<int> addFoodsSchema(FoodsTableCompanion entry) =>
-      into(foodsTable).insert(entry);
 }
