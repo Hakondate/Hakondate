@@ -1027,250 +1027,9 @@ class $DishFoodstuffsTableTable extends DishFoodstuffsTable
 class FoodstuffsSchema extends DataClass
     implements Insertable<FoodstuffsSchema> {
   final int id;
-  final int foodId;
+  final String name;
   final int? piece;
   final double gram;
-  FoodstuffsSchema(
-      {required this.id, required this.foodId, this.piece, required this.gram});
-  factory FoodstuffsSchema.fromData(
-      Map<String, dynamic> data, GeneratedDatabase db,
-      {String? prefix}) {
-    final effectivePrefix = prefix ?? '';
-    return FoodstuffsSchema(
-      id: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
-      foodId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}food_id'])!,
-      piece: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}piece']),
-      gram: const RealType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}gram'])!,
-    );
-  }
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    map['id'] = Variable<int>(id);
-    map['food_id'] = Variable<int>(foodId);
-    if (!nullToAbsent || piece != null) {
-      map['piece'] = Variable<int?>(piece);
-    }
-    map['gram'] = Variable<double>(gram);
-    return map;
-  }
-
-  FoodstuffsTableCompanion toCompanion(bool nullToAbsent) {
-    return FoodstuffsTableCompanion(
-      id: Value(id),
-      foodId: Value(foodId),
-      piece:
-          piece == null && nullToAbsent ? const Value.absent() : Value(piece),
-      gram: Value(gram),
-    );
-  }
-
-  factory FoodstuffsSchema.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
-    serializer ??= moorRuntimeOptions.defaultSerializer;
-    return FoodstuffsSchema(
-      id: serializer.fromJson<int>(json['id']),
-      foodId: serializer.fromJson<int>(json['foodId']),
-      piece: serializer.fromJson<int?>(json['piece']),
-      gram: serializer.fromJson<double>(json['gram']),
-    );
-  }
-  @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= moorRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{
-      'id': serializer.toJson<int>(id),
-      'foodId': serializer.toJson<int>(foodId),
-      'piece': serializer.toJson<int?>(piece),
-      'gram': serializer.toJson<double>(gram),
-    };
-  }
-
-  FoodstuffsSchema copyWith({int? id, int? foodId, int? piece, double? gram}) =>
-      FoodstuffsSchema(
-        id: id ?? this.id,
-        foodId: foodId ?? this.foodId,
-        piece: piece ?? this.piece,
-        gram: gram ?? this.gram,
-      );
-  @override
-  String toString() {
-    return (StringBuffer('FoodstuffsSchema(')
-          ..write('id: $id, ')
-          ..write('foodId: $foodId, ')
-          ..write('piece: $piece, ')
-          ..write('gram: $gram')
-          ..write(')'))
-        .toString();
-  }
-
-  @override
-  int get hashCode => $mrjf($mrjc(id.hashCode,
-      $mrjc(foodId.hashCode, $mrjc(piece.hashCode, gram.hashCode))));
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is FoodstuffsSchema &&
-          other.id == this.id &&
-          other.foodId == this.foodId &&
-          other.piece == this.piece &&
-          other.gram == this.gram);
-}
-
-class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
-  final Value<int> id;
-  final Value<int> foodId;
-  final Value<int?> piece;
-  final Value<double> gram;
-  const FoodstuffsTableCompanion({
-    this.id = const Value.absent(),
-    this.foodId = const Value.absent(),
-    this.piece = const Value.absent(),
-    this.gram = const Value.absent(),
-  });
-  FoodstuffsTableCompanion.insert({
-    this.id = const Value.absent(),
-    required int foodId,
-    this.piece = const Value.absent(),
-    required double gram,
-  })  : foodId = Value(foodId),
-        gram = Value(gram);
-  static Insertable<FoodstuffsSchema> custom({
-    Expression<int>? id,
-    Expression<int>? foodId,
-    Expression<int?>? piece,
-    Expression<double>? gram,
-  }) {
-    return RawValuesInsertable({
-      if (id != null) 'id': id,
-      if (foodId != null) 'food_id': foodId,
-      if (piece != null) 'piece': piece,
-      if (gram != null) 'gram': gram,
-    });
-  }
-
-  FoodstuffsTableCompanion copyWith(
-      {Value<int>? id,
-      Value<int>? foodId,
-      Value<int?>? piece,
-      Value<double>? gram}) {
-    return FoodstuffsTableCompanion(
-      id: id ?? this.id,
-      foodId: foodId ?? this.foodId,
-      piece: piece ?? this.piece,
-      gram: gram ?? this.gram,
-    );
-  }
-
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    if (id.present) {
-      map['id'] = Variable<int>(id.value);
-    }
-    if (foodId.present) {
-      map['food_id'] = Variable<int>(foodId.value);
-    }
-    if (piece.present) {
-      map['piece'] = Variable<int?>(piece.value);
-    }
-    if (gram.present) {
-      map['gram'] = Variable<double>(gram.value);
-    }
-    return map;
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('FoodstuffsTableCompanion(')
-          ..write('id: $id, ')
-          ..write('foodId: $foodId, ')
-          ..write('piece: $piece, ')
-          ..write('gram: $gram')
-          ..write(')'))
-        .toString();
-  }
-}
-
-class $FoodstuffsTableTable extends FoodstuffsTable
-    with TableInfo<$FoodstuffsTableTable, FoodstuffsSchema> {
-  final GeneratedDatabase _db;
-  final String? _alias;
-  $FoodstuffsTableTable(this._db, [this._alias]);
-  final VerificationMeta _idMeta = const VerificationMeta('id');
-  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
-      'id', aliasedName, false,
-      typeName: 'INTEGER',
-      requiredDuringInsert: false,
-      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  final VerificationMeta _foodIdMeta = const VerificationMeta('foodId');
-  late final GeneratedColumn<int?> foodId = GeneratedColumn<int?>(
-      'food_id', aliasedName, false,
-      typeName: 'INTEGER', requiredDuringInsert: true);
-  final VerificationMeta _pieceMeta = const VerificationMeta('piece');
-  late final GeneratedColumn<int?> piece = GeneratedColumn<int?>(
-      'piece', aliasedName, true,
-      typeName: 'INTEGER', requiredDuringInsert: false);
-  final VerificationMeta _gramMeta = const VerificationMeta('gram');
-  late final GeneratedColumn<double?> gram = GeneratedColumn<double?>(
-      'gram', aliasedName, false,
-      typeName: 'REAL', requiredDuringInsert: true);
-  @override
-  List<GeneratedColumn> get $columns => [id, foodId, piece, gram];
-  @override
-  String get aliasedName => _alias ?? 'foodstuffs_table';
-  @override
-  String get actualTableName => 'foodstuffs_table';
-  @override
-  VerificationContext validateIntegrity(Insertable<FoodstuffsSchema> instance,
-      {bool isInserting = false}) {
-    final context = VerificationContext();
-    final data = instance.toColumns(true);
-    if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    }
-    if (data.containsKey('food_id')) {
-      context.handle(_foodIdMeta,
-          foodId.isAcceptableOrUnknown(data['food_id']!, _foodIdMeta));
-    } else if (isInserting) {
-      context.missing(_foodIdMeta);
-    }
-    if (data.containsKey('piece')) {
-      context.handle(
-          _pieceMeta, piece.isAcceptableOrUnknown(data['piece']!, _pieceMeta));
-    }
-    if (data.containsKey('gram')) {
-      context.handle(
-          _gramMeta, gram.isAcceptableOrUnknown(data['gram']!, _gramMeta));
-    } else if (isInserting) {
-      context.missing(_gramMeta);
-    }
-    return context;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {id};
-  @override
-  FoodstuffsSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return FoodstuffsSchema.fromData(data, _db,
-        prefix: tablePrefix != null ? '$tablePrefix.' : null);
-  }
-
-  @override
-  $FoodstuffsTableTable createAlias(String alias) {
-    return $FoodstuffsTableTable(_db, alias);
-  }
-}
-
-class FoodsSchema extends DataClass implements Insertable<FoodsSchema> {
-  final int id;
-  final String name;
-  final bool isHeat;
-  final bool isAllergy;
   final double energy;
   final double protein;
   final double lipid;
@@ -1286,11 +1045,13 @@ class FoodsSchema extends DataClass implements Insertable<FoodsSchema> {
   final double vitaminC;
   final double dietaryFiber;
   final double salt;
-  FoodsSchema(
+  final bool isHeat;
+  final bool isAllergy;
+  FoodstuffsSchema(
       {required this.id,
       required this.name,
-      required this.isHeat,
-      required this.isAllergy,
+      this.piece,
+      required this.gram,
       required this.energy,
       required this.protein,
       required this.lipid,
@@ -1305,19 +1066,22 @@ class FoodsSchema extends DataClass implements Insertable<FoodsSchema> {
       required this.vitaminB2,
       required this.vitaminC,
       required this.dietaryFiber,
-      required this.salt});
-  factory FoodsSchema.fromData(Map<String, dynamic> data, GeneratedDatabase db,
+      required this.salt,
+      required this.isHeat,
+      required this.isAllergy});
+  factory FoodstuffsSchema.fromData(
+      Map<String, dynamic> data, GeneratedDatabase db,
       {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    return FoodsSchema(
+    return FoodstuffsSchema(
       id: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
       name: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
-      isHeat: const BoolType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}is_heat'])!,
-      isAllergy: const BoolType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}is_allergy'])!,
+      piece: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}piece']),
+      gram: const RealType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}gram'])!,
       energy: const RealType()
           .mapFromDatabaseResponse(data['${effectivePrefix}energy'])!,
       protein: const RealType()
@@ -1348,6 +1112,10 @@ class FoodsSchema extends DataClass implements Insertable<FoodsSchema> {
           .mapFromDatabaseResponse(data['${effectivePrefix}dietary_fiber'])!,
       salt: const RealType()
           .mapFromDatabaseResponse(data['${effectivePrefix}salt'])!,
+      isHeat: const BoolType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}is_heat'])!,
+      isAllergy: const BoolType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}is_allergy'])!,
     );
   }
   @override
@@ -1355,8 +1123,10 @@ class FoodsSchema extends DataClass implements Insertable<FoodsSchema> {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
     map['name'] = Variable<String>(name);
-    map['is_heat'] = Variable<bool>(isHeat);
-    map['is_allergy'] = Variable<bool>(isAllergy);
+    if (!nullToAbsent || piece != null) {
+      map['piece'] = Variable<int?>(piece);
+    }
+    map['gram'] = Variable<double>(gram);
     map['energy'] = Variable<double>(energy);
     map['protein'] = Variable<double>(protein);
     map['lipid'] = Variable<double>(lipid);
@@ -1372,15 +1142,18 @@ class FoodsSchema extends DataClass implements Insertable<FoodsSchema> {
     map['vitamin_c'] = Variable<double>(vitaminC);
     map['dietary_fiber'] = Variable<double>(dietaryFiber);
     map['salt'] = Variable<double>(salt);
+    map['is_heat'] = Variable<bool>(isHeat);
+    map['is_allergy'] = Variable<bool>(isAllergy);
     return map;
   }
 
-  FoodsTableCompanion toCompanion(bool nullToAbsent) {
-    return FoodsTableCompanion(
+  FoodstuffsTableCompanion toCompanion(bool nullToAbsent) {
+    return FoodstuffsTableCompanion(
       id: Value(id),
       name: Value(name),
-      isHeat: Value(isHeat),
-      isAllergy: Value(isAllergy),
+      piece:
+          piece == null && nullToAbsent ? const Value.absent() : Value(piece),
+      gram: Value(gram),
       energy: Value(energy),
       protein: Value(protein),
       lipid: Value(lipid),
@@ -1396,17 +1169,19 @@ class FoodsSchema extends DataClass implements Insertable<FoodsSchema> {
       vitaminC: Value(vitaminC),
       dietaryFiber: Value(dietaryFiber),
       salt: Value(salt),
+      isHeat: Value(isHeat),
+      isAllergy: Value(isAllergy),
     );
   }
 
-  factory FoodsSchema.fromJson(Map<String, dynamic> json,
+  factory FoodstuffsSchema.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
-    return FoodsSchema(
+    return FoodstuffsSchema(
       id: serializer.fromJson<int>(json['id']),
       name: serializer.fromJson<String>(json['name']),
-      isHeat: serializer.fromJson<bool>(json['isHeat']),
-      isAllergy: serializer.fromJson<bool>(json['isAllergy']),
+      piece: serializer.fromJson<int?>(json['piece']),
+      gram: serializer.fromJson<double>(json['gram']),
       energy: serializer.fromJson<double>(json['energy']),
       protein: serializer.fromJson<double>(json['protein']),
       lipid: serializer.fromJson<double>(json['lipid']),
@@ -1422,6 +1197,8 @@ class FoodsSchema extends DataClass implements Insertable<FoodsSchema> {
       vitaminC: serializer.fromJson<double>(json['vitaminC']),
       dietaryFiber: serializer.fromJson<double>(json['dietaryFiber']),
       salt: serializer.fromJson<double>(json['salt']),
+      isHeat: serializer.fromJson<bool>(json['isHeat']),
+      isAllergy: serializer.fromJson<bool>(json['isAllergy']),
     );
   }
   @override
@@ -1430,8 +1207,8 @@ class FoodsSchema extends DataClass implements Insertable<FoodsSchema> {
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
       'name': serializer.toJson<String>(name),
-      'isHeat': serializer.toJson<bool>(isHeat),
-      'isAllergy': serializer.toJson<bool>(isAllergy),
+      'piece': serializer.toJson<int?>(piece),
+      'gram': serializer.toJson<double>(gram),
       'energy': serializer.toJson<double>(energy),
       'protein': serializer.toJson<double>(protein),
       'lipid': serializer.toJson<double>(lipid),
@@ -1447,14 +1224,16 @@ class FoodsSchema extends DataClass implements Insertable<FoodsSchema> {
       'vitaminC': serializer.toJson<double>(vitaminC),
       'dietaryFiber': serializer.toJson<double>(dietaryFiber),
       'salt': serializer.toJson<double>(salt),
+      'isHeat': serializer.toJson<bool>(isHeat),
+      'isAllergy': serializer.toJson<bool>(isAllergy),
     };
   }
 
-  FoodsSchema copyWith(
+  FoodstuffsSchema copyWith(
           {int? id,
           String? name,
-          bool? isHeat,
-          bool? isAllergy,
+          int? piece,
+          double? gram,
           double? energy,
           double? protein,
           double? lipid,
@@ -1469,12 +1248,14 @@ class FoodsSchema extends DataClass implements Insertable<FoodsSchema> {
           double? vitaminB2,
           double? vitaminC,
           double? dietaryFiber,
-          double? salt}) =>
-      FoodsSchema(
+          double? salt,
+          bool? isHeat,
+          bool? isAllergy}) =>
+      FoodstuffsSchema(
         id: id ?? this.id,
         name: name ?? this.name,
-        isHeat: isHeat ?? this.isHeat,
-        isAllergy: isAllergy ?? this.isAllergy,
+        piece: piece ?? this.piece,
+        gram: gram ?? this.gram,
         energy: energy ?? this.energy,
         protein: protein ?? this.protein,
         lipid: lipid ?? this.lipid,
@@ -1490,14 +1271,16 @@ class FoodsSchema extends DataClass implements Insertable<FoodsSchema> {
         vitaminC: vitaminC ?? this.vitaminC,
         dietaryFiber: dietaryFiber ?? this.dietaryFiber,
         salt: salt ?? this.salt,
+        isHeat: isHeat ?? this.isHeat,
+        isAllergy: isAllergy ?? this.isAllergy,
       );
   @override
   String toString() {
-    return (StringBuffer('FoodsSchema(')
+    return (StringBuffer('FoodstuffsSchema(')
           ..write('id: $id, ')
           ..write('name: $name, ')
-          ..write('isHeat: $isHeat, ')
-          ..write('isAllergy: $isAllergy, ')
+          ..write('piece: $piece, ')
+          ..write('gram: $gram, ')
           ..write('energy: $energy, ')
           ..write('protein: $protein, ')
           ..write('lipid: $lipid, ')
@@ -1512,7 +1295,9 @@ class FoodsSchema extends DataClass implements Insertable<FoodsSchema> {
           ..write('vitaminB2: $vitaminB2, ')
           ..write('vitaminC: $vitaminC, ')
           ..write('dietaryFiber: $dietaryFiber, ')
-          ..write('salt: $salt')
+          ..write('salt: $salt, ')
+          ..write('isHeat: $isHeat, ')
+          ..write('isAllergy: $isAllergy')
           ..write(')'))
         .toString();
   }
@@ -1523,9 +1308,9 @@ class FoodsSchema extends DataClass implements Insertable<FoodsSchema> {
       $mrjc(
           name.hashCode,
           $mrjc(
-              isHeat.hashCode,
+              piece.hashCode,
               $mrjc(
-                  isAllergy.hashCode,
+                  gram.hashCode,
                   $mrjc(
                       energy.hashCode,
                       $mrjc(
@@ -1558,15 +1343,17 @@ class FoodsSchema extends DataClass implements Insertable<FoodsSchema> {
                                                                       $mrjc(
                                                                           dietaryFiber
                                                                               .hashCode,
-                                                                          salt.hashCode)))))))))))))))))));
+                                                                          $mrjc(
+                                                                              salt.hashCode,
+                                                                              $mrjc(isHeat.hashCode, isAllergy.hashCode)))))))))))))))))))));
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is FoodsSchema &&
+      (other is FoodstuffsSchema &&
           other.id == this.id &&
           other.name == this.name &&
-          other.isHeat == this.isHeat &&
-          other.isAllergy == this.isAllergy &&
+          other.piece == this.piece &&
+          other.gram == this.gram &&
           other.energy == this.energy &&
           other.protein == this.protein &&
           other.lipid == this.lipid &&
@@ -1581,14 +1368,16 @@ class FoodsSchema extends DataClass implements Insertable<FoodsSchema> {
           other.vitaminB2 == this.vitaminB2 &&
           other.vitaminC == this.vitaminC &&
           other.dietaryFiber == this.dietaryFiber &&
-          other.salt == this.salt);
+          other.salt == this.salt &&
+          other.isHeat == this.isHeat &&
+          other.isAllergy == this.isAllergy);
 }
 
-class FoodsTableCompanion extends UpdateCompanion<FoodsSchema> {
+class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
   final Value<int> id;
   final Value<String> name;
-  final Value<bool> isHeat;
-  final Value<bool> isAllergy;
+  final Value<int?> piece;
+  final Value<double> gram;
   final Value<double> energy;
   final Value<double> protein;
   final Value<double> lipid;
@@ -1604,11 +1393,13 @@ class FoodsTableCompanion extends UpdateCompanion<FoodsSchema> {
   final Value<double> vitaminC;
   final Value<double> dietaryFiber;
   final Value<double> salt;
-  const FoodsTableCompanion({
+  final Value<bool> isHeat;
+  final Value<bool> isAllergy;
+  const FoodstuffsTableCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
-    this.isHeat = const Value.absent(),
-    this.isAllergy = const Value.absent(),
+    this.piece = const Value.absent(),
+    this.gram = const Value.absent(),
     this.energy = const Value.absent(),
     this.protein = const Value.absent(),
     this.lipid = const Value.absent(),
@@ -1624,12 +1415,14 @@ class FoodsTableCompanion extends UpdateCompanion<FoodsSchema> {
     this.vitaminC = const Value.absent(),
     this.dietaryFiber = const Value.absent(),
     this.salt = const Value.absent(),
+    this.isHeat = const Value.absent(),
+    this.isAllergy = const Value.absent(),
   });
-  FoodsTableCompanion.insert({
+  FoodstuffsTableCompanion.insert({
     this.id = const Value.absent(),
     required String name,
-    required bool isHeat,
-    required bool isAllergy,
+    this.piece = const Value.absent(),
+    required double gram,
     required double energy,
     required double protein,
     required double lipid,
@@ -1645,9 +1438,10 @@ class FoodsTableCompanion extends UpdateCompanion<FoodsSchema> {
     required double vitaminC,
     required double dietaryFiber,
     required double salt,
+    required bool isHeat,
+    required bool isAllergy,
   })  : name = Value(name),
-        isHeat = Value(isHeat),
-        isAllergy = Value(isAllergy),
+        gram = Value(gram),
         energy = Value(energy),
         protein = Value(protein),
         lipid = Value(lipid),
@@ -1662,12 +1456,14 @@ class FoodsTableCompanion extends UpdateCompanion<FoodsSchema> {
         vitaminB2 = Value(vitaminB2),
         vitaminC = Value(vitaminC),
         dietaryFiber = Value(dietaryFiber),
-        salt = Value(salt);
-  static Insertable<FoodsSchema> custom({
+        salt = Value(salt),
+        isHeat = Value(isHeat),
+        isAllergy = Value(isAllergy);
+  static Insertable<FoodstuffsSchema> custom({
     Expression<int>? id,
     Expression<String>? name,
-    Expression<bool>? isHeat,
-    Expression<bool>? isAllergy,
+    Expression<int?>? piece,
+    Expression<double>? gram,
     Expression<double>? energy,
     Expression<double>? protein,
     Expression<double>? lipid,
@@ -1683,12 +1479,14 @@ class FoodsTableCompanion extends UpdateCompanion<FoodsSchema> {
     Expression<double>? vitaminC,
     Expression<double>? dietaryFiber,
     Expression<double>? salt,
+    Expression<bool>? isHeat,
+    Expression<bool>? isAllergy,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (name != null) 'name': name,
-      if (isHeat != null) 'is_heat': isHeat,
-      if (isAllergy != null) 'is_allergy': isAllergy,
+      if (piece != null) 'piece': piece,
+      if (gram != null) 'gram': gram,
       if (energy != null) 'energy': energy,
       if (protein != null) 'protein': protein,
       if (lipid != null) 'lipid': lipid,
@@ -1704,14 +1502,16 @@ class FoodsTableCompanion extends UpdateCompanion<FoodsSchema> {
       if (vitaminC != null) 'vitamin_c': vitaminC,
       if (dietaryFiber != null) 'dietary_fiber': dietaryFiber,
       if (salt != null) 'salt': salt,
+      if (isHeat != null) 'is_heat': isHeat,
+      if (isAllergy != null) 'is_allergy': isAllergy,
     });
   }
 
-  FoodsTableCompanion copyWith(
+  FoodstuffsTableCompanion copyWith(
       {Value<int>? id,
       Value<String>? name,
-      Value<bool>? isHeat,
-      Value<bool>? isAllergy,
+      Value<int?>? piece,
+      Value<double>? gram,
       Value<double>? energy,
       Value<double>? protein,
       Value<double>? lipid,
@@ -1726,12 +1526,14 @@ class FoodsTableCompanion extends UpdateCompanion<FoodsSchema> {
       Value<double>? vitaminB2,
       Value<double>? vitaminC,
       Value<double>? dietaryFiber,
-      Value<double>? salt}) {
-    return FoodsTableCompanion(
+      Value<double>? salt,
+      Value<bool>? isHeat,
+      Value<bool>? isAllergy}) {
+    return FoodstuffsTableCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
-      isHeat: isHeat ?? this.isHeat,
-      isAllergy: isAllergy ?? this.isAllergy,
+      piece: piece ?? this.piece,
+      gram: gram ?? this.gram,
       energy: energy ?? this.energy,
       protein: protein ?? this.protein,
       lipid: lipid ?? this.lipid,
@@ -1747,6 +1549,8 @@ class FoodsTableCompanion extends UpdateCompanion<FoodsSchema> {
       vitaminC: vitaminC ?? this.vitaminC,
       dietaryFiber: dietaryFiber ?? this.dietaryFiber,
       salt: salt ?? this.salt,
+      isHeat: isHeat ?? this.isHeat,
+      isAllergy: isAllergy ?? this.isAllergy,
     );
   }
 
@@ -1759,11 +1563,11 @@ class FoodsTableCompanion extends UpdateCompanion<FoodsSchema> {
     if (name.present) {
       map['name'] = Variable<String>(name.value);
     }
-    if (isHeat.present) {
-      map['is_heat'] = Variable<bool>(isHeat.value);
+    if (piece.present) {
+      map['piece'] = Variable<int?>(piece.value);
     }
-    if (isAllergy.present) {
-      map['is_allergy'] = Variable<bool>(isAllergy.value);
+    if (gram.present) {
+      map['gram'] = Variable<double>(gram.value);
     }
     if (energy.present) {
       map['energy'] = Variable<double>(energy.value);
@@ -1810,16 +1614,22 @@ class FoodsTableCompanion extends UpdateCompanion<FoodsSchema> {
     if (salt.present) {
       map['salt'] = Variable<double>(salt.value);
     }
+    if (isHeat.present) {
+      map['is_heat'] = Variable<bool>(isHeat.value);
+    }
+    if (isAllergy.present) {
+      map['is_allergy'] = Variable<bool>(isAllergy.value);
+    }
     return map;
   }
 
   @override
   String toString() {
-    return (StringBuffer('FoodsTableCompanion(')
+    return (StringBuffer('FoodstuffsTableCompanion(')
           ..write('id: $id, ')
           ..write('name: $name, ')
-          ..write('isHeat: $isHeat, ')
-          ..write('isAllergy: $isAllergy, ')
+          ..write('piece: $piece, ')
+          ..write('gram: $gram, ')
           ..write('energy: $energy, ')
           ..write('protein: $protein, ')
           ..write('lipid: $lipid, ')
@@ -1834,17 +1644,19 @@ class FoodsTableCompanion extends UpdateCompanion<FoodsSchema> {
           ..write('vitaminB2: $vitaminB2, ')
           ..write('vitaminC: $vitaminC, ')
           ..write('dietaryFiber: $dietaryFiber, ')
-          ..write('salt: $salt')
+          ..write('salt: $salt, ')
+          ..write('isHeat: $isHeat, ')
+          ..write('isAllergy: $isAllergy')
           ..write(')'))
         .toString();
   }
 }
 
-class $FoodsTableTable extends FoodsTable
-    with TableInfo<$FoodsTableTable, FoodsSchema> {
+class $FoodstuffsTableTable extends FoodstuffsTable
+    with TableInfo<$FoodstuffsTableTable, FoodstuffsSchema> {
   final GeneratedDatabase _db;
   final String? _alias;
-  $FoodsTableTable(this._db, [this._alias]);
+  $FoodstuffsTableTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
       'id', aliasedName, false,
@@ -1855,18 +1667,14 @@ class $FoodsTableTable extends FoodsTable
   late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
       'name', aliasedName, false,
       typeName: 'TEXT', requiredDuringInsert: true);
-  final VerificationMeta _isHeatMeta = const VerificationMeta('isHeat');
-  late final GeneratedColumn<bool?> isHeat = GeneratedColumn<bool?>(
-      'is_heat', aliasedName, false,
-      typeName: 'INTEGER',
-      requiredDuringInsert: true,
-      defaultConstraints: 'CHECK (is_heat IN (0, 1))');
-  final VerificationMeta _isAllergyMeta = const VerificationMeta('isAllergy');
-  late final GeneratedColumn<bool?> isAllergy = GeneratedColumn<bool?>(
-      'is_allergy', aliasedName, false,
-      typeName: 'INTEGER',
-      requiredDuringInsert: true,
-      defaultConstraints: 'CHECK (is_allergy IN (0, 1))');
+  final VerificationMeta _pieceMeta = const VerificationMeta('piece');
+  late final GeneratedColumn<int?> piece = GeneratedColumn<int?>(
+      'piece', aliasedName, true,
+      typeName: 'INTEGER', requiredDuringInsert: false);
+  final VerificationMeta _gramMeta = const VerificationMeta('gram');
+  late final GeneratedColumn<double?> gram = GeneratedColumn<double?>(
+      'gram', aliasedName, false,
+      typeName: 'REAL', requiredDuringInsert: true);
   final VerificationMeta _energyMeta = const VerificationMeta('energy');
   late final GeneratedColumn<double?> energy = GeneratedColumn<double?>(
       'energy', aliasedName, false,
@@ -1929,12 +1737,24 @@ class $FoodsTableTable extends FoodsTable
   late final GeneratedColumn<double?> salt = GeneratedColumn<double?>(
       'salt', aliasedName, false,
       typeName: 'REAL', requiredDuringInsert: true);
+  final VerificationMeta _isHeatMeta = const VerificationMeta('isHeat');
+  late final GeneratedColumn<bool?> isHeat = GeneratedColumn<bool?>(
+      'is_heat', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      defaultConstraints: 'CHECK (is_heat IN (0, 1))');
+  final VerificationMeta _isAllergyMeta = const VerificationMeta('isAllergy');
+  late final GeneratedColumn<bool?> isAllergy = GeneratedColumn<bool?>(
+      'is_allergy', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: true,
+      defaultConstraints: 'CHECK (is_allergy IN (0, 1))');
   @override
   List<GeneratedColumn> get $columns => [
         id,
         name,
-        isHeat,
-        isAllergy,
+        piece,
+        gram,
         energy,
         protein,
         lipid,
@@ -1949,14 +1769,16 @@ class $FoodsTableTable extends FoodsTable
         vitaminB2,
         vitaminC,
         dietaryFiber,
-        salt
+        salt,
+        isHeat,
+        isAllergy
       ];
   @override
-  String get aliasedName => _alias ?? 'foods_table';
+  String get aliasedName => _alias ?? 'foodstuffs_table';
   @override
-  String get actualTableName => 'foods_table';
+  String get actualTableName => 'foodstuffs_table';
   @override
-  VerificationContext validateIntegrity(Insertable<FoodsSchema> instance,
+  VerificationContext validateIntegrity(Insertable<FoodstuffsSchema> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -1969,17 +1791,15 @@ class $FoodsTableTable extends FoodsTable
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
-    if (data.containsKey('is_heat')) {
-      context.handle(_isHeatMeta,
-          isHeat.isAcceptableOrUnknown(data['is_heat']!, _isHeatMeta));
-    } else if (isInserting) {
-      context.missing(_isHeatMeta);
+    if (data.containsKey('piece')) {
+      context.handle(
+          _pieceMeta, piece.isAcceptableOrUnknown(data['piece']!, _pieceMeta));
     }
-    if (data.containsKey('is_allergy')) {
-      context.handle(_isAllergyMeta,
-          isAllergy.isAcceptableOrUnknown(data['is_allergy']!, _isAllergyMeta));
+    if (data.containsKey('gram')) {
+      context.handle(
+          _gramMeta, gram.isAcceptableOrUnknown(data['gram']!, _gramMeta));
     } else if (isInserting) {
-      context.missing(_isAllergyMeta);
+      context.missing(_gramMeta);
     }
     if (data.containsKey('energy')) {
       context.handle(_energyMeta,
@@ -2075,20 +1895,32 @@ class $FoodsTableTable extends FoodsTable
     } else if (isInserting) {
       context.missing(_saltMeta);
     }
+    if (data.containsKey('is_heat')) {
+      context.handle(_isHeatMeta,
+          isHeat.isAcceptableOrUnknown(data['is_heat']!, _isHeatMeta));
+    } else if (isInserting) {
+      context.missing(_isHeatMeta);
+    }
+    if (data.containsKey('is_allergy')) {
+      context.handle(_isAllergyMeta,
+          isAllergy.isAcceptableOrUnknown(data['is_allergy']!, _isAllergyMeta));
+    } else if (isInserting) {
+      context.missing(_isAllergyMeta);
+    }
     return context;
   }
 
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  FoodsSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return FoodsSchema.fromData(data, _db,
+  FoodstuffsSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return FoodstuffsSchema.fromData(data, _db,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
   @override
-  $FoodsTableTable createAlias(String alias) {
-    return $FoodsTableTable(_db, alias);
+  $FoodstuffsTableTable createAlias(String alias) {
+    return $FoodstuffsTableTable(_db, alias);
   }
 }
 
@@ -2103,7 +1935,6 @@ abstract class _$MenusDatabase extends GeneratedDatabase {
       $DishFoodstuffsTableTable(this);
   late final $FoodstuffsTableTable foodstuffsTable =
       $FoodstuffsTableTable(this);
-  late final $FoodsTableTable foodsTable = $FoodsTableTable(this);
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
@@ -2113,7 +1944,6 @@ abstract class _$MenusDatabase extends GeneratedDatabase {
         menuDishesTable,
         dishesTable,
         dishFoodstuffsTable,
-        foodstuffsTable,
-        foodsTable
+        foodstuffsTable
       ];
 }
