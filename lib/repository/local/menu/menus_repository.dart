@@ -13,6 +13,8 @@ class MenusRepository {
 
   late final MenusDatabase repository;
 
+  Future<void> addMenu(MenuModel menu) async {}
+
   Future<List<MenuModel>> getAllMenus() async {
     List<MenuModel> _menus = [];
     final List<MenusSchema> _menusSchemas = await repository.allMenusSchemas;
