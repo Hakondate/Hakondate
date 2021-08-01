@@ -5,6 +5,7 @@ import 'package:hakondate_v2/model/nutrients/nutrients_model.dart';
 import 'package:hakondate_v2/model/quantity/quantity_model.dart';
 import 'package:hakondate_v2/model/school/school_model.dart';
 import 'package:hakondate_v2/repository/local/menu/menus_database.dart';
+import 'package:moor/moor.dart';
 
 class MenusRepository {
   MenusRepository() {
@@ -13,7 +14,82 @@ class MenusRepository {
 
   late final MenusDatabase repository;
 
-  Future<void> addMenu(MenuModel menu) async {}
+  Future<void> addMenu(MenuModel menu) async {
+    final int _id =
+        menu.day.year * 100000000 +
+        menu.day.month * 10000 +
+        menu.day.day * 100 +
+        menu.school.lunchBlock;
+
+    final SchoolsTableCompanion _schoolSchema = SchoolsTableCompanion(
+      name: Value(menu.school.name),
+      lunchBlock: Value(menu.school.lunchBlock),
+      classification: Value(menu.school.classification ?? 0)
+    );
+    final int _schoolId = await repository.addSchoolsSchema(_schoolSchema);
+
+    final MenusTableCompanion _menuSchema = MenusTableCompanion(
+      id: Value(_id),
+      day: Value(menu.day.millisecondsSinceEpoch),
+      schoolId: Value(_schoolId)
+    );
+    final int _menuId = await repository.addMenusSchema(_menuSchema);
+
+    await Future.forEach(menu.dishes, (DishModel dish) async {
+      final int _dishId = await _addDish(dish);
+      await repository.addMenuDishesSchema(
+        MenuDishesTableCompanion(
+          menuId: Value(_menuId),
+          dishId: Value(_dishId)
+        )
+      );
+    });
+  }
+
+  Future<int> _addDish(DishModel dish) async {
+    final DishesTableCompanion _dishSchema = DishesTableCompanion(
+      name: Value(dish.name),
+      category: Value(dish.category)
+    );
+    final int _dishId = await repository.addDishesSchema(_dishSchema);
+    await Future.forEach(dish.foodstuffs, (FoodstuffModel foodstuff) async {
+      final int _foodstuffId = await _addFoodstuff(foodstuff);
+      await repository.addDishFoodstuffsSchema(
+        DishFoodstuffsTableCompanion(
+          dishId: Value(_dishId),
+          foodstuffId: Value(_foodstuffId)
+        )
+      );
+    });
+
+    return _dishId;
+  }
+
+  Future<int> _addFoodstuff(FoodstuffModel foodstuff) async {
+    final FoodstuffsTableCompanion _foodstuffSchema = FoodstuffsTableCompanion(
+      name: Value(foodstuff.name),
+      piece: Value(foodstuff.quantity.piece),
+      gram: Value(foodstuff.quantity.gram),
+      energy: Value(foodstuff.nutrients.energy),
+      protein: Value(foodstuff.nutrients.protein),
+      lipid: Value(foodstuff.nutrients.lipid),
+      carbohydrate: Value(foodstuff.nutrients.carbohydrate),
+      sodium: Value(foodstuff.nutrients.sodium),
+      calcium: Value(foodstuff.nutrients.calcium),
+      magnesium: Value(foodstuff.nutrients.magnesium),
+      iron: Value(foodstuff.nutrients.iron),
+      zinc: Value(foodstuff.nutrients.zinc),
+      retinol: Value(foodstuff.nutrients.retinol),
+      vitaminB1: Value(foodstuff.nutrients.vitaminB1),
+      vitaminB2: Value(foodstuff.nutrients.vitaminB2),
+      vitaminC: Value(foodstuff.nutrients.vitaminC),
+      dietaryFiber: Value(foodstuff.nutrients.dietaryFiber),
+      salt: Value(foodstuff.nutrients.salt),
+      isHeat: Value(foodstuff.isHeat),
+      isAllergy: Value(foodstuff.isAllergy)
+    );
+    return await repository.addFoodstuffsSchema(_foodstuffSchema);
+  }
 
   Future<List<MenuModel>> getAllMenus() async {
     List<MenuModel> _menus = [];
