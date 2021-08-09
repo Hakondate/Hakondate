@@ -11,7 +11,7 @@ class UsersSchoolModel extends SchoolModel {
     required int parentId,
     required String name,
     int? lunchBlock,
-    int? classification,
+    required int classification,
     this.schoolYear
   }) : super(
     id: id,

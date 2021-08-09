@@ -1,7 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'package:hakondate_v2/model/dish/dish_model.dart';
-import 'package:hakondate_v2/model/school/school_model.dart';
 
 part 'menu_model.g.dart';
 
@@ -10,18 +9,20 @@ class MenuModel {
   MenuModel({
     required this.id,
     required this.day,
-    required this.school,
-    required this.dishes
+    required this.schoolId,
+    required this.dishes,
+    this.event
   });
 
   factory MenuModel.fromJson(Map<String, dynamic> json) =>
       _$MenuModelFromJson(json);
   Map<String, dynamic> toJson() => _$MenuModelToJson(this);
 
-  final int id;                 // ID: 2021/06/30 LB1 → 2021063001
+  final int id;                 // Day: 2021/06/30 & ScID: 1 → 2021063001
   final DateTime day;           // 日付
-  final SchoolModel school;     // 学校
+  final int schoolId;           // 学校
   final List<DishModel> dishes; // 料理
+  final String? event;          // イベント
 
   double get energy {
     double _sum = 0.0;

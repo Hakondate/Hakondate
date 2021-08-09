@@ -12,7 +12,7 @@ SchoolModel _$SchoolModelFromJson(Map<String, dynamic> json) {
     parentId: json['parentId'] as int,
     name: json['name'] as String,
     lunchBlock: json['lunchBlock'] as int?,
-    classification: json['classification'] as int?,
+    classification: json['classification'] as int,
   );
 }
 
