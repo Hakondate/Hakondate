@@ -9,91 +9,91 @@ import 'package:moor/moor.dart';
 
 class MenusRepository {
   MenusRepository() {
-    this.repository = MenusDatabase();
+    this._repository = MenusDatabase();
   }
 
-  late final MenusDatabase repository;
+  late final MenusDatabase _repository;
 
-  Future<void> addMenu(MenuModel menu) async {
-    final int _id =
-        menu.day.year * 100000000 +
-        menu.day.month * 10000 +
-        menu.day.day * 100 +
-        menu.school.lunchBlock;
-
-    final SchoolsTableCompanion _schoolSchema = SchoolsTableCompanion(
-      name: Value(menu.school.name),
-      lunchBlock: Value(menu.school.lunchBlock),
-      classification: Value(menu.school.classification ?? 0)
-    );
-    final int _schoolId = await repository.addSchoolsSchema(_schoolSchema);
-
-    final MenusTableCompanion _menuSchema = MenusTableCompanion(
-      id: Value(_id),
-      day: Value(menu.day.millisecondsSinceEpoch),
-      schoolId: Value(_schoolId)
-    );
-    final int _menuId = await repository.addMenusSchema(_menuSchema);
-
-    await Future.forEach(menu.dishes, (DishModel dish) async {
-      final int _dishId = await _addDish(dish);
-      await repository.addMenuDishesSchema(
-        MenuDishesTableCompanion(
-          menuId: Value(_menuId),
-          dishId: Value(_dishId)
-        )
-      );
-    });
-  }
-
-  Future<int> _addDish(DishModel dish) async {
-    final DishesTableCompanion _dishSchema = DishesTableCompanion(
-      name: Value(dish.name),
-      category: Value(dish.category)
-    );
-    final int _dishId = await repository.addDishesSchema(_dishSchema);
-    await Future.forEach(dish.foodstuffs, (FoodstuffModel foodstuff) async {
-      final int _foodstuffId = await _addFoodstuff(foodstuff);
-      await repository.addDishFoodstuffsSchema(
-        DishFoodstuffsTableCompanion(
-          dishId: Value(_dishId),
-          foodstuffId: Value(_foodstuffId)
-        )
-      );
-    });
-
-    return _dishId;
-  }
-
-  Future<int> _addFoodstuff(FoodstuffModel foodstuff) async {
-    final FoodstuffsTableCompanion _foodstuffSchema = FoodstuffsTableCompanion(
-      name: Value(foodstuff.name),
-      piece: Value(foodstuff.quantity.piece),
-      gram: Value(foodstuff.quantity.gram),
-      energy: Value(foodstuff.nutrients.energy),
-      protein: Value(foodstuff.nutrients.protein),
-      lipid: Value(foodstuff.nutrients.lipid),
-      carbohydrate: Value(foodstuff.nutrients.carbohydrate),
-      sodium: Value(foodstuff.nutrients.sodium),
-      calcium: Value(foodstuff.nutrients.calcium),
-      magnesium: Value(foodstuff.nutrients.magnesium),
-      iron: Value(foodstuff.nutrients.iron),
-      zinc: Value(foodstuff.nutrients.zinc),
-      retinol: Value(foodstuff.nutrients.retinol),
-      vitaminB1: Value(foodstuff.nutrients.vitaminB1),
-      vitaminB2: Value(foodstuff.nutrients.vitaminB2),
-      vitaminC: Value(foodstuff.nutrients.vitaminC),
-      dietaryFiber: Value(foodstuff.nutrients.dietaryFiber),
-      salt: Value(foodstuff.nutrients.salt),
-      isHeat: Value(foodstuff.isHeat),
-      isAllergy: Value(foodstuff.isAllergy)
-    );
-    return await repository.addFoodstuffsSchema(_foodstuffSchema);
-  }
+  // Future<void> addMenu(MenuModel menu) async {
+  //   final int _id =
+  //       menu.day.year * 100000000 +
+  //       menu.day.month * 10000 +
+  //       menu.day.day * 100 +
+  //       menu.school.id;
+  //
+  //   final SchoolsTableCompanion _schoolSchema = SchoolsTableCompanion(
+  //     name: Value(menu.school.name),
+  //     lunchBlock: Value(menu.school.id),
+  //     classification: Value(menu.school.classification ?? 0)
+  //   );
+  //   final int _schoolId = await _repository.addSchoolsSchema(_schoolSchema);
+  //
+  //   final MenusTableCompanion _menuSchema = MenusTableCompanion(
+  //     id: Value(_id),
+  //     day: Value(menu.day.millisecondsSinceEpoch),
+  //     schoolId: Value(_schoolId)
+  //   );
+  //   final int _menuId = await _repository.addMenusSchema(_menuSchema);
+  //
+  //   await Future.forEach(menu.dishes, (DishModel dish) async {
+  //     final int _dishId = await _addDish(dish);
+  //     await _repository.addMenuDishesSchema(
+  //       MenuDishesTableCompanion(
+  //         menuId: Value(_menuId),
+  //         dishId: Value(_dishId)
+  //       )
+  //     );
+  //   });
+  // }
+  //
+  // Future<int> _addDish(DishModel dish) async {
+  //   final DishesTableCompanion _dishSchema = DishesTableCompanion(
+  //     name: Value(dish.name),
+  //     category: Value(dish.category)
+  //   );
+  //   final int _dishId = await _repository.addDishesSchema(_dishSchema);
+  //   await Future.forEach(dish.foodstuffs, (FoodstuffModel foodstuff) async {
+  //     final int _foodstuffId = await _addFoodstuff(foodstuff);
+  //     await _repository.addDishFoodstuffsSchema(
+  //       DishFoodstuffsTableCompanion(
+  //         dishId: Value(_dishId),
+  //         foodstuffId: Value(_foodstuffId)
+  //       )
+  //     );
+  //   });
+  //
+  //   return _dishId;
+  // }
+  //
+  // Future<int> _addFoodstuff(FoodstuffModel foodstuff) async {
+  //   final FoodstuffsTableCompanion _foodstuffSchema = FoodstuffsTableCompanion(
+  //     name: Value(foodstuff.name),
+  //     piece: Value(foodstuff.quantity.piece),
+  //     gram: Value(foodstuff.quantity.gram),
+  //     energy: Value(foodstuff.nutrients.energy),
+  //     protein: Value(foodstuff.nutrients.protein),
+  //     lipid: Value(foodstuff.nutrients.lipid),
+  //     carbohydrate: Value(foodstuff.nutrients.carbohydrate),
+  //     sodium: Value(foodstuff.nutrients.sodium),
+  //     calcium: Value(foodstuff.nutrients.calcium),
+  //     magnesium: Value(foodstuff.nutrients.magnesium),
+  //     iron: Value(foodstuff.nutrients.iron),
+  //     zinc: Value(foodstuff.nutrients.zinc),
+  //     retinol: Value(foodstuff.nutrients.retinol),
+  //     vitaminB1: Value(foodstuff.nutrients.vitaminB1),
+  //     vitaminB2: Value(foodstuff.nutrients.vitaminB2),
+  //     vitaminC: Value(foodstuff.nutrients.vitaminC),
+  //     dietaryFiber: Value(foodstuff.nutrients.dietaryFiber),
+  //     salt: Value(foodstuff.nutrients.salt),
+  //     isHeat: Value(foodstuff.isHeat),
+  //     isAllergy: Value(foodstuff.isAllergy)
+  //   );
+  //   return await _repository.addFoodstuffsSchema(_foodstuffSchema);
+  // }
 
   Future<List<MenuModel>> getAllMenus() async {
     List<MenuModel> _menus = [];
-    final List<MenusSchema> _menusSchemas = await repository.allMenusSchemas;
+    final List<MenusSchema> _menusSchemas = await _repository.allMenusSchemas;
     await Future.forEach(_menusSchemas, (MenusSchema menusSchema) async {
       final MenuModel _menu = await getMenuById(menusSchema.id);
       _menus.add(_menu);
@@ -102,12 +102,22 @@ class MenusRepository {
     return _menus;
   }
 
+  // Future<List<MenuModel>> getSelectionPeriodMenus(int firstId, int lastId) async {
+  //   final int _firstId = firstId < lastId ? firstId : lastId;
+  //   final int _lastId = firstId < lastId ? firstId : lastId;
+  //
+  //   List<MenuModel> _menus = [];
+  //   for(int i = _firstId; i <= _lastId; i++) {
+  //
+  //   }
+  // }
+
   Future<MenuModel> getMenuById(int menuId) async {
-    final MenusSchema _menusSchema = await repository.getMenusSchemaById(menuId);
-    final SchoolsSchema _schoolsSchema = await repository.getSchoolsSchemaById(_menusSchema.schoolId);
+    final MenusSchema _menusSchema = await _repository.getMenusSchemaById(menuId);
+    final SchoolsSchema _schoolsSchema = await _repository.getSchoolsSchemaById(_menusSchema.schoolId);
 
     List<DishModel> _dishes = [];
-    final List<MenuDishesSchema> _menuDishesSchemas = await repository.getMenuDishesSchemasByMenuId(_menusSchema.id);
+    final List<MenuDishesSchema> _menuDishesSchemas = await _repository.getMenuDishesSchemasByMenuId(_menusSchema.id);
     await Future.forEach(_menuDishesSchemas, (MenuDishesSchema menuDishesSchema) async {
       final DishModel _dish = await _getDishById(menuDishesSchema.dishId);
       _dishes.add(_dish);
@@ -117,6 +127,8 @@ class MenusRepository {
       id: _menusSchema.id,
       day: DateTime.fromMillisecondsSinceEpoch(_menusSchema.day),
       school: SchoolModel(
+        id: _schoolsSchema.id,
+        parentId: _schoolsSchema.parentId,
         name: _schoolsSchema.name,
         lunchBlock: _schoolsSchema.lunchBlock,
         classification: _schoolsSchema.classification
@@ -126,10 +138,10 @@ class MenusRepository {
   }
 
   Future<DishModel> _getDishById(int dishId) async {
-    final DishesSchema _dishesSchema = await repository.getDishesSchemaById(dishId);
+    final DishesSchema _dishesSchema = await _repository.getDishesSchemaById(dishId);
 
     List<FoodstuffModel> _foodstuffs = [];
-    final List<DishFoodstuffsSchema> _dishFoodstuffsSchemas = await repository.getDishFoodstuffsSchemasByDishId(_dishesSchema.id);
+    final List<DishFoodstuffsSchema> _dishFoodstuffsSchemas = await _repository.getDishFoodstuffsSchemasByDishId(_dishesSchema.id);
     await Future.forEach(_dishFoodstuffsSchemas, (DishFoodstuffsSchema dishFoodstuffsSchema) async {
       final FoodstuffModel _foodstuff = await _getFoodstuffById(dishFoodstuffsSchema.foodstuffId);
       _foodstuffs.add(_foodstuff);
@@ -143,7 +155,7 @@ class MenusRepository {
   }
 
   Future<FoodstuffModel> _getFoodstuffById(int foodstuffId) async {
-    final FoodstuffsSchema _foodstuffsSchema = await repository.getFoodstuffsSchemaById(foodstuffId);
+    final FoodstuffsSchema _foodstuffsSchema = await _repository.getFoodstuffsSchemaById(foodstuffId);
 
     return FoodstuffModel(
       name: _foodstuffsSchema.name,

@@ -40,6 +40,10 @@ class MenusDatabase extends _$MenusDatabase {
   // MenusSchemaの全データ取得
   Future<List<MenusSchema>> get allMenusSchemas => select(menusTable).get();
 
+  // 範囲指定でのデータ取得
+  Future<List<MenusSchema>> getSelectionPeriodMenusSchemas(int firstId, int lastId) =>
+      (select(menusTable)..where((t) => t.id.isBetweenValues(firstId, lastId) & t.schoolId.equals(firstId % 100))).get();
+
   // IDからMenusSchemaを取得
   Future<MenusSchema> getMenusSchemaById(int id) =>
       (select(menusTable)..where((t) => t.id.equals(id))).getSingle();

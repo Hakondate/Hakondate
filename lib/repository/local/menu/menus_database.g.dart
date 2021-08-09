@@ -9,11 +9,13 @@ part of 'menus_database.dart';
 // ignore_for_file: unnecessary_brace_in_string_interps, unnecessary_this
 class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
   final int id;
+  final int parentId;
   final String name;
   final int lunchBlock;
   final int classification;
   SchoolsSchema(
       {required this.id,
+      required this.parentId,
       required this.name,
       required this.lunchBlock,
       required this.classification});
@@ -24,6 +26,8 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
     return SchoolsSchema(
       id: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
+      parentId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}parent_id'])!,
       name: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
       lunchBlock: const IntType()
@@ -36,6 +40,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
+    map['parent_id'] = Variable<int>(parentId);
     map['name'] = Variable<String>(name);
     map['lunch_block'] = Variable<int>(lunchBlock);
     map['classification'] = Variable<int>(classification);
@@ -45,6 +50,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
   SchoolsTableCompanion toCompanion(bool nullToAbsent) {
     return SchoolsTableCompanion(
       id: Value(id),
+      parentId: Value(parentId),
       name: Value(name),
       lunchBlock: Value(lunchBlock),
       classification: Value(classification),
@@ -56,6 +62,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return SchoolsSchema(
       id: serializer.fromJson<int>(json['id']),
+      parentId: serializer.fromJson<int>(json['parentId']),
       name: serializer.fromJson<String>(json['name']),
       lunchBlock: serializer.fromJson<int>(json['lunchBlock']),
       classification: serializer.fromJson<int>(json['classification']),
@@ -66,6 +73,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
+      'parentId': serializer.toJson<int>(parentId),
       'name': serializer.toJson<String>(name),
       'lunchBlock': serializer.toJson<int>(lunchBlock),
       'classification': serializer.toJson<int>(classification),
@@ -73,9 +81,14 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
   }
 
   SchoolsSchema copyWith(
-          {int? id, String? name, int? lunchBlock, int? classification}) =>
+          {int? id,
+          int? parentId,
+          String? name,
+          int? lunchBlock,
+          int? classification}) =>
       SchoolsSchema(
         id: id ?? this.id,
+        parentId: parentId ?? this.parentId,
         name: name ?? this.name,
         lunchBlock: lunchBlock ?? this.lunchBlock,
         classification: classification ?? this.classification,
@@ -84,6 +97,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
   String toString() {
     return (StringBuffer('SchoolsSchema(')
           ..write('id: $id, ')
+          ..write('parentId: $parentId, ')
           ..write('name: $name, ')
           ..write('lunchBlock: $lunchBlock, ')
           ..write('classification: $classification')
@@ -95,12 +109,15 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
   int get hashCode => $mrjf($mrjc(
       id.hashCode,
       $mrjc(
-          name.hashCode, $mrjc(lunchBlock.hashCode, classification.hashCode))));
+          parentId.hashCode,
+          $mrjc(name.hashCode,
+              $mrjc(lunchBlock.hashCode, classification.hashCode)))));
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is SchoolsSchema &&
           other.id == this.id &&
+          other.parentId == this.parentId &&
           other.name == this.name &&
           other.lunchBlock == this.lunchBlock &&
           other.classification == this.classification);
@@ -108,31 +125,37 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
 
 class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
   final Value<int> id;
+  final Value<int> parentId;
   final Value<String> name;
   final Value<int> lunchBlock;
   final Value<int> classification;
   const SchoolsTableCompanion({
     this.id = const Value.absent(),
+    this.parentId = const Value.absent(),
     this.name = const Value.absent(),
     this.lunchBlock = const Value.absent(),
     this.classification = const Value.absent(),
   });
   SchoolsTableCompanion.insert({
     this.id = const Value.absent(),
+    required int parentId,
     required String name,
     required int lunchBlock,
     required int classification,
-  })  : name = Value(name),
+  })  : parentId = Value(parentId),
+        name = Value(name),
         lunchBlock = Value(lunchBlock),
         classification = Value(classification);
   static Insertable<SchoolsSchema> custom({
     Expression<int>? id,
+    Expression<int>? parentId,
     Expression<String>? name,
     Expression<int>? lunchBlock,
     Expression<int>? classification,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
+      if (parentId != null) 'parent_id': parentId,
       if (name != null) 'name': name,
       if (lunchBlock != null) 'lunch_block': lunchBlock,
       if (classification != null) 'classification': classification,
@@ -141,11 +164,13 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
 
   SchoolsTableCompanion copyWith(
       {Value<int>? id,
+      Value<int>? parentId,
       Value<String>? name,
       Value<int>? lunchBlock,
       Value<int>? classification}) {
     return SchoolsTableCompanion(
       id: id ?? this.id,
+      parentId: parentId ?? this.parentId,
       name: name ?? this.name,
       lunchBlock: lunchBlock ?? this.lunchBlock,
       classification: classification ?? this.classification,
@@ -157,6 +182,9 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
     final map = <String, Expression>{};
     if (id.present) {
       map['id'] = Variable<int>(id.value);
+    }
+    if (parentId.present) {
+      map['parent_id'] = Variable<int>(parentId.value);
     }
     if (name.present) {
       map['name'] = Variable<String>(name.value);
@@ -174,6 +202,7 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
   String toString() {
     return (StringBuffer('SchoolsTableCompanion(')
           ..write('id: $id, ')
+          ..write('parentId: $parentId, ')
           ..write('name: $name, ')
           ..write('lunchBlock: $lunchBlock, ')
           ..write('classification: $classification')
@@ -193,6 +222,10 @@ class $SchoolsTableTable extends SchoolsTable
       typeName: 'INTEGER',
       requiredDuringInsert: false,
       defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
+  final VerificationMeta _parentIdMeta = const VerificationMeta('parentId');
+  late final GeneratedColumn<int?> parentId = GeneratedColumn<int?>(
+      'parent_id', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _nameMeta = const VerificationMeta('name');
   late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
       'name', aliasedName, false,
@@ -207,7 +240,8 @@ class $SchoolsTableTable extends SchoolsTable
       'classification', aliasedName, false,
       typeName: 'INTEGER', requiredDuringInsert: true);
   @override
-  List<GeneratedColumn> get $columns => [id, name, lunchBlock, classification];
+  List<GeneratedColumn> get $columns =>
+      [id, parentId, name, lunchBlock, classification];
   @override
   String get aliasedName => _alias ?? 'schools_table';
   @override
@@ -219,6 +253,12 @@ class $SchoolsTableTable extends SchoolsTable
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('parent_id')) {
+      context.handle(_parentIdMeta,
+          parentId.isAcceptableOrUnknown(data['parent_id']!, _parentIdMeta));
+    } else if (isInserting) {
+      context.missing(_parentIdMeta);
     }
     if (data.containsKey('name')) {
       context.handle(

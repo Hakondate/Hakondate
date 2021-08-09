@@ -4,11 +4,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate_v2/model/menu/menu_model.dart';
 import 'package:hakondate_v2/provider/menu/menus_state.dart';
+import 'package:hakondate_v2/repository/local/menu/menus_repository.dart';
 
 final menusProvider = StateNotifierProvider<MenusViewModel, MenusState>((ref) => MenusViewModel());
 
 class MenusViewModel extends StateNotifier<MenusState> {
-  MenusViewModel() : super(const MenusState());
+  MenusViewModel() : this._menusRepository = MenusRepository(), super(const MenusState());
+
+  final MenusRepository _menusRepository;
 
   void _addMenus(dynamic menus) {
     if (menus is! MenuModel && menus is! List<MenuModel>)
