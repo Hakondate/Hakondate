@@ -127,7 +127,8 @@ class MenusRepository {
       id: _menusSchema.id,
       day: _menusSchema.day,
       schoolId: _menusSchema.schoolId,
-      dishes: _dishes
+      dishes: _dishes,
+      event: _menusSchema.event
     );
   }
 

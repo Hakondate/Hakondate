@@ -23,4 +23,5 @@ class FoodstuffsTable extends Table {
   RealColumn get salt => real()();
   BoolColumn get isHeat => boolean()();
   BoolColumn get isAllergy => boolean()();
+  TextColumn get origin => text().nullable()();
 }

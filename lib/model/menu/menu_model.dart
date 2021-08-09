@@ -10,7 +10,8 @@ class MenuModel {
     required this.id,
     required this.day,
     required this.schoolId,
-    required this.dishes
+    required this.dishes,
+    this.event
   });
 
   factory MenuModel.fromJson(Map<String, dynamic> json) =>
@@ -21,6 +22,7 @@ class MenuModel {
   final DateTime day;           // 日付
   final int schoolId;           // 学校
   final List<DishModel> dishes; // 料理
+  final String? event;          // イベント
 
   double get energy {
     double _sum = 0.0;

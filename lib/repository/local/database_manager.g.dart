@@ -11,13 +11,13 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
   final int id;
   final int parentId;
   final String name;
-  final int lunchBlock;
+  final int? lunchBlock;
   final int classification;
   SchoolsSchema(
       {required this.id,
       required this.parentId,
       required this.name,
-      required this.lunchBlock,
+      this.lunchBlock,
       required this.classification});
   factory SchoolsSchema.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
@@ -31,7 +31,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       name: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
       lunchBlock: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}lunch_block'])!,
+          .mapFromDatabaseResponse(data['${effectivePrefix}lunch_block']),
       classification: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}classification'])!,
     );
@@ -42,7 +42,9 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
     map['id'] = Variable<int>(id);
     map['parent_id'] = Variable<int>(parentId);
     map['name'] = Variable<String>(name);
-    map['lunch_block'] = Variable<int>(lunchBlock);
+    if (!nullToAbsent || lunchBlock != null) {
+      map['lunch_block'] = Variable<int?>(lunchBlock);
+    }
     map['classification'] = Variable<int>(classification);
     return map;
   }
@@ -52,7 +54,9 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       id: Value(id),
       parentId: Value(parentId),
       name: Value(name),
-      lunchBlock: Value(lunchBlock),
+      lunchBlock: lunchBlock == null && nullToAbsent
+          ? const Value.absent()
+          : Value(lunchBlock),
       classification: Value(classification),
     );
   }
@@ -64,7 +68,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       id: serializer.fromJson<int>(json['id']),
       parentId: serializer.fromJson<int>(json['parentId']),
       name: serializer.fromJson<String>(json['name']),
-      lunchBlock: serializer.fromJson<int>(json['lunchBlock']),
+      lunchBlock: serializer.fromJson<int?>(json['lunchBlock']),
       classification: serializer.fromJson<int>(json['classification']),
     );
   }
@@ -75,7 +79,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       'id': serializer.toJson<int>(id),
       'parentId': serializer.toJson<int>(parentId),
       'name': serializer.toJson<String>(name),
-      'lunchBlock': serializer.toJson<int>(lunchBlock),
+      'lunchBlock': serializer.toJson<int?>(lunchBlock),
       'classification': serializer.toJson<int>(classification),
     };
   }
@@ -127,7 +131,7 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
   final Value<int> id;
   final Value<int> parentId;
   final Value<String> name;
-  final Value<int> lunchBlock;
+  final Value<int?> lunchBlock;
   final Value<int> classification;
   const SchoolsTableCompanion({
     this.id = const Value.absent(),
@@ -140,17 +144,16 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
     this.id = const Value.absent(),
     required int parentId,
     required String name,
-    required int lunchBlock,
+    this.lunchBlock = const Value.absent(),
     required int classification,
   })  : parentId = Value(parentId),
         name = Value(name),
-        lunchBlock = Value(lunchBlock),
         classification = Value(classification);
   static Insertable<SchoolsSchema> custom({
     Expression<int>? id,
     Expression<int>? parentId,
     Expression<String>? name,
-    Expression<int>? lunchBlock,
+    Expression<int?>? lunchBlock,
     Expression<int>? classification,
   }) {
     return RawValuesInsertable({
@@ -166,7 +169,7 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
       {Value<int>? id,
       Value<int>? parentId,
       Value<String>? name,
-      Value<int>? lunchBlock,
+      Value<int?>? lunchBlock,
       Value<int>? classification}) {
     return SchoolsTableCompanion(
       id: id ?? this.id,
@@ -190,7 +193,7 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
       map['name'] = Variable<String>(name.value);
     }
     if (lunchBlock.present) {
-      map['lunch_block'] = Variable<int>(lunchBlock.value);
+      map['lunch_block'] = Variable<int?>(lunchBlock.value);
     }
     if (classification.present) {
       map['classification'] = Variable<int>(classification.value);
@@ -232,8 +235,8 @@ class $SchoolsTableTable extends SchoolsTable
       typeName: 'TEXT', requiredDuringInsert: true);
   final VerificationMeta _lunchBlockMeta = const VerificationMeta('lunchBlock');
   late final GeneratedColumn<int?> lunchBlock = GeneratedColumn<int?>(
-      'lunch_block', aliasedName, false,
-      typeName: 'INTEGER', requiredDuringInsert: true);
+      'lunch_block', aliasedName, true,
+      typeName: 'INTEGER', requiredDuringInsert: false);
   final VerificationMeta _classificationMeta =
       const VerificationMeta('classification');
   late final GeneratedColumn<int?> classification = GeneratedColumn<int?>(
@@ -271,8 +274,6 @@ class $SchoolsTableTable extends SchoolsTable
           _lunchBlockMeta,
           lunchBlock.isAcceptableOrUnknown(
               data['lunch_block']!, _lunchBlockMeta));
-    } else if (isInserting) {
-      context.missing(_lunchBlockMeta);
     }
     if (data.containsKey('classification')) {
       context.handle(
@@ -303,7 +304,12 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
   final int id;
   final DateTime day;
   final int schoolId;
-  MenusSchema({required this.id, required this.day, required this.schoolId});
+  final String? event;
+  MenusSchema(
+      {required this.id,
+      required this.day,
+      required this.schoolId,
+      this.event});
   factory MenusSchema.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String? prefix}) {
     final effectivePrefix = prefix ?? '';
@@ -314,6 +320,8 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
           .mapFromDatabaseResponse(data['${effectivePrefix}day'])!,
       schoolId: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}school_id'])!,
+      event: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}event']),
     );
   }
   @override
@@ -322,6 +330,9 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
     map['id'] = Variable<int>(id);
     map['day'] = Variable<DateTime>(day);
     map['school_id'] = Variable<int>(schoolId);
+    if (!nullToAbsent || event != null) {
+      map['event'] = Variable<String?>(event);
+    }
     return map;
   }
 
@@ -330,6 +341,8 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
       id: Value(id),
       day: Value(day),
       schoolId: Value(schoolId),
+      event:
+          event == null && nullToAbsent ? const Value.absent() : Value(event),
     );
   }
 
@@ -340,6 +353,7 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
       id: serializer.fromJson<int>(json['id']),
       day: serializer.fromJson<DateTime>(json['day']),
       schoolId: serializer.fromJson<int>(json['schoolId']),
+      event: serializer.fromJson<String?>(json['event']),
     );
   }
   @override
@@ -349,69 +363,84 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
       'id': serializer.toJson<int>(id),
       'day': serializer.toJson<DateTime>(day),
       'schoolId': serializer.toJson<int>(schoolId),
+      'event': serializer.toJson<String?>(event),
     };
   }
 
-  MenusSchema copyWith({int? id, DateTime? day, int? schoolId}) => MenusSchema(
+  MenusSchema copyWith(
+          {int? id, DateTime? day, int? schoolId, String? event}) =>
+      MenusSchema(
         id: id ?? this.id,
         day: day ?? this.day,
         schoolId: schoolId ?? this.schoolId,
+        event: event ?? this.event,
       );
   @override
   String toString() {
     return (StringBuffer('MenusSchema(')
           ..write('id: $id, ')
           ..write('day: $day, ')
-          ..write('schoolId: $schoolId')
+          ..write('schoolId: $schoolId, ')
+          ..write('event: $event')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode =>
-      $mrjf($mrjc(id.hashCode, $mrjc(day.hashCode, schoolId.hashCode)));
+  int get hashCode => $mrjf($mrjc(id.hashCode,
+      $mrjc(day.hashCode, $mrjc(schoolId.hashCode, event.hashCode))));
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is MenusSchema &&
           other.id == this.id &&
           other.day == this.day &&
-          other.schoolId == this.schoolId);
+          other.schoolId == this.schoolId &&
+          other.event == this.event);
 }
 
 class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
   final Value<int> id;
   final Value<DateTime> day;
   final Value<int> schoolId;
+  final Value<String?> event;
   const MenusTableCompanion({
     this.id = const Value.absent(),
     this.day = const Value.absent(),
     this.schoolId = const Value.absent(),
+    this.event = const Value.absent(),
   });
   MenusTableCompanion.insert({
     this.id = const Value.absent(),
     required DateTime day,
     required int schoolId,
+    this.event = const Value.absent(),
   })  : day = Value(day),
         schoolId = Value(schoolId);
   static Insertable<MenusSchema> custom({
     Expression<int>? id,
     Expression<DateTime>? day,
     Expression<int>? schoolId,
+    Expression<String?>? event,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (day != null) 'day': day,
       if (schoolId != null) 'school_id': schoolId,
+      if (event != null) 'event': event,
     });
   }
 
   MenusTableCompanion copyWith(
-      {Value<int>? id, Value<DateTime>? day, Value<int>? schoolId}) {
+      {Value<int>? id,
+      Value<DateTime>? day,
+      Value<int>? schoolId,
+      Value<String?>? event}) {
     return MenusTableCompanion(
       id: id ?? this.id,
       day: day ?? this.day,
       schoolId: schoolId ?? this.schoolId,
+      event: event ?? this.event,
     );
   }
 
@@ -427,6 +456,9 @@ class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
     if (schoolId.present) {
       map['school_id'] = Variable<int>(schoolId.value);
     }
+    if (event.present) {
+      map['event'] = Variable<String?>(event.value);
+    }
     return map;
   }
 
@@ -435,7 +467,8 @@ class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
     return (StringBuffer('MenusTableCompanion(')
           ..write('id: $id, ')
           ..write('day: $day, ')
-          ..write('schoolId: $schoolId')
+          ..write('schoolId: $schoolId, ')
+          ..write('event: $event')
           ..write(')'))
         .toString();
   }
@@ -458,8 +491,12 @@ class $MenusTableTable extends MenusTable
   late final GeneratedColumn<int?> schoolId = GeneratedColumn<int?>(
       'school_id', aliasedName, false,
       typeName: 'INTEGER', requiredDuringInsert: true);
+  final VerificationMeta _eventMeta = const VerificationMeta('event');
+  late final GeneratedColumn<String?> event = GeneratedColumn<String?>(
+      'event', aliasedName, true,
+      typeName: 'TEXT', requiredDuringInsert: false);
   @override
-  List<GeneratedColumn> get $columns => [id, day, schoolId];
+  List<GeneratedColumn> get $columns => [id, day, schoolId, event];
   @override
   String get aliasedName => _alias ?? 'menus_table';
   @override
@@ -483,6 +520,10 @@ class $MenusTableTable extends MenusTable
           schoolId.isAcceptableOrUnknown(data['school_id']!, _schoolIdMeta));
     } else if (isInserting) {
       context.missing(_schoolIdMeta);
+    }
+    if (data.containsKey('event')) {
+      context.handle(
+          _eventMeta, event.isAcceptableOrUnknown(data['event']!, _eventMeta));
     }
     return context;
   }
@@ -1087,6 +1128,7 @@ class FoodstuffsSchema extends DataClass
   final double salt;
   final bool isHeat;
   final bool isAllergy;
+  final String? origin;
   FoodstuffsSchema(
       {required this.id,
       required this.name,
@@ -1108,7 +1150,8 @@ class FoodstuffsSchema extends DataClass
       required this.dietaryFiber,
       required this.salt,
       required this.isHeat,
-      required this.isAllergy});
+      required this.isAllergy,
+      this.origin});
   factory FoodstuffsSchema.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
       {String? prefix}) {
@@ -1156,6 +1199,8 @@ class FoodstuffsSchema extends DataClass
           .mapFromDatabaseResponse(data['${effectivePrefix}is_heat'])!,
       isAllergy: const BoolType()
           .mapFromDatabaseResponse(data['${effectivePrefix}is_allergy'])!,
+      origin: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}origin']),
     );
   }
   @override
@@ -1184,6 +1229,9 @@ class FoodstuffsSchema extends DataClass
     map['salt'] = Variable<double>(salt);
     map['is_heat'] = Variable<bool>(isHeat);
     map['is_allergy'] = Variable<bool>(isAllergy);
+    if (!nullToAbsent || origin != null) {
+      map['origin'] = Variable<String?>(origin);
+    }
     return map;
   }
 
@@ -1211,6 +1259,8 @@ class FoodstuffsSchema extends DataClass
       salt: Value(salt),
       isHeat: Value(isHeat),
       isAllergy: Value(isAllergy),
+      origin:
+          origin == null && nullToAbsent ? const Value.absent() : Value(origin),
     );
   }
 
@@ -1239,6 +1289,7 @@ class FoodstuffsSchema extends DataClass
       salt: serializer.fromJson<double>(json['salt']),
       isHeat: serializer.fromJson<bool>(json['isHeat']),
       isAllergy: serializer.fromJson<bool>(json['isAllergy']),
+      origin: serializer.fromJson<String?>(json['origin']),
     );
   }
   @override
@@ -1266,6 +1317,7 @@ class FoodstuffsSchema extends DataClass
       'salt': serializer.toJson<double>(salt),
       'isHeat': serializer.toJson<bool>(isHeat),
       'isAllergy': serializer.toJson<bool>(isAllergy),
+      'origin': serializer.toJson<String?>(origin),
     };
   }
 
@@ -1290,7 +1342,8 @@ class FoodstuffsSchema extends DataClass
           double? dietaryFiber,
           double? salt,
           bool? isHeat,
-          bool? isAllergy}) =>
+          bool? isAllergy,
+          String? origin}) =>
       FoodstuffsSchema(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -1313,6 +1366,7 @@ class FoodstuffsSchema extends DataClass
         salt: salt ?? this.salt,
         isHeat: isHeat ?? this.isHeat,
         isAllergy: isAllergy ?? this.isAllergy,
+        origin: origin ?? this.origin,
       );
   @override
   String toString() {
@@ -1337,7 +1391,8 @@ class FoodstuffsSchema extends DataClass
           ..write('dietaryFiber: $dietaryFiber, ')
           ..write('salt: $salt, ')
           ..write('isHeat: $isHeat, ')
-          ..write('isAllergy: $isAllergy')
+          ..write('isAllergy: $isAllergy, ')
+          ..write('origin: $origin')
           ..write(')'))
         .toString();
   }
@@ -1385,7 +1440,7 @@ class FoodstuffsSchema extends DataClass
                                                                               .hashCode,
                                                                           $mrjc(
                                                                               salt.hashCode,
-                                                                              $mrjc(isHeat.hashCode, isAllergy.hashCode)))))))))))))))))))));
+                                                                              $mrjc(isHeat.hashCode, $mrjc(isAllergy.hashCode, origin.hashCode))))))))))))))))))))));
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -1410,7 +1465,8 @@ class FoodstuffsSchema extends DataClass
           other.dietaryFiber == this.dietaryFiber &&
           other.salt == this.salt &&
           other.isHeat == this.isHeat &&
-          other.isAllergy == this.isAllergy);
+          other.isAllergy == this.isAllergy &&
+          other.origin == this.origin);
 }
 
 class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
@@ -1435,6 +1491,7 @@ class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
   final Value<double> salt;
   final Value<bool> isHeat;
   final Value<bool> isAllergy;
+  final Value<String?> origin;
   const FoodstuffsTableCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
@@ -1457,6 +1514,7 @@ class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
     this.salt = const Value.absent(),
     this.isHeat = const Value.absent(),
     this.isAllergy = const Value.absent(),
+    this.origin = const Value.absent(),
   });
   FoodstuffsTableCompanion.insert({
     this.id = const Value.absent(),
@@ -1480,6 +1538,7 @@ class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
     required double salt,
     required bool isHeat,
     required bool isAllergy,
+    this.origin = const Value.absent(),
   })  : name = Value(name),
         gram = Value(gram),
         energy = Value(energy),
@@ -1521,6 +1580,7 @@ class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
     Expression<double>? salt,
     Expression<bool>? isHeat,
     Expression<bool>? isAllergy,
+    Expression<String?>? origin,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -1544,6 +1604,7 @@ class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
       if (salt != null) 'salt': salt,
       if (isHeat != null) 'is_heat': isHeat,
       if (isAllergy != null) 'is_allergy': isAllergy,
+      if (origin != null) 'origin': origin,
     });
   }
 
@@ -1568,7 +1629,8 @@ class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
       Value<double>? dietaryFiber,
       Value<double>? salt,
       Value<bool>? isHeat,
-      Value<bool>? isAllergy}) {
+      Value<bool>? isAllergy,
+      Value<String?>? origin}) {
     return FoodstuffsTableCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -1591,6 +1653,7 @@ class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
       salt: salt ?? this.salt,
       isHeat: isHeat ?? this.isHeat,
       isAllergy: isAllergy ?? this.isAllergy,
+      origin: origin ?? this.origin,
     );
   }
 
@@ -1660,6 +1723,9 @@ class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
     if (isAllergy.present) {
       map['is_allergy'] = Variable<bool>(isAllergy.value);
     }
+    if (origin.present) {
+      map['origin'] = Variable<String?>(origin.value);
+    }
     return map;
   }
 
@@ -1686,7 +1752,8 @@ class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
           ..write('dietaryFiber: $dietaryFiber, ')
           ..write('salt: $salt, ')
           ..write('isHeat: $isHeat, ')
-          ..write('isAllergy: $isAllergy')
+          ..write('isAllergy: $isAllergy, ')
+          ..write('origin: $origin')
           ..write(')'))
         .toString();
   }
@@ -1789,6 +1856,10 @@ class $FoodstuffsTableTable extends FoodstuffsTable
       typeName: 'INTEGER',
       requiredDuringInsert: true,
       defaultConstraints: 'CHECK (is_allergy IN (0, 1))');
+  final VerificationMeta _originMeta = const VerificationMeta('origin');
+  late final GeneratedColumn<String?> origin = GeneratedColumn<String?>(
+      'origin', aliasedName, true,
+      typeName: 'TEXT', requiredDuringInsert: false);
   @override
   List<GeneratedColumn> get $columns => [
         id,
@@ -1811,7 +1882,8 @@ class $FoodstuffsTableTable extends FoodstuffsTable
         dietaryFiber,
         salt,
         isHeat,
-        isAllergy
+        isAllergy,
+        origin
       ];
   @override
   String get aliasedName => _alias ?? 'foodstuffs_table';
@@ -1946,6 +2018,10 @@ class $FoodstuffsTableTable extends FoodstuffsTable
           isAllergy.isAcceptableOrUnknown(data['is_allergy']!, _isAllergyMeta));
     } else if (isInserting) {
       context.missing(_isAllergyMeta);
+    }
+    if (data.containsKey('origin')) {
+      context.handle(_originMeta,
+          origin.isAcceptableOrUnknown(data['origin']!, _originMeta));
     }
     return context;
   }

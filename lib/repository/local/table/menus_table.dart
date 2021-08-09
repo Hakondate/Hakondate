@@ -8,6 +8,7 @@ class MenusTable extends Table {
   IntColumn get id => integer()();
   DateTimeColumn get day => dateTime()();
   IntColumn get schoolId => integer()();
+  TextColumn get event => text().nullable()();
 
   @override
   Set<Column> get primaryKey => {id};

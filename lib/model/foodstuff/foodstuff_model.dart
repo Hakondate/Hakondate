@@ -12,7 +12,8 @@ class FoodstuffModel {
     required this.quantity,
     required this.nutrients,
     this.isAllergy = false,
-    this.isHeat = false
+    this.isHeat = false,
+    this.origin
   });
 
   factory FoodstuffModel.fromJson(Map<String, dynamic> json) =>
@@ -24,4 +25,5 @@ class FoodstuffModel {
   final NutrientsModel nutrients; // 栄養素
   final bool isAllergy;           // アレルギー食品
   final bool isHeat;              // 熱加工食品
+  final String? origin;           // 原産地
 }

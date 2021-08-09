@@ -14,6 +14,7 @@ MenuModel _$MenuModelFromJson(Map<String, dynamic> json) {
     dishes: (json['dishes'] as List<dynamic>)
         .map((e) => DishModel.fromJson(e as Map<String, dynamic>))
         .toList(),
+    event: json['event'] as String?,
   );
 }
 
@@ -22,4 +23,5 @@ Map<String, dynamic> _$MenuModelToJson(MenuModel instance) => <String, dynamic>{
       'day': instance.day.toIso8601String(),
       'schoolId': instance.schoolId,
       'dishes': instance.dishes,
+      'event': instance.event,
     };

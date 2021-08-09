@@ -14,6 +14,7 @@ FoodstuffModel _$FoodstuffModelFromJson(Map<String, dynamic> json) {
         NutrientsModel.fromJson(json['nutrients'] as Map<String, dynamic>),
     isAllergy: json['isAllergy'] as bool,
     isHeat: json['isHeat'] as bool,
+    origin: json['origin'] as String?,
   );
 }
 
@@ -24,4 +25,5 @@ Map<String, dynamic> _$FoodstuffModelToJson(FoodstuffModel instance) =>
       'nutrients': instance.nutrients,
       'isAllergy': instance.isAllergy,
       'isHeat': instance.isHeat,
+      'origin': instance.origin,
     };
