@@ -95,40 +95,45 @@ class MenusRepository {
     List<MenuModel> _menus = [];
     final List<MenusSchema> _menusSchemas = await _databaseManager.allMenusSchemas;
     await Future.forEach(_menusSchemas, (MenusSchema menusSchema) async {
-      final MenuModel _menu = await getMenuById(menusSchema.id);
+      final MenuModel _menu = await _getMenuBySchema(menusSchema);
       _menus.add(_menu);
     });
 
     return _menus;
   }
 
-  // Future<List<MenuModel>> getSelectionPeriodMenus(int firstId, int lastId) async {
-  //   final int _firstId = firstId < lastId ? firstId : lastId;
-  //   final int _lastId = firstId < lastId ? firstId : lastId;
-  //
-  //   List<MenuModel> _menus = [];
-  //   for(int i = _firstId; i <= _lastId; i++) {
-  //
-  //   }
-  // }
+  Future<List<MenuModel>> getSelectionPeriodMenus(DateTime startDay, DateTime endDay, int schoolId) async {
+    List<MenuModel> _menus = [];
+    final List<MenusSchema> _menusSchemas = await _databaseManager.getSelectionPeriodMenusSchemas(startDay, endDay, schoolId);
+    await Future.forEach(_menusSchemas, (MenusSchema menusSchema) async {
+      final MenuModel _menu = await _getMenuBySchema(menusSchema);
+      _menus.add(_menu);
+    });
+
+    return _menus;
+  }
 
   Future<MenuModel> getMenuById(int menuId) async {
     final MenusSchema _menusSchema = await _databaseManager.getMenusSchemaById(menuId);
     // final SchoolsSchema _schoolsSchema = await _repository.getSchoolsSchemaById(_menusSchema.schoolId);
 
+    return _getMenuBySchema(_menusSchema);
+  }
+
+  Future<MenuModel> _getMenuBySchema(MenusSchema menusSchema) async {
     List<DishModel> _dishes = [];
-    final List<MenuDishesSchema> _menuDishesSchemas = await _databaseManager.getMenuDishesSchemasByMenuId(_menusSchema.id);
+    final List<MenuDishesSchema> _menuDishesSchemas = await _databaseManager.getMenuDishesSchemasByMenuId(menusSchema.id);
     await Future.forEach(_menuDishesSchemas, (MenuDishesSchema menuDishesSchema) async {
       final DishModel _dish = await _getDishById(menuDishesSchema.dishId);
       _dishes.add(_dish);
     });
 
     return MenuModel(
-      id: _menusSchema.id,
-      day: _menusSchema.day,
-      schoolId: _menusSchema.schoolId,
-      dishes: _dishes,
-      event: _menusSchema.event
+        id: menusSchema.id,
+        day: menusSchema.day,
+        schoolId: menusSchema.schoolId,
+        dishes: _dishes,
+        event: menusSchema.event
     );
   }
 
