@@ -6,7 +6,7 @@ import 'package:moor/moor.dart';
 @DataClassName('MenusSchema')
 class MenusTable extends Table {
   IntColumn get id => integer()();
-  IntColumn get day => integer()();
+  DateTimeColumn get day => dateTime()();
   IntColumn get schoolId => integer()();
 
   @override

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'menus_database.dart';
+part of 'database_manager.dart';
 
 // **************************************************************************
 // MoorGenerator
@@ -301,7 +301,7 @@ class $SchoolsTableTable extends SchoolsTable
 
 class MenusSchema extends DataClass implements Insertable<MenusSchema> {
   final int id;
-  final int day;
+  final DateTime day;
   final int schoolId;
   MenusSchema({required this.id, required this.day, required this.schoolId});
   factory MenusSchema.fromData(Map<String, dynamic> data, GeneratedDatabase db,
@@ -310,7 +310,7 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
     return MenusSchema(
       id: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
-      day: const IntType()
+      day: const DateTimeType()
           .mapFromDatabaseResponse(data['${effectivePrefix}day'])!,
       schoolId: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}school_id'])!,
@@ -320,7 +320,7 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
-    map['day'] = Variable<int>(day);
+    map['day'] = Variable<DateTime>(day);
     map['school_id'] = Variable<int>(schoolId);
     return map;
   }
@@ -338,7 +338,7 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return MenusSchema(
       id: serializer.fromJson<int>(json['id']),
-      day: serializer.fromJson<int>(json['day']),
+      day: serializer.fromJson<DateTime>(json['day']),
       schoolId: serializer.fromJson<int>(json['schoolId']),
     );
   }
@@ -347,12 +347,12 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
-      'day': serializer.toJson<int>(day),
+      'day': serializer.toJson<DateTime>(day),
       'schoolId': serializer.toJson<int>(schoolId),
     };
   }
 
-  MenusSchema copyWith({int? id, int? day, int? schoolId}) => MenusSchema(
+  MenusSchema copyWith({int? id, DateTime? day, int? schoolId}) => MenusSchema(
         id: id ?? this.id,
         day: day ?? this.day,
         schoolId: schoolId ?? this.schoolId,
@@ -381,7 +381,7 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
 
 class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
   final Value<int> id;
-  final Value<int> day;
+  final Value<DateTime> day;
   final Value<int> schoolId;
   const MenusTableCompanion({
     this.id = const Value.absent(),
@@ -390,13 +390,13 @@ class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
   });
   MenusTableCompanion.insert({
     this.id = const Value.absent(),
-    required int day,
+    required DateTime day,
     required int schoolId,
   })  : day = Value(day),
         schoolId = Value(schoolId);
   static Insertable<MenusSchema> custom({
     Expression<int>? id,
-    Expression<int>? day,
+    Expression<DateTime>? day,
     Expression<int>? schoolId,
   }) {
     return RawValuesInsertable({
@@ -407,7 +407,7 @@ class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
   }
 
   MenusTableCompanion copyWith(
-      {Value<int>? id, Value<int>? day, Value<int>? schoolId}) {
+      {Value<int>? id, Value<DateTime>? day, Value<int>? schoolId}) {
     return MenusTableCompanion(
       id: id ?? this.id,
       day: day ?? this.day,
@@ -422,7 +422,7 @@ class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
       map['id'] = Variable<int>(id.value);
     }
     if (day.present) {
-      map['day'] = Variable<int>(day.value);
+      map['day'] = Variable<DateTime>(day.value);
     }
     if (schoolId.present) {
       map['school_id'] = Variable<int>(schoolId.value);
@@ -451,7 +451,7 @@ class $MenusTableTable extends MenusTable
       'id', aliasedName, false,
       typeName: 'INTEGER', requiredDuringInsert: false);
   final VerificationMeta _dayMeta = const VerificationMeta('day');
-  late final GeneratedColumn<int?> day = GeneratedColumn<int?>(
+  late final GeneratedColumn<DateTime?> day = GeneratedColumn<DateTime?>(
       'day', aliasedName, false,
       typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _schoolIdMeta = const VerificationMeta('schoolId');
@@ -1964,8 +1964,8 @@ class $FoodstuffsTableTable extends FoodstuffsTable
   }
 }
 
-abstract class _$MenusDatabase extends GeneratedDatabase {
-  _$MenusDatabase(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
+abstract class _$DatabaseManager extends GeneratedDatabase {
+  _$DatabaseManager(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
   late final $SchoolsTableTable schoolsTable = $SchoolsTableTable(this);
   late final $MenusTableTable menusTable = $MenusTableTable(this);
   late final $MenuDishesTableTable menuDishesTable =

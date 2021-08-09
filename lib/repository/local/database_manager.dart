@@ -5,20 +5,20 @@ import 'package:moor/moor.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
 
-import 'package:hakondate_v2/repository/local/menu/table/dish_foodstuffs_table.dart';
-import 'package:hakondate_v2/repository/local/menu/table/dishes_table.dart';
-import 'package:hakondate_v2/repository/local/menu/table/foodstuffs_table.dart';
-import 'package:hakondate_v2/repository/local/menu/table/menu_dishes_table.dart';
-import 'package:hakondate_v2/repository/local/menu/table/menus_table.dart';
-import 'package:hakondate_v2/repository/local/menu/table/schools_table.dart';
+import 'package:hakondate_v2/repository/local/table/dish_foodstuffs_table.dart';
+import 'package:hakondate_v2/repository/local/table/dishes_table.dart';
+import 'package:hakondate_v2/repository/local/table/foodstuffs_table.dart';
+import 'package:hakondate_v2/repository/local/table/menu_dishes_table.dart';
+import 'package:hakondate_v2/repository/local/table/menus_table.dart';
+import 'package:hakondate_v2/repository/local/table/schools_table.dart';
 
-part 'menus_database.g.dart';
+part 'database_manager.g.dart';
 
 LazyDatabase _openConnection() {
   return LazyDatabase(() async {
-    final dbFolder = await getApplicationDocumentsDirectory();
-    final file = File(p.join(dbFolder.path + '/database', 'menus.sqlite'));
-    return VmDatabase(file);
+    final _dbFolder = await getApplicationDocumentsDirectory();
+    final _file = File(p.join(_dbFolder.path, 'db.sqlite'));
+    return VmDatabase(_file);
   });
 }
 
@@ -30,8 +30,8 @@ LazyDatabase _openConnection() {
   DishFoodstuffsTable,
   FoodstuffsTable,
 ])
-class MenusDatabase extends _$MenusDatabase {
-  MenusDatabase() : super(_openConnection());
+class DatabaseManager extends _$DatabaseManager {
+  DatabaseManager() : super(_openConnection());
 
   @override
   int get schemaVersion => 1;
@@ -41,8 +41,8 @@ class MenusDatabase extends _$MenusDatabase {
   Future<List<MenusSchema>> get allMenusSchemas => select(menusTable).get();
 
   // 範囲指定でのデータ取得
-  Future<List<MenusSchema>> getSelectionPeriodMenusSchemas(int firstId, int lastId) =>
-      (select(menusTable)..where((t) => t.id.isBetweenValues(firstId, lastId) & t.schoolId.equals(firstId % 100))).get();
+  Future<List<MenusSchema>> getSelectionPeriodMenusSchemas(DateTime startDay, DateTime endDay, int schoolId) =>
+      (select(menusTable)..where((t) => t.day.isBetweenValues(startDay, endDay) & t.schoolId.equals(schoolId))).get();
 
   // IDからMenusSchemaを取得
   Future<MenusSchema> getMenusSchemaById(int id) =>
