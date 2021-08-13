@@ -22,6 +22,8 @@ LazyDatabase _openConnection() {
   });
 }
 
+final DatabaseManager databaseManager = DatabaseManager();
+
 @UseMoor(tables: [
   SchoolsTable,
   MenusTable,

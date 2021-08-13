@@ -8,7 +8,7 @@ import 'package:moor/moor.dart';
 
 class MenusRepository {
   MenusRepository() {
-    this._databaseManager = DatabaseManager();
+    this._databaseManager = databaseManager;
   }
 
   late final DatabaseManager _databaseManager;
