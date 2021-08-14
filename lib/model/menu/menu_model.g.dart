@@ -8,18 +8,20 @@ part of 'menu_model.dart';
 
 MenuModel _$MenuModelFromJson(Map<String, dynamic> json) {
   return MenuModel(
-    id: json['id'] as String,
+    id: json['id'] as int,
     day: DateTime.parse(json['day'] as String),
-    school: SchoolModel.fromJson(json['school'] as Map<String, dynamic>),
+    schoolId: json['schoolId'] as int,
     dishes: (json['dishes'] as List<dynamic>)
         .map((e) => DishModel.fromJson(e as Map<String, dynamic>))
         .toList(),
+    event: json['event'] as String?,
   );
 }
 
 Map<String, dynamic> _$MenuModelToJson(MenuModel instance) => <String, dynamic>{
       'id': instance.id,
       'day': instance.day.toIso8601String(),
-      'school': instance.school,
+      'schoolId': instance.schoolId,
       'dishes': instance.dishes,
+      'event': instance.event,
     };

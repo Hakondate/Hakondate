@@ -7,11 +7,15 @@ part 'users_school_model.g.dart';
 @JsonSerializable()
 class UsersSchoolModel extends SchoolModel {
   UsersSchoolModel({
+    required int id,
+    required int parentId,
     required String name,
-    required int lunchBlock,
-    int? classification,
+    int? lunchBlock,
+    required int classification,
     this.schoolYear
   }) : super(
+    id: id,
+    parentId: parentId,
     name: name,
     lunchBlock: lunchBlock,
     classification: classification
