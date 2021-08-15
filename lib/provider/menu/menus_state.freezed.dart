@@ -16,7 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$MenusStateTearOff {
   const _$MenusStateTearOff();
 
-  _MenusState call({List<MenuModel> menus = const <MenuModel>[]}) {
+  _MenusState call(
+      {AsyncValue<List<MenuModel>> menus = const AsyncValue.loading()}) {
     return _MenusState(
       menus: menus,
     );
@@ -28,7 +29,7 @@ const $MenusState = _$MenusStateTearOff();
 
 /// @nodoc
 mixin _$MenusState {
-  List<MenuModel> get menus => throw _privateConstructorUsedError;
+  AsyncValue<List<MenuModel>> get menus => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MenusStateCopyWith<MenusState> get copyWith =>
@@ -40,7 +41,9 @@ abstract class $MenusStateCopyWith<$Res> {
   factory $MenusStateCopyWith(
           MenusState value, $Res Function(MenusState) then) =
       _$MenusStateCopyWithImpl<$Res>;
-  $Res call({List<MenuModel> menus});
+  $Res call({AsyncValue<List<MenuModel>> menus});
+
+  $AsyncValueCopyWith<List<MenuModel>, $Res> get menus;
 }
 
 /// @nodoc
@@ -59,8 +62,15 @@ class _$MenusStateCopyWithImpl<$Res> implements $MenusStateCopyWith<$Res> {
       menus: menus == freezed
           ? _value.menus
           : menus // ignore: cast_nullable_to_non_nullable
-              as List<MenuModel>,
+              as AsyncValue<List<MenuModel>>,
     ));
+  }
+
+  @override
+  $AsyncValueCopyWith<List<MenuModel>, $Res> get menus {
+    return $AsyncValueCopyWith<List<MenuModel>, $Res>(_value.menus, (value) {
+      return _then(_value.copyWith(menus: value));
+    });
   }
 }
 
@@ -70,7 +80,10 @@ abstract class _$MenusStateCopyWith<$Res> implements $MenusStateCopyWith<$Res> {
           _MenusState value, $Res Function(_MenusState) then) =
       __$MenusStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<MenuModel> menus});
+  $Res call({AsyncValue<List<MenuModel>> menus});
+
+  @override
+  $AsyncValueCopyWith<List<MenuModel>, $Res> get menus;
 }
 
 /// @nodoc
@@ -91,7 +104,7 @@ class __$MenusStateCopyWithImpl<$Res> extends _$MenusStateCopyWithImpl<$Res>
       menus: menus == freezed
           ? _value.menus
           : menus // ignore: cast_nullable_to_non_nullable
-              as List<MenuModel>,
+              as AsyncValue<List<MenuModel>>,
     ));
   }
 }
@@ -99,11 +112,11 @@ class __$MenusStateCopyWithImpl<$Res> extends _$MenusStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_MenusState with DiagnosticableTreeMixin implements _MenusState {
-  const _$_MenusState({this.menus = const <MenuModel>[]});
+  const _$_MenusState({this.menus = const AsyncValue.loading()});
 
-  @JsonKey(defaultValue: const <MenuModel>[])
+  @JsonKey(defaultValue: const AsyncValue.loading())
   @override
-  final List<MenuModel> menus;
+  final AsyncValue<List<MenuModel>> menus;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -137,10 +150,11 @@ class _$_MenusState with DiagnosticableTreeMixin implements _MenusState {
 }
 
 abstract class _MenusState implements MenusState {
-  const factory _MenusState({List<MenuModel> menus}) = _$_MenusState;
+  const factory _MenusState({AsyncValue<List<MenuModel>> menus}) =
+      _$_MenusState;
 
   @override
-  List<MenuModel> get menus => throw _privateConstructorUsedError;
+  AsyncValue<List<MenuModel>> get menus => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$MenusStateCopyWith<_MenusState> get copyWith =>

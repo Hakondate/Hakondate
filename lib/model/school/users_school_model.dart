@@ -1,31 +1,22 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:hakondate_v2/model/school/school_model.dart';
-
+part 'users_school_model.freezed.dart';
 part 'users_school_model.g.dart';
 
-@JsonSerializable()
-class UsersSchoolModel extends SchoolModel {
-  UsersSchoolModel({
+@freezed
+class UsersSchoolModel with _$UsersSchoolModel {
+  const UsersSchoolModel._();
+  const factory UsersSchoolModel({
     required int id,
     required int parentId,
     required String name,
     int? lunchBlock,
-    required int classification,
-    this.schoolYear
-  }) : super(
-    id: id,
-    parentId: parentId,
-    name: name,
-    lunchBlock: lunchBlock,
-    classification: classification
-  );
+    @Default(0) int classification,
+    int? schoolYear               // 学年(年齢)
+  }) = _UsersSchoolModel;
 
   factory UsersSchoolModel.fromJson(Map<String, dynamic> json) =>
       _$UsersSchoolModelFromJson(json);
-  Map<String, dynamic> toJson() => _$UsersSchoolModelToJson(this);
-
-  final int? schoolYear;  // 学年(年齢)
 
   /* 登録情報から学年区別を返す
   * 小学1.2年 => "lower"
@@ -34,7 +25,7 @@ class UsersSchoolModel extends SchoolModel {
   * 中学生    => "junior"
   * データ不備 => "junior" */
   String schoolGrade() {
-    if (classification == null || schoolYear == null) return "junior";
+    if (schoolYear == null) return "junior";
     else if (classification == 1) {
       if (schoolYear! <= 2) return "lower";
       else if (schoolYear! <= 4) return "middle";

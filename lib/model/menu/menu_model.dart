@@ -1,28 +1,19 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:hakondate_v2/model/dish/dish_model.dart';
 
-part 'menu_model.g.dart';
+part 'menu_model.freezed.dart';
 
-@JsonSerializable()
-class MenuModel {
-  MenuModel({
-    required this.id,
-    required this.day,
-    required this.schoolId,
-    required this.dishes,
-    this.event
-  });
-
-  factory MenuModel.fromJson(Map<String, dynamic> json) =>
-      _$MenuModelFromJson(json);
-  Map<String, dynamic> toJson() => _$MenuModelToJson(this);
-
-  final int id;                 // Day: 2021/06/30 & ScID: 1 → 2021063001
-  final DateTime day;           // 日付
-  final int schoolId;           // 学校
-  final List<DishModel> dishes; // 料理
-  final String? event;          // イベント
+@freezed
+class MenuModel with _$MenuModel {
+  const MenuModel._();                // Support Getter Method
+  const factory MenuModel({
+    required int id,                  // Day: 2021/06/30 & ScID: 1 → 2021063001
+    required DateTime day,            // 日付
+    required int schoolId,            // 学校
+    required List<DishModel> dishes,  // 料理
+    String? event                     // イベント
+  }) = _MenuModel;
 
   double get energy {
     double _sum = 0.0;

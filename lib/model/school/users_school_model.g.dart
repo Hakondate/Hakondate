@@ -6,18 +6,19 @@ part of 'users_school_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-UsersSchoolModel _$UsersSchoolModelFromJson(Map<String, dynamic> json) {
-  return UsersSchoolModel(
+_$_UsersSchoolModel _$_$_UsersSchoolModelFromJson(Map<String, dynamic> json) {
+  return _$_UsersSchoolModel(
     id: json['id'] as int,
     parentId: json['parentId'] as int,
     name: json['name'] as String,
     lunchBlock: json['lunchBlock'] as int?,
-    classification: json['classification'] as int,
+    classification: json['classification'] as int? ?? 0,
     schoolYear: json['schoolYear'] as int?,
   );
 }
 
-Map<String, dynamic> _$UsersSchoolModelToJson(UsersSchoolModel instance) =>
+Map<String, dynamic> _$_$_UsersSchoolModelToJson(
+        _$_UsersSchoolModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'parentId': instance.parentId,

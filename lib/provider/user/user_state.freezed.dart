@@ -40,6 +40,8 @@ abstract class $UserStateCopyWith<$Res> {
   factory $UserStateCopyWith(UserState value, $Res Function(UserState) then) =
       _$UserStateCopyWithImpl<$Res>;
   $Res call({UserModel user});
+
+  $UserModelCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -61,6 +63,13 @@ class _$UserStateCopyWithImpl<$Res> implements $UserStateCopyWith<$Res> {
               as UserModel,
     ));
   }
+
+  @override
+  $UserModelCopyWith<$Res> get user {
+    return $UserModelCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -70,6 +79,9 @@ abstract class _$UserStateCopyWith<$Res> implements $UserStateCopyWith<$Res> {
       __$UserStateCopyWithImpl<$Res>;
   @override
   $Res call({UserModel user});
+
+  @override
+  $UserModelCopyWith<$Res> get user;
 }
 
 /// @nodoc

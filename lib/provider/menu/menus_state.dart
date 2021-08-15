@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart'; // .freezed.dart側で利用
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:hakondate_v2/model/menu/menu_model.dart';
@@ -20,12 +21,13 @@ part 'menus_state.freezed.dart';
 /// Q. [factory]の意味
 /// A. 返り値のあるコンストラクタを定義
 ///
-/// Q. .loading()の使い道
-/// A. menusのデータを読み込む際や，DBとの通信中を表現する
+/// Q. [AsyncValue]の意味
+/// A. menusは非同期処理で変更が行われる．AsyncValueはその際の状態管理を手軽に行える．
+///     menusの読み込み中は.loading()，エラーが出たら.error()みたいな感じ
 
 @freezed
-abstract class MenusState with _$MenusState {
+class MenusState with _$MenusState {
   const factory MenusState({
-    @Default(<MenuModel>[]) List<MenuModel> menus,
+    @Default(AsyncValue.loading()) AsyncValue<List<MenuModel>> menus,
   }) = _MenusState;
 }

@@ -1,29 +1,18 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:hakondate_v2/model/nutrients/nutrients_model.dart';
 import 'package:hakondate_v2/model/quantity/quantity_model.dart';
 
-part 'foodstuff_model.g.dart';
+part 'foodstuff_model.freezed.dart';
 
-@JsonSerializable()
-class FoodstuffModel {
-  FoodstuffModel({
-    required this.name,
-    required this.quantity,
-    required this.nutrients,
-    this.isAllergy = false,
-    this.isHeat = false,
-    this.origin
-  });
-
-  factory FoodstuffModel.fromJson(Map<String, dynamic> json) =>
-      _$FoodstuffModelFromJson(json);
-  Map<String, dynamic> toJson() => _$FoodstuffModelToJson(this);
-
-  final String name;              // 食材名
-  final QuantityModel quantity;   // 分量
-  final NutrientsModel nutrients; // 栄養素
-  final bool isAllergy;           // アレルギー食品
-  final bool isHeat;              // 熱加工食品
-  final String? origin;           // 原産地
+@freezed
+class FoodstuffModel with _$FoodstuffModel {
+  const factory FoodstuffModel({
+    required String name,               // 食材名
+    required QuantityModel quantity,    // 分量
+    required NutrientsModel nutrients,  // 栄養素
+    @Default(false) bool isAllergy,     // アレルギー食品
+    @Default(false) bool isHeat,        // 熱加工食品
+    String? origin                      // 原産地
+  }) = _FoodstuffModel;
 }

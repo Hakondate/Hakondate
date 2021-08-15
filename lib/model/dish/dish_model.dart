@@ -1,24 +1,17 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:hakondate_v2/model/foodstuff/foodstuff_model.dart';
 
-part 'dish_model.g.dart';
+part 'dish_model.freezed.dart';
 
-@JsonSerializable()
-class DishModel {
-  DishModel({
-    required this.name,
-    required this.foodstuffs,
-    this.category
-  });
-
-  factory DishModel.fromJson(Map<String, dynamic> json) =>
-      _$DishModelFromJson(json);
-  Map<String, dynamic> toJson() => _$DishModelToJson(this);
-
-  final String name;                      // 料理名
-  final List<FoodstuffModel> foodstuffs;  // 食材
-  final String? category;                 // 分類
+@freezed
+class DishModel with _$DishModel {
+  const DishModel._();
+  const factory DishModel({
+    required String name,                     // 料理名
+    required List<FoodstuffModel> foodstuffs, // 食材
+    String? category,                         // 分類
+  }) = _DishModel;
 
   double get energy {
     double _sum = 0.0;

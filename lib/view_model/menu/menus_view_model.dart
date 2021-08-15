@@ -18,10 +18,10 @@ class MenusViewModel extends StateNotifier<MenusState> {
     if (menus is! MenuModel && menus is! List<MenuModel>)
       throw UnsupportedError('The menus argument can only be MenuModel or List<MenuModel> type.');
     final List<MenuModel> _newMenus = [
-      ...state.menus,
+      ...state.menus.data!.value,
       menus
     ];
-    state = state.copyWith(menus: _newMenus);
+    state = state.copyWith(menus: AsyncValue.data(_newMenus));
   }
 
   Future<void> updateLocalMenus() async {
@@ -29,7 +29,8 @@ class MenusViewModel extends StateNotifier<MenusState> {
   }
 
   Future<void> getLocalMenus(DateTime day, UserModel user) async {
-    List<MenuModel> _sortedMenus = state.menus;
+    // List<MenuModel> _sortedMenus = state.menus;
+    List<MenuModel> _sortedMenus = state.menus as List<MenuModel>;
     _sortedMenus.sort((a, b) => a.day.compareTo(b.day));
     final DateTime _oldDay = _sortedMenus.last.day;
     if (day.isBefore(_oldDay)) {
