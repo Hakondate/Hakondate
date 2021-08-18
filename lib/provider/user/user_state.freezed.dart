@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$UserStateTearOff {
   const _$UserStateTearOff();
 
-  _UserState call({required UserModel user}) {
+  _UserState call({AsyncValue<UserModel> user = const AsyncValue.loading()}) {
     return _UserState(
       user: user,
     );
@@ -28,7 +28,7 @@ const $UserState = _$UserStateTearOff();
 
 /// @nodoc
 mixin _$UserState {
-  UserModel get user => throw _privateConstructorUsedError;
+  AsyncValue<UserModel> get user => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserStateCopyWith<UserState> get copyWith =>
@@ -39,9 +39,9 @@ mixin _$UserState {
 abstract class $UserStateCopyWith<$Res> {
   factory $UserStateCopyWith(UserState value, $Res Function(UserState) then) =
       _$UserStateCopyWithImpl<$Res>;
-  $Res call({UserModel user});
+  $Res call({AsyncValue<UserModel> user});
 
-  $UserModelCopyWith<$Res> get user;
+  $AsyncValueCopyWith<UserModel, $Res> get user;
 }
 
 /// @nodoc
@@ -60,13 +60,13 @@ class _$UserStateCopyWithImpl<$Res> implements $UserStateCopyWith<$Res> {
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as UserModel,
+              as AsyncValue<UserModel>,
     ));
   }
 
   @override
-  $UserModelCopyWith<$Res> get user {
-    return $UserModelCopyWith<$Res>(_value.user, (value) {
+  $AsyncValueCopyWith<UserModel, $Res> get user {
+    return $AsyncValueCopyWith<UserModel, $Res>(_value.user, (value) {
       return _then(_value.copyWith(user: value));
     });
   }
@@ -78,10 +78,10 @@ abstract class _$UserStateCopyWith<$Res> implements $UserStateCopyWith<$Res> {
           _UserState value, $Res Function(_UserState) then) =
       __$UserStateCopyWithImpl<$Res>;
   @override
-  $Res call({UserModel user});
+  $Res call({AsyncValue<UserModel> user});
 
   @override
-  $UserModelCopyWith<$Res> get user;
+  $AsyncValueCopyWith<UserModel, $Res> get user;
 }
 
 /// @nodoc
@@ -101,7 +101,7 @@ class __$UserStateCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as UserModel,
+              as AsyncValue<UserModel>,
     ));
   }
 }
@@ -109,10 +109,11 @@ class __$UserStateCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_UserState with DiagnosticableTreeMixin implements _UserState {
-  const _$_UserState({required this.user});
+  const _$_UserState({this.user = const AsyncValue.loading()});
 
+  @JsonKey(defaultValue: const AsyncValue.loading())
   @override
-  final UserModel user;
+  final AsyncValue<UserModel> user;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -146,10 +147,10 @@ class _$_UserState with DiagnosticableTreeMixin implements _UserState {
 }
 
 abstract class _UserState implements UserState {
-  const factory _UserState({required UserModel user}) = _$_UserState;
+  const factory _UserState({AsyncValue<UserModel> user}) = _$_UserState;
 
   @override
-  UserModel get user => throw _privateConstructorUsedError;
+  AsyncValue<UserModel> get user => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$UserStateCopyWith<_UserState> get copyWith =>

@@ -44,6 +44,8 @@ flutter:
 
   assets:
     - assets/slns/
+    - assets/images/
+    - assets/loading_animation/
 
   fonts:
     - family: MPLUSRounded1c
