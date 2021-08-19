@@ -9,6 +9,6 @@ part 'user_state.freezed.dart';
 @freezed
 class UserState with _$UserState {
   const factory UserState({
-    @Default(AsyncValue.loading()) AsyncValue<UserModel> user
+    @Default(UserModel()) UserModel user
   }) = _UserState;
 }

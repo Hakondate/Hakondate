@@ -9,21 +9,47 @@ class Splash extends ConsumerWidget {
   void _handleToHome() {}
   void _handleToTerms() {}
 
-  Future<void> _initState(BuildContext context, WidgetRef ref) async {
-    bool _isExistUser = await ref.read(userProvider.notifier).getUser();
-    if (!_isExistUser) _handleToTerms();
-    else {
+  Stream<String> _initialData(BuildContext context, WidgetRef ref) async* {
+    await ref.read(userProvider.notifier).getUser();
+    if (ref.read(userProvider.notifier).isExistUser()) {
+      yield 'CheckingUpdate';
+      if (await ref.read(menusProvider.notifier).checkUpdate()) {
+        yield 'Updating';
+        await ref.read(menusProvider.notifier).updateLocalMenus(ref.watch(userProvider).user);
+      }
+      _handleToHome();
+    } else {
+      _handleToTerms();
     }
+  }
+
+  void _showErrorDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return CupertinoAlertDialog(
+            title: Text('通信エラー'),
+            content: Text('データの更新に失敗しました．データの更新をせず利用する場合は"このまま利用"を選択してください．'),
+            actions: [
+              CupertinoDialogAction(
+                child: Text('このまま利用'),
+                onPressed: () {},
+              ),
+              CupertinoDialogAction(
+                isDefaultAction: true,
+                child: Text('リトライ'),
+                onPressed: () {},
+              )
+            ],
+          );
+        }
+    );
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userState = ref.watch(userProvider);
-    final menusState = ref.watch(menusProvider);
-
     final double _screenWidth = MediaQuery.of(context).size.width;
-
-    _initState(context, ref);
 
     return Scaffold(
       body: Container(
@@ -35,22 +61,27 @@ class Splash extends ConsumerWidget {
               Image.asset('assets/images/splash.png', width: _screenWidth / 6.0),
               SizedBox(
                 width: _screenWidth * 2.0 / 3.0,
-                child: userState.user.when(
-                    data: (user) {
-                      ref.read(menusProvider.notifier).updateLocalMenus(user).then((_) {
-                        final DateTime _day = DateTime.now();
-                        ref.read(menusProvider.notifier).getLocalMenus(_day, user).then((_) {
-                          _handleToHome();
-                        });
-                      });
-                      menusState.menus.when(
-                          data: (_) => {},
-                          loading: () => Image.asset('assets/loading_animation/data_updating.gif'),
-                          error: (error, stack) {}
-                      );
-                    },
-                    loading: () => Image.asset('assets/loading_animation/data_reading.gif'),
-                    error: (_, __) => Container(),
+                child: StreamBuilder(
+                  stream: _initialData(context, ref),
+                  initialData: 'CheckingUserData',
+                  builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                    if (snapshot.connectionState != ConnectionState.done) {
+                      Widget _widget = Container();
+                      switch (snapshot.data) {
+                        case 'CheckingUserData':
+                          _widget = Image.asset('assets/loading_animation/data_reading.gif');
+                          break;
+                        case 'CheckingUpdate':
+                          _widget = Image.asset('assets/loading_animation/checking.gif');
+                          break;
+                        case 'Updating':
+                          _widget = Image.asset('assets/loading_animation/data_updating.gif');
+                          break;
+                      }
+                      return _widget;
+                    }
+                    return Container();
+                  },
                 ),
               ),
             ],

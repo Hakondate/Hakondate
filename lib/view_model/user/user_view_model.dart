@@ -2,8 +2,10 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
 
@@ -17,22 +19,22 @@ final userProvider = StateNotifierProvider<UserViewModel, UserState>((ref) => Us
 class UserViewModel extends StateNotifier<UserState> {
   UserViewModel() : super(UserState());
 
-  Future<bool> getUser() async {
-    state = state.copyWith(user: AsyncValue.loading());
+  Future<void> getUser() async {
     try {
       final File _userFile = await _getUserFile();
       final String _content = await _userFile.readAsString();
       UserModel _user = UserModel.fromJson(json.decode(_content));
-      state = state.copyWith(user: AsyncValue.data(_user));
-      return true;
-    } catch (e) {
-      state = state.copyWith(user: AsyncValue.error(e));
-      return false;
+      state = state.copyWith(user: _user);
+    } catch (error) {
+      debugPrint('Either the user has not registered, or access to the user file has failed.');
+      debugPrint(error.toString());
     }
   }
 
+  bool isExistUser() => state.user.name != null && state.user.school != null;
+
   Future<void> updateUser({String? name, UsersSchoolModel? school}) async {
-    UserModel _user = state.user.data!.value;
+    UserModel _user = state.user;
     NutrientsModel? _slns = school == null ? _user.slns : await _getSLNS(school);
     UserModel _newUser = UserModel(
       name: name ?? _user.name,
@@ -40,7 +42,7 @@ class UserViewModel extends StateNotifier<UserState> {
       slns: _slns
     );
     await _writeUser(_newUser);
-    state = state.copyWith(user: AsyncValue.data(_newUser));
+    state = state.copyWith(user: _newUser);
   }
 
   Future<NutrientsModel> _getSLNS(UsersSchoolModel? school) async {
@@ -63,7 +65,6 @@ class UserViewModel extends StateNotifier<UserState> {
       final String _encoded = json.encode(user.toJson());
       _userFile.writeAsString(_encoded.toString());
     } catch (e) {
-      state = state.copyWith(user: AsyncValue.error(e));
     }
   }
 

@@ -28,6 +28,6 @@ part 'menus_state.freezed.dart';
 @freezed
 class MenusState with _$MenusState {
   const factory MenusState({
-    @Default(AsyncValue.loading()) AsyncValue<List<MenuModel>> menus,
+    @Default(<MenuModel>[]) List<MenuModel> menus,
   }) = _MenusState;
 }
