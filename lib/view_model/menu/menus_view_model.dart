@@ -25,12 +25,19 @@ class MenusViewModel extends StateNotifier<MenusState> {
   }
 
   Future<void> getLocalMenus(DateTime day, UserModel user) async {
-    List<MenuModel> _sortedMenus = state.menus;
-    _sortedMenus.sort((a, b) => a.day.compareTo(b.day));
-    final DateTime _oldDay = _sortedMenus.last.day;
-    if (day.isBefore(_oldDay)) {
-      List<MenuModel> _newMenus = await _localRepository.getSelectionPeriodMenus(day, _oldDay, user.school!.parentId);
-      _addMenus(_newMenus);
+    DateTime _referenceDay = DateTime(DateTime.now().year, DateTime.now().month + 1).add(Duration(days: -1)); // 今月末
+    if (state.menus.isEmpty) {
+      List<MenuModel> _sortedMenus = state.menus;
+      _sortedMenus.sort((a, b) => a.day.compareTo(b.day));
+      _referenceDay = _sortedMenus.last.day;
+    }
+    if (day.isBefore(_referenceDay)) {
+      try {
+        List<MenuModel> _newMenus = await _localRepository.getSelectionPeriodMenus(day, _referenceDay, user.school!.parentId);
+        _addMenus(_newMenus);
+      } catch (error) {
+        throw Exception(error);
+      }
     }
   }
 

@@ -64,7 +64,8 @@ class UserViewModel extends StateNotifier<UserState> {
       final File _userFile = await _getUserFile();
       final String _encoded = json.encode(user.toJson());
       _userFile.writeAsString(_encoded.toString());
-    } catch (e) {
+    } catch (error) {
+      throw Exception(error);
     }
   }
 

@@ -6,20 +6,24 @@ import 'package:hakondate_v2/view_model/menu/menus_view_model.dart';
 import 'package:hakondate_v2/view_model/user/user_view_model.dart';
 
 class Splash extends ConsumerWidget {
-  void _handleToHome() {}
-  void _handleToTerms() {}
-
   Stream<String> _initialData(BuildContext context, WidgetRef ref) async* {
-    await ref.read(userProvider.notifier).getUser();
-    if (ref.read(userProvider.notifier).isExistUser()) {
-      yield 'CheckingUpdate';
-      if (await ref.read(menusProvider.notifier).checkUpdate()) {
-        yield 'Updating';
-        await ref.read(menusProvider.notifier).updateLocalMenus(ref.watch(userProvider).user);
+    try {
+      await ref.read(userProvider.notifier).getUser();
+      if (ref.read(userProvider.notifier).isExistUser()) {
+        yield 'CheckingUpdate';
+        if (await ref.read(menusProvider.notifier).checkUpdate()) {
+          yield 'Updating';
+          await ref.read(menusProvider.notifier).updateLocalMenus(ref.watch(userProvider).user);
+        }
+        final DateTime _loadingDay = DateTime(DateTime.now().year, DateTime.now().month);
+        await ref.read(menusProvider.notifier).getLocalMenus(_loadingDay, ref.watch(userProvider).user);
+        // TODO: ホーム画面への遷移
+      } else {
+        // TODO: 新規登録画面への遷移
       }
-      _handleToHome();
-    } else {
-      _handleToTerms();
+    } catch (error) {
+      debugPrint(error.toString());
+      _showErrorDialog(context);
     }
   }
 
@@ -80,7 +84,7 @@ class Splash extends ConsumerWidget {
                       }
                       return _widget;
                     }
-                    return Container();
+                    return Image.asset('assets/loading_animation/data_reading.gif');
                   },
                 ),
               ),
