@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$UserStateTearOff {
   const _$UserStateTearOff();
 
-  _UserState call({required UserModel user}) {
+  _UserState call({UserModel user = const UserModel()}) {
     return _UserState(
       user: user,
     );
@@ -40,6 +40,8 @@ abstract class $UserStateCopyWith<$Res> {
   factory $UserStateCopyWith(UserState value, $Res Function(UserState) then) =
       _$UserStateCopyWithImpl<$Res>;
   $Res call({UserModel user});
+
+  $UserModelCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -61,6 +63,13 @@ class _$UserStateCopyWithImpl<$Res> implements $UserStateCopyWith<$Res> {
               as UserModel,
     ));
   }
+
+  @override
+  $UserModelCopyWith<$Res> get user {
+    return $UserModelCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -70,6 +79,9 @@ abstract class _$UserStateCopyWith<$Res> implements $UserStateCopyWith<$Res> {
       __$UserStateCopyWithImpl<$Res>;
   @override
   $Res call({UserModel user});
+
+  @override
+  $UserModelCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -97,8 +109,9 @@ class __$UserStateCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_UserState with DiagnosticableTreeMixin implements _UserState {
-  const _$_UserState({required this.user});
+  const _$_UserState({this.user = const UserModel()});
 
+  @JsonKey(defaultValue: const UserModel())
   @override
   final UserModel user;
 
@@ -134,7 +147,7 @@ class _$_UserState with DiagnosticableTreeMixin implements _UserState {
 }
 
 abstract class _UserState implements UserState {
-  const factory _UserState({required UserModel user}) = _$_UserState;
+  const factory _UserState({UserModel user}) = _$_UserState;
 
   @override
   UserModel get user => throw _privateConstructorUsedError;

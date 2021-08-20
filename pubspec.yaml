@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # ネイティブアイコン
+  # デザイン
   cupertino_icons: ^1.0.2
 
   # 状態管理関連
@@ -36,6 +36,7 @@ dev_dependencies:
   freezed: ^0.14.2
   json_serializable: ^4.1.4
   moor_generator: ^4.4.1
+  flutter_native_splash: ^1.2.1
 
 flutter:
 
@@ -43,6 +44,8 @@ flutter:
 
   assets:
     - assets/slns/
+    - assets/images/
+    - assets/loading_animation/
 
   fonts:
     - family: MPLUSRounded1c
@@ -60,3 +63,9 @@ flutter:
           weight: 800
         - asset: fonts/MPLUSRounded1c-Black.ttf
           weight: 900
+
+flutter_native_splash:
+  color: "#FFBF7F"
+  image: assets/images/splash.png
+  android: true
+  ios: true
