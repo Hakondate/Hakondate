@@ -43,6 +43,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/debug/
     - assets/slns/
     - assets/images/
     - assets/loading_animation/

@@ -6,13 +6,18 @@ import 'package:hakondate_v2/model/menu/menu_model.dart';
 import 'package:hakondate_v2/model/user/user_model.dart';
 import 'package:hakondate_v2/provider/menu/menus_state.dart';
 import 'package:hakondate_v2/repository/local/menus_local_repository.dart';
+import 'package:hakondate_v2/repository/remote/menus_remote_repository.dart';
 
 final menusProvider = StateNotifierProvider<MenusViewModel, MenusState>((ref) => MenusViewModel());
 
 class MenusViewModel extends StateNotifier<MenusState> {
-  MenusViewModel() : this._localRepository = MenusLocalRepository(), super(const MenusState());
+  MenusViewModel() :
+        this._localRepository = MenusLocalRepository(),
+        this._remoteRepository = MenusRemoteRepository(),
+        super(const MenusState());
 
   final MenusLocalRepository _localRepository;
+  final MenusRemoteRepository _remoteRepository;
 
   void _addMenus(dynamic menus) {
     if (menus is! MenuModel && menus is! List<MenuModel>)
@@ -43,6 +48,10 @@ class MenusViewModel extends StateNotifier<MenusState> {
 
   Future<void> updateLocalMenus(UserModel user) async {
     // TODO: リモートデータの更新をローカルに反映
+    final List<dynamic> _newMenus = await _remoteRepository.downloadMenus();
+    await Future.forEach(_newMenus, (dynamic menu) async {
+      await _localRepository.addMenu(menu);
+    });
   }
 
   Future<bool> checkUpdate() async {
