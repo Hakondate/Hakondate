@@ -29,7 +29,8 @@ class Splash extends ConsumerWidget {
           yield 'Updating';
           await ref.read(menusProvider.notifier).updateLocalMenus(ref.watch(userProvider).user);
         }
-        final DateTime _loadingDay = DateTime(DateTime.now().year, DateTime.now().month);
+        // final DateTime _loadingDay = DateTime(DateTime.now().year, DateTime.now().month);
+        final DateTime _loadingDay = DateTime(DateTime.now().year, 7);
         await ref.read(menusProvider.notifier).getLocalMenus(_loadingDay, ref.watch(userProvider).user);
         // TODO: ホーム画面への遷移
       } else {
