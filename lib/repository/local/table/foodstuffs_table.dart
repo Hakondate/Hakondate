@@ -24,4 +24,10 @@ class FoodstuffsTable extends Table {
   BoolColumn get isHeat => boolean()();
   BoolColumn get isAllergy => boolean()();
   TextColumn get origin => text().nullable()();
+
+  // 記述と処理省略のためにエネルギー量のみを参照している
+  @override
+  List<String> get customConstraints => [
+    'UNIQUE (name, gram, energy, isHeat, isAllergy, origin)'
+  ];
 }
