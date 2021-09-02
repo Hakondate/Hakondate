@@ -18,13 +18,13 @@ class MenusLocalRepository {
     // KEYWORDS: UNIQUE制約 UPSERT
     final MenusTableCompanion _menusSchema = MenusTableCompanion(
       id: Value(menu['id']),
-      day: Value(menu['day']),
+      day: Value(DateTime.fromMillisecondsSinceEpoch(menu['day'])),
       schoolId: Value(menu['schoolId']),
       event: Value(menu['event'])
     );
     final int _menuId = await _databaseManager.addMenusSchema(_menusSchema);
 
-    await Future.forEach(menu['dishes'], (Map<String, dynamic> dish) async {
+    await Future.forEach(menu['dishes'], (dynamic dish) async {
       final int _dishId = await _addDish(dish);
       await _databaseManager.addMenuDishesSchema(
         MenuDishesTableCompanion(
@@ -44,7 +44,7 @@ class MenusLocalRepository {
     );
     final int _dishId = await _databaseManager.addDishesSchema(_dishSchema);
 
-    await Future.forEach(dish['foodstuffs'], (Map<String, dynamic> foodstuff) async {
+    await Future.forEach(dish['foodstuffs'], (dynamic foodstuff) async {
       final int _foodstuffId = await _addFoodstuff(foodstuff);
       await _databaseManager.addDishFoodstuffsSchema(
         DishFoodstuffsTableCompanion(
@@ -62,22 +62,22 @@ class MenusLocalRepository {
       FoodstuffsTableCompanion(
         name: Value(foodstuff['name']),
         piece: Value(foodstuff['piece']),
-        gram: Value(foodstuff['gram']),
-        energy: Value(foodstuff['energy']),
-        protein: Value(foodstuff['protein']),
-        lipid: Value(foodstuff['lipid']),
-        carbohydrate: Value(foodstuff['carbohydrate']),
-        sodium: Value(foodstuff['sodium']),
-        calcium: Value(foodstuff['calcium']),
-        magnesium: Value(foodstuff['magnesium']),
-        iron: Value(foodstuff['iron']),
-        zinc: Value(foodstuff['zinc']),
-        retinol: Value(foodstuff['retinol']),
-        vitaminB1: Value(foodstuff['vitaminB1']),
-        vitaminB2: Value(foodstuff['vitaminB2']),
-        vitaminC: Value(foodstuff['vitaminC']),
-        dietaryFiber: Value(foodstuff['dietaryFiber']),
-        salt: Value(foodstuff['salt']),
+        gram: Value(foodstuff['gram'].toDouble()),
+        energy: Value(foodstuff['energy'].toDouble()),
+        protein: Value(foodstuff['protein'].toDouble()),
+        lipid: Value(foodstuff['lipid'].toDouble()),
+        carbohydrate: Value(foodstuff['carbohydrate'].toDouble()),
+        sodium: Value(foodstuff['sodium'].toDouble()),
+        calcium: Value(foodstuff['calcium'].toDouble()),
+        magnesium: Value(foodstuff['magnesium'].toDouble()),
+        iron: Value(foodstuff['iron'].toDouble()),
+        zinc: Value(foodstuff['zinc'].toDouble()),
+        retinol: Value(foodstuff['retinol'].toDouble()),
+        vitaminB1: Value(foodstuff['vitaminB1'].toDouble()),
+        vitaminB2: Value(foodstuff['vitaminB2'].toDouble()),
+        vitaminC: Value(foodstuff['vitaminC'].toDouble()),
+        dietaryFiber: Value(foodstuff['dietaryFiber'].toDouble()),
+        salt: Value(foodstuff['salt'].toDouble()),
         isHeat: Value(foodstuff['isHeat']),
         isAllergy: Value(foodstuff['isAllergy']),
         origin: Value(foodstuff['origin'])
