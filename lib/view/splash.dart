@@ -24,14 +24,7 @@ class Splash extends ConsumerWidget {
 
       await ref.read(userProvider.notifier).getUser();
       if (ref.read(userProvider.notifier).isExistUser()) {
-        yield 'CheckingUpdate';
-        if (await ref.read(menusProvider.notifier).checkUpdate()) {
-          yield 'Updating';
-          await ref.read(menusProvider.notifier).updateLocalMenus(ref.watch(userProvider).user);
-        }
-        // final DateTime _loadingDay = DateTime(DateTime.now().year, DateTime.now().month);
-        final DateTime _loadingDay = DateTime(DateTime.now().year, 7);
-        await ref.read(menusProvider.notifier).getLocalMenus(_loadingDay, ref.watch(userProvider).user);
+        yield* ref.read(menusProvider.notifier).initialMenus(ref.watch(userProvider).user);
         // TODO: ホーム画面への遷移
       } else {
         // TODO: 新規登録画面への遷移
@@ -84,13 +77,12 @@ class Splash extends ConsumerWidget {
                 width: _screenWidth * 2.0 / 3.0,
                 child: StreamBuilder(
                   stream: _initialData(context, ref),
-                  initialData: 'CheckingUserData',
-                  builder:
-                      (BuildContext context, AsyncSnapshot<String> snapshot) {
+                  initialData: 'Reading',
+                  builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
                     if (snapshot.connectionState != ConnectionState.done) {
                       Widget _widget = Container();
                       switch (snapshot.data) {
-                        case 'CheckingUserData':
+                        case 'Reading':
                           _widget = Image.asset('assets/loading_animation/data_reading.gif');
                           break;
                         case 'CheckingUpdate':

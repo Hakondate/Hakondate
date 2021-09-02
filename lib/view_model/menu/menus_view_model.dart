@@ -20,19 +20,22 @@ class MenusViewModel extends StateNotifier<MenusState> {
   final MenusLocalRepository _localRepository;
   final MenusRemoteRepository _remoteRepository;
 
-  void _addMenus(dynamic menus) {
-    if (menus is! MenuModel && menus is! List<MenuModel>)
-      throw UnsupportedError('The menus argument can only be MenuModel or List<MenuModel> type.');
-    final List<MenuModel> _newMenus = (menus is MenuModel)
-        ? [...state.menus, menus]
-        : [...state.menus, ...menus];
-    state = state.copyWith(menus: _newMenus);
+  Stream<String> initialMenus(UserModel user) async* {
+    yield 'CheckingUpdate';
+    if (await _checkUpdate()) {
+      yield 'Updating';
+      await _updateLocalMenus(user);
+    }
+    yield 'Reading';
+    // final DateTime _loadingDay = DateTime(DateTime.now().year, DateTime.now().month);
+    final DateTime _loadingDay = DateTime(2021, 7);  // デバッグ用
+    await getLocalMenus(_loadingDay, user);
   }
 
   Future<void> getLocalMenus(DateTime day, UserModel user) async {
     DateTime _referenceDay =
-        DateTime(DateTime.now().year, DateTime.now().month + 1)
-            .add(Duration(days: -1)); // 今月末
+    DateTime(DateTime.now().year, DateTime.now().month + 1)
+        .add(Duration(days: -1)); // 今月末
     if (state.menus.isNotEmpty) {
       List<MenuModel> _copiedMenus = state.menus;
       _copiedMenus.sort((a, b) => a.day.compareTo(b.day));
@@ -48,7 +51,11 @@ class MenusViewModel extends StateNotifier<MenusState> {
     }
   }
 
-  Future<void> updateLocalMenus(UserModel user) async {
+  Future<bool> _checkUpdate() async {
+    return true;
+  }
+
+  Future<void> _updateLocalMenus(UserModel user) async {
     // TODO: リモートデータの更新をローカルに反映
     final List<dynamic> _newMenus = await _remoteRepository.downloadMenus();
     await Future.forEach(_newMenus, (dynamic menu) async {
@@ -56,7 +63,12 @@ class MenusViewModel extends StateNotifier<MenusState> {
     });
   }
 
-  Future<bool> checkUpdate() async {
-    return true;
+  void _addMenus(dynamic menus) {
+    if (menus is! MenuModel && menus is! List<MenuModel>)
+      throw UnsupportedError('The menus argument can only be MenuModel or List<MenuModel> type.');
+    final List<MenuModel> _newMenus = (menus is MenuModel)
+        ? [...state.menus, menus]
+        : [...state.menus, ...menus];
+    state = state.copyWith(menus: _newMenus);
   }
 }
