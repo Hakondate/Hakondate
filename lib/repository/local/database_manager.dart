@@ -43,13 +43,8 @@ class DatabaseManager extends _$DatabaseManager {
   Future<List<MenusSchema>> get allMenusSchemas => select(menusTable).get();
 
   // 範囲指定でのデータ取得
-  Future<List<MenusSchema>> getSelectionPeriodMenusSchemas(
-          DateTime startDay, DateTime endDay, int schoolId) =>
-      (select(menusTable)
-            ..where((t) =>
-                t.day.isBetweenValues(startDay, endDay) &
-                t.schoolId.equals(schoolId)))
-          .get();
+  Future<List<MenusSchema>> getSelectionPeriodMenusSchemas(DateTime startDay, DateTime endDay, int schoolId) =>
+      (select(menusTable)..where((t) => t.day.isBetweenValues(startDay, endDay) & t.schoolId.equals(schoolId))).get();
 
   // IDからMenusSchemaを取得
   Future<MenusSchema> getMenusSchemaById(int id) =>

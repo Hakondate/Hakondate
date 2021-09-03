@@ -6,9 +6,11 @@ class MenuDishesTable extends Table {
   IntColumn get dishId => integer()();
 
   @override
+  Set<Column> get primaryKey => {menuId, dishId};
+
+  @override
   List<String> get customConstraints => [
     'FOREIGN KEY(menu_id) REFERENCES menus_table(id)',
-    'FOREIGN KEY(dish_id) REFERENCES dishes_table(id)',
-    'UNIQUE (menuId, dishId)'
+    'FOREIGN KEY(dish_id) REFERENCES dishes_table(id)'
   ];
 }

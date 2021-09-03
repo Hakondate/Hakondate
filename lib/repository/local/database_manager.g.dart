@@ -704,7 +704,7 @@ class $MenuDishesTableTable extends MenuDishesTable
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => <GeneratedColumn>{};
+  Set<GeneratedColumn> get $primaryKey => {menuId, dishId};
   @override
   MenuDishesSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
     return MenuDishesSchema.fromData(data, _db,
@@ -1094,7 +1094,7 @@ class $DishFoodstuffsTableTable extends DishFoodstuffsTable
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => <GeneratedColumn>{};
+  Set<GeneratedColumn> get $primaryKey => {dishId, foodstuffId};
   @override
   DishFoodstuffsSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
     return DishFoodstuffsSchema.fromData(data, _db,
