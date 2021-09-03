@@ -14,8 +14,6 @@ class MenusLocalRepository {
   late final DatabaseManager _databaseManager;
 
   Future<int> addMenu(Map<String, dynamic> menu) async {
-    // TODO: 各スキーマの競合の解決処理を書く(仕様がよくわからん)
-    // KEYWORDS: UNIQUE制約 UPSERT
     final MenusTableCompanion _menusSchema = MenusTableCompanion(
       id: Value(menu['id']),
       day: Value(DateTime.fromMillisecondsSinceEpoch(menu['day'])),
