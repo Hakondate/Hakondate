@@ -308,11 +308,11 @@
         "event": null,
         "dishes": [
             {
-                "name": "ごはん",
+                "name": "ごはんちゃん",
                 "category": "主食",
                 "foodstuffs": [
                     {
-                        "name": "精白米",
+                        "name": "精白米ちゃん",
                         "piece": null,
                         "gram": 100.0,
                         "energy": 358,
@@ -337,11 +337,11 @@
                 ]
             },
             {
-                "name": "牛乳",
+                "name": "牛乳ちゃん",
                 "category": "飲み物",
                 "foodstuffs": [
                     {
-                        "name": "牛乳",
+                        "name": "牛乳ちゃん",
                         "piece": null,
                         "gram": 206.0,
                         "energy": 138,
@@ -366,11 +366,11 @@
                 ]
             },
             {
-                "name": "五目あんかけ豆腐",
+                "name": "五目あんかけ豆腐ちゃん",
                 "category": "主菜",
                 "foodstuffs": [
                     {
-                        "name": "豆腐",
+                        "name": "豆腐ちゃん",
                         "piece": null,
                         "gram": 150.0,
                         "energy": 89,
@@ -393,7 +393,7 @@
                         "origin": null
                     },
                     {
-                        "name": "豚ももスライス",
+                        "name": "豚ももスライスちゃん",
                         "piece": null,
                         "gram": 15.0,
                         "energy": 27,
@@ -416,7 +416,7 @@
                         "origin": null
                     },
                     {
-                        "name": "玉ねぎ",
+                        "name": "玉ねぎちゃん",
                         "piece": null,
                         "gram": 35.0,
                         "energy": 13,
@@ -439,7 +439,7 @@
                         "origin": null
                     },
                     {
-                        "name": "たけのこ",
+                        "name": "たけのこちゃん",
                         "piece": null,
                         "gram": 10.0,
                         "energy": 2,
@@ -462,7 +462,7 @@
                         "origin": null
                     },
                     {
-                        "name": "人参",
+                        "name": "人参ちゃん",
                         "piece": null,
                         "gram": 15.0,
                         "energy": 5,
@@ -485,7 +485,7 @@
                         "origin": "函館市"
                     },
                     {
-                        "name": "長ねぎ",
+                        "name": "長ねぎちゃん",
                         "piece": null,
                         "gram": 15.0,
                         "energy": 5,
@@ -508,7 +508,7 @@
                         "origin": null
                     },
                     {
-                        "name": "さやいんげん",
+                        "name": "さやいんげんちゃん",
                         "piece": null,
                         "gram": 6.0,
                         "energy": 2,
@@ -531,7 +531,7 @@
                         "origin": null
                     },
                     {
-                        "name": "サラダ油",
+                        "name": "サラダ油ちゃん",
                         "piece": null,
                         "gram": 2.0,
                         "energy": 18,
@@ -554,7 +554,7 @@
                         "origin": null
                     },
                     {
-                        "name": "上白糖",
+                        "name": "上白糖ちゃん",
                         "piece": null,
                         "gram": 1.8,
                         "energy": 7,
@@ -577,7 +577,7 @@
                         "origin": null
                     },
                     {
-                        "name": "水",
+                        "name": "水ちゃん",
                         "piece": null,
                         "gram": 45.0,
                         "energy": 0,
