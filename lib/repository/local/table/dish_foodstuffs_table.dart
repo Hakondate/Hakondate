@@ -8,6 +8,7 @@ class DishFoodstuffsTable extends Table {
   @override
   List<String> get customConstraints => [
     'FOREIGN KEY(dish_id) REFERENCES dishes_table(id)',
-    'FOREIGN KEY(foodstuff_id) REFERENCES foodstuffs_table(id)'
+    'FOREIGN KEY(foodstuff_id) REFERENCES foodstuffs_table(id)',
+    'UNIQUE (dishId, foodstuffId)'
   ];
 }

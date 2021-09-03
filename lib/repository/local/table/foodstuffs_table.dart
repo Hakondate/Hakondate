@@ -28,6 +28,6 @@ class FoodstuffsTable extends Table {
   // 記述と処理省略のためにエネルギー量のみを参照している
   @override
   List<String> get customConstraints => [
-    'UNIQUE (name, gram, energy, isHeat, isAllergy, origin)'
+    'UNIQUE (name, gram, energy, isHeat, isAllergy)'
   ];
 }
