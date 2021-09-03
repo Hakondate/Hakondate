@@ -24,4 +24,9 @@ class FoodstuffsTable extends Table {
   BoolColumn get isHeat => boolean()();
   BoolColumn get isAllergy => boolean()();
   TextColumn get origin => text().nullable()();
+
+  @override
+  List<String> get customConstraints => [
+    'UNIQUE (name, gram, is_heat, is_allergy)'
+  ];
 }

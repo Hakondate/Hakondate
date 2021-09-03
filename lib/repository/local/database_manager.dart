@@ -43,8 +43,13 @@ class DatabaseManager extends _$DatabaseManager {
   Future<List<MenusSchema>> get allMenusSchemas => select(menusTable).get();
 
   // 範囲指定でのデータ取得
-  Future<List<MenusSchema>> getSelectionPeriodMenusSchemas(DateTime startDay, DateTime endDay, int schoolId) =>
-      (select(menusTable)..where((t) => t.day.isBetweenValues(startDay, endDay) & t.schoolId.equals(schoolId))).get();
+  Future<List<MenusSchema>> getSelectionPeriodMenusSchemas(
+          DateTime startDay, DateTime endDay, int schoolId) =>
+      (select(menusTable)
+            ..where((t) =>
+                t.day.isBetweenValues(startDay, endDay) &
+                t.schoolId.equals(schoolId)))
+          .get();
 
   // IDからMenusSchemaを取得
   Future<MenusSchema> getMenusSchemaById(int id) =>
@@ -73,25 +78,49 @@ class DatabaseManager extends _$DatabaseManager {
   /* INSERT */
   // MenusSchemaを追加
   Future<int> addMenusSchema(MenusTableCompanion entry) =>
-      into(menusTable).insert(entry);
+      into(menusTable).insert(
+          entry,
+          onConflict: DoUpdate((old) => MenusTableCompanion.custom(
+              event: Constant(entry.event.value)
+          ))
+      );
 
   // SchoolsSchemaを追加
   Future<int> addSchoolsSchema(SchoolsTableCompanion entry) =>
-      into(schoolsTable).insert(entry);
+      into(schoolsTable).insertOnConflictUpdate(entry);
 
   // MenuDishesSchemaを追加
   Future<int> addMenuDishesSchema(MenuDishesTableCompanion entry) =>
-      into(menuDishesTable).insert(entry);
+      into(menuDishesTable).insertOnConflictUpdate(entry);
 
   // DishesSchemaを追加
-  Future<int> addDishesSchema(DishesTableCompanion entry) =>
-      into(dishesTable).insert(entry);
+  Future<int> addDishesSchema(DishesTableCompanion entry) async {
+    final DishesSchema? _conflictSchema = await (select(dishesTable)..where((t) =>
+        t.name.equals(entry.name.value))).getSingleOrNull();
+    if (_conflictSchema != null) return _conflictSchema.id;
+    return await into(dishesTable).insert(
+        entry,
+        onConflict: DoUpdate((old) => DishesTableCompanion.custom(
+            category: Constant(entry.category.value)
+        ))
+    );
+  }
 
   // DishFoodstuffsSchemaを追加
   Future<int> addDishFoodstuffsSchema(DishFoodstuffsTableCompanion entry) =>
-      into(dishFoodstuffsTable).insert(entry);
+      into(dishFoodstuffsTable).insertOnConflictUpdate(entry);
 
   // FoodstuffsSchemaを追加
-  Future<int> addFoodstuffsSchema(FoodstuffsTableCompanion entry) =>
-      into(foodstuffsTable).insert(entry);
+  Future<int> addFoodstuffsSchema(FoodstuffsTableCompanion entry) async {
+    final FoodstuffsSchema? _conflictSchema = await (select(foodstuffsTable)..where((t) =>
+        t.name.equals(entry.name.value) &
+        t.gram.equals(entry.gram.value) &
+        t.isHeat.equals(entry.isHeat.value) &
+        t.isAllergy.equals(entry.isAllergy.value)
+    )).getSingleOrNull();
+    if (_conflictSchema != null) return _conflictSchema.id;
+    return await into(foodstuffsTable).insert(entry,
+        onConflict: DoUpdate((old) => FoodstuffsTableCompanion.custom(
+            origin: Constant(entry.origin.value))));
+  }
 }

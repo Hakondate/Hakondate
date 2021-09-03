@@ -704,7 +704,7 @@ class $MenuDishesTableTable extends MenuDishesTable
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => <GeneratedColumn>{};
+  Set<GeneratedColumn> get $primaryKey => {menuId, dishId};
   @override
   MenuDishesSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
     return MenuDishesSchema.fromData(data, _db,
@@ -877,7 +877,9 @@ class $DishesTableTable extends DishesTable
   final VerificationMeta _nameMeta = const VerificationMeta('name');
   late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
       'name', aliasedName, false,
-      typeName: 'TEXT', requiredDuringInsert: true);
+      typeName: 'TEXT',
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL UNIQUE');
   final VerificationMeta _categoryMeta = const VerificationMeta('category');
   late final GeneratedColumn<String?> category = GeneratedColumn<String?>(
       'category', aliasedName, true,
@@ -1092,7 +1094,7 @@ class $DishFoodstuffsTableTable extends DishFoodstuffsTable
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => <GeneratedColumn>{};
+  Set<GeneratedColumn> get $primaryKey => {dishId, foodstuffId};
   @override
   DishFoodstuffsSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
     return DishFoodstuffsSchema.fromData(data, _db,
