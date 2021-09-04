@@ -43,13 +43,8 @@ class DatabaseManager extends _$DatabaseManager {
   Future<List<MenusSchema>> get allMenusSchemas => select(menusTable).get();
 
   // 範囲指定でのデータ取得
-  Future<List<MenusSchema>> getSelectionPeriodMenusSchemas(
-          DateTime startDay, DateTime endDay, int schoolId) =>
-      (select(menusTable)
-            ..where((t) =>
-                t.day.isBetweenValues(startDay, endDay) &
-                t.schoolId.equals(schoolId)))
-          .get();
+  Future<List<MenusSchema>> getSelectionPeriodMenusSchemas(DateTime startDay, DateTime endDay, int schoolId) =>
+      (select(menusTable)..where((t) => t.day.isBetweenValues(startDay, endDay) & t.schoolId.equals(schoolId))).get();
 
   // IDからMenusSchemaを取得
   Future<MenusSchema> getMenusSchemaById(int id) =>
@@ -78,8 +73,7 @@ class DatabaseManager extends _$DatabaseManager {
   /* INSERT */
   // MenusSchemaを追加
   Future<int> addMenusSchema(MenusTableCompanion entry) =>
-      into(menusTable).insert(
-          entry,
+      into(menusTable).insert(entry,
           onConflict: DoUpdate((old) => MenusTableCompanion.custom(
               event: Constant(entry.event.value)
           ))
@@ -95,15 +89,19 @@ class DatabaseManager extends _$DatabaseManager {
 
   // DishesSchemaを追加
   Future<int> addDishesSchema(DishesTableCompanion entry) async {
-    final DishesSchema? _conflictSchema = await (select(dishesTable)..where((t) =>
-        t.name.equals(entry.name.value))).getSingleOrNull();
-    if (_conflictSchema != null) return _conflictSchema.id;
-    return await into(dishesTable).insert(
-        entry,
-        onConflict: DoUpdate((old) => DishesTableCompanion.custom(
-            category: Constant(entry.category.value)
-        ))
-    );
+    final DishesSchema? _conflictSchema = await (select(dishesTable)
+          ..where((t) => t.name.equals(entry.name.value)))
+        .getSingleOrNull();
+    if (_conflictSchema == null)
+      return await into(dishesTable).insert(entry,
+          onConflict: DoUpdate((old) => DishesTableCompanion.custom(
+              category: Constant(entry.category.value)
+          ))
+      );
+    else if (_conflictSchema.category != entry.category.value)
+      return await (update(dishesTable)..where((t) =>
+          t.name.equals(entry.name.value))).write(DishesTableCompanion(category: entry.category));
+    return _conflictSchema.id;
   }
 
   // DishFoodstuffsSchemaを追加
@@ -113,14 +111,55 @@ class DatabaseManager extends _$DatabaseManager {
   // FoodstuffsSchemaを追加
   Future<int> addFoodstuffsSchema(FoodstuffsTableCompanion entry) async {
     final FoodstuffsSchema? _conflictSchema = await (select(foodstuffsTable)..where((t) =>
-        t.name.equals(entry.name.value) &
-        t.gram.equals(entry.gram.value) &
-        t.isHeat.equals(entry.isHeat.value) &
-        t.isAllergy.equals(entry.isAllergy.value)
-    )).getSingleOrNull();
-    if (_conflictSchema != null) return _conflictSchema.id;
-    return await into(foodstuffsTable).insert(entry,
-        onConflict: DoUpdate((old) => FoodstuffsTableCompanion.custom(
-            origin: Constant(entry.origin.value))));
+              t.name.equals(entry.name.value) &
+              t.gram.equals(entry.gram.value) &
+              t.isHeat.equals(entry.isHeat.value) &
+              t.isAllergy.equals(entry.isAllergy.value))).getSingleOrNull();
+    if (_conflictSchema == null)
+      return await into(foodstuffsTable).insert(entry,
+          onConflict: DoUpdate((old) => FoodstuffsTableCompanion.custom(
+              origin: Constant(entry.origin.value)
+          ))
+      );
+    else if (_conflictSchema.piece != entry.piece.value ||
+        _conflictSchema.energy != entry.energy.value ||
+        _conflictSchema.protein != entry.protein.value ||
+        _conflictSchema.lipid != entry.lipid.value ||
+        _conflictSchema.sodium != entry.sodium.value ||
+        _conflictSchema.carbohydrate != entry.carbohydrate.value ||
+        _conflictSchema.calcium != entry.calcium.value ||
+        _conflictSchema.magnesium != entry.magnesium.value ||
+        _conflictSchema.iron != entry.iron.value ||
+        _conflictSchema.zinc != entry.zinc.value ||
+        _conflictSchema.retinol != entry.retinol.value ||
+        _conflictSchema.vitaminB1 != entry.vitaminB1.value ||
+        _conflictSchema.vitaminB2 != entry.vitaminB2.value ||
+        _conflictSchema.vitaminC != entry.vitaminC.value ||
+        _conflictSchema.dietaryFiber != entry.dietaryFiber.value ||
+        _conflictSchema.salt != entry.salt.value ||
+        _conflictSchema.origin != entry.origin.value)
+      return await (update(foodstuffsTable)..where((t) =>
+          t.name.equals(entry.name.value) &
+          t.gram.equals(entry.gram.value) &
+          t.isHeat.equals(entry.isHeat.value) &
+          t.isAllergy.equals(entry.isAllergy.value)))
+          .write(FoodstuffsTableCompanion(
+              piece: entry.piece,
+              energy: entry.energy,
+              lipid: entry.lipid,
+              sodium: entry.sodium,
+              carbohydrate: entry.carbohydrate,
+              calcium: entry.calcium,
+              magnesium: entry.magnesium,
+              iron: entry.iron,
+              zinc: entry.zinc,
+              retinol: entry.retinol,
+              vitaminB1: entry.vitaminB1,
+              vitaminB2: entry.vitaminB2,
+              vitaminC: entry.vitaminC,
+              dietaryFiber: entry.dietaryFiber,
+              salt: entry.salt,
+              origin: entry.origin));
+    return _conflictSchema.id;
   }
 }
