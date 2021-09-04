@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate_v2/model/school/users_school_model.dart';
 
-import 'package:hakondate_v2/view_model/menu/menus_view_model.dart';
-import 'package:hakondate_v2/view_model/user/user_view_model.dart';
+import 'package:hakondate_v2/view_model/menus_view_model.dart';
+import 'package:hakondate_v2/view_model/user_view_model.dart';
 
 class Splash extends ConsumerWidget {
   Stream<String> _initialData(BuildContext context, WidgetRef ref) async* {
