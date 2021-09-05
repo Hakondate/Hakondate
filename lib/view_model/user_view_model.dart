@@ -10,7 +10,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
 
 import 'package:hakondate_v2/model/nutrients/nutrients_model.dart';
-import 'package:hakondate_v2/provider/user/user_state.dart';
+import 'package:hakondate_v2/state//user/user_state.dart';
 import 'package:hakondate_v2/model/user/user_model.dart';
 import 'package:hakondate_v2/model/school/users_school_model.dart';
 
