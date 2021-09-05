@@ -26,8 +26,7 @@ class Hakondate extends StatelessWidget {
             selectionColor: Colors.blueAccent,
           ),
         ),
-        // home: Splash(),
-        home: Terms(),
+        home: Splash(),
         debugShowCheckedModeBanner: false,
       ),
     );
