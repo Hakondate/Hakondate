@@ -96,7 +96,7 @@ class AppRouterDelegate extends RouterDelegate<List<RouteSettings>> with PopNavi
 * WebのURL制御などに使う
 * はこんだてはモバイル限定なので空のものを宣言
 */
-class VoidRouteInformationParser extends RouteInformationParser<List<RouteSettings>> {
+class ListRouteInformationParser extends RouteInformationParser<List<RouteSettings>> {
   @override
   Future<List<RouteSettings>> parseRouteInformation(RouteInformation routeInformation) async => [];
 }

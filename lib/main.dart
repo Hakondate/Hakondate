@@ -7,7 +7,7 @@ void main() {
 }
 
 class Hakondate extends StatelessWidget {
-  final _routeInformationParser = VoidRouteInformationParser();
+  final _routeInformationParser = ListRouteInformationParser();
   final _appRouterDelegate = AppRouterDelegate();
 
   @override
