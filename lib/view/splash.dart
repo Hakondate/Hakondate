@@ -1,38 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hakondate_v2/model/school/users_school_model.dart';
+import 'package:hakondate_v2/router/app_navigator_state_notifier.dart';
 
 import 'package:hakondate_v2/view_model/menus_view_model.dart';
 import 'package:hakondate_v2/view_model/user_view_model.dart';
 
 class Splash extends ConsumerWidget {
   Stream<String> _initialData(BuildContext context, WidgetRef ref) async* {
-    try {
-      // デバッグ用
-      await ref.read(userProvider.notifier).updateUser(
-          name: 'みかど',
-          school: UsersSchoolModel(
-              id: 1,
-              parentId: 1,
-              name: '巴中学校',
-              schoolYear: 1,
-              classification: 1,
-              lunchBlock: 1
-          )
-      );
-
-      await ref.read(userProvider.notifier).getUser();
-      if (ref.read(userProvider.notifier).isExistUser()) {
+    final bool _isExistUser = await ref.read(userProvider.notifier).getUser();
+    if (_isExistUser) {
+      try {
         yield* ref.read(menusProvider.notifier).initialMenus(ref.watch(userProvider).user);
-        // TODO: ホーム画面への遷移
-      } else {
-        // TODO: 新規登録画面への遷移
+      } catch (error) {
+        debugPrint(error.toString());
+        _showErrorDialog(context);
       }
-    } catch (error) {
-      debugPrint(error.toString());
-      _showErrorDialog(context);
     }
+    ref.read(routerProvider.notifier).handleFromSplash(toTerms: !_isExistUser);
   }
 
   void _showErrorDialog(BuildContext context) {

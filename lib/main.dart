@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hakondate_v2/view/splash.dart';
-import 'package:hakondate_v2/view/terms.dart';
+import 'package:hakondate_v2/router/app_router_delegate.dart';
 
 void main() {
   runApp(Hakondate());
 }
 
 class Hakondate extends StatelessWidget {
+  final _routeInformationParser = ListRouteInformationParser();
+  final _appRouterDelegate = AppRouterDelegate();
+
   @override
   Widget build(BuildContext context) {
     return ProviderScope(
-      child: MaterialApp(
+      child: MaterialApp.router(
         title: 'はこんだて',
         theme: ThemeData(
           fontFamily: 'MPLUSRounded1c',
@@ -26,7 +28,8 @@ class Hakondate extends StatelessWidget {
             selectionColor: Colors.blueAccent,
           ),
         ),
-        home: Splash(),
+        routeInformationParser: _routeInformationParser,
+        routerDelegate: _appRouterDelegate,
         debugShowCheckedModeBanner: false,
       ),
     );
