@@ -9,4 +9,6 @@ class AppNavigatorStateNotifier extends StateNotifier<AppNavigatorState> {
 
   void handleFromSplash({bool isExistUser = true}) =>
       state = state.copyWith(isInitialLoading: false, isShowTerms: !isExistUser);
+
+  void handleFromTerms() => state = state.copyWith(isShowTerms: false, isShowSignup: true);
 }

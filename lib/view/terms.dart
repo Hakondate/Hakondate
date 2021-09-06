@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate_v2/router/app_navigator_state_notifier.dart';
 
 import 'package:hakondate_v2/unit/design_unit.dart';
 import 'package:hakondate_v2/view_model/is_agreed_view_model.dart';
 
 class Terms extends ConsumerWidget {
-  void _handle() {}
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     bool _isAgreed = ref.watch(isAgreedProvider);
@@ -51,7 +50,7 @@ class Terms extends ConsumerWidget {
                       ),
                       shape: StadiumBorder()
                     ),
-                    onPressed: _isAgreed ? _handle : null,
+                    onPressed: _isAgreed ? ref.read(routerProvider.notifier).handleFromTerms : null,
                     child: Text('お子様の登録')
                   )
                 ],
