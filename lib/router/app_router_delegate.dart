@@ -12,8 +12,13 @@ class AppRouterDelegate extends RouterDelegate<List<RouteSettings>> with PopNavi
   @override
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-  bool _handlePopPage(Route<dynamic> route, dynamic result) {
+  bool _handlePopPage(Route<dynamic> route, dynamic result, WidgetRef ref) {
     if (!route.didPop(result)) return false;
+
+    final _router = ref.watch(routerProvider);
+    if (_router.isShowSetting || _router.isShowAboutUs || _router.isShowHelp)
+      ref.read(routerProvider.notifier).handleToHome();
+
     return true;
   }
 
@@ -24,7 +29,8 @@ class AppRouterDelegate extends RouterDelegate<List<RouteSettings>> with PopNavi
         final _router = ref.watch(routerProvider);
         return Navigator(
           key: navigatorKey,
-          onPopPage: _handlePopPage,
+          onPopPage: (Route<dynamic> route, dynamic result) =>
+              _handlePopPage(route, result, ref),
           pages: [
             if (_router.isInitialLoading) ...[
               MaterialPage(

@@ -22,4 +22,6 @@ class AppNavigatorStateNotifier extends StateNotifier<AppNavigatorState> {
 
   void handleFromHome({bool toSetting = false, bool toAboutUs = false, bool toHelp = false}) =>
       state = state.copyWith(isShowSetting: toSetting, isShowAboutUs: toAboutUs, isShowHelp: toHelp);
+
+  void handleToHome() => state = state.copyWith(isShowSetting: false, isShowAboutUs: false, isShowHelp: false);
 }
