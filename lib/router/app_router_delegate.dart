@@ -53,6 +53,7 @@ class AppRouterDelegate extends RouterDelegate<List<RouteSettings>> with PopNavi
                 child: Scaffold(),
               ),
             ] else ...[
+              // TODO: HOME内のNavigatorの実装
               MaterialPage(
                 key: ValueKey('home'),
                 child: Scaffold(),

@@ -10,13 +10,15 @@ class AppNavigatorState with _$AppNavigatorState {
     @Default(false) bool isShowTerms,
     @Default(false) bool isShowSignup,
     @Default(false) bool isShowConfirmation,
-    // @Default(false) bool isShowMenuList,
-    // int? selectedMenuId,
-    // int? selectedDishId,
-    // int? selectedPopularRecipeId,
-    // int? selectedMonthlyOriginId,
     @Default(false) bool isShowSetting,
     @Default(false) bool isShowHelp,
     @Default(false) bool isShowAboutUs,
   }) = _AppNavigatorState;
 }
+
+// Home内の遷移で少なくても必要になるやつら
+// @Default(false) bool isShowMenuList,
+// int? selectedMenuId,
+// int? selectedDishId,
+// int? selectedPopularRecipeId,
+// int? selectedMonthlyOriginId,
