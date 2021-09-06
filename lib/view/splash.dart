@@ -17,7 +17,7 @@ class Splash extends ConsumerWidget {
         _showErrorDialog(context);
       }
     }
-    ref.read(routerProvider.notifier).handleFromSplash(isExistUser: _isExistUser);
+    ref.read(routerProvider.notifier).handleFromSplash(toTerms: !_isExistUser);
   }
 
   void _showErrorDialog(BuildContext context) {

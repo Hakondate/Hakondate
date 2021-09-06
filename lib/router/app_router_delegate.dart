@@ -41,11 +41,11 @@ class AppRouterDelegate extends RouterDelegate<List<RouteSettings>> with PopNavi
                 key: ValueKey('signup'),
                 child: Scaffold(),
               ),
-              if (_router.isShowConfirmation)
-                MaterialPage(
-                  key: ValueKey('confirmation'),
-                  child: Scaffold(),
-                )
+            ] else if (_router.isShowConfirmation) ...[
+              MaterialPage(
+                key: ValueKey('confirmation'),
+                child: Scaffold(),
+              ),
             ] else ...[
               MaterialPage(
                 key: ValueKey('home'),
