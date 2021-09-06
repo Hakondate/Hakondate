@@ -19,19 +19,19 @@ final userProvider = StateNotifierProvider<UserViewModel, UserState>((ref) => Us
 class UserViewModel extends StateNotifier<UserState> {
   UserViewModel() : super(UserState());
 
-  Future<void> getUser() async {
+  Future<bool> getUser() async {
     try {
       final File _userFile = await _getUserFile();
       final String _content = await _userFile.readAsString();
       UserModel _user = UserModel.fromJson(json.decode(_content));
       state = state.copyWith(user: _user);
+      return true;
     } catch (error) {
       debugPrint('Either the user has not registered, or access to the user file has failed.');
       debugPrint(error.toString());
+      return false;
     }
   }
-
-  bool isExistUser() => state.user.name != null && state.user.school != null;
 
   Future<void> updateUser({String? name, UsersSchoolModel? school}) async {
     UserModel _user = state.user;

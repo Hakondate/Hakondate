@@ -6,4 +6,7 @@ final routerProvider = StateNotifierProvider<AppNavigatorStateNotifier, AppNavig
 
 class AppNavigatorStateNotifier extends StateNotifier<AppNavigatorState> {
   AppNavigatorStateNotifier() : super(AppNavigatorState());
+
+  void handleFromSplash({bool isExistUser = true}) =>
+      state = state.copyWith(isInitialLoading: false, isShowTerms: !isExistUser);
 }
