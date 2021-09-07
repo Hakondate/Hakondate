@@ -3,12 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate_v2/router/app_navigator_state_notifier.dart';
 
 import 'package:hakondate_v2/unit/design_unit.dart';
-import 'package:hakondate_v2/view_model/is_agreed_view_model.dart';
+import 'package:hakondate_v2/view_model/terms_view_model.dart';
 
 class Terms extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    bool _isAgreed = ref.watch(isAgreedProvider);
+    final termsVariables = ref.watch(termsProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -33,8 +33,8 @@ class Terms extends ConsumerWidget {
                 children: [
                   Checkbox(
                     activeColor: Theme.of(context).accentColor,
-                    value: _isAgreed,
-                    onChanged: (_) => ref.read(isAgreedProvider.notifier).tapped()
+                    value: termsVariables.isAgree,
+                    onChanged: (_) => ref.read(termsProvider.notifier).onTap()
                   ),
                   Text(
                     '利用規約に同意する',
@@ -50,7 +50,7 @@ class Terms extends ConsumerWidget {
                       ),
                       shape: StadiumBorder()
                     ),
-                    onPressed: _isAgreed ? ref.read(routerProvider.notifier).handleFromTerms : null,
+                    onPressed: termsVariables.isAgree ? ref.read(routerProvider.notifier).handleFromTerms : null,
                     child: Text('お子様の登録')
                   )
                 ],

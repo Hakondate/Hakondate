@@ -8,6 +8,8 @@ final routerProvider =
 class AppNavigatorStateNotifier extends StateNotifier<AppNavigatorState> {
   AppNavigatorStateNotifier() : super(AppNavigatorState());
 
+  void handleReload() => state = state.copyWith();
+
   void handleFromSplash({bool toTerms = false}) =>
       state = state.copyWith(isInitialLoading: false, isShowTerms: toTerms);
 
