@@ -11,7 +11,7 @@ class Splash extends ConsumerWidget {
   Stream<String> _initialData(BuildContext context, WidgetRef ref) async* {
     yield 'Reading';
     final bool _isExistUser = await ref.read(userProvider.notifier).getUser();
-    if (true) {
+    if (_isExistUser) {
       try {
         await for (final status in ref.read(menusProvider.notifier).initialMenus(ref.watch(userProvider).user)) {
           yield status;
