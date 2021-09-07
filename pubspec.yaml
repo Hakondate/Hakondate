@@ -37,6 +37,7 @@ dev_dependencies:
   json_serializable: ^4.1.4
   moor_generator: ^4.4.1
   flutter_native_splash: ^1.2.1
+  flutter_launcher_icons: ^0.9.2
 
 flutter:
 
@@ -70,3 +71,9 @@ flutter_native_splash:
   image: assets/images/splash.png
   android: true
   ios: true
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: assets/images/splash.png
+  adaptive_icon_background: "#FFBF7F"
