@@ -2,12 +2,20 @@
 ## サービス概要
 
 ## 構成
-### 状態管理
-- [flutter_riverpod](https://pub.dev/packages/riverpod) : 状態管理パッケージ，コンパイル時のエラー検知や無駄なクラスのネストを回避できる
-- [state_notifier](https://pub.dev/packages/state_notifier) : 状態値をimmutableに扱うためのパッケージ
+### 利用技術・パッケージ
+#### 状態管理
+- [Riverpod](https://pub.dev/packages/riverpod) : 状態管理パッケージ，コンパイル時のエラー検知や無駄なクラスのネストを回避できる
+- [State Notifier](https://pub.dev/packages/state_notifier) : 状態値をimmutableに扱うためのパッケージ
 - [freezed](https://pub.dev/packages/freezed/install) : State Notifierをより簡素に実装するためのパッケージ
   - freezed_annotation
   - build_runner
+
+#### ローカルデータ
+- SQLite
+- [Moor](https://moor.simonbinder.eu/) : SQLiteとAppを繋ぐパッケージ，DB操作とかが楽になる
+
+#### 遷移(Routing)管理
+- [Navigator 2.0](https://docs.google.com/document/d/1Q0jx0l4-xymph9O6zLaOY4d_f7YFpNWX_eGbzYxr9wY/edit#) : 宣言的な遷移の実装ができるパッケージ
 
 ### アーキテクチャ
 MVVMを採用  
