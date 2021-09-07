@@ -44,12 +44,7 @@ mixin _$AppNavigatorState {
   bool get isInitialLoading => throw _privateConstructorUsedError;
   bool get isShowTerms => throw _privateConstructorUsedError;
   bool get isShowSignup => throw _privateConstructorUsedError;
-  bool get isShowConfirmation =>
-      throw _privateConstructorUsedError; // @Default(false) bool isShowMenuList,
-// int? selectedMenuId,
-// int? selectedDishId,
-// int? selectedPopularRecipeId,
-// int? selectedMonthlyOriginId,
+  bool get isShowConfirmation => throw _privateConstructorUsedError;
   bool get isShowSetting => throw _privateConstructorUsedError;
   bool get isShowHelp => throw _privateConstructorUsedError;
   bool get isShowAboutUs => throw _privateConstructorUsedError;
@@ -224,11 +219,7 @@ class _$_AppNavigatorState
   @override
   final bool isShowConfirmation;
   @JsonKey(defaultValue: false)
-  @override // @Default(false) bool isShowMenuList,
-// int? selectedMenuId,
-// int? selectedDishId,
-// int? selectedPopularRecipeId,
-// int? selectedMonthlyOriginId,
+  @override
   final bool isShowSetting;
   @JsonKey(defaultValue: false)
   @override
@@ -318,11 +309,7 @@ abstract class _AppNavigatorState implements AppNavigatorState {
   bool get isShowSignup => throw _privateConstructorUsedError;
   @override
   bool get isShowConfirmation => throw _privateConstructorUsedError;
-  @override // @Default(false) bool isShowMenuList,
-// int? selectedMenuId,
-// int? selectedDishId,
-// int? selectedPopularRecipeId,
-// int? selectedMonthlyOriginId,
+  @override
   bool get isShowSetting => throw _privateConstructorUsedError;
   @override
   bool get isShowHelp => throw _privateConstructorUsedError;

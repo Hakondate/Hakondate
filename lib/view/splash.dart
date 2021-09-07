@@ -1,27 +1,40 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hakondate_v2/router/app_navigator_state_notifier.dart';
 
+import 'package:hakondate_v2/router/app_navigator_state_notifier.dart';
 import 'package:hakondate_v2/view_model/menus_view_model.dart';
+import 'package:hakondate_v2/view_model/splash_view_model.dart';
 import 'package:hakondate_v2/view_model/user_view_model.dart';
 
 class Splash extends ConsumerWidget {
   Stream<String> _initialData(BuildContext context, WidgetRef ref) async* {
+    yield 'Reading';
     final bool _isExistUser = await ref.read(userProvider.notifier).getUser();
-    if (_isExistUser) {
+    if (true) {
       try {
-        yield* ref.read(menusProvider.notifier).initialMenus(ref.watch(userProvider).user);
+        await for (final status in ref.read(menusProvider.notifier).initialMenus(ref.watch(userProvider).user)) {
+          yield status;
+        }
       } catch (error) {
         debugPrint(error.toString());
-        _showErrorDialog(context);
+        if (!ref.watch(splashProvider).isShowErrorDialog) {
+          ref.read(splashProvider.notifier).activeErrorDialog();
+          await _showErrorDialog(context, ref);
+        }
+        return;
       }
     }
     ref.read(routerProvider.notifier).handleFromSplash(toTerms: !_isExistUser);
   }
 
-  void _showErrorDialog(BuildContext context) {
-    showDialog(
+  /*
+  * いくつか重なって表示されるので変数でErrorDialogを表示しているかを管理
+  * 原因はStreamBuilderが読み込み時に複数回呼ばれることだと思う
+  *  参考: https://stackoverflow.com/questions/57562407/flutter-streambuilder-called-twice-when-initialized
+  */
+  Future<void> _showErrorDialog(BuildContext context, WidgetRef ref) async {
+    await showDialog(
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
@@ -31,12 +44,21 @@ class Splash extends ConsumerWidget {
             actions: [
               CupertinoDialogAction(
                 child: Text('このまま利用'),
-                onPressed: () {},
+                onPressed: () async {
+                  final DateTime _loadingDay = DateTime(DateTime.now().year, DateTime.now().month);
+                  await ref.read(menusProvider.notifier).getLocalMenus(_loadingDay, ref.watch(userProvider).user);
+                  ref.read(splashProvider.notifier).popErrorDialog();
+                  ref.read(routerProvider.notifier).handleFromSplash();
+                },
               ),
               CupertinoDialogAction(
                 isDefaultAction: true,
                 child: Text('リトライ'),
-                onPressed: () {},
+                onPressed: () {
+                  ref.read(splashProvider.notifier).popErrorDialog();
+                  ref.read(routerProvider.notifier).handleReload();
+                  Navigator.of(context).pop();
+                },
               )
             ],
           );
