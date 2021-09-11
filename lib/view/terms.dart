@@ -13,7 +13,6 @@ class Terms extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('利用規約'),
-        centerTitle: true,
       ),
       body: Container(
         margin: EdgeInsets.symmetric(
@@ -50,8 +49,8 @@ class Terms extends ConsumerWidget {
                       ),
                       shape: StadiumBorder()
                     ),
+                    child: Text('お子様の新規登録'),
                     onPressed: termsVariables.isAgree ? ref.read(routerProvider.notifier).handleFromTerms : null,
-                    child: Text('お子様の登録')
                   )
                 ],
               ),
