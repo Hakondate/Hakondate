@@ -21,6 +21,9 @@
 MVVMを採用  
 [flutter-architecture-blueprints](https://github.com/wasabeef/flutter-architecture-blueprints)などを参考に構築  
 
+### Null Safety
+取り入れてます
+
 **概要**
 - view : Widgetの描画
 - view_model : viewで受け取った入力の処理
