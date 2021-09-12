@@ -44,6 +44,9 @@ class DatabaseManager extends _$DatabaseManager {
   // MenusSchemaの全データ取得
   Future<List<MenusSchema>> get allMenusSchemas => select(menusTable).get();
 
+  // SchoolsSchemaの全データ取得
+  Future<List<SchoolsSchema>> get allSchoolsSchemas => select(schoolsTable).get();
+
   // 範囲指定でのデータ取得
   Future<List<MenusSchema>> getSelectionPeriodMenusSchemas(DateTime startDay, DateTime endDay, int schoolId) =>
       (select(menusTable)..where((t) => t.day.isBetweenValues(startDay, endDay) & t.schoolId.equals(schoolId))).get();

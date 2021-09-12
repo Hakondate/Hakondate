@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate_v2/router/app_navigator_state_notifier.dart';
+import 'package:hakondate_v2/view/signup.dart';
 import 'package:hakondate_v2/view/splash.dart';
 import 'package:hakondate_v2/view/terms.dart';
 
@@ -45,7 +46,7 @@ class AppRouterDelegate extends RouterDelegate<List<RouteSettings>> with PopNavi
             ] else if (_router.isShowSignup) ...[
               MaterialPage(
                 key: ValueKey('signup'),
-                child: Scaffold(),
+                child: Signup(),
               ),
             ] else if (_router.isShowConfirmation) ...[
               MaterialPage(

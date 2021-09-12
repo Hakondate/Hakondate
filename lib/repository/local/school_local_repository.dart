@@ -8,6 +8,22 @@ class SchoolLocalRepository {
 
   late final DatabaseManager _databaseManager;
 
+  Future<List<SchoolModel>> getAllSchool() async {
+    final List<SchoolModel> _schools = [];
+    final List<SchoolsSchema> _schoolsSchemas = await _databaseManager.allSchoolsSchemas;
+    _schoolsSchemas.forEach((schoolSchema) {
+      _schools.add(
+        SchoolModel(
+            id: schoolSchema.id,
+            parentId: schoolSchema.parentId,
+            name: schoolSchema.name,
+            classification: schoolSchema.classification)
+      );
+    });
+
+    return _schools;
+  }
+
   Future<SchoolModel> getSchoolById(int id) async {
     final SchoolsSchema _schoolsSchema = await _databaseManager.getSchoolsSchemaById(id);
     return SchoolModel(

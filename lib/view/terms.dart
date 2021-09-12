@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate_v2/router/app_navigator_state_notifier.dart';
 
-import 'package:hakondate_v2/unit/design_unit.dart';
+import 'package:hakondate_v2/unit/size.dart';
 import 'package:hakondate_v2/view_model/terms_view_model.dart';
 
 class Terms extends ConsumerWidget {
@@ -72,7 +72,7 @@ class Terms extends ConsumerWidget {
     return Expanded(
       child: Card(
         child: SingleChildScrollView(
-          padding: EdgeInsets.all(normalPaddingSize),
+          padding: EdgeInsets.all(PaddingSize.normal),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

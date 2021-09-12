@@ -222,9 +222,7 @@ class $SchoolsTableTable extends SchoolsTable
   final VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
       'id', aliasedName, false,
-      typeName: 'INTEGER',
-      requiredDuringInsert: false,
-      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
+      typeName: 'INTEGER', requiredDuringInsert: false);
   final VerificationMeta _parentIdMeta = const VerificationMeta('parentId');
   late final GeneratedColumn<int?> parentId = GeneratedColumn<int?>(
       'parent_id', aliasedName, false,
