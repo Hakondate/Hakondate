@@ -106,4 +106,7 @@ class UserViewModel extends StateNotifier<UserState> {
 
     return "junior";
   }
+
+  Future<int> createUser(String name, int schoolId, int schoolYear) =>
+      _usersLocalRepository.addUser(name, schoolId, schoolYear);
 }

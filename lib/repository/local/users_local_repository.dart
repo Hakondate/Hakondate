@@ -35,6 +35,16 @@ class UsersLocalRepository {
     );
   }
 
+  Future<int> addUser(String name, int schoolId, int schoolYear) async {
+    return await _databaseManager.addUsersSchema(
+      UsersTableCompanion(
+        name: Value(name),
+        schoolId: Value(schoolId),
+        schoolYear: Value(schoolYear),
+      )
+    );
+  }
+
   Future<void> updateUser(UserModel user) async {
     await _databaseManager.updateUser(UsersTableCompanion(
       id: Value(user.id),
