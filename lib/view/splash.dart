@@ -13,7 +13,7 @@ class Splash extends ConsumerWidget {
     final bool _isExistUser = await ref.read(userProvider.notifier).getUser();
     if (_isExistUser) {
       try {
-        await for (final status in ref.read(menusProvider.notifier).initialMenus(ref.watch(userProvider).user)) {
+        await for (final status in ref.read(menusProvider.notifier).initialMenus(ref.watch(userProvider).currentUser!.schoolId)) {
           yield status;
         }
       } catch (error) {
@@ -46,7 +46,7 @@ class Splash extends ConsumerWidget {
                 child: Text('このまま利用'),
                 onPressed: () async {
                   final DateTime _loadingDay = DateTime(DateTime.now().year, DateTime.now().month);
-                  await ref.read(menusProvider.notifier).getLocalMenus(_loadingDay, ref.watch(userProvider).user);
+                  await ref.read(menusProvider.notifier).getLocalMenus(_loadingDay, ref.watch(userProvider).currentUser!.schoolId);
                   ref.read(splashProvider.notifier).popErrorDialog();
                   ref.read(routerProvider.notifier).handleFromSplash();
                 },

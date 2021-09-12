@@ -2042,6 +2042,252 @@ class $FoodstuffsTableTable extends FoodstuffsTable
   }
 }
 
+class UsersSchema extends DataClass implements Insertable<UsersSchema> {
+  final int id;
+  final String name;
+  final int schoolId;
+  final int schoolYear;
+  UsersSchema(
+      {required this.id,
+      required this.name,
+      required this.schoolId,
+      required this.schoolYear});
+  factory UsersSchema.fromData(Map<String, dynamic> data, GeneratedDatabase db,
+      {String? prefix}) {
+    final effectivePrefix = prefix ?? '';
+    return UsersSchema(
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
+      name: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
+      schoolId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}school_id'])!,
+      schoolYear: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}school_year'])!,
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['name'] = Variable<String>(name);
+    map['school_id'] = Variable<int>(schoolId);
+    map['school_year'] = Variable<int>(schoolYear);
+    return map;
+  }
+
+  UsersTableCompanion toCompanion(bool nullToAbsent) {
+    return UsersTableCompanion(
+      id: Value(id),
+      name: Value(name),
+      schoolId: Value(schoolId),
+      schoolYear: Value(schoolYear),
+    );
+  }
+
+  factory UsersSchema.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return UsersSchema(
+      id: serializer.fromJson<int>(json['id']),
+      name: serializer.fromJson<String>(json['name']),
+      schoolId: serializer.fromJson<int>(json['schoolId']),
+      schoolYear: serializer.fromJson<int>(json['schoolYear']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'name': serializer.toJson<String>(name),
+      'schoolId': serializer.toJson<int>(schoolId),
+      'schoolYear': serializer.toJson<int>(schoolYear),
+    };
+  }
+
+  UsersSchema copyWith(
+          {int? id, String? name, int? schoolId, int? schoolYear}) =>
+      UsersSchema(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        schoolId: schoolId ?? this.schoolId,
+        schoolYear: schoolYear ?? this.schoolYear,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('UsersSchema(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('schoolId: $schoolId, ')
+          ..write('schoolYear: $schoolYear')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf($mrjc(id.hashCode,
+      $mrjc(name.hashCode, $mrjc(schoolId.hashCode, schoolYear.hashCode))));
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is UsersSchema &&
+          other.id == this.id &&
+          other.name == this.name &&
+          other.schoolId == this.schoolId &&
+          other.schoolYear == this.schoolYear);
+}
+
+class UsersTableCompanion extends UpdateCompanion<UsersSchema> {
+  final Value<int> id;
+  final Value<String> name;
+  final Value<int> schoolId;
+  final Value<int> schoolYear;
+  const UsersTableCompanion({
+    this.id = const Value.absent(),
+    this.name = const Value.absent(),
+    this.schoolId = const Value.absent(),
+    this.schoolYear = const Value.absent(),
+  });
+  UsersTableCompanion.insert({
+    this.id = const Value.absent(),
+    required String name,
+    required int schoolId,
+    required int schoolYear,
+  })  : name = Value(name),
+        schoolId = Value(schoolId),
+        schoolYear = Value(schoolYear);
+  static Insertable<UsersSchema> custom({
+    Expression<int>? id,
+    Expression<String>? name,
+    Expression<int>? schoolId,
+    Expression<int>? schoolYear,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (name != null) 'name': name,
+      if (schoolId != null) 'school_id': schoolId,
+      if (schoolYear != null) 'school_year': schoolYear,
+    });
+  }
+
+  UsersTableCompanion copyWith(
+      {Value<int>? id,
+      Value<String>? name,
+      Value<int>? schoolId,
+      Value<int>? schoolYear}) {
+    return UsersTableCompanion(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      schoolId: schoolId ?? this.schoolId,
+      schoolYear: schoolYear ?? this.schoolYear,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (schoolId.present) {
+      map['school_id'] = Variable<int>(schoolId.value);
+    }
+    if (schoolYear.present) {
+      map['school_year'] = Variable<int>(schoolYear.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('UsersTableCompanion(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('schoolId: $schoolId, ')
+          ..write('schoolYear: $schoolYear')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $UsersTableTable extends UsersTable
+    with TableInfo<$UsersTableTable, UsersSchema> {
+  final GeneratedDatabase _db;
+  final String? _alias;
+  $UsersTableTable(this._db, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+      'id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: false,
+      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
+  final VerificationMeta _nameMeta = const VerificationMeta('name');
+  late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
+      'name', aliasedName, false,
+      typeName: 'TEXT', requiredDuringInsert: true);
+  final VerificationMeta _schoolIdMeta = const VerificationMeta('schoolId');
+  late final GeneratedColumn<int?> schoolId = GeneratedColumn<int?>(
+      'school_id', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: true);
+  final VerificationMeta _schoolYearMeta = const VerificationMeta('schoolYear');
+  late final GeneratedColumn<int?> schoolYear = GeneratedColumn<int?>(
+      'school_year', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [id, name, schoolId, schoolYear];
+  @override
+  String get aliasedName => _alias ?? 'users_table';
+  @override
+  String get actualTableName => 'users_table';
+  @override
+  VerificationContext validateIntegrity(Insertable<UsersSchema> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('school_id')) {
+      context.handle(_schoolIdMeta,
+          schoolId.isAcceptableOrUnknown(data['school_id']!, _schoolIdMeta));
+    } else if (isInserting) {
+      context.missing(_schoolIdMeta);
+    }
+    if (data.containsKey('school_year')) {
+      context.handle(
+          _schoolYearMeta,
+          schoolYear.isAcceptableOrUnknown(
+              data['school_year']!, _schoolYearMeta));
+    } else if (isInserting) {
+      context.missing(_schoolYearMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  UsersSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return UsersSchema.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+  }
+
+  @override
+  $UsersTableTable createAlias(String alias) {
+    return $UsersTableTable(_db, alias);
+  }
+}
+
 abstract class _$DatabaseManager extends GeneratedDatabase {
   _$DatabaseManager(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
   late final $SchoolsTableTable schoolsTable = $SchoolsTableTable(this);
@@ -2053,6 +2299,7 @@ abstract class _$DatabaseManager extends GeneratedDatabase {
       $DishFoodstuffsTableTable(this);
   late final $FoodstuffsTableTable foodstuffsTable =
       $FoodstuffsTableTable(this);
+  late final $UsersTableTable usersTable = $UsersTableTable(this);
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
@@ -2062,6 +2309,7 @@ abstract class _$DatabaseManager extends GeneratedDatabase {
         menuDishesTable,
         dishesTable,
         dishFoodstuffsTable,
-        foodstuffsTable
+        foodstuffsTable,
+        usersTable
       ];
 }

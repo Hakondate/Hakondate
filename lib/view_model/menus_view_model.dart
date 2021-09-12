@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate_v2/model/menu/menu_model.dart';
-import 'package:hakondate_v2/model/user/user_model.dart';
 import 'package:hakondate_v2/state//menu/menus_state.dart';
 import 'package:hakondate_v2/repository/local/menus_local_repository.dart';
 import 'package:hakondate_v2/repository/remote/menus_remote_repository.dart';
@@ -20,19 +19,19 @@ class MenusViewModel extends StateNotifier<MenusState> {
   final MenusLocalRepository _localRepository;
   final MenusRemoteRepository _remoteRepository;
 
-  Stream<String> initialMenus(UserModel user) async* {
+  Stream<String> initialMenus(int schoolId) async* {
     yield 'CheckingUpdate';
     if (await _checkUpdate()) {
       yield 'Updating';
-      await _updateLocalMenus(user);
+      await _updateLocalMenus(schoolId);
     }
     yield 'Reading';
     final DateTime _loadingDay = DateTime(DateTime.now().year, DateTime.now().month);
     // final DateTime _loadingDay = DateTime(2021, 7);  // デバッグ用
-    await getLocalMenus(_loadingDay, user);
+    await getLocalMenus(_loadingDay, schoolId);
   }
 
-  Future<void> getLocalMenus(DateTime day, UserModel user) async {
+  Future<void> getLocalMenus(DateTime day, int schoolId) async {
     DateTime _referenceDay =
     DateTime(DateTime.now().year, DateTime.now().month + 1)
         .add(Duration(days: -1)); // 今月末
@@ -43,7 +42,7 @@ class MenusViewModel extends StateNotifier<MenusState> {
     }
     if (day.isBefore(_referenceDay)) {
       try {
-        List<MenuModel> _newMenus = await _localRepository.getSelectionPeriodMenus(day, _referenceDay, user.school!.parentId);
+        List<MenuModel> _newMenus = await _localRepository.getSelectionPeriodMenus(day, _referenceDay, schoolId);
         _addMenus(_newMenus);
       } catch (error) {
         throw Exception(error);
@@ -55,7 +54,7 @@ class MenusViewModel extends StateNotifier<MenusState> {
     return true;
   }
 
-  Future<void> _updateLocalMenus(UserModel user) async {
+  Future<void> _updateLocalMenus(int schoolId) async {
     // TODO: リモートデータの更新をローカルに反映
     final List<dynamic> _newMenus = await _remoteRepository.downloadMenus();
     await Future.forEach(_newMenus, (dynamic menu) async {

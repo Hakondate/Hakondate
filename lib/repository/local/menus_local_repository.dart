@@ -1,10 +1,11 @@
+import 'package:moor/moor.dart';
+
 import 'package:hakondate_v2/model/dish/dish_model.dart';
 import 'package:hakondate_v2/model/foodstuff/foodstuff_model.dart';
 import 'package:hakondate_v2/model/menu/menu_model.dart';
 import 'package:hakondate_v2/model/nutrients/nutrients_model.dart';
 import 'package:hakondate_v2/model/quantity/quantity_model.dart';
 import 'package:hakondate_v2/repository/local/database_manager.dart';
-import 'package:moor/moor.dart';
 
 class MenusLocalRepository {
   MenusLocalRepository() {

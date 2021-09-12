@@ -5,6 +5,7 @@ import 'package:moor/moor.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
 
+import 'package:hakondate_v2/repository/local/table/users_table.dart';
 import 'package:hakondate_v2/repository/local/table/dish_foodstuffs_table.dart';
 import 'package:hakondate_v2/repository/local/table/dishes_table.dart';
 import 'package:hakondate_v2/repository/local/table/foodstuffs_table.dart';
@@ -31,6 +32,7 @@ final DatabaseManager databaseManager = DatabaseManager();
   DishesTable,
   DishFoodstuffsTable,
   FoodstuffsTable,
+  UsersTable,
 ])
 class DatabaseManager extends _$DatabaseManager {
   DatabaseManager() : super(_openConnection());
@@ -69,6 +71,13 @@ class DatabaseManager extends _$DatabaseManager {
   // IDからFoodstuffsSchemaを取得
   Future<FoodstuffsSchema> getFoodstuffsSchemaById(int id) =>
       (select(foodstuffsTable)..where((t) => t.id.equals(id))).getSingle();
+
+  // UsersSchemaの全データ取得
+  Future<List<UsersSchema>> get allUsersSchemas => select(usersTable).get();
+
+  // IDからUsersSchemaを取得
+  Future<UsersSchema> getUsersSchemaById(int id) =>
+      (select(usersTable)..where((t) => t.id.equals(id))).getSingle();
 
   /* INSERT */
   // MenusSchemaを追加
@@ -162,4 +171,11 @@ class DatabaseManager extends _$DatabaseManager {
               origin: entry.origin));
     return _conflictSchema.id;
   }
+
+  Future<int> addUsersSchema(UsersTableCompanion entry) =>
+      into(usersTable).insertOnConflictUpdate(entry);
+
+  /* UPDATE */
+  Future<void> updateUser(UsersTableCompanion entry) =>
+      (update(usersTable)..where((t) => t.id.equals(entry.id.value))).write(entry);
 }

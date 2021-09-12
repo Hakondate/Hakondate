@@ -12,25 +12,23 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-UserModel _$UserModelFromJson(Map<String, dynamic> json) {
-  return _UserModel.fromJson(json);
-}
-
 /// @nodoc
 class _$UserModelTearOff {
   const _$UserModelTearOff();
 
   _UserModel call(
-      {String? name, UsersSchoolModel? school, NutrientsModel? slns}) {
+      {required int id,
+      required String name,
+      required int schoolId,
+      required int schoolYear,
+      NutrientsModel? slns}) {
     return _UserModel(
+      id: id,
       name: name,
-      school: school,
+      schoolId: schoolId,
+      schoolYear: schoolYear,
       slns: slns,
     );
-  }
-
-  UserModel fromJson(Map<String, Object> json) {
-    return UserModel.fromJson(json);
   }
 }
 
@@ -39,11 +37,12 @@ const $UserModel = _$UserModelTearOff();
 
 /// @nodoc
 mixin _$UserModel {
-  String? get name => throw _privateConstructorUsedError; // ニックネーム
-  UsersSchoolModel? get school => throw _privateConstructorUsedError; // 学校
+  int get id => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError; // ニックネーム
+  int get schoolId => throw _privateConstructorUsedError; // 学校
+  int get schoolYear => throw _privateConstructorUsedError; // 学年
   NutrientsModel? get slns => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $UserModelCopyWith<UserModel> get copyWith =>
       throw _privateConstructorUsedError;
@@ -53,9 +52,13 @@ mixin _$UserModel {
 abstract class $UserModelCopyWith<$Res> {
   factory $UserModelCopyWith(UserModel value, $Res Function(UserModel) then) =
       _$UserModelCopyWithImpl<$Res>;
-  $Res call({String? name, UsersSchoolModel? school, NutrientsModel? slns});
+  $Res call(
+      {int id,
+      String name,
+      int schoolId,
+      int schoolYear,
+      NutrientsModel? slns});
 
-  $UsersSchoolModelCopyWith<$Res>? get school;
   $NutrientsModelCopyWith<$Res>? get slns;
 }
 
@@ -69,35 +72,34 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
-    Object? school = freezed,
+    Object? schoolId = freezed,
+    Object? schoolYear = freezed,
     Object? slns = freezed,
   }) {
     return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      school: school == freezed
-          ? _value.school
-          : school // ignore: cast_nullable_to_non_nullable
-              as UsersSchoolModel?,
+              as String,
+      schoolId: schoolId == freezed
+          ? _value.schoolId
+          : schoolId // ignore: cast_nullable_to_non_nullable
+              as int,
+      schoolYear: schoolYear == freezed
+          ? _value.schoolYear
+          : schoolYear // ignore: cast_nullable_to_non_nullable
+              as int,
       slns: slns == freezed
           ? _value.slns
           : slns // ignore: cast_nullable_to_non_nullable
               as NutrientsModel?,
     ));
-  }
-
-  @override
-  $UsersSchoolModelCopyWith<$Res>? get school {
-    if (_value.school == null) {
-      return null;
-    }
-
-    return $UsersSchoolModelCopyWith<$Res>(_value.school!, (value) {
-      return _then(_value.copyWith(school: value));
-    });
   }
 
   @override
@@ -118,10 +120,13 @@ abstract class _$UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
           _UserModel value, $Res Function(_UserModel) then) =
       __$UserModelCopyWithImpl<$Res>;
   @override
-  $Res call({String? name, UsersSchoolModel? school, NutrientsModel? slns});
+  $Res call(
+      {int id,
+      String name,
+      int schoolId,
+      int schoolYear,
+      NutrientsModel? slns});
 
-  @override
-  $UsersSchoolModelCopyWith<$Res>? get school;
   @override
   $NutrientsModelCopyWith<$Res>? get slns;
 }
@@ -137,19 +142,29 @@ class __$UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
-    Object? school = freezed,
+    Object? schoolId = freezed,
+    Object? schoolYear = freezed,
     Object? slns = freezed,
   }) {
     return _then(_UserModel(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      school: school == freezed
-          ? _value.school
-          : school // ignore: cast_nullable_to_non_nullable
-              as UsersSchoolModel?,
+              as String,
+      schoolId: schoolId == freezed
+          ? _value.schoolId
+          : schoolId // ignore: cast_nullable_to_non_nullable
+              as int,
+      schoolYear: schoolYear == freezed
+          ? _value.schoolYear
+          : schoolYear // ignore: cast_nullable_to_non_nullable
+              as int,
       slns: slns == freezed
           ? _value.slns
           : slns // ignore: cast_nullable_to_non_nullable
@@ -159,33 +174,46 @@ class __$UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$_UserModel extends _UserModel {
-  const _$_UserModel({this.name, this.school, this.slns}) : super._();
 
-  factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
-      _$_$_UserModelFromJson(json);
+class _$_UserModel extends _UserModel {
+  const _$_UserModel(
+      {required this.id,
+      required this.name,
+      required this.schoolId,
+      required this.schoolYear,
+      this.slns})
+      : super._();
 
   @override
-  final String? name;
+  final int id;
+  @override
+  final String name;
   @override // ニックネーム
-  final UsersSchoolModel? school;
+  final int schoolId;
   @override // 学校
+  final int schoolYear;
+  @override // 学年
   final NutrientsModel? slns;
 
   @override
   String toString() {
-    return 'UserModel(name: $name, school: $school, slns: $slns)';
+    return 'UserModel(id: $id, name: $name, schoolId: $schoolId, schoolYear: $schoolYear, slns: $slns)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _UserModel &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.school, school) ||
-                const DeepCollectionEquality().equals(other.school, school)) &&
+            (identical(other.schoolId, schoolId) ||
+                const DeepCollectionEquality()
+                    .equals(other.schoolId, schoolId)) &&
+            (identical(other.schoolYear, schoolYear) ||
+                const DeepCollectionEquality()
+                    .equals(other.schoolYear, schoolYear)) &&
             (identical(other.slns, slns) ||
                 const DeepCollectionEquality().equals(other.slns, slns)));
   }
@@ -193,36 +221,36 @@ class _$_UserModel extends _UserModel {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(school) ^
+      const DeepCollectionEquality().hash(schoolId) ^
+      const DeepCollectionEquality().hash(schoolYear) ^
       const DeepCollectionEquality().hash(slns);
 
   @JsonKey(ignore: true)
   @override
   _$UserModelCopyWith<_UserModel> get copyWith =>
       __$UserModelCopyWithImpl<_UserModel>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$_$_UserModelToJson(this);
-  }
 }
 
 abstract class _UserModel extends UserModel {
   const factory _UserModel(
-      {String? name,
-      UsersSchoolModel? school,
+      {required int id,
+      required String name,
+      required int schoolId,
+      required int schoolYear,
       NutrientsModel? slns}) = _$_UserModel;
   const _UserModel._() : super._();
 
-  factory _UserModel.fromJson(Map<String, dynamic> json) =
-      _$_UserModel.fromJson;
-
   @override
-  String? get name => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
+  @override
+  String get name => throw _privateConstructorUsedError;
   @override // ニックネーム
-  UsersSchoolModel? get school => throw _privateConstructorUsedError;
+  int get schoolId => throw _privateConstructorUsedError;
   @override // 学校
+  int get schoolYear => throw _privateConstructorUsedError;
+  @override // 学年
   NutrientsModel? get slns => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
