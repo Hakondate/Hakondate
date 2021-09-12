@@ -1,77 +1,109 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate_v2/model/school/school_model.dart';
 
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart' as p;
-
-import 'package:hakondate_v2/model/nutrients/nutrients_model.dart';
 import 'package:hakondate_v2/state//user/user_state.dart';
+import 'package:hakondate_v2/model/nutrients/nutrients_model.dart';
 import 'package:hakondate_v2/model/user/user_model.dart';
-import 'package:hakondate_v2/model/school/users_school_model.dart';
+import 'package:hakondate_v2/repository/local/school_local_repository.dart';
+import 'package:hakondate_v2/repository/local/users_local_repository.dart';
 
 final userProvider = StateNotifierProvider<UserViewModel, UserState>((ref) => UserViewModel());
 
 class UserViewModel extends StateNotifier<UserState> {
-  UserViewModel() : super(UserState());
+  UserViewModel()
+      : this._usersLocalRepository = UsersLocalRepository(),
+        this._schoolLocalRepository = SchoolLocalRepository(),
+        super(UserState());
+
+  final UsersLocalRepository _usersLocalRepository;
+  final SchoolLocalRepository _schoolLocalRepository;
 
   Future<bool> getUser() async {
     try {
-      final File _userFile = await _getUserFile();
-      final String _content = await _userFile.readAsString();
-      UserModel _user = UserModel.fromJson(json.decode(_content));
-      state = state.copyWith(user: _user);
+      final List<UserModel> _users = await _usersLocalRepository.getAllUser();
+
+      if (_users.isEmpty) return false;
+
+      state = state.copyWith(users: _users);
+      _setCurrentUser(_users.first.id);
+
       return true;
     } catch (error) {
-      debugPrint('Either the user has not registered, or access to the user file has failed.');
+      debugPrint('Failed to load user data.');
       debugPrint(error.toString());
+
       return false;
     }
   }
 
-  Future<void> updateUser({String? name, UsersSchoolModel? school}) async {
-    UserModel _user = state.user;
-    NutrientsModel? _slns = school == null ? _user.slns : await _getSLNS(school);
-    UserModel _newUser = UserModel(
-      name: name ?? _user.name,
-      school: school ?? _user.school,
-      slns: _slns
+  Future<void> _setCurrentUser(int id) async {
+    final UserModel _user = await _usersLocalRepository.getUserById(id);
+    final NutrientsModel _slns = await _getSLNS(_user.schoolId);
+    final SchoolModel _school = await _schoolLocalRepository.getSchoolById(_user.schoolId);
+
+    state = state.copyWith(
+      currentUser: _user.copyWith(slns: _slns),
+      school: _school,
     );
-    await _writeUser(_newUser);
-    state = state.copyWith(user: _newUser);
   }
 
-  Future<NutrientsModel> _getSLNS(UsersSchoolModel? school) async {
-    NutrientsModel _slns = NutrientsModel();
-    if (school == null) {
-      return _slns;
-    }
+  Future<void> updateUser({String? name, int? schoolId, int? schoolYear}) async {
+    if (state.currentUser == null) return;
+    NutrientsModel? _slns = (schoolId != null || schoolYear != null)
+        ? await _getSLNS(state.currentUser!.id)
+        : state.currentUser!.slns;
+    UserModel _newUser = state.currentUser!.copyWith(
+      name: name ?? state.currentUser!.name,
+      schoolId: schoolId ?? state.currentUser!.schoolId,
+      schoolYear: schoolYear ?? state.currentUser!.schoolYear,
+      slns: _slns,
+    );
+    await _usersLocalRepository.updateUser(_newUser);
 
-    final String _pathSLNS = 'assets/slns/${school.schoolGrade()}.json';
+    List<UserModel> _newUsers = await _usersLocalRepository.getAllUser();
+    SchoolModel _newSchool = await _schoolLocalRepository.getSchoolById(_newUser.schoolId);
+
+    state = state.copyWith(
+      users: _newUsers,
+      currentUser: _newUser,
+      school: _newSchool,
+    );
+  }
+
+  Future<NutrientsModel> _getSLNS(int userId, {int? schoolId, int? schoolYear}) async {
+    final String _schoolGrade = await _getSchoolGrade(
+        userId,
+        schoolId: schoolId,
+        schoolYear: schoolYear,
+    );
+    final String _pathSLNS = 'assets/slns/$_schoolGrade.json';
     final String _jsonSLNS = await rootBundle.loadString(_pathSLNS);
     final Map<String, dynamic> _decodeSLNS = json.decode(_jsonSLNS);
 
-    _slns = NutrientsModel.fromJson(_decodeSLNS);
-    return _slns;
+    return NutrientsModel.fromJson(_decodeSLNS);
   }
 
-  Future<void> _writeUser(UserModel user) async {
-    try {
-      final File _userFile = await _getUserFile();
-      final String _encoded = json.encode(user.toJson());
-      _userFile.writeAsString(_encoded.toString());
-    } catch (error) {
-      throw Exception(error);
+  /* 登録情報から学年区別を返す
+  * 小学1.2年 => "lower"
+  * 小学3.4年 => "middle"
+  * 小学5.6年 => "upper"
+  * 中学生    => "junior"
+  * データ不備 => "junior" */
+  Future<String> _getSchoolGrade(int userId, {int? schoolId, int? schoolYear}) async {
+    final UserModel _user = await _usersLocalRepository.getUserById(userId);
+    final SchoolModel _school = await _schoolLocalRepository.getSchoolById(schoolId ?? _user.schoolId);
+    if (_school.classification == 1) {
+      int _schoolYear = schoolYear ?? _user.schoolYear;
+      if (_schoolYear <= 2) return "lower";
+      else if (_schoolYear <= 4) return "middle";
+      else if (_schoolYear <= 6) return "upper";
     }
-  }
 
-  Future<File> _getUserFile() async {
-    final Directory _directory = await getApplicationDocumentsDirectory();
-    final File _file = File(p.join(_directory.path, 'user.json'));
-    return _file;
+    return "junior";
   }
 }

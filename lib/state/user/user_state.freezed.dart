@@ -16,9 +16,14 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$UserStateTearOff {
   const _$UserStateTearOff();
 
-  _UserState call({UserModel user = const UserModel()}) {
+  _UserState call(
+      {List<UserModel> users = const <UserModel>[],
+      UserModel? currentUser,
+      SchoolModel? school}) {
     return _UserState(
-      user: user,
+      users: users,
+      currentUser: currentUser,
+      school: school,
     );
   }
 }
@@ -28,7 +33,9 @@ const $UserState = _$UserStateTearOff();
 
 /// @nodoc
 mixin _$UserState {
-  UserModel get user => throw _privateConstructorUsedError;
+  List<UserModel> get users => throw _privateConstructorUsedError;
+  UserModel? get currentUser => throw _privateConstructorUsedError;
+  SchoolModel? get school => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserStateCopyWith<UserState> get copyWith =>
@@ -39,9 +46,11 @@ mixin _$UserState {
 abstract class $UserStateCopyWith<$Res> {
   factory $UserStateCopyWith(UserState value, $Res Function(UserState) then) =
       _$UserStateCopyWithImpl<$Res>;
-  $Res call({UserModel user});
+  $Res call(
+      {List<UserModel> users, UserModel? currentUser, SchoolModel? school});
 
-  $UserModelCopyWith<$Res> get user;
+  $UserModelCopyWith<$Res>? get currentUser;
+  $SchoolModelCopyWith<$Res>? get school;
 }
 
 /// @nodoc
@@ -54,20 +63,45 @@ class _$UserStateCopyWithImpl<$Res> implements $UserStateCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? user = freezed,
+    Object? users = freezed,
+    Object? currentUser = freezed,
+    Object? school = freezed,
   }) {
     return _then(_value.copyWith(
-      user: user == freezed
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as UserModel,
+      users: users == freezed
+          ? _value.users
+          : users // ignore: cast_nullable_to_non_nullable
+              as List<UserModel>,
+      currentUser: currentUser == freezed
+          ? _value.currentUser
+          : currentUser // ignore: cast_nullable_to_non_nullable
+              as UserModel?,
+      school: school == freezed
+          ? _value.school
+          : school // ignore: cast_nullable_to_non_nullable
+              as SchoolModel?,
     ));
   }
 
   @override
-  $UserModelCopyWith<$Res> get user {
-    return $UserModelCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
+  $UserModelCopyWith<$Res>? get currentUser {
+    if (_value.currentUser == null) {
+      return null;
+    }
+
+    return $UserModelCopyWith<$Res>(_value.currentUser!, (value) {
+      return _then(_value.copyWith(currentUser: value));
+    });
+  }
+
+  @override
+  $SchoolModelCopyWith<$Res>? get school {
+    if (_value.school == null) {
+      return null;
+    }
+
+    return $SchoolModelCopyWith<$Res>(_value.school!, (value) {
+      return _then(_value.copyWith(school: value));
     });
   }
 }
@@ -78,10 +112,13 @@ abstract class _$UserStateCopyWith<$Res> implements $UserStateCopyWith<$Res> {
           _UserState value, $Res Function(_UserState) then) =
       __$UserStateCopyWithImpl<$Res>;
   @override
-  $Res call({UserModel user});
+  $Res call(
+      {List<UserModel> users, UserModel? currentUser, SchoolModel? school});
 
   @override
-  $UserModelCopyWith<$Res> get user;
+  $UserModelCopyWith<$Res>? get currentUser;
+  @override
+  $SchoolModelCopyWith<$Res>? get school;
 }
 
 /// @nodoc
@@ -95,13 +132,23 @@ class __$UserStateCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? user = freezed,
+    Object? users = freezed,
+    Object? currentUser = freezed,
+    Object? school = freezed,
   }) {
     return _then(_UserState(
-      user: user == freezed
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as UserModel,
+      users: users == freezed
+          ? _value.users
+          : users // ignore: cast_nullable_to_non_nullable
+              as List<UserModel>,
+      currentUser: currentUser == freezed
+          ? _value.currentUser
+          : currentUser // ignore: cast_nullable_to_non_nullable
+              as UserModel?,
+      school: school == freezed
+          ? _value.school
+          : school // ignore: cast_nullable_to_non_nullable
+              as SchoolModel?,
     ));
   }
 }
@@ -109,15 +156,20 @@ class __$UserStateCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_UserState with DiagnosticableTreeMixin implements _UserState {
-  const _$_UserState({this.user = const UserModel()});
+  const _$_UserState(
+      {this.users = const <UserModel>[], this.currentUser, this.school});
 
-  @JsonKey(defaultValue: const UserModel())
+  @JsonKey(defaultValue: const <UserModel>[])
   @override
-  final UserModel user;
+  final List<UserModel> users;
+  @override
+  final UserModel? currentUser;
+  @override
+  final SchoolModel? school;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserState(user: $user)';
+    return 'UserState(users: $users, currentUser: $currentUser, school: $school)';
   }
 
   @override
@@ -125,20 +177,30 @@ class _$_UserState with DiagnosticableTreeMixin implements _UserState {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'UserState'))
-      ..add(DiagnosticsProperty('user', user));
+      ..add(DiagnosticsProperty('users', users))
+      ..add(DiagnosticsProperty('currentUser', currentUser))
+      ..add(DiagnosticsProperty('school', school));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _UserState &&
-            (identical(other.user, user) ||
-                const DeepCollectionEquality().equals(other.user, user)));
+            (identical(other.users, users) ||
+                const DeepCollectionEquality().equals(other.users, users)) &&
+            (identical(other.currentUser, currentUser) ||
+                const DeepCollectionEquality()
+                    .equals(other.currentUser, currentUser)) &&
+            (identical(other.school, school) ||
+                const DeepCollectionEquality().equals(other.school, school)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(user);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(users) ^
+      const DeepCollectionEquality().hash(currentUser) ^
+      const DeepCollectionEquality().hash(school);
 
   @JsonKey(ignore: true)
   @override
@@ -147,10 +209,17 @@ class _$_UserState with DiagnosticableTreeMixin implements _UserState {
 }
 
 abstract class _UserState implements UserState {
-  const factory _UserState({UserModel user}) = _$_UserState;
+  const factory _UserState(
+      {List<UserModel> users,
+      UserModel? currentUser,
+      SchoolModel? school}) = _$_UserState;
 
   @override
-  UserModel get user => throw _privateConstructorUsedError;
+  List<UserModel> get users => throw _privateConstructorUsedError;
+  @override
+  UserModel? get currentUser => throw _privateConstructorUsedError;
+  @override
+  SchoolModel? get school => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$UserStateCopyWith<_UserState> get copyWith =>
