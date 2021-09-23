@@ -1,5 +1,6 @@
 import 'package:hakondate_v2/model/school/school_model.dart';
 import 'package:hakondate_v2/repository/local/database_manager.dart';
+import 'package:moor/moor.dart';
 
 class SchoolLocalRepository {
   SchoolLocalRepository() {
@@ -32,5 +33,16 @@ class SchoolLocalRepository {
         name: _schoolsSchema.name,
         classification: _schoolsSchema.classification,
     );
+  }
+
+  Future<int> addSchool(Map<String, dynamic> school) async {
+    final SchoolsTableCompanion _schoolsSchema = SchoolsTableCompanion(
+      id: Value(school['id']),
+      parentId: Value(school['parentId']),
+      name: Value(school['name']),
+      lunchBlock: Value(school['lunchBlock']),
+      classification: Value(school['classification']),
+    );
+    return await _databaseManager.addSchoolsSchema(_schoolsSchema);
   }
 }

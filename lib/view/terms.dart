@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate_v2/router/app_navigator_state_notifier.dart';
 
 import 'package:hakondate_v2/unit/size.dart';
-import 'package:hakondate_v2/view_model/terms_view_model.dart';
+import 'package:hakondate_v2/view_model/single_page/terms_view_model.dart';
 
 class Terms extends ConsumerWidget {
   @override

@@ -4,11 +4,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate_v2/router/app_navigator_state_notifier.dart';
 import 'package:hakondate_v2/unit/size.dart';
 import 'package:hakondate_v2/view/component/setting_label.dart';
+import 'package:hakondate_v2/view_model/single_page/signup_view_model.dart';
 
 class Signup extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final GlobalKey _formKey = GlobalKey<FormState>();
+
     return Scaffold(
       appBar: AppBar(
         title: Text('お子様の新規登録'),
@@ -19,7 +21,7 @@ class Signup extends ConsumerWidget {
           child: Column(
             children: [
               _nameForm(context),
-              _schoolForm(context),
+              _schoolForm(context, ref),
             ],
           ),
         ),
@@ -67,7 +69,9 @@ class Signup extends ConsumerWidget {
     );
   }
 
-  Widget _schoolForm(BuildContext context) {
+  Widget _schoolForm(BuildContext context, WidgetRef ref) {
+    final store = ref.watch(signupProvider);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -88,26 +92,21 @@ class Signup extends ConsumerWidget {
             ],
           ),
         ),
-        Container(
-          color: Colors.white,
-          child: ListTile(
-            contentPadding: EdgeInsets.only(
-              left: PaddingSize.content,
-              right: PaddingSize.content,
-            ),
-            title: Text(
-              '学校',
-              style: TextStyle(fontSize: FontSize.label),
-            ),
-            trailing: Text(
-              'school.name',
-              style: TextStyle(fontSize: FontSize.label, color: Colors.black38),
-            ),
-            onTap: () {},
-          ),
-        ),
         SettingLabel(
           title: '学校',
+          dialList: store.schools.map((school) => school.name).toList(),
+          completed: (index) {
+            final int _id = store.schools[index].id;
+            ref.read(signupProvider.notifier).updateSchool(_id);
+          },
+          trailing: store.schoolTrailing,
+        ),
+        SettingLabel(
+          title: '学年',
+          dialList: store.schoolYears,
+          completed: (index) =>
+              ref.read(signupProvider.notifier).updateSchoolYear(index + 1),
+          trailing: store.schoolYearTrailing,
         ),
       ],
     );
