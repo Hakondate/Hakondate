@@ -17,13 +17,15 @@ class _$SignupStateTearOff {
   const _$SignupStateTearOff();
 
   _SignupState call(
-      {String name = '',
+      {String? name,
       int? schoolId,
       int? schoolYear,
       String schoolTrailing = '学校を選択',
       String schoolYearTrailing = '学年を選択',
       List<SchoolModel> schools = const <SchoolModel>[],
-      List<String> schoolYears = const <String>['1年生', '2年生', '3年生']}) {
+      List<String> schoolYears = const <String>['1年生', '2年生', '3年生'],
+      String? nameErrorState,
+      String? schoolErrorState}) {
     return _SignupState(
       name: name,
       schoolId: schoolId,
@@ -32,6 +34,8 @@ class _$SignupStateTearOff {
       schoolYearTrailing: schoolYearTrailing,
       schools: schools,
       schoolYears: schoolYears,
+      nameErrorState: nameErrorState,
+      schoolErrorState: schoolErrorState,
     );
   }
 }
@@ -41,13 +45,15 @@ const $SignupState = _$SignupStateTearOff();
 
 /// @nodoc
 mixin _$SignupState {
-  String get name => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
   int? get schoolId => throw _privateConstructorUsedError;
   int? get schoolYear => throw _privateConstructorUsedError;
   String get schoolTrailing => throw _privateConstructorUsedError;
   String get schoolYearTrailing => throw _privateConstructorUsedError;
   List<SchoolModel> get schools => throw _privateConstructorUsedError;
   List<String> get schoolYears => throw _privateConstructorUsedError;
+  String? get nameErrorState => throw _privateConstructorUsedError;
+  String? get schoolErrorState => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SignupStateCopyWith<SignupState> get copyWith =>
@@ -60,13 +66,15 @@ abstract class $SignupStateCopyWith<$Res> {
           SignupState value, $Res Function(SignupState) then) =
       _$SignupStateCopyWithImpl<$Res>;
   $Res call(
-      {String name,
+      {String? name,
       int? schoolId,
       int? schoolYear,
       String schoolTrailing,
       String schoolYearTrailing,
       List<SchoolModel> schools,
-      List<String> schoolYears});
+      List<String> schoolYears,
+      String? nameErrorState,
+      String? schoolErrorState});
 }
 
 /// @nodoc
@@ -86,12 +94,14 @@ class _$SignupStateCopyWithImpl<$Res> implements $SignupStateCopyWith<$Res> {
     Object? schoolYearTrailing = freezed,
     Object? schools = freezed,
     Object? schoolYears = freezed,
+    Object? nameErrorState = freezed,
+    Object? schoolErrorState = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       schoolId: schoolId == freezed
           ? _value.schoolId
           : schoolId // ignore: cast_nullable_to_non_nullable
@@ -116,6 +126,14 @@ class _$SignupStateCopyWithImpl<$Res> implements $SignupStateCopyWith<$Res> {
           ? _value.schoolYears
           : schoolYears // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      nameErrorState: nameErrorState == freezed
+          ? _value.nameErrorState
+          : nameErrorState // ignore: cast_nullable_to_non_nullable
+              as String?,
+      schoolErrorState: schoolErrorState == freezed
+          ? _value.schoolErrorState
+          : schoolErrorState // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -128,13 +146,15 @@ abstract class _$SignupStateCopyWith<$Res>
       __$SignupStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String name,
+      {String? name,
       int? schoolId,
       int? schoolYear,
       String schoolTrailing,
       String schoolYearTrailing,
       List<SchoolModel> schools,
-      List<String> schoolYears});
+      List<String> schoolYears,
+      String? nameErrorState,
+      String? schoolErrorState});
 }
 
 /// @nodoc
@@ -156,12 +176,14 @@ class __$SignupStateCopyWithImpl<$Res> extends _$SignupStateCopyWithImpl<$Res>
     Object? schoolYearTrailing = freezed,
     Object? schools = freezed,
     Object? schoolYears = freezed,
+    Object? nameErrorState = freezed,
+    Object? schoolErrorState = freezed,
   }) {
     return _then(_SignupState(
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       schoolId: schoolId == freezed
           ? _value.schoolId
           : schoolId // ignore: cast_nullable_to_non_nullable
@@ -186,6 +208,14 @@ class __$SignupStateCopyWithImpl<$Res> extends _$SignupStateCopyWithImpl<$Res>
           ? _value.schoolYears
           : schoolYears // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      nameErrorState: nameErrorState == freezed
+          ? _value.nameErrorState
+          : nameErrorState // ignore: cast_nullable_to_non_nullable
+              as String?,
+      schoolErrorState: schoolErrorState == freezed
+          ? _value.schoolErrorState
+          : schoolErrorState // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -194,17 +224,18 @@ class __$SignupStateCopyWithImpl<$Res> extends _$SignupStateCopyWithImpl<$Res>
 
 class _$_SignupState with DiagnosticableTreeMixin implements _SignupState {
   const _$_SignupState(
-      {this.name = '',
+      {this.name,
       this.schoolId,
       this.schoolYear,
       this.schoolTrailing = '学校を選択',
       this.schoolYearTrailing = '学年を選択',
       this.schools = const <SchoolModel>[],
-      this.schoolYears = const <String>['1年生', '2年生', '3年生']});
+      this.schoolYears = const <String>['1年生', '2年生', '3年生'],
+      this.nameErrorState,
+      this.schoolErrorState});
 
-  @JsonKey(defaultValue: '')
   @override
-  final String name;
+  final String? name;
   @override
   final int? schoolId;
   @override
@@ -221,10 +252,14 @@ class _$_SignupState with DiagnosticableTreeMixin implements _SignupState {
   @JsonKey(defaultValue: const <String>['1年生', '2年生', '3年生'])
   @override
   final List<String> schoolYears;
+  @override
+  final String? nameErrorState;
+  @override
+  final String? schoolErrorState;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SignupState(name: $name, schoolId: $schoolId, schoolYear: $schoolYear, schoolTrailing: $schoolTrailing, schoolYearTrailing: $schoolYearTrailing, schools: $schools, schoolYears: $schoolYears)';
+    return 'SignupState(name: $name, schoolId: $schoolId, schoolYear: $schoolYear, schoolTrailing: $schoolTrailing, schoolYearTrailing: $schoolYearTrailing, schools: $schools, schoolYears: $schoolYears, nameErrorState: $nameErrorState, schoolErrorState: $schoolErrorState)';
   }
 
   @override
@@ -238,7 +273,9 @@ class _$_SignupState with DiagnosticableTreeMixin implements _SignupState {
       ..add(DiagnosticsProperty('schoolTrailing', schoolTrailing))
       ..add(DiagnosticsProperty('schoolYearTrailing', schoolYearTrailing))
       ..add(DiagnosticsProperty('schools', schools))
-      ..add(DiagnosticsProperty('schoolYears', schoolYears));
+      ..add(DiagnosticsProperty('schoolYears', schoolYears))
+      ..add(DiagnosticsProperty('nameErrorState', nameErrorState))
+      ..add(DiagnosticsProperty('schoolErrorState', schoolErrorState));
   }
 
   @override
@@ -264,7 +301,13 @@ class _$_SignupState with DiagnosticableTreeMixin implements _SignupState {
                     .equals(other.schools, schools)) &&
             (identical(other.schoolYears, schoolYears) ||
                 const DeepCollectionEquality()
-                    .equals(other.schoolYears, schoolYears)));
+                    .equals(other.schoolYears, schoolYears)) &&
+            (identical(other.nameErrorState, nameErrorState) ||
+                const DeepCollectionEquality()
+                    .equals(other.nameErrorState, nameErrorState)) &&
+            (identical(other.schoolErrorState, schoolErrorState) ||
+                const DeepCollectionEquality()
+                    .equals(other.schoolErrorState, schoolErrorState)));
   }
 
   @override
@@ -276,7 +319,9 @@ class _$_SignupState with DiagnosticableTreeMixin implements _SignupState {
       const DeepCollectionEquality().hash(schoolTrailing) ^
       const DeepCollectionEquality().hash(schoolYearTrailing) ^
       const DeepCollectionEquality().hash(schools) ^
-      const DeepCollectionEquality().hash(schoolYears);
+      const DeepCollectionEquality().hash(schoolYears) ^
+      const DeepCollectionEquality().hash(nameErrorState) ^
+      const DeepCollectionEquality().hash(schoolErrorState);
 
   @JsonKey(ignore: true)
   @override
@@ -286,16 +331,18 @@ class _$_SignupState with DiagnosticableTreeMixin implements _SignupState {
 
 abstract class _SignupState implements SignupState {
   const factory _SignupState(
-      {String name,
+      {String? name,
       int? schoolId,
       int? schoolYear,
       String schoolTrailing,
       String schoolYearTrailing,
       List<SchoolModel> schools,
-      List<String> schoolYears}) = _$_SignupState;
+      List<String> schoolYears,
+      String? nameErrorState,
+      String? schoolErrorState}) = _$_SignupState;
 
   @override
-  String get name => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
   @override
   int? get schoolId => throw _privateConstructorUsedError;
   @override
@@ -308,6 +355,10 @@ abstract class _SignupState implements SignupState {
   List<SchoolModel> get schools => throw _privateConstructorUsedError;
   @override
   List<String> get schoolYears => throw _privateConstructorUsedError;
+  @override
+  String? get nameErrorState => throw _privateConstructorUsedError;
+  @override
+  String? get schoolErrorState => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$SignupStateCopyWith<_SignupState> get copyWith =>

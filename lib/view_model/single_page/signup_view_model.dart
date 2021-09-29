@@ -20,7 +20,7 @@ class SignupViewModel extends StateNotifier<SignupState> {
     state = state.copyWith(schools: schools);
   }
 
-  void updateName(String name) => state = state.copyWith(name: name);
+  void updateName(String? name) => state = state.copyWith(name: name);
 
   Future<void> updateSchool(int id) async {
     final SchoolModel school = await _schoolLocalRepository.getSchoolById(id);
@@ -36,4 +36,32 @@ class SignupViewModel extends StateNotifier<SignupState> {
 
   void updateSchoolYear(int year) =>
       state = state.copyWith(schoolYear: year, schoolYearTrailing: '$year年生');
+
+  bool checkValidation() {
+    _checkNameValidation();
+    _checkSchoolValidation();
+
+    return state.nameErrorState == null && state.schoolErrorState == null;
+  }
+
+  void _checkNameValidation() {
+    final String? _nameErrorState = (state.name == null || state.name!.isEmpty)
+        ? 'お子様の名前を入力してください' : null;
+    state = state.copyWith(nameErrorState: _nameErrorState);
+  }
+
+  void _checkSchoolValidation() {
+    if (state.schoolId != null && state.schoolYear != null) {
+      state = state.copyWith(schoolErrorState: null);
+      return;
+    }
+
+    if (state.schoolId == null && state.schoolYear == null) {
+      state = state.copyWith(schoolErrorState: '学校・学年を選択してください');
+    } else if (state.schoolId == null) {
+      state = state.copyWith(schoolErrorState: '学校を選択してください');
+    } else if (state.schoolYear == null) {
+      state = state.copyWith(schoolErrorState: '学年を選択してください');
+    }
+  }
 }

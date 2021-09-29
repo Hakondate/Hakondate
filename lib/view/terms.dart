@@ -8,7 +8,7 @@ import 'package:hakondate_v2/view_model/single_page/terms_view_model.dart';
 class Terms extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final termsVariables = ref.watch(termsProvider);
+    final store = ref.watch(termsProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -32,7 +32,7 @@ class Terms extends ConsumerWidget {
                 children: [
                   Checkbox(
                     activeColor: Theme.of(context).accentColor,
-                    value: termsVariables.isAgree,
+                    value: store.isAgree,
                     onChanged: (_) => ref.read(termsProvider.notifier).onTap()
                   ),
                   Text(
@@ -43,14 +43,15 @@ class Terms extends ConsumerWidget {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: Theme.of(context).accentColor,
+                      padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
                       textStyle: TextStyle(
                         color: Colors.white,
                         fontFamily: 'MPLUSRounded1c'
                       ),
                       shape: StadiumBorder()
                     ),
-                    child: Text('お子様の新規登録'),
-                    onPressed: termsVariables.isAgree ? ref.read(routerProvider.notifier).handleFromTerms : null,
+                    child: Text('はじめる'),
+                    onPressed: store.isAgree ? ref.read(routerProvider.notifier).handleFromTerms : null,
                   )
                 ],
               ),
