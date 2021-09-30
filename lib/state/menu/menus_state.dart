@@ -20,10 +20,6 @@ part 'menus_state.freezed.dart';
 ///
 /// Q. [factory]の意味
 /// A. 返り値のあるコンストラクタを定義
-///
-/// Q. [AsyncValue]の意味
-/// A. menusは非同期処理で変更が行われる．AsyncValueはその際の状態管理を手軽に行える．
-///     menusの読み込み中は.loading()，エラーが出たら.error()みたいな感じ
 
 @freezed
 class MenusState with _$MenusState {

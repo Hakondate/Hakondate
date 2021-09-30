@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate_v2/router/app_navigator_state_notifier.dart';
-import 'package:hakondate_v2/view_model/menus_view_model.dart';
-import 'package:hakondate_v2/view_model/splash_view_model.dart';
-import 'package:hakondate_v2/view_model/user_view_model.dart';
+import 'package:hakondate_v2/view_model/multi_page/menus_view_model.dart';
+import 'package:hakondate_v2/view_model/single_page/splash_view_model.dart';
+import 'package:hakondate_v2/view_model/multi_page/user_view_model.dart';
 
 class Splash extends ConsumerWidget {
   Stream<String> _initialData(BuildContext context, WidgetRef ref) async* {
@@ -13,7 +13,7 @@ class Splash extends ConsumerWidget {
     final bool _isExistUser = await ref.read(userProvider.notifier).getUser();
     if (_isExistUser) {
       try {
-        await for (final status in ref.read(menusProvider.notifier).initialMenus(ref.watch(userProvider).user)) {
+        await for (final status in ref.read(menusProvider.notifier).initialMenus(ref.watch(userProvider).currentUser!.schoolId)) {
           yield status;
         }
       } catch (error) {
@@ -46,7 +46,7 @@ class Splash extends ConsumerWidget {
                 child: Text('このまま利用'),
                 onPressed: () async {
                   final DateTime _loadingDay = DateTime(DateTime.now().year, DateTime.now().month);
-                  await ref.read(menusProvider.notifier).getLocalMenus(_loadingDay, ref.watch(userProvider).user);
+                  await ref.read(menusProvider.notifier).getLocalMenus(_loadingDay, ref.watch(userProvider).currentUser!.schoolId);
                   ref.read(splashProvider.notifier).popErrorDialog();
                   ref.read(routerProvider.notifier).handleFromSplash();
                 },
