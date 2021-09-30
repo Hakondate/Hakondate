@@ -49,7 +49,8 @@ class Signup extends ConsumerWidget {
                 onPressed: () {},
               ),
               Spacer(),
-              _nameErrorIndication(context, ref),
+              _errorIndication(context, ref.watch(signupProvider).nameErrorState),
+              // _nameErrorIndication(context, ref),
             ],
           ),
           TextFormField(
@@ -93,7 +94,8 @@ class Signup extends ConsumerWidget {
                 onPressed: () {},
               ),
               Spacer(),
-              _schoolErrorIndication(context, ref),
+              // _schoolErrorIndication(context, ref),
+              _errorIndication(context, ref.watch(signupProvider).schoolErrorState),
             ],
           ),
         ),
@@ -118,34 +120,16 @@ class Signup extends ConsumerWidget {
     );
   }
 
-  Widget _nameErrorIndication(BuildContext context, WidgetRef ref) {
-    if (ref.watch(signupProvider).nameErrorState != null)
-      return Padding(
-        padding: EdgeInsets.all(PaddingSize.normal),
-        child: Text(
-          ref.watch(signupProvider).nameErrorState!,
-          style: TextStyle(
-            fontSize: 12,
-            color: Theme.of(context).errorColor,
-          ),
-        ),
-      );
-    return Container();
-  }
+  Widget _errorIndication(BuildContext context, String? errorState) {
+    if (errorState == null || errorState.isEmpty) return Container();
 
-  Widget _schoolErrorIndication(BuildContext context, WidgetRef ref) {
-    if (ref.watch(signupProvider).schoolErrorState != null)
-      return Padding(
-        padding: EdgeInsets.all(PaddingSize.normal),
-        child: Text(
-          ref.watch(signupProvider).schoolErrorState!,
-          style: TextStyle(
-            fontSize: 12,
-            color: Theme.of(context).errorColor,
-          ),
-        ),
-      );
-    return Container();
+    return Text(
+      errorState,
+      style: TextStyle(
+        fontSize: FontSize.indication,
+        color: Theme.of(context).errorColor,
+      ),
+    );
   }
 
   Widget _submitButton(BuildContext context, WidgetRef ref) {
@@ -157,7 +141,10 @@ class Signup extends ConsumerWidget {
           ElevatedButton(
             style: ElevatedButton.styleFrom(
                 primary: Theme.of(context).accentColor,
-                padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+                padding: EdgeInsets.symmetric(
+                  vertical: PaddingSize.buttonVertical,
+                  horizontal: PaddingSize.buttonHorizontal,
+                ),
                 textStyle: TextStyle(
                     color: Colors.white,
                     fontFamily: 'MPLUSRounded1c'
