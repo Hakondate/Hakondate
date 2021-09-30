@@ -58,7 +58,6 @@ class Signup extends ConsumerWidget {
               ),
               Spacer(),
               _errorIndication(context, ref.watch(signupProvider).nameErrorState),
-              // _nameErrorIndication(context, ref),
             ],
           ),
           TextFormField(
@@ -109,7 +108,6 @@ class Signup extends ConsumerWidget {
                 ),
               ),
               Spacer(),
-              // _schoolErrorIndication(context, ref),
               _errorIndication(context, ref.watch(signupProvider).schoolErrorState),
             ],
           ),
