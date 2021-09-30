@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate_v2/router/app_navigator_state_notifier.dart';
 import 'package:hakondate_v2/unit/size.dart';
+import 'package:hakondate_v2/view/component/help_dialog.dart';
 import 'package:hakondate_v2/view/component/setting_label.dart';
 import 'package:hakondate_v2/view_model/single_page/signup_view_model.dart';
 
@@ -46,7 +47,14 @@ class Signup extends ConsumerWidget {
                 icon: Icon(Icons.help),
                 iconSize: 20,
                 color: Theme.of(context).primaryIconTheme.color,
-                onPressed: () {},
+                onPressed: () => HelpDialog(
+                  context,
+                  title: 'お名前について',
+                  content:
+                      '　お名前情報は，本アプリ内でユーザを識別するために利用されます．'
+                      'あだ名などを入力していただいても構いません．また，あとで変更することもできます．\n'
+                      '　お名前情報は，端末内に保存され収集されることはありません．',
+                ),
               ),
               Spacer(),
               _errorIndication(context, ref.watch(signupProvider).nameErrorState),
@@ -91,7 +99,14 @@ class Signup extends ConsumerWidget {
                 icon: Icon(Icons.help),
                 iconSize: 20,
                 color: Theme.of(context).primaryIconTheme.color,
-                onPressed: () {},
+                onPressed: () => HelpDialog(
+                  context,
+                  title: '学校・学年について',
+                  content:
+                      '　学校情報は，本アプリ内でお子様の通っている学校の献立を表示するために利用されます．選択肢にない学校は，本アプリ未対応の学校です．\n'
+                      '　学年情報は，本アプリ内でお子様の年齢に合わせた情報(栄養基準値など)を表示するために利用されます．\n'
+                      '　どちらの情報も，端末内に保存され収集されることはありません．',
+                ),
               ),
               Spacer(),
               // _schoolErrorIndication(context, ref),

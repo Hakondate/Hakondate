@@ -18,6 +18,7 @@ class MarginSize {
 }
 
 class PaddingSize {
+  static const double minimum = 8.0;            // 小さめ
   static const double normal = 16.0;            // 基本余白
   static const double content = 32.0;           // ラベル内の左右余白など
   static const double buttonVertical = 5.0;     // ボタンの水平方向の基本マージン
