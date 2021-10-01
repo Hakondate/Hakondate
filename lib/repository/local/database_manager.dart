@@ -181,4 +181,17 @@ class DatabaseManager extends _$DatabaseManager {
   /* UPDATE */
   Future<void> updateUser(UsersTableCompanion entry) =>
       (update(usersTable)..where((t) => t.id.equals(entry.id.value))).write(entry);
+
+  /* COUNT */
+  Future<int> countSchools() async {
+    final Expression<int> exp = schoolsTable.id.count();
+    final query = selectOnly(schoolsTable)..addColumns([exp]);
+    return await query.map((scheme) => scheme.read(exp)).getSingle();
+  }
+
+  Future<int> countUsers() async {
+    final Expression<int> exp = usersTable.id.count();
+    final query = selectOnly(usersTable)..addColumns([exp]);
+    return await query.map((scheme) => scheme.read(exp)).getSingle();
+  }
 }

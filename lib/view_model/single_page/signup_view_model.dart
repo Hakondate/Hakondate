@@ -2,36 +2,46 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate_v2/model/school/school_model.dart';
 import 'package:hakondate_v2/state/signup/signup_state.dart';
-import 'package:hakondate_v2/repository/local/school_local_repository.dart';
+import 'package:hakondate_v2/repository/local/schools_local_repository.dart';
 
 final signupProvider = StateNotifierProvider<SignupViewModel, SignupState>(
     (ref) => SignupViewModel());
 
 class SignupViewModel extends StateNotifier<SignupState> {
   SignupViewModel() : super(SignupState()) {
-    this._schoolLocalRepository = SchoolLocalRepository();
+    this._schoolLocalRepository = SchoolsLocalRepository();
     _initialize();
   }
 
-  late final SchoolLocalRepository _schoolLocalRepository;
+  late final SchoolsLocalRepository _schoolLocalRepository;
 
   Future<void> _initialize() async {
-    final List<SchoolModel> schools = await _schoolLocalRepository.getAllSchool();
+    final List<SchoolModel> schools = await _schoolLocalRepository.getAll();
     state = state.copyWith(schools: schools);
   }
 
   void updateName(String? name) => state = state.copyWith(name: name);
 
   Future<void> updateSchool(int id) async {
-    final SchoolModel school = await _schoolLocalRepository.getSchoolById(id);
-    final List<String> schoolYears = (school.classification == 1)
+    final SchoolModel school = await _schoolLocalRepository.getById(id);
+    final List<String> schoolYears = (school.classification == 0)
         ? ['1年生', '2年生', '3年生', '4年生', '5年生', '6年生']
         : ['1年生', '2年生', '3年生'];
-    state = state.copyWith(
-      schoolId: id,
-      schoolYears: schoolYears,
-      schoolTrailing: school.name,
-    );
+    if (state.schoolYear != null && state.schoolYear! > 3 && school.classification > 0) {
+      state = state.copyWith(
+        schoolId: id,
+        schoolYear: 3,
+        schoolYears: schoolYears,
+        schoolTrailing: school.name,
+        schoolYearTrailing: '3年生',
+      );
+    } else {
+      state = state.copyWith(
+        schoolId: id,
+        schoolYears: schoolYears,
+        schoolTrailing: school.name,
+      );
+    }
   }
 
   void updateSchoolYear(int year) =>

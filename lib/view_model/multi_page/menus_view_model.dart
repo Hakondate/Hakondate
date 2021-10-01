@@ -19,7 +19,7 @@ class MenusViewModel extends StateNotifier<MenusState> {
   final MenusLocalRepository _localRepository;
   final MenusRemoteRepository _remoteRepository;
 
-  Stream<String> initialMenus(int schoolId) async* {
+  Stream<String> initialize(int schoolId) async* {
     yield 'CheckingUpdate';
     if (await _checkUpdate()) {
       yield 'Updating';
@@ -42,7 +42,7 @@ class MenusViewModel extends StateNotifier<MenusState> {
     }
     if (day.isBefore(_referenceDay)) {
       try {
-        List<MenuModel> _newMenus = await _localRepository.getSelectionPeriodMenus(day, _referenceDay, schoolId);
+        List<MenuModel> _newMenus = await _localRepository.getSelectionPeriod(day, _referenceDay, schoolId);
         _addMenus(_newMenus);
       } catch (error) {
         throw Exception(error);
@@ -58,7 +58,7 @@ class MenusViewModel extends StateNotifier<MenusState> {
     // TODO: リモートデータの更新をローカルに反映
     final List<dynamic> _newMenus = await _remoteRepository.downloadMenus();
     await Future.forEach(_newMenus, (dynamic menu) async {
-      await _localRepository.addMenu(menu);
+      await _localRepository.add(menu);
     });
   }
 
