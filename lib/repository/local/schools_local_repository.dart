@@ -2,14 +2,16 @@ import 'package:hakondate_v2/model/school/school_model.dart';
 import 'package:hakondate_v2/repository/local/database_manager.dart';
 import 'package:moor/moor.dart';
 
-class SchoolLocalRepository {
-  SchoolLocalRepository() {
+class SchoolsLocalRepository {
+  SchoolsLocalRepository() {
     this._databaseManager = databaseManager;
   }
 
   late final DatabaseManager _databaseManager;
 
-  Future<List<SchoolModel>> getAllSchool() async {
+  Future<int> count() => _databaseManager.countSchools();
+
+  Future<List<SchoolModel>> getAll() async {
     final List<SchoolModel> _schools = [];
     final List<SchoolsSchema> _schoolsSchemas = await _databaseManager.allSchoolsSchemas;
     _schoolsSchemas.forEach((schoolSchema) {
@@ -25,7 +27,7 @@ class SchoolLocalRepository {
     return _schools;
   }
 
-  Future<SchoolModel> getSchoolById(int id) async {
+  Future<SchoolModel> getById(int id) async {
     final SchoolsSchema _schoolsSchema = await _databaseManager.getSchoolsSchemaById(id);
     return SchoolModel(
         id: _schoolsSchema.id,
@@ -35,7 +37,7 @@ class SchoolLocalRepository {
     );
   }
 
-  Future<int> addSchool(Map<String, dynamic> school) async {
+  Future<int> add(Map<String, dynamic> school) async {
     final SchoolsTableCompanion _schoolsSchema = SchoolsTableCompanion(
       id: Value(school['id']),
       parentId: Value(school['parentId']),

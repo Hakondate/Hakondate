@@ -4,28 +4,35 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate_v2/router/app_navigator_state_notifier.dart';
 import 'package:hakondate_v2/view_model/multi_page/menus_view_model.dart';
+import 'package:hakondate_v2/view_model/multi_page/school_view_model.dart';
 import 'package:hakondate_v2/view_model/single_page/splash_view_model.dart';
 import 'package:hakondate_v2/view_model/multi_page/user_view_model.dart';
 
 class Splash extends ConsumerWidget {
   Stream<String> _initialData(BuildContext context, WidgetRef ref) async* {
     yield 'Reading';
-    final bool _isExistUser = await ref.read(userProvider.notifier).getUser();
-    if (_isExistUser) {
-      try {
-        await for (final status in ref.read(menusProvider.notifier).initialMenus(ref.watch(userProvider).currentUser!.schoolId)) {
+    try {
+      await for (final status in ref.read(schoolProvider.notifier).initialize()) {
+        yield status;
+      }
+      final bool _isSignedUp = await ref.read(userProvider.notifier).checkSignedUp();
+      if (_isSignedUp) {
+        await for (final status in ref.read(menusProvider.notifier)
+            .initialize(ref.watch(userProvider).currentUser!.schoolId)) {
           yield status;
         }
-      } catch (error) {
-        debugPrint(error.toString());
-        if (!ref.watch(splashProvider).isShowErrorDialog) {
-          ref.read(splashProvider.notifier).activeErrorDialog();
-          await _showErrorDialog(context, ref);
-        }
-        return;
       }
+      ref.read(routerProvider.notifier).handleFromSplash(toTerms: !_isSignedUp);
+    } catch (error) {
+      debugPrint(error.toString());
+
+      if (!ref.watch(splashProvider).isShowErrorDialog) {
+        ref.read(splashProvider.notifier).activeErrorDialog();
+        await _showErrorDialog(context, ref);
+      }
+
+      return;
     }
-    ref.read(routerProvider.notifier).handleFromSplash(toTerms: !_isExistUser);
   }
 
   /*

@@ -9,7 +9,7 @@ class UsersLocalRepository {
 
   late final DatabaseManager _databaseManager;
 
-  Future<List<UserModel>> getAllUser() async {
+  Future<List<UserModel>> getAll() async {
     List<UserModel> _users = [];
     final List<UsersSchema> _usersSchemas = await _databaseManager.allUsersSchemas;
     _usersSchemas.forEach((UsersSchema usersSchema) {
@@ -25,7 +25,7 @@ class UsersLocalRepository {
     return _users;
   }
 
-  Future<UserModel> getUserById(int id) async {
+  Future<UserModel> getById(int id) async {
     final UsersSchema _usersSchema = await _databaseManager.getUsersSchemaById(id);
     return UserModel(
       id: _usersSchema.id,
@@ -35,7 +35,7 @@ class UsersLocalRepository {
     );
   }
 
-  Future<int> addUser(String name, int schoolId, int schoolYear) async {
+  Future<int> add(String name, int schoolId, int schoolYear) async {
     return await _databaseManager.addUsersSchema(
       UsersTableCompanion(
         name: Value(name),
@@ -45,7 +45,7 @@ class UsersLocalRepository {
     );
   }
 
-  Future<void> updateUser(UserModel user) async {
+  Future<void> update(UserModel user) async {
     await _databaseManager.updateUser(UsersTableCompanion(
       id: Value(user.id),
       name: Value(user.name),
@@ -53,4 +53,6 @@ class UsersLocalRepository {
       schoolYear: Value(user.schoolYear),
     ));
   }
+
+  Future<int> count() => _databaseManager.countUsers();
 }

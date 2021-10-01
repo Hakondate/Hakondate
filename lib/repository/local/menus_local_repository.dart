@@ -14,7 +14,7 @@ class MenusLocalRepository {
 
   late final DatabaseManager _databaseManager;
 
-  Future<int> addMenu(Map<String, dynamic> menu) async {
+  Future<int> add(Map<String, dynamic> menu) async {
     final MenusTableCompanion _menusSchema = MenusTableCompanion(
       id: Value(menu['id']),
       day: Value(DateTime.fromMillisecondsSinceEpoch(menu['day'])),
@@ -84,35 +84,35 @@ class MenusLocalRepository {
     );
   }
 
-  Future<List<MenuModel>> getAllMenus() async {
+  Future<List<MenuModel>> getAll() async {
     List<MenuModel> _menus = [];
     final List<MenusSchema> _menusSchemas = await _databaseManager.allMenusSchemas;
     await Future.forEach(_menusSchemas, (MenusSchema menusSchema) async {
-      final MenuModel _menu = await _getMenuBySchema(menusSchema);
+      final MenuModel _menu = await _getBySchema(menusSchema);
       _menus.add(_menu);
     });
 
     return _menus;
   }
 
-  Future<List<MenuModel>> getSelectionPeriodMenus(DateTime startDay, DateTime endDay, int schoolId) async {
+  Future<List<MenuModel>> getSelectionPeriod(DateTime startDay, DateTime endDay, int schoolId) async {
     List<MenuModel> _menus = [];
     final List<MenusSchema> _menusSchemas = await _databaseManager.getSelectionPeriodMenusSchemas(startDay, endDay, schoolId);
     await Future.forEach(_menusSchemas, (MenusSchema menusSchema) async {
-      final MenuModel _menu = await _getMenuBySchema(menusSchema);
+      final MenuModel _menu = await _getBySchema(menusSchema);
       _menus.add(_menu);
     });
 
     return _menus;
   }
 
-  Future<MenuModel> getMenuById(int menuId) async {
+  Future<MenuModel> getById(int menuId) async {
     final MenusSchema _menusSchema = await _databaseManager.getMenusSchemaById(menuId);
 
-    return _getMenuBySchema(_menusSchema);
+    return _getBySchema(_menusSchema);
   }
 
-  Future<MenuModel> _getMenuBySchema(MenusSchema menusSchema) async {
+  Future<MenuModel> _getBySchema(MenusSchema menusSchema) async {
     List<DishModel> _dishes = [];
     final List<MenuDishesSchema> _menuDishesSchemas = await _databaseManager.getMenuDishesSchemasByMenuId(menusSchema.id);
     await Future.forEach(_menuDishesSchemas, (MenuDishesSchema menuDishesSchema) async {

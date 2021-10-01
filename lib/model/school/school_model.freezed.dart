@@ -40,7 +40,7 @@ mixin _$SchoolModel {
   int get id => throw _privateConstructorUsedError; // ID
   int get parentId => throw _privateConstructorUsedError; // 親学校(給食センター)のID
   String get name => throw _privateConstructorUsedError; // 学校名
-  int? get lunchBlock => throw _privateConstructorUsedError; // 給食区分: 1 ~ 6
+  int? get lunchBlock => throw _privateConstructorUsedError; // 給食区分: 1 ~ 10
   int get classification => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -170,7 +170,7 @@ class _$_SchoolModel implements _SchoolModel {
   final String name;
   @override // 学校名
   final int? lunchBlock;
-  @override // 給食区分: 1 ~ 6
+  @override // 給食区分: 1 ~ 10
   final int classification;
 
   @override
@@ -228,7 +228,7 @@ abstract class _SchoolModel implements SchoolModel {
   String get name => throw _privateConstructorUsedError;
   @override // 学校名
   int? get lunchBlock => throw _privateConstructorUsedError;
-  @override // 給食区分: 1 ~ 6
+  @override // 給食区分: 1 ~ 10
   int get classification => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
