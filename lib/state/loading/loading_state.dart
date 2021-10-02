@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'splash_state.freezed.dart';
+part 'loading_state.freezed.dart';
 
 @freezed
-class SplashState with _$SplashState {
-  const factory SplashState({
+class LoadingState with _$LoadingState {
+  const factory LoadingState({
     @Default(false) bool isShowErrorDialog
-  }) = _SplashState;
+  }) = _LoadingState;
 }

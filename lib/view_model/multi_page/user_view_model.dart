@@ -29,7 +29,7 @@ class UserViewModel extends StateNotifier<UserState> {
       if (await _usersLocalRepository.count() == 0) return false;
       final SharedPreferences _prefs = await SharedPreferences.getInstance();
       final int _currentUserId = _prefs.getInt('current_user_id') ?? 1;
-      _setCurrentUser(_currentUserId);
+      await _setCurrentUser(_currentUserId);
 
       return true;
     } catch (error) {
@@ -42,7 +42,7 @@ class UserViewModel extends StateNotifier<UserState> {
 
   Future<bool> changeCurrentUser(int id) async {
     try {
-      _setCurrentUser(id);
+      await _setCurrentUser(id);
       final SharedPreferences _prefs = await SharedPreferences.getInstance();
 
       return await _prefs.setInt('current_user_id', id);
@@ -111,10 +111,15 @@ class UserViewModel extends StateNotifier<UserState> {
     return 'junior';
   }
 
-  Future<int> createUser(String name, int schoolId, int schoolYear) async {
+  Future<int> createUser({
+    required String name,
+    required int schoolId,
+    required int schoolYear,
+  }) async {
     final int id = await _usersLocalRepository.add(name, schoolId, schoolYear);
     final SharedPreferences _prefs = await SharedPreferences.getInstance();
     await _prefs.setInt('current_user_id', id);
+    await _setCurrentUser(id);
 
     return id;
   }

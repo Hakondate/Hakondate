@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate_v2/router/app_navigator_state_notifier.dart';
 import 'package:hakondate_v2/view_model/multi_page/menus_view_model.dart';
 import 'package:hakondate_v2/view_model/multi_page/school_view_model.dart';
-import 'package:hakondate_v2/view_model/single_page/splash_view_model.dart';
+import 'package:hakondate_v2/view_model/multi_page/loading_view_model.dart';
 import 'package:hakondate_v2/view_model/multi_page/user_view_model.dart';
 
 class Splash extends ConsumerWidget {
@@ -26,8 +26,8 @@ class Splash extends ConsumerWidget {
     } catch (error) {
       debugPrint(error.toString());
 
-      if (!ref.watch(splashProvider).isShowErrorDialog) {
-        ref.read(splashProvider.notifier).activeErrorDialog();
+      if (!ref.watch(loadingProvider).isShowErrorDialog) {
+        ref.read(loadingProvider.notifier).activeErrorDialog();
         await _showErrorDialog(context, ref);
       }
 
@@ -54,7 +54,7 @@ class Splash extends ConsumerWidget {
                 onPressed: () async {
                   final DateTime _loadingDay = DateTime(DateTime.now().year, DateTime.now().month);
                   await ref.read(menusProvider.notifier).getLocalMenus(_loadingDay, ref.watch(userProvider).currentUser!.schoolId);
-                  ref.read(splashProvider.notifier).popErrorDialog();
+                  ref.read(loadingProvider.notifier).popErrorDialog();
                   ref.read(routerProvider.notifier).handleFromSplash();
                 },
               ),
@@ -62,7 +62,7 @@ class Splash extends ConsumerWidget {
                 isDefaultAction: true,
                 child: Text('リトライ'),
                 onPressed: () {
-                  ref.read(splashProvider.notifier).popErrorDialog();
+                  ref.read(loadingProvider.notifier).popErrorDialog();
                   ref.read(routerProvider.notifier).handleReload();
                   Navigator.of(context).pop();
                 },

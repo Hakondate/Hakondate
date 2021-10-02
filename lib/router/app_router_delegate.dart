@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate_v2/router/app_navigator_state_notifier.dart';
-import 'package:hakondate_v2/view/signup.dart';
-import 'package:hakondate_v2/view/splash.dart';
-import 'package:hakondate_v2/view/terms.dart';
+import 'package:hakondate_v2/view/signup/signup.dart';
+import 'package:hakondate_v2/view/splash/splash.dart';
+import 'package:hakondate_v2/view/terms/terms.dart';
 
 class AppRouterDelegate extends RouterDelegate<List<RouteSettings>> with PopNavigatorRouterDelegateMixin {
   AppRouterDelegate();
@@ -47,11 +47,6 @@ class AppRouterDelegate extends RouterDelegate<List<RouteSettings>> with PopNavi
               MaterialPage(
                 key: ValueKey('signup'),
                 child: Signup(),
-              ),
-            ] else if (_router.isShowConfirmation) ...[
-              MaterialPage(
-                key: ValueKey('confirmation'),
-                child: Scaffold(),
               ),
             ] else ...[
               // TODO: HOME内のNavigatorの実装

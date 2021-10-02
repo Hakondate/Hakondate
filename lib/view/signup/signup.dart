@@ -1,14 +1,74 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:hakondate_v2/router/app_navigator_state_notifier.dart';
 import 'package:hakondate_v2/unit/size.dart';
 import 'package:hakondate_v2/view/component/help_dialog.dart';
 import 'package:hakondate_v2/view/component/setting_label.dart';
+import 'package:hakondate_v2/view/signup/loading_dialog.dart';
 import 'package:hakondate_v2/view_model/single_page/signup_view_model.dart';
 
 class Signup extends ConsumerWidget {
   final GlobalKey _formKey = GlobalKey<FormState>();
+
+  Future<void> _showConfirmationDialog(BuildContext context, WidgetRef ref) async {
+    final store = ref.watch(signupProvider);
+
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return CupertinoAlertDialog(
+          title: Text('確認'),
+          content: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(vertical: MarginSize.minimum),
+                child: Text(
+                    '以下の内容でお子様を登録します．\n'
+                    '※ あとで変更することができます．',
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text('お名前：　'),
+                      Text('学校：　'),
+                      Text('学年：　'),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(store.name!),
+                      Text(store.schoolTrailing),
+                      Text(store.schoolYearTrailing),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+          actions: [
+            CupertinoDialogAction(
+              child: Text('修正する'),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            CupertinoDialogAction(
+              isDefaultAction: true,
+              child: Text('登録する'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                LoadingDialog(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -32,6 +92,8 @@ class Signup extends ConsumerWidget {
   }
 
   Widget _nameForm(BuildContext context, WidgetRef ref) {
+    final store = ref.watch(signupProvider);
+
     return Padding(
       padding: EdgeInsets.all(PaddingSize.normal),
       child: Column(
@@ -53,14 +115,15 @@ class Signup extends ConsumerWidget {
                   content:
                       '　お名前情報は，本アプリ内でユーザを識別するために利用されます．'
                       'あだ名などを入力していただいても構いません．また，あとで変更することもできます．\n'
-                      '　お名前情報は，端末内に保存され収集されることはありません．',
+                      '　お名前情報は，端末内に保存され収集されることはありません．また，あとから変更することができます．',
                 ),
               ),
               Spacer(),
-              _errorIndication(context, ref.watch(signupProvider).nameErrorState),
+              _errorIndication(context, store.nameErrorState),
             ],
           ),
           TextFormField(
+            initialValue: store.name,
             keyboardType: TextInputType.name,
             maxLength: 15,
             decoration: InputDecoration(
@@ -104,7 +167,7 @@ class Signup extends ConsumerWidget {
                   content:
                       '　学校情報は，本アプリ内でお子様の通っている学校の献立を表示するために利用されます．選択肢にない学校は，本アプリ未対応の学校です．\n'
                       '　学年情報は，本アプリ内でお子様の年齢に合わせた情報(栄養基準値など)を表示するために利用されます．\n'
-                      '　どちらの情報も，端末内に保存され収集されることはありません．',
+                      '　どちらの情報も，端末内に保存され収集されることはありません．また，あとから変更することができます．',
                 ),
               ),
               Spacer(),
@@ -164,10 +227,11 @@ class Signup extends ConsumerWidget {
                 ),
                 shape: StadiumBorder()
             ),
-            child: Text('決定'),
+            child: Text('登録する'),
             onPressed: () {
               if (ref.read(signupProvider.notifier).checkValidation()) {
-                ref.read(routerProvider.notifier).handleFromSignup();
+                _showConfirmationDialog(context, ref);
+                // ref.read(routerProvider.notifier).handleFromSignup();
               }
             },
           ),
