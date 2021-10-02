@@ -9,7 +9,6 @@ class AppNavigatorState with _$AppNavigatorState {
     @Default(true) bool isInitialLoading,
     @Default(false) bool isShowTerms,
     @Default(false) bool isShowSignup,
-    @Default(false) bool isShowConfirmation,
     @Default(false) bool isShowSetting,
     @Default(false) bool isShowHelp,
     @Default(false) bool isShowAboutUs,

@@ -16,11 +16,7 @@ class AppNavigatorStateNotifier extends StateNotifier<AppNavigatorState> {
   void handleFromTerms() =>
       state = state.copyWith(isShowTerms: false, isShowSignup: true);
 
-  void handleFromSignup() =>
-      state = state.copyWith(isShowSignup: false, isShowConfirmation: true);
-
-  void handleFromConfirmation({bool toSignup = false}) =>
-      state = state.copyWith(isShowSignup: toSignup, isShowConfirmation: false);
+  void handleFromSignup() => state = state.copyWith(isShowSignup: false);
 
   void handleFromHome({bool toSetting = false, bool toAboutUs = false, bool toHelp = false}) =>
       state = state.copyWith(isShowSetting: toSetting, isShowAboutUs: toAboutUs, isShowHelp: toHelp);

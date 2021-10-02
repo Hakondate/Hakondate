@@ -20,7 +20,6 @@ class _$AppNavigatorStateTearOff {
       {bool isInitialLoading = true,
       bool isShowTerms = false,
       bool isShowSignup = false,
-      bool isShowConfirmation = false,
       bool isShowSetting = false,
       bool isShowHelp = false,
       bool isShowAboutUs = false}) {
@@ -28,7 +27,6 @@ class _$AppNavigatorStateTearOff {
       isInitialLoading: isInitialLoading,
       isShowTerms: isShowTerms,
       isShowSignup: isShowSignup,
-      isShowConfirmation: isShowConfirmation,
       isShowSetting: isShowSetting,
       isShowHelp: isShowHelp,
       isShowAboutUs: isShowAboutUs,
@@ -44,7 +42,6 @@ mixin _$AppNavigatorState {
   bool get isInitialLoading => throw _privateConstructorUsedError;
   bool get isShowTerms => throw _privateConstructorUsedError;
   bool get isShowSignup => throw _privateConstructorUsedError;
-  bool get isShowConfirmation => throw _privateConstructorUsedError;
   bool get isShowSetting => throw _privateConstructorUsedError;
   bool get isShowHelp => throw _privateConstructorUsedError;
   bool get isShowAboutUs => throw _privateConstructorUsedError;
@@ -63,7 +60,6 @@ abstract class $AppNavigatorStateCopyWith<$Res> {
       {bool isInitialLoading,
       bool isShowTerms,
       bool isShowSignup,
-      bool isShowConfirmation,
       bool isShowSetting,
       bool isShowHelp,
       bool isShowAboutUs});
@@ -83,7 +79,6 @@ class _$AppNavigatorStateCopyWithImpl<$Res>
     Object? isInitialLoading = freezed,
     Object? isShowTerms = freezed,
     Object? isShowSignup = freezed,
-    Object? isShowConfirmation = freezed,
     Object? isShowSetting = freezed,
     Object? isShowHelp = freezed,
     Object? isShowAboutUs = freezed,
@@ -100,10 +95,6 @@ class _$AppNavigatorStateCopyWithImpl<$Res>
       isShowSignup: isShowSignup == freezed
           ? _value.isShowSignup
           : isShowSignup // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isShowConfirmation: isShowConfirmation == freezed
-          ? _value.isShowConfirmation
-          : isShowConfirmation // ignore: cast_nullable_to_non_nullable
               as bool,
       isShowSetting: isShowSetting == freezed
           ? _value.isShowSetting
@@ -132,7 +123,6 @@ abstract class _$AppNavigatorStateCopyWith<$Res>
       {bool isInitialLoading,
       bool isShowTerms,
       bool isShowSignup,
-      bool isShowConfirmation,
       bool isShowSetting,
       bool isShowHelp,
       bool isShowAboutUs});
@@ -154,7 +144,6 @@ class __$AppNavigatorStateCopyWithImpl<$Res>
     Object? isInitialLoading = freezed,
     Object? isShowTerms = freezed,
     Object? isShowSignup = freezed,
-    Object? isShowConfirmation = freezed,
     Object? isShowSetting = freezed,
     Object? isShowHelp = freezed,
     Object? isShowAboutUs = freezed,
@@ -171,10 +160,6 @@ class __$AppNavigatorStateCopyWithImpl<$Res>
       isShowSignup: isShowSignup == freezed
           ? _value.isShowSignup
           : isShowSignup // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isShowConfirmation: isShowConfirmation == freezed
-          ? _value.isShowConfirmation
-          : isShowConfirmation // ignore: cast_nullable_to_non_nullable
               as bool,
       isShowSetting: isShowSetting == freezed
           ? _value.isShowSetting
@@ -201,7 +186,6 @@ class _$_AppNavigatorState
       {this.isInitialLoading = true,
       this.isShowTerms = false,
       this.isShowSignup = false,
-      this.isShowConfirmation = false,
       this.isShowSetting = false,
       this.isShowHelp = false,
       this.isShowAboutUs = false});
@@ -217,9 +201,6 @@ class _$_AppNavigatorState
   final bool isShowSignup;
   @JsonKey(defaultValue: false)
   @override
-  final bool isShowConfirmation;
-  @JsonKey(defaultValue: false)
-  @override
   final bool isShowSetting;
   @JsonKey(defaultValue: false)
   @override
@@ -230,7 +211,7 @@ class _$_AppNavigatorState
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AppNavigatorState(isInitialLoading: $isInitialLoading, isShowTerms: $isShowTerms, isShowSignup: $isShowSignup, isShowConfirmation: $isShowConfirmation, isShowSetting: $isShowSetting, isShowHelp: $isShowHelp, isShowAboutUs: $isShowAboutUs)';
+    return 'AppNavigatorState(isInitialLoading: $isInitialLoading, isShowTerms: $isShowTerms, isShowSignup: $isShowSignup, isShowSetting: $isShowSetting, isShowHelp: $isShowHelp, isShowAboutUs: $isShowAboutUs)';
   }
 
   @override
@@ -241,7 +222,6 @@ class _$_AppNavigatorState
       ..add(DiagnosticsProperty('isInitialLoading', isInitialLoading))
       ..add(DiagnosticsProperty('isShowTerms', isShowTerms))
       ..add(DiagnosticsProperty('isShowSignup', isShowSignup))
-      ..add(DiagnosticsProperty('isShowConfirmation', isShowConfirmation))
       ..add(DiagnosticsProperty('isShowSetting', isShowSetting))
       ..add(DiagnosticsProperty('isShowHelp', isShowHelp))
       ..add(DiagnosticsProperty('isShowAboutUs', isShowAboutUs));
@@ -260,9 +240,6 @@ class _$_AppNavigatorState
             (identical(other.isShowSignup, isShowSignup) ||
                 const DeepCollectionEquality()
                     .equals(other.isShowSignup, isShowSignup)) &&
-            (identical(other.isShowConfirmation, isShowConfirmation) ||
-                const DeepCollectionEquality()
-                    .equals(other.isShowConfirmation, isShowConfirmation)) &&
             (identical(other.isShowSetting, isShowSetting) ||
                 const DeepCollectionEquality()
                     .equals(other.isShowSetting, isShowSetting)) &&
@@ -280,7 +257,6 @@ class _$_AppNavigatorState
       const DeepCollectionEquality().hash(isInitialLoading) ^
       const DeepCollectionEquality().hash(isShowTerms) ^
       const DeepCollectionEquality().hash(isShowSignup) ^
-      const DeepCollectionEquality().hash(isShowConfirmation) ^
       const DeepCollectionEquality().hash(isShowSetting) ^
       const DeepCollectionEquality().hash(isShowHelp) ^
       const DeepCollectionEquality().hash(isShowAboutUs);
@@ -296,7 +272,6 @@ abstract class _AppNavigatorState implements AppNavigatorState {
       {bool isInitialLoading,
       bool isShowTerms,
       bool isShowSignup,
-      bool isShowConfirmation,
       bool isShowSetting,
       bool isShowHelp,
       bool isShowAboutUs}) = _$_AppNavigatorState;
@@ -307,8 +282,6 @@ abstract class _AppNavigatorState implements AppNavigatorState {
   bool get isShowTerms => throw _privateConstructorUsedError;
   @override
   bool get isShowSignup => throw _privateConstructorUsedError;
-  @override
-  bool get isShowConfirmation => throw _privateConstructorUsedError;
   @override
   bool get isShowSetting => throw _privateConstructorUsedError;
   @override
