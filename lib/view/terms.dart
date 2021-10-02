@@ -31,7 +31,7 @@ class Terms extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Checkbox(
-                    activeColor: Theme.of(context).accentColor,
+                    activeColor: Theme.of(context).colorScheme.secondary,
                     value: store.isAgree,
                     onChanged: (_) => ref.read(termsProvider.notifier).onTap()
                   ),
@@ -42,7 +42,7 @@ class Terms extends ConsumerWidget {
                   Spacer(),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Theme.of(context).accentColor,
+                      primary: Theme.of(context).colorScheme.secondary,
                       padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
                       textStyle: TextStyle(
                         color: Colors.white,

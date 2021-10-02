@@ -68,7 +68,7 @@ class Signup extends ConsumerWidget {
               border: OutlineInputBorder(),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                    color: Theme.of(context).accentColor,
+                    color: Theme.of(context).colorScheme.secondary,
                     width: 2.0,
                 ),
               ),
@@ -153,7 +153,7 @@ class Signup extends ConsumerWidget {
         children: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-                primary: Theme.of(context).accentColor,
+                primary: Theme.of(context).colorScheme.secondary,
                 padding: EdgeInsets.symmetric(
                   vertical: PaddingSize.buttonVertical,
                   horizontal: PaddingSize.buttonHorizontal,

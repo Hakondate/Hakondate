@@ -21,17 +21,24 @@ class Hakondate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = ThemeData(
+      fontFamily: 'MPLUSRounded1c',
+      appBarTheme: AppBarTheme(
+        foregroundColor: Color(0xFF373737),
+        backgroundColor: Colors.white,
+      ),
+      textSelectionTheme: TextSelectionThemeData(selectionColor: Colors.blueAccent),
+      primaryIconTheme: IconThemeData(color: Colors.orangeAccent)
+    );
+
     return ProviderScope(
       child: MaterialApp.router(
         title: 'はこんだて',
-        theme: ThemeData(
-          fontFamily: 'MPLUSRounded1c',
-          primaryColor: Colors.white,
-          primaryTextTheme: TextTheme(headline6: TextStyle(color: Color(0xFF373737))),
-          primaryIconTheme: IconThemeData(color: Colors.orangeAccent),
-          accentColor: Colors.orangeAccent,
-          accentTextTheme: TextTheme(bodyText2: TextStyle(color: Colors.blueAccent)),
-          textSelectionTheme: TextSelectionThemeData(selectionColor: Colors.blueAccent),
+        theme: theme.copyWith(
+          colorScheme: theme.colorScheme.copyWith(
+            primary: Colors.white,
+            secondary: Colors.orangeAccent,
+          ),
         ),
         routeInformationParser: _routeInformationParser,
         routerDelegate: _appRouterDelegate,
