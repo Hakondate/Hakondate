@@ -12,7 +12,7 @@ class MenuModel with _$MenuModel {
     required DateTime day,            // 日付
     required int schoolId,            // 学校
     required List<DishModel> dishes,  // 料理
-    String? event                     // イベント
+    String? event,                    // イベント
   }) = _MenuModel;
 
   double get energy {
@@ -20,6 +20,7 @@ class MenuModel with _$MenuModel {
     dishes.forEach((dish) {
       _sum += dish.energy;
     });
+
     return _sum;
   }
 
@@ -28,6 +29,7 @@ class MenuModel with _$MenuModel {
     dishes.forEach((dish) {
       _sum += dish.protein;
     });
+
     return _sum;
   }
 
@@ -36,6 +38,7 @@ class MenuModel with _$MenuModel {
     dishes.forEach((dish) {
       _sum += dish.lipid;
     });
+
     return _sum;
   }
 
@@ -44,6 +47,7 @@ class MenuModel with _$MenuModel {
     dishes.forEach((dish) {
       _sum += dish.carbohydrate;
     });
+
     return _sum;
   }
 
@@ -52,6 +56,7 @@ class MenuModel with _$MenuModel {
     dishes.forEach((dish) {
       _sum += dish.sodium;
     });
+
     return _sum;
   }
 
@@ -60,6 +65,7 @@ class MenuModel with _$MenuModel {
     dishes.forEach((dish) {
       _sum += dish.calcium;
     });
+
     return _sum;
   }
 
@@ -68,6 +74,7 @@ class MenuModel with _$MenuModel {
     dishes.forEach((dish) {
       _sum += dish.magnesium;
     });
+
     return _sum;
   }
 
@@ -76,6 +83,7 @@ class MenuModel with _$MenuModel {
     dishes.forEach((dish) {
       _sum += dish.iron;
     });
+
     return _sum;
   }
 
@@ -84,6 +92,7 @@ class MenuModel with _$MenuModel {
     dishes.forEach((dish) {
       _sum += dish.zinc;
     });
+
     return _sum;
   }
 
@@ -92,6 +101,7 @@ class MenuModel with _$MenuModel {
     dishes.forEach((dish) {
       _sum += dish.retinol;
     });
+
     return _sum;
   }
 
@@ -100,6 +110,7 @@ class MenuModel with _$MenuModel {
     dishes.forEach((dish) {
       _sum += dish.vitaminB1;
     });
+
     return _sum;
   }
 
@@ -108,6 +119,7 @@ class MenuModel with _$MenuModel {
     dishes.forEach((dish) {
       _sum += dish.vitaminB2;
     });
+
     return _sum;
   }
 
@@ -116,6 +128,7 @@ class MenuModel with _$MenuModel {
     dishes.forEach((dish) {
       _sum += dish.vitaminC;
     });
+
     return _sum;
   }
 
@@ -124,6 +137,7 @@ class MenuModel with _$MenuModel {
     dishes.forEach((dish) {
       _sum += dish.dietaryFiber;
     });
+
     return _sum;
   }
 
@@ -132,6 +146,7 @@ class MenuModel with _$MenuModel {
     dishes.forEach((dish) {
       _sum += dish.salt;
     });
+
     return _sum;
   }
 }

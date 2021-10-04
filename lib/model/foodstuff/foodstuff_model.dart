@@ -13,6 +13,6 @@ class FoodstuffModel with _$FoodstuffModel {
     required NutrientsModel nutrients,  // 栄養素
     @Default(false) bool isAllergy,     // アレルギー食品
     @Default(false) bool isHeat,        // 熱加工食品
-    String? origin                      // 原産地
+    String? origin,                     // 原産地
   }) = _FoodstuffModel;
 }
