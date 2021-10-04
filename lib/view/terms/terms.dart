@@ -51,7 +51,7 @@ class Terms extends ConsumerWidget {
                       shape: StadiumBorder()
                     ),
                     child: Text('はじめる'),
-                    onPressed: store.isAgree ? ref.read(routerProvider.notifier).handleFromTerms : null,
+                    onPressed: store.isAgree ? ref.read(appRouterProvider.notifier).handleFromTerms : null,
                   )
                 ],
               ),

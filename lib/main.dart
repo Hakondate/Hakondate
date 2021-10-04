@@ -16,11 +16,11 @@ void main() {
 }
 
 class Hakondate extends StatelessWidget {
-  final _routeInformationParser = ListRouteInformationParser();
-  final _appRouterDelegate = AppRouterDelegate();
-
   @override
   Widget build(BuildContext context) {
+    final _routeInformationParser = ListRouteInformationParser();
+    final _appRouterDelegate = AppRouterDelegate();
+    final _backButtonDispatcher = RootBackButtonDispatcher();
     final ThemeData theme = ThemeData(
       fontFamily: 'MPLUSRounded1c',
       appBarTheme: AppBarTheme(
@@ -42,6 +42,7 @@ class Hakondate extends StatelessWidget {
         ),
         routeInformationParser: _routeInformationParser,
         routerDelegate: _appRouterDelegate,
+        backButtonDispatcher: _backButtonDispatcher,
         debugShowCheckedModeBanner: false,
       ),
     );

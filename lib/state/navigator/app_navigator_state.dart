@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'app_navigator_state.freezed.dart';
@@ -14,10 +15,3 @@ class AppNavigatorState with _$AppNavigatorState {
     @Default(false) bool isShowAboutUs,
   }) = _AppNavigatorState;
 }
-
-// Home内の遷移で少なくても必要になるやつら
-// @Default(false) bool isShowMenuList,
-// int? selectedMenuId,
-// int? selectedDishId,
-// int? selectedPopularRecipeId,
-// int? selectedMonthlyOriginId,

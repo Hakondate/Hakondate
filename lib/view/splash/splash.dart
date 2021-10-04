@@ -22,7 +22,7 @@ class Splash extends ConsumerWidget {
           yield status;
         }
       }
-      ref.read(routerProvider.notifier).handleFromSplash(toTerms: !_isSignedUp);
+      ref.read(appRouterProvider.notifier).handleFromSplash(toTerms: !_isSignedUp);
     } catch (error) {
       debugPrint(error.toString());
 
@@ -55,7 +55,7 @@ class Splash extends ConsumerWidget {
                   final DateTime _loadingDay = DateTime(DateTime.now().year, DateTime.now().month);
                   await ref.read(menusProvider.notifier).getLocalMenus(_loadingDay, ref.watch(userProvider).currentUser!.schoolId);
                   ref.read(loadingProvider.notifier).popErrorDialog();
-                  ref.read(routerProvider.notifier).handleFromSplash();
+                  ref.read(appRouterProvider.notifier).handleFromSplash();
                 },
               ),
               CupertinoDialogAction(
@@ -63,7 +63,7 @@ class Splash extends ConsumerWidget {
                 child: Text('リトライ'),
                 onPressed: () {
                   ref.read(loadingProvider.notifier).popErrorDialog();
-                  ref.read(routerProvider.notifier).handleReload();
+                  ref.read(appRouterProvider.notifier).handleReload();
                   Navigator.of(context).pop();
                 },
               )

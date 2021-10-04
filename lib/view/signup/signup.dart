@@ -107,7 +107,7 @@ class Signup extends ConsumerWidget {
               ),
               IconButton(
                 icon: Icon(Icons.help),
-                iconSize: 20,
+                iconSize: IconSize.help,
                 color: Theme.of(context).primaryIconTheme.color,
                 onPressed: () => HelpDialog(
                   context,
@@ -159,7 +159,7 @@ class Signup extends ConsumerWidget {
               ),
               IconButton(
                 icon: Icon(Icons.help),
-                iconSize: 20,
+                iconSize: IconSize.help,
                 color: Theme.of(context).primaryIconTheme.color,
                 onPressed: () => HelpDialog(
                   context,

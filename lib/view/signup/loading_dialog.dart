@@ -75,7 +75,7 @@ class LoadingDialog {
           .initialize(ref.watch(userProvider).currentUser!.schoolId)) {
         yield status;
       }
-      ref.read(routerProvider.notifier).handleFromSignup();
+      ref.read(appRouterProvider.notifier).handleFromSignup();
     } catch (error) {
       debugPrint(error.toString());
 
@@ -103,7 +103,7 @@ class LoadingDialog {
                   final DateTime _loadingDay = DateTime(DateTime.now().year, DateTime.now().month);
                   await ref.read(menusProvider.notifier).getLocalMenus(_loadingDay, ref.watch(userProvider).currentUser!.schoolId);
                   ref.read(loadingProvider.notifier).popErrorDialog();
-                  ref.read(routerProvider.notifier).handleFromSignup();
+                  ref.read(appRouterProvider.notifier).handleFromSignup();
                 },
               ),
               CupertinoDialogAction(
@@ -111,7 +111,7 @@ class LoadingDialog {
                 child: Text('リトライ'),
                 onPressed: () {
                   ref.read(loadingProvider.notifier).popErrorDialog();
-                  ref.read(routerProvider.notifier).handleReload();
+                  ref.read(appRouterProvider.notifier).handleReload();
                   Navigator.of(context).pop();
                 },
               )

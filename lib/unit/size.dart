@@ -24,3 +24,8 @@ class PaddingSize {
   static const double buttonVertical = 5.0;     // ボタンの水平方向の基本マージン
   static const double buttonHorizontal = 25.0;  // ボタンの垂直方向の基本マージン
 }
+
+class IconSize {
+  static const double help = 20.0;              // ヘルプ用
+  static const double navigationItem = 30.0;    // ボトムバー用
+}
