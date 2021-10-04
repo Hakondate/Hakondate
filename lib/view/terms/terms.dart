@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hakondate_v2/router/app_navigator_state_notifier.dart';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:hakondate_v2/router/app_navigator_state_notifier.dart';
 import 'package:hakondate_v2/unit/size.dart';
 import 'package:hakondate_v2/view_model/single_page/terms_view_model.dart';
 
@@ -17,11 +18,14 @@ class Terms extends ConsumerWidget {
       body: Container(
         margin: EdgeInsets.symmetric(
           vertical: MarginSize.normalVertical,
-          horizontal: MarginSize.normalHorizontal
+          horizontal: MarginSize.normalHorizontal,
         ),
         child: Column(
           children: [
-            _guideText(),
+            Text(
+              '　以下の利用規約に同意の上，はこんだてをご利用ください．',
+              style: TextStyle(fontSize: FontSize.body),
+            ),
             SizedBox(height: SpaceSize.paragraph),
             _termsCard(),
             SizedBox(height: SpaceSize.paragraph),
@@ -33,11 +37,11 @@ class Terms extends ConsumerWidget {
                   Checkbox(
                     activeColor: Theme.of(context).colorScheme.secondary,
                     value: store.isAgree,
-                    onChanged: (_) => ref.read(termsProvider.notifier).onTap()
+                    onChanged: (_) => ref.read(termsProvider.notifier).onTap(),
                   ),
                   Text(
                     '利用規約に同意する',
-                    style: TextStyle(fontSize: FontSize.body)
+                    style: TextStyle(fontSize: FontSize.body),
                   ),
                   Spacer(),
                   ElevatedButton(
@@ -46,26 +50,19 @@ class Terms extends ConsumerWidget {
                       padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
                       textStyle: TextStyle(
                         color: Colors.white,
-                        fontFamily: 'MPLUSRounded1c'
+                        fontFamily: 'MPLUSRounded1c',
                       ),
-                      shape: StadiumBorder()
+                      shape: StadiumBorder(),
                     ),
                     child: Text('はじめる'),
                     onPressed: store.isAgree ? ref.read(appRouterProvider.notifier).handleFromTerms : null,
-                  )
+                  ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
-    );
-  }
-
-  Widget _guideText() {
-    return Text(
-        '　以下の利用規約に同意の上，はこんだてをご利用ください．',
-        style: TextStyle(fontSize: FontSize.body)
     );
   }
 
@@ -136,7 +133,7 @@ class Terms extends ConsumerWidget {
                   title: '第十条 専属的合意管轄その他雑則',
                   sentence:
                       '　本アプリ又は，本アプリに関連して生じた紛争については，北海道を管轄する裁判所を専属的合意管轄裁判所とします．'
-                      'また，本規約は日本国の法令に準拠するものとします．')
+                      'また，本規約は日本国の法令に準拠するものとします．'),
             ],
           ),
         ),
@@ -144,15 +141,14 @@ class Terms extends ConsumerWidget {
     );
   }
 
-  Widget _paragraphText(
-      {required String title, required String sentence}) {
+  Widget _paragraphText({required String title, required String sentence}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(title, style: TextStyle(fontSize: FontSize.subheading)),
         SizedBox(height: SpaceSize.line),
         Text(sentence, style: TextStyle(fontSize: FontSize.body)),
-        SizedBox(height: SpaceSize.paragraph)
+        SizedBox(height: SpaceSize.paragraph),
       ],
     );
   }

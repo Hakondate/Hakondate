@@ -18,6 +18,7 @@ class DishModel with _$DishModel {
     foodstuffs.forEach((foodstuff) {
       _sum += foodstuff.nutrients.energy;
     });
+
     return _sum;
   }
 
@@ -26,6 +27,7 @@ class DishModel with _$DishModel {
     foodstuffs.forEach((foodstuff) {
       _sum += foodstuff.nutrients.protein;
     });
+
     return _sum;
   }
 
@@ -34,6 +36,7 @@ class DishModel with _$DishModel {
     foodstuffs.forEach((foodstuff) {
       _sum += foodstuff.nutrients.lipid;
     });
+
     return _sum;
   }
 
@@ -42,6 +45,7 @@ class DishModel with _$DishModel {
     foodstuffs.forEach((foodstuff) {
       _sum += foodstuff.nutrients.carbohydrate;
     });
+
     return _sum;
   }
 
@@ -50,6 +54,7 @@ class DishModel with _$DishModel {
     foodstuffs.forEach((foodstuff) {
       _sum += foodstuff.nutrients.sodium;
     });
+
     return _sum;
   }
 
@@ -58,6 +63,7 @@ class DishModel with _$DishModel {
     foodstuffs.forEach((foodstuff) {
       _sum += foodstuff.nutrients.calcium;
     });
+
     return _sum;
   }
 
@@ -66,6 +72,7 @@ class DishModel with _$DishModel {
     foodstuffs.forEach((foodstuff) {
       _sum += foodstuff.nutrients.magnesium;
     });
+
     return _sum;
   }
 
@@ -74,6 +81,7 @@ class DishModel with _$DishModel {
     foodstuffs.forEach((foodstuff) {
       _sum += foodstuff.nutrients.iron;
     });
+
     return _sum;
   }
 
@@ -82,6 +90,7 @@ class DishModel with _$DishModel {
     foodstuffs.forEach((foodstuff) {
       _sum += foodstuff.nutrients.zinc;
     });
+
     return _sum;
   }
 
@@ -90,6 +99,7 @@ class DishModel with _$DishModel {
     foodstuffs.forEach((foodstuff) {
       _sum += foodstuff.nutrients.retinol;
     });
+
     return _sum;
   }
 
@@ -98,6 +108,7 @@ class DishModel with _$DishModel {
     foodstuffs.forEach((foodstuff) {
       _sum += foodstuff.nutrients.vitaminB1;
     });
+
     return _sum;
   }
 
@@ -106,6 +117,7 @@ class DishModel with _$DishModel {
     foodstuffs.forEach((foodstuff) {
       _sum += foodstuff.nutrients.vitaminB2;
     });
+
     return _sum;
   }
 
@@ -114,6 +126,7 @@ class DishModel with _$DishModel {
     foodstuffs.forEach((foodstuff) {
       _sum += foodstuff.nutrients.vitaminC;
     });
+
     return _sum;
   }
 
@@ -122,6 +135,7 @@ class DishModel with _$DishModel {
     foodstuffs.forEach((foodstuff) {
       _sum += foodstuff.nutrients.dietaryFiber;
     });
+
     return _sum;
   }
 
@@ -130,6 +144,7 @@ class DishModel with _$DishModel {
     foodstuffs.forEach((foodstuff) {
       _sum += foodstuff.nutrients.salt;
     });
+
     return _sum;
   }
 }

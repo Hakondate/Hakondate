@@ -85,10 +85,11 @@ class DatabaseManager extends _$DatabaseManager {
   /* INSERT */
   // MenusSchemaを追加
   Future<int> addMenusSchema(MenusTableCompanion entry) =>
-      into(menusTable).insert(entry,
-          onConflict: DoUpdate((old) => MenusTableCompanion.custom(
-              event: Constant(entry.event.value)
-          ))
+      into(menusTable).insert(
+        entry,
+        onConflict: DoUpdate((old) => MenusTableCompanion.custom(
+          event: Constant(entry.event.value),
+        )),
       );
 
   // SchoolsSchemaを追加
@@ -105,14 +106,16 @@ class DatabaseManager extends _$DatabaseManager {
           ..where((t) => t.name.equals(entry.name.value)))
         .getSingleOrNull();
     if (_conflictSchema == null)
-      return await into(dishesTable).insert(entry,
-          onConflict: DoUpdate((old) => DishesTableCompanion.custom(
-              category: Constant(entry.category.value)
-          ))
+      return await into(dishesTable).insert(
+        entry,
+        onConflict: DoUpdate((old) => DishesTableCompanion.custom(
+          category: Constant(entry.category.value),
+        )),
       );
     else if (_conflictSchema.category != entry.category.value)
       return await (update(dishesTable)..where((t) =>
           t.name.equals(entry.name.value))).write(DishesTableCompanion(category: entry.category));
+
     return _conflictSchema.id;
   }
 
@@ -128,10 +131,11 @@ class DatabaseManager extends _$DatabaseManager {
               t.isHeat.equals(entry.isHeat.value) &
               t.isAllergy.equals(entry.isAllergy.value))).getSingleOrNull();
     if (_conflictSchema == null)
-      return await into(foodstuffsTable).insert(entry,
-          onConflict: DoUpdate((old) => FoodstuffsTableCompanion.custom(
-              origin: Constant(entry.origin.value)
-          ))
+      return await into(foodstuffsTable).insert(
+        entry,
+        onConflict: DoUpdate((old) => FoodstuffsTableCompanion.custom(
+          origin: Constant(entry.origin.value),
+        )),
       );
     else if (_conflictSchema.piece != entry.piece.value ||
         _conflictSchema.energy != entry.energy.value ||
@@ -172,6 +176,7 @@ class DatabaseManager extends _$DatabaseManager {
               dietaryFiber: entry.dietaryFiber,
               salt: entry.salt,
               origin: entry.origin));
+
     return _conflictSchema.id;
   }
 
@@ -186,12 +191,14 @@ class DatabaseManager extends _$DatabaseManager {
   Future<int> countSchools() async {
     final Expression<int> exp = schoolsTable.id.count();
     final query = selectOnly(schoolsTable)..addColumns([exp]);
+
     return await query.map((scheme) => scheme.read(exp)).getSingle();
   }
 
   Future<int> countUsers() async {
     final Expression<int> exp = usersTable.id.count();
     final query = selectOnly(usersTable)..addColumns([exp]);
+
     return await query.map((scheme) => scheme.read(exp)).getSingle();
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate_v2/unit/size.dart';
@@ -24,8 +25,8 @@ class Signup extends ConsumerWidget {
               Container(
                 margin: EdgeInsets.symmetric(vertical: MarginSize.minimum),
                 child: Text(
-                    '以下の内容でお子様を登録します．\n'
-                    '※ あとで変更することができます．',
+                  '以下の内容でお子様を登録します．\n'
+                  '※ あとで変更することができます．',
                 ),
               ),
               Row(
@@ -229,10 +230,8 @@ class Signup extends ConsumerWidget {
             ),
             child: Text('登録する'),
             onPressed: () {
-              if (ref.read(signupProvider.notifier).checkValidation()) {
+              if (ref.read(signupProvider.notifier).checkValidation())
                 _showConfirmationDialog(context, ref);
-                // ref.read(routerProvider.notifier).handleFromSignup();
-              }
             },
           ),
         ],

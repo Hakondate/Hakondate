@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate_v2/router/app_navigator_state_notifier.dart';
@@ -24,8 +25,8 @@ class LoadingDialog {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                      'assets/images/splash.png',
-                      width: _screenWidth / 6.0
+                    'assets/images/splash.png',
+                    width: _screenWidth / 6.0,
                   ),
                   SizedBox(
                     width: _screenWidth * 2.0 / 3.0,
@@ -90,33 +91,34 @@ class LoadingDialog {
 
   Future<void> _showErrorDialog(BuildContext context, WidgetRef ref) async {
     await showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return CupertinoAlertDialog(
-            title: Text('通信エラー'),
-            content: Text('データの更新に失敗しました．データの更新をせず利用する場合は"このまま利用"を選択してください．'),
-            actions: [
-              CupertinoDialogAction(
-                child: Text('このまま利用'),
-                onPressed: () async {
-                  final DateTime _loadingDay = DateTime(DateTime.now().year, DateTime.now().month);
-                  await ref.read(menusProvider.notifier).getLocalMenus(_loadingDay, ref.watch(userProvider).currentUser!.schoolId);
-                  ref.read(loadingProvider.notifier).popErrorDialog();
-                  ref.read(appRouterProvider.notifier).handleFromSignup();
-                },
-              ),
-              CupertinoDialogAction(
-                isDefaultAction: true,
-                child: Text('リトライ'),
-                onPressed: () {
-                  ref.read(loadingProvider.notifier).popErrorDialog();
-                  ref.read(appRouterProvider.notifier).handleReload();
-                  Navigator.of(context).pop();
-                },
-              )
-            ],
-          );
-        });
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return CupertinoAlertDialog(
+          title: Text('通信エラー'),
+          content: Text('データの更新に失敗しました．データの更新をせず利用する場合は"このまま利用"を選択してください．'),
+          actions: [
+            CupertinoDialogAction(
+              child: Text('このまま利用'),
+              onPressed: () async {
+                final DateTime _loadingDay = DateTime(DateTime.now().year, DateTime.now().month);
+                await ref.read(menusProvider.notifier).getLocalMenus(_loadingDay, ref.watch(userProvider).currentUser!.schoolId);
+                ref.read(loadingProvider.notifier).popErrorDialog();
+                ref.read(appRouterProvider.notifier).handleFromSignup();
+              },
+            ),
+            CupertinoDialogAction(
+              isDefaultAction: true,
+              child: Text('リトライ'),
+              onPressed: () {
+                ref.read(loadingProvider.notifier).popErrorDialog();
+                ref.read(appRouterProvider.notifier).handleReload();
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }

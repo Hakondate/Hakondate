@@ -27,7 +27,6 @@ class MenusViewModel extends StateNotifier<MenusState> {
     }
     yield 'Reading';
     final DateTime _loadingDay = DateTime(DateTime.now().year, DateTime.now().month);
-    // final DateTime _loadingDay = DateTime(2021, 7);  // デバッグ用
     await getLocalMenus(_loadingDay, schoolId);
   }
 

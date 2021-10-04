@@ -1,5 +1,6 @@
 import 'package:hakondate_v2/model/user/user_model.dart';
 import 'package:hakondate_v2/repository/local/database_manager.dart';
+
 import 'package:moor/moor.dart';
 
 class UsersLocalRepository {
@@ -27,6 +28,7 @@ class UsersLocalRepository {
 
   Future<UserModel> getById(int id) async {
     final UsersSchema _usersSchema = await _databaseManager.getUsersSchemaById(id);
+
     return UserModel(
       id: _usersSchema.id,
       name: _usersSchema.name,
@@ -36,13 +38,11 @@ class UsersLocalRepository {
   }
 
   Future<int> add(String name, int schoolId, int schoolYear) async {
-    return await _databaseManager.addUsersSchema(
-      UsersTableCompanion(
-        name: Value(name),
-        schoolId: Value(schoolId),
-        schoolYear: Value(schoolYear),
-      )
-    );
+    return await _databaseManager.addUsersSchema(UsersTableCompanion(
+      name: Value(name),
+      schoolId: Value(schoolId),
+      schoolYear: Value(schoolYear),
+    ));
   }
 
   Future<void> update(UserModel user) async {

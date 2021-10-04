@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:hakondate_v2/repository/local/schools_local_repository.dart';
 import 'package:hakondate_v2/repository/remote/schools_remote_repository.dart';
-
 import 'package:hakondate_v2/state/school/school_state.dart';
 
 final schoolProvider = StateNotifierProvider<SchoolViewModel, SchoolState>((ref) => SchoolViewModel());

@@ -19,18 +19,17 @@ class MenusLocalRepository {
       id: Value(menu['id']),
       day: Value(DateTime.fromMillisecondsSinceEpoch(menu['day'])),
       schoolId: Value(menu['schoolId']),
-      event: Value(menu['event'])
+      event: Value(menu['event']),
     );
     final int _menuId = await _databaseManager.addMenusSchema(_menusSchema);
 
     await Future.forEach(menu['dishes'], (dynamic dish) async {
       final int _dishId = await _addDish(dish);
       await _databaseManager.addMenuDishesSchema(
-        MenuDishesTableCompanion(
-          menuId: Value(_menuId),
-          dishId: Value(_dishId)
-        )
-      );
+          MenuDishesTableCompanion(
+            menuId: Value(_menuId),
+            dishId: Value(_dishId),
+          ));
     });
 
     return _menuId;
@@ -39,49 +38,46 @@ class MenusLocalRepository {
   Future<int> _addDish(Map<String, dynamic> dish) async {
     final DishesTableCompanion _dishSchema = DishesTableCompanion(
       name: Value(dish['name']),
-      category: Value(dish['category'])
+      category: Value(dish['category']),
     );
     final int _dishId = await _databaseManager.addDishesSchema(_dishSchema);
 
     await Future.forEach(dish['foodstuffs'], (dynamic foodstuff) async {
       final int _foodstuffId = await _addFoodstuff(foodstuff);
       await _databaseManager.addDishFoodstuffsSchema(
-        DishFoodstuffsTableCompanion(
-          dishId: Value(_dishId),
-          foodstuffId: Value(_foodstuffId)
-        )
-      );
+          DishFoodstuffsTableCompanion(
+            dishId: Value(_dishId),
+            foodstuffId: Value(_foodstuffId),
+          ));
     });
 
     return _dishId;
   }
 
   Future<int> _addFoodstuff(Map<String, dynamic> foodstuff) async {
-    return await _databaseManager.addFoodstuffsSchema(
-      FoodstuffsTableCompanion(
-        name: Value(foodstuff['name']),
-        piece: Value(foodstuff['piece']),
-        gram: Value(foodstuff['gram'].toDouble()),
-        energy: Value(foodstuff['energy'].toDouble()),
-        protein: Value(foodstuff['protein'].toDouble()),
-        lipid: Value(foodstuff['lipid'].toDouble()),
-        carbohydrate: Value(foodstuff['carbohydrate'].toDouble()),
-        sodium: Value(foodstuff['sodium'].toDouble()),
-        calcium: Value(foodstuff['calcium'].toDouble()),
-        magnesium: Value(foodstuff['magnesium'].toDouble()),
-        iron: Value(foodstuff['iron'].toDouble()),
-        zinc: Value(foodstuff['zinc'].toDouble()),
-        retinol: Value(foodstuff['retinol'].toDouble()),
-        vitaminB1: Value(foodstuff['vitaminB1'].toDouble()),
-        vitaminB2: Value(foodstuff['vitaminB2'].toDouble()),
-        vitaminC: Value(foodstuff['vitaminC'].toDouble()),
-        dietaryFiber: Value(foodstuff['dietaryFiber'].toDouble()),
-        salt: Value(foodstuff['salt'].toDouble()),
-        isHeat: Value(foodstuff['isHeat']),
-        isAllergy: Value(foodstuff['isAllergy']),
-        origin: Value(foodstuff['origin'])
-      )
-    );
+    return await _databaseManager.addFoodstuffsSchema(FoodstuffsTableCompanion(
+      name: Value(foodstuff['name']),
+      piece: Value(foodstuff['piece']),
+      gram: Value(foodstuff['gram'].toDouble()),
+      energy: Value(foodstuff['energy'].toDouble()),
+      protein: Value(foodstuff['protein'].toDouble()),
+      lipid: Value(foodstuff['lipid'].toDouble()),
+      carbohydrate: Value(foodstuff['carbohydrate'].toDouble()),
+      sodium: Value(foodstuff['sodium'].toDouble()),
+      calcium: Value(foodstuff['calcium'].toDouble()),
+      magnesium: Value(foodstuff['magnesium'].toDouble()),
+      iron: Value(foodstuff['iron'].toDouble()),
+      zinc: Value(foodstuff['zinc'].toDouble()),
+      retinol: Value(foodstuff['retinol'].toDouble()),
+      vitaminB1: Value(foodstuff['vitaminB1'].toDouble()),
+      vitaminB2: Value(foodstuff['vitaminB2'].toDouble()),
+      vitaminC: Value(foodstuff['vitaminC'].toDouble()),
+      dietaryFiber: Value(foodstuff['dietaryFiber'].toDouble()),
+      salt: Value(foodstuff['salt'].toDouble()),
+      isHeat: Value(foodstuff['isHeat']),
+      isAllergy: Value(foodstuff['isAllergy']),
+      origin: Value(foodstuff['origin']),
+    ));
   }
 
   Future<List<MenuModel>> getAll() async {
@@ -121,11 +117,11 @@ class MenusLocalRepository {
     });
 
     return MenuModel(
-        id: menusSchema.id,
-        day: menusSchema.day,
-        schoolId: menusSchema.schoolId,
-        dishes: _dishes,
-        event: menusSchema.event
+      id: menusSchema.id,
+      day: menusSchema.day,
+      schoolId: menusSchema.schoolId,
+      dishes: _dishes,
+      event: menusSchema.event,
     );
   }
 
@@ -142,7 +138,7 @@ class MenusLocalRepository {
     return DishModel(
       name: _dishesSchema.name,
       foodstuffs: _foodstuffs,
-      category: _dishesSchema.category
+      category: _dishesSchema.category,
     );
   }
 
@@ -153,7 +149,7 @@ class MenusLocalRepository {
       name: _foodstuffsSchema.name,
       quantity: QuantityModel(
         piece: _foodstuffsSchema.piece,
-        gram: _foodstuffsSchema.gram
+        gram: _foodstuffsSchema.gram,
       ),
       nutrients: NutrientsModel(
         energy: _foodstuffsSchema.energy,
@@ -170,11 +166,11 @@ class MenusLocalRepository {
         vitaminB2: _foodstuffsSchema.vitaminB2,
         vitaminC: _foodstuffsSchema.vitaminC,
         dietaryFiber: _foodstuffsSchema.dietaryFiber,
-        salt: _foodstuffsSchema.salt
+        salt: _foodstuffsSchema.salt,
       ),
       isAllergy: _foodstuffsSchema.isAllergy,
       isHeat: _foodstuffsSchema.isHeat,
-      origin: _foodstuffsSchema.origin
+      origin: _foodstuffsSchema.origin,
     );
   }
 }
