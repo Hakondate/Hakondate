@@ -10,7 +10,7 @@ class MenuDishesTable extends Table {
 
   @override
   List<String> get customConstraints => [
-    'FOREIGN KEY(menu_id) REFERENCES menus_table(id)',
-    'FOREIGN KEY(dish_id) REFERENCES dishes_table(id)',
-  ];
+        'FOREIGN KEY(menu_id) REFERENCES menus_table(id)',
+        'FOREIGN KEY(dish_id) REFERENCES dishes_table(id)',
+      ];
 }

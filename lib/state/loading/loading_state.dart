@@ -6,7 +6,6 @@ part 'loading_state.freezed.dart';
 
 @freezed
 class LoadingState with _$LoadingState {
-  const factory LoadingState({
-    @Default(false) bool isShowErrorDialog
-  }) = _LoadingState;
+  const factory LoadingState({@Default(false) bool isShowErrorDialog}) =
+      _LoadingState;
 }

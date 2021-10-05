@@ -33,23 +33,28 @@ class LoadingDialog {
                     child: StreamBuilder(
                       stream: _load(context, ref),
                       initialData: 'Reading',
-                      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                      builder: (BuildContext context,
+                          AsyncSnapshot<String> snapshot) {
                         if (snapshot.connectionState != ConnectionState.done) {
                           Widget _widget = Container();
                           switch (snapshot.data) {
                             case 'Reading':
-                              _widget = Image.asset('assets/loading_animation/data_reading.gif');
+                              _widget = Image.asset(
+                                  'assets/loading_animation/data_reading.gif');
                               break;
                             case 'CheckingUpdate':
-                              _widget = Image.asset('assets/loading_animation/checking.gif');
+                              _widget = Image.asset(
+                                  'assets/loading_animation/checking.gif');
                               break;
                             case 'Updating':
-                              _widget = Image.asset('assets/loading_animation/data_updating.gif');
+                              _widget = Image.asset(
+                                  'assets/loading_animation/data_updating.gif');
                               break;
                           }
                           return _widget;
                         }
-                        return Image.asset('assets/loading_animation/data_reading.gif');
+                        return Image.asset(
+                            'assets/loading_animation/data_reading.gif');
                       },
                     ),
                   ),
@@ -68,11 +73,12 @@ class LoadingDialog {
     yield 'Updating';
     try {
       await ref.read(userProvider.notifier).createUser(
-        name: store.name!,
-        schoolId: store.schoolId!,
-        schoolYear: store.schoolYear!,
-      );
-      await for (final status in ref.read(menusProvider.notifier)
+            name: store.name!,
+            schoolId: store.schoolId!,
+            schoolYear: store.schoolYear!,
+          );
+      await for (final status in ref
+          .read(menusProvider.notifier)
           .initialize(ref.watch(userProvider).currentUser!.schoolId)) {
         yield status;
       }
@@ -101,8 +107,10 @@ class LoadingDialog {
             CupertinoDialogAction(
               child: Text('このまま利用'),
               onPressed: () async {
-                final DateTime _loadingDay = DateTime(DateTime.now().year, DateTime.now().month);
-                await ref.read(menusProvider.notifier).getLocalMenus(_loadingDay, ref.watch(userProvider).currentUser!.schoolId);
+                final DateTime _loadingDay =
+                    DateTime(DateTime.now().year, DateTime.now().month);
+                await ref.read(menusProvider.notifier).getLocalMenus(
+                    _loadingDay, ref.watch(userProvider).currentUser!.schoolId);
                 ref.read(loadingProvider.notifier).popErrorDialog();
                 ref.read(appRouterProvider.notifier).handleFromSignup();
               },

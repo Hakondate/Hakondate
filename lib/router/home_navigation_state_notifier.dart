@@ -7,18 +7,19 @@ final homeRouterProvider =
         (ref) => HomeNavigationStateNotifier());
 
 class HomeNavigationStateNotifier extends StateNotifier<HomeNavigatorState> {
-  HomeNavigationStateNotifier() : super(HomeNavigatorState());
+  HomeNavigationStateNotifier() : super(const HomeNavigatorState());
 
   void initialize(int schoolId) {
     final DateTime _today = DateTime.now();
-    final _todayMenuId = _today.year * 1000000
-        + _today.month * 10000
-        + _today.day * 100
-        + schoolId;
+    final _todayMenuId = _today.year * 1000000 +
+        _today.month * 10000 +
+        _today.day * 100 +
+        schoolId;
     state = state.copyWith(todayMenuId: _todayMenuId);
   }
 
-  void handleFromHome({bool isShowMenuList = false, int? menuId, int? dishId}) =>
+  void handleFromHome(
+          {bool isShowMenuList = false, int? menuId, int? dishId}) =>
       state = state.copyWith(
         isShowMenuList: isShowMenuList,
         selectedMenuId: menuId ?? state.selectedMenuId,
@@ -26,9 +27,10 @@ class HomeNavigationStateNotifier extends StateNotifier<HomeNavigatorState> {
       );
 
   void handleFromMenuList({int? menuId}) => state = state.copyWith(
-    isShowMenuList: false,
-    selectedMenuId: menuId ?? state.todayMenuId,
-  );
+        isShowMenuList: false,
+        selectedMenuId: menuId ?? state.todayMenuId,
+      );
 
-  void handleFromDish({int? dishId}) => state = state.copyWith(selectedDishId: dishId);
+  void handleFromDish({int? dishId}) =>
+      state = state.copyWith(selectedDishId: dishId);
 }

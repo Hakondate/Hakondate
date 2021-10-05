@@ -41,6 +41,7 @@ dev_dependencies:
   moor_generator: ^4.4.1
   flutter_native_splash: ^1.2.1
   flutter_launcher_icons: ^0.9.2
+  flutter_lints: ^1.0.4
 
   # build_runner の実行コマンド
   # flutter packages pub run build_runner build
