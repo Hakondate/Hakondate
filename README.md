@@ -21,8 +21,9 @@
 MVVMを採用  
 [flutter-architecture-blueprints](https://github.com/wasabeef/flutter-architecture-blueprints)などを参考に構築  
 
-### Null Safety
-取り入れてます
+Null Safetyを採用  
+[Sound null safety in Dart](https://dart.dev/null-safety)  
+[Null safety in Flutter](https://flutter.dev/docs/null-safety)
 
 **概要**
 - view : Widgetの描画
@@ -38,3 +39,12 @@ MVVMを採用
 > [Effective Dartまとめ](https://qiita.com/mkosuke/items/42c19d7edbf111f7fb71)
 
 **実際にあったミス**
+1. リストの要素，Widgetツリー，オプション引数の最後の要素にカンマをつけてない
+    ```
+    Widget(
+      childlen: [
+        Widget1(),
+        Widget2()  // ここのカンマ(,)
+      ]            // ここも
+    );
+    ```
