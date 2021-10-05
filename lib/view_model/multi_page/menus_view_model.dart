@@ -12,8 +12,8 @@ final menusProvider = StateNotifierProvider<MenusViewModel, MenusState>(
 
 class MenusViewModel extends StateNotifier<MenusState> {
   MenusViewModel()
-      : this._localRepository = MenusLocalRepository(),
-        this._remoteRepository = MenusRemoteRepository(),
+      : _localRepository = MenusLocalRepository(),
+        _remoteRepository = MenusRemoteRepository(),
         super(const MenusState());
 
   final MenusLocalRepository _localRepository;
@@ -26,14 +26,15 @@ class MenusViewModel extends StateNotifier<MenusState> {
       await _updateLocalMenus(schoolId);
     }
     yield 'Reading';
-    final DateTime _loadingDay = DateTime(DateTime.now().year, DateTime.now().month);
+    final DateTime _loadingDay =
+        DateTime(DateTime.now().year, DateTime.now().month);
     await getLocalMenus(_loadingDay, schoolId);
   }
 
   Future<void> getLocalMenus(DateTime day, int schoolId) async {
     DateTime _referenceDay =
-    DateTime(DateTime.now().year, DateTime.now().month + 1)
-        .add(Duration(days: -1)); // 今月末
+        DateTime(DateTime.now().year, DateTime.now().month + 1)
+            .add(const Duration(days: -1)); // 今月末
     if (state.menus.isNotEmpty) {
       List<MenuModel> _copiedMenus = state.menus;
       _copiedMenus.sort((a, b) => a.day.compareTo(b.day));
@@ -41,7 +42,8 @@ class MenusViewModel extends StateNotifier<MenusState> {
     }
     if (day.isBefore(_referenceDay)) {
       try {
-        List<MenuModel> _newMenus = await _localRepository.getSelectionPeriod(day, _referenceDay, schoolId);
+        List<MenuModel> _newMenus = await _localRepository.getSelectionPeriod(
+            day, _referenceDay, schoolId);
         _addMenus(_newMenus);
       } catch (error) {
         throw Exception(error);
@@ -62,8 +64,10 @@ class MenusViewModel extends StateNotifier<MenusState> {
   }
 
   void _addMenus(dynamic menus) {
-    if (menus is! MenuModel && menus is! List<MenuModel>)
-      throw UnsupportedError('The menus argument can only be MenuModel or List<MenuModel> type.');
+    if (menus is! MenuModel && menus is! List<MenuModel>) {
+      throw UnsupportedError(
+          'The menus argument can only be MenuModel or List<MenuModel> type.');
+    }
     final List<MenuModel> _newMenus = (menus is MenuModel)
         ? [...state.menus, menus]
         : [...state.menus, ...menus];

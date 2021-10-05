@@ -5,15 +5,16 @@ import 'package:moor/moor.dart';
 
 class UsersLocalRepository {
   UsersLocalRepository() {
-    this._databaseManager = databaseManager;
+    _databaseManager = databaseManager;
   }
 
   late final DatabaseManager _databaseManager;
 
   Future<List<UserModel>> getAll() async {
     List<UserModel> _users = [];
-    final List<UsersSchema> _usersSchemas = await _databaseManager.allUsersSchemas;
-    _usersSchemas.forEach((UsersSchema usersSchema) {
+    final List<UsersSchema> _usersSchemas =
+        await _databaseManager.allUsersSchemas;
+    for (var usersSchema in _usersSchemas) {
       final UserModel _user = UserModel(
         id: usersSchema.id,
         name: usersSchema.name,
@@ -21,13 +22,14 @@ class UsersLocalRepository {
         schoolYear: usersSchema.schoolYear,
       );
       _users.add(_user);
-    });
+    }
 
     return _users;
   }
 
   Future<UserModel> getById(int id) async {
-    final UsersSchema _usersSchema = await _databaseManager.getUsersSchemaById(id);
+    final UsersSchema _usersSchema =
+        await _databaseManager.getUsersSchemaById(id);
 
     return UserModel(
       id: _usersSchema.id,

@@ -9,7 +9,8 @@ import 'package:hakondate_v2/view/signup/signup.dart';
 import 'package:hakondate_v2/view/splash/splash.dart';
 import 'package:hakondate_v2/view/terms/terms.dart';
 
-class AppRouterDelegate extends RouterDelegate<List<RouteSettings>> with PopNavigatorRouterDelegateMixin {
+class AppRouterDelegate extends RouterDelegate<List<RouteSettings>>
+    with PopNavigatorRouterDelegateMixin {
   @override
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -17,63 +18,62 @@ class AppRouterDelegate extends RouterDelegate<List<RouteSettings>> with PopNavi
     if (!route.didPop(result)) return false;
 
     final _router = ref.watch(appRouterProvider);
-    if (_router.isShowSetting || _router.isShowAboutUs || _router.isShowHelp)
+    if (_router.isShowSetting || _router.isShowAboutUs || _router.isShowHelp) {
       ref.read(appRouterProvider.notifier).handleToHome();
+    }
 
     return true;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(
-      builder: (BuildContext context, WidgetRef ref, _) {
-        final _router = ref.watch(appRouterProvider);
+    return Consumer(builder: (BuildContext context, WidgetRef ref, _) {
+      final _router = ref.watch(appRouterProvider);
 
-        return Navigator(
-          key: navigatorKey,
-          onPopPage: (Route<dynamic> route, dynamic result) =>
-              _handlePopPage(route, result, ref),
-          pages: [
-            if (_router.isInitialLoading) ...[
-              MaterialPage(
-                key: ValueKey('splash'),
-                child: Splash(),
+      return Navigator(
+        key: navigatorKey,
+        onPopPage: (Route<dynamic> route, dynamic result) =>
+            _handlePopPage(route, result, ref),
+        pages: [
+          if (_router.isInitialLoading) ...[
+            MaterialPage(
+              key: const ValueKey('splash'),
+              child: Splash(),
+            ),
+          ] else if (_router.isShowTerms) ...[
+            MaterialPage(
+              key: const ValueKey('terms'),
+              child: Terms(),
+            ),
+          ] else if (_router.isShowSignup) ...[
+            MaterialPage(
+              key: const ValueKey('signup'),
+              child: Signup(),
+            ),
+          ] else ...[
+            MaterialPage(
+              key: const ValueKey('main'),
+              child: AppBottomNavigationBar(),
+            ),
+            if (_router.isShowSetting)
+              const MaterialPage(
+                key: ValueKey('setting'),
+                child: Scaffold(),
               ),
-            ] else if (_router.isShowTerms) ...[
-              MaterialPage(
-                key: ValueKey('terms'),
-                child: Terms(),
+            if (_router.isShowAboutUs)
+              const MaterialPage(
+                key: ValueKey('aboutUs'),
+                child: Scaffold(),
               ),
-            ] else if (_router.isShowSignup) ...[
-              MaterialPage(
-                key: ValueKey('signup'),
-                child: Signup(),
+            if (_router.isShowHelp)
+              const MaterialPage(
+                key: ValueKey('help'),
+                child: Scaffold(),
               ),
-            ] else ...[
-              MaterialPage(
-                key: ValueKey('main'),
-                child: AppBottomNavigationBar(),
-              ),
-              if (_router.isShowSetting)
-                MaterialPage(
-                  key: ValueKey('setting'),
-                  child: Scaffold(),
-                ),
-              if (_router.isShowAboutUs)
-                MaterialPage(
-                  key: ValueKey('aboutUs'),
-                  child: Scaffold(),
-                ),
-              if (_router.isShowHelp)
-                MaterialPage(
-                  key: ValueKey('help'),
-                  child: Scaffold(),
-                ),
-            ],
           ],
-        );
-      }
-    );
+        ],
+      );
+    });
   }
 
   /*
@@ -92,7 +92,10 @@ class AppRouterDelegate extends RouterDelegate<List<RouteSettings>> with PopNavi
 * WebのURL制御などに使う
 * はこんだてはモバイル限定なので空のものを宣言
 */
-class ListRouteInformationParser extends RouteInformationParser<List<RouteSettings>> {
+class ListRouteInformationParser
+    extends RouteInformationParser<List<RouteSettings>> {
   @override
-  Future<List<RouteSettings>> parseRouteInformation(RouteInformation routeInformation) async => [];
+  Future<List<RouteSettings>> parseRouteInformation(
+          RouteInformation routeInformation) async =>
+      [];
 }

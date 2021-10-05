@@ -7,8 +7,8 @@ class FontSize {
 }
 
 class SpaceSize {
-  static const double line = 8.0;         // 基本行間
-  static const double paragraph = 16.0;   // 段落毎の行間
+  static const double line = 8.0;       // 基本行間
+  static const double paragraph = 16.0; // 段落毎の行間
 }
 
 class MarginSize {
@@ -26,6 +26,6 @@ class PaddingSize {
 }
 
 class IconSize {
-  static const double help = 20.0;              // ヘルプ用
-  static const double navigationItem = 30.0;    // ボトムバー用
+  static const double help = 20.0;            // ヘルプ用
+  static const double navigationItem = 30.0;  // ボトムバー用
 }

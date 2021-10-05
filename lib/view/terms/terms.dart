@@ -7,30 +7,32 @@ import 'package:hakondate_v2/unit/size.dart';
 import 'package:hakondate_v2/view_model/single_page/terms_view_model.dart';
 
 class Terms extends ConsumerWidget {
+  const Terms({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final store = ref.watch(termsProvider);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('利用規約'),
+        title: const Text('利用規約'),
       ),
       body: Container(
-        margin: EdgeInsets.symmetric(
+        margin: const EdgeInsets.symmetric(
           vertical: MarginSize.normalVertical,
           horizontal: MarginSize.normalHorizontal,
         ),
         child: Column(
           children: [
-            Text(
+            const Text(
               '　以下の利用規約に同意の上，はこんだてをご利用ください．',
               style: TextStyle(fontSize: FontSize.body),
             ),
-            SizedBox(height: SpaceSize.paragraph),
+            const SizedBox(height: SpaceSize.paragraph),
             _termsCard(),
-            SizedBox(height: SpaceSize.paragraph),
+            const SizedBox(height: SpaceSize.paragraph),
             Container(
-              margin: EdgeInsets.all(MarginSize.minimum),
+              margin: const EdgeInsets.all(MarginSize.minimum),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -39,23 +41,26 @@ class Terms extends ConsumerWidget {
                     value: store.isAgree,
                     onChanged: (_) => ref.read(termsProvider.notifier).onTap(),
                   ),
-                  Text(
+                  const Text(
                     '利用規約に同意する',
                     style: TextStyle(fontSize: FontSize.body),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: Theme.of(context).colorScheme.secondary,
-                      padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
-                      textStyle: TextStyle(
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+                      textStyle: const TextStyle(
                         color: Colors.white,
                         fontFamily: 'MPLUSRounded1c',
                       ),
-                      shape: StadiumBorder(),
+                      shape: const StadiumBorder(),
                     ),
-                    child: Text('はじめる'),
-                    onPressed: store.isAgree ? ref.read(appRouterProvider.notifier).handleFromTerms : null,
+                    child: const Text('はじめる'),
+                    onPressed: store.isAgree
+                        ? ref.read(appRouterProvider.notifier).handleFromTerms
+                        : null,
                   ),
                 ],
               ),
@@ -70,7 +75,7 @@ class Terms extends ConsumerWidget {
     return Expanded(
       child: Card(
         child: SingleChildScrollView(
-          padding: EdgeInsets.all(PaddingSize.normal),
+          padding: const EdgeInsets.all(PaddingSize.normal),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -113,8 +118,7 @@ class Terms extends ConsumerWidget {
                       'これら第三者のサービスが行う個人情報の取り扱いに対しては，提供者はいかなる義務及び責任を負わないものとします．'),
               _paragraphText(
                   title: '第七条 サービス提供の中止・一部中断・変更等',
-                  sentence:
-                      '　本アプリは予告なく，サービスの提供を中止または，一時的に中断する可能性があります．'
+                  sentence: '　本アプリは予告なく，サービスの提供を中止または，一時的に中断する可能性があります．'
                       '同様に本アプリは予告なく，提供サービスの内容・表示・操作方法等を変更する事があります．'
                       'これにより，利用者または第三者が被った損害に対し提供者はいかなる責任も負わないものとし，損害賠償の義務もないものとします．'
                       'また，提供者は本アプリのアップデート・サポート等を行う義務・責任を負わないものとします．'
@@ -145,10 +149,10 @@ class Terms extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: TextStyle(fontSize: FontSize.subheading)),
-        SizedBox(height: SpaceSize.line),
-        Text(sentence, style: TextStyle(fontSize: FontSize.body)),
-        SizedBox(height: SpaceSize.paragraph),
+        Text(title, style: const TextStyle(fontSize: FontSize.subheading)),
+        const SizedBox(height: SpaceSize.line),
+        Text(sentence, style: const TextStyle(fontSize: FontSize.body)),
+        const SizedBox(height: SpaceSize.paragraph),
       ],
     );
   }

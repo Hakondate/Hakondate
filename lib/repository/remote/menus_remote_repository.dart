@@ -11,6 +11,7 @@ class MenusRemoteRepository {
 
   Future<List<dynamic>> downloadMenus() async {
     // デバッグ用
-    return json.decode(await rootBundle.loadString('assets/debug/demo_menus.json'));
+    return json
+        .decode(await rootBundle.loadString('assets/debug/demo_menus.json'));
   }
 }

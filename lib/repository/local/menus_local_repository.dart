@@ -9,7 +9,7 @@ import 'package:hakondate_v2/repository/local/database_manager.dart';
 
 class MenusLocalRepository {
   MenusLocalRepository() {
-    this._databaseManager = databaseManager;
+    _databaseManager = databaseManager;
   }
 
   late final DatabaseManager _databaseManager;
@@ -25,11 +25,10 @@ class MenusLocalRepository {
 
     await Future.forEach(menu['dishes'], (dynamic dish) async {
       final int _dishId = await _addDish(dish);
-      await _databaseManager.addMenuDishesSchema(
-          MenuDishesTableCompanion(
-            menuId: Value(_menuId),
-            dishId: Value(_dishId),
-          ));
+      await _databaseManager.addMenuDishesSchema(MenuDishesTableCompanion(
+        menuId: Value(_menuId),
+        dishId: Value(_dishId),
+      ));
     });
 
     return _menuId;
@@ -44,11 +43,11 @@ class MenusLocalRepository {
 
     await Future.forEach(dish['foodstuffs'], (dynamic foodstuff) async {
       final int _foodstuffId = await _addFoodstuff(foodstuff);
-      await _databaseManager.addDishFoodstuffsSchema(
-          DishFoodstuffsTableCompanion(
-            dishId: Value(_dishId),
-            foodstuffId: Value(_foodstuffId),
-          ));
+      await _databaseManager
+          .addDishFoodstuffsSchema(DishFoodstuffsTableCompanion(
+        dishId: Value(_dishId),
+        foodstuffId: Value(_foodstuffId),
+      ));
     });
 
     return _dishId;
@@ -82,7 +81,8 @@ class MenusLocalRepository {
 
   Future<List<MenuModel>> getAll() async {
     List<MenuModel> _menus = [];
-    final List<MenusSchema> _menusSchemas = await _databaseManager.allMenusSchemas;
+    final List<MenusSchema> _menusSchemas =
+        await _databaseManager.allMenusSchemas;
     await Future.forEach(_menusSchemas, (MenusSchema menusSchema) async {
       final MenuModel _menu = await _getBySchema(menusSchema);
       _menus.add(_menu);
@@ -91,9 +91,11 @@ class MenusLocalRepository {
     return _menus;
   }
 
-  Future<List<MenuModel>> getSelectionPeriod(DateTime startDay, DateTime endDay, int schoolId) async {
+  Future<List<MenuModel>> getSelectionPeriod(
+      DateTime startDay, DateTime endDay, int schoolId) async {
     List<MenuModel> _menus = [];
-    final List<MenusSchema> _menusSchemas = await _databaseManager.getSelectionPeriodMenusSchemas(startDay, endDay, schoolId);
+    final List<MenusSchema> _menusSchemas = await _databaseManager
+        .getSelectionPeriodMenusSchemas(startDay, endDay, schoolId);
     await Future.forEach(_menusSchemas, (MenusSchema menusSchema) async {
       final MenuModel _menu = await _getBySchema(menusSchema);
       _menus.add(_menu);
@@ -103,15 +105,18 @@ class MenusLocalRepository {
   }
 
   Future<MenuModel> getById(int menuId) async {
-    final MenusSchema _menusSchema = await _databaseManager.getMenusSchemaById(menuId);
+    final MenusSchema _menusSchema =
+        await _databaseManager.getMenusSchemaById(menuId);
 
     return _getBySchema(_menusSchema);
   }
 
   Future<MenuModel> _getBySchema(MenusSchema menusSchema) async {
     List<DishModel> _dishes = [];
-    final List<MenuDishesSchema> _menuDishesSchemas = await _databaseManager.getMenuDishesSchemasByMenuId(menusSchema.id);
-    await Future.forEach(_menuDishesSchemas, (MenuDishesSchema menuDishesSchema) async {
+    final List<MenuDishesSchema> _menuDishesSchemas =
+        await _databaseManager.getMenuDishesSchemasByMenuId(menusSchema.id);
+    await Future.forEach(_menuDishesSchemas,
+        (MenuDishesSchema menuDishesSchema) async {
       final DishModel _dish = await _getDishById(menuDishesSchema.dishId);
       _dishes.add(_dish);
     });
@@ -126,12 +131,17 @@ class MenusLocalRepository {
   }
 
   Future<DishModel> _getDishById(int dishId) async {
-    final DishesSchema _dishesSchema = await _databaseManager.getDishesSchemaById(dishId);
+    final DishesSchema _dishesSchema =
+        await _databaseManager.getDishesSchemaById(dishId);
 
     List<FoodstuffModel> _foodstuffs = [];
-    final List<DishFoodstuffsSchema> _dishFoodstuffsSchemas = await _databaseManager.getDishFoodstuffsSchemasByDishId(_dishesSchema.id);
-    await Future.forEach(_dishFoodstuffsSchemas, (DishFoodstuffsSchema dishFoodstuffsSchema) async {
-      final FoodstuffModel _foodstuff = await _getFoodstuffById(dishFoodstuffsSchema.foodstuffId);
+    final List<DishFoodstuffsSchema> _dishFoodstuffsSchemas =
+        await _databaseManager
+            .getDishFoodstuffsSchemasByDishId(_dishesSchema.id);
+    await Future.forEach(_dishFoodstuffsSchemas,
+        (DishFoodstuffsSchema dishFoodstuffsSchema) async {
+      final FoodstuffModel _foodstuff =
+          await _getFoodstuffById(dishFoodstuffsSchema.foodstuffId);
       _foodstuffs.add(_foodstuff);
     });
 
@@ -143,7 +153,8 @@ class MenusLocalRepository {
   }
 
   Future<FoodstuffModel> _getFoodstuffById(int foodstuffId) async {
-    final FoodstuffsSchema _foodstuffsSchema = await _databaseManager.getFoodstuffsSchemaById(foodstuffId);
+    final FoodstuffsSchema _foodstuffsSchema =
+        await _databaseManager.getFoodstuffsSchemaById(foodstuffId);
 
     return FoodstuffModel(
       name: _foodstuffsSchema.name,

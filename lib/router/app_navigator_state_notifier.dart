@@ -7,7 +7,7 @@ final appRouterProvider =
         (ref) => AppNavigatorStateNotifier());
 
 class AppNavigatorStateNotifier extends StateNotifier<AppNavigatorState> {
-  AppNavigatorStateNotifier() : super(AppNavigatorState());
+  AppNavigatorStateNotifier() : super(const AppNavigatorState());
 
   void handleReload() => state = state.copyWith();
 
@@ -19,8 +19,15 @@ class AppNavigatorStateNotifier extends StateNotifier<AppNavigatorState> {
 
   void handleFromSignup() => state = state.copyWith(isShowSignup: false);
 
-  void handleFromHome({bool toSetting = false, bool toAboutUs = false, bool toHelp = false}) =>
-      state = state.copyWith(isShowSetting: toSetting, isShowAboutUs: toAboutUs, isShowHelp: toHelp);
+  void handleFromHome(
+          {bool toSetting = false,
+          bool toAboutUs = false,
+          bool toHelp = false}) =>
+      state = state.copyWith(
+          isShowSetting: toSetting,
+          isShowAboutUs: toAboutUs,
+          isShowHelp: toHelp);
 
-  void handleToHome() => state = state.copyWith(isShowSetting: false, isShowAboutUs: false, isShowHelp: false);
+  void handleToHome() => state = state.copyWith(
+      isShowSetting: false, isShowAboutUs: false, isShowHelp: false);
 }

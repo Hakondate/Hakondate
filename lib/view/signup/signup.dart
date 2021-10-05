@@ -12,19 +12,22 @@ import 'package:hakondate_v2/view_model/single_page/signup_view_model.dart';
 class Signup extends ConsumerWidget {
   final GlobalKey _formKey = GlobalKey<FormState>();
 
-  Future<void> _showConfirmationDialog(BuildContext context, WidgetRef ref) async {
+  Signup({Key? key}) : super(key: key);
+
+  Future<void> _showConfirmationDialog(
+      BuildContext context, WidgetRef ref) async {
     final store = ref.watch(signupProvider);
 
     await showDialog(
       context: context,
       builder: (BuildContext context) {
         return CupertinoAlertDialog(
-          title: Text('確認'),
+          title: const Text('確認'),
           content: Column(
             children: [
               Container(
-                margin: EdgeInsets.symmetric(vertical: MarginSize.minimum),
-                child: Text(
+                margin: const EdgeInsets.symmetric(vertical: MarginSize.minimum),
+                child: const Text(
                   '以下の内容でお子様を登録します．\n'
                   '※ あとで変更することができます．',
                 ),
@@ -34,7 +37,7 @@ class Signup extends ConsumerWidget {
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
+                    children: const [
                       Text('お名前：　'),
                       Text('学校：　'),
                       Text('学年：　'),
@@ -54,12 +57,12 @@ class Signup extends ConsumerWidget {
           ),
           actions: [
             CupertinoDialogAction(
-              child: Text('修正する'),
+              child: const Text('修正する'),
               onPressed: () => Navigator.of(context).pop(),
             ),
             CupertinoDialogAction(
               isDefaultAction: true,
-              child: Text('登録する'),
+              child: const Text('登録する'),
               onPressed: () {
                 Navigator.of(context).pop();
                 LoadingDialog(context);
@@ -75,7 +78,7 @@ class Signup extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('お子様の新規登録'),
+        title: const Text('お子様の新規登録'),
       ),
       body: Form(
         key: _formKey,
@@ -96,30 +99,29 @@ class Signup extends ConsumerWidget {
     final store = ref.watch(signupProvider);
 
     return Padding(
-      padding: EdgeInsets.all(PaddingSize.normal),
+      padding: const EdgeInsets.all(PaddingSize.normal),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Text(
+              const Text(
                 'お名前',
                 style: TextStyle(fontSize: FontSize.subheading),
               ),
               IconButton(
-                icon: Icon(Icons.help),
+                icon: const Icon(Icons.help),
                 iconSize: IconSize.help,
                 color: Theme.of(context).primaryIconTheme.color,
                 onPressed: () => HelpDialog(
                   context,
                   title: 'お名前について',
-                  content:
-                      '　お名前情報は，本アプリ内でユーザを識別するために利用されます．'
+                  content: '　お名前情報は，本アプリ内でユーザを識別するために利用されます．'
                       'あだ名などを入力していただいても構いません．また，あとで変更することもできます．\n'
                       '　お名前情報は，端末内に保存され収集されることはありません．また，あとから変更することができます．',
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               _errorIndication(context, store.nameErrorState),
             ],
           ),
@@ -129,15 +131,16 @@ class Signup extends ConsumerWidget {
             maxLength: 15,
             decoration: InputDecoration(
               hintText: 'お子様の名前かあだ名を入力',
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                    color: Theme.of(context).colorScheme.secondary,
-                    width: 2.0,
+                  color: Theme.of(context).colorScheme.secondary,
+                  width: 2.0,
                 ),
               ),
             ),
-            onChanged: (value) => ref.read(signupProvider.notifier).updateName(value),
+            onChanged: (value) =>
+                ref.read(signupProvider.notifier).updateName(value),
           ),
         ],
       ),
@@ -151,15 +154,15 @@ class Signup extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.all(PaddingSize.normal),
+          padding: const EdgeInsets.all(PaddingSize.normal),
           child: Row(
             children: [
-              Text(
+              const Text(
                 '学校・学年',
                 style: TextStyle(fontSize: FontSize.subheading),
               ),
               IconButton(
-                icon: Icon(Icons.help),
+                icon: const Icon(Icons.help),
                 iconSize: IconSize.help,
                 color: Theme.of(context).primaryIconTheme.color,
                 onPressed: () => HelpDialog(
@@ -171,8 +174,9 @@ class Signup extends ConsumerWidget {
                       '　どちらの情報も，端末内に保存され収集されることはありません．また，あとから変更することができます．',
                 ),
               ),
-              Spacer(),
-              _errorIndication(context, ref.watch(signupProvider).schoolErrorState),
+              const Spacer(),
+              _errorIndication(
+                  context, ref.watch(signupProvider).schoolErrorState),
             ],
           ),
         ),
@@ -192,7 +196,7 @@ class Signup extends ConsumerWidget {
               ref.read(signupProvider.notifier).updateSchoolYear(index + 1),
           trailing: store.schoolYearTrailing,
         ),
-        SizedBox(height: PaddingSize.normal),
+        const SizedBox(height: PaddingSize.normal),
       ],
     );
   }
@@ -211,27 +215,25 @@ class Signup extends ConsumerWidget {
 
   Widget _submitButton(BuildContext context, WidgetRef ref) {
     return Padding(
-      padding: EdgeInsets.all(PaddingSize.normal),
+      padding: const EdgeInsets.all(PaddingSize.normal),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(
                 primary: Theme.of(context).colorScheme.secondary,
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   vertical: PaddingSize.buttonVertical,
                   horizontal: PaddingSize.buttonHorizontal,
                 ),
-                textStyle: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'MPLUSRounded1c'
-                ),
-                shape: StadiumBorder()
-            ),
-            child: Text('登録する'),
+                textStyle: const TextStyle(
+                    color: Colors.white, fontFamily: 'MPLUSRounded1c'),
+                shape: const StadiumBorder()),
+            child: const Text('登録する'),
             onPressed: () {
-              if (ref.read(signupProvider.notifier).checkValidation())
+              if (ref.read(signupProvider.notifier).checkValidation()) {
                 _showConfirmationDialog(context, ref);
+              }
             },
           ),
         ],
