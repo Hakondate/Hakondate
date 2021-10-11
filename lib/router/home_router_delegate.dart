@@ -27,7 +27,6 @@ class HomeRouterDelegate extends RouterDelegate<List<RouteSettings>>
     } else if (store.isShowMenuList) {
       ref.read(homeRouterProvider.notifier).handleFromMenuList();
     }
-
     return true;
   }
 

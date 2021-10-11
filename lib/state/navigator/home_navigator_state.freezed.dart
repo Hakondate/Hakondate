@@ -35,9 +35,9 @@ const $HomeNavigatorState = _$HomeNavigatorStateTearOff();
 
 /// @nodoc
 mixin _$HomeNavigatorState {
-  int get todayMenuId => throw _privateConstructorUsedError;
-  int get selectedMenuId =>
+  int get todayMenuId =>
       throw _privateConstructorUsedError; // -1: データなし, 0: 給食が休み
+  int get selectedMenuId => throw _privateConstructorUsedError;
   bool get isShowMenuList => throw _privateConstructorUsedError;
   int? get selectedDishId => throw _privateConstructorUsedError;
 
@@ -163,10 +163,10 @@ class _$_HomeNavigatorState
   @override
   final int todayMenuId;
   @JsonKey(defaultValue: -1)
-  @override
+  @override // -1: データなし, 0: 給食が休み
   final int selectedMenuId;
   @JsonKey(defaultValue: false)
-  @override // -1: データなし, 0: 給食が休み
+  @override
   final bool isShowMenuList;
   @override
   final int? selectedDishId;
@@ -228,9 +228,9 @@ abstract class _HomeNavigatorState implements HomeNavigatorState {
 
   @override
   int get todayMenuId => throw _privateConstructorUsedError;
-  @override
-  int get selectedMenuId => throw _privateConstructorUsedError;
   @override // -1: データなし, 0: 給食が休み
+  int get selectedMenuId => throw _privateConstructorUsedError;
+  @override
   bool get isShowMenuList => throw _privateConstructorUsedError;
   @override
   int? get selectedDishId => throw _privateConstructorUsedError;

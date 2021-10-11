@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate_v2/router/home_router_delegate.dart';
+import 'package:hakondate_v2/router/recipe_router_delegate.dart';
 import 'package:hakondate_v2/unit/size.dart';
 
 class AppBottomNavigationBar extends ConsumerWidget {
@@ -62,7 +63,15 @@ class AppBottomNavigationBar extends ConsumerWidget {
             case 1:
               return CupertinoTabView(
                 builder: (BuildContext context) {
-                  return Scaffold();
+                  final _recipeRouteInformationParser =
+                      RecipeListRouteInformationParser();
+                  final _recipeRouterDelegate = RecipeRouterDelegate();
+
+                  return Router(
+                    routeInformationParser: _recipeRouteInformationParser,
+                    routerDelegate: _recipeRouterDelegate,
+                    backButtonDispatcher: _backButtonDispatcher,
+                  );
                 },
               );
             case 2:
