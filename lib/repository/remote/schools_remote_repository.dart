@@ -12,7 +12,8 @@ class SchoolsRemoteRepository {
 
   Future<List<dynamic>> downloadAllSchool() async {
     // デバッグ用
-    return json.decode(await rootBundle.loadString('assets/debug/demo_schools.json'));
+    return json
+        .decode(await rootBundle.loadString('assets/debug/demo_schools.json'));
   }
 
   Future<List<dynamic>> downloadUpdate() async {

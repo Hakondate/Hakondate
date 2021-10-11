@@ -20,7 +20,7 @@ class NutrientsModel with _$NutrientsModel {
     @Default(0.0) double vitaminB2,     // ビタミンB2
     @Default(0.0) double vitaminC,      // ビタミンC
     @Default(0.0) double dietaryFiber,  // 食物繊維
-    @Default(0.0) double salt           // 食塩相当量
+    @Default(0.0) double salt,          // 食塩相当量
   }) = _NutrientsModel;
 
   factory NutrientsModel.fromJson(Map<String, dynamic> json) =>

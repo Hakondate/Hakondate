@@ -13,17 +13,20 @@ class HomeRouterDelegate extends RouterDelegate<List<RouteSettings>>
     final store = ref.watch(homeRouterProvider);
 
     if (!route.didPop(result)) {
-      if (store.selectedMenuId != store.todayMenuId)
-        ref.read(homeRouterProvider.notifier)
+      if (store.selectedMenuId != store.todayMenuId) {
+        ref
+            .read(homeRouterProvider.notifier)
             .handleFromHome(menuId: store.todayMenuId);
+      }
 
       return false;
     }
 
-    if (store.selectedDishId != null)
+    if (store.selectedDishId != null) {
       ref.read(homeRouterProvider.notifier).handleFromDish();
-    else if (store.isShowMenuList)
+    } else if (store.isShowMenuList) {
       ref.read(homeRouterProvider.notifier).handleFromMenuList();
+    }
 
     return true;
   }
@@ -36,22 +39,22 @@ class HomeRouterDelegate extends RouterDelegate<List<RouteSettings>>
 
         return Navigator(
           key: navigatorKey,
-          onPopPage:(Route<dynamic> route, dynamic result) =>
+          onPopPage: (Route<dynamic> route, dynamic result) =>
               _handlePopPage(route, result, ref),
           pages: [
-            MaterialPage(
+            const MaterialPage(
               key: ValueKey('home'),
               child: Scaffold(),
             ),
             if (_router.isShowMenuList)
-              MaterialPage(
+              const MaterialPage(
                 key: ValueKey('menuList'),
                 child: Scaffold(),
               ),
             if (_router.selectedDishId != null)
               MaterialPage(
                 key: ValueKey('dish${_router.selectedDishId.toString()}'),
-                child: Scaffold(),
+                child: const Scaffold(),
               ),
           ],
         );
@@ -67,7 +70,10 @@ class HomeRouterDelegate extends RouterDelegate<List<RouteSettings>>
   Future<void> setNewRoutePath(List<RouteSettings> configuration) async {}
 }
 
-class HomeListRouteInformationParser extends RouteInformationParser<List<RouteSettings>> {
+class HomeListRouteInformationParser
+    extends RouteInformationParser<List<RouteSettings>> {
   @override
-  Future<List<RouteSettings>> parseRouteInformation(RouteInformation routeInformation) async => [];
+  Future<List<RouteSettings>> parseRouteInformation(
+          RouteInformation routeInformation) async =>
+      [];
 }

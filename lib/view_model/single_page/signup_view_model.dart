@@ -8,8 +8,8 @@ final signupProvider = StateNotifierProvider<SignupViewModel, SignupState>(
     (ref) => SignupViewModel());
 
 class SignupViewModel extends StateNotifier<SignupState> {
-  SignupViewModel() : super(SignupState()) {
-    this._schoolLocalRepository = SchoolsLocalRepository();
+  SignupViewModel() : super(const SignupState()) {
+    _schoolLocalRepository = SchoolsLocalRepository();
     _initialize();
   }
 
@@ -27,7 +27,9 @@ class SignupViewModel extends StateNotifier<SignupState> {
     final List<String> schoolYears = (school.classification == 0)
         ? ['1年生', '2年生', '3年生', '4年生', '5年生', '6年生']
         : ['1年生', '2年生', '3年生'];
-    if (state.schoolYear != null && state.schoolYear! > 3 && school.classification > 0) {
+    if (state.schoolYear != null &&
+        state.schoolYear! > 3 &&
+        school.classification > 0) {
       state = state.copyWith(
         schoolId: id,
         schoolYear: 3,
@@ -55,8 +57,8 @@ class SignupViewModel extends StateNotifier<SignupState> {
   }
 
   void _checkNameValidation() {
-    final String? _nameErrorState = (state.name == null || state.name!.isEmpty)
-        ? 'お子様の名前を入力してください' : null;
+    final String? _nameErrorState =
+        (state.name == null || state.name!.isEmpty) ? 'お子様の名前を入力してください' : null;
     state = state.copyWith(nameErrorState: _nameErrorState);
   }
 

@@ -7,16 +7,19 @@ import 'package:hakondate_v2/router/home_router_delegate.dart';
 import 'package:hakondate_v2/unit/size.dart';
 
 class AppBottomNavigationBar extends ConsumerWidget {
+  const AppBottomNavigationBar({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _backButtonDispatcher = ChildBackButtonDispatcher(Router.of(context).backButtonDispatcher!);
+    final _backButtonDispatcher =
+        ChildBackButtonDispatcher(Router.of(context).backButtonDispatcher!);
 
     return WillPopScope(
       onWillPop: () => Future<bool>.value(true),
       child: CupertinoTabScaffold(
         tabBar: CupertinoTabBar(
           activeColor: Theme.of(context).colorScheme.secondary,
-          items: [
+          items: const [
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.local_dining,
@@ -45,7 +48,8 @@ class AppBottomNavigationBar extends ConsumerWidget {
             case 0:
               return CupertinoTabView(
                 builder: (BuildContext context) {
-                  final _homeRouteInformationParser = HomeListRouteInformationParser();
+                  final _homeRouteInformationParser =
+                      HomeListRouteInformationParser();
                   final _homeRouterDelegate = HomeRouterDelegate();
 
                   return Router(
