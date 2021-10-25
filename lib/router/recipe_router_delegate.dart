@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate_v2/router/recipe_navigation_state_notifier.dart';
+import 'package:hakondate_v2/view/recipe/recipe_list.dart';
 
 class RecipeRouterDelegate extends RouterDelegate<List<RouteSettings>>
     with PopNavigatorRouterDelegateMixin {
@@ -26,9 +27,9 @@ class RecipeRouterDelegate extends RouterDelegate<List<RouteSettings>>
             onPopPage: (Route<dynamic> route, dynamic result) =>
                 _handlePopPage(route, result, ref),
             pages: [
-              const MaterialPage(
+              MaterialPage(
                 key: ValueKey('recipe'),
-                child: Scaffold(),
+                child: RecipeList(),
               ),
             ],
           );
