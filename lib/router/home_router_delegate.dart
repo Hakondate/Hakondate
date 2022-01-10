@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate_v2/router/home_navigation_state_notifier.dart';
+import 'package:hakondate_v2/view/home/home.dart';
 
 class HomeRouterDelegate extends RouterDelegate<List<RouteSettings>>
     with PopNavigatorRouterDelegateMixin {
@@ -10,18 +11,11 @@ class HomeRouterDelegate extends RouterDelegate<List<RouteSettings>>
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   bool _handlePopPage(Route<dynamic> route, dynamic result, WidgetRef ref) {
-    final store = ref.watch(homeRouterProvider);
-
     if (!route.didPop(result)) {
-      if (store.selectedMenuId != store.todayMenuId) {
-        ref
-            .read(homeRouterProvider.notifier)
-            .handleFromHome(menuId: store.todayMenuId);
-      }
-
       return false;
     }
 
+    final store = ref.watch(homeRouterProvider);
     if (store.selectedDishId != null) {
       ref.read(homeRouterProvider.notifier).handleFromDish();
     } else if (store.isShowMenuList) {
@@ -42,9 +36,9 @@ class HomeRouterDelegate extends RouterDelegate<List<RouteSettings>>
           onPopPage: (Route<dynamic> route, dynamic result) =>
               _handlePopPage(route, result, ref),
           pages: [
-            const MaterialPage(
-              key: ValueKey('home'),
-              child: Scaffold(),
+            MaterialPage(
+              key: const ValueKey('home'),
+              child: Home(),
             ),
             if (_router.isShowMenuList)
               const MaterialPage(
@@ -74,6 +68,5 @@ class HomeListRouteInformationParser
     extends RouteInformationParser<List<RouteSettings>> {
   @override
   Future<List<RouteSettings>> parseRouteInformation(
-          RouteInformation routeInformation) async =>
-      [];
+          RouteInformation routeInformation) async => [];
 }

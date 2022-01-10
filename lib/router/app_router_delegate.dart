@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate_v2/router/app_navigator_state_notifier.dart';
-import 'package:hakondate_v2/view/home/app_bottom_navigation_bar.dart';
+import 'package:hakondate_v2/view/bottom_bar/app_bottom_navigation_bar.dart';
 import 'package:hakondate_v2/view/signup/signup.dart';
 import 'package:hakondate_v2/view/splash/splash.dart';
 import 'package:hakondate_v2/view/terms/terms.dart';
@@ -36,13 +36,13 @@ class AppRouterDelegate extends RouterDelegate<List<RouteSettings>>
             _handlePopPage(route, result, ref),
         pages: [
           if (_router.isInitialLoading) ...[
-            MaterialPage(
-              key: const ValueKey('splash'),
+            const MaterialPage(
+              key: ValueKey('splash'),
               child: Splash(),
             ),
           ] else if (_router.isShowTerms) ...[
-            MaterialPage(
-              key: const ValueKey('terms'),
+            const MaterialPage(
+              key: ValueKey('terms'),
               child: Terms(),
             ),
           ] else if (_router.isShowSignup) ...[
@@ -51,8 +51,8 @@ class AppRouterDelegate extends RouterDelegate<List<RouteSettings>>
               child: Signup(),
             ),
           ] else ...[
-            MaterialPage(
-              key: const ValueKey('main'),
+            const MaterialPage(
+              key: ValueKey('bottomBar'),
               child: AppBottomNavigationBar(),
             ),
             if (_router.isShowSetting)

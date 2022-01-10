@@ -4,6 +4,8 @@ class FontSize {
   static const double body = 16.0;        // 本文
   static const double label = 18.0;       // ラベル内
   static const double subheading = 20.0;  // 副見出し
+  static const double dishName = 20.0;    // 献立名
+  static const double menuStatus = 25.0;  // メニューのステータス用
 }
 
 class SpaceSize {
@@ -13,6 +15,7 @@ class SpaceSize {
 
 class MarginSize {
   static const double minimum = 8.0;            // 最小のマージン
+  static const double normal = 16.0;            // 通常のマージン
   static const double normalVertical = 30.0;    // 水平方向の基本マージン
   static const double normalHorizontal = 25.0;  // 垂直方向の基本マージン
 }
@@ -28,4 +31,5 @@ class PaddingSize {
 class IconSize {
   static const double help = 20.0;            // ヘルプ用
   static const double navigationItem = 30.0;  // ボトムバー用
+  static const double homeFoodIcon = 40;      // ホームのフードアイコン用
 }

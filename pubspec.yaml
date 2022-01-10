@@ -11,9 +11,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
   # デザイン
   cupertino_icons: ^1.0.2
+  shimmer: ^2.0.0
 
   # 状態管理関連
   flutter_riverpod: ^1.0.0-dev.5
@@ -55,6 +58,9 @@ flutter:
     - assets/debug/
     - assets/slns/
     - assets/images/
+    - assets/images/food_icon/
+    - assets/images/label/
+    - assets/images/menu_status/
     - assets/loading_animation/
 
   fonts:

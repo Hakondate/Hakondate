@@ -101,11 +101,11 @@ class LoadingDialog {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return CupertinoAlertDialog(
-          title: Text('通信エラー'),
-          content: Text('データの更新に失敗しました．データの更新をせず利用する場合は"このまま利用"を選択してください．'),
+          title: const Text('通信エラー'),
+          content: const Text('データの更新に失敗しました．データの更新をせず利用する場合は"このまま利用"を選択してください．'),
           actions: [
             CupertinoDialogAction(
-              child: Text('このまま利用'),
+              child: const Text('このまま利用'),
               onPressed: () async {
                 final DateTime _loadingDay =
                     DateTime(DateTime.now().year, DateTime.now().month);
@@ -117,7 +117,7 @@ class LoadingDialog {
             ),
             CupertinoDialogAction(
               isDefaultAction: true,
-              child: Text('リトライ'),
+              child: const Text('リトライ'),
               onPressed: () {
                 ref.read(loadingProvider.notifier).popErrorDialog();
                 ref.read(appRouterProvider.notifier).handleReload();

@@ -104,11 +104,20 @@ class MenusLocalRepository {
     return _menus;
   }
 
-  Future<MenuModel> getById(int menuId) async {
-    final MenusSchema _menusSchema =
-        await _databaseManager.getMenusSchemaById(menuId);
+  Future<int> getStatusByDate(DateTime day) async {
+    final DateTime oldest = await _databaseManager.getOldestDay();
+    final DateTime latest = await _databaseManager.getLatestDay();
 
-    return _getBySchema(_menusSchema);
+    if (day.isAfter(oldest) && day.isBefore(latest)) return 0;
+
+    return -1;
+  }
+
+  Future<MenuModel?> getById(int id) async {
+    final MenusSchema? _menusSchema =
+        await _databaseManager.getMenusSchemaById(id);
+
+    return (_menusSchema != null) ? _getBySchema(_menusSchema) : null;
   }
 
   Future<MenuModel> _getBySchema(MenusSchema menusSchema) async {

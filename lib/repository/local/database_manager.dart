@@ -57,9 +57,25 @@ class DatabaseManager extends _$DatabaseManager {
                 t.schoolId.equals(schoolId)))
           .get();
 
+  // 最新のMenusSchemaの日付を取得
+  Future<DateTime> getLatestDay() async {
+    final Expression<DateTime> exp = menusTable.day.max();
+    final query = selectOnly(menusTable)..addColumns([exp]);
+
+    return await query.map((scheme) => scheme.read(exp)).getSingle();
+  }
+
+  // 最古のMenusSchemaの日付を取得
+  Future<DateTime> getOldestDay() async {
+    final Expression<DateTime> exp = menusTable.day.min();
+    final query = selectOnly(menusTable)..addColumns([exp]);
+
+    return await query.map((scheme) => scheme.read(exp)).getSingle();
+  }
+
   // IDからMenusSchemaを取得
-  Future<MenusSchema> getMenusSchemaById(int id) =>
-      (select(menusTable)..where((t) => t.id.equals(id))).getSingle();
+  Future<MenusSchema?> getMenusSchemaById(int id) =>
+      (select(menusTable)..where((t) => t.id.equals(id))).getSingleOrNull();
 
   // IDからSchoolSchemaを取得
   Future<SchoolsSchema> getSchoolsSchemaById(int id) =>
