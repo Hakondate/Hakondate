@@ -110,12 +110,8 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
   }
 
   @override
-  int get hashCode => $mrjf($mrjc(
-      id.hashCode,
-      $mrjc(
-          parentId.hashCode,
-          $mrjc(name.hashCode,
-              $mrjc(lunchBlock.hashCode, classification.hashCode)))));
+  int get hashCode =>
+      Object.hash(id, parentId, name, lunchBlock, classification);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -385,8 +381,7 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
   }
 
   @override
-  int get hashCode => $mrjf($mrjc(id.hashCode,
-      $mrjc(day.hashCode, $mrjc(schoolId.hashCode, event.hashCode))));
+  int get hashCode => Object.hash(id, day, schoolId, event);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -602,7 +597,7 @@ class MenuDishesSchema extends DataClass
   }
 
   @override
-  int get hashCode => $mrjf($mrjc(menuId.hashCode, dishId.hashCode));
+  int get hashCode => Object.hash(menuId, dishId);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -789,8 +784,7 @@ class DishesSchema extends DataClass implements Insertable<DishesSchema> {
   }
 
   @override
-  int get hashCode =>
-      $mrjf($mrjc(id.hashCode, $mrjc(name.hashCode, category.hashCode)));
+  int get hashCode => Object.hash(id, name, category);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -986,7 +980,7 @@ class DishFoodstuffsSchema extends DataClass
   }
 
   @override
-  int get hashCode => $mrjf($mrjc(dishId.hashCode, foodstuffId.hashCode));
+  int get hashCode => Object.hash(dishId, foodstuffId);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -1398,49 +1392,30 @@ class FoodstuffsSchema extends DataClass
   }
 
   @override
-  int get hashCode => $mrjf($mrjc(
-      id.hashCode,
-      $mrjc(
-          name.hashCode,
-          $mrjc(
-              piece.hashCode,
-              $mrjc(
-                  gram.hashCode,
-                  $mrjc(
-                      energy.hashCode,
-                      $mrjc(
-                          protein.hashCode,
-                          $mrjc(
-                              lipid.hashCode,
-                              $mrjc(
-                                  sodium.hashCode,
-                                  $mrjc(
-                                      carbohydrate.hashCode,
-                                      $mrjc(
-                                          calcium.hashCode,
-                                          $mrjc(
-                                              magnesium.hashCode,
-                                              $mrjc(
-                                                  iron.hashCode,
-                                                  $mrjc(
-                                                      zinc.hashCode,
-                                                      $mrjc(
-                                                          retinol.hashCode,
-                                                          $mrjc(
-                                                              vitaminB1
-                                                                  .hashCode,
-                                                              $mrjc(
-                                                                  vitaminB2
-                                                                      .hashCode,
-                                                                  $mrjc(
-                                                                      vitaminC
-                                                                          .hashCode,
-                                                                      $mrjc(
-                                                                          dietaryFiber
-                                                                              .hashCode,
-                                                                          $mrjc(
-                                                                              salt.hashCode,
-                                                                              $mrjc(isHeat.hashCode, $mrjc(isAllergy.hashCode, origin.hashCode))))))))))))))))))))));
+  int get hashCode => Object.hashAll([
+        id,
+        name,
+        piece,
+        gram,
+        energy,
+        protein,
+        lipid,
+        sodium,
+        carbohydrate,
+        calcium,
+        magnesium,
+        iron,
+        zinc,
+        retinol,
+        vitaminB1,
+        vitaminB2,
+        vitaminC,
+        dietaryFiber,
+        salt,
+        isHeat,
+        isAllergy,
+        origin
+      ]);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -2124,8 +2099,7 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
   }
 
   @override
-  int get hashCode => $mrjf($mrjc(id.hashCode,
-      $mrjc(name.hashCode, $mrjc(schoolId.hashCode, schoolYear.hashCode))));
+  int get hashCode => Object.hash(id, name, schoolId, schoolYear);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||

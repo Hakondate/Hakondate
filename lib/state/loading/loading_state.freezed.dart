@@ -1,5 +1,6 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'loading_state.dart';
 
@@ -102,7 +103,7 @@ class __$LoadingStateCopyWithImpl<$Res> extends _$LoadingStateCopyWithImpl<$Res>
 class _$_LoadingState with DiagnosticableTreeMixin implements _LoadingState {
   const _$_LoadingState({this.isShowErrorDialog = false});
 
-  @JsonKey(defaultValue: false)
+  @JsonKey()
   @override
   final bool isShowErrorDialog;
 
@@ -122,16 +123,15 @@ class _$_LoadingState with DiagnosticableTreeMixin implements _LoadingState {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _LoadingState &&
-            (identical(other.isShowErrorDialog, isShowErrorDialog) ||
-                const DeepCollectionEquality()
-                    .equals(other.isShowErrorDialog, isShowErrorDialog)));
+        (other.runtimeType == runtimeType &&
+            other is _LoadingState &&
+            const DeepCollectionEquality()
+                .equals(other.isShowErrorDialog, isShowErrorDialog));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(isShowErrorDialog);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(isShowErrorDialog));
 
   @JsonKey(ignore: true)
   @override
@@ -143,7 +143,7 @@ abstract class _LoadingState implements LoadingState {
   const factory _LoadingState({bool isShowErrorDialog}) = _$_LoadingState;
 
   @override
-  bool get isShowErrorDialog => throw _privateConstructorUsedError;
+  bool get isShowErrorDialog;
   @override
   @JsonKey(ignore: true)
   _$LoadingStateCopyWith<_LoadingState> get copyWith =>

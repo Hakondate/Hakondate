@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate_v2/model/menu/menu_model.dart';
-import 'package:hakondate_v2/state//menu/menus_state.dart';
+import 'package:hakondate_v2/state/menu/menus_state.dart';
 import 'package:hakondate_v2/repository/local/menus_local_repository.dart';
 import 'package:hakondate_v2/repository/remote/menus_remote_repository.dart';
 

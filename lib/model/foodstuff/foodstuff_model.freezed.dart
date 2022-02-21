@@ -1,5 +1,6 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'foodstuff_model.dart';
 
@@ -216,10 +217,10 @@ class _$_FoodstuffModel implements _FoodstuffModel {
   final QuantityModel quantity;
   @override // 分量
   final NutrientsModel nutrients;
-  @JsonKey(defaultValue: false)
+  @JsonKey()
   @override // 栄養素
   final bool isAllergy;
-  @JsonKey(defaultValue: false)
+  @JsonKey()
   @override // アレルギー食品
   final bool isHeat;
   @override // 熱加工食品
@@ -233,33 +234,25 @@ class _$_FoodstuffModel implements _FoodstuffModel {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _FoodstuffModel &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.quantity, quantity) ||
-                const DeepCollectionEquality()
-                    .equals(other.quantity, quantity)) &&
-            (identical(other.nutrients, nutrients) ||
-                const DeepCollectionEquality()
-                    .equals(other.nutrients, nutrients)) &&
-            (identical(other.isAllergy, isAllergy) ||
-                const DeepCollectionEquality()
-                    .equals(other.isAllergy, isAllergy)) &&
-            (identical(other.isHeat, isHeat) ||
-                const DeepCollectionEquality().equals(other.isHeat, isHeat)) &&
-            (identical(other.origin, origin) ||
-                const DeepCollectionEquality().equals(other.origin, origin)));
+        (other.runtimeType == runtimeType &&
+            other is _FoodstuffModel &&
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.quantity, quantity) &&
+            const DeepCollectionEquality().equals(other.nutrients, nutrients) &&
+            const DeepCollectionEquality().equals(other.isAllergy, isAllergy) &&
+            const DeepCollectionEquality().equals(other.isHeat, isHeat) &&
+            const DeepCollectionEquality().equals(other.origin, origin));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(quantity) ^
-      const DeepCollectionEquality().hash(nutrients) ^
-      const DeepCollectionEquality().hash(isAllergy) ^
-      const DeepCollectionEquality().hash(isHeat) ^
-      const DeepCollectionEquality().hash(origin);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(quantity),
+      const DeepCollectionEquality().hash(nutrients),
+      const DeepCollectionEquality().hash(isAllergy),
+      const DeepCollectionEquality().hash(isHeat),
+      const DeepCollectionEquality().hash(origin));
 
   @JsonKey(ignore: true)
   @override
@@ -277,17 +270,17 @@ abstract class _FoodstuffModel implements FoodstuffModel {
       String? origin}) = _$_FoodstuffModel;
 
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override // 食材名
-  QuantityModel get quantity => throw _privateConstructorUsedError;
+  QuantityModel get quantity;
   @override // 分量
-  NutrientsModel get nutrients => throw _privateConstructorUsedError;
+  NutrientsModel get nutrients;
   @override // 栄養素
-  bool get isAllergy => throw _privateConstructorUsedError;
+  bool get isAllergy;
   @override // アレルギー食品
-  bool get isHeat => throw _privateConstructorUsedError;
+  bool get isHeat;
   @override // 熱加工食品
-  String? get origin => throw _privateConstructorUsedError;
+  String? get origin;
   @override
   @JsonKey(ignore: true)
   _$FoodstuffModelCopyWith<_FoodstuffModel> get copyWith =>

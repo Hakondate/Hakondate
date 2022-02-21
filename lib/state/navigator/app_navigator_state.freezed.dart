@@ -1,5 +1,6 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'app_navigator_state.dart';
 
@@ -190,22 +191,22 @@ class _$_AppNavigatorState
       this.isShowHelp = false,
       this.isShowAboutUs = false});
 
-  @JsonKey(defaultValue: true)
+  @JsonKey()
   @override
   final bool isInitialLoading;
-  @JsonKey(defaultValue: false)
+  @JsonKey()
   @override
   final bool isShowTerms;
-  @JsonKey(defaultValue: false)
+  @JsonKey()
   @override
   final bool isShowSignup;
-  @JsonKey(defaultValue: false)
+  @JsonKey()
   @override
   final bool isShowSetting;
-  @JsonKey(defaultValue: false)
+  @JsonKey()
   @override
   final bool isShowHelp;
-  @JsonKey(defaultValue: false)
+  @JsonKey()
   @override
   final bool isShowAboutUs;
 
@@ -230,36 +231,31 @@ class _$_AppNavigatorState
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _AppNavigatorState &&
-            (identical(other.isInitialLoading, isInitialLoading) ||
-                const DeepCollectionEquality()
-                    .equals(other.isInitialLoading, isInitialLoading)) &&
-            (identical(other.isShowTerms, isShowTerms) ||
-                const DeepCollectionEquality()
-                    .equals(other.isShowTerms, isShowTerms)) &&
-            (identical(other.isShowSignup, isShowSignup) ||
-                const DeepCollectionEquality()
-                    .equals(other.isShowSignup, isShowSignup)) &&
-            (identical(other.isShowSetting, isShowSetting) ||
-                const DeepCollectionEquality()
-                    .equals(other.isShowSetting, isShowSetting)) &&
-            (identical(other.isShowHelp, isShowHelp) ||
-                const DeepCollectionEquality()
-                    .equals(other.isShowHelp, isShowHelp)) &&
-            (identical(other.isShowAboutUs, isShowAboutUs) ||
-                const DeepCollectionEquality()
-                    .equals(other.isShowAboutUs, isShowAboutUs)));
+        (other.runtimeType == runtimeType &&
+            other is _AppNavigatorState &&
+            const DeepCollectionEquality()
+                .equals(other.isInitialLoading, isInitialLoading) &&
+            const DeepCollectionEquality()
+                .equals(other.isShowTerms, isShowTerms) &&
+            const DeepCollectionEquality()
+                .equals(other.isShowSignup, isShowSignup) &&
+            const DeepCollectionEquality()
+                .equals(other.isShowSetting, isShowSetting) &&
+            const DeepCollectionEquality()
+                .equals(other.isShowHelp, isShowHelp) &&
+            const DeepCollectionEquality()
+                .equals(other.isShowAboutUs, isShowAboutUs));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(isInitialLoading) ^
-      const DeepCollectionEquality().hash(isShowTerms) ^
-      const DeepCollectionEquality().hash(isShowSignup) ^
-      const DeepCollectionEquality().hash(isShowSetting) ^
-      const DeepCollectionEquality().hash(isShowHelp) ^
-      const DeepCollectionEquality().hash(isShowAboutUs);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(isInitialLoading),
+      const DeepCollectionEquality().hash(isShowTerms),
+      const DeepCollectionEquality().hash(isShowSignup),
+      const DeepCollectionEquality().hash(isShowSetting),
+      const DeepCollectionEquality().hash(isShowHelp),
+      const DeepCollectionEquality().hash(isShowAboutUs));
 
   @JsonKey(ignore: true)
   @override
@@ -277,17 +273,17 @@ abstract class _AppNavigatorState implements AppNavigatorState {
       bool isShowAboutUs}) = _$_AppNavigatorState;
 
   @override
-  bool get isInitialLoading => throw _privateConstructorUsedError;
+  bool get isInitialLoading;
   @override
-  bool get isShowTerms => throw _privateConstructorUsedError;
+  bool get isShowTerms;
   @override
-  bool get isShowSignup => throw _privateConstructorUsedError;
+  bool get isShowSignup;
   @override
-  bool get isShowSetting => throw _privateConstructorUsedError;
+  bool get isShowSetting;
   @override
-  bool get isShowHelp => throw _privateConstructorUsedError;
+  bool get isShowHelp;
   @override
-  bool get isShowAboutUs => throw _privateConstructorUsedError;
+  bool get isShowAboutUs;
   @override
   @JsonKey(ignore: true)
   _$AppNavigatorStateCopyWith<_AppNavigatorState> get copyWith =>

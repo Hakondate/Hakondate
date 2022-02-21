@@ -33,6 +33,7 @@ class MenuCard extends StatelessWidget {
               Image.asset('assets/images/label/menuLabel.png'),
               ListView.builder(
                 shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
                 padding: const EdgeInsets.all(PaddingSize.minimum),
                 itemCount: store.menu!.dishes.length,
                 itemBuilder: (BuildContext context, int i) {

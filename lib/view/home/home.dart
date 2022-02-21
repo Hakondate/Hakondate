@@ -4,17 +4,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate_v2/unit/size.dart';
 import 'package:hakondate_v2/view/home/menu_card.dart';
+import 'package:hakondate_v2/view/home/nutrients_card.dart';
 import 'package:hakondate_v2/view_model/multi_page/user_view_model.dart';
 import 'package:hakondate_v2/view_model/single_page/home_view_model.dart';
 
 class Home extends ConsumerWidget {
-  final ScrollController scrollController = ScrollController();
-
-  Home({Key? key}) : super(key: key);
+  const Home({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Future.microtask(() => ref
+    Future.microtask(() async => await ref
         .read(homeProvider.notifier)
         .initialize(ref.watch(userProvider).currentUser!.schoolId));
 
@@ -23,8 +22,19 @@ class Home extends ConsumerWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(ref.read(homeProvider.notifier).dateText() + 'の献立'),
+          bottom: const TabBar(
+            tabs: [
+              Tab(
+                child: Text('1', style: TextStyle(color: Colors.black87),),
+              ),
+            ],
+          ),
         ),
-        body: _bodyWidget(),
+        body: TabBarView(
+          children: [
+            _bodyWidget(),
+          ],
+        ),
       ),
     );
   }
@@ -52,10 +62,12 @@ class Home extends ConsumerWidget {
               text: '献立は準備中です...',
             );
           default:
+            /// TODO: スクロールできない(原因不明)
             return ListView(
-              controller: scrollController,
               children: const [
                 MenuCard(),
+                NutrientsCard(),
+                SizedBox(height: 30),
               ],
             );
         }

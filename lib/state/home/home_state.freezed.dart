@@ -1,5 +1,6 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'home_state.dart';
 
@@ -20,12 +21,14 @@ class _$HomeStateTearOff {
       {DateTime? selectedDay,
       MenuModel? menu,
       int status = -1,
-      bool isFetching = true}) {
+      bool isFetching = true,
+      ScrollController? scrollController}) {
     return _HomeState(
       selectedDay: selectedDay,
       menu: menu,
       status: status,
       isFetching: isFetching,
+      scrollController: scrollController,
     );
   }
 }
@@ -40,6 +43,7 @@ mixin _$HomeState {
   int get status =>
       throw _privateConstructorUsedError; // -1:データ無し, 0:休み, 1:給食あり
   bool get isFetching => throw _privateConstructorUsedError;
+  ScrollController? get scrollController => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStateCopyWith<HomeState> get copyWith =>
@@ -51,7 +55,11 @@ abstract class $HomeStateCopyWith<$Res> {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
       _$HomeStateCopyWithImpl<$Res>;
   $Res call(
-      {DateTime? selectedDay, MenuModel? menu, int status, bool isFetching});
+      {DateTime? selectedDay,
+      MenuModel? menu,
+      int status,
+      bool isFetching,
+      ScrollController? scrollController});
 
   $MenuModelCopyWith<$Res>? get menu;
 }
@@ -70,6 +78,7 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
     Object? menu = freezed,
     Object? status = freezed,
     Object? isFetching = freezed,
+    Object? scrollController = freezed,
   }) {
     return _then(_value.copyWith(
       selectedDay: selectedDay == freezed
@@ -88,6 +97,10 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
+      scrollController: scrollController == freezed
+          ? _value.scrollController
+          : scrollController // ignore: cast_nullable_to_non_nullable
+              as ScrollController?,
     ));
   }
 
@@ -110,7 +123,11 @@ abstract class _$HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
       __$HomeStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {DateTime? selectedDay, MenuModel? menu, int status, bool isFetching});
+      {DateTime? selectedDay,
+      MenuModel? menu,
+      int status,
+      bool isFetching,
+      ScrollController? scrollController});
 
   @override
   $MenuModelCopyWith<$Res>? get menu;
@@ -131,6 +148,7 @@ class __$HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
     Object? menu = freezed,
     Object? status = freezed,
     Object? isFetching = freezed,
+    Object? scrollController = freezed,
   }) {
     return _then(_HomeState(
       selectedDay: selectedDay == freezed
@@ -149,6 +167,10 @@ class __$HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
+      scrollController: scrollController == freezed
+          ? _value.scrollController
+          : scrollController // ignore: cast_nullable_to_non_nullable
+              as ScrollController?,
     ));
   }
 }
@@ -157,22 +179,28 @@ class __$HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
 
 class _$_HomeState with DiagnosticableTreeMixin implements _HomeState {
   const _$_HomeState(
-      {this.selectedDay, this.menu, this.status = -1, this.isFetching = true});
+      {this.selectedDay,
+      this.menu,
+      this.status = -1,
+      this.isFetching = true,
+      this.scrollController});
 
   @override
   final DateTime? selectedDay;
   @override
   final MenuModel? menu;
-  @JsonKey(defaultValue: -1)
+  @JsonKey()
   @override
   final int status;
-  @JsonKey(defaultValue: true)
+  @JsonKey()
   @override // -1:データ無し, 0:休み, 1:給食あり
   final bool isFetching;
+  @override
+  final ScrollController? scrollController;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HomeState(selectedDay: $selectedDay, menu: $menu, status: $status, isFetching: $isFetching)';
+    return 'HomeState(selectedDay: $selectedDay, menu: $menu, status: $status, isFetching: $isFetching, scrollController: $scrollController)';
   }
 
   @override
@@ -183,32 +211,33 @@ class _$_HomeState with DiagnosticableTreeMixin implements _HomeState {
       ..add(DiagnosticsProperty('selectedDay', selectedDay))
       ..add(DiagnosticsProperty('menu', menu))
       ..add(DiagnosticsProperty('status', status))
-      ..add(DiagnosticsProperty('isFetching', isFetching));
+      ..add(DiagnosticsProperty('isFetching', isFetching))
+      ..add(DiagnosticsProperty('scrollController', scrollController));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _HomeState &&
-            (identical(other.selectedDay, selectedDay) ||
-                const DeepCollectionEquality()
-                    .equals(other.selectedDay, selectedDay)) &&
-            (identical(other.menu, menu) ||
-                const DeepCollectionEquality().equals(other.menu, menu)) &&
-            (identical(other.status, status) ||
-                const DeepCollectionEquality().equals(other.status, status)) &&
-            (identical(other.isFetching, isFetching) ||
-                const DeepCollectionEquality()
-                    .equals(other.isFetching, isFetching)));
+        (other.runtimeType == runtimeType &&
+            other is _HomeState &&
+            const DeepCollectionEquality()
+                .equals(other.selectedDay, selectedDay) &&
+            const DeepCollectionEquality().equals(other.menu, menu) &&
+            const DeepCollectionEquality().equals(other.status, status) &&
+            const DeepCollectionEquality()
+                .equals(other.isFetching, isFetching) &&
+            const DeepCollectionEquality()
+                .equals(other.scrollController, scrollController));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(selectedDay) ^
-      const DeepCollectionEquality().hash(menu) ^
-      const DeepCollectionEquality().hash(status) ^
-      const DeepCollectionEquality().hash(isFetching);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(selectedDay),
+      const DeepCollectionEquality().hash(menu),
+      const DeepCollectionEquality().hash(status),
+      const DeepCollectionEquality().hash(isFetching),
+      const DeepCollectionEquality().hash(scrollController));
 
   @JsonKey(ignore: true)
   @override
@@ -221,16 +250,19 @@ abstract class _HomeState implements HomeState {
       {DateTime? selectedDay,
       MenuModel? menu,
       int status,
-      bool isFetching}) = _$_HomeState;
+      bool isFetching,
+      ScrollController? scrollController}) = _$_HomeState;
 
   @override
-  DateTime? get selectedDay => throw _privateConstructorUsedError;
+  DateTime? get selectedDay;
   @override
-  MenuModel? get menu => throw _privateConstructorUsedError;
+  MenuModel? get menu;
   @override
-  int get status => throw _privateConstructorUsedError;
+  int get status;
   @override // -1:データ無し, 0:休み, 1:給食あり
-  bool get isFetching => throw _privateConstructorUsedError;
+  bool get isFetching;
+  @override
+  ScrollController? get scrollController;
   @override
   @JsonKey(ignore: true)
   _$HomeStateCopyWith<_HomeState> get copyWith =>

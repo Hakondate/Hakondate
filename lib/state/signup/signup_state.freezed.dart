@@ -1,5 +1,6 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'signup_state.dart';
 
@@ -240,16 +241,16 @@ class _$_SignupState with DiagnosticableTreeMixin implements _SignupState {
   final int? schoolId;
   @override
   final int? schoolYear;
-  @JsonKey(defaultValue: '学校を選択')
+  @JsonKey()
   @override
   final String schoolTrailing;
-  @JsonKey(defaultValue: '学年を選択')
+  @JsonKey()
   @override
   final String schoolYearTrailing;
-  @JsonKey(defaultValue: const <SchoolModel>[])
+  @JsonKey()
   @override
   final List<SchoolModel> schools;
-  @JsonKey(defaultValue: const <String>['1年生', '2年生', '3年生'])
+  @JsonKey()
   @override
   final List<String> schoolYears;
   @override
@@ -281,47 +282,37 @@ class _$_SignupState with DiagnosticableTreeMixin implements _SignupState {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _SignupState &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.schoolId, schoolId) ||
-                const DeepCollectionEquality()
-                    .equals(other.schoolId, schoolId)) &&
-            (identical(other.schoolYear, schoolYear) ||
-                const DeepCollectionEquality()
-                    .equals(other.schoolYear, schoolYear)) &&
-            (identical(other.schoolTrailing, schoolTrailing) ||
-                const DeepCollectionEquality()
-                    .equals(other.schoolTrailing, schoolTrailing)) &&
-            (identical(other.schoolYearTrailing, schoolYearTrailing) ||
-                const DeepCollectionEquality()
-                    .equals(other.schoolYearTrailing, schoolYearTrailing)) &&
-            (identical(other.schools, schools) ||
-                const DeepCollectionEquality()
-                    .equals(other.schools, schools)) &&
-            (identical(other.schoolYears, schoolYears) ||
-                const DeepCollectionEquality()
-                    .equals(other.schoolYears, schoolYears)) &&
-            (identical(other.nameErrorState, nameErrorState) ||
-                const DeepCollectionEquality()
-                    .equals(other.nameErrorState, nameErrorState)) &&
-            (identical(other.schoolErrorState, schoolErrorState) ||
-                const DeepCollectionEquality()
-                    .equals(other.schoolErrorState, schoolErrorState)));
+        (other.runtimeType == runtimeType &&
+            other is _SignupState &&
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.schoolId, schoolId) &&
+            const DeepCollectionEquality()
+                .equals(other.schoolYear, schoolYear) &&
+            const DeepCollectionEquality()
+                .equals(other.schoolTrailing, schoolTrailing) &&
+            const DeepCollectionEquality()
+                .equals(other.schoolYearTrailing, schoolYearTrailing) &&
+            const DeepCollectionEquality().equals(other.schools, schools) &&
+            const DeepCollectionEquality()
+                .equals(other.schoolYears, schoolYears) &&
+            const DeepCollectionEquality()
+                .equals(other.nameErrorState, nameErrorState) &&
+            const DeepCollectionEquality()
+                .equals(other.schoolErrorState, schoolErrorState));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(schoolId) ^
-      const DeepCollectionEquality().hash(schoolYear) ^
-      const DeepCollectionEquality().hash(schoolTrailing) ^
-      const DeepCollectionEquality().hash(schoolYearTrailing) ^
-      const DeepCollectionEquality().hash(schools) ^
-      const DeepCollectionEquality().hash(schoolYears) ^
-      const DeepCollectionEquality().hash(nameErrorState) ^
-      const DeepCollectionEquality().hash(schoolErrorState);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(schoolId),
+      const DeepCollectionEquality().hash(schoolYear),
+      const DeepCollectionEquality().hash(schoolTrailing),
+      const DeepCollectionEquality().hash(schoolYearTrailing),
+      const DeepCollectionEquality().hash(schools),
+      const DeepCollectionEquality().hash(schoolYears),
+      const DeepCollectionEquality().hash(nameErrorState),
+      const DeepCollectionEquality().hash(schoolErrorState));
 
   @JsonKey(ignore: true)
   @override
@@ -342,23 +333,23 @@ abstract class _SignupState implements SignupState {
       String? schoolErrorState}) = _$_SignupState;
 
   @override
-  String? get name => throw _privateConstructorUsedError;
+  String? get name;
   @override
-  int? get schoolId => throw _privateConstructorUsedError;
+  int? get schoolId;
   @override
-  int? get schoolYear => throw _privateConstructorUsedError;
+  int? get schoolYear;
   @override
-  String get schoolTrailing => throw _privateConstructorUsedError;
+  String get schoolTrailing;
   @override
-  String get schoolYearTrailing => throw _privateConstructorUsedError;
+  String get schoolYearTrailing;
   @override
-  List<SchoolModel> get schools => throw _privateConstructorUsedError;
+  List<SchoolModel> get schools;
   @override
-  List<String> get schoolYears => throw _privateConstructorUsedError;
+  List<String> get schoolYears;
   @override
-  String? get nameErrorState => throw _privateConstructorUsedError;
+  String? get nameErrorState;
   @override
-  String? get schoolErrorState => throw _privateConstructorUsedError;
+  String? get schoolErrorState;
   @override
   @JsonKey(ignore: true)
   _$SignupStateCopyWith<_SignupState> get copyWith =>

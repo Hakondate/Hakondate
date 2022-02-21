@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate_v2/model/menu/menu_model.dart';
@@ -32,6 +33,7 @@ class HomeViewModel extends StateNotifier<HomeState> {
         selectedDay: _today,
         menu: _selected,
         status: _status,
+        scrollController: ScrollController(),
         isFetching: false,
       );
     } else {
@@ -39,6 +41,7 @@ class HomeViewModel extends StateNotifier<HomeState> {
         selectedDay: _today,
         menu: _selected,
         status: 1,
+        scrollController: ScrollController(),
         isFetching: false,
       );
     }

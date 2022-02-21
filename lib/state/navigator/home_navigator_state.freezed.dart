@@ -1,5 +1,6 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'home_navigator_state.dart';
 
@@ -159,13 +160,13 @@ class _$_HomeNavigatorState
       this.isShowMenuList = false,
       this.selectedDishId});
 
-  @JsonKey(defaultValue: -1)
+  @JsonKey()
   @override
   final int todayMenuId;
-  @JsonKey(defaultValue: -1)
+  @JsonKey()
   @override // -1: データなし, 0: 給食が休み
   final int selectedMenuId;
-  @JsonKey(defaultValue: false)
+  @JsonKey()
   @override
   final bool isShowMenuList;
   @override
@@ -190,28 +191,25 @@ class _$_HomeNavigatorState
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _HomeNavigatorState &&
-            (identical(other.todayMenuId, todayMenuId) ||
-                const DeepCollectionEquality()
-                    .equals(other.todayMenuId, todayMenuId)) &&
-            (identical(other.selectedMenuId, selectedMenuId) ||
-                const DeepCollectionEquality()
-                    .equals(other.selectedMenuId, selectedMenuId)) &&
-            (identical(other.isShowMenuList, isShowMenuList) ||
-                const DeepCollectionEquality()
-                    .equals(other.isShowMenuList, isShowMenuList)) &&
-            (identical(other.selectedDishId, selectedDishId) ||
-                const DeepCollectionEquality()
-                    .equals(other.selectedDishId, selectedDishId)));
+        (other.runtimeType == runtimeType &&
+            other is _HomeNavigatorState &&
+            const DeepCollectionEquality()
+                .equals(other.todayMenuId, todayMenuId) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedMenuId, selectedMenuId) &&
+            const DeepCollectionEquality()
+                .equals(other.isShowMenuList, isShowMenuList) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedDishId, selectedDishId));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(todayMenuId) ^
-      const DeepCollectionEquality().hash(selectedMenuId) ^
-      const DeepCollectionEquality().hash(isShowMenuList) ^
-      const DeepCollectionEquality().hash(selectedDishId);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(todayMenuId),
+      const DeepCollectionEquality().hash(selectedMenuId),
+      const DeepCollectionEquality().hash(isShowMenuList),
+      const DeepCollectionEquality().hash(selectedDishId));
 
   @JsonKey(ignore: true)
   @override
@@ -227,13 +225,13 @@ abstract class _HomeNavigatorState implements HomeNavigatorState {
       int? selectedDishId}) = _$_HomeNavigatorState;
 
   @override
-  int get todayMenuId => throw _privateConstructorUsedError;
+  int get todayMenuId;
   @override // -1: データなし, 0: 給食が休み
-  int get selectedMenuId => throw _privateConstructorUsedError;
+  int get selectedMenuId;
   @override
-  bool get isShowMenuList => throw _privateConstructorUsedError;
+  bool get isShowMenuList;
   @override
-  int? get selectedDishId => throw _privateConstructorUsedError;
+  int? get selectedDishId;
   @override
   @JsonKey(ignore: true)
   _$HomeNavigatorStateCopyWith<_HomeNavigatorState> get copyWith =>

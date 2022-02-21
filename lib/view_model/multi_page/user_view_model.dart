@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:hakondate_v2/model/school/school_model.dart';
-import 'package:hakondate_v2/state//user/user_state.dart';
+import 'package:hakondate_v2/state/user/user_state.dart';
 import 'package:hakondate_v2/model/nutrients/nutrients_model.dart';
 import 'package:hakondate_v2/model/user/user_model.dart';
 import 'package:hakondate_v2/repository/local/schools_local_repository.dart';

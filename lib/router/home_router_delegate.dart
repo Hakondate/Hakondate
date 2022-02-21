@@ -36,8 +36,8 @@ class HomeRouterDelegate extends RouterDelegate<List<RouteSettings>>
           onPopPage: (Route<dynamic> route, dynamic result) =>
               _handlePopPage(route, result, ref),
           pages: [
-            MaterialPage(
-              key: const ValueKey('home'),
+            const MaterialPage(
+              key: ValueKey('home'),
               child: Home(),
             ),
             if (_router.isShowMenuList)

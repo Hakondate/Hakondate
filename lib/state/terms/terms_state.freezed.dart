@@ -1,5 +1,6 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'terms_state.dart';
 
@@ -101,7 +102,7 @@ class __$TermsStateCopyWithImpl<$Res> extends _$TermsStateCopyWithImpl<$Res>
 class _$_TermsState with DiagnosticableTreeMixin implements _TermsState {
   const _$_TermsState({this.isAgree = false});
 
-  @JsonKey(defaultValue: false)
+  @JsonKey()
   @override
   final bool isAgree;
 
@@ -121,14 +122,14 @@ class _$_TermsState with DiagnosticableTreeMixin implements _TermsState {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _TermsState &&
-            (identical(other.isAgree, isAgree) ||
-                const DeepCollectionEquality().equals(other.isAgree, isAgree)));
+        (other.runtimeType == runtimeType &&
+            other is _TermsState &&
+            const DeepCollectionEquality().equals(other.isAgree, isAgree));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(isAgree);
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(isAgree));
 
   @JsonKey(ignore: true)
   @override
@@ -140,7 +141,7 @@ abstract class _TermsState implements TermsState {
   const factory _TermsState({bool isAgree}) = _$_TermsState;
 
   @override
-  bool get isAgree => throw _privateConstructorUsedError;
+  bool get isAgree;
   @override
   @JsonKey(ignore: true)
   _$TermsStateCopyWith<_TermsState> get copyWith =>
