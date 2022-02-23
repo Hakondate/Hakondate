@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:hakondate_v2/router/app_navigator_state_notifier.dart';
+import 'package:hakondate_v2/router/routes.dart';
 import 'package:hakondate_v2/view_model/multi_page/menus_view_model.dart';
 import 'package:hakondate_v2/view_model/multi_page/school_view_model.dart';
 import 'package:hakondate_v2/view_model/multi_page/loading_view_model.dart';
 import 'package:hakondate_v2/view_model/multi_page/user_view_model.dart';
+import 'package:hakondate_v2/view_model/single_page/home_view_model.dart';
 
 class Splash extends ConsumerWidget {
   const Splash({Key? key}) : super(key: key);
@@ -19,18 +20,21 @@ class Splash extends ConsumerWidget {
           in ref.read(schoolProvider.notifier).initialize()) {
         yield status;
       }
-      final bool _isSignedUp =
-          await ref.read(userProvider.notifier).checkSignedUp();
-      if (_isSignedUp) {
-        await for (final status in ref
-            .read(menusProvider.notifier)
-            .initialize(ref.watch(userProvider).currentUser!.schoolId)) {
-          yield status;
-        }
+
+      if (!await ref.read(userProvider.notifier).checkSignedUp()) {
+        routemaster.replace('/terms');
+
+        return;
       }
-      ref
-          .read(appRouterProvider.notifier)
-          .handleFromSplash(toTerms: !_isSignedUp);
+
+      await for (final status in ref
+          .read(menusProvider.notifier)
+          .initialize(ref.watch(userProvider).currentUser!.schoolId)) {
+        yield status;
+      }
+      await ref.read(homeProvider.notifier)
+          .initialize(ref.watch(userProvider).currentUser!.schoolId);
+      routemaster.replace('/home');
     } catch (error) {
       debugPrint(error.toString());
 
@@ -60,12 +64,12 @@ class Splash extends ConsumerWidget {
             CupertinoDialogAction(
               child: const Text('このまま利用'),
               onPressed: () async {
-                final DateTime _loadingDay =
-                    DateTime(DateTime.now().year, DateTime.now().month);
                 await ref.read(menusProvider.notifier).getLocalMenus(
-                    _loadingDay, ref.watch(userProvider).currentUser!.schoolId);
+                  DateTime(DateTime.now().year, DateTime.now().month),
+                  ref.watch(userProvider).currentUser!.schoolId,
+                );
                 ref.read(loadingProvider.notifier).popErrorDialog();
-                ref.read(appRouterProvider.notifier).handleFromSplash();
+                routemaster.replace('/home');
               },
             ),
             CupertinoDialogAction(
@@ -73,7 +77,7 @@ class Splash extends ConsumerWidget {
               child: const Text('リトライ'),
               onPressed: () {
                 ref.read(loadingProvider.notifier).popErrorDialog();
-                ref.read(appRouterProvider.notifier).handleReload();
+                routemaster.replace('/splash');
                 Navigator.of(context).pop();
               },
             ),
@@ -85,7 +89,7 @@ class Splash extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final double _screenWidth = MediaQuery.of(context).size.width;
+    final double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       body: Container(
@@ -96,32 +100,28 @@ class Splash extends ConsumerWidget {
             children: [
               Image.asset(
                 'assets/images/splash.png',
-                width: _screenWidth / 6.0,
+                width: screenWidth / 6.0,
               ),
               SizedBox(
-                width: _screenWidth * 2.0 / 3.0,
+                width: screenWidth * 2.0 / 3.0,
                 child: StreamBuilder(
                   stream: _initialData(context, ref),
                   initialData: 'Reading',
                   builder:
                       (BuildContext context, AsyncSnapshot<String> snapshot) {
                     if (snapshot.connectionState != ConnectionState.done) {
-                      Widget _widget = Container();
                       switch (snapshot.data) {
                         case 'Reading':
-                          _widget = Image.asset(
+                          return Image.asset(
                               'assets/loading_animation/data_reading.gif');
-                          break;
                         case 'CheckingUpdate':
-                          _widget = Image.asset(
+                          return Image.asset(
                               'assets/loading_animation/checking.gif');
-                          break;
                         case 'Updating':
-                          _widget = Image.asset(
+                          return Image.asset(
                               'assets/loading_animation/data_updating.gif');
-                          break;
                       }
-                      return _widget;
+                      return Container();
                     }
                     return Image.asset(
                         'assets/loading_animation/data_reading.gif');

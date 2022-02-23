@@ -3,19 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate_v2/unit/size.dart';
-import 'package:hakondate_v2/view/home/menu_card.dart';
-import 'package:hakondate_v2/view/home/nutrients_card.dart';
+import 'package:hakondate_v2/view/daily/menu_card.dart';
+import 'package:hakondate_v2/view/daily/nutrients_card.dart';
 import 'package:hakondate_v2/view_model/multi_page/user_view_model.dart';
 import 'package:hakondate_v2/view_model/single_page/home_view_model.dart';
 
-class Home extends ConsumerWidget {
-  const Home({Key? key}) : super(key: key);
+class Daily extends ConsumerWidget {
+  const Daily({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Future.microtask(() async => await ref
-        .read(homeProvider.notifier)
-        .initialize(ref.watch(userProvider).currentUser!.schoolId));
 
     return DefaultTabController(
       length: 1,

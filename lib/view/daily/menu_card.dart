@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate_v2/router/routes.dart';
 
 import 'package:hakondate_v2/unit/size.dart';
 import 'package:hakondate_v2/view_model/single_page/home_view_model.dart';
@@ -53,6 +54,7 @@ class MenuCard extends StatelessWidget {
                         ),
                         overflow: TextOverflow.clip,
                       ),
+                      onTap: () => routemaster.push('dish/1'),
                     ),
                   );
                 },

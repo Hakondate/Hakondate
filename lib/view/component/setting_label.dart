@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:hakondate_v2/unit/size.dart';
 
 class SettingLabel extends StatelessWidget {

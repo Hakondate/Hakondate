@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:hakondate_v2/router/app_navigator_state_notifier.dart';
+import 'package:hakondate_v2/router/routes.dart';
 import 'package:hakondate_v2/view_model/multi_page/menus_view_model.dart';
 import 'package:hakondate_v2/view_model/multi_page/loading_view_model.dart';
 import 'package:hakondate_v2/view_model/multi_page/user_view_model.dart';
+import 'package:hakondate_v2/view_model/single_page/home_view_model.dart';
 import 'package:hakondate_v2/view_model/single_page/signup_view_model.dart';
 
 class LoadingDialog {
@@ -82,7 +83,9 @@ class LoadingDialog {
           .initialize(ref.watch(userProvider).currentUser!.schoolId)) {
         yield status;
       }
-      ref.read(appRouterProvider.notifier).handleFromSignup();
+      await ref.read(homeProvider.notifier)
+          .initialize(ref.watch(userProvider).currentUser!.schoolId);
+      routemaster.replace('/home');
     } catch (error) {
       debugPrint(error.toString());
 
@@ -112,7 +115,7 @@ class LoadingDialog {
                 await ref.read(menusProvider.notifier).getLocalMenus(
                     _loadingDay, ref.watch(userProvider).currentUser!.schoolId);
                 ref.read(loadingProvider.notifier).popErrorDialog();
-                ref.read(appRouterProvider.notifier).handleFromSignup();
+                routemaster.replace('/home');
               },
             ),
             CupertinoDialogAction(
@@ -120,7 +123,7 @@ class LoadingDialog {
               child: const Text('リトライ'),
               onPressed: () {
                 ref.read(loadingProvider.notifier).popErrorDialog();
-                ref.read(appRouterProvider.notifier).handleReload();
+                routemaster.replace('/splash');
                 Navigator.of(context).pop();
               },
             ),

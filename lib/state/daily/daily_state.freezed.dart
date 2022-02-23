@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'home_state.dart';
+part of 'daily_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,16 +14,16 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$HomeStateTearOff {
-  const _$HomeStateTearOff();
+class _$DailyStateTearOff {
+  const _$DailyStateTearOff();
 
-  _HomeState call(
+  _DailyState call(
       {DateTime? selectedDay,
       MenuModel? menu,
       int status = -1,
       bool isFetching = true,
       ScrollController? scrollController}) {
-    return _HomeState(
+    return _DailyState(
       selectedDay: selectedDay,
       menu: menu,
       status: status,
@@ -34,10 +34,10 @@ class _$HomeStateTearOff {
 }
 
 /// @nodoc
-const $HomeState = _$HomeStateTearOff();
+const $DailyState = _$DailyStateTearOff();
 
 /// @nodoc
-mixin _$HomeState {
+mixin _$DailyState {
   DateTime? get selectedDay => throw _privateConstructorUsedError;
   MenuModel? get menu => throw _privateConstructorUsedError;
   int get status =>
@@ -46,14 +46,15 @@ mixin _$HomeState {
   ScrollController? get scrollController => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $HomeStateCopyWith<HomeState> get copyWith =>
+  $DailyStateCopyWith<DailyState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $HomeStateCopyWith<$Res> {
-  factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
-      _$HomeStateCopyWithImpl<$Res>;
+abstract class $DailyStateCopyWith<$Res> {
+  factory $DailyStateCopyWith(
+          DailyState value, $Res Function(DailyState) then) =
+      _$DailyStateCopyWithImpl<$Res>;
   $Res call(
       {DateTime? selectedDay,
       MenuModel? menu,
@@ -65,12 +66,12 @@ abstract class $HomeStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
-  _$HomeStateCopyWithImpl(this._value, this._then);
+class _$DailyStateCopyWithImpl<$Res> implements $DailyStateCopyWith<$Res> {
+  _$DailyStateCopyWithImpl(this._value, this._then);
 
-  final HomeState _value;
+  final DailyState _value;
   // ignore: unused_field
-  final $Res Function(HomeState) _then;
+  final $Res Function(DailyState) _then;
 
   @override
   $Res call({
@@ -117,10 +118,10 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
-  factory _$HomeStateCopyWith(
-          _HomeState value, $Res Function(_HomeState) then) =
-      __$HomeStateCopyWithImpl<$Res>;
+abstract class _$DailyStateCopyWith<$Res> implements $DailyStateCopyWith<$Res> {
+  factory _$DailyStateCopyWith(
+          _DailyState value, $Res Function(_DailyState) then) =
+      __$DailyStateCopyWithImpl<$Res>;
   @override
   $Res call(
       {DateTime? selectedDay,
@@ -134,13 +135,14 @@ abstract class _$HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
-    implements _$HomeStateCopyWith<$Res> {
-  __$HomeStateCopyWithImpl(_HomeState _value, $Res Function(_HomeState) _then)
-      : super(_value, (v) => _then(v as _HomeState));
+class __$DailyStateCopyWithImpl<$Res> extends _$DailyStateCopyWithImpl<$Res>
+    implements _$DailyStateCopyWith<$Res> {
+  __$DailyStateCopyWithImpl(
+      _DailyState _value, $Res Function(_DailyState) _then)
+      : super(_value, (v) => _then(v as _DailyState));
 
   @override
-  _HomeState get _value => super._value as _HomeState;
+  _DailyState get _value => super._value as _DailyState;
 
   @override
   $Res call({
@@ -150,7 +152,7 @@ class __$HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
     Object? isFetching = freezed,
     Object? scrollController = freezed,
   }) {
-    return _then(_HomeState(
+    return _then(_DailyState(
       selectedDay: selectedDay == freezed
           ? _value.selectedDay
           : selectedDay // ignore: cast_nullable_to_non_nullable
@@ -177,8 +179,8 @@ class __$HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_HomeState with DiagnosticableTreeMixin implements _HomeState {
-  const _$_HomeState(
+class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
+  const _$_DailyState(
       {this.selectedDay,
       this.menu,
       this.status = -1,
@@ -200,14 +202,14 @@ class _$_HomeState with DiagnosticableTreeMixin implements _HomeState {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HomeState(selectedDay: $selectedDay, menu: $menu, status: $status, isFetching: $isFetching, scrollController: $scrollController)';
+    return 'DailyState(selectedDay: $selectedDay, menu: $menu, status: $status, isFetching: $isFetching, scrollController: $scrollController)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'HomeState'))
+      ..add(DiagnosticsProperty('type', 'DailyState'))
       ..add(DiagnosticsProperty('selectedDay', selectedDay))
       ..add(DiagnosticsProperty('menu', menu))
       ..add(DiagnosticsProperty('status', status))
@@ -219,7 +221,7 @@ class _$_HomeState with DiagnosticableTreeMixin implements _HomeState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _HomeState &&
+            other is _DailyState &&
             const DeepCollectionEquality()
                 .equals(other.selectedDay, selectedDay) &&
             const DeepCollectionEquality().equals(other.menu, menu) &&
@@ -241,17 +243,17 @@ class _$_HomeState with DiagnosticableTreeMixin implements _HomeState {
 
   @JsonKey(ignore: true)
   @override
-  _$HomeStateCopyWith<_HomeState> get copyWith =>
-      __$HomeStateCopyWithImpl<_HomeState>(this, _$identity);
+  _$DailyStateCopyWith<_DailyState> get copyWith =>
+      __$DailyStateCopyWithImpl<_DailyState>(this, _$identity);
 }
 
-abstract class _HomeState implements HomeState {
-  const factory _HomeState(
+abstract class _DailyState implements DailyState {
+  const factory _DailyState(
       {DateTime? selectedDay,
       MenuModel? menu,
       int status,
       bool isFetching,
-      ScrollController? scrollController}) = _$_HomeState;
+      ScrollController? scrollController}) = _$_DailyState;
 
   @override
   DateTime? get selectedDay;
@@ -265,6 +267,6 @@ abstract class _HomeState implements HomeState {
   ScrollController? get scrollController;
   @override
   @JsonKey(ignore: true)
-  _$HomeStateCopyWith<_HomeState> get copyWith =>
+  _$DailyStateCopyWith<_DailyState> get copyWith =>
       throw _privateConstructorUsedError;
 }
