@@ -4,15 +4,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate_v2/model/menu/menu_model.dart';
 
 import 'package:hakondate_v2/repository/local/menus_local_repository.dart';
-import 'package:hakondate_v2/state/home/home_state.dart';
+import 'package:hakondate_v2/state/daily/daily_state.dart';
 
-final homeProvider = StateNotifierProvider<HomeViewModel, HomeState>((ref) =>
-    HomeViewModel());
+final homeProvider = StateNotifierProvider<DailyViewModel, DailyState>((ref) =>
+    DailyViewModel());
 
-class HomeViewModel extends StateNotifier<HomeState> {
-  HomeViewModel()
+class DailyViewModel extends StateNotifier<DailyState> {
+  DailyViewModel()
       : _menusLocalRepository = MenusLocalRepository(),
-        super(const HomeState());
+        super(const DailyState());
 
   final MenusLocalRepository _menusLocalRepository;
 
