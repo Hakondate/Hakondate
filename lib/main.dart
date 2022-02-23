@@ -3,7 +3,9 @@ import 'package:flutter/services.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:hakondate_v2/router/app_router_delegate.dart';
+import 'package:routemaster/routemaster.dart';
+
+import 'package:hakondate_v2/router/routes.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,9 +20,6 @@ class Hakondate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _routeInformationParser = ListRouteInformationParser();
-    final _appRouterDelegate = AppRouterDelegate();
-    final _backButtonDispatcher = RootBackButtonDispatcher();
     final ThemeData theme = ThemeData(
         fontFamily: 'MPLUSRounded1c',
         appBarTheme: const AppBarTheme(
@@ -40,9 +39,8 @@ class Hakondate extends StatelessWidget {
             secondary: Colors.orangeAccent,
           ),
         ),
-        routeInformationParser: _routeInformationParser,
-        routerDelegate: _appRouterDelegate,
-        backButtonDispatcher: _backButtonDispatcher,
+        routerDelegate: routemaster,
+        routeInformationParser: const RoutemasterParser(),
         debugShowCheckedModeBanner: false,
       ),
     );
