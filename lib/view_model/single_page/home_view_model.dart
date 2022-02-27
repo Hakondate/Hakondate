@@ -51,14 +51,6 @@ class DailyViewModel extends StateNotifier<DailyState> {
   int _parseToId(DateTime day, int schoolId) =>
       day.year * 1000000 + day.month * 10000 + day.day * 100 + schoolId;
 
-  String dateText() {
-    if (isSameDay(state.selectedDay, DateTime.now())) {
-      return '今日';
-    }
-
-    return DateFormat('M月d日').format(state.selectedDay);
-  }
-
   bool isSameDay(DateTime day, DateTime other) =>
       day.year == other.year && day.month == other.month && day.day == other.day;
 }

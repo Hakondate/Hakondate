@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hakondate_v2/view_model/multi_page/user_view_model.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:intl/intl.dart';
 
 import 'package:hakondate_v2/unit/size.dart';
 import 'package:hakondate_v2/view/daily/menu_card.dart';
 import 'package:hakondate_v2/view/daily/nutrients_card.dart';
 import 'package:hakondate_v2/view_model/single_page/home_view_model.dart';
+import 'package:hakondate_v2/view_model/multi_page/user_view_model.dart';
 
 class Daily extends ConsumerWidget {
   const Daily({Key? key}) : super(key: key);
@@ -16,7 +17,8 @@ class Daily extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(ref.read(homeProvider.notifier).dateText() + 'の献立'),
+        elevation: 0.0,
+        title: _appBarTitle(),
       ),
       body: Column(
         children: [
@@ -25,54 +27,62 @@ class Daily extends ConsumerWidget {
         ],
       ),
     );
-
-    // return DefaultTabController(
-    //   length: 1,
-    //   child: Scaffold(
-    //     appBar: AppBar(
-    //       title: Text(ref.read(homeProvider.notifier).dateText() + 'の献立'),
-    //       bottom: const TabBar(
-    //         tabs: [
-    //           Tab(
-    //             child: Text('1', style: TextStyle(color: Colors.black87),),
-    //           ),
-    //         ],
-    //       ),
-    //     ),
-    //     body: TabBarView(
-    //       children: [
-    //         _bodyWidget(),
-    //       ],
-    //     ),
-    //   ),
-    // );
   }
 
-  Widget _calendarWidget() {
+  Widget _appBarTitle() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
         final store = ref.watch(homeProvider);
+        final formatted = (isSameDay(store.selectedDay, DateTime.now()))
+            ? '今日' : DateFormat('M月d日').format(store.selectedDay);
+        return Text(formatted + 'の献立');
+      },
+    );
+  }
 
-        return TableCalendar(
-          headerVisible: false,
-          calendarFormat: CalendarFormat.week,
-          focusedDay: store.focusedDay,
-          firstDay: store.calendarTabFirstDay,
-          lastDay: store.calendarTabLastDay,
-          selectedDayPredicate: (DateTime day) =>
-              isSameDay(store.selectedDay, day),
-          onDaySelected: (DateTime selectedDay, _){
-            if (!isSameDay(store.selectedDay, selectedDay)) {
+  Widget _calendarWidget() {
+    return Material(
+      color: Colors.white,
+      elevation: 4.0,
+      child: Consumer(
+        builder: (BuildContext context, WidgetRef ref, _) {
+          final store = ref.watch(homeProvider);
+
+          return TableCalendar(
+            headerVisible: false,
+            locale: 'ja_JP',
+            calendarFormat: CalendarFormat.week,
+            focusedDay: store.focusedDay,
+            firstDay: store.calendarTabFirstDay,
+            lastDay: store.calendarTabLastDay,
+            selectedDayPredicate: (DateTime day) =>
+                isSameDay(store.selectedDay, day),
+            onDaySelected: (DateTime selectedDay, _){
+              if (isSameDay(store.selectedDay, selectedDay)) return;
               ref.read(homeProvider.notifier).updateSelectedDay(
                 day: selectedDay,
                 schoolId: ref.watch(userProvider).currentUser!.schoolId,
               );
-            }
-          },
-          onPageChanged: (DateTime focusedDay) =>
-              ref.watch(homeProvider.notifier).updateFocusedDay(focusedDay),  // readで読み込むと再描画が発生
-        );
-      }
+            },
+            onPageChanged: (DateTime focusedDay) =>
+                ref.watch(homeProvider.notifier).updateFocusedDay(focusedDay),  // readで読み込むと再描画が発生
+            daysOfWeekHeight: 20,
+            calendarStyle: CalendarStyle(
+              todayTextStyle: const CalendarStyle().defaultTextStyle,
+              todayDecoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+              ),
+              selectedDecoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+            ),
+          );
+        }
+      ),
     );
   }
 
@@ -119,9 +129,10 @@ class Daily extends ConsumerWidget {
   }) {
     final double _screenWidth = MediaQuery.of(context).size.width;
 
-    return Center(
+    return Expanded(
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
             'assets/images/menu_status/' + imageFileName,
