@@ -18,17 +18,21 @@ class _$DailyStateTearOff {
   const _$DailyStateTearOff();
 
   _DailyState call(
-      {DateTime? selectedDay,
+      {required DateTime selectedDay,
+      required DateTime focusedDay,
+      required DateTime calendarTabFirstDay,
+      required DateTime calendarTabLastDay,
       MenuModel? menu,
       int status = -1,
-      bool isFetching = true,
-      ScrollController? scrollController}) {
+      bool isFetching = true}) {
     return _DailyState(
       selectedDay: selectedDay,
+      focusedDay: focusedDay,
+      calendarTabFirstDay: calendarTabFirstDay,
+      calendarTabLastDay: calendarTabLastDay,
       menu: menu,
       status: status,
       isFetching: isFetching,
-      scrollController: scrollController,
     );
   }
 }
@@ -38,12 +42,14 @@ const $DailyState = _$DailyStateTearOff();
 
 /// @nodoc
 mixin _$DailyState {
-  DateTime? get selectedDay => throw _privateConstructorUsedError;
+  DateTime get selectedDay => throw _privateConstructorUsedError;
+  DateTime get focusedDay => throw _privateConstructorUsedError;
+  DateTime get calendarTabFirstDay => throw _privateConstructorUsedError;
+  DateTime get calendarTabLastDay => throw _privateConstructorUsedError;
   MenuModel? get menu => throw _privateConstructorUsedError;
   int get status =>
       throw _privateConstructorUsedError; // -1:データ無し, 0:休み, 1:給食あり
   bool get isFetching => throw _privateConstructorUsedError;
-  ScrollController? get scrollController => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DailyStateCopyWith<DailyState> get copyWith =>
@@ -56,11 +62,13 @@ abstract class $DailyStateCopyWith<$Res> {
           DailyState value, $Res Function(DailyState) then) =
       _$DailyStateCopyWithImpl<$Res>;
   $Res call(
-      {DateTime? selectedDay,
+      {DateTime selectedDay,
+      DateTime focusedDay,
+      DateTime calendarTabFirstDay,
+      DateTime calendarTabLastDay,
       MenuModel? menu,
       int status,
-      bool isFetching,
-      ScrollController? scrollController});
+      bool isFetching});
 
   $MenuModelCopyWith<$Res>? get menu;
 }
@@ -76,16 +84,30 @@ class _$DailyStateCopyWithImpl<$Res> implements $DailyStateCopyWith<$Res> {
   @override
   $Res call({
     Object? selectedDay = freezed,
+    Object? focusedDay = freezed,
+    Object? calendarTabFirstDay = freezed,
+    Object? calendarTabLastDay = freezed,
     Object? menu = freezed,
     Object? status = freezed,
     Object? isFetching = freezed,
-    Object? scrollController = freezed,
   }) {
     return _then(_value.copyWith(
       selectedDay: selectedDay == freezed
           ? _value.selectedDay
           : selectedDay // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTime,
+      focusedDay: focusedDay == freezed
+          ? _value.focusedDay
+          : focusedDay // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      calendarTabFirstDay: calendarTabFirstDay == freezed
+          ? _value.calendarTabFirstDay
+          : calendarTabFirstDay // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      calendarTabLastDay: calendarTabLastDay == freezed
+          ? _value.calendarTabLastDay
+          : calendarTabLastDay // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       menu: menu == freezed
           ? _value.menu
           : menu // ignore: cast_nullable_to_non_nullable
@@ -98,10 +120,6 @@ class _$DailyStateCopyWithImpl<$Res> implements $DailyStateCopyWith<$Res> {
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
-      scrollController: scrollController == freezed
-          ? _value.scrollController
-          : scrollController // ignore: cast_nullable_to_non_nullable
-              as ScrollController?,
     ));
   }
 
@@ -124,11 +142,13 @@ abstract class _$DailyStateCopyWith<$Res> implements $DailyStateCopyWith<$Res> {
       __$DailyStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {DateTime? selectedDay,
+      {DateTime selectedDay,
+      DateTime focusedDay,
+      DateTime calendarTabFirstDay,
+      DateTime calendarTabLastDay,
       MenuModel? menu,
       int status,
-      bool isFetching,
-      ScrollController? scrollController});
+      bool isFetching});
 
   @override
   $MenuModelCopyWith<$Res>? get menu;
@@ -147,16 +167,30 @@ class __$DailyStateCopyWithImpl<$Res> extends _$DailyStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? selectedDay = freezed,
+    Object? focusedDay = freezed,
+    Object? calendarTabFirstDay = freezed,
+    Object? calendarTabLastDay = freezed,
     Object? menu = freezed,
     Object? status = freezed,
     Object? isFetching = freezed,
-    Object? scrollController = freezed,
   }) {
     return _then(_DailyState(
       selectedDay: selectedDay == freezed
           ? _value.selectedDay
           : selectedDay // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTime,
+      focusedDay: focusedDay == freezed
+          ? _value.focusedDay
+          : focusedDay // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      calendarTabFirstDay: calendarTabFirstDay == freezed
+          ? _value.calendarTabFirstDay
+          : calendarTabFirstDay // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      calendarTabLastDay: calendarTabLastDay == freezed
+          ? _value.calendarTabLastDay
+          : calendarTabLastDay // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       menu: menu == freezed
           ? _value.menu
           : menu // ignore: cast_nullable_to_non_nullable
@@ -169,10 +203,6 @@ class __$DailyStateCopyWithImpl<$Res> extends _$DailyStateCopyWithImpl<$Res>
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
-      scrollController: scrollController == freezed
-          ? _value.scrollController
-          : scrollController // ignore: cast_nullable_to_non_nullable
-              as ScrollController?,
     ));
   }
 }
@@ -181,14 +211,22 @@ class __$DailyStateCopyWithImpl<$Res> extends _$DailyStateCopyWithImpl<$Res>
 
 class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
   const _$_DailyState(
-      {this.selectedDay,
+      {required this.selectedDay,
+      required this.focusedDay,
+      required this.calendarTabFirstDay,
+      required this.calendarTabLastDay,
       this.menu,
       this.status = -1,
-      this.isFetching = true,
-      this.scrollController});
+      this.isFetching = true});
 
   @override
-  final DateTime? selectedDay;
+  final DateTime selectedDay;
+  @override
+  final DateTime focusedDay;
+  @override
+  final DateTime calendarTabFirstDay;
+  @override
+  final DateTime calendarTabLastDay;
   @override
   final MenuModel? menu;
   @JsonKey()
@@ -197,12 +235,10 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
   @JsonKey()
   @override // -1:データ無し, 0:休み, 1:給食あり
   final bool isFetching;
-  @override
-  final ScrollController? scrollController;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DailyState(selectedDay: $selectedDay, menu: $menu, status: $status, isFetching: $isFetching, scrollController: $scrollController)';
+    return 'DailyState(selectedDay: $selectedDay, focusedDay: $focusedDay, calendarTabFirstDay: $calendarTabFirstDay, calendarTabLastDay: $calendarTabLastDay, menu: $menu, status: $status, isFetching: $isFetching)';
   }
 
   @override
@@ -211,10 +247,12 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
     properties
       ..add(DiagnosticsProperty('type', 'DailyState'))
       ..add(DiagnosticsProperty('selectedDay', selectedDay))
+      ..add(DiagnosticsProperty('focusedDay', focusedDay))
+      ..add(DiagnosticsProperty('calendarTabFirstDay', calendarTabFirstDay))
+      ..add(DiagnosticsProperty('calendarTabLastDay', calendarTabLastDay))
       ..add(DiagnosticsProperty('menu', menu))
       ..add(DiagnosticsProperty('status', status))
-      ..add(DiagnosticsProperty('isFetching', isFetching))
-      ..add(DiagnosticsProperty('scrollController', scrollController));
+      ..add(DiagnosticsProperty('isFetching', isFetching));
   }
 
   @override
@@ -224,22 +262,28 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
             other is _DailyState &&
             const DeepCollectionEquality()
                 .equals(other.selectedDay, selectedDay) &&
+            const DeepCollectionEquality()
+                .equals(other.focusedDay, focusedDay) &&
+            const DeepCollectionEquality()
+                .equals(other.calendarTabFirstDay, calendarTabFirstDay) &&
+            const DeepCollectionEquality()
+                .equals(other.calendarTabLastDay, calendarTabLastDay) &&
             const DeepCollectionEquality().equals(other.menu, menu) &&
             const DeepCollectionEquality().equals(other.status, status) &&
             const DeepCollectionEquality()
-                .equals(other.isFetching, isFetching) &&
-            const DeepCollectionEquality()
-                .equals(other.scrollController, scrollController));
+                .equals(other.isFetching, isFetching));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(selectedDay),
+      const DeepCollectionEquality().hash(focusedDay),
+      const DeepCollectionEquality().hash(calendarTabFirstDay),
+      const DeepCollectionEquality().hash(calendarTabLastDay),
       const DeepCollectionEquality().hash(menu),
       const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(isFetching),
-      const DeepCollectionEquality().hash(scrollController));
+      const DeepCollectionEquality().hash(isFetching));
 
   @JsonKey(ignore: true)
   @override
@@ -249,22 +293,28 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
 
 abstract class _DailyState implements DailyState {
   const factory _DailyState(
-      {DateTime? selectedDay,
+      {required DateTime selectedDay,
+      required DateTime focusedDay,
+      required DateTime calendarTabFirstDay,
+      required DateTime calendarTabLastDay,
       MenuModel? menu,
       int status,
-      bool isFetching,
-      ScrollController? scrollController}) = _$_DailyState;
+      bool isFetching}) = _$_DailyState;
 
   @override
-  DateTime? get selectedDay;
+  DateTime get selectedDay;
+  @override
+  DateTime get focusedDay;
+  @override
+  DateTime get calendarTabFirstDay;
+  @override
+  DateTime get calendarTabLastDay;
   @override
   MenuModel? get menu;
   @override
   int get status;
   @override // -1:データ無し, 0:休み, 1:給食あり
   bool get isFetching;
-  @override
-  ScrollController? get scrollController;
   @override
   @JsonKey(ignore: true)
   _$DailyStateCopyWith<_DailyState> get copyWith =>

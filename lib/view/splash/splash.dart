@@ -32,8 +32,9 @@ class Splash extends ConsumerWidget {
           .initialize(ref.watch(userProvider).currentUser!.schoolId)) {
         yield status;
       }
-      await ref.read(homeProvider.notifier)
-          .initialize(ref.watch(userProvider).currentUser!.schoolId);
+      await ref.read(homeProvider.notifier).updateSelectedDay(
+        schoolId: ref.watch(userProvider).currentUser!.schoolId,
+      );
       routemaster.replace('/home');
     } catch (error) {
       debugPrint(error.toString());

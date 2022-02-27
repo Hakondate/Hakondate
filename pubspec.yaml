@@ -16,8 +16,8 @@ dependencies:
 
   # デザイン
   cupertino_icons: ^1.0.2
-  shimmer: ^2.0.0
   multi_charts: ^0.3.0
+  table_calendar: ^3.0.4
 
   # 状態管理関連
   flutter_riverpod: ^1.0.0-dev.5

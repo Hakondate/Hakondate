@@ -54,7 +54,7 @@ class MenuCard extends StatelessWidget {
                         ),
                         overflow: TextOverflow.clip,
                       ),
-                      onTap: () => routemaster.push('dish/1'),
+                      onTap: () => routemaster.replace('dish/1'),
                     ),
                   );
                 },
