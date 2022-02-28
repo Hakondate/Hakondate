@@ -35,6 +35,7 @@ class Daily extends ConsumerWidget {
         final store = ref.watch(homeProvider);
         final formatted = (isSameDay(store.selectedDay, DateTime.now()))
             ? '今日' : DateFormat('M月d日').format(store.selectedDay);
+
         return Text(formatted + 'の献立');
       },
     );
@@ -55,9 +56,8 @@ class Daily extends ConsumerWidget {
             focusedDay: store.focusedDay,
             firstDay: store.calendarTabFirstDay,
             lastDay: store.calendarTabLastDay,
-            selectedDayPredicate: (DateTime day) =>
-                isSameDay(store.selectedDay, day),
-            onDaySelected: (DateTime selectedDay, _){
+            selectedDayPredicate: (DateTime day) => isSameDay(store.selectedDay, day),
+            onDaySelected: (DateTime selectedDay, _) {
               if (isSameDay(store.selectedDay, selectedDay)) return;
               ref.read(homeProvider.notifier).updateSelectedDay(
                 day: selectedDay,
