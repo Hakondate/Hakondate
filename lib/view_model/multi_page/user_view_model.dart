@@ -107,7 +107,7 @@ class UserViewModel extends StateNotifier<UserState> {
     final UserModel _user = await _usersLocalRepository.getById(userId);
     final SchoolModel _school =
         await _schoolsLocalRepository.getById(schoolId ?? _user.schoolId);
-    if (_school.classification == 1) {
+    if (_school.classification != 1) {
       int _schoolYear = schoolYear ?? _user.schoolYear;
       if (_schoolYear <= 2) {
         return 'lower';

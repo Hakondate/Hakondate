@@ -1,8 +1,8 @@
-import 'package:intl/intl.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate_v2/model/menu/menu_model.dart';
 
 import 'package:hakondate_v2/repository/local/menus_local_repository.dart';
+import 'package:hakondate_v2/model/nutrients/nutrients_model.dart';
 import 'package:hakondate_v2/state/daily/daily_state.dart';
 
 final homeProvider = StateNotifierProvider<DailyViewModel, DailyState>(
@@ -53,4 +53,46 @@ class DailyViewModel extends StateNotifier<DailyState> {
 
   bool isSameDay(DateTime day, DateTime other) =>
       day.year == other.year && day.month == other.month && day.day == other.day;
+
+  List<double> getGraphValues({
+    NutrientsModel? slns,
+    required double graphMaxValue,
+  }) {
+    if (slns == null) {
+      return [0, 0, 0, 0, 0, 0];
+    }
+
+    return [
+      state.menu!.energy / slns.energy * 100.0,
+      state.menu!.protein / slns.protein * 100.0,
+      _calcVitaminSufficiency(slns.retinol, slns.vitaminB1, slns.vitaminB2, slns.vitaminC),
+      _calcMineralSufficiency(slns.calcium, slns.magnesium, slns.iron, slns.zinc),
+      state.menu!.carbohydrate / slns.carbohydrate * 100.0,
+      state.menu!.lipid / slns.lipid * 100.0,
+    ].map((element) => (element > graphMaxValue) ? graphMaxValue : element).toList();
+  }
+
+  double _calcVitaminSufficiency(
+      double retinolRef,
+      double vitaminB1Ref,
+      double vitaminB2Ref,
+      double vitaminCRef
+      ) {
+    return (state.menu!.retinol / retinolRef
+        + state.menu!.vitaminB1 / vitaminB1Ref
+        + state.menu!.vitaminB2 / vitaminB2Ref
+        + state.menu!.vitaminC / vitaminCRef) / 4 * 100.0;
+  }
+
+  double _calcMineralSufficiency(
+      double calciumRef,
+      double magnesiumRef,
+      double ironRef,
+      double zincRef
+      ) {
+    return (state.menu!.calcium / calciumRef
+        + state.menu!.magnesium / magnesiumRef
+        + state.menu!.iron / ironRef
+        + state.menu!.zinc / zincRef) / 4 * 100.0;
+  }
 }
