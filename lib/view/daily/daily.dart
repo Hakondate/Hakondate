@@ -10,11 +10,11 @@ import 'package:hakondate_v2/view/daily/nutrients_card.dart';
 import 'package:hakondate_v2/view_model/single_page/home_view_model.dart';
 import 'package:hakondate_v2/view_model/multi_page/user_view_model.dart';
 
-class Daily extends ConsumerWidget {
+class Daily extends StatelessWidget {
   const Daily({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,

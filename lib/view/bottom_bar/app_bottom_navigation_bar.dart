@@ -1,16 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:hakondate_v2/unit/size.dart';
 import 'package:routemaster/routemaster.dart';
 
-class AppBottomNavigationBar extends ConsumerWidget {
+class AppBottomNavigationBar extends StatelessWidget {
   const AppBottomNavigationBar({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final tabState = CupertinoTabPage.of(context);
 
     return CupertinoTabScaffold(
