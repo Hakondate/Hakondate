@@ -1,14 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:hakondate_v2/unit/size.dart';
 
 class SettingLabel extends StatelessWidget {
-  SettingLabel({
+  const SettingLabel({
+    Key? key,
     required this.title,
     required this.dialList,
     required this.completed,
     required this.trailing,
-  });
+  }) : super(key: key);
 
   final String title;
   final List<String> dialList;
@@ -20,7 +22,7 @@ class SettingLabel extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       builder: (context) {
-        return Container(
+        return SizedBox(
           height: MediaQuery.of(context).size.height * 2 / 5,
           child: Scaffold(
             appBar: AppBar(
@@ -33,7 +35,7 @@ class SettingLabel extends StatelessWidget {
                     completed(_selected);
                     Navigator.pop(context);
                   },
-                  child: Text(
+                  child: const Text(
                     '完了',
                     style: TextStyle(
                       fontSize: 20,
@@ -61,17 +63,17 @@ class SettingLabel extends StatelessWidget {
     return Container(
       color: Colors.white,
       child: ListTile(
-        contentPadding: EdgeInsets.only(
+        contentPadding: const EdgeInsets.only(
           left: PaddingSize.content,
           right: PaddingSize.content,
         ),
         title: Text(
           title,
-          style: TextStyle(fontSize: FontSize.label),
+          style: const TextStyle(fontSize: FontSize.label),
         ),
         trailing: Text(
           trailing,
-          style: TextStyle(fontSize: FontSize.label, color: Colors.black38),
+          style: const TextStyle(fontSize: FontSize.label, color: Colors.black38),
         ),
         onTap: () => _showDialPickerModal(context),
       ),

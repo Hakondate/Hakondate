@@ -1,5 +1,6 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'menu_model.dart';
 
@@ -188,28 +189,23 @@ class _$_MenuModel extends _MenuModel {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _MenuModel &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.day, day) ||
-                const DeepCollectionEquality().equals(other.day, day)) &&
-            (identical(other.schoolId, schoolId) ||
-                const DeepCollectionEquality()
-                    .equals(other.schoolId, schoolId)) &&
-            (identical(other.dishes, dishes) ||
-                const DeepCollectionEquality().equals(other.dishes, dishes)) &&
-            (identical(other.event, event) ||
-                const DeepCollectionEquality().equals(other.event, event)));
+        (other.runtimeType == runtimeType &&
+            other is _MenuModel &&
+            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.day, day) &&
+            const DeepCollectionEquality().equals(other.schoolId, schoolId) &&
+            const DeepCollectionEquality().equals(other.dishes, dishes) &&
+            const DeepCollectionEquality().equals(other.event, event));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(day) ^
-      const DeepCollectionEquality().hash(schoolId) ^
-      const DeepCollectionEquality().hash(dishes) ^
-      const DeepCollectionEquality().hash(event);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(day),
+      const DeepCollectionEquality().hash(schoolId),
+      const DeepCollectionEquality().hash(dishes),
+      const DeepCollectionEquality().hash(event));
 
   @JsonKey(ignore: true)
   @override
@@ -227,15 +223,15 @@ abstract class _MenuModel extends MenuModel {
   const _MenuModel._() : super._();
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override // Day: 2021/06/30 & ScID: 1 → 2021063001
-  DateTime get day => throw _privateConstructorUsedError;
+  DateTime get day;
   @override // 日付
-  int get schoolId => throw _privateConstructorUsedError;
+  int get schoolId;
   @override // 学校
-  List<DishModel> get dishes => throw _privateConstructorUsedError;
+  List<DishModel> get dishes;
   @override // 料理
-  String? get event => throw _privateConstructorUsedError;
+  String? get event;
   @override
   @JsonKey(ignore: true)
   _$MenuModelCopyWith<_MenuModel> get copyWith =>

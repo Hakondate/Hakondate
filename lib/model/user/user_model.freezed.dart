@@ -1,5 +1,6 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'user_model.dart';
 
@@ -203,29 +204,24 @@ class _$_UserModel extends _UserModel {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _UserModel &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.schoolId, schoolId) ||
-                const DeepCollectionEquality()
-                    .equals(other.schoolId, schoolId)) &&
-            (identical(other.schoolYear, schoolYear) ||
-                const DeepCollectionEquality()
-                    .equals(other.schoolYear, schoolYear)) &&
-            (identical(other.slns, slns) ||
-                const DeepCollectionEquality().equals(other.slns, slns)));
+        (other.runtimeType == runtimeType &&
+            other is _UserModel &&
+            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.schoolId, schoolId) &&
+            const DeepCollectionEquality()
+                .equals(other.schoolYear, schoolYear) &&
+            const DeepCollectionEquality().equals(other.slns, slns));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(schoolId) ^
-      const DeepCollectionEquality().hash(schoolYear) ^
-      const DeepCollectionEquality().hash(slns);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(schoolId),
+      const DeepCollectionEquality().hash(schoolYear),
+      const DeepCollectionEquality().hash(slns));
 
   @JsonKey(ignore: true)
   @override
@@ -243,15 +239,15 @@ abstract class _UserModel extends UserModel {
   const _UserModel._() : super._();
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override // ニックネーム
-  int get schoolId => throw _privateConstructorUsedError;
+  int get schoolId;
   @override // 学校
-  int get schoolYear => throw _privateConstructorUsedError;
+  int get schoolYear;
   @override // 学年
-  NutrientsModel? get slns => throw _privateConstructorUsedError;
+  NutrientsModel? get slns;
   @override
   @JsonKey(ignore: true)
   _$UserModelCopyWith<_UserModel> get copyWith =>

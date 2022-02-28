@@ -1,5 +1,6 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'school_model.dart';
 
@@ -181,30 +182,25 @@ class _$_SchoolModel implements _SchoolModel {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _SchoolModel &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.parentId, parentId) ||
-                const DeepCollectionEquality()
-                    .equals(other.parentId, parentId)) &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.lunchBlock, lunchBlock) ||
-                const DeepCollectionEquality()
-                    .equals(other.lunchBlock, lunchBlock)) &&
-            (identical(other.classification, classification) ||
-                const DeepCollectionEquality()
-                    .equals(other.classification, classification)));
+        (other.runtimeType == runtimeType &&
+            other is _SchoolModel &&
+            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.parentId, parentId) &&
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality()
+                .equals(other.lunchBlock, lunchBlock) &&
+            const DeepCollectionEquality()
+                .equals(other.classification, classification));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(parentId) ^
-      const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(lunchBlock) ^
-      const DeepCollectionEquality().hash(classification);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(parentId),
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(lunchBlock),
+      const DeepCollectionEquality().hash(classification));
 
   @JsonKey(ignore: true)
   @override
@@ -221,15 +217,15 @@ abstract class _SchoolModel implements SchoolModel {
       required int classification}) = _$_SchoolModel;
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override // ID
-  int get parentId => throw _privateConstructorUsedError;
+  int get parentId;
   @override // 親学校(給食センター)のID
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override // 学校名
-  int? get lunchBlock => throw _privateConstructorUsedError;
+  int? get lunchBlock;
   @override // 給食区分: 1 ~ 10
-  int get classification => throw _privateConstructorUsedError;
+  int get classification;
   @override
   @JsonKey(ignore: true)
   _$SchoolModelCopyWith<_SchoolModel> get copyWith =>

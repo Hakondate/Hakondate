@@ -1,5 +1,6 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'nutrients_model.dart';
 
@@ -55,7 +56,7 @@ class _$NutrientsModelTearOff {
     );
   }
 
-  NutrientsModel fromJson(Map<String, Object> json) {
+  NutrientsModel fromJson(Map<String, Object?> json) {
     return NutrientsModel.fromJson(json);
   }
 }
@@ -342,51 +343,51 @@ class _$_NutrientsModel implements _NutrientsModel {
       this.salt = 0.0});
 
   factory _$_NutrientsModel.fromJson(Map<String, dynamic> json) =>
-      _$_$_NutrientsModelFromJson(json);
+      _$$_NutrientsModelFromJson(json);
 
-  @JsonKey(defaultValue: 0.0)
+  @JsonKey()
   @override
   final double energy;
-  @JsonKey(defaultValue: 0.0)
+  @JsonKey()
   @override // エネルギー
   final double protein;
-  @JsonKey(defaultValue: 0.0)
+  @JsonKey()
   @override // タンパク質
   final double lipid;
-  @JsonKey(defaultValue: 0.0)
+  @JsonKey()
   @override // 脂質
   final double carbohydrate;
-  @JsonKey(defaultValue: 0.0)
+  @JsonKey()
   @override // 炭水化物
   final double sodium;
-  @JsonKey(defaultValue: 0.0)
+  @JsonKey()
   @override // ナトリウム
   final double calcium;
-  @JsonKey(defaultValue: 0.0)
+  @JsonKey()
   @override // カルシウム
   final double magnesium;
-  @JsonKey(defaultValue: 0.0)
+  @JsonKey()
   @override // マグネシウム
   final double iron;
-  @JsonKey(defaultValue: 0.0)
+  @JsonKey()
   @override // 鉄分
   final double zinc;
-  @JsonKey(defaultValue: 0.0)
+  @JsonKey()
   @override // 亜鉛
   final double retinol;
-  @JsonKey(defaultValue: 0.0)
+  @JsonKey()
   @override // レチノール活性当量(ビタミンA)
   final double vitaminB1;
-  @JsonKey(defaultValue: 0.0)
+  @JsonKey()
   @override // ビタミンB1
   final double vitaminB2;
-  @JsonKey(defaultValue: 0.0)
+  @JsonKey()
   @override // ビタミンB2
   final double vitaminC;
-  @JsonKey(defaultValue: 0.0)
+  @JsonKey()
   @override // ビタミンC
   final double dietaryFiber;
-  @JsonKey(defaultValue: 0.0)
+  @JsonKey()
   @override // 食物繊維
   final double salt;
 
@@ -398,66 +399,45 @@ class _$_NutrientsModel implements _NutrientsModel {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _NutrientsModel &&
-            (identical(other.energy, energy) ||
-                const DeepCollectionEquality().equals(other.energy, energy)) &&
-            (identical(other.protein, protein) ||
-                const DeepCollectionEquality()
-                    .equals(other.protein, protein)) &&
-            (identical(other.lipid, lipid) ||
-                const DeepCollectionEquality().equals(other.lipid, lipid)) &&
-            (identical(other.carbohydrate, carbohydrate) ||
-                const DeepCollectionEquality()
-                    .equals(other.carbohydrate, carbohydrate)) &&
-            (identical(other.sodium, sodium) ||
-                const DeepCollectionEquality().equals(other.sodium, sodium)) &&
-            (identical(other.calcium, calcium) ||
-                const DeepCollectionEquality()
-                    .equals(other.calcium, calcium)) &&
-            (identical(other.magnesium, magnesium) ||
-                const DeepCollectionEquality()
-                    .equals(other.magnesium, magnesium)) &&
-            (identical(other.iron, iron) ||
-                const DeepCollectionEquality().equals(other.iron, iron)) &&
-            (identical(other.zinc, zinc) ||
-                const DeepCollectionEquality().equals(other.zinc, zinc)) &&
-            (identical(other.retinol, retinol) ||
-                const DeepCollectionEquality()
-                    .equals(other.retinol, retinol)) &&
-            (identical(other.vitaminB1, vitaminB1) ||
-                const DeepCollectionEquality()
-                    .equals(other.vitaminB1, vitaminB1)) &&
-            (identical(other.vitaminB2, vitaminB2) ||
-                const DeepCollectionEquality()
-                    .equals(other.vitaminB2, vitaminB2)) &&
-            (identical(other.vitaminC, vitaminC) ||
-                const DeepCollectionEquality()
-                    .equals(other.vitaminC, vitaminC)) &&
-            (identical(other.dietaryFiber, dietaryFiber) ||
-                const DeepCollectionEquality()
-                    .equals(other.dietaryFiber, dietaryFiber)) &&
-            (identical(other.salt, salt) ||
-                const DeepCollectionEquality().equals(other.salt, salt)));
+        (other.runtimeType == runtimeType &&
+            other is _NutrientsModel &&
+            const DeepCollectionEquality().equals(other.energy, energy) &&
+            const DeepCollectionEquality().equals(other.protein, protein) &&
+            const DeepCollectionEquality().equals(other.lipid, lipid) &&
+            const DeepCollectionEquality()
+                .equals(other.carbohydrate, carbohydrate) &&
+            const DeepCollectionEquality().equals(other.sodium, sodium) &&
+            const DeepCollectionEquality().equals(other.calcium, calcium) &&
+            const DeepCollectionEquality().equals(other.magnesium, magnesium) &&
+            const DeepCollectionEquality().equals(other.iron, iron) &&
+            const DeepCollectionEquality().equals(other.zinc, zinc) &&
+            const DeepCollectionEquality().equals(other.retinol, retinol) &&
+            const DeepCollectionEquality().equals(other.vitaminB1, vitaminB1) &&
+            const DeepCollectionEquality().equals(other.vitaminB2, vitaminB2) &&
+            const DeepCollectionEquality().equals(other.vitaminC, vitaminC) &&
+            const DeepCollectionEquality()
+                .equals(other.dietaryFiber, dietaryFiber) &&
+            const DeepCollectionEquality().equals(other.salt, salt));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(energy) ^
-      const DeepCollectionEquality().hash(protein) ^
-      const DeepCollectionEquality().hash(lipid) ^
-      const DeepCollectionEquality().hash(carbohydrate) ^
-      const DeepCollectionEquality().hash(sodium) ^
-      const DeepCollectionEquality().hash(calcium) ^
-      const DeepCollectionEquality().hash(magnesium) ^
-      const DeepCollectionEquality().hash(iron) ^
-      const DeepCollectionEquality().hash(zinc) ^
-      const DeepCollectionEquality().hash(retinol) ^
-      const DeepCollectionEquality().hash(vitaminB1) ^
-      const DeepCollectionEquality().hash(vitaminB2) ^
-      const DeepCollectionEquality().hash(vitaminC) ^
-      const DeepCollectionEquality().hash(dietaryFiber) ^
-      const DeepCollectionEquality().hash(salt);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(energy),
+      const DeepCollectionEquality().hash(protein),
+      const DeepCollectionEquality().hash(lipid),
+      const DeepCollectionEquality().hash(carbohydrate),
+      const DeepCollectionEquality().hash(sodium),
+      const DeepCollectionEquality().hash(calcium),
+      const DeepCollectionEquality().hash(magnesium),
+      const DeepCollectionEquality().hash(iron),
+      const DeepCollectionEquality().hash(zinc),
+      const DeepCollectionEquality().hash(retinol),
+      const DeepCollectionEquality().hash(vitaminB1),
+      const DeepCollectionEquality().hash(vitaminB2),
+      const DeepCollectionEquality().hash(vitaminC),
+      const DeepCollectionEquality().hash(dietaryFiber),
+      const DeepCollectionEquality().hash(salt));
 
   @JsonKey(ignore: true)
   @override
@@ -466,7 +446,7 @@ class _$_NutrientsModel implements _NutrientsModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_NutrientsModelToJson(this);
+    return _$$_NutrientsModelToJson(this);
   }
 }
 
@@ -492,35 +472,35 @@ abstract class _NutrientsModel implements NutrientsModel {
       _$_NutrientsModel.fromJson;
 
   @override
-  double get energy => throw _privateConstructorUsedError;
+  double get energy;
   @override // エネルギー
-  double get protein => throw _privateConstructorUsedError;
+  double get protein;
   @override // タンパク質
-  double get lipid => throw _privateConstructorUsedError;
+  double get lipid;
   @override // 脂質
-  double get carbohydrate => throw _privateConstructorUsedError;
+  double get carbohydrate;
   @override // 炭水化物
-  double get sodium => throw _privateConstructorUsedError;
+  double get sodium;
   @override // ナトリウム
-  double get calcium => throw _privateConstructorUsedError;
+  double get calcium;
   @override // カルシウム
-  double get magnesium => throw _privateConstructorUsedError;
+  double get magnesium;
   @override // マグネシウム
-  double get iron => throw _privateConstructorUsedError;
+  double get iron;
   @override // 鉄分
-  double get zinc => throw _privateConstructorUsedError;
+  double get zinc;
   @override // 亜鉛
-  double get retinol => throw _privateConstructorUsedError;
+  double get retinol;
   @override // レチノール活性当量(ビタミンA)
-  double get vitaminB1 => throw _privateConstructorUsedError;
+  double get vitaminB1;
   @override // ビタミンB1
-  double get vitaminB2 => throw _privateConstructorUsedError;
+  double get vitaminB2;
   @override // ビタミンB2
-  double get vitaminC => throw _privateConstructorUsedError;
+  double get vitaminC;
   @override // ビタミンC
-  double get dietaryFiber => throw _privateConstructorUsedError;
+  double get dietaryFiber;
   @override // 食物繊維
-  double get salt => throw _privateConstructorUsedError;
+  double get salt;
   @override
   @JsonKey(ignore: true)
   _$NutrientsModelCopyWith<_NutrientsModel> get copyWith =>

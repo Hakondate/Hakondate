@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:routemaster/routemaster.dart';
 
-import 'package:hakondate_v2/router/app_router_delegate.dart';
+import 'package:hakondate_v2/router/routes.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-
+  await initializeDateFormatting('ja_JP');
   runApp(const Hakondate());
 }
 
@@ -18,9 +20,6 @@ class Hakondate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _routeInformationParser = ListRouteInformationParser();
-    final _appRouterDelegate = AppRouterDelegate();
-    final _backButtonDispatcher = RootBackButtonDispatcher();
     final ThemeData theme = ThemeData(
         fontFamily: 'MPLUSRounded1c',
         appBarTheme: const AppBarTheme(
@@ -38,11 +37,11 @@ class Hakondate extends StatelessWidget {
           colorScheme: theme.colorScheme.copyWith(
             primary: Colors.white,
             secondary: Colors.orangeAccent,
+            secondaryVariant: const Color(0xFFFFEAD6),
           ),
         ),
-        routeInformationParser: _routeInformationParser,
-        routerDelegate: _appRouterDelegate,
-        backButtonDispatcher: _backButtonDispatcher,
+        routerDelegate: routemaster,
+        routeInformationParser: const RoutemasterParser(),
         debugShowCheckedModeBanner: false,
       ),
     );

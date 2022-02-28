@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:hakondate_v2/model/school/school_model.dart';
-import 'package:hakondate_v2/state//user/user_state.dart';
+import 'package:hakondate_v2/state/user/user_state.dart';
 import 'package:hakondate_v2/model/nutrients/nutrients_model.dart';
 import 'package:hakondate_v2/model/user/user_model.dart';
 import 'package:hakondate_v2/repository/local/schools_local_repository.dart';
@@ -107,7 +107,7 @@ class UserViewModel extends StateNotifier<UserState> {
     final UserModel _user = await _usersLocalRepository.getById(userId);
     final SchoolModel _school =
         await _schoolsLocalRepository.getById(schoolId ?? _user.schoolId);
-    if (_school.classification == 1) {
+    if (_school.classification != 1) {
       int _schoolYear = schoolYear ?? _user.schoolYear;
       if (_schoolYear <= 2) {
         return 'lower';

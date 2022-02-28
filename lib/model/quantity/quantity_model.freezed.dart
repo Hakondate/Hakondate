@@ -1,5 +1,6 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'quantity_model.dart';
 
@@ -118,7 +119,7 @@ class _$_QuantityModel implements _QuantityModel {
 
   @override
   final int? piece;
-  @JsonKey(defaultValue: 0.0)
+  @JsonKey()
   @override // 個数
   final double gram;
 
@@ -130,18 +131,17 @@ class _$_QuantityModel implements _QuantityModel {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _QuantityModel &&
-            (identical(other.piece, piece) ||
-                const DeepCollectionEquality().equals(other.piece, piece)) &&
-            (identical(other.gram, gram) ||
-                const DeepCollectionEquality().equals(other.gram, gram)));
+        (other.runtimeType == runtimeType &&
+            other is _QuantityModel &&
+            const DeepCollectionEquality().equals(other.piece, piece) &&
+            const DeepCollectionEquality().equals(other.gram, gram));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(piece) ^
-      const DeepCollectionEquality().hash(gram);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(piece),
+      const DeepCollectionEquality().hash(gram));
 
   @JsonKey(ignore: true)
   @override
@@ -153,9 +153,9 @@ abstract class _QuantityModel implements QuantityModel {
   const factory _QuantityModel({int? piece, double gram}) = _$_QuantityModel;
 
   @override
-  int? get piece => throw _privateConstructorUsedError;
+  int? get piece;
   @override // 個数
-  double get gram => throw _privateConstructorUsedError;
+  double get gram;
   @override
   @JsonKey(ignore: true)
   _$QuantityModelCopyWith<_QuantityModel> get copyWith =>
