@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate_v2/model/school/school_model.dart';
 import 'package:hakondate_v2/state/signup/signup_state.dart';
 import 'package:hakondate_v2/repository/local/schools_local_repository.dart';
+import 'package:hakondate_v2/unit/enum.dart';
 
 final signupProvider = StateNotifierProvider<SignupViewModel, SignupState>(
     (ref) => SignupViewModel());
@@ -24,12 +25,12 @@ class SignupViewModel extends StateNotifier<SignupState> {
 
   Future<void> updateSchool(int id) async {
     final SchoolModel school = await _schoolLocalRepository.getById(id);
-    final List<String> schoolYears = (school.classification == 0)
+    final List<String> schoolYears = (school.classification == SchoolClassification.primary)
         ? ['1年生', '2年生', '3年生', '4年生', '5年生', '6年生']
         : ['1年生', '2年生', '3年生'];
     if (state.schoolYear != null &&
         state.schoolYear! > 3 &&
-        school.classification > 0) {
+        school.classification == SchoolClassification.secondary) {
       state = state.copyWith(
         schoolId: id,
         schoolYear: 3,

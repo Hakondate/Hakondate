@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:hakondate_v2/model/foodstuff/foodstuff_model.dart';
+import 'package:hakondate_v2/unit/enum.dart';
 
 part 'dish_model.freezed.dart';
 
@@ -10,7 +11,7 @@ class DishModel with _$DishModel {
   const factory DishModel({
     required String name,                     // 料理名
     required List<FoodstuffModel> foodstuffs, // 食材
-    String? category,                         // 分類
+    DishCategory? category,                   // 分類
   }) = _DishModel;
 
   double get energy {

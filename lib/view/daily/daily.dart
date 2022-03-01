@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate_v2/state/daily/daily_state.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
 
@@ -96,13 +97,13 @@ class Daily extends StatelessWidget {
         }
 
         switch (store.status) {
-          case 0:
+          case DailyStatus.holiday:
             return _noMenuWidget(
               context: context,
               imageFileName: 'holiday.png',
               text: '給食はお休みです...',
             );
-          case -1:
+          case DailyStatus.noData:
             return _noMenuWidget(
               context: context,
               imageFileName: 'no_data.png',

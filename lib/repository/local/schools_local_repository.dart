@@ -1,5 +1,6 @@
 import 'package:hakondate_v2/model/school/school_model.dart';
 import 'package:hakondate_v2/repository/local/database_manager.dart';
+import 'package:hakondate_v2/unit/enum.dart';
 
 import 'package:moor/moor.dart';
 
@@ -13,35 +14,46 @@ class SchoolsLocalRepository {
   Future<int> count() => _databaseManager.countSchools();
 
   Future<List<SchoolModel>> getAll() async {
-    final List<SchoolModel> _schools = [];
-    final List<SchoolsSchema> _schoolsSchemas =
+    final List<SchoolModel> schools = [];
+    final List<SchoolsSchema> schoolsSchemas =
         await _databaseManager.allSchoolsSchemas;
-    for (var schoolSchema in _schoolsSchemas) {
-      _schools.add(SchoolModel(
+    for (var schoolSchema in schoolsSchemas) {
+      schools.add(SchoolModel(
           id: schoolSchema.id,
           parentId: schoolSchema.parentId,
           name: schoolSchema.name,
-          classification: schoolSchema.classification,
+          classification: _judgeClassification(schoolSchema.classification),
         ));
     }
 
-    return _schools;
+    return schools;
   }
 
   Future<SchoolModel> getById(int id) async {
-    final SchoolsSchema _schoolsSchema =
+    final SchoolsSchema schoolsSchema =
         await _databaseManager.getSchoolsSchemaById(id);
 
     return SchoolModel(
-      id: _schoolsSchema.id,
-      parentId: _schoolsSchema.parentId,
-      name: _schoolsSchema.name,
-      classification: _schoolsSchema.classification,
+      id: schoolsSchema.id,
+      parentId: schoolsSchema.parentId,
+      name: schoolsSchema.name,
+      classification: _judgeClassification(schoolsSchema.classification),
     );
   }
 
+  SchoolClassification _judgeClassification(String classificationStr) {
+    switch (classificationStr) {
+      case 'primary':
+        return SchoolClassification.primary;
+      case 'secondary':
+        return SchoolClassification.secondary;
+      default:
+        return SchoolClassification.secondary;
+    }
+  }
+
   Future<int> add(Map<String, dynamic> school) async {
-    final SchoolsTableCompanion _schoolsSchema = SchoolsTableCompanion(
+    final SchoolsTableCompanion schoolsSchema = SchoolsTableCompanion(
       id: Value(school['id']),
       parentId: Value(school['parentId']),
       name: Value(school['name']),
@@ -49,6 +61,6 @@ class SchoolsLocalRepository {
       classification: Value(school['classification']),
     );
 
-    return await _databaseManager.addSchoolsSchema(_schoolsSchema);
+    return await _databaseManager.addSchoolsSchema(schoolsSchema);
   }
 }

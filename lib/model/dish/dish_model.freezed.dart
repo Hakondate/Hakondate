@@ -20,7 +20,7 @@ class _$DishModelTearOff {
   _DishModel call(
       {required String name,
       required List<FoodstuffModel> foodstuffs,
-      String? category}) {
+      DishCategory? category}) {
     return _DishModel(
       name: name,
       foodstuffs: foodstuffs,
@@ -37,7 +37,7 @@ mixin _$DishModel {
   String get name => throw _privateConstructorUsedError; // 料理名
   List<FoodstuffModel> get foodstuffs =>
       throw _privateConstructorUsedError; // 食材
-  String? get category => throw _privateConstructorUsedError;
+  DishCategory? get category => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DishModelCopyWith<DishModel> get copyWith =>
@@ -48,7 +48,8 @@ mixin _$DishModel {
 abstract class $DishModelCopyWith<$Res> {
   factory $DishModelCopyWith(DishModel value, $Res Function(DishModel) then) =
       _$DishModelCopyWithImpl<$Res>;
-  $Res call({String name, List<FoodstuffModel> foodstuffs, String? category});
+  $Res call(
+      {String name, List<FoodstuffModel> foodstuffs, DishCategory? category});
 }
 
 /// @nodoc
@@ -77,7 +78,7 @@ class _$DishModelCopyWithImpl<$Res> implements $DishModelCopyWith<$Res> {
       category: category == freezed
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DishCategory?,
     ));
   }
 }
@@ -88,7 +89,8 @@ abstract class _$DishModelCopyWith<$Res> implements $DishModelCopyWith<$Res> {
           _DishModel value, $Res Function(_DishModel) then) =
       __$DishModelCopyWithImpl<$Res>;
   @override
-  $Res call({String name, List<FoodstuffModel> foodstuffs, String? category});
+  $Res call(
+      {String name, List<FoodstuffModel> foodstuffs, DishCategory? category});
 }
 
 /// @nodoc
@@ -118,7 +120,7 @@ class __$DishModelCopyWithImpl<$Res> extends _$DishModelCopyWithImpl<$Res>
       category: category == freezed
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DishCategory?,
     ));
   }
 }
@@ -135,7 +137,7 @@ class _$_DishModel extends _DishModel {
   @override // 料理名
   final List<FoodstuffModel> foodstuffs;
   @override // 食材
-  final String? category;
+  final DishCategory? category;
 
   @override
   String toString() {
@@ -170,7 +172,7 @@ abstract class _DishModel extends DishModel {
   const factory _DishModel(
       {required String name,
       required List<FoodstuffModel> foodstuffs,
-      String? category}) = _$_DishModel;
+      DishCategory? category}) = _$_DishModel;
   const _DishModel._() : super._();
 
   @override
@@ -178,7 +180,7 @@ abstract class _DishModel extends DishModel {
   @override // 料理名
   List<FoodstuffModel> get foodstuffs;
   @override // 食材
-  String? get category;
+  DishCategory? get category;
   @override
   @JsonKey(ignore: true)
   _$DishModelCopyWith<_DishModel> get copyWith =>

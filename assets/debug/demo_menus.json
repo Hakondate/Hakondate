@@ -7,7 +7,7 @@
         "dishes": [
             {
                 "name": "ごはん",
-                "category": "主食",
+                "category": "main",
                 "foodstuffs": [
                     {
                         "name": "精白米",
@@ -36,7 +36,7 @@
             },
             {
                 "name": "牛乳",
-                "category": "飲み物",
+                "category": "drink",
                 "foodstuffs": [
                     {
                         "name": "牛乳",
@@ -65,7 +65,7 @@
             },
             {
                 "name": "五目あんかけ豆腐",
-                "category": "主菜",
+                "category": "side",
                 "foodstuffs": [
                     {
                         "name": "豆腐",
@@ -309,7 +309,7 @@
         "dishes": [
             {
                 "name": "ごはんちゃん",
-                "category": "主食",
+                "category": "main",
                 "foodstuffs": [
                     {
                         "name": "精白米ちゃん",
@@ -338,7 +338,7 @@
             },
             {
                 "name": "牛乳ちゃん",
-                "category": "飲み物",
+                "category": "drink",
                 "foodstuffs": [
                     {
                         "name": "牛乳ちゃん",
@@ -367,7 +367,7 @@
             },
             {
                 "name": "五目あんかけ豆腐ちゃん",
-                "category": "主菜",
+                "category": "side",
                 "foodstuffs": [
                     {
                         "name": "豆腐ちゃん",
@@ -611,7 +611,7 @@
         "dishes": [
             {
                 "name": "ごはん",
-                "category": "主食",
+                "category": "main",
                 "foodstuffs": [
                     {
                         "name": "精白米",
@@ -640,7 +640,7 @@
             },
             {
                 "name": "牛乳",
-                "category": "飲み物",
+                "category": "drink",
                 "foodstuffs": [
                     {
                         "name": "牛乳",
@@ -669,7 +669,7 @@
             },
             {
                 "name": "五目あんかけ豆腐",
-                "category": "主菜",
+                "category": "side",
                 "foodstuffs": [
                     {
                         "name": "豆腐",
@@ -913,7 +913,7 @@
         "dishes": [
             {
                 "name": "ごはん",
-                "category": "主食",
+                "category": "main",
                 "foodstuffs": [
                     {
                         "name": "精白米",
@@ -942,7 +942,7 @@
             },
             {
                 "name": "牛乳",
-                "category": "飲み物",
+                "category": "drink",
                 "foodstuffs": [
                     {
                         "name": "牛乳",
@@ -971,7 +971,7 @@
             },
             {
                 "name": "五目あんかけ豆腐",
-                "category": "主菜",
+                "category": "side",
                 "foodstuffs": [
                     {
                         "name": "豆腐",
@@ -1215,7 +1215,7 @@
         "dishes": [
             {
                 "name": "ごはん",
-                "category": "主食",
+                "category": "main",
                 "foodstuffs": [
                     {
                         "name": "精白米",
@@ -1244,7 +1244,7 @@
             },
             {
                 "name": "牛乳",
-                "category": "飲み物",
+                "category": "drink",
                 "foodstuffs": [
                     {
                         "name": "牛乳",
@@ -1273,7 +1273,7 @@
             },
             {
                 "name": "五目あんかけ豆腐",
-                "category": "主菜",
+                "category": "side",
                 "foodstuffs": [
                     {
                         "name": "豆腐",

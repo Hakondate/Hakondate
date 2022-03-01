@@ -22,7 +22,7 @@ class _$SchoolModelTearOff {
       required int parentId,
       required String name,
       int? lunchBlock,
-      required int classification}) {
+      required SchoolClassification classification}) {
     return _SchoolModel(
       id: id,
       parentId: parentId,
@@ -42,7 +42,7 @@ mixin _$SchoolModel {
   int get parentId => throw _privateConstructorUsedError; // 親学校(給食センター)のID
   String get name => throw _privateConstructorUsedError; // 学校名
   int? get lunchBlock => throw _privateConstructorUsedError; // 給食区分: 1 ~ 10
-  int get classification => throw _privateConstructorUsedError;
+  SchoolClassification get classification => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SchoolModelCopyWith<SchoolModel> get copyWith =>
@@ -55,7 +55,11 @@ abstract class $SchoolModelCopyWith<$Res> {
           SchoolModel value, $Res Function(SchoolModel) then) =
       _$SchoolModelCopyWithImpl<$Res>;
   $Res call(
-      {int id, int parentId, String name, int? lunchBlock, int classification});
+      {int id,
+      int parentId,
+      String name,
+      int? lunchBlock,
+      SchoolClassification classification});
 }
 
 /// @nodoc
@@ -94,7 +98,7 @@ class _$SchoolModelCopyWithImpl<$Res> implements $SchoolModelCopyWith<$Res> {
       classification: classification == freezed
           ? _value.classification
           : classification // ignore: cast_nullable_to_non_nullable
-              as int,
+              as SchoolClassification,
     ));
   }
 }
@@ -107,7 +111,11 @@ abstract class _$SchoolModelCopyWith<$Res>
       __$SchoolModelCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int id, int parentId, String name, int? lunchBlock, int classification});
+      {int id,
+      int parentId,
+      String name,
+      int? lunchBlock,
+      SchoolClassification classification});
 }
 
 /// @nodoc
@@ -148,7 +156,7 @@ class __$SchoolModelCopyWithImpl<$Res> extends _$SchoolModelCopyWithImpl<$Res>
       classification: classification == freezed
           ? _value.classification
           : classification // ignore: cast_nullable_to_non_nullable
-              as int,
+              as SchoolClassification,
     ));
   }
 }
@@ -172,7 +180,7 @@ class _$_SchoolModel implements _SchoolModel {
   @override // 学校名
   final int? lunchBlock;
   @override // 給食区分: 1 ~ 10
-  final int classification;
+  final SchoolClassification classification;
 
   @override
   String toString() {
@@ -214,7 +222,7 @@ abstract class _SchoolModel implements SchoolModel {
       required int parentId,
       required String name,
       int? lunchBlock,
-      required int classification}) = _$_SchoolModel;
+      required SchoolClassification classification}) = _$_SchoolModel;
 
   @override
   int get id;
@@ -225,7 +233,7 @@ abstract class _SchoolModel implements SchoolModel {
   @override // 学校名
   int? get lunchBlock;
   @override // 給食区分: 1 ~ 10
-  int get classification;
+  SchoolClassification get classification;
   @override
   @JsonKey(ignore: true)
   _$SchoolModelCopyWith<_SchoolModel> get copyWith =>

@@ -23,7 +23,7 @@ class _$DailyStateTearOff {
       required DateTime calendarTabFirstDay,
       required DateTime calendarTabLastDay,
       MenuModel? menu,
-      int status = -1,
+      DailyStatus status = DailyStatus.noData,
       bool isFetching = true}) {
     return _DailyState(
       selectedDay: selectedDay,
@@ -47,8 +47,7 @@ mixin _$DailyState {
   DateTime get calendarTabFirstDay => throw _privateConstructorUsedError;
   DateTime get calendarTabLastDay => throw _privateConstructorUsedError;
   MenuModel? get menu => throw _privateConstructorUsedError;
-  int get status =>
-      throw _privateConstructorUsedError; // -1:データ無し, 0:休み, 1:給食あり
+  DailyStatus get status => throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -67,7 +66,7 @@ abstract class $DailyStateCopyWith<$Res> {
       DateTime calendarTabFirstDay,
       DateTime calendarTabLastDay,
       MenuModel? menu,
-      int status,
+      DailyStatus status,
       bool isFetching});
 
   $MenuModelCopyWith<$Res>? get menu;
@@ -115,7 +114,7 @@ class _$DailyStateCopyWithImpl<$Res> implements $DailyStateCopyWith<$Res> {
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as int,
+              as DailyStatus,
       isFetching: isFetching == freezed
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
@@ -147,7 +146,7 @@ abstract class _$DailyStateCopyWith<$Res> implements $DailyStateCopyWith<$Res> {
       DateTime calendarTabFirstDay,
       DateTime calendarTabLastDay,
       MenuModel? menu,
-      int status,
+      DailyStatus status,
       bool isFetching});
 
   @override
@@ -198,7 +197,7 @@ class __$DailyStateCopyWithImpl<$Res> extends _$DailyStateCopyWithImpl<$Res>
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as int,
+              as DailyStatus,
       isFetching: isFetching == freezed
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
@@ -216,7 +215,7 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
       required this.calendarTabFirstDay,
       required this.calendarTabLastDay,
       this.menu,
-      this.status = -1,
+      this.status = DailyStatus.noData,
       this.isFetching = true});
 
   @override
@@ -231,9 +230,9 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
   final MenuModel? menu;
   @JsonKey()
   @override
-  final int status;
+  final DailyStatus status;
   @JsonKey()
-  @override // -1:データ無し, 0:休み, 1:給食あり
+  @override
   final bool isFetching;
 
   @override
@@ -298,7 +297,7 @@ abstract class _DailyState implements DailyState {
       required DateTime calendarTabFirstDay,
       required DateTime calendarTabLastDay,
       MenuModel? menu,
-      int status,
+      DailyStatus status,
       bool isFetching}) = _$_DailyState;
 
   @override
@@ -312,8 +311,8 @@ abstract class _DailyState implements DailyState {
   @override
   MenuModel? get menu;
   @override
-  int get status;
-  @override // -1:データ無し, 0:休み, 1:給食あり
+  DailyStatus get status;
+  @override
   bool get isFetching;
   @override
   @JsonKey(ignore: true)

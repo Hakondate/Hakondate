@@ -7,6 +7,12 @@ import 'package:hakondate_v2/model/menu/menu_model.dart';
 
 part 'daily_state.freezed.dart';
 
+enum DailyStatus {
+  noData,
+  holiday,
+  lunchesDay,
+}
+
 @freezed
 class DailyState with _$DailyState {
   const factory DailyState({
@@ -15,7 +21,7 @@ class DailyState with _$DailyState {
     required DateTime calendarTabFirstDay,
     required DateTime calendarTabLastDay,
     MenuModel? menu,
-    @Default(-1) int status,  // -1:データ無し, 0:休み, 1:給食あり
+    @Default(DailyStatus.noData) DailyStatus status,
     @Default(true) bool isFetching,
   }) = _DailyState;
 }
