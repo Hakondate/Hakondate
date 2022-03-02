@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate_v2/router/routes.dart';
+import 'package:hakondate_v2/unit/enum.dart';
 import 'package:hakondate_v2/view_model/multi_page/menus_view_model.dart';
 import 'package:hakondate_v2/view_model/multi_page/loading_view_model.dart';
 import 'package:hakondate_v2/view_model/multi_page/user_view_model.dart';
@@ -33,26 +34,20 @@ class LoadingDialog {
                     width: _screenWidth * 2.0 / 3.0,
                     child: StreamBuilder(
                       stream: _load(context, ref),
-                      initialData: 'Reading',
+                      initialData: LoadingStatus.reading,
                       builder: (BuildContext context,
-                          AsyncSnapshot<String> snapshot) {
+                          AsyncSnapshot<LoadingStatus> snapshot) {
                         if (snapshot.connectionState != ConnectionState.done) {
-                          Widget _widget = Container();
                           switch (snapshot.data) {
-                            case 'Reading':
-                              _widget = Image.asset(
-                                  'assets/loading_animation/data_reading.gif');
-                              break;
-                            case 'CheckingUpdate':
-                              _widget = Image.asset(
-                                  'assets/loading_animation/checking.gif');
-                              break;
-                            case 'Updating':
-                              _widget = Image.asset(
-                                  'assets/loading_animation/data_updating.gif');
-                              break;
+                            case LoadingStatus.reading:
+                              return Image.asset('assets/loading_animation/data_reading.gif');
+                            case LoadingStatus.checkingUpdate:
+                              return Image.asset('assets/loading_animation/checking.gif');
+                            case LoadingStatus.updating:
+                              return Image.asset('assets/loading_animation/data_updating.gif');
+                            default:
+                              return Container();
                           }
-                          return _widget;
                         }
                         return Image.asset(
                             'assets/loading_animation/data_reading.gif');
@@ -68,10 +63,10 @@ class LoadingDialog {
     );
   }
 
-  Stream<String> _load(BuildContext context, WidgetRef ref) async* {
+  Stream<LoadingStatus> _load(BuildContext context, WidgetRef ref) async* {
     final store = ref.watch(signupProvider);
 
-    yield 'Updating';
+    yield LoadingStatus.updating;
     try {
       await ref.read(userProvider.notifier).createUser(
             name: store.name!,

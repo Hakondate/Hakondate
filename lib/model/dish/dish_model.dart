@@ -1,9 +1,14 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:hakondate_v2/model/foodstuff/foodstuff_model.dart';
-import 'package:hakondate_v2/unit/enum.dart';
 
 part 'dish_model.freezed.dart';
+
+enum DishCategory {
+  main,
+  drink,
+  side,
+}
 
 @freezed
 class DishModel with _$DishModel {

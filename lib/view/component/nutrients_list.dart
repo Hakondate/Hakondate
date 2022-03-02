@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:hakondate_v2/unit/enum.dart';
 import 'package:hakondate_v2/view/component/nutrient_label.dart';
 
 class NutrientsList extends StatelessWidget {

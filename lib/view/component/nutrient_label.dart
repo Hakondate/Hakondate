@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'package:hakondate_v2/unit/enum.dart';
 import 'package:hakondate_v2/unit/size.dart';
+
+enum NutrientUnit {
+  kcal,
+  gram,
+  mGram,
+  microGram,
+}
 
 class NutrientLabel extends StatelessWidget {
   final String name;

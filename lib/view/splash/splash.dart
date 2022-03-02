@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate_v2/router/routes.dart';
+import 'package:hakondate_v2/unit/enum.dart';
 import 'package:hakondate_v2/view_model/multi_page/menus_view_model.dart';
 import 'package:hakondate_v2/view_model/multi_page/school_view_model.dart';
 import 'package:hakondate_v2/view_model/multi_page/loading_view_model.dart';
@@ -13,8 +14,8 @@ import 'package:hakondate_v2/view_model/single_page/home_view_model.dart';
 class Splash extends ConsumerWidget {
   const Splash({Key? key}) : super(key: key);
 
-  Stream<String> _initialData(BuildContext context, WidgetRef ref) async* {
-    yield 'Reading';
+  Stream<LoadingStatus> _initialData(BuildContext context, WidgetRef ref) async* {
+    yield LoadingStatus.reading;
     try {
       await for (final status
           in ref.read(schoolProvider.notifier).initialize()) {
@@ -107,25 +108,25 @@ class Splash extends ConsumerWidget {
                 width: screenWidth * 2.0 / 3.0,
                 child: StreamBuilder(
                   stream: _initialData(context, ref),
-                  initialData: 'Reading',
+                  initialData: LoadingStatus.reading,
                   builder:
-                      (BuildContext context, AsyncSnapshot<String> snapshot) {
+                      (BuildContext context, AsyncSnapshot<LoadingStatus> snapshot) {
                     if (snapshot.connectionState != ConnectionState.done) {
                       switch (snapshot.data) {
-                        case 'Reading':
+                        case LoadingStatus.reading:
                           return Image.asset(
                               'assets/loading_animation/data_reading.gif');
-                        case 'CheckingUpdate':
+                        case LoadingStatus.checkingUpdate:
                           return Image.asset(
                               'assets/loading_animation/checking.gif');
-                        case 'Updating':
+                        case LoadingStatus.updating:
                           return Image.asset(
                               'assets/loading_animation/data_updating.gif');
+                        default:
+                          return Container();
                       }
-                      return Container();
                     }
-                    return Image.asset(
-                        'assets/loading_animation/data_reading.gif');
+                    return Image.asset('assets/loading_animation/data_reading.gif');
                   },
                 ),
               ),

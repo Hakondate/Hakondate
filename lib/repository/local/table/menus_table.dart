@@ -15,6 +15,6 @@ class MenusTable extends Table {
 
   @override
   List<String> get customConstraints => [
-        'FOREIGN KEY(school_id) REFERENCES schools_table(id)',
-      ];
+    'FOREIGN KEY(school_id) REFERENCES schools_table(id)',
+  ];
 }
