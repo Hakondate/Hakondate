@@ -27,6 +27,6 @@ class FoodstuffsTable extends Table {
 
   @override
   List<String> get customConstraints => [
-        'UNIQUE (name, gram, is_heat, is_allergy)',
-      ];
+    'UNIQUE (name, gram, is_heat, is_allergy)',
+  ];
 }

@@ -6,7 +6,7 @@ class SchoolsTable extends Table {
   IntColumn get parentId => integer()();
   TextColumn get name => text()();
   IntColumn get lunchBlock => integer().nullable()();
-  IntColumn get classification => integer()();
+  TextColumn get classification => text()();
 
   @override
   Set<Column> get primaryKey => {id};

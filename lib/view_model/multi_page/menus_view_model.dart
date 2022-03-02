@@ -6,6 +6,7 @@ import 'package:hakondate_v2/model/menu/menu_model.dart';
 import 'package:hakondate_v2/state/menu/menus_state.dart';
 import 'package:hakondate_v2/repository/local/menus_local_repository.dart';
 import 'package:hakondate_v2/repository/remote/menus_remote_repository.dart';
+import 'package:hakondate_v2/unit/enum.dart';
 
 final menusProvider = StateNotifierProvider<MenusViewModel, MenusState>(
     (ref) => MenusViewModel());
@@ -19,13 +20,13 @@ class MenusViewModel extends StateNotifier<MenusState> {
   final MenusLocalRepository _localRepository;
   final MenusRemoteRepository _remoteRepository;
 
-  Stream<String> initialize(int schoolId) async* {
-    yield 'CheckingUpdate';
+  Stream<LoadingStatus> initialize(int schoolId) async* {
+    yield LoadingStatus.checkingUpdate;
     if (await _checkUpdate()) {
-      yield 'Updating';
+      yield LoadingStatus.updating;
       await _updateLocalMenus(schoolId);
     }
-    yield 'Reading';
+    yield LoadingStatus.reading;
     final DateTime _loadingDay =
         DateTime(DateTime.now().year, DateTime.now().month);
     await getLocalMenus(_loadingDay, schoolId);

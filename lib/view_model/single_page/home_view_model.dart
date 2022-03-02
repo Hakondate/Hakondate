@@ -29,7 +29,7 @@ class DailyViewModel extends StateNotifier<DailyState> {
     MenuModel? _selected = await _menusLocalRepository.getById(_parseToId(day, schoolId));
 
     if (_selected == null) {
-      final int _status = await _menusLocalRepository.getStatusByDate(day);
+      final DailyStatus _status = await _menusLocalRepository.getStatusByDate(day);
       state = state.copyWith(
         selectedDay: day,
         menu: _selected,
@@ -40,7 +40,7 @@ class DailyViewModel extends StateNotifier<DailyState> {
       state = state.copyWith(
         selectedDay: day,
         menu: _selected,
-        status: 1,
+        status: DailyStatus.lunchesDay,
         isFetching: false,
       );
     }

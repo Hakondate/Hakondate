@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate_v2/unit/enum.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:hakondate_v2/model/school/school_model.dart';
@@ -13,6 +14,13 @@ import 'package:hakondate_v2/model/nutrients/nutrients_model.dart';
 import 'package:hakondate_v2/model/user/user_model.dart';
 import 'package:hakondate_v2/repository/local/schools_local_repository.dart';
 import 'package:hakondate_v2/repository/local/users_local_repository.dart';
+
+enum SchoolGrade {
+  lower,
+  middle,
+  upper,
+  junior,
+}
 
 final userProvider =
     StateNotifierProvider<UserViewModel, UserState>((ref) => UserViewModel());
@@ -84,12 +92,12 @@ class UserViewModel extends StateNotifier<UserState> {
 
   Future<NutrientsModel> _getSLNS(int userId,
       {int? schoolId, int? schoolYear}) async {
-    final String _schoolGrade = await _getSchoolGrade(
+    final SchoolGrade _schoolGrade = await _getSchoolGrade(
       userId,
       schoolId: schoolId,
       schoolYear: schoolYear,
     );
-    final String _pathSLNS = 'assets/slns/$_schoolGrade.json';
+    final String _pathSLNS = _getPathSLNS(_schoolGrade);
     final String _jsonSLNS = await rootBundle.loadString(_pathSLNS);
     final Map<String, dynamic> _decodeSLNS = json.decode(_jsonSLNS);
 
@@ -102,23 +110,36 @@ class UserViewModel extends StateNotifier<UserState> {
   * 小学5.6年 => "upper"
   * 中学生    => "junior"
   * データ不備 => "junior" */
-  Future<String> _getSchoolGrade(int userId,
+  Future<SchoolGrade> _getSchoolGrade(int userId,
       {int? schoolId, int? schoolYear}) async {
     final UserModel _user = await _usersLocalRepository.getById(userId);
     final SchoolModel _school =
         await _schoolsLocalRepository.getById(schoolId ?? _user.schoolId);
-    if (_school.classification != 1) {
+    if (_school.classification != SchoolClassification.secondary) {
       int _schoolYear = schoolYear ?? _user.schoolYear;
       if (_schoolYear <= 2) {
-        return 'lower';
+        return SchoolGrade.lower;
       } else if (_schoolYear <= 4) {
-        return 'middle';
+        return SchoolGrade.middle;
       } else if (_schoolYear <= 6) {
-        return 'upper';
+        return SchoolGrade.upper;
       }
     }
 
-    return 'junior';
+    return SchoolGrade.junior;
+  }
+
+  String _getPathSLNS(SchoolGrade grade) {
+    switch (grade) {
+      case SchoolGrade.lower:
+        return 'assets/slns/lower.json';
+      case SchoolGrade.middle:
+        return 'assets/slns/middle.json';
+      case SchoolGrade.upper:
+        return 'assets/slns/upper.json';
+      default:
+        return 'assets/slns/junior.json';
+    }
   }
 
   Future<int> createUser({

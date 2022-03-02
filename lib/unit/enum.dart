@@ -1,6 +1,5 @@
-enum NutrientUnit {
-  kcal,
-  gram,
-  mGram,
-  microGram,
+enum LoadingStatus{
+  reading,
+  checkingUpdate,
+  updating,
 }

@@ -40,7 +40,7 @@ const $UserModel = _$UserModelTearOff();
 mixin _$UserModel {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError; // ニックネーム
-  int get schoolId => throw _privateConstructorUsedError; // 学校
+  int get schoolId => throw _privateConstructorUsedError; // 学校ID
   int get schoolYear => throw _privateConstructorUsedError; // 学年
   NutrientsModel? get slns => throw _privateConstructorUsedError;
 
@@ -191,7 +191,7 @@ class _$_UserModel extends _UserModel {
   final String name;
   @override // ニックネーム
   final int schoolId;
-  @override // 学校
+  @override // 学校ID
   final int schoolYear;
   @override // 学年
   final NutrientsModel? slns;
@@ -244,7 +244,7 @@ abstract class _UserModel extends UserModel {
   String get name;
   @override // ニックネーム
   int get schoolId;
-  @override // 学校
+  @override // 学校ID
   int get schoolYear;
   @override // 学年
   NutrientsModel? get slns;

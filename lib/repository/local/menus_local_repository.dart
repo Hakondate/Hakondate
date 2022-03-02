@@ -1,3 +1,5 @@
+import 'package:hakondate_v2/state/daily/daily_state.dart';
+import 'package:hakondate_v2/unit/enum.dart';
 import 'package:moor/moor.dart';
 
 import 'package:hakondate_v2/model/dish/dish_model.dart';
@@ -104,13 +106,13 @@ class MenusLocalRepository {
     return _menus;
   }
 
-  Future<int> getStatusByDate(DateTime day) async {
+  Future<DailyStatus> getStatusByDate(DateTime day) async {
     final DateTime oldest = await _databaseManager.getOldestDay();
     final DateTime latest = await _databaseManager.getLatestDay();
 
-    if (day.isAfter(oldest) && day.isBefore(latest)) return 0;
+    if (day.isAfter(oldest) && day.isBefore(latest)) return DailyStatus.holiday;
 
-    return -1;
+    return DailyStatus.noData;
   }
 
   Future<MenuModel?> getById(int id) async {
@@ -154,11 +156,32 @@ class MenusLocalRepository {
       _foodstuffs.add(_foodstuff);
     });
 
-    return DishModel(
-      name: _dishesSchema.name,
-      foodstuffs: _foodstuffs,
-      category: _dishesSchema.category,
-    );
+    switch (_dishesSchema.category) {
+      case 'main':
+        return DishModel(
+          name: _dishesSchema.name,
+          foodstuffs: _foodstuffs,
+          category: DishCategory.main,
+        );
+      case 'drink':
+        return DishModel(
+          name: _dishesSchema.name,
+          foodstuffs: _foodstuffs,
+          category: DishCategory.drink,
+        );
+      case 'side':
+        return DishModel(
+          name: _dishesSchema.name,
+          foodstuffs: _foodstuffs,
+          category: DishCategory.side,
+        );
+      default:
+        return DishModel(
+          name: _dishesSchema.name,
+          foodstuffs: _foodstuffs,
+          category: null,
+        );
+    }
   }
 
   Future<FoodstuffModel> _getFoodstuffById(int foodstuffId) async {

@@ -12,7 +12,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
   final int parentId;
   final String name;
   final int? lunchBlock;
-  final int classification;
+  final String classification;
   SchoolsSchema(
       {required this.id,
       required this.parentId,
@@ -32,7 +32,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
           .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
       lunchBlock: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}lunch_block']),
-      classification: const IntType()
+      classification: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}classification'])!,
     );
   }
@@ -45,7 +45,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
     if (!nullToAbsent || lunchBlock != null) {
       map['lunch_block'] = Variable<int?>(lunchBlock);
     }
-    map['classification'] = Variable<int>(classification);
+    map['classification'] = Variable<String>(classification);
     return map;
   }
 
@@ -69,7 +69,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       parentId: serializer.fromJson<int>(json['parentId']),
       name: serializer.fromJson<String>(json['name']),
       lunchBlock: serializer.fromJson<int?>(json['lunchBlock']),
-      classification: serializer.fromJson<int>(json['classification']),
+      classification: serializer.fromJson<String>(json['classification']),
     );
   }
   @override
@@ -80,7 +80,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       'parentId': serializer.toJson<int>(parentId),
       'name': serializer.toJson<String>(name),
       'lunchBlock': serializer.toJson<int?>(lunchBlock),
-      'classification': serializer.toJson<int>(classification),
+      'classification': serializer.toJson<String>(classification),
     };
   }
 
@@ -89,7 +89,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
           int? parentId,
           String? name,
           int? lunchBlock,
-          int? classification}) =>
+          String? classification}) =>
       SchoolsSchema(
         id: id ?? this.id,
         parentId: parentId ?? this.parentId,
@@ -128,7 +128,7 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
   final Value<int> parentId;
   final Value<String> name;
   final Value<int?> lunchBlock;
-  final Value<int> classification;
+  final Value<String> classification;
   const SchoolsTableCompanion({
     this.id = const Value.absent(),
     this.parentId = const Value.absent(),
@@ -141,7 +141,7 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
     required int parentId,
     required String name,
     this.lunchBlock = const Value.absent(),
-    required int classification,
+    required String classification,
   })  : parentId = Value(parentId),
         name = Value(name),
         classification = Value(classification);
@@ -150,7 +150,7 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
     Expression<int>? parentId,
     Expression<String>? name,
     Expression<int?>? lunchBlock,
-    Expression<int>? classification,
+    Expression<String>? classification,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -166,7 +166,7 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
       Value<int>? parentId,
       Value<String>? name,
       Value<int?>? lunchBlock,
-      Value<int>? classification}) {
+      Value<String>? classification}) {
     return SchoolsTableCompanion(
       id: id ?? this.id,
       parentId: parentId ?? this.parentId,
@@ -192,7 +192,7 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
       map['lunch_block'] = Variable<int?>(lunchBlock.value);
     }
     if (classification.present) {
-      map['classification'] = Variable<int>(classification.value);
+      map['classification'] = Variable<String>(classification.value);
     }
     return map;
   }
@@ -233,9 +233,9 @@ class $SchoolsTableTable extends SchoolsTable
       typeName: 'INTEGER', requiredDuringInsert: false);
   final VerificationMeta _classificationMeta =
       const VerificationMeta('classification');
-  late final GeneratedColumn<int?> classification = GeneratedColumn<int?>(
+  late final GeneratedColumn<String?> classification = GeneratedColumn<String?>(
       'classification', aliasedName, false,
-      typeName: 'INTEGER', requiredDuringInsert: true);
+      typeName: 'TEXT', requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns =>
       [id, parentId, name, lunchBlock, classification];
