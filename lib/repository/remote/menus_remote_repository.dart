@@ -7,7 +7,9 @@ import 'package:hakondate_v2/model/user/user_model.dart';
 class MenusRemoteRepository {
   MenusRemoteRepository();
 
-  Future<void> checkUpdate(UserModel user) async {}
+  Future<bool> checkUpdate(int schoolId) async {
+    return true;
+  }
 
   Future<List<dynamic>> downloadMenus() async {
     // デバッグ用
