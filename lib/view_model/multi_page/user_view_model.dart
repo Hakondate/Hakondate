@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hakondate_v2/unit/enum.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:hakondate_v2/model/school/school_model.dart';

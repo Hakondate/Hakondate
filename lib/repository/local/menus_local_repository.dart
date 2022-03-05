@@ -1,5 +1,4 @@
 import 'package:hakondate_v2/state/daily/daily_state.dart';
-import 'package:hakondate_v2/unit/enum.dart';
 import 'package:moor/moor.dart';
 
 import 'package:hakondate_v2/model/dish/dish_model.dart';

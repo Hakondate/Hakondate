@@ -5,8 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate_v2/unit/size.dart';
 import 'package:hakondate_v2/view/component/help_dialog.dart';
+import 'package:hakondate_v2/view/component/loading_animation_widget.dart';
 import 'package:hakondate_v2/view/component/setting_label.dart';
-import 'package:hakondate_v2/view/signup/loading_dialog.dart';
 import 'package:hakondate_v2/view_model/single_page/signup_view_model.dart';
 
 class Signup extends StatelessWidget {
@@ -66,9 +66,16 @@ class Signup extends StatelessWidget {
             CupertinoDialogAction(
               isDefaultAction: true,
               child: const Text('登録する'),
-              onPressed: () {
+              onPressed: () async {
                 Navigator.of(context).pop();
-                LoadingDialog(context);
+                await showGeneralDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  barrierColor: Colors.black.withOpacity(0.5),
+                  pageBuilder: (_, __, ___) {
+                    return const LoadingAnimationWidget(isSplash: false);
+                  },
+                );
               },
             ),
           ],
