@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:moor/ffi.dart';
-import 'package:moor/moor.dart';
+import 'package:drift/native.dart';
+import 'package:drift/drift.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
 
@@ -19,13 +19,13 @@ LazyDatabase _openConnection() {
   return LazyDatabase(() async {
     final _dbFolder = await getApplicationDocumentsDirectory();
     final _file = File(p.join(_dbFolder.path, 'db.sqlite'));
-    return VmDatabase(_file);
+    return NativeDatabase(_file);
   });
 }
 
 final DatabaseManager databaseManager = DatabaseManager();
 
-@UseMoor(tables: [
+@DriftDatabase(tables: [
   SchoolsTable,
   MenusTable,
   MenuDishesTable,

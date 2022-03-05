@@ -1,4 +1,4 @@
-import 'package:moor/moor.dart';
+import 'package:drift/drift.dart';
 
 /* SQLiteのテーブル定義
 * Moorで利用するための定義を行なっている

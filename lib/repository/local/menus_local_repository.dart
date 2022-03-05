@@ -1,5 +1,5 @@
 import 'package:hakondate_v2/state/daily/daily_state.dart';
-import 'package:moor/moor.dart';
+import 'package:drift/drift.dart';
 
 import 'package:hakondate_v2/model/dish/dish_model.dart';
 import 'package:hakondate_v2/model/foodstuff/foodstuff_model.dart';

@@ -1,7 +1,7 @@
 import 'package:hakondate_v2/model/school/school_model.dart';
 import 'package:hakondate_v2/repository/local/database_manager.dart';
 
-import 'package:moor/moor.dart';
+import 'package:drift/drift.dart';
 
 class SchoolsLocalRepository {
   SchoolsLocalRepository() {
