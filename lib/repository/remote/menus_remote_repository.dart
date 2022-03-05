@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
-import 'package:hakondate_v2/model/user/user_model.dart';
-
 class MenusRemoteRepository {
   MenusRemoteRepository();
 

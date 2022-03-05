@@ -47,19 +47,21 @@ class SplashViewModel extends StateNotifier<SplashState> {
   }
 
   Future<void> loadSignup(BuildContext context) async {
-    state = state.copyWith(loadingStatus: LoadingStatus.updating);
-    try {
-      await _reader(userProvider.notifier).createUser(
-        name: _reader(signupProvider.notifier).state.name!,
-        schoolId: _reader(signupProvider.notifier).state.schoolId!,
-        schoolYear: _reader(signupProvider.notifier).state.schoolYear!,
-      );
-      await _initializeMenus();
-      routemaster.replace('/home');
-      state = state.copyWith(loadingStatus: LoadingStatus.unloading);
-    } catch (error) {
-      await _handleError(error, context);
-    }
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      state = state.copyWith(loadingStatus: LoadingStatus.updating);
+      try {
+        await _reader(userProvider.notifier).createUser(
+          name: _reader(signupProvider.notifier).state.name!,
+          schoolId: _reader(signupProvider.notifier).state.schoolId!,
+          schoolYear: _reader(signupProvider.notifier).state.schoolYear!,
+        );
+        await _initializeMenus();
+        routemaster.replace('/home');
+        state = state.copyWith(loadingStatus: LoadingStatus.unloading);
+      } catch (error) {
+        await _handleError(error, context);
+      }
+    });
   }
 
   Future<void> _initializeSchool() async {
@@ -115,39 +117,41 @@ class SplashViewModel extends StateNotifier<SplashState> {
   }
 
   Future<void> _showErrorDialog(BuildContext context) async {
-    await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return CupertinoAlertDialog(
-          title: const Text('通信エラー'),
-          content: const Text('データの更新に失敗しました．データの更新をせず利用する場合は"このまま利用"を選択してください．'),
-          actions: [
-            CupertinoDialogAction(
-              child: const Text('このまま利用'),
-              onPressed: () async {
-                await _useAsIs();
-                Navigator.of(context).pop();
-              },
-            ),
-            CupertinoDialogAction(
-              isDefaultAction: true,
-              child: const Text('リトライ'),
-              onPressed: () {
-                routemaster.replace('/splash');
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return CupertinoAlertDialog(
+            title: const Text('通信エラー'),
+            content: const Text('データの更新に失敗しました．データの更新をせず利用する場合は"このまま利用"を選択してください．'),
+            actions: [
+              CupertinoDialogAction(
+                child: const Text('このまま利用'),
+                onPressed: () async {
+                  await _useAsIs();
+                  Navigator.of(context).pop();
+                },
+              ),
+              CupertinoDialogAction(
+                isDefaultAction: true,
+                child: const Text('リトライ'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  loadSplash(context);
+                },
+              ),
+            ],
+          );
+        },
+      );
+    });
   }
 
   Future<void> _useAsIs() async {
     final currentUser = _reader(userProvider.notifier).state.currentUser;
-    if (currentUser != null) {
+    if (await _reader(userProvider.notifier).checkSignedUp()) {
       await _reader(homeProvider.notifier).updateSelectedDay(
-        schoolId: currentUser.schoolId,
+        schoolId: currentUser!.schoolId,
       );
       routemaster.replace('/home');
     } else {
