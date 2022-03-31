@@ -19,9 +19,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       required this.name,
       this.lunchBlock,
       required this.classification});
-  factory SchoolsSchema.fromData(
-      Map<String, dynamic> data, GeneratedDatabase db,
-      {String? prefix}) {
+  factory SchoolsSchema.fromData(Map<String, dynamic> data, {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return SchoolsSchema(
       id: const IntType()
@@ -284,7 +282,7 @@ class $SchoolsTableTable extends SchoolsTable
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   SchoolsSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return SchoolsSchema.fromData(data, _db,
+    return SchoolsSchema.fromData(data,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
@@ -304,8 +302,7 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
       required this.day,
       required this.schoolId,
       this.event});
-  factory MenusSchema.fromData(Map<String, dynamic> data, GeneratedDatabase db,
-      {String? prefix}) {
+  factory MenusSchema.fromData(Map<String, dynamic> data, {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return MenusSchema(
       id: const IntType()
@@ -525,7 +522,7 @@ class $MenusTableTable extends MenusTable
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   MenusSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return MenusSchema.fromData(data, _db,
+    return MenusSchema.fromData(data,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
@@ -540,8 +537,7 @@ class MenuDishesSchema extends DataClass
   final int menuId;
   final int dishId;
   MenuDishesSchema({required this.menuId, required this.dishId});
-  factory MenuDishesSchema.fromData(
-      Map<String, dynamic> data, GeneratedDatabase db,
+  factory MenuDishesSchema.fromData(Map<String, dynamic> data,
       {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return MenuDishesSchema(
@@ -700,7 +696,7 @@ class $MenuDishesTableTable extends MenuDishesTable
   Set<GeneratedColumn> get $primaryKey => {menuId, dishId};
   @override
   MenuDishesSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return MenuDishesSchema.fromData(data, _db,
+    return MenuDishesSchema.fromData(data,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
@@ -715,8 +711,7 @@ class DishesSchema extends DataClass implements Insertable<DishesSchema> {
   final String name;
   final String? category;
   DishesSchema({required this.id, required this.name, this.category});
-  factory DishesSchema.fromData(Map<String, dynamic> data, GeneratedDatabase db,
-      {String? prefix}) {
+  factory DishesSchema.fromData(Map<String, dynamic> data, {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return DishesSchema(
       id: const IntType()
@@ -907,7 +902,7 @@ class $DishesTableTable extends DishesTable
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   DishesSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return DishesSchema.fromData(data, _db,
+    return DishesSchema.fromData(data,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
@@ -922,8 +917,7 @@ class DishFoodstuffsSchema extends DataClass
   final int dishId;
   final int foodstuffId;
   DishFoodstuffsSchema({required this.dishId, required this.foodstuffId});
-  factory DishFoodstuffsSchema.fromData(
-      Map<String, dynamic> data, GeneratedDatabase db,
+  factory DishFoodstuffsSchema.fromData(Map<String, dynamic> data,
       {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return DishFoodstuffsSchema(
@@ -1089,7 +1083,7 @@ class $DishFoodstuffsTableTable extends DishFoodstuffsTable
   Set<GeneratedColumn> get $primaryKey => {dishId, foodstuffId};
   @override
   DishFoodstuffsSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return DishFoodstuffsSchema.fromData(data, _db,
+    return DishFoodstuffsSchema.fromData(data,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
@@ -1146,8 +1140,7 @@ class FoodstuffsSchema extends DataClass
       required this.isHeat,
       required this.isAllergy,
       this.origin});
-  factory FoodstuffsSchema.fromData(
-      Map<String, dynamic> data, GeneratedDatabase db,
+  factory FoodstuffsSchema.fromData(Map<String, dynamic> data,
       {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return FoodstuffsSchema(
@@ -2005,7 +1998,7 @@ class $FoodstuffsTableTable extends FoodstuffsTable
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   FoodstuffsSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return FoodstuffsSchema.fromData(data, _db,
+    return FoodstuffsSchema.fromData(data,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
@@ -2025,8 +2018,7 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
       required this.name,
       required this.schoolId,
       required this.schoolYear});
-  factory UsersSchema.fromData(Map<String, dynamic> data, GeneratedDatabase db,
-      {String? prefix}) {
+  factory UsersSchema.fromData(Map<String, dynamic> data, {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return UsersSchema(
       id: const IntType()
@@ -2250,7 +2242,7 @@ class $UsersTableTable extends UsersTable
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   UsersSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return UsersSchema.fromData(data, _db,
+    return UsersSchema.fromData(data,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 

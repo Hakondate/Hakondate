@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hakondate_v2/unit/size.dart';
-import 'package:hakondate_v2/view/component/nutrients_list.dart';
 import 'package:multi_charts/multi_charts.dart';
 
-import 'package:hakondate_v2/view_model/single_page/home_view_model.dart';
+import 'package:hakondate_v2/unit/size.dart';
+import 'package:hakondate_v2/view/component/nutrients_list.dart';
+import 'package:hakondate_v2/view_model/single_page/daily_view_model.dart';
 import 'package:hakondate_v2/view_model/multi_page/user_view_model.dart';
 
 class NutrientsCard extends StatelessWidget {
@@ -32,7 +32,7 @@ class NutrientsCard extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 3/4,
           height: MediaQuery.of(context).size.width * 3/4,
           child: RadarChart(
-            values: ref.read(homeProvider.notifier).getGraphValues(
+            values: ref.read(dailyProvider.notifier).getGraphValues(
               slns: ref.watch(userProvider).currentUser!.slns,
               graphMaxValue: graphMaxValue,
             ),
@@ -67,7 +67,7 @@ class NutrientsCard extends StatelessWidget {
           ),
           children: [
             NutrientsList(
-              nutrients: ref.watch(homeProvider).menu,
+              nutrients: ref.watch(dailyProvider).menu,
               backgroundColor: Theme.of(context).colorScheme.secondaryVariant,
             ),
           ],

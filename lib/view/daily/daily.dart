@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate_v2/router/routes.dart';
 import 'package:hakondate_v2/state/daily/daily_state.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
@@ -8,7 +9,7 @@ import 'package:intl/intl.dart';
 import 'package:hakondate_v2/unit/size.dart';
 import 'package:hakondate_v2/view/daily/menu_card.dart';
 import 'package:hakondate_v2/view/daily/nutrients_card.dart';
-import 'package:hakondate_v2/view_model/single_page/home_view_model.dart';
+import 'package:hakondate_v2/view_model/single_page/daily_view_model.dart';
 import 'package:hakondate_v2/view_model/multi_page/user_view_model.dart';
 
 class Daily extends StatelessWidget {
@@ -20,6 +21,12 @@ class Daily extends StatelessWidget {
       appBar: AppBar(
         elevation: 0.0,
         title: _appBarTitle(),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.calendar_today_outlined),
+            onPressed: () => routemaster.push('calendar'),
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -33,7 +40,7 @@ class Daily extends StatelessWidget {
   Widget _appBarTitle() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        final store = ref.watch(homeProvider);
+        final store = ref.watch(dailyProvider);
         final formatted = (isSameDay(store.selectedDay, DateTime.now()))
             ? '今日' : DateFormat('M月d日').format(store.selectedDay);
 
@@ -48,7 +55,7 @@ class Daily extends StatelessWidget {
       elevation: 4.0,
       child: Consumer(
         builder: (BuildContext context, WidgetRef ref, _) {
-          final store = ref.watch(homeProvider);
+          final store = ref.watch(dailyProvider);
 
           return TableCalendar(
             headerVisible: false,
@@ -60,13 +67,13 @@ class Daily extends StatelessWidget {
             selectedDayPredicate: (DateTime day) => isSameDay(store.selectedDay, day),
             onDaySelected: (DateTime selectedDay, _) {
               if (isSameDay(store.selectedDay, selectedDay)) return;
-              ref.read(homeProvider.notifier).updateSelectedDay(
+              ref.read(dailyProvider.notifier).updateSelectedDay(
                 day: selectedDay,
                 schoolId: ref.watch(userProvider).currentUser!.schoolId,
               );
             },
             onPageChanged: (DateTime focusedDay) =>
-                ref.watch(homeProvider.notifier).updateFocusedDay(focusedDay),  // readで読み込むと再描画が発生
+                ref.watch(dailyProvider.notifier).updateFocusedDay(focusedDay),  // readで読み込むと再描画が発生
             daysOfWeekHeight: 20,
             calendarStyle: CalendarStyle(
               todayTextStyle: const CalendarStyle().defaultTextStyle,
@@ -90,7 +97,7 @@ class Daily extends StatelessWidget {
   Widget _bodyWidget() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        final store = ref.watch(homeProvider);
+        final store = ref.watch(dailyProvider);
 
         if (store.isFetching) {
           return Container();

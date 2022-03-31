@@ -9,7 +9,7 @@ import 'package:hakondate_v2/repository/remote/schools_remote_repository.dart';
 import 'package:hakondate_v2/repository/local/menus_local_repository.dart';
 import 'package:hakondate_v2/repository/remote/menus_remote_repository.dart';
 import 'package:hakondate_v2/view_model/multi_page/user_view_model.dart';
-import 'package:hakondate_v2/view_model/single_page/home_view_model.dart';
+import 'package:hakondate_v2/view_model/single_page/daily_view_model.dart';
 import 'package:hakondate_v2/view_model/single_page/signup_view_model.dart';
 
 final splashProvider = StateNotifierProvider<SplashViewModel, SplashState>(
@@ -97,7 +97,7 @@ class SplashViewModel extends StateNotifier<SplashState> {
       });
     }
 
-    await _reader(homeProvider.notifier).updateSelectedDay(
+    await _reader(dailyProvider.notifier).updateSelectedDay(
       schoolId: schoolId,
     );
     state = state.copyWith(loadingStatus: LoadingStatus.reading);
@@ -150,7 +150,7 @@ class SplashViewModel extends StateNotifier<SplashState> {
   Future<void> _useAsIs() async {
     final currentUser = _reader(userProvider.notifier).state.currentUser;
     if (await _reader(userProvider.notifier).checkSignedUp()) {
-      await _reader(homeProvider.notifier).updateSelectedDay(
+      await _reader(dailyProvider.notifier).updateSelectedDay(
         schoolId: currentUser!.schoolId,
       );
       routemaster.replace('/home');

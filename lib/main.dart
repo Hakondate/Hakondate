@@ -9,8 +9,10 @@ import 'package:hakondate_v2/router/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   await initializeDateFormatting('ja_JP');
   runApp(const Hakondate());
 }

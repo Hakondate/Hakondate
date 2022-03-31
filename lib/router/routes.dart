@@ -28,7 +28,7 @@ final routes = RouteMap(
     ),
     '/home/daily': (_) => const MaterialPage(child: Daily()),
     '/home/daily/dish/:id': (_) => MaterialPage(child: Scaffold(appBar: AppBar(),)),
-    '/home/daily/menu_list': (_) => const MaterialPage(child: Scaffold()),
+    '/home/daily/calendar': (_) => const MaterialPage(child: Scaffold()),
     '/home/recipes': (_) => const MaterialPage(child: Scaffold()),
     '/home/letters': (_) => const MaterialPage(child: Scaffold()),
     '/setting': (_) => const MaterialPage(child: Scaffold()),

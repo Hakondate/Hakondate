@@ -1,11 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hakondate_v2/model/menu/menu_model.dart';
 
+import 'package:hakondate_v2/model/menu/menu_model.dart';
 import 'package:hakondate_v2/repository/local/menus_local_repository.dart';
 import 'package:hakondate_v2/model/nutrients/nutrients_model.dart';
 import 'package:hakondate_v2/state/daily/daily_state.dart';
 
-final homeProvider = StateNotifierProvider<DailyViewModel, DailyState>(
+final dailyProvider = StateNotifierProvider<DailyViewModel, DailyState>(
     (ref) => DailyViewModel());
 
 class DailyViewModel extends StateNotifier<DailyState> {

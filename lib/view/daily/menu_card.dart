@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate_v2/router/routes.dart';
 
 import 'package:hakondate_v2/unit/size.dart';
-import 'package:hakondate_v2/view_model/single_page/home_view_model.dart';
+import 'package:hakondate_v2/view_model/single_page/daily_view_model.dart';
 
 class MenuCard extends StatelessWidget {
   const MenuCard({Key? key}) : super(key: key);
@@ -13,7 +13,7 @@ class MenuCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        final store = ref.watch(homeProvider);
+        final store = ref.watch(dailyProvider);
         final foodIcons = [
           'assets/images/food_icon/main_food.png',
           'assets/images/food_icon/drink.png',
