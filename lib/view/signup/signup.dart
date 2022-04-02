@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:hakondate_v2/router/routes.dart';
 import 'package:hakondate_v2/unit/size.dart';
 import 'package:hakondate_v2/view/component/help_dialog.dart';
 import 'package:hakondate_v2/view/component/loading_animation_widget.dart';
@@ -61,13 +62,13 @@ class Signup extends StatelessWidget {
           actions: [
             CupertinoDialogAction(
               child: const Text('修正する'),
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () => routemaster.pop(),
             ),
             CupertinoDialogAction(
               isDefaultAction: true,
               child: const Text('登録する'),
               onPressed: () async {
-                Navigator.of(context).pop();
+                routemaster.pop();
                 await showGeneralDialog(
                   context: context,
                   barrierDismissible: false,

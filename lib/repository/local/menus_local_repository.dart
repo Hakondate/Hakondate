@@ -1,5 +1,6 @@
-import 'package:hakondate_v2/state/daily/daily_state.dart';
 import 'package:drift/drift.dart';
+
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate_v2/model/dish/dish_model.dart';
 import 'package:hakondate_v2/model/foodstuff/foodstuff_model.dart';
@@ -7,55 +8,96 @@ import 'package:hakondate_v2/model/menu/menu_model.dart';
 import 'package:hakondate_v2/model/nutrients/nutrients_model.dart';
 import 'package:hakondate_v2/model/quantity/quantity_model.dart';
 import 'package:hakondate_v2/repository/local/database_manager.dart';
+import 'package:hakondate_v2/state/daily/daily_state.dart';
 
-class MenusLocalRepository {
-  MenusLocalRepository() {
-    _databaseManager = databaseManager;
-  }
+final menusLocalRepositoryProvider = Provider<MenusLocalRepository>((ref) {
+  final DatabaseManager databaseManager = ref.read(databaseManagerProvider);
+  return MenusLocalRepository(databaseManager);
+});
 
-  late final DatabaseManager _databaseManager;
+abstract class MenusLocalRepositoryBase {
+  Future<int> add(Map<String, dynamic> menu);
+  Future<List<MenuModel>> getAll();
+  Future<MenuModel?> getById(int id);
+  Future<List<MenuModel>> getSelectedPeriod({
+    required DateTime startDay,
+    required DateTime endDay,
+    required int schoolId,
+  });
+  Future<DailyStatus> getStatusByDate(DateTime day);
+}
 
+class MenusLocalRepository extends MenusLocalRepositoryBase {
+  MenusLocalRepository(this._db) : super();
+
+  final DatabaseManager _db;
+
+  @override
   Future<int> add(Map<String, dynamic> menu) async {
-    final MenusTableCompanion _menusSchema = MenusTableCompanion(
+    final MenusTableCompanion companion = MenusTableCompanion(
       id: Value(menu['id']),
       day: Value(DateTime.fromMillisecondsSinceEpoch(menu['day'])),
       schoolId: Value(menu['schoolId']),
       event: Value(menu['event']),
     );
-    final int _menuId = await _databaseManager.addMenusSchema(_menusSchema);
+    final int menuId = await _db.into(_db.menusTable).insert(
+      companion,
+      onConflict: DoUpdate((old) => MenusTableCompanion.custom(
+        event: Constant(companion.event.value),
+      )),
+    );
 
     await Future.forEach(menu['dishes'], (dynamic dish) async {
-      final int _dishId = await _addDish(dish);
-      await _databaseManager.addMenuDishesSchema(MenuDishesTableCompanion(
-        menuId: Value(_menuId),
-        dishId: Value(_dishId),
-      ));
+      final int dishId = await _addDish(dish);
+      await _db.into(_db.menuDishesTable).insertOnConflictUpdate(
+          MenuDishesTableCompanion(
+            menuId: Value(menuId),
+            dishId: Value(dishId),
+          )
+      );
     });
 
-    return _menuId;
+    return menuId;
   }
 
   Future<int> _addDish(Map<String, dynamic> dish) async {
-    final DishesTableCompanion _dishSchema = DishesTableCompanion(
+    final int dishId;
+    final DishesTableCompanion companion = DishesTableCompanion(
       name: Value(dish['name']),
       category: Value(dish['category']),
     );
-    final int _dishId = await _databaseManager.addDishesSchema(_dishSchema);
+    final DishesSchema? conflictSchema = await (_db.select(_db.dishesTable)
+      ..where((t) => t.name.equals(companion.name.value))).getSingleOrNull();
+
+    if (conflictSchema == null) {
+      dishId = await _db.into(_db.dishesTable).insert(
+        companion,
+        onConflict: DoUpdate((old) => DishesTableCompanion.custom(
+          category: Constant(companion.category.value),
+        )),
+      );
+    } else if (conflictSchema.category != companion.category.value) {
+      dishId = await (_db.update(_db.dishesTable)
+        ..where((t) => t.name.equals(companion.name.value)))
+          .write(DishesTableCompanion(category: companion.category));
+    } else {
+      dishId = conflictSchema.id;
+    }
 
     await Future.forEach(dish['foodstuffs'], (dynamic foodstuff) async {
-      final int _foodstuffId = await _addFoodstuff(foodstuff);
-      await _databaseManager
-          .addDishFoodstuffsSchema(DishFoodstuffsTableCompanion(
-        dishId: Value(_dishId),
-        foodstuffId: Value(_foodstuffId),
-      ));
+      final int foodstuffId = await _addFoodstuff(foodstuff);
+      await _db.into(_db.dishFoodstuffsTable).insertOnConflictUpdate(
+          DishFoodstuffsTableCompanion(
+            dishId: Value(dishId),
+            foodstuffId: Value(foodstuffId),
+          ));
     });
 
-    return _dishId;
+    return dishId;
   }
 
   Future<int> _addFoodstuff(Map<String, dynamic> foodstuff) async {
-    return await _databaseManager.addFoodstuffsSchema(FoodstuffsTableCompanion(
+    final FoodstuffsTableCompanion companion = FoodstuffsTableCompanion(
       name: Value(foodstuff['name']),
       piece: Value(foodstuff['piece']),
       gram: Value(foodstuff['gram'].toDouble()),
@@ -77,142 +119,222 @@ class MenusLocalRepository {
       isHeat: Value(foodstuff['isHeat']),
       isAllergy: Value(foodstuff['isAllergy']),
       origin: Value(foodstuff['origin']),
-    ));
+    );
+    final FoodstuffsSchema? conflictSchema =
+      await (_db.select(_db.foodstuffsTable)..where((t) =>
+          t.name.equals(companion.name.value) &
+          t.gram.equals(companion.gram.value) &
+          t.isHeat.equals(companion.isHeat.value) &
+          t.isAllergy.equals(companion.isAllergy.value))).getSingleOrNull();
+
+    if (conflictSchema == null) {
+      return await _db.into(_db.foodstuffsTable).insert(
+        companion,
+        onConflict: DoUpdate((old) => FoodstuffsTableCompanion.custom(
+          origin: Constant(companion.origin.value),
+        )),
+      );
+    } else if (
+        conflictSchema.piece != companion.piece.value ||
+        conflictSchema.energy != companion.energy.value ||
+        conflictSchema.protein != companion.protein.value ||
+        conflictSchema.lipid != companion.lipid.value ||
+        conflictSchema.sodium != companion.sodium.value ||
+        conflictSchema.carbohydrate != companion.carbohydrate.value ||
+        conflictSchema.calcium != companion.calcium.value ||
+        conflictSchema.magnesium != companion.magnesium.value ||
+        conflictSchema.iron != companion.iron.value ||
+        conflictSchema.zinc != companion.zinc.value ||
+        conflictSchema.retinol != companion.retinol.value ||
+        conflictSchema.vitaminB1 != companion.vitaminB1.value ||
+        conflictSchema.vitaminB2 != companion.vitaminB2.value ||
+        conflictSchema.vitaminC != companion.vitaminC.value ||
+        conflictSchema.dietaryFiber != companion.dietaryFiber.value ||
+        conflictSchema.salt != companion.salt.value ||
+        conflictSchema.origin != companion.origin.value
+    ) {
+      return await (_db.update(_db.foodstuffsTable)..where((t) =>
+        t.name.equals(companion.name.value) &
+        t.gram.equals(companion.gram.value) &
+        t.isHeat.equals(companion.isHeat.value) &
+        t.isAllergy.equals(companion.isAllergy.value))).write(
+          FoodstuffsTableCompanion(
+            piece: companion.piece,
+            energy: companion.energy,
+            lipid: companion.lipid,
+            sodium: companion.sodium,
+            carbohydrate: companion.carbohydrate,
+            calcium: companion.calcium,
+            magnesium: companion.magnesium,
+            iron: companion.iron,
+            zinc: companion.zinc,
+            retinol: companion.retinol,
+            vitaminB1: companion.vitaminB1,
+            vitaminB2: companion.vitaminB2,
+            vitaminC: companion.vitaminC,
+            dietaryFiber: companion.dietaryFiber,
+            salt: companion.salt,
+            origin: companion.origin,
+          ));
+    }
+
+    return conflictSchema.id;
   }
 
+  @override
   Future<List<MenuModel>> getAll() async {
-    List<MenuModel> _menus = [];
-    final List<MenusSchema> _menusSchemas =
-        await _databaseManager.allMenusSchemas;
-    await Future.forEach(_menusSchemas, (MenusSchema menusSchema) async {
-      final MenuModel _menu = await _getBySchema(menusSchema);
-      _menus.add(_menu);
+    List<MenuModel> menus = [];
+    final List<MenusSchema> menusSchemas = await _db.select(_db.menusTable).get();
+
+    await Future.forEach(menusSchemas, (MenusSchema menusSchema) async {
+      final MenuModel menu = await _getBySchema(menusSchema);
+      menus.add(menu);
     });
 
-    return _menus;
+    return menus;
   }
 
-  Future<List<MenuModel>> getSelectionPeriod(
-      DateTime startDay, DateTime endDay, int schoolId) async {
-    List<MenuModel> _menus = [];
-    final List<MenusSchema> _menusSchemas = await _databaseManager
-        .getSelectionPeriodMenusSchemas(startDay, endDay, schoolId);
-    await Future.forEach(_menusSchemas, (MenusSchema menusSchema) async {
-      final MenuModel _menu = await _getBySchema(menusSchema);
-      _menus.add(_menu);
+  @override
+  Future<List<MenuModel>> getSelectedPeriod({
+    required DateTime startDay,
+    required DateTime endDay,
+    required int schoolId,
+  }) async {
+    List<MenuModel> menus = [];
+    final List<MenusSchema> menusSchemas = await (_db.select(_db.menusTable)..where((t) =>
+      t.day.isBetweenValues(startDay, endDay) & t.schoolId.equals(schoolId))).get();
+
+    await Future.forEach(menusSchemas, (MenusSchema menusSchema) async {
+      final MenuModel menu = await _getBySchema(menusSchema);
+      menus.add(menu);
     });
 
-    return _menus;
+    return menus;
   }
 
+  @override
   Future<DailyStatus> getStatusByDate(DateTime day) async {
-    final DateTime oldest = await _databaseManager.getOldestDay();
-    final DateTime latest = await _databaseManager.getLatestDay();
+    final DateTime oldest = await _getOldestDay();
+    final DateTime latest = await _getLatestDay();
 
-    if (day.isAfter(oldest) && day.isBefore(latest)) return DailyStatus.holiday;
+    if (day.isAfter(oldest) && day.isBefore(latest)) {
+      return DailyStatus.holiday;
+    }
 
     return DailyStatus.noData;
   }
 
-  Future<MenuModel?> getById(int id) async {
-    final MenusSchema? _menusSchema =
-        await _databaseManager.getMenusSchemaById(id);
+  Future<DateTime> _getOldestDay() async {
+    final Expression<DateTime> exp = _db.menusTable.day.min();
+    final query = _db.selectOnly(_db.menusTable)..addColumns([exp]);
 
-    return (_menusSchema != null) ? _getBySchema(_menusSchema) : null;
+    return await query.map((scheme) => scheme.read(exp)).getSingle();
+  }
+
+  Future<DateTime> _getLatestDay() async {
+    final Expression<DateTime> exp = _db.menusTable.day.max();
+    final query = _db.selectOnly(_db.menusTable)..addColumns([exp]);
+
+    return await query.map((scheme) => scheme.read(exp)).getSingle();
+  }
+
+  @override
+  Future<MenuModel?> getById(int id) async {
+    final MenusSchema? menusSchema =
+        await (_db.select(_db.menusTable)..where((t) => t.id.equals(id))).getSingleOrNull();
+
+    return (menusSchema != null) ? _getBySchema(menusSchema) : null;
   }
 
   Future<MenuModel> _getBySchema(MenusSchema menusSchema) async {
-    List<DishModel> _dishes = [];
-    final List<MenuDishesSchema> _menuDishesSchemas =
-        await _databaseManager.getMenuDishesSchemasByMenuId(menusSchema.id);
-    await Future.forEach(_menuDishesSchemas,
-        (MenuDishesSchema menuDishesSchema) async {
+    List<DishModel> dishes = [];
+    final List<MenuDishesSchema> menuDishesSchemas =
+        await (_db.select(_db.menuDishesTable)..where((t) => t.menuId.equals(menusSchema.id))).get();
+
+    await Future.forEach(menuDishesSchemas, (MenuDishesSchema menuDishesSchema) async {
       final DishModel _dish = await _getDishById(menuDishesSchema.dishId);
-      _dishes.add(_dish);
+      dishes.add(_dish);
     });
 
     return MenuModel(
       id: menusSchema.id,
       day: menusSchema.day,
       schoolId: menusSchema.schoolId,
-      dishes: _dishes,
+      dishes: dishes,
       event: menusSchema.event,
     );
   }
 
   Future<DishModel> _getDishById(int dishId) async {
-    final DishesSchema _dishesSchema =
-        await _databaseManager.getDishesSchemaById(dishId);
+    final DishesSchema dishesSchema =
+        await (_db.select(_db.dishesTable)..where((t) => t.id.equals(dishId))).getSingle();
+    List<FoodstuffModel> foodstuffs = [];
+    final List<DishFoodstuffsSchema> dishFoodstuffsSchemas =
+        await (_db.select(_db.dishFoodstuffsTable)..where((t) => t.dishId.equals(dishesSchema.id))).get();
 
-    List<FoodstuffModel> _foodstuffs = [];
-    final List<DishFoodstuffsSchema> _dishFoodstuffsSchemas =
-        await _databaseManager
-            .getDishFoodstuffsSchemasByDishId(_dishesSchema.id);
-    await Future.forEach(_dishFoodstuffsSchemas,
-        (DishFoodstuffsSchema dishFoodstuffsSchema) async {
-      final FoodstuffModel _foodstuff =
-          await _getFoodstuffById(dishFoodstuffsSchema.foodstuffId);
-      _foodstuffs.add(_foodstuff);
+    await Future.forEach(dishFoodstuffsSchemas, (DishFoodstuffsSchema dishFoodstuffsSchema) async {
+      final FoodstuffModel foodstuff = await _getFoodstuffById(dishFoodstuffsSchema.foodstuffId);
+      foodstuffs.add(foodstuff);
     });
 
-    switch (_dishesSchema.category) {
+    switch (dishesSchema.category) {
       case 'main':
         return DishModel(
-          name: _dishesSchema.name,
-          foodstuffs: _foodstuffs,
+          name: dishesSchema.name,
+          foodstuffs: foodstuffs,
           category: DishCategory.main,
         );
       case 'drink':
         return DishModel(
-          name: _dishesSchema.name,
-          foodstuffs: _foodstuffs,
+          name: dishesSchema.name,
+          foodstuffs: foodstuffs,
           category: DishCategory.drink,
         );
       case 'side':
         return DishModel(
-          name: _dishesSchema.name,
-          foodstuffs: _foodstuffs,
+          name: dishesSchema.name,
+          foodstuffs: foodstuffs,
           category: DishCategory.side,
         );
       default:
         return DishModel(
-          name: _dishesSchema.name,
-          foodstuffs: _foodstuffs,
+          name: dishesSchema.name,
+          foodstuffs: foodstuffs,
           category: null,
         );
     }
   }
 
   Future<FoodstuffModel> _getFoodstuffById(int foodstuffId) async {
-    final FoodstuffsSchema _foodstuffsSchema =
-        await _databaseManager.getFoodstuffsSchemaById(foodstuffId);
+    final FoodstuffsSchema foodstuffsSchema =
+        await (_db.select(_db.foodstuffsTable)..where((t) => t.id.equals(foodstuffId))).getSingle();
 
     return FoodstuffModel(
-      name: _foodstuffsSchema.name,
+      name: foodstuffsSchema.name,
       quantity: QuantityModel(
-        piece: _foodstuffsSchema.piece,
-        gram: _foodstuffsSchema.gram,
+        piece: foodstuffsSchema.piece,
+        gram: foodstuffsSchema.gram,
       ),
       nutrients: NutrientsModel(
-        energy: _foodstuffsSchema.energy,
-        protein: _foodstuffsSchema.protein,
-        lipid: _foodstuffsSchema.lipid,
-        carbohydrate: _foodstuffsSchema.carbohydrate,
-        sodium: _foodstuffsSchema.sodium,
-        calcium: _foodstuffsSchema.calcium,
-        magnesium: _foodstuffsSchema.magnesium,
-        iron: _foodstuffsSchema.iron,
-        zinc: _foodstuffsSchema.zinc,
-        retinol: _foodstuffsSchema.retinol,
-        vitaminB1: _foodstuffsSchema.vitaminB1,
-        vitaminB2: _foodstuffsSchema.vitaminB2,
-        vitaminC: _foodstuffsSchema.vitaminC,
-        dietaryFiber: _foodstuffsSchema.dietaryFiber,
-        salt: _foodstuffsSchema.salt,
+        energy: foodstuffsSchema.energy,
+        protein: foodstuffsSchema.protein,
+        lipid: foodstuffsSchema.lipid,
+        carbohydrate: foodstuffsSchema.carbohydrate,
+        sodium: foodstuffsSchema.sodium,
+        calcium: foodstuffsSchema.calcium,
+        magnesium: foodstuffsSchema.magnesium,
+        iron: foodstuffsSchema.iron,
+        zinc: foodstuffsSchema.zinc,
+        retinol: foodstuffsSchema.retinol,
+        vitaminB1: foodstuffsSchema.vitaminB1,
+        vitaminB2: foodstuffsSchema.vitaminB2,
+        vitaminC: foodstuffsSchema.vitaminC,
+        dietaryFiber: foodstuffsSchema.dietaryFiber,
+        salt: foodstuffsSchema.salt,
       ),
-      isAllergy: _foodstuffsSchema.isAllergy,
-      isHeat: _foodstuffsSchema.isHeat,
-      origin: _foodstuffsSchema.origin,
+      isAllergy: foodstuffsSchema.isAllergy,
+      isHeat: foodstuffsSchema.isHeat,
+      origin: foodstuffsSchema.origin,
     );
   }
 }
