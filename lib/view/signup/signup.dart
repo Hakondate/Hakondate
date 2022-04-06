@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate_v2/constant/app_color.dart';
 
 import 'package:hakondate_v2/router/routes.dart';
-import 'package:hakondate_v2/unit/size.dart';
+import 'package:hakondate_v2/constant/size.dart';
 import 'package:hakondate_v2/view/component/help_dialog.dart';
 import 'package:hakondate_v2/view/component/loading_animation_widget.dart';
 import 'package:hakondate_v2/view/component/setting_label.dart';
@@ -126,12 +127,16 @@ class Signup extends StatelessWidget {
                     icon: const Icon(Icons.help),
                     iconSize: IconSize.help,
                     color: Theme.of(context).primaryIconTheme.color,
-                    onPressed: () => HelpDialog(
-                      context,
-                      title: 'お名前について',
-                      content: '　お名前情報は，本アプリ内でユーザを識別するために利用されます．'
-                          'あだ名などを入力していただいても構いません．また，あとで変更することもできます．\n'
-                          '　お名前情報は，端末内に保存され収集されることはありません．また，あとから変更することができます．',
+                    onPressed: () => showDialog(
+                      context: context,
+                      builder: (BuildContext context) => const HelpDialog(
+                        title: Text('お名前について'),
+                        content: Text(
+                            '　お名前情報は，本アプリ内でユーザを識別するために利用されます．'
+                            'あだ名などを入力していただいても構いません．また，あとで変更することもできます．\n'
+                            '　お名前情報は，端末内に保存され収集されることはありません．また，あとから変更することができます．'
+                        ),
+                      ),
                     ),
                   ),
                   const Spacer(),
@@ -147,7 +152,7 @@ class Signup extends StatelessWidget {
                   border: const OutlineInputBorder(),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: Theme.of(context).colorScheme.secondary,
+                      color: AppColor.brand.secondary,
                       width: 2.0,
                     ),
                   ),
@@ -182,13 +187,16 @@ class Signup extends StatelessWidget {
                     icon: const Icon(Icons.help),
                     iconSize: IconSize.help,
                     color: Theme.of(context).primaryIconTheme.color,
-                    onPressed: () => HelpDialog(
-                      context,
-                      title: '学校・学年について',
-                      content:
-                          '　学校情報は，本アプリ内でお子様の通っている学校の献立を表示するために利用されます．選択肢にない学校は，本アプリ未対応の学校です．\n'
-                          '　学年情報は，本アプリ内でお子様の年齢に合わせた情報(栄養基準値など)を表示するために利用されます．\n'
-                          '　どちらの情報も，端末内に保存され収集されることはありません．また，あとから変更することができます．',
+                    onPressed: () => showDialog(
+                      context: context,
+                      builder: (BuildContext context) => const HelpDialog(
+                        title: Text('学校・学年について'),
+                        content: Text(
+                            '　学校情報は，本アプリ内でお子様の通っている学校の献立を表示するために利用されます．選択肢にない学校は，本アプリ未対応の学校です．\n'
+                            '　学年情報は，本アプリ内でお子様の年齢に合わせた情報(栄養基準値など)を表示するために利用されます．\n'
+                            '　どちらの情報も，端末内に保存され収集されることはありません．また，あとから変更することができます．'
+                        ),
+                      ),
                     ),
                   ),
                   const Spacer(),
@@ -242,14 +250,14 @@ class Signup extends StatelessWidget {
             children: [
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    primary: Theme.of(context).colorScheme.secondary,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: PaddingSize.buttonVertical,
-                      horizontal: PaddingSize.buttonHorizontal,
-                    ),
-                    textStyle: const TextStyle(
-                        color: Colors.white, fontFamily: 'MPLUSRounded1c'),
-                    shape: const StadiumBorder()),
+                  primary: AppColor.brand.secondary,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: PaddingSize.buttonVertical,
+                    horizontal: PaddingSize.buttonHorizontal,
+                  ),
+                  textStyle: TextStyle(color: AppColor.text.white),
+                  shape: const StadiumBorder(),
+                ),
                 child: const Text('登録する'),
                 onPressed: () {
                   if (ref.read(signupProvider.notifier).checkValidation()) {

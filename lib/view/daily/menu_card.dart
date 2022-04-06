@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate_v2/router/routes.dart';
 
-import 'package:hakondate_v2/unit/size.dart';
+import 'package:hakondate_v2/constant/size.dart';
 import 'package:hakondate_v2/view_model/single_page/daily_view_model.dart';
 
 class MenuCard extends StatelessWidget {

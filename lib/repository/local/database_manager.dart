@@ -18,9 +18,9 @@ part 'database_manager.g.dart';
 
 final databaseManagerProvider = Provider<DatabaseManager>((ref) {
   final LazyDatabase lazyDatabase = LazyDatabase(() async {
-    final _dbFolder = await getApplicationDocumentsDirectory();
-    final _file = File(p.join(_dbFolder.path, 'db.sqlite'));
-    return NativeDatabase(_file);
+    final Directory directory = await getApplicationDocumentsDirectory();
+    final File file = File(p.join(directory.path, 'db.sqlite'));
+    return NativeDatabase(file);
   });
 
   return DatabaseManager(lazyDatabase);

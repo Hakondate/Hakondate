@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hakondate_v2/router/routes.dart';
-import 'package:hakondate_v2/state/daily/daily_state.dart';
+import 'package:hakondate_v2/constant/app_color.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
 
-import 'package:hakondate_v2/unit/size.dart';
+import 'package:hakondate_v2/constant/size.dart';
+import 'package:hakondate_v2/router/routes.dart';
+import 'package:hakondate_v2/state/daily/daily_state.dart';
 import 'package:hakondate_v2/view/daily/menu_card.dart';
 import 'package:hakondate_v2/view/daily/nutrients_card.dart';
 import 'package:hakondate_v2/view_model/single_page/daily_view_model.dart';
@@ -23,6 +24,8 @@ class Daily extends StatelessWidget {
         title: _appBarTitle(),
         actions: [
           IconButton(
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
             icon: const Icon(Icons.calendar_today_outlined),
             onPressed: () => routemaster.push('calendar'),
           ),
@@ -51,7 +54,7 @@ class Daily extends StatelessWidget {
 
   Widget _calendarWidget() {
     return Material(
-      color: Colors.white,
+      color: AppColor.brand.primary,
       elevation: 4.0,
       child: Consumer(
         builder: (BuildContext context, WidgetRef ref, _) {
@@ -80,12 +83,12 @@ class Daily extends StatelessWidget {
               todayDecoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: Theme.of(context).colorScheme.secondary,
+                  color: AppColor.brand.secondary,
                 ),
               ),
               selectedDecoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Theme.of(context).colorScheme.secondary,
+                color: AppColor.brand.secondary,
               ),
             ),
           );
@@ -149,10 +152,10 @@ class Daily extends StatelessWidget {
           const SizedBox(height: MarginSize.normal),
           Text(
             text,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: FontSize.menuStatus,
               fontWeight: FontWeight.bold,
-              color: Colors.black87,
+              color: AppColor.text.primary,
             ),
           ),
         ],

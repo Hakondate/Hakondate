@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:multi_charts/multi_charts.dart';
 
-import 'package:hakondate_v2/unit/size.dart';
+import 'package:hakondate_v2/constant/app_color.dart';
+import 'package:hakondate_v2/constant/size.dart';
 import 'package:hakondate_v2/view/component/nutrients_list.dart';
 import 'package:hakondate_v2/view_model/single_page/daily_view_model.dart';
 import 'package:hakondate_v2/view_model/multi_page/user_view_model.dart';
@@ -48,7 +49,7 @@ class NutrientsCard extends StatelessWidget {
             chartRadiusFactor: 0.7,
             textScaleFactor: 0.05,
             animate: false,
-            fillColor: Theme.of(context).colorScheme.secondary,
+            fillColor: AppColor.brand.secondary,
           ),
         );
       },
@@ -68,12 +69,12 @@ class NutrientsCard extends StatelessWidget {
           children: [
             NutrientsList(
               nutrients: ref.watch(dailyProvider).menu,
-              backgroundColor: Theme.of(context).colorScheme.secondaryVariant,
+              backgroundColor: AppColor.brand.secondaryLight,
             ),
           ],
           onExpansionChanged: (bool isExpanded) => !isExpanded,
-          textColor: Theme.of(context).colorScheme.secondary,
-          iconColor: Theme.of(context).colorScheme.secondary,
+          textColor: AppColor.brand.secondary,
+          iconColor: AppColor.brand.secondary,
         );
       },
     );

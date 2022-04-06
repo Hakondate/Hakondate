@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hakondate_v2/constant/app_color.dart';
 
-import 'package:hakondate_v2/unit/size.dart';
+import 'package:hakondate_v2/constant/size.dart';
+import 'package:hakondate_v2/router/routes.dart';
 
 class SettingLabel extends StatelessWidget {
   const SettingLabel({
@@ -33,13 +35,13 @@ class SettingLabel extends StatelessWidget {
                 TextButton(
                   onPressed: () {
                     completed(_selected);
-                    Navigator.pop(context);
+                    routemaster.pop(context);
                   },
-                  child: const Text(
+                  child: Text(
                     '完了',
                     style: TextStyle(
                       fontSize: 20,
-                      color: Colors.blueAccent,
+                      color: AppColor.text.blue,
                     ),
                   ),
                 ),
@@ -60,8 +62,8 @@ class SettingLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
+    return Material(
+      color: AppColor.brand.primary,
       child: ListTile(
         contentPadding: const EdgeInsets.only(
           left: PaddingSize.content,
@@ -73,7 +75,10 @@ class SettingLabel extends StatelessWidget {
         ),
         trailing: Text(
           trailing,
-          style: const TextStyle(fontSize: FontSize.label, color: Colors.black38),
+          style: TextStyle(
+            color: AppColor.text.blackMid,
+            fontSize: FontSize.label,
+          ),
         ),
         onTap: () => _showDialPickerModal(context),
       ),
