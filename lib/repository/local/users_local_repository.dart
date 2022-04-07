@@ -1,35 +1,50 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:hakondate_v2/model/user/user_model.dart';
 import 'package:hakondate_v2/repository/local/database_manager.dart';
 
 import 'package:drift/drift.dart';
 
-class UsersLocalRepository {
-  UsersLocalRepository() {
-    _databaseManager = databaseManager;
-  }
+final usersLocalRepositoryProvider = Provider<UsersLocalRepository>((ref) {
+  final DatabaseManager databaseManager = ref.read(databaseManagerProvider);
+  return UsersLocalRepository(databaseManager);
+});
 
-  late final DatabaseManager _databaseManager;
+abstract class UsersLocalRepositoryBase {
+  Future<List<UserModel>> getAll();
+  Future<UserModel> getById(int id);
+  Future<int> add(String name, int schoolId, int schoolYear);
+  Future<int> update(UserModel user);
+  Future<int> count();
+}
 
+class UsersLocalRepository extends UsersLocalRepositoryBase {
+  UsersLocalRepository(this._db) : super();
+
+  final DatabaseManager _db;
+
+  @override
   Future<List<UserModel>> getAll() async {
-    List<UserModel> _users = [];
-    final List<UsersSchema> _usersSchemas =
-        await _databaseManager.allUsersSchemas;
-    for (var usersSchema in _usersSchemas) {
+    List<UserModel> users = [];
+    final List<UsersSchema> usersSchemas = await _db.select(_db.usersTable).get();
+
+    for (var usersSchema in usersSchemas) {
       final UserModel _user = UserModel(
         id: usersSchema.id,
         name: usersSchema.name,
         schoolId: usersSchema.schoolId,
         schoolYear: usersSchema.schoolYear,
       );
-      _users.add(_user);
+      users.add(_user);
     }
 
-    return _users;
+    return users;
   }
 
+  @override
   Future<UserModel> getById(int id) async {
     final UsersSchema _usersSchema =
-        await _databaseManager.getUsersSchemaById(id);
+        await (_db.select(_db.usersTable)..where((t) => t.id.equals(id))).getSingle();
 
     return UserModel(
       id: _usersSchema.id,
@@ -39,22 +54,33 @@ class UsersLocalRepository {
     );
   }
 
-  Future<int> add(String name, int schoolId, int schoolYear) async {
-    return await _databaseManager.addUsersSchema(UsersTableCompanion(
-      name: Value(name),
-      schoolId: Value(schoolId),
-      schoolYear: Value(schoolYear),
-    ));
-  }
+  @override
+  Future<int> add(String name, int schoolId, int schoolYear) =>
+      _db.into(_db.usersTable).insertOnConflictUpdate(
+        UsersTableCompanion(
+          name: Value(name),
+          schoolId: Value(schoolId),
+          schoolYear: Value(schoolYear),
+        ));
 
-  Future<void> update(UserModel user) async {
-    await _databaseManager.updateUser(UsersTableCompanion(
+  @override
+  Future<int> update(UserModel user) async {
+    final UsersTableCompanion companion = UsersTableCompanion(
       id: Value(user.id),
       name: Value(user.name),
       schoolId: Value(user.schoolId),
       schoolYear: Value(user.schoolYear),
-    ));
+    );
+
+    return await (_db.update(_db.usersTable)..where((t) =>
+        t.id.equals(companion.id.value))).write(companion);
   }
 
-  Future<int> count() => _databaseManager.countUsers();
+  @override
+  Future<int> count() async {
+    final Expression<int> exp = _db.usersTable.id.count();
+    final query = _db.selectOnly(_db.usersTable)..addColumns([exp]);
+
+    return await query.map((scheme) => scheme.read(exp)).getSingle();
+  }
 }
