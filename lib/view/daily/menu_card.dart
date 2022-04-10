@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hakondate_v2/router/routes.dart';
+import 'package:hakondate_v2/model/dish/dish_model.dart';
 
+import 'package:hakondate_v2/router/routes.dart';
 import 'package:hakondate_v2/unit/size.dart';
 import 'package:hakondate_v2/view_model/single_page/daily_view_model.dart';
 
@@ -32,6 +33,17 @@ class MenuCard extends StatelessWidget {
           child: Column(
             children: [
               Image.asset('assets/images/label/menuLabel.png'),
+              GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                ),
+                itemCount: store.menu!.dishes.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return _menuTile(store.menu!.dishes[index]);
+                },
+              ),
               ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -63,6 +75,27 @@ class MenuCard extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  Widget _menuTile(DishModel dish) {
+    return Container(
+      padding: const EdgeInsets.all(PaddingSize.minimum),
+      width: double.infinity,
+      height: 64.0,
+      child: ClipRRect(
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.center,
+              child: Text(
+                dish.name,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
