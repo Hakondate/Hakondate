@@ -21,17 +21,18 @@ enum SchoolGrade {
   junior,
 }
 
-final userProvider =
-    StateNotifierProvider<UserViewModel, UserState>((ref) => UserViewModel());
+final userProvider = StateNotifierProvider<UserViewModel, UserState>((ref) {
+  final UsersLocalRepository usersLocalRepository = ref.read(usersLocalRepositoryProvider);
+  final SchoolsLocalRepository schoolsLocalRepository = ref.read(schoolsLocalRepositoryProvider);
+  return UserViewModel(schoolsLocalRepository, usersLocalRepository);
+});
 
 class UserViewModel extends StateNotifier<UserState> {
-  UserViewModel()
-      : _usersLocalRepository = UsersLocalRepository(),
-        _schoolsLocalRepository = SchoolsLocalRepository(),
-        super(const UserState());
+  UserViewModel(this._schoolsLocalRepository, this._usersLocalRepository)
+      : super(const UserState());
 
-  final UsersLocalRepository _usersLocalRepository;
   final SchoolsLocalRepository _schoolsLocalRepository;
+  final UsersLocalRepository _usersLocalRepository;
 
   Future<bool> checkSignedUp() async {
     try {

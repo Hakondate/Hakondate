@@ -9,30 +9,28 @@ import 'package:hakondate_v2/view/bottom_bar/app_bottom_navigation_bar.dart';
 import 'package:hakondate_v2/view/daily/daily.dart';
 
 final routemaster = RoutemasterDelegate(
-  routesBuilder: (context) => routes,
-);
-
-final routes = RouteMap(
-  onUnknownRoute: (_) => const Redirect('/splash'),
-  routes: {
-    '/splash': (_) => const MaterialPage(child: Splash()),
-    '/terms': (_) => const MaterialPage(child: Terms()),
-    '/signup': (_) => MaterialPage(child: Signup()),
-    '/home': (_) => const CupertinoTabPage(
-      child: AppBottomNavigationBar(),
-      paths: [
-        '/home/daily',
-        '/home/recipes',
-        '/home/letters',
-      ],
-    ),
-    '/home/daily': (_) => const MaterialPage(child: Daily()),
-    '/home/daily/dish/:id': (_) => MaterialPage(child: Scaffold(appBar: AppBar(),)),
-    '/home/daily/calendar': (_) => const MaterialPage(child: Scaffold()),
-    '/home/recipes': (_) => const MaterialPage(child: Scaffold()),
-    '/home/letters': (_) => const MaterialPage(child: Scaffold()),
-    '/setting': (_) => const MaterialPage(child: Scaffold()),
-    '/about_us': (_) => const MaterialPage(child: Scaffold()),
-    '/help': (_) => const MaterialPage(child: Scaffold()),
-  },
+  routesBuilder: (context) => RouteMap(
+    onUnknownRoute: (_) => const Redirect('/splash'),
+    routes: {
+      '/splash': (_) => const MaterialPage(child: Splash()),
+      '/terms': (_) => const MaterialPage(child: Terms()),
+      '/signup': (_) => MaterialPage(child: Signup()),
+      '/home': (_) => const CupertinoTabPage(
+        child: AppBottomNavigationBar(),
+        paths: [
+          '/home/daily',
+          '/home/recipes',
+          '/home/letters',
+        ],
+      ),
+      '/home/daily': (_) => const MaterialPage(child: Daily()),
+      '/home/daily/dish/:id': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
+      '/home/daily/calendar': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
+      '/home/recipes': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
+      '/home/letters': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
+      '/setting': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
+      '/about_us': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
+      '/help': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
+    },
+  ),
 );

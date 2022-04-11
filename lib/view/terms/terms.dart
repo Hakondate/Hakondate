@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate_v2/constant/app_color.dart';
 
 import 'package:hakondate_v2/router/routes.dart';
-import 'package:hakondate_v2/unit/size.dart';
+import 'package:hakondate_v2/constant/size.dart';
 import 'package:hakondate_v2/view_model/single_page/terms_view_model.dart';
 
 class Terms extends ConsumerWidget {
@@ -37,7 +38,7 @@ class Terms extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Checkbox(
-                    activeColor: Theme.of(context).colorScheme.secondary,
+                    activeColor: AppColor.brand.secondary,
                     value: store.isAgree,
                     onChanged: (_) => ref.read(termsProvider.notifier).onTap(),
                   ),
@@ -48,12 +49,13 @@ class Terms extends ConsumerWidget {
                   const Spacer(),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Theme.of(context).colorScheme.secondary,
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
-                      textStyle: const TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'MPLUSRounded1c',
+                      primary: AppColor.brand.secondary,
+                      padding: const EdgeInsets.symmetric(
+                        vertical: PaddingSize.buttonVertical,
+                        horizontal: PaddingSize.buttonHorizontal,
+                      ),
+                      textStyle: TextStyle(
+                        color: AppColor.text.white,
                       ),
                       shape: const StadiumBorder(),
                     ),

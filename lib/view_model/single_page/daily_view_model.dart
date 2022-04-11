@@ -5,13 +5,14 @@ import 'package:hakondate_v2/repository/local/menus_local_repository.dart';
 import 'package:hakondate_v2/model/nutrients/nutrients_model.dart';
 import 'package:hakondate_v2/state/daily/daily_state.dart';
 
-final dailyProvider = StateNotifierProvider<DailyViewModel, DailyState>(
-    (ref) => DailyViewModel());
+final dailyProvider = StateNotifierProvider<DailyViewModel, DailyState>((ref) {
+  final MenusLocalRepository menusLocalRepository = ref.read(menusLocalRepositoryProvider);
+  return DailyViewModel(menusLocalRepository);
+});
 
 class DailyViewModel extends StateNotifier<DailyState> {
-  DailyViewModel()
-      : _menusLocalRepository = MenusLocalRepository(),
-        super(DailyState(
+  DailyViewModel(this._menusLocalRepository)
+      : super(DailyState(
           selectedDay: DateTime.now(),
           focusedDay: DateTime.now(),
           calendarTabFirstDay: DateTime(2019, 8, 1),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:hakondate_v2/constant/app_color.dart';
 import 'package:hakondate_v2/view/component/loading_animation_widget.dart';
 
 class Splash extends StatelessWidget {
@@ -9,7 +10,7 @@ class Splash extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: const Color(0xffFFBF7F),
+        color: AppColor.brand.secondaryLight,
         child: const LoadingAnimationWidget(),
       ),
     );

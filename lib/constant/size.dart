@@ -4,7 +4,7 @@ class FontSize {
   static const double body = 16.0;        // 本文
   static const double label = 18.0;       // ラベル内
   static const double subheading = 20.0;  // 副見出し
-  static const double dishName = 20.0;    // 献立名
+  static const double dishName = 16.0;    // 献立名
   static const double menuStatus = 25.0;  // メニューのステータス用
 }
 

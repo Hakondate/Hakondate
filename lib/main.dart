@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hakondate_v2/constant/app_color.dart';
 
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,23 +24,27 @@ class Hakondate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = ThemeData(
-        fontFamily: 'MPLUSRounded1c',
-        appBarTheme: const AppBarTheme(
-          foregroundColor: Color(0xFF373737),
-          backgroundColor: Colors.white,
+      fontFamily: 'MPLUSRounded1c',
+      appBarTheme: AppBarTheme(
+        titleTextStyle: TextStyle(
+          color: AppColor.text.primary,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
         ),
-        textSelectionTheme:
-            const TextSelectionThemeData(selectionColor: Colors.blueAccent),
-        primaryIconTheme: const IconThemeData(color: Colors.orangeAccent));
+        iconTheme: IconThemeData(color: AppColor.brand.secondary),
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
+      ),
+      primaryIconTheme: IconThemeData(color: AppColor.brand.secondary),
+    );
 
     return ProviderScope(
       child: MaterialApp.router(
         title: 'はこんだて',
         theme: theme.copyWith(
           colorScheme: theme.colorScheme.copyWith(
-            primary: Colors.white,
-            secondary: Colors.orangeAccent,
-            secondaryVariant: const Color(0xFFFFEAD6),
+            primary: AppColor.brand.primary,
+            secondary: AppColor.brand.secondary,
+            secondaryVariant: AppColor.brand.secondaryLight,
           ),
         ),
         routerDelegate: routemaster,

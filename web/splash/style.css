@@ -1,8 +1,8 @@
 body, html {
   margin:0;
   height:100%;
-  background: #FFBF7F;
-  background-image: url("img/light-background.png");
+  background: #FFC966;
+  
   background-size: 100% 100%;
 }
 
@@ -36,8 +36,8 @@ body, html {
   body {
     margin:0;
     height:100%;
-    background: #FFBF7F;
-    background-image: url("img/dark-background.png");
+    background: #FFC966;
+    
     background-size: 100% 100%;
   }
 }

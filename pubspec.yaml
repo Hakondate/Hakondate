@@ -64,6 +64,7 @@ flutter:
     - assets/slns/
     - assets/images/
     - assets/images/food_icon/
+    - assets/images/menu_tile/
     - assets/images/label/
     - assets/images/menu_status/
     - assets/loading_animation/
@@ -86,14 +87,23 @@ flutter:
           weight: 900
 
 flutter_native_splash:
-  color: "#FFBF7F"
+  color: "#FFC966"
   image: assets/images/splash.png
   android: true
   ios: true
+  info_plist_files:
+    - 'ios/Runner/Info-Debug.plist'
+    - 'ios/Runner/Info-Release.plist'
+
+  # 更新コマンド
+  # flutter pub run flutter_native_splash:create
 
 flutter_icons:
   android: true
   ios: true
   image_path: assets/images/icon.png
-  adaptive_icon_background: "#FFBF7F"
+  adaptive_icon_background: "#FFC966"
   remove_alpha_ios: true
+
+  # 更新コマンド
+  # flutter pub run flutter_launcher_icons:main

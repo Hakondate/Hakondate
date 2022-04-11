@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate_v2/constant/app_color.dart';
 
 import 'package:hakondate_v2/model/menu/menu_model.dart';
 import 'package:hakondate_v2/router/routes.dart';
-import 'package:hakondate_v2/unit/size.dart';
+import 'package:hakondate_v2/constant/size.dart';
 import 'package:hakondate_v2/view_model/multi_page/user_view_model.dart';
 import 'package:hakondate_v2/view_model/single_page/calendar_view_model.dart';
 import 'package:hakondate_v2/view_model/single_page/daily_view_model.dart';
@@ -51,7 +52,7 @@ class Calendar extends StatelessWidget {
                     .isSameDay(menu.day, DateTime.now()))
                 ? Border(
                     left: BorderSide(
-                      color: Theme.of(context).colorScheme.secondary,
+                      color: AppColor.brand.secondary,
                       width: 5.0,
                     ),
                   )
