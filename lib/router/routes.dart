@@ -24,7 +24,7 @@ final routemaster = RoutemasterDelegate(
         ],
       ),
       '/home/daily': (_) => const MaterialPage(child: Daily()),
-      '/home/daily/dish/:id': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
+      '/home/daily/dish': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
       '/home/daily/calendar': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
       '/home/recipes': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
       '/home/letters': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),

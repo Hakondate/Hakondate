@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate_v2/constant/app_color.dart';
 import 'package:hakondate_v2/model/dish/dish_model.dart';
-import 'package:hakondate_v2/router/routes.dart';
 import 'package:hakondate_v2/constant/size.dart';
+import 'package:hakondate_v2/router/routes.dart';
 import 'package:hakondate_v2/view_model/single_page/daily_view_model.dart';
 
 class MenuCard extends StatelessWidget {
@@ -39,25 +39,47 @@ class MenuCard extends StatelessWidget {
   }
 
   Widget _menuTile(DishModel dish) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
-        image: DecorationImage(
-          image: AssetImage('assets/images/menu_tile/${dish.category.getValue()}.png'),
-          fit: BoxFit.fitWidth,
-        ),
-        color: AppColor.ui.secondaryUltraLight,
-      ),
-      child: Center(
-        child: Text(
-          dish.name,
-          style: const TextStyle(
-            fontSize: FontSize.dishName,
-            fontWeight: FontWeight.bold,
+    return GestureDetector(
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: AppColor.ui.white.withOpacity(0.8),
+            width: 3.0,
           ),
-          textAlign: TextAlign.center,
+          image: DecorationImage(
+            image: AssetImage('assets/images/menu_tile/${dish.category.getValue()}.png'),
+            fit: BoxFit.fitWidth,
+          ),
+          color: AppColor.brand.secondary,
+          boxShadow: [
+            BoxShadow(
+              color: AppColor.ui.shadow,
+              blurRadius: 3.0,
+              offset: const Offset(0.0, 1.0),
+            ),
+          ],
+        ),
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            color: AppColor.ui.white.withOpacity(0.7),
+          ),
+          child: Center(
+            child: Text(
+              dish.name,
+              style: const TextStyle(
+                fontSize: FontSize.dishName,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
         ),
       ),
+      onTap: () => routemaster.push('dish'),
     );
   }
 }
