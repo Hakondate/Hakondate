@@ -5,7 +5,7 @@ import 'package:multi_charts/multi_charts.dart';
 
 import 'package:hakondate_v2/constant/app_color.dart';
 import 'package:hakondate_v2/constant/size.dart';
-import 'package:hakondate_v2/view/component/nutrients_list.dart';
+import 'package:hakondate_v2/view/component/label/nutrients_list.dart';
 import 'package:hakondate_v2/view_model/single_page/daily_view_model.dart';
 import 'package:hakondate_v2/view_model/multi_page/user_view_model.dart';
 
@@ -15,6 +15,7 @@ class NutrientsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      clipBehavior: Clip.antiAliasWithSaveLayer,
       child: Column(
         children: [
           Image.asset('assets/images/label/nutrientsLabel.png'),
@@ -68,7 +69,7 @@ class NutrientsCard extends StatelessWidget {
           ),
           children: [
             NutrientsList(
-              nutrients: ref.watch(dailyProvider).menu,
+              nutrients: ref.watch(dailyProvider).dailyMenu.menu,
               backgroundColor: AppColor.ui.secondaryUltraLight,
             ),
           ],

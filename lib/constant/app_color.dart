@@ -24,4 +24,6 @@ class _Ui {
   final Color secondaryUltraLight = const Color(0xFFFFEDCC);
   final Color white = const Color(0xFFFFFFFF);
   final Color shadow = const Color(0xFF000000).withOpacity(0.4);
+  final Color saturday = const Color(0xFF8EAFED);
+  final Color sunday = const Color(0xFFED8EAF);
 }

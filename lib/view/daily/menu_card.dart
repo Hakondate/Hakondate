@@ -18,6 +18,7 @@ class MenuCard extends StatelessWidget {
         final store = ref.watch(dailyProvider);
 
         return Card(
+          clipBehavior: Clip.antiAliasWithSaveLayer,
           child: Column(
             children: [
               Image.asset('assets/images/label/menuLabel.png'),
@@ -29,7 +30,7 @@ class MenuCard extends StatelessWidget {
                 mainAxisSpacing: MarginSize.minimum,
                 crossAxisSpacing: MarginSize.minimum,
                 childAspectRatio: 2 / 1,
-                children: store.menu!.dishes.map((DishModel dish) => _menuTile(dish)).toList(),
+                children: store.dailyMenu.menu!.dishes.map((DishModel dish) => _menuTile(dish)).toList(),
               ),
             ],
           ),
@@ -55,7 +56,7 @@ class MenuCard extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: AppColor.ui.shadow,
-              blurRadius: 3.0,
+              blurRadius: 1.0,
               offset: const Offset(0.0, 1.0),
             ),
           ],
@@ -71,7 +72,7 @@ class MenuCard extends StatelessWidget {
             child: Text(
               dish.name,
               style: const TextStyle(
-                fontSize: FontSize.dishName,
+                fontSize: 16.0,
                 fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center,

@@ -10,5 +10,7 @@ part 'calendar_state.freezed.dart';
 class CalendarState with _$CalendarState {
   const factory CalendarState({
     @Default([]) List<MenuModel> menus,
+    DateTime? oldestDay,
+    DateTime? latestDay,
   }) = _CalendarState;
 }

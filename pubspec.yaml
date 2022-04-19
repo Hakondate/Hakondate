@@ -37,7 +37,7 @@ dependencies:
   intl: ^0.17.0
 
   # 遷移関連
-  routemaster: ^0.9.5
+  routemaster: ^0.10.0-dev5
 
 dev_dependencies:
   flutter_test:

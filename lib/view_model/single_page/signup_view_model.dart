@@ -58,9 +58,9 @@ class SignupViewModel extends StateNotifier<SignupState> {
   }
 
   void _checkNameValidation() {
-    final String? _nameErrorState =
+    final String? nameErrorState =
         (state.name == null || state.name!.isEmpty) ? 'お子様の名前を入力してください' : null;
-    state = state.copyWith(nameErrorState: _nameErrorState);
+    state = state.copyWith(nameErrorState: nameErrorState);
   }
 
   void _checkSchoolValidation() {

@@ -10,12 +10,13 @@ class AppBottomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tabState = CupertinoTabPage.of(context);
+    final CupertinoTabPageState tabState = CupertinoTabPage.of(context);
 
     return CupertinoTabScaffold(
       controller: tabState.controller,
       tabBuilder: tabState.tabBuilder,
       tabBar: CupertinoTabBar(
+        height: MarginSize.kTabBarHeight,
         activeColor: AppColor.brand.secondary,
         items: const [
           BottomNavigationBarItem(

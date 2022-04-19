@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hakondate_v2/constant/app_color.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
 
-import 'package:hakondate_v2/constant/size.dart';
 import 'package:hakondate_v2/router/routes.dart';
-import 'package:hakondate_v2/state/daily/daily_state.dart';
+import 'package:hakondate_v2/constant/app_color.dart';
+import 'package:hakondate_v2/model/menu/daily_menu_model.dart';
 import 'package:hakondate_v2/view/daily/menu_card.dart';
+import 'package:hakondate_v2/view/daily/non_lunches_day_body.dart';
 import 'package:hakondate_v2/view/daily/nutrients_card.dart';
 import 'package:hakondate_v2/view_model/single_page/daily_view_model.dart';
 import 'package:hakondate_v2/view_model/multi_page/user_view_model.dart';
@@ -27,7 +27,7 @@ class Daily extends StatelessWidget {
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
             icon: const Icon(Icons.calendar_today_outlined),
-            onPressed: () => routemaster.push('calendar'),
+            onPressed: () => routemaster.replace('/home/calendar'),
           ),
         ],
       ),
@@ -90,6 +90,7 @@ class Daily extends StatelessWidget {
                 shape: BoxShape.circle,
                 color: AppColor.brand.secondary,
               ),
+              outsideTextStyle: const CalendarStyle().defaultTextStyle,
             ),
           );
         }
@@ -106,16 +107,14 @@ class Daily extends StatelessWidget {
           return Container();
         }
 
-        switch (store.status) {
+        switch (store.dailyMenu.status) {
           case DailyStatus.holiday:
-            return _noMenuWidget(
-              context: context,
+            return const NonLunchesDayBody(
               imageFileName: 'holiday.png',
               text: '給食はお休みです...',
             );
           case DailyStatus.noData:
-            return _noMenuWidget(
-              context: context,
+            return const NonLunchesDayBody(
               imageFileName: 'no_data.png',
               text: '献立は準備中です...',
             );
@@ -130,36 +129,6 @@ class Daily extends StatelessWidget {
             );
         }
       },
-    );
-  }
-
-  Widget _noMenuWidget({
-    required BuildContext context,
-    required String imageFileName,
-    required String text,
-  }) {
-    final double _screenWidth = MediaQuery.of(context).size.width;
-
-    return Expanded(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            'assets/images/menu_status/' + imageFileName,
-            width: _screenWidth / 2,
-          ),
-          const SizedBox(height: MarginSize.normal),
-          Text(
-            text,
-            style: TextStyle(
-              fontSize: FontSize.menuStatus,
-              fontWeight: FontWeight.bold,
-              color: AppColor.text.primary,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

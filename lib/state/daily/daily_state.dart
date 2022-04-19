@@ -1,16 +1,9 @@
 import 'package:flutter/foundation.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import 'package:hakondate_v2/model/menu/menu_model.dart';
+import 'package:hakondate_v2/model/menu/daily_menu_model.dart';
 
 part 'daily_state.freezed.dart';
-
-enum DailyStatus {
-  noData,
-  holiday,
-  lunchesDay,
-}
 
 @freezed
 class DailyState with _$DailyState {
@@ -19,8 +12,7 @@ class DailyState with _$DailyState {
     required DateTime focusedDay,
     required DateTime calendarTabFirstDay,
     required DateTime calendarTabLastDay,
-    MenuModel? menu,
-    @Default(DailyStatus.noData) DailyStatus status,
+    @Default(DailyMenuModel()) DailyMenuModel dailyMenu,
     @Default(true) bool isFetching,
   }) = _DailyState;
 }

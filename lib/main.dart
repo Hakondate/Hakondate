@@ -44,7 +44,6 @@ class Hakondate extends StatelessWidget {
           colorScheme: theme.colorScheme.copyWith(
             primary: AppColor.brand.primary,
             secondary: AppColor.brand.secondary,
-            secondaryVariant: AppColor.brand.secondaryLight,
           ),
         ),
         routerDelegate: routemaster,

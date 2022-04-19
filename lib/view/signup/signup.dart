@@ -6,9 +6,9 @@ import 'package:hakondate_v2/constant/app_color.dart';
 
 import 'package:hakondate_v2/router/routes.dart';
 import 'package:hakondate_v2/constant/size.dart';
-import 'package:hakondate_v2/view/component/help_dialog.dart';
-import 'package:hakondate_v2/view/component/loading_animation_widget.dart';
-import 'package:hakondate_v2/view/component/setting_label.dart';
+import 'package:hakondate_v2/view/component/dialog/help_dialog.dart';
+import 'package:hakondate_v2/view/component/other/loading_animation_widget.dart';
+import 'package:hakondate_v2/view/component/label/setting_label.dart';
 import 'package:hakondate_v2/view_model/single_page/signup_view_model.dart';
 
 class Signup extends StatelessWidget {
