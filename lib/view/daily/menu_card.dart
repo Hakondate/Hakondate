@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate_v2/constant/app_color.dart';
 import 'package:hakondate_v2/model/dish/dish_model.dart';
 import 'package:hakondate_v2/constant/size.dart';
+import 'package:hakondate_v2/model/menu/menu_model.dart';
 import 'package:hakondate_v2/router/routes.dart';
 import 'package:hakondate_v2/view_model/single_page/daily_view_model.dart';
 
@@ -15,7 +16,9 @@ class MenuCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        final store = ref.watch(dailyProvider);
+        final menu = ref.watch(dailyProvider).menu;
+
+        if (menu is! LunchesDayMenuModel) return Container();
 
         return Card(
           clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -30,7 +33,7 @@ class MenuCard extends StatelessWidget {
                 mainAxisSpacing: MarginSize.minimum,
                 crossAxisSpacing: MarginSize.minimum,
                 childAspectRatio: 2 / 1,
-                children: store.dailyMenu.menu!.dishes.map((DishModel dish) => _menuTile(dish)).toList(),
+                children: menu.dishes.map((DishModel dish) => _menuTile(dish)).toList(),
               ),
             ],
           ),

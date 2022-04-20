@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate_v2/model/menu/menu_model.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
 
 import 'package:hakondate_v2/router/routes.dart';
 import 'package:hakondate_v2/constant/app_color.dart';
-import 'package:hakondate_v2/model/menu/daily_menu_model.dart';
 import 'package:hakondate_v2/view/daily/menu_card.dart';
 import 'package:hakondate_v2/view/daily/non_lunches_day_body.dart';
 import 'package:hakondate_v2/view/daily/nutrients_card.dart';
@@ -107,27 +107,26 @@ class Daily extends StatelessWidget {
           return Container();
         }
 
-        switch (store.dailyMenu.status) {
-          case DailyStatus.holiday:
-            return const NonLunchesDayBody(
-              imageFileName: 'holiday.png',
-              text: '給食はお休みです...',
-            );
-          case DailyStatus.noData:
-            return const NonLunchesDayBody(
-              imageFileName: 'no_data.png',
-              text: '献立は準備中です...',
-            );
-          default:
-            return Expanded(
-              child: ListView(
-                children: const [
-                  MenuCard(),
-                  NutrientsCard(),
-                ],
-              ),
-            );
+        if (store.menu is LunchesDayMenuModel) {
+          return Expanded(
+            child: ListView(
+              children: const [
+                MenuCard(),
+                NutrientsCard(),
+              ],
+            ),
+          );
+        } else if (store.menu is HolidayMenuModel) {
+          return const NonLunchesDayBody(
+            imageFileName: 'holiday.png',
+            text: '給食はお休みです...',
+          );
         }
+
+        return const NonLunchesDayBody(
+          imageFileName: 'no_data.png',
+          text: '献立は準備中です...',
+        );
       },
     );
   }

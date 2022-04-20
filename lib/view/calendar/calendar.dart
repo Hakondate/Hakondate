@@ -1,10 +1,10 @@
+import 'package:hakondate_v2/model/menu/menu_model.dart';
 import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate_v2/constant/app_color.dart';
-import 'package:hakondate_v2/model/menu/daily_menu_model.dart';
 import 'package:hakondate_v2/router/routes.dart';
 import 'package:hakondate_v2/view/component/frame/fade_up_app_bar.dart';
 import 'package:hakondate_v2/view_model/multi_page/user_view_model.dart';
@@ -112,22 +112,17 @@ class Calendar extends StatelessWidget {
         builder: (BuildContext context, WidgetRef ref, _) {
           return FutureBuilder(
             future: ref.read(calendarProvider.notifier).getDailyMenu(day),
-            builder: (BuildContext context, AsyncSnapshot<DailyMenuModel> snapshot) {
+            builder: (BuildContext context, AsyncSnapshot<MenuModel> snapshot) {
               if (snapshot.hasData) {
-                final DailyMenuModel? dailyMenu = snapshot.data;
+                final MenuModel? menu = snapshot.data;
 
-                if (dailyMenu == null) return Container();
-
-                switch (dailyMenu.status) {
-                  case DailyStatus.noData:
-                    return Container();
-                  case DailyStatus.holiday:
-                    return Container();
-                  case DailyStatus.lunchesDay:
-                    return Container();
-                  default:
-                    return Container();
+                if (menu is LunchesDayMenuModel) {
+                  return Container();
+                } else if (menu is HolidayMenuModel) {
+                  return Container();
                 }
+
+                return Container();
               } else {
                 return Container();
               }

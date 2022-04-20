@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hakondate_v2/model/menu/daily_menu_model.dart';
 
 import 'package:hakondate_v2/model/menu/menu_model.dart';
 import 'package:hakondate_v2/model/user/user_model.dart';
@@ -97,5 +96,5 @@ class CalendarViewModel extends StateNotifier<CalendarState> {
     return latestDay.difference(oldestDay).inDays + 1;
   }
 
-  Future<DailyMenuModel> getDailyMenu(DateTime day) => _menusLocalRepository.getDailyMenuByDay(day);
+  Future<MenuModel> getDailyMenu(DateTime day) => _menusLocalRepository.getMenuByDay(day);
 }

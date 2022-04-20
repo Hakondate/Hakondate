@@ -69,7 +69,7 @@ class NutrientsCard extends StatelessWidget {
           ),
           children: [
             NutrientsList(
-              nutrients: ref.watch(dailyProvider).dailyMenu.menu,
+              nutrients: ref.watch(dailyProvider).menu,
               backgroundColor: AppColor.ui.secondaryUltraLight,
             ),
           ],

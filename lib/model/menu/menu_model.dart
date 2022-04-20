@@ -6,15 +6,32 @@ part 'menu_model.freezed.dart';
 
 @freezed
 class MenuModel with _$MenuModel {
-  const MenuModel._();                // Support Getter Method
-  const factory MenuModel({
+  factory MenuModel({
     required int id,                  // Day: 2021/06/30 & ScID: 1 → 2021063001
     required DateTime day,            // 日付
     required int schoolId,            // 学校
     required List<DishModel> dishes,  // 料理
     String? event,                    // イベント
-  }) = _MenuModel;
+  }) => MenuModel.lunchesDay(
+    id: id,
+    day: day,
+    schoolId: schoolId,
+    dishes: dishes,
+    event: event,
+  );
 
+  const factory MenuModel.lunchesDay({
+    required int id,
+    required DateTime day,
+    required int schoolId,
+    required List<DishModel> dishes,
+    String? event,
+  }) = LunchesDayMenuModel;
+  const factory MenuModel.holiday() = HolidayMenuModel;
+  const factory MenuModel.noData() = NodataMenuModel;
+}
+
+extension LunchesDayMenuModelExtension on LunchesDayMenuModel {
   double get energy {
     double _sum = 0.0;
     for (var dish in dishes) {

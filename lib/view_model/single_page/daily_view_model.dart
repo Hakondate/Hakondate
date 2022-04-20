@@ -32,7 +32,7 @@ class DailyViewModel extends StateNotifier<DailyState> {
 
     state = state.copyWith(
       selectedDay: day,
-      dailyMenu: await _menusLocalRepository.getDailyMenuByDay(day),
+      menu: await _menusLocalRepository.getMenuByDay(day),
       isFetching: false,
     );
   }
@@ -43,9 +43,9 @@ class DailyViewModel extends StateNotifier<DailyState> {
     NutrientsModel? slns,
     required double graphMaxValue,
   }) {
-    final MenuModel? menu = state.dailyMenu.menu;
+    final MenuModel menu = state.menu;
 
-    if (slns == null || menu == null) {
+    if (slns == null || menu is! LunchesDayMenuModel) {
       return [0, 0, 0, 0, 0, 0];
     }
 
@@ -65,9 +65,9 @@ class DailyViewModel extends StateNotifier<DailyState> {
       double vitaminB2Ref,
       double vitaminCRef,
       ) {
-    final MenuModel? menu = state.dailyMenu.menu;
+    final MenuModel menu = state.menu;
 
-    if (menu == null) return 0;
+    if (menu is! LunchesDayMenuModel) return 0;
 
     return (menu.retinol / retinolRef + menu.vitaminB1 / vitaminB1Ref
         + menu.vitaminB2 / vitaminB2Ref + menu.vitaminC / vitaminCRef) / 4 * 100.0;
@@ -79,9 +79,9 @@ class DailyViewModel extends StateNotifier<DailyState> {
       double ironRef,
       double zincRef,
       ) {
-    final MenuModel? menu = state.dailyMenu.menu;
+    final MenuModel menu = state.menu;
 
-    if (menu == null) return 0;
+    if (menu is! LunchesDayMenuModel) return 0;
 
     return (menu.calcium / calciumRef + menu.magnesium / magnesiumRef
         + menu.iron / ironRef + menu.zinc / zincRef) / 4 * 100.0;

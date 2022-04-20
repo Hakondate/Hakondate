@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate_v2/model/dish/dish_model.dart';
 import 'package:hakondate_v2/model/foodstuff/foodstuff_model.dart';
-import 'package:hakondate_v2/model/menu/daily_menu_model.dart';
 import 'package:hakondate_v2/model/menu/menu_model.dart';
 import 'package:hakondate_v2/model/nutrients/nutrients_model.dart';
 import 'package:hakondate_v2/model/quantity/quantity_model.dart';
@@ -20,14 +19,12 @@ final menusLocalRepositoryProvider = Provider<MenusLocalRepository>((ref) {
 abstract class MenusLocalRepositoryBase {
   Future<int> add(Map<String, dynamic> menu);
   Future<List<MenuModel>> getAll();
-  Future<DailyMenuModel> getDailyMenuByDay(DateTime day);
-  Future<MenuModel?> getMenuById(int id);
+  Future<MenuModel> getMenuByDay(DateTime day);
   Future<List<MenuModel>> getSelectedPeriod({
     required DateTime startDay,
     required DateTime endDay,
     required int schoolId,
   });
-  Future<DailyStatus> getNonLunchesDailyStatusByDay(DateTime day);
 }
 
 class MenusLocalRepository extends MenusLocalRepositoryBase {
@@ -199,24 +196,25 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
   }
 
   @override
-  Future<DailyMenuModel> getDailyMenuByDay(DateTime day) async {
+  Future<MenuModel> getMenuByDay(DateTime day) async {
     final int id = _commonFunction.getIdByDay(day);
-    final MenuModel? menu = await getMenuById(id);
+    final MenuModel? menu = await _getMenuById(id);
 
     if (menu != null) {
-      return DailyMenuModel(
-        status: DailyStatus.lunchesDay,
-        menu: menu,
-      );
+      return menu;
     }
 
-    return DailyMenuModel(
-      status: await getNonLunchesDailyStatusByDay(day),
-    );
+    final DateTime oldest = await _getOldestDay();
+    final DateTime latest = await _getLatestDay();
+
+    if (day.isAfter(oldest) && day.isBefore(latest)) {
+      return const MenuModel.holiday();
+    }
+
+    return const MenuModel.noData();
   }
 
-  @override
-  Future<MenuModel?> getMenuById(int id) async {
+  Future<MenuModel?> _getMenuById(int id) async {
     final MenusSchema? menusSchema =
     await (_db.select(_db.menusTable)..where((t) => t.id.equals(id))).getSingleOrNull();
 
@@ -239,18 +237,6 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
     });
 
     return menus;
-  }
-
-  @override
-  Future<DailyStatus> getNonLunchesDailyStatusByDay(DateTime day) async {
-    final DateTime oldest = await _getOldestDay();
-    final DateTime latest = await _getLatestDay();
-
-    if (day.isAfter(oldest) && day.isBefore(latest)) {
-      return DailyStatus.holiday;
-    }
-
-    return DailyStatus.noData;
   }
 
   Future<DateTime> _getOldestDay() async {
