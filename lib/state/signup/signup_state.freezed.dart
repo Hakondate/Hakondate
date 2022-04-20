@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'signup_state.dart';
@@ -11,38 +12,7 @@ part of 'signup_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$SignupStateTearOff {
-  const _$SignupStateTearOff();
-
-  _SignupState call(
-      {String? name,
-      int? schoolId,
-      int? schoolYear,
-      String schoolTrailing = '学校を選択',
-      String schoolYearTrailing = '学年を選択',
-      List<SchoolModel> schools = const <SchoolModel>[],
-      List<String> schoolYears = const <String>['1年生', '2年生', '3年生'],
-      String? nameErrorState,
-      String? schoolErrorState}) {
-    return _SignupState(
-      name: name,
-      schoolId: schoolId,
-      schoolYear: schoolYear,
-      schoolTrailing: schoolTrailing,
-      schoolYearTrailing: schoolYearTrailing,
-      schools: schools,
-      schoolYears: schoolYears,
-      nameErrorState: nameErrorState,
-      schoolErrorState: schoolErrorState,
-    );
-  }
-}
-
-/// @nodoc
-const $SignupState = _$SignupStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$SignupState {
@@ -230,10 +200,12 @@ class _$_SignupState with DiagnosticableTreeMixin implements _SignupState {
       this.schoolYear,
       this.schoolTrailing = '学校を選択',
       this.schoolYearTrailing = '学年を選択',
-      this.schools = const <SchoolModel>[],
-      this.schoolYears = const <String>['1年生', '2年生', '3年生'],
+      final List<SchoolModel> schools = const <SchoolModel>[],
+      final List<String> schoolYears = const <String>['1年生', '2年生', '3年生'],
       this.nameErrorState,
-      this.schoolErrorState});
+      this.schoolErrorState})
+      : _schools = schools,
+        _schoolYears = schoolYears;
 
   @override
   final String? name;
@@ -241,18 +213,28 @@ class _$_SignupState with DiagnosticableTreeMixin implements _SignupState {
   final int? schoolId;
   @override
   final int? schoolYear;
-  @JsonKey()
   @override
+  @JsonKey()
   final String schoolTrailing;
-  @JsonKey()
   @override
+  @JsonKey()
   final String schoolYearTrailing;
-  @JsonKey()
+  final List<SchoolModel> _schools;
   @override
-  final List<SchoolModel> schools;
   @JsonKey()
+  List<SchoolModel> get schools {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_schools);
+  }
+
+  final List<String> _schoolYears;
   @override
-  final List<String> schoolYears;
+  @JsonKey()
+  List<String> get schoolYears {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_schoolYears);
+  }
+
   @override
   final String? nameErrorState;
   @override
@@ -322,34 +304,34 @@ class _$_SignupState with DiagnosticableTreeMixin implements _SignupState {
 
 abstract class _SignupState implements SignupState {
   const factory _SignupState(
-      {String? name,
-      int? schoolId,
-      int? schoolYear,
-      String schoolTrailing,
-      String schoolYearTrailing,
-      List<SchoolModel> schools,
-      List<String> schoolYears,
-      String? nameErrorState,
-      String? schoolErrorState}) = _$_SignupState;
+      {final String? name,
+      final int? schoolId,
+      final int? schoolYear,
+      final String schoolTrailing,
+      final String schoolYearTrailing,
+      final List<SchoolModel> schools,
+      final List<String> schoolYears,
+      final String? nameErrorState,
+      final String? schoolErrorState}) = _$_SignupState;
 
   @override
-  String? get name;
+  String? get name => throw _privateConstructorUsedError;
   @override
-  int? get schoolId;
+  int? get schoolId => throw _privateConstructorUsedError;
   @override
-  int? get schoolYear;
+  int? get schoolYear => throw _privateConstructorUsedError;
   @override
-  String get schoolTrailing;
+  String get schoolTrailing => throw _privateConstructorUsedError;
   @override
-  String get schoolYearTrailing;
+  String get schoolYearTrailing => throw _privateConstructorUsedError;
   @override
-  List<SchoolModel> get schools;
+  List<SchoolModel> get schools => throw _privateConstructorUsedError;
   @override
-  List<String> get schoolYears;
+  List<String> get schoolYears => throw _privateConstructorUsedError;
   @override
-  String? get nameErrorState;
+  String? get nameErrorState => throw _privateConstructorUsedError;
   @override
-  String? get schoolErrorState;
+  String? get schoolErrorState => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$SignupStateCopyWith<_SignupState> get copyWith =>

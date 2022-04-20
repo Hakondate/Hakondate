@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'dish_model.dart';
@@ -11,26 +12,7 @@ part of 'dish_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$DishModelTearOff {
-  const _$DishModelTearOff();
-
-  _DishModel call(
-      {required String name,
-      required List<FoodstuffModel> foodstuffs,
-      DishCategory? category}) {
-    return _DishModel(
-      name: name,
-      foodstuffs: foodstuffs,
-      category: category,
-    );
-  }
-}
-
-/// @nodoc
-const $DishModel = _$DishModelTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$DishModel {
@@ -129,14 +111,25 @@ class __$DishModelCopyWithImpl<$Res> extends _$DishModelCopyWithImpl<$Res>
 
 class _$_DishModel extends _DishModel {
   const _$_DishModel(
-      {required this.name, required this.foodstuffs, this.category})
-      : super._();
+      {required this.name,
+      required final List<FoodstuffModel> foodstuffs,
+      this.category})
+      : _foodstuffs = foodstuffs,
+        super._();
 
   @override
   final String name;
-  @override // 料理名
-  final List<FoodstuffModel> foodstuffs;
-  @override // 食材
+// 料理名
+  final List<FoodstuffModel> _foodstuffs;
+// 料理名
+  @override
+  List<FoodstuffModel> get foodstuffs {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_foodstuffs);
+  }
+
+// 食材
+  @override
   final DishCategory? category;
 
   @override
@@ -170,17 +163,17 @@ class _$_DishModel extends _DishModel {
 
 abstract class _DishModel extends DishModel {
   const factory _DishModel(
-      {required String name,
-      required List<FoodstuffModel> foodstuffs,
-      DishCategory? category}) = _$_DishModel;
+      {required final String name,
+      required final List<FoodstuffModel> foodstuffs,
+      final DishCategory? category}) = _$_DishModel;
   const _DishModel._() : super._();
 
   @override
-  String get name;
+  String get name => throw _privateConstructorUsedError;
   @override // 料理名
-  List<FoodstuffModel> get foodstuffs;
+  List<FoodstuffModel> get foodstuffs => throw _privateConstructorUsedError;
   @override // 食材
-  DishCategory? get category;
+  DishCategory? get category => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$DishModelCopyWith<_DishModel> get copyWith =>

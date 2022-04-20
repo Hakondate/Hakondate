@@ -6,6 +6,7 @@ part 'menu_model.freezed.dart';
 
 @freezed
 class MenuModel with _$MenuModel {
+  const MenuModel._();
   factory MenuModel({
     required int id,                  // Day: 2021/06/30 & ScID: 1 → 2021063001
     required DateTime day,            // 日付
@@ -29,12 +30,16 @@ class MenuModel with _$MenuModel {
   }) = LunchesDayMenuModel;
   const factory MenuModel.holiday() = HolidayMenuModel;
   const factory MenuModel.noData() = NodataMenuModel;
-}
 
-extension LunchesDayMenuModelExtension on LunchesDayMenuModel {
   double get energy {
+    final MenuModel menu = this;
+
+    if (menu is! LunchesDayMenuModel) {
+      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+    }
+
     double _sum = 0.0;
-    for (var dish in dishes) {
+    for (var dish in menu.dishes) {
       _sum += dish.energy;
     }
 
@@ -42,8 +47,14 @@ extension LunchesDayMenuModelExtension on LunchesDayMenuModel {
   }
 
   double get protein {
+    final MenuModel menu = this;
+
+    if (menu is! LunchesDayMenuModel) {
+      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+    }
+
     double _sum = 0.0;
-    for (var dish in dishes) {
+    for (var dish in menu.dishes) {
       _sum += dish.protein;
     }
 
@@ -51,8 +62,14 @@ extension LunchesDayMenuModelExtension on LunchesDayMenuModel {
   }
 
   double get lipid {
+    final MenuModel menu = this;
+
+    if (menu is! LunchesDayMenuModel) {
+      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+    }
+
     double _sum = 0.0;
-    for (var dish in dishes) {
+    for (var dish in menu.dishes) {
       _sum += dish.lipid;
     }
 
@@ -60,8 +77,14 @@ extension LunchesDayMenuModelExtension on LunchesDayMenuModel {
   }
 
   double get carbohydrate {
+    final MenuModel menu = this;
+
+    if (menu is! LunchesDayMenuModel) {
+      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+    }
+
     double _sum = 0.0;
-    for (var dish in dishes) {
+    for (var dish in menu.dishes) {
       _sum += dish.carbohydrate;
     }
 
@@ -69,8 +92,14 @@ extension LunchesDayMenuModelExtension on LunchesDayMenuModel {
   }
 
   double get sodium {
+    final MenuModel menu = this;
+
+    if (menu is! LunchesDayMenuModel) {
+      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+    }
+
     double _sum = 0.0;
-    for (var dish in dishes) {
+    for (var dish in menu.dishes) {
       _sum += dish.sodium;
     }
 
@@ -78,8 +107,14 @@ extension LunchesDayMenuModelExtension on LunchesDayMenuModel {
   }
 
   double get calcium {
+    final MenuModel menu = this;
+
+    if (menu is! LunchesDayMenuModel) {
+      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+    }
+
     double _sum = 0.0;
-    for (var dish in dishes) {
+    for (var dish in menu.dishes) {
       _sum += dish.calcium;
     }
 
@@ -87,8 +122,14 @@ extension LunchesDayMenuModelExtension on LunchesDayMenuModel {
   }
 
   double get magnesium {
+    final MenuModel menu = this;
+
+    if (menu is! LunchesDayMenuModel) {
+      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+    }
+
     double _sum = 0.0;
-    for (var dish in dishes) {
+    for (var dish in menu.dishes) {
       _sum += dish.magnesium;
     }
 
@@ -96,8 +137,14 @@ extension LunchesDayMenuModelExtension on LunchesDayMenuModel {
   }
 
   double get iron {
+    final MenuModel menu = this;
+
+    if (menu is! LunchesDayMenuModel) {
+      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+    }
+
     double _sum = 0.0;
-    for (var dish in dishes) {
+    for (var dish in menu.dishes) {
       _sum += dish.iron;
     }
 
@@ -105,8 +152,14 @@ extension LunchesDayMenuModelExtension on LunchesDayMenuModel {
   }
 
   double get zinc {
+    final MenuModel menu = this;
+
+    if (menu is! LunchesDayMenuModel) {
+      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+    }
+
     double _sum = 0.0;
-    for (var dish in dishes) {
+    for (var dish in menu.dishes) {
       _sum += dish.zinc;
     }
 
@@ -114,8 +167,14 @@ extension LunchesDayMenuModelExtension on LunchesDayMenuModel {
   }
 
   double get retinol {
+    final MenuModel menu = this;
+
+    if (menu is! LunchesDayMenuModel) {
+      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+    }
+
     double _sum = 0.0;
-    for (var dish in dishes) {
+    for (var dish in menu.dishes) {
       _sum += dish.retinol;
     }
 
@@ -123,8 +182,14 @@ extension LunchesDayMenuModelExtension on LunchesDayMenuModel {
   }
 
   double get vitaminB1 {
+    final MenuModel menu = this;
+
+    if (menu is! LunchesDayMenuModel) {
+      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+    }
+
     double _sum = 0.0;
-    for (var dish in dishes) {
+    for (var dish in menu.dishes) {
       _sum += dish.vitaminB1;
     }
 
@@ -132,8 +197,14 @@ extension LunchesDayMenuModelExtension on LunchesDayMenuModel {
   }
 
   double get vitaminB2 {
+    final MenuModel menu = this;
+
+    if (menu is! LunchesDayMenuModel) {
+      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+    }
+
     double _sum = 0.0;
-    for (var dish in dishes) {
+    for (var dish in menu.dishes) {
       _sum += dish.vitaminB2;
     }
 
@@ -141,8 +212,14 @@ extension LunchesDayMenuModelExtension on LunchesDayMenuModel {
   }
 
   double get vitaminC {
+    final MenuModel menu = this;
+
+    if (menu is! LunchesDayMenuModel) {
+      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+    }
+
     double _sum = 0.0;
-    for (var dish in dishes) {
+    for (var dish in menu.dishes) {
       _sum += dish.vitaminC;
     }
 
@@ -150,8 +227,14 @@ extension LunchesDayMenuModelExtension on LunchesDayMenuModel {
   }
 
   double get dietaryFiber {
+    final MenuModel menu = this;
+
+    if (menu is! LunchesDayMenuModel) {
+      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+    }
+
     double _sum = 0.0;
-    for (var dish in dishes) {
+    for (var dish in menu.dishes) {
       _sum += dish.dietaryFiber;
     }
 
@@ -159,8 +242,14 @@ extension LunchesDayMenuModelExtension on LunchesDayMenuModel {
   }
 
   double get salt {
+    final MenuModel menu = this;
+
+    if (menu is! LunchesDayMenuModel) {
+      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+    }
+
     double _sum = 0.0;
-    for (var dish in dishes) {
+    for (var dish in menu.dishes) {
       _sum += dish.salt;
     }
 

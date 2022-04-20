@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'quantity_model.dart';
@@ -11,22 +12,7 @@ part of 'quantity_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$QuantityModelTearOff {
-  const _$QuantityModelTearOff();
-
-  _QuantityModel call({int? piece, double gram = 0.0}) {
-    return _QuantityModel(
-      piece: piece,
-      gram: gram,
-    );
-  }
-}
-
-/// @nodoc
-const $QuantityModel = _$QuantityModelTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$QuantityModel {
@@ -119,8 +105,9 @@ class _$_QuantityModel implements _QuantityModel {
 
   @override
   final int? piece;
+// 個数
+  @override
   @JsonKey()
-  @override // 個数
   final double gram;
 
   @override
@@ -150,12 +137,13 @@ class _$_QuantityModel implements _QuantityModel {
 }
 
 abstract class _QuantityModel implements QuantityModel {
-  const factory _QuantityModel({int? piece, double gram}) = _$_QuantityModel;
+  const factory _QuantityModel({final int? piece, final double gram}) =
+      _$_QuantityModel;
 
   @override
-  int? get piece;
+  int? get piece => throw _privateConstructorUsedError;
   @override // 個数
-  double get gram;
+  double get gram => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$QuantityModelCopyWith<_QuantityModel> get copyWith =>

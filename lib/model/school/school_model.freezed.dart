@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'school_model.dart';
@@ -11,30 +12,7 @@ part of 'school_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$SchoolModelTearOff {
-  const _$SchoolModelTearOff();
-
-  _SchoolModel call(
-      {required int id,
-      required int parentId,
-      required String name,
-      int? lunchBlock,
-      required SchoolClassification classification}) {
-    return _SchoolModel(
-      id: id,
-      parentId: parentId,
-      name: name,
-      lunchBlock: lunchBlock,
-      classification: classification,
-    );
-  }
-}
-
-/// @nodoc
-const $SchoolModel = _$SchoolModelTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$SchoolModel {
@@ -173,13 +151,17 @@ class _$_SchoolModel implements _SchoolModel {
 
   @override
   final int id;
-  @override // ID
+// ID
+  @override
   final int parentId;
-  @override // 親学校(給食センター)のID
+// 親学校(給食センター)のID
+  @override
   final String name;
-  @override // 学校名
+// 学校名
+  @override
   final int? lunchBlock;
-  @override // 給食区分: 1 ~ 10
+// 給食区分: 1 ~ 10
+  @override
   final SchoolClassification classification;
 
   @override
@@ -218,22 +200,22 @@ class _$_SchoolModel implements _SchoolModel {
 
 abstract class _SchoolModel implements SchoolModel {
   const factory _SchoolModel(
-      {required int id,
-      required int parentId,
-      required String name,
-      int? lunchBlock,
-      required SchoolClassification classification}) = _$_SchoolModel;
+      {required final int id,
+      required final int parentId,
+      required final String name,
+      final int? lunchBlock,
+      required final SchoolClassification classification}) = _$_SchoolModel;
 
   @override
-  int get id;
+  int get id => throw _privateConstructorUsedError;
   @override // ID
-  int get parentId;
+  int get parentId => throw _privateConstructorUsedError;
   @override // 親学校(給食センター)のID
-  String get name;
+  String get name => throw _privateConstructorUsedError;
   @override // 学校名
-  int? get lunchBlock;
+  int? get lunchBlock => throw _privateConstructorUsedError;
   @override // 給食区分: 1 ~ 10
-  SchoolClassification get classification;
+  SchoolClassification get classification => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$SchoolModelCopyWith<_SchoolModel> get copyWith =>

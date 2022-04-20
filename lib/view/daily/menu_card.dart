@@ -18,7 +18,9 @@ class MenuCard extends StatelessWidget {
       builder: (BuildContext context, WidgetRef ref, _) {
         final menu = ref.watch(dailyProvider).menu;
 
-        if (menu is! LunchesDayMenuModel) return Container();
+        if (menu is! LunchesDayMenuModel) {
+          throw Exception("'menu' is not 'LunchesDayMenuModel'");
+        }
 
         return Card(
           clipBehavior: Clip.antiAliasWithSaveLayer,

@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'calendar_state.dart';
@@ -11,26 +12,7 @@ part of 'calendar_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$CalendarStateTearOff {
-  const _$CalendarStateTearOff();
-
-  _CalendarState call(
-      {List<MenuModel> menus = const [],
-      DateTime? oldestDay,
-      DateTime? latestDay}) {
-    return _CalendarState(
-      menus: menus,
-      oldestDay: oldestDay,
-      latestDay: latestDay,
-    );
-  }
-}
-
-/// @nodoc
-const $CalendarState = _$CalendarStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$CalendarState {
@@ -131,11 +113,17 @@ class __$CalendarStateCopyWithImpl<$Res>
 
 class _$_CalendarState with DiagnosticableTreeMixin implements _CalendarState {
   const _$_CalendarState(
-      {this.menus = const [], this.oldestDay, this.latestDay});
+      {final List<MenuModel> menus = const [], this.oldestDay, this.latestDay})
+      : _menus = menus;
 
-  @JsonKey()
+  final List<MenuModel> _menus;
   @override
-  final List<MenuModel> menus;
+  @JsonKey()
+  List<MenuModel> get menus {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_menus);
+  }
+
   @override
   final DateTime? oldestDay;
   @override
@@ -181,16 +169,16 @@ class _$_CalendarState with DiagnosticableTreeMixin implements _CalendarState {
 
 abstract class _CalendarState implements CalendarState {
   const factory _CalendarState(
-      {List<MenuModel> menus,
-      DateTime? oldestDay,
-      DateTime? latestDay}) = _$_CalendarState;
+      {final List<MenuModel> menus,
+      final DateTime? oldestDay,
+      final DateTime? latestDay}) = _$_CalendarState;
 
   @override
-  List<MenuModel> get menus;
+  List<MenuModel> get menus => throw _privateConstructorUsedError;
   @override
-  DateTime? get oldestDay;
+  DateTime? get oldestDay => throw _privateConstructorUsedError;
   @override
-  DateTime? get latestDay;
+  DateTime? get latestDay => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$CalendarStateCopyWith<_CalendarState> get copyWith =>

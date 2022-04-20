@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
 
 part 'nutrients_model.freezed.dart';
 part 'nutrients_model.g.dart';
@@ -23,6 +24,6 @@ class NutrientsModel with _$NutrientsModel {
     @Default(0.0) double salt,          // 食塩相当量
   }) = _NutrientsModel;
 
-  factory NutrientsModel.fromJson(Map<String, dynamic> json) =>
+  factory NutrientsModel.fromJson(Map<String, Object?> json) =>
       _$NutrientsModelFromJson(json);
 }

@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'menu_model.dart';
@@ -11,38 +12,7 @@ part of 'menu_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$MenuModelTearOff {
-  const _$MenuModelTearOff();
-
-  LunchesDayMenuModel lunchesDay(
-      {required int id,
-      required DateTime day,
-      required int schoolId,
-      required List<DishModel> dishes,
-      String? event}) {
-    return LunchesDayMenuModel(
-      id: id,
-      day: day,
-      schoolId: schoolId,
-      dishes: dishes,
-      event: event,
-    );
-  }
-
-  HolidayMenuModel holiday() {
-    return const HolidayMenuModel();
-  }
-
-  NodataMenuModel noData() {
-    return const NodataMenuModel();
-  }
-}
-
-/// @nodoc
-const $MenuModel = _$MenuModelTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$MenuModel {
@@ -172,13 +142,15 @@ class _$LunchesDayMenuModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LunchesDayMenuModel implements LunchesDayMenuModel {
+class _$LunchesDayMenuModel extends LunchesDayMenuModel {
   const _$LunchesDayMenuModel(
       {required this.id,
       required this.day,
       required this.schoolId,
-      required this.dishes,
-      this.event});
+      required final List<DishModel> dishes,
+      this.event})
+      : _dishes = dishes,
+        super._();
 
   @override
   final int id;
@@ -186,8 +158,13 @@ class _$LunchesDayMenuModel implements LunchesDayMenuModel {
   final DateTime day;
   @override
   final int schoolId;
+  final List<DishModel> _dishes;
   @override
-  final List<DishModel> dishes;
+  List<DishModel> get dishes {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_dishes);
+  }
+
   @override
   final String? event;
 
@@ -297,19 +274,20 @@ class _$LunchesDayMenuModel implements LunchesDayMenuModel {
   }
 }
 
-abstract class LunchesDayMenuModel implements MenuModel {
+abstract class LunchesDayMenuModel extends MenuModel {
   const factory LunchesDayMenuModel(
-      {required int id,
-      required DateTime day,
-      required int schoolId,
-      required List<DishModel> dishes,
-      String? event}) = _$LunchesDayMenuModel;
+      {required final int id,
+      required final DateTime day,
+      required final int schoolId,
+      required final List<DishModel> dishes,
+      final String? event}) = _$LunchesDayMenuModel;
+  const LunchesDayMenuModel._() : super._();
 
-  int get id;
-  DateTime get day;
-  int get schoolId;
-  List<DishModel> get dishes;
-  String? get event;
+  int get id => throw _privateConstructorUsedError;
+  DateTime get day => throw _privateConstructorUsedError;
+  int get schoolId => throw _privateConstructorUsedError;
+  List<DishModel> get dishes => throw _privateConstructorUsedError;
+  String? get event => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $LunchesDayMenuModelCopyWith<LunchesDayMenuModel> get copyWith =>
       throw _privateConstructorUsedError;
@@ -335,8 +313,8 @@ class _$HolidayMenuModelCopyWithImpl<$Res> extends _$MenuModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$HolidayMenuModel implements HolidayMenuModel {
-  const _$HolidayMenuModel();
+class _$HolidayMenuModel extends HolidayMenuModel {
+  const _$HolidayMenuModel() : super._();
 
   @override
   String toString() {
@@ -427,8 +405,9 @@ class _$HolidayMenuModel implements HolidayMenuModel {
   }
 }
 
-abstract class HolidayMenuModel implements MenuModel {
+abstract class HolidayMenuModel extends MenuModel {
   const factory HolidayMenuModel() = _$HolidayMenuModel;
+  const HolidayMenuModel._() : super._();
 }
 
 /// @nodoc
@@ -451,8 +430,8 @@ class _$NodataMenuModelCopyWithImpl<$Res> extends _$MenuModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$NodataMenuModel implements NodataMenuModel {
-  const _$NodataMenuModel();
+class _$NodataMenuModel extends NodataMenuModel {
+  const _$NodataMenuModel() : super._();
 
   @override
   String toString() {
@@ -543,6 +522,7 @@ class _$NodataMenuModel implements NodataMenuModel {
   }
 }
 
-abstract class NodataMenuModel implements MenuModel {
+abstract class NodataMenuModel extends MenuModel {
   const factory NodataMenuModel() = _$NodataMenuModel;
+  const NodataMenuModel._() : super._();
 }

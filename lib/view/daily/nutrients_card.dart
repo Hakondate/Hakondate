@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate_v2/model/menu/menu_model.dart';
 import 'package:multi_charts/multi_charts.dart';
 
 import 'package:hakondate_v2/constant/app_color.dart';
@@ -60,6 +61,12 @@ class NutrientsCard extends StatelessWidget {
   Widget _nutrientsExpansionTile() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
+        final MenuModel menu = ref.watch(dailyProvider).menu;
+
+        if (menu is! LunchesDayMenuModel) {
+          throw Exception("'menu' is not 'LunchesDayMenuModel'");
+        }
+
         return ExpansionTile(
           title: const Text(
             '詳細な栄養値',
@@ -69,7 +76,7 @@ class NutrientsCard extends StatelessWidget {
           ),
           children: [
             NutrientsList(
-              nutrients: ref.watch(dailyProvider).menu,
+              nutrients: menu,
               backgroundColor: AppColor.ui.secondaryUltraLight,
             ),
           ],

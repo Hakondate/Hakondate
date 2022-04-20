@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'splash_state.dart';
@@ -11,24 +12,7 @@ part of 'splash_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$SplashStateTearOff {
-  const _$SplashStateTearOff();
-
-  _SplashState call(
-      {LoadingStatus loadingStatus = LoadingStatus.unloading,
-      bool isErrorOccurring = false}) {
-    return _SplashState(
-      loadingStatus: loadingStatus,
-      isErrorOccurring: isErrorOccurring,
-    );
-  }
-}
-
-/// @nodoc
-const $SplashState = _$SplashStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$SplashState {
@@ -119,11 +103,11 @@ class _$_SplashState implements _SplashState {
       {this.loadingStatus = LoadingStatus.unloading,
       this.isErrorOccurring = false});
 
-  @JsonKey()
   @override
+  @JsonKey()
   final LoadingStatus loadingStatus;
-  @JsonKey()
   @override
+  @JsonKey()
   final bool isErrorOccurring;
 
   @override
@@ -156,12 +140,13 @@ class _$_SplashState implements _SplashState {
 
 abstract class _SplashState implements SplashState {
   const factory _SplashState(
-      {LoadingStatus loadingStatus, bool isErrorOccurring}) = _$_SplashState;
+      {final LoadingStatus loadingStatus,
+      final bool isErrorOccurring}) = _$_SplashState;
 
   @override
-  LoadingStatus get loadingStatus;
+  LoadingStatus get loadingStatus => throw _privateConstructorUsedError;
   @override
-  bool get isErrorOccurring;
+  bool get isErrorOccurring => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$SplashStateCopyWith<_SplashState> get copyWith =>

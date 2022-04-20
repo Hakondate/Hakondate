@@ -210,30 +210,36 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
 
 class $SchoolsTableTable extends SchoolsTable
     with TableInfo<$SchoolsTableTable, SchoolsSchema> {
-  final GeneratedDatabase _db;
+  @override
+  final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $SchoolsTableTable(this._db, [this._alias]);
+  $SchoolsTableTable(this.attachedDatabase, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
   late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
       'id', aliasedName, false,
-      typeName: 'INTEGER', requiredDuringInsert: false);
+      type: const IntType(), requiredDuringInsert: false);
   final VerificationMeta _parentIdMeta = const VerificationMeta('parentId');
+  @override
   late final GeneratedColumn<int?> parentId = GeneratedColumn<int?>(
       'parent_id', aliasedName, false,
-      typeName: 'INTEGER', requiredDuringInsert: true);
+      type: const IntType(), requiredDuringInsert: true);
   final VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
   late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
       'name', aliasedName, false,
-      typeName: 'TEXT', requiredDuringInsert: true);
+      type: const StringType(), requiredDuringInsert: true);
   final VerificationMeta _lunchBlockMeta = const VerificationMeta('lunchBlock');
+  @override
   late final GeneratedColumn<int?> lunchBlock = GeneratedColumn<int?>(
       'lunch_block', aliasedName, true,
-      typeName: 'INTEGER', requiredDuringInsert: false);
+      type: const IntType(), requiredDuringInsert: false);
   final VerificationMeta _classificationMeta =
       const VerificationMeta('classification');
+  @override
   late final GeneratedColumn<String?> classification = GeneratedColumn<String?>(
       'classification', aliasedName, false,
-      typeName: 'TEXT', requiredDuringInsert: true);
+      type: const StringType(), requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns =>
       [id, parentId, name, lunchBlock, classification];
@@ -288,7 +294,7 @@ class $SchoolsTableTable extends SchoolsTable
 
   @override
   $SchoolsTableTable createAlias(String alias) {
-    return $SchoolsTableTable(_db, alias);
+    return $SchoolsTableTable(attachedDatabase, alias);
   }
 }
 
@@ -466,25 +472,30 @@ class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
 
 class $MenusTableTable extends MenusTable
     with TableInfo<$MenusTableTable, MenusSchema> {
-  final GeneratedDatabase _db;
+  @override
+  final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $MenusTableTable(this._db, [this._alias]);
+  $MenusTableTable(this.attachedDatabase, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
   late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
       'id', aliasedName, false,
-      typeName: 'INTEGER', requiredDuringInsert: false);
+      type: const IntType(), requiredDuringInsert: false);
   final VerificationMeta _dayMeta = const VerificationMeta('day');
+  @override
   late final GeneratedColumn<DateTime?> day = GeneratedColumn<DateTime?>(
       'day', aliasedName, false,
-      typeName: 'INTEGER', requiredDuringInsert: true);
+      type: const IntType(), requiredDuringInsert: true);
   final VerificationMeta _schoolIdMeta = const VerificationMeta('schoolId');
+  @override
   late final GeneratedColumn<int?> schoolId = GeneratedColumn<int?>(
       'school_id', aliasedName, false,
-      typeName: 'INTEGER', requiredDuringInsert: true);
+      type: const IntType(), requiredDuringInsert: true);
   final VerificationMeta _eventMeta = const VerificationMeta('event');
+  @override
   late final GeneratedColumn<String?> event = GeneratedColumn<String?>(
       'event', aliasedName, true,
-      typeName: 'TEXT', requiredDuringInsert: false);
+      type: const StringType(), requiredDuringInsert: false);
   @override
   List<GeneratedColumn> get $columns => [id, day, schoolId, event];
   @override
@@ -528,7 +539,7 @@ class $MenusTableTable extends MenusTable
 
   @override
   $MenusTableTable createAlias(String alias) {
-    return $MenusTableTable(_db, alias);
+    return $MenusTableTable(attachedDatabase, alias);
   }
 }
 
@@ -655,17 +666,20 @@ class MenuDishesTableCompanion extends UpdateCompanion<MenuDishesSchema> {
 
 class $MenuDishesTableTable extends MenuDishesTable
     with TableInfo<$MenuDishesTableTable, MenuDishesSchema> {
-  final GeneratedDatabase _db;
+  @override
+  final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $MenuDishesTableTable(this._db, [this._alias]);
+  $MenuDishesTableTable(this.attachedDatabase, [this._alias]);
   final VerificationMeta _menuIdMeta = const VerificationMeta('menuId');
+  @override
   late final GeneratedColumn<int?> menuId = GeneratedColumn<int?>(
       'menu_id', aliasedName, false,
-      typeName: 'INTEGER', requiredDuringInsert: true);
+      type: const IntType(), requiredDuringInsert: true);
   final VerificationMeta _dishIdMeta = const VerificationMeta('dishId');
+  @override
   late final GeneratedColumn<int?> dishId = GeneratedColumn<int?>(
       'dish_id', aliasedName, false,
-      typeName: 'INTEGER', requiredDuringInsert: true);
+      type: const IntType(), requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [menuId, dishId];
   @override
@@ -702,7 +716,7 @@ class $MenuDishesTableTable extends MenuDishesTable
 
   @override
   $MenuDishesTableTable createAlias(String alias) {
-    return $MenuDishesTableTable(_db, alias);
+    return $MenuDishesTableTable(attachedDatabase, alias);
   }
 }
 
@@ -852,25 +866,29 @@ class DishesTableCompanion extends UpdateCompanion<DishesSchema> {
 
 class $DishesTableTable extends DishesTable
     with TableInfo<$DishesTableTable, DishesSchema> {
-  final GeneratedDatabase _db;
+  @override
+  final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $DishesTableTable(this._db, [this._alias]);
+  $DishesTableTable(this.attachedDatabase, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
   late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
       'id', aliasedName, false,
-      typeName: 'INTEGER',
+      type: const IntType(),
       requiredDuringInsert: false,
       defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
   final VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
   late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
       'name', aliasedName, false,
-      typeName: 'TEXT',
+      type: const StringType(),
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL UNIQUE');
   final VerificationMeta _categoryMeta = const VerificationMeta('category');
+  @override
   late final GeneratedColumn<String?> category = GeneratedColumn<String?>(
       'category', aliasedName, true,
-      typeName: 'TEXT', requiredDuringInsert: false);
+      type: const StringType(), requiredDuringInsert: false);
   @override
   List<GeneratedColumn> get $columns => [id, name, category];
   @override
@@ -908,7 +926,7 @@ class $DishesTableTable extends DishesTable
 
   @override
   $DishesTableTable createAlias(String alias) {
-    return $DishesTableTable(_db, alias);
+    return $DishesTableTable(attachedDatabase, alias);
   }
 }
 
@@ -1038,18 +1056,21 @@ class DishFoodstuffsTableCompanion
 
 class $DishFoodstuffsTableTable extends DishFoodstuffsTable
     with TableInfo<$DishFoodstuffsTableTable, DishFoodstuffsSchema> {
-  final GeneratedDatabase _db;
+  @override
+  final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $DishFoodstuffsTableTable(this._db, [this._alias]);
+  $DishFoodstuffsTableTable(this.attachedDatabase, [this._alias]);
   final VerificationMeta _dishIdMeta = const VerificationMeta('dishId');
+  @override
   late final GeneratedColumn<int?> dishId = GeneratedColumn<int?>(
       'dish_id', aliasedName, false,
-      typeName: 'INTEGER', requiredDuringInsert: true);
+      type: const IntType(), requiredDuringInsert: true);
   final VerificationMeta _foodstuffIdMeta =
       const VerificationMeta('foodstuffId');
+  @override
   late final GeneratedColumn<int?> foodstuffId = GeneratedColumn<int?>(
       'foodstuff_id', aliasedName, false,
-      typeName: 'INTEGER', requiredDuringInsert: true);
+      type: const IntType(), requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [dishId, foodstuffId];
   @override
@@ -1089,7 +1110,7 @@ class $DishFoodstuffsTableTable extends DishFoodstuffsTable
 
   @override
   $DishFoodstuffsTableTable createAlias(String alias) {
-    return $DishFoodstuffsTableTable(_db, alias);
+    return $DishFoodstuffsTableTable(attachedDatabase, alias);
   }
 }
 
@@ -1729,105 +1750,128 @@ class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
 
 class $FoodstuffsTableTable extends FoodstuffsTable
     with TableInfo<$FoodstuffsTableTable, FoodstuffsSchema> {
-  final GeneratedDatabase _db;
+  @override
+  final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $FoodstuffsTableTable(this._db, [this._alias]);
+  $FoodstuffsTableTable(this.attachedDatabase, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
   late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
       'id', aliasedName, false,
-      typeName: 'INTEGER',
+      type: const IntType(),
       requiredDuringInsert: false,
       defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
   final VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
   late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
       'name', aliasedName, false,
-      typeName: 'TEXT', requiredDuringInsert: true);
+      type: const StringType(), requiredDuringInsert: true);
   final VerificationMeta _pieceMeta = const VerificationMeta('piece');
+  @override
   late final GeneratedColumn<int?> piece = GeneratedColumn<int?>(
       'piece', aliasedName, true,
-      typeName: 'INTEGER', requiredDuringInsert: false);
+      type: const IntType(), requiredDuringInsert: false);
   final VerificationMeta _gramMeta = const VerificationMeta('gram');
+  @override
   late final GeneratedColumn<double?> gram = GeneratedColumn<double?>(
       'gram', aliasedName, false,
-      typeName: 'REAL', requiredDuringInsert: true);
+      type: const RealType(), requiredDuringInsert: true);
   final VerificationMeta _energyMeta = const VerificationMeta('energy');
+  @override
   late final GeneratedColumn<double?> energy = GeneratedColumn<double?>(
       'energy', aliasedName, false,
-      typeName: 'REAL', requiredDuringInsert: true);
+      type: const RealType(), requiredDuringInsert: true);
   final VerificationMeta _proteinMeta = const VerificationMeta('protein');
+  @override
   late final GeneratedColumn<double?> protein = GeneratedColumn<double?>(
       'protein', aliasedName, false,
-      typeName: 'REAL', requiredDuringInsert: true);
+      type: const RealType(), requiredDuringInsert: true);
   final VerificationMeta _lipidMeta = const VerificationMeta('lipid');
+  @override
   late final GeneratedColumn<double?> lipid = GeneratedColumn<double?>(
       'lipid', aliasedName, false,
-      typeName: 'REAL', requiredDuringInsert: true);
+      type: const RealType(), requiredDuringInsert: true);
   final VerificationMeta _sodiumMeta = const VerificationMeta('sodium');
+  @override
   late final GeneratedColumn<double?> sodium = GeneratedColumn<double?>(
       'sodium', aliasedName, false,
-      typeName: 'REAL', requiredDuringInsert: true);
+      type: const RealType(), requiredDuringInsert: true);
   final VerificationMeta _carbohydrateMeta =
       const VerificationMeta('carbohydrate');
+  @override
   late final GeneratedColumn<double?> carbohydrate = GeneratedColumn<double?>(
       'carbohydrate', aliasedName, false,
-      typeName: 'REAL', requiredDuringInsert: true);
+      type: const RealType(), requiredDuringInsert: true);
   final VerificationMeta _calciumMeta = const VerificationMeta('calcium');
+  @override
   late final GeneratedColumn<double?> calcium = GeneratedColumn<double?>(
       'calcium', aliasedName, false,
-      typeName: 'REAL', requiredDuringInsert: true);
+      type: const RealType(), requiredDuringInsert: true);
   final VerificationMeta _magnesiumMeta = const VerificationMeta('magnesium');
+  @override
   late final GeneratedColumn<double?> magnesium = GeneratedColumn<double?>(
       'magnesium', aliasedName, false,
-      typeName: 'REAL', requiredDuringInsert: true);
+      type: const RealType(), requiredDuringInsert: true);
   final VerificationMeta _ironMeta = const VerificationMeta('iron');
+  @override
   late final GeneratedColumn<double?> iron = GeneratedColumn<double?>(
       'iron', aliasedName, false,
-      typeName: 'REAL', requiredDuringInsert: true);
+      type: const RealType(), requiredDuringInsert: true);
   final VerificationMeta _zincMeta = const VerificationMeta('zinc');
+  @override
   late final GeneratedColumn<double?> zinc = GeneratedColumn<double?>(
       'zinc', aliasedName, false,
-      typeName: 'REAL', requiredDuringInsert: true);
+      type: const RealType(), requiredDuringInsert: true);
   final VerificationMeta _retinolMeta = const VerificationMeta('retinol');
+  @override
   late final GeneratedColumn<double?> retinol = GeneratedColumn<double?>(
       'retinol', aliasedName, false,
-      typeName: 'REAL', requiredDuringInsert: true);
+      type: const RealType(), requiredDuringInsert: true);
   final VerificationMeta _vitaminB1Meta = const VerificationMeta('vitaminB1');
+  @override
   late final GeneratedColumn<double?> vitaminB1 = GeneratedColumn<double?>(
       'vitamin_b1', aliasedName, false,
-      typeName: 'REAL', requiredDuringInsert: true);
+      type: const RealType(), requiredDuringInsert: true);
   final VerificationMeta _vitaminB2Meta = const VerificationMeta('vitaminB2');
+  @override
   late final GeneratedColumn<double?> vitaminB2 = GeneratedColumn<double?>(
       'vitamin_b2', aliasedName, false,
-      typeName: 'REAL', requiredDuringInsert: true);
+      type: const RealType(), requiredDuringInsert: true);
   final VerificationMeta _vitaminCMeta = const VerificationMeta('vitaminC');
+  @override
   late final GeneratedColumn<double?> vitaminC = GeneratedColumn<double?>(
       'vitamin_c', aliasedName, false,
-      typeName: 'REAL', requiredDuringInsert: true);
+      type: const RealType(), requiredDuringInsert: true);
   final VerificationMeta _dietaryFiberMeta =
       const VerificationMeta('dietaryFiber');
+  @override
   late final GeneratedColumn<double?> dietaryFiber = GeneratedColumn<double?>(
       'dietary_fiber', aliasedName, false,
-      typeName: 'REAL', requiredDuringInsert: true);
+      type: const RealType(), requiredDuringInsert: true);
   final VerificationMeta _saltMeta = const VerificationMeta('salt');
+  @override
   late final GeneratedColumn<double?> salt = GeneratedColumn<double?>(
       'salt', aliasedName, false,
-      typeName: 'REAL', requiredDuringInsert: true);
+      type: const RealType(), requiredDuringInsert: true);
   final VerificationMeta _isHeatMeta = const VerificationMeta('isHeat');
+  @override
   late final GeneratedColumn<bool?> isHeat = GeneratedColumn<bool?>(
       'is_heat', aliasedName, false,
-      typeName: 'INTEGER',
+      type: const BoolType(),
       requiredDuringInsert: true,
       defaultConstraints: 'CHECK (is_heat IN (0, 1))');
   final VerificationMeta _isAllergyMeta = const VerificationMeta('isAllergy');
+  @override
   late final GeneratedColumn<bool?> isAllergy = GeneratedColumn<bool?>(
       'is_allergy', aliasedName, false,
-      typeName: 'INTEGER',
+      type: const BoolType(),
       requiredDuringInsert: true,
       defaultConstraints: 'CHECK (is_allergy IN (0, 1))');
   final VerificationMeta _originMeta = const VerificationMeta('origin');
+  @override
   late final GeneratedColumn<String?> origin = GeneratedColumn<String?>(
       'origin', aliasedName, true,
-      typeName: 'TEXT', requiredDuringInsert: false);
+      type: const StringType(), requiredDuringInsert: false);
   @override
   List<GeneratedColumn> get $columns => [
         id,
@@ -2004,7 +2048,7 @@ class $FoodstuffsTableTable extends FoodstuffsTable
 
   @override
   $FoodstuffsTableTable createAlias(String alias) {
-    return $FoodstuffsTableTable(_db, alias);
+    return $FoodstuffsTableTable(attachedDatabase, alias);
   }
 }
 
@@ -2180,27 +2224,32 @@ class UsersTableCompanion extends UpdateCompanion<UsersSchema> {
 
 class $UsersTableTable extends UsersTable
     with TableInfo<$UsersTableTable, UsersSchema> {
-  final GeneratedDatabase _db;
+  @override
+  final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $UsersTableTable(this._db, [this._alias]);
+  $UsersTableTable(this.attachedDatabase, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
   late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
       'id', aliasedName, false,
-      typeName: 'INTEGER',
+      type: const IntType(),
       requiredDuringInsert: false,
       defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
   final VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
   late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
       'name', aliasedName, false,
-      typeName: 'TEXT', requiredDuringInsert: true);
+      type: const StringType(), requiredDuringInsert: true);
   final VerificationMeta _schoolIdMeta = const VerificationMeta('schoolId');
+  @override
   late final GeneratedColumn<int?> schoolId = GeneratedColumn<int?>(
       'school_id', aliasedName, false,
-      typeName: 'INTEGER', requiredDuringInsert: true);
+      type: const IntType(), requiredDuringInsert: true);
   final VerificationMeta _schoolYearMeta = const VerificationMeta('schoolYear');
+  @override
   late final GeneratedColumn<int?> schoolYear = GeneratedColumn<int?>(
       'school_year', aliasedName, false,
-      typeName: 'INTEGER', requiredDuringInsert: true);
+      type: const IntType(), requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [id, name, schoolId, schoolYear];
   @override
@@ -2248,7 +2297,7 @@ class $UsersTableTable extends UsersTable
 
   @override
   $UsersTableTable createAlias(String alias) {
-    return $UsersTableTable(_db, alias);
+    return $UsersTableTable(attachedDatabase, alias);
   }
 }
 
