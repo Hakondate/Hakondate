@@ -32,3 +32,7 @@ class IconSize {
   static const double navigationItem = 30.0;  // ボトムバー用
   static const double homeFoodIcon = 40;      // ホームのフードアイコン用
 }
+
+class UiSize {
+  static const double calendarTileHeight = 150; // カレンダー画面の高さ
+}
