@@ -1,4 +1,3 @@
-import 'package:hakondate_v2/view/calendar/non_lunches_day_calendar_tile.dart';
 import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
@@ -8,6 +7,8 @@ import 'package:hakondate_v2/constant/app_color.dart';
 import 'package:hakondate_v2/constant/size.dart';
 import 'package:hakondate_v2/router/routes.dart';
 import 'package:hakondate_v2/view/component/frame/fade_up_app_bar.dart';
+import 'package:hakondate_v2/view/component/frame/stateful_wrapper.dart';
+import 'package:hakondate_v2/view/calendar/non_lunches_day_calendar_tile.dart';
 import 'package:hakondate_v2/view/calendar/menu_chips.dart';
 import 'package:hakondate_v2/view_model/multi_page/common_function.dart';
 import 'package:hakondate_v2/view_model/multi_page/user_view_model.dart';
@@ -27,19 +28,28 @@ class Calendar extends StatelessWidget {
       body: Consumer(
         builder: (BuildContext context, WidgetRef ref, _) {
           final store = ref.watch(calendarProvider);
+          final double appHeight = MediaQuery.of(context).size.height;
 
-          return ListView.builder(
-            physics: const AlwaysScrollableScrollPhysics(),
-            itemCount: ref.read(calendarProvider.notifier).itemCount,
-            itemBuilder: (_, int index) =>
-                _dayTile(store.oldestDay!.add(Duration(days: index))),
+          return StatefulWrapper(
+            onInit: () => ref.read(calendarProvider.notifier).initialize(appHeight),
+            child: Scrollbar(
+              controller: ref.read(calendarProvider.notifier).scrollController,
+              radius: const Radius.circular(16.0),
+              child: ListView.builder(
+                controller: ref.read(calendarProvider.notifier).scrollController,
+                reverse: true,
+                physics: const AlwaysScrollableScrollPhysics(),
+                itemCount: ref.read(calendarProvider.notifier).itemCount,
+                itemBuilder: (_, int index) => _calendarTile(store.latestDay.add(Duration(days: -index))),
+              ),
+            ),
           );
         },
       ),
     );
   }
 
-  Widget _dayTile(DateTime day) {
+  Widget _calendarTile(DateTime day) {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
         return GestureDetector(
@@ -167,7 +177,7 @@ class Calendar extends StatelessWidget {
 
                         return NonLunchesDayCalendarTile.noData();
                       } else {
-                        return NonLunchesDayCalendarTile.noData();
+                        return NonLunchesDayCalendarTile.loading();
                       }
                     },
                   );

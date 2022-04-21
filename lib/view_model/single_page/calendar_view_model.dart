@@ -1,100 +1,83 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:hakondate_v2/constant/size.dart';
 import 'package:hakondate_v2/model/menu/menu_model.dart';
-import 'package:hakondate_v2/model/user/user_model.dart';
 import 'package:hakondate_v2/repository/local/menus_local_repository.dart';
 import 'package:hakondate_v2/state/calendar/calendar_state.dart';
-import 'package:hakondate_v2/view_model/multi_page/user_view_model.dart';
+import 'package:hakondate_v2/view_model/single_page/daily_view_model.dart';
 
 final calendarProvider = StateNotifierProvider<CalendarViewModel, CalendarState>((ref) {
-  final UserViewModel userProviderReader = ref.read(userProvider.notifier);
   final MenusLocalRepository menusLocalRepository = ref.read(menusLocalRepositoryProvider);
+  final DailyViewModel dailyProviderReader = ref.read(dailyProvider.notifier);
   return CalendarViewModel(
-    userProviderReader,
     menusLocalRepository,
+    dailyProviderReader,
   );
 });
 
 class CalendarViewModel extends StateNotifier<CalendarState> {
   CalendarViewModel(
-    this._userProviderReader,
     this._menusLocalRepository,
-  ) : super(const CalendarState()) {
-    initialize();
-  }
+    this._dailyProviderReader,
+  ) : super(CalendarState(
+    oldestDay: _dailyProviderReader.state.calendarTabFirstDay,
+    latestDay: _dailyProviderReader.state.calendarTabLastDay,
+    scrollController: ScrollController(),
+  ));
 
-  final UserViewModel _userProviderReader;
   final MenusLocalRepository _menusLocalRepository;
+  final DailyViewModel _dailyProviderReader;
+  final double _calendarHeightWithMargin = UiSize.calendarTileHeight + 8.0;
 
-  void initialize() async {
-    final DateTime oldestDay = DateTime(
-      DateTime.now().year,
-      DateTime.now().month,
-      1,
-    );
-    final DateTime latestDay = DateTime(
-      DateTime.now().year,
-      DateTime.now().month + 2,
-      1,
-    ).add(const Duration(days: -1));
+  ScrollController get scrollController => state.scrollController;
+  int get itemCount => state.latestDay.difference(state.oldestDay).inDays + 1;
 
-    await _updateMenus(
-      oldestDay: oldestDay,
-      latestDay: latestDay,
-    );
-  }
+  void initialize(double appHeight) {
+    state.scrollController.addListener(() {
+      final double maxScrollExtent = state.scrollController.position.maxScrollExtent;
+      final double currentPosition = state.scrollController.position.pixels;
 
-  Future<void> fetchPreviousMonth() async {
-    try {
-      final DateTime? oldestDay = state.oldestDay;
-
-      if (oldestDay == null) throw Exception('Oldest day does not exist');
-
-      await _updateMenus(
-        oldestDay: DateTime(oldestDay.year, oldestDay.month - 1, 1),
-      );
-    } catch (error) {
-      debugPrint(error.toString());
-    }
-  }
-
-  Future<void> _updateMenus({
-    required DateTime oldestDay,
-    DateTime? latestDay,
-  }) async {
-    try {
-      final UserModel? user = _userProviderReader.state.currentUser;
-      final DateTime? _latestDay = latestDay ?? state.latestDay;
-
-      if (user == null) throw Exception('Current user does not exist');
-      if (_latestDay == null) throw Exception('Latest day does not exist');
-
-      final List<MenuModel> menus = await _menusLocalRepository.getSelectedPeriod(
-        startDay: oldestDay,
-        endDay: _latestDay,
-        schoolId: user.schoolId,
-      );
-
+      if ((maxScrollExtent - UiSize.calendarTileHeight * 0.5) <= currentPosition) {
+        fetchPreviousMonth();
+      }
+    });
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       state = state.copyWith(
-        oldestDay: oldestDay,
-        latestDay: _latestDay,
-        menus: menus,
+        oldestDay: DateTime(
+          _dailyProviderReader.state.selectedDay.year,
+          _dailyProviderReader.state.selectedDay.month - 1,
+          1,
+        ),
       );
-    } catch (error) {
-      debugPrint(error.toString());
+      state.scrollController.jumpTo(_getInitialScrollPosition(appHeight));
+    });
+  }
+
+  void fetchPreviousMonth() {
+    final DateTime limitMonth = _dailyProviderReader.state.calendarTabFirstDay.add(const Duration(days: 1));
+    if (state.oldestDay.isAfter(limitMonth)) {
+      state = state.copyWith(
+        oldestDay: DateTime(state.oldestDay.year, state.oldestDay.month - 1, 1),
+      );
     }
   }
 
-  int get itemCount {
-    final DateTime? latestDay = state.latestDay;
-    final DateTime? oldestDay = state.oldestDay;
+  double _getInitialScrollPosition(double appHeight) {
+    final int dayDifference = state.latestDay.difference(_dailyProviderReader.state.selectedDay).inDays;
+    final double scrollPosition = _calendarHeightWithMargin * dayDifference - (appHeight - _calendarHeightWithMargin) / 2.0;
 
-    if (latestDay == null || oldestDay == null) return 0;
+    if (scrollPosition < 0.0) return 0.0;
 
-    return latestDay.difference(oldestDay).inDays + 1;
+    return scrollPosition;
   }
 
   Future<MenuModel> getDailyMenu(DateTime day) => _menusLocalRepository.getMenuByDay(day);
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
 }

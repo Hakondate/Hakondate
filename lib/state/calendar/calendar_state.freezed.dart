@@ -16,9 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$CalendarState {
-  List<MenuModel> get menus => throw _privateConstructorUsedError;
-  DateTime? get oldestDay => throw _privateConstructorUsedError;
-  DateTime? get latestDay => throw _privateConstructorUsedError;
+  DateTime get oldestDay => throw _privateConstructorUsedError;
+  DateTime get latestDay => throw _privateConstructorUsedError;
+  ScrollController get scrollController => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CalendarStateCopyWith<CalendarState> get copyWith =>
@@ -30,7 +30,10 @@ abstract class $CalendarStateCopyWith<$Res> {
   factory $CalendarStateCopyWith(
           CalendarState value, $Res Function(CalendarState) then) =
       _$CalendarStateCopyWithImpl<$Res>;
-  $Res call({List<MenuModel> menus, DateTime? oldestDay, DateTime? latestDay});
+  $Res call(
+      {DateTime oldestDay,
+      DateTime latestDay,
+      ScrollController scrollController});
 }
 
 /// @nodoc
@@ -44,23 +47,23 @@ class _$CalendarStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? menus = freezed,
     Object? oldestDay = freezed,
     Object? latestDay = freezed,
+    Object? scrollController = freezed,
   }) {
     return _then(_value.copyWith(
-      menus: menus == freezed
-          ? _value.menus
-          : menus // ignore: cast_nullable_to_non_nullable
-              as List<MenuModel>,
       oldestDay: oldestDay == freezed
           ? _value.oldestDay
           : oldestDay // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTime,
       latestDay: latestDay == freezed
           ? _value.latestDay
           : latestDay // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTime,
+      scrollController: scrollController == freezed
+          ? _value.scrollController
+          : scrollController // ignore: cast_nullable_to_non_nullable
+              as ScrollController,
     ));
   }
 }
@@ -72,7 +75,10 @@ abstract class _$CalendarStateCopyWith<$Res>
           _CalendarState value, $Res Function(_CalendarState) then) =
       __$CalendarStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<MenuModel> menus, DateTime? oldestDay, DateTime? latestDay});
+  $Res call(
+      {DateTime oldestDay,
+      DateTime latestDay,
+      ScrollController scrollController});
 }
 
 /// @nodoc
@@ -88,23 +94,23 @@ class __$CalendarStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? menus = freezed,
     Object? oldestDay = freezed,
     Object? latestDay = freezed,
+    Object? scrollController = freezed,
   }) {
     return _then(_CalendarState(
-      menus: menus == freezed
-          ? _value.menus
-          : menus // ignore: cast_nullable_to_non_nullable
-              as List<MenuModel>,
       oldestDay: oldestDay == freezed
           ? _value.oldestDay
           : oldestDay // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTime,
       latestDay: latestDay == freezed
           ? _value.latestDay
           : latestDay // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTime,
+      scrollController: scrollController == freezed
+          ? _value.scrollController
+          : scrollController // ignore: cast_nullable_to_non_nullable
+              as ScrollController,
     ));
   }
 }
@@ -113,25 +119,20 @@ class __$CalendarStateCopyWithImpl<$Res>
 
 class _$_CalendarState with DiagnosticableTreeMixin implements _CalendarState {
   const _$_CalendarState(
-      {final List<MenuModel> menus = const [], this.oldestDay, this.latestDay})
-      : _menus = menus;
-
-  final List<MenuModel> _menus;
-  @override
-  @JsonKey()
-  List<MenuModel> get menus {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_menus);
-  }
+      {required this.oldestDay,
+      required this.latestDay,
+      required this.scrollController});
 
   @override
-  final DateTime? oldestDay;
+  final DateTime oldestDay;
   @override
-  final DateTime? latestDay;
+  final DateTime latestDay;
+  @override
+  final ScrollController scrollController;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'CalendarState(menus: $menus, oldestDay: $oldestDay, latestDay: $latestDay)';
+    return 'CalendarState(oldestDay: $oldestDay, latestDay: $latestDay, scrollController: $scrollController)';
   }
 
   @override
@@ -139,9 +140,9 @@ class _$_CalendarState with DiagnosticableTreeMixin implements _CalendarState {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'CalendarState'))
-      ..add(DiagnosticsProperty('menus', menus))
       ..add(DiagnosticsProperty('oldestDay', oldestDay))
-      ..add(DiagnosticsProperty('latestDay', latestDay));
+      ..add(DiagnosticsProperty('latestDay', latestDay))
+      ..add(DiagnosticsProperty('scrollController', scrollController));
   }
 
   @override
@@ -149,17 +150,18 @@ class _$_CalendarState with DiagnosticableTreeMixin implements _CalendarState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _CalendarState &&
-            const DeepCollectionEquality().equals(other.menus, menus) &&
             const DeepCollectionEquality().equals(other.oldestDay, oldestDay) &&
-            const DeepCollectionEquality().equals(other.latestDay, latestDay));
+            const DeepCollectionEquality().equals(other.latestDay, latestDay) &&
+            const DeepCollectionEquality()
+                .equals(other.scrollController, scrollController));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(menus),
       const DeepCollectionEquality().hash(oldestDay),
-      const DeepCollectionEquality().hash(latestDay));
+      const DeepCollectionEquality().hash(latestDay),
+      const DeepCollectionEquality().hash(scrollController));
 
   @JsonKey(ignore: true)
   @override
@@ -169,16 +171,16 @@ class _$_CalendarState with DiagnosticableTreeMixin implements _CalendarState {
 
 abstract class _CalendarState implements CalendarState {
   const factory _CalendarState(
-      {final List<MenuModel> menus,
-      final DateTime? oldestDay,
-      final DateTime? latestDay}) = _$_CalendarState;
+      {required final DateTime oldestDay,
+      required final DateTime latestDay,
+      required final ScrollController scrollController}) = _$_CalendarState;
 
   @override
-  List<MenuModel> get menus => throw _privateConstructorUsedError;
+  DateTime get oldestDay => throw _privateConstructorUsedError;
   @override
-  DateTime? get oldestDay => throw _privateConstructorUsedError;
+  DateTime get latestDay => throw _privateConstructorUsedError;
   @override
-  DateTime? get latestDay => throw _privateConstructorUsedError;
+  ScrollController get scrollController => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$CalendarStateCopyWith<_CalendarState> get copyWith =>

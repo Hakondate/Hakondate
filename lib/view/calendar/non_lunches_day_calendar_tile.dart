@@ -27,15 +27,21 @@ class NonLunchesDayCalendarTile extends StatelessWidget {
 
   factory NonLunchesDayCalendarTile.noData() {
     return NonLunchesDayCalendarTile(
-      backgroundColor: AppColor.ui.black.withOpacity(0.1),
+      backgroundColor: AppColor.ui.black.withOpacity(0.3),
       message: Text(
         '準備中です',
         style: TextStyle(
           fontSize: 24.0,
           fontWeight: FontWeight.bold,
-          color: AppColor.text.gray,
+          color: AppColor.text.white,
         ),
       ),
+    );
+  }
+
+  factory NonLunchesDayCalendarTile.loading() {
+    return NonLunchesDayCalendarTile(
+      message: Container(),
     );
   }
 
