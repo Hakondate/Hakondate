@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:hakondate_v2/unit/size.dart';
+import 'package:hakondate_v2/constant/app_color.dart';
+import 'package:hakondate_v2/constant/size.dart';
 import 'package:routemaster/routemaster.dart';
 
 class AppBottomNavigationBar extends StatelessWidget {
@@ -9,13 +10,14 @@ class AppBottomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tabState = CupertinoTabPage.of(context);
+    final CupertinoTabPageState tabState = CupertinoTabPage.of(context);
 
     return CupertinoTabScaffold(
       controller: tabState.controller,
       tabBuilder: tabState.tabBuilder,
       tabBar: CupertinoTabBar(
-        activeColor: Theme.of(context).colorScheme.secondary,
+        height: MarginSize.kTabBarHeight,
+        activeColor: AppColor.brand.secondary,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(

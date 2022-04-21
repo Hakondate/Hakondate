@@ -4,16 +4,17 @@ import 'package:hakondate_v2/model/school/school_model.dart';
 import 'package:hakondate_v2/state/signup/signup_state.dart';
 import 'package:hakondate_v2/repository/local/schools_local_repository.dart';
 
-final signupProvider = StateNotifierProvider<SignupViewModel, SignupState>(
-    (ref) => SignupViewModel());
+final signupProvider = StateNotifierProvider<SignupViewModel, SignupState>((ref) {
+  final SchoolsLocalRepository schoolLocalRepository = ref.read(schoolsLocalRepositoryProvider);
+  return SignupViewModel(schoolLocalRepository);
+});
 
 class SignupViewModel extends StateNotifier<SignupState> {
-  SignupViewModel() : super(const SignupState()) {
-    _schoolLocalRepository = SchoolsLocalRepository();
+  SignupViewModel(this._schoolLocalRepository) : super(const SignupState()) {
     _initialize();
   }
 
-  late final SchoolsLocalRepository _schoolLocalRepository;
+  final SchoolsLocalRepository _schoolLocalRepository;
 
   Future<void> _initialize() async {
     final List<SchoolModel> schools = await _schoolLocalRepository.getAll();
@@ -57,9 +58,9 @@ class SignupViewModel extends StateNotifier<SignupState> {
   }
 
   void _checkNameValidation() {
-    final String? _nameErrorState =
+    final String? nameErrorState =
         (state.name == null || state.name!.isEmpty) ? 'お子様の名前を入力してください' : null;
-    state = state.copyWith(nameErrorState: _nameErrorState);
+    state = state.copyWith(nameErrorState: nameErrorState);
   }
 
   void _checkSchoolValidation() {

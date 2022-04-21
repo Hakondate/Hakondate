@@ -1208,8 +1208,8 @@
         ]
     },
     {
-        "id": 2021070401,
-        "day": 1625324400000,
+        "id": 2022042201,
+        "day": 1650553200000,
         "schoolId": 1,
         "event": "和食の日",
         "dishes": [
@@ -1500,6 +1500,64 @@
                         "vitaminB2": 0,
                         "vitaminC": 0,
                         "dietaryFiber": 0,
+                        "salt": 0,
+                        "isAllergy": false,
+                        "isHeat": false,
+                        "origin": null
+                    }
+                ]
+            },
+            {
+                "name": "ごはんHAOAHAOAHOAHOAHOAHOA",
+                "category": "main",
+                "foodstuffs": [
+                    {
+                        "name": "精白米",
+                        "piece": null,
+                        "gram": 100.0,
+                        "energy": 358,
+                        "protein": 6.1,
+                        "lipid": 0.9,
+                        "carbohydrate": 77.6,
+                        "sodium": 1,
+                        "calcium": 5,
+                        "magnesium": 23,
+                        "iron": 0.8,
+                        "zinc": 1.4,
+                        "retinol": 0,
+                        "vitaminB1": 0.08,
+                        "vitaminB2": 0.02,
+                        "vitaminC": 0,
+                        "dietaryFiber": 0.5,
+                        "salt": 0,
+                        "isAllergy": false,
+                        "isHeat": false,
+                        "origin": null
+                    }
+                ]
+            },
+            {
+                "name": "ごはんああああああああああああああああああああああああああ",
+                "category": "main",
+                "foodstuffs": [
+                    {
+                        "name": "精白米",
+                        "piece": null,
+                        "gram": 100.0,
+                        "energy": 358,
+                        "protein": 6.1,
+                        "lipid": 0.9,
+                        "carbohydrate": 77.6,
+                        "sodium": 1,
+                        "calcium": 5,
+                        "magnesium": 23,
+                        "iron": 0.8,
+                        "zinc": 1.4,
+                        "retinol": 0,
+                        "vitaminB1": 0.08,
+                        "vitaminB2": 0.02,
+                        "vitaminC": 0,
+                        "dietaryFiber": 0.5,
                         "salt": 0,
                         "isAllergy": false,
                         "isHeat": false,

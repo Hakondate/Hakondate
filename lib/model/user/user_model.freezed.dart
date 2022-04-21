@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'user_model.dart';
@@ -11,30 +12,7 @@ part of 'user_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$UserModelTearOff {
-  const _$UserModelTearOff();
-
-  _UserModel call(
-      {required int id,
-      required String name,
-      required int schoolId,
-      required int schoolYear,
-      NutrientsModel? slns}) {
-    return _UserModel(
-      id: id,
-      name: name,
-      schoolId: schoolId,
-      schoolYear: schoolYear,
-      slns: slns,
-    );
-  }
-}
-
-/// @nodoc
-const $UserModel = _$UserModelTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$UserModel {
@@ -189,11 +167,14 @@ class _$_UserModel extends _UserModel {
   final int id;
   @override
   final String name;
-  @override // ニックネーム
+// ニックネーム
+  @override
   final int schoolId;
-  @override // 学校ID
+// 学校ID
+  @override
   final int schoolYear;
-  @override // 学年
+// 学年
+  @override
   final NutrientsModel? slns;
 
   @override
@@ -231,23 +212,23 @@ class _$_UserModel extends _UserModel {
 
 abstract class _UserModel extends UserModel {
   const factory _UserModel(
-      {required int id,
-      required String name,
-      required int schoolId,
-      required int schoolYear,
-      NutrientsModel? slns}) = _$_UserModel;
+      {required final int id,
+      required final String name,
+      required final int schoolId,
+      required final int schoolYear,
+      final NutrientsModel? slns}) = _$_UserModel;
   const _UserModel._() : super._();
 
   @override
-  int get id;
+  int get id => throw _privateConstructorUsedError;
   @override
-  String get name;
+  String get name => throw _privateConstructorUsedError;
   @override // ニックネーム
-  int get schoolId;
+  int get schoolId => throw _privateConstructorUsedError;
   @override // 学校ID
-  int get schoolYear;
+  int get schoolYear => throw _privateConstructorUsedError;
   @override // 学年
-  NutrientsModel? get slns;
+  NutrientsModel? get slns => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$UserModelCopyWith<_UserModel> get copyWith =>

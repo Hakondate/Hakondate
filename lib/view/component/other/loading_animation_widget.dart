@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate_v2/state/splash/splash_state.dart';
-import 'package:hakondate_v2/view/component/stateful_wrapper.dart';
+import 'package:hakondate_v2/view/component/frame/stateful_wrapper.dart';
 import 'package:hakondate_v2/view_model/single_page/splash_view_model.dart';
 
 class LoadingAnimationWidget extends ConsumerWidget {

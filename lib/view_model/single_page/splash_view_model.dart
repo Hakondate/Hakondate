@@ -9,19 +9,30 @@ import 'package:hakondate_v2/repository/remote/schools_remote_repository.dart';
 import 'package:hakondate_v2/repository/local/menus_local_repository.dart';
 import 'package:hakondate_v2/repository/remote/menus_remote_repository.dart';
 import 'package:hakondate_v2/view_model/multi_page/user_view_model.dart';
-import 'package:hakondate_v2/view_model/single_page/home_view_model.dart';
+import 'package:hakondate_v2/view_model/single_page/daily_view_model.dart';
 import 'package:hakondate_v2/view_model/single_page/signup_view_model.dart';
 
-final splashProvider = StateNotifierProvider<SplashViewModel, SplashState>(
-    (ref) => SplashViewModel(ref.read));
+final splashProvider = StateNotifierProvider<SplashViewModel, SplashState>((ref) {
+  final SchoolsLocalRepository schoolsLocalRepository = ref.read(schoolsLocalRepositoryProvider);
+  final SchoolsRemoteRepository schoolsRemoteRepository = ref.read(schoolsRemoteRepositoryProvider);
+  final MenusLocalRepository menusLocalRepository = ref.read(menusLocalRepositoryProvider);
+  final MenusRemoteRepository menusRemoteRepository = ref.read(menusRemoteRepositoryProvider);
+  return SplashViewModel(
+    ref.read,
+    schoolsLocalRepository,
+    schoolsRemoteRepository,
+    menusLocalRepository,
+    menusRemoteRepository,
+  );
+});
 
 class SplashViewModel extends StateNotifier<SplashState> {
-  SplashViewModel(this._reader)
-      : _schoolsLocalRepository = SchoolsLocalRepository(),
-        _schoolsRemoteRepository = SchoolsRemoteRepository(),
-        _menusLocalRepository = MenusLocalRepository(),
-        _menusRemoteRepository = MenusRemoteRepository(),
-        super(const SplashState());
+  SplashViewModel(this._reader,
+      this._schoolsLocalRepository,
+      this._schoolsRemoteRepository,
+      this._menusLocalRepository,
+      this._menusRemoteRepository,
+      ) : super(const SplashState());
 
   final Reader _reader;
   final SchoolsLocalRepository _schoolsLocalRepository;
@@ -97,7 +108,7 @@ class SplashViewModel extends StateNotifier<SplashState> {
       });
     }
 
-    await _reader(homeProvider.notifier).updateSelectedDay(
+    await _reader(dailyProvider.notifier).updateSelectedDay(
       schoolId: schoolId,
     );
     state = state.copyWith(loadingStatus: LoadingStatus.reading);
@@ -129,14 +140,14 @@ class SplashViewModel extends StateNotifier<SplashState> {
                 child: const Text('このまま利用'),
                 onPressed: () async {
                   await _useAsIs();
-                  Navigator.of(context).pop();
+                  routemaster.pop();
                 },
               ),
               CupertinoDialogAction(
                 isDefaultAction: true,
                 child: const Text('リトライ'),
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  routemaster.pop();
                   loadSplash(context);
                 },
               ),
@@ -150,7 +161,7 @@ class SplashViewModel extends StateNotifier<SplashState> {
   Future<void> _useAsIs() async {
     final currentUser = _reader(userProvider.notifier).state.currentUser;
     if (await _reader(userProvider.notifier).checkSignedUp()) {
-      await _reader(homeProvider.notifier).updateSelectedDay(
+      await _reader(dailyProvider.notifier).updateSelectedDay(
         schoolId: currentUser!.schoolId,
       );
       routemaster.replace('/home');

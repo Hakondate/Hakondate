@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'nutrients_model.dart';
@@ -11,58 +12,11 @@ part of 'nutrients_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 NutrientsModel _$NutrientsModelFromJson(Map<String, dynamic> json) {
   return _NutrientsModel.fromJson(json);
 }
-
-/// @nodoc
-class _$NutrientsModelTearOff {
-  const _$NutrientsModelTearOff();
-
-  _NutrientsModel call(
-      {double energy = 0.0,
-      double protein = 0.0,
-      double lipid = 0.0,
-      double carbohydrate = 0.0,
-      double sodium = 0.0,
-      double calcium = 0.0,
-      double magnesium = 0.0,
-      double iron = 0.0,
-      double zinc = 0.0,
-      double retinol = 0.0,
-      double vitaminB1 = 0.0,
-      double vitaminB2 = 0.0,
-      double vitaminC = 0.0,
-      double dietaryFiber = 0.0,
-      double salt = 0.0}) {
-    return _NutrientsModel(
-      energy: energy,
-      protein: protein,
-      lipid: lipid,
-      carbohydrate: carbohydrate,
-      sodium: sodium,
-      calcium: calcium,
-      magnesium: magnesium,
-      iron: iron,
-      zinc: zinc,
-      retinol: retinol,
-      vitaminB1: vitaminB1,
-      vitaminB2: vitaminB2,
-      vitaminC: vitaminC,
-      dietaryFiber: dietaryFiber,
-      salt: salt,
-    );
-  }
-
-  NutrientsModel fromJson(Map<String, Object?> json) {
-    return NutrientsModel.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $NutrientsModel = _$NutrientsModelTearOff();
 
 /// @nodoc
 mixin _$NutrientsModel {
@@ -324,7 +278,9 @@ class __$NutrientsModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_NutrientsModel implements _NutrientsModel {
+class _$_NutrientsModel
+    with DiagnosticableTreeMixin
+    implements _NutrientsModel {
   const _$_NutrientsModel(
       {this.energy = 0.0,
       this.protein = 0.0,
@@ -345,55 +301,91 @@ class _$_NutrientsModel implements _NutrientsModel {
   factory _$_NutrientsModel.fromJson(Map<String, dynamic> json) =>
       _$$_NutrientsModelFromJson(json);
 
-  @JsonKey()
   @override
+  @JsonKey()
   final double energy;
+// エネルギー
+  @override
   @JsonKey()
-  @override // エネルギー
   final double protein;
+// タンパク質
+  @override
   @JsonKey()
-  @override // タンパク質
   final double lipid;
+// 脂質
+  @override
   @JsonKey()
-  @override // 脂質
   final double carbohydrate;
+// 炭水化物
+  @override
   @JsonKey()
-  @override // 炭水化物
   final double sodium;
+// ナトリウム
+  @override
   @JsonKey()
-  @override // ナトリウム
   final double calcium;
+// カルシウム
+  @override
   @JsonKey()
-  @override // カルシウム
   final double magnesium;
+// マグネシウム
+  @override
   @JsonKey()
-  @override // マグネシウム
   final double iron;
+// 鉄分
+  @override
   @JsonKey()
-  @override // 鉄分
   final double zinc;
+// 亜鉛
+  @override
   @JsonKey()
-  @override // 亜鉛
   final double retinol;
+// レチノール活性当量(ビタミンA)
+  @override
   @JsonKey()
-  @override // レチノール活性当量(ビタミンA)
   final double vitaminB1;
+// ビタミンB1
+  @override
   @JsonKey()
-  @override // ビタミンB1
   final double vitaminB2;
+// ビタミンB2
+  @override
   @JsonKey()
-  @override // ビタミンB2
   final double vitaminC;
+// ビタミンC
+  @override
   @JsonKey()
-  @override // ビタミンC
   final double dietaryFiber;
+// 食物繊維
+  @override
   @JsonKey()
-  @override // 食物繊維
   final double salt;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'NutrientsModel(energy: $energy, protein: $protein, lipid: $lipid, carbohydrate: $carbohydrate, sodium: $sodium, calcium: $calcium, magnesium: $magnesium, iron: $iron, zinc: $zinc, retinol: $retinol, vitaminB1: $vitaminB1, vitaminB2: $vitaminB2, vitaminC: $vitaminC, dietaryFiber: $dietaryFiber, salt: $salt)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'NutrientsModel'))
+      ..add(DiagnosticsProperty('energy', energy))
+      ..add(DiagnosticsProperty('protein', protein))
+      ..add(DiagnosticsProperty('lipid', lipid))
+      ..add(DiagnosticsProperty('carbohydrate', carbohydrate))
+      ..add(DiagnosticsProperty('sodium', sodium))
+      ..add(DiagnosticsProperty('calcium', calcium))
+      ..add(DiagnosticsProperty('magnesium', magnesium))
+      ..add(DiagnosticsProperty('iron', iron))
+      ..add(DiagnosticsProperty('zinc', zinc))
+      ..add(DiagnosticsProperty('retinol', retinol))
+      ..add(DiagnosticsProperty('vitaminB1', vitaminB1))
+      ..add(DiagnosticsProperty('vitaminB2', vitaminB2))
+      ..add(DiagnosticsProperty('vitaminC', vitaminC))
+      ..add(DiagnosticsProperty('dietaryFiber', dietaryFiber))
+      ..add(DiagnosticsProperty('salt', salt));
   }
 
   @override
@@ -420,6 +412,7 @@ class _$_NutrientsModel implements _NutrientsModel {
             const DeepCollectionEquality().equals(other.salt, salt));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -452,55 +445,55 @@ class _$_NutrientsModel implements _NutrientsModel {
 
 abstract class _NutrientsModel implements NutrientsModel {
   const factory _NutrientsModel(
-      {double energy,
-      double protein,
-      double lipid,
-      double carbohydrate,
-      double sodium,
-      double calcium,
-      double magnesium,
-      double iron,
-      double zinc,
-      double retinol,
-      double vitaminB1,
-      double vitaminB2,
-      double vitaminC,
-      double dietaryFiber,
-      double salt}) = _$_NutrientsModel;
+      {final double energy,
+      final double protein,
+      final double lipid,
+      final double carbohydrate,
+      final double sodium,
+      final double calcium,
+      final double magnesium,
+      final double iron,
+      final double zinc,
+      final double retinol,
+      final double vitaminB1,
+      final double vitaminB2,
+      final double vitaminC,
+      final double dietaryFiber,
+      final double salt}) = _$_NutrientsModel;
 
   factory _NutrientsModel.fromJson(Map<String, dynamic> json) =
       _$_NutrientsModel.fromJson;
 
   @override
-  double get energy;
+  double get energy => throw _privateConstructorUsedError;
   @override // エネルギー
-  double get protein;
+  double get protein => throw _privateConstructorUsedError;
   @override // タンパク質
-  double get lipid;
+  double get lipid => throw _privateConstructorUsedError;
   @override // 脂質
-  double get carbohydrate;
+  double get carbohydrate => throw _privateConstructorUsedError;
   @override // 炭水化物
-  double get sodium;
+  double get sodium => throw _privateConstructorUsedError;
   @override // ナトリウム
-  double get calcium;
+  double get calcium => throw _privateConstructorUsedError;
   @override // カルシウム
-  double get magnesium;
+  double get magnesium => throw _privateConstructorUsedError;
   @override // マグネシウム
-  double get iron;
+  double get iron => throw _privateConstructorUsedError;
   @override // 鉄分
-  double get zinc;
+  double get zinc => throw _privateConstructorUsedError;
   @override // 亜鉛
-  double get retinol;
+  double get retinol => throw _privateConstructorUsedError;
   @override // レチノール活性当量(ビタミンA)
-  double get vitaminB1;
+  double get vitaminB1 => throw _privateConstructorUsedError;
   @override // ビタミンB1
-  double get vitaminB2;
+  double get vitaminB2 => throw _privateConstructorUsedError;
   @override // ビタミンB2
-  double get vitaminC;
+  double get vitaminC => throw _privateConstructorUsedError;
   @override // ビタミンC
-  double get dietaryFiber;
+  double get dietaryFiber => throw _privateConstructorUsedError;
   @override // 食物繊維
-  double get salt;
+  double get salt => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$NutrientsModelCopyWith<_NutrientsModel> get copyWith =>

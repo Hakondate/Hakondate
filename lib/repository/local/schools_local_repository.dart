@@ -1,22 +1,41 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:hakondate_v2/model/school/school_model.dart';
 import 'package:hakondate_v2/repository/local/database_manager.dart';
 
 import 'package:drift/drift.dart';
 
-class SchoolsLocalRepository {
-  SchoolsLocalRepository() {
-    _databaseManager = databaseManager;
+final schoolsLocalRepositoryProvider = Provider<SchoolsLocalRepository>((ref) {
+  final DatabaseManager databaseManager = ref.read(databaseManagerProvider);
+  return SchoolsLocalRepository(databaseManager);
+});
+
+abstract class SchoolsLocalRepositoryBase {
+  Future<int> count();
+  Future<List<SchoolModel>> getAll();
+  Future<SchoolModel> getById(int id);
+  Future<int> add(Map<String, dynamic> school);
+}
+
+class SchoolsLocalRepository extends SchoolsLocalRepositoryBase {
+  SchoolsLocalRepository(this._db) : super();
+
+  final DatabaseManager _db;
+
+  @override
+  Future<int> count() async {
+    final Expression<int> exp = _db.schoolsTable.id.count();
+    final query = _db.selectOnly(_db.schoolsTable)..addColumns([exp]);
+
+    return await query.map((scheme) => scheme.read(exp)).getSingle();
   }
 
-  late final DatabaseManager _databaseManager;
-
-  Future<int> count() => _databaseManager.countSchools();
-
+  @override
   Future<List<SchoolModel>> getAll() async {
     final List<SchoolModel> schools = [];
-    final List<SchoolsSchema> schoolsSchemas =
-        await _databaseManager.allSchoolsSchemas;
-    for (var schoolSchema in schoolsSchemas) {
+    final List<SchoolsSchema> schoolsSchemas = await _db.select(_db.schoolsTable).get();
+
+    for (SchoolsSchema schoolSchema in schoolsSchemas) {
       schools.add(SchoolModel(
           id: schoolSchema.id,
           parentId: schoolSchema.parentId,
@@ -28,9 +47,10 @@ class SchoolsLocalRepository {
     return schools;
   }
 
+  @override
   Future<SchoolModel> getById(int id) async {
     final SchoolsSchema schoolsSchema =
-        await _databaseManager.getSchoolsSchemaById(id);
+        await (_db.select(_db.schoolsTable)..where((t) => t.id.equals(id))).getSingle();
 
     return SchoolModel(
       id: schoolsSchema.id,
@@ -51,15 +71,14 @@ class SchoolsLocalRepository {
     }
   }
 
-  Future<int> add(Map<String, dynamic> school) async {
-    final SchoolsTableCompanion schoolsSchema = SchoolsTableCompanion(
-      id: Value(school['id']),
-      parentId: Value(school['parentId']),
-      name: Value(school['name']),
-      lunchBlock: Value(school['lunchBlock']),
-      classification: Value(school['classification']),
-    );
-
-    return await _databaseManager.addSchoolsSchema(schoolsSchema);
-  }
+  @override
+  Future<int> add(Map<String, dynamic> school) =>
+      _db.into(_db.schoolsTable).insertOnConflictUpdate(
+        SchoolsTableCompanion(
+          id: Value(school['id']),
+          parentId: Value(school['parentId']),
+          name: Value(school['name']),
+          lunchBlock: Value(school['lunchBlock']),
+          classification: Value(school['classification']),
+        ));
 }

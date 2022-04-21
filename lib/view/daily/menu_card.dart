@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hakondate_v2/router/routes.dart';
 
-import 'package:hakondate_v2/unit/size.dart';
-import 'package:hakondate_v2/view_model/single_page/home_view_model.dart';
+import 'package:hakondate_v2/constant/app_color.dart';
+import 'package:hakondate_v2/model/dish/dish_model.dart';
+import 'package:hakondate_v2/constant/size.dart';
+import 'package:hakondate_v2/model/menu/menu_model.dart';
+import 'package:hakondate_v2/router/routes.dart';
+import 'package:hakondate_v2/view_model/single_page/daily_view_model.dart';
 
 class MenuCard extends StatelessWidget {
   const MenuCard({Key? key}) : super(key: key);
@@ -13,56 +16,76 @@ class MenuCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        final store = ref.watch(homeProvider);
-        final foodIcons = [
-          'assets/images/food_icon/main_food.png',
-          'assets/images/food_icon/drink.png',
-          'assets/images/food_icon/side_food1.png',
-          'assets/images/food_icon/side_food2.png',
-          'assets/images/food_icon/side_food3.png',
-          'assets/images/food_icon/side_food4.png',
-          'assets/images/food_icon/side_food5.png',
-          'assets/images/food_icon/side_food6.png',
-          'assets/images/food_icon/side_food7.png',
-          'assets/images/food_icon/side_food8.png',
-          'assets/images/food_icon/side_food9.png',
-        ];
+        final menu = ref.watch(dailyProvider).menu;
+
+        if (menu is! LunchesDayMenuModel) {
+          throw Exception("'menu' is not 'LunchesDayMenuModel'");
+        }
 
         return Card(
+          clipBehavior: Clip.antiAliasWithSaveLayer,
           child: Column(
             children: [
               Image.asset('assets/images/label/menuLabel.png'),
-              ListView.builder(
+              GridView.count(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
+                crossAxisCount: 2,
                 padding: const EdgeInsets.all(PaddingSize.minimum),
-                itemCount: store.menu!.dishes.length,
-                itemBuilder: (BuildContext context, int i) {
-                  return Card(
-                    child: ListTile(
-                      leading: (i < foodIcons.length)
-                          ? Image.asset(foodIcons[i], width: IconSize.homeFoodIcon)
-                          : Image.asset(
-                        foodIcons[foodIcons.length - 1],
-                        width: IconSize.homeFoodIcon,
-                      ),
-                      title: Text(
-                        store.menu!.dishes[i].name,
-                        style: const TextStyle(
-                          fontSize: FontSize.dishName,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        overflow: TextOverflow.clip,
-                      ),
-                      onTap: () => routemaster.replace('dish/1'),
-                    ),
-                  );
-                },
+                mainAxisSpacing: MarginSize.minimum,
+                crossAxisSpacing: MarginSize.minimum,
+                childAspectRatio: 2 / 1,
+                children: menu.dishes.map((DishModel dish) => _menuTile(dish)).toList(),
               ),
             ],
           ),
         );
       },
+    );
+  }
+
+  Widget _menuTile(DishModel dish) {
+    return GestureDetector(
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: AppColor.ui.white.withOpacity(0.8),
+            width: 3.0,
+          ),
+          image: DecorationImage(
+            image: AssetImage('assets/images/menu_tile/${dish.category.getValue()}.png'),
+            fit: BoxFit.fitWidth,
+          ),
+          color: AppColor.brand.secondary,
+          boxShadow: [
+            BoxShadow(
+              color: AppColor.ui.shadow,
+              blurRadius: 1.0,
+              offset: const Offset(0.0, 1.0),
+            ),
+          ],
+        ),
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            color: AppColor.ui.white.withOpacity(0.7),
+          ),
+          child: Center(
+            child: Text(
+              dish.name,
+              style: const TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      ),
+      onTap: () => routemaster.push('dish'),
     );
   }
 }

@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'foodstuff_model.dart';
@@ -11,32 +12,7 @@ part of 'foodstuff_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$FoodstuffModelTearOff {
-  const _$FoodstuffModelTearOff();
-
-  _FoodstuffModel call(
-      {required String name,
-      required QuantityModel quantity,
-      required NutrientsModel nutrients,
-      bool isAllergy = false,
-      bool isHeat = false,
-      String? origin}) {
-    return _FoodstuffModel(
-      name: name,
-      quantity: quantity,
-      nutrients: nutrients,
-      isAllergy: isAllergy,
-      isHeat: isHeat,
-      origin: origin,
-    );
-  }
-}
-
-/// @nodoc
-const $FoodstuffModel = _$FoodstuffModelTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$FoodstuffModel {
@@ -213,17 +189,22 @@ class _$_FoodstuffModel implements _FoodstuffModel {
 
   @override
   final String name;
-  @override // 食材名
+// 食材名
+  @override
   final QuantityModel quantity;
-  @override // 分量
+// 分量
+  @override
   final NutrientsModel nutrients;
+// 栄養素
+  @override
   @JsonKey()
-  @override // 栄養素
   final bool isAllergy;
+// アレルギー食品
+  @override
   @JsonKey()
-  @override // アレルギー食品
   final bool isHeat;
-  @override // 熱加工食品
+// 熱加工食品
+  @override
   final String? origin;
 
   @override
@@ -262,25 +243,25 @@ class _$_FoodstuffModel implements _FoodstuffModel {
 
 abstract class _FoodstuffModel implements FoodstuffModel {
   const factory _FoodstuffModel(
-      {required String name,
-      required QuantityModel quantity,
-      required NutrientsModel nutrients,
-      bool isAllergy,
-      bool isHeat,
-      String? origin}) = _$_FoodstuffModel;
+      {required final String name,
+      required final QuantityModel quantity,
+      required final NutrientsModel nutrients,
+      final bool isAllergy,
+      final bool isHeat,
+      final String? origin}) = _$_FoodstuffModel;
 
   @override
-  String get name;
+  String get name => throw _privateConstructorUsedError;
   @override // 食材名
-  QuantityModel get quantity;
+  QuantityModel get quantity => throw _privateConstructorUsedError;
   @override // 分量
-  NutrientsModel get nutrients;
+  NutrientsModel get nutrients => throw _privateConstructorUsedError;
   @override // 栄養素
-  bool get isAllergy;
+  bool get isAllergy => throw _privateConstructorUsedError;
   @override // アレルギー食品
-  bool get isHeat;
+  bool get isHeat => throw _privateConstructorUsedError;
   @override // 熱加工食品
-  String? get origin;
+  String? get origin => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$FoodstuffModelCopyWith<_FoodstuffModel> get copyWith =>

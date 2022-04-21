@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'daily_state.dart';
@@ -11,34 +12,7 @@ part of 'daily_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$DailyStateTearOff {
-  const _$DailyStateTearOff();
-
-  _DailyState call(
-      {required DateTime selectedDay,
-      required DateTime focusedDay,
-      required DateTime calendarTabFirstDay,
-      required DateTime calendarTabLastDay,
-      MenuModel? menu,
-      DailyStatus status = DailyStatus.noData,
-      bool isFetching = true}) {
-    return _DailyState(
-      selectedDay: selectedDay,
-      focusedDay: focusedDay,
-      calendarTabFirstDay: calendarTabFirstDay,
-      calendarTabLastDay: calendarTabLastDay,
-      menu: menu,
-      status: status,
-      isFetching: isFetching,
-    );
-  }
-}
-
-/// @nodoc
-const $DailyState = _$DailyStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$DailyState {
@@ -46,8 +20,7 @@ mixin _$DailyState {
   DateTime get focusedDay => throw _privateConstructorUsedError;
   DateTime get calendarTabFirstDay => throw _privateConstructorUsedError;
   DateTime get calendarTabLastDay => throw _privateConstructorUsedError;
-  MenuModel? get menu => throw _privateConstructorUsedError;
-  DailyStatus get status => throw _privateConstructorUsedError;
+  MenuModel get menu => throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -65,11 +38,10 @@ abstract class $DailyStateCopyWith<$Res> {
       DateTime focusedDay,
       DateTime calendarTabFirstDay,
       DateTime calendarTabLastDay,
-      MenuModel? menu,
-      DailyStatus status,
+      MenuModel menu,
       bool isFetching});
 
-  $MenuModelCopyWith<$Res>? get menu;
+  $MenuModelCopyWith<$Res> get menu;
 }
 
 /// @nodoc
@@ -87,7 +59,6 @@ class _$DailyStateCopyWithImpl<$Res> implements $DailyStateCopyWith<$Res> {
     Object? calendarTabFirstDay = freezed,
     Object? calendarTabLastDay = freezed,
     Object? menu = freezed,
-    Object? status = freezed,
     Object? isFetching = freezed,
   }) {
     return _then(_value.copyWith(
@@ -110,11 +81,7 @@ class _$DailyStateCopyWithImpl<$Res> implements $DailyStateCopyWith<$Res> {
       menu: menu == freezed
           ? _value.menu
           : menu // ignore: cast_nullable_to_non_nullable
-              as MenuModel?,
-      status: status == freezed
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as DailyStatus,
+              as MenuModel,
       isFetching: isFetching == freezed
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
@@ -123,12 +90,8 @@ class _$DailyStateCopyWithImpl<$Res> implements $DailyStateCopyWith<$Res> {
   }
 
   @override
-  $MenuModelCopyWith<$Res>? get menu {
-    if (_value.menu == null) {
-      return null;
-    }
-
-    return $MenuModelCopyWith<$Res>(_value.menu!, (value) {
+  $MenuModelCopyWith<$Res> get menu {
+    return $MenuModelCopyWith<$Res>(_value.menu, (value) {
       return _then(_value.copyWith(menu: value));
     });
   }
@@ -145,12 +108,11 @@ abstract class _$DailyStateCopyWith<$Res> implements $DailyStateCopyWith<$Res> {
       DateTime focusedDay,
       DateTime calendarTabFirstDay,
       DateTime calendarTabLastDay,
-      MenuModel? menu,
-      DailyStatus status,
+      MenuModel menu,
       bool isFetching});
 
   @override
-  $MenuModelCopyWith<$Res>? get menu;
+  $MenuModelCopyWith<$Res> get menu;
 }
 
 /// @nodoc
@@ -170,7 +132,6 @@ class __$DailyStateCopyWithImpl<$Res> extends _$DailyStateCopyWithImpl<$Res>
     Object? calendarTabFirstDay = freezed,
     Object? calendarTabLastDay = freezed,
     Object? menu = freezed,
-    Object? status = freezed,
     Object? isFetching = freezed,
   }) {
     return _then(_DailyState(
@@ -193,11 +154,7 @@ class __$DailyStateCopyWithImpl<$Res> extends _$DailyStateCopyWithImpl<$Res>
       menu: menu == freezed
           ? _value.menu
           : menu // ignore: cast_nullable_to_non_nullable
-              as MenuModel?,
-      status: status == freezed
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as DailyStatus,
+              as MenuModel,
       isFetching: isFetching == freezed
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
@@ -214,8 +171,7 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
       required this.focusedDay,
       required this.calendarTabFirstDay,
       required this.calendarTabLastDay,
-      this.menu,
-      this.status = DailyStatus.noData,
+      this.menu = const MenuModel.noData(),
       this.isFetching = true});
 
   @override
@@ -227,17 +183,15 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
   @override
   final DateTime calendarTabLastDay;
   @override
-  final MenuModel? menu;
   @JsonKey()
+  final MenuModel menu;
   @override
-  final DailyStatus status;
   @JsonKey()
-  @override
   final bool isFetching;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DailyState(selectedDay: $selectedDay, focusedDay: $focusedDay, calendarTabFirstDay: $calendarTabFirstDay, calendarTabLastDay: $calendarTabLastDay, menu: $menu, status: $status, isFetching: $isFetching)';
+    return 'DailyState(selectedDay: $selectedDay, focusedDay: $focusedDay, calendarTabFirstDay: $calendarTabFirstDay, calendarTabLastDay: $calendarTabLastDay, menu: $menu, isFetching: $isFetching)';
   }
 
   @override
@@ -250,7 +204,6 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
       ..add(DiagnosticsProperty('calendarTabFirstDay', calendarTabFirstDay))
       ..add(DiagnosticsProperty('calendarTabLastDay', calendarTabLastDay))
       ..add(DiagnosticsProperty('menu', menu))
-      ..add(DiagnosticsProperty('status', status))
       ..add(DiagnosticsProperty('isFetching', isFetching));
   }
 
@@ -268,7 +221,6 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
             const DeepCollectionEquality()
                 .equals(other.calendarTabLastDay, calendarTabLastDay) &&
             const DeepCollectionEquality().equals(other.menu, menu) &&
-            const DeepCollectionEquality().equals(other.status, status) &&
             const DeepCollectionEquality()
                 .equals(other.isFetching, isFetching));
   }
@@ -281,7 +233,6 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
       const DeepCollectionEquality().hash(calendarTabFirstDay),
       const DeepCollectionEquality().hash(calendarTabLastDay),
       const DeepCollectionEquality().hash(menu),
-      const DeepCollectionEquality().hash(status),
       const DeepCollectionEquality().hash(isFetching));
 
   @JsonKey(ignore: true)
@@ -292,28 +243,25 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
 
 abstract class _DailyState implements DailyState {
   const factory _DailyState(
-      {required DateTime selectedDay,
-      required DateTime focusedDay,
-      required DateTime calendarTabFirstDay,
-      required DateTime calendarTabLastDay,
-      MenuModel? menu,
-      DailyStatus status,
-      bool isFetching}) = _$_DailyState;
+      {required final DateTime selectedDay,
+      required final DateTime focusedDay,
+      required final DateTime calendarTabFirstDay,
+      required final DateTime calendarTabLastDay,
+      final MenuModel menu,
+      final bool isFetching}) = _$_DailyState;
 
   @override
-  DateTime get selectedDay;
+  DateTime get selectedDay => throw _privateConstructorUsedError;
   @override
-  DateTime get focusedDay;
+  DateTime get focusedDay => throw _privateConstructorUsedError;
   @override
-  DateTime get calendarTabFirstDay;
+  DateTime get calendarTabFirstDay => throw _privateConstructorUsedError;
   @override
-  DateTime get calendarTabLastDay;
+  DateTime get calendarTabLastDay => throw _privateConstructorUsedError;
   @override
-  MenuModel? get menu;
+  MenuModel get menu => throw _privateConstructorUsedError;
   @override
-  DailyStatus get status;
-  @override
-  bool get isFetching;
+  bool get isFetching => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$DailyStateCopyWith<_DailyState> get copyWith =>
