@@ -2,13 +2,13 @@ import 'package:drift/drift.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:hakondate_v2/model/dish/dish_model.dart';
-import 'package:hakondate_v2/model/foodstuff/foodstuff_model.dart';
-import 'package:hakondate_v2/model/menu/menu_model.dart';
-import 'package:hakondate_v2/model/nutrients/nutrients_model.dart';
-import 'package:hakondate_v2/model/quantity/quantity_model.dart';
-import 'package:hakondate_v2/repository/local/database_manager.dart';
-import 'package:hakondate_v2/view_model/multi_page/common_function.dart';
+import 'package:hakondate/model/dish/dish_model.dart';
+import 'package:hakondate/model/foodstuff/foodstuff_model.dart';
+import 'package:hakondate/model/menu/menu_model.dart';
+import 'package:hakondate/model/nutrients/nutrients_model.dart';
+import 'package:hakondate/model/quantity/quantity_model.dart';
+import 'package:hakondate/repository/local/database_manager.dart';
+import 'package:hakondate/view_model/multi_page/common_function.dart';
 
 final menusLocalRepositoryProvider = Provider<MenusLocalRepository>((ref) {
   final DatabaseManager databaseManager = ref.read(databaseManagerProvider);

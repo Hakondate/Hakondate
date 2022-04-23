@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:hakondate_v2/view/calendar/calendar.dart';
+import 'package:hakondate/view/calendar/calendar.dart';
 
 import 'package:routemaster/routemaster.dart';
 
-import 'package:hakondate_v2/view/component/frame/fade_up_page.dart';
-import 'package:hakondate_v2/view/splash/splash.dart';
-import 'package:hakondate_v2/view/terms/terms.dart';
-import 'package:hakondate_v2/view/signup/signup.dart';
-import 'package:hakondate_v2/view/bottom_bar/app_bottom_navigation_bar.dart';
-import 'package:hakondate_v2/view/daily/daily.dart';
+import 'package:hakondate/view/component/frame/fade_up_page.dart';
+import 'package:hakondate/view/splash/splash.dart';
+import 'package:hakondate/view/terms/terms.dart';
+import 'package:hakondate/view/signup/signup.dart';
+import 'package:hakondate/view/bottom_bar/app_bottom_navigation_bar.dart';
+import 'package:hakondate/view/daily/daily.dart';
 
 final routemaster = RoutemasterDelegate(
   routesBuilder: (context) => RouteMap(

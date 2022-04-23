@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:hakondate_v2/model/dish/dish_model.dart';
+import 'package:hakondate/model/dish/dish_model.dart';
 
 part 'menu_model.freezed.dart';
 

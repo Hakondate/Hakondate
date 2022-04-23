@@ -1,4 +1,4 @@
-name: hakondate_v2
+name: hakondate
 description: はこんだて開発用プロジェクト
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev

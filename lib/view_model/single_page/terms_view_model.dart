@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hakondate_v2/state/terms/terms_state.dart';
+import 'package:hakondate/state/terms/terms_state.dart';
 
 final termsProvider = StateNotifierProvider<TermsViewModel, TermsState>(
     (ref) => TermsViewModel());

@@ -54,6 +54,8 @@ app.*.map.json
 **/android/local.properties
 **/android/**/GeneratedPluginRegistrant.java
 **/android/key.properties
+**/android/app/src/main/res/mipmap*/
+**/android/app/google-services.json
 *.jks
 
 # iOS/XCode related
@@ -83,8 +85,11 @@ app.*.map.json
 **/ios/Flutter/app.zip
 **/ios/Flutter/flutter_assets/
 **/ios/Flutter/flutter_export_environment.sh
+**/ios/Flutter/DartDefines.xcconfig
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
+**/ios/GoogleService-Info.plist
+**/ios/Podfile.lock
 
 # macOS
 **/macos/Flutter/GeneratedPluginRegistrant.swift

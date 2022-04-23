@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "37711418622",
+    "project_id": "hakondate-develop",
+    "storage_bucket": "hakondate-develop.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:37711418622:android:199b1eaf791eee788ec1af",
+        "android_client_info": {
+          "package_name": "jp.ac.fun.hakondate.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "37711418622-njljvskvabl3nn5h7s9ff8cn5k0qc919.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdebemHmmqs4JLRlV5LJvHvP6TBCLtooQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "37711418622-njljvskvabl3nn5h7s9ff8cn5k0qc919.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
