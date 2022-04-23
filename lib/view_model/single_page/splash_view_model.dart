@@ -2,15 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:hakondate_v2/router/routes.dart';
-import 'package:hakondate_v2/state/splash/splash_state.dart';
-import 'package:hakondate_v2/repository/local/schools_local_repository.dart';
-import 'package:hakondate_v2/repository/remote/schools_remote_repository.dart';
-import 'package:hakondate_v2/repository/local/menus_local_repository.dart';
-import 'package:hakondate_v2/repository/remote/menus_remote_repository.dart';
-import 'package:hakondate_v2/view_model/multi_page/user_view_model.dart';
-import 'package:hakondate_v2/view_model/single_page/daily_view_model.dart';
-import 'package:hakondate_v2/view_model/single_page/signup_view_model.dart';
+import 'package:hakondate/router/routes.dart';
+import 'package:hakondate/state/splash/splash_state.dart';
+import 'package:hakondate/repository/local/schools_local_repository.dart';
+import 'package:hakondate/repository/remote/schools_remote_repository.dart';
+import 'package:hakondate/repository/local/menus_local_repository.dart';
+import 'package:hakondate/repository/remote/menus_remote_repository.dart';
+import 'package:hakondate/view_model/multi_page/user_view_model.dart';
+import 'package:hakondate/view_model/single_page/daily_view_model.dart';
+import 'package:hakondate/view_model/single_page/signup_view_model.dart';
 
 final splashProvider = StateNotifierProvider<SplashViewModel, SplashState>((ref) {
   final SchoolsLocalRepository schoolsLocalRepository = ref.read(schoolsLocalRepositoryProvider);
@@ -108,9 +108,7 @@ class SplashViewModel extends StateNotifier<SplashState> {
       });
     }
 
-    await _reader(dailyProvider.notifier).updateSelectedDay(
-      schoolId: schoolId,
-    );
+    await _reader(dailyProvider.notifier).updateSelectedDay();
     state = state.copyWith(loadingStatus: LoadingStatus.reading);
   }
 
@@ -159,11 +157,8 @@ class SplashViewModel extends StateNotifier<SplashState> {
   }
 
   Future<void> _useAsIs() async {
-    final currentUser = _reader(userProvider.notifier).state.currentUser;
     if (await _reader(userProvider.notifier).checkSignedUp()) {
-      await _reader(dailyProvider.notifier).updateSelectedDay(
-        schoolId: currentUser!.schoolId,
-      );
+      await _reader(dailyProvider.notifier).updateSelectedDay();
       routemaster.replace('/home');
     } else {
       routemaster.replace('/terms');

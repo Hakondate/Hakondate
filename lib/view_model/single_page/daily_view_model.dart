@@ -1,9 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:hakondate_v2/model/menu/menu_model.dart';
-import 'package:hakondate_v2/repository/local/menus_local_repository.dart';
-import 'package:hakondate_v2/model/nutrients/nutrients_model.dart';
-import 'package:hakondate_v2/state/daily/daily_state.dart';
+import 'package:hakondate/model/menu/menu_model.dart';
+import 'package:hakondate/repository/local/menus_local_repository.dart';
+import 'package:hakondate/model/nutrients/nutrients_model.dart';
+import 'package:hakondate/state/daily/daily_state.dart';
+import 'package:hakondate/util/environment.dart';
 
 final dailyProvider = StateNotifierProvider<DailyViewModel, DailyState>((ref) {
   final MenusLocalRepository menusLocalRepository = ref.read(menusLocalRepositoryProvider);
@@ -25,9 +26,16 @@ class DailyViewModel extends StateNotifier<DailyState> {
 
   final MenusLocalRepository _menusLocalRepository;
 
-  Future<void> updateSelectedDay({DateTime? day, required int schoolId}) async {
-    // day ??= DateTime.now();
-    day ??= DateTime(2021, 7, 1); // For Debug
+  Future<void> updateSelectedDay({DateTime? day}) async {
+    switch (Environment.flavor) {
+      case Flavor.dev:
+        day ??= DateTime(2021, 7, 1);
+        break;
+      case Flavor.stg:
+      case Flavor.prod:
+        day ??= DateTime.now();
+        break;
+    }
     state = state.copyWith(isFetching: true);
 
     state = state.copyWith(

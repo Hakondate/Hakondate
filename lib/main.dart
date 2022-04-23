@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hakondate_v2/constant/app_color.dart';
+import 'package:hakondate/constant/app_color.dart';
 
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 
-import 'package:hakondate_v2/router/routes.dart';
+import 'package:hakondate/router/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

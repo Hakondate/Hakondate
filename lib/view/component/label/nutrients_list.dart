@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:hakondate_v2/view/component/label/nutrient_label.dart';
+import 'package:hakondate/view/component/label/nutrient_label.dart';
 
 class NutrientsList extends StatelessWidget {
   final dynamic nutrients;

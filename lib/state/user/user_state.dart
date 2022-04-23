@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:hakondate_v2/model/user/user_model.dart';
+import 'package:hakondate/model/user/user_model.dart';
 
 part 'user_state.freezed.dart';
 

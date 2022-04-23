@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:hakondate_v2/constant/size.dart';
+import 'package:hakondate/constant/size.dart';
 
 enum NutrientUnit {
   kcal,

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hakondate_v2/constant/app_color.dart';
+import 'package:hakondate/constant/app_color.dart';
 
-import 'package:hakondate_v2/router/routes.dart';
-import 'package:hakondate_v2/constant/size.dart';
-import 'package:hakondate_v2/view_model/single_page/terms_view_model.dart';
+import 'package:hakondate/router/routes.dart';
+import 'package:hakondate/constant/size.dart';
+import 'package:hakondate/view_model/single_page/terms_view_model.dart';
 
 class Terms extends ConsumerWidget {
   const Terms({Key? key}) : super(key: key);

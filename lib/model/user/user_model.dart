@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:hakondate_v2/model/nutrients/nutrients_model.dart';
+import 'package:hakondate/model/nutrients/nutrients_model.dart';
 
 part 'user_model.freezed.dart';
 

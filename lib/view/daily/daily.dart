@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hakondate_v2/model/menu/menu_model.dart';
+import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
 
-import 'package:hakondate_v2/router/routes.dart';
-import 'package:hakondate_v2/constant/app_color.dart';
-import 'package:hakondate_v2/view/daily/menu_card.dart';
-import 'package:hakondate_v2/view/daily/non_lunches_day_body.dart';
-import 'package:hakondate_v2/view/daily/nutrients_card.dart';
-import 'package:hakondate_v2/view_model/single_page/daily_view_model.dart';
-import 'package:hakondate_v2/view_model/multi_page/user_view_model.dart';
+import 'package:hakondate/router/routes.dart';
+import 'package:hakondate/constant/app_color.dart';
+import 'package:hakondate/view/daily/menu_card.dart';
+import 'package:hakondate/view/daily/non_lunches_day_body.dart';
+import 'package:hakondate/view/daily/nutrients_card.dart';
+import 'package:hakondate/view_model/single_page/daily_view_model.dart';
 
 class Daily extends StatelessWidget {
   const Daily({Key? key}) : super(key: key);
@@ -70,13 +69,10 @@ class Daily extends StatelessWidget {
             selectedDayPredicate: (DateTime day) => isSameDay(store.selectedDay, day),
             onDaySelected: (DateTime selectedDay, _) {
               if (isSameDay(store.selectedDay, selectedDay)) return;
-              ref.read(dailyProvider.notifier).updateSelectedDay(
-                day: selectedDay,
-                schoolId: ref.watch(userProvider).currentUser!.schoolId,
-              );
+              ref.read(dailyProvider.notifier).updateSelectedDay(day: selectedDay);
             },
             onPageChanged: (DateTime focusedDay) =>
-                ref.watch(dailyProvider.notifier).updateFocusedDay(focusedDay),  // readで読み込むと再描画が発生
+                ref.read(dailyProvider.notifier).updateFocusedDay(focusedDay),  // readで読み込むと再描画が発生
             daysOfWeekHeight: 20,
             calendarStyle: CalendarStyle(
               todayTextStyle: const CalendarStyle().defaultTextStyle,

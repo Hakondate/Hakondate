@@ -3,18 +3,17 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:hakondate_v2/constant/app_color.dart';
-import 'package:hakondate_v2/constant/size.dart';
-import 'package:hakondate_v2/router/routes.dart';
-import 'package:hakondate_v2/view/component/frame/fade_up_app_bar.dart';
-import 'package:hakondate_v2/view/component/frame/stateful_wrapper.dart';
-import 'package:hakondate_v2/view/calendar/non_lunches_day_calendar_tile.dart';
-import 'package:hakondate_v2/view/calendar/menu_chips.dart';
-import 'package:hakondate_v2/view_model/multi_page/common_function.dart';
-import 'package:hakondate_v2/view_model/multi_page/user_view_model.dart';
-import 'package:hakondate_v2/view_model/single_page/calendar_view_model.dart';
-import 'package:hakondate_v2/view_model/single_page/daily_view_model.dart';
-import 'package:hakondate_v2/model/menu/menu_model.dart';
+import 'package:hakondate/constant/app_color.dart';
+import 'package:hakondate/constant/size.dart';
+import 'package:hakondate/router/routes.dart';
+import 'package:hakondate/view/component/frame/fade_up_app_bar.dart';
+import 'package:hakondate/view/component/frame/stateful_wrapper.dart';
+import 'package:hakondate/view/calendar/non_lunches_day_calendar_tile.dart';
+import 'package:hakondate/view/calendar/menu_chips.dart';
+import 'package:hakondate/view_model/multi_page/common_function.dart';
+import 'package:hakondate/view_model/single_page/calendar_view_model.dart';
+import 'package:hakondate/view_model/single_page/daily_view_model.dart';
+import 'package:hakondate/model/menu/menu_model.dart';
 
 class Calendar extends StatelessWidget {
   const Calendar({Key? key}) : super(key: key);
@@ -54,11 +53,8 @@ class Calendar extends StatelessWidget {
       builder: (BuildContext context, WidgetRef ref, _) {
         return GestureDetector(
           onTap: () {
-            ref.read(dailyProvider.notifier).updateSelectedDay(
-              day: day,
-              schoolId: ref.watch(userProvider).currentUser!.schoolId,
-            );
-            ref.watch(dailyProvider.notifier).updateFocusedDay(day);
+            ref.read(dailyProvider.notifier).updateSelectedDay(day: day);
+            ref.read(dailyProvider.notifier).updateFocusedDay(day);
             routemaster.pop();
           },
           child: Card(

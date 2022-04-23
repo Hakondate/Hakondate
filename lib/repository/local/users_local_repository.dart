@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:hakondate_v2/model/user/user_model.dart';
-import 'package:hakondate_v2/repository/local/database_manager.dart';
+import 'package:hakondate/model/user/user_model.dart';
+import 'package:hakondate/repository/local/database_manager.dart';
 
 import 'package:drift/drift.dart';
 

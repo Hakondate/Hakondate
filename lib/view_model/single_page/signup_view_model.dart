@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:hakondate_v2/model/school/school_model.dart';
-import 'package:hakondate_v2/state/signup/signup_state.dart';
-import 'package:hakondate_v2/repository/local/schools_local_repository.dart';
+import 'package:hakondate/model/school/school_model.dart';
+import 'package:hakondate/state/signup/signup_state.dart';
+import 'package:hakondate/repository/local/schools_local_repository.dart';
 
 final signupProvider = StateNotifierProvider<SignupViewModel, SignupState>((ref) {
   final SchoolsLocalRepository schoolLocalRepository = ref.read(schoolsLocalRepositoryProvider);
