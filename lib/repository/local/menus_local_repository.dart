@@ -197,7 +197,7 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
 
   @override
   Future<MenuModel> getMenuByDay(DateTime day) async {
-    final int id = _commonFunction.getIdByDay(day);
+    final int id = await _commonFunction.getIdByDay(day);
     final MenuModel? menu = await _getMenuById(id);
 
     if (menu != null) {

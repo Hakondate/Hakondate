@@ -1,13 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'splash_state.freezed.dart';
-
-enum LoadingStatus{
-  unloading,
-  reading,
-  checkingUpdate,
-  updating,
-}
+part 'loading_status.dart';
 
 @freezed
 class SplashState with _$SplashState {
