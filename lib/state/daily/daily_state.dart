@@ -8,10 +8,7 @@ part 'daily_state.freezed.dart';
 @freezed
 class DailyState with _$DailyState {
   const factory DailyState({
-    required DateTime selectedDay,
     required DateTime focusedDay,
-    required DateTime calendarTabFirstDay,
-    required DateTime calendarTabLastDay,
     @Default(MenuModel.noData()) MenuModel menu,
     @Default(true) bool isFetching,
   }) = _DailyState;

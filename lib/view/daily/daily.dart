@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate/model/menu/menu_model.dart';
+import 'package:hakondate/view_model/multi_page/linking_daily_calendar_view_model.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
 
@@ -42,7 +43,7 @@ class Daily extends StatelessWidget {
   Widget _appBarTitle() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        final store = ref.watch(dailyProvider);
+        final store = ref.watch(linkingDailyCalendarProvider);
         final formatted = (isSameDay(store.selectedDay, DateTime.now()))
             ? '今日' : DateFormat('M月d日').format(store.selectedDay);
 
@@ -57,19 +58,20 @@ class Daily extends StatelessWidget {
       elevation: 4.0,
       child: Consumer(
         builder: (BuildContext context, WidgetRef ref, _) {
-          final store = ref.watch(dailyProvider);
+          final dailyStore = ref.watch(dailyProvider);
+          final linkingStore = ref.watch(linkingDailyCalendarProvider);
 
           return TableCalendar(
             headerVisible: false,
             locale: 'ja_JP',
             calendarFormat: CalendarFormat.week,
-            focusedDay: store.focusedDay,
-            firstDay: store.calendarTabFirstDay,
-            lastDay: store.calendarTabLastDay,
-            selectedDayPredicate: (DateTime day) => isSameDay(store.selectedDay, day),
+            focusedDay: dailyStore.focusedDay,
+            firstDay: linkingStore.calendarOldestDay,
+            lastDay: linkingStore.calendarLatestDay,
+            selectedDayPredicate: (DateTime day) => isSameDay(linkingStore.selectedDay, day),
             onDaySelected: (DateTime selectedDay, _) {
-              if (isSameDay(store.selectedDay, selectedDay)) return;
-              ref.read(dailyProvider.notifier).updateSelectedDay(day: selectedDay);
+              if (isSameDay(linkingStore.selectedDay, selectedDay)) return;
+              ref.read(dailyProvider.notifier).updateSelectedDay(selectedDay);
             },
             onPageChanged: (DateTime focusedDay) =>
                 ref.read(dailyProvider.notifier).updateFocusedDay(focusedDay),  // readで読み込むと再描画が発生

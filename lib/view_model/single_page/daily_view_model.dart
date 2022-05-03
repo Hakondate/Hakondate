@@ -4,42 +4,27 @@ import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:hakondate/repository/local/menus_local_repository.dart';
 import 'package:hakondate/model/nutrients/nutrients_model.dart';
 import 'package:hakondate/state/daily/daily_state.dart';
-import 'package:hakondate/util/environment.dart';
+import 'package:hakondate/view_model/multi_page/linking_daily_calendar_view_model.dart';
 
-final dailyProvider = StateNotifierProvider<DailyViewModel, DailyState>((ref) {
+final dailyProvider = StateNotifierProvider.autoDispose<DailyViewModel, DailyState>((ref) {
   final MenusLocalRepository menusLocalRepository = ref.read(menusLocalRepositoryProvider);
-  return DailyViewModel(menusLocalRepository);
+  final LinkingDailyCalendarViewModel linkingDailyCalendarProviderReader = ref.read(linkingDailyCalendarProvider.notifier);
+  return DailyViewModel(menusLocalRepository, linkingDailyCalendarProviderReader);
 });
 
 class DailyViewModel extends StateNotifier<DailyState> {
-  DailyViewModel(this._menusLocalRepository)
-      : super(DailyState(
-          selectedDay: DateTime.now(),
-          focusedDay: DateTime.now(),
-          calendarTabFirstDay: DateTime(2019, 8, 1),
-          calendarTabLastDay: DateTime(
-            DateTime.now().year,
-            DateTime.now().month + 2,
-            1,
-          ).add(const Duration(seconds: -1)),
-        ));
+  DailyViewModel(this._menusLocalRepository, this._linkingCalendarProviderReader) : super(DailyState(
+    focusedDay: _linkingCalendarProviderReader.state.selectedDay,
+  ));
 
   final MenusLocalRepository _menusLocalRepository;
+  final LinkingDailyCalendarViewModel _linkingCalendarProviderReader;
 
-  Future<void> updateSelectedDay({DateTime? day}) async {
-    switch (Environment.flavor) {
-      case Flavor.dev:
-        day ??= DateTime(2021, 7, 1);
-        break;
-      case Flavor.stg:
-      case Flavor.prod:
-        day ??= DateTime.now();
-        break;
-    }
+  Future<void> updateSelectedDay(DateTime day) async {
     state = state.copyWith(isFetching: true);
 
+    _linkingCalendarProviderReader.updateSelectedDay(day);
     state = state.copyWith(
-      selectedDay: day,
       menu: await _menusLocalRepository.getMenuByDay(day),
       isFetching: false,
     );

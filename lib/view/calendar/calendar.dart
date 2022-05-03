@@ -1,3 +1,4 @@
+import 'package:hakondate/view_model/single_page/daily_view_model.dart';
 import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
@@ -11,8 +12,8 @@ import 'package:hakondate/view/component/frame/stateful_wrapper.dart';
 import 'package:hakondate/view/calendar/non_lunches_day_calendar_tile.dart';
 import 'package:hakondate/view/calendar/menu_chips.dart';
 import 'package:hakondate/view_model/multi_page/common_function.dart';
+import 'package:hakondate/view_model/multi_page/linking_daily_calendar_view_model.dart';
 import 'package:hakondate/view_model/single_page/calendar_view_model.dart';
-import 'package:hakondate/view_model/single_page/daily_view_model.dart';
 import 'package:hakondate/model/menu/menu_model.dart';
 
 class Calendar extends StatelessWidget {
@@ -53,8 +54,7 @@ class Calendar extends StatelessWidget {
       builder: (BuildContext context, WidgetRef ref, _) {
         return GestureDetector(
           onTap: () {
-            ref.read(dailyProvider.notifier).updateSelectedDay(day: day);
-            ref.read(dailyProvider.notifier).updateFocusedDay(day);
+            ref.read(linkingDailyCalendarProvider.notifier).updateSelectedDay(day);
             routemaster.pop();
           },
           child: Card(
