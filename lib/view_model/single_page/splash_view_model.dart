@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -8,6 +7,7 @@ import 'package:hakondate/repository/local/schools_local_repository.dart';
 import 'package:hakondate/repository/remote/schools_remote_repository.dart';
 import 'package:hakondate/repository/local/menus_local_repository.dart';
 import 'package:hakondate/repository/remote/menus_remote_repository.dart';
+import 'package:hakondate/view/component/dialog/hakondate_dialog/hakondate_dialog.dart';
 import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 import 'package:hakondate/view_model/single_page/daily_view_model.dart';
 import 'package:hakondate/view_model/single_page/signup_view_model.dart';
@@ -130,26 +130,24 @@ class SplashViewModel extends StateNotifier<SplashState> {
       await showDialog(
         context: context,
         builder: (BuildContext context) {
-          return CupertinoAlertDialog(
+          return HakondateDialog(
             title: const Text('通信エラー'),
-            content: const Text('データの更新に失敗しました．データの更新をせず利用する場合は"このまま利用"を選択してください．'),
-            actions: [
-              CupertinoDialogAction(
-                child: const Text('このまま利用'),
-                onPressed: () async {
-                  await _useAsIs();
-                  routemaster.pop();
-                },
-              ),
-              CupertinoDialogAction(
-                isDefaultAction: true,
-                child: const Text('リトライ'),
-                onPressed: () {
-                  routemaster.pop();
-                  loadSplash(context);
-                },
-              ),
-            ],
+            body: const Text('データの更新に失敗しました．データの更新をせず利用する場合は"このまま利用"を選択してください．'),
+            firstAction: HakondateActionButton(
+              isPrimary: true,
+              text: const Text('リトライ'),
+              onTap: () {
+                routemaster.pop();
+                loadSplash(context);
+              },
+            ),
+            secondAction: HakondateActionButton(
+              text: const Text('このまま利用'),
+              onTap: () async {
+                await _useAsIs();
+                routemaster.pop();
+              },
+            ),
           );
         },
       );
