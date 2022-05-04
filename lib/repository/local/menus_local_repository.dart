@@ -1,5 +1,4 @@
 import 'package:drift/drift.dart';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/model/dish/dish_model.dart';

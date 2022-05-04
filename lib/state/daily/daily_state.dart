@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'package:hakondate/model/menu/menu_model.dart';
 
 part 'daily_state.freezed.dart';
