@@ -52,9 +52,8 @@ class Calendar extends StatelessWidget {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
         return GestureDetector(
-          onTap: () {
-            ref.read(dailyProvider.notifier).updateSelectedDay(day: day);
-            ref.read(dailyProvider.notifier).updateFocusedDay(day);
+          onTap: () async {
+            await ref.read(dailyProvider.notifier).updateSelectedDay(selectedDay: day);
             routemaster.pop();
           },
           child: Card(

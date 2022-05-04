@@ -35,16 +35,13 @@ class LoadingAnimationWidget extends ConsumerWidget {
                 builder: (BuildContext context) {
                   switch (ref.watch(splashProvider).loadingStatus) {
                     case LoadingStatus.reading:
-                      return Image.asset(
-                          'assets/loading_animation/data_reading.gif');
+                      return Image.asset('assets/loading_animation/data_reading.gif');
                     case LoadingStatus.checkingUpdate:
-                      return Image.asset(
-                          'assets/loading_animation/checking.gif');
+                      return Image.asset('assets/loading_animation/checking.gif');
                     case LoadingStatus.updating:
-                      return Image.asset(
-                          'assets/loading_animation/data_updating.gif');
+                      return Image.asset('assets/loading_animation/data_updating.gif');
                     default:
-                      return Container();
+                      return Image.asset('assets/loading_animation/data_reading.gif');
                   }
                 },
               ),
