@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
-
 import 'package:hakondate/model/menu/menu_model.dart';
 
 class MenuChips extends StatelessWidget {

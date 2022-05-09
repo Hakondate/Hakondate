@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:hakondate/constant/size.dart';
 
 class TermsContentColumn extends StatelessWidget {

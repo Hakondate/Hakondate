@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:hakondate/constant/size.dart';
-
-enum NutrientUnit {
-  kcal,
-  gram,
-  mGram,
-  microGram,
-}
+import 'package:hakondate/model/nutrients/nutrient_unit.dart';
 
 class NutrientLabel extends StatelessWidget {
   final String name;
@@ -56,35 +50,14 @@ class NutrientLabel extends StatelessWidget {
           ),
           Expanded(
             flex: 2,
-            child: _unitText(),
+            child: Text(
+              '  ' + unit.unitText,
+              style: const TextStyle(
+                fontSize: FontSize.body,
+              ),
+            ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _unitText() {
-    String unitStr = '';
-
-    switch (unit) {
-      case NutrientUnit.kcal:
-        unitStr = 'kcal';
-        break;
-      case NutrientUnit.gram:
-        unitStr = 'g';
-        break;
-      case NutrientUnit.mGram:
-        unitStr = 'mg';
-        break;
-      case NutrientUnit.microGram:
-        unitStr = 'μg';
-        break;
-    }
-
-    return Text(
-      '  ' + unitStr,
-      style: const TextStyle(
-        fontSize: FontSize.body,
       ),
     );
   }
