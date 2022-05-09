@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate/constant/app_key.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:hakondate/model/school/school_model.dart';
@@ -38,7 +39,7 @@ class UserViewModel extends StateNotifier<UserState> {
     try {
       if (await _usersLocalRepository.count() == 0) return false;
       final SharedPreferences prefs = await SharedPreferences.getInstance();
-      final int _currentUserId = prefs.getInt('current_user_id') ?? 1;
+      final int _currentUserId = prefs.getInt(AppKey.sharedPreferencesKey.currentUserId) ?? 1;
       await _setCurrentUser(_currentUserId);
 
       return true;
@@ -55,7 +56,7 @@ class UserViewModel extends StateNotifier<UserState> {
       await _setCurrentUser(id);
       final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-      return await prefs.setInt('current_user_id', id);
+      return await prefs.setInt(AppKey.sharedPreferencesKey.currentUserId, id);
     } catch (error) {
       debugPrint('Failed to change current user.');
       debugPrint(error.toString());
@@ -149,7 +150,7 @@ class UserViewModel extends StateNotifier<UserState> {
   }) async {
     final int id = await _usersLocalRepository.add(name, schoolId, schoolYear);
     final SharedPreferences _prefs = await SharedPreferences.getInstance();
-    await _prefs.setInt('current_user_id', id);
+    await _prefs.setInt(AppKey.sharedPreferencesKey.currentUserId, id);
     await _setCurrentUser(id);
 
     return id;

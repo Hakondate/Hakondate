@@ -83,7 +83,7 @@ class Terms extends StatelessWidget {
                 ),
                 child: const Text('はじめる'),
                 onPressed: store.isAgree
-                    ? () => routemaster.replace('/signup')
+                    ? () => ref.read(termsProvider.notifier).transition()
                     : null,
               ),
             ],

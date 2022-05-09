@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate/constant/app_key.dart';
 import 'package:hakondate/constant/record_date.dart';
 
 import 'package:hakondate/router/routes.dart';
@@ -14,7 +15,7 @@ import 'package:hakondate/view_model/single_page/daily_view_model.dart';
 import 'package:hakondate/view_model/single_page/signup_view_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final splashProvider = StateNotifierProvider<SplashViewModel, SplashState>((ref) {
+final splashProvider = StateNotifierProvider.autoDispose<SplashViewModel, SplashState>((ref) {
   final SchoolsLocalRepository schoolsLocalRepository = ref.read(schoolsLocalRepositoryProvider);
   final SchoolsRemoteRepository schoolsRemoteRepository = ref.read(schoolsRemoteRepositoryProvider);
   final MenusLocalRepository menusLocalRepository = ref.read(menusLocalRepositoryProvider);
@@ -53,14 +54,26 @@ class SplashViewModel extends StateNotifier<SplashState> {
       }
 
       final SharedPreferences prefs = await SharedPreferences.getInstance();
-      final DateTime termsAgreedDay = DateTime.fromMillisecondsSinceEpoch(prefs.getInt('agree_terms_day') ?? 0);
+      final DateTime termsAgreedDay = DateTime.fromMillisecondsSinceEpoch(
+          prefs.getInt(AppKey.sharedPreferencesKey.agreedTermsDay) ?? 0);
 
       if (termsAgreedDay.isBefore(RecordDate.termsLastUpdateDay)) {
-        // await showDialog(
-        //   context: context,
-        //   builder: ,
-        // );
-        return routemaster.replace('/terms');
+        return await showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) => HakondateDialog(
+            title: const Text('お知らせ'),
+            body: const Text('利用規約が更新されました\n本サービスを利用するためには再度同意していただく必要があります'),
+            firstAction: HakondateActionButton(
+              text: const Text('利用規約を見る'),
+              isPrimary: true,
+              onTap: () {
+                routemaster.pop();
+                routemaster.replace('/terms');
+              },
+            ),
+          ),
+        );
       }
 
       await _initializeMenus();
