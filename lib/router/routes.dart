@@ -15,7 +15,7 @@ final routemaster = RoutemasterDelegate(
     onUnknownRoute: (_) => const Redirect('/splash'),
     routes: {
       '/splash': (_) => const MaterialPage(child: Splash()),
-      '/terms': (_) => const MaterialPage(child: Terms()),
+      '/home/terms': (_) => const MaterialPage(child: Terms()),
       '/signup': (_) => MaterialPage(child: Signup()),
       '/home': (_) => const CupertinoTabPage(
         child: AppBottomNavigationBar(),
@@ -30,9 +30,11 @@ final routemaster = RoutemasterDelegate(
       '/home/calendar': (_) => const FadeUpPage(child: Calendar()),
       '/home/recipes': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
       '/home/letters': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
-      '/setting': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
-      '/about_us': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
-      '/help': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
+      '/home/setting': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
+      '/home/about_us': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
+      '/home/help': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
+      '/home/license': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
+      '/home/origin': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
     },
   ),
 );
