@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hakondate/constant/app_color.dart';
 
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:routemaster/routemaster.dart';
 
+import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/router/routes.dart';
 
 void main() async {

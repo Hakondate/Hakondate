@@ -7,12 +7,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:hakondate/model/school/school_model.dart';
-import 'package:hakondate/state/user/user_state.dart';
 import 'package:hakondate/model/nutrients/nutrients_model.dart';
+import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/model/user/user_model.dart';
 import 'package:hakondate/repository/local/schools_local_repository.dart';
 import 'package:hakondate/repository/local/users_local_repository.dart';
+import 'package:hakondate/state/user/user_state.dart';
 
 enum SchoolGrade {
   lower,

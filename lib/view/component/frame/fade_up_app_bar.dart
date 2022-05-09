@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:hakondate/router/routes.dart';
 
 class FadeUpAppBar extends StatelessWidget implements PreferredSizeWidget {
