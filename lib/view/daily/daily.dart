@@ -67,12 +67,11 @@ class Daily extends StatelessWidget {
             firstDay: store.calendarTabFirstDay,
             lastDay: store.calendarTabLastDay,
             selectedDayPredicate: (DateTime day) => isSameDay(store.selectedDay, day),
-            onDaySelected: (DateTime selectedDay, _) {
+            onDaySelected: (DateTime selectedDay, DateTime focusedDay) async {
               if (isSameDay(store.selectedDay, selectedDay)) return;
-              ref.read(dailyProvider.notifier).updateSelectedDay(day: selectedDay);
+              await ref.read(dailyProvider.notifier).updateSelectedDay(selectedDay: selectedDay);
             },
-            onPageChanged: (DateTime focusedDay) =>
-                ref.read(dailyProvider.notifier).updateFocusedDay(focusedDay),  // readで読み込むと再描画が発生
+            onPageChanged: (DateTime focusedDay) => ref.read(dailyProvider.notifier).updateFocusedDay(focusedDay),
             daysOfWeekHeight: 20,
             calendarStyle: CalendarStyle(
               todayTextStyle: const CalendarStyle().defaultTextStyle,
