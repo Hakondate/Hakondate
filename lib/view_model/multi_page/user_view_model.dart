@@ -37,8 +37,8 @@ class UserViewModel extends StateNotifier<UserState> {
   Future<bool> checkSignedUp() async {
     try {
       if (await _usersLocalRepository.count() == 0) return false;
-      final SharedPreferences _prefs = await SharedPreferences.getInstance();
-      final int _currentUserId = _prefs.getInt('current_user_id') ?? 1;
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      final int _currentUserId = prefs.getInt('current_user_id') ?? 1;
       await _setCurrentUser(_currentUserId);
 
       return true;
@@ -53,9 +53,9 @@ class UserViewModel extends StateNotifier<UserState> {
   Future<bool> changeCurrentUser(int id) async {
     try {
       await _setCurrentUser(id);
-      final SharedPreferences _prefs = await SharedPreferences.getInstance();
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-      return await _prefs.setInt('current_user_id', id);
+      return await prefs.setInt('current_user_id', id);
     } catch (error) {
       debugPrint('Failed to change current user.');
       debugPrint(error.toString());
@@ -65,29 +65,29 @@ class UserViewModel extends StateNotifier<UserState> {
   }
 
   Future<void> _setCurrentUser(int id) async {
-    final UserModel _user = await _usersLocalRepository.getById(id);
-    final NutrientsModel _slns = await _getSLNS(_user.schoolId);
+    final UserModel user = await _usersLocalRepository.getById(id);
+    final NutrientsModel slns = await _getSLNS(user.schoolId);
 
     state = state.copyWith(
-      currentUser: _user.copyWith(slns: _slns),
+      currentUser: user.copyWith(slns: slns),
     );
   }
 
   Future<void> updateCurrentUser(
       {String? name, int? schoolId, int? schoolYear}) async {
     if (state.currentUser == null) return;
-    NutrientsModel? _slns = (schoolId != null || schoolYear != null)
+    NutrientsModel? slns = (schoolId != null || schoolYear != null)
         ? await _getSLNS(state.currentUser!.id)
         : state.currentUser!.slns;
-    UserModel _newUser = state.currentUser!.copyWith(
+    UserModel newUser = state.currentUser!.copyWith(
       name: name ?? state.currentUser!.name,
       schoolId: schoolId ?? state.currentUser!.schoolId,
       schoolYear: schoolYear ?? state.currentUser!.schoolYear,
-      slns: _slns,
+      slns: slns,
     );
-    await _usersLocalRepository.update(_newUser);
+    await _usersLocalRepository.update(newUser);
 
-    state = state.copyWith(currentUser: _newUser);
+    state = state.copyWith(currentUser: newUser);
   }
 
   Future<NutrientsModel> _getSLNS(int userId,

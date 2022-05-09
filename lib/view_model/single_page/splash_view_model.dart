@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate/constant/record_date.dart';
 
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/splash/splash_state.dart';
@@ -11,6 +12,7 @@ import 'package:hakondate/repository/remote/menus_remote_repository.dart';
 import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 import 'package:hakondate/view_model/single_page/daily_view_model.dart';
 import 'package:hakondate/view_model/single_page/signup_view_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final splashProvider = StateNotifierProvider<SplashViewModel, SplashState>((ref) {
   final SchoolsLocalRepository schoolsLocalRepository = ref.read(schoolsLocalRepositoryProvider);
@@ -27,7 +29,8 @@ final splashProvider = StateNotifierProvider<SplashViewModel, SplashState>((ref)
 });
 
 class SplashViewModel extends StateNotifier<SplashState> {
-  SplashViewModel(this._reader,
+  SplashViewModel(
+      this._reader,
       this._schoolsLocalRepository,
       this._schoolsRemoteRepository,
       this._menusLocalRepository,
@@ -46,6 +49,17 @@ class SplashViewModel extends StateNotifier<SplashState> {
       await _initializeSchool();
 
       if (!await _reader(userProvider.notifier).checkSignedUp()) {
+        return routemaster.replace('/terms');
+      }
+
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      final DateTime termsAgreedDay = DateTime.fromMillisecondsSinceEpoch(prefs.getInt('agree_terms_day') ?? 0);
+
+      if (termsAgreedDay.isBefore(RecordDate.termsLastUpdateDay)) {
+        // await showDialog(
+        //   context: context,
+        //   builder: ,
+        // );
         return routemaster.replace('/terms');
       }
 
