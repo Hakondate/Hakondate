@@ -22,14 +22,14 @@ class Daily extends StatelessWidget {
       appBar: AppBar(
         elevation: 0.0,
         title: _appBarTitle(),
-        leading: Consumer(builder: (BuildContext context, WidgetRef ref, _) {
-          return IconButton(
+        leading: Consumer(
+          builder: (BuildContext context, WidgetRef ref, _) => IconButton(
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
             icon: const Icon(Icons.dehaze),
             onPressed: () => ref.read(drawerProvider.notifier).openDrawer(),
-          );
-        }),
+          ),
+        ),
         actions: [
           IconButton(
             splashColor: Colors.transparent,
@@ -63,46 +63,47 @@ class Daily extends StatelessWidget {
 
   Widget _calendarWidget() {
     return Material(
-      color: AppColor.brand.primary,
-      elevation: 4.0,
-      child: Consumer(builder: (BuildContext context, WidgetRef ref, _) {
-        final store = ref.watch(dailyProvider);
+        color: AppColor.brand.primary,
+        elevation: 4.0,
+        child: Consumer(
+            builder: (BuildContext context, WidgetRef ref, _) {
+              final store = ref.watch(dailyProvider);
 
-        return TableCalendar(
-          headerVisible: false,
-          locale: 'ja_JP',
-          calendarFormat: CalendarFormat.week,
-          focusedDay: store.focusedDay,
-          firstDay: store.calendarTabFirstDay,
-          lastDay: store.calendarTabLastDay,
-          selectedDayPredicate: (DateTime day) =>
-              isSameDay(store.selectedDay, day),
-          onDaySelected: (DateTime selectedDay, _) {
-            if (isSameDay(store.selectedDay, selectedDay)) return;
-            ref
-                .read(dailyProvider.notifier)
-                .updateSelectedDay(day: selectedDay);
-          },
-          onPageChanged: (DateTime focusedDay) => ref
-              .read(dailyProvider.notifier)
-              .updateFocusedDay(focusedDay), // readで読み込むと再描画が発生
-          daysOfWeekHeight: 20,
-          calendarStyle: CalendarStyle(
-            todayTextStyle: const CalendarStyle().defaultTextStyle,
-            todayDecoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: AppColor.brand.secondary,
-              ),
-            ),
-            selectedDecoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColor.brand.secondary,
-            ),
-            outsideTextStyle: const CalendarStyle().defaultTextStyle,
-          ),
-        );
-      }),
+              return TableCalendar(
+                headerVisible: false,
+                locale: 'ja_JP',
+                calendarFormat: CalendarFormat.week,
+                focusedDay: store.focusedDay,
+                firstDay: store.calendarTabFirstDay,
+                lastDay: store.calendarTabLastDay,
+                selectedDayPredicate: (DateTime day) =>
+                    isSameDay(store.selectedDay, day),
+                onDaySelected: (DateTime selectedDay, _) {
+                  if (isSameDay(store.selectedDay, selectedDay)) return;
+                  ref
+                      .read(dailyProvider.notifier)
+                      .updateSelectedDay(day: selectedDay);
+                },
+                onPageChanged: (DateTime focusedDay) =>
+                    ref.read(dailyProvider.notifier).updateFocusedDay(focusedDay),
+                // readで読み込むと再描画が発生
+                daysOfWeekHeight: 20,
+                calendarStyle: CalendarStyle(
+                  todayTextStyle: const CalendarStyle().defaultTextStyle,
+                  todayDecoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: AppColor.brand.secondary,
+                    ),
+                  ),
+                  selectedDecoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppColor.brand.secondary,
+                  ),
+                  outsideTextStyle: const CalendarStyle().defaultTextStyle,
+                ),
+              );
+        }),
     );
   }
 

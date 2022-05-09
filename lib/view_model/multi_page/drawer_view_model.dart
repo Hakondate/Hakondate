@@ -7,10 +7,9 @@ final drawerProvider = StateNotifierProvider<DrawerViewModel, DrawerState>(
     (_) => DrawerViewModel());
 
 class DrawerViewModel extends StateNotifier<DrawerState> {
-  DrawerViewModel()
-      : super(DrawerState(
-          scaffoldKey: GlobalKey<ScaffoldState>(),
-        ));
+  DrawerViewModel() : super(DrawerState(
+    scaffoldKey: GlobalKey<ScaffoldState>(),
+  ));
 
   void openDrawer() => state.scaffoldKey.currentState!.openDrawer();
 }

@@ -6,10 +6,9 @@ class DailyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: const <Widget>[
-          DrawerHeader(
+      child: Column(
+        children: <Widget>[
+          const DrawerHeader(
             decoration: BoxDecoration(
               color: Colors.blue,
               image: DecorationImage(
@@ -25,33 +24,42 @@ class DailyDrawer extends StatelessWidget {
               ),
             ),
           ),
-          ListTile(
-            leading: Icon(Icons.account_circle),
-            title: Text('ユーザー情報'),
-            // onTap: () => {},
-          ),
-          ListTile(
-            leading: Icon(Icons.agriculture),
-            title: Text('産地情報'),
-            // onTap: () => {},
-          ),
-          ListTile(
-            leading: Icon(Icons.info),
-            title: Text('インフォメーション'),
-            // onTap: () => {},
-          ),
-          ListTile(
-            leading: Icon(Icons.help),
-            title: Text('ヘルプ'),
-            // onTap: () => {},
-          ),
-          ListTile(
-            leading: Icon(Icons.lock),
-            title: Text('ライセンス情報'),
-            // onTap: () => {},
-          ),
+          _bodyWidget(),
         ],
       ),
     );
   }
+
+  Widget _bodyWidget() {
+    return Column(
+      children: data.map((data) =>
+        Container(
+          padding: const EdgeInsets.all(8.0),
+          // margin: const EdgeInsets.only(top:5.0),
+          color: Colors.white70,
+          child: Row(
+            children: <Widget>[
+              Icon(data.icon),
+              Text(data.text),
+            ],
+          ),
+        ),
+      ).toList(),
+    );
+  }
+}
+
+List<DrawerData> data = [
+  DrawerData(Icons.account_circle, 'ユーザー情報'),
+  DrawerData(Icons.agriculture, '産地情報'),
+  DrawerData(Icons.gavel, '利用規約'),
+  DrawerData(Icons.info, 'インフォメーション'),
+  DrawerData(Icons.help, 'ヘルプ'),
+  DrawerData(Icons.lock, 'ライセンス情報'),
+];
+
+class DrawerData {
+  IconData icon;
+  String text;
+  DrawerData(this.icon, this.text);
 }
