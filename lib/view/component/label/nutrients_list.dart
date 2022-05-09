@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:hakondate/model/nutrients/nutrient_unit.dart';
 import 'package:hakondate/view/component/label/nutrient_label.dart';
 
 class NutrientsList extends StatelessWidget {

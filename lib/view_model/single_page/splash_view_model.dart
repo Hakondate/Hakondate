@@ -130,6 +130,7 @@ class SplashViewModel extends StateNotifier<SplashState> {
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
       await showDialog(
         context: context,
+        barrierDismissible: false,
         builder: (BuildContext context) {
           return CupertinoAlertDialog(
             title: const Text('通信エラー'),

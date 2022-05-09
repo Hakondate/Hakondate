@@ -5,6 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hakondate/model/user/user_model.dart';
 
 part 'user_state.freezed.dart';
+part 'school_grade.dart';
 
 @freezed
 class UserState with _$UserState {
