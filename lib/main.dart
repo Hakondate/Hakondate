@@ -27,7 +27,7 @@ class Hakondate extends StatelessWidget {
       fontFamily: 'MPLUSRounded1c',
       appBarTheme: AppBarTheme(
         titleTextStyle: TextStyle(
-          color: AppColor.text.primary,
+          color: AppColor.text.appBarTitle,
           fontSize: 20,
           fontWeight: FontWeight.bold,
         ),

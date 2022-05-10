@@ -1,19 +1,22 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:hakondate/constant/app_key.dart';
+import 'package:hakondate/constant/record_date.dart';
 import 'package:hakondate/repository/local/menus_local_repository.dart';
 import 'package:hakondate/repository/local/schools_local_repository.dart';
 import 'package:hakondate/repository/remote/menus_remote_repository.dart';
 import 'package:hakondate/repository/remote/schools_remote_repository.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/splash/splash_state.dart';
+import 'package:hakondate/view/component/dialog/hakondate_dialog/hakondate_dialog.dart';
 import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 import 'package:hakondate/view_model/single_page/daily_view_model.dart';
 import 'package:hakondate/view_model/single_page/signup_view_model.dart';
 
-final splashProvider = StateNotifierProvider<SplashViewModel, SplashState>((ref) {
+final splashProvider = StateNotifierProvider.autoDispose<SplashViewModel, SplashState>((ref) {
   final SchoolsLocalRepository schoolsLocalRepository = ref.read(schoolsLocalRepositoryProvider);
   final SchoolsRemoteRepository schoolsRemoteRepository = ref.read(schoolsRemoteRepositoryProvider);
   final MenusLocalRepository menusLocalRepository = ref.read(menusLocalRepositoryProvider);
@@ -28,7 +31,8 @@ final splashProvider = StateNotifierProvider<SplashViewModel, SplashState>((ref)
 });
 
 class SplashViewModel extends StateNotifier<SplashState> {
-  SplashViewModel(this._reader,
+  SplashViewModel(
+      this._reader,
       this._schoolsLocalRepository,
       this._schoolsRemoteRepository,
       this._menusLocalRepository,
@@ -48,6 +52,29 @@ class SplashViewModel extends StateNotifier<SplashState> {
 
       if (!await _reader(userProvider.notifier).checkSignedUp()) {
         return routemaster.replace('/terms');
+      }
+
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      final DateTime termsAgreedDay = DateTime.fromMillisecondsSinceEpoch(
+          prefs.getInt(AppKey.sharedPreferencesKey.agreedTermsDay) ?? 0);
+
+      if (termsAgreedDay.isBefore(RecordDate.termsLastUpdateDay)) {
+        return await showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) => HakondateDialog(
+            title: const Text('お知らせ'),
+            body: const Text('利用規約が更新されました\n本サービスを利用するためには再度同意していただく必要があります'),
+            firstAction: HakondateActionButton(
+              text: const Text('利用規約を見る'),
+              isPrimary: true,
+              onTap: () {
+                routemaster.pop();
+                routemaster.replace('/terms');
+              },
+            ),
+          ),
+        );
       }
 
       await _initializeMenus();
@@ -132,26 +159,24 @@ class SplashViewModel extends StateNotifier<SplashState> {
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
-          return CupertinoAlertDialog(
+          return HakondateDialog(
             title: const Text('通信エラー'),
-            content: const Text('データの更新に失敗しました．データの更新をせず利用する場合は"このまま利用"を選択してください．'),
-            actions: [
-              CupertinoDialogAction(
-                child: const Text('このまま利用'),
-                onPressed: () async {
-                  await _useAsIs();
-                  routemaster.pop();
-                },
-              ),
-              CupertinoDialogAction(
-                isDefaultAction: true,
-                child: const Text('リトライ'),
-                onPressed: () {
-                  routemaster.pop();
-                  loadSplash(context);
-                },
-              ),
-            ],
+            body: const Text('データの更新に失敗しました．データの更新をせず利用する場合は"このまま利用"を選択してください．'),
+            firstAction: HakondateActionButton(
+              isPrimary: true,
+              text: const Text('リトライ'),
+              onTap: () {
+                routemaster.pop();
+                loadSplash(context);
+              },
+            ),
+            secondAction: HakondateActionButton(
+              text: const Text('このまま利用'),
+              onTap: () async {
+                await _useAsIs();
+                routemaster.pop();
+              },
+            ),
           );
         },
       );
