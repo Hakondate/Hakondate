@@ -15,6 +15,8 @@ abstract class UsersLocalRepositoryBase {
   Future<int> add(String name, int schoolId, int schoolYear);
   Future<int> update(UserModel user);
   Future<int> count();
+  Future<int> delete(int id);
+  Future<void> deleteAll();
 }
 
 class UsersLocalRepository extends UsersLocalRepositoryBase {
@@ -82,4 +84,10 @@ class UsersLocalRepository extends UsersLocalRepositoryBase {
 
     return await query.map((scheme) => scheme.read(exp)).getSingle();
   }
+
+  @override
+  Future<int> delete(int id) => (_db.delete(_db.usersTable)..where((t) => t.id.equals(id))).go();
+
+  @override
+  Future<void> deleteAll() => _db.delete(_db.usersTable).go();
 }

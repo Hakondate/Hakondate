@@ -19,11 +19,7 @@ abstract class MenusLocalRepositoryBase {
   Future<int> add(Map<String, dynamic> menu);
   Future<List<MenuModel>> getAll();
   Future<MenuModel> getMenuByDay(DateTime day);
-  Future<List<MenuModel>> getSelectedPeriod({
-    required DateTime startDay,
-    required DateTime endDay,
-    required int schoolId,
-  });
+  Future<int> deleteAll();
 }
 
 class MenusLocalRepository extends MenusLocalRepositoryBase {
@@ -220,24 +216,6 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
     return (menusSchema != null) ? _getBySchema(menusSchema) : null;
   }
 
-  @override
-  Future<List<MenuModel>> getSelectedPeriod({
-    required DateTime startDay,
-    required DateTime endDay,
-    required int schoolId,
-  }) async {
-    List<MenuModel> menus = [];
-    final List<MenusSchema> menusSchemas = await (_db.select(_db.menusTable)..where((t) =>
-      t.day.isBetweenValues(startDay, endDay) & t.schoolId.equals(schoolId))).get();
-
-    await Future.forEach(menusSchemas, (MenusSchema menusSchema) async {
-      final MenuModel menu = await _getBySchema(menusSchema);
-      menus.add(menu);
-    });
-
-    return menus;
-  }
-
   Future<DateTime> _getOldestDay() async {
     final Expression<DateTime> exp = _db.menusTable.day.min();
     final query = _db.selectOnly(_db.menusTable)..addColumns([exp]);
@@ -343,4 +321,7 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
       origin: foodstuffsSchema.origin,
     );
   }
+
+  @override
+  Future<int> deleteAll() => _db.delete(_db.menusTable).go();
 }
