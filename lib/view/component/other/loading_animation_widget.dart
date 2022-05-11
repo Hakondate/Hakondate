@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/splash/splash_state.dart';
+import 'package:hakondate/util/exception/connection_exception.dart';
+import 'package:hakondate/util/exception/sqlite_exception.dart';
+import 'package:hakondate/view/component/dialog/exception_dialog/connection_exception_dialog.dart';
 import 'package:hakondate/view/component/frame/stateful_wrapper.dart';
 import 'package:hakondate/view_model/single_page/splash_view_model.dart';
 
@@ -34,16 +38,21 @@ class LoadingAnimationWidget extends ConsumerWidget {
                   : ref.read(splashProvider.notifier).loadSignup(context),
               child: Builder(
                 builder: (BuildContext context) {
-                  switch (ref.watch(splashProvider).loadingStatus) {
-                    case LoadingStatus.reading:
-                      return Image.asset('assets/loading_animation/data_reading.gif');
-                    case LoadingStatus.checkingUpdate:
-                      return Image.asset('assets/loading_animation/checking.gif');
-                    case LoadingStatus.updating:
-                      return Image.asset('assets/loading_animation/data_updating.gif');
-                    default:
-                      return Image.asset('assets/loading_animation/data_reading.gif');
+                  final store = ref.watch(splashProvider);
+                  if (store is SplashStateLoad) {
+                    switch (store.status) {
+                      case LoadingStatus.reading:
+                        return Image.asset('assets/loading_animation/data_reading.gif');
+                      case LoadingStatus.checkingUpdate:
+                        return Image.asset('assets/loading_animation/checking.gif');
+                      case LoadingStatus.updating:
+                        return Image.asset('assets/loading_animation/data_updating.gif');
+                      case LoadingStatus.unloading:
+                        return Image.asset('assets/loading_animation/data_reading.gif');
+                    }
                   }
+
+                  return Image.asset('assets/loading_animation/data_reading.gif');
                 },
               ),
             ),

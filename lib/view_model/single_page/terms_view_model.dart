@@ -25,6 +25,7 @@ class TermsViewModel extends StateNotifier<TermsState> {
     if (_userProviderReader.state.currentUser != null) {
       return routemaster.replace('/splash');
     }
+
     routemaster.replace('/signup');
   }
 }

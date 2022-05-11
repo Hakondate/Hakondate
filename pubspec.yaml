@@ -51,8 +51,7 @@ dev_dependencies:
   import_sorter: ^4.6.0
 
   # build_runner の実行コマンド
-  # flutter packages pub run build_runner build
-  # flutter packages pub run build_runner build --delete-conflicting-outputs (競合があった場合削除オプション)
+  # flutter packages pub run build_runner build --delete-conflicting-outputs
 
 flutter:
 

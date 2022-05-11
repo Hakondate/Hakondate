@@ -7,6 +7,7 @@ import 'package:routemaster/routemaster.dart';
 
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/router/routes.dart';
+import 'package:hakondate/util/app_unique_key.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,17 +39,22 @@ class Hakondate extends StatelessWidget {
     );
 
     return ProviderScope(
-      child: MaterialApp.router(
-        title: 'はこんだて',
-        theme: theme.copyWith(
-          colorScheme: theme.colorScheme.copyWith(
-            primary: AppColor.brand.primary,
-            secondary: AppColor.brand.secondary,
-          ),
-        ),
-        routerDelegate: routemaster,
-        routeInformationParser: const RoutemasterParser(),
-        debugShowCheckedModeBanner: false,
+      child: Consumer(
+        builder: (BuildContext context, WidgetRef ref, _) {
+          return MaterialApp.router(
+            key: key ?? ref.watch(appUniqueKeyProvider),
+            title: 'はこんだて',
+            theme: theme.copyWith(
+              colorScheme: theme.colorScheme.copyWith(
+                primary: AppColor.brand.primary,
+                secondary: AppColor.brand.secondary,
+              ),
+            ),
+            routerDelegate: routemaster,
+            routeInformationParser: const RoutemasterParser(),
+            debugShowCheckedModeBanner: false,
+          );
+        }
       ),
     );
   }

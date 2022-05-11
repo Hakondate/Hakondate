@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/repository/local/database_manager.dart';
+import 'package:hakondate/util/exception/sqlite_exception.dart';
 
 final schoolsLocalRepositoryProvider = Provider<SchoolsLocalRepository>((ref) {
   final DatabaseManager databaseManager = ref.read(databaseManagerProvider);
@@ -25,8 +26,9 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryBase {
   Future<int> count() async {
     final Expression<int> exp = _db.schoolsTable.id.count();
     final query = _db.selectOnly(_db.schoolsTable)..addColumns([exp]);
+    final int? count = await query.map((scheme) => scheme.read(exp)).getSingleOrNull();
 
-    return await query.map((scheme) => scheme.read(exp)).getSingle();
+    return count ?? 0;
   }
 
   @override
@@ -48,8 +50,10 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryBase {
 
   @override
   Future<SchoolModel> getById(int id) async {
-    final SchoolsSchema schoolsSchema =
-        await (_db.select(_db.schoolsTable)..where((t) => t.id.equals(id))).getSingle();
+    final SchoolsSchema? schoolsSchema =
+        await (_db.select(_db.schoolsTable)..where((t) => t.id.equals(id))).getSingleOrNull();
+
+    if (schoolsSchema == null) throw SQLiteException('Failed to select $id from schoolsTable');
 
     return SchoolModel(
       id: schoolsSchema.id,

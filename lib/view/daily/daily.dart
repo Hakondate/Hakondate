@@ -7,9 +7,11 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:hakondate/router/routes.dart';
+import 'package:hakondate/util/environment.dart';
 import 'package:hakondate/view/daily/menu_card.dart';
 import 'package:hakondate/view/daily/non_lunches_day_body.dart';
 import 'package:hakondate/view/daily/nutrients_card.dart';
+import 'package:hakondate/view_model/multi_page/common_function.dart';
 import 'package:hakondate/view_model/single_page/daily_view_model.dart';
 
 class Daily extends StatelessWidget {
@@ -27,6 +29,14 @@ class Daily extends StatelessWidget {
             highlightColor: Colors.transparent,
             icon: const Icon(Icons.calendar_today_outlined),
             onPressed: () => routemaster.replace('/home/calendar'),
+          ),
+          if (Environment.flavor == Flavor.dev) Consumer(
+            builder: (_, WidgetRef ref, __) {
+              return IconButton(
+                icon: const Icon(Icons.deblur_outlined),
+                onPressed: () => ref.read(commonFunctionProvider.notifier).deleteAllData(),
+              );
+            },
           ),
         ],
       ),

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/model/user/user_model.dart';
 import 'package:hakondate/repository/local/database_manager.dart';
+import 'package:hakondate/util/exception/sqlite_exception.dart';
 
 final usersLocalRepositoryProvider = Provider<UsersLocalRepository>((ref) {
   final DatabaseManager databaseManager = ref.read(databaseManagerProvider);
@@ -44,14 +45,16 @@ class UsersLocalRepository extends UsersLocalRepositoryBase {
 
   @override
   Future<UserModel> getById(int id) async {
-    final UsersSchema _usersSchema =
-        await (_db.select(_db.usersTable)..where((t) => t.id.equals(id))).getSingle();
+    final UsersSchema? usersSchema =
+        await (_db.select(_db.usersTable)..where((t) => t.id.equals(id))).getSingleOrNull();
+
+    if (usersSchema == null) throw SQLiteException('Failed to select $id from usersTable');
 
     return UserModel(
-      id: _usersSchema.id,
-      name: _usersSchema.name,
-      schoolId: _usersSchema.schoolId,
-      schoolYear: _usersSchema.schoolYear,
+      id: usersSchema.id,
+      name: usersSchema.name,
+      schoolId: usersSchema.schoolId,
+      schoolYear: usersSchema.schoolYear,
     );
   }
 
@@ -81,8 +84,9 @@ class UsersLocalRepository extends UsersLocalRepositoryBase {
   Future<int> count() async {
     final Expression<int> exp = _db.usersTable.id.count();
     final query = _db.selectOnly(_db.usersTable)..addColumns([exp]);
+    final int? count = await query.map((scheme) => scheme.read(exp)).getSingleOrNull();
 
-    return await query.map((scheme) => scheme.read(exp)).getSingle();
+    return count ?? 0;
   }
 
   @override
