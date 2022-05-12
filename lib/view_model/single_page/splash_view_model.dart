@@ -59,7 +59,7 @@ class SplashViewModel extends StateNotifier<SplashState> {
   }
 
   Future<void> loadSignup(BuildContext context) async {
-    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       state = state.copyWith(loadingStatus: LoadingStatus.updating);
       try {
         await _reader(userProvider.notifier).createUser(
@@ -127,7 +127,7 @@ class SplashViewModel extends StateNotifier<SplashState> {
   }
 
   Future<void> _showErrorDialog(BuildContext context) async {
-    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       await showDialog(
         context: context,
         barrierDismissible: false,
