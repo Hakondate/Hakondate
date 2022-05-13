@@ -8,7 +8,7 @@ import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/view_model/single_page/terms_view_model.dart';
 
 class Terms extends ConsumerWidget {
-  const Terms({Key? key}) : super(key: key);
+  const Terms({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

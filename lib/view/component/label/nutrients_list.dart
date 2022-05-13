@@ -4,14 +4,14 @@ import 'package:hakondate/model/nutrients/nutrient_unit.dart';
 import 'package:hakondate/view/component/label/nutrient_label.dart';
 
 class NutrientsList extends StatelessWidget {
-  final dynamic nutrients;
-  final Color? backgroundColor;
-
   const NutrientsList({
-    Key? key,
+    super.key,
     required this.nutrients,
     this.backgroundColor,
-  }) : super(key: key);
+  });
+
+  final dynamic nutrients;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {

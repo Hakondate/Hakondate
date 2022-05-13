@@ -7,7 +7,7 @@ import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 
 class AppBottomNavigationBar extends StatelessWidget {
-  const AppBottomNavigationBar({Key? key}) : super(key: key);
+  const AppBottomNavigationBar({super.key});
 
   @override
   Widget build(BuildContext context) {

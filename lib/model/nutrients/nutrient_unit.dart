@@ -1,8 +1,11 @@
 enum NutrientUnit {
-  kcal,
-  gram,
-  mGram,
-  microGram,
+  kcal(value: 'kcal'),
+  gram(value: 'g'),
+  mGram(value: 'mg'),
+  microGram(value: 'μg');
+
+  const NutrientUnit({required this.value});
+  final String value;
 }
 
 extension NutrientUnitExtension on NutrientUnit {

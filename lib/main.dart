@@ -19,7 +19,7 @@ void main() async {
 }
 
 class Hakondate extends StatelessWidget {
-  const Hakondate({Key? key}) : super(key: key);
+  const Hakondate({super.key});
 
   @override
   Widget build(BuildContext context) {

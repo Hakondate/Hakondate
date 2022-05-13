@@ -14,7 +14,7 @@ import 'package:hakondate/view_model/single_page/signup_view_model.dart';
 class Signup extends StatelessWidget {
   final GlobalKey _formKey = GlobalKey<FormState>();
 
-  Signup({Key? key}) : super(key: key);
+  Signup({super.key});
 
   Future<void> _showConfirmationDialog(BuildContext context) async {
     await showDialog(

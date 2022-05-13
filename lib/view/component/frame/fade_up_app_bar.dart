@@ -4,9 +4,9 @@ import 'package:hakondate/router/routes.dart';
 
 class FadeUpAppBar extends StatelessWidget implements PreferredSizeWidget {
   const FadeUpAppBar({
-    Key? key,
+    super.key,
     this.title,
-  }) : super(key: key);
+  });
 
   final Widget? title;
 

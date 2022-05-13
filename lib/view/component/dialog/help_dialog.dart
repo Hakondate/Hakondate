@@ -4,10 +4,10 @@ import 'package:hakondate/constant/size.dart';
 
 class HelpDialog extends StatelessWidget {
   const HelpDialog({
-    Key? key,
+    super.key,
     required this.title,
     required this.content,
-  }) : super(key: key);
+  });
 
   final Widget title;
   final Widget content;
