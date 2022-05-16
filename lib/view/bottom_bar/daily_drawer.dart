@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hakondate/router/routes.dart';
 
+import 'package:hakondate/constant/app_color.dart';
+import 'package:hakondate/constant/size.dart';
+
 class DailyDrawer extends StatelessWidget {
   const DailyDrawer({Key? key}) : super(key: key);
 
@@ -8,11 +11,11 @@ class DailyDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
         child: SafeArea(
+          top: false,
           child: Column(
             children: <Widget>[
                Container(
                  decoration: const BoxDecoration(
-                   color: Colors.black,
                    image: DecorationImage(
                      fit: BoxFit.cover,
                      image: AssetImage('assets/images/icon.png'),
@@ -20,14 +23,6 @@ class DailyDrawer extends StatelessWidget {
                  ),
                 width: double.infinity,
                 height: 200,
-                alignment: Alignment(-0.8, -0.8),
-                child: const Text(
-                  'はこんだて',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 24,
-                  ),
-                ),
               ),
               _bodyWidget(),
             ],
@@ -41,34 +36,52 @@ class DailyDrawer extends StatelessWidget {
       child: Column(
         children: [
           _drawerLabel(
-            icon: Icons.account_circle,
+            icon: Icons.account_circle_outlined,
             labelText: 'ユーザー情報',
-            onTap: () => routemaster.push('/home/setting'),
+            onTap: () => {
+              routemaster.pop(),
+              routemaster.push('/home/setting')
+            },
           ),
           _drawerLabel(
-            icon: Icons.agriculture,
+            icon: Icons.agriculture_outlined,
             labelText: '産地情報',
-            onTap: () => routemaster.push('/home/origin'),
+            onTap: () => {
+              routemaster.pop(),
+              routemaster.push('/home/origin')
+            },
           ),
           _drawerLabel(
-            icon: Icons.gavel,
+            icon: Icons.gavel_outlined,
             labelText: '利用規約',
-            onTap: () => routemaster.push('/home/terms'),
+            onTap: () => {
+              routemaster.pop(),
+              routemaster.push('/home/terms')
+            },
           ),
           _drawerLabel(
-            icon: Icons.info,
+            icon: Icons.info_outlined,
             labelText: 'インフォメーション',
-            onTap: () => routemaster.push('/home/about_us'),
+            onTap: () => {
+              routemaster.pop(),
+              routemaster.push('/home/about_us')
+            },
           ),
           _drawerLabel(
-            icon: Icons.help,
+            icon: Icons.help_outlined,
             labelText: 'ヘルプ',
-            onTap: () => routemaster.push('/home/help'),
+            onTap: () => {
+              routemaster.pop(),
+              routemaster.push('/home/help')
+            },
           ),
           _drawerLabel(
-            icon: Icons.lock,
+            icon: Icons.lock_outlined,
             labelText: 'ライセンス情報',
-            onTap: () => routemaster.push('/license'),
+            onTap: () => {
+              routemaster.pop(),
+              routemaster.push('/license')
+            },
           ),
         ],
       ),
@@ -82,12 +95,20 @@ class DailyDrawer extends StatelessWidget {
   }) {
     return GestureDetector(
         child: Container(
-          padding: const EdgeInsets.only(left: 30, top: 20, bottom: 20),
+          padding: const EdgeInsets.only(
+              left: PaddingSize.buttonHorizontal,
+              top: PaddingSize.normal,
+              bottom: PaddingSize.normal,
+          ),
           child: Row(
             children: <Widget>[
-              Icon(icon, size: 25,),
-              const SizedBox(width: 20),
-              Text(labelText, style: const TextStyle(fontSize: 16)),
+              Icon(
+                icon,
+                size: IconSize.drawer,
+                color: AppColor.brand.secondary,
+              ),
+              const SizedBox(width: MarginSize.minimum),
+              Text(labelText, style: const TextStyle(fontSize: FontSize.body)),
             ],
           ),
         ),

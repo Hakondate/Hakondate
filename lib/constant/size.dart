@@ -29,6 +29,7 @@ class PaddingSize {
 
 class IconSize {
   static const double help = 20.0;            // ヘルプ用
+  static const double drawer = 24.0;          // ドロワー用
   static const double navigationItem = 30.0;  // ボトムバー用
   static const double homeFoodIcon = 40;      // ホームのフードアイコン用
 }
