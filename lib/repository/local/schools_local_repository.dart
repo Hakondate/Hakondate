@@ -1,9 +1,8 @@
+import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/repository/local/database_manager.dart';
-
-import 'package:drift/drift.dart';
 
 final schoolsLocalRepositoryProvider = Provider<SchoolsLocalRepository>((ref) {
   final DatabaseManager databaseManager = ref.read(databaseManagerProvider);

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:hakondate/router/routes.dart';
-import 'package:hakondate/state/splash/splash_state.dart';
-import 'package:hakondate/repository/local/schools_local_repository.dart';
-import 'package:hakondate/repository/remote/schools_remote_repository.dart';
 import 'package:hakondate/repository/local/menus_local_repository.dart';
+import 'package:hakondate/repository/local/schools_local_repository.dart';
 import 'package:hakondate/repository/remote/menus_remote_repository.dart';
 import 'package:hakondate/view/component/dialog/hakondate_dialog/hakondate_dialog.dart';
+import 'package:hakondate/repository/remote/schools_remote_repository.dart';
+import 'package:hakondate/router/routes.dart';
+import 'package:hakondate/state/splash/splash_state.dart';
 import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 import 'package:hakondate/view_model/single_page/daily_view_model.dart';
 import 'package:hakondate/view_model/single_page/signup_view_model.dart';
@@ -129,6 +130,7 @@ class SplashViewModel extends StateNotifier<SplashState> {
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
       await showDialog(
         context: context,
+        barrierDismissible: false,
         builder: (BuildContext context) {
           return HakondateDialog(
             title: const Text('通信エラー'),

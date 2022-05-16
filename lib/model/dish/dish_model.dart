@@ -3,27 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hakondate/model/foodstuff/foodstuff_model.dart';
 
 part 'dish_model.freezed.dart';
-
-enum DishCategory {
-  main,
-  drink,
-  side,
-}
-
-extension DishModelExtension on DishCategory? {
-  String getValue() {
-    switch (this) {
-      case DishCategory.main:
-        return 'main';
-      case DishCategory.drink:
-        return 'drink';
-      case DishCategory.side:
-        return 'side';
-      default:
-        return 'side';
-    }
-  }
-}
+part 'dish_category.dart';
 
 @freezed
 class DishModel with _$DishModel {

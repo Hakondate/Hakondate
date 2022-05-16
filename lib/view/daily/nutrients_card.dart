@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:multi_charts/multi_charts.dart';
 
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
+import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:hakondate/view/component/label/nutrients_list.dart';
-import 'package:hakondate/view_model/single_page/daily_view_model.dart';
 import 'package:hakondate/view_model/multi_page/user_view_model.dart';
+import 'package:hakondate/view_model/single_page/daily_view_model.dart';
 
 class NutrientsCard extends StatelessWidget {
   const NutrientsCard({Key? key}) : super(key: key);

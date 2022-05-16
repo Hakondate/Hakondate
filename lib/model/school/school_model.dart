@@ -1,11 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'school_model.freezed.dart';
-
-enum SchoolClassification {
-  primary,    // 小学校
-  secondary,  // 中学校
-}
+part 'school_classification.dart';
 
 @freezed
 class SchoolModel with _$SchoolModel {
