@@ -193,7 +193,7 @@ class Signup extends StatelessWidget {
                   if (ref.read(signupProvider.notifier).checkValidation()) {
                     await showDialog(
                       context: context,
-                      builder: (BuildContext context) => confirmationDialog(),
+                      builder: (BuildContext context) => _confirmationDialog(),
                     );
                   }
                 },
@@ -205,7 +205,7 @@ class Signup extends StatelessWidget {
     );
   }
 
-  Widget confirmationDialog() {
+  Widget _confirmationDialog() {
     return Builder(
       builder: (context) {
         return HakondateDialog(
