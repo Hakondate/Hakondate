@@ -10,7 +10,7 @@ import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/repository/remote/firebase_options.dart';
 import 'package:hakondate/router/routes.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
