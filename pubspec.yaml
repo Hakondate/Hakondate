@@ -38,6 +38,8 @@ dependencies:
 
   # 遷移関連
   routemaster: ^0.10.0-dev5
+
+  # Firebase関連
   firebase_core: ^1.17.0
 
 dev_dependencies:
