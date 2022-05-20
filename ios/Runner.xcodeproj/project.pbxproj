@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
+		3560445B283767B9003C4122 /* firebase_app_id_file.json in Resources */ = {isa = PBXBuildFile; fileRef = 3560445A283767B9003C4122 /* firebase_app_id_file.json */; };
 		35C5D4D5281454EE00EABFA0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 35C5D4D4281454EE00EABFA0 /* GoogleService-Info.plist */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
 		5C05CD5EB2CAB98D07BDB3B0 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78FC91986F52CC62EFB5DD0 /* Pods_Runner.framework */; };
@@ -34,6 +35,7 @@
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
 		2ADE36256992A6253CCE1173 /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
+		3560445A283767B9003C4122 /* firebase_app_id_file.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = firebase_app_id_file.json; sourceTree = "<group>"; };
 		35C5D4D02814494900EABFA0 /* dev.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = dev.xcconfig; path = Flutter/dev.xcconfig; sourceTree = "<group>"; };
 		35C5D4D12814497B00EABFA0 /* stg.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = stg.xcconfig; path = Flutter/stg.xcconfig; sourceTree = "<group>"; };
 		35C5D4D2281449A300EABFA0 /* prod.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = prod.xcconfig; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 		97C146E51CF9000F007C117D = {
 			isa = PBXGroup;
 			children = (
+				3560445A283767B9003C4122 /* firebase_app_id_file.json */,
 				35C5D4D4281454EE00EABFA0 /* GoogleService-Info.plist */,
 				9740EEB11CF90186004384FC /* Flutter */,
 				97C146F01CF9000F007C117D /* Runner */,
@@ -200,6 +203,7 @@
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				35C5D4D5281454EE00EABFA0 /* GoogleService-Info.plist in Resources */,
+				3560445B283767B9003C4122 /* firebase_app_id_file.json in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
 			);
@@ -244,6 +248,7 @@
 			);
 			outputPaths = (
 				"$(SRCROOT)/GoogleService-Info.plist",
+				"$(SRCROOT)/firebase_app_id_file.json",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
