@@ -114,6 +114,7 @@ import_sorter:
   ignored_files:
     - \/lib\/*\/*.freezed.dart
     - \/lib\/*\/*.g.dart
+    - \/lib\/*\/firebase_options.dart
 
   # 実行コマンド
   # flutter pub run import_sorter:main
