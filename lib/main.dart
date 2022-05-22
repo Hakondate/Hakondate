@@ -26,7 +26,7 @@ class Hakondate extends StatelessWidget {
     final ThemeData theme = ThemeData(
       appBarTheme: Theme.of(context).appBarTheme.copyWith(
         titleTextStyle: TextStyle(
-          color: AppColor.text.primary,
+          color: AppColor.text.appBarTitle,
           fontSize: 20,
           fontWeight: FontWeight.bold,
         ),
