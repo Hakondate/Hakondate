@@ -434,8 +434,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.1"
-<<<<<<< HEAD
-=======
   path_drawing:
     dependency: transitive
     description:
@@ -450,7 +448,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
->>>>>>> develop
   path_provider:
     dependency: "direct main"
     description:
