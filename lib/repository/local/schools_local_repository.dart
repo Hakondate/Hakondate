@@ -14,6 +14,7 @@ abstract class SchoolsLocalRepositoryBase {
   Future<List<SchoolModel>> getAll();
   Future<SchoolModel> getById(int id);
   Future<int> add(Map<String, dynamic> school);
+  Future<DateTime> getLatestUpdateDay();
 }
 
 class SchoolsLocalRepository extends SchoolsLocalRepositoryBase {
@@ -71,13 +72,22 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryBase {
   }
 
   @override
-  Future<int> add(Map<String, dynamic> school) =>
-      _db.into(_db.schoolsTable).insertOnConflictUpdate(
-        SchoolsTableCompanion(
-          id: Value(school['id']),
-          parentId: Value(school['parentId']),
-          name: Value(school['name']),
-          lunchBlock: Value(school['lunchBlock']),
-          classification: Value(school['classification']),
-        ));
+  Future<int> add(Map<String, dynamic> school) => _db.into(_db.schoolsTable).insertOnConflictUpdate(
+      SchoolsTableCompanion(
+        id: Value(school['id']),
+        parentId: Value(school['parentId']),
+        name: Value(school['name']),
+        lunchBlock: Value(school['lunchBlock']),
+        classification: Value(school['classification']),
+        updateAt: Value(DateTime.now()),
+      ));
+
+  @override
+  Future<DateTime> getLatestUpdateDay() async {
+    final Expression<DateTime> exp = _db.schoolsTable.updateAt.max();
+    final query = _db.selectOnly(_db.schoolsTable)..addColumns([exp]);
+    final DateTime? day = await query.map((scheme) => scheme.read(exp)).getSingleOrNull();
+
+    return day ?? DateTime(1970);
+  }
 }
