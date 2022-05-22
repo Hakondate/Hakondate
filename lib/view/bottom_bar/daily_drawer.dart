@@ -13,28 +13,25 @@ class DailyDrawer extends StatelessWidget {
         child: SafeArea(
           top: false,
           child: Column(
-            children: <Widget>[
-               Container(
-                 decoration: const BoxDecoration(
-                   image: DecorationImage(
-                     fit: BoxFit.cover,
-                     image: AssetImage('assets/images/icon.png'),
-                   ),
-                 ),
+            children: [
+              Image.asset(
+                'assets/images/icon.png',
+                fit: BoxFit.cover,
                 width: double.infinity,
                 height: 200,
               ),
-              _bodyWidget(),
+              _pageListWidget(),
             ],
           ),
         ),
     );
   }
 
-  Widget _bodyWidget() {
+  Widget _pageListWidget() {
     return SingleChildScrollView(
       child: Column(
         children: [
+          const SizedBox(height: SpaceSize.paragraph),
           _drawerLabel(
             icon: Icons.account_circle_outlined,
             labelText: 'ユーザー情報',
@@ -51,8 +48,12 @@ class DailyDrawer extends StatelessWidget {
               routemaster.push('/home/origin')
             },
           ),
+          Divider(
+            color: AppColor.text.gray,
+            height: SpaceSize.paragraph*2,
+          ),
           _drawerLabel(
-            icon: Icons.gavel_outlined,
+            icon: Icons.description_outlined,
             labelText: '利用規約',
             onTap: () => {
               routemaster.pop(),
@@ -76,11 +77,11 @@ class DailyDrawer extends StatelessWidget {
             },
           ),
           _drawerLabel(
-            icon: Icons.lock_outlined,
+            icon: Icons.credit_card_outlined,
             labelText: 'ライセンス情報',
             onTap: () => {
               routemaster.pop(),
-              routemaster.push('/license')
+              routemaster.push('home/license')
             },
           ),
         ],
@@ -101,7 +102,7 @@ class DailyDrawer extends StatelessWidget {
               bottom: PaddingSize.normal,
           ),
           child: Row(
-            children: <Widget>[
+            children: [
               Icon(
                 icon,
                 size: IconSize.drawer,

@@ -15,7 +15,7 @@ final routemaster = RoutemasterDelegate(
     onUnknownRoute: (_) => const Redirect('/splash'),
     routes: {
       '/splash': (_) => const MaterialPage(child: Splash()),
-      '/home/terms': (_) => const MaterialPage(child: Terms()),
+      '/terms': (_) => const MaterialPage(child: Terms()),
       '/signup': (_) => MaterialPage(child: Signup()),
       '/home': (_) => const CupertinoTabPage(
         child: AppBottomNavigationBar(),
