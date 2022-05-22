@@ -18,6 +18,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   multi_charts: ^0.3.0
   table_calendar: ^3.0.4
+  flutter_svg: ^1.0.3
 
   # 状態管理関連
   flutter_riverpod: ^1.0.0-dev.5
@@ -68,6 +69,7 @@ flutter:
     - assets/images/label/
     - assets/images/menu_status/
     - assets/loading_animation/
+    - assets/svgs/bottom_navigation_bar_icons/
 
   fonts:
     - family: MPLUSRounded1c

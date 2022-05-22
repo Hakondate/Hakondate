@@ -17,11 +17,12 @@ final routemaster = RoutemasterDelegate(
       '/splash': (_) => const MaterialPage(child: Splash()),
       '/terms': (_) => const MaterialPage(child: Terms()),
       '/signup': (_) => MaterialPage(child: Signup()),
-      '/home': (_) => const CupertinoTabPage(
+      '/home': (_) => const TabPage(
         child: AppBottomNavigationBar(),
         paths: [
           '/home/daily',
           '/home/recipes',
+          '/home/dictionary',
           '/home/letters',
         ],
       ),
@@ -29,6 +30,7 @@ final routemaster = RoutemasterDelegate(
       '/home/daily/dish': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
       '/home/calendar': (_) => const FadeUpPage(child: Calendar()),
       '/home/recipes': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
+      '/home/dictionary': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
       '/home/letters': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
       '/setting': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
       '/about_us': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
