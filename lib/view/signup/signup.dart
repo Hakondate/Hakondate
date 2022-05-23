@@ -1,10 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
+
+import 'package:hakondate/view/component/dialog/hakondate_dialog/hakondate_dialog.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/view/component/dialog/help_dialog.dart';
 import 'package:hakondate/view/component/label/setting_label.dart';
@@ -20,67 +21,76 @@ class Signup extends StatelessWidget {
     await showDialog(
       context: context,
       builder: (BuildContext context) {
-        return CupertinoAlertDialog(
+        return HakondateDialog(
           title: const Text('確認'),
-          content: Column(
-            children: [
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: MarginSize.minimum),
-                child: const Text(
-                  '以下の内容でお子様を登録します．\n'
-                  '※ あとで変更することができます．',
+          body: Padding(
+            padding: const EdgeInsets.all(PaddingSize.normal),
+            child: Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: MarginSize.minimum),
+                  child: const Text(
+                    '以下の内容でお子様を登録します\n'
+                        '※ あとで変更することができます',
+                  ),
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: const [
-                      Text('お名前：　'),
-                      Text('学校：　'),
-                      Text('学年：　'),
+                DefaultTextStyle(
+                  style: TextStyle(
+                    color: AppColor.brand.secondary,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16.0,
+                    height: 1.4,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: const [
+                          Text('お名前：　'),
+                          Text('学校：　'),
+                          Text('学年：　'),
+                        ],
+                      ),
+                      Consumer(
+                          builder: (BuildContext context, WidgetRef ref, _) {
+                            final store = ref.watch(signupProvider);
+
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(store.name!),
+                                Text(store.schoolTrailing),
+                                Text(store.schoolYearTrailing),
+                              ],
+                            );
+                          }
+                      ),
                     ],
                   ),
-                  Consumer(
-                    builder: (BuildContext context, WidgetRef ref, _) {
-                      final store = ref.watch(signupProvider);
-
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(store.name!),
-                          Text(store.schoolTrailing),
-                          Text(store.schoolYearTrailing),
-                        ],
-                      );
-                    }
-                  ),
-                ],
-              ),
-            ],
+                ),
+              ],
+            ),
           ),
-          actions: [
-            CupertinoDialogAction(
-              child: const Text('修正する'),
-              onPressed: () => routemaster.pop(),
-            ),
-            CupertinoDialogAction(
-              isDefaultAction: true,
-              child: const Text('登録する'),
-              onPressed: () async {
-                routemaster.pop();
-                await showGeneralDialog(
-                  context: context,
-                  barrierDismissible: false,
-                  barrierColor: Colors.black.withOpacity(0.5),
-                  pageBuilder: (_, __, ___) {
-                    return const LoadingAnimationWidget(isSplash: false);
-                  },
-                );
-              },
-            ),
-          ],
+          firstAction: HakondateActionButton(
+            text: const Text('登録する'),
+            isPrimary: true,
+            onTap: () async {
+              routemaster.pop();
+              await showGeneralDialog(
+                context: context,
+                barrierDismissible: false,
+                barrierColor: Colors.black.withOpacity(0.5),
+                pageBuilder: (_, __, ___) {
+                  return const LoadingAnimationWidget(isSplash: false);
+                },
+              );
+            },
+          ),
+          secondAction: HakondateActionButton(
+            text: const Text('修正する'),
+            onTap: () => routemaster.pop(),
+          ),
         );
       },
     );
