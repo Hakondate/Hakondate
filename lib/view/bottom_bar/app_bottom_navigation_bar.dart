@@ -62,6 +62,7 @@ class AppBottomNavigationBar extends ConsumerWidget {
           ),
         ],
       ),
+      drawerEnableOpenDragGesture: false,
       drawer: const DailyDrawer(),
     );
   }

@@ -25,6 +25,7 @@ class PaddingSize {
   static const double content = 32.0;           // ラベル内の左右余白など
   static const double buttonVertical = 5.0;     // ボタンの水平方向の基本マージン
   static const double buttonHorizontal = 25.0;  // ボタンの垂直方向の基本マージン
+  static const double buttonHorizontalLarge = 30.0;  // ボタンの垂直方向の大きなマージン
 }
 
 class IconSize {
