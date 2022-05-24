@@ -1,6 +1,6 @@
 part of 'splash_state.dart';
 
-enum LoadingStatus{
+enum LoadingStatus {
   unloading,
   reading,
   checkingUpdate,

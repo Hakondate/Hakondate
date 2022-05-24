@@ -259,9 +259,8 @@ class Signup extends StatelessWidget {
               ],
             ),
           ),
-          firstAction: HakondateActionButton(
+          firstAction: HakondateActionButton.primary(
             text: const Text('登録する'),
-            isPrimary: true,
             onTap: () async {
               routemaster.pop();
               await showGeneralDialog(

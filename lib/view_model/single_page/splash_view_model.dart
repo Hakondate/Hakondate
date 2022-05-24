@@ -11,7 +11,12 @@ import 'package:hakondate/repository/remote/menus_remote_repository.dart';
 import 'package:hakondate/repository/remote/schools_remote_repository.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/splash/splash_state.dart';
-import 'package:hakondate/view/component/dialog/hakondate_dialog/hakondate_dialog.dart';
+import 'package:hakondate/util/app_unique_key.dart';
+import 'package:hakondate/util/exception/connection_exception.dart';
+import 'package:hakondate/view/component/dialog/exception_dialog/connection_exception_dialog.dart';
+import 'package:hakondate/view/component/dialog/exception_dialog/local_database_exception_dialog.dart';
+import 'package:hakondate/view/splash/terms_updated_dialog.dart';
+import 'package:hakondate/view_model/multi_page/common_function.dart';
 import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 import 'package:hakondate/view_model/single_page/daily_view_model.dart';
 import 'package:hakondate/view_model/single_page/signup_view_model.dart';
@@ -37,7 +42,7 @@ class SplashViewModel extends StateNotifier<SplashState> {
       this._schoolsRemoteRepository,
       this._menusLocalRepository,
       this._menusRemoteRepository,
-      ) : super(const SplashState());
+      ) : super(SplashState());
 
   final Reader _reader;
   final SchoolsLocalRepository _schoolsLocalRepository;
@@ -46,11 +51,12 @@ class SplashViewModel extends StateNotifier<SplashState> {
   final MenusRemoteRepository _menusRemoteRepository;
 
   Future<void> loadSplash(BuildContext context) async {
-    state = state.copyWith(loadingStatus: LoadingStatus.reading);
+    state = SplashState(status: LoadingStatus.reading);
     try {
       await _initializeSchool();
+      state = SplashState(status: LoadingStatus.reading);
 
-      if (!await _reader(userProvider.notifier).checkSignedUp()) {
+      if (!await _reader(userProvider.notifier).signIn()) {
         return routemaster.replace('/terms');
       }
 
@@ -62,32 +68,29 @@ class SplashViewModel extends StateNotifier<SplashState> {
         return await showDialog(
           context: context,
           barrierDismissible: false,
-          builder: (BuildContext context) => HakondateDialog(
-            title: const Text('お知らせ'),
-            body: const Text('利用規約が更新されました\n本サービスを利用するためには再度同意していただく必要があります'),
-            firstAction: HakondateActionButton(
-              text: const Text('利用規約を見る'),
-              isPrimary: true,
-              onTap: () {
-                routemaster.pop();
-                routemaster.replace('/terms');
-              },
-            ),
+          builder: (_) => TermsUpdatedDialog(
+            onTap: () {
+              routemaster.pop();
+              routemaster.replace('/terms');
+            },
           ),
         );
       }
 
       await _initializeMenus();
       routemaster.replace('/home');
-      state = state.copyWith(loadingStatus: LoadingStatus.unloading);
-    } catch (error) {
-      await _handleError(error, context);
+      state = SplashState(status: LoadingStatus.unloading);
+    } on Exception catch (error, stack) {
+      debugPrint(error.toString());
+      debugPrint(stack.toString());
+      state = SplashState.error(error: error);
+      await _showErrorDialog(context);
     }
   }
 
   Future<void> loadSignup(BuildContext context) async {
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
-      state = state.copyWith(loadingStatus: LoadingStatus.updating);
+      state = SplashState(status: LoadingStatus.updating);
       try {
         await _reader(userProvider.notifier).createUser(
           name: _reader(signupProvider.notifier).state.name!,
@@ -96,39 +99,40 @@ class SplashViewModel extends StateNotifier<SplashState> {
         );
         await _initializeMenus();
         routemaster.replace('/home');
-        state = state.copyWith(loadingStatus: LoadingStatus.unloading);
-      } catch (error) {
-        await _handleError(error, context);
+        state = SplashState(status: LoadingStatus.unloading);
+      } on Exception catch (error, stack) {
+        debugPrint(error.toString());
+        debugPrint(stack.toString());
+        state = SplashState.error(error: error);
+        await _showErrorDialog(context);
       }
     });
   }
 
   Future<void> _initializeSchool() async {
     List<dynamic> schools = [];
-    state = state.copyWith(loadingStatus: LoadingStatus.checkingUpdate);
+    state = SplashState(status: LoadingStatus.checkingUpdate);
 
     if (await _schoolsLocalRepository.count() == 0) {
-      state = state.copyWith(loadingStatus: LoadingStatus.updating);
+      state = SplashState(status: LoadingStatus.updating);
       schools = await _schoolsRemoteRepository.downloadAllSchool();
     } else if (await _schoolsRemoteRepository.checkUpdate()) {
-      state = state.copyWith(loadingStatus: LoadingStatus.updating);
+      state = SplashState(status: LoadingStatus.updating);
       schools = await _schoolsRemoteRepository.downloadUpdate();
     }
 
     await Future.forEach(schools, (dynamic school) async {
       await _schoolsLocalRepository.add(school);
     });
-
-    state = state.copyWith(loadingStatus: LoadingStatus.reading);
   }
 
   Future<void> _initializeMenus() async {
-    final int schoolId =
-        _reader(userProvider.notifier).state.currentUser!.schoolId;
-    state = state.copyWith(loadingStatus: LoadingStatus.checkingUpdate);
+    state = SplashState(status: LoadingStatus.checkingUpdate);
+    final int schoolId = _reader(userProvider.notifier).state.currentUser!.schoolId;
+    final int parentId = await _reader(commonFunctionProvider.notifier).getParentId(schoolId);
 
-    if (await _menusRemoteRepository.checkUpdate(schoolId)) {
-      state = state.copyWith(loadingStatus: LoadingStatus.updating);
+    if (await _menusRemoteRepository.checkUpdate(parentId)) {
+      state = SplashState(status: LoadingStatus.updating);
       List<dynamic> menus = await _menusRemoteRepository.downloadMenus();
 
       await Future.forEach(menus, (dynamic menu) async {
@@ -137,58 +141,36 @@ class SplashViewModel extends StateNotifier<SplashState> {
     }
 
     await _reader(dailyProvider.notifier).updateSelectedDay();
-    state = state.copyWith(loadingStatus: LoadingStatus.reading);
-  }
-
-  Future<void> _handleError(Object error, BuildContext context) async {
-    debugPrint(error.toString());
-
-    if (!state.isErrorOccurring) {
-      state = state.copyWith(isErrorOccurring: true);
-      await _showErrorDialog(context);
-      state = state.copyWith(
-        loadingStatus: LoadingStatus.unloading,
-        isErrorOccurring: false,
-      );
-    }
+    state = SplashState(status: LoadingStatus.reading);
   }
 
   Future<void> _showErrorDialog(BuildContext context) async {
-    WidgetsBinding.instance!.addPostFrameCallback((_) async {
-      await showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return HakondateDialog(
-            title: const Text('通信エラー'),
-            body: const Text('データの更新に失敗しました．データの更新をせず利用する場合は"このまま利用"を選択してください．'),
-            firstAction: HakondateActionButton(
-              isPrimary: true,
-              text: const Text('リトライ'),
-              onTap: () {
-                routemaster.pop();
-                loadSplash(context);
-              },
-            ),
-            secondAction: HakondateActionButton(
-              text: const Text('このまま利用'),
-              onTap: () async {
-                await _useAsIs();
-                routemaster.pop();
-              },
-            ),
-          );
-        },
-      );
-    });
-  }
+    final SplashState cache = state;
 
-  Future<void> _useAsIs() async {
-    if (await _reader(userProvider.notifier).checkSignedUp()) {
-      await _reader(dailyProvider.notifier).updateSelectedDay();
-      routemaster.replace('/home');
-    } else {
-      routemaster.replace('/terms');
-    }
+    if (cache is! SplashStateError) return;
+
+    await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        if (cache.error is ConnectionException) {
+          return ConnectionExceptionDialog(
+            onTapRetry: () {
+              routemaster.pop();
+              state = SplashState();
+              _reader(appUniqueKeyProvider.notifier).restartApp();
+            },
+          );
+        }
+
+        return LocalDatabaseExceptionDialog(
+          onTapRetry: () {
+            routemaster.pop();
+            state = SplashState();
+            _reader(appUniqueKeyProvider.notifier).restartApp();
+          },
+        );
+      },
+    );
   }
 }

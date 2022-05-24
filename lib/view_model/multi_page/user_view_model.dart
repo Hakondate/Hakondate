@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,6 +13,7 @@ import 'package:hakondate/model/user/user_model.dart';
 import 'package:hakondate/repository/local/schools_local_repository.dart';
 import 'package:hakondate/repository/local/users_local_repository.dart';
 import 'package:hakondate/state/user/user_state.dart';
+import 'package:hakondate/util/exception/shared_preferences_exception.dart';
 
 final userProvider = StateNotifierProvider<UserViewModel, UserState>((ref) {
   final UsersLocalRepository usersLocalRepository = ref.read(usersLocalRepositoryProvider);
@@ -28,47 +28,40 @@ class UserViewModel extends StateNotifier<UserState> {
   final SchoolsLocalRepository _schoolsLocalRepository;
   final UsersLocalRepository _usersLocalRepository;
 
-  Future<bool> checkSignedUp() async {
-    try {
-      if (await _usersLocalRepository.count() == 0) return false;
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      final int _currentUserId = prefs.getInt(AppKey.sharedPreferencesKey.currentUserId) ?? 1;
-      await _setCurrentUser(_currentUserId);
+  Future<bool> signIn() async {
+    if (await _usersLocalRepository.count() == 0) return false;
 
-      return true;
-    } catch (error) {
-      debugPrint('Failed to load user data.');
-      debugPrint(error.toString());
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final int? currentUserId = prefs.getInt(AppKey.sharedPreferencesKey.currentUserId);
 
-      return false;
+    if (currentUserId == null) {
+      throw SharedPreferencesException('Failed to get ${AppKey.sharedPreferencesKey.currentUserId} value');
     }
+
+    await changeCurrentUser(currentUserId, isSetPrefs: false);
+
+    return true;
   }
 
-  Future<bool> changeCurrentUser(int id) async {
-    try {
-      await _setCurrentUser(id);
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-
-      return await prefs.setInt(AppKey.sharedPreferencesKey.currentUserId, id);
-    } catch (error) {
-      debugPrint('Failed to change current user.');
-      debugPrint(error.toString());
-
-      return false;
-    }
-  }
-
-  Future<void> _setCurrentUser(int id) async {
+  Future<void> changeCurrentUser(int id, {bool isSetPrefs = true}) async {
     final UserModel user = await _usersLocalRepository.getById(id);
-    final NutrientsModel slns = await _getSLNS(user.schoolId);
+    final NutrientsModel slns = await _getSLNS(user.id);
+
+    if (isSetPrefs) {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setInt(AppKey.sharedPreferencesKey.currentUserId, id);
+    }
 
     state = state.copyWith(
       currentUser: user.copyWith(slns: slns),
     );
   }
 
-  Future<void> updateCurrentUser(
-      {String? name, int? schoolId, int? schoolYear}) async {
+  Future<void> updateCurrentUser({
+    String? name,
+    int? schoolId,
+    int? schoolYear,
+  }) async {
     if (state.currentUser == null) return;
     NutrientsModel? slns = (schoolId != null || schoolYear != null)
         ? await _getSLNS(state.currentUser!.id)
@@ -114,10 +107,10 @@ class UserViewModel extends StateNotifier<UserState> {
     required int schoolYear,
   }) async {
     final int id = await _usersLocalRepository.add(name, schoolId, schoolYear);
-    final SharedPreferences _prefs = await SharedPreferences.getInstance();
-    await _prefs.setInt(AppKey.sharedPreferencesKey.currentUserId, id);
-    await _setCurrentUser(id);
+    await changeCurrentUser(id);
 
     return id;
   }
+
+  void signOut() => state = state.copyWith(currentUser: null);
 }

@@ -14,6 +14,19 @@ class HakondateActionButton extends StatelessWidget {
   final Color? color;
   final bool isPrimary;
 
+  factory HakondateActionButton.primary({
+    Key? key,
+    required Widget text,
+    Function()? onTap,
+    Color? color,
+  }) => HakondateActionButton(
+    key: key,
+    text: text,
+    onTap: onTap,
+    color: color,
+    isPrimary: true,
+  );
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
