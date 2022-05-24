@@ -131,14 +131,14 @@ class SplashViewModel extends StateNotifier<SplashState> {
     final int schoolId = _reader(userProvider.notifier).state.currentUser!.schoolId;
     final int parentId = await _reader(commonFunctionProvider.notifier).getParentId(schoolId);
 
-    if (await _menusRemoteRepository.checkUpdate(parentId)) {
-      state = SplashState(status: LoadingStatus.updating);
-      List<dynamic> menus = await _menusRemoteRepository.downloadMenus();
+    state = SplashState(status: LoadingStatus.updating);
+    List<dynamic> menus = await _menusRemoteRepository.get(
+      schoolId: parentId,
+    );
 
-      await Future.forEach(menus, (dynamic menu) async {
-        await _menusLocalRepository.add(menu);
-      });
-    }
+    await Future.forEach(menus, (dynamic menu) async {
+      await _menusLocalRepository.add(menu);
+    });
 
     await _reader(dailyProvider.notifier).updateSelectedDay();
     state = SplashState(status: LoadingStatus.reading);

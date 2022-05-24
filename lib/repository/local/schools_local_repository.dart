@@ -2,12 +2,12 @@ import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/model/school/school_model.dart';
-import 'package:hakondate/repository/local/database_manager.dart';
+import 'package:hakondate/repository/local/local_database.dart';
 import 'package:hakondate/util/exception/sqlite_exception.dart';
 
 final schoolsLocalRepositoryProvider = Provider<SchoolsLocalRepository>((ref) {
-  final DatabaseManager databaseManager = ref.read(databaseManagerProvider);
-  return SchoolsLocalRepository(databaseManager);
+  final LocalDatabase localDatabase = ref.read(localDatabaseProvider);
+  return SchoolsLocalRepository(localDatabase);
 });
 
 abstract class SchoolsLocalRepositoryBase {
@@ -21,7 +21,7 @@ abstract class SchoolsLocalRepositoryBase {
 class SchoolsLocalRepository extends SchoolsLocalRepositoryBase {
   SchoolsLocalRepository(this._db) : super();
 
-  final DatabaseManager _db;
+  final LocalDatabase _db;
 
   @override
   Future<int> count() async {

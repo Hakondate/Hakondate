@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'database_manager.dart';
+part of 'local_database.dart';
 
 // **************************************************************************
 // MoorGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps, unnecessary_this
+// ignore_for_file: type=lint
 class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
   final int id;
   final int parentId;
@@ -2441,8 +2441,8 @@ class $UsersTableTable extends UsersTable
   }
 }
 
-abstract class _$DatabaseManager extends GeneratedDatabase {
-  _$DatabaseManager(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
+abstract class _$LocalDatabase extends GeneratedDatabase {
+  _$LocalDatabase(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
   late final $SchoolsTableTable schoolsTable = $SchoolsTableTable(this);
   late final $MenusTableTable menusTable = $MenusTableTable(this);
   late final $MenuDishesTableTable menuDishesTable =

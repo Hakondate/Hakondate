@@ -82,11 +82,11 @@ class _$SchoolModelCopyWithImpl<$Res> implements $SchoolModelCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$SchoolModelCopyWith<$Res>
+abstract class _$$_SchoolModelCopyWith<$Res>
     implements $SchoolModelCopyWith<$Res> {
-  factory _$SchoolModelCopyWith(
-          _SchoolModel value, $Res Function(_SchoolModel) then) =
-      __$SchoolModelCopyWithImpl<$Res>;
+  factory _$$_SchoolModelCopyWith(
+          _$_SchoolModel value, $Res Function(_$_SchoolModel) then) =
+      __$$_SchoolModelCopyWithImpl<$Res>;
   @override
   $Res call(
       {int id,
@@ -97,14 +97,14 @@ abstract class _$SchoolModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$SchoolModelCopyWithImpl<$Res> extends _$SchoolModelCopyWithImpl<$Res>
-    implements _$SchoolModelCopyWith<$Res> {
-  __$SchoolModelCopyWithImpl(
-      _SchoolModel _value, $Res Function(_SchoolModel) _then)
-      : super(_value, (v) => _then(v as _SchoolModel));
+class __$$_SchoolModelCopyWithImpl<$Res> extends _$SchoolModelCopyWithImpl<$Res>
+    implements _$$_SchoolModelCopyWith<$Res> {
+  __$$_SchoolModelCopyWithImpl(
+      _$_SchoolModel _value, $Res Function(_$_SchoolModel) _then)
+      : super(_value, (v) => _then(v as _$_SchoolModel));
 
   @override
-  _SchoolModel get _value => super._value as _SchoolModel;
+  _$_SchoolModel get _value => super._value as _$_SchoolModel;
 
   @override
   $Res call({
@@ -114,7 +114,7 @@ class __$SchoolModelCopyWithImpl<$Res> extends _$SchoolModelCopyWithImpl<$Res>
     Object? lunchBlock = freezed,
     Object? classification = freezed,
   }) {
-    return _then(_SchoolModel(
+    return _then(_$_SchoolModel(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -173,7 +173,7 @@ class _$_SchoolModel implements _SchoolModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _SchoolModel &&
+            other is _$_SchoolModel &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.parentId, parentId) &&
             const DeepCollectionEquality().equals(other.name, name) &&
@@ -194,8 +194,8 @@ class _$_SchoolModel implements _SchoolModel {
 
   @JsonKey(ignore: true)
   @override
-  _$SchoolModelCopyWith<_SchoolModel> get copyWith =>
-      __$SchoolModelCopyWithImpl<_SchoolModel>(this, _$identity);
+  _$$_SchoolModelCopyWith<_$_SchoolModel> get copyWith =>
+      __$$_SchoolModelCopyWithImpl<_$_SchoolModel>(this, _$identity);
 }
 
 abstract class _SchoolModel implements SchoolModel {
@@ -218,6 +218,6 @@ abstract class _SchoolModel implements SchoolModel {
   SchoolClassification get classification => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$SchoolModelCopyWith<_SchoolModel> get copyWith =>
+  _$$_SchoolModelCopyWith<_$_SchoolModel> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -6,13 +6,13 @@ import 'package:hakondate/model/foodstuff/foodstuff_model.dart';
 import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:hakondate/model/nutrients/nutrients_model.dart';
 import 'package:hakondate/model/quantity/quantity_model.dart';
-import 'package:hakondate/repository/local/database_manager.dart';
+import 'package:hakondate/repository/local/local_database.dart';
 import 'package:hakondate/view_model/multi_page/common_function.dart';
 
 final menusLocalRepositoryProvider = Provider<MenusLocalRepository>((ref) {
-  final DatabaseManager databaseManager = ref.read(databaseManagerProvider);
+  final LocalDatabase localDatabase = ref.read(localDatabaseProvider);
   final CommonFunction commonFunction = ref.read(commonFunctionProvider.notifier);
-  return MenusLocalRepository(databaseManager, commonFunction);
+  return MenusLocalRepository(localDatabase, commonFunction);
 });
 
 abstract class MenusLocalRepositoryBase {
@@ -26,7 +26,7 @@ abstract class MenusLocalRepositoryBase {
 class MenusLocalRepository extends MenusLocalRepositoryBase {
   MenusLocalRepository(this._db, this._commonFunction) : super();
 
-  final DatabaseManager _db;
+  final LocalDatabase _db;
   final CommonFunction _commonFunction;
 
   @override
@@ -220,6 +220,8 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
   }
 
   Future<DateTime> _getOldestDay() async {
+    if (await _count() == 0) return DateTime.now();
+
     final Expression<DateTime> exp = _db.menusTable.day.min();
     final query = _db.selectOnly(_db.menusTable)..addColumns([exp]);
 
@@ -227,6 +229,8 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
   }
 
   Future<DateTime> _getLatestDay() async {
+    if (await _count() == 0) return DateTime.now();
+
     final Expression<DateTime> exp = _db.menusTable.day.max();
     final query = _db.selectOnly(_db.menusTable)..addColumns([exp]);
 
@@ -332,6 +336,14 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
     final DateTime? day = await query.map((scheme) => scheme.read(exp)).getSingleOrNull();
 
     return day ?? DateTime(1970);
+  }
+
+  Future<int> _count() async {
+    final Expression<int> exp = _db.menusTable.id.count();
+    final query = _db.selectOnly(_db.menusTable)..addColumns([exp]);
+    final int? count = await query.map((scheme) => scheme.read(exp)).getSingleOrNull();
+
+    return count ?? 0;
   }
 
   @override

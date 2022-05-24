@@ -110,11 +110,11 @@ class _$SignupStateCopyWithImpl<$Res> implements $SignupStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$SignupStateCopyWith<$Res>
+abstract class _$$_SignupStateCopyWith<$Res>
     implements $SignupStateCopyWith<$Res> {
-  factory _$SignupStateCopyWith(
-          _SignupState value, $Res Function(_SignupState) then) =
-      __$SignupStateCopyWithImpl<$Res>;
+  factory _$$_SignupStateCopyWith(
+          _$_SignupState value, $Res Function(_$_SignupState) then) =
+      __$$_SignupStateCopyWithImpl<$Res>;
   @override
   $Res call(
       {String? name,
@@ -129,14 +129,14 @@ abstract class _$SignupStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$SignupStateCopyWithImpl<$Res> extends _$SignupStateCopyWithImpl<$Res>
-    implements _$SignupStateCopyWith<$Res> {
-  __$SignupStateCopyWithImpl(
-      _SignupState _value, $Res Function(_SignupState) _then)
-      : super(_value, (v) => _then(v as _SignupState));
+class __$$_SignupStateCopyWithImpl<$Res> extends _$SignupStateCopyWithImpl<$Res>
+    implements _$$_SignupStateCopyWith<$Res> {
+  __$$_SignupStateCopyWithImpl(
+      _$_SignupState _value, $Res Function(_$_SignupState) _then)
+      : super(_value, (v) => _then(v as _$_SignupState));
 
   @override
-  _SignupState get _value => super._value as _SignupState;
+  _$_SignupState get _value => super._value as _$_SignupState;
 
   @override
   $Res call({
@@ -150,7 +150,7 @@ class __$SignupStateCopyWithImpl<$Res> extends _$SignupStateCopyWithImpl<$Res>
     Object? nameErrorState = freezed,
     Object? schoolErrorState = freezed,
   }) {
-    return _then(_SignupState(
+    return _then(_$_SignupState(
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -172,11 +172,11 @@ class __$SignupStateCopyWithImpl<$Res> extends _$SignupStateCopyWithImpl<$Res>
           : schoolYearTrailing // ignore: cast_nullable_to_non_nullable
               as String,
       schools: schools == freezed
-          ? _value.schools
+          ? _value._schools
           : schools // ignore: cast_nullable_to_non_nullable
               as List<SchoolModel>,
       schoolYears: schoolYears == freezed
-          ? _value.schoolYears
+          ? _value._schoolYears
           : schoolYears // ignore: cast_nullable_to_non_nullable
               as List<String>,
       nameErrorState: nameErrorState == freezed
@@ -265,7 +265,7 @@ class _$_SignupState with DiagnosticableTreeMixin implements _SignupState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _SignupState &&
+            other is _$_SignupState &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.schoolId, schoolId) &&
             const DeepCollectionEquality()
@@ -274,9 +274,9 @@ class _$_SignupState with DiagnosticableTreeMixin implements _SignupState {
                 .equals(other.schoolTrailing, schoolTrailing) &&
             const DeepCollectionEquality()
                 .equals(other.schoolYearTrailing, schoolYearTrailing) &&
-            const DeepCollectionEquality().equals(other.schools, schools) &&
+            const DeepCollectionEquality().equals(other._schools, _schools) &&
             const DeepCollectionEquality()
-                .equals(other.schoolYears, schoolYears) &&
+                .equals(other._schoolYears, _schoolYears) &&
             const DeepCollectionEquality()
                 .equals(other.nameErrorState, nameErrorState) &&
             const DeepCollectionEquality()
@@ -291,15 +291,15 @@ class _$_SignupState with DiagnosticableTreeMixin implements _SignupState {
       const DeepCollectionEquality().hash(schoolYear),
       const DeepCollectionEquality().hash(schoolTrailing),
       const DeepCollectionEquality().hash(schoolYearTrailing),
-      const DeepCollectionEquality().hash(schools),
-      const DeepCollectionEquality().hash(schoolYears),
+      const DeepCollectionEquality().hash(_schools),
+      const DeepCollectionEquality().hash(_schoolYears),
       const DeepCollectionEquality().hash(nameErrorState),
       const DeepCollectionEquality().hash(schoolErrorState));
 
   @JsonKey(ignore: true)
   @override
-  _$SignupStateCopyWith<_SignupState> get copyWith =>
-      __$SignupStateCopyWithImpl<_SignupState>(this, _$identity);
+  _$$_SignupStateCopyWith<_$_SignupState> get copyWith =>
+      __$$_SignupStateCopyWithImpl<_$_SignupState>(this, _$identity);
 }
 
 abstract class _SignupState implements SignupState {
@@ -334,6 +334,6 @@ abstract class _SignupState implements SignupState {
   String? get schoolErrorState => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$SignupStateCopyWith<_SignupState> get copyWith =>
+  _$$_SignupStateCopyWith<_$_SignupState> get copyWith =>
       throw _privateConstructorUsedError;
 }

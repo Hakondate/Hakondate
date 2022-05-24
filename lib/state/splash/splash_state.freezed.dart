@@ -73,29 +73,29 @@ class _$SplashStateCopyWithImpl<$Res> implements $SplashStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class $SplashStateLoadCopyWith<$Res> {
-  factory $SplashStateLoadCopyWith(
-          SplashStateLoad value, $Res Function(SplashStateLoad) then) =
-      _$SplashStateLoadCopyWithImpl<$Res>;
+abstract class _$$SplashStateLoadCopyWith<$Res> {
+  factory _$$SplashStateLoadCopyWith(
+          _$SplashStateLoad value, $Res Function(_$SplashStateLoad) then) =
+      __$$SplashStateLoadCopyWithImpl<$Res>;
   $Res call({LoadingStatus status});
 }
 
 /// @nodoc
-class _$SplashStateLoadCopyWithImpl<$Res>
+class __$$SplashStateLoadCopyWithImpl<$Res>
     extends _$SplashStateCopyWithImpl<$Res>
-    implements $SplashStateLoadCopyWith<$Res> {
-  _$SplashStateLoadCopyWithImpl(
-      SplashStateLoad _value, $Res Function(SplashStateLoad) _then)
-      : super(_value, (v) => _then(v as SplashStateLoad));
+    implements _$$SplashStateLoadCopyWith<$Res> {
+  __$$SplashStateLoadCopyWithImpl(
+      _$SplashStateLoad _value, $Res Function(_$SplashStateLoad) _then)
+      : super(_value, (v) => _then(v as _$SplashStateLoad));
 
   @override
-  SplashStateLoad get _value => super._value as SplashStateLoad;
+  _$SplashStateLoad get _value => super._value as _$SplashStateLoad;
 
   @override
   $Res call({
     Object? status = freezed,
   }) {
-    return _then(SplashStateLoad(
+    return _then(_$SplashStateLoad(
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -121,7 +121,7 @@ class _$SplashStateLoad implements SplashStateLoad {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is SplashStateLoad &&
+            other is _$SplashStateLoad &&
             const DeepCollectionEquality().equals(other.status, status));
   }
 
@@ -131,8 +131,8 @@ class _$SplashStateLoad implements SplashStateLoad {
 
   @JsonKey(ignore: true)
   @override
-  $SplashStateLoadCopyWith<SplashStateLoad> get copyWith =>
-      _$SplashStateLoadCopyWithImpl<SplashStateLoad>(this, _$identity);
+  _$$SplashStateLoadCopyWith<_$SplashStateLoad> get copyWith =>
+      __$$SplashStateLoadCopyWithImpl<_$SplashStateLoad>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -203,34 +203,34 @@ abstract class SplashStateLoad implements SplashState {
 
   LoadingStatus get status => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $SplashStateLoadCopyWith<SplashStateLoad> get copyWith =>
+  _$$SplashStateLoadCopyWith<_$SplashStateLoad> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SplashStateErrorCopyWith<$Res> {
-  factory $SplashStateErrorCopyWith(
-          SplashStateError value, $Res Function(SplashStateError) then) =
-      _$SplashStateErrorCopyWithImpl<$Res>;
+abstract class _$$SplashStateErrorCopyWith<$Res> {
+  factory _$$SplashStateErrorCopyWith(
+          _$SplashStateError value, $Res Function(_$SplashStateError) then) =
+      __$$SplashStateErrorCopyWithImpl<$Res>;
   $Res call({Exception error});
 }
 
 /// @nodoc
-class _$SplashStateErrorCopyWithImpl<$Res>
+class __$$SplashStateErrorCopyWithImpl<$Res>
     extends _$SplashStateCopyWithImpl<$Res>
-    implements $SplashStateErrorCopyWith<$Res> {
-  _$SplashStateErrorCopyWithImpl(
-      SplashStateError _value, $Res Function(SplashStateError) _then)
-      : super(_value, (v) => _then(v as SplashStateError));
+    implements _$$SplashStateErrorCopyWith<$Res> {
+  __$$SplashStateErrorCopyWithImpl(
+      _$SplashStateError _value, $Res Function(_$SplashStateError) _then)
+      : super(_value, (v) => _then(v as _$SplashStateError));
 
   @override
-  SplashStateError get _value => super._value as SplashStateError;
+  _$SplashStateError get _value => super._value as _$SplashStateError;
 
   @override
   $Res call({
     Object? error = freezed,
   }) {
-    return _then(SplashStateError(
+    return _then(_$SplashStateError(
       error: error == freezed
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -256,7 +256,7 @@ class _$SplashStateError implements SplashStateError {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is SplashStateError &&
+            other is _$SplashStateError &&
             const DeepCollectionEquality().equals(other.error, error));
   }
 
@@ -266,8 +266,8 @@ class _$SplashStateError implements SplashStateError {
 
   @JsonKey(ignore: true)
   @override
-  $SplashStateErrorCopyWith<SplashStateError> get copyWith =>
-      _$SplashStateErrorCopyWithImpl<SplashStateError>(this, _$identity);
+  _$$SplashStateErrorCopyWith<_$SplashStateError> get copyWith =>
+      __$$SplashStateErrorCopyWithImpl<_$SplashStateError>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -338,6 +338,6 @@ abstract class SplashStateError implements SplashState {
 
   Exception get error => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $SplashStateErrorCopyWith<SplashStateError> get copyWith =>
+  _$$SplashStateErrorCopyWith<_$SplashStateError> get copyWith =>
       throw _privateConstructorUsedError;
 }
