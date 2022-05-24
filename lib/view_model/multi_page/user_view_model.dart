@@ -78,22 +78,22 @@ class UserViewModel extends StateNotifier<UserState> {
   }
 
   Future<NutrientsModel> _getSLNS(int userId) async {
-    final SchoolGrade _schoolGrade = await _getSchoolGrade(userId);
-    final String _jsonSLNS = await rootBundle.loadString(_schoolGrade.slnsPath);
-    final Map<String, dynamic> _decodeSLNS = json.decode(_jsonSLNS);
+    final SchoolGrade schoolGrade = await _getSchoolGrade(userId);
+    final String jsonSLNS = await rootBundle.loadString(schoolGrade.slnsPath);
+    final Map<String, dynamic> decodeSLNS = json.decode(jsonSLNS);
 
-    return NutrientsModel.fromJson(_decodeSLNS);
+    return NutrientsModel.fromJson(decodeSLNS);
   }
 
   Future<SchoolGrade> _getSchoolGrade(int userId) async {
-    final UserModel _user = await _usersLocalRepository.getById(userId);
-    final SchoolModel _school = await _schoolsLocalRepository.getById(_user.schoolId);
-    if (_school.classification != SchoolClassification.secondary) {
-      if (_user.schoolYear <= 2) {
+    final UserModel user = await _usersLocalRepository.getById(userId);
+    final SchoolModel school = await _schoolsLocalRepository.getById(user.schoolId);
+    if (school.classification != SchoolClassification.secondary) {
+      if (user.schoolYear <= 2) {
         return SchoolGrade.lower;
-      } else if (_user.schoolYear <= 4) {
+      } else if (user.schoolYear <= 4) {
         return SchoolGrade.middle;
-      } else if (_user.schoolYear <= 6) {
+      } else if (user.schoolYear <= 6) {
         return SchoolGrade.upper;
       }
     }
