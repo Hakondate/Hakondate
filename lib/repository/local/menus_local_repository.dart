@@ -331,11 +331,12 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
 
   @override
   Future<DateTime> getLatestUpdateDay() async {
+    if (await _count() == 0) return DateTime(1970);
+
     final Expression<DateTime> exp = _db.menusTable.updateAt.max();
     final query = _db.selectOnly(_db.menusTable)..addColumns([exp]);
-    final DateTime? day = await query.map((scheme) => scheme.read(exp)).getSingleOrNull();
 
-    return day ?? DateTime(1970);
+    return await query.map((scheme) => scheme.read(exp)).getSingle();
   }
 
   Future<int> _count() async {

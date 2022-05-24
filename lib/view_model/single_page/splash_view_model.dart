@@ -156,18 +156,18 @@ class SplashViewModel extends StateNotifier<SplashState> {
         if (cache.error is ConnectionException) {
           return ConnectionExceptionDialog(
             onTapRetry: () {
-              routemaster.pop();
               state = SplashState();
-              _reader(appUniqueKeyProvider.notifier).restartApp();
+              routemaster.pop().whenComplete(() =>
+                  _reader(appUniqueKeyProvider.notifier).restartApp());
             },
           );
         }
 
         return LocalDatabaseExceptionDialog(
           onTapRetry: () {
-            routemaster.pop();
             state = SplashState();
-            _reader(appUniqueKeyProvider.notifier).restartApp();
+            routemaster.pop().whenComplete(() =>
+                _reader(appUniqueKeyProvider.notifier).restartApp());
           },
         );
       },

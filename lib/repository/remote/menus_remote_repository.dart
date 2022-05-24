@@ -28,7 +28,10 @@ class MenusRemoteRepository extends MenusRemoteRepositoryBase {
     //   return json.decode(await rootBundle.loadString('assets/debug/demo_menus.json'));
     // }
 
-    final firestoreData = await _db.where('updateAt', isGreaterThan: day ?? DateTime(1970)).get();
+    final firestoreData = await _db
+        .where('schoolId', isEqualTo: schoolId)
+        .where('updateAt', isGreaterThan: day ?? DateTime(1970))
+        .get();
 
     return [];
   }
