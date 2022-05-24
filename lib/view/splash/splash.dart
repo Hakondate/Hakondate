@@ -4,7 +4,7 @@ import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/view/component/other/loading_animation_widget.dart';
 
 class Splash extends StatelessWidget {
-  const Splash({Key? key}) : super(key: key);
+  const Splash({super.key});
 
   @override
   Widget build(BuildContext context) {

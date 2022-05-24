@@ -1,7 +1,7 @@
 enum Flavor {
   dev,
   stg,
-  prod,
+  prod;
 }
 
 class Environment {

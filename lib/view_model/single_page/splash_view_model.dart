@@ -89,7 +89,7 @@ class SplashViewModel extends StateNotifier<SplashState> {
   }
 
   Future<void> loadSignup(BuildContext context) async {
-    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       state = SplashState(status: LoadingStatus.updating);
       try {
         await _reader(userProvider.notifier).createUser(

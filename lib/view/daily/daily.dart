@@ -13,7 +13,7 @@ import 'package:hakondate/view/daily/nutrients_card.dart';
 import 'package:hakondate/view_model/single_page/daily_view_model.dart';
 
 class Daily extends StatelessWidget {
-  const Daily({Key? key}) : super(key: key);
+  const Daily({super.key});
 
   @override
   Widget build(BuildContext context) {

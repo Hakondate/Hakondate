@@ -8,7 +8,7 @@ import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/constant/svg_path.dart';
 
 class AppBottomNavigationBar extends StatelessWidget {
-  const AppBottomNavigationBar({Key? key}) : super(key: key);
+  const AppBottomNavigationBar({super.key});
 
   @override
   Widget build(BuildContext context) {

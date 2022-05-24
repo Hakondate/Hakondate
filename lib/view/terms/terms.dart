@@ -8,7 +8,7 @@ import 'package:hakondate/view/terms/terms_content_column.dart';
 import 'package:hakondate/view_model/single_page/terms_view_model.dart';
 
 class Terms extends StatelessWidget {
-  const Terms({Key? key}) : super(key: key);
+  const Terms({super.key});
 
   @override
   Widget build(BuildContext context) {
