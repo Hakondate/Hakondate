@@ -19,6 +19,7 @@ abstract class MenusLocalRepositoryBase {
   Future<int> add(Map<String, dynamic> menu);
   Future<List<MenuModel>> getAll();
   Future<MenuModel> getMenuByDay(DateTime day);
+  Future<DateTime> getLatestUpdateDay();
   Future<int> deleteAll();
 }
 
@@ -35,11 +36,13 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
       day: Value(DateTime.fromMillisecondsSinceEpoch(menu['day'])),
       schoolId: Value(menu['schoolId']),
       event: Value(menu['event']),
+      updateAt: Value(DateTime.now()),
     );
     final int menuId = await _db.into(_db.menusTable).insert(
       companion,
       onConflict: DoUpdate((old) => MenusTableCompanion.custom(
         event: Constant(companion.event.value),
+        updateAt: Constant(companion.updateAt.value),
       )),
     );
 
@@ -320,6 +323,15 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
       isHeat: foodstuffsSchema.isHeat,
       origin: foodstuffsSchema.origin,
     );
+  }
+
+  @override
+  Future<DateTime> getLatestUpdateDay() async {
+    final Expression<DateTime> exp = _db.menusTable.updateAt.max();
+    final query = _db.selectOnly(_db.menusTable)..addColumns([exp]);
+    final DateTime? day = await query.map((scheme) => scheme.read(exp)).getSingleOrNull();
+
+    return day ?? DateTime(1970);
   }
 
   @override
