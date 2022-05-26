@@ -11,15 +11,9 @@ import 'package:hakondate/repository/remote/menus_remote_repository.dart';
 import 'package:hakondate/repository/remote/schools_remote_repository.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/splash/splash_state.dart';
-import 'package:hakondate/util/app_unique_key.dart';
-import 'package:hakondate/util/exception/connection_exception.dart';
-import 'package:hakondate/view/component/dialog/exception_dialog/connection_exception_dialog.dart';
-import 'package:hakondate/view/component/dialog/exception_dialog/local_database_exception_dialog.dart';
-import 'package:hakondate/view/splash/terms_updated_dialog.dart';
 import 'package:hakondate/view_model/multi_page/common_function.dart';
 import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 import 'package:hakondate/view_model/single_page/daily_view_model.dart';
-import 'package:hakondate/view_model/single_page/signup_view_model.dart';
 
 final splashProvider = StateNotifierProvider.autoDispose<SplashViewModel, SplashState>((ref) {
   final SchoolsLocalRepository schoolsLocalRepository = ref.read(schoolsLocalRepositoryProvider);
@@ -50,53 +44,29 @@ class SplashViewModel extends StateNotifier<SplashState> {
   final MenusLocalRepository _menusLocalRepository;
   final MenusRemoteRepository _menusRemoteRepository;
 
-  Future<void> loadSplash(BuildContext context) async {
-    state = SplashState(status: LoadingStatus.reading);
-    try {
-      await _initializeSchool();
-      state = SplashState(status: LoadingStatus.reading);
-
-      if (!await _reader(userProvider.notifier).signIn()) {
-        return routemaster.replace('/terms');
-      }
-
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      final DateTime termsAgreedDay = DateTime.fromMillisecondsSinceEpoch(
-          prefs.getInt(AppKey.sharedPreferencesKey.agreedTermsDay) ?? 0);
-
-      if (termsAgreedDay.isBefore(RecordDate.termsLastUpdateDay)) {
-        return await showDialog(
-          context: context,
-          barrierDismissible: false,
-          builder: (_) => TermsUpdatedDialog(
-            onTap: () {
-              routemaster.pop();
-              routemaster.replace('/terms');
-            },
-          ),
-        );
-      }
-
-      await _initializeMenus();
-      routemaster.replace('/home');
-      state = SplashState(status: LoadingStatus.unloading);
-    } on Exception catch (error, stack) {
-      debugPrint(error.toString());
-      debugPrint(stack.toString());
-      state = SplashState.error(error: error);
-      await _showErrorDialog(context);
-    }
-  }
-
-  Future<void> loadSignup(BuildContext context) async {
+  Future<void> initialize({
+    Future<void> Function()? termsUpdated,
+    Future<void> Function(Exception, StackTrace)? errorOccurred,
+  }) async {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      state = SplashState(status: LoadingStatus.updating);
+      state = SplashState(status: LoadingStatus.reading);
       try {
-        await _reader(userProvider.notifier).createUser(
-          name: _reader(signupProvider.notifier).state.name!,
-          schoolId: _reader(signupProvider.notifier).state.schoolId!,
-          schoolYear: _reader(signupProvider.notifier).state.schoolYear!,
-        );
+        await _initializeSchools();
+        state = SplashState(status: LoadingStatus.reading);
+
+        if (!await _reader(userProvider.notifier).signIn()) {
+          return routemaster.replace('/terms');
+        }
+
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+        final DateTime termsAgreedDay = DateTime.fromMillisecondsSinceEpoch(
+            prefs.getInt(AppKey.sharedPreferencesKey.agreedTermsDay) ?? 0);
+
+        if (termsAgreedDay.isBefore(RecordDate.termsLastUpdateDay)) {
+          state = SplashState(status: LoadingStatus.unloading);
+          if (termsUpdated != null) return await termsUpdated();
+        }
+
         await _initializeMenus();
         routemaster.replace('/home');
         state = SplashState(status: LoadingStatus.unloading);
@@ -104,22 +74,15 @@ class SplashViewModel extends StateNotifier<SplashState> {
         debugPrint(error.toString());
         debugPrint(stack.toString());
         state = SplashState.error(error: error);
-        await _showErrorDialog(context);
+
+        if (errorOccurred != null) return await errorOccurred(error, stack);
       }
     });
   }
 
-  Future<void> _initializeSchool() async {
-    List<dynamic> schools = [];
-    state = SplashState(status: LoadingStatus.checkingUpdate);
-
-    if (await _schoolsLocalRepository.count() == 0) {
-      state = SplashState(status: LoadingStatus.updating);
-      schools = await _schoolsRemoteRepository.downloadAllSchool();
-    } else if (await _schoolsRemoteRepository.checkUpdate()) {
-      state = SplashState(status: LoadingStatus.updating);
-      schools = await _schoolsRemoteRepository.downloadUpdate();
-    }
+  Future<void> _initializeSchools() async {
+    state = SplashState(status: LoadingStatus.updating);
+    List<dynamic> schools = await _schoolsRemoteRepository.downloadUpdate();
 
     await Future.forEach(schools, (dynamic school) async {
       await _schoolsLocalRepository.add(school);
@@ -142,35 +105,5 @@ class SplashViewModel extends StateNotifier<SplashState> {
 
     await _reader(dailyProvider.notifier).updateSelectedDay();
     state = SplashState(status: LoadingStatus.reading);
-  }
-
-  Future<void> _showErrorDialog(BuildContext context) async {
-    final SplashState cache = state;
-
-    if (cache is! SplashStateError) return;
-
-    await showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        if (cache.error is ConnectionException) {
-          return ConnectionExceptionDialog(
-            onTapRetry: () {
-              state = SplashState();
-              routemaster.pop().whenComplete(() =>
-                  _reader(appUniqueKeyProvider.notifier).restartApp());
-            },
-          );
-        }
-
-        return LocalDatabaseExceptionDialog(
-          onTapRetry: () {
-            state = SplashState();
-            routemaster.pop().whenComplete(() =>
-                _reader(appUniqueKeyProvider.notifier).restartApp());
-          },
-        );
-      },
-    );
   }
 }
