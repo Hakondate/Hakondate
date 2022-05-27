@@ -35,6 +35,10 @@ class SchoolsRemoteRepository extends SchoolsRemoteRepositoryBase {
 
   @override
   Future<List<dynamic>> downloadUpdate() async {
+    if (Environment.flavor == Flavor.dev) {
+      return json.decode(await rootBundle.loadString('assets/debug/demo_schools.json'));
+    }
+
     return [];
   }
 }

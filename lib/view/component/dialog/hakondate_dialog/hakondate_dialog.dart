@@ -10,13 +10,13 @@ class HakondateDialog extends StatelessWidget {
     Key? key,
     this.title,
     required this.body,
-    required this.firstAction,
+    this.firstAction,
     this.secondAction,
   }) : super(key: key);
 
   final Widget? title;
   final Widget body;
-  final HakondateActionButton firstAction;
+  final HakondateActionButton? firstAction;
   final HakondateActionButton? secondAction;
 
   @override
@@ -40,28 +40,30 @@ class HakondateDialog extends StatelessWidget {
           children: [
             if (title != null) _header(),
             _body(),
-            Divider(
-              thickness: 1.0,
-              color: AppColor.brand.secondaryLight,
-              height: 0.0,
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                if (secondAction != null) ...[
-                  Expanded(child: secondAction!),
-                  SizedBox(
-                    height: 56.0,
-                    child: VerticalDivider(
-                      thickness: 1.0,
-                      color: AppColor.brand.secondaryLight,
-                      width: 1.0,
+            if (firstAction != null) ...[
+              Divider(
+                thickness: 1.0,
+                color: AppColor.brand.secondaryLight,
+                height: 0.0,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  if (secondAction != null) ...[
+                    Expanded(child: secondAction!),
+                    SizedBox(
+                      height: 56.0,
+                      child: VerticalDivider(
+                        thickness: 1.0,
+                        color: AppColor.brand.secondaryLight,
+                        width: 1.0,
+                      ),
                     ),
-                  ),
+                  ],
+                  Expanded(child: firstAction!),
                 ],
-                Expanded(child: firstAction),
-              ],
-            ),
+              ),
+            ],
           ],
         ),
       ),
