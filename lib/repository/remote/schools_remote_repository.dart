@@ -1,44 +1,28 @@
 import 'dart:async';
-import 'dart:convert';
 
-import 'package:flutter/services.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:hakondate/util/environment.dart';
+import 'package:hakondate/repository/remote/firestore_database.dart';
 
-final schoolsRemoteRepositoryProvider = Provider<SchoolsRemoteRepository>((ref) =>
-    SchoolsRemoteRepository());
+final schoolsRemoteRepositoryProvider = Provider<SchoolsRemoteRepository>((ref) {
+  final FirestoreDatabase firestoreDatabase = ref.read(firestoreDatabaseProvider.notifier);
+  return SchoolsRemoteRepository(firestoreDatabase.schoolsCollection);
+});
 
 abstract class SchoolsRemoteRepositoryBase {
-  Future<bool> checkUpdate();
-  Future<List<dynamic>> downloadAllSchool();
-  Future<List<dynamic>> downloadUpdate();
+  Future<List<dynamic>> get({required DateTime day});
 }
 
 class SchoolsRemoteRepository extends SchoolsRemoteRepositoryBase {
-  SchoolsRemoteRepository() : super();
+  SchoolsRemoteRepository(this._db) : super();
+
+  final CollectionReference<Map<String, dynamic>> _db;
 
   @override
-  Future<bool> checkUpdate() async {
-    return false;
-  }
+  Future<List<dynamic>> get({required DateTime day}) async {
+    final firestoreData = await _db.where('updateAt', isGreaterThan: day).get();
 
-  @override
-  Future<List<dynamic>> downloadAllSchool() async {
-    if (Environment.flavor == Flavor.dev) {
-      return json.decode(await rootBundle.loadString('assets/debug/demo_schools.json'));
-    }
-
-    return [];
-  }
-
-  @override
-  Future<List<dynamic>> downloadUpdate() async {
-    if (Environment.flavor == Flavor.dev) {
-      return json.decode(await rootBundle.loadString('assets/debug/demo_schools.json'));
-    }
-
-    return [];
+    return firestoreData.docs.map((doc) => doc.data()).toList();
   }
 }

@@ -11,6 +11,7 @@ import 'package:hakondate/repository/remote/menus_remote_repository.dart';
 import 'package:hakondate/repository/remote/schools_remote_repository.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/splash/splash_state.dart';
+import 'package:hakondate/util/exception/shared_preferences_exception.dart';
 import 'package:hakondate/view_model/multi_page/common_function.dart';
 import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 import 'package:hakondate/view_model/single_page/daily_view_model.dart';
@@ -81,24 +82,47 @@ class SplashViewModel extends StateNotifier<SplashState> {
   }
 
   Future<void> _initializeSchools() async {
-    state = SplashState(status: LoadingStatus.updating);
-    List<dynamic> schools = await _schoolsRemoteRepository.downloadUpdate();
+    state = SplashState(status: LoadingStatus.reading);
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final DateTime latestSchoolsUpdateAt = DateTime.fromMillisecondsSinceEpoch(
+        prefs.getInt(AppKey.sharedPreferencesKey.latestSchoolsUpdateAt) ?? 0);
 
+    state = SplashState(status: LoadingStatus.checkingUpdate);
+    List<dynamic> schools = await _schoolsRemoteRepository.get(day: latestSchoolsUpdateAt);
+
+    if (!await prefs.setInt(AppKey.sharedPreferencesKey.latestSchoolsUpdateAt,
+        DateTime.now().millisecondsSinceEpoch)) {
+      throw SharedPreferencesException(
+          'Failed to set ${AppKey.sharedPreferencesKey.latestSchoolsUpdateAt} value');
+    }
+
+    state = SplashState(status: LoadingStatus.updating);
     await Future.forEach(schools, (dynamic school) async {
       await _schoolsLocalRepository.add(school);
     });
   }
 
   Future<void> _initializeMenus() async {
-    state = SplashState(status: LoadingStatus.checkingUpdate);
+    state = SplashState(status: LoadingStatus.reading);
     final int schoolId = _reader(userProvider.notifier).state.currentUser!.schoolId;
     final int parentId = await _reader(commonFunctionProvider.notifier).getParentId(schoolId);
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final DateTime latestMenusUpdateAt = DateTime.fromMillisecondsSinceEpoch(
+        prefs.getInt(AppKey.sharedPreferencesKey.latestMenusUpdateAt) ?? 0);
 
-    state = SplashState(status: LoadingStatus.updating);
+    state = SplashState(status: LoadingStatus.checkingUpdate);
     List<dynamic> menus = await _menusRemoteRepository.get(
       schoolId: parentId,
+      day: latestMenusUpdateAt,
     );
 
+    if (!await prefs.setInt(AppKey.sharedPreferencesKey.latestMenusUpdateAt,
+        DateTime.now().millisecondsSinceEpoch)) {
+      throw SharedPreferencesException(
+          'Failed to set ${AppKey.sharedPreferencesKey.latestMenusUpdateAt} value');
+    }
+
+    state = SplashState(status: LoadingStatus.updating);
     await Future.forEach(menus, (dynamic menu) async {
       await _menusLocalRepository.add(menu);
     });

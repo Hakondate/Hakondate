@@ -33,7 +33,7 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
   Future<int> add(Map<String, dynamic> menu) async {
     final MenusTableCompanion companion = MenusTableCompanion(
       id: Value(menu['id']),
-      day: Value(DateTime.fromMillisecondsSinceEpoch(menu['day'])),
+      day: Value(_commonFunction.getDayFromTimestamp(menu['day'])),
       schoolId: Value(menu['schoolId']),
       event: Value(menu['event']),
       updateAt: Value(DateTime.now()),

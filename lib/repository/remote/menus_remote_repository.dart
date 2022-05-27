@@ -1,12 +1,7 @@
-import 'dart:convert';
-
-import 'package:flutter/services.dart';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/repository/remote/firestore_database.dart';
-import 'package:hakondate/util/environment.dart';
 
 final menusRemoteRepositoryProvider = Provider<MenusRemoteRepository>((ref) {
   final FirestoreDatabase firestoreDatabase = ref.read(firestoreDatabaseProvider.notifier);
@@ -14,7 +9,7 @@ final menusRemoteRepositoryProvider = Provider<MenusRemoteRepository>((ref) {
 });
 
 abstract class MenusRemoteRepositoryBase {
-  Future<List<dynamic>> get({required int schoolId, DateTime? day});
+  Future<List<dynamic>> get({required int schoolId, required DateTime day});
 }
 
 class MenusRemoteRepository extends MenusRemoteRepositoryBase {
@@ -23,16 +18,12 @@ class MenusRemoteRepository extends MenusRemoteRepositoryBase {
   final CollectionReference<Map<String, dynamic>> _db;
 
   @override
-  Future<List<dynamic>> get({required int schoolId, DateTime? day}) async {
-    // if (Environment.flavor == Flavor.dev) {
-    //   return json.decode(await rootBundle.loadString('assets/debug/demo_menus.json'));
-    // }
-
+  Future<List<dynamic>> get({required int schoolId, required DateTime day}) async {
     final firestoreData = await _db
         .where('schoolId', isEqualTo: schoolId)
-        .where('updateAt', isGreaterThan: day ?? DateTime(1970))
+        .where('updateAt', isGreaterThan: day)
         .get();
 
-    return [];
+    return firestoreData.docs.map((doc) => doc.data()).toList();
   }
 }
