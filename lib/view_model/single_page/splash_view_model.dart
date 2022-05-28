@@ -84,7 +84,7 @@ class SplashViewModel extends StateNotifier<SplashState> {
     final DateTime latestUpdate = await _schoolsLocalRepository.getLatestUpdateDay();
 
     state = SplashState(status: LoadingStatus.checkingUpdate);
-    List<dynamic> schools = await _schoolsRemoteRepository.get(day: latestUpdate);
+    List<dynamic> schools = await _schoolsRemoteRepository.get(updateAt: latestUpdate);
 
     state = SplashState(status: LoadingStatus.updating);
     await Future.forEach(schools, (dynamic school) async {
@@ -105,6 +105,5 @@ class SplashViewModel extends StateNotifier<SplashState> {
     });
 
     await _reader(dailyProvider.notifier).updateSelectedDay();
-    state = SplashState(status: LoadingStatus.reading);
   }
 }

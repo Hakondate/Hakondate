@@ -11,7 +11,7 @@ final schoolsRemoteRepositoryProvider = Provider<SchoolsRemoteRepository>((ref) 
 });
 
 abstract class SchoolsRemoteRepositoryBase {
-  Future<List<dynamic>> get({required DateTime day});
+  Future<List<dynamic>> get({required DateTime updateAt});
 }
 
 class SchoolsRemoteRepository extends SchoolsRemoteRepositoryBase {
@@ -20,8 +20,8 @@ class SchoolsRemoteRepository extends SchoolsRemoteRepositoryBase {
   final CollectionReference<Map<String, dynamic>> _db;
 
   @override
-  Future<List<dynamic>> get({required DateTime day}) async {
-    final firestoreData = await _db.where('updateAt', isGreaterThan: day).get();
+  Future<List<dynamic>> get({required DateTime updateAt}) async {
+    final firestoreData = await _db.where('updateAt', isGreaterThan: updateAt).get();
 
     return firestoreData.docs.map((doc) => doc.data()).toList();
   }
