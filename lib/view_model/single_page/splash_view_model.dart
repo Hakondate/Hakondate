@@ -11,8 +11,6 @@ import 'package:hakondate/repository/remote/menus_remote_repository.dart';
 import 'package:hakondate/repository/remote/schools_remote_repository.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/splash/splash_state.dart';
-import 'package:hakondate/util/exception/shared_preferences_exception.dart';
-import 'package:hakondate/view_model/multi_page/common_function.dart';
 import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 import 'package:hakondate/view_model/single_page/daily_view_model.dart';
 
@@ -53,8 +51,8 @@ class SplashViewModel extends StateNotifier<SplashState> {
       state = SplashState(status: LoadingStatus.reading);
       try {
         await _initializeSchools();
-        state = SplashState(status: LoadingStatus.reading);
 
+        state = SplashState(status: LoadingStatus.reading);
         if (!await _reader(userProvider.notifier).signIn()) {
           return routemaster.replace('/terms');
         }
@@ -83,18 +81,10 @@ class SplashViewModel extends StateNotifier<SplashState> {
 
   Future<void> _initializeSchools() async {
     state = SplashState(status: LoadingStatus.reading);
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final DateTime latestSchoolsUpdateAt = DateTime.fromMillisecondsSinceEpoch(
-        prefs.getInt(AppKey.sharedPreferencesKey.latestSchoolsUpdateAt) ?? 0);
+    final DateTime latestUpdate = await _schoolsLocalRepository.getLatestUpdateDay();
 
     state = SplashState(status: LoadingStatus.checkingUpdate);
-    List<dynamic> schools = await _schoolsRemoteRepository.get(day: latestSchoolsUpdateAt);
-
-    if (!await prefs.setInt(AppKey.sharedPreferencesKey.latestSchoolsUpdateAt,
-        DateTime.now().millisecondsSinceEpoch)) {
-      throw SharedPreferencesException(
-          'Failed to set ${AppKey.sharedPreferencesKey.latestSchoolsUpdateAt} value');
-    }
+    List<dynamic> schools = await _schoolsRemoteRepository.get(day: latestUpdate);
 
     state = SplashState(status: LoadingStatus.updating);
     await Future.forEach(schools, (dynamic school) async {
@@ -104,23 +94,10 @@ class SplashViewModel extends StateNotifier<SplashState> {
 
   Future<void> _initializeMenus() async {
     state = SplashState(status: LoadingStatus.reading);
-    final int schoolId = _reader(userProvider.notifier).state.currentUser!.schoolId;
-    final int parentId = await _reader(commonFunctionProvider.notifier).getParentId(schoolId);
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final DateTime latestMenusUpdateAt = DateTime.fromMillisecondsSinceEpoch(
-        prefs.getInt(AppKey.sharedPreferencesKey.latestMenusUpdateAt) ?? 0);
+    final DateTime latestUpdate = await _menusLocalRepository.getLatestUpdateDay();
 
     state = SplashState(status: LoadingStatus.checkingUpdate);
-    List<dynamic> menus = await _menusRemoteRepository.get(
-      schoolId: parentId,
-      day: latestMenusUpdateAt,
-    );
-
-    if (!await prefs.setInt(AppKey.sharedPreferencesKey.latestMenusUpdateAt,
-        DateTime.now().millisecondsSinceEpoch)) {
-      throw SharedPreferencesException(
-          'Failed to set ${AppKey.sharedPreferencesKey.latestMenusUpdateAt} value');
-    }
+    List<dynamic> menus = await _menusRemoteRepository.get(updateAt: latestUpdate);
 
     state = SplashState(status: LoadingStatus.updating);
     await Future.forEach(menus, (dynamic menu) async {

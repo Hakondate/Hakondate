@@ -14,6 +14,7 @@ import 'package:hakondate/repository/local/schools_local_repository.dart';
 import 'package:hakondate/repository/local/users_local_repository.dart';
 import 'package:hakondate/state/user/user_state.dart';
 import 'package:hakondate/util/exception/shared_preferences_exception.dart';
+import 'package:hakondate/util/exception/sign_in_exception.dart';
 
 final userProvider = StateNotifierProvider<UserViewModel, UserState>((ref) {
   final UsersLocalRepository usersLocalRepository = ref.read(usersLocalRepositoryProvider);
@@ -110,6 +111,14 @@ class UserViewModel extends StateNotifier<UserState> {
     await changeCurrentUser(id);
 
     return id;
+  }
+
+  Future<int> getParentId() async {
+    final UserModel? user = state.currentUser;
+    if (user == null) throw const SignInException('Current user does not exist');
+    final SchoolModel school = await _schoolsLocalRepository.getById(user.schoolId);
+
+    return school.parentId;
   }
 
   void signOut() => state = state.copyWith(currentUser: null);

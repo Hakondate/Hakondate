@@ -24,17 +24,8 @@ class CommonFunction extends StateNotifier<void> {
   }
 
   Future<int> getIdByDay(DateTime day) async {
-    final UserModel? user = _reader(userProvider.notifier).state.currentUser;
-
-    if (user == null) throw Exception('Current user does not exist');
-
-    final int parentId = await getParentId(user.schoolId);
+    final int parentId = await _reader(userProvider.notifier).getParentId();
     return day.year * 1000000 + day.month * 10000 + day.day * 100 + parentId;
-  }
-
-  Future<int> getParentId(int schoolId) async {
-    final SchoolModel school = await _reader(schoolsLocalRepositoryProvider).getById(schoolId);
-    return school.parentId;
   }
 
   Future<void> deleteAllData() async {
