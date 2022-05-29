@@ -225,8 +225,8 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
     final int schoolId = await _userReader.getParentId();
     final Expression<DateTime> exp = _db.menusTable.day.min();
     final query = _db.selectOnly(_db.menusTable)
-      ..addColumns([exp])
-      ..where(_db.menusTable.schoolId.equals(schoolId));
+      ..where(_db.menusTable.schoolId.equals(schoolId))
+      ..addColumns([exp]);
 
     return await query.map((scheme) => scheme.read(exp)).getSingle();
   }
@@ -237,8 +237,8 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
     final int schoolId = await _userReader.getParentId();
     final Expression<DateTime> exp = _db.menusTable.day.max();
     final query = _db.selectOnly(_db.menusTable)
-      ..addColumns([exp])
-      ..where(_db.menusTable.schoolId.equals(schoolId));
+      ..where(_db.menusTable.schoolId.equals(schoolId))
+      ..addColumns([exp]);
 
     return await query.map((scheme) => scheme.read(exp)).getSingle();
   }
@@ -342,8 +342,8 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
     final int schoolId = await _userReader.getParentId();
     final Expression<DateTime> exp = _db.menusTable.updateAt.max();
     final query = _db.selectOnly(_db.menusTable)
-      ..addColumns([exp])
-      ..where(_db.menusTable.schoolId.equals(schoolId));
+      ..where(_db.menusTable.schoolId.equals(schoolId))
+      ..addColumns([exp]);
 
     return await query.map((scheme) => scheme.read(exp)).getSingle();
   }
@@ -352,8 +352,8 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
     final int schoolId = await _userReader.getParentId();
     final Expression<int> exp = _db.menusTable.id.count();
     final query = _db.selectOnly(_db.menusTable)
-      ..addColumns([exp])
-      ..where(_db.menusTable.schoolId.equals(schoolId));
+      ..where(_db.menusTable.schoolId.equals(schoolId))
+      ..addColumns([exp]);
     final int? count = await query.map((scheme) => scheme.read(exp)).getSingleOrNull();
 
     return count ?? 0;
