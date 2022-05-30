@@ -30,7 +30,7 @@
 .pub-cache/
 .pub/
 /build/
-.fvm/flutter_sdk
+.fvm/
 
 # Symbolication related
 app.*.symbols
