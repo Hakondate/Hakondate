@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hakondate/router/routes.dart';
 
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
+import 'package:hakondate/router/routes.dart';
 
 class DailyDrawer extends StatelessWidget {
   const DailyDrawer({Key? key}) : super(key: key);
@@ -35,7 +35,7 @@ class DailyDrawer extends StatelessWidget {
           _drawerLabel(
             icon: Icons.account_circle_outlined,
             labelText: 'ユーザー情報',
-            onTap: () => routemaster.push('/home/setting'),
+            onTap: () => routemaster.push('/home/user_setting'),
           ),
           _drawerLabel(
             icon: Icons.agriculture_outlined,
