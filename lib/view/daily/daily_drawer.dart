@@ -35,12 +35,12 @@ class DailyDrawer extends StatelessWidget {
           _drawerLabel(
             icon: Icons.account_circle_outlined,
             labelText: 'ユーザー情報',
-            onTap: () => {routemaster.pop(), routemaster.push('/home/setting')},
+            onTap: () => routemaster.push('/home/setting'),
           ),
           _drawerLabel(
             icon: Icons.agriculture_outlined,
             labelText: '産地情報',
-            onTap: () => {routemaster.pop(), routemaster.push('/home/origin')},
+            onTap: () => routemaster.push('/home/origin'),
           ),
           Divider(
             color: AppColor.text.gray,
@@ -52,23 +52,23 @@ class DailyDrawer extends StatelessWidget {
           _drawerLabel(
             icon: Icons.description_outlined,
             labelText: '利用規約',
-            onTap: () => {routemaster.pop(), routemaster.push('/home/terms')},
+            onTap: () => routemaster.push('/home/terms'),
           ),
           _drawerLabel(
             icon: Icons.info_outlined,
             labelText: 'インフォメーション',
             onTap: () =>
-            {routemaster.pop(), routemaster.push('/home/about_us')},
+            routemaster.push('/home/about_us'),
           ),
           _drawerLabel(
             icon: Icons.help_outlined,
             labelText: 'ヘルプ',
-            onTap: () => {routemaster.pop(), routemaster.push('/home/help')},
+            onTap: () => routemaster.push('/home/help'),
           ),
           _drawerLabel(
             icon: Icons.credit_card_outlined,
             labelText: 'ライセンス情報',
-            onTap: () => {routemaster.pop(), routemaster.push('home/license')},
+            onTap: () => routemaster.push('/home/license'),
           ),
         ],
       ),
@@ -81,6 +81,7 @@ class DailyDrawer extends StatelessWidget {
     Function()? onTap,
   }) {
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       child: Container(
         padding: const EdgeInsets.only(
           left: PaddingSize.buttonHorizontal,
@@ -95,11 +96,14 @@ class DailyDrawer extends StatelessWidget {
               color: AppColor.brand.secondary,
             ),
             const SizedBox(width: MarginSize.minimum),
-            Text(labelText, style: const TextStyle(fontSize: FontSize.body)),
+            Text(
+              labelText,
+              style: const TextStyle(fontSize: FontSize.body),
+            ),
           ],
         ),
       ),
-      onTap: onTap,
+      onTap: () => onTap != null ? routemaster.pop().whenComplete(onTap): null,
     );
   }
 }

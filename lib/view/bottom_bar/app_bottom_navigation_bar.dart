@@ -7,7 +7,7 @@ import 'package:routemaster/routemaster.dart';
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/constant/svg_path.dart';
-import 'package:hakondate/view/daily/drawer.dart';
+import 'package:hakondate/view/daily/daily_drawer.dart';
 import 'package:hakondate/view_model/multi_page/drawer_view_model.dart';
 
 class AppBottomNavigationBar extends ConsumerWidget {
