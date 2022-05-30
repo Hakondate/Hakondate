@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:routemaster/routemaster.dart';
 
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/constant/svg_path.dart';
+import 'package:hakondate/view/daily/daily_drawer.dart';
+import 'package:hakondate/view_model/multi_page/drawer_view_model.dart';
 
-class AppBottomNavigationBar extends StatelessWidget {
+class AppBottomNavigationBar extends ConsumerWidget {
   const AppBottomNavigationBar({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final TabPageState tabState = TabPage.of(context);
 
     return Scaffold(
+      key: ref.watch(drawerProvider).scaffoldKey,
+      drawer: const DailyDrawer(),
+      drawerEnableOpenDragGesture: false,
       body: TabBarView(
         controller: tabState.controller,
         physics: const NeverScrollableScrollPhysics(),
