@@ -35,7 +35,7 @@ class DailyDrawer extends StatelessWidget {
           _drawerLabel(
             icon: Icons.account_circle_outlined,
             labelText: 'ユーザー情報',
-            onTap: () => routemaster.push('/home/user_setting'),
+            onTap: () => routemaster.push('/home/user_settings'),
           ),
           _drawerLabel(
             icon: Icons.agriculture_outlined,
