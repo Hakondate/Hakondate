@@ -63,7 +63,11 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/mock/
+    - assets/mock/firestore/menus/
+    - assets/mock/firestore/menus/school00/
+    - assets/mock/firestore/menus/school01/
+    - assets/mock/firestore/menus/school02/
+    - assets/mock/firestore/menus/school03/
     - assets/slns/
     - assets/images/
     - assets/images/calendar_hedgehog/
