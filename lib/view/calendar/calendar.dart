@@ -148,7 +148,7 @@ class Calendar extends StatelessWidget {
             bottom: PaddingSize.minimum,
             child: Image.asset(
               'assets/images/calendar_hedgehog/${day.month}.png',
-              height: UiSize.calendarTileHeight * 0.8,
+              height: UiSize.calendarTileHeight * 0.65,
             ),
           ),
           Positioned.fill(

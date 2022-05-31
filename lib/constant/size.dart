@@ -36,5 +36,5 @@ class IconSize {
 }
 
 class UiSize {
-  static const double calendarTileHeight = 150; // カレンダー画面の高さ
+  static const double calendarTileHeight = 180; // カレンダー画面の高さ
 }
