@@ -63,7 +63,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/debug/
+    - assets/mock/
     - assets/slns/
     - assets/images/
     - assets/images/calendar_hedgehog/

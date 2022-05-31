@@ -4,10 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/repository/local/local_database.dart';
 import 'package:hakondate/util/exception/sqlite_exception.dart';
+import 'package:hakondate/view_model/multi_page/common_function.dart';
 
 final schoolsLocalRepositoryProvider = Provider<SchoolsLocalRepository>((ref) {
   final LocalDatabase localDatabase = ref.read(localDatabaseProvider);
-  return SchoolsLocalRepository(localDatabase);
+  final CommonFunction commonFunction = ref.read(commonFunctionProvider.notifier);
+  return SchoolsLocalRepository(localDatabase, commonFunction);
 });
 
 abstract class SchoolsLocalRepositoryBase {
@@ -19,9 +21,10 @@ abstract class SchoolsLocalRepositoryBase {
 }
 
 class SchoolsLocalRepository extends SchoolsLocalRepositoryBase {
-  SchoolsLocalRepository(this._db) : super();
+  SchoolsLocalRepository(this._db, this._commonFunction) : super();
 
   final LocalDatabase _db;
+  final CommonFunction _commonFunction;
 
   @override
   Future<int> count() async {
@@ -83,7 +86,7 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryBase {
         name: Value(school['name']),
         lunchBlock: Value(school['lunchBlock']),
         classification: Value(school['classification']),
-        updateAt: Value(DateTime.now()),
+        updateAt: Value(_commonFunction.getDayFromTimestamp(school['updateAt'])),
       ));
 
   @override

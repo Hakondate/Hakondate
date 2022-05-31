@@ -39,7 +39,7 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
       day: Value(_commonFunction.getDayFromTimestamp(menu['day'])),
       schoolId: Value(menu['schoolId']),
       event: Value(menu['event']),
-      updateAt: Value(DateTime.now()),
+      updateAt: Value(_commonFunction.getDayFromTimestamp(menu['updateAt'])),
     );
     final int menuId = await _db.into(_db.menusTable).insert(
       companion,
