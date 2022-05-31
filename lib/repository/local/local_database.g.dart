@@ -1,24 +1,28 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'database_manager.dart';
+part of 'local_database.dart';
 
 // **************************************************************************
 // MoorGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps, unnecessary_this
+// ignore_for_file: type=lint
 class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
   final int id;
   final int parentId;
   final String name;
   final int? lunchBlock;
   final String classification;
+  final DateTime createAt;
+  final DateTime updateAt;
   SchoolsSchema(
       {required this.id,
       required this.parentId,
       required this.name,
       this.lunchBlock,
-      required this.classification});
+      required this.classification,
+      required this.createAt,
+      required this.updateAt});
   factory SchoolsSchema.fromData(Map<String, dynamic> data, {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return SchoolsSchema(
@@ -32,6 +36,10 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
           .mapFromDatabaseResponse(data['${effectivePrefix}lunch_block']),
       classification: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}classification'])!,
+      createAt: const DateTimeType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}create_at'])!,
+      updateAt: const DateTimeType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}update_at'])!,
     );
   }
   @override
@@ -44,6 +52,8 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       map['lunch_block'] = Variable<int?>(lunchBlock);
     }
     map['classification'] = Variable<String>(classification);
+    map['create_at'] = Variable<DateTime>(createAt);
+    map['update_at'] = Variable<DateTime>(updateAt);
     return map;
   }
 
@@ -56,6 +66,8 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
           ? const Value.absent()
           : Value(lunchBlock),
       classification: Value(classification),
+      createAt: Value(createAt),
+      updateAt: Value(updateAt),
     );
   }
 
@@ -68,6 +80,8 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       name: serializer.fromJson<String>(json['name']),
       lunchBlock: serializer.fromJson<int?>(json['lunchBlock']),
       classification: serializer.fromJson<String>(json['classification']),
+      createAt: serializer.fromJson<DateTime>(json['createAt']),
+      updateAt: serializer.fromJson<DateTime>(json['updateAt']),
     );
   }
   @override
@@ -79,6 +93,8 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       'name': serializer.toJson<String>(name),
       'lunchBlock': serializer.toJson<int?>(lunchBlock),
       'classification': serializer.toJson<String>(classification),
+      'createAt': serializer.toJson<DateTime>(createAt),
+      'updateAt': serializer.toJson<DateTime>(updateAt),
     };
   }
 
@@ -87,13 +103,17 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
           int? parentId,
           String? name,
           int? lunchBlock,
-          String? classification}) =>
+          String? classification,
+          DateTime? createAt,
+          DateTime? updateAt}) =>
       SchoolsSchema(
         id: id ?? this.id,
         parentId: parentId ?? this.parentId,
         name: name ?? this.name,
         lunchBlock: lunchBlock ?? this.lunchBlock,
         classification: classification ?? this.classification,
+        createAt: createAt ?? this.createAt,
+        updateAt: updateAt ?? this.updateAt,
       );
   @override
   String toString() {
@@ -102,14 +122,16 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
           ..write('parentId: $parentId, ')
           ..write('name: $name, ')
           ..write('lunchBlock: $lunchBlock, ')
-          ..write('classification: $classification')
+          ..write('classification: $classification, ')
+          ..write('createAt: $createAt, ')
+          ..write('updateAt: $updateAt')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode =>
-      Object.hash(id, parentId, name, lunchBlock, classification);
+  int get hashCode => Object.hash(
+      id, parentId, name, lunchBlock, classification, createAt, updateAt);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -118,7 +140,9 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
           other.parentId == this.parentId &&
           other.name == this.name &&
           other.lunchBlock == this.lunchBlock &&
-          other.classification == this.classification);
+          other.classification == this.classification &&
+          other.createAt == this.createAt &&
+          other.updateAt == this.updateAt);
 }
 
 class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
@@ -127,12 +151,16 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
   final Value<String> name;
   final Value<int?> lunchBlock;
   final Value<String> classification;
+  final Value<DateTime> createAt;
+  final Value<DateTime> updateAt;
   const SchoolsTableCompanion({
     this.id = const Value.absent(),
     this.parentId = const Value.absent(),
     this.name = const Value.absent(),
     this.lunchBlock = const Value.absent(),
     this.classification = const Value.absent(),
+    this.createAt = const Value.absent(),
+    this.updateAt = const Value.absent(),
   });
   SchoolsTableCompanion.insert({
     this.id = const Value.absent(),
@@ -140,6 +168,8 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
     required String name,
     this.lunchBlock = const Value.absent(),
     required String classification,
+    this.createAt = const Value.absent(),
+    this.updateAt = const Value.absent(),
   })  : parentId = Value(parentId),
         name = Value(name),
         classification = Value(classification);
@@ -149,6 +179,8 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
     Expression<String>? name,
     Expression<int?>? lunchBlock,
     Expression<String>? classification,
+    Expression<DateTime>? createAt,
+    Expression<DateTime>? updateAt,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -156,6 +188,8 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
       if (name != null) 'name': name,
       if (lunchBlock != null) 'lunch_block': lunchBlock,
       if (classification != null) 'classification': classification,
+      if (createAt != null) 'create_at': createAt,
+      if (updateAt != null) 'update_at': updateAt,
     });
   }
 
@@ -164,13 +198,17 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
       Value<int>? parentId,
       Value<String>? name,
       Value<int?>? lunchBlock,
-      Value<String>? classification}) {
+      Value<String>? classification,
+      Value<DateTime>? createAt,
+      Value<DateTime>? updateAt}) {
     return SchoolsTableCompanion(
       id: id ?? this.id,
       parentId: parentId ?? this.parentId,
       name: name ?? this.name,
       lunchBlock: lunchBlock ?? this.lunchBlock,
       classification: classification ?? this.classification,
+      createAt: createAt ?? this.createAt,
+      updateAt: updateAt ?? this.updateAt,
     );
   }
 
@@ -192,6 +230,12 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
     if (classification.present) {
       map['classification'] = Variable<String>(classification.value);
     }
+    if (createAt.present) {
+      map['create_at'] = Variable<DateTime>(createAt.value);
+    }
+    if (updateAt.present) {
+      map['update_at'] = Variable<DateTime>(updateAt.value);
+    }
     return map;
   }
 
@@ -202,7 +246,9 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
           ..write('parentId: $parentId, ')
           ..write('name: $name, ')
           ..write('lunchBlock: $lunchBlock, ')
-          ..write('classification: $classification')
+          ..write('classification: $classification, ')
+          ..write('createAt: $createAt, ')
+          ..write('updateAt: $updateAt')
           ..write(')'))
         .toString();
   }
@@ -240,9 +286,23 @@ class $SchoolsTableTable extends SchoolsTable
   late final GeneratedColumn<String?> classification = GeneratedColumn<String?>(
       'classification', aliasedName, false,
       type: const StringType(), requiredDuringInsert: true);
+  final VerificationMeta _createAtMeta = const VerificationMeta('createAt');
+  @override
+  late final GeneratedColumn<DateTime?> createAt = GeneratedColumn<DateTime?>(
+      'create_at', aliasedName, false,
+      type: const IntType(),
+      requiredDuringInsert: false,
+      defaultValue: Constant(DateTime.now()));
+  final VerificationMeta _updateAtMeta = const VerificationMeta('updateAt');
+  @override
+  late final GeneratedColumn<DateTime?> updateAt = GeneratedColumn<DateTime?>(
+      'update_at', aliasedName, false,
+      type: const IntType(),
+      requiredDuringInsert: false,
+      defaultValue: Constant(DateTime.now()));
   @override
   List<GeneratedColumn> get $columns =>
-      [id, parentId, name, lunchBlock, classification];
+      [id, parentId, name, lunchBlock, classification, createAt, updateAt];
   @override
   String get aliasedName => _alias ?? 'schools_table';
   @override
@@ -281,6 +341,14 @@ class $SchoolsTableTable extends SchoolsTable
     } else if (isInserting) {
       context.missing(_classificationMeta);
     }
+    if (data.containsKey('create_at')) {
+      context.handle(_createAtMeta,
+          createAt.isAcceptableOrUnknown(data['create_at']!, _createAtMeta));
+    }
+    if (data.containsKey('update_at')) {
+      context.handle(_updateAtMeta,
+          updateAt.isAcceptableOrUnknown(data['update_at']!, _updateAtMeta));
+    }
     return context;
   }
 
@@ -303,11 +371,15 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
   final DateTime day;
   final int schoolId;
   final String? event;
+  final DateTime createAt;
+  final DateTime updateAt;
   MenusSchema(
       {required this.id,
       required this.day,
       required this.schoolId,
-      this.event});
+      this.event,
+      required this.createAt,
+      required this.updateAt});
   factory MenusSchema.fromData(Map<String, dynamic> data, {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return MenusSchema(
@@ -319,6 +391,10 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
           .mapFromDatabaseResponse(data['${effectivePrefix}school_id'])!,
       event: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}event']),
+      createAt: const DateTimeType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}create_at'])!,
+      updateAt: const DateTimeType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}update_at'])!,
     );
   }
   @override
@@ -330,6 +406,8 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
     if (!nullToAbsent || event != null) {
       map['event'] = Variable<String?>(event);
     }
+    map['create_at'] = Variable<DateTime>(createAt);
+    map['update_at'] = Variable<DateTime>(updateAt);
     return map;
   }
 
@@ -340,6 +418,8 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
       schoolId: Value(schoolId),
       event:
           event == null && nullToAbsent ? const Value.absent() : Value(event),
+      createAt: Value(createAt),
+      updateAt: Value(updateAt),
     );
   }
 
@@ -351,6 +431,8 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
       day: serializer.fromJson<DateTime>(json['day']),
       schoolId: serializer.fromJson<int>(json['schoolId']),
       event: serializer.fromJson<String?>(json['event']),
+      createAt: serializer.fromJson<DateTime>(json['createAt']),
+      updateAt: serializer.fromJson<DateTime>(json['updateAt']),
     );
   }
   @override
@@ -361,16 +443,25 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
       'day': serializer.toJson<DateTime>(day),
       'schoolId': serializer.toJson<int>(schoolId),
       'event': serializer.toJson<String?>(event),
+      'createAt': serializer.toJson<DateTime>(createAt),
+      'updateAt': serializer.toJson<DateTime>(updateAt),
     };
   }
 
   MenusSchema copyWith(
-          {int? id, DateTime? day, int? schoolId, String? event}) =>
+          {int? id,
+          DateTime? day,
+          int? schoolId,
+          String? event,
+          DateTime? createAt,
+          DateTime? updateAt}) =>
       MenusSchema(
         id: id ?? this.id,
         day: day ?? this.day,
         schoolId: schoolId ?? this.schoolId,
         event: event ?? this.event,
+        createAt: createAt ?? this.createAt,
+        updateAt: updateAt ?? this.updateAt,
       );
   @override
   String toString() {
@@ -378,13 +469,15 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
           ..write('id: $id, ')
           ..write('day: $day, ')
           ..write('schoolId: $schoolId, ')
-          ..write('event: $event')
+          ..write('event: $event, ')
+          ..write('createAt: $createAt, ')
+          ..write('updateAt: $updateAt')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, day, schoolId, event);
+  int get hashCode => Object.hash(id, day, schoolId, event, createAt, updateAt);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -392,7 +485,9 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
           other.id == this.id &&
           other.day == this.day &&
           other.schoolId == this.schoolId &&
-          other.event == this.event);
+          other.event == this.event &&
+          other.createAt == this.createAt &&
+          other.updateAt == this.updateAt);
 }
 
 class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
@@ -400,17 +495,23 @@ class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
   final Value<DateTime> day;
   final Value<int> schoolId;
   final Value<String?> event;
+  final Value<DateTime> createAt;
+  final Value<DateTime> updateAt;
   const MenusTableCompanion({
     this.id = const Value.absent(),
     this.day = const Value.absent(),
     this.schoolId = const Value.absent(),
     this.event = const Value.absent(),
+    this.createAt = const Value.absent(),
+    this.updateAt = const Value.absent(),
   });
   MenusTableCompanion.insert({
     this.id = const Value.absent(),
     required DateTime day,
     required int schoolId,
     this.event = const Value.absent(),
+    this.createAt = const Value.absent(),
+    this.updateAt = const Value.absent(),
   })  : day = Value(day),
         schoolId = Value(schoolId);
   static Insertable<MenusSchema> custom({
@@ -418,12 +519,16 @@ class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
     Expression<DateTime>? day,
     Expression<int>? schoolId,
     Expression<String?>? event,
+    Expression<DateTime>? createAt,
+    Expression<DateTime>? updateAt,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (day != null) 'day': day,
       if (schoolId != null) 'school_id': schoolId,
       if (event != null) 'event': event,
+      if (createAt != null) 'create_at': createAt,
+      if (updateAt != null) 'update_at': updateAt,
     });
   }
 
@@ -431,12 +536,16 @@ class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
       {Value<int>? id,
       Value<DateTime>? day,
       Value<int>? schoolId,
-      Value<String?>? event}) {
+      Value<String?>? event,
+      Value<DateTime>? createAt,
+      Value<DateTime>? updateAt}) {
     return MenusTableCompanion(
       id: id ?? this.id,
       day: day ?? this.day,
       schoolId: schoolId ?? this.schoolId,
       event: event ?? this.event,
+      createAt: createAt ?? this.createAt,
+      updateAt: updateAt ?? this.updateAt,
     );
   }
 
@@ -455,6 +564,12 @@ class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
     if (event.present) {
       map['event'] = Variable<String?>(event.value);
     }
+    if (createAt.present) {
+      map['create_at'] = Variable<DateTime>(createAt.value);
+    }
+    if (updateAt.present) {
+      map['update_at'] = Variable<DateTime>(updateAt.value);
+    }
     return map;
   }
 
@@ -464,7 +579,9 @@ class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
           ..write('id: $id, ')
           ..write('day: $day, ')
           ..write('schoolId: $schoolId, ')
-          ..write('event: $event')
+          ..write('event: $event, ')
+          ..write('createAt: $createAt, ')
+          ..write('updateAt: $updateAt')
           ..write(')'))
         .toString();
   }
@@ -496,8 +613,23 @@ class $MenusTableTable extends MenusTable
   late final GeneratedColumn<String?> event = GeneratedColumn<String?>(
       'event', aliasedName, true,
       type: const StringType(), requiredDuringInsert: false);
+  final VerificationMeta _createAtMeta = const VerificationMeta('createAt');
   @override
-  List<GeneratedColumn> get $columns => [id, day, schoolId, event];
+  late final GeneratedColumn<DateTime?> createAt = GeneratedColumn<DateTime?>(
+      'create_at', aliasedName, false,
+      type: const IntType(),
+      requiredDuringInsert: false,
+      defaultValue: Constant(DateTime.now()));
+  final VerificationMeta _updateAtMeta = const VerificationMeta('updateAt');
+  @override
+  late final GeneratedColumn<DateTime?> updateAt = GeneratedColumn<DateTime?>(
+      'update_at', aliasedName, false,
+      type: const IntType(),
+      requiredDuringInsert: false,
+      defaultValue: Constant(DateTime.now()));
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, day, schoolId, event, createAt, updateAt];
   @override
   String get aliasedName => _alias ?? 'menus_table';
   @override
@@ -525,6 +657,14 @@ class $MenusTableTable extends MenusTable
     if (data.containsKey('event')) {
       context.handle(
           _eventMeta, event.isAcceptableOrUnknown(data['event']!, _eventMeta));
+    }
+    if (data.containsKey('create_at')) {
+      context.handle(_createAtMeta,
+          createAt.isAcceptableOrUnknown(data['create_at']!, _createAtMeta));
+    }
+    if (data.containsKey('update_at')) {
+      context.handle(_updateAtMeta,
+          updateAt.isAcceptableOrUnknown(data['update_at']!, _updateAtMeta));
     }
     return context;
   }
@@ -2301,8 +2441,8 @@ class $UsersTableTable extends UsersTable
   }
 }
 
-abstract class _$DatabaseManager extends GeneratedDatabase {
-  _$DatabaseManager(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
+abstract class _$LocalDatabase extends GeneratedDatabase {
+  _$LocalDatabase(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
   late final $SchoolsTableTable schoolsTable = $SchoolsTableTable(this);
   late final $MenusTableTable menusTable = $MenusTableTable(this);
   late final $MenuDishesTableTable menuDishesTable =

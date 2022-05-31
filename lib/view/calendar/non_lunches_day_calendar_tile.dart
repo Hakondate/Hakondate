@@ -4,10 +4,10 @@ import 'package:hakondate/constant/app_color.dart';
 
 class NonLunchesDayCalendarTile extends StatelessWidget {
   const NonLunchesDayCalendarTile({
-    Key? key,
+    super.key,
     required this.message,
     this.backgroundColor,
-  }) : super(key: key);
+  });
 
   final Widget message;
   final Color? backgroundColor;

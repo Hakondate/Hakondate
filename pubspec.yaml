@@ -6,7 +6,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -21,7 +21,7 @@ dependencies:
   flutter_svg: ^1.0.3
 
   # 状態管理関連
-  flutter_riverpod: ^1.0.0-dev.5
+  flutter_riverpod: ^1.0.4
   freezed_annotation: ^2.0.1
   freezed: ^2.0.1
   json_serializable: ^6.1.6
@@ -38,7 +38,11 @@ dependencies:
   intl: ^0.17.0
 
   # 遷移関連
-  routemaster: ^0.10.0-dev5
+  routemaster: ^1.0.0
+
+  # Firebase関連
+  firebase_core: ^1.17.0
+  cloud_firestore: ^3.1.16
 
 dev_dependencies:
   flutter_test:
@@ -52,15 +56,18 @@ dev_dependencies:
   import_sorter: ^4.6.0
 
   # build_runner の実行コマンド
-  # flutter packages pub run build_runner build
-  # flutter packages pub run build_runner build --delete-conflicting-outputs (競合があった場合削除オプション)
+  # flutter packages pub run build_runner build --delete-conflicting-outputs
 
 flutter:
 
   uses-material-design: true
 
   assets:
-    - assets/debug/
+    - assets/mock/firestore/menus/
+    - assets/mock/firestore/menus/school00/
+    - assets/mock/firestore/menus/school01/
+    - assets/mock/firestore/menus/school02/
+    - assets/mock/firestore/menus/school03/
     - assets/slns/
     - assets/images/
     - assets/images/calendar_hedgehog/
@@ -115,6 +122,7 @@ import_sorter:
   ignored_files:
     - \/lib\/*\/*.freezed.dart
     - \/lib\/*\/*.g.dart
+    - \/lib\/*\/firebase_options.dart
 
   # 実行コマンド
   # flutter pub run import_sorter:main

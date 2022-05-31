@@ -4,18 +4,18 @@ import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/nutrients/nutrient_unit.dart';
 
 class NutrientLabel extends StatelessWidget {
-  final String name;
-  final double value;
-  final NutrientUnit unit;
-  final Color? backgroundColor;
-
   const NutrientLabel({
-    Key? key,
+    super.key,
     required this.name,
     required this.value,
     required this.unit,
     this.backgroundColor,
-  }) : super(key: key);
+  });
+
+  final String name;
+  final double value;
+  final NutrientUnit unit;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +51,7 @@ class NutrientLabel extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Text(
-              '  ' + unit.unitText,
+              '  ' + unit.value,
               style: const TextStyle(
                 fontSize: FontSize.body,
               ),

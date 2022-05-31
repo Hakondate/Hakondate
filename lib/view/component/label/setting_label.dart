@@ -7,12 +7,12 @@ import 'package:hakondate/router/routes.dart';
 
 class SettingLabel extends StatelessWidget {
   const SettingLabel({
-    Key? key,
+    super.key,
     required this.title,
     required this.dialList,
     required this.completed,
     required this.trailing,
-  }) : super(key: key);
+  });
 
   final String title;
   final List<String> dialList;

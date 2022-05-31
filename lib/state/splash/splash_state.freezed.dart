@@ -16,11 +16,43 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SplashState {
-  LoadingStatus get loadingStatus => throw _privateConstructorUsedError;
-  bool get isErrorOccurring => throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $SplashStateCopyWith<SplashState> get copyWith =>
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(LoadingStatus status) load,
+    required TResult Function(Exception error) error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(LoadingStatus status)? load,
+    TResult Function(Exception error)? error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(LoadingStatus status)? load,
+    TResult Function(Exception error)? error,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SplashStateLoad value) load,
+    required TResult Function(SplashStateError value) error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(SplashStateLoad value)? load,
+    TResult Function(SplashStateError value)? error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SplashStateLoad value)? load,
+    TResult Function(SplashStateError value)? error,
+    required TResult orElse(),
+  }) =>
       throw _privateConstructorUsedError;
 }
 
@@ -29,7 +61,6 @@ abstract class $SplashStateCopyWith<$Res> {
   factory $SplashStateCopyWith(
           SplashState value, $Res Function(SplashState) then) =
       _$SplashStateCopyWithImpl<$Res>;
-  $Res call({LoadingStatus loadingStatus, bool isErrorOccurring});
 }
 
 /// @nodoc
@@ -39,116 +70,274 @@ class _$SplashStateCopyWithImpl<$Res> implements $SplashStateCopyWith<$Res> {
   final SplashState _value;
   // ignore: unused_field
   final $Res Function(SplashState) _then;
-
-  @override
-  $Res call({
-    Object? loadingStatus = freezed,
-    Object? isErrorOccurring = freezed,
-  }) {
-    return _then(_value.copyWith(
-      loadingStatus: loadingStatus == freezed
-          ? _value.loadingStatus
-          : loadingStatus // ignore: cast_nullable_to_non_nullable
-              as LoadingStatus,
-      isErrorOccurring: isErrorOccurring == freezed
-          ? _value.isErrorOccurring
-          : isErrorOccurring // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
-abstract class _$SplashStateCopyWith<$Res>
-    implements $SplashStateCopyWith<$Res> {
-  factory _$SplashStateCopyWith(
-          _SplashState value, $Res Function(_SplashState) then) =
-      __$SplashStateCopyWithImpl<$Res>;
-  @override
-  $Res call({LoadingStatus loadingStatus, bool isErrorOccurring});
+abstract class _$$SplashStateLoadCopyWith<$Res> {
+  factory _$$SplashStateLoadCopyWith(
+          _$SplashStateLoad value, $Res Function(_$SplashStateLoad) then) =
+      __$$SplashStateLoadCopyWithImpl<$Res>;
+  $Res call({LoadingStatus status});
 }
 
 /// @nodoc
-class __$SplashStateCopyWithImpl<$Res> extends _$SplashStateCopyWithImpl<$Res>
-    implements _$SplashStateCopyWith<$Res> {
-  __$SplashStateCopyWithImpl(
-      _SplashState _value, $Res Function(_SplashState) _then)
-      : super(_value, (v) => _then(v as _SplashState));
+class __$$SplashStateLoadCopyWithImpl<$Res>
+    extends _$SplashStateCopyWithImpl<$Res>
+    implements _$$SplashStateLoadCopyWith<$Res> {
+  __$$SplashStateLoadCopyWithImpl(
+      _$SplashStateLoad _value, $Res Function(_$SplashStateLoad) _then)
+      : super(_value, (v) => _then(v as _$SplashStateLoad));
 
   @override
-  _SplashState get _value => super._value as _SplashState;
+  _$SplashStateLoad get _value => super._value as _$SplashStateLoad;
 
   @override
   $Res call({
-    Object? loadingStatus = freezed,
-    Object? isErrorOccurring = freezed,
+    Object? status = freezed,
   }) {
-    return _then(_SplashState(
-      loadingStatus: loadingStatus == freezed
-          ? _value.loadingStatus
-          : loadingStatus // ignore: cast_nullable_to_non_nullable
+    return _then(_$SplashStateLoad(
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
               as LoadingStatus,
-      isErrorOccurring: isErrorOccurring == freezed
-          ? _value.isErrorOccurring
-          : isErrorOccurring // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_SplashState implements _SplashState {
-  const _$_SplashState(
-      {this.loadingStatus = LoadingStatus.unloading,
-      this.isErrorOccurring = false});
+class _$SplashStateLoad implements SplashStateLoad {
+  const _$SplashStateLoad({required this.status});
 
   @override
-  @JsonKey()
-  final LoadingStatus loadingStatus;
-  @override
-  @JsonKey()
-  final bool isErrorOccurring;
+  final LoadingStatus status;
 
   @override
   String toString() {
-    return 'SplashState(loadingStatus: $loadingStatus, isErrorOccurring: $isErrorOccurring)';
+    return 'SplashState.load(status: $status)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _SplashState &&
-            const DeepCollectionEquality()
-                .equals(other.loadingStatus, loadingStatus) &&
-            const DeepCollectionEquality()
-                .equals(other.isErrorOccurring, isErrorOccurring));
+            other is _$SplashStateLoad &&
+            const DeepCollectionEquality().equals(other.status, status));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(loadingStatus),
-      const DeepCollectionEquality().hash(isErrorOccurring));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(status));
 
   @JsonKey(ignore: true)
   @override
-  _$SplashStateCopyWith<_SplashState> get copyWith =>
-      __$SplashStateCopyWithImpl<_SplashState>(this, _$identity);
+  _$$SplashStateLoadCopyWith<_$SplashStateLoad> get copyWith =>
+      __$$SplashStateLoadCopyWithImpl<_$SplashStateLoad>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(LoadingStatus status) load,
+    required TResult Function(Exception error) error,
+  }) {
+    return load(status);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(LoadingStatus status)? load,
+    TResult Function(Exception error)? error,
+  }) {
+    return load?.call(status);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(LoadingStatus status)? load,
+    TResult Function(Exception error)? error,
+    required TResult orElse(),
+  }) {
+    if (load != null) {
+      return load(status);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SplashStateLoad value) load,
+    required TResult Function(SplashStateError value) error,
+  }) {
+    return load(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(SplashStateLoad value)? load,
+    TResult Function(SplashStateError value)? error,
+  }) {
+    return load?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SplashStateLoad value)? load,
+    TResult Function(SplashStateError value)? error,
+    required TResult orElse(),
+  }) {
+    if (load != null) {
+      return load(this);
+    }
+    return orElse();
+  }
 }
 
-abstract class _SplashState implements SplashState {
-  const factory _SplashState(
-      {final LoadingStatus loadingStatus,
-      final bool isErrorOccurring}) = _$_SplashState;
+abstract class SplashStateLoad implements SplashState {
+  const factory SplashStateLoad({required final LoadingStatus status}) =
+      _$SplashStateLoad;
+
+  LoadingStatus get status => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$SplashStateLoadCopyWith<_$SplashStateLoad> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SplashStateErrorCopyWith<$Res> {
+  factory _$$SplashStateErrorCopyWith(
+          _$SplashStateError value, $Res Function(_$SplashStateError) then) =
+      __$$SplashStateErrorCopyWithImpl<$Res>;
+  $Res call({Exception error});
+}
+
+/// @nodoc
+class __$$SplashStateErrorCopyWithImpl<$Res>
+    extends _$SplashStateCopyWithImpl<$Res>
+    implements _$$SplashStateErrorCopyWith<$Res> {
+  __$$SplashStateErrorCopyWithImpl(
+      _$SplashStateError _value, $Res Function(_$SplashStateError) _then)
+      : super(_value, (v) => _then(v as _$SplashStateError));
 
   @override
-  LoadingStatus get loadingStatus => throw _privateConstructorUsedError;
+  _$SplashStateError get _value => super._value as _$SplashStateError;
+
   @override
-  bool get isErrorOccurring => throw _privateConstructorUsedError;
+  $Res call({
+    Object? error = freezed,
+  }) {
+    return _then(_$SplashStateError(
+      error: error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as Exception,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SplashStateError implements SplashStateError {
+  const _$SplashStateError({required this.error});
+
   @override
+  final Exception error;
+
+  @override
+  String toString() {
+    return 'SplashState.error(error: $error)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SplashStateError &&
+            const DeepCollectionEquality().equals(other.error, error));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(error));
+
   @JsonKey(ignore: true)
-  _$SplashStateCopyWith<_SplashState> get copyWith =>
+  @override
+  _$$SplashStateErrorCopyWith<_$SplashStateError> get copyWith =>
+      __$$SplashStateErrorCopyWithImpl<_$SplashStateError>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(LoadingStatus status) load,
+    required TResult Function(Exception error) error,
+  }) {
+    return error(this.error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(LoadingStatus status)? load,
+    TResult Function(Exception error)? error,
+  }) {
+    return error?.call(this.error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(LoadingStatus status)? load,
+    TResult Function(Exception error)? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this.error);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SplashStateLoad value) load,
+    required TResult Function(SplashStateError value) error,
+  }) {
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(SplashStateLoad value)? load,
+    TResult Function(SplashStateError value)? error,
+  }) {
+    return error?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SplashStateLoad value)? load,
+    TResult Function(SplashStateError value)? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SplashStateError implements SplashState {
+  const factory SplashStateError({required final Exception error}) =
+      _$SplashStateError;
+
+  Exception get error => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$SplashStateErrorCopyWith<_$SplashStateError> get copyWith =>
       throw _privateConstructorUsedError;
 }
