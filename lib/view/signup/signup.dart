@@ -5,6 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/state/signup/signup_state.dart';
+import 'package:hakondate/router/routes.dart';
+import 'package:hakondate/view/component/dialog/hakondate_dialog/hakondate_dialog.dart';
 import 'package:hakondate/view/component/dialog/help_dialog.dart';
 import 'package:hakondate/view/component/label/setting_label.dart';
 import 'package:hakondate/view/signup/signing_up_dialog.dart';

@@ -11,6 +11,7 @@ import 'package:hakondate/repository/remote/menus_remote_repository.dart';
 import 'package:hakondate/repository/remote/schools_remote_repository.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/splash/splash_state.dart';
+import 'package:hakondate/view/component/dialog/hakondate_dialog/hakondate_dialog.dart';
 import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 import 'package:hakondate/view_model/single_page/daily_view_model.dart';
 
