@@ -16,7 +16,7 @@ class DailyViewModel extends StateNotifier<DailyState> {
       : super(DailyState(
           selectedDay: DateTime.now(),
           focusedDay: DateTime.now(),
-          calendarTabFirstDay: DateTime(2022, 5, 16),
+          calendarTabFirstDay: DateTime(2019, 8, 1),
           calendarTabLastDay: DateTime(
             DateTime.now().year,
             DateTime.now().month + 2,
@@ -29,7 +29,7 @@ class DailyViewModel extends StateNotifier<DailyState> {
   Future<void> updateSelectedDay({DateTime? selectedDay, DateTime? focusedDay}) async {
     switch (Environment.flavor) {
       case Flavor.dev:
-        selectedDay ??= DateTime(2021, 7, 1);
+        selectedDay ??= DateTime(2022, 5, 16);
         break;
       case Flavor.stg:
       case Flavor.prod:
