@@ -91,6 +91,8 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryBase {
 
   @override
   Future<DateTime> getLatestUpdateDay() async {
+    if (await count() < 1) return DateTime(1970);
+
     final Expression<DateTime> exp = _db.schoolsTable.updateAt.max();
     final query = _db.selectOnly(_db.schoolsTable)..addColumns([exp]);
     final DateTime? day = await query.map((scheme) => scheme.read(exp)).getSingleOrNull();
