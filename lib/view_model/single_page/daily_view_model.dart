@@ -16,7 +16,7 @@ class DailyViewModel extends StateNotifier<DailyState> {
       : super(DailyState(
           selectedDay: DateTime.now(),
           focusedDay: DateTime.now(),
-          calendarTabFirstDay: DateTime(2019, 8, 1),
+          calendarTabFirstDay: DateTime(2022, 5, 16),
           calendarTabLastDay: DateTime(
             DateTime.now().year,
             DateTime.now().month + 2,
