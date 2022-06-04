@@ -31,7 +31,7 @@
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>このアプリの利用には許可が必要です。</string>
 	<key>NSUserTrackingUsageDescription</key>
-    <string>許可をいただき収集したお客様のご利用情報は、給食情報の提供元である小中学校・市役所と共有し本サービスの品質の向上に役立たせていただきます。
+	<string>許可をいただき収集したお客様のご利用情報は、給食情報の提供元である小中学校・市役所と共有し本サービスの品質の向上に役立たせていただきます。
 より便利で親しみやすいサービスの提供を行う為、トラッキングの許可をお願いいたします。</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
