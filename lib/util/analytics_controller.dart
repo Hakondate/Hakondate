@@ -11,8 +11,14 @@ class AnalyticsController extends StateNotifier<FirebaseAnalytics> {
 
   Future<void> logSignup() => state.logSignUp(signUpMethod: 'original');
 
-  Future<void> logSelectMenu(int id) => state.logSelectContent(
-    contentType: 'menu',
-    itemId: id.toString(),
-  );
+  Future<void> logViewMenu(int id) async {
+    await state.logSelectContent(
+      contentType: 'menu',
+      itemId: id.toString(),
+    );
+    await state.logScreenView(
+      screenClass: 'Daily',
+      screenName: id.toString(),
+    );
+  }
 }

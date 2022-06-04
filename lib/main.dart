@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -22,6 +23,7 @@ Future<void> main() async {
       DeviceOrientation.portraitDown,
     ]);
     await initializeDateFormatting('ja_JP');
+    await AppTrackingTransparency.requestTrackingAuthorization();
     if (Firebase.apps.isEmpty) {
       await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,

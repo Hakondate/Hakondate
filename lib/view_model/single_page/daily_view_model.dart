@@ -49,7 +49,7 @@ class DailyViewModel extends StateNotifier<DailyState> {
 
     final MenuModel menu = state.menu;
     if (menu is LunchesDayMenuModel) {
-      await _analyticsController.logSelectMenu(menu.id);
+      await _analyticsController.logViewMenu(menu.id);
     }
 
     state = state.copyWith(isFetching: false);
