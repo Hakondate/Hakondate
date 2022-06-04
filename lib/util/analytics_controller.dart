@@ -21,4 +21,37 @@ class AnalyticsController extends StateNotifier<FirebaseAnalytics> {
       screenName: id.toString(),
     );
   }
+
+  Future<void> logViewRecipe(int id) async {
+    await state.logSelectContent(
+      contentType: 'recipe',
+      itemId: id.toString(),
+    );
+    await state.logScreenView(
+      screenClass: 'Recipe',
+      screenName: id.toString(),
+    );
+  }
+
+  Future<void> logViewDictionary(int id) async {
+    await state.logSelectContent(
+      contentType: 'foodstuff',
+      itemId: id.toString(),
+    );
+    await state.logScreenView(
+      screenClass: 'Dictionary',
+      screenName: id.toString(),
+    );
+  }
+
+  Future<void> logViewLetter(int id) async {
+    await state.logSelectContent(
+      contentType: 'letter',
+      itemId: id.toString(),
+    );
+    await state.logScreenView(
+      screenClass: 'Letter',
+      screenName: id.toString(),
+    );
+  }
 }
