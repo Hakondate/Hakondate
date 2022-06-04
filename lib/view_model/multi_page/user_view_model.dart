@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hakondate/util/analytics_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:hakondate/constant/app_key.dart';
@@ -14,6 +13,7 @@ import 'package:hakondate/model/user/user_model.dart';
 import 'package:hakondate/repository/local/schools_local_repository.dart';
 import 'package:hakondate/repository/local/users_local_repository.dart';
 import 'package:hakondate/state/user/user_state.dart';
+import 'package:hakondate/util/analytics_controller.dart';
 import 'package:hakondate/util/exception/shared_preferences_exception.dart';
 import 'package:hakondate/util/exception/sign_in_exception.dart';
 
