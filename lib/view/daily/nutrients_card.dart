@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate/util/exception/class_type_exception.dart';
 import 'package:multi_charts/multi_charts.dart';
 
 import 'package:hakondate/constant/app_color.dart';
@@ -64,7 +65,7 @@ class NutrientsCard extends StatelessWidget {
         final MenuModel menu = ref.watch(dailyProvider).menu;
 
         if (menu is! LunchesDayMenuModel) {
-          throw Exception("'menu' is not 'LunchesDayMenuModel'");
+          throw const ClassTypeException("'menu' is not 'LunchesDayMenuModel'");
         }
 
         return ExpansionTile(

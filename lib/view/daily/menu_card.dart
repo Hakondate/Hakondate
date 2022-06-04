@@ -7,6 +7,7 @@ import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/dish/dish_model.dart';
 import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:hakondate/router/routes.dart';
+import 'package:hakondate/util/exception/class_type_exception.dart';
 import 'package:hakondate/view_model/single_page/daily_view_model.dart';
 
 class MenuCard extends StatelessWidget {
@@ -19,7 +20,7 @@ class MenuCard extends StatelessWidget {
         final menu = ref.watch(dailyProvider).menu;
 
         if (menu is! LunchesDayMenuModel) {
-          throw Exception("'menu' is not 'LunchesDayMenuModel'");
+          throw const ClassTypeException("'menu' is not 'LunchesDayMenuModel'");
         }
 
         return Card(

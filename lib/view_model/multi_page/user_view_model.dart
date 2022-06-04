@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate/util/analytics_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:hakondate/constant/app_key.dart';
@@ -19,15 +20,17 @@ import 'package:hakondate/util/exception/sign_in_exception.dart';
 final userProvider = StateNotifierProvider<UserViewModel, UserState>((ref) {
   final UsersLocalRepository usersLocalRepository = ref.read(usersLocalRepositoryProvider);
   final SchoolsLocalRepository schoolsLocalRepository = ref.read(schoolsLocalRepositoryProvider);
-  return UserViewModel(schoolsLocalRepository, usersLocalRepository);
+  final AnalyticsController analyticsController = ref.read(analyticsControllerProvider.notifier);
+  return UserViewModel(schoolsLocalRepository, usersLocalRepository, analyticsController);
 });
 
 class UserViewModel extends StateNotifier<UserState> {
-  UserViewModel(this._schoolsLocalRepository, this._usersLocalRepository)
+  UserViewModel(this._schoolsLocalRepository, this._usersLocalRepository, this._analyticsController)
       : super(const UserState());
 
   final SchoolsLocalRepository _schoolsLocalRepository;
   final UsersLocalRepository _usersLocalRepository;
+  final AnalyticsController _analyticsController;
 
   Future<bool> signIn() async {
     if (await _usersLocalRepository.count() == 0) return false;
@@ -109,6 +112,7 @@ class UserViewModel extends StateNotifier<UserState> {
   }) async {
     final int id = await _usersLocalRepository.add(name, schoolId, schoolYear);
     await changeCurrentUser(id);
+    await _analyticsController.logSignup();
 
     return id;
   }
