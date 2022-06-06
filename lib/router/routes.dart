@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hakondate/view/license/license.dart';
 
 import 'package:routemaster/routemaster.dart';
 
@@ -35,7 +36,7 @@ final routemaster = RoutemasterDelegate(
       '/home/user_settings': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
       '/home/about_us': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
       '/home/help': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
-      '/home/license': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
+      '/home/license': (_) => const MaterialPage(child: License()),
       '/home/origin': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
     },
   ),
