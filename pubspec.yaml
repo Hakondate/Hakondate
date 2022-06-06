@@ -38,7 +38,7 @@ dependencies:
   intl: ^0.17.0
 
   # 遷移関連
-  routemaster: ^1.0.0
+  routemaster: ^1.0.1
 
   # Firebase関連
   app_tracking_transparency: ^2.0.2+4
