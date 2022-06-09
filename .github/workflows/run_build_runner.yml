@@ -1,0 +1,25 @@
+name: run build_runner
+
+on:
+  push:
+    branches: [ "develop" ]
+  pull_request:
+    branches: [ "develop" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: 'Setup flutter environment'
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+        
+      - name: 'Get packages'
+        run: flutter pub get
+      
+      - name: 'Run import_sorter'
+        run: flutter pub run import_sorter:main
