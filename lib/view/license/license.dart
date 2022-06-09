@@ -1,37 +1,35 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
+import 'package:hakondate/constant/app_color.dart';
+import 'package:hakondate/constant/oss_licenses.dart';
+import 'package:hakondate/router/routes.dart';
+import 'package:hakondate/view/component/frame/fade_up_app_bar.dart';
 
 class License extends StatelessWidget {
   const License({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final List<Package> directDependencyLicenses = ossLicenses.where(
+            (package) => package.isDirectDependency).toList();
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('ライセンス'),
+      backgroundColor: AppColor.ui.white,
+      appBar: const FadeUpAppBar(
+        title: Text('ライセンス'),
       ),
-      body: FutureBuilder(
-        future: LicenseRegistry.licenses.toList(),
-        builder: (BuildContext context, AsyncSnapshot<List<LicenseEntry>> snapshot) {
-          if (snapshot.connectionState != ConnectionState.done) {
-            return const SizedBox.shrink();
-          }
-
-          final List<LicenseEntry>? licenses = snapshot.data;
-          if (licenses != null) {
-            return ListView.builder(
-              itemCount: licenses.length,
-              itemBuilder: (BuildContext context, int index) {
-                final LicenseEntry license = licenses[index];
-
-                return ListTile(
-                  title: Text(license.packages.toString()),
-                );
-              },
-            );
-          }
-
-          return const SizedBox.shrink();
+      body: ListView.separated(
+        itemCount: directDependencyLicenses.length,
+        separatorBuilder: (_, __) => const Divider(
+          height: 0.0,
+        ),
+        itemBuilder: (_, int index) {
+          final Package package = directDependencyLicenses[index];
+          return ListTile(
+            title: Text(package.name),
+            trailing: const Icon(Icons.chevron_right_rounded),
+            onTap: () => routemaster.push(index.toString()),
+          );
         },
       ),
     );
