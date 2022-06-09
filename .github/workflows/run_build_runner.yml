@@ -13,9 +13,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      - uses: subosito/flutter-action@v2
+      - name: 'Setup flutter environment'
+        uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-      - run: flutter pub get
-      - run: flutter pub run flutter_oss_licenses:generate.dart -o lib/constant/oss_licenses.dart
-      - run: flutter pub run import_sorter:main
+        
+      - name: 'Get packages'
+        run: flutter pub get
+      - name: 'Run flutter_oss_licenses'
+        run: flutter pub run flutter_oss_licenses:generate.dart -o lib/constant/oss_licenses.dart
+      - name: 'Run import_sorter'
+        run: flutter pub run import_sorter:main
