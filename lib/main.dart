@@ -1,25 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:routemaster/routemaster.dart';
 
 import 'package:hakondate/constant/app_color.dart';
+import 'package:hakondate/repository/remote/firebase_options.dart';
 import 'package:hakondate/router/routes.dart';
+import 'package:hakondate/util/app_unique_key.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
   await initializeDateFormatting('ja_JP');
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const Hakondate());
 }
 
 class Hakondate extends StatelessWidget {
-  const Hakondate({Key? key}) : super(key: key);
+  const Hakondate({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -50,12 +56,22 @@ class Hakondate extends StatelessWidget {
     );
 
     return ProviderScope(
-      child: MaterialApp.router(
-        title: 'はこんだて',
-        theme: theme,
-        routerDelegate: routemaster,
-        routeInformationParser: const RoutemasterParser(),
-        debugShowCheckedModeBanner: false,
+      child: Consumer(
+        builder: (BuildContext context, WidgetRef ref, _) {
+          return MaterialApp.router(
+            key: key ?? ref.watch(appUniqueKeyProvider),
+            title: 'はこんだて',
+            theme: theme.copyWith(
+              colorScheme: theme.colorScheme.copyWith(
+                primary: AppColor.brand.primary,
+                secondary: AppColor.brand.secondary,
+              ),
+            ),
+            routerDelegate: routemaster,
+            routeInformationParser: const RoutemasterParser(),
+            debugShowCheckedModeBanner: false,
+          );
+        },
       ),
     );
   }

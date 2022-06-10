@@ -158,11 +158,11 @@ class _$NutrientsModelCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$NutrientsModelCopyWith<$Res>
+abstract class _$$_NutrientsModelCopyWith<$Res>
     implements $NutrientsModelCopyWith<$Res> {
-  factory _$NutrientsModelCopyWith(
-          _NutrientsModel value, $Res Function(_NutrientsModel) then) =
-      __$NutrientsModelCopyWithImpl<$Res>;
+  factory _$$_NutrientsModelCopyWith(
+          _$_NutrientsModel value, $Res Function(_$_NutrientsModel) then) =
+      __$$_NutrientsModelCopyWithImpl<$Res>;
   @override
   $Res call(
       {double energy,
@@ -183,15 +183,15 @@ abstract class _$NutrientsModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$NutrientsModelCopyWithImpl<$Res>
+class __$$_NutrientsModelCopyWithImpl<$Res>
     extends _$NutrientsModelCopyWithImpl<$Res>
-    implements _$NutrientsModelCopyWith<$Res> {
-  __$NutrientsModelCopyWithImpl(
-      _NutrientsModel _value, $Res Function(_NutrientsModel) _then)
-      : super(_value, (v) => _then(v as _NutrientsModel));
+    implements _$$_NutrientsModelCopyWith<$Res> {
+  __$$_NutrientsModelCopyWithImpl(
+      _$_NutrientsModel _value, $Res Function(_$_NutrientsModel) _then)
+      : super(_value, (v) => _then(v as _$_NutrientsModel));
 
   @override
-  _NutrientsModel get _value => super._value as _NutrientsModel;
+  _$_NutrientsModel get _value => super._value as _$_NutrientsModel;
 
   @override
   $Res call({
@@ -211,7 +211,7 @@ class __$NutrientsModelCopyWithImpl<$Res>
     Object? dietaryFiber = freezed,
     Object? salt = freezed,
   }) {
-    return _then(_NutrientsModel(
+    return _then(_$_NutrientsModel(
       energy: energy == freezed
           ? _value.energy
           : energy // ignore: cast_nullable_to_non_nullable
@@ -392,7 +392,7 @@ class _$_NutrientsModel
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _NutrientsModel &&
+            other is _$_NutrientsModel &&
             const DeepCollectionEquality().equals(other.energy, energy) &&
             const DeepCollectionEquality().equals(other.protein, protein) &&
             const DeepCollectionEquality().equals(other.lipid, lipid) &&
@@ -434,8 +434,8 @@ class _$_NutrientsModel
 
   @JsonKey(ignore: true)
   @override
-  _$NutrientsModelCopyWith<_NutrientsModel> get copyWith =>
-      __$NutrientsModelCopyWithImpl<_NutrientsModel>(this, _$identity);
+  _$$_NutrientsModelCopyWith<_$_NutrientsModel> get copyWith =>
+      __$$_NutrientsModelCopyWithImpl<_$_NutrientsModel>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -496,6 +496,6 @@ abstract class _NutrientsModel implements NutrientsModel {
   double get salt => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$NutrientsModelCopyWith<_NutrientsModel> get copyWith =>
+  _$$_NutrientsModelCopyWith<_$_NutrientsModel> get copyWith =>
       throw _privateConstructorUsedError;
 }

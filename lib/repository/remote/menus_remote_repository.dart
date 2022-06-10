@@ -1,33 +1,33 @@
-import 'dart:convert';
-
-import 'package:flutter/services.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:hakondate/util/environment.dart';
+import 'package:hakondate/repository/remote/firestore_database.dart';
+import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 
-final menusRemoteRepositoryProvider = Provider<MenusRemoteRepository>((ref) =>
-    MenusRemoteRepository());
+final menusRemoteRepositoryProvider = Provider<MenusRemoteRepository>((ref) {
+  final FirestoreDatabase firestoreDatabase = ref.read(firestoreDatabaseProvider.notifier);
+  final UserViewModel userReader = ref.read(userProvider.notifier);
+  return MenusRemoteRepository(firestoreDatabase.menusCollection, userReader);
+});
 
 abstract class MenusRemoteRepositoryBase {
-  Future<bool> checkUpdate(int schoolId);
-  Future<List<dynamic>> downloadMenus();
+  Future<List<dynamic>> get({required DateTime updateAt});
 }
 
 class MenusRemoteRepository extends MenusRemoteRepositoryBase {
-  MenusRemoteRepository() : super();
+  MenusRemoteRepository(this._db, this._userReader) : super();
+
+  final CollectionReference<Map<String, dynamic>> _db;
+  final UserViewModel _userReader;
 
   @override
-  Future<bool> checkUpdate(int schoolId) async {
-    return true;
-  }
+  Future<List<dynamic>> get({required DateTime updateAt}) async {
+    final int schoolId = await _userReader.getParentId();
+    final firestoreData = await _db
+        .where('schoolId', isEqualTo: schoolId)
+        .where('updateAt', isGreaterThan: updateAt)
+        .get();
 
-  @override
-  Future<List<dynamic>> downloadMenus() async {
-    if (Environment.flavor == Flavor.dev) {
-      return json.decode(await rootBundle.loadString('assets/debug/demo_menus.json'));
-    }
-
-    return [];
+    return firestoreData.docs.map((doc) => doc.data()).toList();
   }
 }

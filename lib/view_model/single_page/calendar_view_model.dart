@@ -43,7 +43,7 @@ class CalendarViewModel extends StateNotifier<CalendarState> {
         fetchPreviousMonth();
       }
     });
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       state = state.copyWith(
         oldestDay: DateTime(
           _dailyProviderReader.state.selectedDay.year,
