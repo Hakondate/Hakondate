@@ -6,7 +6,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -19,6 +19,7 @@ dependencies:
   multi_charts: ^0.3.0
   table_calendar: ^3.0.4
   flutter_svg: ^1.0.3
+  flutter_pdfview: ^1.2.2
 
   # 状態管理関連
   flutter_riverpod: ^1.0.0-dev.5
@@ -39,6 +40,9 @@ dependencies:
 
   # 遷移関連
   routemaster: ^0.10.0-dev5
+
+  # 通信関連
+  http: ^0.13.4
 
 dev_dependencies:
   flutter_test:

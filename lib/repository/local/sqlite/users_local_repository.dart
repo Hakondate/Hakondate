@@ -2,7 +2,7 @@ import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/model/user/user_model.dart';
-import 'package:hakondate/repository/local/database_manager.dart';
+import 'package:hakondate/repository/local/sqlite/database_manager.dart';
 
 final usersLocalRepositoryProvider = Provider<UsersLocalRepository>((ref) {
   final DatabaseManager databaseManager = ref.read(databaseManagerProvider);

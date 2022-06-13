@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/menu/menu_model.dart';
-import 'package:hakondate/repository/local/menus_local_repository.dart';
+import 'package:hakondate/repository/local/sqlite/menus_local_repository.dart';
 import 'package:hakondate/state/calendar/calendar_state.dart';
 import 'package:hakondate/view_model/single_page/daily_view_model.dart';
 

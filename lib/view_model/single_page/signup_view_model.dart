@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/model/school/school_model.dart';
-import 'package:hakondate/repository/local/schools_local_repository.dart';
+import 'package:hakondate/repository/local/sqlite/schools_local_repository.dart';
 import 'package:hakondate/state/signup/signup_state.dart';
 
 final signupProvider = StateNotifierProvider<SignupViewModel, SignupState>((ref) {

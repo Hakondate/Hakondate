@@ -6,7 +6,7 @@ import 'package:hakondate/model/foodstuff/foodstuff_model.dart';
 import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:hakondate/model/nutrients/nutrients_model.dart';
 import 'package:hakondate/model/quantity/quantity_model.dart';
-import 'package:hakondate/repository/local/database_manager.dart';
+import 'package:hakondate/repository/local/sqlite/database_manager.dart';
 import 'package:hakondate/view_model/multi_page/common_function.dart';
 
 final menusLocalRepositoryProvider = Provider<MenusLocalRepository>((ref) {

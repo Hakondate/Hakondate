@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/model/user/user_model.dart';
-import 'package:hakondate/repository/local/schools_local_repository.dart';
+import 'package:hakondate/repository/local/sqlite/schools_local_repository.dart';
 import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 
 final commonFunctionProvider = StateNotifierProvider<CommonFunction, void>((ref) => CommonFunction(ref.read));
