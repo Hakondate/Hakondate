@@ -12,6 +12,7 @@ final openDataRecipeRepositoryProvider = Provider<OpenDataRecipeRepository>((ref
 
 abstract class OpenDataRecipeRepositoryBase {
   Future<String?> add({required String path, required Uint8List bytes});
+  String? getPath({required String path});
 }
 
 class OpenDataRecipeRepository extends OpenDataRecipeRepositoryBase {
@@ -21,13 +22,23 @@ class OpenDataRecipeRepository extends OpenDataRecipeRepositoryBase {
 
   @override
   Future<String?> add({required String path, required Uint8List bytes}) async {
-    return _localDirectory.when(
+    return await _localDirectory.when(
       data: (LocalDirectory directory) async {
         final File file = File(directory.path + path);
         if (!await file.exists()) await file.writeAsBytes(bytes);
 
         return file.path;
       },
+      error: (Object error, StackTrace? stack) =>
+          throw const LocalDirectoryException('Local directory provider is not initialized'),
+      loading: () => null,
+    );
+  }
+
+  @override
+  String? getPath({required String path}) {
+    return _localDirectory.when(
+      data: (LocalDirectory directory) => directory.path + path,
       error: (Object error, StackTrace? stack) =>
           throw const LocalDirectoryException('Local directory provider is not initialized'),
       loading: () => null,

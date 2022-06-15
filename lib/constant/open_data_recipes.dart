@@ -9,6 +9,19 @@ class OpenDataRecipes {
     ...others,
   ];
 
+  static List<OpenDataRecipeModel> recipes(RecipeType type) {
+    switch (type) {
+      case RecipeType.dupe:
+        return dupes;
+      case RecipeType.original:
+        return originals;
+      case RecipeType.steamConvectionOven:
+        return steamConvectionOvens;
+      case RecipeType.other:
+        return others;
+    }
+  }
+
   static final List<OpenDataRecipeModel> dupes = [
     OpenDataRecipeModel(
       name: 'とろろ昆布のすまし汁',
@@ -43,13 +56,13 @@ class OpenDataRecipes {
     OpenDataRecipeModel(
       name: 'そうめんすまし汁',
       type: RecipeType.dupe,
-      thumbnail: 'B5soumen.jpeg',
+      thumbnail: 'B5soumen.JPG',
       pdf: 'B5soumen.pdf',
     ),
     OpenDataRecipeModel(
       name: 'けんちん汁',
       type: RecipeType.dupe,
-      thumbnail: 'B6kenchin.jpeg',
+      thumbnail: 'B6kenchin.jpg',
       pdf: 'B6kenchin.pdf',
     ),
     OpenDataRecipeModel(
@@ -100,7 +113,7 @@ class OpenDataRecipes {
     OpenDataRecipeModel(
       name: 'ぶりとなすのたたき風',
       type: RecipeType.original,
-      thumbnail: 'B3buritonautataki.jpeg',
+      thumbnail: 'B3buritonautataki.jpg',
       pdf: 'B3burinasutataki.pdf',
     ),
     OpenDataRecipeModel(
@@ -112,7 +125,7 @@ class OpenDataRecipes {
     OpenDataRecipeModel(
       name: '春採り昆布の佃煮、くじらの竜田揚げ',
       type: RecipeType.original,
-      thumbnail: 'B6harutorikujira.jpeg',
+      thumbnail: 'B6harutorikujira.jpg',
       pdf: 'B6konbukujira.pdf',
     ),
     OpenDataRecipeModel(

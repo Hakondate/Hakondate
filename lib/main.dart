@@ -29,6 +29,7 @@ class Hakondate extends StatelessWidget {
           color: AppColor.text.appBarTitle,
           fontSize: 20,
           fontWeight: FontWeight.bold,
+          fontFamily: 'MPLUSRounded1c',
         ),
         iconTheme: IconThemeData(
           color: AppColor.brand.secondary,
@@ -47,6 +48,7 @@ class Hakondate extends StatelessWidget {
         primary: AppColor.brand.primary,
         secondary: AppColor.brand.secondary,
       ),
+      scaffoldBackgroundColor: AppColor.ui.white,
     );
 
     return ProviderScope(
