@@ -23,7 +23,7 @@ class NonLunchesDayBody extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            'assets/images/menu_status/' + imageFileName,
+            'assets/images/status/menu_status/' + imageFileName,
             width: _screenWidth / 2,
           ),
           const SizedBox(height: MarginSize.normal),

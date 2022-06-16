@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'package:hakondate/model/recipe/recipe_type.dart';
 
 part 'open_data_recipe_model.freezed.dart';
@@ -16,7 +17,6 @@ class OpenDataRecipeModel with _$OpenDataRecipeModel {
   String? get thumbnailUrl => (thumbnail != null)
       ? 'https://www.city.hakodate.hokkaido.jp/docs/2016012500108/files/thumb/$thumbnail'
       : null;
-  String get pdfUrl => 'https://www.city.hakodate.hokkaido.jp/docs/2016012500108/files/thumb/$pdf';
-  String? get thumbnailPath => (thumbnail != null) ? '/open_data_recipes/thumbnails/$thumbnail' : null;
+  String get pdfUrl => 'https://www.city.hakodate.hokkaido.jp/docs/2016012500108/files/$pdf';
   String get pdfPath => '/open_data_recipes/pdfs/$pdf';
 }

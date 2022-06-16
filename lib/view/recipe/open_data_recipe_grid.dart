@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/open_data_recipes.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/recipe/open_data_recipe_model.dart';
 import 'package:hakondate/model/recipe/recipe_type.dart';
+import 'package:hakondate/router/routes.dart';
 
 class OpenDataRecipeGrid extends StatelessWidget {
   const OpenDataRecipeGrid({
@@ -29,6 +31,7 @@ class OpenDataRecipeGrid extends StatelessWidget {
 
   Widget _gridTile(OpenDataRecipeModel recipe) {
     return GestureDetector(
+      onTap: () => routemaster.push('/home/recipes_pdf/' + recipe.pdf),
       child: Container(
         margin: const EdgeInsets.all(MarginSize.shadow),
         width: double.infinity,
@@ -51,19 +54,22 @@ class OpenDataRecipeGrid extends StatelessWidget {
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(vertical: PaddingSize.minimum),
-              color: AppColor.ui.white,
+              color: AppColor.brand.secondary,
               child: Text(
                 recipe.name,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
+                style: TextStyle(
+                  color: AppColor.text.white,
                   fontWeight: FontWeight.bold,
+                  height: 1.1,
                 ),
               ),
             ),
             Expanded(
               child: Image.network(
                 recipe.thumbnailUrl ?? '',
-                fit: BoxFit.fitHeight,
+                width: double.infinity,
+                fit: BoxFit.cover,
                 loadingBuilder: (_, Widget child, ImageChunkEvent? loadingProgress) {
                   if (loadingProgress == null) return child;
                   return Center(

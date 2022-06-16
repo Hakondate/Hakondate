@@ -41,9 +41,6 @@ dependencies:
   # 遷移関連
   routemaster: ^0.10.0-dev5
 
-  # 通信関連
-  http: ^0.13.4
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -71,7 +68,8 @@ flutter:
     - assets/images/food_icon/
     - assets/images/menu_tile/
     - assets/images/label/
-    - assets/images/menu_status/
+    - assets/images/status/
+    - assets/images/status/menu_status/
     - assets/loading_animation/
     - assets/svgs/bottom_navigation_bar_icons/
 
