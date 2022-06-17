@@ -40,7 +40,8 @@ class RecipePDF extends ConsumerWidget {
           if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
             return PDFView(
               filePath: snapshot.data,
-              enableSwipe: true,
+              enableSwipe: false,
+              onError: (_) => ref.read(recipeProvider.notifier).reDownload(recipe: recipe),
             );
           }
 

@@ -28,4 +28,15 @@ class RecipeViewModel extends StateNotifier<void> {
     final Uint8List bytes = await _openDataRemoteRepository.getPDF(recipe.pdfUrl);
     return await _openDataLocalRepository.add(path: path, bytes: bytes);
   }
+
+  Future<void> reDownload({required OpenDataRecipeModel recipe}) async {
+    final String path = recipe.pdfPath;
+
+    if (await _openDataLocalRepository.isExist(path: path)) {
+      await _openDataLocalRepository.delete(path: path);
+    }
+
+    final Uint8List bytes = await _openDataRemoteRepository.getPDF(recipe.pdfUrl);
+    await _openDataLocalRepository.add(path: path, bytes: bytes);
+  }
 }
