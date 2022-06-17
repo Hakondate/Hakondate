@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$OpenDataRecipeModel {
+  int get id => throw _privateConstructorUsedError; // ID
   String get name => throw _privateConstructorUsedError; // 名前
   RecipeType get type => throw _privateConstructorUsedError; // タイプ
   String? get thumbnail => throw _privateConstructorUsedError; // サムネイル
@@ -31,7 +32,8 @@ abstract class $OpenDataRecipeModelCopyWith<$Res> {
   factory $OpenDataRecipeModelCopyWith(
           OpenDataRecipeModel value, $Res Function(OpenDataRecipeModel) then) =
       _$OpenDataRecipeModelCopyWithImpl<$Res>;
-  $Res call({String name, RecipeType type, String? thumbnail, String pdf});
+  $Res call(
+      {int id, String name, RecipeType type, String? thumbnail, String pdf});
 }
 
 /// @nodoc
@@ -45,12 +47,17 @@ class _$OpenDataRecipeModelCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
     Object? type = freezed,
     Object? thumbnail = freezed,
     Object? pdf = freezed,
   }) {
     return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -78,7 +85,8 @@ abstract class _$OpenDataRecipeModelCopyWith<$Res>
           $Res Function(_OpenDataRecipeModel) then) =
       __$OpenDataRecipeModelCopyWithImpl<$Res>;
   @override
-  $Res call({String name, RecipeType type, String? thumbnail, String pdf});
+  $Res call(
+      {int id, String name, RecipeType type, String? thumbnail, String pdf});
 }
 
 /// @nodoc
@@ -94,12 +102,17 @@ class __$OpenDataRecipeModelCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
     Object? type = freezed,
     Object? thumbnail = freezed,
     Object? pdf = freezed,
   }) {
     return _then(_OpenDataRecipeModel(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -124,12 +137,16 @@ class __$OpenDataRecipeModelCopyWithImpl<$Res>
 
 class _$_OpenDataRecipeModel extends _OpenDataRecipeModel {
   _$_OpenDataRecipeModel(
-      {required this.name,
+      {required this.id,
+      required this.name,
       this.type = RecipeType.other,
       this.thumbnail,
       required this.pdf})
       : super._();
 
+  @override
+  final int id;
+// ID
   @override
   final String name;
 // 名前
@@ -145,7 +162,7 @@ class _$_OpenDataRecipeModel extends _OpenDataRecipeModel {
 
   @override
   String toString() {
-    return 'OpenDataRecipeModel(name: $name, type: $type, thumbnail: $thumbnail, pdf: $pdf)';
+    return 'OpenDataRecipeModel(id: $id, name: $name, type: $type, thumbnail: $thumbnail, pdf: $pdf)';
   }
 
   @override
@@ -153,6 +170,7 @@ class _$_OpenDataRecipeModel extends _OpenDataRecipeModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _OpenDataRecipeModel &&
+            const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.type, type) &&
             const DeepCollectionEquality().equals(other.thumbnail, thumbnail) &&
@@ -162,6 +180,7 @@ class _$_OpenDataRecipeModel extends _OpenDataRecipeModel {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(type),
       const DeepCollectionEquality().hash(thumbnail),
@@ -176,13 +195,16 @@ class _$_OpenDataRecipeModel extends _OpenDataRecipeModel {
 
 abstract class _OpenDataRecipeModel extends OpenDataRecipeModel {
   factory _OpenDataRecipeModel(
-      {required final String name,
+      {required final int id,
+      required final String name,
       final RecipeType type,
       final String? thumbnail,
       required final String pdf}) = _$_OpenDataRecipeModel;
   _OpenDataRecipeModel._() : super._();
 
   @override
+  int get id => throw _privateConstructorUsedError;
+  @override // ID
   String get name => throw _privateConstructorUsedError;
   @override // 名前
   RecipeType get type => throw _privateConstructorUsedError;

@@ -31,7 +31,7 @@ class OpenDataRecipeGrid extends StatelessWidget {
 
   Widget _gridTile(OpenDataRecipeModel recipe) {
     return GestureDetector(
-      onTap: () => routemaster.push('/home/recipes_pdf/' + recipe.pdf),
+      onTap: () => routemaster.push('/home/recipes_pdf/${recipe.id}'),
       child: Container(
         margin: const EdgeInsets.all(MarginSize.shadow),
         width: double.infinity,
@@ -66,8 +66,8 @@ class OpenDataRecipeGrid extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Image.network(
-                recipe.thumbnailUrl ?? '',
+              child: (recipe.thumbnailUrl != null) ? Image.network(
+                recipe.thumbnailUrl!,
                 width: double.infinity,
                 fit: BoxFit.cover,
                 loadingBuilder: (_, Widget child, ImageChunkEvent? loadingProgress) {
@@ -78,19 +78,23 @@ class OpenDataRecipeGrid extends StatelessWidget {
                     ),
                   );
                 },
-                errorBuilder: (_, __, ___) => Container(
-                  width: double.infinity,
-                  color: AppColor.ui.unsupported,
-                  child: Icon(
-                    Icons.image_not_supported_outlined,
-                    size: IconSize.noImage,
-                    color: AppColor.ui.white,
-                  ),
-                ),
-              ),
+                errorBuilder: (_, __, ___) => _noImage(),
+              ) : _noImage(),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _noImage() {
+    return Container(
+      width: double.infinity,
+      color: AppColor.ui.unsupported,
+      child: Icon(
+        Icons.image_not_supported_outlined,
+        size: IconSize.noImage,
+        color: AppColor.ui.white,
       ),
     );
   }

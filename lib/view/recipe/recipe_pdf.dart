@@ -13,14 +13,14 @@ import 'package:hakondate/view_model/single_page/recipe_view_model.dart';
 class RecipePDF extends ConsumerWidget {
   const RecipePDF({
     super.key,
-    this.pdf,
+    this.id,
   });
 
-  final String? pdf;
+  final String? id;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final OpenDataRecipeModel recipe = OpenDataRecipes.all.firstWhere((recipe) => recipe.pdf == pdf);
+    final OpenDataRecipeModel recipe = OpenDataRecipes.all.firstWhere((recipe) => recipe.id == int.parse(id ?? '0'));
 
     return Scaffold(
       appBar: FadeUpAppBar(

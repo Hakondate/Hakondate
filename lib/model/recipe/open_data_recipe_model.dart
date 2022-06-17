@@ -8,6 +8,7 @@ part 'open_data_recipe_model.freezed.dart';
 class OpenDataRecipeModel with _$OpenDataRecipeModel {
   const OpenDataRecipeModel._();
   factory OpenDataRecipeModel({
+    required int id,                            // ID
     required String name,                       // 名前
     @Default(RecipeType.other) RecipeType type, // タイプ
     String? thumbnail,                          // サムネイル
