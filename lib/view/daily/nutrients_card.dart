@@ -6,12 +6,13 @@ import 'package:multi_charts/multi_charts.dart';
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/menu/menu_model.dart';
+import 'package:hakondate/util/exception/class_type_exception.dart';
 import 'package:hakondate/view/component/label/nutrients_list.dart';
 import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 import 'package:hakondate/view_model/single_page/daily_view_model.dart';
 
 class NutrientsCard extends StatelessWidget {
-  const NutrientsCard({Key? key}) : super(key: key);
+  const NutrientsCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +65,7 @@ class NutrientsCard extends StatelessWidget {
         final MenuModel menu = ref.watch(dailyProvider).menu;
 
         if (menu is! LunchesDayMenuModel) {
-          throw Exception("'menu' is not 'LunchesDayMenuModel'");
+          throw const ClassTypeException("'menu' is not 'LunchesDayMenuModel'");
         }
 
         return ExpansionTile(

@@ -53,29 +53,30 @@ class _$TermsStateCopyWithImpl<$Res> implements $TermsStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$TermsStateCopyWith<$Res> implements $TermsStateCopyWith<$Res> {
-  factory _$TermsStateCopyWith(
-          _TermsState value, $Res Function(_TermsState) then) =
-      __$TermsStateCopyWithImpl<$Res>;
+abstract class _$$_TermsStateCopyWith<$Res>
+    implements $TermsStateCopyWith<$Res> {
+  factory _$$_TermsStateCopyWith(
+          _$_TermsState value, $Res Function(_$_TermsState) then) =
+      __$$_TermsStateCopyWithImpl<$Res>;
   @override
   $Res call({bool isAgree});
 }
 
 /// @nodoc
-class __$TermsStateCopyWithImpl<$Res> extends _$TermsStateCopyWithImpl<$Res>
-    implements _$TermsStateCopyWith<$Res> {
-  __$TermsStateCopyWithImpl(
-      _TermsState _value, $Res Function(_TermsState) _then)
-      : super(_value, (v) => _then(v as _TermsState));
+class __$$_TermsStateCopyWithImpl<$Res> extends _$TermsStateCopyWithImpl<$Res>
+    implements _$$_TermsStateCopyWith<$Res> {
+  __$$_TermsStateCopyWithImpl(
+      _$_TermsState _value, $Res Function(_$_TermsState) _then)
+      : super(_value, (v) => _then(v as _$_TermsState));
 
   @override
-  _TermsState get _value => super._value as _TermsState;
+  _$_TermsState get _value => super._value as _$_TermsState;
 
   @override
   $Res call({
     Object? isAgree = freezed,
   }) {
-    return _then(_TermsState(
+    return _then(_$_TermsState(
       isAgree: isAgree == freezed
           ? _value.isAgree
           : isAgree // ignore: cast_nullable_to_non_nullable
@@ -110,7 +111,7 @@ class _$_TermsState with DiagnosticableTreeMixin implements _TermsState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _TermsState &&
+            other is _$_TermsState &&
             const DeepCollectionEquality().equals(other.isAgree, isAgree));
   }
 
@@ -120,8 +121,8 @@ class _$_TermsState with DiagnosticableTreeMixin implements _TermsState {
 
   @JsonKey(ignore: true)
   @override
-  _$TermsStateCopyWith<_TermsState> get copyWith =>
-      __$TermsStateCopyWithImpl<_TermsState>(this, _$identity);
+  _$$_TermsStateCopyWith<_$_TermsState> get copyWith =>
+      __$$_TermsStateCopyWithImpl<_$_TermsState>(this, _$identity);
 }
 
 abstract class _TermsState implements TermsState {
@@ -131,6 +132,6 @@ abstract class _TermsState implements TermsState {
   bool get isAgree => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$TermsStateCopyWith<_TermsState> get copyWith =>
+  _$$_TermsStateCopyWith<_$_TermsState> get copyWith =>
       throw _privateConstructorUsedError;
 }
