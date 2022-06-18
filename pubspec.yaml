@@ -6,7 +6,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -19,9 +19,10 @@ dependencies:
   multi_charts: ^0.3.0
   table_calendar: ^3.0.4
   flutter_svg: ^1.0.3
+  flutter_pdfview: ^1.2.2
 
   # 状態管理関連
-  flutter_riverpod: ^1.0.0-dev.5
+  flutter_riverpod: ^1.0.4
   freezed_annotation: ^2.0.1
   freezed: ^2.0.1
   json_serializable: ^6.1.6
@@ -38,7 +39,14 @@ dependencies:
   intl: ^0.17.0
 
   # 遷移関連
-  routemaster: ^0.10.0-dev5
+  routemaster: ^1.0.1
+
+  # Firebase関連
+  app_tracking_transparency: ^2.0.2+4
+  firebase_core: ^1.17.0
+  cloud_firestore: ^3.1.16
+  firebase_crashlytics: ^2.8.1
+  firebase_analytics: ^9.1.9
 
 dev_dependencies:
   flutter_test:
@@ -52,8 +60,7 @@ dev_dependencies:
   import_sorter: ^4.6.0
 
   # build_runner の実行コマンド
-  # flutter packages pub run build_runner build
-  # flutter packages pub run build_runner build --delete-conflicting-outputs (競合があった場合削除オプション)
+  # flutter packages pub run build_runner build --delete-conflicting-outputs
 
 flutter:
 
@@ -67,7 +74,8 @@ flutter:
     - assets/images/food_icon/
     - assets/images/menu_tile/
     - assets/images/label/
-    - assets/images/menu_status/
+    - assets/images/status/
+    - assets/images/status/menu_status/
     - assets/loading_animation/
     - assets/svgs/bottom_navigation_bar_icons/
 
@@ -115,6 +123,7 @@ import_sorter:
   ignored_files:
     - \/lib\/*\/*.freezed.dart
     - \/lib\/*\/*.g.dart
+    - \/lib\/*\/firebase_options.dart
 
   # 実行コマンド
   # flutter pub run import_sorter:main

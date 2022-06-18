@@ -98,10 +98,11 @@ class _$DailyStateCopyWithImpl<$Res> implements $DailyStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$DailyStateCopyWith<$Res> implements $DailyStateCopyWith<$Res> {
-  factory _$DailyStateCopyWith(
-          _DailyState value, $Res Function(_DailyState) then) =
-      __$DailyStateCopyWithImpl<$Res>;
+abstract class _$$_DailyStateCopyWith<$Res>
+    implements $DailyStateCopyWith<$Res> {
+  factory _$$_DailyStateCopyWith(
+          _$_DailyState value, $Res Function(_$_DailyState) then) =
+      __$$_DailyStateCopyWithImpl<$Res>;
   @override
   $Res call(
       {DateTime selectedDay,
@@ -116,14 +117,14 @@ abstract class _$DailyStateCopyWith<$Res> implements $DailyStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$DailyStateCopyWithImpl<$Res> extends _$DailyStateCopyWithImpl<$Res>
-    implements _$DailyStateCopyWith<$Res> {
-  __$DailyStateCopyWithImpl(
-      _DailyState _value, $Res Function(_DailyState) _then)
-      : super(_value, (v) => _then(v as _DailyState));
+class __$$_DailyStateCopyWithImpl<$Res> extends _$DailyStateCopyWithImpl<$Res>
+    implements _$$_DailyStateCopyWith<$Res> {
+  __$$_DailyStateCopyWithImpl(
+      _$_DailyState _value, $Res Function(_$_DailyState) _then)
+      : super(_value, (v) => _then(v as _$_DailyState));
 
   @override
-  _DailyState get _value => super._value as _DailyState;
+  _$_DailyState get _value => super._value as _$_DailyState;
 
   @override
   $Res call({
@@ -134,7 +135,7 @@ class __$DailyStateCopyWithImpl<$Res> extends _$DailyStateCopyWithImpl<$Res>
     Object? menu = freezed,
     Object? isFetching = freezed,
   }) {
-    return _then(_DailyState(
+    return _then(_$_DailyState(
       selectedDay: selectedDay == freezed
           ? _value.selectedDay
           : selectedDay // ignore: cast_nullable_to_non_nullable
@@ -211,7 +212,7 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _DailyState &&
+            other is _$_DailyState &&
             const DeepCollectionEquality()
                 .equals(other.selectedDay, selectedDay) &&
             const DeepCollectionEquality()
@@ -237,8 +238,8 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
 
   @JsonKey(ignore: true)
   @override
-  _$DailyStateCopyWith<_DailyState> get copyWith =>
-      __$DailyStateCopyWithImpl<_DailyState>(this, _$identity);
+  _$$_DailyStateCopyWith<_$_DailyState> get copyWith =>
+      __$$_DailyStateCopyWithImpl<_$_DailyState>(this, _$identity);
 }
 
 abstract class _DailyState implements DailyState {
@@ -264,6 +265,6 @@ abstract class _DailyState implements DailyState {
   bool get isFetching => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$DailyStateCopyWith<_DailyState> get copyWith =>
+  _$$_DailyStateCopyWith<_$_DailyState> get copyWith =>
       throw _privateConstructorUsedError;
 }

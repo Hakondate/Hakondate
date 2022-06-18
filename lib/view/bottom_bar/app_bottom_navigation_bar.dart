@@ -11,7 +11,7 @@ import 'package:hakondate/view/daily/daily_drawer.dart';
 import 'package:hakondate/view_model/multi_page/drawer_view_model.dart';
 
 class AppBottomNavigationBar extends ConsumerWidget {
-  const AppBottomNavigationBar({Key? key}) : super(key: key);
+  const AppBottomNavigationBar({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

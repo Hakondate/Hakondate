@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:routemaster/routemaster.dart';
 
 class FadeUpPage extends TransitionBuilderPage<void> {
-  const FadeUpPage({required Widget child}) : super(child: child);
+  const FadeUpPage({required super.child});
 
   @override
   PageTransition buildPopTransition(BuildContext context) {

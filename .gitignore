@@ -87,7 +87,9 @@ app.*.map.json
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
 **/ios/GoogleService-Info.plist
+**/ios/firebase_app_id_file.json
 **/ios/Podfile.lock
+**/ios/Runner.xcodeproj/project.pbxproj
 
 # macOS
 **/macos/Flutter/GeneratedPluginRegistrant.swift

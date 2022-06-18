@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>37711418622-g293thetb0d0p8fmm7ul3170elhgc464.apps.googleusercontent.com</string>
+	<string>852115917987-k6eb6m9mchn6ksabom2g4fl69tud4c1f.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.37711418622-g293thetb0d0p8fmm7ul3170elhgc464</string>
+	<string>com.googleusercontent.apps.852115917987-k6eb6m9mchn6ksabom2g4fl69tud4c1f</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAU2Kzi9yamHkOolCJrL7wOVcvU2MSnBPc</string>
+	<string>AIzaSyDUA4C92JkRJPesBR32_K8CJGH1dUfBXNw</string>
 	<key>GCM_SENDER_ID</key>
-	<string>37711418622</string>
+	<string>852115917987</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>jp.ac.fun.hakondate.dev</string>
+	<string>jp.ac.fun.hakondate.stg</string>
 	<key>PROJECT_ID</key>
-	<string>hakondate-develop</string>
+	<string>hakondate-staging</string>
 	<key>STORAGE_BUCKET</key>
-	<string>hakondate-develop.appspot.com</string>
+	<string>hakondate-staging.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:37711418622:ios:72f40f96456e67778ec1af</string>
+	<string>1:852115917987:ios:781aeda7ea585082420316</string>
 </dict>
 </plist>

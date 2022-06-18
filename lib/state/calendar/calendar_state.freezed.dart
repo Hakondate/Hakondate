@@ -69,11 +69,11 @@ class _$CalendarStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$CalendarStateCopyWith<$Res>
+abstract class _$$_CalendarStateCopyWith<$Res>
     implements $CalendarStateCopyWith<$Res> {
-  factory _$CalendarStateCopyWith(
-          _CalendarState value, $Res Function(_CalendarState) then) =
-      __$CalendarStateCopyWithImpl<$Res>;
+  factory _$$_CalendarStateCopyWith(
+          _$_CalendarState value, $Res Function(_$_CalendarState) then) =
+      __$$_CalendarStateCopyWithImpl<$Res>;
   @override
   $Res call(
       {DateTime oldestDay,
@@ -82,15 +82,15 @@ abstract class _$CalendarStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$CalendarStateCopyWithImpl<$Res>
+class __$$_CalendarStateCopyWithImpl<$Res>
     extends _$CalendarStateCopyWithImpl<$Res>
-    implements _$CalendarStateCopyWith<$Res> {
-  __$CalendarStateCopyWithImpl(
-      _CalendarState _value, $Res Function(_CalendarState) _then)
-      : super(_value, (v) => _then(v as _CalendarState));
+    implements _$$_CalendarStateCopyWith<$Res> {
+  __$$_CalendarStateCopyWithImpl(
+      _$_CalendarState _value, $Res Function(_$_CalendarState) _then)
+      : super(_value, (v) => _then(v as _$_CalendarState));
 
   @override
-  _CalendarState get _value => super._value as _CalendarState;
+  _$_CalendarState get _value => super._value as _$_CalendarState;
 
   @override
   $Res call({
@@ -98,7 +98,7 @@ class __$CalendarStateCopyWithImpl<$Res>
     Object? latestDay = freezed,
     Object? scrollController = freezed,
   }) {
-    return _then(_CalendarState(
+    return _then(_$_CalendarState(
       oldestDay: oldestDay == freezed
           ? _value.oldestDay
           : oldestDay // ignore: cast_nullable_to_non_nullable
@@ -149,7 +149,7 @@ class _$_CalendarState with DiagnosticableTreeMixin implements _CalendarState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _CalendarState &&
+            other is _$_CalendarState &&
             const DeepCollectionEquality().equals(other.oldestDay, oldestDay) &&
             const DeepCollectionEquality().equals(other.latestDay, latestDay) &&
             const DeepCollectionEquality()
@@ -165,8 +165,8 @@ class _$_CalendarState with DiagnosticableTreeMixin implements _CalendarState {
 
   @JsonKey(ignore: true)
   @override
-  _$CalendarStateCopyWith<_CalendarState> get copyWith =>
-      __$CalendarStateCopyWithImpl<_CalendarState>(this, _$identity);
+  _$$_CalendarStateCopyWith<_$_CalendarState> get copyWith =>
+      __$$_CalendarStateCopyWithImpl<_$_CalendarState>(this, _$identity);
 }
 
 abstract class _CalendarState implements CalendarState {
@@ -183,6 +183,6 @@ abstract class _CalendarState implements CalendarState {
   ScrollController get scrollController => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$CalendarStateCopyWith<_CalendarState> get copyWith =>
+  _$$_CalendarStateCopyWith<_$_CalendarState> get copyWith =>
       throw _privateConstructorUsedError;
 }

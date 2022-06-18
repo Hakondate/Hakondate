@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "37711418622",
-    "project_id": "hakondate-develop",
-    "storage_bucket": "hakondate-develop.appspot.com"
+    "project_number": "852115917987",
+    "project_id": "hakondate-staging",
+    "storage_bucket": "hakondate-staging.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:37711418622:android:199b1eaf791eee788ec1af",
+        "mobilesdk_app_id": "1:852115917987:android:728007dec1b8cf3c420316",
         "android_client_info": {
-          "package_name": "jp.ac.fun.hakondate.dev"
+          "package_name": "jp.ac.fun.hakondate.stg"
         }
       },
       "oauth_client": [
         {
-          "client_id": "37711418622-njljvskvabl3nn5h7s9ff8cn5k0qc919.apps.googleusercontent.com",
+          "client_id": "852115917987-hsaqj0jd7rg3eq22khscuaoga6n7qkek.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBdebemHmmqs4JLRlV5LJvHvP6TBCLtooQ"
+          "current_key": "AIzaSyB7W9UV7NqTAvng2wMlRVNzvapUUxWtTAo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "37711418622-njljvskvabl3nn5h7s9ff8cn5k0qc919.apps.googleusercontent.com",
+              "client_id": "852115917987-hsaqj0jd7rg3eq22khscuaoga6n7qkek.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "852115917987-4q4jmvvq9vn3dj0kihikvmbhmvg8299v.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.ac.fun.hakondate.dev"
+              }
             }
           ]
         }

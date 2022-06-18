@@ -5,10 +5,10 @@ import 'package:hakondate/constant/size.dart';
 
 class NonLunchesDayBody extends StatelessWidget {
   const NonLunchesDayBody({
-    Key? key,
+    super.key,
     required this.imageFileName,
     required this.text,
-  }) : super(key: key);
+  });
 
   final String imageFileName;
   final String text;
@@ -23,7 +23,7 @@ class NonLunchesDayBody extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            'assets/images/menu_status/' + imageFileName,
+            'assets/images/status/menu_status/' + imageFileName,
             width: _screenWidth / 2,
           ),
           const SizedBox(height: MarginSize.normal),

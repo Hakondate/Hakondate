@@ -1,7 +1,9 @@
+import 'package:hakondate/util/exception/parameters_exception.dart';
+
 enum Flavor {
   dev,
   stg,
-  prod,
+  prod;
 }
 
 class Environment {
@@ -15,7 +17,7 @@ class Environment {
       case 'prod':
         return Flavor.prod;
       default:
-        throw Exception("'Flavour' must be specified");
+        throw const ParametersException("'Flavour' must be specified");
     }
   }
 

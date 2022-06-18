@@ -6,9 +6,9 @@ import 'package:hakondate/model/menu/menu_model.dart';
 
 class MenuChips extends StatelessWidget {
   const MenuChips({
-    Key? key,
+    super.key,
     required this.menu,
-  }) : super(key: key);
+  });
 
   final LunchesDayMenuModel menu;
 

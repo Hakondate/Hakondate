@@ -60,32 +60,32 @@ class _$QuantityModelCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$QuantityModelCopyWith<$Res>
+abstract class _$$_QuantityModelCopyWith<$Res>
     implements $QuantityModelCopyWith<$Res> {
-  factory _$QuantityModelCopyWith(
-          _QuantityModel value, $Res Function(_QuantityModel) then) =
-      __$QuantityModelCopyWithImpl<$Res>;
+  factory _$$_QuantityModelCopyWith(
+          _$_QuantityModel value, $Res Function(_$_QuantityModel) then) =
+      __$$_QuantityModelCopyWithImpl<$Res>;
   @override
   $Res call({int? piece, double gram});
 }
 
 /// @nodoc
-class __$QuantityModelCopyWithImpl<$Res>
+class __$$_QuantityModelCopyWithImpl<$Res>
     extends _$QuantityModelCopyWithImpl<$Res>
-    implements _$QuantityModelCopyWith<$Res> {
-  __$QuantityModelCopyWithImpl(
-      _QuantityModel _value, $Res Function(_QuantityModel) _then)
-      : super(_value, (v) => _then(v as _QuantityModel));
+    implements _$$_QuantityModelCopyWith<$Res> {
+  __$$_QuantityModelCopyWithImpl(
+      _$_QuantityModel _value, $Res Function(_$_QuantityModel) _then)
+      : super(_value, (v) => _then(v as _$_QuantityModel));
 
   @override
-  _QuantityModel get _value => super._value as _QuantityModel;
+  _$_QuantityModel get _value => super._value as _$_QuantityModel;
 
   @override
   $Res call({
     Object? piece = freezed,
     Object? gram = freezed,
   }) {
-    return _then(_QuantityModel(
+    return _then(_$_QuantityModel(
       piece: piece == freezed
           ? _value.piece
           : piece // ignore: cast_nullable_to_non_nullable
@@ -119,7 +119,7 @@ class _$_QuantityModel implements _QuantityModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _QuantityModel &&
+            other is _$_QuantityModel &&
             const DeepCollectionEquality().equals(other.piece, piece) &&
             const DeepCollectionEquality().equals(other.gram, gram));
   }
@@ -132,8 +132,8 @@ class _$_QuantityModel implements _QuantityModel {
 
   @JsonKey(ignore: true)
   @override
-  _$QuantityModelCopyWith<_QuantityModel> get copyWith =>
-      __$QuantityModelCopyWithImpl<_QuantityModel>(this, _$identity);
+  _$$_QuantityModelCopyWith<_$_QuantityModel> get copyWith =>
+      __$$_QuantityModelCopyWithImpl<_$_QuantityModel>(this, _$identity);
 }
 
 abstract class _QuantityModel implements QuantityModel {
@@ -146,6 +146,6 @@ abstract class _QuantityModel implements QuantityModel {
   double get gram => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$QuantityModelCopyWith<_QuantityModel> get copyWith =>
+  _$$_QuantityModelCopyWith<_$_QuantityModel> get copyWith =>
       throw _privateConstructorUsedError;
 }

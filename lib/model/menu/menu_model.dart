@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:hakondate/model/dish/dish_model.dart';
+import 'package:hakondate/util/exception/class_type_exception.dart';
 
 part 'menu_model.freezed.dart';
 
@@ -35,7 +36,7 @@ class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double _sum = 0.0;
@@ -50,7 +51,7 @@ class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double _sum = 0.0;
@@ -65,7 +66,7 @@ class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double _sum = 0.0;
@@ -80,7 +81,7 @@ class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double _sum = 0.0;
@@ -95,7 +96,7 @@ class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double _sum = 0.0;
@@ -110,7 +111,7 @@ class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double _sum = 0.0;
@@ -125,7 +126,7 @@ class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double _sum = 0.0;
@@ -140,7 +141,7 @@ class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double _sum = 0.0;
@@ -155,7 +156,7 @@ class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double _sum = 0.0;
@@ -170,7 +171,7 @@ class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double _sum = 0.0;
@@ -185,7 +186,7 @@ class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double _sum = 0.0;
@@ -200,7 +201,7 @@ class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double _sum = 0.0;
@@ -215,7 +216,7 @@ class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double _sum = 0.0;
@@ -230,7 +231,7 @@ class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double _sum = 0.0;
@@ -245,7 +246,7 @@ class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw Exception('Non-LunchesDayMenuModel called MenuModels getter');
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double _sum = 0.0;
