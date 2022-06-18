@@ -6,7 +6,7 @@ import 'package:hakondate/repository/local/sqlite/local_database.dart';
 import 'package:hakondate/util/exception/sqlite_exception.dart';
 
 final usersLocalRepositoryProvider = Provider<UsersLocalRepository>((ref) {
-  final LocalDatabase localDatabase = ref.read(localDatabaseProvider);
+  final LocalDatabase localDatabase = ref.watch(localDatabaseProvider);
   return UsersLocalRepository(localDatabase);
 });
 
@@ -21,7 +21,7 @@ abstract class UsersLocalRepositoryBase {
 }
 
 class UsersLocalRepository extends UsersLocalRepositoryBase {
-  UsersLocalRepository(this._db) : super();
+  UsersLocalRepository(this._db);
 
   final LocalDatabase _db;
 

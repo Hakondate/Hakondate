@@ -9,18 +9,17 @@ import 'package:hakondate/util/exception/parameters_exception.dart';
 import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 
 final signupProvider = StateNotifierProvider<SignupViewModel, SignupState>((ref) {
-  final SchoolsLocalRepository schoolLocalRepository = ref.read(schoolsLocalRepositoryProvider);
-  final UserViewModel userReader = ref.read(userProvider.notifier);
-  return SignupViewModel(schoolLocalRepository, userReader);
+  final SchoolsLocalRepository schoolLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
+  return SignupViewModel(schoolLocalRepository, ref.read);
 });
 
 class SignupViewModel extends StateNotifier<SignupState> {
-  SignupViewModel(this._schoolLocalRepository, this._userReader) : super(SignupState()) {
+  SignupViewModel(this._schoolLocalRepository, this._reader) : super(SignupState()) {
     _initialize();
   }
 
   final SchoolsLocalRepository _schoolLocalRepository;
-  final UserViewModel _userReader;
+  final Reader _reader;
 
   Future<void> _initialize() async {
     final cache = state;
@@ -45,7 +44,7 @@ class SignupViewModel extends StateNotifier<SignupState> {
         throw const ParametersException('Do not allow Null parameter');
       }
 
-      await _userReader.createUser(
+      await _reader(userProvider.notifier).createUser(
         name: name,
         schoolId: schoolId,
         schoolYear: schoolYear,

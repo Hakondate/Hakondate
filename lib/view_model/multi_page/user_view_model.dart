@@ -18,19 +18,18 @@ import 'package:hakondate/util/exception/shared_preferences_exception.dart';
 import 'package:hakondate/util/exception/sign_in_exception.dart';
 
 final userProvider = StateNotifierProvider<UserViewModel, UserState>((ref) {
-  final UsersLocalRepository usersLocalRepository = ref.read(usersLocalRepositoryProvider);
-  final SchoolsLocalRepository schoolsLocalRepository = ref.read(schoolsLocalRepositoryProvider);
-  final AnalyticsController analyticsController = ref.read(analyticsControllerProvider.notifier);
-  return UserViewModel(schoolsLocalRepository, usersLocalRepository, analyticsController);
+  final UsersLocalRepository usersLocalRepository = ref.watch(usersLocalRepositoryProvider);
+  final SchoolsLocalRepository schoolsLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
+  return UserViewModel(schoolsLocalRepository, usersLocalRepository, ref.read);
 });
 
 class UserViewModel extends StateNotifier<UserState> {
-  UserViewModel(this._schoolsLocalRepository, this._usersLocalRepository, this._analyticsController)
+  UserViewModel(this._schoolsLocalRepository, this._usersLocalRepository, this._reader)
       : super(const UserState());
 
   final SchoolsLocalRepository _schoolsLocalRepository;
   final UsersLocalRepository _usersLocalRepository;
-  final AnalyticsController _analyticsController;
+  final Reader _reader;
 
   Future<bool> signIn() async {
     if (await _usersLocalRepository.count() == 0) return false;
@@ -112,7 +111,7 @@ class UserViewModel extends StateNotifier<UserState> {
   }) async {
     final int id = await _usersLocalRepository.add(name, schoolId, schoolYear);
     await changeCurrentUser(id);
-    await _analyticsController.logSignup();
+    await _reader(analyticsControllerProvider.notifier).logSignup();
 
     return id;
   }

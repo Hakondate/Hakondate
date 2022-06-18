@@ -4,7 +4,7 @@ import 'dart:typed_data';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 
-final openDataRecipeLocalRepositoryProvider = Provider<OpenDataRecipeLocalRepository>((ref) =>OpenDataRecipeLocalRepository());
+final openDataRecipeLocalRepositoryProvider = Provider<OpenDataRecipeLocalRepository>((_) =>OpenDataRecipeLocalRepository());
 
 abstract class OpenDataRecipeLocalRepositoryBase {
   Future<String> add({required String path, required Uint8List bytes});
