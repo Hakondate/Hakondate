@@ -19,6 +19,7 @@ dependencies:
   multi_charts: ^0.3.0
   table_calendar: ^3.0.4
   flutter_svg: ^1.0.3
+  flutter_pdfview: ^1.2.2
 
   # 状態管理関連
   flutter_riverpod: ^1.0.4
@@ -73,7 +74,8 @@ flutter:
     - assets/images/food_icon/
     - assets/images/menu_tile/
     - assets/images/label/
-    - assets/images/menu_status/
+    - assets/images/status/
+    - assets/images/status/menu_status/
     - assets/loading_animation/
     - assets/svgs/bottom_navigation_bar_icons/
 
