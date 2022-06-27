@@ -64,6 +64,7 @@ flutter:
     - assets/slns/
     - assets/images/
     - assets/images/calendar_hedgehog/
+    - assets/images/drawer/
     - assets/images/food_icon/
     - assets/images/menu_tile/
     - assets/images/label/
