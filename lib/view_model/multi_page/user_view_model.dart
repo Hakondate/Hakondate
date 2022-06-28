@@ -1,18 +1,20 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:hakondate/constant/app_key.dart';
 import 'package:hakondate/model/nutrients/nutrients_model.dart';
 import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/model/user/user_model.dart';
 import 'package:hakondate/repository/local/schools_local_repository.dart';
 import 'package:hakondate/repository/local/users_local_repository.dart';
 import 'package:hakondate/state/user/user_state.dart';
+import 'package:hakondate/util/exception/shared_preferences_exception.dart';
+import 'package:hakondate/util/exception/sign_in_exception.dart';
 
 final userProvider = StateNotifierProvider<UserViewModel, UserState>((ref) {
   final UsersLocalRepository usersLocalRepository = ref.read(usersLocalRepositoryProvider);
@@ -27,79 +29,72 @@ class UserViewModel extends StateNotifier<UserState> {
   final SchoolsLocalRepository _schoolsLocalRepository;
   final UsersLocalRepository _usersLocalRepository;
 
-  Future<bool> checkSignedUp() async {
-    try {
-      if (await _usersLocalRepository.count() == 0) return false;
-      final SharedPreferences _prefs = await SharedPreferences.getInstance();
-      final int _currentUserId = _prefs.getInt('current_user_id') ?? 1;
-      await _setCurrentUser(_currentUserId);
+  Future<bool> signIn() async {
+    if (await _usersLocalRepository.count() == 0) return false;
 
-      return true;
-    } catch (error) {
-      debugPrint('Failed to load user data.');
-      debugPrint(error.toString());
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final int? currentUserId = prefs.getInt(AppKey.sharedPreferencesKey.currentUserId);
 
-      return false;
+    if (currentUserId == null) {
+      throw SharedPreferencesException('Failed to get ${AppKey.sharedPreferencesKey.currentUserId} value');
     }
+
+    await changeCurrentUser(currentUserId, isSetPrefs: false);
+
+    return true;
   }
 
-  Future<bool> changeCurrentUser(int id) async {
-    try {
-      await _setCurrentUser(id);
-      final SharedPreferences _prefs = await SharedPreferences.getInstance();
+  Future<void> changeCurrentUser(int id, {bool isSetPrefs = true}) async {
+    final UserModel user = await _usersLocalRepository.getById(id);
+    final NutrientsModel slns = await _getSLNS(user.id);
 
-      return await _prefs.setInt('current_user_id', id);
-    } catch (error) {
-      debugPrint('Failed to change current user.');
-      debugPrint(error.toString());
-
-      return false;
+    if (isSetPrefs) {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setInt(AppKey.sharedPreferencesKey.currentUserId, id);
     }
-  }
-
-  Future<void> _setCurrentUser(int id) async {
-    final UserModel _user = await _usersLocalRepository.getById(id);
-    final NutrientsModel _slns = await _getSLNS(_user.id);
 
     state = state.copyWith(
-      currentUser: _user.copyWith(slns: _slns),
+      currentUser: user.copyWith(slns: slns),
     );
   }
 
-  Future<void> updateCurrentUser(
-      {String? name, int? schoolId, int? schoolYear}) async {
+  Future<void> updateCurrentUser({
+    String? name,
+    int? schoolId,
+    int? schoolYear,
+  }) async {
     if (state.currentUser == null) return;
-    NutrientsModel? _slns = (schoolId != null || schoolYear != null)
+    NutrientsModel? slns = (schoolId != null || schoolYear != null)
         ? await _getSLNS(state.currentUser!.id)
         : state.currentUser!.slns;
-    UserModel _newUser = state.currentUser!.copyWith(
+    UserModel newUser = state.currentUser!.copyWith(
       name: name ?? state.currentUser!.name,
       schoolId: schoolId ?? state.currentUser!.schoolId,
       schoolYear: schoolYear ?? state.currentUser!.schoolYear,
-      slns: _slns,
+      slns: slns,
     );
-    await _usersLocalRepository.update(_newUser);
+    await _usersLocalRepository.update(newUser);
 
-    state = state.copyWith(currentUser: _newUser);
+    state = state.copyWith(currentUser: newUser);
   }
 
   Future<NutrientsModel> _getSLNS(int userId) async {
-    final SchoolGrade _schoolGrade = await _getSchoolGrade(userId);
-    final String _jsonSLNS = await rootBundle.loadString(_schoolGrade.slnsPath);
-    final Map<String, dynamic> _decodeSLNS = json.decode(_jsonSLNS);
+    final SchoolGrade schoolGrade = await _getSchoolGrade(userId);
+    final String jsonSLNS = await rootBundle.loadString(schoolGrade.slnsPath);
+    final Map<String, dynamic> decodeSLNS = json.decode(jsonSLNS);
 
-    return NutrientsModel.fromJson(_decodeSLNS);
+    return NutrientsModel.fromJson(decodeSLNS);
   }
 
   Future<SchoolGrade> _getSchoolGrade(int userId) async {
-    final UserModel _user = await _usersLocalRepository.getById(userId);
-    final SchoolModel _school = await _schoolsLocalRepository.getById(_user.schoolId);
-    if (_school.classification != SchoolClassification.secondary) {
-      if (_user.schoolYear <= 2) {
+    final UserModel user = await _usersLocalRepository.getById(userId);
+    final SchoolModel school = await _schoolsLocalRepository.getById(user.schoolId);
+    if (school.classification != SchoolClassification.secondary) {
+      if (user.schoolYear <= 2) {
         return SchoolGrade.lower;
-      } else if (_user.schoolYear <= 4) {
+      } else if (user.schoolYear <= 4) {
         return SchoolGrade.middle;
-      } else if (_user.schoolYear <= 6) {
+      } else if (user.schoolYear <= 6) {
         return SchoolGrade.upper;
       }
     }
@@ -113,10 +108,18 @@ class UserViewModel extends StateNotifier<UserState> {
     required int schoolYear,
   }) async {
     final int id = await _usersLocalRepository.add(name, schoolId, schoolYear);
-    final SharedPreferences _prefs = await SharedPreferences.getInstance();
-    await _prefs.setInt('current_user_id', id);
-    await _setCurrentUser(id);
+    await changeCurrentUser(id);
 
     return id;
   }
+
+  Future<int> getParentId() async {
+    final UserModel? user = state.currentUser;
+    if (user == null) throw const SignInException('Current user does not exist');
+    final SchoolModel school = await _schoolsLocalRepository.getById(user.schoolId);
+
+    return school.parentId;
+  }
+
+  void signOut() => state = state.copyWith(currentUser: null);
 }

@@ -5,8 +5,10 @@ part 'loading_status.dart';
 
 @freezed
 class SplashState with _$SplashState {
-  const factory SplashState({
-    @Default(LoadingStatus.unloading) LoadingStatus loadingStatus,
-    @Default(false) bool isErrorOccurring,
-  }) = _SplashState;
+  factory SplashState({
+    LoadingStatus status = LoadingStatus.unloading,
+  }) => SplashState.load(status: status);
+
+  const factory SplashState.load({required LoadingStatus status}) = SplashStateLoad;
+  const factory SplashState.error({required Exception error}) = SplashStateError;
 }

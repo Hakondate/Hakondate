@@ -94,10 +94,10 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
-  factory _$UserModelCopyWith(
-          _UserModel value, $Res Function(_UserModel) then) =
-      __$UserModelCopyWithImpl<$Res>;
+abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
+  factory _$$_UserModelCopyWith(
+          _$_UserModel value, $Res Function(_$_UserModel) then) =
+      __$$_UserModelCopyWithImpl<$Res>;
   @override
   $Res call(
       {int id,
@@ -111,13 +111,14 @@ abstract class _$UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
-    implements _$UserModelCopyWith<$Res> {
-  __$UserModelCopyWithImpl(_UserModel _value, $Res Function(_UserModel) _then)
-      : super(_value, (v) => _then(v as _UserModel));
+class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
+    implements _$$_UserModelCopyWith<$Res> {
+  __$$_UserModelCopyWithImpl(
+      _$_UserModel _value, $Res Function(_$_UserModel) _then)
+      : super(_value, (v) => _then(v as _$_UserModel));
 
   @override
-  _UserModel get _value => super._value as _UserModel;
+  _$_UserModel get _value => super._value as _$_UserModel;
 
   @override
   $Res call({
@@ -127,7 +128,7 @@ class __$UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
     Object? schoolYear = freezed,
     Object? slns = freezed,
   }) {
-    return _then(_UserModel(
+    return _then(_$_UserModel(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -186,7 +187,7 @@ class _$_UserModel extends _UserModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _UserModel &&
+            other is _$_UserModel &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.schoolId, schoolId) &&
@@ -206,8 +207,8 @@ class _$_UserModel extends _UserModel {
 
   @JsonKey(ignore: true)
   @override
-  _$UserModelCopyWith<_UserModel> get copyWith =>
-      __$UserModelCopyWithImpl<_UserModel>(this, _$identity);
+  _$$_UserModelCopyWith<_$_UserModel> get copyWith =>
+      __$$_UserModelCopyWithImpl<_$_UserModel>(this, _$identity);
 }
 
 abstract class _UserModel extends UserModel {
@@ -231,6 +232,6 @@ abstract class _UserModel extends UserModel {
   NutrientsModel? get slns => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$UserModelCopyWith<_UserModel> get copyWith =>
+  _$$_UserModelCopyWith<_$_UserModel> get copyWith =>
       throw _privateConstructorUsedError;
 }

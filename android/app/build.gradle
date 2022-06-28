@@ -21,7 +21,7 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
-def dartEnvironmentVariables = [:];
+def dartEnvironmentVariables = [:]
 if (project.hasProperty('dart-defines')) {
     dartEnvironmentVariables = dartEnvironmentVariables + project.property('dart-defines')
             .split(',')
@@ -56,7 +56,6 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "jp.ac.fun.hakondate"
         minSdkVersion 23
         targetSdkVersion 31
