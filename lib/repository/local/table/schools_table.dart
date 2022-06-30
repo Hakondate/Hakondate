@@ -7,6 +7,8 @@ class SchoolsTable extends Table {
   TextColumn get name => text()();
   IntColumn get lunchBlock => integer().nullable()();
   TextColumn get classification => text()();
+  DateTimeColumn get createAt => dateTime().withDefault(Constant(DateTime.now()))();
+  DateTimeColumn get updateAt => dateTime().withDefault(Constant(DateTime.now()))();
 
   @override
   Set<Column> get primaryKey => {id};

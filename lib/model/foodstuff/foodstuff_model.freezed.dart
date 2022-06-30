@@ -107,11 +107,11 @@ class _$FoodstuffModelCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$FoodstuffModelCopyWith<$Res>
+abstract class _$$_FoodstuffModelCopyWith<$Res>
     implements $FoodstuffModelCopyWith<$Res> {
-  factory _$FoodstuffModelCopyWith(
-          _FoodstuffModel value, $Res Function(_FoodstuffModel) then) =
-      __$FoodstuffModelCopyWithImpl<$Res>;
+  factory _$$_FoodstuffModelCopyWith(
+          _$_FoodstuffModel value, $Res Function(_$_FoodstuffModel) then) =
+      __$$_FoodstuffModelCopyWithImpl<$Res>;
   @override
   $Res call(
       {String name,
@@ -128,15 +128,15 @@ abstract class _$FoodstuffModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$FoodstuffModelCopyWithImpl<$Res>
+class __$$_FoodstuffModelCopyWithImpl<$Res>
     extends _$FoodstuffModelCopyWithImpl<$Res>
-    implements _$FoodstuffModelCopyWith<$Res> {
-  __$FoodstuffModelCopyWithImpl(
-      _FoodstuffModel _value, $Res Function(_FoodstuffModel) _then)
-      : super(_value, (v) => _then(v as _FoodstuffModel));
+    implements _$$_FoodstuffModelCopyWith<$Res> {
+  __$$_FoodstuffModelCopyWithImpl(
+      _$_FoodstuffModel _value, $Res Function(_$_FoodstuffModel) _then)
+      : super(_value, (v) => _then(v as _$_FoodstuffModel));
 
   @override
-  _FoodstuffModel get _value => super._value as _FoodstuffModel;
+  _$_FoodstuffModel get _value => super._value as _$_FoodstuffModel;
 
   @override
   $Res call({
@@ -147,7 +147,7 @@ class __$FoodstuffModelCopyWithImpl<$Res>
     Object? isHeat = freezed,
     Object? origin = freezed,
   }) {
-    return _then(_FoodstuffModel(
+    return _then(_$_FoodstuffModel(
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -216,7 +216,7 @@ class _$_FoodstuffModel implements _FoodstuffModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _FoodstuffModel &&
+            other is _$_FoodstuffModel &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.quantity, quantity) &&
             const DeepCollectionEquality().equals(other.nutrients, nutrients) &&
@@ -237,8 +237,8 @@ class _$_FoodstuffModel implements _FoodstuffModel {
 
   @JsonKey(ignore: true)
   @override
-  _$FoodstuffModelCopyWith<_FoodstuffModel> get copyWith =>
-      __$FoodstuffModelCopyWithImpl<_FoodstuffModel>(this, _$identity);
+  _$$_FoodstuffModelCopyWith<_$_FoodstuffModel> get copyWith =>
+      __$$_FoodstuffModelCopyWithImpl<_$_FoodstuffModel>(this, _$identity);
 }
 
 abstract class _FoodstuffModel implements FoodstuffModel {
@@ -264,6 +264,6 @@ abstract class _FoodstuffModel implements FoodstuffModel {
   String? get origin => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$FoodstuffModelCopyWith<_FoodstuffModel> get copyWith =>
+  _$$_FoodstuffModelCopyWith<_$_FoodstuffModel> get copyWith =>
       throw _privateConstructorUsedError;
 }

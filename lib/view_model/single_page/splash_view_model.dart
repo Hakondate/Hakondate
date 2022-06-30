@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:hakondate/constant/app_key.dart';
+import 'package:hakondate/constant/record_date.dart';
 import 'package:hakondate/repository/local/menus_local_repository.dart';
 import 'package:hakondate/repository/local/schools_local_repository.dart';
 import 'package:hakondate/repository/remote/menus_remote_repository.dart';
 import 'package:hakondate/repository/remote/schools_remote_repository.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/splash/splash_state.dart';
-import 'package:hakondate/view/component/dialog/hakondate_dialog/hakondate_dialog.dart';
 import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 import 'package:hakondate/view_model/single_page/daily_view_model.dart';
-import 'package:hakondate/view_model/single_page/signup_view_model.dart';
 
-final splashProvider = StateNotifierProvider<SplashViewModel, SplashState>((ref) {
+final splashProvider = StateNotifierProvider.autoDispose<SplashViewModel, SplashState>((ref) {
   final SchoolsLocalRepository schoolsLocalRepository = ref.read(schoolsLocalRepositoryProvider);
   final SchoolsRemoteRepository schoolsRemoteRepository = ref.read(schoolsRemoteRepositoryProvider);
   final MenusLocalRepository menusLocalRepository = ref.read(menusLocalRepositoryProvider);
@@ -28,12 +29,13 @@ final splashProvider = StateNotifierProvider<SplashViewModel, SplashState>((ref)
 });
 
 class SplashViewModel extends StateNotifier<SplashState> {
-  SplashViewModel(this._reader,
+  SplashViewModel(
+      this._reader,
       this._schoolsLocalRepository,
       this._schoolsRemoteRepository,
       this._menusLocalRepository,
       this._menusRemoteRepository,
-      ) : super(const SplashState());
+      ) : super(SplashState());
 
   final Reader _reader;
   final SchoolsLocalRepository _schoolsLocalRepository;
@@ -41,127 +43,67 @@ class SplashViewModel extends StateNotifier<SplashState> {
   final MenusLocalRepository _menusLocalRepository;
   final MenusRemoteRepository _menusRemoteRepository;
 
-  Future<void> loadSplash(BuildContext context) async {
-    state = state.copyWith(loadingStatus: LoadingStatus.reading);
-    try {
-      await _initializeSchool();
-
-      if (!await _reader(userProvider.notifier).checkSignedUp()) {
-        return routemaster.replace('/terms');
-      }
-
-      await _initializeMenus();
-      routemaster.replace('/home');
-      state = state.copyWith(loadingStatus: LoadingStatus.unloading);
-    } catch (error) {
-      await _handleError(error, context);
-    }
-  }
-
-  Future<void> loadSignup(BuildContext context) async {
-    WidgetsBinding.instance!.addPostFrameCallback((_) async {
-      state = state.copyWith(loadingStatus: LoadingStatus.updating);
+  Future<void> initialize({
+    Future<void> Function()? termsUpdated,
+    Future<void> Function(Exception, StackTrace)? errorOccurred,
+  }) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      state = SplashState(status: LoadingStatus.reading);
       try {
-        await _reader(userProvider.notifier).createUser(
-          name: _reader(signupProvider.notifier).state.name!,
-          schoolId: _reader(signupProvider.notifier).state.schoolId!,
-          schoolYear: _reader(signupProvider.notifier).state.schoolYear!,
-        );
+        await _initializeSchools();
+
+        state = SplashState(status: LoadingStatus.reading);
+        if (!await _reader(userProvider.notifier).signIn()) {
+          return routemaster.replace('/terms');
+        }
+
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+        final DateTime termsAgreedDay = DateTime.fromMillisecondsSinceEpoch(
+            prefs.getInt(AppKey.sharedPreferencesKey.agreedTermsDay) ?? 0);
+
+        if (termsAgreedDay.isBefore(RecordDate.termsLastUpdateDay)) {
+          state = SplashState(status: LoadingStatus.unloading);
+          if (termsUpdated != null) return await termsUpdated();
+        }
+
         await _initializeMenus();
         routemaster.replace('/home');
-        state = state.copyWith(loadingStatus: LoadingStatus.unloading);
-      } catch (error) {
-        await _handleError(error, context);
+        state = SplashState(status: LoadingStatus.unloading);
+      } on Exception catch (error, stack) {
+        debugPrint(error.toString());
+        debugPrint(stack.toString());
+        state = SplashState.error(error: error);
+
+        if (errorOccurred != null) return await errorOccurred(error, stack);
       }
     });
   }
 
-  Future<void> _initializeSchool() async {
-    List<dynamic> schools = [];
-    state = state.copyWith(loadingStatus: LoadingStatus.checkingUpdate);
+  Future<void> _initializeSchools() async {
+    state = SplashState(status: LoadingStatus.reading);
+    final DateTime latestUpdate = await _schoolsLocalRepository.getLatestUpdateDay();
 
-    if (await _schoolsLocalRepository.count() == 0) {
-      state = state.copyWith(loadingStatus: LoadingStatus.updating);
-      schools = await _schoolsRemoteRepository.downloadAllSchool();
-    } else if (await _schoolsRemoteRepository.checkUpdate()) {
-      state = state.copyWith(loadingStatus: LoadingStatus.updating);
-      schools = await _schoolsRemoteRepository.downloadUpdate();
-    }
+    state = SplashState(status: LoadingStatus.checkingUpdate);
+    List<dynamic> schools = await _schoolsRemoteRepository.get(updateAt: latestUpdate);
 
+    state = SplashState(status: LoadingStatus.updating);
     await Future.forEach(schools, (dynamic school) async {
       await _schoolsLocalRepository.add(school);
     });
-
-    state = state.copyWith(loadingStatus: LoadingStatus.reading);
   }
 
   Future<void> _initializeMenus() async {
-    final int schoolId =
-        _reader(userProvider.notifier).state.currentUser!.schoolId;
-    state = state.copyWith(loadingStatus: LoadingStatus.checkingUpdate);
+    state = SplashState(status: LoadingStatus.reading);
+    final DateTime latestUpdate = await _menusLocalRepository.getLatestUpdateDay();
 
-    if (await _menusRemoteRepository.checkUpdate(schoolId)) {
-      state = state.copyWith(loadingStatus: LoadingStatus.updating);
-      List<dynamic> menus = await _menusRemoteRepository.downloadMenus();
+    state = SplashState(status: LoadingStatus.checkingUpdate);
+    List<dynamic> menus = await _menusRemoteRepository.get(updateAt: latestUpdate);
 
-      await Future.forEach(menus, (dynamic menu) async {
-        await _menusLocalRepository.add(menu);
-      });
-    }
+    state = SplashState(status: LoadingStatus.updating);
+    await Future.forEach(menus, (dynamic menu) async {
+      await _menusLocalRepository.add(menu);
+    });
 
     await _reader(dailyProvider.notifier).updateSelectedDay();
-    state = state.copyWith(loadingStatus: LoadingStatus.reading);
-  }
-
-  Future<void> _handleError(Object error, BuildContext context) async {
-    debugPrint(error.toString());
-
-    if (!state.isErrorOccurring) {
-      state = state.copyWith(isErrorOccurring: true);
-      await _showErrorDialog(context);
-      state = state.copyWith(
-        loadingStatus: LoadingStatus.unloading,
-        isErrorOccurring: false,
-      );
-    }
-  }
-
-  Future<void> _showErrorDialog(BuildContext context) async {
-    WidgetsBinding.instance!.addPostFrameCallback((_) async {
-      await showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return HakondateDialog(
-            title: const Text('通信エラー'),
-            body: const Text('データの更新に失敗しました．データの更新をせず利用する場合は"このまま利用"を選択してください．'),
-            firstAction: HakondateActionButton(
-              isPrimary: true,
-              text: const Text('リトライ'),
-              onTap: () {
-                routemaster.pop();
-                loadSplash(context);
-              },
-            ),
-            secondAction: HakondateActionButton(
-              text: const Text('このまま利用'),
-              onTap: () async {
-                await _useAsIs();
-                routemaster.pop();
-              },
-            ),
-          );
-        },
-      );
-    });
-  }
-
-  Future<void> _useAsIs() async {
-    if (await _reader(userProvider.notifier).checkSignedUp()) {
-      await _reader(dailyProvider.notifier).updateSelectedDay();
-      routemaster.replace('/home');
-    } else {
-      routemaster.replace('/terms');
-    }
   }
 }

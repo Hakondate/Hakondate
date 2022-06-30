@@ -21,7 +21,7 @@ dependencies:
   flutter_svg: ^1.0.3
 
   # 状態管理関連
-  flutter_riverpod: ^1.0.0-dev.5
+  flutter_riverpod: ^1.0.4
   freezed_annotation: ^2.0.1
   freezed: ^2.0.1
   json_serializable: ^6.1.6
@@ -38,7 +38,11 @@ dependencies:
   intl: ^0.17.0
 
   # 遷移関連
-  routemaster: ^0.10.0-dev5
+  routemaster: ^1.0.0
+
+  # Firebase関連
+  firebase_core: ^1.17.0
+  cloud_firestore: ^3.1.16
 
 dev_dependencies:
   flutter_test:
@@ -53,8 +57,7 @@ dev_dependencies:
   flutter_oss_licenses: ^2.0.0+1
 
   # build_runner の実行コマンド
-  # flutter packages pub run build_runner build
-  # flutter packages pub run build_runner build --delete-conflicting-outputs (競合があった場合削除オプション)
+  # flutter packages pub run build_runner build --delete-conflicting-outputs
 
   # oss_licenses.dart の生成コマンド（パッケージを追加したら実行する）
   # flutter pub run flutter_oss_licenses:generate.dart -o lib/constant/oss_licenses.dart
@@ -120,6 +123,7 @@ import_sorter:
     - \/lib\/*\/*.freezed.dart
     - \/lib\/*\/*.g.dart
     - \/lib\/*\/oss_licenses.dart
+    - \/lib\/*\/firebase_options.dart
 
   # 実行コマンド
   # flutter pub run import_sorter:main

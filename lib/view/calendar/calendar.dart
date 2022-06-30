@@ -16,7 +16,7 @@ import 'package:hakondate/view_model/single_page/calendar_view_model.dart';
 import 'package:hakondate/view_model/single_page/daily_view_model.dart';
 
 class Calendar extends StatelessWidget {
-  const Calendar({Key? key}) : super(key: key);
+  const Calendar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -148,7 +148,7 @@ class Calendar extends StatelessWidget {
             bottom: PaddingSize.minimum,
             child: Image.asset(
               'assets/images/calendar_hedgehog/${day.month}.png',
-              height: UiSize.calendarTileHeight * 0.8,
+              height: UiSize.calendarTileHeight * 0.65,
             ),
           ),
           Positioned.fill(

@@ -4,96 +4,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
+import 'package:hakondate/state/signup/signup_state.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/view/component/dialog/hakondate_dialog/hakondate_dialog.dart';
 import 'package:hakondate/view/component/dialog/help_dialog.dart';
 import 'package:hakondate/view/component/label/setting_label.dart';
-import 'package:hakondate/view/component/other/loading_animation_widget.dart';
+import 'package:hakondate/view/signup/signing_up_dialog.dart';
 import 'package:hakondate/view_model/single_page/signup_view_model.dart';
 
 class Signup extends StatelessWidget {
+  Signup({super.key});
+
   final GlobalKey _formKey = GlobalKey<FormState>();
-
-  Signup({Key? key}) : super(key: key);
-
-  Future<void> _showConfirmationDialog(BuildContext context) async {
-    await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return HakondateDialog(
-          title: const Text('確認'),
-          body: Padding(
-            padding: const EdgeInsets.all(PaddingSize.normal),
-            child: Column(
-              children: [
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: MarginSize.minimum),
-                  child: const Text(
-                    '以下の内容でお子様を登録します\n'
-                        '※ あとで変更することができます',
-                  ),
-                ),
-                DefaultTextStyle(
-                  style: TextStyle(
-                    color: AppColor.brand.secondary,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16.0,
-                    height: 1.4,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: const [
-                          Text('お名前：　'),
-                          Text('学校：　'),
-                          Text('学年：　'),
-                        ],
-                      ),
-                      Consumer(
-                          builder: (BuildContext context, WidgetRef ref, _) {
-                            final store = ref.watch(signupProvider);
-
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(store.name!),
-                                Text(store.schoolTrailing),
-                                Text(store.schoolYearTrailing),
-                              ],
-                            );
-                          }
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          firstAction: HakondateActionButton(
-            text: const Text('登録する'),
-            isPrimary: true,
-            onTap: () async {
-              routemaster.pop();
-              await showGeneralDialog(
-                context: context,
-                barrierDismissible: false,
-                barrierColor: Colors.black.withOpacity(0.5),
-                pageBuilder: (_, __, ___) {
-                  return const LoadingAnimationWidget(isSplash: false);
-                },
-              );
-            },
-          ),
-          secondAction: HakondateActionButton(
-            text: const Text('修正する'),
-            onTap: () => routemaster.pop(),
-          ),
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -149,11 +71,11 @@ class Signup extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                  _errorIndication(context, store.nameErrorState),
+                  if (store is SignupStateData) _errorIndication(store.nameErrorState),
                 ],
               ),
               TextFormField(
-                initialValue: store.name,
+                initialValue: (store is SignupStateData) ? store.name : '',
                 keyboardType: TextInputType.name,
                 maxLength: 15,
                 decoration: InputDecoration(
@@ -166,8 +88,7 @@ class Signup extends StatelessWidget {
                     ),
                   ),
                 ),
-                onChanged: (value) =>
-                    ref.read(signupProvider.notifier).updateName(value),
+                onChanged: (value) => ref.read(signupProvider.notifier).updateName(value),
               ),
             ],
           ),
@@ -209,26 +130,25 @@ class Signup extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                  _errorIndication(
-                      context, ref.watch(signupProvider).schoolErrorState),
+                  if (store is SignupStateData) _errorIndication(store.schoolErrorState),
                 ],
               ),
             ),
             SettingLabel(
               title: '学校',
-              dialList: store.schools.map((school) => school.name).toList(),
+              dialList: (store is SignupStateData) ? store.schools.map((school) => school.name).toList() : [],
               completed: (index) {
+                if (store is! SignupStateData) return;
                 final int _id = store.schools[index].id;
                 ref.read(signupProvider.notifier).updateSchool(_id);
               },
-              trailing: store.schoolTrailing,
+              trailing: (store is SignupStateData) ? store.schoolTrailing : '',
             ),
             SettingLabel(
               title: '学年',
-              dialList: store.schoolYears,
-              completed: (index) =>
-                  ref.read(signupProvider.notifier).updateSchoolYear(index + 1),
-              trailing: store.schoolYearTrailing,
+              dialList: (store is SignupStateData) ? store.schoolYears : [],
+              completed: (index) => ref.read(signupProvider.notifier).updateSchoolYear(index + 1),
+              trailing: (store is SignupStateData) ? store.schoolYearTrailing : '',
             ),
             const SizedBox(height: PaddingSize.normal),
           ],
@@ -237,15 +157,19 @@ class Signup extends StatelessWidget {
     );
   }
 
-  Widget _errorIndication(BuildContext context, String? errorState) {
+  Widget _errorIndication(String? errorState) {
     if (errorState == null || errorState.isEmpty) return Container();
 
-    return Text(
-      errorState,
-      style: TextStyle(
-        fontSize: FontSize.indication,
-        color: Theme.of(context).errorColor,
-      ),
+    return Builder(
+      builder: (BuildContext context) {
+        return Text(
+          errorState,
+          style: TextStyle(
+            fontSize: FontSize.indication,
+            color: Theme.of(context).errorColor,
+          ),
+        );
+      }
     );
   }
 
@@ -268,9 +192,12 @@ class Signup extends StatelessWidget {
                   shape: const StadiumBorder(),
                 ),
                 child: const Text('登録する'),
-                onPressed: () {
+                onPressed: () async {
                   if (ref.read(signupProvider.notifier).checkValidation()) {
-                    _showConfirmationDialog(context);
+                    await showDialog(
+                      context: context,
+                      builder: (BuildContext context) => const SigningUpDialog(),
+                    );
                   }
                 },
               ),

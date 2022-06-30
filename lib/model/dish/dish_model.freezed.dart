@@ -66,23 +66,24 @@ class _$DishModelCopyWithImpl<$Res> implements $DishModelCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$DishModelCopyWith<$Res> implements $DishModelCopyWith<$Res> {
-  factory _$DishModelCopyWith(
-          _DishModel value, $Res Function(_DishModel) then) =
-      __$DishModelCopyWithImpl<$Res>;
+abstract class _$$_DishModelCopyWith<$Res> implements $DishModelCopyWith<$Res> {
+  factory _$$_DishModelCopyWith(
+          _$_DishModel value, $Res Function(_$_DishModel) then) =
+      __$$_DishModelCopyWithImpl<$Res>;
   @override
   $Res call(
       {String name, List<FoodstuffModel> foodstuffs, DishCategory? category});
 }
 
 /// @nodoc
-class __$DishModelCopyWithImpl<$Res> extends _$DishModelCopyWithImpl<$Res>
-    implements _$DishModelCopyWith<$Res> {
-  __$DishModelCopyWithImpl(_DishModel _value, $Res Function(_DishModel) _then)
-      : super(_value, (v) => _then(v as _DishModel));
+class __$$_DishModelCopyWithImpl<$Res> extends _$DishModelCopyWithImpl<$Res>
+    implements _$$_DishModelCopyWith<$Res> {
+  __$$_DishModelCopyWithImpl(
+      _$_DishModel _value, $Res Function(_$_DishModel) _then)
+      : super(_value, (v) => _then(v as _$_DishModel));
 
   @override
-  _DishModel get _value => super._value as _DishModel;
+  _$_DishModel get _value => super._value as _$_DishModel;
 
   @override
   $Res call({
@@ -90,13 +91,13 @@ class __$DishModelCopyWithImpl<$Res> extends _$DishModelCopyWithImpl<$Res>
     Object? foodstuffs = freezed,
     Object? category = freezed,
   }) {
-    return _then(_DishModel(
+    return _then(_$_DishModel(
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       foodstuffs: foodstuffs == freezed
-          ? _value.foodstuffs
+          ? _value._foodstuffs
           : foodstuffs // ignore: cast_nullable_to_non_nullable
               as List<FoodstuffModel>,
       category: category == freezed
@@ -141,10 +142,10 @@ class _$_DishModel extends _DishModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _DishModel &&
+            other is _$_DishModel &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality()
-                .equals(other.foodstuffs, foodstuffs) &&
+                .equals(other._foodstuffs, _foodstuffs) &&
             const DeepCollectionEquality().equals(other.category, category));
   }
 
@@ -152,13 +153,13 @@ class _$_DishModel extends _DishModel {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(foodstuffs),
+      const DeepCollectionEquality().hash(_foodstuffs),
       const DeepCollectionEquality().hash(category));
 
   @JsonKey(ignore: true)
   @override
-  _$DishModelCopyWith<_DishModel> get copyWith =>
-      __$DishModelCopyWithImpl<_DishModel>(this, _$identity);
+  _$$_DishModelCopyWith<_$_DishModel> get copyWith =>
+      __$$_DishModelCopyWithImpl<_$_DishModel>(this, _$identity);
 }
 
 abstract class _DishModel extends DishModel {
@@ -176,6 +177,6 @@ abstract class _DishModel extends DishModel {
   DishCategory? get category => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$DishModelCopyWith<_DishModel> get copyWith =>
+  _$$_DishModelCopyWith<_$_DishModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
