@@ -20,7 +20,7 @@ jobs:
         
       - name: 'Get packages'
         run: flutter pub get
-
+        
       - name: 'Run flutter_oss_licenses'
         run: flutter pub run flutter_oss_licenses:generate.dart -o lib/constant/oss_licenses.dart
       
