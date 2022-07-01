@@ -2,7 +2,7 @@ import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/model/school/school_model.dart';
-import 'package:hakondate/repository/local/local_database.dart';
+import 'package:hakondate/repository/local/sqlite/local_database.dart';
 import 'package:hakondate/util/exception/sqlite_exception.dart';
 import 'package:hakondate/view_model/multi_page/common_function.dart';
 

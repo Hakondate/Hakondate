@@ -6,7 +6,7 @@ import 'package:hakondate/model/foodstuff/foodstuff_model.dart';
 import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:hakondate/model/nutrients/nutrients_model.dart';
 import 'package:hakondate/model/quantity/quantity_model.dart';
-import 'package:hakondate/repository/local/local_database.dart';
+import 'package:hakondate/repository/local/sqlite/local_database.dart';
 import 'package:hakondate/view_model/multi_page/common_function.dart';
 import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 
