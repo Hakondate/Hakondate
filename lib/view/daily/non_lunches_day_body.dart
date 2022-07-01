@@ -5,10 +5,10 @@ import 'package:hakondate/constant/size.dart';
 
 class NonLunchesDayBody extends StatelessWidget {
   const NonLunchesDayBody({
-    Key? key,
+    super.key,
     required this.imageFileName,
     required this.text,
-  }) : super(key: key);
+  });
 
   final String imageFileName;
   final String text;

@@ -29,7 +29,7 @@ class DailyViewModel extends StateNotifier<DailyState> {
   Future<void> updateSelectedDay({DateTime? selectedDay, DateTime? focusedDay}) async {
     switch (Environment.flavor) {
       case Flavor.dev:
-        selectedDay ??= DateTime(2021, 7, 1);
+        selectedDay ??= DateTime(2022, 5, 16);
         break;
       case Flavor.stg:
       case Flavor.prod:

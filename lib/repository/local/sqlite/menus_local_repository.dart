@@ -6,44 +6,46 @@ import 'package:hakondate/model/foodstuff/foodstuff_model.dart';
 import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:hakondate/model/nutrients/nutrients_model.dart';
 import 'package:hakondate/model/quantity/quantity_model.dart';
-import 'package:hakondate/repository/local/sqlite/database_manager.dart';
+import 'package:hakondate/repository/local/sqlite/local_database.dart';
 import 'package:hakondate/view_model/multi_page/common_function.dart';
+import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 
 final menusLocalRepositoryProvider = Provider<MenusLocalRepository>((ref) {
-  final DatabaseManager databaseManager = ref.read(databaseManagerProvider);
+  final LocalDatabase localDatabase = ref.read(localDatabaseProvider);
   final CommonFunction commonFunction = ref.read(commonFunctionProvider.notifier);
-  return MenusLocalRepository(databaseManager, commonFunction);
+  final UserViewModel userReader = ref.read(userProvider.notifier);
+  return MenusLocalRepository(localDatabase, commonFunction, userReader);
 });
 
 abstract class MenusLocalRepositoryBase {
   Future<int> add(Map<String, dynamic> menu);
   Future<List<MenuModel>> getAll();
   Future<MenuModel> getMenuByDay(DateTime day);
-  Future<List<MenuModel>> getSelectedPeriod({
-    required DateTime startDay,
-    required DateTime endDay,
-    required int schoolId,
-  });
+  Future<DateTime> getLatestUpdateDay();
+  Future<int> deleteAll();
 }
 
 class MenusLocalRepository extends MenusLocalRepositoryBase {
-  MenusLocalRepository(this._db, this._commonFunction) : super();
+  MenusLocalRepository(this._db, this._commonFunction, this._userReader) : super();
 
-  final DatabaseManager _db;
+  final LocalDatabase _db;
   final CommonFunction _commonFunction;
+  final UserViewModel _userReader;
 
   @override
   Future<int> add(Map<String, dynamic> menu) async {
     final MenusTableCompanion companion = MenusTableCompanion(
       id: Value(menu['id']),
-      day: Value(DateTime.fromMillisecondsSinceEpoch(menu['day'])),
+      day: Value(_commonFunction.getDayFromTimestamp(menu['day'])),
       schoolId: Value(menu['schoolId']),
       event: Value(menu['event']),
+      updateAt: Value(_commonFunction.getDayFromTimestamp(menu['updateAt'])),
     );
     final int menuId = await _db.into(_db.menusTable).insert(
       companion,
       onConflict: DoUpdate((old) => MenusTableCompanion.custom(
         event: Constant(companion.event.value),
+        updateAt: Constant(companion.updateAt.value),
       )),
     );
 
@@ -53,8 +55,7 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
           MenuDishesTableCompanion(
             menuId: Value(menuId),
             dishId: Value(dishId),
-          )
-      );
+          ));
     });
 
     return menuId;
@@ -184,7 +185,9 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
   @override
   Future<List<MenuModel>> getAll() async {
     List<MenuModel> menus = [];
-    final List<MenusSchema> menusSchemas = await _db.select(_db.menusTable).get();
+    final int schoolId = await _userReader.getParentId();
+    final List<MenusSchema> menusSchemas = await (_db.select(_db.menusTable)
+      ..where((t) => t.schoolId.equals(schoolId))).get();
 
     await Future.forEach(menusSchemas, (MenusSchema menusSchema) async {
       final MenuModel menu = await _getBySchema(menusSchema);
@@ -199,55 +202,43 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
     final int id = await _commonFunction.getIdByDay(day);
     final MenuModel? menu = await _getMenuById(id);
 
-    if (menu != null) {
-      return menu;
-    }
+    if (menu != null) return menu;
 
     final DateTime oldest = await _getOldestDay();
     final DateTime latest = await _getLatestDay();
 
-    if (day.isAfter(oldest) && day.isBefore(latest)) {
-      return const MenuModel.holiday();
-    }
+    if (day.isAfter(oldest) && day.isBefore(latest)) return const MenuModel.holiday();
 
     return const MenuModel.noData();
   }
 
   Future<MenuModel?> _getMenuById(int id) async {
-    final MenusSchema? menusSchema =
-    await (_db.select(_db.menusTable)..where((t) => t.id.equals(id))).getSingleOrNull();
+    final MenusSchema? menusSchema = await (_db.select(_db.menusTable)
+      ..where((t) => t.id.equals(id))).getSingleOrNull();
 
     return (menusSchema != null) ? _getBySchema(menusSchema) : null;
   }
 
-  @override
-  Future<List<MenuModel>> getSelectedPeriod({
-    required DateTime startDay,
-    required DateTime endDay,
-    required int schoolId,
-  }) async {
-    List<MenuModel> menus = [];
-    final List<MenusSchema> menusSchemas = await (_db.select(_db.menusTable)..where((t) =>
-      t.day.isBetweenValues(startDay, endDay) & t.schoolId.equals(schoolId))).get();
-
-    await Future.forEach(menusSchemas, (MenusSchema menusSchema) async {
-      final MenuModel menu = await _getBySchema(menusSchema);
-      menus.add(menu);
-    });
-
-    return menus;
-  }
-
   Future<DateTime> _getOldestDay() async {
+    if (await _count() == 0) return DateTime.now();
+
+    final int schoolId = await _userReader.getParentId();
     final Expression<DateTime> exp = _db.menusTable.day.min();
-    final query = _db.selectOnly(_db.menusTable)..addColumns([exp]);
+    final query = _db.selectOnly(_db.menusTable)
+      ..where(_db.menusTable.schoolId.equals(schoolId))
+      ..addColumns([exp]);
 
     return await query.map((scheme) => scheme.read(exp)).getSingle();
   }
 
   Future<DateTime> _getLatestDay() async {
+    if (await _count() == 0) return DateTime.now();
+
+    final int schoolId = await _userReader.getParentId();
     final Expression<DateTime> exp = _db.menusTable.day.max();
-    final query = _db.selectOnly(_db.menusTable)..addColumns([exp]);
+    final query = _db.selectOnly(_db.menusTable)
+      ..where(_db.menusTable.schoolId.equals(schoolId))
+      ..addColumns([exp]);
 
     return await query.map((scheme) => scheme.read(exp)).getSingle();
   }
@@ -272,11 +263,11 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
   }
 
   Future<DishModel> _getDishById(int dishId) async {
-    final DishesSchema dishesSchema =
-        await (_db.select(_db.dishesTable)..where((t) => t.id.equals(dishId))).getSingle();
+    final DishesSchema dishesSchema = await (_db.select(_db.dishesTable)
+      ..where((t) => t.id.equals(dishId))).getSingle();
     List<FoodstuffModel> foodstuffs = [];
-    final List<DishFoodstuffsSchema> dishFoodstuffsSchemas =
-        await (_db.select(_db.dishFoodstuffsTable)..where((t) => t.dishId.equals(dishesSchema.id))).get();
+    final List<DishFoodstuffsSchema> dishFoodstuffsSchemas = await (_db.select(_db.dishFoodstuffsTable)
+      ..where((t) => t.dishId.equals(dishesSchema.id))).get();
 
     await Future.forEach(dishFoodstuffsSchemas, (DishFoodstuffsSchema dishFoodstuffsSchema) async {
       final FoodstuffModel foodstuff = await _getFoodstuffById(dishFoodstuffsSchema.foodstuffId);
@@ -343,4 +334,31 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
       origin: foodstuffsSchema.origin,
     );
   }
+
+  @override
+  Future<DateTime> getLatestUpdateDay() async {
+    if (await _count() == 0) return DateTime(1970);
+
+    final int schoolId = await _userReader.getParentId();
+    final Expression<DateTime> exp = _db.menusTable.updateAt.max();
+    final query = _db.selectOnly(_db.menusTable)
+      ..where(_db.menusTable.schoolId.equals(schoolId))
+      ..addColumns([exp]);
+
+    return await query.map((scheme) => scheme.read(exp)).getSingle();
+  }
+
+  Future<int> _count() async {
+    final int schoolId = await _userReader.getParentId();
+    final Expression<int> exp = _db.menusTable.id.count();
+    final query = _db.selectOnly(_db.menusTable)
+      ..where(_db.menusTable.schoolId.equals(schoolId))
+      ..addColumns([exp]);
+    final int? count = await query.map((scheme) => scheme.read(exp)).getSingleOrNull();
+
+    return count ?? 0;
+  }
+
+  @override
+  Future<int> deleteAll() => _db.delete(_db.menusTable).go();
 }

@@ -2,11 +2,12 @@ import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/model/user/user_model.dart';
-import 'package:hakondate/repository/local/sqlite/database_manager.dart';
+import 'package:hakondate/repository/local/sqlite/local_database.dart';
+import 'package:hakondate/util/exception/sqlite_exception.dart';
 
 final usersLocalRepositoryProvider = Provider<UsersLocalRepository>((ref) {
-  final DatabaseManager databaseManager = ref.read(databaseManagerProvider);
-  return UsersLocalRepository(databaseManager);
+  final LocalDatabase localDatabase = ref.read(localDatabaseProvider);
+  return UsersLocalRepository(localDatabase);
 });
 
 abstract class UsersLocalRepositoryBase {
@@ -15,12 +16,14 @@ abstract class UsersLocalRepositoryBase {
   Future<int> add(String name, int schoolId, int schoolYear);
   Future<int> update(UserModel user);
   Future<int> count();
+  Future<int> delete(int id);
+  Future<void> deleteAll();
 }
 
 class UsersLocalRepository extends UsersLocalRepositoryBase {
   UsersLocalRepository(this._db) : super();
 
-  final DatabaseManager _db;
+  final LocalDatabase _db;
 
   @override
   Future<List<UserModel>> getAll() async {
@@ -42,14 +45,16 @@ class UsersLocalRepository extends UsersLocalRepositoryBase {
 
   @override
   Future<UserModel> getById(int id) async {
-    final UsersSchema _usersSchema =
-        await (_db.select(_db.usersTable)..where((t) => t.id.equals(id))).getSingle();
+    final UsersSchema? usersSchema =
+        await (_db.select(_db.usersTable)..where((t) => t.id.equals(id))).getSingleOrNull();
+
+    if (usersSchema == null) throw SQLiteException('Failed to select $id from usersTable');
 
     return UserModel(
-      id: _usersSchema.id,
-      name: _usersSchema.name,
-      schoolId: _usersSchema.schoolId,
-      schoolYear: _usersSchema.schoolYear,
+      id: usersSchema.id,
+      name: usersSchema.name,
+      schoolId: usersSchema.schoolId,
+      schoolYear: usersSchema.schoolYear,
     );
   }
 
@@ -79,7 +84,14 @@ class UsersLocalRepository extends UsersLocalRepositoryBase {
   Future<int> count() async {
     final Expression<int> exp = _db.usersTable.id.count();
     final query = _db.selectOnly(_db.usersTable)..addColumns([exp]);
+    final int? count = await query.map((scheme) => scheme.read(exp)).getSingleOrNull();
 
-    return await query.map((scheme) => scheme.read(exp)).getSingle();
+    return count ?? 0;
   }
+
+  @override
+  Future<int> delete(int id) => (_db.delete(_db.usersTable)..where((t) => t.id.equals(id))).go();
+
+  @override
+  Future<void> deleteAll() => _db.delete(_db.usersTable).go();
 }

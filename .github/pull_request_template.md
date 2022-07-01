@@ -24,6 +24,4 @@
     - Widgetの階層構造
     - 静的型付け
     くらいは少なくとも確認する
-- [ ] import_sorterでimport文を整理した
-    - `flutter pub run import_sorter:main`を実行する
 - [ ] 提出予定のファイルを確認し不要な変更やファイルが混入していないかを確認した

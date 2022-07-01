@@ -14,16 +14,16 @@ import 'package:hakondate/repository/local/sqlite/table/menus_table.dart';
 import 'package:hakondate/repository/local/sqlite/table/schools_table.dart';
 import 'package:hakondate/repository/local/sqlite/table/users_table.dart';
 
-part 'database_manager.g.dart';
+part 'local_database.g.dart';
 
-final databaseManagerProvider = Provider<DatabaseManager>((ref) {
+final localDatabaseProvider = Provider<LocalDatabase>((_) {
   final LazyDatabase lazyDatabase = LazyDatabase(() async {
     final Directory directory = await getApplicationDocumentsDirectory();
     final File file = File(p.join(directory.path, 'db.sqlite'));
     return NativeDatabase(file);
   });
 
-  return DatabaseManager(lazyDatabase);
+  return LocalDatabase(lazyDatabase);
 });
 
 @DriftDatabase(tables: [
@@ -35,8 +35,8 @@ final databaseManagerProvider = Provider<DatabaseManager>((ref) {
   FoodstuffsTable,
   UsersTable,
 ])
-class DatabaseManager extends _$DatabaseManager {
-  DatabaseManager(LazyDatabase _lazyDatabase) : super(_lazyDatabase);
+class LocalDatabase extends _$LocalDatabase {
+  LocalDatabase(LazyDatabase _lazyDatabase) : super(_lazyDatabase);
 
   @override
   int get schemaVersion => 1;

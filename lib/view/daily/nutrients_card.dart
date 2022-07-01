@@ -11,7 +11,7 @@ import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 import 'package:hakondate/view_model/single_page/daily_view_model.dart';
 
 class NutrientsCard extends StatelessWidget {
-  const NutrientsCard({Key? key}) : super(key: key);
+  const NutrientsCard({super.key});
 
   @override
   Widget build(BuildContext context) {
