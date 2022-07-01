@@ -11,14 +11,13 @@ class DailyDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: SafeArea(
-        top: false,
+        top: true,
         child: Column(
           children: [
             Image.asset(
-              'assets/images/icon.png',
-              fit: BoxFit.cover,
+              'assets/images/drawer/header.png',
+              fit: BoxFit.fitWidth,
               width: double.infinity,
-              height: 200,
             ),
             _pageListWidget(),
           ],
