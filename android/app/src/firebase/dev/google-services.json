@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "37711418622",
+    "firebase_url": "https://hakondate-develop-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "hakondate-develop",
     "storage_bucket": "hakondate-develop.appspot.com"
   },
@@ -29,6 +30,13 @@
             {
               "client_id": "37711418622-njljvskvabl3nn5h7s9ff8cn5k0qc919.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "37711418622-g293thetb0d0p8fmm7ul3170elhgc464.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.ac.fun.hakondate.dev"
+              }
             }
           ]
         }

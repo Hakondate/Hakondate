@@ -4,15 +4,17 @@ import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:hakondate/model/nutrients/nutrients_model.dart';
 import 'package:hakondate/repository/local/menus_local_repository.dart';
 import 'package:hakondate/state/daily/daily_state.dart';
+import 'package:hakondate/util/analytics_controller.dart';
 import 'package:hakondate/util/environment.dart';
 
 final dailyProvider = StateNotifierProvider<DailyViewModel, DailyState>((ref) {
   final MenusLocalRepository menusLocalRepository = ref.read(menusLocalRepositoryProvider);
-  return DailyViewModel(menusLocalRepository);
+  final AnalyticsController analyticsController = ref.read(analyticsControllerProvider.notifier);
+  return DailyViewModel(menusLocalRepository, analyticsController);
 });
 
 class DailyViewModel extends StateNotifier<DailyState> {
-  DailyViewModel(this._menusLocalRepository)
+  DailyViewModel(this._menusLocalRepository, this._analyticsController)
       : super(DailyState(
           selectedDay: DateTime.now(),
           focusedDay: DateTime.now(),
@@ -25,6 +27,7 @@ class DailyViewModel extends StateNotifier<DailyState> {
         ));
 
   final MenusLocalRepository _menusLocalRepository;
+  final AnalyticsController _analyticsController;
 
   Future<void> updateSelectedDay({DateTime? selectedDay, DateTime? focusedDay}) async {
     switch (Environment.flavor) {
@@ -42,8 +45,14 @@ class DailyViewModel extends StateNotifier<DailyState> {
       selectedDay: selectedDay,
       focusedDay: focusedDay ?? selectedDay,
       menu: await _menusLocalRepository.getMenuByDay(selectedDay),
-      isFetching: false,
     );
+
+    final MenuModel menu = state.menu;
+    if (menu is LunchesDayMenuModel) {
+      await _analyticsController.logViewMenu(menu.id);
+    }
+
+    state = state.copyWith(isFetching: false);
   }
 
   void updateFocusedDay(DateTime day) => state = state.copyWith(focusedDay: day);
