@@ -52,13 +52,13 @@ class DailyDrawer extends StatelessWidget {
           _drawerLabel(
             icon: Icons.description_outlined,
             labelText: '利用規約',
-            onTap: () => routemaster.push('/home/terms'),
+            onTap: () => routemaster.push('/home/drawer_terms'),
           ),
           _drawerLabel(
             icon: Icons.info_outlined,
             labelText: 'インフォメーション',
             onTap: () =>
-            routemaster.push('/home/about_us'),
+            routemaster.push('/home/information'),
           ),
           _drawerLabel(
             icon: Icons.help_outlined,
