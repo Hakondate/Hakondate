@@ -54,30 +54,30 @@ class _$DrawerStateCopyWithImpl<$Res> implements $DrawerStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$DrawerStateCopyWith<$Res>
+abstract class _$$_DrawerStateCopyWith<$Res>
     implements $DrawerStateCopyWith<$Res> {
-  factory _$DrawerStateCopyWith(
-          _DrawerState value, $Res Function(_DrawerState) then) =
-      __$DrawerStateCopyWithImpl<$Res>;
+  factory _$$_DrawerStateCopyWith(
+          _$_DrawerState value, $Res Function(_$_DrawerState) then) =
+      __$$_DrawerStateCopyWithImpl<$Res>;
   @override
   $Res call({GlobalKey<ScaffoldState> scaffoldKey});
 }
 
 /// @nodoc
-class __$DrawerStateCopyWithImpl<$Res> extends _$DrawerStateCopyWithImpl<$Res>
-    implements _$DrawerStateCopyWith<$Res> {
-  __$DrawerStateCopyWithImpl(
-      _DrawerState _value, $Res Function(_DrawerState) _then)
-      : super(_value, (v) => _then(v as _DrawerState));
+class __$$_DrawerStateCopyWithImpl<$Res> extends _$DrawerStateCopyWithImpl<$Res>
+    implements _$$_DrawerStateCopyWith<$Res> {
+  __$$_DrawerStateCopyWithImpl(
+      _$_DrawerState _value, $Res Function(_$_DrawerState) _then)
+      : super(_value, (v) => _then(v as _$_DrawerState));
 
   @override
-  _DrawerState get _value => super._value as _DrawerState;
+  _$_DrawerState get _value => super._value as _$_DrawerState;
 
   @override
   $Res call({
     Object? scaffoldKey = freezed,
   }) {
-    return _then(_DrawerState(
+    return _then(_$_DrawerState(
       scaffoldKey: scaffoldKey == freezed
           ? _value.scaffoldKey
           : scaffoldKey // ignore: cast_nullable_to_non_nullable
@@ -111,7 +111,7 @@ class _$_DrawerState with DiagnosticableTreeMixin implements _DrawerState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _DrawerState &&
+            other is _$_DrawerState &&
             const DeepCollectionEquality()
                 .equals(other.scaffoldKey, scaffoldKey));
   }
@@ -122,8 +122,8 @@ class _$_DrawerState with DiagnosticableTreeMixin implements _DrawerState {
 
   @JsonKey(ignore: true)
   @override
-  _$DrawerStateCopyWith<_DrawerState> get copyWith =>
-      __$DrawerStateCopyWithImpl<_DrawerState>(this, _$identity);
+  _$$_DrawerStateCopyWith<_$_DrawerState> get copyWith =>
+      __$$_DrawerStateCopyWithImpl<_$_DrawerState>(this, _$identity);
 }
 
 abstract class _DrawerState implements DrawerState {
@@ -135,6 +135,6 @@ abstract class _DrawerState implements DrawerState {
       throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$DrawerStateCopyWith<_DrawerState> get copyWith =>
+  _$$_DrawerStateCopyWith<_$_DrawerState> get copyWith =>
       throw _privateConstructorUsedError;
 }

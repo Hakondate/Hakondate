@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hakondate/view/letter/letter.dart';
 
 import 'package:routemaster/routemaster.dart';
 
@@ -26,7 +27,7 @@ final routemaster = RoutemasterDelegate(
           '/home/daily',
           '/home/recipes',
           '/home/dictionary',
-          '/home/letters',
+          '/home/letter',
         ],
       ),
       '/home/daily': (_) => const MaterialPage(child: Daily()),
@@ -34,7 +35,7 @@ final routemaster = RoutemasterDelegate(
       '/home/calendar': (_) => const FadeUpPage(child: Calendar()),
       '/home/recipes': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
       '/home/dictionary': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
-      '/home/letters': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
+      '/home/letter': (_) => const MaterialPage(child: Letter()),
       '/home/user_settings': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
       '/home/origin': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
       '/home/drawer_terms': (_) => const FadeUpPage(child: DrawerTerms()),
