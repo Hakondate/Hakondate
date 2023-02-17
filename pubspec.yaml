@@ -42,7 +42,7 @@ dependencies:
 
   # Firebase関連
   firebase_core: ^2.6.1
-  cloud_firestore: ^4.4.2
+  cloud_firestore: ^4.4.0
   firebase_storage: ^11.0.13
 
 dev_dependencies:
