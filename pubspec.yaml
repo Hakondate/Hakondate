@@ -41,8 +41,9 @@ dependencies:
   routemaster: ^1.0.0
 
   # Firebase関連
-  firebase_core: ^1.17.0
-  cloud_firestore: ^3.1.16
+  firebase_core: ^2.6.1
+  cloud_firestore: ^4.4.2
+  firebase_storage: ^11.0.13
 
 dev_dependencies:
   flutter_test:
