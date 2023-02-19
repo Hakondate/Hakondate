@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate/constant/size.dart';
+import 'package:hakondate/model/letter/letter_metadata_model.dart';
+import 'package:hakondate/view_model/single_page/letter_view_model.dart';
 
 class Letter extends StatelessWidget {
   const Letter({super.key});
@@ -14,8 +16,9 @@ class Letter extends StatelessWidget {
       body: Consumer(
         builder: (BuildContext context, WidgetRef ref, _) {
           return ListView.builder(
-            itemCount: 10,
+            itemCount: ref.watch(letterProvider).letters.length,
             itemBuilder: (BuildContext context, int index) {
+              final LetterMetadataModel letter = ref.watch(letterProvider).letters[index];
               return Card(
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 child: Row(
@@ -30,13 +33,13 @@ class Letter extends StatelessWidget {
                     Expanded(
                       flex: 7,
                       child: Padding(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           vertical: 16.0,
                           horizontal: 8.0,
                         ),
                         child: Text(
-                          '10月の食育便り',
-                          style: TextStyle(
+                          letter.title,
+                          style: const TextStyle(
                             fontSize: FontSize.body,
                             fontWeight: FontWeight.bold,
                           ),

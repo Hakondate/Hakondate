@@ -8,6 +8,4 @@ final firestorageDatabaseProvider = StateNotifierProvider<FirestorageDatabase, F
 
 class FirestorageDatabase extends StateNotifier<FirebaseStorage> {
   FirestorageDatabase(super.storage);
-
-  Reference get lettersReference => state.ref().child('letters');
 }
