@@ -12,6 +12,7 @@ import 'package:hakondate/view/signup/signup.dart';
 import 'package:hakondate/view/splash/splash.dart';
 import 'package:hakondate/view/terms/drawer_terms.dart';
 import 'package:hakondate/view/terms/terms.dart';
+import 'package:hakondate/view/information/information.dart';
 
 final routemaster = RoutemasterDelegate(
   routesBuilder: (context) => RouteMap(
@@ -38,7 +39,7 @@ final routemaster = RoutemasterDelegate(
       '/home/user_settings': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
       '/home/origin': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
       '/home/drawer_terms': (_) => const FadeUpPage(child: DrawerTerms()),
-      '/home/information': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
+      '/home/information': (_) => const MaterialPage(child: Information()),
       '/home/help': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
       '/home/license': (_) => const FadeUpPage(child: License()),
       '/home/license/:index': (route) => FadeUpPage(child: LicenseDetail(

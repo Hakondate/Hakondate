@@ -73,6 +73,7 @@ flutter:
     - assets/images/calendar_hedgehog/
     - assets/images/drawer/
     - assets/images/food_icon/
+    - assets/images/information/
     - assets/images/menu_tile/
     - assets/images/label/
     - assets/images/menu_status/
