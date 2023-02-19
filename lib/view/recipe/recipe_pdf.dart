@@ -7,6 +7,8 @@ import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/open_data_recipes.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/recipe/open_data_recipe_model.dart';
+import 'package:hakondate/router/routes.dart';
+import 'package:hakondate/view/component/dialog/exception_dialog/download_exception_dialog.dart';
 import 'package:hakondate/view/component/frame/fade_up_app_bar.dart';
 import 'package:hakondate/view_model/single_page/recipe_view_model.dart';
 
@@ -41,7 +43,14 @@ class RecipePDF extends ConsumerWidget {
             return PDFView(
               filePath: snapshot.data,
               enableSwipe: false,
-              onError: (_) => ref.read(recipeProvider.notifier).reDownload(recipe: recipe),
+              onError: (_) async => await showDialog(
+                context: context,
+                builder: (BuildContext context) => DownloadExceptionDialog(
+                  onTapRetry: () => routemaster.pop().whenComplete(() =>
+                      ref.read(recipeProvider.notifier).reDownload(recipe: recipe)),
+                  onTapPop: () => routemaster.pop().whenComplete(() => routemaster.pop()),
+                ),
+              ),
             );
           }
 
