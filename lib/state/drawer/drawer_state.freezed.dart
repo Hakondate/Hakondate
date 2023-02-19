@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'drawer_state.dart';
 
@@ -28,28 +28,32 @@ mixin _$DrawerState {
 abstract class $DrawerStateCopyWith<$Res> {
   factory $DrawerStateCopyWith(
           DrawerState value, $Res Function(DrawerState) then) =
-      _$DrawerStateCopyWithImpl<$Res>;
+      _$DrawerStateCopyWithImpl<$Res, DrawerState>;
+  @useResult
   $Res call({GlobalKey<ScaffoldState> scaffoldKey});
 }
 
 /// @nodoc
-class _$DrawerStateCopyWithImpl<$Res> implements $DrawerStateCopyWith<$Res> {
+class _$DrawerStateCopyWithImpl<$Res, $Val extends DrawerState>
+    implements $DrawerStateCopyWith<$Res> {
   _$DrawerStateCopyWithImpl(this._value, this._then);
 
-  final DrawerState _value;
   // ignore: unused_field
-  final $Res Function(DrawerState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? scaffoldKey = freezed,
+    Object? scaffoldKey = null,
   }) {
     return _then(_value.copyWith(
-      scaffoldKey: scaffoldKey == freezed
+      scaffoldKey: null == scaffoldKey
           ? _value.scaffoldKey
           : scaffoldKey // ignore: cast_nullable_to_non_nullable
               as GlobalKey<ScaffoldState>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -60,25 +64,25 @@ abstract class _$$_DrawerStateCopyWith<$Res>
           _$_DrawerState value, $Res Function(_$_DrawerState) then) =
       __$$_DrawerStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({GlobalKey<ScaffoldState> scaffoldKey});
 }
 
 /// @nodoc
-class __$$_DrawerStateCopyWithImpl<$Res> extends _$DrawerStateCopyWithImpl<$Res>
+class __$$_DrawerStateCopyWithImpl<$Res>
+    extends _$DrawerStateCopyWithImpl<$Res, _$_DrawerState>
     implements _$$_DrawerStateCopyWith<$Res> {
   __$$_DrawerStateCopyWithImpl(
       _$_DrawerState _value, $Res Function(_$_DrawerState) _then)
-      : super(_value, (v) => _then(v as _$_DrawerState));
+      : super(_value, _then);
 
-  @override
-  _$_DrawerState get _value => super._value as _$_DrawerState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? scaffoldKey = freezed,
+    Object? scaffoldKey = null,
   }) {
     return _then(_$_DrawerState(
-      scaffoldKey: scaffoldKey == freezed
+      scaffoldKey: null == scaffoldKey
           ? _value.scaffoldKey
           : scaffoldKey // ignore: cast_nullable_to_non_nullable
               as GlobalKey<ScaffoldState>,
@@ -112,16 +116,16 @@ class _$_DrawerState with DiagnosticableTreeMixin implements _DrawerState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_DrawerState &&
-            const DeepCollectionEquality()
-                .equals(other.scaffoldKey, scaffoldKey));
+            (identical(other.scaffoldKey, scaffoldKey) ||
+                other.scaffoldKey == scaffoldKey));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(scaffoldKey));
+  int get hashCode => Object.hash(runtimeType, scaffoldKey);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_DrawerStateCopyWith<_$_DrawerState> get copyWith =>
       __$$_DrawerStateCopyWithImpl<_$_DrawerState>(this, _$identity);
 }
@@ -131,8 +135,7 @@ abstract class _DrawerState implements DrawerState {
       {required final GlobalKey<ScaffoldState> scaffoldKey}) = _$_DrawerState;
 
   @override
-  GlobalKey<ScaffoldState> get scaffoldKey =>
-      throw _privateConstructorUsedError;
+  GlobalKey<ScaffoldState> get scaffoldKey;
   @override
   @JsonKey(ignore: true)
   _$$_DrawerStateCopyWith<_$_DrawerState> get copyWith =>

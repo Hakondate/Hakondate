@@ -3,24 +3,23 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/model/school/school_model.dart';
-import 'package:hakondate/repository/local/schools_local_repository.dart';
+import 'package:hakondate/repository/local/sqlite/schools_local_repository.dart';
 import 'package:hakondate/state/signup/signup_state.dart';
 import 'package:hakondate/util/exception/parameters_exception.dart';
 import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 
 final signupProvider = StateNotifierProvider<SignupViewModel, SignupState>((ref) {
-  final SchoolsLocalRepository schoolLocalRepository = ref.read(schoolsLocalRepositoryProvider);
-  final UserViewModel userReader = ref.read(userProvider.notifier);
-  return SignupViewModel(schoolLocalRepository, userReader);
+  final SchoolsLocalRepository schoolLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
+  return SignupViewModel(schoolLocalRepository, ref);
 });
 
 class SignupViewModel extends StateNotifier<SignupState> {
-  SignupViewModel(this._schoolLocalRepository, this._userReader) : super(SignupState()) {
+  SignupViewModel(this._schoolLocalRepository, this._ref) : super(SignupState()) {
     _initialize();
   }
 
   final SchoolsLocalRepository _schoolLocalRepository;
-  final UserViewModel _userReader;
+  final Ref _ref;
 
   Future<void> _initialize() async {
     final cache = state;
@@ -45,7 +44,7 @@ class SignupViewModel extends StateNotifier<SignupState> {
         throw const ParametersException('Do not allow Null parameter');
       }
 
-      await _userReader.createUser(
+      await _ref.read(userProvider.notifier).createUser(
         name: name,
         schoolId: schoolId,
         schoolYear: schoolYear,

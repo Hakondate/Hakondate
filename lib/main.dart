@@ -1,7 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:routemaster/routemaster.dart';
@@ -12,16 +16,24 @@ import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/util/app_unique_key.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
-  await initializeDateFormatting('ja_JP');
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+  runZonedGuarded<Future<void>>(() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    await initializeDateFormatting('ja_JP');
+    await AppTrackingTransparency.requestTrackingAuthorization();
+    if (Firebase.apps.isEmpty) {
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+    }
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+    runApp(const Hakondate());
+  }, (Object error, StackTrace stack) =>
+      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true),
   );
-  runApp(const Hakondate());
 }
 
 class Hakondate extends StatelessWidget {
@@ -35,6 +47,7 @@ class Hakondate extends StatelessWidget {
           color: AppColor.text.appBarTitle,
           fontSize: 20,
           fontWeight: FontWeight.bold,
+          fontFamily: 'MPLUSRounded1c',
         ),
         iconTheme: IconThemeData(
           color: AppColor.brand.secondary,
@@ -53,6 +66,7 @@ class Hakondate extends StatelessWidget {
         primary: AppColor.brand.primary,
         secondary: AppColor.brand.secondary,
       ),
+      scaffoldBackgroundColor: AppColor.ui.white,
     );
 
     return ProviderScope(

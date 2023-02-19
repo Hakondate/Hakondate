@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'dish_model.dart';
 
@@ -29,39 +29,43 @@ mixin _$DishModel {
 /// @nodoc
 abstract class $DishModelCopyWith<$Res> {
   factory $DishModelCopyWith(DishModel value, $Res Function(DishModel) then) =
-      _$DishModelCopyWithImpl<$Res>;
+      _$DishModelCopyWithImpl<$Res, DishModel>;
+  @useResult
   $Res call(
       {String name, List<FoodstuffModel> foodstuffs, DishCategory? category});
 }
 
 /// @nodoc
-class _$DishModelCopyWithImpl<$Res> implements $DishModelCopyWith<$Res> {
+class _$DishModelCopyWithImpl<$Res, $Val extends DishModel>
+    implements $DishModelCopyWith<$Res> {
   _$DishModelCopyWithImpl(this._value, this._then);
 
-  final DishModel _value;
   // ignore: unused_field
-  final $Res Function(DishModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? foodstuffs = freezed,
+    Object? name = null,
+    Object? foodstuffs = null,
     Object? category = freezed,
   }) {
     return _then(_value.copyWith(
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      foodstuffs: foodstuffs == freezed
+      foodstuffs: null == foodstuffs
           ? _value.foodstuffs
           : foodstuffs // ignore: cast_nullable_to_non_nullable
               as List<FoodstuffModel>,
-      category: category == freezed
+      category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as DishCategory?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -71,36 +75,36 @@ abstract class _$$_DishModelCopyWith<$Res> implements $DishModelCopyWith<$Res> {
           _$_DishModel value, $Res Function(_$_DishModel) then) =
       __$$_DishModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String name, List<FoodstuffModel> foodstuffs, DishCategory? category});
 }
 
 /// @nodoc
-class __$$_DishModelCopyWithImpl<$Res> extends _$DishModelCopyWithImpl<$Res>
+class __$$_DishModelCopyWithImpl<$Res>
+    extends _$DishModelCopyWithImpl<$Res, _$_DishModel>
     implements _$$_DishModelCopyWith<$Res> {
   __$$_DishModelCopyWithImpl(
       _$_DishModel _value, $Res Function(_$_DishModel) _then)
-      : super(_value, (v) => _then(v as _$_DishModel));
+      : super(_value, _then);
 
-  @override
-  _$_DishModel get _value => super._value as _$_DishModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? foodstuffs = freezed,
+    Object? name = null,
+    Object? foodstuffs = null,
     Object? category = freezed,
   }) {
     return _then(_$_DishModel(
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      foodstuffs: foodstuffs == freezed
+      foodstuffs: null == foodstuffs
           ? _value._foodstuffs
           : foodstuffs // ignore: cast_nullable_to_non_nullable
               as List<FoodstuffModel>,
-      category: category == freezed
+      category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as DishCategory?,
@@ -125,6 +129,7 @@ class _$_DishModel extends _DishModel {
 // 料理名
   @override
   List<FoodstuffModel> get foodstuffs {
+    if (_foodstuffs is EqualUnmodifiableListView) return _foodstuffs;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_foodstuffs);
   }
@@ -143,21 +148,20 @@ class _$_DishModel extends _DishModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_DishModel &&
-            const DeepCollectionEquality().equals(other.name, name) &&
+            (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality()
                 .equals(other._foodstuffs, _foodstuffs) &&
-            const DeepCollectionEquality().equals(other.category, category));
+            (identical(other.category, category) ||
+                other.category == category));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(_foodstuffs),
-      const DeepCollectionEquality().hash(category));
+  int get hashCode => Object.hash(runtimeType, name,
+      const DeepCollectionEquality().hash(_foodstuffs), category);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_DishModelCopyWith<_$_DishModel> get copyWith =>
       __$$_DishModelCopyWithImpl<_$_DishModel>(this, _$identity);
 }
@@ -170,11 +174,11 @@ abstract class _DishModel extends DishModel {
   const _DishModel._() : super._();
 
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override // 料理名
-  List<FoodstuffModel> get foodstuffs => throw _privateConstructorUsedError;
+  List<FoodstuffModel> get foodstuffs;
   @override // 食材
-  DishCategory? get category => throw _privateConstructorUsedError;
+  DishCategory? get category;
   @override
   @JsonKey(ignore: true)
   _$$_DishModelCopyWith<_$_DishModel> get copyWith =>

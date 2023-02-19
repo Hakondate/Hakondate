@@ -17,6 +17,7 @@ class MarginSize {
   static const double normalVertical = 30.0;    // 水平方向の基本マージン
   static const double normalHorizontal = 25.0;  // 垂直方向の基本マージン
   static const double kTabBarHeight = 50.0;     // BottomNavigationBarの高さ
+  static const double shadow = 1.0;             // 影のサイズ
 }
 
 class PaddingSize {
@@ -32,6 +33,7 @@ class IconSize {
   static const double help = 20.0;            // ヘルプ用
   static const double drawer = 24.0;          // ドロワー用
   static const double navigationItem = 28.0;  // ボトムバー用
+  static const double noImage = 32.0;         // レシピのサムネイル用
   static const double homeFoodIcon = 40;      // ホームのフードアイコン用
 }
 

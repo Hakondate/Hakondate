@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'school_model.dart';
 
@@ -31,7 +31,8 @@ mixin _$SchoolModel {
 abstract class $SchoolModelCopyWith<$Res> {
   factory $SchoolModelCopyWith(
           SchoolModel value, $Res Function(SchoolModel) then) =
-      _$SchoolModelCopyWithImpl<$Res>;
+      _$SchoolModelCopyWithImpl<$Res, SchoolModel>;
+  @useResult
   $Res call(
       {int id,
       int parentId,
@@ -41,43 +42,46 @@ abstract class $SchoolModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SchoolModelCopyWithImpl<$Res> implements $SchoolModelCopyWith<$Res> {
+class _$SchoolModelCopyWithImpl<$Res, $Val extends SchoolModel>
+    implements $SchoolModelCopyWith<$Res> {
   _$SchoolModelCopyWithImpl(this._value, this._then);
 
-  final SchoolModel _value;
   // ignore: unused_field
-  final $Res Function(SchoolModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? parentId = freezed,
-    Object? name = freezed,
+    Object? id = null,
+    Object? parentId = null,
+    Object? name = null,
     Object? lunchBlock = freezed,
-    Object? classification = freezed,
+    Object? classification = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      parentId: parentId == freezed
+      parentId: null == parentId
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
               as int,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      lunchBlock: lunchBlock == freezed
+      lunchBlock: freezed == lunchBlock
           ? _value.lunchBlock
           : lunchBlock // ignore: cast_nullable_to_non_nullable
               as int?,
-      classification: classification == freezed
+      classification: null == classification
           ? _value.classification
           : classification // ignore: cast_nullable_to_non_nullable
               as SchoolClassification,
-    ));
+    ) as $Val);
   }
 }
 
@@ -88,6 +92,7 @@ abstract class _$$_SchoolModelCopyWith<$Res>
           _$_SchoolModel value, $Res Function(_$_SchoolModel) then) =
       __$$_SchoolModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int id,
       int parentId,
@@ -97,41 +102,40 @@ abstract class _$$_SchoolModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SchoolModelCopyWithImpl<$Res> extends _$SchoolModelCopyWithImpl<$Res>
+class __$$_SchoolModelCopyWithImpl<$Res>
+    extends _$SchoolModelCopyWithImpl<$Res, _$_SchoolModel>
     implements _$$_SchoolModelCopyWith<$Res> {
   __$$_SchoolModelCopyWithImpl(
       _$_SchoolModel _value, $Res Function(_$_SchoolModel) _then)
-      : super(_value, (v) => _then(v as _$_SchoolModel));
+      : super(_value, _then);
 
-  @override
-  _$_SchoolModel get _value => super._value as _$_SchoolModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? parentId = freezed,
-    Object? name = freezed,
+    Object? id = null,
+    Object? parentId = null,
+    Object? name = null,
     Object? lunchBlock = freezed,
-    Object? classification = freezed,
+    Object? classification = null,
   }) {
     return _then(_$_SchoolModel(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      parentId: parentId == freezed
+      parentId: null == parentId
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
               as int,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      lunchBlock: lunchBlock == freezed
+      lunchBlock: freezed == lunchBlock
           ? _value.lunchBlock
           : lunchBlock // ignore: cast_nullable_to_non_nullable
               as int?,
-      classification: classification == freezed
+      classification: null == classification
           ? _value.classification
           : classification // ignore: cast_nullable_to_non_nullable
               as SchoolClassification,
@@ -174,26 +178,23 @@ class _$_SchoolModel implements _SchoolModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SchoolModel &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.parentId, parentId) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality()
-                .equals(other.lunchBlock, lunchBlock) &&
-            const DeepCollectionEquality()
-                .equals(other.classification, classification));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.parentId, parentId) ||
+                other.parentId == parentId) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.lunchBlock, lunchBlock) ||
+                other.lunchBlock == lunchBlock) &&
+            (identical(other.classification, classification) ||
+                other.classification == classification));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(parentId),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(lunchBlock),
-      const DeepCollectionEquality().hash(classification));
+  int get hashCode =>
+      Object.hash(runtimeType, id, parentId, name, lunchBlock, classification);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SchoolModelCopyWith<_$_SchoolModel> get copyWith =>
       __$$_SchoolModelCopyWithImpl<_$_SchoolModel>(this, _$identity);
 }
@@ -207,15 +208,15 @@ abstract class _SchoolModel implements SchoolModel {
       required final SchoolClassification classification}) = _$_SchoolModel;
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override // ID
-  int get parentId => throw _privateConstructorUsedError;
+  int get parentId;
   @override // 親学校(給食センター)のID
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override // 学校名
-  int? get lunchBlock => throw _privateConstructorUsedError;
+  int? get lunchBlock;
   @override // 給食区分: 1 ~ 10
-  SchoolClassification get classification => throw _privateConstructorUsedError;
+  SchoolClassification get classification;
   @override
   @JsonKey(ignore: true)
   _$$_SchoolModelCopyWith<_$_SchoolModel> get copyWith =>

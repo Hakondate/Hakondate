@@ -26,7 +26,7 @@ class FoodstuffsTable extends Table {
   TextColumn get origin => text().nullable()();
 
   @override
-  List<String> get customConstraints => [
-    'UNIQUE (name, gram, is_heat, is_allergy)',
+  List<Set<Column>> get uniqueKeys => [
+    {name, gram, isHeat, isAllergy},
   ];
 }

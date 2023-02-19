@@ -4,31 +4,32 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/menu/menu_model.dart';
-import 'package:hakondate/repository/local/menus_local_repository.dart';
+import 'package:hakondate/repository/local/sqlite/menus_local_repository.dart';
 import 'package:hakondate/state/calendar/calendar_state.dart';
+import 'package:hakondate/state/daily/daily_state.dart';
 import 'package:hakondate/view_model/single_page/daily_view_model.dart';
 
 final calendarProvider = StateNotifierProvider<CalendarViewModel, CalendarState>((ref) {
-  final MenusLocalRepository menusLocalRepository = ref.read(menusLocalRepositoryProvider);
-  final DailyViewModel dailyProviderReader = ref.read(dailyProvider.notifier);
+  final MenusLocalRepository menusLocalRepository = ref.watch(menusLocalRepositoryProvider);
+  final DailyState daily = ref.watch(dailyProvider);
   return CalendarViewModel(
     menusLocalRepository,
-    dailyProviderReader,
+    daily,
   );
 });
 
 class CalendarViewModel extends StateNotifier<CalendarState> {
   CalendarViewModel(
     this._menusLocalRepository,
-    this._dailyProviderReader,
+    this._daily,
   ) : super(CalendarState(
-    oldestDay: _dailyProviderReader.state.calendarTabFirstDay,
-    latestDay: _dailyProviderReader.state.calendarTabLastDay,
+    oldestDay: _daily.calendarTabFirstDay,
+    latestDay: _daily.calendarTabLastDay,
     scrollController: ScrollController(),
   ));
 
   final MenusLocalRepository _menusLocalRepository;
-  final DailyViewModel _dailyProviderReader;
+  final DailyState _daily;
   final double _calendarHeightWithMargin = UiSize.calendarTileHeight + 8.0;
 
   ScrollController get scrollController => state.scrollController;
@@ -46,8 +47,8 @@ class CalendarViewModel extends StateNotifier<CalendarState> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       state = state.copyWith(
         oldestDay: DateTime(
-          _dailyProviderReader.state.selectedDay.year,
-          _dailyProviderReader.state.selectedDay.month - 1,
+          _daily.selectedDay.year,
+          _daily.selectedDay.month - 1,
           1,
         ),
       );
@@ -56,7 +57,7 @@ class CalendarViewModel extends StateNotifier<CalendarState> {
   }
 
   void fetchPreviousMonth() {
-    final DateTime limitMonth = _dailyProviderReader.state.calendarTabFirstDay.add(const Duration(days: 1));
+    final DateTime limitMonth = _daily.calendarTabFirstDay.add(const Duration(days: 1));
     if (state.oldestDay.isAfter(limitMonth)) {
       state = state.copyWith(
         oldestDay: DateTime(state.oldestDay.year, state.oldestDay.month - 1, 1),
@@ -65,7 +66,7 @@ class CalendarViewModel extends StateNotifier<CalendarState> {
   }
 
   double _getInitialScrollPosition(double appHeight) {
-    final int dayDifference = state.latestDay.difference(_dailyProviderReader.state.selectedDay).inDays;
+    final int dayDifference = state.latestDay.difference(_daily.selectedDay).inDays;
     final double scrollPosition = _calendarHeightWithMargin * dayDifference - (appHeight - _calendarHeightWithMargin) / 2.0;
 
     if (scrollPosition < 0.0) return 0.0;

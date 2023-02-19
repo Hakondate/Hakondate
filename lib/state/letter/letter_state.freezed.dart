@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'letter_state.dart';
 
@@ -28,45 +28,50 @@ mixin _$LetterState {
 abstract class $LetterStateCopyWith<$Res> {
   factory $LetterStateCopyWith(
           LetterState value, $Res Function(LetterState) then) =
-      _$LetterStateCopyWithImpl<$Res>;
+      _$LetterStateCopyWithImpl<$Res, LetterState>;
+  @useResult
   $Res call({List<LetterMetadataModel> letters, LetterMetadataModel? letter});
 
   $LetterMetadataModelCopyWith<$Res>? get letter;
 }
 
 /// @nodoc
-class _$LetterStateCopyWithImpl<$Res> implements $LetterStateCopyWith<$Res> {
+class _$LetterStateCopyWithImpl<$Res, $Val extends LetterState>
+    implements $LetterStateCopyWith<$Res> {
   _$LetterStateCopyWithImpl(this._value, this._then);
 
-  final LetterState _value;
   // ignore: unused_field
-  final $Res Function(LetterState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? letters = freezed,
+    Object? letters = null,
     Object? letter = freezed,
   }) {
     return _then(_value.copyWith(
-      letters: letters == freezed
+      letters: null == letters
           ? _value.letters
           : letters // ignore: cast_nullable_to_non_nullable
               as List<LetterMetadataModel>,
-      letter: letter == freezed
+      letter: freezed == letter
           ? _value.letter
           : letter // ignore: cast_nullable_to_non_nullable
               as LetterMetadataModel?,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LetterMetadataModelCopyWith<$Res>? get letter {
     if (_value.letter == null) {
       return null;
     }
 
     return $LetterMetadataModelCopyWith<$Res>(_value.letter!, (value) {
-      return _then(_value.copyWith(letter: value));
+      return _then(_value.copyWith(letter: value) as $Val);
     });
   }
 }
@@ -78,6 +83,7 @@ abstract class _$$_LetterStateCopyWith<$Res>
           _$_LetterState value, $Res Function(_$_LetterState) then) =
       __$$_LetterStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({List<LetterMetadataModel> letters, LetterMetadataModel? letter});
 
   @override
@@ -85,26 +91,25 @@ abstract class _$$_LetterStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_LetterStateCopyWithImpl<$Res> extends _$LetterStateCopyWithImpl<$Res>
+class __$$_LetterStateCopyWithImpl<$Res>
+    extends _$LetterStateCopyWithImpl<$Res, _$_LetterState>
     implements _$$_LetterStateCopyWith<$Res> {
   __$$_LetterStateCopyWithImpl(
       _$_LetterState _value, $Res Function(_$_LetterState) _then)
-      : super(_value, (v) => _then(v as _$_LetterState));
+      : super(_value, _then);
 
-  @override
-  _$_LetterState get _value => super._value as _$_LetterState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? letters = freezed,
+    Object? letters = null,
     Object? letter = freezed,
   }) {
     return _then(_$_LetterState(
-      letters: letters == freezed
+      letters: null == letters
           ? _value._letters
           : letters // ignore: cast_nullable_to_non_nullable
               as List<LetterMetadataModel>,
-      letter: letter == freezed
+      letter: freezed == letter
           ? _value.letter
           : letter // ignore: cast_nullable_to_non_nullable
               as LetterMetadataModel?,
@@ -124,6 +129,7 @@ class _$_LetterState with DiagnosticableTreeMixin implements _LetterState {
   @override
   @JsonKey()
   List<LetterMetadataModel> get letters {
+    if (_letters is EqualUnmodifiableListView) return _letters;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_letters);
   }
@@ -151,17 +157,16 @@ class _$_LetterState with DiagnosticableTreeMixin implements _LetterState {
         (other.runtimeType == runtimeType &&
             other is _$_LetterState &&
             const DeepCollectionEquality().equals(other._letters, _letters) &&
-            const DeepCollectionEquality().equals(other.letter, letter));
+            (identical(other.letter, letter) || other.letter == letter));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_letters),
-      const DeepCollectionEquality().hash(letter));
+      runtimeType, const DeepCollectionEquality().hash(_letters), letter);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LetterStateCopyWith<_$_LetterState> get copyWith =>
       __$$_LetterStateCopyWithImpl<_$_LetterState>(this, _$identity);
 }
@@ -172,9 +177,9 @@ abstract class _LetterState implements LetterState {
       final LetterMetadataModel? letter}) = _$_LetterState;
 
   @override
-  List<LetterMetadataModel> get letters => throw _privateConstructorUsedError;
+  List<LetterMetadataModel> get letters;
   @override
-  LetterMetadataModel? get letter => throw _privateConstructorUsedError;
+  LetterMetadataModel? get letter;
   @override
   @JsonKey(ignore: true)
   _$$_LetterStateCopyWith<_$_LetterState> get copyWith =>

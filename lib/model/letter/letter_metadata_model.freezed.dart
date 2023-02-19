@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'letter_metadata_model.dart';
 
@@ -30,44 +30,47 @@ mixin _$LetterMetadataModel {
 abstract class $LetterMetadataModelCopyWith<$Res> {
   factory $LetterMetadataModelCopyWith(
           LetterMetadataModel value, $Res Function(LetterMetadataModel) then) =
-      _$LetterMetadataModelCopyWithImpl<$Res>;
+      _$LetterMetadataModelCopyWithImpl<$Res, LetterMetadataModel>;
+  @useResult
   $Res call({String title, String path, int lunchBlock, DateTime updateAt});
 }
 
 /// @nodoc
-class _$LetterMetadataModelCopyWithImpl<$Res>
+class _$LetterMetadataModelCopyWithImpl<$Res, $Val extends LetterMetadataModel>
     implements $LetterMetadataModelCopyWith<$Res> {
   _$LetterMetadataModelCopyWithImpl(this._value, this._then);
 
-  final LetterMetadataModel _value;
   // ignore: unused_field
-  final $Res Function(LetterMetadataModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? title = freezed,
-    Object? path = freezed,
-    Object? lunchBlock = freezed,
-    Object? updateAt = freezed,
+    Object? title = null,
+    Object? path = null,
+    Object? lunchBlock = null,
+    Object? updateAt = null,
   }) {
     return _then(_value.copyWith(
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      path: path == freezed
+      path: null == path
           ? _value.path
           : path // ignore: cast_nullable_to_non_nullable
               as String,
-      lunchBlock: lunchBlock == freezed
+      lunchBlock: null == lunchBlock
           ? _value.lunchBlock
           : lunchBlock // ignore: cast_nullable_to_non_nullable
               as int,
-      updateAt: updateAt == freezed
+      updateAt: null == updateAt
           ? _value.updateAt
           : updateAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-    ));
+    ) as $Val);
   }
 }
 
@@ -78,41 +81,40 @@ abstract class _$$_LetterMetadataModelCopyWith<$Res>
           $Res Function(_$_LetterMetadataModel) then) =
       __$$_LetterMetadataModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String title, String path, int lunchBlock, DateTime updateAt});
 }
 
 /// @nodoc
 class __$$_LetterMetadataModelCopyWithImpl<$Res>
-    extends _$LetterMetadataModelCopyWithImpl<$Res>
+    extends _$LetterMetadataModelCopyWithImpl<$Res, _$_LetterMetadataModel>
     implements _$$_LetterMetadataModelCopyWith<$Res> {
   __$$_LetterMetadataModelCopyWithImpl(_$_LetterMetadataModel _value,
       $Res Function(_$_LetterMetadataModel) _then)
-      : super(_value, (v) => _then(v as _$_LetterMetadataModel));
+      : super(_value, _then);
 
-  @override
-  _$_LetterMetadataModel get _value => super._value as _$_LetterMetadataModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? title = freezed,
-    Object? path = freezed,
-    Object? lunchBlock = freezed,
-    Object? updateAt = freezed,
+    Object? title = null,
+    Object? path = null,
+    Object? lunchBlock = null,
+    Object? updateAt = null,
   }) {
     return _then(_$_LetterMetadataModel(
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      path: path == freezed
+      path: null == path
           ? _value.path
           : path // ignore: cast_nullable_to_non_nullable
               as String,
-      lunchBlock: lunchBlock == freezed
+      lunchBlock: null == lunchBlock
           ? _value.lunchBlock
           : lunchBlock // ignore: cast_nullable_to_non_nullable
               as int,
-      updateAt: updateAt == freezed
+      updateAt: null == updateAt
           ? _value.updateAt
           : updateAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
@@ -148,23 +150,21 @@ class _$_LetterMetadataModel implements _LetterMetadataModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LetterMetadataModel &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality().equals(other.path, path) &&
-            const DeepCollectionEquality()
-                .equals(other.lunchBlock, lunchBlock) &&
-            const DeepCollectionEquality().equals(other.updateAt, updateAt));
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.path, path) || other.path == path) &&
+            (identical(other.lunchBlock, lunchBlock) ||
+                other.lunchBlock == lunchBlock) &&
+            (identical(other.updateAt, updateAt) ||
+                other.updateAt == updateAt));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(path),
-      const DeepCollectionEquality().hash(lunchBlock),
-      const DeepCollectionEquality().hash(updateAt));
+  int get hashCode =>
+      Object.hash(runtimeType, title, path, lunchBlock, updateAt);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LetterMetadataModelCopyWith<_$_LetterMetadataModel> get copyWith =>
       __$$_LetterMetadataModelCopyWithImpl<_$_LetterMetadataModel>(
           this, _$identity);
@@ -178,13 +178,13 @@ abstract class _LetterMetadataModel implements LetterMetadataModel {
       required final DateTime updateAt}) = _$_LetterMetadataModel;
 
   @override
-  String get title => throw _privateConstructorUsedError;
+  String get title;
   @override
-  String get path => throw _privateConstructorUsedError;
+  String get path;
   @override
-  int get lunchBlock => throw _privateConstructorUsedError;
+  int get lunchBlock;
   @override
-  DateTime get updateAt => throw _privateConstructorUsedError;
+  DateTime get updateAt;
   @override
   @JsonKey(ignore: true)
   _$$_LetterMetadataModelCopyWith<_$_LetterMetadataModel> get copyWith =>

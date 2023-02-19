@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'letters_remote_repository_model.dart';
 
@@ -29,34 +29,39 @@ abstract class $LettersRemoteRepositoryModelCopyWith<$Res> {
   factory $LettersRemoteRepositoryModelCopyWith(
           LettersRemoteRepositoryModel value,
           $Res Function(LettersRemoteRepositoryModel) then) =
-      _$LettersRemoteRepositoryModelCopyWithImpl<$Res>;
+      _$LettersRemoteRepositoryModelCopyWithImpl<$Res,
+          LettersRemoteRepositoryModel>;
+  @useResult
   $Res call({String? pageToken, bool isNotNextPage});
 }
 
 /// @nodoc
-class _$LettersRemoteRepositoryModelCopyWithImpl<$Res>
+class _$LettersRemoteRepositoryModelCopyWithImpl<$Res,
+        $Val extends LettersRemoteRepositoryModel>
     implements $LettersRemoteRepositoryModelCopyWith<$Res> {
   _$LettersRemoteRepositoryModelCopyWithImpl(this._value, this._then);
 
-  final LettersRemoteRepositoryModel _value;
   // ignore: unused_field
-  final $Res Function(LettersRemoteRepositoryModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? pageToken = freezed,
-    Object? isNotNextPage = freezed,
+    Object? isNotNextPage = null,
   }) {
     return _then(_value.copyWith(
-      pageToken: pageToken == freezed
+      pageToken: freezed == pageToken
           ? _value.pageToken
           : pageToken // ignore: cast_nullable_to_non_nullable
               as String?,
-      isNotNextPage: isNotNextPage == freezed
+      isNotNextPage: null == isNotNextPage
           ? _value.isNotNextPage
           : isNotNextPage // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -68,33 +73,32 @@ abstract class _$$_LettersRemoteRepositoryModelCopyWith<$Res>
           $Res Function(_$_LettersRemoteRepositoryModel) then) =
       __$$_LettersRemoteRepositoryModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String? pageToken, bool isNotNextPage});
 }
 
 /// @nodoc
 class __$$_LettersRemoteRepositoryModelCopyWithImpl<$Res>
-    extends _$LettersRemoteRepositoryModelCopyWithImpl<$Res>
+    extends _$LettersRemoteRepositoryModelCopyWithImpl<$Res,
+        _$_LettersRemoteRepositoryModel>
     implements _$$_LettersRemoteRepositoryModelCopyWith<$Res> {
   __$$_LettersRemoteRepositoryModelCopyWithImpl(
       _$_LettersRemoteRepositoryModel _value,
       $Res Function(_$_LettersRemoteRepositoryModel) _then)
-      : super(_value, (v) => _then(v as _$_LettersRemoteRepositoryModel));
+      : super(_value, _then);
 
-  @override
-  _$_LettersRemoteRepositoryModel get _value =>
-      super._value as _$_LettersRemoteRepositoryModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? pageToken = freezed,
-    Object? isNotNextPage = freezed,
+    Object? isNotNextPage = null,
   }) {
     return _then(_$_LettersRemoteRepositoryModel(
-      pageToken: pageToken == freezed
+      pageToken: freezed == pageToken
           ? _value.pageToken
           : pageToken // ignore: cast_nullable_to_non_nullable
               as String?,
-      isNotNextPage: isNotNextPage == freezed
+      isNotNextPage: null == isNotNextPage
           ? _value.isNotNextPage
           : isNotNextPage // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -124,19 +128,18 @@ class _$_LettersRemoteRepositoryModel implements _LettersRemoteRepositoryModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LettersRemoteRepositoryModel &&
-            const DeepCollectionEquality().equals(other.pageToken, pageToken) &&
-            const DeepCollectionEquality()
-                .equals(other.isNotNextPage, isNotNextPage));
+            (identical(other.pageToken, pageToken) ||
+                other.pageToken == pageToken) &&
+            (identical(other.isNotNextPage, isNotNextPage) ||
+                other.isNotNextPage == isNotNextPage));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(pageToken),
-      const DeepCollectionEquality().hash(isNotNextPage));
+  int get hashCode => Object.hash(runtimeType, pageToken, isNotNextPage);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LettersRemoteRepositoryModelCopyWith<_$_LettersRemoteRepositoryModel>
       get copyWith => __$$_LettersRemoteRepositoryModelCopyWithImpl<
           _$_LettersRemoteRepositoryModel>(this, _$identity);
@@ -149,9 +152,9 @@ abstract class _LettersRemoteRepositoryModel
       final bool isNotNextPage}) = _$_LettersRemoteRepositoryModel;
 
   @override
-  String? get pageToken => throw _privateConstructorUsedError;
+  String? get pageToken;
   @override
-  bool get isNotNextPage => throw _privateConstructorUsedError;
+  bool get isNotNextPage;
   @override
   @JsonKey(ignore: true)
   _$$_LettersRemoteRepositoryModelCopyWith<_$_LettersRemoteRepositoryModel>

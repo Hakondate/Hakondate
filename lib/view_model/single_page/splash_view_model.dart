@@ -5,8 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:hakondate/constant/app_key.dart';
 import 'package:hakondate/constant/record_date.dart';
-import 'package:hakondate/repository/local/menus_local_repository.dart';
-import 'package:hakondate/repository/local/schools_local_repository.dart';
+import 'package:hakondate/repository/local/sqlite/menus_local_repository.dart';
+import 'package:hakondate/repository/local/sqlite/schools_local_repository.dart';
 import 'package:hakondate/repository/remote/menus_remote_repository.dart';
 import 'package:hakondate/repository/remote/schools_remote_repository.dart';
 import 'package:hakondate/router/routes.dart';
@@ -15,12 +15,12 @@ import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 import 'package:hakondate/view_model/single_page/daily_view_model.dart';
 
 final splashProvider = StateNotifierProvider.autoDispose<SplashViewModel, SplashState>((ref) {
-  final SchoolsLocalRepository schoolsLocalRepository = ref.read(schoolsLocalRepositoryProvider);
-  final SchoolsRemoteRepository schoolsRemoteRepository = ref.read(schoolsRemoteRepositoryProvider);
-  final MenusLocalRepository menusLocalRepository = ref.read(menusLocalRepositoryProvider);
-  final MenusRemoteRepository menusRemoteRepository = ref.read(menusRemoteRepositoryProvider);
+  final SchoolsLocalRepository schoolsLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
+  final SchoolsRemoteRepository schoolsRemoteRepository = ref.watch(schoolsRemoteRepositoryProvider);
+  final MenusLocalRepository menusLocalRepository = ref.watch(menusLocalRepositoryProvider);
+  final MenusRemoteRepository menusRemoteRepository = ref.watch(menusRemoteRepositoryProvider);
   return SplashViewModel(
-    ref.read,
+    ref,
     schoolsLocalRepository,
     schoolsRemoteRepository,
     menusLocalRepository,
@@ -30,14 +30,14 @@ final splashProvider = StateNotifierProvider.autoDispose<SplashViewModel, Splash
 
 class SplashViewModel extends StateNotifier<SplashState> {
   SplashViewModel(
-      this._reader,
+      this._ref,
       this._schoolsLocalRepository,
       this._schoolsRemoteRepository,
       this._menusLocalRepository,
       this._menusRemoteRepository,
       ) : super(SplashState());
 
-  final Reader _reader;
+  final Ref _ref;
   final SchoolsLocalRepository _schoolsLocalRepository;
   final SchoolsRemoteRepository _schoolsRemoteRepository;
   final MenusLocalRepository _menusLocalRepository;
@@ -53,7 +53,7 @@ class SplashViewModel extends StateNotifier<SplashState> {
         await _initializeSchools();
 
         state = SplashState(status: LoadingStatus.reading);
-        if (!await _reader(userProvider.notifier).signIn()) {
+        if (!await _ref.read(userProvider.notifier).signIn()) {
           return routemaster.replace('/terms');
         }
 
@@ -104,6 +104,6 @@ class SplashViewModel extends StateNotifier<SplashState> {
       await _menusLocalRepository.add(menu);
     });
 
-    await _reader(dailyProvider.notifier).updateSelectedDay();
+    await _ref.read(dailyProvider.notifier).updateSelectedDay();
   }
 }
