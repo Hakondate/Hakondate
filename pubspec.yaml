@@ -39,11 +39,14 @@ dependencies:
   intl: ^0.17.0
 
   # 遷移関連
-  routemaster: ^1.0.0
+  routemaster: ^1.0.1
 
   # Firebase関連
+  app_tracking_transparency: ^2.0.2+4
   firebase_core: ^1.17.0
   cloud_firestore: ^3.1.16
+  firebase_crashlytics: ^2.8.1
+  firebase_analytics: ^9.1.9
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +75,7 @@ flutter:
     - assets/slns/
     - assets/images/
     - assets/images/calendar_hedgehog/
+    - assets/images/drawer/
     - assets/images/food_icon/
     - assets/images/menu_tile/
     - assets/images/label/
