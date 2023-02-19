@@ -7,9 +7,8 @@ import 'package:hakondate/util/exception/sqlite_exception.dart';
 import 'package:hakondate/view_model/multi_page/common_function.dart';
 
 final schoolsLocalRepositoryProvider = Provider<SchoolsLocalRepository>((ref) {
-  final LocalDatabase localDatabase = ref.read(localDatabaseProvider);
-  final CommonFunction commonFunction = ref.read(commonFunctionProvider.notifier);
-  return SchoolsLocalRepository(localDatabase, commonFunction);
+  final LocalDatabase localDatabase = ref.watch(localDatabaseProvider);
+  return SchoolsLocalRepository(localDatabase, ref.read);
 });
 
 abstract class SchoolsLocalRepositoryBase {
@@ -21,10 +20,10 @@ abstract class SchoolsLocalRepositoryBase {
 }
 
 class SchoolsLocalRepository extends SchoolsLocalRepositoryBase {
-  SchoolsLocalRepository(this._db, this._commonFunction) : super();
+  SchoolsLocalRepository(this._db, this._reader);
 
   final LocalDatabase _db;
-  final CommonFunction _commonFunction;
+  final Reader _reader;
 
   @override
   Future<int> count() async {
@@ -86,7 +85,7 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryBase {
         name: Value(school['name']),
         lunchBlock: Value(school['lunchBlock']),
         classification: Value(school['classification']),
-        updateAt: Value(_commonFunction.getDayFromTimestamp(school['updateAt'])),
+        updateAt: Value(_reader(commonFunctionProvider.notifier).getDayFromTimestamp(school['updateAt'])),
       ));
 
   @override

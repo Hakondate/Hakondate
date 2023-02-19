@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:hakondate/repository/local/sqlite/menus_local_repository.dart';
-import 'package:hakondate/repository/local/sqlite/schools_local_repository.dart';
 import 'package:hakondate/constant/app_key.dart';
 import 'package:hakondate/constant/record_date.dart';
+import 'package:hakondate/repository/local/sqlite/menus_local_repository.dart';
+import 'package:hakondate/repository/local/sqlite/schools_local_repository.dart';
 import 'package:hakondate/repository/remote/menus_remote_repository.dart';
 import 'package:hakondate/repository/remote/schools_remote_repository.dart';
 import 'package:hakondate/router/routes.dart';
@@ -15,10 +15,10 @@ import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 import 'package:hakondate/view_model/single_page/daily_view_model.dart';
 
 final splashProvider = StateNotifierProvider.autoDispose<SplashViewModel, SplashState>((ref) {
-  final SchoolsLocalRepository schoolsLocalRepository = ref.read(schoolsLocalRepositoryProvider);
-  final SchoolsRemoteRepository schoolsRemoteRepository = ref.read(schoolsRemoteRepositoryProvider);
-  final MenusLocalRepository menusLocalRepository = ref.read(menusLocalRepositoryProvider);
-  final MenusRemoteRepository menusRemoteRepository = ref.read(menusRemoteRepositoryProvider);
+  final SchoolsLocalRepository schoolsLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
+  final SchoolsRemoteRepository schoolsRemoteRepository = ref.watch(schoolsRemoteRepositoryProvider);
+  final MenusLocalRepository menusLocalRepository = ref.watch(menusLocalRepositoryProvider);
+  final MenusRemoteRepository menusRemoteRepository = ref.watch(menusRemoteRepositoryProvider);
   return SplashViewModel(
     ref.read,
     schoolsLocalRepository,

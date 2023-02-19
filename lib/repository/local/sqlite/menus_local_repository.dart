@@ -11,10 +11,8 @@ import 'package:hakondate/view_model/multi_page/common_function.dart';
 import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 
 final menusLocalRepositoryProvider = Provider<MenusLocalRepository>((ref) {
-  final LocalDatabase localDatabase = ref.read(localDatabaseProvider);
-  final CommonFunction commonFunction = ref.read(commonFunctionProvider.notifier);
-  final UserViewModel userReader = ref.read(userProvider.notifier);
-  return MenusLocalRepository(localDatabase, commonFunction, userReader);
+  final LocalDatabase localDatabase = ref.watch(localDatabaseProvider);
+  return MenusLocalRepository(localDatabase, ref.read);
 });
 
 abstract class MenusLocalRepositoryBase {
@@ -26,20 +24,19 @@ abstract class MenusLocalRepositoryBase {
 }
 
 class MenusLocalRepository extends MenusLocalRepositoryBase {
-  MenusLocalRepository(this._db, this._commonFunction, this._userReader) : super();
+  MenusLocalRepository(this._db, this._reader);
 
   final LocalDatabase _db;
-  final CommonFunction _commonFunction;
-  final UserViewModel _userReader;
+  final Reader _reader;
 
   @override
   Future<int> add(Map<String, dynamic> menu) async {
     final MenusTableCompanion companion = MenusTableCompanion(
       id: Value(menu['id']),
-      day: Value(_commonFunction.getDayFromTimestamp(menu['day'])),
+      day: Value(_reader(commonFunctionProvider.notifier).getDayFromTimestamp(menu['day'])),
       schoolId: Value(menu['schoolId']),
       event: Value(menu['event']),
-      updateAt: Value(_commonFunction.getDayFromTimestamp(menu['updateAt'])),
+      updateAt: Value(_reader(commonFunctionProvider.notifier).getDayFromTimestamp(menu['updateAt'])),
     );
     final int menuId = await _db.into(_db.menusTable).insert(
       companion,
@@ -185,7 +182,7 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
   @override
   Future<List<MenuModel>> getAll() async {
     List<MenuModel> menus = [];
-    final int schoolId = await _userReader.getParentId();
+    final int schoolId = await _reader(userProvider.notifier).getParentId();
     final List<MenusSchema> menusSchemas = await (_db.select(_db.menusTable)
       ..where((t) => t.schoolId.equals(schoolId))).get();
 
@@ -199,7 +196,7 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
 
   @override
   Future<MenuModel> getMenuByDay(DateTime day) async {
-    final int id = await _commonFunction.getIdByDay(day);
+    final int id = await _reader(commonFunctionProvider.notifier).getIdByDay(day);
     final MenuModel? menu = await _getMenuById(id);
 
     if (menu != null) return menu;
@@ -222,7 +219,7 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
   Future<DateTime> _getOldestDay() async {
     if (await _count() == 0) return DateTime.now();
 
-    final int schoolId = await _userReader.getParentId();
+    final int schoolId = await _reader(userProvider.notifier).getParentId();
     final Expression<DateTime> exp = _db.menusTable.day.min();
     final query = _db.selectOnly(_db.menusTable)
       ..where(_db.menusTable.schoolId.equals(schoolId))
@@ -234,7 +231,7 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
   Future<DateTime> _getLatestDay() async {
     if (await _count() == 0) return DateTime.now();
 
-    final int schoolId = await _userReader.getParentId();
+    final int schoolId = await _reader(userProvider.notifier).getParentId();
     final Expression<DateTime> exp = _db.menusTable.day.max();
     final query = _db.selectOnly(_db.menusTable)
       ..where(_db.menusTable.schoolId.equals(schoolId))
@@ -339,7 +336,7 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
   Future<DateTime> getLatestUpdateDay() async {
     if (await _count() == 0) return DateTime(1970);
 
-    final int schoolId = await _userReader.getParentId();
+    final int schoolId = await _reader(userProvider.notifier).getParentId();
     final Expression<DateTime> exp = _db.menusTable.updateAt.max();
     final query = _db.selectOnly(_db.menusTable)
       ..where(_db.menusTable.schoolId.equals(schoolId))
@@ -349,7 +346,7 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
   }
 
   Future<int> _count() async {
-    final int schoolId = await _userReader.getParentId();
+    final int schoolId = await _reader(userProvider.notifier).getParentId();
     final Expression<int> exp = _db.menusTable.id.count();
     final query = _db.selectOnly(_db.menusTable)
       ..where(_db.menusTable.schoolId.equals(schoolId))

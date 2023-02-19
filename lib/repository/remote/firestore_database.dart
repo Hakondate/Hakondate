@@ -8,7 +8,4 @@ final firestoreDatabaseProvider = StateNotifierProvider<FirestoreDatabase, Fireb
 
 class FirestoreDatabase extends StateNotifier<FirebaseFirestore> {
   FirestoreDatabase(FirebaseFirestore database) : super(database);
-
-  CollectionReference<Map<String, dynamic>> get menusCollection => state.collection('menus');
-  CollectionReference<Map<String, dynamic>> get schoolsCollection => state.collection('schools');
 }

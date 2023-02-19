@@ -7,8 +7,8 @@ import 'package:hakondate/repository/local/directory/open_data_recipe_local_repo
 import 'package:hakondate/repository/remote/open_data_recipe_remote_repository.dart';
 
 final recipeProvider = StateNotifierProvider<RecipeViewModel, void>((ref) {
-  final OpenDataRecipeLocalRepository openDataLocalRepository = ref.read(openDataRecipeLocalRepositoryProvider);
-  final OpenDataRecipeRemoteRepository openDataRemoteRepository = ref.read(openDataRecipeRemoteRepositoryProvider);
+  final OpenDataRecipeLocalRepository openDataLocalRepository = ref.watch(openDataRecipeLocalRepositoryProvider);
+  final OpenDataRecipeRemoteRepository openDataRemoteRepository = ref.watch(openDataRecipeRemoteRepositoryProvider);
   return RecipeViewModel(openDataLocalRepository, openDataRemoteRepository);
 });
 
