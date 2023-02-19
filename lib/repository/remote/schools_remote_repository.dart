@@ -6,8 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate/repository/remote/firestore_database.dart';
 
 final schoolsRemoteRepositoryProvider = Provider<SchoolsRemoteRepository>((ref) {
-  final FirestoreDatabase firestoreDatabase = ref.read(firestoreDatabaseProvider.notifier);
-  return SchoolsRemoteRepository(firestoreDatabase.schoolsCollection);
+  final FirebaseFirestore firestoreDatabase = ref.watch(firestoreDatabaseProvider);
+  return SchoolsRemoteRepository(firestoreDatabase.collection('schools'));
 });
 
 abstract class SchoolsRemoteRepositoryBase {

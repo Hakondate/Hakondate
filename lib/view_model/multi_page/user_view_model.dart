@@ -10,24 +10,26 @@ import 'package:hakondate/constant/app_key.dart';
 import 'package:hakondate/model/nutrients/nutrients_model.dart';
 import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/model/user/user_model.dart';
-import 'package:hakondate/repository/local/schools_local_repository.dart';
-import 'package:hakondate/repository/local/users_local_repository.dart';
+import 'package:hakondate/repository/local/sqlite/schools_local_repository.dart';
+import 'package:hakondate/repository/local/sqlite/users_local_repository.dart';
 import 'package:hakondate/state/user/user_state.dart';
+import 'package:hakondate/util/analytics_controller.dart';
 import 'package:hakondate/util/exception/shared_preferences_exception.dart';
 import 'package:hakondate/util/exception/sign_in_exception.dart';
 
 final userProvider = StateNotifierProvider<UserViewModel, UserState>((ref) {
-  final UsersLocalRepository usersLocalRepository = ref.read(usersLocalRepositoryProvider);
-  final SchoolsLocalRepository schoolsLocalRepository = ref.read(schoolsLocalRepositoryProvider);
-  return UserViewModel(schoolsLocalRepository, usersLocalRepository);
+  final UsersLocalRepository usersLocalRepository = ref.watch(usersLocalRepositoryProvider);
+  final SchoolsLocalRepository schoolsLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
+  return UserViewModel(schoolsLocalRepository, usersLocalRepository, ref.read);
 });
 
 class UserViewModel extends StateNotifier<UserState> {
-  UserViewModel(this._schoolsLocalRepository, this._usersLocalRepository)
+  UserViewModel(this._schoolsLocalRepository, this._usersLocalRepository, this._reader)
       : super(const UserState());
 
   final SchoolsLocalRepository _schoolsLocalRepository;
   final UsersLocalRepository _usersLocalRepository;
+  final Reader _reader;
 
   Future<bool> signIn() async {
     if (await _usersLocalRepository.count() == 0) return false;
@@ -109,6 +111,7 @@ class UserViewModel extends StateNotifier<UserState> {
   }) async {
     final int id = await _usersLocalRepository.add(name, schoolId, schoolYear);
     await changeCurrentUser(id);
+    await _reader(analyticsControllerProvider.notifier).logSignup();
 
     return id;
   }
