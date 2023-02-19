@@ -2,11 +2,138 @@
 
 part of 'local_database.dart';
 
-// **************************************************************************
-// MoorGenerator
-// **************************************************************************
-
 // ignore_for_file: type=lint
+class $SchoolsTableTable extends SchoolsTable
+    with TableInfo<$SchoolsTableTable, SchoolsSchema> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $SchoolsTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _parentIdMeta =
+      const VerificationMeta('parentId');
+  @override
+  late final GeneratedColumn<int> parentId = GeneratedColumn<int>(
+      'parent_id', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+      'name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _lunchBlockMeta =
+      const VerificationMeta('lunchBlock');
+  @override
+  late final GeneratedColumn<int> lunchBlock = GeneratedColumn<int>(
+      'lunch_block', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _classificationMeta =
+      const VerificationMeta('classification');
+  @override
+  late final GeneratedColumn<String> classification = GeneratedColumn<String>(
+      'classification', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _createAtMeta =
+      const VerificationMeta('createAt');
+  @override
+  late final GeneratedColumn<DateTime> createAt = GeneratedColumn<DateTime>(
+      'create_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: Constant(DateTime.now()));
+  static const VerificationMeta _updateAtMeta =
+      const VerificationMeta('updateAt');
+  @override
+  late final GeneratedColumn<DateTime> updateAt = GeneratedColumn<DateTime>(
+      'update_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: Constant(DateTime.now()));
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, parentId, name, lunchBlock, classification, createAt, updateAt];
+  @override
+  String get aliasedName => _alias ?? 'schools_table';
+  @override
+  String get actualTableName => 'schools_table';
+  @override
+  VerificationContext validateIntegrity(Insertable<SchoolsSchema> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('parent_id')) {
+      context.handle(_parentIdMeta,
+          parentId.isAcceptableOrUnknown(data['parent_id']!, _parentIdMeta));
+    } else if (isInserting) {
+      context.missing(_parentIdMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('lunch_block')) {
+      context.handle(
+          _lunchBlockMeta,
+          lunchBlock.isAcceptableOrUnknown(
+              data['lunch_block']!, _lunchBlockMeta));
+    }
+    if (data.containsKey('classification')) {
+      context.handle(
+          _classificationMeta,
+          classification.isAcceptableOrUnknown(
+              data['classification']!, _classificationMeta));
+    } else if (isInserting) {
+      context.missing(_classificationMeta);
+    }
+    if (data.containsKey('create_at')) {
+      context.handle(_createAtMeta,
+          createAt.isAcceptableOrUnknown(data['create_at']!, _createAtMeta));
+    }
+    if (data.containsKey('update_at')) {
+      context.handle(_updateAtMeta,
+          updateAt.isAcceptableOrUnknown(data['update_at']!, _updateAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  SchoolsSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return SchoolsSchema(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      parentId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}parent_id'])!,
+      name: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      lunchBlock: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}lunch_block']),
+      classification: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}classification'])!,
+      createAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}create_at'])!,
+      updateAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}update_at'])!,
+    );
+  }
+
+  @override
+  $SchoolsTableTable createAlias(String alias) {
+    return $SchoolsTableTable(attachedDatabase, alias);
+  }
+}
+
 class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
   final int id;
   final int parentId;
@@ -15,7 +142,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
   final String classification;
   final DateTime createAt;
   final DateTime updateAt;
-  SchoolsSchema(
+  const SchoolsSchema(
       {required this.id,
       required this.parentId,
       required this.name,
@@ -23,25 +150,6 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       required this.classification,
       required this.createAt,
       required this.updateAt});
-  factory SchoolsSchema.fromData(Map<String, dynamic> data, {String? prefix}) {
-    final effectivePrefix = prefix ?? '';
-    return SchoolsSchema(
-      id: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
-      parentId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}parent_id'])!,
-      name: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
-      lunchBlock: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}lunch_block']),
-      classification: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}classification'])!,
-      createAt: const DateTimeType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}create_at'])!,
-      updateAt: const DateTimeType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}update_at'])!,
-    );
-  }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -49,7 +157,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
     map['parent_id'] = Variable<int>(parentId);
     map['name'] = Variable<String>(name);
     if (!nullToAbsent || lunchBlock != null) {
-      map['lunch_block'] = Variable<int?>(lunchBlock);
+      map['lunch_block'] = Variable<int>(lunchBlock);
     }
     map['classification'] = Variable<String>(classification);
     map['create_at'] = Variable<DateTime>(createAt);
@@ -102,7 +210,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
           {int? id,
           int? parentId,
           String? name,
-          int? lunchBlock,
+          Value<int?> lunchBlock = const Value.absent(),
           String? classification,
           DateTime? createAt,
           DateTime? updateAt}) =>
@@ -110,7 +218,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
         id: id ?? this.id,
         parentId: parentId ?? this.parentId,
         name: name ?? this.name,
-        lunchBlock: lunchBlock ?? this.lunchBlock,
+        lunchBlock: lunchBlock.present ? lunchBlock.value : this.lunchBlock,
         classification: classification ?? this.classification,
         createAt: createAt ?? this.createAt,
         updateAt: updateAt ?? this.updateAt,
@@ -177,7 +285,7 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
     Expression<int>? id,
     Expression<int>? parentId,
     Expression<String>? name,
-    Expression<int?>? lunchBlock,
+    Expression<int>? lunchBlock,
     Expression<String>? classification,
     Expression<DateTime>? createAt,
     Expression<DateTime>? updateAt,
@@ -225,7 +333,7 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
       map['name'] = Variable<String>(name.value);
     }
     if (lunchBlock.present) {
-      map['lunch_block'] = Variable<int?>(lunchBlock.value);
+      map['lunch_block'] = Variable<int>(lunchBlock.value);
     }
     if (classification.present) {
       map['classification'] = Variable<String>(classification.value);
@@ -254,92 +362,79 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
   }
 }
 
-class $SchoolsTableTable extends SchoolsTable
-    with TableInfo<$SchoolsTableTable, SchoolsSchema> {
+class $MenusTableTable extends MenusTable
+    with TableInfo<$MenusTableTable, MenusSchema> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $SchoolsTableTable(this.attachedDatabase, [this._alias]);
-  final VerificationMeta _idMeta = const VerificationMeta('id');
+  $MenusTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
-  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, false,
-      type: const IntType(), requiredDuringInsert: false);
-  final VerificationMeta _parentIdMeta = const VerificationMeta('parentId');
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _dayMeta = const VerificationMeta('day');
   @override
-  late final GeneratedColumn<int?> parentId = GeneratedColumn<int?>(
-      'parent_id', aliasedName, false,
-      type: const IntType(), requiredDuringInsert: true);
-  final VerificationMeta _nameMeta = const VerificationMeta('name');
+  late final GeneratedColumn<DateTime> day = GeneratedColumn<DateTime>(
+      'day', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  static const VerificationMeta _schoolIdMeta =
+      const VerificationMeta('schoolId');
   @override
-  late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
-      'name', aliasedName, false,
-      type: const StringType(), requiredDuringInsert: true);
-  final VerificationMeta _lunchBlockMeta = const VerificationMeta('lunchBlock');
+  late final GeneratedColumn<int> schoolId = GeneratedColumn<int>(
+      'school_id', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _eventMeta = const VerificationMeta('event');
   @override
-  late final GeneratedColumn<int?> lunchBlock = GeneratedColumn<int?>(
-      'lunch_block', aliasedName, true,
-      type: const IntType(), requiredDuringInsert: false);
-  final VerificationMeta _classificationMeta =
-      const VerificationMeta('classification');
+  late final GeneratedColumn<String> event = GeneratedColumn<String>(
+      'event', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _createAtMeta =
+      const VerificationMeta('createAt');
   @override
-  late final GeneratedColumn<String?> classification = GeneratedColumn<String?>(
-      'classification', aliasedName, false,
-      type: const StringType(), requiredDuringInsert: true);
-  final VerificationMeta _createAtMeta = const VerificationMeta('createAt');
-  @override
-  late final GeneratedColumn<DateTime?> createAt = GeneratedColumn<DateTime?>(
+  late final GeneratedColumn<DateTime> createAt = GeneratedColumn<DateTime>(
       'create_at', aliasedName, false,
-      type: const IntType(),
+      type: DriftSqlType.dateTime,
       requiredDuringInsert: false,
       defaultValue: Constant(DateTime.now()));
-  final VerificationMeta _updateAtMeta = const VerificationMeta('updateAt');
+  static const VerificationMeta _updateAtMeta =
+      const VerificationMeta('updateAt');
   @override
-  late final GeneratedColumn<DateTime?> updateAt = GeneratedColumn<DateTime?>(
+  late final GeneratedColumn<DateTime> updateAt = GeneratedColumn<DateTime>(
       'update_at', aliasedName, false,
-      type: const IntType(),
+      type: DriftSqlType.dateTime,
       requiredDuringInsert: false,
       defaultValue: Constant(DateTime.now()));
   @override
   List<GeneratedColumn> get $columns =>
-      [id, parentId, name, lunchBlock, classification, createAt, updateAt];
+      [id, day, schoolId, event, createAt, updateAt];
   @override
-  String get aliasedName => _alias ?? 'schools_table';
+  String get aliasedName => _alias ?? 'menus_table';
   @override
-  String get actualTableName => 'schools_table';
+  String get actualTableName => 'menus_table';
   @override
-  VerificationContext validateIntegrity(Insertable<SchoolsSchema> instance,
+  VerificationContext validateIntegrity(Insertable<MenusSchema> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
-    if (data.containsKey('parent_id')) {
-      context.handle(_parentIdMeta,
-          parentId.isAcceptableOrUnknown(data['parent_id']!, _parentIdMeta));
-    } else if (isInserting) {
-      context.missing(_parentIdMeta);
-    }
-    if (data.containsKey('name')) {
+    if (data.containsKey('day')) {
       context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+          _dayMeta, day.isAcceptableOrUnknown(data['day']!, _dayMeta));
     } else if (isInserting) {
-      context.missing(_nameMeta);
+      context.missing(_dayMeta);
     }
-    if (data.containsKey('lunch_block')) {
-      context.handle(
-          _lunchBlockMeta,
-          lunchBlock.isAcceptableOrUnknown(
-              data['lunch_block']!, _lunchBlockMeta));
-    }
-    if (data.containsKey('classification')) {
-      context.handle(
-          _classificationMeta,
-          classification.isAcceptableOrUnknown(
-              data['classification']!, _classificationMeta));
+    if (data.containsKey('school_id')) {
+      context.handle(_schoolIdMeta,
+          schoolId.isAcceptableOrUnknown(data['school_id']!, _schoolIdMeta));
     } else if (isInserting) {
-      context.missing(_classificationMeta);
+      context.missing(_schoolIdMeta);
+    }
+    if (data.containsKey('event')) {
+      context.handle(
+          _eventMeta, event.isAcceptableOrUnknown(data['event']!, _eventMeta));
     }
     if (data.containsKey('create_at')) {
       context.handle(_createAtMeta,
@@ -355,14 +450,27 @@ class $SchoolsTableTable extends SchoolsTable
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  SchoolsSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return SchoolsSchema.fromData(data,
-        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+  MenusSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return MenusSchema(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      day: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}day'])!,
+      schoolId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}school_id'])!,
+      event: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}event']),
+      createAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}create_at'])!,
+      updateAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}update_at'])!,
+    );
   }
 
   @override
-  $SchoolsTableTable createAlias(String alias) {
-    return $SchoolsTableTable(attachedDatabase, alias);
+  $MenusTableTable createAlias(String alias) {
+    return $MenusTableTable(attachedDatabase, alias);
   }
 }
 
@@ -373,30 +481,13 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
   final String? event;
   final DateTime createAt;
   final DateTime updateAt;
-  MenusSchema(
+  const MenusSchema(
       {required this.id,
       required this.day,
       required this.schoolId,
       this.event,
       required this.createAt,
       required this.updateAt});
-  factory MenusSchema.fromData(Map<String, dynamic> data, {String? prefix}) {
-    final effectivePrefix = prefix ?? '';
-    return MenusSchema(
-      id: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
-      day: const DateTimeType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}day'])!,
-      schoolId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}school_id'])!,
-      event: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}event']),
-      createAt: const DateTimeType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}create_at'])!,
-      updateAt: const DateTimeType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}update_at'])!,
-    );
-  }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -404,7 +495,7 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
     map['day'] = Variable<DateTime>(day);
     map['school_id'] = Variable<int>(schoolId);
     if (!nullToAbsent || event != null) {
-      map['event'] = Variable<String?>(event);
+      map['event'] = Variable<String>(event);
     }
     map['create_at'] = Variable<DateTime>(createAt);
     map['update_at'] = Variable<DateTime>(updateAt);
@@ -452,14 +543,14 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
           {int? id,
           DateTime? day,
           int? schoolId,
-          String? event,
+          Value<String?> event = const Value.absent(),
           DateTime? createAt,
           DateTime? updateAt}) =>
       MenusSchema(
         id: id ?? this.id,
         day: day ?? this.day,
         schoolId: schoolId ?? this.schoolId,
-        event: event ?? this.event,
+        event: event.present ? event.value : this.event,
         createAt: createAt ?? this.createAt,
         updateAt: updateAt ?? this.updateAt,
       );
@@ -518,7 +609,7 @@ class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
     Expression<int>? id,
     Expression<DateTime>? day,
     Expression<int>? schoolId,
-    Expression<String?>? event,
+    Expression<String>? event,
     Expression<DateTime>? createAt,
     Expression<DateTime>? updateAt,
   }) {
@@ -562,7 +653,7 @@ class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
       map['school_id'] = Variable<int>(schoolId.value);
     }
     if (event.present) {
-      map['event'] = Variable<String?>(event.value);
+      map['event'] = Variable<String>(event.value);
     }
     if (createAt.present) {
       map['create_at'] = Variable<DateTime>(createAt.value);
@@ -587,99 +678,64 @@ class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
   }
 }
 
-class $MenusTableTable extends MenusTable
-    with TableInfo<$MenusTableTable, MenusSchema> {
+class $MenuDishesTableTable extends MenuDishesTable
+    with TableInfo<$MenuDishesTableTable, MenuDishesSchema> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $MenusTableTable(this.attachedDatabase, [this._alias]);
-  final VerificationMeta _idMeta = const VerificationMeta('id');
+  $MenuDishesTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _menuIdMeta = const VerificationMeta('menuId');
   @override
-  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
-      'id', aliasedName, false,
-      type: const IntType(), requiredDuringInsert: false);
-  final VerificationMeta _dayMeta = const VerificationMeta('day');
+  late final GeneratedColumn<int> menuId = GeneratedColumn<int>(
+      'menu_id', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _dishIdMeta = const VerificationMeta('dishId');
   @override
-  late final GeneratedColumn<DateTime?> day = GeneratedColumn<DateTime?>(
-      'day', aliasedName, false,
-      type: const IntType(), requiredDuringInsert: true);
-  final VerificationMeta _schoolIdMeta = const VerificationMeta('schoolId');
+  late final GeneratedColumn<int> dishId = GeneratedColumn<int>(
+      'dish_id', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
   @override
-  late final GeneratedColumn<int?> schoolId = GeneratedColumn<int?>(
-      'school_id', aliasedName, false,
-      type: const IntType(), requiredDuringInsert: true);
-  final VerificationMeta _eventMeta = const VerificationMeta('event');
+  List<GeneratedColumn> get $columns => [menuId, dishId];
   @override
-  late final GeneratedColumn<String?> event = GeneratedColumn<String?>(
-      'event', aliasedName, true,
-      type: const StringType(), requiredDuringInsert: false);
-  final VerificationMeta _createAtMeta = const VerificationMeta('createAt');
+  String get aliasedName => _alias ?? 'menu_dishes_table';
   @override
-  late final GeneratedColumn<DateTime?> createAt = GeneratedColumn<DateTime?>(
-      'create_at', aliasedName, false,
-      type: const IntType(),
-      requiredDuringInsert: false,
-      defaultValue: Constant(DateTime.now()));
-  final VerificationMeta _updateAtMeta = const VerificationMeta('updateAt');
+  String get actualTableName => 'menu_dishes_table';
   @override
-  late final GeneratedColumn<DateTime?> updateAt = GeneratedColumn<DateTime?>(
-      'update_at', aliasedName, false,
-      type: const IntType(),
-      requiredDuringInsert: false,
-      defaultValue: Constant(DateTime.now()));
-  @override
-  List<GeneratedColumn> get $columns =>
-      [id, day, schoolId, event, createAt, updateAt];
-  @override
-  String get aliasedName => _alias ?? 'menus_table';
-  @override
-  String get actualTableName => 'menus_table';
-  @override
-  VerificationContext validateIntegrity(Insertable<MenusSchema> instance,
+  VerificationContext validateIntegrity(Insertable<MenuDishesSchema> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
-    if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    }
-    if (data.containsKey('day')) {
-      context.handle(
-          _dayMeta, day.isAcceptableOrUnknown(data['day']!, _dayMeta));
+    if (data.containsKey('menu_id')) {
+      context.handle(_menuIdMeta,
+          menuId.isAcceptableOrUnknown(data['menu_id']!, _menuIdMeta));
     } else if (isInserting) {
-      context.missing(_dayMeta);
+      context.missing(_menuIdMeta);
     }
-    if (data.containsKey('school_id')) {
-      context.handle(_schoolIdMeta,
-          schoolId.isAcceptableOrUnknown(data['school_id']!, _schoolIdMeta));
+    if (data.containsKey('dish_id')) {
+      context.handle(_dishIdMeta,
+          dishId.isAcceptableOrUnknown(data['dish_id']!, _dishIdMeta));
     } else if (isInserting) {
-      context.missing(_schoolIdMeta);
-    }
-    if (data.containsKey('event')) {
-      context.handle(
-          _eventMeta, event.isAcceptableOrUnknown(data['event']!, _eventMeta));
-    }
-    if (data.containsKey('create_at')) {
-      context.handle(_createAtMeta,
-          createAt.isAcceptableOrUnknown(data['create_at']!, _createAtMeta));
-    }
-    if (data.containsKey('update_at')) {
-      context.handle(_updateAtMeta,
-          updateAt.isAcceptableOrUnknown(data['update_at']!, _updateAtMeta));
+      context.missing(_dishIdMeta);
     }
     return context;
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => {id};
+  Set<GeneratedColumn> get $primaryKey => {menuId, dishId};
   @override
-  MenusSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return MenusSchema.fromData(data,
-        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+  MenuDishesSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return MenuDishesSchema(
+      menuId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}menu_id'])!,
+      dishId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}dish_id'])!,
+    );
   }
 
   @override
-  $MenusTableTable createAlias(String alias) {
-    return $MenusTableTable(attachedDatabase, alias);
+  $MenuDishesTableTable createAlias(String alias) {
+    return $MenuDishesTableTable(attachedDatabase, alias);
   }
 }
 
@@ -687,17 +743,7 @@ class MenuDishesSchema extends DataClass
     implements Insertable<MenuDishesSchema> {
   final int menuId;
   final int dishId;
-  MenuDishesSchema({required this.menuId, required this.dishId});
-  factory MenuDishesSchema.fromData(Map<String, dynamic> data,
-      {String? prefix}) {
-    final effectivePrefix = prefix ?? '';
-    return MenuDishesSchema(
-      menuId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}menu_id'])!,
-      dishId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}dish_id'])!,
-    );
-  }
+  const MenuDishesSchema({required this.menuId, required this.dishId});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -804,59 +850,79 @@ class MenuDishesTableCompanion extends UpdateCompanion<MenuDishesSchema> {
   }
 }
 
-class $MenuDishesTableTable extends MenuDishesTable
-    with TableInfo<$MenuDishesTableTable, MenuDishesSchema> {
+class $DishesTableTable extends DishesTable
+    with TableInfo<$DishesTableTable, DishesSchema> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $MenuDishesTableTable(this.attachedDatabase, [this._alias]);
-  final VerificationMeta _menuIdMeta = const VerificationMeta('menuId');
+  $DishesTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
-  late final GeneratedColumn<int?> menuId = GeneratedColumn<int?>(
-      'menu_id', aliasedName, false,
-      type: const IntType(), requiredDuringInsert: true);
-  final VerificationMeta _dishIdMeta = const VerificationMeta('dishId');
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      hasAutoIncrement: true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
   @override
-  late final GeneratedColumn<int?> dishId = GeneratedColumn<int?>(
-      'dish_id', aliasedName, false,
-      type: const IntType(), requiredDuringInsert: true);
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+      'name', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: true,
+      defaultConstraints: GeneratedColumn.constraintIsAlways('UNIQUE'));
+  static const VerificationMeta _categoryMeta =
+      const VerificationMeta('category');
   @override
-  List<GeneratedColumn> get $columns => [menuId, dishId];
+  late final GeneratedColumn<String> category = GeneratedColumn<String>(
+      'category', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
   @override
-  String get aliasedName => _alias ?? 'menu_dishes_table';
+  List<GeneratedColumn> get $columns => [id, name, category];
   @override
-  String get actualTableName => 'menu_dishes_table';
+  String get aliasedName => _alias ?? 'dishes_table';
   @override
-  VerificationContext validateIntegrity(Insertable<MenuDishesSchema> instance,
+  String get actualTableName => 'dishes_table';
+  @override
+  VerificationContext validateIntegrity(Insertable<DishesSchema> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
-    if (data.containsKey('menu_id')) {
-      context.handle(_menuIdMeta,
-          menuId.isAcceptableOrUnknown(data['menu_id']!, _menuIdMeta));
-    } else if (isInserting) {
-      context.missing(_menuIdMeta);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
-    if (data.containsKey('dish_id')) {
-      context.handle(_dishIdMeta,
-          dishId.isAcceptableOrUnknown(data['dish_id']!, _dishIdMeta));
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
     } else if (isInserting) {
-      context.missing(_dishIdMeta);
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('category')) {
+      context.handle(_categoryMeta,
+          category.isAcceptableOrUnknown(data['category']!, _categoryMeta));
     }
     return context;
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => {menuId, dishId};
+  Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  MenuDishesSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return MenuDishesSchema.fromData(data,
-        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+  DishesSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return DishesSchema(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      name: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      category: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}category']),
+    );
   }
 
   @override
-  $MenuDishesTableTable createAlias(String alias) {
-    return $MenuDishesTableTable(attachedDatabase, alias);
+  $DishesTableTable createAlias(String alias) {
+    return $DishesTableTable(attachedDatabase, alias);
   }
 }
 
@@ -864,25 +930,14 @@ class DishesSchema extends DataClass implements Insertable<DishesSchema> {
   final int id;
   final String name;
   final String? category;
-  DishesSchema({required this.id, required this.name, this.category});
-  factory DishesSchema.fromData(Map<String, dynamic> data, {String? prefix}) {
-    final effectivePrefix = prefix ?? '';
-    return DishesSchema(
-      id: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
-      name: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
-      category: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}category']),
-    );
-  }
+  const DishesSchema({required this.id, required this.name, this.category});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
     map['name'] = Variable<String>(name);
     if (!nullToAbsent || category != null) {
-      map['category'] = Variable<String?>(category);
+      map['category'] = Variable<String>(category);
     }
     return map;
   }
@@ -916,11 +971,14 @@ class DishesSchema extends DataClass implements Insertable<DishesSchema> {
     };
   }
 
-  DishesSchema copyWith({int? id, String? name, String? category}) =>
+  DishesSchema copyWith(
+          {int? id,
+          String? name,
+          Value<String?> category = const Value.absent()}) =>
       DishesSchema(
         id: id ?? this.id,
         name: name ?? this.name,
-        category: category ?? this.category,
+        category: category.present ? category.value : this.category,
       );
   @override
   String toString() {
@@ -960,7 +1018,7 @@ class DishesTableCompanion extends UpdateCompanion<DishesSchema> {
   static Insertable<DishesSchema> custom({
     Expression<int>? id,
     Expression<String>? name,
-    Expression<String?>? category,
+    Expression<String>? category,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -988,7 +1046,7 @@ class DishesTableCompanion extends UpdateCompanion<DishesSchema> {
       map['name'] = Variable<String>(name.value);
     }
     if (category.present) {
-      map['category'] = Variable<String?>(category.value);
+      map['category'] = Variable<String>(category.value);
     }
     return map;
   }
@@ -1004,69 +1062,68 @@ class DishesTableCompanion extends UpdateCompanion<DishesSchema> {
   }
 }
 
-class $DishesTableTable extends DishesTable
-    with TableInfo<$DishesTableTable, DishesSchema> {
+class $DishFoodstuffsTableTable extends DishFoodstuffsTable
+    with TableInfo<$DishFoodstuffsTableTable, DishFoodstuffsSchema> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $DishesTableTable(this.attachedDatabase, [this._alias]);
-  final VerificationMeta _idMeta = const VerificationMeta('id');
+  $DishFoodstuffsTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _dishIdMeta = const VerificationMeta('dishId');
   @override
-  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
-      'id', aliasedName, false,
-      type: const IntType(),
-      requiredDuringInsert: false,
-      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  final VerificationMeta _nameMeta = const VerificationMeta('name');
+  late final GeneratedColumn<int> dishId = GeneratedColumn<int>(
+      'dish_id', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _foodstuffIdMeta =
+      const VerificationMeta('foodstuffId');
   @override
-  late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
-      'name', aliasedName, false,
-      type: const StringType(),
-      requiredDuringInsert: true,
-      $customConstraints: 'NOT NULL UNIQUE');
-  final VerificationMeta _categoryMeta = const VerificationMeta('category');
+  late final GeneratedColumn<int> foodstuffId = GeneratedColumn<int>(
+      'foodstuff_id', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
   @override
-  late final GeneratedColumn<String?> category = GeneratedColumn<String?>(
-      'category', aliasedName, true,
-      type: const StringType(), requiredDuringInsert: false);
+  List<GeneratedColumn> get $columns => [dishId, foodstuffId];
   @override
-  List<GeneratedColumn> get $columns => [id, name, category];
+  String get aliasedName => _alias ?? 'dish_foodstuffs_table';
   @override
-  String get aliasedName => _alias ?? 'dishes_table';
+  String get actualTableName => 'dish_foodstuffs_table';
   @override
-  String get actualTableName => 'dishes_table';
-  @override
-  VerificationContext validateIntegrity(Insertable<DishesSchema> instance,
+  VerificationContext validateIntegrity(
+      Insertable<DishFoodstuffsSchema> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
-    if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    }
-    if (data.containsKey('name')) {
-      context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    if (data.containsKey('dish_id')) {
+      context.handle(_dishIdMeta,
+          dishId.isAcceptableOrUnknown(data['dish_id']!, _dishIdMeta));
     } else if (isInserting) {
-      context.missing(_nameMeta);
+      context.missing(_dishIdMeta);
     }
-    if (data.containsKey('category')) {
-      context.handle(_categoryMeta,
-          category.isAcceptableOrUnknown(data['category']!, _categoryMeta));
+    if (data.containsKey('foodstuff_id')) {
+      context.handle(
+          _foodstuffIdMeta,
+          foodstuffId.isAcceptableOrUnknown(
+              data['foodstuff_id']!, _foodstuffIdMeta));
+    } else if (isInserting) {
+      context.missing(_foodstuffIdMeta);
     }
     return context;
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => {id};
+  Set<GeneratedColumn> get $primaryKey => {dishId, foodstuffId};
   @override
-  DishesSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return DishesSchema.fromData(data,
-        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+  DishFoodstuffsSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return DishFoodstuffsSchema(
+      dishId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}dish_id'])!,
+      foodstuffId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}foodstuff_id'])!,
+    );
   }
 
   @override
-  $DishesTableTable createAlias(String alias) {
-    return $DishesTableTable(attachedDatabase, alias);
+  $DishFoodstuffsTableTable createAlias(String alias) {
+    return $DishFoodstuffsTableTable(attachedDatabase, alias);
   }
 }
 
@@ -1074,17 +1131,7 @@ class DishFoodstuffsSchema extends DataClass
     implements Insertable<DishFoodstuffsSchema> {
   final int dishId;
   final int foodstuffId;
-  DishFoodstuffsSchema({required this.dishId, required this.foodstuffId});
-  factory DishFoodstuffsSchema.fromData(Map<String, dynamic> data,
-      {String? prefix}) {
-    final effectivePrefix = prefix ?? '';
-    return DishFoodstuffsSchema(
-      dishId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}dish_id'])!,
-      foodstuffId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}foodstuff_id'])!,
-    );
-  }
+  const DishFoodstuffsSchema({required this.dishId, required this.foodstuffId});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -1194,63 +1241,374 @@ class DishFoodstuffsTableCompanion
   }
 }
 
-class $DishFoodstuffsTableTable extends DishFoodstuffsTable
-    with TableInfo<$DishFoodstuffsTableTable, DishFoodstuffsSchema> {
+class $FoodstuffsTableTable extends FoodstuffsTable
+    with TableInfo<$FoodstuffsTableTable, FoodstuffsSchema> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $DishFoodstuffsTableTable(this.attachedDatabase, [this._alias]);
-  final VerificationMeta _dishIdMeta = const VerificationMeta('dishId');
+  $FoodstuffsTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
-  late final GeneratedColumn<int?> dishId = GeneratedColumn<int?>(
-      'dish_id', aliasedName, false,
-      type: const IntType(), requiredDuringInsert: true);
-  final VerificationMeta _foodstuffIdMeta =
-      const VerificationMeta('foodstuffId');
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      hasAutoIncrement: true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
   @override
-  late final GeneratedColumn<int?> foodstuffId = GeneratedColumn<int?>(
-      'foodstuff_id', aliasedName, false,
-      type: const IntType(), requiredDuringInsert: true);
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+      'name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _pieceMeta = const VerificationMeta('piece');
   @override
-  List<GeneratedColumn> get $columns => [dishId, foodstuffId];
+  late final GeneratedColumn<int> piece = GeneratedColumn<int>(
+      'piece', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _gramMeta = const VerificationMeta('gram');
   @override
-  String get aliasedName => _alias ?? 'dish_foodstuffs_table';
+  late final GeneratedColumn<double> gram = GeneratedColumn<double>(
+      'gram', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _energyMeta = const VerificationMeta('energy');
   @override
-  String get actualTableName => 'dish_foodstuffs_table';
+  late final GeneratedColumn<double> energy = GeneratedColumn<double>(
+      'energy', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _proteinMeta =
+      const VerificationMeta('protein');
   @override
-  VerificationContext validateIntegrity(
-      Insertable<DishFoodstuffsSchema> instance,
+  late final GeneratedColumn<double> protein = GeneratedColumn<double>(
+      'protein', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _lipidMeta = const VerificationMeta('lipid');
+  @override
+  late final GeneratedColumn<double> lipid = GeneratedColumn<double>(
+      'lipid', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _sodiumMeta = const VerificationMeta('sodium');
+  @override
+  late final GeneratedColumn<double> sodium = GeneratedColumn<double>(
+      'sodium', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _carbohydrateMeta =
+      const VerificationMeta('carbohydrate');
+  @override
+  late final GeneratedColumn<double> carbohydrate = GeneratedColumn<double>(
+      'carbohydrate', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _calciumMeta =
+      const VerificationMeta('calcium');
+  @override
+  late final GeneratedColumn<double> calcium = GeneratedColumn<double>(
+      'calcium', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _magnesiumMeta =
+      const VerificationMeta('magnesium');
+  @override
+  late final GeneratedColumn<double> magnesium = GeneratedColumn<double>(
+      'magnesium', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _ironMeta = const VerificationMeta('iron');
+  @override
+  late final GeneratedColumn<double> iron = GeneratedColumn<double>(
+      'iron', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _zincMeta = const VerificationMeta('zinc');
+  @override
+  late final GeneratedColumn<double> zinc = GeneratedColumn<double>(
+      'zinc', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _retinolMeta =
+      const VerificationMeta('retinol');
+  @override
+  late final GeneratedColumn<double> retinol = GeneratedColumn<double>(
+      'retinol', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _vitaminB1Meta =
+      const VerificationMeta('vitaminB1');
+  @override
+  late final GeneratedColumn<double> vitaminB1 = GeneratedColumn<double>(
+      'vitamin_b1', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _vitaminB2Meta =
+      const VerificationMeta('vitaminB2');
+  @override
+  late final GeneratedColumn<double> vitaminB2 = GeneratedColumn<double>(
+      'vitamin_b2', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _vitaminCMeta =
+      const VerificationMeta('vitaminC');
+  @override
+  late final GeneratedColumn<double> vitaminC = GeneratedColumn<double>(
+      'vitamin_c', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _dietaryFiberMeta =
+      const VerificationMeta('dietaryFiber');
+  @override
+  late final GeneratedColumn<double> dietaryFiber = GeneratedColumn<double>(
+      'dietary_fiber', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _saltMeta = const VerificationMeta('salt');
+  @override
+  late final GeneratedColumn<double> salt = GeneratedColumn<double>(
+      'salt', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _isHeatMeta = const VerificationMeta('isHeat');
+  @override
+  late final GeneratedColumn<bool> isHeat =
+      GeneratedColumn<bool>('is_heat', aliasedName, false,
+          type: DriftSqlType.bool,
+          requiredDuringInsert: true,
+          defaultConstraints: GeneratedColumn.constraintsDependsOnDialect({
+            SqlDialect.sqlite: 'CHECK ("is_heat" IN (0, 1))',
+            SqlDialect.mysql: '',
+            SqlDialect.postgres: '',
+          }));
+  static const VerificationMeta _isAllergyMeta =
+      const VerificationMeta('isAllergy');
+  @override
+  late final GeneratedColumn<bool> isAllergy =
+      GeneratedColumn<bool>('is_allergy', aliasedName, false,
+          type: DriftSqlType.bool,
+          requiredDuringInsert: true,
+          defaultConstraints: GeneratedColumn.constraintsDependsOnDialect({
+            SqlDialect.sqlite: 'CHECK ("is_allergy" IN (0, 1))',
+            SqlDialect.mysql: '',
+            SqlDialect.postgres: '',
+          }));
+  static const VerificationMeta _originMeta = const VerificationMeta('origin');
+  @override
+  late final GeneratedColumn<String> origin = GeneratedColumn<String>(
+      'origin', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        name,
+        piece,
+        gram,
+        energy,
+        protein,
+        lipid,
+        sodium,
+        carbohydrate,
+        calcium,
+        magnesium,
+        iron,
+        zinc,
+        retinol,
+        vitaminB1,
+        vitaminB2,
+        vitaminC,
+        dietaryFiber,
+        salt,
+        isHeat,
+        isAllergy,
+        origin
+      ];
+  @override
+  String get aliasedName => _alias ?? 'foodstuffs_table';
+  @override
+  String get actualTableName => 'foodstuffs_table';
+  @override
+  VerificationContext validateIntegrity(Insertable<FoodstuffsSchema> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
-    if (data.containsKey('dish_id')) {
-      context.handle(_dishIdMeta,
-          dishId.isAcceptableOrUnknown(data['dish_id']!, _dishIdMeta));
-    } else if (isInserting) {
-      context.missing(_dishIdMeta);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
-    if (data.containsKey('foodstuff_id')) {
+    if (data.containsKey('name')) {
       context.handle(
-          _foodstuffIdMeta,
-          foodstuffId.isAcceptableOrUnknown(
-              data['foodstuff_id']!, _foodstuffIdMeta));
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
     } else if (isInserting) {
-      context.missing(_foodstuffIdMeta);
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('piece')) {
+      context.handle(
+          _pieceMeta, piece.isAcceptableOrUnknown(data['piece']!, _pieceMeta));
+    }
+    if (data.containsKey('gram')) {
+      context.handle(
+          _gramMeta, gram.isAcceptableOrUnknown(data['gram']!, _gramMeta));
+    } else if (isInserting) {
+      context.missing(_gramMeta);
+    }
+    if (data.containsKey('energy')) {
+      context.handle(_energyMeta,
+          energy.isAcceptableOrUnknown(data['energy']!, _energyMeta));
+    } else if (isInserting) {
+      context.missing(_energyMeta);
+    }
+    if (data.containsKey('protein')) {
+      context.handle(_proteinMeta,
+          protein.isAcceptableOrUnknown(data['protein']!, _proteinMeta));
+    } else if (isInserting) {
+      context.missing(_proteinMeta);
+    }
+    if (data.containsKey('lipid')) {
+      context.handle(
+          _lipidMeta, lipid.isAcceptableOrUnknown(data['lipid']!, _lipidMeta));
+    } else if (isInserting) {
+      context.missing(_lipidMeta);
+    }
+    if (data.containsKey('sodium')) {
+      context.handle(_sodiumMeta,
+          sodium.isAcceptableOrUnknown(data['sodium']!, _sodiumMeta));
+    } else if (isInserting) {
+      context.missing(_sodiumMeta);
+    }
+    if (data.containsKey('carbohydrate')) {
+      context.handle(
+          _carbohydrateMeta,
+          carbohydrate.isAcceptableOrUnknown(
+              data['carbohydrate']!, _carbohydrateMeta));
+    } else if (isInserting) {
+      context.missing(_carbohydrateMeta);
+    }
+    if (data.containsKey('calcium')) {
+      context.handle(_calciumMeta,
+          calcium.isAcceptableOrUnknown(data['calcium']!, _calciumMeta));
+    } else if (isInserting) {
+      context.missing(_calciumMeta);
+    }
+    if (data.containsKey('magnesium')) {
+      context.handle(_magnesiumMeta,
+          magnesium.isAcceptableOrUnknown(data['magnesium']!, _magnesiumMeta));
+    } else if (isInserting) {
+      context.missing(_magnesiumMeta);
+    }
+    if (data.containsKey('iron')) {
+      context.handle(
+          _ironMeta, iron.isAcceptableOrUnknown(data['iron']!, _ironMeta));
+    } else if (isInserting) {
+      context.missing(_ironMeta);
+    }
+    if (data.containsKey('zinc')) {
+      context.handle(
+          _zincMeta, zinc.isAcceptableOrUnknown(data['zinc']!, _zincMeta));
+    } else if (isInserting) {
+      context.missing(_zincMeta);
+    }
+    if (data.containsKey('retinol')) {
+      context.handle(_retinolMeta,
+          retinol.isAcceptableOrUnknown(data['retinol']!, _retinolMeta));
+    } else if (isInserting) {
+      context.missing(_retinolMeta);
+    }
+    if (data.containsKey('vitamin_b1')) {
+      context.handle(_vitaminB1Meta,
+          vitaminB1.isAcceptableOrUnknown(data['vitamin_b1']!, _vitaminB1Meta));
+    } else if (isInserting) {
+      context.missing(_vitaminB1Meta);
+    }
+    if (data.containsKey('vitamin_b2')) {
+      context.handle(_vitaminB2Meta,
+          vitaminB2.isAcceptableOrUnknown(data['vitamin_b2']!, _vitaminB2Meta));
+    } else if (isInserting) {
+      context.missing(_vitaminB2Meta);
+    }
+    if (data.containsKey('vitamin_c')) {
+      context.handle(_vitaminCMeta,
+          vitaminC.isAcceptableOrUnknown(data['vitamin_c']!, _vitaminCMeta));
+    } else if (isInserting) {
+      context.missing(_vitaminCMeta);
+    }
+    if (data.containsKey('dietary_fiber')) {
+      context.handle(
+          _dietaryFiberMeta,
+          dietaryFiber.isAcceptableOrUnknown(
+              data['dietary_fiber']!, _dietaryFiberMeta));
+    } else if (isInserting) {
+      context.missing(_dietaryFiberMeta);
+    }
+    if (data.containsKey('salt')) {
+      context.handle(
+          _saltMeta, salt.isAcceptableOrUnknown(data['salt']!, _saltMeta));
+    } else if (isInserting) {
+      context.missing(_saltMeta);
+    }
+    if (data.containsKey('is_heat')) {
+      context.handle(_isHeatMeta,
+          isHeat.isAcceptableOrUnknown(data['is_heat']!, _isHeatMeta));
+    } else if (isInserting) {
+      context.missing(_isHeatMeta);
+    }
+    if (data.containsKey('is_allergy')) {
+      context.handle(_isAllergyMeta,
+          isAllergy.isAcceptableOrUnknown(data['is_allergy']!, _isAllergyMeta));
+    } else if (isInserting) {
+      context.missing(_isAllergyMeta);
+    }
+    if (data.containsKey('origin')) {
+      context.handle(_originMeta,
+          origin.isAcceptableOrUnknown(data['origin']!, _originMeta));
     }
     return context;
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => {dishId, foodstuffId};
+  Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  DishFoodstuffsSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return DishFoodstuffsSchema.fromData(data,
-        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+  List<Set<GeneratedColumn>> get uniqueKeys => [
+        {name, gram, isHeat, isAllergy},
+      ];
+  @override
+  FoodstuffsSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return FoodstuffsSchema(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      name: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      piece: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}piece']),
+      gram: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}gram'])!,
+      energy: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}energy'])!,
+      protein: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}protein'])!,
+      lipid: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}lipid'])!,
+      sodium: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}sodium'])!,
+      carbohydrate: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}carbohydrate'])!,
+      calcium: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}calcium'])!,
+      magnesium: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}magnesium'])!,
+      iron: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}iron'])!,
+      zinc: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}zinc'])!,
+      retinol: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}retinol'])!,
+      vitaminB1: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}vitamin_b1'])!,
+      vitaminB2: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}vitamin_b2'])!,
+      vitaminC: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}vitamin_c'])!,
+      dietaryFiber: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}dietary_fiber'])!,
+      salt: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}salt'])!,
+      isHeat: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_heat'])!,
+      isAllergy: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_allergy'])!,
+      origin: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}origin']),
+    );
   }
 
   @override
-  $DishFoodstuffsTableTable createAlias(String alias) {
-    return $DishFoodstuffsTableTable(attachedDatabase, alias);
+  $FoodstuffsTableTable createAlias(String alias) {
+    return $FoodstuffsTableTable(attachedDatabase, alias);
   }
 }
 
@@ -1278,7 +1636,7 @@ class FoodstuffsSchema extends DataClass
   final bool isHeat;
   final bool isAllergy;
   final String? origin;
-  FoodstuffsSchema(
+  const FoodstuffsSchema(
       {required this.id,
       required this.name,
       this.piece,
@@ -1301,63 +1659,13 @@ class FoodstuffsSchema extends DataClass
       required this.isHeat,
       required this.isAllergy,
       this.origin});
-  factory FoodstuffsSchema.fromData(Map<String, dynamic> data,
-      {String? prefix}) {
-    final effectivePrefix = prefix ?? '';
-    return FoodstuffsSchema(
-      id: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
-      name: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
-      piece: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}piece']),
-      gram: const RealType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}gram'])!,
-      energy: const RealType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}energy'])!,
-      protein: const RealType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}protein'])!,
-      lipid: const RealType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}lipid'])!,
-      sodium: const RealType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}sodium'])!,
-      carbohydrate: const RealType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}carbohydrate'])!,
-      calcium: const RealType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}calcium'])!,
-      magnesium: const RealType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}magnesium'])!,
-      iron: const RealType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}iron'])!,
-      zinc: const RealType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}zinc'])!,
-      retinol: const RealType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}retinol'])!,
-      vitaminB1: const RealType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}vitamin_b1'])!,
-      vitaminB2: const RealType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}vitamin_b2'])!,
-      vitaminC: const RealType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}vitamin_c'])!,
-      dietaryFiber: const RealType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}dietary_fiber'])!,
-      salt: const RealType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}salt'])!,
-      isHeat: const BoolType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}is_heat'])!,
-      isAllergy: const BoolType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}is_allergy'])!,
-      origin: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}origin']),
-    );
-  }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
     map['name'] = Variable<String>(name);
     if (!nullToAbsent || piece != null) {
-      map['piece'] = Variable<int?>(piece);
+      map['piece'] = Variable<int>(piece);
     }
     map['gram'] = Variable<double>(gram);
     map['energy'] = Variable<double>(energy);
@@ -1378,7 +1686,7 @@ class FoodstuffsSchema extends DataClass
     map['is_heat'] = Variable<bool>(isHeat);
     map['is_allergy'] = Variable<bool>(isAllergy);
     if (!nullToAbsent || origin != null) {
-      map['origin'] = Variable<String?>(origin);
+      map['origin'] = Variable<String>(origin);
     }
     return map;
   }
@@ -1472,7 +1780,7 @@ class FoodstuffsSchema extends DataClass
   FoodstuffsSchema copyWith(
           {int? id,
           String? name,
-          int? piece,
+          Value<int?> piece = const Value.absent(),
           double? gram,
           double? energy,
           double? protein,
@@ -1491,11 +1799,11 @@ class FoodstuffsSchema extends DataClass
           double? salt,
           bool? isHeat,
           bool? isAllergy,
-          String? origin}) =>
+          Value<String?> origin = const Value.absent()}) =>
       FoodstuffsSchema(
         id: id ?? this.id,
         name: name ?? this.name,
-        piece: piece ?? this.piece,
+        piece: piece.present ? piece.value : this.piece,
         gram: gram ?? this.gram,
         energy: energy ?? this.energy,
         protein: protein ?? this.protein,
@@ -1514,7 +1822,7 @@ class FoodstuffsSchema extends DataClass
         salt: salt ?? this.salt,
         isHeat: isHeat ?? this.isHeat,
         isAllergy: isAllergy ?? this.isAllergy,
-        origin: origin ?? this.origin,
+        origin: origin.present ? origin.value : this.origin,
       );
   @override
   String toString() {
@@ -1690,7 +1998,7 @@ class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
   static Insertable<FoodstuffsSchema> custom({
     Expression<int>? id,
     Expression<String>? name,
-    Expression<int?>? piece,
+    Expression<int>? piece,
     Expression<double>? gram,
     Expression<double>? energy,
     Expression<double>? protein,
@@ -1709,7 +2017,7 @@ class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
     Expression<double>? salt,
     Expression<bool>? isHeat,
     Expression<bool>? isAllergy,
-    Expression<String?>? origin,
+    Expression<String>? origin,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -1796,7 +2104,7 @@ class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
       map['name'] = Variable<String>(name.value);
     }
     if (piece.present) {
-      map['piece'] = Variable<int?>(piece.value);
+      map['piece'] = Variable<int>(piece.value);
     }
     if (gram.present) {
       map['gram'] = Variable<double>(gram.value);
@@ -1853,7 +2161,7 @@ class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
       map['is_allergy'] = Variable<bool>(isAllergy.value);
     }
     if (origin.present) {
-      map['origin'] = Variable<String?>(origin.value);
+      map['origin'] = Variable<String>(origin.value);
     }
     return map;
   }
@@ -1888,161 +2196,46 @@ class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
   }
 }
 
-class $FoodstuffsTableTable extends FoodstuffsTable
-    with TableInfo<$FoodstuffsTableTable, FoodstuffsSchema> {
+class $UsersTableTable extends UsersTable
+    with TableInfo<$UsersTableTable, UsersSchema> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $FoodstuffsTableTable(this.attachedDatabase, [this._alias]);
-  final VerificationMeta _idMeta = const VerificationMeta('id');
+  $UsersTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
-  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, false,
-      type: const IntType(),
+      hasAutoIncrement: true,
+      type: DriftSqlType.int,
       requiredDuringInsert: false,
-      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  final VerificationMeta _nameMeta = const VerificationMeta('name');
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
   @override
-  late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
       'name', aliasedName, false,
-      type: const StringType(), requiredDuringInsert: true);
-  final VerificationMeta _pieceMeta = const VerificationMeta('piece');
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _schoolIdMeta =
+      const VerificationMeta('schoolId');
   @override
-  late final GeneratedColumn<int?> piece = GeneratedColumn<int?>(
-      'piece', aliasedName, true,
-      type: const IntType(), requiredDuringInsert: false);
-  final VerificationMeta _gramMeta = const VerificationMeta('gram');
+  late final GeneratedColumn<int> schoolId = GeneratedColumn<int>(
+      'school_id', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _schoolYearMeta =
+      const VerificationMeta('schoolYear');
   @override
-  late final GeneratedColumn<double?> gram = GeneratedColumn<double?>(
-      'gram', aliasedName, false,
-      type: const RealType(), requiredDuringInsert: true);
-  final VerificationMeta _energyMeta = const VerificationMeta('energy');
+  late final GeneratedColumn<int> schoolYear = GeneratedColumn<int>(
+      'school_year', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
   @override
-  late final GeneratedColumn<double?> energy = GeneratedColumn<double?>(
-      'energy', aliasedName, false,
-      type: const RealType(), requiredDuringInsert: true);
-  final VerificationMeta _proteinMeta = const VerificationMeta('protein');
+  List<GeneratedColumn> get $columns => [id, name, schoolId, schoolYear];
   @override
-  late final GeneratedColumn<double?> protein = GeneratedColumn<double?>(
-      'protein', aliasedName, false,
-      type: const RealType(), requiredDuringInsert: true);
-  final VerificationMeta _lipidMeta = const VerificationMeta('lipid');
+  String get aliasedName => _alias ?? 'users_table';
   @override
-  late final GeneratedColumn<double?> lipid = GeneratedColumn<double?>(
-      'lipid', aliasedName, false,
-      type: const RealType(), requiredDuringInsert: true);
-  final VerificationMeta _sodiumMeta = const VerificationMeta('sodium');
+  String get actualTableName => 'users_table';
   @override
-  late final GeneratedColumn<double?> sodium = GeneratedColumn<double?>(
-      'sodium', aliasedName, false,
-      type: const RealType(), requiredDuringInsert: true);
-  final VerificationMeta _carbohydrateMeta =
-      const VerificationMeta('carbohydrate');
-  @override
-  late final GeneratedColumn<double?> carbohydrate = GeneratedColumn<double?>(
-      'carbohydrate', aliasedName, false,
-      type: const RealType(), requiredDuringInsert: true);
-  final VerificationMeta _calciumMeta = const VerificationMeta('calcium');
-  @override
-  late final GeneratedColumn<double?> calcium = GeneratedColumn<double?>(
-      'calcium', aliasedName, false,
-      type: const RealType(), requiredDuringInsert: true);
-  final VerificationMeta _magnesiumMeta = const VerificationMeta('magnesium');
-  @override
-  late final GeneratedColumn<double?> magnesium = GeneratedColumn<double?>(
-      'magnesium', aliasedName, false,
-      type: const RealType(), requiredDuringInsert: true);
-  final VerificationMeta _ironMeta = const VerificationMeta('iron');
-  @override
-  late final GeneratedColumn<double?> iron = GeneratedColumn<double?>(
-      'iron', aliasedName, false,
-      type: const RealType(), requiredDuringInsert: true);
-  final VerificationMeta _zincMeta = const VerificationMeta('zinc');
-  @override
-  late final GeneratedColumn<double?> zinc = GeneratedColumn<double?>(
-      'zinc', aliasedName, false,
-      type: const RealType(), requiredDuringInsert: true);
-  final VerificationMeta _retinolMeta = const VerificationMeta('retinol');
-  @override
-  late final GeneratedColumn<double?> retinol = GeneratedColumn<double?>(
-      'retinol', aliasedName, false,
-      type: const RealType(), requiredDuringInsert: true);
-  final VerificationMeta _vitaminB1Meta = const VerificationMeta('vitaminB1');
-  @override
-  late final GeneratedColumn<double?> vitaminB1 = GeneratedColumn<double?>(
-      'vitamin_b1', aliasedName, false,
-      type: const RealType(), requiredDuringInsert: true);
-  final VerificationMeta _vitaminB2Meta = const VerificationMeta('vitaminB2');
-  @override
-  late final GeneratedColumn<double?> vitaminB2 = GeneratedColumn<double?>(
-      'vitamin_b2', aliasedName, false,
-      type: const RealType(), requiredDuringInsert: true);
-  final VerificationMeta _vitaminCMeta = const VerificationMeta('vitaminC');
-  @override
-  late final GeneratedColumn<double?> vitaminC = GeneratedColumn<double?>(
-      'vitamin_c', aliasedName, false,
-      type: const RealType(), requiredDuringInsert: true);
-  final VerificationMeta _dietaryFiberMeta =
-      const VerificationMeta('dietaryFiber');
-  @override
-  late final GeneratedColumn<double?> dietaryFiber = GeneratedColumn<double?>(
-      'dietary_fiber', aliasedName, false,
-      type: const RealType(), requiredDuringInsert: true);
-  final VerificationMeta _saltMeta = const VerificationMeta('salt');
-  @override
-  late final GeneratedColumn<double?> salt = GeneratedColumn<double?>(
-      'salt', aliasedName, false,
-      type: const RealType(), requiredDuringInsert: true);
-  final VerificationMeta _isHeatMeta = const VerificationMeta('isHeat');
-  @override
-  late final GeneratedColumn<bool?> isHeat = GeneratedColumn<bool?>(
-      'is_heat', aliasedName, false,
-      type: const BoolType(),
-      requiredDuringInsert: true,
-      defaultConstraints: 'CHECK (is_heat IN (0, 1))');
-  final VerificationMeta _isAllergyMeta = const VerificationMeta('isAllergy');
-  @override
-  late final GeneratedColumn<bool?> isAllergy = GeneratedColumn<bool?>(
-      'is_allergy', aliasedName, false,
-      type: const BoolType(),
-      requiredDuringInsert: true,
-      defaultConstraints: 'CHECK (is_allergy IN (0, 1))');
-  final VerificationMeta _originMeta = const VerificationMeta('origin');
-  @override
-  late final GeneratedColumn<String?> origin = GeneratedColumn<String?>(
-      'origin', aliasedName, true,
-      type: const StringType(), requiredDuringInsert: false);
-  @override
-  List<GeneratedColumn> get $columns => [
-        id,
-        name,
-        piece,
-        gram,
-        energy,
-        protein,
-        lipid,
-        sodium,
-        carbohydrate,
-        calcium,
-        magnesium,
-        iron,
-        zinc,
-        retinol,
-        vitaminB1,
-        vitaminB2,
-        vitaminC,
-        dietaryFiber,
-        salt,
-        isHeat,
-        isAllergy,
-        origin
-      ];
-  @override
-  String get aliasedName => _alias ?? 'foodstuffs_table';
-  @override
-  String get actualTableName => 'foodstuffs_table';
-  @override
-  VerificationContext validateIntegrity(Insertable<FoodstuffsSchema> instance,
+  VerificationContext validateIntegrity(Insertable<UsersSchema> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -2055,125 +2248,19 @@ class $FoodstuffsTableTable extends FoodstuffsTable
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
-    if (data.containsKey('piece')) {
+    if (data.containsKey('school_id')) {
+      context.handle(_schoolIdMeta,
+          schoolId.isAcceptableOrUnknown(data['school_id']!, _schoolIdMeta));
+    } else if (isInserting) {
+      context.missing(_schoolIdMeta);
+    }
+    if (data.containsKey('school_year')) {
       context.handle(
-          _pieceMeta, piece.isAcceptableOrUnknown(data['piece']!, _pieceMeta));
-    }
-    if (data.containsKey('gram')) {
-      context.handle(
-          _gramMeta, gram.isAcceptableOrUnknown(data['gram']!, _gramMeta));
+          _schoolYearMeta,
+          schoolYear.isAcceptableOrUnknown(
+              data['school_year']!, _schoolYearMeta));
     } else if (isInserting) {
-      context.missing(_gramMeta);
-    }
-    if (data.containsKey('energy')) {
-      context.handle(_energyMeta,
-          energy.isAcceptableOrUnknown(data['energy']!, _energyMeta));
-    } else if (isInserting) {
-      context.missing(_energyMeta);
-    }
-    if (data.containsKey('protein')) {
-      context.handle(_proteinMeta,
-          protein.isAcceptableOrUnknown(data['protein']!, _proteinMeta));
-    } else if (isInserting) {
-      context.missing(_proteinMeta);
-    }
-    if (data.containsKey('lipid')) {
-      context.handle(
-          _lipidMeta, lipid.isAcceptableOrUnknown(data['lipid']!, _lipidMeta));
-    } else if (isInserting) {
-      context.missing(_lipidMeta);
-    }
-    if (data.containsKey('sodium')) {
-      context.handle(_sodiumMeta,
-          sodium.isAcceptableOrUnknown(data['sodium']!, _sodiumMeta));
-    } else if (isInserting) {
-      context.missing(_sodiumMeta);
-    }
-    if (data.containsKey('carbohydrate')) {
-      context.handle(
-          _carbohydrateMeta,
-          carbohydrate.isAcceptableOrUnknown(
-              data['carbohydrate']!, _carbohydrateMeta));
-    } else if (isInserting) {
-      context.missing(_carbohydrateMeta);
-    }
-    if (data.containsKey('calcium')) {
-      context.handle(_calciumMeta,
-          calcium.isAcceptableOrUnknown(data['calcium']!, _calciumMeta));
-    } else if (isInserting) {
-      context.missing(_calciumMeta);
-    }
-    if (data.containsKey('magnesium')) {
-      context.handle(_magnesiumMeta,
-          magnesium.isAcceptableOrUnknown(data['magnesium']!, _magnesiumMeta));
-    } else if (isInserting) {
-      context.missing(_magnesiumMeta);
-    }
-    if (data.containsKey('iron')) {
-      context.handle(
-          _ironMeta, iron.isAcceptableOrUnknown(data['iron']!, _ironMeta));
-    } else if (isInserting) {
-      context.missing(_ironMeta);
-    }
-    if (data.containsKey('zinc')) {
-      context.handle(
-          _zincMeta, zinc.isAcceptableOrUnknown(data['zinc']!, _zincMeta));
-    } else if (isInserting) {
-      context.missing(_zincMeta);
-    }
-    if (data.containsKey('retinol')) {
-      context.handle(_retinolMeta,
-          retinol.isAcceptableOrUnknown(data['retinol']!, _retinolMeta));
-    } else if (isInserting) {
-      context.missing(_retinolMeta);
-    }
-    if (data.containsKey('vitamin_b1')) {
-      context.handle(_vitaminB1Meta,
-          vitaminB1.isAcceptableOrUnknown(data['vitamin_b1']!, _vitaminB1Meta));
-    } else if (isInserting) {
-      context.missing(_vitaminB1Meta);
-    }
-    if (data.containsKey('vitamin_b2')) {
-      context.handle(_vitaminB2Meta,
-          vitaminB2.isAcceptableOrUnknown(data['vitamin_b2']!, _vitaminB2Meta));
-    } else if (isInserting) {
-      context.missing(_vitaminB2Meta);
-    }
-    if (data.containsKey('vitamin_c')) {
-      context.handle(_vitaminCMeta,
-          vitaminC.isAcceptableOrUnknown(data['vitamin_c']!, _vitaminCMeta));
-    } else if (isInserting) {
-      context.missing(_vitaminCMeta);
-    }
-    if (data.containsKey('dietary_fiber')) {
-      context.handle(
-          _dietaryFiberMeta,
-          dietaryFiber.isAcceptableOrUnknown(
-              data['dietary_fiber']!, _dietaryFiberMeta));
-    } else if (isInserting) {
-      context.missing(_dietaryFiberMeta);
-    }
-    if (data.containsKey('salt')) {
-      context.handle(
-          _saltMeta, salt.isAcceptableOrUnknown(data['salt']!, _saltMeta));
-    } else if (isInserting) {
-      context.missing(_saltMeta);
-    }
-    if (data.containsKey('is_heat')) {
-      context.handle(_isHeatMeta,
-          isHeat.isAcceptableOrUnknown(data['is_heat']!, _isHeatMeta));
-    } else if (isInserting) {
-      context.missing(_isHeatMeta);
-    }
-    if (data.containsKey('is_allergy')) {
-      context.handle(_isAllergyMeta,
-          isAllergy.isAcceptableOrUnknown(data['is_allergy']!, _isAllergyMeta));
-    } else if (isInserting) {
-      context.missing(_isAllergyMeta);
-    }
-    if (data.containsKey('origin')) {
-      context.handle(_originMeta,
-          origin.isAcceptableOrUnknown(data['origin']!, _originMeta));
+      context.missing(_schoolYearMeta);
     }
     return context;
   }
@@ -2181,14 +2268,23 @@ class $FoodstuffsTableTable extends FoodstuffsTable
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  FoodstuffsSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return FoodstuffsSchema.fromData(data,
-        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+  UsersSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return UsersSchema(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      name: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      schoolId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}school_id'])!,
+      schoolYear: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}school_year'])!,
+    );
   }
 
   @override
-  $FoodstuffsTableTable createAlias(String alias) {
-    return $FoodstuffsTableTable(attachedDatabase, alias);
+  $UsersTableTable createAlias(String alias) {
+    return $UsersTableTable(attachedDatabase, alias);
   }
 }
 
@@ -2197,24 +2293,11 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
   final String name;
   final int schoolId;
   final int schoolYear;
-  UsersSchema(
+  const UsersSchema(
       {required this.id,
       required this.name,
       required this.schoolId,
       required this.schoolYear});
-  factory UsersSchema.fromData(Map<String, dynamic> data, {String? prefix}) {
-    final effectivePrefix = prefix ?? '';
-    return UsersSchema(
-      id: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
-      name: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
-      schoolId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}school_id'])!,
-      schoolYear: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}school_year'])!,
-    );
-  }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -2362,87 +2445,8 @@ class UsersTableCompanion extends UpdateCompanion<UsersSchema> {
   }
 }
 
-class $UsersTableTable extends UsersTable
-    with TableInfo<$UsersTableTable, UsersSchema> {
-  @override
-  final GeneratedDatabase attachedDatabase;
-  final String? _alias;
-  $UsersTableTable(this.attachedDatabase, [this._alias]);
-  final VerificationMeta _idMeta = const VerificationMeta('id');
-  @override
-  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
-      'id', aliasedName, false,
-      type: const IntType(),
-      requiredDuringInsert: false,
-      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  final VerificationMeta _nameMeta = const VerificationMeta('name');
-  @override
-  late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
-      'name', aliasedName, false,
-      type: const StringType(), requiredDuringInsert: true);
-  final VerificationMeta _schoolIdMeta = const VerificationMeta('schoolId');
-  @override
-  late final GeneratedColumn<int?> schoolId = GeneratedColumn<int?>(
-      'school_id', aliasedName, false,
-      type: const IntType(), requiredDuringInsert: true);
-  final VerificationMeta _schoolYearMeta = const VerificationMeta('schoolYear');
-  @override
-  late final GeneratedColumn<int?> schoolYear = GeneratedColumn<int?>(
-      'school_year', aliasedName, false,
-      type: const IntType(), requiredDuringInsert: true);
-  @override
-  List<GeneratedColumn> get $columns => [id, name, schoolId, schoolYear];
-  @override
-  String get aliasedName => _alias ?? 'users_table';
-  @override
-  String get actualTableName => 'users_table';
-  @override
-  VerificationContext validateIntegrity(Insertable<UsersSchema> instance,
-      {bool isInserting = false}) {
-    final context = VerificationContext();
-    final data = instance.toColumns(true);
-    if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    }
-    if (data.containsKey('name')) {
-      context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
-    } else if (isInserting) {
-      context.missing(_nameMeta);
-    }
-    if (data.containsKey('school_id')) {
-      context.handle(_schoolIdMeta,
-          schoolId.isAcceptableOrUnknown(data['school_id']!, _schoolIdMeta));
-    } else if (isInserting) {
-      context.missing(_schoolIdMeta);
-    }
-    if (data.containsKey('school_year')) {
-      context.handle(
-          _schoolYearMeta,
-          schoolYear.isAcceptableOrUnknown(
-              data['school_year']!, _schoolYearMeta));
-    } else if (isInserting) {
-      context.missing(_schoolYearMeta);
-    }
-    return context;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {id};
-  @override
-  UsersSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return UsersSchema.fromData(data,
-        prefix: tablePrefix != null ? '$tablePrefix.' : null);
-  }
-
-  @override
-  $UsersTableTable createAlias(String alias) {
-    return $UsersTableTable(attachedDatabase, alias);
-  }
-}
-
 abstract class _$LocalDatabase extends GeneratedDatabase {
-  _$LocalDatabase(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
+  _$LocalDatabase(QueryExecutor e) : super(e);
   late final $SchoolsTableTable schoolsTable = $SchoolsTableTable(this);
   late final $MenusTableTable menusTable = $MenusTableTable(this);
   late final $MenuDishesTableTable menuDishesTable =
@@ -2454,7 +2458,8 @@ abstract class _$LocalDatabase extends GeneratedDatabase {
       $FoodstuffsTableTable(this);
   late final $UsersTableTable usersTable = $UsersTableTable(this);
   @override
-  Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
+  Iterable<TableInfo<Table, Object?>> get allTables =>
+      allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities => [
         schoolsTable,

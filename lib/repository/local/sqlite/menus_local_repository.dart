@@ -12,7 +12,7 @@ import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 
 final menusLocalRepositoryProvider = Provider<MenusLocalRepository>((ref) {
   final LocalDatabase localDatabase = ref.watch(localDatabaseProvider);
-  return MenusLocalRepository(localDatabase, ref.read);
+  return MenusLocalRepository(localDatabase, ref);
 });
 
 abstract class MenusLocalRepositoryBase {
@@ -24,19 +24,19 @@ abstract class MenusLocalRepositoryBase {
 }
 
 class MenusLocalRepository extends MenusLocalRepositoryBase {
-  MenusLocalRepository(this._db, this._reader);
+  MenusLocalRepository(this._db, this._ref);
 
   final LocalDatabase _db;
-  final Reader _reader;
+  final Ref _ref;
 
   @override
   Future<int> add(Map<String, dynamic> menu) async {
     final MenusTableCompanion companion = MenusTableCompanion(
       id: Value(menu['id']),
-      day: Value(_reader(commonFunctionProvider.notifier).getDayFromTimestamp(menu['day'])),
+      day: Value(_ref.read(commonFunctionProvider.notifier).getDayFromTimestamp(menu['day'])),
       schoolId: Value(menu['schoolId']),
       event: Value(menu['event']),
-      updateAt: Value(_reader(commonFunctionProvider.notifier).getDayFromTimestamp(menu['updateAt'])),
+      updateAt: Value(_ref.read(commonFunctionProvider.notifier).getDayFromTimestamp(menu['updateAt'])),
     );
     final int menuId = await _db.into(_db.menusTable).insert(
       companion,
@@ -182,7 +182,7 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
   @override
   Future<List<MenuModel>> getAll() async {
     List<MenuModel> menus = [];
-    final int schoolId = await _reader(userProvider.notifier).getParentId();
+    final int schoolId = await _ref.read(userProvider.notifier).getParentId();
     final List<MenusSchema> menusSchemas = await (_db.select(_db.menusTable)
       ..where((t) => t.schoolId.equals(schoolId))).get();
 
@@ -196,7 +196,7 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
 
   @override
   Future<MenuModel> getMenuByDay(DateTime day) async {
-    final int id = await _reader(commonFunctionProvider.notifier).getIdByDay(day);
+    final int id = await _ref.read(commonFunctionProvider.notifier).getIdByDay(day);
     final MenuModel? menu = await _getMenuById(id);
 
     if (menu != null) return menu;
@@ -219,25 +219,25 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
   Future<DateTime> _getOldestDay() async {
     if (await _count() == 0) return DateTime.now();
 
-    final int schoolId = await _reader(userProvider.notifier).getParentId();
+    final int schoolId = await _ref.read(userProvider.notifier).getParentId();
     final Expression<DateTime> exp = _db.menusTable.day.min();
     final query = _db.selectOnly(_db.menusTable)
       ..where(_db.menusTable.schoolId.equals(schoolId))
       ..addColumns([exp]);
 
-    return await query.map((scheme) => scheme.read(exp)).getSingle();
+    return await query.map((scheme) => scheme.read(exp)).getSingle() ?? DateTime.now();
   }
 
   Future<DateTime> _getLatestDay() async {
     if (await _count() == 0) return DateTime.now();
 
-    final int schoolId = await _reader(userProvider.notifier).getParentId();
+    final int schoolId = await _ref.read(userProvider.notifier).getParentId();
     final Expression<DateTime> exp = _db.menusTable.day.max();
     final query = _db.selectOnly(_db.menusTable)
       ..where(_db.menusTable.schoolId.equals(schoolId))
       ..addColumns([exp]);
 
-    return await query.map((scheme) => scheme.read(exp)).getSingle();
+    return await query.map((scheme) => scheme.read(exp)).getSingle() ?? DateTime.now();
   }
 
   Future<MenuModel> _getBySchema(MenusSchema menusSchema) async {
@@ -246,8 +246,8 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
         await (_db.select(_db.menuDishesTable)..where((t) => t.menuId.equals(menusSchema.id))).get();
 
     await Future.forEach(menuDishesSchemas, (MenuDishesSchema menuDishesSchema) async {
-      final DishModel _dish = await _getDishById(menuDishesSchema.dishId);
-      dishes.add(_dish);
+      final DishModel dish = await _getDishById(menuDishesSchema.dishId);
+      dishes.add(dish);
     });
 
     return MenuModel(
@@ -336,17 +336,17 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
   Future<DateTime> getLatestUpdateDay() async {
     if (await _count() == 0) return DateTime(1970);
 
-    final int schoolId = await _reader(userProvider.notifier).getParentId();
+    final int schoolId = await _ref.read(userProvider.notifier).getParentId();
     final Expression<DateTime> exp = _db.menusTable.updateAt.max();
     final query = _db.selectOnly(_db.menusTable)
       ..where(_db.menusTable.schoolId.equals(schoolId))
       ..addColumns([exp]);
 
-    return await query.map((scheme) => scheme.read(exp)).getSingle();
+    return await query.map((scheme) => scheme.read(exp)).getSingle() ?? DateTime(1970);
   }
 
   Future<int> _count() async {
-    final int schoolId = await _reader(userProvider.notifier).getParentId();
+    final int schoolId = await _ref.read(userProvider.notifier).getParentId();
     final Expression<int> exp = _db.menusTable.id.count();
     final query = _db.selectOnly(_db.menusTable)
       ..where(_db.menusTable.schoolId.equals(schoolId))

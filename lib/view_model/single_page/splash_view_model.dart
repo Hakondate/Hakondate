@@ -20,7 +20,7 @@ final splashProvider = StateNotifierProvider.autoDispose<SplashViewModel, Splash
   final MenusLocalRepository menusLocalRepository = ref.watch(menusLocalRepositoryProvider);
   final MenusRemoteRepository menusRemoteRepository = ref.watch(menusRemoteRepositoryProvider);
   return SplashViewModel(
-    ref.read,
+    ref,
     schoolsLocalRepository,
     schoolsRemoteRepository,
     menusLocalRepository,
@@ -30,14 +30,14 @@ final splashProvider = StateNotifierProvider.autoDispose<SplashViewModel, Splash
 
 class SplashViewModel extends StateNotifier<SplashState> {
   SplashViewModel(
-      this._reader,
+      this._ref,
       this._schoolsLocalRepository,
       this._schoolsRemoteRepository,
       this._menusLocalRepository,
       this._menusRemoteRepository,
       ) : super(SplashState());
 
-  final Reader _reader;
+  final Ref _ref;
   final SchoolsLocalRepository _schoolsLocalRepository;
   final SchoolsRemoteRepository _schoolsRemoteRepository;
   final MenusLocalRepository _menusLocalRepository;
@@ -53,7 +53,7 @@ class SplashViewModel extends StateNotifier<SplashState> {
         await _initializeSchools();
 
         state = SplashState(status: LoadingStatus.reading);
-        if (!await _reader(userProvider.notifier).signIn()) {
+        if (!await _ref.read(userProvider.notifier).signIn()) {
           return routemaster.replace('/terms');
         }
 
@@ -104,6 +104,6 @@ class SplashViewModel extends StateNotifier<SplashState> {
       await _menusLocalRepository.add(menu);
     });
 
-    await _reader(dailyProvider.notifier).updateSelectedDay();
+    await _ref.read(dailyProvider.notifier).updateSelectedDay();
   }
 }

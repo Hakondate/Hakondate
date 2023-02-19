@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'quantity_model.dart';
 
@@ -28,34 +28,37 @@ mixin _$QuantityModel {
 abstract class $QuantityModelCopyWith<$Res> {
   factory $QuantityModelCopyWith(
           QuantityModel value, $Res Function(QuantityModel) then) =
-      _$QuantityModelCopyWithImpl<$Res>;
+      _$QuantityModelCopyWithImpl<$Res, QuantityModel>;
+  @useResult
   $Res call({int? piece, double gram});
 }
 
 /// @nodoc
-class _$QuantityModelCopyWithImpl<$Res>
+class _$QuantityModelCopyWithImpl<$Res, $Val extends QuantityModel>
     implements $QuantityModelCopyWith<$Res> {
   _$QuantityModelCopyWithImpl(this._value, this._then);
 
-  final QuantityModel _value;
   // ignore: unused_field
-  final $Res Function(QuantityModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? piece = freezed,
-    Object? gram = freezed,
+    Object? gram = null,
   }) {
     return _then(_value.copyWith(
-      piece: piece == freezed
+      piece: freezed == piece
           ? _value.piece
           : piece // ignore: cast_nullable_to_non_nullable
               as int?,
-      gram: gram == freezed
+      gram: null == gram
           ? _value.gram
           : gram // ignore: cast_nullable_to_non_nullable
               as double,
-    ));
+    ) as $Val);
   }
 }
 
@@ -66,31 +69,30 @@ abstract class _$$_QuantityModelCopyWith<$Res>
           _$_QuantityModel value, $Res Function(_$_QuantityModel) then) =
       __$$_QuantityModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({int? piece, double gram});
 }
 
 /// @nodoc
 class __$$_QuantityModelCopyWithImpl<$Res>
-    extends _$QuantityModelCopyWithImpl<$Res>
+    extends _$QuantityModelCopyWithImpl<$Res, _$_QuantityModel>
     implements _$$_QuantityModelCopyWith<$Res> {
   __$$_QuantityModelCopyWithImpl(
       _$_QuantityModel _value, $Res Function(_$_QuantityModel) _then)
-      : super(_value, (v) => _then(v as _$_QuantityModel));
+      : super(_value, _then);
 
-  @override
-  _$_QuantityModel get _value => super._value as _$_QuantityModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? piece = freezed,
-    Object? gram = freezed,
+    Object? gram = null,
   }) {
     return _then(_$_QuantityModel(
-      piece: piece == freezed
+      piece: freezed == piece
           ? _value.piece
           : piece // ignore: cast_nullable_to_non_nullable
               as int?,
-      gram: gram == freezed
+      gram: null == gram
           ? _value.gram
           : gram // ignore: cast_nullable_to_non_nullable
               as double,
@@ -120,18 +122,16 @@ class _$_QuantityModel implements _QuantityModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_QuantityModel &&
-            const DeepCollectionEquality().equals(other.piece, piece) &&
-            const DeepCollectionEquality().equals(other.gram, gram));
+            (identical(other.piece, piece) || other.piece == piece) &&
+            (identical(other.gram, gram) || other.gram == gram));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(piece),
-      const DeepCollectionEquality().hash(gram));
+  int get hashCode => Object.hash(runtimeType, piece, gram);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_QuantityModelCopyWith<_$_QuantityModel> get copyWith =>
       __$$_QuantityModelCopyWithImpl<_$_QuantityModel>(this, _$identity);
 }
@@ -141,9 +141,9 @@ abstract class _QuantityModel implements QuantityModel {
       _$_QuantityModel;
 
   @override
-  int? get piece => throw _privateConstructorUsedError;
+  int? get piece;
   @override // 個数
-  double get gram => throw _privateConstructorUsedError;
+  double get gram;
   @override
   @JsonKey(ignore: true)
   _$$_QuantityModelCopyWith<_$_QuantityModel> get copyWith =>

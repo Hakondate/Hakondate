@@ -6,7 +6,7 @@ import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 
 final menusRemoteRepositoryProvider = Provider<MenusRemoteRepository>((ref) {
   final FirebaseFirestore firestoreDatabase = ref.watch(firestoreDatabaseProvider);
-  return MenusRemoteRepository(firestoreDatabase.collection('menus'), ref.read);
+  return MenusRemoteRepository(firestoreDatabase.collection('menus'), ref);
 });
 
 abstract class MenusRemoteRepositoryBase {
@@ -14,14 +14,14 @@ abstract class MenusRemoteRepositoryBase {
 }
 
 class MenusRemoteRepository extends MenusRemoteRepositoryBase {
-  MenusRemoteRepository(this._db, this._reader);
+  MenusRemoteRepository(this._db, this._ref);
 
   final CollectionReference<Map<String, dynamic>> _db;
-  final Reader _reader;
+  final Ref _ref;
 
   @override
   Future<List<dynamic>> get({required DateTime updateAt}) async {
-    final int schoolId = await _reader(userProvider.notifier).getParentId();
+    final int schoolId = await _ref.read(userProvider.notifier).getParentId();
     final firestoreData = await _db
         .where('schoolId', isEqualTo: schoolId)
         .where('updateAt', isGreaterThan: updateAt)

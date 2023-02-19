@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'open_data_recipe_model.dart';
 
@@ -31,101 +31,103 @@ mixin _$OpenDataRecipeModel {
 abstract class $OpenDataRecipeModelCopyWith<$Res> {
   factory $OpenDataRecipeModelCopyWith(
           OpenDataRecipeModel value, $Res Function(OpenDataRecipeModel) then) =
-      _$OpenDataRecipeModelCopyWithImpl<$Res>;
+      _$OpenDataRecipeModelCopyWithImpl<$Res, OpenDataRecipeModel>;
+  @useResult
   $Res call(
       {int id, String name, RecipeType type, String? thumbnail, String pdf});
 }
 
 /// @nodoc
-class _$OpenDataRecipeModelCopyWithImpl<$Res>
+class _$OpenDataRecipeModelCopyWithImpl<$Res, $Val extends OpenDataRecipeModel>
     implements $OpenDataRecipeModelCopyWith<$Res> {
   _$OpenDataRecipeModelCopyWithImpl(this._value, this._then);
 
-  final OpenDataRecipeModel _value;
   // ignore: unused_field
-  final $Res Function(OpenDataRecipeModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? type = freezed,
+    Object? id = null,
+    Object? name = null,
+    Object? type = null,
     Object? thumbnail = freezed,
-    Object? pdf = freezed,
+    Object? pdf = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as RecipeType,
-      thumbnail: thumbnail == freezed
+      thumbnail: freezed == thumbnail
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String?,
-      pdf: pdf == freezed
+      pdf: null == pdf
           ? _value.pdf
           : pdf // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$OpenDataRecipeModelCopyWith<$Res>
+abstract class _$$_OpenDataRecipeModelCopyWith<$Res>
     implements $OpenDataRecipeModelCopyWith<$Res> {
-  factory _$OpenDataRecipeModelCopyWith(_OpenDataRecipeModel value,
-          $Res Function(_OpenDataRecipeModel) then) =
-      __$OpenDataRecipeModelCopyWithImpl<$Res>;
+  factory _$$_OpenDataRecipeModelCopyWith(_$_OpenDataRecipeModel value,
+          $Res Function(_$_OpenDataRecipeModel) then) =
+      __$$_OpenDataRecipeModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int id, String name, RecipeType type, String? thumbnail, String pdf});
 }
 
 /// @nodoc
-class __$OpenDataRecipeModelCopyWithImpl<$Res>
-    extends _$OpenDataRecipeModelCopyWithImpl<$Res>
-    implements _$OpenDataRecipeModelCopyWith<$Res> {
-  __$OpenDataRecipeModelCopyWithImpl(
-      _OpenDataRecipeModel _value, $Res Function(_OpenDataRecipeModel) _then)
-      : super(_value, (v) => _then(v as _OpenDataRecipeModel));
+class __$$_OpenDataRecipeModelCopyWithImpl<$Res>
+    extends _$OpenDataRecipeModelCopyWithImpl<$Res, _$_OpenDataRecipeModel>
+    implements _$$_OpenDataRecipeModelCopyWith<$Res> {
+  __$$_OpenDataRecipeModelCopyWithImpl(_$_OpenDataRecipeModel _value,
+      $Res Function(_$_OpenDataRecipeModel) _then)
+      : super(_value, _then);
 
-  @override
-  _OpenDataRecipeModel get _value => super._value as _OpenDataRecipeModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? type = freezed,
+    Object? id = null,
+    Object? name = null,
+    Object? type = null,
     Object? thumbnail = freezed,
-    Object? pdf = freezed,
+    Object? pdf = null,
   }) {
-    return _then(_OpenDataRecipeModel(
-      id: id == freezed
+    return _then(_$_OpenDataRecipeModel(
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as RecipeType,
-      thumbnail: thumbnail == freezed
+      thumbnail: freezed == thumbnail
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String?,
-      pdf: pdf == freezed
+      pdf: null == pdf
           ? _value.pdf
           : pdf // ignore: cast_nullable_to_non_nullable
               as String,
@@ -169,27 +171,23 @@ class _$_OpenDataRecipeModel extends _OpenDataRecipeModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _OpenDataRecipeModel &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality().equals(other.thumbnail, thumbnail) &&
-            const DeepCollectionEquality().equals(other.pdf, pdf));
+            other is _$_OpenDataRecipeModel &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.thumbnail, thumbnail) ||
+                other.thumbnail == thumbnail) &&
+            (identical(other.pdf, pdf) || other.pdf == pdf));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(thumbnail),
-      const DeepCollectionEquality().hash(pdf));
+  int get hashCode => Object.hash(runtimeType, id, name, type, thumbnail, pdf);
 
   @JsonKey(ignore: true)
   @override
-  _$OpenDataRecipeModelCopyWith<_OpenDataRecipeModel> get copyWith =>
-      __$OpenDataRecipeModelCopyWithImpl<_OpenDataRecipeModel>(
+  @pragma('vm:prefer-inline')
+  _$$_OpenDataRecipeModelCopyWith<_$_OpenDataRecipeModel> get copyWith =>
+      __$$_OpenDataRecipeModelCopyWithImpl<_$_OpenDataRecipeModel>(
           this, _$identity);
 }
 
@@ -203,17 +201,17 @@ abstract class _OpenDataRecipeModel extends OpenDataRecipeModel {
   _OpenDataRecipeModel._() : super._();
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override // ID
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override // 名前
-  RecipeType get type => throw _privateConstructorUsedError;
+  RecipeType get type;
   @override // タイプ
-  String? get thumbnail => throw _privateConstructorUsedError;
+  String? get thumbnail;
   @override // サムネイル
-  String get pdf => throw _privateConstructorUsedError;
+  String get pdf;
   @override
   @JsonKey(ignore: true)
-  _$OpenDataRecipeModelCopyWith<_OpenDataRecipeModel> get copyWith =>
+  _$$_OpenDataRecipeModelCopyWith<_$_OpenDataRecipeModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
