@@ -9,30 +9,30 @@ import 'package:hakondate/util/app_unique_key.dart';
 import 'package:hakondate/util/environment.dart';
 import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 
-final commonFunctionProvider = StateNotifierProvider<CommonFunction, void>((ref) => CommonFunction(ref.read));
+final commonFunctionProvider = StateNotifierProvider<CommonFunction, void>((ref) => CommonFunction(ref));
 
 class CommonFunction extends StateNotifier<void> {
-  CommonFunction(this._reader) : super(null);
+  CommonFunction(this._ref) : super(null);
 
-  final Reader _reader;
+  final Ref _ref;
 
   bool isSameDay(DateTime day1, DateTime day2) {
     return day1.year == day2.year && day1.month == day2.month && day1.day == day2.day;
   }
 
   Future<int> getIdByDay(DateTime day) async {
-    final int parentId = await _reader(userProvider.notifier).getParentId();
+    final int parentId = await _ref.read(userProvider.notifier).getParentId();
     return day.year * 1000000 + day.month * 10000 + day.day * 100 + parentId;
   }
 
   Future<void> deleteAllData() async {
     if (Environment.flavor != Flavor.dev) return;
 
-    _reader(appUniqueKeyProvider.notifier).restartApp();
-    _reader(userProvider.notifier).signOut();
+    _ref.read(appUniqueKeyProvider.notifier).restartApp();
+    _ref.read(userProvider.notifier).signOut();
 
-    await _reader(usersLocalRepositoryProvider).deleteAll();
-    await _reader(menusLocalRepositoryProvider).deleteAll();
+    await _ref.read(usersLocalRepositoryProvider).deleteAll();
+    await _ref.read(menusLocalRepositoryProvider).deleteAll();
 
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove(AppKey.sharedPreferencesKey.currentUserId);

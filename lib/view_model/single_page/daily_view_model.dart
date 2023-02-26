@@ -9,11 +9,11 @@ import 'package:hakondate/util/environment.dart';
 
 final dailyProvider = StateNotifierProvider<DailyViewModel, DailyState>((ref) {
   final MenusLocalRepository menusLocalRepository = ref.watch(menusLocalRepositoryProvider);
-  return DailyViewModel(menusLocalRepository, ref.read);
+  return DailyViewModel(menusLocalRepository, ref);
 });
 
 class DailyViewModel extends StateNotifier<DailyState> {
-  DailyViewModel(this._menusLocalRepository, this._reader)
+  DailyViewModel(this._menusLocalRepository, this._ref)
       : super(DailyState(
           selectedDay: DateTime.now(),
           focusedDay: DateTime.now(),
@@ -26,7 +26,7 @@ class DailyViewModel extends StateNotifier<DailyState> {
         ));
 
   final MenusLocalRepository _menusLocalRepository;
-  final Reader _reader;
+  final Ref _ref;
 
   Future<void> updateSelectedDay({DateTime? selectedDay, DateTime? focusedDay}) async {
     switch (Environment.flavor) {
@@ -48,7 +48,7 @@ class DailyViewModel extends StateNotifier<DailyState> {
 
     final MenuModel menu = state.menu;
     if (menu is LunchesDayMenuModel) {
-      await _reader(analyticsControllerProvider.notifier).logViewMenu(menu.id);
+      await _ref.read(analyticsControllerProvider.notifier).logViewMenu(menu.id);
     }
 
     state = state.copyWith(isFetching: false);

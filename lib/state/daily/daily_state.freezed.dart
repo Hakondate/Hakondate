@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'daily_state.dart';
 
@@ -32,7 +32,8 @@ mixin _$DailyState {
 abstract class $DailyStateCopyWith<$Res> {
   factory $DailyStateCopyWith(
           DailyState value, $Res Function(DailyState) then) =
-      _$DailyStateCopyWithImpl<$Res>;
+      _$DailyStateCopyWithImpl<$Res, DailyState>;
+  @useResult
   $Res call(
       {DateTime selectedDay,
       DateTime focusedDay,
@@ -45,54 +46,58 @@ abstract class $DailyStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DailyStateCopyWithImpl<$Res> implements $DailyStateCopyWith<$Res> {
+class _$DailyStateCopyWithImpl<$Res, $Val extends DailyState>
+    implements $DailyStateCopyWith<$Res> {
   _$DailyStateCopyWithImpl(this._value, this._then);
 
-  final DailyState _value;
   // ignore: unused_field
-  final $Res Function(DailyState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? selectedDay = freezed,
-    Object? focusedDay = freezed,
-    Object? calendarTabFirstDay = freezed,
-    Object? calendarTabLastDay = freezed,
-    Object? menu = freezed,
-    Object? isFetching = freezed,
+    Object? selectedDay = null,
+    Object? focusedDay = null,
+    Object? calendarTabFirstDay = null,
+    Object? calendarTabLastDay = null,
+    Object? menu = null,
+    Object? isFetching = null,
   }) {
     return _then(_value.copyWith(
-      selectedDay: selectedDay == freezed
+      selectedDay: null == selectedDay
           ? _value.selectedDay
           : selectedDay // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      focusedDay: focusedDay == freezed
+      focusedDay: null == focusedDay
           ? _value.focusedDay
           : focusedDay // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      calendarTabFirstDay: calendarTabFirstDay == freezed
+      calendarTabFirstDay: null == calendarTabFirstDay
           ? _value.calendarTabFirstDay
           : calendarTabFirstDay // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      calendarTabLastDay: calendarTabLastDay == freezed
+      calendarTabLastDay: null == calendarTabLastDay
           ? _value.calendarTabLastDay
           : calendarTabLastDay // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      menu: menu == freezed
+      menu: null == menu
           ? _value.menu
           : menu // ignore: cast_nullable_to_non_nullable
               as MenuModel,
-      isFetching: isFetching == freezed
+      isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $MenuModelCopyWith<$Res> get menu {
     return $MenuModelCopyWith<$Res>(_value.menu, (value) {
-      return _then(_value.copyWith(menu: value));
+      return _then(_value.copyWith(menu: value) as $Val);
     });
   }
 }
@@ -104,6 +109,7 @@ abstract class _$$_DailyStateCopyWith<$Res>
           _$_DailyState value, $Res Function(_$_DailyState) then) =
       __$$_DailyStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {DateTime selectedDay,
       DateTime focusedDay,
@@ -117,46 +123,45 @@ abstract class _$$_DailyStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_DailyStateCopyWithImpl<$Res> extends _$DailyStateCopyWithImpl<$Res>
+class __$$_DailyStateCopyWithImpl<$Res>
+    extends _$DailyStateCopyWithImpl<$Res, _$_DailyState>
     implements _$$_DailyStateCopyWith<$Res> {
   __$$_DailyStateCopyWithImpl(
       _$_DailyState _value, $Res Function(_$_DailyState) _then)
-      : super(_value, (v) => _then(v as _$_DailyState));
+      : super(_value, _then);
 
-  @override
-  _$_DailyState get _value => super._value as _$_DailyState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? selectedDay = freezed,
-    Object? focusedDay = freezed,
-    Object? calendarTabFirstDay = freezed,
-    Object? calendarTabLastDay = freezed,
-    Object? menu = freezed,
-    Object? isFetching = freezed,
+    Object? selectedDay = null,
+    Object? focusedDay = null,
+    Object? calendarTabFirstDay = null,
+    Object? calendarTabLastDay = null,
+    Object? menu = null,
+    Object? isFetching = null,
   }) {
     return _then(_$_DailyState(
-      selectedDay: selectedDay == freezed
+      selectedDay: null == selectedDay
           ? _value.selectedDay
           : selectedDay // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      focusedDay: focusedDay == freezed
+      focusedDay: null == focusedDay
           ? _value.focusedDay
           : focusedDay // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      calendarTabFirstDay: calendarTabFirstDay == freezed
+      calendarTabFirstDay: null == calendarTabFirstDay
           ? _value.calendarTabFirstDay
           : calendarTabFirstDay // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      calendarTabLastDay: calendarTabLastDay == freezed
+      calendarTabLastDay: null == calendarTabLastDay
           ? _value.calendarTabLastDay
           : calendarTabLastDay // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      menu: menu == freezed
+      menu: null == menu
           ? _value.menu
           : menu // ignore: cast_nullable_to_non_nullable
               as MenuModel,
-      isFetching: isFetching == freezed
+      isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -213,31 +218,26 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_DailyState &&
-            const DeepCollectionEquality()
-                .equals(other.selectedDay, selectedDay) &&
-            const DeepCollectionEquality()
-                .equals(other.focusedDay, focusedDay) &&
-            const DeepCollectionEquality()
-                .equals(other.calendarTabFirstDay, calendarTabFirstDay) &&
-            const DeepCollectionEquality()
-                .equals(other.calendarTabLastDay, calendarTabLastDay) &&
-            const DeepCollectionEquality().equals(other.menu, menu) &&
-            const DeepCollectionEquality()
-                .equals(other.isFetching, isFetching));
+            (identical(other.selectedDay, selectedDay) ||
+                other.selectedDay == selectedDay) &&
+            (identical(other.focusedDay, focusedDay) ||
+                other.focusedDay == focusedDay) &&
+            (identical(other.calendarTabFirstDay, calendarTabFirstDay) ||
+                other.calendarTabFirstDay == calendarTabFirstDay) &&
+            (identical(other.calendarTabLastDay, calendarTabLastDay) ||
+                other.calendarTabLastDay == calendarTabLastDay) &&
+            (identical(other.menu, menu) || other.menu == menu) &&
+            (identical(other.isFetching, isFetching) ||
+                other.isFetching == isFetching));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(selectedDay),
-      const DeepCollectionEquality().hash(focusedDay),
-      const DeepCollectionEquality().hash(calendarTabFirstDay),
-      const DeepCollectionEquality().hash(calendarTabLastDay),
-      const DeepCollectionEquality().hash(menu),
-      const DeepCollectionEquality().hash(isFetching));
+  int get hashCode => Object.hash(runtimeType, selectedDay, focusedDay,
+      calendarTabFirstDay, calendarTabLastDay, menu, isFetching);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_DailyStateCopyWith<_$_DailyState> get copyWith =>
       __$$_DailyStateCopyWithImpl<_$_DailyState>(this, _$identity);
 }
@@ -252,17 +252,17 @@ abstract class _DailyState implements DailyState {
       final bool isFetching}) = _$_DailyState;
 
   @override
-  DateTime get selectedDay => throw _privateConstructorUsedError;
+  DateTime get selectedDay;
   @override
-  DateTime get focusedDay => throw _privateConstructorUsedError;
+  DateTime get focusedDay;
   @override
-  DateTime get calendarTabFirstDay => throw _privateConstructorUsedError;
+  DateTime get calendarTabFirstDay;
   @override
-  DateTime get calendarTabLastDay => throw _privateConstructorUsedError;
+  DateTime get calendarTabLastDay;
   @override
-  MenuModel get menu => throw _privateConstructorUsedError;
+  MenuModel get menu;
   @override
-  bool get isFetching => throw _privateConstructorUsedError;
+  bool get isFetching;
   @override
   @JsonKey(ignore: true)
   _$$_DailyStateCopyWith<_$_DailyState> get copyWith =>

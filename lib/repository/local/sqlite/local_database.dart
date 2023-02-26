@@ -20,7 +20,7 @@ final localDatabaseProvider = Provider<LocalDatabase>((_) {
   final LazyDatabase lazyDatabase = LazyDatabase(() async {
     final Directory directory = await getApplicationDocumentsDirectory();
     final File file = File(p.join(directory.path, 'db.sqlite'));
-    return NativeDatabase(file);
+    return NativeDatabase.createInBackground(file);
   });
 
   return LocalDatabase(lazyDatabase);
@@ -36,7 +36,7 @@ final localDatabaseProvider = Provider<LocalDatabase>((_) {
   UsersTable,
 ])
 class LocalDatabase extends _$LocalDatabase {
-  LocalDatabase(LazyDatabase _lazyDatabase) : super(_lazyDatabase);
+  LocalDatabase(LazyDatabase lazyDatabase) : super(lazyDatabase);
 
   @override
   int get schemaVersion => 1;

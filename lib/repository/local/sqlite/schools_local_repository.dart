@@ -8,7 +8,7 @@ import 'package:hakondate/view_model/multi_page/common_function.dart';
 
 final schoolsLocalRepositoryProvider = Provider<SchoolsLocalRepository>((ref) {
   final LocalDatabase localDatabase = ref.watch(localDatabaseProvider);
-  return SchoolsLocalRepository(localDatabase, ref.read);
+  return SchoolsLocalRepository(localDatabase, ref);
 });
 
 abstract class SchoolsLocalRepositoryBase {
@@ -20,10 +20,10 @@ abstract class SchoolsLocalRepositoryBase {
 }
 
 class SchoolsLocalRepository extends SchoolsLocalRepositoryBase {
-  SchoolsLocalRepository(this._db, this._reader);
+  SchoolsLocalRepository(this._db, this._ref);
 
   final LocalDatabase _db;
-  final Reader _reader;
+  final Ref _ref;
 
   @override
   Future<int> count() async {
@@ -85,7 +85,7 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryBase {
         name: Value(school['name']),
         lunchBlock: Value(school['lunchBlock']),
         classification: Value(school['classification']),
-        updateAt: Value(_reader(commonFunctionProvider.notifier).getDayFromTimestamp(school['updateAt'])),
+        updateAt: Value(_ref.read(commonFunctionProvider.notifier).getDayFromTimestamp(school['updateAt'])),
       ));
 
   @override

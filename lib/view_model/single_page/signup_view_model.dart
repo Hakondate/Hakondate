@@ -10,16 +10,16 @@ import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 
 final signupProvider = StateNotifierProvider<SignupViewModel, SignupState>((ref) {
   final SchoolsLocalRepository schoolLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
-  return SignupViewModel(schoolLocalRepository, ref.read);
+  return SignupViewModel(schoolLocalRepository, ref);
 });
 
 class SignupViewModel extends StateNotifier<SignupState> {
-  SignupViewModel(this._schoolLocalRepository, this._reader) : super(SignupState()) {
+  SignupViewModel(this._schoolLocalRepository, this._ref) : super(SignupState()) {
     _initialize();
   }
 
   final SchoolsLocalRepository _schoolLocalRepository;
-  final Reader _reader;
+  final Ref _ref;
 
   Future<void> _initialize() async {
     final cache = state;
@@ -44,7 +44,7 @@ class SignupViewModel extends StateNotifier<SignupState> {
         throw const ParametersException('Do not allow Null parameter');
       }
 
-      await _reader(userProvider.notifier).createUser(
+      await _ref.read(userProvider.notifier).createUser(
         name: name,
         schoolId: schoolId,
         schoolYear: schoolYear,

@@ -20,16 +20,16 @@ import 'package:hakondate/util/exception/sign_in_exception.dart';
 final userProvider = StateNotifierProvider<UserViewModel, UserState>((ref) {
   final UsersLocalRepository usersLocalRepository = ref.watch(usersLocalRepositoryProvider);
   final SchoolsLocalRepository schoolsLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
-  return UserViewModel(schoolsLocalRepository, usersLocalRepository, ref.read);
+  return UserViewModel(schoolsLocalRepository, usersLocalRepository, ref);
 });
 
 class UserViewModel extends StateNotifier<UserState> {
-  UserViewModel(this._schoolsLocalRepository, this._usersLocalRepository, this._reader)
+  UserViewModel(this._schoolsLocalRepository, this._usersLocalRepository, this._ref)
       : super(const UserState());
 
   final SchoolsLocalRepository _schoolsLocalRepository;
   final UsersLocalRepository _usersLocalRepository;
-  final Reader _reader;
+  final Ref _ref;
 
   Future<bool> signIn() async {
     if (await _usersLocalRepository.count() == 0) return false;
@@ -111,7 +111,7 @@ class UserViewModel extends StateNotifier<UserState> {
   }) async {
     final int id = await _usersLocalRepository.add(name, schoolId, schoolYear);
     await changeCurrentUser(id);
-    await _reader(analyticsControllerProvider.notifier).logSignup();
+    await _ref.read(analyticsControllerProvider.notifier).logSignup();
 
     return id;
   }

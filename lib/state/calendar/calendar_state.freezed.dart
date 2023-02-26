@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'calendar_state.dart';
 
@@ -29,7 +29,8 @@ mixin _$CalendarState {
 abstract class $CalendarStateCopyWith<$Res> {
   factory $CalendarStateCopyWith(
           CalendarState value, $Res Function(CalendarState) then) =
-      _$CalendarStateCopyWithImpl<$Res>;
+      _$CalendarStateCopyWithImpl<$Res, CalendarState>;
+  @useResult
   $Res call(
       {DateTime oldestDay,
       DateTime latestDay,
@@ -37,34 +38,36 @@ abstract class $CalendarStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CalendarStateCopyWithImpl<$Res>
+class _$CalendarStateCopyWithImpl<$Res, $Val extends CalendarState>
     implements $CalendarStateCopyWith<$Res> {
   _$CalendarStateCopyWithImpl(this._value, this._then);
 
-  final CalendarState _value;
   // ignore: unused_field
-  final $Res Function(CalendarState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? oldestDay = freezed,
-    Object? latestDay = freezed,
-    Object? scrollController = freezed,
+    Object? oldestDay = null,
+    Object? latestDay = null,
+    Object? scrollController = null,
   }) {
     return _then(_value.copyWith(
-      oldestDay: oldestDay == freezed
+      oldestDay: null == oldestDay
           ? _value.oldestDay
           : oldestDay // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      latestDay: latestDay == freezed
+      latestDay: null == latestDay
           ? _value.latestDay
           : latestDay // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      scrollController: scrollController == freezed
+      scrollController: null == scrollController
           ? _value.scrollController
           : scrollController // ignore: cast_nullable_to_non_nullable
               as ScrollController,
-    ));
+    ) as $Val);
   }
 }
 
@@ -75,6 +78,7 @@ abstract class _$$_CalendarStateCopyWith<$Res>
           _$_CalendarState value, $Res Function(_$_CalendarState) then) =
       __$$_CalendarStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {DateTime oldestDay,
       DateTime latestDay,
@@ -83,31 +87,29 @@ abstract class _$$_CalendarStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_CalendarStateCopyWithImpl<$Res>
-    extends _$CalendarStateCopyWithImpl<$Res>
+    extends _$CalendarStateCopyWithImpl<$Res, _$_CalendarState>
     implements _$$_CalendarStateCopyWith<$Res> {
   __$$_CalendarStateCopyWithImpl(
       _$_CalendarState _value, $Res Function(_$_CalendarState) _then)
-      : super(_value, (v) => _then(v as _$_CalendarState));
+      : super(_value, _then);
 
-  @override
-  _$_CalendarState get _value => super._value as _$_CalendarState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? oldestDay = freezed,
-    Object? latestDay = freezed,
-    Object? scrollController = freezed,
+    Object? oldestDay = null,
+    Object? latestDay = null,
+    Object? scrollController = null,
   }) {
     return _then(_$_CalendarState(
-      oldestDay: oldestDay == freezed
+      oldestDay: null == oldestDay
           ? _value.oldestDay
           : oldestDay // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      latestDay: latestDay == freezed
+      latestDay: null == latestDay
           ? _value.latestDay
           : latestDay // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      scrollController: scrollController == freezed
+      scrollController: null == scrollController
           ? _value.scrollController
           : scrollController // ignore: cast_nullable_to_non_nullable
               as ScrollController,
@@ -150,21 +152,21 @@ class _$_CalendarState with DiagnosticableTreeMixin implements _CalendarState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CalendarState &&
-            const DeepCollectionEquality().equals(other.oldestDay, oldestDay) &&
-            const DeepCollectionEquality().equals(other.latestDay, latestDay) &&
-            const DeepCollectionEquality()
-                .equals(other.scrollController, scrollController));
+            (identical(other.oldestDay, oldestDay) ||
+                other.oldestDay == oldestDay) &&
+            (identical(other.latestDay, latestDay) ||
+                other.latestDay == latestDay) &&
+            (identical(other.scrollController, scrollController) ||
+                other.scrollController == scrollController));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(oldestDay),
-      const DeepCollectionEquality().hash(latestDay),
-      const DeepCollectionEquality().hash(scrollController));
+  int get hashCode =>
+      Object.hash(runtimeType, oldestDay, latestDay, scrollController);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_CalendarStateCopyWith<_$_CalendarState> get copyWith =>
       __$$_CalendarStateCopyWithImpl<_$_CalendarState>(this, _$identity);
 }
@@ -176,11 +178,11 @@ abstract class _CalendarState implements CalendarState {
       required final ScrollController scrollController}) = _$_CalendarState;
 
   @override
-  DateTime get oldestDay => throw _privateConstructorUsedError;
+  DateTime get oldestDay;
   @override
-  DateTime get latestDay => throw _privateConstructorUsedError;
+  DateTime get latestDay;
   @override
-  ScrollController get scrollController => throw _privateConstructorUsedError;
+  ScrollController get scrollController;
   @override
   @JsonKey(ignore: true)
   _$$_CalendarStateCopyWith<_$_CalendarState> get copyWith =>

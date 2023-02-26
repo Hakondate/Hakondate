@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'user_model.dart';
 
@@ -30,7 +30,8 @@ mixin _$UserModel {
 /// @nodoc
 abstract class $UserModelCopyWith<$Res> {
   factory $UserModelCopyWith(UserModel value, $Res Function(UserModel) then) =
-      _$UserModelCopyWithImpl<$Res>;
+      _$UserModelCopyWithImpl<$Res, UserModel>;
+  @useResult
   $Res call(
       {int id,
       String name,
@@ -42,53 +43,57 @@ abstract class $UserModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
+class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
+    implements $UserModelCopyWith<$Res> {
   _$UserModelCopyWithImpl(this._value, this._then);
 
-  final UserModel _value;
   // ignore: unused_field
-  final $Res Function(UserModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? schoolId = freezed,
-    Object? schoolYear = freezed,
+    Object? id = null,
+    Object? name = null,
+    Object? schoolId = null,
+    Object? schoolYear = null,
     Object? slns = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      schoolId: schoolId == freezed
+      schoolId: null == schoolId
           ? _value.schoolId
           : schoolId // ignore: cast_nullable_to_non_nullable
               as int,
-      schoolYear: schoolYear == freezed
+      schoolYear: null == schoolYear
           ? _value.schoolYear
           : schoolYear // ignore: cast_nullable_to_non_nullable
               as int,
-      slns: slns == freezed
+      slns: freezed == slns
           ? _value.slns
           : slns // ignore: cast_nullable_to_non_nullable
               as NutrientsModel?,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $NutrientsModelCopyWith<$Res>? get slns {
     if (_value.slns == null) {
       return null;
     }
 
     return $NutrientsModelCopyWith<$Res>(_value.slns!, (value) {
-      return _then(_value.copyWith(slns: value));
+      return _then(_value.copyWith(slns: value) as $Val);
     });
   }
 }
@@ -99,6 +104,7 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
           _$_UserModel value, $Res Function(_$_UserModel) then) =
       __$$_UserModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int id,
       String name,
@@ -111,41 +117,40 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
+class __$$_UserModelCopyWithImpl<$Res>
+    extends _$UserModelCopyWithImpl<$Res, _$_UserModel>
     implements _$$_UserModelCopyWith<$Res> {
   __$$_UserModelCopyWithImpl(
       _$_UserModel _value, $Res Function(_$_UserModel) _then)
-      : super(_value, (v) => _then(v as _$_UserModel));
+      : super(_value, _then);
 
-  @override
-  _$_UserModel get _value => super._value as _$_UserModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? schoolId = freezed,
-    Object? schoolYear = freezed,
+    Object? id = null,
+    Object? name = null,
+    Object? schoolId = null,
+    Object? schoolYear = null,
     Object? slns = freezed,
   }) {
     return _then(_$_UserModel(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      schoolId: schoolId == freezed
+      schoolId: null == schoolId
           ? _value.schoolId
           : schoolId // ignore: cast_nullable_to_non_nullable
               as int,
-      schoolYear: schoolYear == freezed
+      schoolYear: null == schoolYear
           ? _value.schoolYear
           : schoolYear // ignore: cast_nullable_to_non_nullable
               as int,
-      slns: slns == freezed
+      slns: freezed == slns
           ? _value.slns
           : slns // ignore: cast_nullable_to_non_nullable
               as NutrientsModel?,
@@ -188,25 +193,22 @@ class _$_UserModel extends _UserModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserModel &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.schoolId, schoolId) &&
-            const DeepCollectionEquality()
-                .equals(other.schoolYear, schoolYear) &&
-            const DeepCollectionEquality().equals(other.slns, slns));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.schoolId, schoolId) ||
+                other.schoolId == schoolId) &&
+            (identical(other.schoolYear, schoolYear) ||
+                other.schoolYear == schoolYear) &&
+            (identical(other.slns, slns) || other.slns == slns));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(schoolId),
-      const DeepCollectionEquality().hash(schoolYear),
-      const DeepCollectionEquality().hash(slns));
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, schoolId, schoolYear, slns);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_UserModelCopyWith<_$_UserModel> get copyWith =>
       __$$_UserModelCopyWithImpl<_$_UserModel>(this, _$identity);
 }
@@ -221,15 +223,15 @@ abstract class _UserModel extends UserModel {
   const _UserModel._() : super._();
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override // ニックネーム
-  int get schoolId => throw _privateConstructorUsedError;
+  int get schoolId;
   @override // 学校ID
-  int get schoolYear => throw _privateConstructorUsedError;
+  int get schoolYear;
   @override // 学年
-  NutrientsModel? get slns => throw _privateConstructorUsedError;
+  NutrientsModel? get slns;
   @override
   @JsonKey(ignore: true)
   _$$_UserModelCopyWith<_$_UserModel> get copyWith =>
