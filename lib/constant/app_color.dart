@@ -10,6 +10,7 @@ class _Brand {
   final Color primary = const Color(0xFFFFFFFF);
   final Color secondary = const Color(0xFFFFAB40);
   final Color secondaryLight = const Color(0xFFFFC966);
+  final Color tertiary = const Color(0xFF9ACCE2);
 }
 
 class _Text {

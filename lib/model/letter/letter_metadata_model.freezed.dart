@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$LetterMetadataModel {
   String get title => throw _privateConstructorUsedError;
   String get path => throw _privateConstructorUsedError;
-  int get lunchBlock => throw _privateConstructorUsedError;
+  int get parentId => throw _privateConstructorUsedError;
   DateTime get updateAt => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -32,7 +32,7 @@ abstract class $LetterMetadataModelCopyWith<$Res> {
           LetterMetadataModel value, $Res Function(LetterMetadataModel) then) =
       _$LetterMetadataModelCopyWithImpl<$Res, LetterMetadataModel>;
   @useResult
-  $Res call({String title, String path, int lunchBlock, DateTime updateAt});
+  $Res call({String title, String path, int parentId, DateTime updateAt});
 }
 
 /// @nodoc
@@ -50,7 +50,7 @@ class _$LetterMetadataModelCopyWithImpl<$Res, $Val extends LetterMetadataModel>
   $Res call({
     Object? title = null,
     Object? path = null,
-    Object? lunchBlock = null,
+    Object? parentId = null,
     Object? updateAt = null,
   }) {
     return _then(_value.copyWith(
@@ -62,9 +62,9 @@ class _$LetterMetadataModelCopyWithImpl<$Res, $Val extends LetterMetadataModel>
           ? _value.path
           : path // ignore: cast_nullable_to_non_nullable
               as String,
-      lunchBlock: null == lunchBlock
-          ? _value.lunchBlock
-          : lunchBlock // ignore: cast_nullable_to_non_nullable
+      parentId: null == parentId
+          ? _value.parentId
+          : parentId // ignore: cast_nullable_to_non_nullable
               as int,
       updateAt: null == updateAt
           ? _value.updateAt
@@ -82,7 +82,7 @@ abstract class _$$_LetterMetadataModelCopyWith<$Res>
       __$$_LetterMetadataModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String title, String path, int lunchBlock, DateTime updateAt});
+  $Res call({String title, String path, int parentId, DateTime updateAt});
 }
 
 /// @nodoc
@@ -98,7 +98,7 @@ class __$$_LetterMetadataModelCopyWithImpl<$Res>
   $Res call({
     Object? title = null,
     Object? path = null,
-    Object? lunchBlock = null,
+    Object? parentId = null,
     Object? updateAt = null,
   }) {
     return _then(_$_LetterMetadataModel(
@@ -110,9 +110,9 @@ class __$$_LetterMetadataModelCopyWithImpl<$Res>
           ? _value.path
           : path // ignore: cast_nullable_to_non_nullable
               as String,
-      lunchBlock: null == lunchBlock
-          ? _value.lunchBlock
-          : lunchBlock // ignore: cast_nullable_to_non_nullable
+      parentId: null == parentId
+          ? _value.parentId
+          : parentId // ignore: cast_nullable_to_non_nullable
               as int,
       updateAt: null == updateAt
           ? _value.updateAt
@@ -128,7 +128,7 @@ class _$_LetterMetadataModel implements _LetterMetadataModel {
   const _$_LetterMetadataModel(
       {required this.title,
       required this.path,
-      required this.lunchBlock,
+      required this.parentId,
       required this.updateAt});
 
   @override
@@ -136,13 +136,13 @@ class _$_LetterMetadataModel implements _LetterMetadataModel {
   @override
   final String path;
   @override
-  final int lunchBlock;
+  final int parentId;
   @override
   final DateTime updateAt;
 
   @override
   String toString() {
-    return 'LetterMetadataModel(title: $title, path: $path, lunchBlock: $lunchBlock, updateAt: $updateAt)';
+    return 'LetterMetadataModel(title: $title, path: $path, parentId: $parentId, updateAt: $updateAt)';
   }
 
   @override
@@ -152,15 +152,14 @@ class _$_LetterMetadataModel implements _LetterMetadataModel {
             other is _$_LetterMetadataModel &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.path, path) || other.path == path) &&
-            (identical(other.lunchBlock, lunchBlock) ||
-                other.lunchBlock == lunchBlock) &&
+            (identical(other.parentId, parentId) ||
+                other.parentId == parentId) &&
             (identical(other.updateAt, updateAt) ||
                 other.updateAt == updateAt));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, title, path, lunchBlock, updateAt);
+  int get hashCode => Object.hash(runtimeType, title, path, parentId, updateAt);
 
   @JsonKey(ignore: true)
   @override
@@ -174,7 +173,7 @@ abstract class _LetterMetadataModel implements LetterMetadataModel {
   const factory _LetterMetadataModel(
       {required final String title,
       required final String path,
-      required final int lunchBlock,
+      required final int parentId,
       required final DateTime updateAt}) = _$_LetterMetadataModel;
 
   @override
@@ -182,7 +181,7 @@ abstract class _LetterMetadataModel implements LetterMetadataModel {
   @override
   String get path;
   @override
-  int get lunchBlock;
+  int get parentId;
   @override
   DateTime get updateAt;
   @override

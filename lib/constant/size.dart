@@ -29,6 +29,10 @@ class PaddingSize {
   static const double buttonHorizontalLarge = 30.0; // ボタンの垂直方向の大きなマージン
 }
 
+class BorderSize {
+  static const double normal = 2.0;           // 標準の太さ
+}
+
 class IconSize {
   static const double help = 20.0;            // ヘルプ用
   static const double drawer = 24.0;          // ドロワー用
