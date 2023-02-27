@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:hakondate/model/letter/letter_metadata_model.dart';
 import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/repository/local/sqlite/schools_local_repository.dart';
@@ -36,11 +37,27 @@ class LetterViewModel extends StateNotifier<LetterState> {
       ],
       status: LetterConnectionStatus.loading,
     );
-    final List<LetterMetadataModel> addLetters = await _lettersRemoteRepository.getList();
+
+    try {
+      final List<LetterMetadataModel> addLetters = await _lettersRemoteRepository.getList();
+      state = state.copyWith(
+        letters: [...currentLetters, ...addLetters],
+        status: LetterConnectionStatus.done,
+      );
+    } on Exception catch (_) {
+      state = state.copyWith(
+        letters: currentLetters,
+        status: LetterConnectionStatus.done,
+      );
+    }
+  }
+
+  Future<void> reloadLetters() async {
+    _lettersRemoteRepository.resetPageToken();
     state = state.copyWith(
-      letters: [...currentLetters, ...addLetters],
-      status: LetterConnectionStatus.done,
+      letters: [],
     );
+    await getLetters();
   }
 
   Future<List<String>> getSchoolLabels(int parentId) async {

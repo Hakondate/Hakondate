@@ -1,7 +1,8 @@
 import 'dart:typed_data';
 
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/model/letter/letter_metadata_model.dart';
@@ -17,6 +18,7 @@ final lettersRemoteRepositoryProvider = Provider<LettersRemoteRepository>((ref) 
 abstract class LettersRemoteRepositoryBase {
   Future<List<LetterMetadataModel>> getList();
   Future<Uint8List> get({required String path});
+  void resetPageToken();
 }
 
 class LettersRemoteRepository extends StateNotifier<LettersRemoteRepositoryModel>
@@ -77,4 +79,10 @@ class LettersRemoteRepository extends StateNotifier<LettersRemoteRepositoryModel
 
     return pdfData;
   }
+
+  @override
+  void resetPageToken() => state = state.copyWith(
+    pageToken: null,
+    isEndListing: false,
+  );
 }
