@@ -66,7 +66,7 @@ class RecipePDF extends ConsumerWidget {
                 Text(
                   '読み込みに失敗しました',
                   style: TextStyle(
-                    fontSize: 24.0,
+                    fontSize: FontSize.status,
                     fontWeight: FontWeight.bold,
                     color: AppColor.text.primary,
                   ),

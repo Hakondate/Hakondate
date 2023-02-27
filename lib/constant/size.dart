@@ -4,6 +4,7 @@ class FontSize {
   static const double body = 16.0;        // 本文
   static const double label = 18.0;       // ラベル内
   static const double subheading = 20.0;  // 副見出し
+  static const double status = 24.0;
 }
 
 class SpaceSize {

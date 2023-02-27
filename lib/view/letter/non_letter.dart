@@ -25,7 +25,7 @@ class NonLetter extends StatelessWidget {
           Text(
             'お便りが見つかりません...',
             style: TextStyle(
-              fontSize: 24.0,
+              fontSize: FontSize.status,
               fontWeight: FontWeight.bold,
               color: AppColor.text.primary,
             ),
@@ -38,6 +38,7 @@ class NonLetter extends StatelessWidget {
                 child: Text(
                   '更新する',
                   style: TextStyle(
+                    fontSize: FontSize.body,
                     color: AppColor.text.blue,
                   ),
                 ),

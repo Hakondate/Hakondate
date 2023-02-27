@@ -47,14 +47,14 @@ class LettersRemoteRepository extends StateNotifier<LettersRemoteRepositoryModel
 
       await Future.forEach(listResult.items, (Reference item) async {
         final FullMetadata metadata = await item.getMetadata();
-        // final int parentId = int.parse(metadata.customMetadata!['schoolId'] ?? '-1');
-        //
-        // if (parentId < 0) throw FirestorageException("${metadata.name}'s 'schoolId' is null");
+        final int parentId = int.parse(metadata.customMetadata!['schoolId'] ?? '-1');
+
+        if (parentId < 0) throw FirestorageException("${metadata.name}'s 'schoolId' is null");
 
         letters.add(LetterMetadataModel(
           title: metadata.name,
           path: metadata.fullPath,
-          parentId: 1,
+          parentId: parentId,
           updateAt: metadata.updated ?? DateTime(2019, 8, 1),
         ));
       });
