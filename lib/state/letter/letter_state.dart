@@ -10,6 +10,12 @@ part 'letter_state.freezed.dart';
 class LetterState with _$LetterState {
   const factory LetterState({
     @Default(<LetterMetadataModel>[]) List<LetterMetadataModel> letters,
-    LetterMetadataModel? letter,
+    LetterMetadataModelData? letter,
+    @Default(LetterConnectionStatus.done) LetterConnectionStatus status,
   }) = _LetterState;
+}
+
+enum LetterConnectionStatus {
+  loading,
+  done;
 }

@@ -20,6 +20,7 @@ dependencies:
   table_calendar: ^3.0.4
   flutter_svg: ^2.0.1
   flutter_pdfview: ^1.2.2
+  shimmer: ^2.0.0
 
   # 状態管理関連
   flutter_riverpod: ^2.2.0

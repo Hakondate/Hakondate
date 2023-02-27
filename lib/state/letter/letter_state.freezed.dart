@@ -17,7 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$LetterState {
   List<LetterMetadataModel> get letters => throw _privateConstructorUsedError;
-  LetterMetadataModel? get letter => throw _privateConstructorUsedError;
+  LetterMetadataModelData? get letter => throw _privateConstructorUsedError;
+  LetterConnectionStatus get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LetterStateCopyWith<LetterState> get copyWith =>
@@ -30,9 +31,10 @@ abstract class $LetterStateCopyWith<$Res> {
           LetterState value, $Res Function(LetterState) then) =
       _$LetterStateCopyWithImpl<$Res, LetterState>;
   @useResult
-  $Res call({List<LetterMetadataModel> letters, LetterMetadataModel? letter});
-
-  $LetterMetadataModelCopyWith<$Res>? get letter;
+  $Res call(
+      {List<LetterMetadataModel> letters,
+      LetterMetadataModelData? letter,
+      LetterConnectionStatus status});
 }
 
 /// @nodoc
@@ -50,6 +52,7 @@ class _$LetterStateCopyWithImpl<$Res, $Val extends LetterState>
   $Res call({
     Object? letters = null,
     Object? letter = freezed,
+    Object? status = null,
   }) {
     return _then(_value.copyWith(
       letters: null == letters
@@ -59,20 +62,12 @@ class _$LetterStateCopyWithImpl<$Res, $Val extends LetterState>
       letter: freezed == letter
           ? _value.letter
           : letter // ignore: cast_nullable_to_non_nullable
-              as LetterMetadataModel?,
+              as LetterMetadataModelData?,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as LetterConnectionStatus,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $LetterMetadataModelCopyWith<$Res>? get letter {
-    if (_value.letter == null) {
-      return null;
-    }
-
-    return $LetterMetadataModelCopyWith<$Res>(_value.letter!, (value) {
-      return _then(_value.copyWith(letter: value) as $Val);
-    });
   }
 }
 
@@ -84,10 +79,10 @@ abstract class _$$_LetterStateCopyWith<$Res>
       __$$_LetterStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<LetterMetadataModel> letters, LetterMetadataModel? letter});
-
-  @override
-  $LetterMetadataModelCopyWith<$Res>? get letter;
+  $Res call(
+      {List<LetterMetadataModel> letters,
+      LetterMetadataModelData? letter,
+      LetterConnectionStatus status});
 }
 
 /// @nodoc
@@ -103,6 +98,7 @@ class __$$_LetterStateCopyWithImpl<$Res>
   $Res call({
     Object? letters = null,
     Object? letter = freezed,
+    Object? status = null,
   }) {
     return _then(_$_LetterState(
       letters: null == letters
@@ -112,7 +108,11 @@ class __$$_LetterStateCopyWithImpl<$Res>
       letter: freezed == letter
           ? _value.letter
           : letter // ignore: cast_nullable_to_non_nullable
-              as LetterMetadataModel?,
+              as LetterMetadataModelData?,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as LetterConnectionStatus,
     ));
   }
 }
@@ -122,7 +122,8 @@ class __$$_LetterStateCopyWithImpl<$Res>
 class _$_LetterState with DiagnosticableTreeMixin implements _LetterState {
   const _$_LetterState(
       {final List<LetterMetadataModel> letters = const <LetterMetadataModel>[],
-      this.letter})
+      this.letter,
+      this.status = LetterConnectionStatus.done})
       : _letters = letters;
 
   final List<LetterMetadataModel> _letters;
@@ -135,11 +136,14 @@ class _$_LetterState with DiagnosticableTreeMixin implements _LetterState {
   }
 
   @override
-  final LetterMetadataModel? letter;
+  final LetterMetadataModelData? letter;
+  @override
+  @JsonKey()
+  final LetterConnectionStatus status;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'LetterState(letters: $letters, letter: $letter)';
+    return 'LetterState(letters: $letters, letter: $letter, status: $status)';
   }
 
   @override
@@ -148,7 +152,8 @@ class _$_LetterState with DiagnosticableTreeMixin implements _LetterState {
     properties
       ..add(DiagnosticsProperty('type', 'LetterState'))
       ..add(DiagnosticsProperty('letters', letters))
-      ..add(DiagnosticsProperty('letter', letter));
+      ..add(DiagnosticsProperty('letter', letter))
+      ..add(DiagnosticsProperty('status', status));
   }
 
   @override
@@ -157,12 +162,16 @@ class _$_LetterState with DiagnosticableTreeMixin implements _LetterState {
         (other.runtimeType == runtimeType &&
             other is _$_LetterState &&
             const DeepCollectionEquality().equals(other._letters, _letters) &&
-            (identical(other.letter, letter) || other.letter == letter));
+            const DeepCollectionEquality().equals(other.letter, letter) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_letters), letter);
+      runtimeType,
+      const DeepCollectionEquality().hash(_letters),
+      const DeepCollectionEquality().hash(letter),
+      status);
 
   @JsonKey(ignore: true)
   @override
@@ -174,12 +183,15 @@ class _$_LetterState with DiagnosticableTreeMixin implements _LetterState {
 abstract class _LetterState implements LetterState {
   const factory _LetterState(
       {final List<LetterMetadataModel> letters,
-      final LetterMetadataModel? letter}) = _$_LetterState;
+      final LetterMetadataModelData? letter,
+      final LetterConnectionStatus status}) = _$_LetterState;
 
   @override
   List<LetterMetadataModel> get letters;
   @override
-  LetterMetadataModel? get letter;
+  LetterMetadataModelData? get letter;
+  @override
+  LetterConnectionStatus get status;
   @override
   @JsonKey(ignore: true)
   _$$_LetterStateCopyWith<_$_LetterState> get copyWith =>

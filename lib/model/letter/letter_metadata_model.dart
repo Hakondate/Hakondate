@@ -4,10 +4,23 @@ part 'letter_metadata_model.freezed.dart';
 
 @freezed
 class LetterMetadataModel with _$LetterMetadataModel {
-  const factory LetterMetadataModel({
+  factory LetterMetadataModel({
     required String title,
     required String path,
     required int parentId,
     required DateTime updateAt,
-  }) = _LetterMetadataModel;
+  }) => LetterMetadataModel.data(
+    title: title,
+    path: path,
+    parentId: parentId,
+    updateAt: updateAt,
+  );
+
+  const factory LetterMetadataModel.data({
+    required String title,
+    required String path,
+    required int parentId,
+    required DateTime updateAt,
+  }) = LetterMetadataModelData;
+  const factory LetterMetadataModel.loading() = LetterMetadataModelLoading;
 }

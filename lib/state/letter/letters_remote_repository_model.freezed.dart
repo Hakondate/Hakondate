@@ -16,8 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$LettersRemoteRepositoryModel {
+  int get maxResults => throw _privateConstructorUsedError;
   String? get pageToken => throw _privateConstructorUsedError;
-  bool get isNotNextPage => throw _privateConstructorUsedError;
+  bool get isEndListing => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LettersRemoteRepositoryModelCopyWith<LettersRemoteRepositoryModel>
@@ -32,7 +33,7 @@ abstract class $LettersRemoteRepositoryModelCopyWith<$Res> {
       _$LettersRemoteRepositoryModelCopyWithImpl<$Res,
           LettersRemoteRepositoryModel>;
   @useResult
-  $Res call({String? pageToken, bool isNotNextPage});
+  $Res call({int maxResults, String? pageToken, bool isEndListing});
 }
 
 /// @nodoc
@@ -49,17 +50,22 @@ class _$LettersRemoteRepositoryModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? maxResults = null,
     Object? pageToken = freezed,
-    Object? isNotNextPage = null,
+    Object? isEndListing = null,
   }) {
     return _then(_value.copyWith(
+      maxResults: null == maxResults
+          ? _value.maxResults
+          : maxResults // ignore: cast_nullable_to_non_nullable
+              as int,
       pageToken: freezed == pageToken
           ? _value.pageToken
           : pageToken // ignore: cast_nullable_to_non_nullable
               as String?,
-      isNotNextPage: null == isNotNextPage
-          ? _value.isNotNextPage
-          : isNotNextPage // ignore: cast_nullable_to_non_nullable
+      isEndListing: null == isEndListing
+          ? _value.isEndListing
+          : isEndListing // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -74,7 +80,7 @@ abstract class _$$_LettersRemoteRepositoryModelCopyWith<$Res>
       __$$_LettersRemoteRepositoryModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? pageToken, bool isNotNextPage});
+  $Res call({int maxResults, String? pageToken, bool isEndListing});
 }
 
 /// @nodoc
@@ -90,17 +96,22 @@ class __$$_LettersRemoteRepositoryModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? maxResults = null,
     Object? pageToken = freezed,
-    Object? isNotNextPage = null,
+    Object? isEndListing = null,
   }) {
     return _then(_$_LettersRemoteRepositoryModel(
+      maxResults: null == maxResults
+          ? _value.maxResults
+          : maxResults // ignore: cast_nullable_to_non_nullable
+              as int,
       pageToken: freezed == pageToken
           ? _value.pageToken
           : pageToken // ignore: cast_nullable_to_non_nullable
               as String?,
-      isNotNextPage: null == isNotNextPage
-          ? _value.isNotNextPage
-          : isNotNextPage // ignore: cast_nullable_to_non_nullable
+      isEndListing: null == isEndListing
+          ? _value.isEndListing
+          : isEndListing // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -110,17 +121,19 @@ class __$$_LettersRemoteRepositoryModelCopyWithImpl<$Res>
 
 class _$_LettersRemoteRepositoryModel implements _LettersRemoteRepositoryModel {
   const _$_LettersRemoteRepositoryModel(
-      {this.pageToken, this.isNotNextPage = false});
+      {required this.maxResults, this.pageToken, this.isEndListing = false});
 
+  @override
+  final int maxResults;
   @override
   final String? pageToken;
   @override
   @JsonKey()
-  final bool isNotNextPage;
+  final bool isEndListing;
 
   @override
   String toString() {
-    return 'LettersRemoteRepositoryModel(pageToken: $pageToken, isNotNextPage: $isNotNextPage)';
+    return 'LettersRemoteRepositoryModel(maxResults: $maxResults, pageToken: $pageToken, isEndListing: $isEndListing)';
   }
 
   @override
@@ -128,14 +141,17 @@ class _$_LettersRemoteRepositoryModel implements _LettersRemoteRepositoryModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LettersRemoteRepositoryModel &&
+            (identical(other.maxResults, maxResults) ||
+                other.maxResults == maxResults) &&
             (identical(other.pageToken, pageToken) ||
                 other.pageToken == pageToken) &&
-            (identical(other.isNotNextPage, isNotNextPage) ||
-                other.isNotNextPage == isNotNextPage));
+            (identical(other.isEndListing, isEndListing) ||
+                other.isEndListing == isEndListing));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, pageToken, isNotNextPage);
+  int get hashCode =>
+      Object.hash(runtimeType, maxResults, pageToken, isEndListing);
 
   @JsonKey(ignore: true)
   @override
@@ -148,13 +164,16 @@ class _$_LettersRemoteRepositoryModel implements _LettersRemoteRepositoryModel {
 abstract class _LettersRemoteRepositoryModel
     implements LettersRemoteRepositoryModel {
   const factory _LettersRemoteRepositoryModel(
-      {final String? pageToken,
-      final bool isNotNextPage}) = _$_LettersRemoteRepositoryModel;
+      {required final int maxResults,
+      final String? pageToken,
+      final bool isEndListing}) = _$_LettersRemoteRepositoryModel;
 
+  @override
+  int get maxResults;
   @override
   String? get pageToken;
   @override
-  bool get isNotNextPage;
+  bool get isEndListing;
   @override
   @JsonKey(ignore: true)
   _$$_LettersRemoteRepositoryModelCopyWith<_$_LettersRemoteRepositoryModel>

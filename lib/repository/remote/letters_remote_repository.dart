@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/model/letter/letter_metadata_model.dart';
@@ -20,38 +21,52 @@ abstract class LettersRemoteRepositoryBase {
 
 class LettersRemoteRepository extends StateNotifier<LettersRemoteRepositoryModel>
     implements LettersRemoteRepositoryBase {
-  LettersRemoteRepository(this._db) : super(const LettersRemoteRepositoryModel());
+  LettersRemoteRepository(this._db) : super(const LettersRemoteRepositoryModel(maxResults: 20));
 
   final Reference _db;
 
   @override
   Future<List<LetterMetadataModel>> getList() async {
     List<LetterMetadataModel> letters = [];
-    final ListResult listResult = await _db.list(ListOptions(
-      maxResults: 30,
-      pageToken: state.pageToken,
-    ));
-
-    state = state.copyWith(
-      pageToken: listResult.nextPageToken,
-      isNotNextPage: listResult.nextPageToken == null,
-    );
-
-    await Future.forEach(listResult.items, (Reference item) async {
-      final FullMetadata metadata = await item.getMetadata();
-      // final int parentId = int.parse(metadata.customMetadata!['schoolId'] ?? '-1');
-      //
-      // if (parentId < 0) throw FirestorageException("${metadata.name}'s 'schoolId' is null");
-
-      letters.add(LetterMetadataModel(
-        title: metadata.name,
-        path: metadata.fullPath,
-        parentId: 1,
-        updateAt: metadata.updated ?? DateTime(2019, 8, 1),
+    try {
+      final ListResult listResult = await _db.list(ListOptions(
+        maxResults: state.maxResults,
+        pageToken: state.pageToken,
       ));
-    });
+      state = state.copyWith(
+        pageToken: listResult.nextPageToken,
+      );
 
-    return letters;
+      if (state.pageToken == null) {
+        state = state.copyWith(
+          isEndListing: true,
+        );
+      }
+
+      await Future.forEach(listResult.items, (Reference item) async {
+        final FullMetadata metadata = await item.getMetadata();
+        // final int parentId = int.parse(metadata.customMetadata!['schoolId'] ?? '-1');
+        //
+        // if (parentId < 0) throw FirestorageException("${metadata.name}'s 'schoolId' is null");
+
+        letters.add(LetterMetadataModel(
+          title: metadata.name,
+          path: metadata.fullPath,
+          parentId: 1,
+          updateAt: metadata.updated ?? DateTime(2019, 8, 1),
+        ));
+      });
+
+      return letters;
+    } on FirebaseException catch (error, stack) {
+      debugPrint(error.toString());
+      debugPrint(stack.toString());
+      rethrow;
+    } on FirestorageException catch (error, stack) {
+      debugPrint(error.toString());
+      debugPrint(stack.toString());
+      rethrow;
+    }
   }
 
   @override

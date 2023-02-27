@@ -23,10 +23,23 @@ class LetterViewModel extends StateNotifier<LetterState> {
   final SchoolsLocalRepository _schoolsLocalRepository;
 
   Future<void> getLetters() async {
-    if (isNotNextPage()) return;
+    if (isEndListing()) return;
 
+    final List<LetterMetadataModel> currentLetters = state.letters;
     state = state.copyWith(
-      letters: [...state.letters, ...await _lettersRemoteRepository.getList()],
+      letters: [
+        ...state.letters,
+        ...List.filled(
+          _lettersRemoteRepository.state.maxResults,
+          const LetterMetadataModel.loading(),
+        ),
+      ],
+      status: LetterConnectionStatus.loading,
+    );
+    final List<LetterMetadataModel> addLetters = await _lettersRemoteRepository.getList();
+    state = state.copyWith(
+      letters: [...currentLetters, ...addLetters],
+      status: LetterConnectionStatus.done,
     );
   }
 
@@ -36,9 +49,9 @@ class LetterViewModel extends StateNotifier<LetterState> {
     return schools.map((school) => school.name.replaceAll('学校', '')).toList();
   }
 
-  bool isNotNextPage() => _lettersRemoteRepository.state.isNotNextPage;
+  bool isEndListing() => _lettersRemoteRepository.state.isEndListing;
 
-  void transitionLetterPDF({required LetterMetadataModel letter}) {
+  void transitionLetterPDF({required LetterMetadataModelData letter}) {
     state = state.copyWith(letter: letter);
     routemaster.push('/home/letter/${state.letter!.title}');
   }
