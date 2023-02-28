@@ -8,20 +8,22 @@ import 'package:hakondate/repository/local/sqlite/schools_local_repository.dart'
 import 'package:hakondate/repository/remote/letters_remote_repository.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/letter/letter_state.dart';
+import 'package:hakondate/util/analytics_controller.dart';
 
 final letterProvider = StateNotifierProvider<LetterViewModel, LetterState>((ref) {
   final LettersRemoteRepository lettersRemoteRepository = ref.watch(lettersRemoteRepositoryProvider);
   final SchoolsLocalRepository schoolsLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
-  return LetterViewModel(lettersRemoteRepository, schoolsLocalRepository);
+  return LetterViewModel(lettersRemoteRepository, schoolsLocalRepository, ref);
 });
 
 class LetterViewModel extends StateNotifier<LetterState> {
-  LetterViewModel(this._lettersRemoteRepository, this._schoolsLocalRepository) : super(const LetterState()) {
+  LetterViewModel(this._lettersRemoteRepository, this._schoolsLocalRepository, this._ref) : super(const LetterState()) {
     getLetters();
   }
 
   final LettersRemoteRepository _lettersRemoteRepository;
   final SchoolsLocalRepository _schoolsLocalRepository;
+  final Ref _ref;
 
   Future<void> getLetters() async {
     if (isEndListing()) return;
@@ -73,6 +75,8 @@ class LetterViewModel extends StateNotifier<LetterState> {
     routemaster.push('/home/letter/${state.letter!.title}');
   }
 
-  Future<Uint8List> getLetterPDF({required String path}) async =>
-      await _lettersRemoteRepository.get(path: path);
+  Future<Uint8List> getLetterPDF({required String path}) async {
+    await _ref.read(analyticsControllerProvider.notifier).logViewLetter(path);
+    return await _lettersRemoteRepository.get(path: path);
+  }
 }
