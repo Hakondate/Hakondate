@@ -35,6 +35,6 @@ jobs:
             git add .; \
             git commit -m '[refactor]Ran OSS Licenses generator and import sorter'; \
             git config pull.rebase false; \
-            git pull origin ${{github.head_ref}}; \
+            git pull; \
             git push origin ${{github.head_ref}}; \
           fi
