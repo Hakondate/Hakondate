@@ -35,6 +35,6 @@ jobs:
           if (git diff --shortstat | grep '[0-9]'); then \
             git add .; \
             git commit -m '[refactor]Ran OSS Licenses generator and import sorter'; \
-            git pull; \
-            git push origin HEAD:${GITHUB_REF}; \
+            git pull origin ${{github.head_ref}}; \
+            git push origin ${{github.head_ref}}; \
           fi
