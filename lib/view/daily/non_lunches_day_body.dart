@@ -30,7 +30,7 @@ class NonLunchesDayBody extends StatelessWidget {
           Text(
             text,
             style: TextStyle(
-              fontSize: 24.0,
+              fontSize: FontSize.status,
               fontWeight: FontWeight.bold,
               color: AppColor.text.primary,
             ),
