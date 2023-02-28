@@ -29,12 +29,13 @@ jobs:
 
       - name: 'Commit and push changes'
         run: |
-          git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
+#          git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
           git config user.name github-actions
           git config user.email github-actions@github.com
           git status
           if (git diff --shortstat | grep '[0-9]'); then \
             git add .; \
             git commit -m '[refactor]Ran OSS Licenses generator and import sorter'; \
+            git pull; \
             git push origin HEAD:${GITHUB_REF}; \
           fi
