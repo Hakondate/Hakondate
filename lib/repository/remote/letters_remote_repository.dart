@@ -47,13 +47,14 @@ class LettersRemoteRepository extends StateNotifier<LettersRemoteRepositoryModel
 
       await Future.forEach(listResult.items, (Reference item) async {
         final FullMetadata metadata = await item.getMetadata();
-        final int parentId = int.parse(metadata.customMetadata!['schoolId'] ?? '-1');
+        final RegExp regExp = RegExp(r'pfx_\d+_schoolId_(\d+)_');
+        final int parentId = int.parse(regExp.firstMatch(metadata.name)?.group(1) ?? '-1');
 
         if (parentId < 0) throw FirestorageException("${metadata.name}'s 'schoolId' is null");
 
         letters.add(LetterMetadataModel(
-          title: metadata.name,
-          path: metadata.fullPath,
+          title: metadata.name.replaceFirst(RegExp(r'pfx_\d+_schoolId_\d+_'), ''),
+          path: metadata.fullPath.replaceFirst('letters/', ''),
           parentId: parentId,
           updateAt: metadata.updated ?? DateTime(2019, 8, 1),
         ));
@@ -73,7 +74,7 @@ class LettersRemoteRepository extends StateNotifier<LettersRemoteRepositoryModel
 
   @override
   Future<Uint8List> get({required String path}) async {
-    final Uint8List? pdfData = await _db.child(path.replaceAll('letters/', '')).getData();
+    final Uint8List? pdfData = await _db.child(path).getData();
 
     if (pdfData == null) throw FirestorageException("'$path' is no data");
 
