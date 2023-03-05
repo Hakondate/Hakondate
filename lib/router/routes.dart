@@ -22,6 +22,8 @@ import 'package:hakondate/view/signup/signup.dart';
 import 'package:hakondate/view/splash/splash.dart';
 import 'package:hakondate/view/terms/drawer_terms.dart';
 import 'package:hakondate/view/terms/terms.dart';
+import 'package:hakondate/view/user_settings/user_settings.dart';
+import 'package:hakondate/view/user_settings/user_settings_detail.dart';
 
 final RoutemasterDelegate routemaster = RoutemasterDelegate(
   routesBuilder: (BuildContext context) => RouteMap(
@@ -31,14 +33,14 @@ final RoutemasterDelegate routemaster = RoutemasterDelegate(
       '/terms': (_) => const MaterialPage<dynamic>(child: Terms()),
       '/signup': (_) => MaterialPage<dynamic>(child: Signup()),
       '/home': (_) => const TabPage(
-        child: AppBottomNavigationBar(),
-        paths: <String>[
-          '/home/daily',
-          '/home/recipes',
-          '/home/dictionary',
-          '/home/letter',
-        ],
-      ),
+            child: AppBottomNavigationBar(),
+            paths: <String>[
+              '/home/daily',
+              '/home/recipes',
+              '/home/dictionary',
+              '/home/letter',
+            ],
+          ),
       '/home/daily': (_) => const MaterialPage<dynamic>(child: Daily()),
       '/home/daily/dish': (_) => const MaterialPage<dynamic>(child: Dish()),
       '/home/calendar': (_) => const FadeUpPage(child: Calendar()),
@@ -48,18 +50,23 @@ final RoutemasterDelegate routemaster = RoutemasterDelegate(
       '/home/dictionary/:group': (_) => const MaterialPage<dynamic>(child: DictionaryGroupList()),
       '/home/dictionary_item/:id': (_) => const FadeUpPage(child: DictionaryItem()),
       '/home/letter': (_) => const MaterialPage<dynamic>(child: Letter()),
-      '/home/letter/:title': (_) => const MaterialPage<dynamic>(child: LetterPDF()),
-      '/home/user_settings': (_) => MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
-      '/home/origin': (_) => MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
+      '/home/letter/:title': (_) =>
+          const MaterialPage<dynamic>(child: LetterPDF()),
+      '/home/user_settings': (_) =>
+          const MaterialPage<dynamic>(child: UserSettings()),
+      '/home/user_settings/:user_id': (_) =>
+          const MaterialPage<dynamic>(child: UserSettingsDetail()),
+      '/home/origin': (_) =>
+          MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
       '/home/drawer_terms': (_) => const FadeUpPage(child: DrawerTerms()),
       '/home/help': (_) => const FadeUpPage(child: Help()),
       '/home/information': (_) => const FadeUpPage(child: Information()),
       '/home/license': (_) => const FadeUpPage(child: License()),
       '/home/license/:index': (RouteData route) => FadeUpPage(
-        child: LicenseDetail(
-          index: int.parse(route.pathParameters['index'] ?? '0'),
-        ),
-      ),
+            child: LicenseDetail(
+              index: int.parse(route.pathParameters['index'] ?? '0'),
+            ),
+          ),
     },
   ),
 );
