@@ -13,6 +13,7 @@ import 'package:hakondate/repository/local/sqlite/table/menu_dishes_table.dart';
 import 'package:hakondate/repository/local/sqlite/table/menus_table.dart';
 import 'package:hakondate/repository/local/sqlite/table/schools_table.dart';
 import 'package:hakondate/repository/local/sqlite/table/users_table.dart';
+import 'package:hakondate/repository/local/sqlite/table/dictionary_items_table.dart';
 
 part 'local_database.g.dart';
 
@@ -35,6 +36,7 @@ final Provider<LocalDatabase> localDatabaseProvider = Provider<LocalDatabase>((_
     DishFoodstuffsTable,
     FoodstuffsTable,
     UsersTable,
+    DictionaryItemsTable,
   ],
 )
 class LocalDatabase extends _$LocalDatabase {
