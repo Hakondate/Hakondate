@@ -16,6 +16,7 @@ abstract class SchoolsLocalRepositoryBase {
   Future<int> count();
   Future<List<SchoolModel>> getAll();
   Future<SchoolModel> getById(int id);
+  Future<List<SchoolModel>> getByParentId(int parentId);
   Future<int> add(Map<String, dynamic> school);
   Future<DateTime> getLatestUpdateDay();
 }
@@ -66,6 +67,26 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryBase {
       name: schoolsSchema.name,
       classification: _judgeClassification(schoolsSchema.classification),
     );
+  }
+
+  @override
+  Future<List<SchoolModel>> getByParentId(int parentId) async {
+    final List<SchoolModel> schools = <SchoolModel>[];
+    final List<SchoolsSchema> schoolsSchemas =
+        await (_db.select(_db.schoolsTable)..where(($SchoolsTableTable t) => t.parentId.equals(parentId))).get();
+
+    for (final SchoolsSchema schoolsSchema in schoolsSchemas) {
+      schools.add(
+        SchoolModel(
+          id: schoolsSchema.id,
+          parentId: schoolsSchema.parentId,
+          name: schoolsSchema.name,
+          classification: _judgeClassification(schoolsSchema.classification),
+        ),
+      );
+    }
+
+    return schools;
   }
 
   SchoolClassification _judgeClassification(String classificationStr) {

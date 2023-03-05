@@ -6,10 +6,12 @@ import 'package:hakondate/view/bottom_bar/app_bottom_navigation_bar.dart';
 import 'package:hakondate/view/calendar/calendar.dart';
 import 'package:hakondate/view/component/frame/fade_up_page.dart';
 import 'package:hakondate/view/daily/daily.dart';
-import 'package:hakondate/view/recipe/recipe.dart';
-import 'package:hakondate/view/recipe/recipe_pdf.dart';
+import 'package:hakondate/view/letter/letter.dart';
+import 'package:hakondate/view/letter/letter_pdf.dart';
 import 'package:hakondate/view/license/license.dart';
 import 'package:hakondate/view/license/license_detail.dart';
+import 'package:hakondate/view/recipe/recipe.dart';
+import 'package:hakondate/view/recipe/recipe_pdf.dart';
 import 'package:hakondate/view/signup/signup.dart';
 import 'package:hakondate/view/splash/splash.dart';
 import 'package:hakondate/view/terms/drawer_terms.dart';
@@ -28,7 +30,7 @@ final RoutemasterDelegate routemaster = RoutemasterDelegate(
           '/home/daily',
           '/home/recipes',
           '/home/dictionary',
-          '/home/letters',
+          '/home/letter',
         ],
       ),
       '/home/daily': (_) => const MaterialPage<dynamic>(child: Daily()),
@@ -37,7 +39,8 @@ final RoutemasterDelegate routemaster = RoutemasterDelegate(
       '/home/recipes': (_) => const MaterialPage<dynamic>(child: Recipe()),
       '/home/recipes_pdf/:id': (RouteData route) => FadeUpPage(child: RecipePDF(id: route.pathParameters['id'])),
       '/home/dictionary': (_) => MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
-      '/home/letters': (_) => MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
+      '/home/letter': (_) => const MaterialPage<dynamic>(child: Letter()),
+      '/home/letter/:title': (_) => const MaterialPage<dynamic>(child: LetterPDF()),
       '/home/user_settings': (_) => MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
       '/home/origin': (_) => MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
       '/home/drawer_terms': (_) => const FadeUpPage(child: DrawerTerms()),

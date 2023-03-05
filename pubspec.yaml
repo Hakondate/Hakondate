@@ -20,13 +20,14 @@ dependencies:
   table_calendar: ^3.0.4
   flutter_svg: ^2.0.1
   flutter_pdfview: ^1.2.2
+  shimmer: ^2.0.0
 
   # 状態管理関連
   flutter_riverpod: ^2.2.0
   freezed_annotation: ^2.0.1
   freezed: ^2.0.1
   json_serializable: ^6.1.6
-  json_annotation: ^4.4.0
+  json_annotation: ^4.8.0
 
   # Drift(SQLite)関連
   drift: ^2.5.0
@@ -45,6 +46,7 @@ dependencies:
   app_tracking_transparency: ^2.0.2+4
   firebase_core: ^2.6.1
   cloud_firestore: ^4.4.2
+  firebase_storage: ^11.0.13
   firebase_crashlytics: ^3.0.14
   firebase_analytics: ^10.1.3
 

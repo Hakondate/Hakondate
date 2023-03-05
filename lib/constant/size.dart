@@ -4,6 +4,7 @@ class FontSize {
   static const double body = 16;        // 本文
   static const double label = 18;       // ラベル内
   static const double subheading = 20;  // 副見出し
+  static const double status = 24;      // ステータス表示
 }
 
 class SpaceSize {
@@ -27,6 +28,10 @@ class PaddingSize {
   static const double buttonVertical = 5;         // ボタンの水平方向の基本マージン
   static const double buttonHorizontal = 25;      // ボタンの垂直方向の基本マージン
   static const double buttonHorizontalLarge = 30; // ボタンの垂直方向の大きなマージン
+}
+
+class BorderSize {
+  static const double normal = 2;           // 標準の太さ
 }
 
 class IconSize {
