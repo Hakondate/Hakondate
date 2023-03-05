@@ -51,7 +51,7 @@ class MenuCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: AppColor.ui.white.withOpacity(0.8),
+            color: AppColor.ui.white.withOpacity(0.5),
             width: 3,
           ),
           image: DecorationImage(

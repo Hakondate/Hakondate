@@ -5,6 +5,7 @@ import 'package:hakondate/constant/open_data_recipes.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/recipe/open_data_recipe_model.dart';
 import 'package:hakondate/model/recipe/recipe_type.dart';
+import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/view/component/tile/grid_frame.dart';
 
 class OpenDataRecipeGrid extends StatelessWidget {
@@ -31,6 +32,7 @@ class OpenDataRecipeGrid extends StatelessWidget {
 
   Widget _gridTile(OpenDataRecipeModel recipe) {
     return GridFrame(
+      onTap: () => routemaster.push('/home/recipes_pdf/${recipe.id}'),
       child: Column(
         verticalDirection: VerticalDirection.up,
         children: <Widget>[
