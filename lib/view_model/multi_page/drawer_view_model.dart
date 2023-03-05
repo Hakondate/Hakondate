@@ -4,13 +4,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/state/drawer/drawer_state.dart';
 
-final drawerProvider = StateNotifierProvider<DrawerViewModel, DrawerState>(
-        (_) => DrawerViewModel());
+final StateNotifierProvider<DrawerViewModel, DrawerState> drawerProvider =
+    StateNotifierProvider<DrawerViewModel, DrawerState>(
+        (_) => DrawerViewModel(),
+);
 
 class DrawerViewModel extends StateNotifier<DrawerState> {
   DrawerViewModel() : super(DrawerState(
-    scaffoldKey: GlobalKey<ScaffoldState>(),
-  ));
+      scaffoldKey: GlobalKey<ScaffoldState>(),
+    ),
+  );
 
   void openDrawer() => state.scaffoldKey.currentState!.openDrawer();
 }

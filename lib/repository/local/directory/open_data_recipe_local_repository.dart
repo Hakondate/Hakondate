@@ -4,7 +4,8 @@ import 'dart:typed_data';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 
-final openDataRecipeLocalRepositoryProvider = Provider<OpenDataRecipeLocalRepository>((_) =>OpenDataRecipeLocalRepository());
+final Provider<OpenDataRecipeLocalRepository> openDataRecipeLocalRepositoryProvider =
+    Provider<OpenDataRecipeLocalRepository>((_) =>OpenDataRecipeLocalRepository());
 
 abstract class OpenDataRecipeLocalRepositoryBase {
   Future<String> add({required String path, required Uint8List bytes});
@@ -26,11 +27,11 @@ class OpenDataRecipeLocalRepository extends OpenDataRecipeLocalRepositoryBase {
   }
 
   @override
-  Future<bool> isExist({required path}) async {
+  Future<bool> isExist({required String path}) async {
     final String fullPath = await getPath(path: path);
     final File file = File(fullPath);
 
-    return await file.exists();
+    return file.existsSync();
   }
 
   @override

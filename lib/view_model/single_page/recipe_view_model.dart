@@ -6,7 +6,8 @@ import 'package:hakondate/model/recipe/open_data_recipe_model.dart';
 import 'package:hakondate/repository/local/directory/open_data_recipe_local_repository.dart';
 import 'package:hakondate/repository/remote/open_data_recipe_remote_repository.dart';
 
-final recipeProvider = StateNotifierProvider<RecipeViewModel, void>((ref) {
+final StateNotifierProvider<RecipeViewModel, void> recipeProvider =
+    StateNotifierProvider<RecipeViewModel, void>((StateNotifierProviderRef<RecipeViewModel, void> ref) {
   final OpenDataRecipeLocalRepository openDataLocalRepository = ref.watch(openDataRecipeLocalRepositoryProvider);
   final OpenDataRecipeRemoteRepository openDataRemoteRepository = ref.watch(openDataRecipeRemoteRepositoryProvider);
   return RecipeViewModel(openDataLocalRepository, openDataRemoteRepository);
@@ -22,11 +23,11 @@ class RecipeViewModel extends StateNotifier<void> {
     final String path = recipe.pdfPath;
 
     if (await _openDataLocalRepository.isExist(path: path)) {
-      return await _openDataLocalRepository.getPath(path: path);
+      return _openDataLocalRepository.getPath(path: path);
     }
 
     final Uint8List bytes = await _openDataRemoteRepository.getPDF(recipe.pdfUrl);
-    return await _openDataLocalRepository.add(path: path, bytes: bytes);
+    return _openDataLocalRepository.add(path: path, bytes: bytes);
   }
 
   Future<void> reDownload({required OpenDataRecipeModel recipe}) async {

@@ -7,7 +7,6 @@ part 'menu_model.freezed.dart';
 
 @freezed
 class MenuModel with _$MenuModel {
-  const MenuModel._();
   factory MenuModel({
     required int id,                  // Day: 2021/06/30 & ScID: 1 → 2021063001
     required DateTime day,            // 日付
@@ -21,6 +20,7 @@ class MenuModel with _$MenuModel {
     dishes: dishes,
     event: event,
   );
+  const MenuModel._();
 
   const factory MenuModel.lunchesDay({
     required int id,
@@ -39,12 +39,12 @@ class MenuModel with _$MenuModel {
       throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
-    double _sum = 0.0;
-    for (var dish in menu.dishes) {
-      _sum += dish.energy;
+    double sum = 0;
+    for (final DishModel dish in menu.dishes) {
+      sum += dish.energy;
     }
 
-    return _sum;
+    return sum;
   }
 
   double get protein {
@@ -54,12 +54,12 @@ class MenuModel with _$MenuModel {
       throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
-    double _sum = 0.0;
-    for (var dish in menu.dishes) {
-      _sum += dish.protein;
+    double sum = 0;
+    for (final DishModel dish in menu.dishes) {
+      sum += dish.protein;
     }
 
-    return _sum;
+    return sum;
   }
 
   double get lipid {
@@ -69,12 +69,12 @@ class MenuModel with _$MenuModel {
       throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
-    double _sum = 0.0;
-    for (var dish in menu.dishes) {
-      _sum += dish.lipid;
+    double sum = 0;
+    for (final DishModel dish in menu.dishes) {
+      sum += dish.lipid;
     }
 
-    return _sum;
+    return sum;
   }
 
   double get carbohydrate {
@@ -84,12 +84,12 @@ class MenuModel with _$MenuModel {
       throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
-    double _sum = 0.0;
-    for (var dish in menu.dishes) {
-      _sum += dish.carbohydrate;
+    double sum = 0;
+    for (final DishModel dish in menu.dishes) {
+      sum += dish.carbohydrate;
     }
 
-    return _sum;
+    return sum;
   }
 
   double get sodium {
@@ -99,12 +99,12 @@ class MenuModel with _$MenuModel {
       throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
-    double _sum = 0.0;
-    for (var dish in menu.dishes) {
-      _sum += dish.sodium;
+    double sum = 0;
+    for (final DishModel dish in menu.dishes) {
+      sum += dish.sodium;
     }
 
-    return _sum;
+    return sum;
   }
 
   double get calcium {
@@ -114,12 +114,12 @@ class MenuModel with _$MenuModel {
       throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
-    double _sum = 0.0;
-    for (var dish in menu.dishes) {
-      _sum += dish.calcium;
+    double sum = 0;
+    for (final DishModel dish in menu.dishes) {
+      sum += dish.calcium;
     }
 
-    return _sum;
+    return sum;
   }
 
   double get magnesium {
@@ -129,12 +129,12 @@ class MenuModel with _$MenuModel {
       throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
-    double _sum = 0.0;
-    for (var dish in menu.dishes) {
-      _sum += dish.magnesium;
+    double sum = 0;
+    for (final DishModel dish in menu.dishes) {
+      sum += dish.magnesium;
     }
 
-    return _sum;
+    return sum;
   }
 
   double get iron {
@@ -144,12 +144,12 @@ class MenuModel with _$MenuModel {
       throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
-    double _sum = 0.0;
-    for (var dish in menu.dishes) {
-      _sum += dish.iron;
+    double sum = 0;
+    for (final DishModel dish in menu.dishes) {
+      sum += dish.iron;
     }
 
-    return _sum;
+    return sum;
   }
 
   double get zinc {
@@ -159,12 +159,12 @@ class MenuModel with _$MenuModel {
       throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
-    double _sum = 0.0;
-    for (var dish in menu.dishes) {
-      _sum += dish.zinc;
+    double sum = 0;
+    for (final DishModel dish in menu.dishes) {
+      sum += dish.zinc;
     }
 
-    return _sum;
+    return sum;
   }
 
   double get retinol {
@@ -174,12 +174,12 @@ class MenuModel with _$MenuModel {
       throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
-    double _sum = 0.0;
-    for (var dish in menu.dishes) {
-      _sum += dish.retinol;
+    double sum = 0;
+    for (final DishModel dish in menu.dishes) {
+      sum += dish.retinol;
     }
 
-    return _sum;
+    return sum;
   }
 
   double get vitaminB1 {
@@ -189,12 +189,12 @@ class MenuModel with _$MenuModel {
       throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
-    double _sum = 0.0;
-    for (var dish in menu.dishes) {
-      _sum += dish.vitaminB1;
+    double sum = 0;
+    for (final DishModel dish in menu.dishes) {
+      sum += dish.vitaminB1;
     }
 
-    return _sum;
+    return sum;
   }
 
   double get vitaminB2 {
@@ -204,12 +204,12 @@ class MenuModel with _$MenuModel {
       throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
-    double _sum = 0.0;
-    for (var dish in menu.dishes) {
-      _sum += dish.vitaminB2;
+    double sum = 0;
+    for (final DishModel dish in menu.dishes) {
+      sum += dish.vitaminB2;
     }
 
-    return _sum;
+    return sum;
   }
 
   double get vitaminC {
@@ -219,12 +219,12 @@ class MenuModel with _$MenuModel {
       throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
-    double _sum = 0.0;
-    for (var dish in menu.dishes) {
-      _sum += dish.vitaminC;
+    double sum = 0;
+    for (final DishModel dish in menu.dishes) {
+      sum += dish.vitaminC;
     }
 
-    return _sum;
+    return sum;
   }
 
   double get dietaryFiber {
@@ -234,12 +234,12 @@ class MenuModel with _$MenuModel {
       throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
-    double _sum = 0.0;
-    for (var dish in menu.dishes) {
-      _sum += dish.dietaryFiber;
+    double sum = 0;
+    for (final DishModel dish in menu.dishes) {
+      sum += dish.dietaryFiber;
     }
 
-    return _sum;
+    return sum;
   }
 
   double get salt {
@@ -249,11 +249,11 @@ class MenuModel with _$MenuModel {
       throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
-    double _sum = 0.0;
-    for (var dish in menu.dishes) {
-      _sum += dish.salt;
+    double sum = 0;
+    for (final DishModel dish in menu.dishes) {
+      sum += dish.salt;
     }
 
-    return _sum;
+    return sum;
   }
 }

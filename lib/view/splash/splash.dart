@@ -18,44 +18,45 @@ class Splash extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final screenWidth = MediaQuery.of(context).size.width;
+    final double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: AppColor.brand.secondaryLight,
       body: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: <Widget>[
             Image.asset(
               'assets/images/splash.png',
               width: screenWidth / 6.0,
             ),
             StatefulWrapper(
               onInit: () => ref.read(splashProvider.notifier).initialize(
-                termsUpdated: () async => await showDialog(
+                termsUpdated: () async => showDialog(
                   context: context,
                   barrierDismissible: false,
                   builder: (_) => TermsUpdatedDialog(
                     onTap: () {
-                      routemaster.pop();
-                      routemaster.replace('/terms');
+                      routemaster..pop()..replace('/terms');
                     },
                   ),
                 ),
-                errorOccurred: (Exception error, _) async => await showDialog(
+                errorOccurred: (Exception error, _) async => showDialog(
                   context: context,
                   barrierDismissible: false,
                   builder: (BuildContext context) {
                     if (error is ConnectionException) {
                       return ConnectionExceptionDialog(
                         onTapRetry: () => routemaster.pop().whenComplete(() =>
-                            ref.read(appUniqueKeyProvider.notifier).restartApp()),
+                            ref.read(appUniqueKeyProvider.notifier).restartApp(),
+                        ),
                       );
                     }
 
                     return LocalDatabaseExceptionDialog(
                       onTapRetry: () => routemaster.pop().whenComplete(() =>
-                          ref.read(appUniqueKeyProvider.notifier).restartApp()),
+                          ref.read(appUniqueKeyProvider.notifier).restartApp(),
+                      ),
                     );
                   },
                 ),
@@ -64,7 +65,7 @@ class Splash extends ConsumerWidget {
                 width: screenWidth * 2.0 / 3.0,
                 child: Builder(
                   builder: (BuildContext context) {
-                    final store = ref.watch(splashProvider);
+                    final SplashState store = ref.watch(splashProvider);
                     if (store is SplashStateLoad) return Image.asset(store.status.imagePath);
                     return Image.asset('assets/loading_animation/data_reading.gif');
                   },

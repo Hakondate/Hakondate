@@ -24,7 +24,7 @@ class Recipe extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: const <Widget>[
                 OpenDataRecipeHeader(
                   isRemoveTopMargin: true,
                   title: Text('だしを活用した和食メニュー'),

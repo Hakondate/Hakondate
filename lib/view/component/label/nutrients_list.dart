@@ -1,13 +1,17 @@
+// ignore_for_file: argument_type_not_assignable, avoid_dynamic_calls
+
 import 'package:flutter/material.dart';
 
 import 'package:hakondate/model/nutrients/nutrient_unit.dart';
 import 'package:hakondate/view/component/label/nutrient_label.dart';
 
+/// MenuModelとDishModelそれぞれから栄養素を参照するため
+/// [nutrients]はdynamic型を許容する
 class NutrientsList extends StatelessWidget {
   const NutrientsList({
-    super.key,
     required this.nutrients,
     this.backgroundColor,
+    super.key,
   });
 
   final dynamic nutrients;
@@ -16,7 +20,7 @@ class NutrientsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      children: <Widget>[
         NutrientLabel(
           name: 'エネルギー',
           value: nutrients.energy,

@@ -4,13 +4,13 @@ import 'package:hakondate/view/component/dialog/hakondate_dialog/hakondate_dialo
 
 class ConnectionExceptionDialog extends StatelessWidget {
   const ConnectionExceptionDialog({
-    Key? key,
+    super.key,
     this.onTapRetry,
     this.onTapContinue,
-  }) : super(key: key);
+  });
 
-  final Function()? onTapRetry;
-  final Function()? onTapContinue;
+  final void Function()? onTapRetry;
+  final void Function()? onTapContinue;
 
   @override
   Widget build(BuildContext context) {

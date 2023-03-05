@@ -15,38 +15,40 @@ import 'package:hakondate/view/splash/splash.dart';
 import 'package:hakondate/view/terms/drawer_terms.dart';
 import 'package:hakondate/view/terms/terms.dart';
 
-final routemaster = RoutemasterDelegate(
-  routesBuilder: (context) => RouteMap(
+final RoutemasterDelegate routemaster = RoutemasterDelegate(
+  routesBuilder: (BuildContext context) => RouteMap(
     onUnknownRoute: (_) => const Redirect('/splash'),
-    routes: {
-      '/splash': (_) => const MaterialPage(child: Splash()),
-      '/terms': (_) => const MaterialPage(child: Terms()),
-      '/signup': (_) => MaterialPage(child: Signup()),
+    routes: <String, RouteSettings Function(RouteData)>{
+      '/splash': (_) => const MaterialPage<dynamic>(child: Splash()),
+      '/terms': (_) => const MaterialPage<dynamic>(child: Terms()),
+      '/signup': (_) => MaterialPage<dynamic>(child: Signup()),
       '/home': (_) => const TabPage(
         child: AppBottomNavigationBar(),
-        paths: [
+        paths: <String>[
           '/home/daily',
           '/home/recipes',
           '/home/dictionary',
           '/home/letters',
         ],
       ),
-      '/home/daily': (_) => const MaterialPage(child: Daily()),
-      '/home/daily/dish': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
+      '/home/daily': (_) => const MaterialPage<dynamic>(child: Daily()),
+      '/home/daily/dish': (_) => MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
       '/home/calendar': (_) => const FadeUpPage(child: Calendar()),
-      '/home/recipes': (_) => const MaterialPage(child: Recipe()),
-      '/home/recipes_pdf/:id': (route) => FadeUpPage(child: RecipePDF(id: route.pathParameters['id'])),
-      '/home/dictionary': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
-      '/home/letters': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
-      '/home/user_settings': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
-      '/home/origin': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
+      '/home/recipes': (_) => const MaterialPage<dynamic>(child: Recipe()),
+      '/home/recipes_pdf/:id': (RouteData route) => FadeUpPage(child: RecipePDF(id: route.pathParameters['id'])),
+      '/home/dictionary': (_) => MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
+      '/home/letters': (_) => MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
+      '/home/user_settings': (_) => MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
+      '/home/origin': (_) => MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
       '/home/drawer_terms': (_) => const FadeUpPage(child: DrawerTerms()),
-      '/home/information': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
-      '/home/help': (_) => MaterialPage(child: Scaffold(appBar: AppBar())),
+      '/home/information': (_) => MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
+      '/home/help': (_) => MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
       '/home/license': (_) => const FadeUpPage(child: License()),
-      '/home/license/:index': (route) => FadeUpPage(child: LicenseDetail(
-        index: int.parse(route.pathParameters['index'] ?? '0'),
-      )),
+      '/home/license/:index': (RouteData route) => FadeUpPage(
+        child: LicenseDetail(
+          index: int.parse(route.pathParameters['index'] ?? '0'),
+        ),
+      ),
     },
   ),
 );

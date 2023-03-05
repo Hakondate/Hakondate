@@ -7,7 +7,8 @@ import 'package:hakondate/state/daily/daily_state.dart';
 import 'package:hakondate/util/analytics_controller.dart';
 import 'package:hakondate/util/environment.dart';
 
-final dailyProvider = StateNotifierProvider<DailyViewModel, DailyState>((ref) {
+final StateNotifierProvider<DailyViewModel, DailyState> dailyProvider =
+    StateNotifierProvider<DailyViewModel, DailyState>((StateNotifierProviderRef<DailyViewModel, DailyState> ref) {
   final MenusLocalRepository menusLocalRepository = ref.watch(menusLocalRepositoryProvider);
   return DailyViewModel(menusLocalRepository, ref);
 });
@@ -17,33 +18,34 @@ class DailyViewModel extends StateNotifier<DailyState> {
       : super(DailyState(
           selectedDay: DateTime.now(),
           focusedDay: DateTime.now(),
-          calendarTabFirstDay: DateTime(2019, 8, 1),
+          calendarTabFirstDay: DateTime(2019, 8),
           calendarTabLastDay: DateTime(
             DateTime.now().year,
             DateTime.now().month + 2,
-            1,
           ).add(const Duration(seconds: -1)),
-        ));
+        ),
+  );
 
   final MenusLocalRepository _menusLocalRepository;
   final Ref _ref;
 
   Future<void> updateSelectedDay({DateTime? selectedDay, DateTime? focusedDay}) async {
+    DateTime? selectedInputDay = selectedDay;
     switch (Environment.flavor) {
       case Flavor.dev:
-        selectedDay ??= DateTime(2022, 5, 16);
+        selectedInputDay ??= DateTime(2022, 5, 16);
         break;
       case Flavor.stg:
       case Flavor.prod:
-        selectedDay ??= DateTime.now();
+      selectedInputDay ??= DateTime.now();
         break;
     }
     state = state.copyWith(isFetching: true);
 
     state = state.copyWith(
-      selectedDay: selectedDay,
-      focusedDay: focusedDay ?? selectedDay,
-      menu: await _menusLocalRepository.getMenuByDay(selectedDay),
+      selectedDay: selectedInputDay,
+      focusedDay: focusedDay ?? selectedInputDay,
+      menu: await _menusLocalRepository.getMenuByDay(selectedInputDay),
     );
 
     final MenuModel menu = state.menu;
@@ -57,23 +59,23 @@ class DailyViewModel extends StateNotifier<DailyState> {
   void updateFocusedDay(DateTime day) => state = state.copyWith(focusedDay: day);
 
   List<double> getGraphValues({
-    NutrientsModel? slns,
     required double graphMaxValue,
+    NutrientsModel? slns,
   }) {
     final MenuModel menu = state.menu;
 
     if (slns == null || menu is! LunchesDayMenuModel) {
-      return [0, 0, 0, 0, 0, 0];
+      return <double>[0, 0, 0, 0, 0, 0];
     }
 
-    return [
+    return <double>[
       menu.energy / slns.energy * 100.0,
       menu.protein / slns.protein * 100.0,
       _calcVitaminSufficiency(slns.retinol, slns.vitaminB1, slns.vitaminB2, slns.vitaminC),
       _calcMineralSufficiency(slns.calcium, slns.magnesium, slns.iron, slns.zinc),
       menu.carbohydrate / slns.carbohydrate * 100.0,
       menu.lipid / slns.lipid * 100.0,
-    ].map((element) => (element > graphMaxValue) ? graphMaxValue : element).toList();
+    ].map((double element) => (element > graphMaxValue) ? graphMaxValue : element).toList();
   }
 
   double _calcVitaminSufficiency(

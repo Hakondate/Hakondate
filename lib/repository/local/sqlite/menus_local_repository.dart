@@ -10,7 +10,8 @@ import 'package:hakondate/repository/local/sqlite/local_database.dart';
 import 'package:hakondate/view_model/multi_page/common_function.dart';
 import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 
-final menusLocalRepositoryProvider = Provider<MenusLocalRepository>((ref) {
+final Provider<MenusLocalRepository> menusLocalRepositoryProvider =
+    Provider<MenusLocalRepository>((ProviderRef<MenusLocalRepository> ref) {
   final LocalDatabase localDatabase = ref.watch(localDatabaseProvider);
   return MenusLocalRepository(localDatabase, ref);
 });
@@ -32,27 +33,36 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
   @override
   Future<int> add(Map<String, dynamic> menu) async {
     final MenusTableCompanion companion = MenusTableCompanion(
-      id: Value(menu['id']),
-      day: Value(_ref.read(commonFunctionProvider.notifier).getDayFromTimestamp(menu['day'])),
-      schoolId: Value(menu['schoolId']),
-      event: Value(menu['event']),
-      updateAt: Value(_ref.read(commonFunctionProvider.notifier).getDayFromTimestamp(menu['updateAt'])),
+      id: Value<int>(menu['id'] as int),
+      day: Value<DateTime>(_ref.read(commonFunctionProvider.notifier).getDayFromTimestamp(menu['day'])),
+      schoolId: Value<int>(menu['schoolId'] as int),
+      event: Value<String?>(menu['event'] as String?),
+      updateAt: Value<DateTime>(_ref
+          .read(commonFunctionProvider.notifier)
+          .getDayFromTimestamp(menu['updateAt']),
+      ),
     );
     final int menuId = await _db.into(_db.menusTable).insert(
       companion,
-      onConflict: DoUpdate((old) => MenusTableCompanion.custom(
-        event: Constant(companion.event.value),
-        updateAt: Constant(companion.updateAt.value),
-      )),
+      // ignore: always_specify_types
+      onConflict: DoUpdate(($MenusTableTable old) =>
+          MenusTableCompanion.custom(
+            // ignore: always_specify_types
+            event: Constant(companion.event.value),
+            // ignore: always_specify_types
+            updateAt: Constant(companion.updateAt.value),
+          ),
+      ),
     );
 
-    await Future.forEach(menu['dishes'], (dynamic dish) async {
-      final int dishId = await _addDish(dish);
+    await Future.forEach(menu['dishes'] as Iterable<dynamic>, (dynamic dish) async {
+      final int dishId = await _addDish(dish as Map<String, dynamic>);
       await _db.into(_db.menuDishesTable).insertOnConflictUpdate(
-          MenuDishesTableCompanion(
-            menuId: Value(menuId),
-            dishId: Value(dishId),
-          ));
+        MenuDishesTableCompanion(
+          menuId: Value<int>(menuId),
+          dishId: Value<int>(dishId),
+        ),
+      );
     });
 
     return menuId;
@@ -61,34 +71,39 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
   Future<int> _addDish(Map<String, dynamic> dish) async {
     final int dishId;
     final DishesTableCompanion companion = DishesTableCompanion(
-      name: Value(dish['name']),
-      category: Value(dish['category']),
+      name: Value<String>(dish['name'] as String),
+      category: Value<String?>(dish['category'] as String?),
     );
     final DishesSchema? conflictSchema = await (_db.select(_db.dishesTable)
-      ..where((t) => t.name.equals(companion.name.value))).getSingleOrNull();
+      ..where(($DishesTableTable t) => t.name.equals(companion.name.value))).getSingleOrNull();
 
     if (conflictSchema == null) {
       dishId = await _db.into(_db.dishesTable).insert(
         companion,
-        onConflict: DoUpdate((old) => DishesTableCompanion.custom(
-          category: Constant(companion.category.value),
-        )),
+        // ignore: always_specify_types
+        onConflict: DoUpdate(($DishesTableTable old) =>
+            DishesTableCompanion.custom(
+              // ignore: always_specify_types
+              category: Constant(companion.category.value),
+            ),
+        ),
       );
     } else if (conflictSchema.category != companion.category.value) {
       dishId = await (_db.update(_db.dishesTable)
-        ..where((t) => t.name.equals(companion.name.value)))
+        ..where(($DishesTableTable t) => t.name.equals(companion.name.value)))
           .write(DishesTableCompanion(category: companion.category));
     } else {
       dishId = conflictSchema.id;
     }
 
-    await Future.forEach(dish['foodstuffs'], (dynamic foodstuff) async {
-      final int foodstuffId = await _addFoodstuff(foodstuff);
+    await Future.forEach(dish['foodstuffs'] as Iterable<dynamic>, (dynamic foodstuff) async {
+      final int foodstuffId = await _addFoodstuff(foodstuff as Map<String, dynamic>);
       await _db.into(_db.dishFoodstuffsTable).insertOnConflictUpdate(
-          DishFoodstuffsTableCompanion(
-            dishId: Value(dishId),
-            foodstuffId: Value(foodstuffId),
-          ));
+        DishFoodstuffsTableCompanion(
+          dishId: Value<int>(dishId),
+          foodstuffId: Value<int>(foodstuffId),
+        ),
+      );
     });
 
     return dishId;
@@ -96,41 +111,46 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
 
   Future<int> _addFoodstuff(Map<String, dynamic> foodstuff) async {
     final FoodstuffsTableCompanion companion = FoodstuffsTableCompanion(
-      name: Value(foodstuff['name']),
-      piece: Value(foodstuff['piece']),
-      gram: Value(foodstuff['gram'].toDouble()),
-      energy: Value(foodstuff['energy'].toDouble()),
-      protein: Value(foodstuff['protein'].toDouble()),
-      lipid: Value(foodstuff['lipid'].toDouble()),
-      carbohydrate: Value(foodstuff['carbohydrate'].toDouble()),
-      sodium: Value(foodstuff['sodium'].toDouble()),
-      calcium: Value(foodstuff['calcium'].toDouble()),
-      magnesium: Value(foodstuff['magnesium'].toDouble()),
-      iron: Value(foodstuff['iron'].toDouble()),
-      zinc: Value(foodstuff['zinc'].toDouble()),
-      retinol: Value(foodstuff['retinol'].toDouble()),
-      vitaminB1: Value(foodstuff['vitaminB1'].toDouble()),
-      vitaminB2: Value(foodstuff['vitaminB2'].toDouble()),
-      vitaminC: Value(foodstuff['vitaminC'].toDouble()),
-      dietaryFiber: Value(foodstuff['dietaryFiber'].toDouble()),
-      salt: Value(foodstuff['salt'].toDouble()),
-      isHeat: Value(foodstuff['isHeat']),
-      isAllergy: Value(foodstuff['isAllergy']),
-      origin: Value(foodstuff['origin']),
+      name: Value<String>(foodstuff['name'] as String),
+      piece: Value<int?>(foodstuff['piece'] as int?),
+      gram: Value<double>(foodstuff['gram'] as double),
+      energy: Value<double>(foodstuff['energy'] as double),
+      protein: Value<double>(foodstuff['protein'] as double),
+      lipid: Value<double>(foodstuff['lipid'] as double),
+      carbohydrate: Value<double>(foodstuff['carbohydrate'] as double),
+      sodium: Value<double>(foodstuff['sodium'] as double),
+      calcium: Value<double>(foodstuff['calcium'] as double),
+      magnesium: Value<double>(foodstuff['magnesium'] as double),
+      iron: Value<double>(foodstuff['iron'] as double),
+      zinc: Value<double>(foodstuff['zinc'] as double),
+      retinol: Value<double>(foodstuff['retinol'] as double),
+      vitaminB1: Value<double>(foodstuff['vitaminB1'] as double),
+      vitaminB2: Value<double>(foodstuff['vitaminB2'] as double),
+      vitaminC: Value<double>(foodstuff['vitaminC'] as double),
+      dietaryFiber: Value<double>(foodstuff['dietaryFiber'] as double),
+      salt: Value<double>(foodstuff['salt'] as double),
+      isHeat: Value<bool>(foodstuff['isHeat'] as bool),
+      isAllergy: Value<bool>(foodstuff['isAllergy'] as bool),
+      origin: Value<String?>(foodstuff['origin'] as String?),
     );
     final FoodstuffsSchema? conflictSchema =
-      await (_db.select(_db.foodstuffsTable)..where((t) =>
+      await (_db.select(_db.foodstuffsTable)..where(($FoodstuffsTableTable t) =>
           t.name.equals(companion.name.value) &
           t.gram.equals(companion.gram.value) &
           t.isHeat.equals(companion.isHeat.value) &
-          t.isAllergy.equals(companion.isAllergy.value))).getSingleOrNull();
+          t.isAllergy.equals(companion.isAllergy.value),
+      )).getSingleOrNull();
 
     if (conflictSchema == null) {
-      return await _db.into(_db.foodstuffsTable).insert(
+      return _db.into(_db.foodstuffsTable).insert(
         companion,
-        onConflict: DoUpdate((old) => FoodstuffsTableCompanion.custom(
-          origin: Constant(companion.origin.value),
-        )),
+        // ignore: always_specify_types
+        onConflict: DoUpdate(($FoodstuffsTableTable old) =>
+            FoodstuffsTableCompanion.custom(
+              // ignore: always_specify_types
+              origin: Constant(companion.origin.value),
+            ),
+        ),
       );
     } else if (
         conflictSchema.piece != companion.piece.value ||
@@ -151,29 +171,31 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
         conflictSchema.salt != companion.salt.value ||
         conflictSchema.origin != companion.origin.value
     ) {
-      return await (_db.update(_db.foodstuffsTable)..where((t) =>
+      return (_db.update(_db.foodstuffsTable)..where(($FoodstuffsTableTable t) =>
         t.name.equals(companion.name.value) &
         t.gram.equals(companion.gram.value) &
         t.isHeat.equals(companion.isHeat.value) &
-        t.isAllergy.equals(companion.isAllergy.value))).write(
-          FoodstuffsTableCompanion(
-            piece: companion.piece,
-            energy: companion.energy,
-            lipid: companion.lipid,
-            sodium: companion.sodium,
-            carbohydrate: companion.carbohydrate,
-            calcium: companion.calcium,
-            magnesium: companion.magnesium,
-            iron: companion.iron,
-            zinc: companion.zinc,
-            retinol: companion.retinol,
-            vitaminB1: companion.vitaminB1,
-            vitaminB2: companion.vitaminB2,
-            vitaminC: companion.vitaminC,
-            dietaryFiber: companion.dietaryFiber,
-            salt: companion.salt,
-            origin: companion.origin,
-          ));
+        t.isAllergy.equals(companion.isAllergy.value),
+      )).write(
+        FoodstuffsTableCompanion(
+          piece: companion.piece,
+          energy: companion.energy,
+          lipid: companion.lipid,
+          sodium: companion.sodium,
+          carbohydrate: companion.carbohydrate,
+          calcium: companion.calcium,
+          magnesium: companion.magnesium,
+          iron: companion.iron,
+          zinc: companion.zinc,
+          retinol: companion.retinol,
+          vitaminB1: companion.vitaminB1,
+          vitaminB2: companion.vitaminB2,
+          vitaminC: companion.vitaminC,
+          dietaryFiber: companion.dietaryFiber,
+          salt: companion.salt,
+          origin: companion.origin,
+        ),
+      );
     }
 
     return conflictSchema.id;
@@ -181,10 +203,10 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
 
   @override
   Future<List<MenuModel>> getAll() async {
-    List<MenuModel> menus = [];
+    final List<MenuModel> menus = <MenuModel>[];
     final int schoolId = await _ref.read(userProvider.notifier).getParentId();
     final List<MenusSchema> menusSchemas = await (_db.select(_db.menusTable)
-      ..where((t) => t.schoolId.equals(schoolId))).get();
+      ..where(($MenusTableTable t) => t.schoolId.equals(schoolId))).get();
 
     await Future.forEach(menusSchemas, (MenusSchema menusSchema) async {
       final MenuModel menu = await _getBySchema(menusSchema);
@@ -211,7 +233,7 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
 
   Future<MenuModel?> _getMenuById(int id) async {
     final MenusSchema? menusSchema = await (_db.select(_db.menusTable)
-      ..where((t) => t.id.equals(id))).getSingleOrNull();
+      ..where(($MenusTableTable t) => t.id.equals(id))).getSingleOrNull();
 
     return (menusSchema != null) ? _getBySchema(menusSchema) : null;
   }
@@ -221,11 +243,11 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
 
     final int schoolId = await _ref.read(userProvider.notifier).getParentId();
     final Expression<DateTime> exp = _db.menusTable.day.min();
-    final query = _db.selectOnly(_db.menusTable)
+    final JoinedSelectStatement<$MenusTableTable, MenusSchema> query = _db.selectOnly(_db.menusTable)
       ..where(_db.menusTable.schoolId.equals(schoolId))
-      ..addColumns([exp]);
+      ..addColumns(<Expression<DateTime>>[exp]);
 
-    return await query.map((scheme) => scheme.read(exp)).getSingle() ?? DateTime.now();
+    return await query.map((TypedResult scheme) => scheme.read(exp)).getSingle() ?? DateTime.now();
   }
 
   Future<DateTime> _getLatestDay() async {
@@ -233,17 +255,17 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
 
     final int schoolId = await _ref.read(userProvider.notifier).getParentId();
     final Expression<DateTime> exp = _db.menusTable.day.max();
-    final query = _db.selectOnly(_db.menusTable)
+    final JoinedSelectStatement<$MenusTableTable, MenusSchema> query = _db.selectOnly(_db.menusTable)
       ..where(_db.menusTable.schoolId.equals(schoolId))
-      ..addColumns([exp]);
+      ..addColumns(<Expression<DateTime>>[exp]);
 
-    return await query.map((scheme) => scheme.read(exp)).getSingle() ?? DateTime.now();
+    return await query.map((TypedResult scheme) => scheme.read(exp)).getSingle() ?? DateTime.now();
   }
 
   Future<MenuModel> _getBySchema(MenusSchema menusSchema) async {
-    List<DishModel> dishes = [];
+    final List<DishModel> dishes = <DishModel>[];
     final List<MenuDishesSchema> menuDishesSchemas =
-        await (_db.select(_db.menuDishesTable)..where((t) => t.menuId.equals(menusSchema.id))).get();
+        await (_db.select(_db.menuDishesTable)..where(($MenuDishesTableTable t) => t.menuId.equals(menusSchema.id))).get();
 
     await Future.forEach(menuDishesSchemas, (MenuDishesSchema menuDishesSchema) async {
       final DishModel dish = await _getDishById(menuDishesSchema.dishId);
@@ -261,10 +283,10 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
 
   Future<DishModel> _getDishById(int dishId) async {
     final DishesSchema dishesSchema = await (_db.select(_db.dishesTable)
-      ..where((t) => t.id.equals(dishId))).getSingle();
-    List<FoodstuffModel> foodstuffs = [];
+      ..where(($DishesTableTable t) => t.id.equals(dishId))).getSingle();
+    final List<FoodstuffModel> foodstuffs = <FoodstuffModel>[];
     final List<DishFoodstuffsSchema> dishFoodstuffsSchemas = await (_db.select(_db.dishFoodstuffsTable)
-      ..where((t) => t.dishId.equals(dishesSchema.id))).get();
+      ..where(($DishFoodstuffsTableTable t) => t.dishId.equals(dishesSchema.id))).get();
 
     await Future.forEach(dishFoodstuffsSchemas, (DishFoodstuffsSchema dishFoodstuffsSchema) async {
       final FoodstuffModel foodstuff = await _getFoodstuffById(dishFoodstuffsSchema.foodstuffId);
@@ -294,14 +316,13 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
         return DishModel(
           name: dishesSchema.name,
           foodstuffs: foodstuffs,
-          category: null,
         );
     }
   }
 
   Future<FoodstuffModel> _getFoodstuffById(int foodstuffId) async {
     final FoodstuffsSchema foodstuffsSchema =
-        await (_db.select(_db.foodstuffsTable)..where((t) => t.id.equals(foodstuffId))).getSingle();
+        await (_db.select(_db.foodstuffsTable)..where(($FoodstuffsTableTable t) => t.id.equals(foodstuffId))).getSingle();
 
     return FoodstuffModel(
       name: foodstuffsSchema.name,
@@ -338,20 +359,20 @@ class MenusLocalRepository extends MenusLocalRepositoryBase {
 
     final int schoolId = await _ref.read(userProvider.notifier).getParentId();
     final Expression<DateTime> exp = _db.menusTable.updateAt.max();
-    final query = _db.selectOnly(_db.menusTable)
+    final JoinedSelectStatement<$MenusTableTable, MenusSchema> query = _db.selectOnly(_db.menusTable)
       ..where(_db.menusTable.schoolId.equals(schoolId))
-      ..addColumns([exp]);
+      ..addColumns(<Expression<DateTime>>[exp]);
 
-    return await query.map((scheme) => scheme.read(exp)).getSingle() ?? DateTime(1970);
+    return await query.map((TypedResult scheme) => scheme.read(exp)).getSingle() ?? DateTime(1970);
   }
 
   Future<int> _count() async {
     final int schoolId = await _ref.read(userProvider.notifier).getParentId();
     final Expression<int> exp = _db.menusTable.id.count();
-    final query = _db.selectOnly(_db.menusTable)
+    final JoinedSelectStatement<$MenusTableTable, MenusSchema> query = _db.selectOnly(_db.menusTable)
       ..where(_db.menusTable.schoolId.equals(schoolId))
-      ..addColumns([exp]);
-    final int? count = await query.map((scheme) => scheme.read(exp)).getSingleOrNull();
+      ..addColumns(<Expression<int>>[exp]);
+    final int? count = await query.map((TypedResult scheme) => scheme.read(exp)).getSingleOrNull();
 
     return count ?? 0;
   }

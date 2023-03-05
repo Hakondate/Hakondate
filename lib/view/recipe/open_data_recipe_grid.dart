@@ -9,8 +9,8 @@ import 'package:hakondate/router/routes.dart';
 
 class OpenDataRecipeGrid extends StatelessWidget {
   const OpenDataRecipeGrid({
-    super.key,
     required this.type,
+    super.key,
   });
 
   final RecipeType type;
@@ -25,7 +25,7 @@ class OpenDataRecipeGrid extends StatelessWidget {
       crossAxisCount: 2,
       mainAxisSpacing: MarginSize.minimum,
       crossAxisSpacing: MarginSize.minimum,
-      children: recipes.map((recipe) => _gridTile(recipe)).toList(),
+      children: recipes.map(_gridTile).toList(),
     );
   }
 
@@ -39,18 +39,18 @@ class OpenDataRecipeGrid extends StatelessWidget {
         clipBehavior: Clip.antiAliasWithSaveLayer,
         decoration: BoxDecoration(
           color: AppColor.ui.white,
-          borderRadius: BorderRadius.circular(16.0),
-          boxShadow: [
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: <BoxShadow>[
             BoxShadow(
               color: AppColor.ui.shadow,
-              blurRadius: 1.0,
-              offset: const Offset(0.0, MarginSize.shadow),
+              blurRadius: 1,
+              offset: const Offset(0, MarginSize.shadow),
             ),
           ],
         ),
         child: Column(
           verticalDirection: VerticalDirection.up,
-          children: [
+          children: <Widget>[
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(vertical: PaddingSize.minimum),

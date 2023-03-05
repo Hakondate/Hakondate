@@ -5,7 +5,8 @@ import 'package:hakondate/model/user/user_model.dart';
 import 'package:hakondate/repository/local/sqlite/local_database.dart';
 import 'package:hakondate/util/exception/sqlite_exception.dart';
 
-final usersLocalRepositoryProvider = Provider<UsersLocalRepository>((ref) {
+final Provider<UsersLocalRepository> usersLocalRepositoryProvider =
+    Provider<UsersLocalRepository>((ProviderRef<UsersLocalRepository> ref) {
   final LocalDatabase localDatabase = ref.watch(localDatabaseProvider);
   return UsersLocalRepository(localDatabase);
 });
@@ -27,17 +28,17 @@ class UsersLocalRepository extends UsersLocalRepositoryBase {
 
   @override
   Future<List<UserModel>> getAll() async {
-    List<UserModel> users = [];
+    final List<UserModel> users = <UserModel>[];
     final List<UsersSchema> usersSchemas = await _db.select(_db.usersTable).get();
 
-    for (var usersSchema in usersSchemas) {
-      final UserModel _user = UserModel(
+    for (final UsersSchema usersSchema in usersSchemas) {
+      final UserModel user = UserModel(
         id: usersSchema.id,
         name: usersSchema.name,
         schoolId: usersSchema.schoolId,
         schoolYear: usersSchema.schoolYear,
       );
-      users.add(_user);
+      users.add(user);
     }
 
     return users;
@@ -46,7 +47,7 @@ class UsersLocalRepository extends UsersLocalRepositoryBase {
   @override
   Future<UserModel> getById(int id) async {
     final UsersSchema? usersSchema =
-        await (_db.select(_db.usersTable)..where((t) => t.id.equals(id))).getSingleOrNull();
+        await (_db.select(_db.usersTable)..where(($UsersTableTable t) => t.id.equals(id))).getSingleOrNull();
 
     if (usersSchema == null) throw SQLiteException('Failed to select $id from usersTable');
 
@@ -62,35 +63,37 @@ class UsersLocalRepository extends UsersLocalRepositoryBase {
   Future<int> add(String name, int schoolId, int schoolYear) =>
       _db.into(_db.usersTable).insertOnConflictUpdate(
         UsersTableCompanion(
-          name: Value(name),
-          schoolId: Value(schoolId),
-          schoolYear: Value(schoolYear),
-        ));
+          name: Value<String>(name),
+          schoolId: Value<int>(schoolId),
+          schoolYear: Value<int>(schoolYear),
+        ),
+      );
 
   @override
   Future<int> update(UserModel user) async {
     final UsersTableCompanion companion = UsersTableCompanion(
-      id: Value(user.id),
-      name: Value(user.name),
-      schoolId: Value(user.schoolId),
-      schoolYear: Value(user.schoolYear),
+      id: Value<int>(user.id),
+      name: Value<String>(user.name),
+      schoolId: Value<int>(user.schoolId),
+      schoolYear: Value<int>(user.schoolYear),
     );
 
-    return await (_db.update(_db.usersTable)..where((t) =>
-        t.id.equals(companion.id.value))).write(companion);
+    return (_db.update(_db.usersTable)..where(($UsersTableTable t) =>
+        t.id.equals(companion.id.value),
+    )).write(companion);
   }
 
   @override
   Future<int> count() async {
     final Expression<int> exp = _db.usersTable.id.count();
-    final query = _db.selectOnly(_db.usersTable)..addColumns([exp]);
-    final int? count = await query.map((scheme) => scheme.read(exp)).getSingleOrNull();
+    final JoinedSelectStatement<$UsersTableTable, UsersSchema> query = _db.selectOnly(_db.usersTable)..addColumns(<Expression<int>>[exp]);
+    final int? count = await query.map((TypedResult scheme) => scheme.read(exp)).getSingleOrNull();
 
     return count ?? 0;
   }
 
   @override
-  Future<int> delete(int id) => (_db.delete(_db.usersTable)..where((t) => t.id.equals(id))).go();
+  Future<int> delete(int id) => (_db.delete(_db.usersTable)..where(($UsersTableTable t) => t.id.equals(id))).go();
 
   @override
   Future<void> deleteAll() => _db.delete(_db.usersTable).go();

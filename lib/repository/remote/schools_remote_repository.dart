@@ -5,11 +5,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/repository/remote/firestore_database.dart';
 
-final schoolsRemoteRepositoryProvider = Provider<SchoolsRemoteRepository>((ref) {
+final Provider<SchoolsRemoteRepository> schoolsRemoteRepositoryProvider =
+    Provider<SchoolsRemoteRepository>((ProviderRef<SchoolsRemoteRepository> ref) {
   final FirebaseFirestore firestoreDatabase = ref.watch(firestoreDatabaseProvider);
   return SchoolsRemoteRepository(firestoreDatabase.collection('schools'));
 });
 
+// ignore: one_member_abstracts
 abstract class SchoolsRemoteRepositoryBase {
   Future<List<dynamic>> get({required DateTime updateAt});
 }
@@ -21,8 +23,9 @@ class SchoolsRemoteRepository extends SchoolsRemoteRepositoryBase {
 
   @override
   Future<List<dynamic>> get({required DateTime updateAt}) async {
-    final firestoreData = await _db.where('updateAt', isGreaterThan: updateAt).get();
+    final QuerySnapshot<Map<String, dynamic>> firestoreData =
+        await _db.where('updateAt', isGreaterThan: updateAt).get();
 
-    return firestoreData.docs.map((doc) => doc.data()).toList();
+    return firestoreData.docs.map((QueryDocumentSnapshot<Map<String, dynamic>> doc) => doc.data()).toList();
   }
 }

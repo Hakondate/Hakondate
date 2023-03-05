@@ -24,8 +24,8 @@ class AppBottomNavigationBar extends ConsumerWidget {
       body: TabBarView(
         controller: tabState.controller,
         physics: const NeverScrollableScrollPhysics(),
-        children: [
-          for (final stack in tabState.stacks) PageStackNavigator(stack: stack),
+        children: <Widget>[
+          for (final PageStack stack in tabState.stacks) PageStackNavigator(stack: stack),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -35,11 +35,11 @@ class AppBottomNavigationBar extends ConsumerWidget {
         backgroundColor: AppColor.ui.white,
         selectedItemColor: AppColor.brand.secondary,
         selectedLabelStyle: const TextStyle(
-          fontSize: 10.0,
+          fontSize: 10,
           fontWeight: FontWeight.bold,
         ),
         showUnselectedLabels: false,
-        items: [
+        items: <BottomNavigationBarItem>[
           _svgBottomNavigationBarItem(
             activeIconPath: SvgPath.bottomNavigationBarIcons.activeDaily,
             inactiveIconPath: SvgPath.bottomNavigationBarIcons.inactiveDaily,
@@ -72,23 +72,29 @@ class AppBottomNavigationBar extends ConsumerWidget {
   }) {
     return BottomNavigationBarItem(
       activeIcon: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 2.0),
+        padding: const EdgeInsets.symmetric(vertical: 2),
         child: SvgPicture.asset(
           activeIconPath,
           width: IconSize.navigationItem,
           height: IconSize.navigationItem,
-          color: AppColor.brand.secondary,
+          colorFilter: ColorFilter.mode(
+            AppColor.brand.secondary,
+            BlendMode.srcIn,
+          ),
         ),
       ),
       icon: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 2.0),
+        padding: const EdgeInsets.symmetric(vertical: 2),
         child: Builder(
-          builder: (context) {
+          builder: (BuildContext context) {
             return SvgPicture.asset(
               inactiveIconPath,
               width: IconSize.navigationItem,
               height: IconSize.navigationItem,
-              color: Theme.of(context).unselectedWidgetColor,
+              colorFilter: ColorFilter.mode(
+                Theme.of(context).unselectedWidgetColor,
+                BlendMode.srcIn,
+              ),
             );
           },
         ),

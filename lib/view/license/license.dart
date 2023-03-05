@@ -11,7 +11,8 @@ class License extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Package> directDependencyLicenses = ossLicenses.where(
-            (package) => package.isDirectDependency).toList();
+          (Package package) => package.isDirectDependency,
+    ).toList();
 
     return Scaffold(
       backgroundColor: AppColor.ui.white,
@@ -21,7 +22,7 @@ class License extends StatelessWidget {
       body: ListView.separated(
         itemCount: directDependencyLicenses.length,
         separatorBuilder: (_, __) => const Divider(
-          height: 0.0,
+          height: 0,
         ),
         itemBuilder: (_, int index) {
           final Package package = directDependencyLicenses[index];

@@ -7,7 +7,8 @@ import 'package:hakondate/state/terms/terms_state.dart';
 import 'package:hakondate/state/user/user_state.dart';
 import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 
-final termsProvider = StateNotifierProvider<TermsViewModel, TermsState>((ref) {
+final StateNotifierProvider<TermsViewModel, TermsState> termsProvider =
+    StateNotifierProvider<TermsViewModel, TermsState>((StateNotifierProviderRef<TermsViewModel, TermsState> ref) {
   final UserState user = ref.watch(userProvider);
   return TermsViewModel(user);
 });

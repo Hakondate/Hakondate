@@ -16,9 +16,9 @@ import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/util/app_unique_key.dart';
 
 Future<void> main() async {
-  runZonedGuarded<Future<void>>(() async {
+  await runZonedGuarded<Future<void>>(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    SystemChrome.setPreferredOrientations([
+    await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);

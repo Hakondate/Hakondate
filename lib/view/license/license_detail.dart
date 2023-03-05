@@ -6,8 +6,8 @@ import 'package:hakondate/view/component/frame/fade_up_app_bar.dart';
 
 class LicenseDetail extends StatelessWidget {
   const LicenseDetail({
-    super.key,
     required this.index,
+    super.key,
   });
 
   final int index;
@@ -15,7 +15,8 @@ class LicenseDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Package package = ossLicenses.where(
-            (package) => package.isDirectDependency).toList()[index];
+          (Package package) => package.isDirectDependency,
+    ).toList()[index];
 
     return Scaffold(
       appBar: FadeUpAppBar(
@@ -27,7 +28,7 @@ class LicenseDetail extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: <Widget>[
               Text('version: ${package.version}'),
               const Divider(),
               Text(package.description),

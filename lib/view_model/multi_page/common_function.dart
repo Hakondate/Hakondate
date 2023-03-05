@@ -9,7 +9,8 @@ import 'package:hakondate/util/app_unique_key.dart';
 import 'package:hakondate/util/environment.dart';
 import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 
-final commonFunctionProvider = StateNotifierProvider<CommonFunction, void>((ref) => CommonFunction(ref));
+final StateNotifierProvider<CommonFunction, void> commonFunctionProvider =
+    StateNotifierProvider<CommonFunction, void>(CommonFunction.new);
 
 class CommonFunction extends StateNotifier<void> {
   CommonFunction(this._ref) : super(null);

@@ -9,7 +9,7 @@ class SchoolModel with _$SchoolModel {
     required int id,                              // ID
     required int parentId,                        // 親学校(給食センター)のID
     required String name,                         // 学校名
-    int? lunchBlock,                              // 給食区分: 1 ~ 10
     required SchoolClassification classification, // 学校区分
+    int? lunchBlock,                              // 給食区分: 1 ~ 10
   }) = _SchoolModel;
 }

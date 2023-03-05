@@ -9,5 +9,5 @@ enum LoadingStatus{
   const LoadingStatus({required this.imageFileName});
   final String imageFileName;
 
-  String get imagePath => 'assets/loading_animation/' + imageFileName;
+  String get imagePath => 'assets/loading_animation/$imageFileName';
 }

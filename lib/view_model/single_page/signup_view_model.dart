@@ -8,7 +8,8 @@ import 'package:hakondate/state/signup/signup_state.dart';
 import 'package:hakondate/util/exception/parameters_exception.dart';
 import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 
-final signupProvider = StateNotifierProvider<SignupViewModel, SignupState>((ref) {
+final StateNotifierProvider<SignupViewModel, SignupState> signupProvider =
+    StateNotifierProvider<SignupViewModel, SignupState>((StateNotifierProviderRef<SignupViewModel, SignupState> ref) {
   final SchoolsLocalRepository schoolLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
   return SignupViewModel(schoolLocalRepository, ref);
 });
@@ -22,7 +23,7 @@ class SignupViewModel extends StateNotifier<SignupState> {
   final Ref _ref;
 
   Future<void> _initialize() async {
-    final cache = state;
+    final SignupState cache = state;
     if (cache is! SignupStateData) return;
 
     final List<SchoolModel> schools = await _schoolLocalRepository.getAll();
@@ -30,7 +31,7 @@ class SignupViewModel extends StateNotifier<SignupState> {
   }
 
   Future<void> signup() async {
-    final cache = state;
+    final SignupState cache = state;
     if (cache is! SignupStateData) return;
 
     state = const SignupStateLoad();
@@ -61,7 +62,7 @@ class SignupViewModel extends StateNotifier<SignupState> {
   }
 
   Future<void> retry() async {
-    final cache = state;
+    final SignupState cache = state;
     if (cache is! SignupStateError) return;
 
     state = cache.cache;
@@ -69,20 +70,20 @@ class SignupViewModel extends StateNotifier<SignupState> {
   }
 
   void updateName(String? name) {
-    final cache = state;
+    final SignupState cache = state;
     if (cache is! SignupStateData) return;
 
     state = cache.copyWith(name: name);
   }
 
   Future<void> updateSchool(int id) async {
-    final cache = state;
+    final SignupState cache = state;
     if (cache is! SignupStateData) return;
 
     final SchoolModel school = await _schoolLocalRepository.getById(id);
     final List<String> schoolYears = (school.classification == SchoolClassification.primary)
-        ? ['1年生', '2年生', '3年生', '4年生', '5年生', '6年生']
-        : ['1年生', '2年生', '3年生'];
+        ? <String>['1年生', '2年生', '3年生', '4年生', '5年生', '6年生']
+        : <String>['1年生', '2年生', '3年生'];
     if (cache.schoolYear != null &&
         cache.schoolYear! > 3 &&
         school.classification == SchoolClassification.secondary) {
@@ -103,7 +104,7 @@ class SignupViewModel extends StateNotifier<SignupState> {
   }
 
   void updateSchoolYear(int year) {
-    final cache = state;
+    final SignupState cache = state;
     if (cache is! SignupStateData) return;
 
     state = cache.copyWith(
@@ -116,14 +117,14 @@ class SignupViewModel extends StateNotifier<SignupState> {
     _checkNameValidation();
     _checkSchoolValidation();
 
-    final cache = state;
+    final SignupState cache = state;
     if (cache is! SignupStateData) return false;
 
     return cache.nameErrorState == null && cache.schoolErrorState == null;
   }
 
   void _checkNameValidation() {
-    final cache = state;
+    final SignupState cache = state;
     if (cache is! SignupStateData) return;
 
     final String? nameErrorState = (cache.name == null || cache.name!.isEmpty)
@@ -132,7 +133,7 @@ class SignupViewModel extends StateNotifier<SignupState> {
   }
 
   void _checkSchoolValidation() {
-    final cache = state;
+    final SignupState cache = state;
     if (cache is! SignupStateData) return;
     if (cache.schoolId != null && cache.schoolYear != null) {
       state = cache.copyWith(schoolErrorState: null);

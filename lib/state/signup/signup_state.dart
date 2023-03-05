@@ -14,8 +14,8 @@ class SignupState with _$SignupState {
     int? schoolYear,
     String schoolTrailing = '学校を選択',
     String schoolYearTrailing = '学年を選択',
-    List<SchoolModel> schools = const [],
-    List<String> schoolYears = const ['1年生', '2年生', '3年生'],
+    List<SchoolModel> schools = const <SchoolModel>[],
+    List<String> schoolYears = const <String>['1年生', '2年生', '3年生'],
     String? nameErrorState,
     String? schoolErrorState,
   }) => SignupState.data(
@@ -31,13 +31,13 @@ class SignupState with _$SignupState {
   );
 
   const factory SignupState.data({
-    String? name,
-    int? schoolId,
-    int? schoolYear,
     required String schoolTrailing,
     required String schoolYearTrailing,
     required List<SchoolModel> schools,
     required List<String> schoolYears,
+    String? name,
+    int? schoolId,
+    int? schoolYear,
     String? nameErrorState,
     String? schoolErrorState,
   }) = SignupStateData;

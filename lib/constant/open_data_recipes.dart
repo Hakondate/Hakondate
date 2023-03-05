@@ -2,7 +2,7 @@ import 'package:hakondate/model/recipe/open_data_recipe_model.dart';
 import 'package:hakondate/model/recipe/recipe_type.dart';
 
 class OpenDataRecipes {
-  static final List<OpenDataRecipeModel> all = [
+  static final List<OpenDataRecipeModel> all = <OpenDataRecipeModel>[
     ...dupes,
     ...originals,
     ...steamConvectionOvens,
@@ -22,7 +22,7 @@ class OpenDataRecipes {
     }
   }
 
-  static final List<OpenDataRecipeModel> dupes = [
+  static final List<OpenDataRecipeModel> dupes = <OpenDataRecipeModel>[
     OpenDataRecipeModel(
       id: 0,
       name: 'とろろ昆布のすまし汁',
@@ -102,7 +102,7 @@ class OpenDataRecipes {
     ),
   ];
 
-  static final List<OpenDataRecipeModel> originals = [
+  static final List<OpenDataRecipeModel> originals = <OpenDataRecipeModel>[
     OpenDataRecipeModel(
       id: 11,
       name: 'いかの磯辺揚げ',
@@ -175,7 +175,7 @@ class OpenDataRecipes {
     ),
   ];
 
-  static final List<OpenDataRecipeModel> steamConvectionOvens = [
+  static final List<OpenDataRecipeModel> steamConvectionOvens = <OpenDataRecipeModel>[
     OpenDataRecipeModel(
       id: 21,
       name: 'ブリの豆板醤焼き',
@@ -331,7 +331,7 @@ class OpenDataRecipes {
     ),
   ];
 
-  static final List<OpenDataRecipeModel> others = [
+  static final List<OpenDataRecipeModel> others = <OpenDataRecipeModel>[
     OpenDataRecipeModel(
       id: 43,
       name: '学校給食のだしの取り方',

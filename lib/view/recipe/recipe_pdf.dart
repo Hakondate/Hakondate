@@ -22,15 +22,15 @@ class RecipePDF extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final OpenDataRecipeModel recipe = OpenDataRecipes.all.firstWhere((recipe) => recipe.id == int.parse(id ?? '0'));
+    final OpenDataRecipeModel recipe = OpenDataRecipes.all.firstWhere((OpenDataRecipeModel recipe) => recipe.id == int.parse(id ?? '0'));
 
     return Scaffold(
       appBar: FadeUpAppBar(
         title: Text(recipe.name),
       ),
-      body: FutureBuilder(
+      body: FutureBuilder<String>(
         future: ref.read(recipeProvider.notifier).getPath(recipe: recipe),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return Center(
               child: CircularProgressIndicator(
@@ -43,12 +43,13 @@ class RecipePDF extends ConsumerWidget {
             return PDFView(
               filePath: snapshot.data,
               enableSwipe: false,
-              onError: (_) async => await showDialog(
+              onError: (_) async => showDialog(
                 context: context,
                 builder: (BuildContext context) => DownloadExceptionDialog(
                   onTapRetry: () => routemaster.pop().whenComplete(() =>
-                      ref.read(recipeProvider.notifier).reDownload(recipe: recipe)),
-                  onTapPop: () => routemaster.pop().whenComplete(() => routemaster.pop()),
+                      ref.read(recipeProvider.notifier).reDownload(recipe: recipe),
+                  ),
+                  onTapPop: () => routemaster.pop().whenComplete(routemaster.pop),
                 ),
               ),
             );
@@ -57,7 +58,7 @@ class RecipePDF extends ConsumerWidget {
           return Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              children: [
+              children: <Widget>[
                 Image.asset(
                   'assets/images/status/error.png',
                   width: MediaQuery.of(context).size.width / 2,
@@ -66,7 +67,7 @@ class RecipePDF extends ConsumerWidget {
                 Text(
                   '読み込みに失敗しました',
                   style: TextStyle(
-                    fontSize: 24.0,
+                    fontSize: 24,
                     fontWeight: FontWeight.bold,
                     color: AppColor.text.primary,
                   ),

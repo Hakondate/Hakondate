@@ -1,7 +1,7 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final analyticsControllerProvider = StateNotifierProvider<AnalyticsController, FirebaseAnalytics>((_) {
+final StateNotifierProvider<AnalyticsController, FirebaseAnalytics> analyticsControllerProvider = StateNotifierProvider<AnalyticsController, FirebaseAnalytics>((_) {
   final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   return AnalyticsController(analytics);
 });

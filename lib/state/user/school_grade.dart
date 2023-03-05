@@ -15,5 +15,5 @@ enum SchoolGrade {
   const SchoolGrade({required this.slnsFileName});
   final String slnsFileName;
 
-  String get slnsPath => 'assets/slns/' + slnsFileName;
+  String get slnsPath => 'assets/slns/$slnsFileName';
 }
