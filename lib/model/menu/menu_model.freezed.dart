@@ -176,7 +176,7 @@ class _$LunchesDayMenuModelImpl extends LunchesDayMenuModel {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LunchesDayMenuModelImpl &&
@@ -320,7 +320,7 @@ class _$HolidayMenuModelImpl extends HolidayMenuModel {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$HolidayMenuModelImpl);
   }
@@ -435,7 +435,7 @@ class _$NodataMenuModelImpl extends NodataMenuModel {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$NodataMenuModelImpl);
   }
