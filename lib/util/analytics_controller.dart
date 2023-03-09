@@ -44,14 +44,14 @@ class AnalyticsController extends StateNotifier<FirebaseAnalytics> {
     );
   }
 
-  Future<void> logViewLetter(int id) async {
+  Future<void> logViewLetter(String path) async {
     await state.logSelectContent(
       contentType: 'letter',
-      itemId: id.toString(),
+      itemId: path,
     );
     await state.logScreenView(
       screenClass: 'Letter',
-      screenName: id.toString(),
+      screenName: path,
     );
   }
 }
