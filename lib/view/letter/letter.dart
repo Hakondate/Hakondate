@@ -36,7 +36,6 @@ class Letter extends StatelessWidget {
                 backgroundColor: AppColor.ui.white,
                 displacement: 0.0,
                 child: GridView.builder(
-                  shrinkWrap: true,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     mainAxisSpacing: MarginSize.minimum,
