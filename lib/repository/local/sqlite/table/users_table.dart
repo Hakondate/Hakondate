@@ -8,7 +8,7 @@ class UsersTable extends Table {
   IntColumn get schoolYear => integer()();
 
   @override
-  List<String> get customConstraints => [
+  List<String> get customConstraints => <String>[
     'FOREIGN KEY(school_id) REFERENCES schools_table(id)',
   ];
 }

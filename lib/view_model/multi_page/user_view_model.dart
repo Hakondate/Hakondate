@@ -17,7 +17,8 @@ import 'package:hakondate/util/analytics_controller.dart';
 import 'package:hakondate/util/exception/shared_preferences_exception.dart';
 import 'package:hakondate/util/exception/sign_in_exception.dart';
 
-final userProvider = StateNotifierProvider<UserViewModel, UserState>((ref) {
+final StateNotifierProvider<UserViewModel, UserState> userProvider =
+    StateNotifierProvider<UserViewModel, UserState>((StateNotifierProviderRef<UserViewModel, UserState> ref) {
   final UsersLocalRepository usersLocalRepository = ref.watch(usersLocalRepositoryProvider);
   final SchoolsLocalRepository schoolsLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
   return UserViewModel(schoolsLocalRepository, usersLocalRepository, ref);
@@ -66,10 +67,10 @@ class UserViewModel extends StateNotifier<UserState> {
     int? schoolYear,
   }) async {
     if (state.currentUser == null) return;
-    NutrientsModel? slns = (schoolId != null || schoolYear != null)
+    final NutrientsModel? slns = (schoolId != null || schoolYear != null)
         ? await _getSLNS(state.currentUser!.id)
         : state.currentUser!.slns;
-    UserModel newUser = state.currentUser!.copyWith(
+    final UserModel newUser = state.currentUser!.copyWith(
       name: name ?? state.currentUser!.name,
       schoolId: schoolId ?? state.currentUser!.schoolId,
       schoolYear: schoolYear ?? state.currentUser!.schoolYear,
@@ -83,7 +84,7 @@ class UserViewModel extends StateNotifier<UserState> {
   Future<NutrientsModel> _getSLNS(int userId) async {
     final SchoolGrade schoolGrade = await _getSchoolGrade(userId);
     final String jsonSLNS = await rootBundle.loadString(schoolGrade.slnsPath);
-    final Map<String, dynamic> decodeSLNS = json.decode(jsonSLNS);
+    final Map<String, dynamic> decodeSLNS = json.decode(jsonSLNS) as Map<String, dynamic>;
 
     return NutrientsModel.fromJson(decodeSLNS);
   }

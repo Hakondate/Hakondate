@@ -1,9 +1,11 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'dart:ui';
 
 class AppColor {
-  static final brand = _Brand();
-  static final text = _Text();
-  static final ui = _Ui();
+  static final _Brand brand = _Brand();
+  static final _Text text = _Text();
+  static final _Ui ui = _Ui();
 }
 
 class _Brand {

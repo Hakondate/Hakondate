@@ -17,7 +17,7 @@ class MenuCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        final menu = ref.watch(dailyProvider).menu;
+        final MenuModel menu = ref.watch(dailyProvider).menu;
 
         if (menu is! LunchesDayMenuModel) {
           throw const ClassTypeException("'menu' is not 'LunchesDayMenuModel'");
@@ -26,7 +26,7 @@ class MenuCard extends StatelessWidget {
         return Card(
           clipBehavior: Clip.antiAliasWithSaveLayer,
           child: Column(
-            children: [
+            children: <Widget>[
               Image.asset('assets/images/label/menuLabel.png'),
               GridView.count(
                 shrinkWrap: true,
@@ -36,7 +36,7 @@ class MenuCard extends StatelessWidget {
                 mainAxisSpacing: MarginSize.minimum,
                 crossAxisSpacing: MarginSize.minimum,
                 childAspectRatio: 2 / 1,
-                children: menu.dishes.map((DishModel dish) => _menuTile(dish)).toList(),
+                children: menu.dishes.map(_menuTile).toList(),
               ),
             ],
           ),
@@ -47,23 +47,23 @@ class MenuCard extends StatelessWidget {
 
   Widget _menuTile(DishModel dish) {
     return GestureDetector(
-      child: Container(
+      child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: AppColor.ui.white.withOpacity(0.8),
-            width: 3.0,
+            color: AppColor.ui.white.withOpacity(0.5),
+            width: 3,
           ),
           image: DecorationImage(
             image: AssetImage('assets/images/menu_tile/${(dish.category != null) ? dish.category!.value : 'side'}.png'),
             fit: BoxFit.fitWidth,
           ),
           color: AppColor.brand.secondary,
-          boxShadow: [
+          boxShadow: <BoxShadow>[
             BoxShadow(
               color: AppColor.ui.shadow,
-              blurRadius: 1.0,
-              offset: const Offset(0.0, MarginSize.shadow),
+              blurRadius: 1,
+              offset: const Offset(0, MarginSize.shadow),
             ),
           ],
         ),
@@ -78,7 +78,7 @@ class MenuCard extends StatelessWidget {
             child: Text(
               dish.name,
               style: const TextStyle(
-                fontSize: 16.0,
+                fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center,

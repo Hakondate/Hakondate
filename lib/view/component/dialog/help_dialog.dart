@@ -4,9 +4,9 @@ import 'package:hakondate/constant/size.dart';
 
 class HelpDialog extends StatelessWidget {
   const HelpDialog({
-    super.key,
     required this.title,
     required this.content,
+    super.key,
   });
 
   final Widget title;
@@ -17,7 +17,7 @@ class HelpDialog extends StatelessWidget {
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       title: Row(
-        children: [
+        children: <Widget>[
           Container(
             margin: const EdgeInsets.only(right: MarginSize.minimum),
             child: Icon(

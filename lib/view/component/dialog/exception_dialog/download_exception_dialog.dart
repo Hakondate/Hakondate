@@ -4,13 +4,13 @@ import 'package:hakondate/view/component/dialog/hakondate_dialog/hakondate_dialo
 
 class DownloadExceptionDialog extends StatelessWidget {
   const DownloadExceptionDialog({
-    Key? key,
+    super.key,
     this.onTapRetry,
     this.onTapPop,
-  }) : super(key: key);
+  });
 
-  final Function()? onTapRetry;
-  final Function()? onTapPop;
+  final void Function()? onTapRetry;
+  final void Function()? onTapPop;
 
   @override
   Widget build(BuildContext context) {

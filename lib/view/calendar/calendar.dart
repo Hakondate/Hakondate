@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate/state/calendar/calendar_state.dart';
 import 'package:intl/intl.dart';
 
 import 'package:hakondate/constant/app_color.dart';
@@ -26,14 +27,14 @@ class Calendar extends StatelessWidget {
       ),
       body: Consumer(
         builder: (BuildContext context, WidgetRef ref, _) {
-          final store = ref.watch(calendarProvider);
+          final CalendarState store = ref.watch(calendarProvider);
           final double appHeight = MediaQuery.of(context).size.height;
 
           return StatefulWrapper(
             onInit: () => ref.read(calendarProvider.notifier).initialize(appHeight),
             child: Scrollbar(
               controller: ref.read(calendarProvider.notifier).scrollController,
-              radius: const Radius.circular(16.0),
+              radius: const Radius.circular(16),
               child: ListView.builder(
                 controller: ref.read(calendarProvider.notifier).scrollController,
                 reverse: true,
@@ -54,7 +55,7 @@ class Calendar extends StatelessWidget {
         return GestureDetector(
           onTap: () async {
             await ref.read(dailyProvider.notifier).updateSelectedDay(selectedDay: day);
-            routemaster.pop();
+            await routemaster.pop();
           },
           child: Card(
             clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -64,7 +65,7 @@ class Calendar extends StatelessWidget {
             child: SizedBox(
               height: UiSize.calendarTileHeight,
               child: Row(
-                children: [
+                children: <Widget>[
                   _dayLabel(day),
                   _dailyContent(day),
                 ],
@@ -78,11 +79,11 @@ class Calendar extends StatelessWidget {
 
   Widget _dayLabel(DateTime day) {
     return Container(
-      width: 64.0,
+      width: 64,
       height: double.infinity,
       color: _dayOfTheWeekColor(day),
       child: Column(
-        children: [
+        children: <Widget>[
           Expanded(
             child: Consumer(
               builder: (BuildContext context, WidgetRef ref, _) {
@@ -100,17 +101,17 @@ class Calendar extends StatelessWidget {
                   );
                 }
                 return Container();
-              }
+              },
             ),
           ),
           Expanded(
             child: Text(
               day.day.toString(),
               style: TextStyle(
-                fontSize: 32.0,
+                fontSize: 32,
                 fontWeight: FontWeight.bold,
                 color: AppColor.text.white,
-                height: 1.0,
+                height: 1,
               ),
             ),
           ),
@@ -118,7 +119,7 @@ class Calendar extends StatelessWidget {
             child: Text(
               DateFormat.EEEE('ja').format(day)[0],
               style: TextStyle(
-                fontSize: 20.0,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: AppColor.text.white,
               ),
@@ -142,7 +143,7 @@ class Calendar extends StatelessWidget {
   Widget _dailyContent(DateTime day) {
     return Expanded(
       child: Stack(
-        children: [
+        children: <Widget>[
           Positioned(
             right: PaddingSize.minimum,
             bottom: PaddingSize.minimum,
@@ -156,7 +157,7 @@ class Calendar extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Consumer(
                 builder: (BuildContext context, WidgetRef ref, _) {
-                  return FutureBuilder(
+                  return FutureBuilder<MenuModel>(
                     future: ref.read(calendarProvider.notifier).getDailyMenu(day),
                     builder: (BuildContext context, AsyncSnapshot<MenuModel> snapshot) {
                       if (snapshot.hasData) {

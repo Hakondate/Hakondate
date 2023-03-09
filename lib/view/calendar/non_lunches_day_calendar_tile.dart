@@ -4,20 +4,16 @@ import 'package:hakondate/constant/app_color.dart';
 
 class NonLunchesDayCalendarTile extends StatelessWidget {
   const NonLunchesDayCalendarTile({
-    super.key,
     required this.message,
     this.backgroundColor,
+    super.key,
   });
-
-  final Widget message;
-  final Color? backgroundColor;
-
   factory NonLunchesDayCalendarTile.holiday() {
     return NonLunchesDayCalendarTile(
       message: Text(
         'お休みです',
         style: TextStyle(
-          fontSize: 24.0,
+          fontSize: 24,
           fontWeight: FontWeight.bold,
           color: AppColor.text.gray,
         ),
@@ -31,7 +27,7 @@ class NonLunchesDayCalendarTile extends StatelessWidget {
       message: Text(
         '準備中です',
         style: TextStyle(
-          fontSize: 24.0,
+          fontSize: 24,
           fontWeight: FontWeight.bold,
           color: AppColor.text.white,
         ),
@@ -44,6 +40,9 @@ class NonLunchesDayCalendarTile extends StatelessWidget {
       message: Container(),
     );
   }
+
+  final Widget message;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {

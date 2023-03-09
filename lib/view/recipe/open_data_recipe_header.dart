@@ -5,10 +5,10 @@ import 'package:hakondate/constant/size.dart';
 
 class OpenDataRecipeHeader extends StatelessWidget {
   const OpenDataRecipeHeader({
-    super.key,
     required this.title,
     this.description,
     this.isRemoveTopMargin = false,
+    super.key,
   });
 
   final Widget title;
@@ -20,10 +20,10 @@ class OpenDataRecipeHeader extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: <Widget>[
         Padding(
           padding: EdgeInsets.only(
-            top: (isRemoveTopMargin) ? 0.0 : PaddingSize.normal,
+            top: isRemoveTopMargin ? 0.0 : PaddingSize.normal,
             bottom: PaddingSize.minimum,
           ),
           child: Container(
@@ -31,7 +31,7 @@ class OpenDataRecipeHeader extends StatelessWidget {
             decoration: BoxDecoration(
               border: Border(
                 left: BorderSide(
-                  width: 8.0,
+                  width: 8,
                   color: AppColor.brand.secondary,
                 ),
               ),

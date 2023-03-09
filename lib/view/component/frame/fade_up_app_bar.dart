@@ -15,12 +15,12 @@ class FadeUpAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       automaticallyImplyLeading: false,
       title: title,
-      actions: [
+      actions: <Widget>[
         IconButton(
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
           icon: const Icon(Icons.close),
-          onPressed: () => routemaster.pop(),
+          onPressed: routemaster.pop,
         ),
       ],
     );

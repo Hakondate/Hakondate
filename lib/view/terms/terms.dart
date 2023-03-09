@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
+import 'package:hakondate/state/terms/terms_state.dart';
 import 'package:hakondate/view/terms/terms_content_column.dart';
 import 'package:hakondate/view_model/single_page/terms_view_model.dart';
 
@@ -22,7 +23,7 @@ class Terms extends StatelessWidget {
           horizontal: MarginSize.normalHorizontal,
         ),
         child: Column(
-          children: [
+          children: <Widget>[
             const Text(
               '　以下の利用規約に同意の上，はこんだてをご利用ください．',
               style: TextStyle(fontSize: FontSize.body),
@@ -51,13 +52,13 @@ class Terms extends StatelessWidget {
   Widget _agreeRow() {
     return Consumer(
       builder: (_, WidgetRef ref, __) {
-        final store = ref.watch(termsProvider);
+        final TermsState store = ref.watch(termsProvider);
 
         return Container(
           margin: const EdgeInsets.all(MarginSize.minimum),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: <Widget>[
               Checkbox(
                 activeColor: AppColor.brand.secondary,
                 value: store.isAgree,
@@ -70,7 +71,7 @@ class Terms extends StatelessWidget {
               const Spacer(),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: AppColor.brand.secondary,
+                  backgroundColor: AppColor.brand.secondary,
                   padding: const EdgeInsets.symmetric(
                     vertical: PaddingSize.buttonVertical,
                     horizontal: PaddingSize.buttonHorizontal,
@@ -80,15 +81,15 @@ class Terms extends StatelessWidget {
                   ),
                   shape: const StadiumBorder(),
                 ),
-                child: const Text('はじめる'),
                 onPressed: store.isAgree
                     ? () => ref.read(termsProvider.notifier).transition()
                     : null,
+                child: const Text('はじめる'),
               ),
             ],
           ),
         );
-      }
+      },
     );
   }
 }

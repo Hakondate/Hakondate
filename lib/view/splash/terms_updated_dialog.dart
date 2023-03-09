@@ -4,11 +4,11 @@ import 'package:hakondate/view/component/dialog/hakondate_dialog/hakondate_dialo
 
 class TermsUpdatedDialog extends StatelessWidget {
   const TermsUpdatedDialog({
-    Key? key,
     required this.onTap,
-  }) : super(key: key);
+    super.key,
+  });
 
-  final Function() onTap;
+  final void Function() onTap;
 
   @override
   Widget build(BuildContext context) {

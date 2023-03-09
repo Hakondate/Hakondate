@@ -1,12 +1,13 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final openDataRecipeRemoteRepositoryProvider = Provider<OpenDataRecipeRemoteRepository>((_) => OpenDataRecipeRemoteRepository());
+final Provider<OpenDataRecipeRemoteRepository> openDataRecipeRemoteRepositoryProvider =
+    Provider<OpenDataRecipeRemoteRepository>((_) => OpenDataRecipeRemoteRepository());
 
+// ignore: one_member_abstracts
 abstract class OpenDataRecipeRemoteRepositoryBase {
   Future<Uint8List> getPDF(String url);
 }
@@ -14,8 +15,10 @@ abstract class OpenDataRecipeRemoteRepositoryBase {
 class OpenDataRecipeRemoteRepository extends OpenDataRecipeRemoteRepositoryBase {
   @override
   Future<Uint8List> getPDF(String url) async {
-    HttpClientRequest request = await HttpClient().getUrl(Uri.parse(url));
-    HttpClientResponse response = await request.close();
-    return await consolidateHttpClientResponseBytes(response);
+    final HttpClientRequest request = await HttpClient().getUrl(Uri.parse(url));
+    final HttpClientResponse response = await request.close();
+    final Uint8List result = await consolidateHttpClientResponseBytes(response);
+
+    return result;
   }
 }

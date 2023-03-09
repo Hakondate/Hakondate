@@ -28,7 +28,7 @@ class LetterPDF extends ConsumerWidget {
         body: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: [
+            children: <Widget>[
               Image.asset(
                 'assets/images/status/error.png',
                 width: MediaQuery.of(context).size.width / 2,
@@ -37,7 +37,7 @@ class LetterPDF extends ConsumerWidget {
               Text(
                 '読み込みに失敗しました',
                 style: TextStyle(
-                  fontSize: 24.0,
+                  fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: AppColor.text.primary,
                 ),
@@ -52,7 +52,7 @@ class LetterPDF extends ConsumerWidget {
       appBar: FadeUpAppBar(
         title: Text(letter.title),
       ),
-      body: FutureBuilder(
+      body: FutureBuilder<Uint8List>(
         future: ref.read(letterProvider.notifier).getLetterPDF(path: letter.path),
         builder: (BuildContext context, AsyncSnapshot<Uint8List> snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
@@ -67,12 +67,13 @@ class LetterPDF extends ConsumerWidget {
             return PDFView(
               pdfData: snapshot.data,
               enableSwipe: false,
-              onError: (_) async => await showDialog(
+              onError: (_) async => showDialog(
                 context: context,
                 builder: (BuildContext context) => DownloadExceptionDialog(
                   onTapRetry: () => routemaster.pop().whenComplete(() =>
-                      ref.read(letterProvider.notifier).getLetterPDF(path: letter.path)),
-                  onTapPop: () => routemaster.pop().whenComplete(() => routemaster.pop()),
+                      ref.read(letterProvider.notifier).getLetterPDF(path: letter.path),
+                  ),
+                  onTapPop: () => routemaster.pop().whenComplete(routemaster.pop),
                 ),
               ),
             );
@@ -81,7 +82,7 @@ class LetterPDF extends ConsumerWidget {
           return Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              children: [
+              children: <Widget>[
                 Image.asset(
                   'assets/images/status/error.png',
                   width: MediaQuery.of(context).size.width / 2,

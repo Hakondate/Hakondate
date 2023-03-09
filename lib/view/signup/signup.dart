@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
+import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/state/signup/signup_state.dart';
 import 'package:hakondate/view/component/dialog/help_dialog.dart';
 import 'package:hakondate/view/component/label/setting_label.dart';
@@ -25,7 +26,7 @@ class Signup extends StatelessWidget {
         key: _formKey,
         child: SingleChildScrollView(
           child: Column(
-            children: [
+            children: <Widget>[
               _nameForm(),
               _schoolForm(),
               _submitButton(),
@@ -39,15 +40,15 @@ class Signup extends StatelessWidget {
   Widget _nameForm() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        final store = ref.watch(signupProvider);
+        final SignupState store = ref.watch(signupProvider);
 
         return Padding(
           padding: const EdgeInsets.all(PaddingSize.normal),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: <Widget>[
               Row(
-                children: [
+                children: <Widget>[
                   const Text(
                     'お名前',
                     style: TextStyle(fontSize: FontSize.subheading),
@@ -56,7 +57,7 @@ class Signup extends StatelessWidget {
                     icon: const Icon(Icons.help),
                     iconSize: IconSize.help,
                     color: Theme.of(context).primaryIconTheme.color,
-                    onPressed: () => showDialog(
+                    onPressed: () async => showDialog(
                       context: context,
                       builder: (BuildContext context) => const HelpDialog(
                         title: Text('お名前について'),
@@ -82,31 +83,31 @@ class Signup extends StatelessWidget {
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                       color: AppColor.brand.secondary,
-                      width: 2.0,
+                      width: 2,
                     ),
                   ),
                 ),
-                onChanged: (value) => ref.read(signupProvider.notifier).updateName(value),
+                onChanged: (String value) => ref.read(signupProvider.notifier).updateName(value),
               ),
             ],
           ),
         );
-      }
+      },
     );
   }
 
   Widget _schoolForm() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        final store = ref.watch(signupProvider);
+        final SignupState store = ref.watch(signupProvider);
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(PaddingSize.normal),
               child: Row(
-                children: [
+                children: <Widget>[
                   const Text(
                     '学校・学年',
                     style: TextStyle(fontSize: FontSize.subheading),
@@ -115,7 +116,7 @@ class Signup extends StatelessWidget {
                     icon: const Icon(Icons.help),
                     iconSize: IconSize.help,
                     color: Theme.of(context).primaryIconTheme.color,
-                    onPressed: () => showDialog(
+                    onPressed: () async => showDialog(
                       context: context,
                       builder: (BuildContext context) => const HelpDialog(
                         title: Text('学校・学年について'),
@@ -134,24 +135,24 @@ class Signup extends StatelessWidget {
             ),
             SettingLabel(
               title: '学校',
-              dialList: (store is SignupStateData) ? store.schools.map((school) => school.name).toList() : [],
-              completed: (index) {
+              dialList: (store is SignupStateData) ? store.schools.map((SchoolModel school) => school.name).toList() : <String>[],
+              completed: (int index) {
                 if (store is! SignupStateData) return;
-                final int _id = store.schools[index].id;
-                ref.read(signupProvider.notifier).updateSchool(_id);
+                final int id = store.schools[index].id;
+                ref.read(signupProvider.notifier).updateSchool(id);
               },
               trailing: (store is SignupStateData) ? store.schoolTrailing : '',
             ),
             SettingLabel(
               title: '学年',
-              dialList: (store is SignupStateData) ? store.schoolYears : [],
-              completed: (index) => ref.read(signupProvider.notifier).updateSchoolYear(index + 1),
+              dialList: (store is SignupStateData) ? store.schoolYears : <String>[],
+              completed: (int index) => ref.read(signupProvider.notifier).updateSchoolYear(index + 1),
               trailing: (store is SignupStateData) ? store.schoolYearTrailing : '',
             ),
             const SizedBox(height: PaddingSize.normal),
           ],
         );
-      }
+      },
     );
   }
 
@@ -164,10 +165,10 @@ class Signup extends StatelessWidget {
           errorState,
           style: TextStyle(
             fontSize: FontSize.indication,
-            color: Theme.of(context).errorColor,
+            color: Theme.of(context).colorScheme.error,
           ),
         );
-      }
+      },
     );
   }
 
@@ -178,10 +179,10 @@ class Signup extends StatelessWidget {
           padding: const EdgeInsets.all(PaddingSize.normal),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: [
+            children: <Widget>[
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: AppColor.brand.secondary,
+                  backgroundColor: AppColor.brand.secondary,
                   padding: const EdgeInsets.symmetric(
                     vertical: PaddingSize.buttonVertical,
                     horizontal: PaddingSize.buttonHorizontal,
@@ -192,7 +193,7 @@ class Signup extends StatelessWidget {
                 child: const Text('登録する'),
                 onPressed: () async {
                   if (ref.read(signupProvider.notifier).checkValidation()) {
-                    await showDialog(
+                    return showDialog(
                       context: context,
                       builder: (BuildContext context) => const SigningUpDialog(),
                     );
@@ -202,7 +203,7 @@ class Signup extends StatelessWidget {
             ],
           ),
         );
-      }
+      },
     );
   }
 }

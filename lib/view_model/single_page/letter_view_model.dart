@@ -10,7 +10,8 @@ import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/letter/letter_state.dart';
 import 'package:hakondate/util/analytics_controller.dart';
 
-final letterProvider = StateNotifierProvider<LetterViewModel, LetterState>((ref) {
+final StateNotifierProvider<LetterViewModel, LetterState> letterProvider =
+    StateNotifierProvider<LetterViewModel, LetterState>((StateNotifierProviderRef<LetterViewModel, LetterState> ref) {
   final LettersRemoteRepository lettersRemoteRepository = ref.watch(lettersRemoteRepositoryProvider);
   final SchoolsLocalRepository schoolsLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
   return LetterViewModel(lettersRemoteRepository, schoolsLocalRepository, ref);
@@ -30,9 +31,9 @@ class LetterViewModel extends StateNotifier<LetterState> {
 
     final List<LetterMetadataModel> currentLetters = state.letters;
     state = state.copyWith(
-      letters: [
+      letters: <LetterMetadataModel>[
         ...state.letters,
-        ...List.filled(
+        ...List<LetterMetadataModel>.filled(
           _lettersRemoteRepository.state.maxResults,
           const LetterMetadataModel.loading(),
         ),
@@ -43,7 +44,7 @@ class LetterViewModel extends StateNotifier<LetterState> {
     try {
       final List<LetterMetadataModel> addLetters = await _lettersRemoteRepository.getList();
       state = state.copyWith(
-        letters: [...currentLetters, ...addLetters],
+        letters: <LetterMetadataModel>[...currentLetters, ...addLetters],
         status: LetterConnectionStatus.done,
       );
     } on Exception catch (_) {
@@ -57,7 +58,7 @@ class LetterViewModel extends StateNotifier<LetterState> {
   Future<void> reloadLetters() async {
     _lettersRemoteRepository.resetPageToken();
     state = state.copyWith(
-      letters: [],
+      letters: <LetterMetadataModel>[],
     );
     await getLetters();
   }
@@ -65,7 +66,7 @@ class LetterViewModel extends StateNotifier<LetterState> {
   Future<List<String>> getSchoolLabels(int parentId) async {
     final List<SchoolModel> schools = await _schoolsLocalRepository.getByParentId(parentId);
 
-    return schools.map((school) => school.name.replaceAll('学校', '')).toList();
+    return schools.map((SchoolModel school) => school.name.replaceAll('学校', '')).toList();
   }
 
   bool isEndListing() => _lettersRemoteRepository.state.isEndListing;
@@ -77,6 +78,6 @@ class LetterViewModel extends StateNotifier<LetterState> {
 
   Future<Uint8List> getLetterPDF({required String path}) async {
     await _ref.read(analyticsControllerProvider.notifier).logViewLetter(path);
-    return await _lettersRemoteRepository.get(path: path);
+    return _lettersRemoteRepository.get(path: path);
   }
 }

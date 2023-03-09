@@ -5,15 +5,14 @@ import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/router/routes.dart';
 
 class DailyDrawer extends StatelessWidget {
-  const DailyDrawer({Key? key}) : super(key: key);
+  const DailyDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: SafeArea(
-        top: true,
         child: Column(
-          children: [
+          children: <Widget>[
             Image.asset(
               'assets/images/drawer/header.png',
               fit: BoxFit.fitWidth,
@@ -29,7 +28,7 @@ class DailyDrawer extends StatelessWidget {
   Widget _pageListWidget() {
     return SingleChildScrollView(
       child: Column(
-        children: [
+        children: <Widget>[
           const SizedBox(height: SpaceSize.paragraph),
           _drawerLabel(
             icon: Icons.account_circle_outlined,
@@ -77,7 +76,7 @@ class DailyDrawer extends StatelessWidget {
   Widget _drawerLabel({
     required IconData icon,
     required String labelText,
-    Function()? onTap,
+    void Function()? onTap,
   }) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -88,7 +87,7 @@ class DailyDrawer extends StatelessWidget {
           bottom: PaddingSize.normal,
         ),
         child: Row(
-          children: [
+          children: <Widget>[
             Icon(
               icon,
               size: IconSize.drawer,

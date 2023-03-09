@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 
 class StatefulWrapper extends StatefulWidget {
   const StatefulWrapper({
-    super.key,
     required this.onInit,
     required this.child,
+    super.key,
   });
 
-  final Function onInit;
+  final void Function() onInit;
   final Widget child;
 
   @override
-  _StatefulWrapperState createState() => _StatefulWrapperState();
+  StatefulWrapperState createState() => StatefulWrapperState();
 }
 
-class _StatefulWrapperState extends State<StatefulWrapper> {
+class StatefulWrapperState extends State<StatefulWrapper> {
 
   @override
   void initState() {

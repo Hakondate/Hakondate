@@ -8,7 +8,7 @@ enum Flavor {
 
 class Environment {
   static Flavor get flavor {
-    const flavor = String.fromEnvironment('FLAVOR');
+    const String flavor = String.fromEnvironment('FLAVOR');
     switch (flavor) {
       case 'dev':
         return Flavor.dev;

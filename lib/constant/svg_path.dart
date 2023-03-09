@@ -1,5 +1,7 @@
+// ignore_for_file: library_private_types_in_public_api
+
 class SvgPath {
-  static final bottomNavigationBarIcons = _BottomNavigationBarIcons();
+  static final _BottomNavigationBarIcons bottomNavigationBarIcons = _BottomNavigationBarIcons();
 }
 
 class _BottomNavigationBarIcons {

@@ -34,7 +34,7 @@ class Letter extends StatelessWidget {
                 onRefresh: () => ref.read(letterProvider.notifier).reloadLetters(),
                 color: AppColor.brand.secondary,
                 backgroundColor: AppColor.ui.white,
-                displacement: 0.0,
+                displacement: 0,
                 child: GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
@@ -46,7 +46,7 @@ class Letter extends StatelessWidget {
                     if (!ref.read(letterProvider.notifier).isEndListing() &&
                         ref.watch(letterProvider).status != LetterConnectionStatus.loading &&
                         index == letters.length - 4) {
-                      Future(ref.read(letterProvider.notifier).getLetters);
+                      Future<void>(ref.read(letterProvider.notifier).getLetters);
                     }
 
                     return _gridTile(index);
@@ -78,13 +78,13 @@ class Letter extends StatelessWidget {
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                children: <Widget>[
                   Text(
                     letter.title,
                     style: const TextStyle(
                       fontSize: FontSize.subheading,
                       fontWeight: FontWeight.bold,
-                      height: 1.0,
+                      height: 1,
                     ),
                     maxLines: 4,
                     overflow: TextOverflow.ellipsis,
@@ -92,36 +92,37 @@ class Letter extends StatelessWidget {
                   const SizedBox(height: PaddingSize.minimum),
                   Consumer(
                     builder: (BuildContext context, WidgetRef ref, _) {
-                      return FutureBuilder(
+                      return FutureBuilder<List<String>>(
                         future: ref.read(letterProvider.notifier).getSchoolLabels(letter.parentId),
                         builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
                           if (snapshot.hasData && snapshot.data != null) {
                             return Wrap(
-                              spacing: 2.0,
-                              runSpacing: 4.0,
-                              children: snapshot.data!.map((name) => Chip(
-                                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                visualDensity: const VisualDensity(
-                                  horizontal: -4.0,
-                                  vertical: -4.0,
-                                ),
-                                elevation: 0.0,
-                                backgroundColor: AppColor.ui.white,
-                                shape: StadiumBorder(
-                                  side: BorderSide(
-                                    width: 2.0,
-                                    color: AppColor.brand.tertiary,
+                              spacing: 2,
+                              runSpacing: 4,
+                              children: snapshot.data!.map((String name) => Chip(
+                                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                  visualDensity: const VisualDensity(
+                                    horizontal: -4,
+                                    vertical: -4,
+                                  ),
+                                  elevation: 0,
+                                  backgroundColor: AppColor.ui.white,
+                                  shape: StadiumBorder(
+                                    side: BorderSide(
+                                      width: 2,
+                                      color: AppColor.brand.tertiary,
+                                    ),
+                                  ),
+                                  label: Text(
+                                    name,
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: AppColor.brand.tertiary,
+                                      height: 1,
+                                    ),
                                   ),
                                 ),
-                                label: Text(
-                                  name,
-                                  style: TextStyle(
-                                    fontSize: 12.0,
-                                    color: AppColor.brand.tertiary,
-                                    height: 1.0,
-                                  ),
-                                ),
-                              )).toList(),
+                              ).toList(),
                             );
                           }
                           return const SizedBox.shrink();
@@ -151,7 +152,7 @@ class Letter extends StatelessWidget {
           highlightColor: AppColor.ui.shimmerHighlight,
           child: const GridFrame(),
         );
-      }
+      },
     );
   }
 }

@@ -7,11 +7,11 @@ import 'package:hakondate/router/routes.dart';
 
 class SettingLabel extends StatelessWidget {
   const SettingLabel({
-    super.key,
     required this.title,
     required this.dialList,
     required this.completed,
     required this.trailing,
+    super.key,
   });
 
   final String title;
@@ -20,10 +20,10 @@ class SettingLabel extends StatelessWidget {
   final String trailing;
 
   void _showDialPickerModal(BuildContext context) {
-    int _selected = 0;
-    showModalBottomSheet(
+    int selected = 0;
+    showModalBottomSheet<dynamic>(
       context: context,
-      builder: (context) {
+      builder: (BuildContext context) {
         return SizedBox(
           height: MediaQuery.of(context).size.height * 2 / 5,
           child: Scaffold(
@@ -31,10 +31,10 @@ class SettingLabel extends StatelessWidget {
               elevation: 0,
               automaticallyImplyLeading: false,
               title: Text('$titleを選択'),
-              actions: [
+              actions: <Widget>[
                 TextButton(
                   onPressed: () {
-                    completed(_selected);
+                    completed(selected);
                     routemaster.pop(context);
                   },
                   child: Text(
@@ -51,8 +51,8 @@ class SettingLabel extends StatelessWidget {
               itemExtent: 40,
               diameterRatio: 1,
               childCount: dialList.length,
-              onSelectedItemChanged: (index) => _selected = index,
-              itemBuilder: (_, index) => Text(dialList[index]),
+              onSelectedItemChanged: (int index) => selected = index,
+              itemBuilder: (_, int index) => Text(dialList[index]),
             ),
           ),
         );

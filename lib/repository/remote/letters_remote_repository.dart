@@ -10,8 +10,9 @@ import 'package:hakondate/repository/remote/firestorage_database.dart';
 import 'package:hakondate/state/letter/letters_remote_repository_model.dart';
 import 'package:hakondate/util/exception/firestorage_exception.dart';
 
-final lettersRemoteRepositoryProvider = Provider<LettersRemoteRepository>((ref) {
-  final FirebaseStorage firestorageDatabase = ref.watch(firestorageDatabaseProvider);
+final Provider<LettersRemoteRepository> lettersRemoteRepositoryProvider =
+    Provider<LettersRemoteRepository>((ProviderRef<LettersRemoteRepository> ref) {
+  final FirebaseStorage firestorageDatabase = ref.watch(firestorageDatabaseProvider as AlwaysAliveProviderListenable<FirebaseStorage>);
   return LettersRemoteRepository(firestorageDatabase.ref().child('letters'));
 });
 
@@ -29,12 +30,14 @@ class LettersRemoteRepository extends StateNotifier<LettersRemoteRepositoryModel
 
   @override
   Future<List<LetterMetadataModel>> getList() async {
-    List<LetterMetadataModel> letters = [];
+    final List<LetterMetadataModel> letters = <LetterMetadataModel>[];
     try {
-      final ListResult listResult = await _db.list(ListOptions(
-        maxResults: state.maxResults,
-        pageToken: state.pageToken,
-      ));
+      final ListResult listResult = await _db.list(
+        ListOptions(
+          maxResults: state.maxResults,
+          pageToken: state.pageToken,
+        ),
+      );
       state = state.copyWith(
         pageToken: listResult.nextPageToken,
       );
@@ -52,12 +55,14 @@ class LettersRemoteRepository extends StateNotifier<LettersRemoteRepositoryModel
 
         if (parentId < 0) throw FirestorageException("${metadata.name}'s 'schoolId' is null");
 
-        letters.add(LetterMetadataModel(
-          title: metadata.name.replaceFirst(RegExp(r'pfx_\d+_schoolId_\d+_'), ''),
-          path: metadata.fullPath.replaceFirst('letters/', ''),
-          parentId: parentId,
-          updateAt: metadata.updated ?? DateTime(2019, 8, 1),
-        ));
+        letters.add(
+          LetterMetadataModel(
+            title: metadata.name.replaceFirst(RegExp(r'pfx_\d+_schoolId_\d+_'), ''),
+            path: metadata.fullPath.replaceFirst('letters/', ''),
+            parentId: parentId,
+            updateAt: metadata.updated ?? DateTime(2019, 8),
+          ),
+        );
       });
 
       return letters;

@@ -2,23 +2,18 @@ part of 'hakondate_dialog.dart';
 
 class HakondateActionButton extends StatelessWidget {
   const HakondateActionButton({
-    Key? key,
     required this.text,
     this.onTap,
     this.color,
     this.isPrimary = false,
-  }) : super(key: key);
-
-  final Widget text;
-  final Function()? onTap;
-  final Color? color;
-  final bool isPrimary;
+    super.key,
+  });
 
   factory HakondateActionButton.primary({
-    Key? key,
     required Widget text,
-    Function()? onTap,
+    void Function()? onTap,
     Color? color,
+    Key? key,
   }) => HakondateActionButton(
     key: key,
     text: text,
@@ -27,21 +22,26 @@ class HakondateActionButton extends StatelessWidget {
     isPrimary: true,
   );
 
+  final Widget text;
+  final void Function()? onTap;
+  final Color? color;
+  final bool isPrimary;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: onTap,
       child: Container(
-        height: 56.0,
+        height: 56,
         width: double.infinity,
         color: color ?? AppColor.ui.white,
         child: Center(
           child: DefaultTextStyle(
             style: TextStyle(
-              color: (isPrimary) ? AppColor.brand.secondary : AppColor.text.gray,
-              fontSize: 16.0,
-              fontWeight: (isPrimary) ? FontWeight.bold : null,
+              color: isPrimary ? AppColor.brand.secondary : AppColor.text.gray,
+              fontSize: 16,
+              fontWeight: isPrimary ? FontWeight.bold : null,
             ),
             child: text,
           ),

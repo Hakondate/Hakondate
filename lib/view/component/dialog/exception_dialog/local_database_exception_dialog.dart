@@ -4,11 +4,11 @@ import 'package:hakondate/view/component/dialog/hakondate_dialog/hakondate_dialo
 
 class LocalDatabaseExceptionDialog extends StatelessWidget {
   const LocalDatabaseExceptionDialog({
-    Key? key,
+    super.key,
     this.onTapRetry,
-  }) : super(key: key);
+  });
 
-  final Function()? onTapRetry;
+  final void Function()? onTapRetry;
 
   @override
   Widget build(BuildContext context) {

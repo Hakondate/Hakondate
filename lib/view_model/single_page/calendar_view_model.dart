@@ -9,7 +9,8 @@ import 'package:hakondate/state/calendar/calendar_state.dart';
 import 'package:hakondate/state/daily/daily_state.dart';
 import 'package:hakondate/view_model/single_page/daily_view_model.dart';
 
-final calendarProvider = StateNotifierProvider<CalendarViewModel, CalendarState>((ref) {
+final StateNotifierProvider<CalendarViewModel, CalendarState> calendarProvider =
+    StateNotifierProvider<CalendarViewModel, CalendarState>((StateNotifierProviderRef<CalendarViewModel, CalendarState> ref) {
   final MenusLocalRepository menusLocalRepository = ref.watch(menusLocalRepositoryProvider);
   final DailyState daily = ref.watch(dailyProvider);
   return CalendarViewModel(
@@ -23,10 +24,11 @@ class CalendarViewModel extends StateNotifier<CalendarState> {
     this._menusLocalRepository,
     this._daily,
   ) : super(CalendarState(
-    oldestDay: _daily.calendarTabFirstDay,
-    latestDay: _daily.calendarTabLastDay,
-    scrollController: ScrollController(),
-  ));
+      oldestDay: _daily.calendarTabFirstDay,
+      latestDay: _daily.calendarTabLastDay,
+      scrollController: ScrollController(),
+    ),
+  );
 
   final MenusLocalRepository _menusLocalRepository;
   final DailyState _daily;
@@ -49,7 +51,6 @@ class CalendarViewModel extends StateNotifier<CalendarState> {
         oldestDay: DateTime(
           _daily.selectedDay.year,
           _daily.selectedDay.month - 1,
-          1,
         ),
       );
       state.scrollController.jumpTo(_getInitialScrollPosition(appHeight));
@@ -60,7 +61,7 @@ class CalendarViewModel extends StateNotifier<CalendarState> {
     final DateTime limitMonth = _daily.calendarTabFirstDay.add(const Duration(days: 1));
     if (state.oldestDay.isAfter(limitMonth)) {
       state = state.copyWith(
-        oldestDay: DateTime(state.oldestDay.year, state.oldestDay.month - 1, 1),
+        oldestDay: DateTime(state.oldestDay.year, state.oldestDay.month - 1),
       );
     }
   }
@@ -69,7 +70,7 @@ class CalendarViewModel extends StateNotifier<CalendarState> {
     final int dayDifference = state.latestDay.difference(_daily.selectedDay).inDays;
     final double scrollPosition = _calendarHeightWithMargin * dayDifference - (appHeight - _calendarHeightWithMargin) / 2.0;
 
-    if (scrollPosition < 0.0) return 0.0;
+    if (scrollPosition < 0.0) return 0;
 
     return scrollPosition;
   }

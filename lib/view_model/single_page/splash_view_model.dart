@@ -14,7 +14,8 @@ import 'package:hakondate/state/splash/splash_state.dart';
 import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 import 'package:hakondate/view_model/single_page/daily_view_model.dart';
 
-final splashProvider = StateNotifierProvider.autoDispose<SplashViewModel, SplashState>((ref) {
+final AutoDisposeStateNotifierProvider<SplashViewModel, SplashState> splashProvider =
+    StateNotifierProvider.autoDispose<SplashViewModel, SplashState>((AutoDisposeStateNotifierProviderRef<SplashViewModel, SplashState> ref) {
   final SchoolsLocalRepository schoolsLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
   final SchoolsRemoteRepository schoolsRemoteRepository = ref.watch(schoolsRemoteRepositoryProvider);
   final MenusLocalRepository menusLocalRepository = ref.watch(menusLocalRepositoryProvider);
@@ -59,22 +60,23 @@ class SplashViewModel extends StateNotifier<SplashState> {
 
         final SharedPreferences prefs = await SharedPreferences.getInstance();
         final DateTime termsAgreedDay = DateTime.fromMillisecondsSinceEpoch(
-            prefs.getInt(AppKey.sharedPreferencesKey.agreedTermsDay) ?? 0);
+          prefs.getInt(AppKey.sharedPreferencesKey.agreedTermsDay) ?? 0,
+        );
 
         if (termsAgreedDay.isBefore(RecordDate.termsLastUpdateDay)) {
-          state = SplashState(status: LoadingStatus.unloading);
+          state = SplashState();
           if (termsUpdated != null) return await termsUpdated();
         }
 
         await _initializeMenus();
         routemaster.replace('/home');
-        state = SplashState(status: LoadingStatus.unloading);
+        state = SplashState();
       } on Exception catch (error, stack) {
         debugPrint(error.toString());
         debugPrint(stack.toString());
         state = SplashState.error(error: error);
 
-        if (errorOccurred != null) return await errorOccurred(error, stack);
+        if (errorOccurred != null) return errorOccurred(error, stack);
       }
     });
   }
@@ -84,11 +86,11 @@ class SplashViewModel extends StateNotifier<SplashState> {
     final DateTime latestUpdate = await _schoolsLocalRepository.getLatestUpdateDay();
 
     state = SplashState(status: LoadingStatus.checkingUpdate);
-    List<dynamic> schools = await _schoolsRemoteRepository.get(updateAt: latestUpdate);
+    final List<dynamic> schools = await _schoolsRemoteRepository.get(updateAt: latestUpdate);
 
     state = SplashState(status: LoadingStatus.updating);
     await Future.forEach(schools, (dynamic school) async {
-      await _schoolsLocalRepository.add(school);
+      await _schoolsLocalRepository.add(school as Map<String, dynamic>);
     });
   }
 
@@ -97,11 +99,11 @@ class SplashViewModel extends StateNotifier<SplashState> {
     final DateTime latestUpdate = await _menusLocalRepository.getLatestUpdateDay();
 
     state = SplashState(status: LoadingStatus.checkingUpdate);
-    List<dynamic> menus = await _menusRemoteRepository.get(updateAt: latestUpdate);
+    final List<dynamic> menus = await _menusRemoteRepository.get(updateAt: latestUpdate);
 
     state = SplashState(status: LoadingStatus.updating);
     await Future.forEach(menus, (dynamic menu) async {
-      await _menusLocalRepository.add(menu);
+      await _menusLocalRepository.add(menu as Map<String, dynamic>);
     });
 
     await _ref.read(dailyProvider.notifier).updateSelectedDay();

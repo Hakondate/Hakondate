@@ -1,3 +1,5 @@
+// ignore_for_file: always_specify_types
+
 import 'package:drift/drift.dart';
 
 @DataClassName('SchoolsSchema')

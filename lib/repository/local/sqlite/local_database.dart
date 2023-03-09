@@ -16,7 +16,7 @@ import 'package:hakondate/repository/local/sqlite/table/users_table.dart';
 
 part 'local_database.g.dart';
 
-final localDatabaseProvider = Provider<LocalDatabase>((_) {
+final Provider<LocalDatabase> localDatabaseProvider = Provider<LocalDatabase>((_) {
   final LazyDatabase lazyDatabase = LazyDatabase(() async {
     final Directory directory = await getApplicationDocumentsDirectory();
     final File file = File(p.join(directory.path, 'db.sqlite'));
@@ -26,17 +26,19 @@ final localDatabaseProvider = Provider<LocalDatabase>((_) {
   return LocalDatabase(lazyDatabase);
 });
 
-@DriftDatabase(tables: [
-  SchoolsTable,
-  MenusTable,
-  MenuDishesTable,
-  DishesTable,
-  DishFoodstuffsTable,
-  FoodstuffsTable,
-  UsersTable,
-])
+@DriftDatabase(
+  tables: <Type>[
+    SchoolsTable,
+    MenusTable,
+    MenuDishesTable,
+    DishesTable,
+    DishFoodstuffsTable,
+    FoodstuffsTable,
+    UsersTable,
+  ],
+)
 class LocalDatabase extends _$LocalDatabase {
-  LocalDatabase(LazyDatabase lazyDatabase) : super(lazyDatabase);
+  LocalDatabase(LazyDatabase super.lazyDatabase);
 
   @override
   int get schemaVersion => 1;

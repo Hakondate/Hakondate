@@ -26,16 +26,16 @@ class GridFrame extends StatelessWidget {
         clipBehavior: Clip.antiAliasWithSaveLayer,
         decoration: BoxDecoration(
           color: AppColor.ui.white,
-          borderRadius: BorderRadius.circular(16.0),
+          borderRadius: BorderRadius.circular(16),
           border: (borderColor != null) ? Border.all(
             color: borderColor!,
             width: BorderSize.normal,
           ) : null,
-          boxShadow: [
+          boxShadow: <BoxShadow>[
             BoxShadow(
               color: AppColor.ui.shadow,
-              blurRadius: 1.0,
-              offset: const Offset(0.0, MarginSize.shadow),
+              blurRadius: 1,
+              offset: const Offset(0, MarginSize.shadow),
             ),
           ],
         ),

@@ -19,7 +19,7 @@ class NutrientsCard extends StatelessWidget {
     return Card(
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: Column(
-        children: [
+        children: <Widget>[
           Image.asset('assets/images/label/nutrientsLabel.png'),
           _nutrientsGraph(),
           _nutrientsExpansionTile(),
@@ -31,7 +31,7 @@ class NutrientsCard extends StatelessWidget {
   Widget _nutrientsGraph() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        const double graphMaxValue = 120.0;
+        const double graphMaxValue = 120;
         return SizedBox(
           width: MediaQuery.of(context).size.width * 3/4,
           height: MediaQuery.of(context).size.width * 3/4,
@@ -40,7 +40,7 @@ class NutrientsCard extends StatelessWidget {
               slns: ref.watch(userProvider).currentUser!.slns,
               graphMaxValue: graphMaxValue,
             ),
-            labels: const [
+            labels: const <String>[
               'エネルギー',
               'たんぱく質',
               'ビタミン',
@@ -75,15 +75,15 @@ class NutrientsCard extends StatelessWidget {
               fontSize: FontSize.subheading,
             ),
           ),
-          children: [
+          onExpansionChanged: (bool isExpanded) => !isExpanded,
+          textColor: AppColor.brand.secondary,
+          iconColor: AppColor.brand.secondary,
+          children: <Widget>[
             NutrientsList(
               nutrients: menu,
               backgroundColor: AppColor.ui.secondaryUltraLight,
             ),
           ],
-          onExpansionChanged: (bool isExpanded) => !isExpanded,
-          textColor: AppColor.brand.secondary,
-          iconColor: AppColor.brand.secondary,
         );
       },
     );

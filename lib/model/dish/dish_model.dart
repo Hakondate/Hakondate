@@ -7,145 +7,145 @@ part 'dish_category.dart';
 
 @freezed
 class DishModel with _$DishModel {
-  const DishModel._();
   const factory DishModel({
     required String name,                     // 料理名
     required List<FoodstuffModel> foodstuffs, // 食材
     DishCategory? category,                   // 分類
   }) = _DishModel;
+  const DishModel._();
 
   double get energy {
-    double _sum = 0.0;
-    for (var foodstuff in foodstuffs) {
-      _sum += foodstuff.nutrients.energy;
+    double sum = 0;
+    for (final FoodstuffModel foodstuff in foodstuffs) {
+      sum += foodstuff.nutrients.energy;
     }
 
-    return _sum;
+    return sum;
   }
 
   double get protein {
-    double _sum = 0.0;
-    for (var foodstuff in foodstuffs) {
-      _sum += foodstuff.nutrients.protein;
+    double sum = 0;
+    for (final FoodstuffModel foodstuff in foodstuffs) {
+      sum += foodstuff.nutrients.protein;
     }
 
-    return _sum;
+    return sum;
   }
 
   double get lipid {
-    double _sum = 0.0;
-    for (var foodstuff in foodstuffs) {
-      _sum += foodstuff.nutrients.lipid;
+    double sum = 0;
+    for (final FoodstuffModel foodstuff in foodstuffs) {
+      sum += foodstuff.nutrients.lipid;
     }
 
-    return _sum;
+    return sum;
   }
 
   double get carbohydrate {
-    double _sum = 0.0;
-    for (var foodstuff in foodstuffs) {
-      _sum += foodstuff.nutrients.carbohydrate;
+    double sum = 0;
+    for (final FoodstuffModel foodstuff in foodstuffs) {
+      sum += foodstuff.nutrients.carbohydrate;
     }
 
-    return _sum;
+    return sum;
   }
 
   double get sodium {
-    double _sum = 0.0;
-    for (var foodstuff in foodstuffs) {
-      _sum += foodstuff.nutrients.sodium;
+    double sum = 0;
+    for (final FoodstuffModel foodstuff in foodstuffs) {
+      sum += foodstuff.nutrients.sodium;
     }
 
-    return _sum;
+    return sum;
   }
 
   double get calcium {
-    double _sum = 0.0;
-    for (var foodstuff in foodstuffs) {
-      _sum += foodstuff.nutrients.calcium;
+    double sum = 0;
+    for (final FoodstuffModel foodstuff in foodstuffs) {
+      sum += foodstuff.nutrients.calcium;
     }
 
-    return _sum;
+    return sum;
   }
 
   double get magnesium {
-    double _sum = 0.0;
-    for (var foodstuff in foodstuffs) {
-      _sum += foodstuff.nutrients.magnesium;
+    double sum = 0;
+    for (final FoodstuffModel foodstuff in foodstuffs) {
+      sum += foodstuff.nutrients.magnesium;
     }
 
-    return _sum;
+    return sum;
   }
 
   double get iron {
-    double _sum = 0.0;
-    for (var foodstuff in foodstuffs) {
-      _sum += foodstuff.nutrients.iron;
+    double sum = 0;
+    for (final FoodstuffModel foodstuff in foodstuffs) {
+      sum += foodstuff.nutrients.iron;
     }
 
-    return _sum;
+    return sum;
   }
 
   double get zinc {
-    double _sum = 0.0;
-    for (var foodstuff in foodstuffs) {
-      _sum += foodstuff.nutrients.zinc;
+    double sum = 0;
+    for (final FoodstuffModel foodstuff in foodstuffs) {
+      sum += foodstuff.nutrients.zinc;
     }
 
-    return _sum;
+    return sum;
   }
 
   double get retinol {
-    double _sum = 0.0;
-    for (var foodstuff in foodstuffs) {
-      _sum += foodstuff.nutrients.retinol;
+    double sum = 0;
+    for (final FoodstuffModel foodstuff in foodstuffs) {
+      sum += foodstuff.nutrients.retinol;
     }
 
-    return _sum;
+    return sum;
   }
 
   double get vitaminB1 {
-    double _sum = 0.0;
-    for (var foodstuff in foodstuffs) {
-      _sum += foodstuff.nutrients.vitaminB1;
+    double sum = 0;
+    for (final FoodstuffModel foodstuff in foodstuffs) {
+      sum += foodstuff.nutrients.vitaminB1;
     }
 
-    return _sum;
+    return sum;
   }
 
   double get vitaminB2 {
-    double _sum = 0.0;
-    for (var foodstuff in foodstuffs) {
-      _sum += foodstuff.nutrients.vitaminB2;
+    double sum = 0;
+    for (final FoodstuffModel foodstuff in foodstuffs) {
+      sum += foodstuff.nutrients.vitaminB2;
     }
 
-    return _sum;
+    return sum;
   }
 
   double get vitaminC {
-    double _sum = 0.0;
-    for (var foodstuff in foodstuffs) {
-      _sum += foodstuff.nutrients.vitaminC;
+    double sum = 0;
+    for (final FoodstuffModel foodstuff in foodstuffs) {
+      sum += foodstuff.nutrients.vitaminC;
     }
 
-    return _sum;
+    return sum;
   }
 
   double get dietaryFiber {
-    double _sum = 0.0;
-    for (var foodstuff in foodstuffs) {
-      _sum += foodstuff.nutrients.dietaryFiber;
+    double sum = 0;
+    for (final FoodstuffModel foodstuff in foodstuffs) {
+      sum += foodstuff.nutrients.dietaryFiber;
     }
 
-    return _sum;
+    return sum;
   }
 
   double get salt {
-    double _sum = 0.0;
-    for (var foodstuff in foodstuffs) {
-      _sum += foodstuff.nutrients.salt;
+    double sum = 0;
+    for (final FoodstuffModel foodstuff in foodstuffs) {
+      sum += foodstuff.nutrients.salt;
     }
 
-    return _sum;
+    return sum;
   }
 }

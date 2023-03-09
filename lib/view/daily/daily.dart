@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate/state/daily/daily_state.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -20,7 +21,7 @@ class Daily extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0.0,
+        elevation: 0,
         title: _appBarTitle(),
         leading: Consumer(
           builder: (BuildContext context, WidgetRef ref, _) => IconButton(
@@ -30,7 +31,7 @@ class Daily extends StatelessWidget {
             onPressed: () => ref.read(drawerProvider.notifier).openDrawer(),
           ),
         ),
-        actions: [
+        actions: <Widget>[
           IconButton(
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
@@ -40,7 +41,7 @@ class Daily extends StatelessWidget {
         ],
       ),
       body: Column(
-        children: [
+        children: <Widget>[
           _calendarWidget(),
           _bodyWidget(),
         ],
@@ -51,11 +52,11 @@ class Daily extends StatelessWidget {
   Widget _appBarTitle() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        final store = ref.watch(dailyProvider);
-        final formatted = (isSameDay(store.selectedDay, DateTime.now()))
+        final DailyState store = ref.watch(dailyProvider);
+        final String formatted = (isSameDay(store.selectedDay, DateTime.now()))
             ? '今日' : DateFormat('M月d日').format(store.selectedDay);
 
-        return Text(formatted + 'の献立');
+        return Text('$formattedの献立');
       },
     );
   }
@@ -63,12 +64,12 @@ class Daily extends StatelessWidget {
   Widget _calendarWidget() {
     return Material(
       color: AppColor.brand.primary,
-      elevation: 4.0,
+      elevation: 4,
       child: Consumer(
         builder: (BuildContext context, WidgetRef ref, _) {
-          final store = ref.watch(dailyProvider);
+          final DailyState store = ref.watch(dailyProvider);
 
-          return TableCalendar(
+          return TableCalendar<dynamic>(
             headerVisible: false,
             locale: 'ja_JP',
             calendarFormat: CalendarFormat.week,
@@ -97,7 +98,7 @@ class Daily extends StatelessWidget {
               outsideTextStyle: const CalendarStyle().defaultTextStyle,
             ),
           );
-        }
+        },
       ),
     );
   }
@@ -105,7 +106,7 @@ class Daily extends StatelessWidget {
   Widget _bodyWidget() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        final store = ref.watch(dailyProvider);
+        final DailyState store = ref.watch(dailyProvider);
 
         if (store.isFetching) {
           return Container();
@@ -114,7 +115,7 @@ class Daily extends StatelessWidget {
         if (store.menu is LunchesDayMenuModel) {
           return Expanded(
             child: ListView(
-              children: const [
+              children: const <Widget>[
                 MenuCard(),
                 NutrientsCard(),
               ],

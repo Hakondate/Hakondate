@@ -5,9 +5,9 @@ import 'package:hakondate/constant/size.dart';
 
 class NonLunchesDayBody extends StatelessWidget {
   const NonLunchesDayBody({
-    super.key,
     required this.imageFileName,
     required this.text,
+    super.key,
   });
 
   final String imageFileName;
@@ -15,16 +15,16 @@ class NonLunchesDayBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double _screenWidth = MediaQuery.of(context).size.width;
+    final double screenWidth = MediaQuery.of(context).size.width;
 
     return Expanded(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+        children: <Widget>[
           Image.asset(
-            'assets/images/status/menu_status/' + imageFileName,
-            width: _screenWidth / 2,
+            'assets/images/status/menu_status/$imageFileName',
+            width: screenWidth / 2,
           ),
           const SizedBox(height: MarginSize.normal),
           Text(

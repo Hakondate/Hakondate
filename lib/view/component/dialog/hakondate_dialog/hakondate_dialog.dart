@@ -7,12 +7,12 @@ part 'hakondate_action_button.dart';
 
 class HakondateDialog extends StatelessWidget {
   const HakondateDialog({
-    Key? key,
-    this.title,
     required this.body,
+    this.title,
     this.firstAction,
     this.secondAction,
-  }) : super(key: key);
+    super.key,
+  });
 
   final Widget? title;
   final Widget body;
@@ -27,36 +27,34 @@ class HakondateDialog extends StatelessWidget {
 
     return AlertDialog(
       backgroundColor: AppColor.ui.white,
-      contentPadding: const EdgeInsets.all(0.0),
+      contentPadding: EdgeInsets.zero,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(16.0)),
+        borderRadius: BorderRadius.all(Radius.circular(16)),
       ),
       content: SizedBox(
         width: width,
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
+          children: <Widget>[
             if (title != null) _header(),
             _body(),
-            if (firstAction != null) ...[
+            if (firstAction != null) ...<Widget>[
               Divider(
-                thickness: 1.0,
+                thickness: 1,
                 color: AppColor.brand.secondaryLight,
-                height: 0.0,
+                height: 0,
               ),
               Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  if (secondAction != null) ...[
+                children: <Widget>[
+                  if (secondAction != null) ...<Widget>[
                     Expanded(child: secondAction!),
                     SizedBox(
-                      height: 56.0,
+                      height: 56,
                       child: VerticalDivider(
-                        thickness: 1.0,
+                        thickness: 1,
                         color: AppColor.brand.secondaryLight,
-                        width: 1.0,
+                        width: 1,
                       ),
                     ),
                   ],
@@ -74,13 +72,13 @@ class HakondateDialog extends StatelessWidget {
     return DefaultTextStyle(
       style: TextStyle(
         color: AppColor.ui.white,
-        fontSize: 18.0,
+        fontSize: 18,
         fontWeight: FontWeight.bold,
         height: 1.2,
       ),
       textAlign: TextAlign.center,
       child: Container(
-        height: 48.0,
+        height: 48,
         width: double.infinity,
         color: AppColor.brand.secondaryLight,
         child: Center(child: title),
@@ -92,7 +90,7 @@ class HakondateDialog extends StatelessWidget {
     if (body is Text) {
       return Padding(
         padding: const EdgeInsets.symmetric(
-          vertical: 56.0,
+          vertical: 56,
           horizontal: PaddingSize.content,
         ),
         child: DefaultTextStyle(

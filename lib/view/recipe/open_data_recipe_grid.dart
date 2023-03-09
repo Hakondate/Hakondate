@@ -10,8 +10,8 @@ import 'package:hakondate/view/component/tile/grid_frame.dart';
 
 class OpenDataRecipeGrid extends StatelessWidget {
   const OpenDataRecipeGrid({
-    super.key,
     required this.type,
+    super.key,
   });
 
   final RecipeType type;
@@ -26,7 +26,7 @@ class OpenDataRecipeGrid extends StatelessWidget {
       crossAxisCount: 2,
       mainAxisSpacing: MarginSize.minimum,
       crossAxisSpacing: MarginSize.minimum,
-      children: recipes.map((recipe) => _gridTile(recipe)).toList(),
+      children: recipes.map(_gridTile).toList(),
     );
   }
 
@@ -35,7 +35,7 @@ class OpenDataRecipeGrid extends StatelessWidget {
       onTap: () => routemaster.push('/home/recipes_pdf/${recipe.id}'),
       child: Column(
         verticalDirection: VerticalDirection.up,
-        children: [
+        children: <Widget>[
           Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(vertical: PaddingSize.minimum),

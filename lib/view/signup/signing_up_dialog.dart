@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,13 +19,13 @@ class SigningUpDialog extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        final store = ref.watch(signupProvider);
+        final SignupState store = ref.watch(signupProvider);
         return HakondateDialog(
           title: const Text('確認'),
           body: Padding(
             padding: const EdgeInsets.all(PaddingSize.normal),
             child: Column(
-              children: [
+              children: <Widget>[
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: MarginSize.minimum),
                   child: const Text(
@@ -35,15 +37,15 @@ class SigningUpDialog extends ConsumerWidget {
                   style: TextStyle(
                     color: AppColor.brand.secondary,
                     fontWeight: FontWeight.bold,
-                    fontSize: 16.0,
+                    fontSize: 16,
                     height: 1.4,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+                    children: <Widget>[
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
-                        children: const [
+                        children: const <Widget>[
                           Text('お名前：　'),
                           Text('学校：　'),
                           Text('学年：　'),
@@ -51,8 +53,8 @@ class SigningUpDialog extends ConsumerWidget {
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          if (store is SignupStateData) ...[
+                        children: <Widget>[
+                          if (store is SignupStateData) ...<Widget>[
                             Text(store.name!),
                             Text(store.schoolTrailing),
                             Text(store.schoolYearTrailing),
@@ -68,17 +70,18 @@ class SigningUpDialog extends ConsumerWidget {
           firstAction: HakondateActionButton.primary(
             text: const Text('登録する'),
             onTap: () async {
-              ref.read(signupProvider.notifier).signup();
-              routemaster.pop().whenComplete(() async => await showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder: (BuildContext context) => _statusDialog(),
-              ));
+              unawaited(ref.read(signupProvider.notifier).signup());
+              await routemaster.pop().whenComplete(() async => showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (BuildContext context) => _statusDialog(),
+                ),
+              );
             },
           ),
           secondAction: HakondateActionButton(
             text: const Text('修正する'),
-            onTap: () => routemaster.pop(),
+            onTap: routemaster.pop,
           ),
         );
       },
@@ -88,7 +91,7 @@ class SigningUpDialog extends ConsumerWidget {
   Widget _statusDialog() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        final store = ref.watch(signupProvider);
+        final SignupState store = ref.watch(signupProvider);
         if (store is SignupStateError) {
           return HakondateDialog(
             title: const Text('登録失敗'),

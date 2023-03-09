@@ -6,7 +6,8 @@ import 'package:hakondate/repository/local/sqlite/local_database.dart';
 import 'package:hakondate/util/exception/sqlite_exception.dart';
 import 'package:hakondate/view_model/multi_page/common_function.dart';
 
-final schoolsLocalRepositoryProvider = Provider<SchoolsLocalRepository>((ref) {
+final Provider<SchoolsLocalRepository> schoolsLocalRepositoryProvider =
+    Provider<SchoolsLocalRepository>((ProviderRef<SchoolsLocalRepository> ref) {
   final LocalDatabase localDatabase = ref.watch(localDatabaseProvider);
   return SchoolsLocalRepository(localDatabase, ref);
 });
@@ -29,24 +30,25 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryBase {
   @override
   Future<int> count() async {
     final Expression<int> exp = _db.schoolsTable.id.count();
-    final query = _db.selectOnly(_db.schoolsTable)..addColumns([exp]);
-    final int? count = await query.map((scheme) => scheme.read(exp)).getSingleOrNull();
+    final JoinedSelectStatement<$SchoolsTableTable, SchoolsSchema> query = _db.selectOnly(_db.schoolsTable)..addColumns(<Expression<int>>[exp]);
+    final int? count = await query.map((TypedResult scheme) => scheme.read(exp)).getSingleOrNull();
 
     return count ?? 0;
   }
 
   @override
   Future<List<SchoolModel>> getAll() async {
-    final List<SchoolModel> schools = [];
+    final List<SchoolModel> schools = <SchoolModel>[];
     final List<SchoolsSchema> schoolsSchemas = await _db.select(_db.schoolsTable).get();
 
-    for (SchoolsSchema schoolSchema in schoolsSchemas) {
+    for (final SchoolsSchema schoolSchema in schoolsSchemas) {
       schools.add(SchoolModel(
           id: schoolSchema.id,
           parentId: schoolSchema.parentId,
           name: schoolSchema.name,
           classification: _judgeClassification(schoolSchema.classification),
-        ));
+        ),
+      );
     }
 
     return schools;
@@ -55,7 +57,7 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryBase {
   @override
   Future<SchoolModel> getById(int id) async {
     final SchoolsSchema? schoolsSchema =
-        await (_db.select(_db.schoolsTable)..where((t) => t.id.equals(id))).getSingleOrNull();
+        await (_db.select(_db.schoolsTable)..where(($SchoolsTableTable t) => t.id.equals(id))).getSingleOrNull();
 
     if (schoolsSchema == null) throw SQLiteException('Failed to select $id from schoolsTable');
 
@@ -69,17 +71,19 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryBase {
 
   @override
   Future<List<SchoolModel>> getByParentId(int parentId) async {
-    final List<SchoolModel> schools = [];
+    final List<SchoolModel> schools = <SchoolModel>[];
     final List<SchoolsSchema> schoolsSchemas =
-        await (_db.select(_db.schoolsTable)..where((t) => t.parentId.equals(parentId))).get();
+        await (_db.select(_db.schoolsTable)..where(($SchoolsTableTable t) => t.parentId.equals(parentId))).get();
 
-    for (SchoolsSchema schoolsSchema in schoolsSchemas) {
-      schools.add(SchoolModel(
-        id: schoolsSchema.id,
-        parentId: schoolsSchema.parentId,
-        name: schoolsSchema.name,
-        classification: _judgeClassification(schoolsSchema.classification),
-      ));
+    for (final SchoolsSchema schoolsSchema in schoolsSchemas) {
+      schools.add(
+        SchoolModel(
+          id: schoolsSchema.id,
+          parentId: schoolsSchema.parentId,
+          name: schoolsSchema.name,
+          classification: _judgeClassification(schoolsSchema.classification),
+        ),
+      );
     }
 
     return schools;
@@ -98,22 +102,23 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryBase {
 
   @override
   Future<int> add(Map<String, dynamic> school) => _db.into(_db.schoolsTable).insertOnConflictUpdate(
-      SchoolsTableCompanion(
-        id: Value(school['id']),
-        parentId: Value(school['parentId']),
-        name: Value(school['name']),
-        lunchBlock: Value(school['lunchBlock']),
-        classification: Value(school['classification']),
-        updateAt: Value(_ref.read(commonFunctionProvider.notifier).getDayFromTimestamp(school['updateAt'])),
-      ));
+    SchoolsTableCompanion(
+      id: Value<int>(school['id'] as int),
+      parentId: Value<int>(school['parentId'] as int),
+      name: Value<String>(school['name'] as String),
+      lunchBlock: Value<int>(school['lunchBlock'] as int),
+      classification: Value<String>(school['classification'] as String),
+      updateAt: Value<DateTime>(_ref.read(commonFunctionProvider.notifier).getDayFromTimestamp(school['updateAt'])),
+    ),
+  );
 
   @override
   Future<DateTime> getLatestUpdateDay() async {
     if (await count() < 1) return DateTime(1970);
 
     final Expression<DateTime> exp = _db.schoolsTable.updateAt.max();
-    final query = _db.selectOnly(_db.schoolsTable)..addColumns([exp]);
-    final DateTime? day = await query.map((scheme) => scheme.read(exp)).getSingleOrNull();
+    final JoinedSelectStatement<$SchoolsTableTable, SchoolsSchema> query = _db.selectOnly(_db.schoolsTable)..addColumns(<Expression<DateTime>>[exp]);
+    final DateTime? day = await query.map((TypedResult scheme) => scheme.read(exp)).getSingleOrNull();
 
     return day ?? DateTime(1970);
   }

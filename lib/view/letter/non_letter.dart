@@ -17,7 +17,7 @@ class NonLetter extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+        children: <Widget>[
           Image.asset(
             'assets/images/status/non_letter.png',
             width: screenWidth / 2,
@@ -44,7 +44,7 @@ class NonLetter extends StatelessWidget {
                   ),
                 ),
               );
-            }
+            },
           ),
           const SizedBox(height: MarginSize.kTabBarHeight),
         ],
