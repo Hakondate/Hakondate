@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/router/routes.dart';
+import 'package:hakondate/view/component/dialog/hakondate_dialog/hakondate_dialog.dart';
 
 class UserSettings extends StatelessWidget {
   const UserSettings({super.key});
@@ -44,35 +44,8 @@ class UserSettings extends StatelessWidget {
       onTap: () {
         if (!isActive) {
           showDialog(
-            context: context,
-            builder: (_) {
-              return AlertDialog(
-                title: Text("ユーザーを変更しますか？"),
-                content: Text("OKを押すと，ユーザーが変更されます"),
-                actions: <Widget>[
-                  // ボタン領域
-                  TextButton(
-                    child: Text(
-                      "Cancel",
-                      style: TextStyle(
-                        color: AppColor.text.blue,
-                      ),
-                    ),
-                    onPressed: () => Navigator.pop(context),
-                  ),
-                  ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                        AppColor.text.blue,
-                      ),
-                    ),
-                    child: Text("OK"),
-                    onPressed: () => Navigator.pop(context),
-                  ),
-                ],
-              );
-            },
-          );
+              context: context,
+              builder: (BuildContext context) => _userSwichDialog(context));
         }
       },
       child: Card(
@@ -80,18 +53,17 @@ class UserSettings extends StatelessWidget {
           vertical: MarginSize.minimum,
           horizontal: MarginSize.normalHorizontal,
         ),
-        elevation: isActive ? 5 : 0,
+        elevation: isActive ? 0 : 0,
         shadowColor: AppColor.brand.secondary,
         shape: RoundedRectangleBorder(
           side: BorderSide(
             color: isActive
                 ? AppColor.brand.secondary
-                : AppColor.brand.secondaryLight,
-            width: isActive ? 2.0 : 1.0,
+                : AppColor.ui.secondaryUltraLight,
+            width: isActive ? 2 : 2,
           ),
           borderRadius: const BorderRadius.all(Radius.circular(15)),
         ),
-        // color: isActive ? AppColor.ui.secondaryUltraLight : AppColor.ui.white,
         child: Padding(
           padding: const EdgeInsets.all(PaddingSize.normal),
           child: Row(
@@ -107,7 +79,6 @@ class UserSettings extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: FontSize.subheading,
                       height: 1.0,
-                      // fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(
@@ -115,33 +86,42 @@ class UserSettings extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 0),
-                    child: Row(children: [
-                      Text('五稜郭中学校',
-                          style: TextStyle(
-                              fontSize: FontSize.body,
-                              color: AppColor.text.gray,
-                              height: 1.0)),
+                    child: Row(children: <Widget>[
+                      Text(
+                        '五稜郭中学校',
+                        style: TextStyle(
+                          fontSize: FontSize.body,
+                          color: AppColor.text.gray,
+                          height: 1.0,
+                        ),
+                      ),
                       const SizedBox(
                         width: 10.0,
                       ),
-                      Text('$schoolYear年',
-                          style: TextStyle(
-                              fontSize: FontSize.body,
-                              color: AppColor.text.gray,
-                              height: 1.0))
+                      Text(
+                        '$schoolYear年',
+                        style: TextStyle(
+                          fontSize: FontSize.body,
+                          color: AppColor.text.gray,
+                          height: 1.0,
+                        ),
+                      ),
                     ]),
                   )
                 ],
               ),
               IconButton(
-                // constraints: const BoxConstraints(maxHeight: FontSize.subheading),
-                onPressed: () {
-                  routemaster.push('1');
-                },
+                isSelected: isActive,
+                onPressed: isActive
+                    ? () {
+                        routemaster.push('1');
+                      }
+                    : null,
                 icon: Icon(
                   Icons.edit,
-                  // size: FontSize.subheading,
-                  color: AppColor.brand.secondary,
+                  color: isActive
+                      ? AppColor.brand.secondary
+                      : AppColor.ui.secondaryUltraLight,
                 ),
               )
             ],
@@ -151,12 +131,33 @@ class UserSettings extends StatelessWidget {
     );
   }
 
+  Widget _userSwichDialog(BuildContext context) {
+    return HakondateDialog(
+      title: const Text('ユーザーを変更しますか？'),
+      body: const Text('はいを押すとユーザーが変更されます'),
+      firstAction: HakondateActionButton.primary(
+        text: const Text('はい'),
+        onTap: () {
+          Navigator.pop(context);
+        },
+      ),
+      secondAction: HakondateActionButton(
+        text: const Text('いいえ'),
+        onTap: () {
+          Navigator.pop(context);
+        },
+      ),
+    );
+  }
+
   Widget _userAddButton() {
     return Center(
       child: FloatingActionButton(
-          backgroundColor: AppColor.text.blue,
-          child: const Icon(
+          elevation: 3,
+          backgroundColor: AppColor.ui.secondaryUltraLight,
+          child: Icon(
             Icons.person_add,
+            color: AppColor.brand.secondary,
           ),
           onPressed: () {
             debugPrint('ユーザー追加ボタンが押された！');
