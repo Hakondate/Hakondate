@@ -19,13 +19,13 @@ class UserSettingsDetail extends StatelessWidget {
           horizontal: MarginSize.normalHorizontal,
         ),
         child: Column(
-          children: [
-            _tappablePairText("ニックネーム", 'あとりンゴ'),
+          children: <Widget>[
+            _tappablePairText('ニックネーム', 'あとりンゴ'),
             const Divider(),
-            _tappablePairText("学校", '五稜郭中学校'),
+            _tappablePairText('学校', '五稜郭中学校'),
             const Divider(),
             _tappablePairText('学年', '3年生'),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             _deletUserButton(context),
@@ -38,12 +38,12 @@ class UserSettingsDetail extends StatelessWidget {
   Widget _tappablePairText(String key, String value) {
     return GestureDetector(
       onTap: () {
-        debugPrint("$keyが押された！");
+        debugPrint('$keyが押された！');
       },
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8),
         child: Row(
-          children: [
+          children: <Widget>[
             Expanded(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -82,15 +82,15 @@ class UserSettingsDetail extends StatelessWidget {
     return Center(
       child: TextButton(
         child: Text(
-          "ユーザーを削除",
+          'ユーザーを削除',
           style: TextStyle(
             color: Theme.of(context).colorScheme.error,
             fontSize: FontSize.body,
           ),
         ),
-        onPressed: () {
+        onPressed: () async {
           debugPrint('削除ボタンが押された！');
-          showDialog(
+          return showDialog(
             context: context,
             builder: (_) => _userDeleteDialog(context),
           );
