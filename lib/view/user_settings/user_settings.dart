@@ -171,7 +171,7 @@ class UserSettings extends StatelessWidget {
           color: AppColor.brand.secondary,
         ),
         onPressed: () {
-          debugPrint('ユーザー追加ボタンが押された！');
+          routemaster.push('-1');
         },
       ),
     );
