@@ -11,7 +11,7 @@ class UserSettingsDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ユーザー情報詳細'),
+        title: const Text('お子様情報詳細'),
       ),
       body: Container(
         margin: const EdgeInsets.symmetric(

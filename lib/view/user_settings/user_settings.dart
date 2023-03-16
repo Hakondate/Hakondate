@@ -12,7 +12,7 @@ class UserSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ユーザー情報一覧'),
+        title: const Text('お子様情報一覧'),
       ),
       body: SingleChildScrollView(
         // physics: const AlwaysScrollableScrollPhysics(),
