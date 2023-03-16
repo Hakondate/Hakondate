@@ -54,8 +54,11 @@ final RoutemasterDelegate routemaster = RoutemasterDelegate(
           const MaterialPage<dynamic>(child: LetterPDF()),
       '/home/user_settings': (_) =>
           const MaterialPage<dynamic>(child: UserSettings()),
-      '/home/user_settings/:user_id': (_) =>
-          const MaterialPage<dynamic>(child: UserSettingsDetail()),
+      '/home/user_settings/:id': (RouteData route) => FadeUpPage(
+            child: UserSettingsDetail(
+              id: int.parse(route.pathParameters['id'] ?? '-1'),
+            ),
+          ),
       '/home/origin': (_) =>
           MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
       '/home/drawer_terms': (_) => const FadeUpPage(child: DrawerTerms()),

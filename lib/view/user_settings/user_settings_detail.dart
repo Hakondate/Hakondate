@@ -1,120 +1,222 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
-import 'package:hakondate/view/component/dialog/hakondate_dialog/hakondate_dialog.dart';
+import 'package:hakondate/model/school/school_model.dart';
+import 'package:hakondate/state/signup/signup_state.dart';
+import 'package:hakondate/view/component/dialog/help_dialog.dart';
+import 'package:hakondate/view/component/frame/fade_up_app_bar.dart';
+import 'package:hakondate/view/component/label/setting_label.dart';
+import 'package:hakondate/view/signup/signing_up_dialog.dart';
+import 'package:hakondate/view_model/single_page/signup_view_model.dart';
 
 class UserSettingsDetail extends StatelessWidget {
-  const UserSettingsDetail({super.key});
+  UserSettingsDetail({
+    required this.id,
+    super.key,
+  });
+
+  final int id;
+  final GlobalKey _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('お子様情報詳細'),
+      appBar: FadeUpAppBar(
+        title: id < 0 ? Text('お子様の追加登録') : Text('お子様情報の変更'),
       ),
-      body: Container(
-        margin: const EdgeInsets.symmetric(
-          vertical: MarginSize.normal,
-          horizontal: MarginSize.normalHorizontal,
-        ),
-        child: Column(
-          children: <Widget>[
-            _tappablePairText('ニックネーム', 'あとりンゴ'),
-            const Divider(),
-            _tappablePairText('学校', '五稜郭中学校'),
-            const Divider(),
-            _tappablePairText('学年', '3年生'),
-            const SizedBox(
-              height: 40,
-            ),
-            _deletUserButton(context),
-          ],
+      body: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              _nameForm(),
+              _schoolForm(),
+              _submitButton(),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _tappablePairText(String key, String value) {
-    return GestureDetector(
-      onTap: () {
-        debugPrint('$keyが押された！');
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  Widget _nameForm() {
+    return Consumer(
+      builder: (BuildContext context, WidgetRef ref, _) {
+        final SignupState store = ref.watch(signupProvider);
+
+        return Padding(
+          padding: const EdgeInsets.all(PaddingSize.normal),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Row(
                 children: <Widget>[
-                  Text(
-                    key,
-                    style: TextStyle(
-                      fontSize: FontSize.label,
-                      color: AppColor.text.primary,
+                  const Text(
+                    'お名前',
+                    style: TextStyle(fontSize: FontSize.subheading),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.help),
+                    iconSize: IconSize.help,
+                    color: Theme.of(context).primaryIconTheme.color,
+                    onPressed: () async => showDialog(
+                      context: context,
+                      builder: (BuildContext context) => const HelpDialog(
+                        title: Text('お名前について'),
+                        content: Text('　お名前情報は，本アプリ内でユーザを識別するために利用されます．'
+                            'あだ名などを入力していただいても構いません．また，あとで変更することもできます．\n'
+                            '　お名前情報は，端末内に保存され収集されることはありません．また，あとから変更することができます．'),
+                      ),
                     ),
                   ),
-                  Text(
-                    value,
-                    style: TextStyle(
-                      fontSize: FontSize.body,
-                      color: AppColor.text.gray,
+                  const Spacer(),
+                  if (store is SignupStateData)
+                    _errorIndication(store.nameErrorState),
+                ],
+              ),
+              TextFormField(
+                initialValue: (store is SignupStateData) ? store.name : '',
+                keyboardType: TextInputType.name,
+                maxLength: 15,
+                decoration: InputDecoration(
+                  hintText: 'お子様の名前かあだ名を入力',
+                  border: const OutlineInputBorder(),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: AppColor.brand.secondary,
+                      width: 2,
                     ),
                   ),
+                ),
+                onChanged: (String value) =>
+                    ref.read(signupProvider.notifier).updateName(value),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _schoolForm() {
+    return Consumer(
+      builder: (BuildContext context, WidgetRef ref, _) {
+        final SignupState store = ref.watch(signupProvider);
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(PaddingSize.normal),
+              child: Row(
+                children: <Widget>[
+                  const Text(
+                    '学校・学年',
+                    style: TextStyle(fontSize: FontSize.subheading),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.help),
+                    iconSize: IconSize.help,
+                    color: Theme.of(context).primaryIconTheme.color,
+                    onPressed: () async => showDialog(
+                      context: context,
+                      builder: (BuildContext context) => const HelpDialog(
+                        title: Text('学校・学年について'),
+                        content: Text(
+                            '　学校情報は，本アプリ内でお子様の通っている学校の献立を表示するために利用されます．選択肢にない学校は，本アプリ未対応の学校です．\n'
+                            '　学年情報は，本アプリ内でお子様の年齢に合わせた情報(栄養基準値など)を表示するために利用されます．\n'
+                            '　どちらの情報も，端末内に保存され収集されることはありません．また，あとから変更することができます．'),
+                      ),
+                    ),
+                  ),
+                  const Spacer(),
+                  if (store is SignupStateData)
+                    _errorIndication(store.schoolErrorState),
                 ],
               ),
             ),
-            const SizedBox(
-              width: 10,
+            SettingLabel(
+              title: '学校',
+              dialList: (store is SignupStateData)
+                  ? store.schools
+                      .map((SchoolModel school) => school.name)
+                      .toList()
+                  : <String>[],
+              completed: (int index) {
+                if (store is! SignupStateData) return;
+                final int id = store.schools[index].id;
+                ref.read(signupProvider.notifier).updateSchool(id);
+              },
+              trailing: (store is SignupStateData) ? store.schoolTrailing : '',
             ),
-            Icon(
-              Icons.chevron_right,
-              color: AppColor.text.blackMid,
-            )
+            SettingLabel(
+              title: '学年',
+              dialList:
+                  (store is SignupStateData) ? store.schoolYears : <String>[],
+              completed: (int index) =>
+                  ref.read(signupProvider.notifier).updateSchoolYear(index + 1),
+              trailing:
+                  (store is SignupStateData) ? store.schoolYearTrailing : '',
+            ),
+            const SizedBox(height: PaddingSize.normal),
           ],
-        ),
-      ),
+        );
+      },
     );
   }
 
-  Widget _deletUserButton(BuildContext context) {
-    return Center(
-      child: TextButton(
-        child: Text(
-          'ユーザーを削除',
+  Widget _errorIndication(String? errorState) {
+    if (errorState == null || errorState.isEmpty) return Container();
+
+    return Builder(
+      builder: (BuildContext context) {
+        return Text(
+          errorState,
           style: TextStyle(
+            fontSize: FontSize.indication,
             color: Theme.of(context).colorScheme.error,
-            fontSize: FontSize.body,
           ),
-        ),
-        onPressed: () async {
-          debugPrint('削除ボタンが押された！');
-          return showDialog(
-            context: context,
-            builder: (_) => _userDeleteDialog(context),
-          );
-        },
-      ),
+        );
+      },
     );
   }
 
-  Widget _userDeleteDialog(BuildContext context) {
-    return HakondateDialog(
-      title: const Text('ユーザーを削除しますか？'),
-      body: const Text('はいを押すとユーザーが削除されます'),
-      firstAction: HakondateActionButton.primary(
-        text: const Text('はい'),
-        onTap: () {
-          Navigator.pop(context);
-        },
-      ),
-      secondAction: HakondateActionButton(
-        text: const Text('いいえ'),
-        onTap: () {
-          Navigator.pop(context);
-        },
-      ),
+  Widget _submitButton() {
+    return Consumer(
+      builder: (BuildContext context, WidgetRef ref, _) {
+        return Padding(
+          padding: const EdgeInsets.all(PaddingSize.normal),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColor.brand.secondary,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: PaddingSize.buttonVertical,
+                    horizontal: PaddingSize.buttonHorizontal,
+                  ),
+                  textStyle: TextStyle(color: AppColor.text.white),
+                  shape: const StadiumBorder(),
+                ),
+                child: const Text('登録する'),
+                onPressed: () async {
+                  if (ref.read(signupProvider.notifier).checkValidation()) {
+                    return showDialog(
+                      context: context,
+                      builder: (BuildContext context) =>
+                          const SigningUpDialog(),
+                    );
+                  }
+                },
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
