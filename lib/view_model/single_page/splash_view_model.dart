@@ -68,6 +68,14 @@ class SplashViewModel extends StateNotifier<SplashState> {
           if (termsUpdated != null) return await termsUpdated();
         }
 
+        final DateTime dictionaryInitializedDay = DateTime.fromMillisecondsSinceEpoch(
+          prefs.getInt(AppKey.sharedPreferencesKey.initializedDictionaryDay) ?? 0,
+        );
+
+        if (dictionaryInitializedDay.isBefore(RecordDate.dictionaryLastUpdateDay)) {
+          await _initializeDictionaries();
+        }
+
         await _initializeMenus();
         routemaster.replace('/home');
         state = SplashState();
@@ -79,6 +87,10 @@ class SplashViewModel extends StateNotifier<SplashState> {
         if (errorOccurred != null) return errorOccurred(error, stack);
       }
     });
+  }
+
+  Future<void> _initializeDictionaries() async {
+    state = SplashState(status: LoadingStatus.reading);
   }
 
   Future<void> _initializeSchools() async {
