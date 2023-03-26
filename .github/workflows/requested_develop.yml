@@ -5,7 +5,7 @@ on:
     branches: [ "develop" ]
 
 jobs:
-  run build_runner:
+  run_build_runner:
     runs-on: ubuntu-latest
 
     steps:
@@ -40,7 +40,7 @@ jobs:
             git push origin HEAD:${{github.head_ref}}; \
           fi
 
-  check lint:
+  check_lint:
     runs-on: ubuntu-latest
 
     steps:
