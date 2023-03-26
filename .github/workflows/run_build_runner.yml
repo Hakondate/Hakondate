@@ -21,8 +21,8 @@ jobs:
 
       - name: 'Setup git config'
         run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+          git config user.name AdminHakondate
+          git config user.email editorhakondate@gmail.com
         
       - name: 'Run flutter_oss_licenses'
         run: flutter pub run flutter_oss_licenses:generate.dart -o lib/constant/oss_licenses.dart
