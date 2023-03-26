@@ -19,12 +19,10 @@ jobs:
       - name: 'Get packages'
         run: flutter pub get
 
-      - name: 'Setup git config and pull'
+      - name: 'Setup git config'
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git config pull.rebase false
-          git pull --allow-unrelated-histories origin ${{github.head_ref}}
         
       - name: 'Run flutter_oss_licenses'
         run: flutter pub run flutter_oss_licenses:generate.dart -o lib/constant/oss_licenses.dart
@@ -37,5 +35,5 @@ jobs:
           if (git diff --shortstat | grep '[0-9]'); then \
             git add .; \
             git commit -m '[refactor]Ran OSS Licenses generator and import sorter'; \
-            git push origin HEAD:${{github.head_ref}}; \
+            git push; \
           fi
