@@ -1,7 +1,7 @@
-name: run build_runner
+name: check build_runner and lint
 
 on:
-  push:
+  pull_request:
     branches: [ "develop" ]
 
 jobs:
@@ -10,23 +10,25 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: 'Setup flutter environment'
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-        
+
       - name: 'Get packages'
         run: flutter pub get
 
-      - name: 'Setup git config'
+      - name: 'Setup git config and pull'
         run: |
-          git config user.name AdminHakondate
-          git config user.email editorhakondate@gmail.com
-        
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git config pull.rebase false
+          git pull --allow-unrelated-histories origin ${{github.head_ref}}
+
       - name: 'Run flutter_oss_licenses'
         run: flutter pub run flutter_oss_licenses:generate.dart -o lib/constant/oss_licenses.dart
-      
+
       - name: 'Run import_sorter'
         run: flutter pub run import_sorter:main
 
@@ -35,5 +37,8 @@ jobs:
           if (git diff --shortstat | grep '[0-9]'); then \
             git add .; \
             git commit -m '[refactor]Ran OSS Licenses generator and import sorter'; \
-            git push; \
+            git push origin HEAD:${{github.head_ref}}; \
           fi
+
+      - name: 'Check lint'
+        run: flutter analyze
