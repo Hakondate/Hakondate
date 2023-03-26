@@ -5,7 +5,7 @@ on:
     branches: [ "develop" ]
 
 jobs:
-  build:
+  run build_runner:
     runs-on: ubuntu-latest
 
     steps:
@@ -39,6 +39,20 @@ jobs:
             git commit -m '[refactor]Ran OSS Licenses generator and import sorter'; \
             git push origin HEAD:${{github.head_ref}}; \
           fi
+
+  check lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: 'Setup flutter environment'
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: 'Get packages'
+        run: flutter pub get
 
       - name: 'Check lint'
         run: flutter analyze
