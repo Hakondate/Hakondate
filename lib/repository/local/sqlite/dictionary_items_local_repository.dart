@@ -25,26 +25,26 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryBase 
   final LocalDatabase _db;
 
   @override
-  Future<int> add(Map<String, String> item) async {
+  Future<int> add(Map<String, dynamic> item) async {
     final DictionaryItemsTableCompanion companion = DictionaryItemsTableCompanion(
-      group: Value<int>(int.parse(item['group']!)),
-      name: Value<String>(item['name']!),
-      energy: Value<double>(double.parse(item['energy']!)),
-      protein: Value<double>(double.parse(item['protein']!)),
-      lipid: Value<double>(double.parse(item['lipid']!)),
-      carbohydrate: Value<double>(double.parse(item['carbohydrate']!)),
-      sodium: Value<double>(double.parse(item['sodium']!)),
-      calcium: Value<double>(double.parse(item['calcium']!)),
-      magnesium: Value<double>(double.parse(item['magnesium']!)),
-      iron: Value<double>(double.parse(item['iron']!)),
-      zinc: Value<double>(double.parse(item['zinc']!)),
-      retinol: Value<double>(double.parse(item['retinol']!)),
-      vitaminB1: Value<double>(double.parse(item['vitaminB1']!)),
-      vitaminB2: Value<double>(double.parse(item['vitaminB2']!)),
-      vitaminC: Value<double>(double.parse(item['vitaminC']!)),
-      dietaryFiber: Value<double>(double.parse(item['dietaryFiber']!)),
-      salt: Value<double>(double.parse(item['salt']!)),
-      note: Value<String?>(item['note']),
+      group: Value<int>(int.parse(item['group'].toString())),
+      name: Value<String>(item['name'] as String),
+      energy: Value<double>(double.parse(item['energy'].toString())),
+      protein: Value<double>(double.parse(item['protein'].toString())),
+      lipid: Value<double>(double.parse(item['lipid'].toString())),
+      carbohydrate: Value<double>(double.parse(item['carbohydrate'].toString())),
+      sodium: Value<double>(double.parse(item['sodium'].toString())),
+      calcium: Value<double>(double.parse(item['calcium'].toString())),
+      magnesium: Value<double>(double.parse(item['magnesium'].toString())),
+      iron: Value<double>(double.parse(item['iron'].toString())),
+      zinc: Value<double>(double.parse(item['zinc'].toString())),
+      retinol: Value<double>(double.parse(item['retinol'].toString())),
+      vitaminB1: Value<double>(double.parse(item['vitaminB1'].toString())),
+      vitaminB2: Value<double>(double.parse(item['vitaminB2'].toString())),
+      vitaminC: Value<double>(double.parse(item['vitaminC'].toString())),
+      dietaryFiber: Value<double>(double.parse(item['dietaryFiber'].toString())),
+      salt: Value<double>(double.parse(item['salt'].toString())),
+      note: Value<String?>(item['note'] as String?),
     );
 
     return _db.into(_db.dictionaryItemsTable).insert(companion);
@@ -57,7 +57,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryBase 
 
     return DictionaryItemModel(
       id: schema.id,
-      group: schema.group,
+      group: _getGroup(schema.group),
       name: schema.name,
       nutrients: NutrientsModel(
         energy: schema.energy,
@@ -90,7 +90,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryBase 
       items.add(
         DictionaryItemModel(
           id: schema.id,
-          group: schema.group,
+          group: _getGroup(schema.group),
           name: schema.name,
           nutrients: NutrientsModel(
             energy: schema.energy,
@@ -291,7 +291,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryBase 
       items.add(
         DictionaryItemModel(
           id: schema.id,
-          group: schema.group,
+          group: _getGroup(schema.group),
           name: schema.name,
           nutrients: NutrientsModel(
             energy: schema.energy,
@@ -317,4 +317,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryBase 
 
     return items;
   }
+
+  DictionaryGroup _getGroup(int groupNumber) =>
+      DictionaryGroup.values.firstWhere((DictionaryGroup group) => group.groupNumber == groupNumber);
 }

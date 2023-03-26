@@ -19,6 +19,7 @@ class MarginSize {
   static const double normalHorizontal = 25;  // 垂直方向の基本マージン
   static const double kTabBarHeight = 50;     // BottomNavigationBarの高さ
   static const double shadow = 1;             // 影のサイズ
+  static const double minimumGrid = 2;        // 小さなグリッド用マージン
 }
 
 class PaddingSize {
@@ -32,6 +33,7 @@ class PaddingSize {
 
 class BorderSize {
   static const double normal = 2;           // 標準の太さ
+  static const double bold = 4;             // 太めの太さ
 }
 
 class IconSize {
@@ -44,4 +46,5 @@ class IconSize {
 
 class UiSize {
   static const double calendarTileHeight = 180; // カレンダー画面の高さ
+  static const double minimumGridCircular = 8;  // 小さいグリッドの角丸の大きさ
 }

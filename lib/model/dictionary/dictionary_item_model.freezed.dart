@@ -17,7 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$DictionaryItemModel {
   int get id => throw _privateConstructorUsedError; // ID
-  int get group => throw _privateConstructorUsedError; // 食品分類（1 ~ 18群）
+  DictionaryGroup get group =>
+      throw _privateConstructorUsedError; // 食品分類（1 ~ 18群）
   String get name => throw _privateConstructorUsedError; // 食材名
   NutrientsModel get nutrients => throw _privateConstructorUsedError; // 栄養素
   String? get note => throw _privateConstructorUsedError;
@@ -34,7 +35,11 @@ abstract class $DictionaryItemModelCopyWith<$Res> {
       _$DictionaryItemModelCopyWithImpl<$Res, DictionaryItemModel>;
   @useResult
   $Res call(
-      {int id, int group, String name, NutrientsModel nutrients, String? note});
+      {int id,
+      DictionaryGroup group,
+      String name,
+      NutrientsModel nutrients,
+      String? note});
 
   $NutrientsModelCopyWith<$Res> get nutrients;
 }
@@ -66,7 +71,7 @@ class _$DictionaryItemModelCopyWithImpl<$Res, $Val extends DictionaryItemModel>
       group: null == group
           ? _value.group
           : group // ignore: cast_nullable_to_non_nullable
-              as int,
+              as DictionaryGroup,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -100,7 +105,11 @@ abstract class _$$_DictionaryItemModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id, int group, String name, NutrientsModel nutrients, String? note});
+      {int id,
+      DictionaryGroup group,
+      String name,
+      NutrientsModel nutrients,
+      String? note});
 
   @override
   $NutrientsModelCopyWith<$Res> get nutrients;
@@ -131,7 +140,7 @@ class __$$_DictionaryItemModelCopyWithImpl<$Res>
       group: null == group
           ? _value.group
           : group // ignore: cast_nullable_to_non_nullable
-              as int,
+              as DictionaryGroup,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -162,7 +171,7 @@ class _$_DictionaryItemModel implements _DictionaryItemModel {
   final int id;
 // ID
   @override
-  final int group;
+  final DictionaryGroup group;
 // 食品分類（1 ~ 18群）
   @override
   final String name;
@@ -206,7 +215,7 @@ class _$_DictionaryItemModel implements _DictionaryItemModel {
 abstract class _DictionaryItemModel implements DictionaryItemModel {
   const factory _DictionaryItemModel(
       {required final int id,
-      required final int group,
+      required final DictionaryGroup group,
       required final String name,
       required final NutrientsModel nutrients,
       final String? note}) = _$_DictionaryItemModel;
@@ -214,7 +223,7 @@ abstract class _DictionaryItemModel implements DictionaryItemModel {
   @override
   int get id;
   @override // ID
-  int get group;
+  DictionaryGroup get group;
   @override // 食品分類（1 ~ 18群）
   String get name;
   @override // 食材名
