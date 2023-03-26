@@ -1,10 +1,11 @@
 /* 定数定義 */
 class FontSize {
-  static const double indication = 12;  // 注意文
-  static const double body = 16;        // 本文
-  static const double label = 18;       // ラベル内
-  static const double subheading = 20;  // 副見出し
-  static const double status = 24;      // ステータス表示
+  static const double indication = 12; // 注意文
+  static const double body = 16;       // 本文
+  static const double label = 18;      // ラベル内
+  static const double subheading = 20; // 副見出し  
+  static const double status = 24;     // ステータス表示
+  static const double heading = 25;    // 中見出し
 }
 
 class SpaceSize {

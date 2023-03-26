@@ -49,6 +49,10 @@ dependencies:
   firebase_storage: ^11.0.13
   firebase_crashlytics: ^3.0.14
   firebase_analytics: ^10.1.3
+  
+  # URL関連
+  url_launcher: ^6.1.10
+  webview_flutter: ^4.0.7
 
 dev_dependencies:
   flutter_test:
@@ -80,6 +84,7 @@ flutter:
     - assets/images/calendar_hedgehog/
     - assets/images/drawer/
     - assets/images/food_icon/
+    - assets/images/information/
     - assets/images/menu_tile/
     - assets/images/label/
     - assets/images/status/

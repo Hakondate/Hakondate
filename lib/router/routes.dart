@@ -6,6 +6,8 @@ import 'package:hakondate/view/bottom_bar/app_bottom_navigation_bar.dart';
 import 'package:hakondate/view/calendar/calendar.dart';
 import 'package:hakondate/view/component/frame/fade_up_page.dart';
 import 'package:hakondate/view/daily/daily.dart';
+import 'package:hakondate/view/information/information.dart';
+import 'package:hakondate/view/help/help.dart';
 import 'package:hakondate/view/letter/letter.dart';
 import 'package:hakondate/view/letter/letter_pdf.dart';
 import 'package:hakondate/view/license/license.dart';
@@ -44,8 +46,8 @@ final RoutemasterDelegate routemaster = RoutemasterDelegate(
       '/home/user_settings': (_) => MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
       '/home/origin': (_) => MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
       '/home/drawer_terms': (_) => const FadeUpPage(child: DrawerTerms()),
-      '/home/information': (_) => MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
-      '/home/help': (_) => MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
+      '/home/information': (_) => const MaterialPage<dynamic>(child: Information()),
+      '/home/help': (_) => const MaterialPage<dynamic>(child: Help()),
       '/home/license': (_) => const FadeUpPage(child: License()),
       '/home/license/:index': (RouteData route) => FadeUpPage(
         child: LicenseDetail(
