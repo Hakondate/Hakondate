@@ -18,7 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$DictionaryState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<DictionaryItemModel>? selectedGroupItems,
+    required TResult Function(
+            DictionaryGroup? selectedGroup,
+            List<DictionaryItemModel>? selectedGroupItems,
             DictionaryItemModel? selectedItem)
         data,
     required TResult Function() load,
@@ -26,7 +28,9 @@ mixin _$DictionaryState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<DictionaryItemModel>? selectedGroupItems,
+    TResult? Function(
+            DictionaryGroup? selectedGroup,
+            List<DictionaryItemModel>? selectedGroupItems,
             DictionaryItemModel? selectedItem)?
         data,
     TResult? Function()? load,
@@ -34,7 +38,9 @@ mixin _$DictionaryState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<DictionaryItemModel>? selectedGroupItems,
+    TResult Function(
+            DictionaryGroup? selectedGroup,
+            List<DictionaryItemModel>? selectedGroupItems,
             DictionaryItemModel? selectedItem)?
         data,
     TResult Function()? load,
@@ -87,7 +93,8 @@ abstract class _$$DictionaryStateDataCopyWith<$Res> {
       __$$DictionaryStateDataCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {List<DictionaryItemModel>? selectedGroupItems,
+      {DictionaryGroup? selectedGroup,
+      List<DictionaryItemModel>? selectedGroupItems,
       DictionaryItemModel? selectedItem});
 
   $DictionaryItemModelCopyWith<$Res>? get selectedItem;
@@ -104,10 +111,15 @@ class __$$DictionaryStateDataCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? selectedGroup = freezed,
     Object? selectedGroupItems = freezed,
     Object? selectedItem = freezed,
   }) {
     return _then(_$DictionaryStateData(
+      selectedGroup: freezed == selectedGroup
+          ? _value.selectedGroup
+          : selectedGroup // ignore: cast_nullable_to_non_nullable
+              as DictionaryGroup?,
       selectedGroupItems: freezed == selectedGroupItems
           ? _value._selectedGroupItems
           : selectedGroupItems // ignore: cast_nullable_to_non_nullable
@@ -136,9 +148,13 @@ class __$$DictionaryStateDataCopyWithImpl<$Res>
 
 class _$DictionaryStateData implements DictionaryStateData {
   const _$DictionaryStateData(
-      {final List<DictionaryItemModel>? selectedGroupItems, this.selectedItem})
+      {this.selectedGroup,
+      final List<DictionaryItemModel>? selectedGroupItems,
+      this.selectedItem})
       : _selectedGroupItems = selectedGroupItems;
 
+  @override
+  final DictionaryGroup? selectedGroup;
   final List<DictionaryItemModel>? _selectedGroupItems;
   @override
   List<DictionaryItemModel>? get selectedGroupItems {
@@ -155,7 +171,7 @@ class _$DictionaryStateData implements DictionaryStateData {
 
   @override
   String toString() {
-    return 'DictionaryState.data(selectedGroupItems: $selectedGroupItems, selectedItem: $selectedItem)';
+    return 'DictionaryState.data(selectedGroup: $selectedGroup, selectedGroupItems: $selectedGroupItems, selectedItem: $selectedItem)';
   }
 
   @override
@@ -163,6 +179,8 @@ class _$DictionaryStateData implements DictionaryStateData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DictionaryStateData &&
+            (identical(other.selectedGroup, selectedGroup) ||
+                other.selectedGroup == selectedGroup) &&
             const DeepCollectionEquality()
                 .equals(other._selectedGroupItems, _selectedGroupItems) &&
             (identical(other.selectedItem, selectedItem) ||
@@ -170,7 +188,7 @@ class _$DictionaryStateData implements DictionaryStateData {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
+  int get hashCode => Object.hash(runtimeType, selectedGroup,
       const DeepCollectionEquality().hash(_selectedGroupItems), selectedItem);
 
   @JsonKey(ignore: true)
@@ -183,36 +201,42 @@ class _$DictionaryStateData implements DictionaryStateData {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<DictionaryItemModel>? selectedGroupItems,
+    required TResult Function(
+            DictionaryGroup? selectedGroup,
+            List<DictionaryItemModel>? selectedGroupItems,
             DictionaryItemModel? selectedItem)
         data,
     required TResult Function() load,
   }) {
-    return data(selectedGroupItems, selectedItem);
+    return data(selectedGroup, selectedGroupItems, selectedItem);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<DictionaryItemModel>? selectedGroupItems,
+    TResult? Function(
+            DictionaryGroup? selectedGroup,
+            List<DictionaryItemModel>? selectedGroupItems,
             DictionaryItemModel? selectedItem)?
         data,
     TResult? Function()? load,
   }) {
-    return data?.call(selectedGroupItems, selectedItem);
+    return data?.call(selectedGroup, selectedGroupItems, selectedItem);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<DictionaryItemModel>? selectedGroupItems,
+    TResult Function(
+            DictionaryGroup? selectedGroup,
+            List<DictionaryItemModel>? selectedGroupItems,
             DictionaryItemModel? selectedItem)?
         data,
     TResult Function()? load,
     required TResult orElse(),
   }) {
     if (data != null) {
-      return data(selectedGroupItems, selectedItem);
+      return data(selectedGroup, selectedGroupItems, selectedItem);
     }
     return orElse();
   }
@@ -251,9 +275,11 @@ class _$DictionaryStateData implements DictionaryStateData {
 
 abstract class DictionaryStateData implements DictionaryState {
   const factory DictionaryStateData(
-      {final List<DictionaryItemModel>? selectedGroupItems,
+      {final DictionaryGroup? selectedGroup,
+      final List<DictionaryItemModel>? selectedGroupItems,
       final DictionaryItemModel? selectedItem}) = _$DictionaryStateData;
 
+  DictionaryGroup? get selectedGroup;
   List<DictionaryItemModel>? get selectedGroupItems;
   DictionaryItemModel? get selectedItem;
   @JsonKey(ignore: true)
@@ -299,7 +325,9 @@ class _$DictionaryStateLoad implements DictionaryStateLoad {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<DictionaryItemModel>? selectedGroupItems,
+    required TResult Function(
+            DictionaryGroup? selectedGroup,
+            List<DictionaryItemModel>? selectedGroupItems,
             DictionaryItemModel? selectedItem)
         data,
     required TResult Function() load,
@@ -310,7 +338,9 @@ class _$DictionaryStateLoad implements DictionaryStateLoad {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<DictionaryItemModel>? selectedGroupItems,
+    TResult? Function(
+            DictionaryGroup? selectedGroup,
+            List<DictionaryItemModel>? selectedGroupItems,
             DictionaryItemModel? selectedItem)?
         data,
     TResult? Function()? load,
@@ -321,7 +351,9 @@ class _$DictionaryStateLoad implements DictionaryStateLoad {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<DictionaryItemModel>? selectedGroupItems,
+    TResult Function(
+            DictionaryGroup? selectedGroup,
+            List<DictionaryItemModel>? selectedGroupItems,
             DictionaryItemModel? selectedItem)?
         data,
     TResult Function()? load,
