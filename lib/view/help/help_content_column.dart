@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:hakondate/view/component/sentence/padded_sentence.dart';
 
 import 'package:hakondate/view/component/sentence/sentence.dart';
@@ -21,3 +21,4 @@ class HelpContentColumn extends StatelessWidget {
     );
   }
 }
+*/
