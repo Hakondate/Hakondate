@@ -22,7 +22,9 @@ class RecipePDF extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final OpenDataRecipeModel recipe = OpenDataRecipes.all.firstWhere((OpenDataRecipeModel recipe) => recipe.id == int.parse(id ?? '0'));
+    final OpenDataRecipeModel recipe = OpenDataRecipes.all.firstWhere(
+          (OpenDataRecipeModel recipe) => recipe.id == int.parse(id ?? '0'),
+    );
 
     return Scaffold(
       appBar: FadeUpAppBar(

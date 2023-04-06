@@ -84,6 +84,7 @@ flutter:
     - assets/images/label/
     - assets/images/status/
     - assets/images/status/menu_status/
+    - assets/initialization_data/
     - assets/loading_animation/
     - assets/svgs/bottom_navigation_bar_icons/
 
