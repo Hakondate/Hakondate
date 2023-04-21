@@ -46,8 +46,39 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryBase 
       salt: Value<double>(double.parse(item['salt'].toString())),
       note: Value<String?>(item['note'] as String?),
     );
+    final DictionaryItemsSchema? conflictSchema =
+      await (_db.select(_db.dictionaryItemsTable)..where(($DictionaryItemsTableTable t) =>
+          t.group.equals(companion.group.value) &
+          t.name.equals(companion.name.value),
+    )).getSingleOrNull();
 
-    return _db.into(_db.dictionaryItemsTable).insert(companion);
+    if (conflictSchema == null) {
+      return _db.into(_db.dictionaryItemsTable).insert(companion);
+    } else {
+      return (_db.update(_db.dictionaryItemsTable)..where(($DictionaryItemsTableTable t) =>
+        t.group.equals(companion.group.value) &
+        t.name.equals(companion.name.value),
+      )).write(
+        DictionaryItemsTableCompanion(
+          energy: companion.energy,
+          protein: companion.protein,
+          lipid: companion.lipid,
+          carbohydrate: companion.carbohydrate,
+          sodium: companion.sodium,
+          calcium: companion.calcium,
+          magnesium: companion.magnesium,
+          iron: companion.iron,
+          zinc: companion.zinc,
+          retinol: companion.retinol,
+          vitaminB1: companion.vitaminB1,
+          vitaminB2: companion.vitaminB2,
+          vitaminC: companion.vitaminC,
+          dietaryFiber: companion.dietaryFiber,
+          salt: companion.salt,
+          note: companion.note,
+        ),
+      );
+    }
   }
 
   @override
@@ -279,6 +310,24 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryBase 
           ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
               expression: t.salt,
+              mode: OrderingMode.desc,
+            )
+          ])..limit(limit)).get();
+        break;
+      case 'vitamin':
+        schemas = await (_db.select(_db.dictionaryItemsTable)
+          ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
+                ($DictionaryItemsTableTable t) => OrderingTerm(
+              expression: t.retinol * const Variable<double>(1000) + t.vitaminB1 + t.vitaminB2 + t.vitaminC,
+              mode: OrderingMode.desc,
+            )
+          ])..limit(limit)).get();
+        break;
+      case 'mineral':
+        schemas = await (_db.select(_db.dictionaryItemsTable)
+          ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
+                ($DictionaryItemsTableTable t) => OrderingTerm(
+              expression: t.calcium + t.magnesium + t.iron + t.zinc,
               mode: OrderingMode.desc,
             )
           ])..limit(limit)).get();
