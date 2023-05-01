@@ -21,23 +21,25 @@ class DictionaryGroupList extends ConsumerWidget {
           appBar: AppBar(
             title: Text('${selectedGroup.groupNumber}群：${selectedGroup.label}'),
           ),
-          body: ListView.separated(
-            itemCount: selectedGroupItems.length,
-            separatorBuilder: (_, __) => const Divider(
-              height: 0,
+          body: Scrollbar(
+            child: ListView.separated(
+              itemCount: selectedGroupItems.length,
+              separatorBuilder: (_, __) => const Divider(
+                height: 0,
+              ),
+              itemBuilder: (_, int index) {
+                final DictionaryItemModel item = selectedGroupItems[index];
+                return ListTile(
+                  tileColor: AppColor.ui.white,
+                  title: Text(item.name),
+                  trailing: const Icon(Icons.chevron_right_rounded),
+                  onTap: () {
+                    ref.read(dictionaryProvider.notifier).selectItem(item.id);
+                    routemaster.push('/home/dictionary_item/${item.id}');
+                  },
+                );
+              },
             ),
-            itemBuilder: (_, int index) {
-              final DictionaryItemModel item = selectedGroupItems[index];
-              return ListTile(
-                tileColor: AppColor.ui.white,
-                title: Text(item.name),
-                trailing: const Icon(Icons.chevron_right_rounded),
-                onTap: () {
-                  ref.read(dictionaryProvider.notifier).selectItem(item.id);
-                  routemaster.push('/home/dictionary_item/${item.id}');
-                },
-              );
-            },
           ),
         );
       },

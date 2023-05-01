@@ -153,28 +153,6 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryBase 
     required String nutrient,
     int limit = 5,
   }) async {
-    final List<String> nutrientNames = <String>[
-      'energy',
-      'protein',
-      'lipid',
-      'carbohydrate',
-      'sodium',
-      'calcium',
-      'magnesium',
-      'iron',
-      'zinc',
-      'retinol',
-      'vitaminB1',
-      'vitaminB2',
-      'vitaminC',
-      'dietaryFiber',
-      'salt',
-    ];
-
-    if (!nutrientNames.contains(nutrient)) {
-      throw SQLiteException("Failed to find nutrient '$nutrient'");
-    }
-
     final List<DictionaryItemModel> items = <DictionaryItemModel>[];
     List<DictionaryItemsSchema> schemas = <DictionaryItemsSchema>[];
 

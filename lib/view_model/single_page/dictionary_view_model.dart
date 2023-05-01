@@ -32,4 +32,39 @@ class DictionaryViewModel extends StateNotifier<DictionaryState> {
       selectedItem: await _dictionaryItemsLocalRepository.getById(id),
     );
   }
+
+  Future<List<double>> getGraphValues(double maxValue) async {
+    final DictionaryState data = state;
+
+    if (data is! DictionaryStateData) return <double>[0, 0, 0, 0, 0, 0];
+
+    final DictionaryItemModel? item = data.selectedItem;
+
+    if (item == null) return <double>[0, 0, 0, 0, 0, 0];
+
+    final DictionaryItemModel energyRef = await _getMaxRef('energy');
+    final DictionaryItemModel proteinRef = await _getMaxRef('protein');
+    final DictionaryItemModel vitaminRef = await _getMaxRef('vitamin');
+    final DictionaryItemModel mineralRef = await _getMaxRef('mineral');
+    final DictionaryItemModel carbohydrateRef = await _getMaxRef('carbohydrate');
+    final DictionaryItemModel lipidRef = await _getMaxRef('lipid');
+
+    return <double>[
+      item.nutrients.energy / energyRef.nutrients.energy * 100,
+      item.nutrients.protein / proteinRef.nutrients.protein * 100,
+      item.nutrients.vitamin / vitaminRef.nutrients.vitamin * 100,
+      item.nutrients.mineral / mineralRef.nutrients.mineral * 100,
+      item.nutrients.carbohydrate / carbohydrateRef.nutrients.carbohydrate * 100,
+      item.nutrients.lipid / lipidRef.nutrients.lipid * 100,
+    ].map((double value) => (value > maxValue) ? maxValue : value).toList();
+  }
+
+  Future<DictionaryItemModel> _getMaxRef(String nutrient) async {
+    final List<DictionaryItemModel> schemas = await _dictionaryItemsLocalRepository.getRanking(
+      nutrient: nutrient,
+      limit: 200,
+    );
+
+    return schemas.last;
+  }
 }
