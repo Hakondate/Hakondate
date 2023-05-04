@@ -26,9 +26,10 @@ class PaddingSize {
   static const double minimum = 8;                // 小さめ
   static const double normal = 16;                // 基本余白
   static const double content = 32;               // ラベル内の左右余白など
-  static const double buttonVertical = 5;         // ボタンの水平方向の基本マージン
-  static const double buttonHorizontal = 25;      // ボタンの垂直方向の基本マージン
-  static const double buttonHorizontalLarge = 30; // ボタンの垂直方向の大きなマージン
+  static const double contentLarge = 40;          // コンテンツ用の大きめの余白
+  static const double buttonVertical = 5;         // ボタンの水平方向の基本余白
+  static const double buttonHorizontal = 25;      // ボタンの垂直方向の基本余白
+  static const double buttonHorizontalLarge = 30; // ボタンの垂直方向の大きな余白
 }
 
 class BorderSize {

@@ -8,12 +8,14 @@ class NutrientsRadarChart extends StatelessWidget {
     required this.values,
     required this.maxValue,
     this.color,
+    this.size,
     super.key,
   });
 
   final List<double> values;
   final double maxValue;
   final Color? color;
+  final double? size;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class NutrientsRadarChart extends StatelessWidget {
 
     return RadarChart(
       maxValue: maxValue,
-      chartRadiusFactor: 0.7,
+      chartRadiusFactor: size ?? 0.7,
       textScaleFactor: 0.05,
       animate: false,
       fillColor: color ?? AppColor.brand.secondary,

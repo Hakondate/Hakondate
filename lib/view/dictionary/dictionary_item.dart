@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate/constant/app_color.dart';
+import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
 import 'package:hakondate/state/dictionary/dictionary_state.dart';
 import 'package:hakondate/view/component/frame/fade_up_app_bar.dart';
@@ -26,15 +27,40 @@ class DictionaryItem extends ConsumerWidget {
           ),
           body: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(selectedItem.name),
+                Padding(
+                  padding: const EdgeInsets.all(PaddingSize.normal),
+                  child: Align(
+                    child: Text(
+                      selectedItem.name,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: FontSize.subheading,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                Divider(
+                  color: AppColor.brand.secondaryLight,
+                  indent: MarginSize.normalVertical,
+                  endIndent: MarginSize.normalVertical,
+                  height: 0,
+                ),
                 FutureBuilder<List<double>>(
                   future: ref.read(dictionaryProvider.notifier).getGraphValues(maxValue),
                   builder: (BuildContext context, AsyncSnapshot<List<double>> snapshot) {
                     if (snapshot.hasData) {
-                      return NutrientsRadarChart(
-                        values: snapshot.data!,
-                        maxValue: maxValue,
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: PaddingSize.contentLarge,
+                        ),
+                        child: NutrientsRadarChart(
+                          values: snapshot.data!,
+                          maxValue: maxValue,
+                          size: 0.9,
+                        ),
                       );
                     }
           
@@ -44,6 +70,17 @@ class DictionaryItem extends ConsumerWidget {
                 NutrientsList(
                   nutrients: selectedItem.nutrients,
                   backgroundColor: AppColor.ui.secondaryUltraLight,
+                ),
+                if (selectedItem.note != null) Padding(
+                  padding: const EdgeInsets.only(
+                    left: PaddingSize.contentLarge,
+                    right: PaddingSize.contentLarge,
+                    top: PaddingSize.minimum,
+                    bottom: 32,
+                  ),
+                  child: Text(
+                    '備考：\n${selectedItem.note!}',
+                  ),
                 ),
               ],
             ),
