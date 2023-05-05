@@ -30,16 +30,46 @@ class DictionaryItem extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.all(PaddingSize.normal),
-                  child: Align(
-                    child: Text(
-                      selectedItem.name,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: FontSize.subheading,
-                        fontWeight: FontWeight.bold,
+                  padding: const EdgeInsets.all(PaddingSize.minimum),
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        width: UiSize.dictionaryGroupBox,
+                        height: UiSize.dictionaryGroupBox,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            width: BorderSize.normal,
+                            color: selectedItem.group.color,
+                          ),
+                          borderRadius: const BorderRadius.all(Radius.circular(UiSize.minimumGridCircular)),
+                        ),
+                        child: Center(
+                          child: Text(
+                            '${selectedItem.group.groupNumber}群',
+                            style: TextStyle(
+                              color: selectedItem.group.color,
+                              fontWeight: FontWeight.bold,
+                              height: 1,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
+                      Expanded(
+                        child: Center(
+                          child: Text(
+                            selectedItem.name,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: FontSize.label,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: UiSize.dictionaryGroupBox,
+                      ),
+                    ],
                   ),
                 ),
                 Divider(
@@ -63,7 +93,7 @@ class DictionaryItem extends ConsumerWidget {
                         ),
                       );
                     }
-          
+                    
                     return const SizedBox.shrink();
                   },
                 ),
@@ -71,7 +101,7 @@ class DictionaryItem extends ConsumerWidget {
                   nutrients: selectedItem.nutrients,
                   backgroundColor: AppColor.ui.secondaryUltraLight,
                 ),
-                if (selectedItem.note != null) Padding(
+                if (selectedItem.note != null && selectedItem.note != '') Padding(
                   padding: const EdgeInsets.only(
                     left: PaddingSize.contentLarge,
                     right: PaddingSize.contentLarge,

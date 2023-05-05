@@ -38,7 +38,7 @@ class DictionaryGrid extends ConsumerWidget {
             Align(
               alignment: Alignment.topLeft,
               child: Container(
-                width: 48,
+                width: UiSize.dictionaryGroupBox,
                 height: 32,
                 decoration: BoxDecoration(
                   color: group.color,

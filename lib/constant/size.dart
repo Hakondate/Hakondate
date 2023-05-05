@@ -48,4 +48,5 @@ class IconSize {
 class UiSize {
   static const double calendarTileHeight = 180; // カレンダー画面の高さ
   static const double minimumGridCircular = 8;  // 小さいグリッドの角丸の大きさ
+  static const double dictionaryGroupBox = 48;  // Dictionary機能の食品群のBoxの大きさ
 }
