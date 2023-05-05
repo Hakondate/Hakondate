@@ -296,7 +296,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryBase 
         schemas = await (_db.select(_db.dictionaryItemsTable)
           ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
-              expression: t.retinol * const Variable<double>(1000) + t.vitaminB1 + t.vitaminB2 + t.vitaminC,
+              expression: t.retinol / const Variable<double>(1000) + t.vitaminB1 + t.vitaminB2 + t.vitaminC,
               mode: OrderingMode.desc,
             )
           ])..limit(limit)).get();

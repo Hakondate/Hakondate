@@ -40,6 +40,7 @@ class NutrientsCard extends StatelessWidget {
               slns: ref.watch(userProvider).currentUser!.slns,
               graphMaxValue: graphMaxValue,
             ),
+            rowValues: ref.read(dailyProvider.notifier).getGraphRowValues(),
             maxValue: graphMaxValue,
           ),
         );

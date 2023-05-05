@@ -88,6 +88,14 @@ class DictionaryItem extends ConsumerWidget {
                         ),
                         child: NutrientsRadarChart(
                           values: snapshot.data!,
+                          rowValues: <double>[
+                            selectedItem.nutrients.energy,
+                            selectedItem.nutrients.protein,
+                            selectedItem.nutrients.vitamin,
+                            selectedItem.nutrients.mineral,
+                            selectedItem.nutrients.carbohydrate,
+                            selectedItem.nutrients.lipid,
+                          ],
                           maxValue: maxValue,
                           size: 0.9,
                         ),
