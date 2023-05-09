@@ -2,17 +2,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
 import 'package:hakondate/repository/local/sqlite/dictionary_items_local_repository.dart';
 import 'package:hakondate/state/dictionary/dictionary_state.dart';
+import 'package:hakondate/util/analytics_controller.dart';
 
 final StateNotifierProvider<DictionaryViewModel, DictionaryState> dictionaryProvider =
     StateNotifierProvider<DictionaryViewModel, DictionaryState>((StateNotifierProviderRef<DictionaryViewModel, DictionaryState> ref) {
   final DictionaryItemsLocalRepository dictionaryItemsLocalRepository = ref.watch(dictionaryItemsLocalRepositoryProvider);
-  return DictionaryViewModel(dictionaryItemsLocalRepository);
+  return DictionaryViewModel(dictionaryItemsLocalRepository, ref);
 });
 
 class DictionaryViewModel extends StateNotifier<DictionaryState> {
-  DictionaryViewModel(this._dictionaryItemsLocalRepository) : super(DictionaryState());
+  DictionaryViewModel(this._dictionaryItemsLocalRepository, this._ref) : super(DictionaryState());
 
   final DictionaryItemsLocalRepository _dictionaryItemsLocalRepository;
+  final Ref _ref;
 
   Future<void> selectGroup(DictionaryGroup group) async {
     state = const DictionaryStateLoad();
@@ -31,6 +33,8 @@ class DictionaryViewModel extends StateNotifier<DictionaryState> {
     state = data.copyWith(
       selectedItem: await _dictionaryItemsLocalRepository.getById(id),
     );
+    
+    await _ref.read(analyticsControllerProvider.notifier).logViewDictionary(id);
   }
 
   Future<List<double>> getGraphValues(double maxValue) async {
