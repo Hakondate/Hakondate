@@ -33,7 +33,7 @@ class DictionaryViewModel extends StateNotifier<DictionaryState> {
     state = data.copyWith(
       selectedItem: await _dictionaryItemsLocalRepository.getById(id),
     );
-    
+
     await _ref.read(analyticsControllerProvider.notifier).logViewDictionary(id);
   }
 
