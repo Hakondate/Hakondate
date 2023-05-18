@@ -2181,11 +2181,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     description: 'A framework for writing Flutter applications',
     homepage: 'https://flutter.dev',
     authors: [],
-<<<<<<< HEAD
-    version: '3.7.9',
-=======
     version: '3.10.1',
->>>>>>> db2091d34fdbd9de0623f1e9a73f71e3dae4a331
     license: '''Copyright 2014 The Flutter Authors. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
@@ -5954,11 +5950,7 @@ freely, subject to the following restrictions:
     homepage: 'https://github.com/VeryGoodOpenSource/very_good_analysis',
     repository: 'https://github.com/VeryGoodOpenSource/very_good_analysis',
     authors: [],
-<<<<<<< HEAD
-    version: '4.0.0+1',
-=======
     version: '5.0.0',
->>>>>>> db2091d34fdbd9de0623f1e9a73f71e3dae4a331
     license: '''MIT License
 
 Copyright (c) 2020 Very Good Ventures
