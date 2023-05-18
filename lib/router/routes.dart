@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hakondate/view/daily/dish.dart';
 
 import 'package:routemaster/routemaster.dart';
 
@@ -34,7 +35,7 @@ final RoutemasterDelegate routemaster = RoutemasterDelegate(
         ],
       ),
       '/home/daily': (_) => const MaterialPage<dynamic>(child: Daily()),
-      '/home/daily/dish': (_) => MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
+      '/home/daily/dish': (_) => const MaterialPage<dynamic>(child: Dish()),
       '/home/calendar': (_) => const FadeUpPage(child: Calendar()),
       '/home/recipes': (_) => const MaterialPage<dynamic>(child: Recipe()),
       '/home/recipes_pdf/:id': (RouteData route) => FadeUpPage(child: RecipePDF(id: route.pathParameters['id'])),
