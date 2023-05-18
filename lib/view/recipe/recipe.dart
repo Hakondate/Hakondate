@@ -14,17 +14,17 @@ class Recipe extends StatelessWidget {
       appBar: AppBar(
         title: const Text('レシピ'),
       ),
-      body: Scrollbar(
+      body: const Scrollbar(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(
+            padding: EdgeInsets.symmetric(
               vertical: PaddingSize.normal,
               horizontal: PaddingSize.minimum,
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const <Widget>[
+              children: <Widget>[
                 OpenDataRecipeHeader(
                   isRemoveTopMargin: true,
                   title: Text('だしを活用した和食メニュー'),
