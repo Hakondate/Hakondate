@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate/model/dish/dish_model.dart';
 
 import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:hakondate/model/nutrients/nutrients_model.dart';
@@ -104,5 +105,9 @@ class DailyViewModel extends StateNotifier<DailyState> {
 
     return (menu.calcium / calciumRef + menu.magnesium / magnesiumRef
         + menu.iron / ironRef + menu.zinc / zincRef) / 4 * 100.0;
+  }
+
+  void selectDish(DishModel dish) {
+    state = state.copyWith(selectedDish: dish);
   }
 }
