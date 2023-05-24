@@ -25,7 +25,7 @@ class UserSettingsDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: FadeUpAppBar(
-        title: id < 0 ? Text('お子様の追加登録') : Text('お子様情報の変更'),
+        title: id < 0 ? const Text('お子様の追加登録') : const Text('お子様情報の変更'),
       ),
       body: Form(
         key: _formKey,
