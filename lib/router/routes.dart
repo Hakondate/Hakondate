@@ -6,6 +6,7 @@ import 'package:hakondate/view/bottom_bar/app_bottom_navigation_bar.dart';
 import 'package:hakondate/view/calendar/calendar.dart';
 import 'package:hakondate/view/component/frame/fade_up_page.dart';
 import 'package:hakondate/view/daily/daily.dart';
+import 'package:hakondate/view/daily/dish.dart';
 import 'package:hakondate/view/letter/letter.dart';
 import 'package:hakondate/view/letter/letter_pdf.dart';
 import 'package:hakondate/view/license/license.dart';
@@ -34,7 +35,7 @@ final RoutemasterDelegate routemaster = RoutemasterDelegate(
         ],
       ),
       '/home/daily': (_) => const MaterialPage<dynamic>(child: Daily()),
-      '/home/daily/dish': (_) => MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
+      '/home/daily/dish': (_) => const MaterialPage<dynamic>(child: Dish()),
       '/home/calendar': (_) => const FadeUpPage(child: Calendar()),
       '/home/recipes': (_) => const MaterialPage<dynamic>(child: Recipe()),
       '/home/recipes_pdf/:id': (RouteData route) => FadeUpPage(child: RecipePDF(id: route.pathParameters['id'])),

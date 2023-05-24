@@ -46,47 +46,54 @@ class MenuCard extends StatelessWidget {
   }
 
   Widget _menuTile(DishModel dish) {
-    return GestureDetector(
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: AppColor.ui.white.withOpacity(0.5),
-            width: 3,
-          ),
-          image: DecorationImage(
-            image: AssetImage('assets/images/menu_tile/${(dish.category != null) ? dish.category!.value : 'side'}.png'),
-            fit: BoxFit.fitWidth,
-          ),
-          color: AppColor.brand.secondary,
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: AppColor.ui.shadow,
-              blurRadius: 1,
-              offset: const Offset(0, MarginSize.shadow),
-            ),
-          ],
-        ),
-        child: Container(
-          width: double.infinity,
-          height: double.infinity,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            color: AppColor.ui.white.withOpacity(0.7),
-          ),
-          child: Center(
-            child: Text(
-              dish.name,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+    return Consumer(
+      builder: (BuildContext context, WidgetRef ref, _) {
+        return GestureDetector(
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: AppColor.ui.white.withOpacity(0.5),
+                width: 3,
               ),
-              textAlign: TextAlign.center,
+              image: DecorationImage(
+                image: AssetImage('assets/images/menu_tile/${(dish.category != null) ? dish.category!.value : 'side'}.png'),
+                fit: BoxFit.fitWidth,
+              ),
+              color: AppColor.brand.secondary,
+              boxShadow: <BoxShadow>[
+                BoxShadow(
+                  color: AppColor.ui.shadow,
+                  blurRadius: 1,
+                  offset: const Offset(0, MarginSize.shadow),
+                ),
+              ],
+            ),
+            child: Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                color: AppColor.ui.white.withOpacity(0.7),
+              ),
+              child: Center(
+                child: Text(
+                  dish.name,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ),
           ),
-        ),
-      ),
-      onTap: () => routemaster.push('dish'),
+          onTap: () {
+            ref.read(dailyProvider.notifier).selectDish(dish);
+            routemaster.push('dish');
+          },
+        );
+      },
     );
   }
 }
