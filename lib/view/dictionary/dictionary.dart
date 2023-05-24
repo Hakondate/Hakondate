@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
 import 'package:hakondate/view/dictionary/dictionary_grid.dart';

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hakondate/view/component/graph/nutrients_radar_chart.dart';
 
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:hakondate/util/exception/class_type_exception.dart';
+import 'package:hakondate/view/component/graph/nutrients_radar_chart.dart';
 import 'package:hakondate/view/component/label/nutrients_list.dart';
 import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 import 'package:hakondate/view_model/single_page/daily_view_model.dart';

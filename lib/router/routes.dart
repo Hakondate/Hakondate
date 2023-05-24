@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hakondate/view/dictionary/dictionary.dart';
-import 'package:hakondate/view/dictionary/dictionary_group_list.dart';
-import 'package:hakondate/view/dictionary/dictionary_item.dart';
 
 import 'package:routemaster/routemaster.dart';
 
@@ -9,6 +6,9 @@ import 'package:hakondate/view/bottom_bar/app_bottom_navigation_bar.dart';
 import 'package:hakondate/view/calendar/calendar.dart';
 import 'package:hakondate/view/component/frame/fade_up_page.dart';
 import 'package:hakondate/view/daily/daily.dart';
+import 'package:hakondate/view/dictionary/dictionary.dart';
+import 'package:hakondate/view/dictionary/dictionary_group_list.dart';
+import 'package:hakondate/view/dictionary/dictionary_item.dart';
 import 'package:hakondate/view/letter/letter.dart';
 import 'package:hakondate/view/letter/letter_pdf.dart';
 import 'package:hakondate/view/license/license.dart';
