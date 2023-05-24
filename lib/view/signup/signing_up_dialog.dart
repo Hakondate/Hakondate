@@ -43,9 +43,9 @@ class SigningUpDialog extends ConsumerWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Column(
+                      const Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
-                        children: const <Widget>[
+                        children: <Widget>[
                           Text('お名前：　'),
                           Text('学校：　'),
                           Text('学年：　'),
