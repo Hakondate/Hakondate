@@ -15,7 +15,6 @@ class UserSettings extends StatelessWidget {
         title: const Text('お子様情報一覧'),
       ),
       body: SingleChildScrollView(
-        // physics: const AlwaysScrollableScrollPhysics(),
         child: Column(
           children: <Widget>[
             const SizedBox(
