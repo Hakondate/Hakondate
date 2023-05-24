@@ -19,13 +19,13 @@ mixin _$SignupState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            String? name,
-            int? schoolId,
-            int? schoolYear,
             String schoolTrailing,
             String schoolYearTrailing,
             List<SchoolModel> schools,
             List<String> schoolYears,
+            String? name,
+            int? schoolId,
+            int? schoolYear,
             String? nameErrorState,
             String? schoolErrorState)
         data,
@@ -36,13 +36,13 @@ mixin _$SignupState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            String? name,
-            int? schoolId,
-            int? schoolYear,
             String schoolTrailing,
             String schoolYearTrailing,
             List<SchoolModel> schools,
             List<String> schoolYears,
+            String? name,
+            int? schoolId,
+            int? schoolYear,
             String? nameErrorState,
             String? schoolErrorState)?
         data,
@@ -53,13 +53,13 @@ mixin _$SignupState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            String? name,
-            int? schoolId,
-            int? schoolYear,
             String schoolTrailing,
             String schoolYearTrailing,
             List<SchoolModel> schools,
             List<String> schoolYears,
+            String? name,
+            int? schoolId,
+            int? schoolYear,
             String? nameErrorState,
             String? schoolErrorState)?
         data,
@@ -117,13 +117,13 @@ abstract class _$$SignupStateDataCopyWith<$Res> {
       __$$SignupStateDataCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {String? name,
-      int? schoolId,
-      int? schoolYear,
-      String schoolTrailing,
+      {String schoolTrailing,
       String schoolYearTrailing,
       List<SchoolModel> schools,
       List<String> schoolYears,
+      String? name,
+      int? schoolId,
+      int? schoolYear,
       String? nameErrorState,
       String? schoolErrorState});
 }
@@ -139,29 +139,17 @@ class __$$SignupStateDataCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? schoolId = freezed,
-    Object? schoolYear = freezed,
     Object? schoolTrailing = null,
     Object? schoolYearTrailing = null,
     Object? schools = null,
     Object? schoolYears = null,
+    Object? name = freezed,
+    Object? schoolId = freezed,
+    Object? schoolYear = freezed,
     Object? nameErrorState = freezed,
     Object? schoolErrorState = freezed,
   }) {
     return _then(_$SignupStateData(
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      schoolId: freezed == schoolId
-          ? _value.schoolId
-          : schoolId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      schoolYear: freezed == schoolYear
-          ? _value.schoolYear
-          : schoolYear // ignore: cast_nullable_to_non_nullable
-              as int?,
       schoolTrailing: null == schoolTrailing
           ? _value.schoolTrailing
           : schoolTrailing // ignore: cast_nullable_to_non_nullable
@@ -178,6 +166,18 @@ class __$$SignupStateDataCopyWithImpl<$Res>
           ? _value._schoolYears
           : schoolYears // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      schoolId: freezed == schoolId
+          ? _value.schoolId
+          : schoolId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      schoolYear: freezed == schoolYear
+          ? _value.schoolYear
+          : schoolYear // ignore: cast_nullable_to_non_nullable
+              as int?,
       nameErrorState: freezed == nameErrorState
           ? _value.nameErrorState
           : nameErrorState // ignore: cast_nullable_to_non_nullable
@@ -196,24 +196,18 @@ class _$SignupStateData
     with DiagnosticableTreeMixin
     implements SignupStateData {
   const _$SignupStateData(
-      {this.name,
-      this.schoolId,
-      this.schoolYear,
-      required this.schoolTrailing,
+      {required this.schoolTrailing,
       required this.schoolYearTrailing,
       required final List<SchoolModel> schools,
       required final List<String> schoolYears,
+      this.name,
+      this.schoolId,
+      this.schoolYear,
       this.nameErrorState,
       this.schoolErrorState})
       : _schools = schools,
         _schoolYears = schoolYears;
 
-  @override
-  final String? name;
-  @override
-  final int? schoolId;
-  @override
-  final int? schoolYear;
   @override
   final String schoolTrailing;
   @override
@@ -235,13 +229,19 @@ class _$SignupStateData
   }
 
   @override
+  final String? name;
+  @override
+  final int? schoolId;
+  @override
+  final int? schoolYear;
+  @override
   final String? nameErrorState;
   @override
   final String? schoolErrorState;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SignupState.data(name: $name, schoolId: $schoolId, schoolYear: $schoolYear, schoolTrailing: $schoolTrailing, schoolYearTrailing: $schoolYearTrailing, schools: $schools, schoolYears: $schoolYears, nameErrorState: $nameErrorState, schoolErrorState: $schoolErrorState)';
+    return 'SignupState.data(schoolTrailing: $schoolTrailing, schoolYearTrailing: $schoolYearTrailing, schools: $schools, schoolYears: $schoolYears, name: $name, schoolId: $schoolId, schoolYear: $schoolYear, nameErrorState: $nameErrorState, schoolErrorState: $schoolErrorState)';
   }
 
   @override
@@ -249,13 +249,13 @@ class _$SignupStateData
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'SignupState.data'))
-      ..add(DiagnosticsProperty('name', name))
-      ..add(DiagnosticsProperty('schoolId', schoolId))
-      ..add(DiagnosticsProperty('schoolYear', schoolYear))
       ..add(DiagnosticsProperty('schoolTrailing', schoolTrailing))
       ..add(DiagnosticsProperty('schoolYearTrailing', schoolYearTrailing))
       ..add(DiagnosticsProperty('schools', schools))
       ..add(DiagnosticsProperty('schoolYears', schoolYears))
+      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('schoolId', schoolId))
+      ..add(DiagnosticsProperty('schoolYear', schoolYear))
       ..add(DiagnosticsProperty('nameErrorState', nameErrorState))
       ..add(DiagnosticsProperty('schoolErrorState', schoolErrorState));
   }
@@ -265,11 +265,6 @@ class _$SignupStateData
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SignupStateData &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.schoolId, schoolId) ||
-                other.schoolId == schoolId) &&
-            (identical(other.schoolYear, schoolYear) ||
-                other.schoolYear == schoolYear) &&
             (identical(other.schoolTrailing, schoolTrailing) ||
                 other.schoolTrailing == schoolTrailing) &&
             (identical(other.schoolYearTrailing, schoolYearTrailing) ||
@@ -277,6 +272,11 @@ class _$SignupStateData
             const DeepCollectionEquality().equals(other._schools, _schools) &&
             const DeepCollectionEquality()
                 .equals(other._schoolYears, _schoolYears) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.schoolId, schoolId) ||
+                other.schoolId == schoolId) &&
+            (identical(other.schoolYear, schoolYear) ||
+                other.schoolYear == schoolYear) &&
             (identical(other.nameErrorState, nameErrorState) ||
                 other.nameErrorState == nameErrorState) &&
             (identical(other.schoolErrorState, schoolErrorState) ||
@@ -286,13 +286,13 @@ class _$SignupStateData
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      name,
-      schoolId,
-      schoolYear,
       schoolTrailing,
       schoolYearTrailing,
       const DeepCollectionEquality().hash(_schools),
       const DeepCollectionEquality().hash(_schoolYears),
+      name,
+      schoolId,
+      schoolYear,
       nameErrorState,
       schoolErrorState);
 
@@ -306,63 +306,55 @@ class _$SignupStateData
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            String? name,
-            int? schoolId,
-            int? schoolYear,
             String schoolTrailing,
             String schoolYearTrailing,
             List<SchoolModel> schools,
             List<String> schoolYears,
+            String? name,
+            int? schoolId,
+            int? schoolYear,
             String? nameErrorState,
             String? schoolErrorState)
         data,
     required TResult Function() load,
     required TResult Function(Exception error, SignupStateData cache) error,
   }) {
-    return data(name, schoolId, schoolYear, schoolTrailing, schoolYearTrailing,
-        schools, schoolYears, nameErrorState, schoolErrorState);
+    return data(schoolTrailing, schoolYearTrailing, schools, schoolYears, name,
+        schoolId, schoolYear, nameErrorState, schoolErrorState);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            String? name,
-            int? schoolId,
-            int? schoolYear,
             String schoolTrailing,
             String schoolYearTrailing,
             List<SchoolModel> schools,
             List<String> schoolYears,
+            String? name,
+            int? schoolId,
+            int? schoolYear,
             String? nameErrorState,
             String? schoolErrorState)?
         data,
     TResult? Function()? load,
     TResult? Function(Exception error, SignupStateData cache)? error,
   }) {
-    return data?.call(
-        name,
-        schoolId,
-        schoolYear,
-        schoolTrailing,
-        schoolYearTrailing,
-        schools,
-        schoolYears,
-        nameErrorState,
-        schoolErrorState);
+    return data?.call(schoolTrailing, schoolYearTrailing, schools, schoolYears,
+        name, schoolId, schoolYear, nameErrorState, schoolErrorState);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            String? name,
-            int? schoolId,
-            int? schoolYear,
             String schoolTrailing,
             String schoolYearTrailing,
             List<SchoolModel> schools,
             List<String> schoolYears,
+            String? name,
+            int? schoolId,
+            int? schoolYear,
             String? nameErrorState,
             String? schoolErrorState)?
         data,
@@ -371,16 +363,8 @@ class _$SignupStateData
     required TResult orElse(),
   }) {
     if (data != null) {
-      return data(
-          name,
-          schoolId,
-          schoolYear,
-          schoolTrailing,
-          schoolYearTrailing,
-          schools,
-          schoolYears,
-          nameErrorState,
-          schoolErrorState);
+      return data(schoolTrailing, schoolYearTrailing, schools, schoolYears,
+          name, schoolId, schoolYear, nameErrorState, schoolErrorState);
     }
     return orElse();
   }
@@ -422,23 +406,23 @@ class _$SignupStateData
 
 abstract class SignupStateData implements SignupState {
   const factory SignupStateData(
-      {final String? name,
-      final int? schoolId,
-      final int? schoolYear,
-      required final String schoolTrailing,
+      {required final String schoolTrailing,
       required final String schoolYearTrailing,
       required final List<SchoolModel> schools,
       required final List<String> schoolYears,
+      final String? name,
+      final int? schoolId,
+      final int? schoolYear,
       final String? nameErrorState,
       final String? schoolErrorState}) = _$SignupStateData;
 
-  String? get name;
-  int? get schoolId;
-  int? get schoolYear;
   String get schoolTrailing;
   String get schoolYearTrailing;
   List<SchoolModel> get schools;
   List<String> get schoolYears;
+  String? get name;
+  int? get schoolId;
+  int? get schoolYear;
   String? get nameErrorState;
   String? get schoolErrorState;
   @JsonKey(ignore: true)
@@ -493,13 +477,13 @@ class _$SignupStateLoad
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            String? name,
-            int? schoolId,
-            int? schoolYear,
             String schoolTrailing,
             String schoolYearTrailing,
             List<SchoolModel> schools,
             List<String> schoolYears,
+            String? name,
+            int? schoolId,
+            int? schoolYear,
             String? nameErrorState,
             String? schoolErrorState)
         data,
@@ -513,13 +497,13 @@ class _$SignupStateLoad
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            String? name,
-            int? schoolId,
-            int? schoolYear,
             String schoolTrailing,
             String schoolYearTrailing,
             List<SchoolModel> schools,
             List<String> schoolYears,
+            String? name,
+            int? schoolId,
+            int? schoolYear,
             String? nameErrorState,
             String? schoolErrorState)?
         data,
@@ -533,13 +517,13 @@ class _$SignupStateLoad
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            String? name,
-            int? schoolId,
-            int? schoolYear,
             String schoolTrailing,
             String schoolYearTrailing,
             List<SchoolModel> schools,
             List<String> schoolYears,
+            String? name,
+            int? schoolId,
+            int? schoolYear,
             String? nameErrorState,
             String? schoolErrorState)?
         data,
@@ -677,13 +661,13 @@ class _$SignupStateError
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            String? name,
-            int? schoolId,
-            int? schoolYear,
             String schoolTrailing,
             String schoolYearTrailing,
             List<SchoolModel> schools,
             List<String> schoolYears,
+            String? name,
+            int? schoolId,
+            int? schoolYear,
             String? nameErrorState,
             String? schoolErrorState)
         data,
@@ -697,13 +681,13 @@ class _$SignupStateError
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            String? name,
-            int? schoolId,
-            int? schoolYear,
             String schoolTrailing,
             String schoolYearTrailing,
             List<SchoolModel> schools,
             List<String> schoolYears,
+            String? name,
+            int? schoolId,
+            int? schoolYear,
             String? nameErrorState,
             String? schoolErrorState)?
         data,
@@ -717,13 +701,13 @@ class _$SignupStateError
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            String? name,
-            int? schoolId,
-            int? schoolYear,
             String schoolTrailing,
             String schoolYearTrailing,
             List<SchoolModel> schools,
             List<String> schoolYears,
+            String? name,
+            int? schoolId,
+            int? schoolYear,
             String? nameErrorState,
             String? schoolErrorState)?
         data,

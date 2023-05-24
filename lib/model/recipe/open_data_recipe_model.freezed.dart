@@ -18,9 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$OpenDataRecipeModel {
   int get id => throw _privateConstructorUsedError; // ID
   String get name => throw _privateConstructorUsedError; // 名前
+  String get pdf => throw _privateConstructorUsedError; // PDF
   RecipeType get type => throw _privateConstructorUsedError; // タイプ
-  String? get thumbnail => throw _privateConstructorUsedError; // サムネイル
-  String get pdf => throw _privateConstructorUsedError;
+  String? get thumbnail => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OpenDataRecipeModelCopyWith<OpenDataRecipeModel> get copyWith =>
@@ -34,7 +34,7 @@ abstract class $OpenDataRecipeModelCopyWith<$Res> {
       _$OpenDataRecipeModelCopyWithImpl<$Res, OpenDataRecipeModel>;
   @useResult
   $Res call(
-      {int id, String name, RecipeType type, String? thumbnail, String pdf});
+      {int id, String name, String pdf, RecipeType type, String? thumbnail});
 }
 
 /// @nodoc
@@ -52,9 +52,9 @@ class _$OpenDataRecipeModelCopyWithImpl<$Res, $Val extends OpenDataRecipeModel>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? pdf = null,
     Object? type = null,
     Object? thumbnail = freezed,
-    Object? pdf = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -65,6 +65,10 @@ class _$OpenDataRecipeModelCopyWithImpl<$Res, $Val extends OpenDataRecipeModel>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      pdf: null == pdf
+          ? _value.pdf
+          : pdf // ignore: cast_nullable_to_non_nullable
+              as String,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -73,10 +77,6 @@ class _$OpenDataRecipeModelCopyWithImpl<$Res, $Val extends OpenDataRecipeModel>
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String?,
-      pdf: null == pdf
-          ? _value.pdf
-          : pdf // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 }
@@ -90,7 +90,7 @@ abstract class _$$_OpenDataRecipeModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id, String name, RecipeType type, String? thumbnail, String pdf});
+      {int id, String name, String pdf, RecipeType type, String? thumbnail});
 }
 
 /// @nodoc
@@ -106,9 +106,9 @@ class __$$_OpenDataRecipeModelCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? pdf = null,
     Object? type = null,
     Object? thumbnail = freezed,
-    Object? pdf = null,
   }) {
     return _then(_$_OpenDataRecipeModel(
       id: null == id
@@ -119,6 +119,10 @@ class __$$_OpenDataRecipeModelCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      pdf: null == pdf
+          ? _value.pdf
+          : pdf // ignore: cast_nullable_to_non_nullable
+              as String,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -127,10 +131,6 @@ class __$$_OpenDataRecipeModelCopyWithImpl<$Res>
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String?,
-      pdf: null == pdf
-          ? _value.pdf
-          : pdf // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -141,9 +141,9 @@ class _$_OpenDataRecipeModel extends _OpenDataRecipeModel {
   _$_OpenDataRecipeModel(
       {required this.id,
       required this.name,
+      required this.pdf,
       this.type = RecipeType.other,
-      this.thumbnail,
-      required this.pdf})
+      this.thumbnail})
       : super._();
 
   @override
@@ -153,18 +153,18 @@ class _$_OpenDataRecipeModel extends _OpenDataRecipeModel {
   final String name;
 // 名前
   @override
+  final String pdf;
+// PDF
+  @override
   @JsonKey()
   final RecipeType type;
 // タイプ
   @override
   final String? thumbnail;
-// サムネイル
-  @override
-  final String pdf;
 
   @override
   String toString() {
-    return 'OpenDataRecipeModel(id: $id, name: $name, type: $type, thumbnail: $thumbnail, pdf: $pdf)';
+    return 'OpenDataRecipeModel(id: $id, name: $name, pdf: $pdf, type: $type, thumbnail: $thumbnail)';
   }
 
   @override
@@ -174,14 +174,14 @@ class _$_OpenDataRecipeModel extends _OpenDataRecipeModel {
             other is _$_OpenDataRecipeModel &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.pdf, pdf) || other.pdf == pdf) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.thumbnail, thumbnail) ||
-                other.thumbnail == thumbnail) &&
-            (identical(other.pdf, pdf) || other.pdf == pdf));
+                other.thumbnail == thumbnail));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, type, thumbnail, pdf);
+  int get hashCode => Object.hash(runtimeType, id, name, pdf, type, thumbnail);
 
   @JsonKey(ignore: true)
   @override
@@ -195,9 +195,9 @@ abstract class _OpenDataRecipeModel extends OpenDataRecipeModel {
   factory _OpenDataRecipeModel(
       {required final int id,
       required final String name,
+      required final String pdf,
       final RecipeType type,
-      final String? thumbnail,
-      required final String pdf}) = _$_OpenDataRecipeModel;
+      final String? thumbnail}) = _$_OpenDataRecipeModel;
   _OpenDataRecipeModel._() : super._();
 
   @override
@@ -205,11 +205,11 @@ abstract class _OpenDataRecipeModel extends OpenDataRecipeModel {
   @override // ID
   String get name;
   @override // 名前
+  String get pdf;
+  @override // PDF
   RecipeType get type;
   @override // タイプ
   String? get thumbnail;
-  @override // サムネイル
-  String get pdf;
   @override
   @JsonKey(ignore: true)
   _$$_OpenDataRecipeModelCopyWith<_$_OpenDataRecipeModel> get copyWith =>

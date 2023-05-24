@@ -86,7 +86,8 @@ class UsersLocalRepository extends UsersLocalRepositoryBase {
   @override
   Future<int> count() async {
     final Expression<int> exp = _db.usersTable.id.count();
-    final JoinedSelectStatement<$UsersTableTable, UsersSchema> query = _db.selectOnly(_db.usersTable)..addColumns(<Expression<int>>[exp]);
+    final JoinedSelectStatement<$UsersTableTable, UsersSchema> query =
+        _db.selectOnly(_db.usersTable)..addColumns(<Expression<int>>[exp]);
     final int? count = await query.map((TypedResult scheme) => scheme.read(exp)).getSingleOrNull();
 
     return count ?? 0;

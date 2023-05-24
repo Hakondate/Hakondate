@@ -78,6 +78,23 @@ class DailyViewModel extends StateNotifier<DailyState> {
     ].map((double element) => (element > graphMaxValue) ? graphMaxValue : element).toList();
   }
 
+  List<double> getGraphRowValues() {
+    final MenuModel menu = state.menu;
+
+    if (menu is! LunchesDayMenuModel) {
+      return <double>[0, 0, 0, 0, 0, 0];
+    }
+
+    return <double>[
+      menu.energy,
+      menu.protein,
+      menu.vitamin,
+      menu.mineral,
+      menu.carbohydrate,
+      menu.lipid,
+    ];
+  }
+
   double _calcVitaminSufficiency(
       double retinolRef,
       double vitaminB1Ref,
