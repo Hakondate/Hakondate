@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate/model/user/user_model.dart';
 import 'package:hakondate/repository/local/sqlite/users_local_repository.dart';
@@ -14,16 +15,31 @@ final AsyncNotifierProvider<UserSettingsViewModel, UserSettingsState>
 class UserSettingsViewModel extends AsyncNotifier<UserSettingsState> {
   @override
   Future<UserSettingsState> build() async {
-    final UsersLocalRepository usersLocalRepository =
-        ref.read(usersLocalRepositoryProvider);
-    final List<UserModel> users = await usersLocalRepository.getAll();
+    final List<UserModel> users = await getUsersFromLocalRepository();
+    for (final UserModel user in users) {
+      debugPrint(user.name);
+    }
 
     return UserSettingsState(
       users: users,
     );
   }
 
-  FutureOr<void> switchCurrentUser(UserModel nextUser) {
+  Future<List<UserModel>> getUsersFromLocalRepository() {
+    final UsersLocalRepository usersLocalRepository =
+        ref.read(usersLocalRepositoryProvider);
+    return usersLocalRepository.getAll();
+  }
+
+  Future<void> updateUsers() async {
+    // ignore: always_specify_types
+    state = const AsyncValue.loading();
     
+    state = await AsyncValue.guard(() async {
+        final List<UserModel> users = await getUsersFromLocalRepository();
+        return UserSettingsState(
+          users: users,
+        );
+    });
   }
 }
