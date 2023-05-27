@@ -8,7 +8,7 @@ import 'package:hakondate/repository/local/sqlite/schools_local_repository.dart'
 import 'package:hakondate/repository/remote/letters_remote_repository.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/letter/letter_state.dart';
-import 'package:hakondate/util/analytics_controller.dart';
+import 'package:hakondate/util/analytics_controller/analytics_controller.dart';
 
 final StateNotifierProvider<LetterViewModel, LetterState> letterProvider =
     StateNotifierProvider<LetterViewModel, LetterState>((StateNotifierProviderRef<LetterViewModel, LetterState> ref) {

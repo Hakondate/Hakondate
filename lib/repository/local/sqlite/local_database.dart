@@ -41,5 +41,14 @@ class LocalDatabase extends _$LocalDatabase {
   LocalDatabase(LazyDatabase super.lazyDatabase);
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
+
+  @override
+  MigrationStrategy get migration {
+    return MigrationStrategy(
+      beforeOpen: (_) async {
+        await customStatement('PRAGMA foreign_keys = ON');
+      },
+    );
+  }
 }

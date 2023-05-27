@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate/model/recipe/open_data_recipe_model.dart';
 import 'package:hakondate/repository/local/directory/open_data_recipe_local_repository.dart';
 import 'package:hakondate/repository/remote/open_data_recipe_remote_repository.dart';
-import 'package:hakondate/util/analytics_controller.dart';
+import 'package:hakondate/util/analytics_controller/analytics_controller.dart';
 
 final StateNotifierProvider<RecipeViewModel, void> recipeProvider =
     StateNotifierProvider<RecipeViewModel, void>((StateNotifierProviderRef<RecipeViewModel, void> ref) {

@@ -1,13 +1,14 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final StateNotifierProvider<AnalyticsController, FirebaseAnalytics> analyticsControllerProvider = StateNotifierProvider<AnalyticsController, FirebaseAnalytics>((_) {
-  final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-  return AnalyticsController(analytics);
-});
+part 'analytics_controller.g.dart';
 
-class AnalyticsController extends StateNotifier<FirebaseAnalytics> {
-  AnalyticsController(super._state);
+@riverpod
+class AnalyticsController extends _$AnalyticsController {
+  @override
+  FirebaseAnalytics build() {
+    return FirebaseAnalytics.instance;
+  }
 
   Future<void> logSignup() => state.logSignUp(signUpMethod: 'original');
 

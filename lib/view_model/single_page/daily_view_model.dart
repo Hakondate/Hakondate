@@ -4,7 +4,7 @@ import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:hakondate/model/nutrients/nutrients_model.dart';
 import 'package:hakondate/repository/local/sqlite/menus_local_repository.dart';
 import 'package:hakondate/state/daily/daily_state.dart';
-import 'package:hakondate/util/analytics_controller.dart';
+import 'package:hakondate/util/analytics_controller/analytics_controller.dart';
 import 'package:hakondate/util/environment.dart';
 
 final StateNotifierProvider<DailyViewModel, DailyState> dailyProvider =

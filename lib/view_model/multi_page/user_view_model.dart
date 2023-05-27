@@ -13,7 +13,7 @@ import 'package:hakondate/model/user/user_model.dart';
 import 'package:hakondate/repository/local/sqlite/schools_local_repository.dart';
 import 'package:hakondate/repository/local/sqlite/users_local_repository.dart';
 import 'package:hakondate/state/user/user_state.dart';
-import 'package:hakondate/util/analytics_controller.dart';
+import 'package:hakondate/util/analytics_controller/analytics_controller.dart';
 import 'package:hakondate/util/exception/shared_preferences_exception.dart';
 import 'package:hakondate/util/exception/sign_in_exception.dart';
 
