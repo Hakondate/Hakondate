@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 import 'package:hakondate/model/user/user_model.dart';
 
 part 'user_settings_state.freezed.dart';

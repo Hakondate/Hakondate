@@ -1,44 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
+import 'package:hakondate/model/user/user_model.dart';
 import 'package:hakondate/router/routes.dart';
-import 'package:hakondate/view/component/dialog/hakondate_dialog/hakondate_dialog.dart';
+import 'package:hakondate/state/user_settings/user_settings_state.dart';
+import 'package:hakondate/view/user_settings/user_switch_dialog.dart';
+import 'package:hakondate/view_model/multi_page/user_view_model.dart';
+import 'package:hakondate/view_model/single_page/user_settings_view_model.dart';
 
-class UserSettings extends StatelessWidget {
+class UserSettings extends ConsumerWidget {
   const UserSettings({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final AsyncValue<UserSettingsState> users = ref.watch(userSettingsProvider);
+    final UserModel currentUser = ref.watch(userProvider).currentUser!;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('お子様情報一覧'),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            const SizedBox(
-              height: 8,
-            ),
-            _userSettingsCard(
-              context,
-              name: 'あとりンゴ',
-              schoolId: 1,
-              schoolYear: 2,
-              isActive: true,
-            ),
-            _userSettingsCard(
-              context,
-              name: 'Micad',
-              schoolId: 1,
-              schoolYear: 3,
-              isActive: false,
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            _userAddButton(),
-          ],
+        child: users.when(
+          loading: () {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+          error: (Object error, StackTrace? stackTrace) {
+            return Center(
+              child: Text(error.toString()),
+            );
+          },
+          data: (UserSettingsState users) {
+            return Column(
+              children: <Widget>[
+                const SizedBox(
+                  height: 8,
+                ),
+                for (final UserModel user in users.users!)
+                  _userSettingsCard(
+                    context,
+                    user: user,
+                    isActive: user.id == currentUser.id,
+                  ),
+                const SizedBox(
+                  height: 8,
+                ),
+                _userAddButton(),
+              ],
+            );
+          },
         ),
       ),
     );
@@ -46,9 +60,7 @@ class UserSettings extends StatelessWidget {
 
   Widget _userSettingsCard(
     BuildContext context, {
-    required String name,
-    required int schoolId,
-    required int schoolYear,
+    required UserModel user,
     required bool isActive,
   }) {
     return GestureDetector(
@@ -56,7 +68,7 @@ class UserSettings extends StatelessWidget {
         if (!isActive) {
           return showDialog(
             context: context,
-            builder: _userSwichDialog,
+            builder: (_) => UserSwitchDialog(id: user.id),
           );
         }
       },
@@ -86,7 +98,7 @@ class UserSettings extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    name,
+                    user.name,
                     style: const TextStyle(
                       fontSize: FontSize.subheading,
                       height: 1,
@@ -109,7 +121,7 @@ class UserSettings extends StatelessWidget {
                         width: 10,
                       ),
                       Text(
-                        '$schoolYear年',
+                        '${user.schoolYear}年',
                         style: TextStyle(
                           fontSize: FontSize.body,
                           color: AppColor.text.gray,
@@ -124,7 +136,7 @@ class UserSettings extends StatelessWidget {
                 isSelected: isActive,
                 onPressed: isActive
                     ? () {
-                        routemaster.push('1');
+                        routemaster.push(user.id.toString());
                       }
                     : null,
                 icon: Icon(
@@ -137,25 +149,6 @@ class UserSettings extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _userSwichDialog(BuildContext context) {
-    return HakondateDialog(
-      title: const Text('ユーザーを変更しますか？'),
-      body: const Text('はいを押すとユーザーが変更されます'),
-      firstAction: HakondateActionButton.primary(
-        text: const Text('はい'),
-        onTap: () {
-          Navigator.pop(context);
-        },
-      ),
-      secondAction: HakondateActionButton(
-        text: const Text('いいえ'),
-        onTap: () {
-          Navigator.pop(context);
-        },
       ),
     );
   }
