@@ -136,7 +136,7 @@ class UserSettings extends ConsumerWidget {
                 isSelected: isActive,
                 onPressed: isActive
                     ? () {
-                        routemaster.push(user.id.toString());
+                        routemaster.push('/signup');
                       }
                     : null,
                 icon: Icon(
@@ -163,7 +163,7 @@ class UserSettings extends ConsumerWidget {
           color: AppColor.brand.secondary,
         ),
         onPressed: () {
-          routemaster.push('-1');
+          routemaster.push('/signup');
         },
       ),
     );

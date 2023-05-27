@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hakondate/view_model/single_page/user_settings_view_model.dart';
 
 import 'package:path_provider/path_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -26,12 +27,12 @@ part 'user_view_model.g.dart';
 class UserViewModel extends _$UserViewModel {
   late final UsersLocalRepositoryAPI _usersLocalRepository;
   late final SchoolsLocalRepositoryAPI _schoolsLocalRepository;
-  
+
   @override
   UserState build() {
     _usersLocalRepository = ref.watch(usersLocalRepositoryProvider);
     _schoolsLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
-    
+
     return const UserState();
   }
 
@@ -65,10 +66,12 @@ class UserViewModel extends _$UserViewModel {
     if (await _usersLocalRepository.count() == 0) return false;
 
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final int? currentUserId = prefs.getInt(AppKey.sharedPreferencesKey.currentUserId);
+    final int? currentUserId =
+        prefs.getInt(AppKey.sharedPreferencesKey.currentUserId);
 
     if (currentUserId == null) {
-      throw SharedPreferencesException('Failed to get ${AppKey.sharedPreferencesKey.currentUserId} value');
+      throw SharedPreferencesException(
+          'Failed to get ${AppKey.sharedPreferencesKey.currentUserId} value');
     }
 
     await changeCurrentUser(currentUserId, isSetPrefs: false);
@@ -107,6 +110,8 @@ class UserViewModel extends _$UserViewModel {
     );
     await _usersLocalRepository.update(newUser);
 
+    await ref.read(userSettingsProvider.notifier).updateUsers();
+
     state = state.copyWith(currentUser: newUser);
   }
 
@@ -120,7 +125,8 @@ class UserViewModel extends _$UserViewModel {
 
   Future<SchoolGrade> getSchoolGrade(int userId) async {
     final UserModel user = await _usersLocalRepository.getById(userId);
-    final SchoolModel school = await _schoolsLocalRepository.getById(user.schoolId);
+    final SchoolModel school =
+        await _schoolsLocalRepository.getById(user.schoolId);
     if (school.classification != SchoolClassification.secondary) {
       if (user.schoolYear <= 2) {
         return SchoolGrade.lower;
@@ -143,13 +149,17 @@ class UserViewModel extends _$UserViewModel {
     await changeCurrentUser(id);
     await ref.read(analyticsControllerProvider.notifier).logSignup();
 
+    await ref.read(userSettingsProvider.notifier).updateUsers();
+
     return id;
   }
 
   Future<int> getParentId() async {
     final UserModel? user = state.currentUser;
-    if (user == null) throw const SignInException('Current user does not exist');
-    final SchoolModel school = await _schoolsLocalRepository.getById(user.schoolId);
+    if (user == null)
+      throw const SignInException('Current user does not exist');
+    final SchoolModel school =
+        await _schoolsLocalRepository.getById(user.schoolId);
 
     return school.parentId;
   }

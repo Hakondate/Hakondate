@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate/router/routes.dart';
 
 import 'package:hakondate/view/component/dialog/hakondate_dialog/hakondate_dialog.dart';
 import 'package:hakondate/view_model/multi_page/user_view_model.dart';
@@ -14,14 +15,16 @@ class UserSwitchDialog extends ConsumerWidget {
       title: const Text('ユーザーを変更しますか？'),
       body: const Text('はいを押すとユーザーが変更されます'),
       firstAction: HakondateActionButton.primary(
-          text: const Text('はい'),
-          onTap: () async {
-            await ref.read(userProvider.notifier).changeCurrentUser(id);
-          },),
+        text: const Text('はい'),
+        onTap: () async {
+          await ref.read(userProvider.notifier).changeCurrentUser(id);
+          await routemaster.pop();
+        },
+      ),
       secondAction: HakondateActionButton(
         text: const Text('いいえ'),
         onTap: () {
-          Navigator.pop(context);
+          routemaster.pop(context);
         },
       ),
     );
