@@ -42,4 +42,11 @@ class UserSettingsViewModel extends AsyncNotifier<UserSettingsState> {
         );
     });
   }
+
+  Future<void> deleteUser(int id) async {
+    final UsersLocalRepository usersLocalRepository =
+        ref.read(usersLocalRepositoryProvider);
+    await usersLocalRepository.delete(id);
+    await updateUsers();
+  }
 }
