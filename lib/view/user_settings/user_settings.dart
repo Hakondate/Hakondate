@@ -6,6 +6,7 @@ import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/user/user_model.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/user_settings/user_settings_state.dart';
+import 'package:hakondate/view/user_settings/user_delete_dialog.dart';
 import 'package:hakondate/view/user_settings/user_switch_dialog.dart';
 import 'package:hakondate/view_model/multi_page/user_view_model.dart';
 import 'package:hakondate/view_model/single_page/user_settings_view_model.dart';
@@ -63,93 +64,97 @@ class UserSettings extends ConsumerWidget {
     required UserModel user,
     required bool isActive,
   }) {
-    return GestureDetector(
-      onTap: () async {
-        if (!isActive) {
-          return showDialog(
-            context: context,
-            builder: (_) => UserSwitchDialog(id: user.id),
-          );
-        }
-      },
-      child: Card(
-        margin: const EdgeInsets.symmetric(
-          vertical: MarginSize.minimum,
-          horizontal: MarginSize.normalHorizontal,
-        ),
-        elevation: 0,
-        shadowColor: AppColor.brand.secondary,
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: isActive
-                ? AppColor.brand.secondary
-                : AppColor.ui.secondaryUltraLight,
-            width: 2,
-          ),
-          borderRadius: const BorderRadius.all(Radius.circular(15)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(PaddingSize.normal),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Column(
+    return Consumer(
+      builder: (BuildContext context, WidgetRef ref, _) {
+        return GestureDetector(
+          onTap: () async {
+            if (!isActive) {
+              return showDialog(
+                context: context,
+                builder: (_) => UserSwitchDialog(id: user.id),
+              );
+            }
+          },
+          child: Card(
+            margin: const EdgeInsets.symmetric(
+              vertical: MarginSize.minimum,
+              horizontal: MarginSize.normalHorizontal,
+            ),
+            elevation: 0,
+            shadowColor: AppColor.brand.secondary,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(
+                color: isActive
+                    ? AppColor.brand.secondary
+                    : AppColor.ui.secondaryUltraLight,
+                width: 2,
+              ),
+              borderRadius: const BorderRadius.all(Radius.circular(15)),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(PaddingSize.normal),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    user.name,
-                    style: const TextStyle(
-                      fontSize: FontSize.subheading,
-                      height: 1,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        '五稜郭中学校',
-                        style: TextStyle(
-                          fontSize: FontSize.body,
-                          color: AppColor.text.gray,
+                        user.name,
+                        style: const TextStyle(
+                          fontSize: FontSize.subheading,
                           height: 1,
                         ),
                       ),
                       const SizedBox(
-                        width: 10,
+                        height: 10,
                       ),
-                      Text(
-                        '${user.schoolYear}年',
-                        style: TextStyle(
-                          fontSize: FontSize.body,
-                          color: AppColor.text.gray,
-                          height: 1,
-                        ),
-                      ),
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            '五稜郭中学校',
+                            style: TextStyle(
+                              fontSize: FontSize.body,
+                              color: AppColor.text.gray,
+                              height: 1,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            '${user.schoolYear}年',
+                            style: TextStyle(
+                              fontSize: FontSize.body,
+                              color: AppColor.text.gray,
+                              height: 1,
+                            ),
+                          ),
+                        ],
+                      )
                     ],
+                  ),
+                  IconButton(
+                    isSelected: isActive,
+                    onPressed: isActive
+                        ? () {
+                            routemaster.push('/signup');
+                          }
+                        : () async {
+                           return showDialog(context: context, builder: (_) => UserDeleteDialog(id: user.id));
+                          },
+                    icon: Icon(
+                      isActive ? Icons.edit : Icons.delete,
+                      color: AppColor.brand.secondary,
+                    ),
                   )
                 ],
               ),
-              IconButton(
-                isSelected: isActive,
-                onPressed: isActive
-                    ? () {
-                        routemaster.push('/signup');
-                      }
-                    : null,
-                icon: Icon(
-                  Icons.edit,
-                  color: isActive
-                      ? AppColor.brand.secondary
-                      : AppColor.ui.secondaryUltraLight,
-                ),
-              )
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
