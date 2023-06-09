@@ -9,8 +9,8 @@ import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/signup/signup_state.dart';
 import 'package:hakondate/view/component/dialog/hakondate_dialog/hakondate_dialog.dart';
-import 'package:hakondate/view_model/multi_page/user_view_model.dart';
-import 'package:hakondate/view_model/single_page/signup_view_model.dart';
+import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
+import 'package:hakondate/view_model/single_page/signup/signup_view_model.dart';
 
 class SigningUpDialog extends ConsumerWidget {
   const SigningUpDialog({super.key});
@@ -103,7 +103,7 @@ class SigningUpDialog extends ConsumerWidget {
           );
         }
 
-        if (store is! SignupStateLoad && ref.watch(userProvider).currentUser != null) {
+        if (store is! SignupStateLoad && ref.watch(userViewModelProvider).currentUser != null) {
           return HakondateDialog(
             title: const Text('登録完了'),
             body: const Text('ユーザ情報の登録が成功しました'),

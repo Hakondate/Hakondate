@@ -11,14 +11,14 @@ import 'package:hakondate/model/letter/letter_metadata_model.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/view/component/dialog/exception_dialog/download_exception_dialog.dart';
 import 'package:hakondate/view/component/frame/fade_up_app_bar.dart';
-import 'package:hakondate/view_model/single_page/letter_view_model.dart';
+import 'package:hakondate/view_model/single_page/letter/letter_view_model.dart';
 
 class LetterPDF extends ConsumerWidget {
   const LetterPDF({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final LetterMetadataModelData? letter = ref.watch(letterProvider).letter;
+    final LetterMetadataModelData? letter = ref.watch(letterViewModelProvider).letter;
 
     if (letter == null) {
       return Scaffold(
@@ -53,7 +53,7 @@ class LetterPDF extends ConsumerWidget {
         title: Text(letter.title),
       ),
       body: FutureBuilder<Uint8List>(
-        future: ref.read(letterProvider.notifier).getLetterPDF(path: letter.path),
+        future: ref.read(letterViewModelProvider.notifier).getLetterPDF(path: letter.path),
         builder: (BuildContext context, AsyncSnapshot<Uint8List> snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return Center(
@@ -71,7 +71,7 @@ class LetterPDF extends ConsumerWidget {
                 context: context,
                 builder: (BuildContext context) => DownloadExceptionDialog(
                   onTapRetry: () => routemaster.pop().whenComplete(() =>
-                      ref.read(letterProvider.notifier).getLetterPDF(path: letter.path),
+                      ref.read(letterViewModelProvider.notifier).getLetterPDF(path: letter.path),
                   ),
                   onTapPop: () => routemaster.pop().whenComplete(routemaster.pop),
                 ),

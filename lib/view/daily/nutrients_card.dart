@@ -8,8 +8,8 @@ import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:hakondate/util/exception/class_type_exception.dart';
 import 'package:hakondate/view/component/label/nutrients_list.dart';
-import 'package:hakondate/view_model/multi_page/user_view_model.dart';
-import 'package:hakondate/view_model/single_page/daily_view_model.dart';
+import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
+import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
 
 class NutrientsCard extends StatelessWidget {
   const NutrientsCard({super.key});
@@ -36,8 +36,8 @@ class NutrientsCard extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 3/4,
           height: MediaQuery.of(context).size.width * 3/4,
           child: RadarChart(
-            values: ref.read(dailyProvider.notifier).getGraphValues(
-              slns: ref.watch(userProvider).currentUser!.slns,
+            values: ref.read(dailyViewModelProvider.notifier).getGraphValues(
+              slns: ref.watch(userViewModelProvider).currentUser!.slns,
               graphMaxValue: graphMaxValue,
             ),
             labels: const <String>[
@@ -62,7 +62,7 @@ class NutrientsCard extends StatelessWidget {
   Widget _nutrientsExpansionTile() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        final MenuModel menu = ref.watch(dailyProvider).menu;
+        final MenuModel menu = ref.watch(dailyViewModelProvider).menu;
 
         if (menu is! LunchesDayMenuModel) {
           throw const ClassTypeException("'menu' is not 'LunchesDayMenuModel'");

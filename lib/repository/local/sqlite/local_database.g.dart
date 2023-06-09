@@ -942,7 +942,11 @@ class $MenuDishesTableTable extends MenuDishesTable
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => {menuId, dishId};
+  Set<GeneratedColumn> get $primaryKey => const {};
+  @override
+  List<Set<GeneratedColumn>> get uniqueKeys => [
+        {menuId, dishId},
+      ];
   @override
   MenuDishesSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
@@ -2510,3 +2514,24 @@ abstract class _$LocalDatabase extends GeneratedDatabase {
         usersTable
       ];
 }
+
+// **************************************************************************
+// RiverpodGenerator
+// **************************************************************************
+
+String _$localDatabaseHash() => r'7fc59fd746d4d230c41f4608259788260f0b95bf';
+
+/// See also [localDatabase].
+@ProviderFor(localDatabase)
+final localDatabaseProvider = Provider<LocalDatabase>.internal(
+  localDatabase,
+  name: r'localDatabaseProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$localDatabaseHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef LocalDatabaseRef = ProviderRef<LocalDatabase>;
+// ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

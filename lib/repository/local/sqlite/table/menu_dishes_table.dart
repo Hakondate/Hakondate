@@ -9,5 +9,7 @@ class MenuDishesTable extends Table {
 
   @override
   // ignore: always_specify_types
-  Set<Column> get primaryKey => {menuId, dishId};
+  List<Set<Column>> get uniqueKeys => [
+    <Column<Object>>{menuId, dishId},
+  ];
 }

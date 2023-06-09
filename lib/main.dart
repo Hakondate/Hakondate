@@ -13,7 +13,7 @@ import 'package:routemaster/routemaster.dart';
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/repository/remote/firebase_options.dart';
 import 'package:hakondate/router/routes.dart';
-import 'package:hakondate/util/app_unique_key.dart';
+import 'package:hakondate/util/app_unique_key/app_unique_key.dart';
 
 Future<void> main() async {
   await runZonedGuarded<Future<void>>(

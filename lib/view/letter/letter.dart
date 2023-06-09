@@ -10,7 +10,7 @@ import 'package:hakondate/model/letter/letter_metadata_model.dart';
 import 'package:hakondate/state/letter/letter_state.dart';
 import 'package:hakondate/view/component/tile/grid_frame.dart';
 import 'package:hakondate/view/letter/non_letter.dart';
-import 'package:hakondate/view_model/single_page/letter_view_model.dart';
+import 'package:hakondate/view_model/single_page/letter/letter_view_model.dart';
 
 class Letter extends StatelessWidget {
   const Letter({super.key});
@@ -23,7 +23,7 @@ class Letter extends StatelessWidget {
       ),
       body: Consumer(
         builder: (BuildContext context, WidgetRef ref, _) {
-          final List<LetterMetadataModel> letters = ref.watch(letterProvider).letters;
+          final List<LetterMetadataModel> letters = ref.watch(letterViewModelProvider).letters;
 
           if (letters.isEmpty) return const NonLetter();
 
@@ -31,7 +31,7 @@ class Letter extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(PaddingSize.minimum),
               child: RefreshIndicator(
-                onRefresh: () => ref.read(letterProvider.notifier).reloadLetters(),
+                onRefresh: () => ref.read(letterViewModelProvider.notifier).reloadLetters(),
                 color: AppColor.brand.secondary,
                 backgroundColor: AppColor.ui.white,
                 displacement: 0,
@@ -43,10 +43,10 @@ class Letter extends StatelessWidget {
                   ),
                   itemCount: letters.length,
                   itemBuilder: (BuildContext context, int index) {
-                    if (!ref.read(letterProvider.notifier).isEndListing() &&
-                        ref.watch(letterProvider).status != LetterConnectionStatus.loading &&
+                    if (!ref.read(letterViewModelProvider.notifier).isEndListing() &&
+                        ref.watch(letterViewModelProvider).status != LetterConnectionStatus.loading &&
                         index == letters.length - 4) {
-                      Future<void>(ref.read(letterProvider.notifier).getLetters);
+                      Future<void>(ref.read(letterViewModelProvider.notifier).getLetters);
                     }
 
                     return _gridTile(index);
@@ -63,11 +63,11 @@ class Letter extends StatelessWidget {
   Widget _gridTile(int index) {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        final LetterMetadataModel letter = ref.watch(letterProvider).letters[index];
+        final LetterMetadataModel letter = ref.watch(letterViewModelProvider).letters[index];
 
         if (letter is LetterMetadataModelData) {
           return GridFrame(
-            onTap: () => ref.read(letterProvider.notifier).transitionLetterPDF(letter: letter),
+            onTap: () => ref.read(letterViewModelProvider.notifier).transitionLetterPDF(letter: letter),
             borderColor: AppColor.brand.secondaryLight,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(
@@ -93,7 +93,7 @@ class Letter extends StatelessWidget {
                   Consumer(
                     builder: (BuildContext context, WidgetRef ref, _) {
                       return FutureBuilder<List<String>>(
-                        future: ref.read(letterProvider.notifier).getSchoolLabels(letter.parentId),
+                        future: ref.read(letterViewModelProvider.notifier).getSchoolLabels(letter.parentId),
                         builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
                           if (snapshot.hasData && snapshot.data != null) {
                             return Wrap(
