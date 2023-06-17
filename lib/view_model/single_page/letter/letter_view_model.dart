@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/widgets.dart';
 import 'package:hakondate/constant/firebase_apis.dart';
 import 'package:hakondate/model/letter/letter_metadata_model.dart';
 import 'package:hakondate/model/school/school_model.dart';
@@ -24,7 +25,7 @@ class LetterViewModel extends _$LetterViewModel {
     _schoolsLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
 
     // TODO(micady): ここの処理ちゃんとする
-    getLetters();
+    // getLetters();
 
     return const LetterState();
   }
@@ -33,33 +34,35 @@ class LetterViewModel extends _$LetterViewModel {
     if (state.isEndListing) return;
 
     final List<LetterMetadataModel> currentLetters = state.letters;
-    state = state.copyWith(
-      status: LetterConnectionStatus.loading,
-      letters: <LetterMetadataModel>[
-        ...state.letters,
-        ...List<LetterMetadataModel>.filled(
-          FirestorageConstant.maxResultsSize,
-          const LetterMetadataModel.loading(),
-        ),
-      ],
-    );
-
-    try {
-      final ListResult listResult = await _lettersRemoteRepository.getListResult(pageToken: state.pageToken);
-      final List<LetterMetadataModel> addedLetters = await _lettersRemoteRepository.getLetterMetadataList(items: listResult.items);
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       state = state.copyWith(
-        status: LetterConnectionStatus.done,
-        letters: <LetterMetadataModel>[...currentLetters, ...addedLetters],
-        isEndListing: listResult.nextPageToken == null,
-        pageToken: listResult.nextPageToken,
+        status: LetterConnectionStatus.loading,
+        letters: <LetterMetadataModel>[
+          ...currentLetters,
+          ...List<LetterMetadataModel>.filled(
+            FirestorageConstant.maxResultsSize,
+            const LetterMetadataModel.loading(),
+          ),
+        ],
       );
-    } on Exception catch (_) {
-      state = state.copyWith(
-        status: LetterConnectionStatus.done,
-        letters: currentLetters,
 
-      );
-    }
+      try {
+        final ListResult listResult = await _lettersRemoteRepository.getListResult(pageToken: state.pageToken);
+        final List<LetterMetadataModel> addedLetters = await _lettersRemoteRepository.getLetterMetadataList(items: listResult.items);
+        state = state.copyWith(
+          status: LetterConnectionStatus.done,
+          letters: <LetterMetadataModel>[...currentLetters, ...addedLetters],
+          isEndListing: listResult.nextPageToken == null,
+          pageToken: listResult.nextPageToken,
+        );
+      } on Exception catch (_) {
+        state = state.copyWith(
+          status: LetterConnectionStatus.done,
+          letters: currentLetters,
+
+        );
+      }
+    });
   }
 
   Future<void> reloadLetters() async {

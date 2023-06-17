@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate/view/component/frame/stateful_wrapper.dart';
 import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -12,50 +13,53 @@ import 'package:hakondate/view/component/tile/grid_frame.dart';
 import 'package:hakondate/view/letter/non_letter.dart';
 import 'package:hakondate/view_model/single_page/letter/letter_view_model.dart';
 
-class Letter extends StatelessWidget {
+class Letter extends ConsumerWidget {
   const Letter({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('お便り'),
       ),
-      body: Consumer(
-        builder: (BuildContext context, WidgetRef ref, _) {
-          final List<LetterMetadataModel> letters = ref.watch(letterViewModelProvider).letters;
-
-          if (letters.isEmpty) return const NonLetter();
-
-          return Scrollbar(
-            child: Padding(
-              padding: const EdgeInsets.all(PaddingSize.minimum),
-              child: RefreshIndicator(
-                onRefresh: () => ref.read(letterViewModelProvider.notifier).reloadLetters(),
-                color: AppColor.brand.secondary,
-                backgroundColor: AppColor.ui.white,
-                displacement: 0,
-                child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: MarginSize.minimum,
-                    crossAxisSpacing: MarginSize.minimum,
+      body: StatefulWrapper(
+        onInit: () => ref.read(letterViewModelProvider.notifier).getLetters(),
+        child: Builder(
+          builder: (BuildContext context) {
+            final List<LetterMetadataModel> letters = ref.watch(letterViewModelProvider).letters;
+      
+            if (letters.isEmpty) return const NonLetter();
+      
+            return Scrollbar(
+              child: Padding(
+                padding: const EdgeInsets.all(PaddingSize.minimum),
+                child: RefreshIndicator(
+                  onRefresh: () => ref.read(letterViewModelProvider.notifier).reloadLetters(),
+                  color: AppColor.brand.secondary,
+                  backgroundColor: AppColor.ui.white,
+                  displacement: 0,
+                  child: GridView.builder(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: MarginSize.minimum,
+                      crossAxisSpacing: MarginSize.minimum,
+                    ),
+                    itemCount: letters.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      if (!ref.watch(letterViewModelProvider).isEndListing &&
+                          ref.watch(letterViewModelProvider).status != LetterConnectionStatus.loading &&
+                          index == letters.length - 4) {
+                        Future<void>(ref.read(letterViewModelProvider.notifier).getLetters);
+                      }
+      
+                      return _gridTile(index);
+                    },
                   ),
-                  itemCount: letters.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    if (!ref.watch(letterViewModelProvider).isEndListing &&
-                        ref.watch(letterViewModelProvider).status != LetterConnectionStatus.loading &&
-                        index == letters.length - 4) {
-                      Future<void>(ref.read(letterViewModelProvider.notifier).getLetters);
-                    }
-
-                    return _gridTile(index);
-                  },
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
