@@ -16,9 +16,12 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$LetterState {
-  List<LetterMetadataModel> get letters => throw _privateConstructorUsedError;
-  LetterMetadataModelData? get letter => throw _privateConstructorUsedError;
   LetterConnectionStatus get status => throw _privateConstructorUsedError;
+  List<LetterMetadataModel> get letters => throw _privateConstructorUsedError;
+  LetterMetadataModelData? get selectedLetter =>
+      throw _privateConstructorUsedError;
+  bool get isEndListing => throw _privateConstructorUsedError;
+  String? get pageToken => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LetterStateCopyWith<LetterState> get copyWith =>
@@ -32,9 +35,11 @@ abstract class $LetterStateCopyWith<$Res> {
       _$LetterStateCopyWithImpl<$Res, LetterState>;
   @useResult
   $Res call(
-      {List<LetterMetadataModel> letters,
-      LetterMetadataModelData? letter,
-      LetterConnectionStatus status});
+      {LetterConnectionStatus status,
+      List<LetterMetadataModel> letters,
+      LetterMetadataModelData? selectedLetter,
+      bool isEndListing,
+      String? pageToken});
 }
 
 /// @nodoc
@@ -50,23 +55,33 @@ class _$LetterStateCopyWithImpl<$Res, $Val extends LetterState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? letters = null,
-    Object? letter = freezed,
     Object? status = null,
+    Object? letters = null,
+    Object? selectedLetter = freezed,
+    Object? isEndListing = null,
+    Object? pageToken = freezed,
   }) {
     return _then(_value.copyWith(
-      letters: null == letters
-          ? _value.letters
-          : letters // ignore: cast_nullable_to_non_nullable
-              as List<LetterMetadataModel>,
-      letter: freezed == letter
-          ? _value.letter
-          : letter // ignore: cast_nullable_to_non_nullable
-              as LetterMetadataModelData?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as LetterConnectionStatus,
+      letters: null == letters
+          ? _value.letters
+          : letters // ignore: cast_nullable_to_non_nullable
+              as List<LetterMetadataModel>,
+      selectedLetter: freezed == selectedLetter
+          ? _value.selectedLetter
+          : selectedLetter // ignore: cast_nullable_to_non_nullable
+              as LetterMetadataModelData?,
+      isEndListing: null == isEndListing
+          ? _value.isEndListing
+          : isEndListing // ignore: cast_nullable_to_non_nullable
+              as bool,
+      pageToken: freezed == pageToken
+          ? _value.pageToken
+          : pageToken // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -80,9 +95,11 @@ abstract class _$$_LetterStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<LetterMetadataModel> letters,
-      LetterMetadataModelData? letter,
-      LetterConnectionStatus status});
+      {LetterConnectionStatus status,
+      List<LetterMetadataModel> letters,
+      LetterMetadataModelData? selectedLetter,
+      bool isEndListing,
+      String? pageToken});
 }
 
 /// @nodoc
@@ -96,23 +113,33 @@ class __$$_LetterStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? letters = null,
-    Object? letter = freezed,
     Object? status = null,
+    Object? letters = null,
+    Object? selectedLetter = freezed,
+    Object? isEndListing = null,
+    Object? pageToken = freezed,
   }) {
     return _then(_$_LetterState(
-      letters: null == letters
-          ? _value._letters
-          : letters // ignore: cast_nullable_to_non_nullable
-              as List<LetterMetadataModel>,
-      letter: freezed == letter
-          ? _value.letter
-          : letter // ignore: cast_nullable_to_non_nullable
-              as LetterMetadataModelData?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as LetterConnectionStatus,
+      letters: null == letters
+          ? _value._letters
+          : letters // ignore: cast_nullable_to_non_nullable
+              as List<LetterMetadataModel>,
+      selectedLetter: freezed == selectedLetter
+          ? _value.selectedLetter
+          : selectedLetter // ignore: cast_nullable_to_non_nullable
+              as LetterMetadataModelData?,
+      isEndListing: null == isEndListing
+          ? _value.isEndListing
+          : isEndListing // ignore: cast_nullable_to_non_nullable
+              as bool,
+      pageToken: freezed == pageToken
+          ? _value.pageToken
+          : pageToken // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -121,11 +148,16 @@ class __$$_LetterStateCopyWithImpl<$Res>
 
 class _$_LetterState with DiagnosticableTreeMixin implements _LetterState {
   const _$_LetterState(
-      {final List<LetterMetadataModel> letters = const <LetterMetadataModel>[],
-      this.letter,
-      this.status = LetterConnectionStatus.done})
+      {this.status = LetterConnectionStatus.done,
+      final List<LetterMetadataModel> letters = const <LetterMetadataModel>[],
+      this.selectedLetter,
+      this.isEndListing = false,
+      this.pageToken})
       : _letters = letters;
 
+  @override
+  @JsonKey()
+  final LetterConnectionStatus status;
   final List<LetterMetadataModel> _letters;
   @override
   @JsonKey()
@@ -136,14 +168,16 @@ class _$_LetterState with DiagnosticableTreeMixin implements _LetterState {
   }
 
   @override
-  final LetterMetadataModelData? letter;
+  final LetterMetadataModelData? selectedLetter;
   @override
   @JsonKey()
-  final LetterConnectionStatus status;
+  final bool isEndListing;
+  @override
+  final String? pageToken;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'LetterState(letters: $letters, letter: $letter, status: $status)';
+    return 'LetterState(status: $status, letters: $letters, selectedLetter: $selectedLetter, isEndListing: $isEndListing, pageToken: $pageToken)';
   }
 
   @override
@@ -151,9 +185,11 @@ class _$_LetterState with DiagnosticableTreeMixin implements _LetterState {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'LetterState'))
+      ..add(DiagnosticsProperty('status', status))
       ..add(DiagnosticsProperty('letters', letters))
-      ..add(DiagnosticsProperty('letter', letter))
-      ..add(DiagnosticsProperty('status', status));
+      ..add(DiagnosticsProperty('selectedLetter', selectedLetter))
+      ..add(DiagnosticsProperty('isEndListing', isEndListing))
+      ..add(DiagnosticsProperty('pageToken', pageToken));
   }
 
   @override
@@ -161,17 +197,24 @@ class _$_LetterState with DiagnosticableTreeMixin implements _LetterState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LetterState &&
+            (identical(other.status, status) || other.status == status) &&
             const DeepCollectionEquality().equals(other._letters, _letters) &&
-            const DeepCollectionEquality().equals(other.letter, letter) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.selectedLetter, selectedLetter) ||
+                other.selectedLetter == selectedLetter) &&
+            (identical(other.isEndListing, isEndListing) ||
+                other.isEndListing == isEndListing) &&
+            (identical(other.pageToken, pageToken) ||
+                other.pageToken == pageToken));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      status,
       const DeepCollectionEquality().hash(_letters),
-      const DeepCollectionEquality().hash(letter),
-      status);
+      selectedLetter,
+      isEndListing,
+      pageToken);
 
   @JsonKey(ignore: true)
   @override
@@ -182,16 +225,22 @@ class _$_LetterState with DiagnosticableTreeMixin implements _LetterState {
 
 abstract class _LetterState implements LetterState {
   const factory _LetterState(
-      {final List<LetterMetadataModel> letters,
-      final LetterMetadataModelData? letter,
-      final LetterConnectionStatus status}) = _$_LetterState;
+      {final LetterConnectionStatus status,
+      final List<LetterMetadataModel> letters,
+      final LetterMetadataModelData? selectedLetter,
+      final bool isEndListing,
+      final String? pageToken}) = _$_LetterState;
 
+  @override
+  LetterConnectionStatus get status;
   @override
   List<LetterMetadataModel> get letters;
   @override
-  LetterMetadataModelData? get letter;
+  LetterMetadataModelData? get selectedLetter;
   @override
-  LetterConnectionStatus get status;
+  bool get isEndListing;
+  @override
+  String? get pageToken;
   @override
   @JsonKey(ignore: true)
   _$$_LetterStateCopyWith<_$_LetterState> get copyWith =>

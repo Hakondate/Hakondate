@@ -43,7 +43,7 @@ class Letter extends StatelessWidget {
                   ),
                   itemCount: letters.length,
                   itemBuilder: (BuildContext context, int index) {
-                    if (!ref.read(letterViewModelProvider.notifier).isEndListing() &&
+                    if (!ref.watch(letterViewModelProvider).isEndListing &&
                         ref.watch(letterViewModelProvider).status != LetterConnectionStatus.loading &&
                         index == letters.length - 4) {
                       Future<void>(ref.read(letterViewModelProvider.notifier).getLetters);
@@ -84,7 +84,7 @@ class Letter extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: FontSize.subheading,
                       fontWeight: FontWeight.bold,
-                      height: 1,
+                      height: 1.1,
                     ),
                     maxLines: 4,
                     overflow: TextOverflow.ellipsis,

@@ -7,13 +7,13 @@ part of 'letters_remote_repository.dart';
 // **************************************************************************
 
 String _$lettersRemoteRepositoryHash() =>
-    r'bf33701d6b7903853c1ed9d376bf82857e5d5984';
+    r'c21ff9f1e905c4e02f6502f995b1ee31839c9250';
 
-/// See also [LettersRemoteRepository].
-@ProviderFor(LettersRemoteRepository)
-final lettersRemoteRepositoryProvider = NotifierProvider<
-    LettersRemoteRepository, LettersRemoteRepositoryModel>.internal(
-  LettersRemoteRepository.new,
+/// See also [lettersRemoteRepository].
+@ProviderFor(lettersRemoteRepository)
+final lettersRemoteRepositoryProvider =
+    Provider<LettersRemoteRepository>.internal(
+  lettersRemoteRepository,
   name: r'lettersRemoteRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
@@ -22,5 +22,5 @@ final lettersRemoteRepositoryProvider = NotifierProvider<
   allTransitiveDependencies: null,
 );
 
-typedef _$LettersRemoteRepository = Notifier<LettersRemoteRepositoryModel>;
+typedef LettersRemoteRepositoryRef = ProviderRef<LettersRemoteRepository>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

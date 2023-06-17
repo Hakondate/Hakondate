@@ -18,7 +18,7 @@ class LetterPDF extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final LetterMetadataModelData? letter = ref.watch(letterViewModelProvider).letter;
+    final LetterMetadataModelData? letter = ref.watch(letterViewModelProvider).selectedLetter;
 
     if (letter == null) {
       return Scaffold(

@@ -7,7 +7,7 @@ part of 'menus_remote_repository.dart';
 // **************************************************************************
 
 String _$menusRemoteRepositoryHash() =>
-    r'0a47315316f3cd187ff5a4ca35e8e85f05351c18';
+    r'efbb01ccd7c81503c9816711d7c169cc823119f4';
 
 /// See also [menusRemoteRepository].
 @ProviderFor(menusRemoteRepository)

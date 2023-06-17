@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:hakondate/constant/firebase_apis.dart';
 import 'package:hakondate/model/letter/letter_metadata_model.dart';
 import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/repository/local/sqlite/schools/schools_local_repository.dart';
@@ -20,7 +20,7 @@ class LetterViewModel extends _$LetterViewModel {
 
   @override
   LetterState build() {
-    _lettersRemoteRepository = ref.watch(lettersRemoteRepositoryProvider as AlwaysAliveProviderListenable<LettersRemoteRepository>);
+    _lettersRemoteRepository = ref.watch(lettersRemoteRepositoryProvider);
     _schoolsLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
 
     // TODO(micady): ここの処理ちゃんとする
@@ -30,38 +30,43 @@ class LetterViewModel extends _$LetterViewModel {
   }
 
   Future<void> getLetters() async {
-    if (isEndListing()) return;
+    if (state.isEndListing) return;
 
     final List<LetterMetadataModel> currentLetters = state.letters;
     state = state.copyWith(
+      status: LetterConnectionStatus.loading,
       letters: <LetterMetadataModel>[
         ...state.letters,
         ...List<LetterMetadataModel>.filled(
-          _lettersRemoteRepository.getMaxResultsSize(),
+          FirestorageConstant.maxResultsSize,
           const LetterMetadataModel.loading(),
         ),
       ],
-      status: LetterConnectionStatus.loading,
     );
 
     try {
-      final List<LetterMetadataModel> addLetters = await _lettersRemoteRepository.getList();
+      final ListResult listResult = await _lettersRemoteRepository.getListResult(pageToken: state.pageToken);
+      final List<LetterMetadataModel> addedLetters = await _lettersRemoteRepository.getLetterMetadataList(items: listResult.items);
       state = state.copyWith(
-        letters: <LetterMetadataModel>[...currentLetters, ...addLetters],
         status: LetterConnectionStatus.done,
+        letters: <LetterMetadataModel>[...currentLetters, ...addedLetters],
+        isEndListing: listResult.nextPageToken == null,
+        pageToken: listResult.nextPageToken,
       );
     } on Exception catch (_) {
       state = state.copyWith(
-        letters: currentLetters,
         status: LetterConnectionStatus.done,
+        letters: currentLetters,
+
       );
     }
   }
 
   Future<void> reloadLetters() async {
-    _lettersRemoteRepository.resetPageToken();
     state = state.copyWith(
       letters: <LetterMetadataModel>[],
+      isEndListing: false,
+      pageToken: null,
     );
     await getLetters();
   }
@@ -72,11 +77,9 @@ class LetterViewModel extends _$LetterViewModel {
     return schools.map((SchoolModel school) => school.name.replaceAll('学校', '')).toList();
   }
 
-  bool isEndListing() => _lettersRemoteRepository.getIsEndListing();
-
   void transitionLetterPDF({required LetterMetadataModelData letter}) {
-    state = state.copyWith(letter: letter);
-    routemaster.push('/home/letter/${state.letter!.title}');
+    state = state.copyWith(selectedLetter: letter);
+    routemaster.push('/home/letter/${state.selectedLetter!.title}');
   }
 
   Future<Uint8List> getLetterPDF({required String path}) async {
