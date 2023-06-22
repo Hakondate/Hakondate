@@ -13,7 +13,7 @@ part 'calendar_view_model.g.dart';
 @riverpod
 class CalendarViewModel extends _$CalendarViewModel {
   late final MenusLocalRepository _menusLocalRepository;
-  late final DailyState _daily;
+  late final AsyncValue<DailyState> _daily;
   final double _calendarHeightWithMargin = UiSize.calendarTileHeight + 8.0;
 
   @override
@@ -25,9 +25,13 @@ class CalendarViewModel extends _$CalendarViewModel {
       state.scrollController.dispose();
     });
 
+    final AsyncValue<DailyState> dailyStateCache = _daily;
+
+    if (dailyStateCache is! AsyncData) throw StateError('DailyState is not AsyncData');
+
     return CalendarState(
-      oldestDay: _daily.calendarTabFirstDay,
-      latestDay: _daily.calendarTabLastDay,
+      oldestDay: dailyStateCache.value!.calendarTabFirstDay,
+      latestDay: dailyStateCache.value!.calendarTabLastDay,
       scrollController: ScrollController(),
     );
   }
@@ -45,10 +49,14 @@ class CalendarViewModel extends _$CalendarViewModel {
       }
     });
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      final AsyncValue<DailyState> dailyStateCache = _daily;
+
+      if (dailyStateCache is! AsyncData) throw StateError('DailyState is not AsyncData');
+
       state = state.copyWith(
         oldestDay: DateTime(
-          _daily.selectedDay.year,
-          _daily.selectedDay.month - 1,
+          dailyStateCache.value!.selectedDay.year,
+          dailyStateCache.value!.selectedDay.month - 1,
         ),
       );
       state.scrollController.jumpTo(_getInitialScrollPosition(appHeight));
@@ -56,7 +64,12 @@ class CalendarViewModel extends _$CalendarViewModel {
   }
 
   void fetchPreviousMonth() {
-    final DateTime limitMonth = _daily.calendarTabFirstDay.add(const Duration(days: 1));
+    final AsyncValue<DailyState> dailyStateCache = _daily;
+
+    if (dailyStateCache is! AsyncData) throw StateError('DailyState is not AsyncData');
+
+    final DateTime limitMonth = dailyStateCache.value!.calendarTabFirstDay.add(const Duration(days: 1));
+
     if (state.oldestDay.isAfter(limitMonth)) {
       state = state.copyWith(
         oldestDay: DateTime(state.oldestDay.year, state.oldestDay.month - 1),
@@ -65,7 +78,11 @@ class CalendarViewModel extends _$CalendarViewModel {
   }
 
   double _getInitialScrollPosition(double appHeight) {
-    final int dayDifference = state.latestDay.difference(_daily.selectedDay).inDays;
+    final AsyncValue<DailyState> dailyStateCache = _daily;
+
+    if (dailyStateCache is! AsyncData) throw StateError('DailyState is not AsyncData');
+
+    final int dayDifference = state.latestDay.difference(dailyStateCache.value!.selectedDay).inDays;
     final double scrollPosition = _calendarHeightWithMargin * dayDifference - (appHeight - _calendarHeightWithMargin) / 2.0;
 
     if (scrollPosition < 0.0) return 0;

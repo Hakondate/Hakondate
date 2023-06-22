@@ -17,7 +17,7 @@ SchoolsLocalRepository schoolsLocalRepository(SchoolsLocalRepositoryRef ref) {
 
 abstract class SchoolsLocalRepositoryAPI {
   Future<int> count();
-  Future<List<SchoolModel>> getAll();
+  Future<List<SchoolModel>> list();
   Future<SchoolModel> getById(int id);
   Future<List<SchoolModel>> getByParentId(int parentId);
   Future<int> add(Map<String, dynamic> school);
@@ -40,7 +40,7 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryAPI {
   }
 
   @override
-  Future<List<SchoolModel>> getAll() async {
+  Future<List<SchoolModel>> list() async {
     final List<SchoolModel> schools = <SchoolModel>[];
     final List<SchoolsSchema> schoolsSchemas = await _db.select(_db.schoolsTable).get();
 

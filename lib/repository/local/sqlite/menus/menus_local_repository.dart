@@ -21,7 +21,7 @@ MenusLocalRepository menusLocalRepository(MenusLocalRepositoryRef ref) {
 
 abstract class MenusLocalRepositoryAPI {
   Future<int> add(Map<String, dynamic> menu);
-  Future<List<MenuModel>> getAll();
+  Future<List<MenuModel>> list();
   Future<MenuModel> getMenuByDay(DateTime day);
   Future<DateTime> getLatestUpdateDay();
   Future<int> deleteAll();
@@ -215,7 +215,7 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
   }
 
   @override
-  Future<List<MenuModel>> getAll() async {
+  Future<List<MenuModel>> list() async {
     final List<MenuModel> menus = <MenuModel>[];
     final int schoolId = await _ref.read(userViewModelProvider.notifier).getParentId();
     final List<MenusSchema> menusSchemas = await (_db.select(_db.menusTable)

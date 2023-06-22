@@ -52,11 +52,16 @@ class Daily extends StatelessWidget {
   Widget _appBarTitle() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        final DailyState store = ref.watch(dailyViewModelProvider);
-        final String formatted = (isSameDay(store.selectedDay, DateTime.now()))
-            ? '今日' : DateFormat('M月d日').format(store.selectedDay);
+        return ref.watch(dailyViewModelProvider).when(
+          data: (DailyState state) {
+            final String formatted = (isSameDay(state.selectedDay, DateTime.now()))
+                ? '今日' : DateFormat('M月d日').format(state.selectedDay);
 
-        return Text('$formattedの献立');
+            return Text('$formattedの献立');
+          },
+          error: (_, __) => const Text(''),
+          loading: () => const Text('読み込み中'),
+        );
       },
     );
   }
@@ -67,36 +72,37 @@ class Daily extends StatelessWidget {
       elevation: 4,
       child: Consumer(
         builder: (BuildContext context, WidgetRef ref, _) {
-          final DailyState store = ref.watch(dailyViewModelProvider);
-
-          return TableCalendar<dynamic>(
-            headerVisible: false,
-            locale: 'ja_JP',
-            calendarFormat: CalendarFormat.week,
-            focusedDay: store.focusedDay,
-            firstDay: store.calendarTabFirstDay,
-            lastDay: store.calendarTabLastDay,
-            selectedDayPredicate: (DateTime day) => isSameDay(store.selectedDay, day),
-            onDaySelected: (DateTime selectedDay, DateTime focusedDay) async {
-              if (isSameDay(store.selectedDay, selectedDay)) return;
-              await ref.read(dailyViewModelProvider.notifier).updateSelectedDay(selectedDay: selectedDay);
-            },
-            onPageChanged: (DateTime focusedDay) => ref.read(dailyViewModelProvider.notifier).updateFocusedDay(focusedDay),
-            daysOfWeekHeight: 20,
-            calendarStyle: CalendarStyle(
-              todayTextStyle: const CalendarStyle().defaultTextStyle,
-              todayDecoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
+          return ref.watch(dailyViewModelProvider).maybeWhen(
+            data: (DailyState state) => TableCalendar<dynamic>(
+              headerVisible: false,
+              locale: 'ja_JP',
+              calendarFormat: CalendarFormat.week,
+              focusedDay: state.focusedDay,
+              firstDay: state.calendarTabFirstDay,
+              lastDay: state.calendarTabLastDay,
+              selectedDayPredicate: (DateTime day) => isSameDay(state.selectedDay, day),
+              onDaySelected: (DateTime selectedDay, DateTime focusedDay) async {
+                if (isSameDay(state.selectedDay, selectedDay)) return;
+                await ref.read(dailyViewModelProvider.notifier).updateSelectedDay(selectedDay: selectedDay);
+              },
+              onPageChanged: (DateTime focusedDay) => ref.read(dailyViewModelProvider.notifier).updateFocusedDay(focusedDay),
+              daysOfWeekHeight: 20,
+              calendarStyle: CalendarStyle(
+                todayTextStyle: const CalendarStyle().defaultTextStyle,
+                todayDecoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: AppColor.brand.secondary,
+                  ),
+                ),
+                selectedDecoration: BoxDecoration(
+                  shape: BoxShape.circle,
                   color: AppColor.brand.secondary,
                 ),
+                outsideTextStyle: const CalendarStyle().defaultTextStyle,
               ),
-              selectedDecoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: AppColor.brand.secondary,
-              ),
-              outsideTextStyle: const CalendarStyle().defaultTextStyle,
             ),
+            orElse: () => const SizedBox.shrink(),
           );
         },
       ),
@@ -106,31 +112,30 @@ class Daily extends StatelessWidget {
   Widget _bodyWidget() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        final DailyState store = ref.watch(dailyViewModelProvider);
+        return ref.watch(dailyViewModelProvider).maybeWhen(
+          data: (DailyState store) {
+            if (store.menu is LunchesDayMenuModel) {
+              return Expanded(
+                child: ListView(
+                  children: const <Widget>[
+                    MenuCard(),
+                    NutrientsCard(),
+                  ],
+                ),
+              );
+            } else if (store.menu is HolidayMenuModel) {
+              return const NonLunchesDayBody(
+                imageFileName: 'holiday.png',
+                text: '給食はお休みです...',
+              );
+            }
 
-        if (store.isFetching) {
-          return Container();
-        }
-
-        if (store.menu is LunchesDayMenuModel) {
-          return Expanded(
-            child: ListView(
-              children: const <Widget>[
-                MenuCard(),
-                NutrientsCard(),
-              ],
-            ),
-          );
-        } else if (store.menu is HolidayMenuModel) {
-          return const NonLunchesDayBody(
-            imageFileName: 'holiday.png',
-            text: '給食はお休みです...',
-          );
-        }
-
-        return const NonLunchesDayBody(
-          imageFileName: 'no_data.png',
-          text: '献立は準備中です...',
+            return const NonLunchesDayBody(
+              imageFileName: 'no_data.png',
+              text: '献立は準備中です...',
+            );
+          },
+          orElse: () => const SizedBox.shrink(),
         );
       },
     );

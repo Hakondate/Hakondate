@@ -14,7 +14,7 @@ UsersLocalRepository usersLocalRepository (UsersLocalRepositoryRef ref) {
 }
 
 abstract class UsersLocalRepositoryAPI {
-  Future<List<UserModel>> getAll();
+  Future<List<UserModel>> list();
   Future<UserModel> getById(int id);
   Future<int> add(String name, int schoolId, int schoolYear);
   Future<int> update(UserModel user);
@@ -29,7 +29,7 @@ class UsersLocalRepository extends UsersLocalRepositoryAPI {
   final LocalDatabase _db;
 
   @override
-  Future<List<UserModel>> getAll() async {
+  Future<List<UserModel>> list() async {
     final List<UserModel> users = <UserModel>[];
     final List<UsersSchema> usersSchemas = await _db.select(_db.usersTable).get();
 

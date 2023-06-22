@@ -1,116 +1,108 @@
 import 'package:flutter/foundation.dart';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/repository/local/sqlite/schools/schools_local_repository.dart';
 import 'package:hakondate/state/signup/signup_state.dart';
 import 'package:hakondate/util/exception/parameters_exception.dart';
 import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-// TODO(micady): initializeあるから考えてからやる
-final StateNotifierProvider<SignupViewModel, SignupState> signupProvider =
-    StateNotifierProvider<SignupViewModel, SignupState>((StateNotifierProviderRef<SignupViewModel, SignupState> ref) {
-  final SchoolsLocalRepository schoolLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
-  return SignupViewModel(schoolLocalRepository, ref);
-});
+part 'signup_view_model.g.dart';
 
-class SignupViewModel extends StateNotifier<SignupState> {
-  SignupViewModel(this._schoolLocalRepository, this._ref) : super(SignupState()) {
-    _initialize();
-  }
+@riverpod
+class SignupViewModel extends _$SignupViewModel {
+  late final SchoolsLocalRepository _schoolLocalRepository;
 
-  final SchoolsLocalRepository _schoolLocalRepository;
-  final Ref _ref;
+  @override
+  FutureOr<SignupState> build() async {
+    _schoolLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
+    final List<SchoolModel> schools = await _schoolLocalRepository.list();
 
-  Future<void> _initialize() async {
-    final SignupState cache = state;
-    if (cache is! SignupStateData) return;
-
-    final List<SchoolModel> schools = await _schoolLocalRepository.getAll();
-    state = cache.copyWith(schools: schools);
+    return SignupState(
+      schools: schools,
+    );
   }
 
   Future<void> signup() async {
-    final SignupState cache = state;
-    if (cache is! SignupStateData) return;
+    final AsyncValue<SignupState> cache = state;
 
-    state = const SignupStateLoad();
+    cache.whenData((SignupState data) async {
+      state = const AsyncLoading<SignupState>();
 
-    final String? name = cache.name;
-    final int? schoolId = cache.schoolId;
-    final int? schoolYear = cache.schoolYear;
+      final String? name = data.name;
+      final int? schoolId = data.schoolId;
+      final int? schoolYear = data.schoolYear;
 
-    try {
-      if (name == null || schoolId == null || schoolYear == null) {
-        throw const ParametersException('Do not allow Null parameter');
+      try {
+        if (name == null || schoolId == null || schoolYear == null) {
+          throw const ParametersException('Do not allow Null parameter');
+        }
+
+        await ref.read(userViewModelProvider.notifier).createUser(
+          name: name,
+          schoolId: schoolId,
+          schoolYear: schoolYear,
+        );
+        state = cache;
+      } on Exception catch (error, stack) {
+        debugPrint(error.toString());
+        debugPrint(stack.toString());
+        state = AsyncError<SignupState>(error, stack).copyWithPrevious(cache);
       }
-
-      await _ref.read(userViewModelProvider.notifier).createUser(
-        name: name,
-        schoolId: schoolId,
-        schoolYear: schoolYear,
-      );
-      state = cache;
-    } on Exception catch (error, stack) {
-      debugPrint(error.toString());
-      debugPrint(stack.toString());
-      state = SignupStateError(
-        error: error,
-        cache: cache,
-      );
-    }
+    });
   }
 
   Future<void> retry() async {
-    final SignupState cache = state;
-    if (cache is! SignupStateError) return;
+    final AsyncValue<SignupState> cache = state;
+    if (cache is! AsyncError) return;
 
-    state = cache.cache;
+    state = AsyncData<SignupState>(cache.valueOrNull!);
+
     await signup();
   }
 
   void updateName(String? name) {
-    final SignupState cache = state;
-    if (cache is! SignupStateData) return;
-
-    state = cache.copyWith(name: name);
+    state.whenData((SignupState data) => state = AsyncData<SignupState>(data.copyWith(name: name)));
   }
 
   Future<void> updateSchool(int id) async {
-    final SignupState cache = state;
-    if (cache is! SignupStateData) return;
-
-    final SchoolModel school = await _schoolLocalRepository.getById(id);
-    final List<String> schoolYears = (school.classification == SchoolClassification.primary)
-        ? <String>['1年生', '2年生', '3年生', '4年生', '5年生', '6年生']
-        : <String>['1年生', '2年生', '3年生'];
-    if (cache.schoolYear != null &&
-        cache.schoolYear! > 3 &&
-        school.classification == SchoolClassification.secondary) {
-      state = cache.copyWith(
-        schoolId: id,
-        schoolYear: 3,
-        schoolYears: schoolYears,
-        schoolTrailing: school.name,
-        schoolYearTrailing: '3年生',
-      );
-    } else {
-      state = cache.copyWith(
-        schoolId: id,
-        schoolYears: schoolYears,
-        schoolTrailing: school.name,
-      );
-    }
+    state.whenData((SignupState data) async {
+      final SchoolModel school = await _schoolLocalRepository.getById(id);
+      final List<String> schoolYears = (school.classification == SchoolClassification.primary)
+          ? <String>['1年生', '2年生', '3年生', '4年生', '5年生', '6年生']
+          : <String>['1年生', '2年生', '3年生'];
+      if (data.schoolYear != null &&
+          data.schoolYear! > 3 &&
+          school.classification == SchoolClassification.secondary) {
+        state = AsyncData<SignupState>(
+          data.copyWith(
+            schoolId: id,
+            schoolYear: 3,
+            schoolYears: schoolYears,
+            schoolTrailing: school.name,
+            schoolYearTrailing: '3年生',
+          ),
+        );
+      } else {
+        state = AsyncData<SignupState>(
+          data.copyWith(
+            schoolId: id,
+            schoolYears: schoolYears,
+            schoolTrailing: school.name,
+          ),
+        );
+      }
+    });
   }
 
   void updateSchoolYear(int year) {
-    final SignupState cache = state;
-    if (cache is! SignupStateData) return;
-
-    state = cache.copyWith(
-      schoolYear: year,
-      schoolYearTrailing: '$year年生',
+    state.whenData((SignupState data) =>
+        state = AsyncData<SignupState>(
+          data.copyWith(
+            schoolYear: year,
+            schoolYearTrailing: '$year年生',
+          ),
+        ),
     );
   }
 
@@ -118,35 +110,177 @@ class SignupViewModel extends StateNotifier<SignupState> {
     _checkNameValidation();
     _checkSchoolValidation();
 
-    final SignupState cache = state;
-    if (cache is! SignupStateData) return false;
-
-    return cache.nameErrorState == null && cache.schoolErrorState == null;
+    return state.maybeWhen(
+      data: (SignupState data) => data.nameErrorState == null && data.schoolErrorState == null,
+      orElse: () => false,
+    );
   }
 
   void _checkNameValidation() {
-    final SignupState cache = state;
-    if (cache is! SignupStateData) return;
-
-    final String? nameErrorState = (cache.name == null || cache.name!.isEmpty)
-        ? 'お子様の名前を入力してください' : null;
-    state = cache.copyWith(nameErrorState: nameErrorState);
+    state.whenData((SignupState data) {
+      final String? nameErrorState = (data.name == null || data.name!.isEmpty)
+              ? 'お子様の名前を入力してください'
+              : null;
+      state = AsyncData<SignupState>(data.copyWith(nameErrorState: nameErrorState));
+    });
   }
 
   void _checkSchoolValidation() {
-    final SignupState cache = state;
-    if (cache is! SignupStateData) return;
-    if (cache.schoolId != null && cache.schoolYear != null) {
-      state = cache.copyWith(schoolErrorState: null);
-      return;
-    }
+    state.whenData((SignupState data) {
+      if (data.schoolId != null && data.schoolYear != null) {
+        state = AsyncData<SignupState>(data.copyWith(schoolErrorState: null));
+        return;
+      }
 
-    if (cache.schoolId == null && cache.schoolYear == null) {
-      state = cache.copyWith(schoolErrorState: '学校・学年を選択してください');
-    } else if (cache.schoolId == null) {
-      state = cache.copyWith(schoolErrorState: '学校を選択してください');
-    } else if (cache.schoolYear == null) {
-      state = cache.copyWith(schoolErrorState: '学年を選択してください');
-    }
+      if (data.schoolId == null && data.schoolYear == null) {
+        state = AsyncData<SignupState>(data.copyWith(schoolErrorState: '学校・学年を選択してください'));
+      } else if (data.schoolId == null) {
+        state = AsyncData<SignupState>(data.copyWith(schoolErrorState: '学校を選択してください'));
+      } else if (data.schoolYear == null) {
+        state = AsyncData<SignupState>(data.copyWith(schoolErrorState: '学年を選択してください'));
+      }
+    });
   }
 }
+
+// final StateNotifierProvider<SignupViewModel, SignupState> signupProvider =
+//     StateNotifierProvider<SignupViewModel, SignupState>((StateNotifierProviderRef<SignupViewModel, SignupState> ref) {
+//   final SchoolsLocalRepository schoolLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
+//   return SignupViewModel(schoolLocalRepository, ref);
+// });
+
+// class SignupViewModel extends StateNotifier<SignupState> {
+//   SignupViewModel(this._schoolLocalRepository, this._ref) : super(SignupState()) {
+//     _initialize();
+//   }
+
+//   final SchoolsLocalRepository _schoolLocalRepository;
+//   final Ref _ref;
+
+//   Future<void> _initialize() async {
+//     final SignupState cache = state;
+//     if (cache is! SignupStateData) return;
+
+//     final List<SchoolModel> schools = await _schoolLocalRepository.list();
+//     state = cache.copyWith(schools: schools);
+//   }
+
+//   Future<void> signup() async {
+//     final SignupState cache = state;
+//     if (cache is! SignupStateData) return;
+
+//     state = const SignupStateLoad();
+
+//     final String? name = cache.name;
+//     final int? schoolId = cache.schoolId;
+//     final int? schoolYear = cache.schoolYear;
+
+//     try {
+//       if (name == null || schoolId == null || schoolYear == null) {
+//         throw const ParametersException('Do not allow Null parameter');
+//       }
+
+//       await _ref.read(userViewModelProvider.notifier).createUser(
+//         name: name,
+//         schoolId: schoolId,
+//         schoolYear: schoolYear,
+//       );
+//       state = cache;
+//     } on Exception catch (error, stack) {
+//       debugPrint(error.toString());
+//       debugPrint(stack.toString());
+//       state = SignupStateError(
+//         error: error,
+//         cache: cache,
+//       );
+//     }
+//   }
+
+//   Future<void> retry() async {
+//     final SignupState cache = state;
+//     if (cache is! SignupStateError) return;
+
+//     state = cache.cache;
+//     await signup();
+//   }
+
+//   void updateName(String? name) {
+//     final SignupState cache = state;
+//     if (cache is! SignupStateData) return;
+
+//     state = cache.copyWith(name: name);
+//   }
+
+//   Future<void> updateSchool(int id) async {
+//     final SignupState cache = state;
+//     if (cache is! SignupStateData) return;
+
+//     final SchoolModel school = await _schoolLocalRepository.getById(id);
+//     final List<String> schoolYears = (school.classification == SchoolClassification.primary)
+//         ? <String>['1年生', '2年生', '3年生', '4年生', '5年生', '6年生']
+//         : <String>['1年生', '2年生', '3年生'];
+//     if (cache.schoolYear != null &&
+//         cache.schoolYear! > 3 &&
+//         school.classification == SchoolClassification.secondary) {
+//       state = cache.copyWith(
+//         schoolId: id,
+//         schoolYear: 3,
+//         schoolYears: schoolYears,
+//         schoolTrailing: school.name,
+//         schoolYearTrailing: '3年生',
+//       );
+//     } else {
+//       state = cache.copyWith(
+//         schoolId: id,
+//         schoolYears: schoolYears,
+//         schoolTrailing: school.name,
+//       );
+//     }
+//   }
+
+//   void updateSchoolYear(int year) {
+//     final SignupState cache = state;
+//     if (cache is! SignupStateData) return;
+
+//     state = cache.copyWith(
+//       schoolYear: year,
+//       schoolYearTrailing: '$year年生',
+//     );
+//   }
+
+//   bool checkValidation() {
+//     _checkNameValidation();
+//     _checkSchoolValidation();
+
+//     final SignupState cache = state;
+//     if (cache is! SignupStateData) return false;
+
+//     return cache.nameErrorState == null && cache.schoolErrorState == null;
+//   }
+
+//   void _checkNameValidation() {
+//     final SignupState cache = state;
+//     if (cache is! SignupStateData) return;
+
+//     final String? nameErrorState = (cache.name == null || cache.name!.isEmpty)
+//         ? 'お子様の名前を入力してください' : null;
+//     state = cache.copyWith(nameErrorState: nameErrorState);
+//   }
+
+//   void _checkSchoolValidation() {
+//     final SignupState cache = state;
+//     if (cache is! SignupStateData) return;
+//     if (cache.schoolId != null && cache.schoolYear != null) {
+//       state = cache.copyWith(schoolErrorState: null);
+//       return;
+//     }
+
+//     if (cache.schoolId == null && cache.schoolYear == null) {
+//       state = cache.copyWith(schoolErrorState: '学校・学年を選択してください');
+//     } else if (cache.schoolId == null) {
+//       state = cache.copyWith(schoolErrorState: '学校を選択してください');
+//     } else if (cache.schoolYear == null) {
+//       state = cache.copyWith(schoolErrorState: '学年を選択してください');
+//     }
+//   }
+// }
