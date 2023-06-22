@@ -30,7 +30,7 @@ class SigningUpDialog extends ConsumerWidget {
                   margin: const EdgeInsets.symmetric(vertical: MarginSize.minimum),
                   child: const Text(
                     '以下の内容でお子様を登録します\n'
-                        '※ あとで変更することができます',
+                    '※ あとで変更することができます',
                   ),
                 ),
                 DefaultTextStyle(

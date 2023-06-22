@@ -65,8 +65,8 @@ class Splash extends ConsumerWidget {
                 width: screenWidth * 2.0 / 3.0,
                 child: Builder(
                   builder: (BuildContext context) {
-                    final SplashState store = ref.watch(splashViewModelProvider);
-                    if (store is SplashStateLoad) return Image.asset(store.status.imagePath);
+                    final SplashState state = ref.watch(splashViewModelProvider);
+                    if (state is SplashStateLoad) return Image.asset(state.status.imagePath);
                     return Image.asset('assets/loading_animation/data_reading.gif');
                   },
                 ),

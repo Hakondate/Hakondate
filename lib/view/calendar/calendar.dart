@@ -27,7 +27,7 @@ class Calendar extends StatelessWidget {
       ),
       body: Consumer(
         builder: (BuildContext context, WidgetRef ref, _) {
-          final CalendarState store = ref.watch(calendarViewModelProvider);
+          final CalendarState state = ref.watch(calendarViewModelProvider);
           final double appHeight = MediaQuery.of(context).size.height;
 
           return StatefulWrapper(
@@ -40,7 +40,7 @@ class Calendar extends StatelessWidget {
                 reverse: true,
                 physics: const AlwaysScrollableScrollPhysics(),
                 itemCount: ref.read(calendarViewModelProvider.notifier).getItemCount(),
-                itemBuilder: (_, int index) => _calendarTile(store.latestDay.add(Duration(days: -index))),
+                itemBuilder: (_, int index) => _calendarTile(state.latestDay.add(Duration(days: -index))),
               ),
             ),
           );

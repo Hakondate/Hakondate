@@ -62,24 +62,25 @@ class DailyViewModel extends _$DailyViewModel {
     required double graphMaxValue,
     NutrientsModel? slns,
   }) {
-    final AsyncValue<DailyState> store = state;
+    return state.maybeWhen(
+      data: (DailyState data) {
+        final MenuModel menu = data.menu;
 
-    if (store is! AsyncData) return <double>[0, 0, 0, 0, 0, 0];
+        if (slns == null || menu is! LunchesDayMenuModel) {
+          return <double>[0, 0, 0, 0, 0, 0];
+        }
 
-    final MenuModel menu = store.value!.menu;
-
-    if (slns == null || menu is! LunchesDayMenuModel) {
-      return <double>[0, 0, 0, 0, 0, 0];
-    }
-
-    return <double>[
-      menu.energy / slns.energy * 100.0,
-      menu.protein / slns.protein * 100.0,
-      _calcVitaminSufficiency(slns.retinol, slns.vitaminB1, slns.vitaminB2, slns.vitaminC),
-      _calcMineralSufficiency(slns.calcium, slns.magnesium, slns.iron, slns.zinc),
-      menu.carbohydrate / slns.carbohydrate * 100.0,
-      menu.lipid / slns.lipid * 100.0,
-    ].map((double element) => (element > graphMaxValue) ? graphMaxValue : element).toList();
+        return <double>[
+          menu.energy / slns.energy * 100.0,
+          menu.protein / slns.protein * 100.0,
+          _calcVitaminSufficiency(slns.retinol, slns.vitaminB1, slns.vitaminB2, slns.vitaminC),
+          _calcMineralSufficiency(slns.calcium, slns.magnesium, slns.iron, slns.zinc),
+          menu.carbohydrate / slns.carbohydrate * 100.0,
+          menu.lipid / slns.lipid * 100.0,
+        ].map((double element) => (element > graphMaxValue) ? graphMaxValue : element).toList();
+      },
+      orElse: () => <double>[0, 0, 0, 0, 0, 0],
+    );
   }
 
   double _calcVitaminSufficiency(
@@ -88,16 +89,19 @@ class DailyViewModel extends _$DailyViewModel {
       double vitaminB2Ref,
       double vitaminCRef,
       ) {
-    final AsyncValue<DailyState> store = state;
+    return state.maybeWhen(
+      data: (DailyState data) {
+        final MenuModel menu = data.menu;
 
-    if (store is! AsyncData) return 0;
+        if (menu is! LunchesDayMenuModel) return 0;
 
-    final MenuModel menu = store.value!.menu;
-
-    if (menu is! LunchesDayMenuModel) return 0;
-
-    return (menu.retinol / retinolRef + menu.vitaminB1 / vitaminB1Ref
-        + menu.vitaminB2 / vitaminB2Ref + menu.vitaminC / vitaminCRef) / 4 * 100.0;
+        return (menu.retinol / retinolRef +
+                menu.vitaminB1 / vitaminB1Ref +
+                menu.vitaminB2 / vitaminB2Ref +
+                menu.vitaminC / vitaminCRef) / 4 * 100.0;
+      },
+      orElse: () => 0,
+    );
   }
 
   double _calcMineralSufficiency(
@@ -106,16 +110,19 @@ class DailyViewModel extends _$DailyViewModel {
       double ironRef,
       double zincRef,
       ) {
-    final AsyncValue<DailyState> store = state;
+    return state.maybeWhen(
+      data: (DailyState data) {
+        final MenuModel menu = data.menu;
 
-    if (store is! AsyncData) return 0;
+        if (menu is! LunchesDayMenuModel) return 0;
 
-    final MenuModel menu = store.value!.menu;
-
-    if (menu is! LunchesDayMenuModel) return 0;
-
-    return (menu.calcium / calciumRef + menu.magnesium / magnesiumRef
-        + menu.iron / ironRef + menu.zinc / zincRef) / 4 * 100.0;
+        return (menu.calcium / calciumRef +
+                menu.magnesium / magnesiumRef +
+                menu.iron / ironRef +
+                menu.zinc / zincRef) / 4 * 100.0;
+      },
+      orElse: () => 0,
+    );
   }
 }
 

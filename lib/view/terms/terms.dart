@@ -52,7 +52,7 @@ class Terms extends StatelessWidget {
   Widget _agreeRow() {
     return Consumer(
       builder: (_, WidgetRef ref, __) {
-        final TermsState store = ref.watch(termsViewModelProvider);
+        final TermsState state = ref.watch(termsViewModelProvider);
 
         return Container(
           margin: const EdgeInsets.all(MarginSize.minimum),
@@ -61,7 +61,7 @@ class Terms extends StatelessWidget {
             children: <Widget>[
               Checkbox(
                 activeColor: AppColor.brand.secondary,
-                value: store.isAgree,
+                value: state.isAgree,
                 onChanged: (_) => ref.read(termsViewModelProvider.notifier).onTap(),
               ),
               const Text(
@@ -81,7 +81,7 @@ class Terms extends StatelessWidget {
                   ),
                   shape: const StadiumBorder(),
                 ),
-                onPressed: store.isAgree
+                onPressed: state.isAgree
                     ? () => ref.read(termsViewModelProvider.notifier).transition()
                     : null,
                 child: const Text('はじめる'),

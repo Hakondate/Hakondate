@@ -113,8 +113,8 @@ class Daily extends StatelessWidget {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
         return ref.watch(dailyViewModelProvider).maybeWhen(
-          data: (DailyState store) {
-            if (store.menu is LunchesDayMenuModel) {
+          data: (DailyState state) {
+            if (state.menu is LunchesDayMenuModel) {
               return Expanded(
                 child: ListView(
                   children: const <Widget>[
@@ -123,7 +123,7 @@ class Daily extends StatelessWidget {
                   ],
                 ),
               );
-            } else if (store.menu is HolidayMenuModel) {
+            } else if (state.menu is HolidayMenuModel) {
               return const NonLunchesDayBody(
                 imageFileName: 'holiday.png',
                 text: '給食はお休みです...',
