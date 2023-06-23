@@ -1,6 +1,7 @@
 // ignore_for_file: always_specify_types
 
 import 'package:drift/drift.dart';
+
 import 'package:hakondate/repository/local/sqlite/table/schools_table.dart';
 
 /// SQLiteのテーブル定義

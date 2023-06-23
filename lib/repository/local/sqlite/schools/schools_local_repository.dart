@@ -1,11 +1,11 @@
 import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/repository/local/sqlite/local_database.dart';
-import 'package:hakondate/util/exception/sqlite_exception.dart';
 import 'package:hakondate/util/common_function/common_function.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:hakondate/util/exception/sqlite_exception.dart';
 
 part 'schools_local_repository.g.dart';
 

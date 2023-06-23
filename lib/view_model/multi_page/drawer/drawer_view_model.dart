@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:hakondate/state/drawer/drawer_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import 'package:hakondate/state/drawer/drawer_state.dart';
 
 part 'drawer_view_model.g.dart';
 

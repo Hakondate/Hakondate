@@ -1,5 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/dish/dish_model.dart';
 import 'package:hakondate/model/foodstuff/foodstuff_model.dart';
@@ -9,7 +10,6 @@ import 'package:hakondate/model/quantity/quantity_model.dart';
 import 'package:hakondate/repository/local/sqlite/local_database.dart';
 import 'package:hakondate/util/common_function/common_function.dart';
 import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'menus_local_repository.g.dart';
 

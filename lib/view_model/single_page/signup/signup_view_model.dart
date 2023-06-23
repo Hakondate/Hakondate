@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
 
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
 import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/repository/local/sqlite/schools/schools_local_repository.dart';
 import 'package:hakondate/state/signup/signup_state.dart';
 import 'package:hakondate/util/exception/parameters_exception.dart';
 import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'signup_view_model.g.dart';
 

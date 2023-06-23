@@ -1,4 +1,5 @@
 import 'package:drift/drift.dart';
+
 import 'package:hakondate/repository/local/sqlite/table/dishes_table.dart';
 import 'package:hakondate/repository/local/sqlite/table/menus_table.dart';
 

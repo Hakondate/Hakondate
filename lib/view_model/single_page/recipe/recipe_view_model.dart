@@ -1,10 +1,11 @@
 import 'dart:typed_data';
 
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
 import 'package:hakondate/model/recipe/open_data_recipe_model.dart';
 import 'package:hakondate/repository/local/directory/open_data_recipes/open_data_recipes_local_repository.dart';
 import 'package:hakondate/repository/remote/open_data_recipes/open_data_recipes_remote_repository.dart';
 import 'package:hakondate/util/analytics_controller/analytics_controller.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'recipe_view_model.g.dart';
 
