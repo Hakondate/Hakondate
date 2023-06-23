@@ -1,3 +1,4 @@
+import 'package:hakondate/model/dish/dish_model.dart';
 import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:hakondate/model/nutrients/nutrients_model.dart';
 import 'package:hakondate/repository/local/sqlite/menus/menus_local_repository.dart';
@@ -57,6 +58,8 @@ class DailyViewModel extends _$DailyViewModel {
   }
 
   void updateFocusedDay(DateTime day) => state = AsyncData<DailyState>(state.value!.copyWith(focusedDay: day));
+
+  void selectDish(DishModel dish) => state = AsyncData<DailyState>(state.value!.copyWith(selectedDish: dish));
 
   List<double> getGraphValues({
     required double graphMaxValue,
