@@ -14,6 +14,5 @@ class DailyState with _$DailyState {
     required DateTime calendarTabFirstDay,
     required DateTime calendarTabLastDay,
     @Default(MenuModel.noData()) MenuModel menu,
-    // @Default(true) bool isFetching,
   }) = _DailyState;
 }
