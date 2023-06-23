@@ -7,8 +7,9 @@ import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/dish/dish_model.dart';
 import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:hakondate/router/routes.dart';
+import 'package:hakondate/state/daily/daily_state.dart';
 import 'package:hakondate/util/exception/class_type_exception.dart';
-import 'package:hakondate/view_model/single_page/daily_view_model.dart';
+import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
 
 class MenuCard extends StatelessWidget {
   const MenuCard({super.key});
@@ -17,29 +18,34 @@ class MenuCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        final MenuModel menu = ref.watch(dailyProvider).menu;
+        return ref.watch(dailyViewModelProvider).maybeWhen(
+          data: (DailyState state) {
+            final MenuModel menu = state.menu;
 
-        if (menu is! LunchesDayMenuModel) {
-          throw const ClassTypeException("'menu' is not 'LunchesDayMenuModel'");
-        }
+            if (menu is! LunchesDayMenuModel) {
+              throw const ClassTypeException("'menu' is not 'LunchesDayMenuModel'");
+            }
 
-        return Card(
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          child: Column(
-            children: <Widget>[
-              Image.asset('assets/images/label/menuLabel.png'),
-              GridView.count(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                crossAxisCount: 2,
-                padding: const EdgeInsets.all(PaddingSize.minimum),
-                mainAxisSpacing: MarginSize.minimum,
-                crossAxisSpacing: MarginSize.minimum,
-                childAspectRatio: 2 / 1,
-                children: menu.dishes.map(_menuTile).toList(),
+            return Card(
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              child: Column(
+                children: <Widget>[
+                  Image.asset('assets/images/label/menuLabel.png'),
+                  GridView.count(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    crossAxisCount: 2,
+                    padding: const EdgeInsets.all(PaddingSize.minimum),
+                    mainAxisSpacing: MarginSize.minimum,
+                    crossAxisSpacing: MarginSize.minimum,
+                    childAspectRatio: 2 / 1,
+                    children: menu.dishes.map(_menuTile).toList(),
+                  ),
+                ],
               ),
-            ],
-          ),
+            );
+          },
+          orElse: () => const SizedBox.shrink(),
         );
       },
     );
@@ -89,7 +95,7 @@ class MenuCard extends StatelessWidget {
             ),
           ),
           onTap: () {
-            ref.read(dailyProvider.notifier).selectDish(dish);
+            ref.read(dailyViewModelProvider.notifier).selectDish(dish);
             routemaster.push('dish');
           },
         );

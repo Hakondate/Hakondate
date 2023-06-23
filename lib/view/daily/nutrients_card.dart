@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate/state/daily/daily_state.dart';
 import 'package:multi_charts/multi_charts.dart';
 
 import 'package:hakondate/constant/app_color.dart';
@@ -8,8 +9,8 @@ import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:hakondate/util/exception/class_type_exception.dart';
 import 'package:hakondate/view/component/label/nutrients_list.dart';
-import 'package:hakondate/view_model/multi_page/user_view_model.dart';
-import 'package:hakondate/view_model/single_page/daily_view_model.dart';
+import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
+import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
 
 class NutrientsCard extends StatelessWidget {
   const NutrientsCard({super.key});
@@ -36,8 +37,8 @@ class NutrientsCard extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 3/4,
           height: MediaQuery.of(context).size.width * 3/4,
           child: RadarChart(
-            values: ref.read(dailyProvider.notifier).getGraphValues(
-              slns: ref.watch(userProvider).currentUser!.slns,
+            values: ref.read(dailyViewModelProvider.notifier).getGraphValues(
+              slns: ref.watch(userViewModelProvider).currentUser!.slns,
               graphMaxValue: graphMaxValue,
             ),
             labels: const <String>[
@@ -62,28 +63,33 @@ class NutrientsCard extends StatelessWidget {
   Widget _nutrientsExpansionTile() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        final MenuModel menu = ref.watch(dailyProvider).menu;
+        return ref.watch(dailyViewModelProvider).maybeWhen(
+          data: (DailyState state) {
+            final MenuModel menu = state.menu;
 
-        if (menu is! LunchesDayMenuModel) {
-          throw const ClassTypeException("'menu' is not 'LunchesDayMenuModel'");
-        }
+            if (menu is! LunchesDayMenuModel) {
+              throw const ClassTypeException("'menu' is not 'LunchesDayMenuModel'");
+            }
 
-        return ExpansionTile(
-          title: const Text(
-            '詳細な栄養値',
-            style: TextStyle(
-              fontSize: FontSize.subheading,
-            ),
-          ),
-          onExpansionChanged: (bool isExpanded) => !isExpanded,
-          textColor: AppColor.brand.secondary,
-          iconColor: AppColor.brand.secondary,
-          children: <Widget>[
-            NutrientsList(
-              nutrients: menu,
-              backgroundColor: AppColor.ui.secondaryUltraLight,
-            ),
-          ],
+            return ExpansionTile(
+              title: const Text(
+                '詳細な栄養値',
+                style: TextStyle(
+                  fontSize: FontSize.subheading,
+                ),
+              ),
+              onExpansionChanged: (bool isExpanded) => !isExpanded,
+              textColor: AppColor.brand.secondary,
+              iconColor: AppColor.brand.secondary,
+              children: <Widget>[
+                NutrientsList(
+                  nutrients: menu,
+                  backgroundColor: AppColor.ui.secondaryUltraLight,
+                ),
+              ],
+            );
+          },
+          orElse: () => const SizedBox.shrink(),
         );
       },
     );
