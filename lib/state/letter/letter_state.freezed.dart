@@ -199,8 +199,8 @@ class _$_LetterState with DiagnosticableTreeMixin implements _LetterState {
             other is _$_LetterState &&
             (identical(other.status, status) || other.status == status) &&
             const DeepCollectionEquality().equals(other._letters, _letters) &&
-            (identical(other.selectedLetter, selectedLetter) ||
-                other.selectedLetter == selectedLetter) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedLetter, selectedLetter) &&
             (identical(other.isEndListing, isEndListing) ||
                 other.isEndListing == isEndListing) &&
             (identical(other.pageToken, pageToken) ||
@@ -212,7 +212,7 @@ class _$_LetterState with DiagnosticableTreeMixin implements _LetterState {
       runtimeType,
       status,
       const DeepCollectionEquality().hash(_letters),
-      selectedLetter,
+      const DeepCollectionEquality().hash(selectedLetter),
       isEndListing,
       pageToken);
 
