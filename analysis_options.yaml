@@ -15,5 +15,7 @@ analyzer:
     - "**/*.freezed.dart"
     - "**/oss_licenses.dart"
     - "**/firebase_options.dart"
+  plugins:
+    - custom_lint
   errors:
     invalid_annotation_target: ignore

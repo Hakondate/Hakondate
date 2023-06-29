@@ -383,7 +383,10 @@ class $MenusTableTable extends MenusTable
   @override
   late final GeneratedColumn<int> schoolId = GeneratedColumn<int>(
       'school_id', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
+      type: DriftSqlType.int,
+      requiredDuringInsert: true,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES schools_table (id)'));
   static const VerificationMeta _eventMeta = const VerificationMeta('event');
   @override
   late final GeneratedColumn<String> event = GeneratedColumn<String>(
@@ -678,178 +681,6 @@ class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
   }
 }
 
-class $MenuDishesTableTable extends MenuDishesTable
-    with TableInfo<$MenuDishesTableTable, MenuDishesSchema> {
-  @override
-  final GeneratedDatabase attachedDatabase;
-  final String? _alias;
-  $MenuDishesTableTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _menuIdMeta = const VerificationMeta('menuId');
-  @override
-  late final GeneratedColumn<int> menuId = GeneratedColumn<int>(
-      'menu_id', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
-  static const VerificationMeta _dishIdMeta = const VerificationMeta('dishId');
-  @override
-  late final GeneratedColumn<int> dishId = GeneratedColumn<int>(
-      'dish_id', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
-  @override
-  List<GeneratedColumn> get $columns => [menuId, dishId];
-  @override
-  String get aliasedName => _alias ?? 'menu_dishes_table';
-  @override
-  String get actualTableName => 'menu_dishes_table';
-  @override
-  VerificationContext validateIntegrity(Insertable<MenuDishesSchema> instance,
-      {bool isInserting = false}) {
-    final context = VerificationContext();
-    final data = instance.toColumns(true);
-    if (data.containsKey('menu_id')) {
-      context.handle(_menuIdMeta,
-          menuId.isAcceptableOrUnknown(data['menu_id']!, _menuIdMeta));
-    } else if (isInserting) {
-      context.missing(_menuIdMeta);
-    }
-    if (data.containsKey('dish_id')) {
-      context.handle(_dishIdMeta,
-          dishId.isAcceptableOrUnknown(data['dish_id']!, _dishIdMeta));
-    } else if (isInserting) {
-      context.missing(_dishIdMeta);
-    }
-    return context;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {menuId, dishId};
-  @override
-  MenuDishesSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return MenuDishesSchema(
-      menuId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}menu_id'])!,
-      dishId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}dish_id'])!,
-    );
-  }
-
-  @override
-  $MenuDishesTableTable createAlias(String alias) {
-    return $MenuDishesTableTable(attachedDatabase, alias);
-  }
-}
-
-class MenuDishesSchema extends DataClass
-    implements Insertable<MenuDishesSchema> {
-  final int menuId;
-  final int dishId;
-  const MenuDishesSchema({required this.menuId, required this.dishId});
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    map['menu_id'] = Variable<int>(menuId);
-    map['dish_id'] = Variable<int>(dishId);
-    return map;
-  }
-
-  MenuDishesTableCompanion toCompanion(bool nullToAbsent) {
-    return MenuDishesTableCompanion(
-      menuId: Value(menuId),
-      dishId: Value(dishId),
-    );
-  }
-
-  factory MenuDishesSchema.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return MenuDishesSchema(
-      menuId: serializer.fromJson<int>(json['menuId']),
-      dishId: serializer.fromJson<int>(json['dishId']),
-    );
-  }
-  @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{
-      'menuId': serializer.toJson<int>(menuId),
-      'dishId': serializer.toJson<int>(dishId),
-    };
-  }
-
-  MenuDishesSchema copyWith({int? menuId, int? dishId}) => MenuDishesSchema(
-        menuId: menuId ?? this.menuId,
-        dishId: dishId ?? this.dishId,
-      );
-  @override
-  String toString() {
-    return (StringBuffer('MenuDishesSchema(')
-          ..write('menuId: $menuId, ')
-          ..write('dishId: $dishId')
-          ..write(')'))
-        .toString();
-  }
-
-  @override
-  int get hashCode => Object.hash(menuId, dishId);
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is MenuDishesSchema &&
-          other.menuId == this.menuId &&
-          other.dishId == this.dishId);
-}
-
-class MenuDishesTableCompanion extends UpdateCompanion<MenuDishesSchema> {
-  final Value<int> menuId;
-  final Value<int> dishId;
-  const MenuDishesTableCompanion({
-    this.menuId = const Value.absent(),
-    this.dishId = const Value.absent(),
-  });
-  MenuDishesTableCompanion.insert({
-    required int menuId,
-    required int dishId,
-  })  : menuId = Value(menuId),
-        dishId = Value(dishId);
-  static Insertable<MenuDishesSchema> custom({
-    Expression<int>? menuId,
-    Expression<int>? dishId,
-  }) {
-    return RawValuesInsertable({
-      if (menuId != null) 'menu_id': menuId,
-      if (dishId != null) 'dish_id': dishId,
-    });
-  }
-
-  MenuDishesTableCompanion copyWith({Value<int>? menuId, Value<int>? dishId}) {
-    return MenuDishesTableCompanion(
-      menuId: menuId ?? this.menuId,
-      dishId: dishId ?? this.dishId,
-    );
-  }
-
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    if (menuId.present) {
-      map['menu_id'] = Variable<int>(menuId.value);
-    }
-    if (dishId.present) {
-      map['dish_id'] = Variable<int>(dishId.value);
-    }
-    return map;
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('MenuDishesTableCompanion(')
-          ..write('menuId: $menuId, ')
-          ..write('dishId: $dishId')
-          ..write(')'))
-        .toString();
-  }
-}
-
 class $DishesTableTable extends DishesTable
     with TableInfo<$DishesTableTable, DishesSchema> {
   @override
@@ -1062,180 +893,194 @@ class DishesTableCompanion extends UpdateCompanion<DishesSchema> {
   }
 }
 
-class $DishFoodstuffsTableTable extends DishFoodstuffsTable
-    with TableInfo<$DishFoodstuffsTableTable, DishFoodstuffsSchema> {
+class $MenuDishesTableTable extends MenuDishesTable
+    with TableInfo<$MenuDishesTableTable, MenuDishesSchema> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $DishFoodstuffsTableTable(this.attachedDatabase, [this._alias]);
+  $MenuDishesTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _menuIdMeta = const VerificationMeta('menuId');
+  @override
+  late final GeneratedColumn<int> menuId = GeneratedColumn<int>(
+      'menu_id', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: true,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES menus_table (id)'));
   static const VerificationMeta _dishIdMeta = const VerificationMeta('dishId');
   @override
   late final GeneratedColumn<int> dishId = GeneratedColumn<int>(
       'dish_id', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
-  static const VerificationMeta _foodstuffIdMeta =
-      const VerificationMeta('foodstuffId');
+      type: DriftSqlType.int,
+      requiredDuringInsert: true,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES dishes_table (id)'));
   @override
-  late final GeneratedColumn<int> foodstuffId = GeneratedColumn<int>(
-      'foodstuff_id', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
+  List<GeneratedColumn> get $columns => [menuId, dishId];
   @override
-  List<GeneratedColumn> get $columns => [dishId, foodstuffId];
+  String get aliasedName => _alias ?? 'menu_dishes_table';
   @override
-  String get aliasedName => _alias ?? 'dish_foodstuffs_table';
+  String get actualTableName => 'menu_dishes_table';
   @override
-  String get actualTableName => 'dish_foodstuffs_table';
-  @override
-  VerificationContext validateIntegrity(
-      Insertable<DishFoodstuffsSchema> instance,
+  VerificationContext validateIntegrity(Insertable<MenuDishesSchema> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
+    if (data.containsKey('menu_id')) {
+      context.handle(_menuIdMeta,
+          menuId.isAcceptableOrUnknown(data['menu_id']!, _menuIdMeta));
+    } else if (isInserting) {
+      context.missing(_menuIdMeta);
+    }
     if (data.containsKey('dish_id')) {
       context.handle(_dishIdMeta,
           dishId.isAcceptableOrUnknown(data['dish_id']!, _dishIdMeta));
     } else if (isInserting) {
       context.missing(_dishIdMeta);
     }
-    if (data.containsKey('foodstuff_id')) {
-      context.handle(
-          _foodstuffIdMeta,
-          foodstuffId.isAcceptableOrUnknown(
-              data['foodstuff_id']!, _foodstuffIdMeta));
-    } else if (isInserting) {
-      context.missing(_foodstuffIdMeta);
-    }
     return context;
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => {dishId, foodstuffId};
+  Set<GeneratedColumn> get $primaryKey => const {};
   @override
-  DishFoodstuffsSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
+  List<Set<GeneratedColumn>> get uniqueKeys => [
+        {menuId, dishId},
+      ];
+  @override
+  MenuDishesSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return DishFoodstuffsSchema(
+    return MenuDishesSchema(
+      menuId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}menu_id'])!,
       dishId: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}dish_id'])!,
-      foodstuffId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}foodstuff_id'])!,
     );
   }
 
   @override
-  $DishFoodstuffsTableTable createAlias(String alias) {
-    return $DishFoodstuffsTableTable(attachedDatabase, alias);
+  $MenuDishesTableTable createAlias(String alias) {
+    return $MenuDishesTableTable(attachedDatabase, alias);
   }
 }
 
-class DishFoodstuffsSchema extends DataClass
-    implements Insertable<DishFoodstuffsSchema> {
+class MenuDishesSchema extends DataClass
+    implements Insertable<MenuDishesSchema> {
+  final int menuId;
   final int dishId;
-  final int foodstuffId;
-  const DishFoodstuffsSchema({required this.dishId, required this.foodstuffId});
+  const MenuDishesSchema({required this.menuId, required this.dishId});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
+    map['menu_id'] = Variable<int>(menuId);
     map['dish_id'] = Variable<int>(dishId);
-    map['foodstuff_id'] = Variable<int>(foodstuffId);
     return map;
   }
 
-  DishFoodstuffsTableCompanion toCompanion(bool nullToAbsent) {
-    return DishFoodstuffsTableCompanion(
+  MenuDishesTableCompanion toCompanion(bool nullToAbsent) {
+    return MenuDishesTableCompanion(
+      menuId: Value(menuId),
       dishId: Value(dishId),
-      foodstuffId: Value(foodstuffId),
     );
   }
 
-  factory DishFoodstuffsSchema.fromJson(Map<String, dynamic> json,
+  factory MenuDishesSchema.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return DishFoodstuffsSchema(
+    return MenuDishesSchema(
+      menuId: serializer.fromJson<int>(json['menuId']),
       dishId: serializer.fromJson<int>(json['dishId']),
-      foodstuffId: serializer.fromJson<int>(json['foodstuffId']),
     );
   }
   @override
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
+      'menuId': serializer.toJson<int>(menuId),
       'dishId': serializer.toJson<int>(dishId),
-      'foodstuffId': serializer.toJson<int>(foodstuffId),
     };
   }
 
-  DishFoodstuffsSchema copyWith({int? dishId, int? foodstuffId}) =>
-      DishFoodstuffsSchema(
+  MenuDishesSchema copyWith({int? menuId, int? dishId}) => MenuDishesSchema(
+        menuId: menuId ?? this.menuId,
         dishId: dishId ?? this.dishId,
-        foodstuffId: foodstuffId ?? this.foodstuffId,
       );
   @override
   String toString() {
-    return (StringBuffer('DishFoodstuffsSchema(')
-          ..write('dishId: $dishId, ')
-          ..write('foodstuffId: $foodstuffId')
+    return (StringBuffer('MenuDishesSchema(')
+          ..write('menuId: $menuId, ')
+          ..write('dishId: $dishId')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(dishId, foodstuffId);
+  int get hashCode => Object.hash(menuId, dishId);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is DishFoodstuffsSchema &&
-          other.dishId == this.dishId &&
-          other.foodstuffId == this.foodstuffId);
+      (other is MenuDishesSchema &&
+          other.menuId == this.menuId &&
+          other.dishId == this.dishId);
 }
 
-class DishFoodstuffsTableCompanion
-    extends UpdateCompanion<DishFoodstuffsSchema> {
+class MenuDishesTableCompanion extends UpdateCompanion<MenuDishesSchema> {
+  final Value<int> menuId;
   final Value<int> dishId;
-  final Value<int> foodstuffId;
-  const DishFoodstuffsTableCompanion({
+  final Value<int> rowid;
+  const MenuDishesTableCompanion({
+    this.menuId = const Value.absent(),
     this.dishId = const Value.absent(),
-    this.foodstuffId = const Value.absent(),
+    this.rowid = const Value.absent(),
   });
-  DishFoodstuffsTableCompanion.insert({
+  MenuDishesTableCompanion.insert({
+    required int menuId,
     required int dishId,
-    required int foodstuffId,
-  })  : dishId = Value(dishId),
-        foodstuffId = Value(foodstuffId);
-  static Insertable<DishFoodstuffsSchema> custom({
+    this.rowid = const Value.absent(),
+  })  : menuId = Value(menuId),
+        dishId = Value(dishId);
+  static Insertable<MenuDishesSchema> custom({
+    Expression<int>? menuId,
     Expression<int>? dishId,
-    Expression<int>? foodstuffId,
+    Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
+      if (menuId != null) 'menu_id': menuId,
       if (dishId != null) 'dish_id': dishId,
-      if (foodstuffId != null) 'foodstuff_id': foodstuffId,
+      if (rowid != null) 'rowid': rowid,
     });
   }
 
-  DishFoodstuffsTableCompanion copyWith(
-      {Value<int>? dishId, Value<int>? foodstuffId}) {
-    return DishFoodstuffsTableCompanion(
+  MenuDishesTableCompanion copyWith(
+      {Value<int>? menuId, Value<int>? dishId, Value<int>? rowid}) {
+    return MenuDishesTableCompanion(
+      menuId: menuId ?? this.menuId,
       dishId: dishId ?? this.dishId,
-      foodstuffId: foodstuffId ?? this.foodstuffId,
+      rowid: rowid ?? this.rowid,
     );
   }
 
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
+    if (menuId.present) {
+      map['menu_id'] = Variable<int>(menuId.value);
+    }
     if (dishId.present) {
       map['dish_id'] = Variable<int>(dishId.value);
     }
-    if (foodstuffId.present) {
-      map['foodstuff_id'] = Variable<int>(foodstuffId.value);
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
     }
     return map;
   }
 
   @override
   String toString() {
-    return (StringBuffer('DishFoodstuffsTableCompanion(')
+    return (StringBuffer('MenuDishesTableCompanion(')
+          ..write('menuId: $menuId, ')
           ..write('dishId: $dishId, ')
-          ..write('foodstuffId: $foodstuffId')
+          ..write('rowid: $rowid')
           ..write(')'))
         .toString();
   }
@@ -2196,6 +2041,201 @@ class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
   }
 }
 
+class $DishFoodstuffsTableTable extends DishFoodstuffsTable
+    with TableInfo<$DishFoodstuffsTableTable, DishFoodstuffsSchema> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $DishFoodstuffsTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _dishIdMeta = const VerificationMeta('dishId');
+  @override
+  late final GeneratedColumn<int> dishId = GeneratedColumn<int>(
+      'dish_id', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: true,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES dishes_table (id)'));
+  static const VerificationMeta _foodstuffIdMeta =
+      const VerificationMeta('foodstuffId');
+  @override
+  late final GeneratedColumn<int> foodstuffId = GeneratedColumn<int>(
+      'foodstuff_id', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: true,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'REFERENCES foodstuffs_table (id)'));
+  @override
+  List<GeneratedColumn> get $columns => [dishId, foodstuffId];
+  @override
+  String get aliasedName => _alias ?? 'dish_foodstuffs_table';
+  @override
+  String get actualTableName => 'dish_foodstuffs_table';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<DishFoodstuffsSchema> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('dish_id')) {
+      context.handle(_dishIdMeta,
+          dishId.isAcceptableOrUnknown(data['dish_id']!, _dishIdMeta));
+    } else if (isInserting) {
+      context.missing(_dishIdMeta);
+    }
+    if (data.containsKey('foodstuff_id')) {
+      context.handle(
+          _foodstuffIdMeta,
+          foodstuffId.isAcceptableOrUnknown(
+              data['foodstuff_id']!, _foodstuffIdMeta));
+    } else if (isInserting) {
+      context.missing(_foodstuffIdMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {dishId, foodstuffId};
+  @override
+  DishFoodstuffsSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return DishFoodstuffsSchema(
+      dishId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}dish_id'])!,
+      foodstuffId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}foodstuff_id'])!,
+    );
+  }
+
+  @override
+  $DishFoodstuffsTableTable createAlias(String alias) {
+    return $DishFoodstuffsTableTable(attachedDatabase, alias);
+  }
+}
+
+class DishFoodstuffsSchema extends DataClass
+    implements Insertable<DishFoodstuffsSchema> {
+  final int dishId;
+  final int foodstuffId;
+  const DishFoodstuffsSchema({required this.dishId, required this.foodstuffId});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['dish_id'] = Variable<int>(dishId);
+    map['foodstuff_id'] = Variable<int>(foodstuffId);
+    return map;
+  }
+
+  DishFoodstuffsTableCompanion toCompanion(bool nullToAbsent) {
+    return DishFoodstuffsTableCompanion(
+      dishId: Value(dishId),
+      foodstuffId: Value(foodstuffId),
+    );
+  }
+
+  factory DishFoodstuffsSchema.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return DishFoodstuffsSchema(
+      dishId: serializer.fromJson<int>(json['dishId']),
+      foodstuffId: serializer.fromJson<int>(json['foodstuffId']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'dishId': serializer.toJson<int>(dishId),
+      'foodstuffId': serializer.toJson<int>(foodstuffId),
+    };
+  }
+
+  DishFoodstuffsSchema copyWith({int? dishId, int? foodstuffId}) =>
+      DishFoodstuffsSchema(
+        dishId: dishId ?? this.dishId,
+        foodstuffId: foodstuffId ?? this.foodstuffId,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('DishFoodstuffsSchema(')
+          ..write('dishId: $dishId, ')
+          ..write('foodstuffId: $foodstuffId')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(dishId, foodstuffId);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is DishFoodstuffsSchema &&
+          other.dishId == this.dishId &&
+          other.foodstuffId == this.foodstuffId);
+}
+
+class DishFoodstuffsTableCompanion
+    extends UpdateCompanion<DishFoodstuffsSchema> {
+  final Value<int> dishId;
+  final Value<int> foodstuffId;
+  final Value<int> rowid;
+  const DishFoodstuffsTableCompanion({
+    this.dishId = const Value.absent(),
+    this.foodstuffId = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  DishFoodstuffsTableCompanion.insert({
+    required int dishId,
+    required int foodstuffId,
+    this.rowid = const Value.absent(),
+  })  : dishId = Value(dishId),
+        foodstuffId = Value(foodstuffId);
+  static Insertable<DishFoodstuffsSchema> custom({
+    Expression<int>? dishId,
+    Expression<int>? foodstuffId,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (dishId != null) 'dish_id': dishId,
+      if (foodstuffId != null) 'foodstuff_id': foodstuffId,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  DishFoodstuffsTableCompanion copyWith(
+      {Value<int>? dishId, Value<int>? foodstuffId, Value<int>? rowid}) {
+    return DishFoodstuffsTableCompanion(
+      dishId: dishId ?? this.dishId,
+      foodstuffId: foodstuffId ?? this.foodstuffId,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (dishId.present) {
+      map['dish_id'] = Variable<int>(dishId.value);
+    }
+    if (foodstuffId.present) {
+      map['foodstuff_id'] = Variable<int>(foodstuffId.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DishFoodstuffsTableCompanion(')
+          ..write('dishId: $dishId, ')
+          ..write('foodstuffId: $foodstuffId, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 class $UsersTableTable extends UsersTable
     with TableInfo<$UsersTableTable, UsersSchema> {
   @override
@@ -2221,7 +2261,10 @@ class $UsersTableTable extends UsersTable
   @override
   late final GeneratedColumn<int> schoolId = GeneratedColumn<int>(
       'school_id', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
+      type: DriftSqlType.int,
+      requiredDuringInsert: true,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES schools_table (id)'));
   static const VerificationMeta _schoolYearMeta =
       const VerificationMeta('schoolYear');
   @override
@@ -2449,13 +2492,13 @@ abstract class _$LocalDatabase extends GeneratedDatabase {
   _$LocalDatabase(QueryExecutor e) : super(e);
   late final $SchoolsTableTable schoolsTable = $SchoolsTableTable(this);
   late final $MenusTableTable menusTable = $MenusTableTable(this);
+  late final $DishesTableTable dishesTable = $DishesTableTable(this);
   late final $MenuDishesTableTable menuDishesTable =
       $MenuDishesTableTable(this);
-  late final $DishesTableTable dishesTable = $DishesTableTable(this);
-  late final $DishFoodstuffsTableTable dishFoodstuffsTable =
-      $DishFoodstuffsTableTable(this);
   late final $FoodstuffsTableTable foodstuffsTable =
       $FoodstuffsTableTable(this);
+  late final $DishFoodstuffsTableTable dishFoodstuffsTable =
+      $DishFoodstuffsTableTable(this);
   late final $UsersTableTable usersTable = $UsersTableTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
@@ -2464,10 +2507,31 @@ abstract class _$LocalDatabase extends GeneratedDatabase {
   List<DatabaseSchemaEntity> get allSchemaEntities => [
         schoolsTable,
         menusTable,
-        menuDishesTable,
         dishesTable,
-        dishFoodstuffsTable,
+        menuDishesTable,
         foodstuffsTable,
+        dishFoodstuffsTable,
         usersTable
       ];
 }
+
+// **************************************************************************
+// RiverpodGenerator
+// **************************************************************************
+
+String _$localDatabaseHash() => r'7fc59fd746d4d230c41f4608259788260f0b95bf';
+
+/// See also [localDatabase].
+@ProviderFor(localDatabase)
+final localDatabaseProvider = Provider<LocalDatabase>.internal(
+  localDatabase,
+  name: r'localDatabaseProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$localDatabaseHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef LocalDatabaseRef = ProviderRef<LocalDatabase>;
+// ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

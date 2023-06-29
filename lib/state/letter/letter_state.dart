@@ -9,9 +9,11 @@ part 'letter_state.freezed.dart';
 @freezed
 class LetterState with _$LetterState {
   const factory LetterState({
-    @Default(<LetterMetadataModel>[]) List<LetterMetadataModel> letters,
-    LetterMetadataModelData? letter,
     @Default(LetterConnectionStatus.done) LetterConnectionStatus status,
+    @Default(<LetterMetadataModel>[]) List<LetterMetadataModel> letters,
+    LetterMetadataModelData? selectedLetter,
+    @Default(false) bool isEndListing,
+    String? pageToken,
   }) = _LetterState;
 }
 

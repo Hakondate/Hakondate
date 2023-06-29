@@ -5,13 +5,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/splash/splash_state.dart';
-import 'package:hakondate/util/app_unique_key.dart';
+import 'package:hakondate/util/app_unique_key/app_unique_key.dart';
 import 'package:hakondate/util/exception/connection_exception.dart';
 import 'package:hakondate/view/component/dialog/exception_dialog/connection_exception_dialog.dart';
 import 'package:hakondate/view/component/dialog/exception_dialog/local_database_exception_dialog.dart';
 import 'package:hakondate/view/component/frame/stateful_wrapper.dart';
 import 'package:hakondate/view/splash/terms_updated_dialog.dart';
-import 'package:hakondate/view_model/single_page/splash_view_model.dart';
+import 'package:hakondate/view_model/single_page/splash/splash_view_model.dart';
 
 class Splash extends ConsumerWidget {
   const Splash({super.key});
@@ -31,7 +31,7 @@ class Splash extends ConsumerWidget {
               width: screenWidth / 6.0,
             ),
             StatefulWrapper(
-              onInit: () => ref.read(splashProvider.notifier).initialize(
+              onInit: () => ref.read(splashViewModelProvider.notifier).initialize(
                 termsUpdated: () async => showDialog(
                   context: context,
                   barrierDismissible: false,
@@ -65,8 +65,8 @@ class Splash extends ConsumerWidget {
                 width: screenWidth * 2.0 / 3.0,
                 child: Builder(
                   builder: (BuildContext context) {
-                    final SplashState store = ref.watch(splashProvider);
-                    if (store is SplashStateLoad) return Image.asset(store.status.imagePath);
+                    final SplashState state = ref.watch(splashViewModelProvider);
+                    if (state is SplashStateLoad) return Image.asset(state.status.imagePath);
                     return Image.asset('assets/loading_animation/data_reading.gif');
                   },
                 ),
