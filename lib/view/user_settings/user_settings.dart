@@ -25,11 +25,7 @@ class UserSettings extends ConsumerWidget {
       ),
       body: SingleChildScrollView(
         child: users.when(
-          loading: () {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          },
+          loading: CircularProgressIndicator.new,
           error: (Object error, StackTrace? stackTrace) {
             return Center(
               child: Text(error.toString()),
@@ -139,10 +135,12 @@ class UserSettings extends ConsumerWidget {
                     isSelected: isActive,
                     onPressed: isActive
                         ? () {
-                            routemaster.push('/signup');
+                            routemaster.push('/home/user_settings/${user.id}');
                           }
                         : () async {
-                           return showDialog(context: context, builder: (_) => UserDeleteDialog(id: user.id));
+                            return showDialog(
+                                context: context,
+                                builder: (_) => UserDeleteDialog(id: user.id));
                           },
                     icon: Icon(
                       isActive ? Icons.edit : Icons.delete,
@@ -168,7 +166,7 @@ class UserSettings extends ConsumerWidget {
           color: AppColor.brand.secondary,
         ),
         onPressed: () {
-          routemaster.push('/signup');
+          routemaster.push('/home/user_settings/-1');
         },
       ),
     );

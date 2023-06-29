@@ -34,12 +34,12 @@ class UserSettingsViewModel extends AsyncNotifier<UserSettingsState> {
   Future<void> updateUsers() async {
     // ignore: always_specify_types
     state = const AsyncValue.loading();
-    
+
     state = await AsyncValue.guard(() async {
-        final List<UserModel> users = await getUsersFromLocalRepository();
-        return UserSettingsState(
-          users: users,
-        );
+      final List<UserModel> users = await getUsersFromLocalRepository();
+      return UserSettingsState(
+        users: users,
+      );
     });
   }
 
@@ -48,5 +48,9 @@ class UserSettingsViewModel extends AsyncNotifier<UserSettingsState> {
         ref.read(usersLocalRepositoryProvider);
     await usersLocalRepository.delete(id);
     await updateUsers();
+  }
+
+  Future<UserModel> getUserById(int id) async {
+    return ref.read(usersLocalRepositoryProvider).getById(id);
   }
 }

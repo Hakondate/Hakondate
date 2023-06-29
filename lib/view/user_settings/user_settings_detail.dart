@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/constant/app_color.dart';
@@ -12,20 +11,21 @@ import 'package:hakondate/view/component/label/setting_label.dart';
 import 'package:hakondate/view/signup/signing_up_dialog.dart';
 import 'package:hakondate/view_model/single_page/signup_view_model.dart';
 
-class UserSettingsDetail extends StatelessWidget {
+class UserSettingsDetail extends ConsumerWidget {
   UserSettingsDetail({
     required this.id,
     super.key,
-  });
+  }) : isNew = id < 0;
 
   final int id;
+  final bool isNew;
   final GlobalKey _formKey = GlobalKey<FormState>();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: FadeUpAppBar(
-        title: id < 0 ? const Text('お子様の追加登録') : const Text('お子様情報の変更'),
+        title: isNew ? const Text('お子様の追加登録') : const Text('お子様情報の変更'),
       ),
       body: Form(
         key: _formKey,
@@ -204,7 +204,9 @@ class UserSettingsDetail extends StatelessWidget {
                 ),
                 child: const Text('登録する'),
                 onPressed: () async {
-                  if (ref.read(signupProvider.notifier).checkValidation()) {
+                  if (ref
+                      .read(signupProvider(null).notifier)
+                      .checkValidation()) {
                     return showDialog(
                       context: context,
                       builder: (BuildContext context) =>

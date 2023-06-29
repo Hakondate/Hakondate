@@ -18,5 +18,5 @@ class SignupState with _$SignupState {
     @Default(<String>['1年生', '2年生', '3年生']) List<String> schoolYears,
     String? nameErrorState,
     String? schoolErrorState,
-  }) = _$SignupState;
+  }) = _SignupState;
 }
