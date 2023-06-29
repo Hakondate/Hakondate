@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,27 +13,30 @@ import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
 part 'common_function.g.dart';
 
 @riverpod
-class CommonFunction extends _$CommonFunction {
-  @override
-  void build() {}
+CommonFunction commonFunction(CommonFunctionRef ref) => CommonFunction(ref);
+
+class CommonFunction {
+  CommonFunction(this._ref);
+
+  final Ref _ref;
 
   bool isSameDay(DateTime day1, DateTime day2) {
     return day1.year == day2.year && day1.month == day2.month && day1.day == day2.day;
   }
 
   Future<int> getIdByDay(DateTime day) async {
-    final int parentId = await ref.read(userViewModelProvider.notifier).getParentId();
+    final int parentId = await _ref.read(userViewModelProvider.notifier).getParentId();
     return day.year * 1000000 + day.month * 10000 + day.day * 100 + parentId;
   }
 
   Future<void> deleteAllData() async {
     if (Environment.flavor != Flavor.dev) return;
 
-    ref.read(appUniqueKeyProvider.notifier).restartApp();
-    ref.read(userViewModelProvider.notifier).signOut();
+    _ref.read(appUniqueKeyProvider.notifier).restartApp();
+    _ref.read(userViewModelProvider.notifier).signOut();
 
-    await ref.read(usersLocalRepositoryProvider).deleteAll();
-    await ref.read(menusLocalRepositoryProvider).deleteAll();
+    await _ref.read(usersLocalRepositoryProvider).deleteAll();
+    await _ref.read(menusLocalRepositoryProvider).deleteAll();
 
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove(AppKey.sharedPreferencesKey.currentUserId);

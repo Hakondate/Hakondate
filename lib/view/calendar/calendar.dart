@@ -87,7 +87,7 @@ class Calendar extends StatelessWidget {
           Expanded(
             child: Consumer(
               builder: (BuildContext context, WidgetRef ref, _) {
-                if (ref.read(commonFunctionProvider.notifier).isSameDay(day, DateTime.now())) {
+                if (ref.read(commonFunctionProvider).isSameDay(day, DateTime.now())) {
                   return Container(
                     padding: const EdgeInsets.only(bottom: PaddingSize.minimum),
                     alignment: Alignment.bottomCenter,

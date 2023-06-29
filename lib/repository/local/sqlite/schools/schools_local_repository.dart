@@ -45,7 +45,8 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryAPI {
     final List<SchoolsSchema> schoolsSchemas = await _db.select(_db.schoolsTable).get();
 
     for (final SchoolsSchema schoolSchema in schoolsSchemas) {
-      schools.add(SchoolModel(
+      schools.add(
+        SchoolModel(
           id: schoolSchema.id,
           parentId: schoolSchema.parentId,
           name: schoolSchema.name,
@@ -59,8 +60,7 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryAPI {
 
   @override
   Future<SchoolModel> getById(int id) async {
-    final SchoolsSchema? schoolsSchema =
-        await (_db.select(_db.schoolsTable)..where(($SchoolsTableTable t) => t.id.equals(id))).getSingleOrNull();
+    final SchoolsSchema? schoolsSchema = await (_db.select(_db.schoolsTable)..where(($SchoolsTableTable t) => t.id.equals(id))).getSingleOrNull();
 
     if (schoolsSchema == null) throw SQLiteException('Failed to select $id from schoolsTable');
 
@@ -75,8 +75,7 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryAPI {
   @override
   Future<List<SchoolModel>> getByParentId(int parentId) async {
     final List<SchoolModel> schools = <SchoolModel>[];
-    final List<SchoolsSchema> schoolsSchemas =
-        await (_db.select(_db.schoolsTable)..where(($SchoolsTableTable t) => t.parentId.equals(parentId))).get();
+    final List<SchoolsSchema> schoolsSchemas = await (_db.select(_db.schoolsTable)..where(($SchoolsTableTable t) => t.parentId.equals(parentId))).get();
 
     for (final SchoolsSchema schoolsSchema in schoolsSchemas) {
       schools.add(
@@ -105,15 +104,15 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryAPI {
 
   @override
   Future<int> add(Map<String, dynamic> school) => _db.into(_db.schoolsTable).insertOnConflictUpdate(
-    SchoolsTableCompanion(
-      id: Value<int>(school['id'] as int),
-      parentId: Value<int>(school['parentId'] as int),
-      name: Value<String>(school['name'] as String),
-      lunchBlock: Value<int>(school['lunchBlock'] as int),
-      classification: Value<String>(school['classification'] as String),
-      updateAt: Value<DateTime>(_ref.read(commonFunctionProvider.notifier).getDayFromTimestamp(school['updateAt'])),
-    ),
-  );
+        SchoolsTableCompanion(
+          id: Value<int>(school['id'] as int),
+          parentId: Value<int>(school['parentId'] as int),
+          name: Value<String>(school['name'] as String),
+          lunchBlock: Value<int>(school['lunchBlock'] as int),
+          classification: Value<String>(school['classification'] as String),
+          updateAt: Value<DateTime>(_ref.read(commonFunctionProvider).getDayFromTimestamp(school['updateAt'])),
+        ),
+      );
 
   @override
   Future<DateTime> getLatestUpdateDay() async {
