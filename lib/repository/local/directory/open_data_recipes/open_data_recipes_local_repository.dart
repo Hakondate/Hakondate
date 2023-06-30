@@ -9,14 +9,14 @@ part 'open_data_recipes_local_repository.g.dart';
 @Riverpod(keepAlive: true)
 OpenDataRecipesLocalRepository openDataRecipesLocalRepository(OpenDataRecipesLocalRepositoryRef ref) => OpenDataRecipesLocalRepository();
 
-abstract class OpenDataRecipesLocalRepositoryBase {
+abstract class OpenDataRecipesLocalRepositoryAPI {
   Future<String> add({required String path, required Uint8List bytes});
   Future<bool> isExist({required String path});
   Future<String> getPath({required String path});
   Future<void> delete({required String path});
 }
 
-class OpenDataRecipesLocalRepository extends OpenDataRecipesLocalRepositoryBase {
+class OpenDataRecipesLocalRepository extends OpenDataRecipesLocalRepositoryAPI {
   OpenDataRecipesLocalRepository();
 
   @override

@@ -31,6 +31,8 @@ class DailyViewModel extends _$DailyViewModel {
   Future<void> updateSelectedDay({DateTime? selectedDay, DateTime? focusedDay}) async {
     final AsyncValue<DailyState> store = state;
 
+    if (store is! AsyncData<DailyState>) return;
+
     state = const AsyncLoading<DailyState>();
 
     DateTime? selectedInputDay = selectedDay;
@@ -45,22 +47,30 @@ class DailyViewModel extends _$DailyViewModel {
     }
     final MenuModel menu = await _menusLocalRepository.getMenuByDay(selectedInputDay);
 
-    if (menu is LunchesDayMenuModel) {
-      await ref.read(analyticsControllerProvider.notifier).logViewMenu(menu.id);
-    }
-
     state = AsyncData<DailyState>(
-      store.value!.copyWith(
+      store.value.copyWith(
         selectedDay: selectedInputDay,
         focusedDay: focusedDay ?? selectedInputDay,
         menu: menu,
       ),
     );
+
+    if (menu is LunchesDayMenuModel) {
+      await ref.read(analyticsControllerProvider.notifier).logViewMenu(menu.id);
+    }
   }
 
-  void updateFocusedDay(DateTime day) => state = AsyncData<DailyState>(state.value!.copyWith(focusedDay: day));
+  void updateFocusedDay(DateTime day) {
+    state.whenData((DailyState data) {
+      state = AsyncData<DailyState>(data.copyWith(focusedDay: day));
+    });
+  }
 
-  void selectDish(DishModel dish) => state = AsyncData<DailyState>(state.value!.copyWith(selectedDish: dish));
+  void selectDish(DishModel dish) {
+    state.whenData((DailyState data) {
+      state = AsyncData<DailyState>(data.copyWith(selectedDish: dish));
+    });
+  }
 
   List<double> getGraphValues({
     required double graphMaxValue,
