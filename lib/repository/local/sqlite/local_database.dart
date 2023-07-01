@@ -13,6 +13,7 @@ import 'package:hakondate/repository/local/sqlite/table/menu_dishes_table.dart';
 import 'package:hakondate/repository/local/sqlite/table/menus_table.dart';
 import 'package:hakondate/repository/local/sqlite/table/schools_table.dart';
 import 'package:hakondate/repository/local/sqlite/table/users_table.dart';
+import 'package:hakondate/util/environment.dart';
 
 part 'local_database.g.dart';
 
@@ -42,11 +43,23 @@ class LocalDatabase extends _$LocalDatabase {
   LocalDatabase(LazyDatabase super.lazyDatabase);
 
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 1;
 
   @override
   MigrationStrategy get migration {
     return MigrationStrategy(
+      onUpgrade: (_, __, ___) async {
+        await customStatement('PRAGMA foreign_keys = OFF');
+
+        await transaction(() async {
+          /* migrarion logic here */
+        });
+
+        if (Environment.flavor == Flavor.dev) {
+          final List<QueryRow> wrongForeignKeys = await customSelect('PRAGMA foreign_key_check').get();
+          assert(wrongForeignKeys.isEmpty, '${wrongForeignKeys.map((QueryRow e) => e.data)}');
+        }
+      },
       beforeOpen: (_) async {
         await customStatement('PRAGMA foreign_keys = ON');
       },
