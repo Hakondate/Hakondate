@@ -14,11 +14,11 @@ SchoolsRemoteRepository schoolsRemoteRepository(SchoolsRemoteRepositoryRef ref) 
 }
 
 // ignore: one_member_abstracts
-abstract class SchoolsRemoteRepositoryBase {
+abstract class SchoolsRemoteRepositoryAPI {
   Future<List<dynamic>> get({required DateTime updateAt});
 }
 
-class SchoolsRemoteRepository extends SchoolsRemoteRepositoryBase {
+class SchoolsRemoteRepository extends SchoolsRemoteRepositoryAPI {
   SchoolsRemoteRepository(this._db) : super();
 
   final CollectionReference<Map<String, dynamic>> _db;

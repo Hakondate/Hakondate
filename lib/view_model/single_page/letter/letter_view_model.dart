@@ -18,8 +18,8 @@ part 'letter_view_model.g.dart';
 
 @Riverpod(keepAlive: true)
 class LetterViewModel extends _$LetterViewModel {
-  late final LettersRemoteRepository _lettersRemoteRepository;
-  late final SchoolsLocalRepository _schoolsLocalRepository;
+  late final LettersRemoteRepositoryAPI _lettersRemoteRepository;
+  late final SchoolsLocalRepositoryAPI _schoolsLocalRepository;
 
   @override
   LetterState build() {

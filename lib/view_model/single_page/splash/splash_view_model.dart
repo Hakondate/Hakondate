@@ -18,10 +18,10 @@ part 'splash_view_model.g.dart';
 
 @riverpod
 class SplashViewModel extends _$SplashViewModel {
-  late final SchoolsLocalRepository _schoolsLocalRepository;
-  late final SchoolsRemoteRepository _schoolsRemoteRepository;
-  late final MenusLocalRepository _menusLocalRepository;
-  late final MenusRemoteRepository _menusRemoteRepository;
+  late final SchoolsLocalRepositoryAPI _schoolsLocalRepository;
+  late final SchoolsRemoteRepositoryAPI _schoolsRemoteRepository;
+  late final MenusLocalRepositoryAPI _menusLocalRepository;
+  late final MenusRemoteRepositoryAPI _menusRemoteRepository;
 
   @override
   SplashState build() {

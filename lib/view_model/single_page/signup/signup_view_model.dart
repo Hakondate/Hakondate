@@ -12,7 +12,7 @@ part 'signup_view_model.g.dart';
 
 @riverpod
 class SignupViewModel extends _$SignupViewModel {
-  late final SchoolsLocalRepository _schoolLocalRepository;
+  late final SchoolsLocalRepositoryAPI _schoolLocalRepository;
 
   @override
   FutureOr<SignupState> build() async {

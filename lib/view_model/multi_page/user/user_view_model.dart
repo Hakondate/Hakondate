@@ -21,8 +21,8 @@ part 'user_view_model.g.dart';
 
 @Riverpod(keepAlive: true)
 class UserViewModel extends _$UserViewModel {
-  late final UsersLocalRepository _usersLocalRepository;
-  late final SchoolsLocalRepository _schoolsLocalRepository;
+  late final UsersLocalRepositoryAPI _usersLocalRepository;
+  late final SchoolsLocalRepositoryAPI _schoolsLocalRepository;
   
   @override
   UserState build() {

@@ -11,8 +11,8 @@ part 'recipe_view_model.g.dart';
 
 @Riverpod(keepAlive: true)
 class RecipeViewModel extends _$RecipeViewModel {
-  late final OpenDataRecipesLocalRepository _openDataLocalRepository;
-  late final OpenDataRecipesRemoteRepository _openDataRemoteRepository;
+  late final OpenDataRecipesLocalRepositoryAPI _openDataLocalRepository;
+  late final OpenDataRecipesRemoteRepositoryAPI _openDataRemoteRepository;
 
   @override
   void build() {
