@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hakondate/constant/version.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:hakondate/constant/app_key.dart';
 import 'package:hakondate/constant/record_date.dart';
+import 'package:hakondate/constant/version.dart';
 import 'package:hakondate/repository/local/sqlite/menus_local_repository.dart';
 import 'package:hakondate/repository/local/sqlite/schools_local_repository.dart';
 import 'package:hakondate/repository/remote/menus_remote_repository.dart';
