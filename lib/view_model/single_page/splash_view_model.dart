@@ -55,16 +55,16 @@ class SplashViewModel extends StateNotifier<SplashState> {
         await _initializeSchools();
 
         state = SplashState(status: LoadingStatus.reading);
-        if (!await _ref.read(userProvider.notifier).signIn()) {
-          return routemaster.replace('/terms');
-        }
-
         final SharedPreferences prefs = await SharedPreferences.getInstance();
         final int migrateVersion = prefs.getInt(AppKey.sharedPreferencesKey.migrateVersion) ?? 0;
 
         if (migrateVersion < Version.migration) {
           await _ref.read(userProvider.notifier).migrate();
           await prefs.setInt(AppKey.sharedPreferencesKey.migrateVersion, Version.migration);
+        }
+
+        if (!await _ref.read(userProvider.notifier).signIn()) {
+          return routemaster.replace('/terms');
         }
 
         final DateTime termsAgreedDay = DateTime.fromMillisecondsSinceEpoch(
