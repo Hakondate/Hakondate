@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate/constant/version.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:hakondate/constant/app_key.dart';
@@ -59,6 +60,13 @@ class SplashViewModel extends StateNotifier<SplashState> {
         }
 
         final SharedPreferences prefs = await SharedPreferences.getInstance();
+        final int migrateVersion = prefs.getInt(AppKey.sharedPreferencesKey.migrateVersion) ?? 0;
+
+        if (migrateVersion < Version.migration) {
+          await _ref.read(userProvider.notifier).migrate();
+          await prefs.setInt(AppKey.sharedPreferencesKey.migrateVersion, Version.migration);
+        }
+
         final DateTime termsAgreedDay = DateTime.fromMillisecondsSinceEpoch(
           prefs.getInt(AppKey.sharedPreferencesKey.agreedTermsDay) ?? 0,
         );

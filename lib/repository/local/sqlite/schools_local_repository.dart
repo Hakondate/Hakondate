@@ -16,6 +16,7 @@ abstract class SchoolsLocalRepositoryBase {
   Future<int> count();
   Future<List<SchoolModel>> getAll();
   Future<SchoolModel> getById(int id);
+  Future<SchoolModel?> getByName(String name);
   Future<List<SchoolModel>> getByParentId(int parentId);
   Future<int> add(Map<String, dynamic> school);
   Future<DateTime> getLatestUpdateDay();
@@ -60,6 +61,21 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryBase {
         await (_db.select(_db.schoolsTable)..where(($SchoolsTableTable t) => t.id.equals(id))).getSingleOrNull();
 
     if (schoolsSchema == null) throw SQLiteException('Failed to select $id from schoolsTable');
+
+    return SchoolModel(
+      id: schoolsSchema.id,
+      parentId: schoolsSchema.parentId,
+      name: schoolsSchema.name,
+      classification: _judgeClassification(schoolsSchema.classification),
+    );
+  }
+
+  @override
+  Future<SchoolModel?> getByName(String name) async {
+    final SchoolsSchema? schoolsSchema =
+        await (_db.select(_db.schoolsTable)..where(($SchoolsTableTable t) => t.name.equals(name))).getSingleOrNull();
+
+    if (schoolsSchema == null) return null;
 
     return SchoolModel(
       id: schoolsSchema.id,
