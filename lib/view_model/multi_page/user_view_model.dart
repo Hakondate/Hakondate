@@ -52,7 +52,7 @@ class UserViewModel extends StateNotifier<UserState> {
       await createUser(
         name: name,
         schoolId: school.id,
-        schoolYear: schoolYear,
+        schoolYear: schoolYear - 6,
       );
     } on Exception catch (error, stack) {
       debugPrint('Infomation: User for v1 does not exist or cannot be read');
