@@ -13,7 +13,7 @@ import 'package:routemaster/routemaster.dart';
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/repository/remote/firebase_options.dart';
 import 'package:hakondate/router/routes.dart';
-import 'package:hakondate/util/app_unique_key.dart';
+import 'package:hakondate/util/app_unique_key/app_unique_key.dart';
 
 Future<void> main() async {
   await runZonedGuarded<Future<void>>(
@@ -32,7 +32,11 @@ Future<void> main() async {
       }
       FlutterError.onError =
           FirebaseCrashlytics.instance.recordFlutterFatalError;
-      runApp(const Hakondate());
+      runApp(
+        const ProviderScope(
+          child: Hakondate(),
+        ),
+      );
     },
     (Object error, StackTrace stack) =>
         FirebaseCrashlytics.instance.recordError(error, stack, fatal: true),
@@ -72,24 +76,22 @@ class Hakondate extends StatelessWidget {
       scaffoldBackgroundColor: AppColor.ui.white,
     );
 
-    return ProviderScope(
-      child: Consumer(
-        builder: (BuildContext context, WidgetRef ref, _) {
-          return MaterialApp.router(
-            key: key ?? ref.watch(appUniqueKeyProvider),
-            title: 'はこんだて',
-            theme: theme.copyWith(
-              colorScheme: theme.colorScheme.copyWith(
-                primary: AppColor.brand.primary,
-                secondary: AppColor.brand.secondary,
-              ),
+    return Consumer(
+      builder: (BuildContext context, WidgetRef ref, _) {
+        return MaterialApp.router(
+          key: key ?? ref.watch(appUniqueKeyProvider),
+          title: 'はこんだて',
+          theme: theme.copyWith(
+            colorScheme: theme.colorScheme.copyWith(
+              primary: AppColor.brand.primary,
+              secondary: AppColor.brand.secondary,
             ),
-            routerDelegate: routemaster,
-            routeInformationParser: const RoutemasterParser(),
-            debugShowCheckedModeBanner: false,
-          );
-        },
-      ),
+          ),
+          routerDelegate: routemaster,
+          routeInformationParser: const RoutemasterParser(),
+          debugShowCheckedModeBanner: false,
+        );
+      },
     );
   }
 }

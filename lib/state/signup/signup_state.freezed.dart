@@ -16,79 +16,18 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SignupState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String? name,
-            int? schoolId,
-            int? schoolYear,
-            String schoolTrailing,
-            String schoolYearTrailing,
-            List<SchoolModel> schools,
-            List<String> schoolYears,
-            String? nameErrorState,
-            String? schoolErrorState)
-        data,
-    required TResult Function() load,
-    required TResult Function(Exception error, SignupStateData cache) error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String? name,
-            int? schoolId,
-            int? schoolYear,
-            String schoolTrailing,
-            String schoolYearTrailing,
-            List<SchoolModel> schools,
-            List<String> schoolYears,
-            String? nameErrorState,
-            String? schoolErrorState)?
-        data,
-    TResult? Function()? load,
-    TResult? Function(Exception error, SignupStateData cache)? error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String? name,
-            int? schoolId,
-            int? schoolYear,
-            String schoolTrailing,
-            String schoolYearTrailing,
-            List<SchoolModel> schools,
-            List<String> schoolYears,
-            String? nameErrorState,
-            String? schoolErrorState)?
-        data,
-    TResult Function()? load,
-    TResult Function(Exception error, SignupStateData cache)? error,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(SignupStateData value) data,
-    required TResult Function(SignupStateLoad value) load,
-    required TResult Function(SignupStateError value) error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SignupStateData value)? data,
-    TResult? Function(SignupStateLoad value)? load,
-    TResult? Function(SignupStateError value)? error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(SignupStateData value)? data,
-    TResult Function(SignupStateLoad value)? load,
-    TResult Function(SignupStateError value)? error,
-    required TResult orElse(),
-  }) =>
+  String? get name => throw _privateConstructorUsedError;
+  int? get schoolId => throw _privateConstructorUsedError;
+  int? get schoolYear => throw _privateConstructorUsedError;
+  String get schoolTrailing => throw _privateConstructorUsedError;
+  String get schoolYearTrailing => throw _privateConstructorUsedError;
+  List<SchoolModel> get schools => throw _privateConstructorUsedError;
+  List<String> get schoolYears => throw _privateConstructorUsedError;
+  String? get nameErrorState => throw _privateConstructorUsedError;
+  String? get schoolErrorState => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $SignupStateCopyWith<SignupState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -97,24 +36,6 @@ abstract class $SignupStateCopyWith<$Res> {
   factory $SignupStateCopyWith(
           SignupState value, $Res Function(SignupState) then) =
       _$SignupStateCopyWithImpl<$Res, SignupState>;
-}
-
-/// @nodoc
-class _$SignupStateCopyWithImpl<$Res, $Val extends SignupState>
-    implements $SignupStateCopyWith<$Res> {
-  _$SignupStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-}
-
-/// @nodoc
-abstract class _$$SignupStateDataCopyWith<$Res> {
-  factory _$$SignupStateDataCopyWith(
-          _$SignupStateData value, $Res Function(_$SignupStateData) then) =
-      __$$SignupStateDataCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {String? name,
@@ -129,11 +50,95 @@ abstract class _$$SignupStateDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$SignupStateDataCopyWithImpl<$Res>
-    extends _$SignupStateCopyWithImpl<$Res, _$SignupStateData>
-    implements _$$SignupStateDataCopyWith<$Res> {
-  __$$SignupStateDataCopyWithImpl(
-      _$SignupStateData _value, $Res Function(_$SignupStateData) _then)
+class _$SignupStateCopyWithImpl<$Res, $Val extends SignupState>
+    implements $SignupStateCopyWith<$Res> {
+  _$SignupStateCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = freezed,
+    Object? schoolId = freezed,
+    Object? schoolYear = freezed,
+    Object? schoolTrailing = null,
+    Object? schoolYearTrailing = null,
+    Object? schools = null,
+    Object? schoolYears = null,
+    Object? nameErrorState = freezed,
+    Object? schoolErrorState = freezed,
+  }) {
+    return _then(_value.copyWith(
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      schoolId: freezed == schoolId
+          ? _value.schoolId
+          : schoolId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      schoolYear: freezed == schoolYear
+          ? _value.schoolYear
+          : schoolYear // ignore: cast_nullable_to_non_nullable
+              as int?,
+      schoolTrailing: null == schoolTrailing
+          ? _value.schoolTrailing
+          : schoolTrailing // ignore: cast_nullable_to_non_nullable
+              as String,
+      schoolYearTrailing: null == schoolYearTrailing
+          ? _value.schoolYearTrailing
+          : schoolYearTrailing // ignore: cast_nullable_to_non_nullable
+              as String,
+      schools: null == schools
+          ? _value.schools
+          : schools // ignore: cast_nullable_to_non_nullable
+              as List<SchoolModel>,
+      schoolYears: null == schoolYears
+          ? _value.schoolYears
+          : schoolYears // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      nameErrorState: freezed == nameErrorState
+          ? _value.nameErrorState
+          : nameErrorState // ignore: cast_nullable_to_non_nullable
+              as String?,
+      schoolErrorState: freezed == schoolErrorState
+          ? _value.schoolErrorState
+          : schoolErrorState // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_SignupStateCopyWith<$Res>
+    implements $SignupStateCopyWith<$Res> {
+  factory _$$_SignupStateCopyWith(
+          _$_SignupState value, $Res Function(_$_SignupState) then) =
+      __$$_SignupStateCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String? name,
+      int? schoolId,
+      int? schoolYear,
+      String schoolTrailing,
+      String schoolYearTrailing,
+      List<SchoolModel> schools,
+      List<String> schoolYears,
+      String? nameErrorState,
+      String? schoolErrorState});
+}
+
+/// @nodoc
+class __$$_SignupStateCopyWithImpl<$Res>
+    extends _$SignupStateCopyWithImpl<$Res, _$_SignupState>
+    implements _$$_SignupStateCopyWith<$Res> {
+  __$$_SignupStateCopyWithImpl(
+      _$_SignupState _value, $Res Function(_$_SignupState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -149,7 +154,7 @@ class __$$SignupStateDataCopyWithImpl<$Res>
     Object? nameErrorState = freezed,
     Object? schoolErrorState = freezed,
   }) {
-    return _then(_$SignupStateData(
+    return _then(_$_SignupState(
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -192,17 +197,15 @@ class __$$SignupStateDataCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SignupStateData
-    with DiagnosticableTreeMixin
-    implements SignupStateData {
-  const _$SignupStateData(
+class _$_SignupState with DiagnosticableTreeMixin implements _SignupState {
+  const _$_SignupState(
       {this.name,
       this.schoolId,
       this.schoolYear,
-      required this.schoolTrailing,
-      required this.schoolYearTrailing,
-      required final List<SchoolModel> schools,
-      required final List<String> schoolYears,
+      this.schoolTrailing = '学校を選択',
+      this.schoolYearTrailing = '学年を選択',
+      final List<SchoolModel> schools = const <SchoolModel>[],
+      final List<String> schoolYears = const <String>['1年生', '2年生', '3年生'],
       this.nameErrorState,
       this.schoolErrorState})
       : _schools = schools,
@@ -215,11 +218,14 @@ class _$SignupStateData
   @override
   final int? schoolYear;
   @override
+  @JsonKey()
   final String schoolTrailing;
   @override
+  @JsonKey()
   final String schoolYearTrailing;
   final List<SchoolModel> _schools;
   @override
+  @JsonKey()
   List<SchoolModel> get schools {
     if (_schools is EqualUnmodifiableListView) return _schools;
     // ignore: implicit_dynamic_type
@@ -228,6 +234,7 @@ class _$SignupStateData
 
   final List<String> _schoolYears;
   @override
+  @JsonKey()
   List<String> get schoolYears {
     if (_schoolYears is EqualUnmodifiableListView) return _schoolYears;
     // ignore: implicit_dynamic_type
@@ -241,14 +248,14 @@ class _$SignupStateData
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SignupState.data(name: $name, schoolId: $schoolId, schoolYear: $schoolYear, schoolTrailing: $schoolTrailing, schoolYearTrailing: $schoolYearTrailing, schools: $schools, schoolYears: $schoolYears, nameErrorState: $nameErrorState, schoolErrorState: $schoolErrorState)';
+    return 'SignupState(name: $name, schoolId: $schoolId, schoolYear: $schoolYear, schoolTrailing: $schoolTrailing, schoolYearTrailing: $schoolYearTrailing, schools: $schools, schoolYears: $schoolYears, nameErrorState: $nameErrorState, schoolErrorState: $schoolErrorState)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'SignupState.data'))
+      ..add(DiagnosticsProperty('type', 'SignupState'))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('schoolId', schoolId))
       ..add(DiagnosticsProperty('schoolYear', schoolYear))
@@ -264,7 +271,7 @@ class _$SignupStateData
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SignupStateData &&
+            other is _$_SignupState &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.schoolId, schoolId) ||
                 other.schoolId == schoolId) &&
@@ -299,487 +306,42 @@ class _$SignupStateData
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SignupStateDataCopyWith<_$SignupStateData> get copyWith =>
-      __$$SignupStateDataCopyWithImpl<_$SignupStateData>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String? name,
-            int? schoolId,
-            int? schoolYear,
-            String schoolTrailing,
-            String schoolYearTrailing,
-            List<SchoolModel> schools,
-            List<String> schoolYears,
-            String? nameErrorState,
-            String? schoolErrorState)
-        data,
-    required TResult Function() load,
-    required TResult Function(Exception error, SignupStateData cache) error,
-  }) {
-    return data(name, schoolId, schoolYear, schoolTrailing, schoolYearTrailing,
-        schools, schoolYears, nameErrorState, schoolErrorState);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String? name,
-            int? schoolId,
-            int? schoolYear,
-            String schoolTrailing,
-            String schoolYearTrailing,
-            List<SchoolModel> schools,
-            List<String> schoolYears,
-            String? nameErrorState,
-            String? schoolErrorState)?
-        data,
-    TResult? Function()? load,
-    TResult? Function(Exception error, SignupStateData cache)? error,
-  }) {
-    return data?.call(
-        name,
-        schoolId,
-        schoolYear,
-        schoolTrailing,
-        schoolYearTrailing,
-        schools,
-        schoolYears,
-        nameErrorState,
-        schoolErrorState);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String? name,
-            int? schoolId,
-            int? schoolYear,
-            String schoolTrailing,
-            String schoolYearTrailing,
-            List<SchoolModel> schools,
-            List<String> schoolYears,
-            String? nameErrorState,
-            String? schoolErrorState)?
-        data,
-    TResult Function()? load,
-    TResult Function(Exception error, SignupStateData cache)? error,
-    required TResult orElse(),
-  }) {
-    if (data != null) {
-      return data(
-          name,
-          schoolId,
-          schoolYear,
-          schoolTrailing,
-          schoolYearTrailing,
-          schools,
-          schoolYears,
-          nameErrorState,
-          schoolErrorState);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(SignupStateData value) data,
-    required TResult Function(SignupStateLoad value) load,
-    required TResult Function(SignupStateError value) error,
-  }) {
-    return data(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SignupStateData value)? data,
-    TResult? Function(SignupStateLoad value)? load,
-    TResult? Function(SignupStateError value)? error,
-  }) {
-    return data?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(SignupStateData value)? data,
-    TResult Function(SignupStateLoad value)? load,
-    TResult Function(SignupStateError value)? error,
-    required TResult orElse(),
-  }) {
-    if (data != null) {
-      return data(this);
-    }
-    return orElse();
-  }
+  _$$_SignupStateCopyWith<_$_SignupState> get copyWith =>
+      __$$_SignupStateCopyWithImpl<_$_SignupState>(this, _$identity);
 }
 
-abstract class SignupStateData implements SignupState {
-  const factory SignupStateData(
+abstract class _SignupState implements SignupState {
+  const factory _SignupState(
       {final String? name,
       final int? schoolId,
       final int? schoolYear,
-      required final String schoolTrailing,
-      required final String schoolYearTrailing,
-      required final List<SchoolModel> schools,
-      required final List<String> schoolYears,
+      final String schoolTrailing,
+      final String schoolYearTrailing,
+      final List<SchoolModel> schools,
+      final List<String> schoolYears,
       final String? nameErrorState,
-      final String? schoolErrorState}) = _$SignupStateData;
+      final String? schoolErrorState}) = _$_SignupState;
 
+  @override
   String? get name;
+  @override
   int? get schoolId;
+  @override
   int? get schoolYear;
+  @override
   String get schoolTrailing;
+  @override
   String get schoolYearTrailing;
+  @override
   List<SchoolModel> get schools;
+  @override
   List<String> get schoolYears;
+  @override
   String? get nameErrorState;
+  @override
   String? get schoolErrorState;
+  @override
   @JsonKey(ignore: true)
-  _$$SignupStateDataCopyWith<_$SignupStateData> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$SignupStateLoadCopyWith<$Res> {
-  factory _$$SignupStateLoadCopyWith(
-          _$SignupStateLoad value, $Res Function(_$SignupStateLoad) then) =
-      __$$SignupStateLoadCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$SignupStateLoadCopyWithImpl<$Res>
-    extends _$SignupStateCopyWithImpl<$Res, _$SignupStateLoad>
-    implements _$$SignupStateLoadCopyWith<$Res> {
-  __$$SignupStateLoadCopyWithImpl(
-      _$SignupStateLoad _value, $Res Function(_$SignupStateLoad) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$SignupStateLoad
-    with DiagnosticableTreeMixin
-    implements SignupStateLoad {
-  const _$SignupStateLoad();
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SignupState.load()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'SignupState.load'));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SignupStateLoad);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String? name,
-            int? schoolId,
-            int? schoolYear,
-            String schoolTrailing,
-            String schoolYearTrailing,
-            List<SchoolModel> schools,
-            List<String> schoolYears,
-            String? nameErrorState,
-            String? schoolErrorState)
-        data,
-    required TResult Function() load,
-    required TResult Function(Exception error, SignupStateData cache) error,
-  }) {
-    return load();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String? name,
-            int? schoolId,
-            int? schoolYear,
-            String schoolTrailing,
-            String schoolYearTrailing,
-            List<SchoolModel> schools,
-            List<String> schoolYears,
-            String? nameErrorState,
-            String? schoolErrorState)?
-        data,
-    TResult? Function()? load,
-    TResult? Function(Exception error, SignupStateData cache)? error,
-  }) {
-    return load?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String? name,
-            int? schoolId,
-            int? schoolYear,
-            String schoolTrailing,
-            String schoolYearTrailing,
-            List<SchoolModel> schools,
-            List<String> schoolYears,
-            String? nameErrorState,
-            String? schoolErrorState)?
-        data,
-    TResult Function()? load,
-    TResult Function(Exception error, SignupStateData cache)? error,
-    required TResult orElse(),
-  }) {
-    if (load != null) {
-      return load();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(SignupStateData value) data,
-    required TResult Function(SignupStateLoad value) load,
-    required TResult Function(SignupStateError value) error,
-  }) {
-    return load(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SignupStateData value)? data,
-    TResult? Function(SignupStateLoad value)? load,
-    TResult? Function(SignupStateError value)? error,
-  }) {
-    return load?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(SignupStateData value)? data,
-    TResult Function(SignupStateLoad value)? load,
-    TResult Function(SignupStateError value)? error,
-    required TResult orElse(),
-  }) {
-    if (load != null) {
-      return load(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class SignupStateLoad implements SignupState {
-  const factory SignupStateLoad() = _$SignupStateLoad;
-}
-
-/// @nodoc
-abstract class _$$SignupStateErrorCopyWith<$Res> {
-  factory _$$SignupStateErrorCopyWith(
-          _$SignupStateError value, $Res Function(_$SignupStateError) then) =
-      __$$SignupStateErrorCopyWithImpl<$Res>;
-  @useResult
-  $Res call({Exception error, SignupStateData cache});
-}
-
-/// @nodoc
-class __$$SignupStateErrorCopyWithImpl<$Res>
-    extends _$SignupStateCopyWithImpl<$Res, _$SignupStateError>
-    implements _$$SignupStateErrorCopyWith<$Res> {
-  __$$SignupStateErrorCopyWithImpl(
-      _$SignupStateError _value, $Res Function(_$SignupStateError) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? error = null,
-    Object? cache = freezed,
-  }) {
-    return _then(_$SignupStateError(
-      error: null == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as Exception,
-      cache: freezed == cache
-          ? _value.cache
-          : cache // ignore: cast_nullable_to_non_nullable
-              as SignupStateData,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$SignupStateError
-    with DiagnosticableTreeMixin
-    implements SignupStateError {
-  const _$SignupStateError({required this.error, required this.cache});
-
-  @override
-  final Exception error;
-  @override
-  final SignupStateData cache;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SignupState.error(error: $error, cache: $cache)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'SignupState.error'))
-      ..add(DiagnosticsProperty('error', error))
-      ..add(DiagnosticsProperty('cache', cache));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SignupStateError &&
-            (identical(other.error, error) || other.error == error) &&
-            const DeepCollectionEquality().equals(other.cache, cache));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, error, const DeepCollectionEquality().hash(cache));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$SignupStateErrorCopyWith<_$SignupStateError> get copyWith =>
-      __$$SignupStateErrorCopyWithImpl<_$SignupStateError>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String? name,
-            int? schoolId,
-            int? schoolYear,
-            String schoolTrailing,
-            String schoolYearTrailing,
-            List<SchoolModel> schools,
-            List<String> schoolYears,
-            String? nameErrorState,
-            String? schoolErrorState)
-        data,
-    required TResult Function() load,
-    required TResult Function(Exception error, SignupStateData cache) error,
-  }) {
-    return error(this.error, cache);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String? name,
-            int? schoolId,
-            int? schoolYear,
-            String schoolTrailing,
-            String schoolYearTrailing,
-            List<SchoolModel> schools,
-            List<String> schoolYears,
-            String? nameErrorState,
-            String? schoolErrorState)?
-        data,
-    TResult? Function()? load,
-    TResult? Function(Exception error, SignupStateData cache)? error,
-  }) {
-    return error?.call(this.error, cache);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String? name,
-            int? schoolId,
-            int? schoolYear,
-            String schoolTrailing,
-            String schoolYearTrailing,
-            List<SchoolModel> schools,
-            List<String> schoolYears,
-            String? nameErrorState,
-            String? schoolErrorState)?
-        data,
-    TResult Function()? load,
-    TResult Function(Exception error, SignupStateData cache)? error,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this.error, cache);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(SignupStateData value) data,
-    required TResult Function(SignupStateLoad value) load,
-    required TResult Function(SignupStateError value) error,
-  }) {
-    return error(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SignupStateData value)? data,
-    TResult? Function(SignupStateLoad value)? load,
-    TResult? Function(SignupStateError value)? error,
-  }) {
-    return error?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(SignupStateData value)? data,
-    TResult Function(SignupStateLoad value)? load,
-    TResult Function(SignupStateError value)? error,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class SignupStateError implements SignupState {
-  const factory SignupStateError(
-      {required final Exception error,
-      required final SignupStateData cache}) = _$SignupStateError;
-
-  Exception get error;
-  SignupStateData get cache;
-  @JsonKey(ignore: true)
-  _$$SignupStateErrorCopyWith<_$SignupStateError> get copyWith =>
+  _$$_SignupStateCopyWith<_$_SignupState> get copyWith =>
       throw _privateConstructorUsedError;
 }

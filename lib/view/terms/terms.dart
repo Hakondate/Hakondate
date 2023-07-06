@@ -6,7 +6,7 @@ import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/state/terms/terms_state.dart';
 import 'package:hakondate/view/terms/terms_content_column.dart';
-import 'package:hakondate/view_model/single_page/terms_view_model.dart';
+import 'package:hakondate/view_model/single_page/terms/terms_view_model.dart';
 
 class Terms extends StatelessWidget {
   const Terms({super.key});
@@ -52,7 +52,7 @@ class Terms extends StatelessWidget {
   Widget _agreeRow() {
     return Consumer(
       builder: (_, WidgetRef ref, __) {
-        final TermsState store = ref.watch(termsProvider);
+        final TermsState state = ref.watch(termsViewModelProvider);
 
         return Container(
           margin: const EdgeInsets.all(MarginSize.minimum),
@@ -61,8 +61,8 @@ class Terms extends StatelessWidget {
             children: <Widget>[
               Checkbox(
                 activeColor: AppColor.brand.secondary,
-                value: store.isAgree,
-                onChanged: (_) => ref.read(termsProvider.notifier).onTap(),
+                value: state.isAgree,
+                onChanged: (_) => ref.read(termsViewModelProvider.notifier).onTap(),
               ),
               const Text(
                 '利用規約に同意する',
@@ -81,8 +81,8 @@ class Terms extends StatelessWidget {
                   ),
                   shape: const StadiumBorder(),
                 ),
-                onPressed: store.isAgree
-                    ? () => ref.read(termsProvider.notifier).transition()
+                onPressed: state.isAgree
+                    ? () => ref.read(termsViewModelProvider.notifier).transition()
                     : null,
                 child: const Text('はじめる'),
               ),
