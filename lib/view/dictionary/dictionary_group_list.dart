@@ -4,14 +4,14 @@ import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/dictionary/dictionary_state.dart';
-import 'package:hakondate/view_model/single_page/dictionary_view_model.dart';
+import 'package:hakondate/view_model/single_page/dictionary/dictionary_view_model.dart';
 
 class DictionaryGroupList extends ConsumerWidget {
   const DictionaryGroupList({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final DictionaryState state = ref.watch(dictionaryProvider);
+    final DictionaryState state = ref.watch(dictionaryViewModelProvider);
 
     return state.when(
       data: (DictionaryGroup? selectedGroup, List<DictionaryItemModel>? selectedGroupItems, _) {
@@ -34,7 +34,7 @@ class DictionaryGroupList extends ConsumerWidget {
                   title: Text(item.name),
                   trailing: const Icon(Icons.chevron_right_rounded),
                   onTap: () {
-                    ref.read(dictionaryProvider.notifier).selectItem(item.id);
+                    ref.read(dictionaryViewModelProvider.notifier).selectItem(item.id);
                     routemaster.push('/home/dictionary_item/${item.id}');
                   },
                 );
