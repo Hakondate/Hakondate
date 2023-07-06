@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hakondate/constant/app_color.dart';
-import 'package:hakondate/model/nutrients/nutrient_unit.dart';
 
 import 'package:multi_charts/multi_charts.dart';
+
+import 'package:hakondate/constant/app_color.dart';
+import 'package:hakondate/model/nutrients/nutrient_unit.dart';
 
 class NutrientsRadarChart extends StatelessWidget {
   const NutrientsRadarChart({
