@@ -2,6 +2,8 @@
 
 import 'package:drift/drift.dart';
 
+import 'package:hakondate/repository/local/sqlite/table/schools_table.dart';
+
 /// SQLiteのテーブル定義
 /// Moorで利用するための定義を行なっている
 /// [customConstraints]では外部キーを定義
@@ -9,16 +11,11 @@ import 'package:drift/drift.dart';
 class MenusTable extends Table {
   IntColumn get id => integer()();
   DateTimeColumn get day => dateTime()();
-  IntColumn get schoolId => integer()();
+  IntColumn get schoolId => integer().references(SchoolsTable, #id)();
   TextColumn get event => text().nullable()();
   DateTimeColumn get createAt => dateTime().withDefault(Constant(DateTime.now()))();
   DateTimeColumn get updateAt => dateTime().withDefault(Constant(DateTime.now()))();
 
   @override
   Set<Column> get primaryKey => {id};
-
-  @override
-  List<String> get customConstraints => <String>[
-    'FOREIGN KEY(school_id) REFERENCES schools_table(id)',
-  ];
 }

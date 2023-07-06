@@ -8,13 +8,13 @@ import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/calendar/calendar_state.dart';
+import 'package:hakondate/util/common_function/common_function.dart';
 import 'package:hakondate/view/calendar/menu_chips.dart';
 import 'package:hakondate/view/calendar/non_lunches_day_calendar_tile.dart';
 import 'package:hakondate/view/component/frame/fade_up_app_bar.dart';
 import 'package:hakondate/view/component/frame/stateful_wrapper.dart';
-import 'package:hakondate/view_model/multi_page/common_function.dart';
-import 'package:hakondate/view_model/single_page/calendar_view_model.dart';
-import 'package:hakondate/view_model/single_page/daily_view_model.dart';
+import 'package:hakondate/view_model/single_page/calendar/calendar_view_model.dart';
+import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
 
 class Calendar extends StatelessWidget {
   const Calendar({super.key});
@@ -27,20 +27,20 @@ class Calendar extends StatelessWidget {
       ),
       body: Consumer(
         builder: (BuildContext context, WidgetRef ref, _) {
-          final CalendarState store = ref.watch(calendarProvider);
+          final CalendarState state = ref.watch(calendarViewModelProvider);
           final double appHeight = MediaQuery.of(context).size.height;
 
           return StatefulWrapper(
-            onInit: () => ref.read(calendarProvider.notifier).initialize(appHeight),
+            onInit: () => ref.read(calendarViewModelProvider.notifier).initialize(appHeight),
             child: Scrollbar(
-              controller: ref.read(calendarProvider.notifier).scrollController,
+              controller: ref.read(calendarViewModelProvider.notifier).getScrollController(),
               radius: const Radius.circular(16),
               child: ListView.builder(
-                controller: ref.read(calendarProvider.notifier).scrollController,
+                controller: ref.read(calendarViewModelProvider.notifier).getScrollController(),
                 reverse: true,
                 physics: const AlwaysScrollableScrollPhysics(),
-                itemCount: ref.read(calendarProvider.notifier).itemCount,
-                itemBuilder: (_, int index) => _calendarTile(store.latestDay.add(Duration(days: -index))),
+                itemCount: ref.read(calendarViewModelProvider.notifier).getItemCount(),
+                itemBuilder: (_, int index) => _calendarTile(state.latestDay.add(Duration(days: -index))),
               ),
             ),
           );
@@ -54,7 +54,7 @@ class Calendar extends StatelessWidget {
       builder: (BuildContext context, WidgetRef ref, _) {
         return GestureDetector(
           onTap: () async {
-            await ref.read(dailyProvider.notifier).updateSelectedDay(selectedDay: day);
+            await ref.read(dailyViewModelProvider.notifier).updateSelectedDay(selectedDay: day);
             await routemaster.pop();
           },
           child: Card(
@@ -87,7 +87,7 @@ class Calendar extends StatelessWidget {
           Expanded(
             child: Consumer(
               builder: (BuildContext context, WidgetRef ref, _) {
-                if (ref.read(commonFunctionProvider.notifier).isSameDay(day, DateTime.now())) {
+                if (ref.read(commonFunctionProvider).isSameDay(day, DateTime.now())) {
                   return Container(
                     padding: const EdgeInsets.only(bottom: PaddingSize.minimum),
                     alignment: Alignment.bottomCenter,
@@ -158,7 +158,7 @@ class Calendar extends StatelessWidget {
               child: Consumer(
                 builder: (BuildContext context, WidgetRef ref, _) {
                   return FutureBuilder<MenuModel>(
-                    future: ref.read(calendarProvider.notifier).getDailyMenu(day),
+                    future: ref.read(calendarViewModelProvider.notifier).getDailyMenu(day),
                     builder: (BuildContext context, AsyncSnapshot<MenuModel> snapshot) {
                       if (snapshot.hasData) {
                         final MenuModel? menu = snapshot.data;
