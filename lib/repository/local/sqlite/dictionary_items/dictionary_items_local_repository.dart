@@ -60,26 +60,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
       return (_db.update(_db.dictionaryItemsTable)..where(($DictionaryItemsTableTable t) =>
         t.group.equals(companion.group.value) &
         t.name.equals(companion.name.value),
-      )).write(
-        DictionaryItemsTableCompanion(
-          energy: companion.energy,
-          protein: companion.protein,
-          lipid: companion.lipid,
-          carbohydrate: companion.carbohydrate,
-          sodium: companion.sodium,
-          calcium: companion.calcium,
-          magnesium: companion.magnesium,
-          iron: companion.iron,
-          zinc: companion.zinc,
-          retinol: companion.retinol,
-          vitaminB1: companion.vitaminB1,
-          vitaminB2: companion.vitaminB2,
-          vitaminC: companion.vitaminC,
-          dietaryFiber: companion.dietaryFiber,
-          salt: companion.salt,
-          note: companion.note,
-        ),
-      );
+      )).write(companion);
     }
   }
 
