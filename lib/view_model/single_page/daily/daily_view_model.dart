@@ -29,35 +29,63 @@ class DailyViewModel extends _$DailyViewModel {
   }
 
   Future<void> updateSelectedDay({DateTime? selectedDay, DateTime? focusedDay}) async {
-    final AsyncValue<DailyState> store = state;
+    // final AsyncValue<DailyState> store = state;
 
-    if (store is! AsyncData<DailyState>) return;
+    // if (store is! AsyncData<DailyState>) return;
 
-    state = const AsyncLoading<DailyState>();
+    // state = const AsyncLoading<DailyState>();
 
-    DateTime? selectedInputDay = selectedDay;
-    switch (Environment.flavor) {
-      case Flavor.dev:
-        selectedInputDay ??= DateTime(2022, 5, 16);
-        break;
-      case Flavor.stg:
-      case Flavor.prod:
-      selectedInputDay ??= DateTime.now();
-        break;
-    }
-    final MenuModel menu = await _menusLocalRepository.getMenuByDay(selectedInputDay);
+    // DateTime? selectedInputDay = selectedDay;
+    // switch (Environment.flavor) {
+    //   case Flavor.dev:
+    //     selectedInputDay ??= DateTime(2022, 5, 16);
+    //     break;
+    //   case Flavor.stg:
+    //   case Flavor.prod:
+    //   selectedInputDay ??= DateTime.now();
+    //     break;
+    // }
+    // final MenuModel menu = await _menusLocalRepository.getMenuByDay(selectedInputDay);
 
-    state = AsyncData<DailyState>(
-      store.value.copyWith(
-        selectedDay: selectedInputDay,
-        focusedDay: focusedDay ?? selectedInputDay,
-        menu: menu,
-      ),
-    );
+    // state = AsyncData<DailyState>(
+    //   store.value.copyWith(
+    //     selectedDay: selectedInputDay,
+    //     focusedDay: focusedDay ?? selectedInputDay,
+    //     menu: menu,
+    //   ),
+    // );
 
-    if (menu is LunchesDayMenuModel) {
-      await ref.read(analyticsControllerProvider.notifier).logViewMenu(menu.id);
-    }
+    // if (menu is LunchesDayMenuModel) {
+    //   await ref.read(analyticsControllerProvider.notifier).logViewMenu(menu.id);
+    // }
+
+    state.whenData((DailyState data) async {
+      state = const AsyncLoading<DailyState>();
+
+      DateTime? selectedInputDay = selectedDay;
+      switch (Environment.flavor) {
+        case Flavor.dev:
+          selectedInputDay ??= DateTime(2022, 5, 16);
+          break;
+        case Flavor.stg:
+        case Flavor.prod:
+        selectedInputDay ??= DateTime.now();
+          break;
+      }
+      final MenuModel menu = await _menusLocalRepository.getMenuByDay(selectedInputDay);
+
+      state = AsyncData<DailyState>(
+        data.copyWith(
+          selectedDay: selectedInputDay,
+          focusedDay: focusedDay ?? selectedInputDay,
+          menu: menu,
+        ),
+      );
+
+      if (menu is LunchesDayMenuModel) {
+        await ref.read(analyticsControllerProvider.notifier).logViewMenu(menu.id);
+      }
+    });
   }
 
   void updateFocusedDay(DateTime day) {

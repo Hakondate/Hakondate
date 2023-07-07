@@ -16,10 +16,12 @@ class DictionaryItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final DictionaryState state = ref.watch(dictionaryViewModelProvider);
+    final AsyncValue<DictionaryState> state = ref.watch(dictionaryViewModelProvider);
 
-    return state.when(
-      data: (_, __, DictionaryItemModel? selectedItem) {
+    return state.maybeWhen(
+      data: (DictionaryState data) {
+        final DictionaryItemModel? selectedItem = data.selectedItem;
+
         if (selectedItem == null) return _loading();
         const double maxValue = 100;
 
@@ -127,7 +129,7 @@ class DictionaryItem extends ConsumerWidget {
           ),
         );
       },
-      load: _loading,
+      orElse: _loading,
     );
   }
 

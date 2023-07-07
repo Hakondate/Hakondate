@@ -12,56 +12,59 @@ class DictionaryViewModel extends _$DictionaryViewModel {
   late final DictionaryItemsLocalRepositoryAPI _dictionaryItemsLocalRepository;
 
   @override
-  DictionaryState build() {
+  FutureOr<DictionaryState> build() {
     _dictionaryItemsLocalRepository = ref.watch(dictionaryItemsLocalRepositoryProvider);
-    return DictionaryState();
+    return const DictionaryState();
   }
 
   Future<void> selectGroup(DictionaryGroup group) async {
-    state = const DictionaryStateLoad();
-    state = DictionaryStateData(
-      selectedGroup: group,
-      selectedGroupItems: await _dictionaryItemsLocalRepository.listGroup(group.groupNumber),
+    state = const AsyncLoading<DictionaryState>();
+    state = AsyncData<DictionaryState>(
+      DictionaryState(
+        selectedGroup: group,
+        selectedGroupItems: await _dictionaryItemsLocalRepository.listGroup(group.groupNumber),
+      ),
     );
   }
 
   Future<void> selectItem(int id) async {
-    final DictionaryState data = state;
-
-    if (data is! DictionaryStateData) return;
-
-    state = const DictionaryStateLoad();
-    state = data.copyWith(
-      selectedItem: await _dictionaryItemsLocalRepository.getById(id),
-    );
+    state.whenData((DictionaryState data) async {
+      state = const AsyncLoading<DictionaryState>();
+      state = AsyncData<DictionaryState>(
+        data.copyWith(
+          selectedItem: await _dictionaryItemsLocalRepository.getById(id),
+        ),
+      );
+    });
 
     await ref.read(analyticsControllerProvider.notifier).logViewDictionary(id);
   }
 
   Future<List<double>> getGraphValues(double maxValue) async {
-    final DictionaryState data = state;
+    return state.maybeWhen(
+      data: (DictionaryState data) async {
+        final DictionaryItemModel? item = data.selectedItem;
 
-    if (data is! DictionaryStateData) return <double>[0, 0, 0, 0, 0, 0];
+        if (item == null) return <double>[0, 0, 0, 0, 0, 0];
 
-    final DictionaryItemModel? item = data.selectedItem;
+        final DictionaryItemModel energyRef = await _getMaxRef('energy');
+        final DictionaryItemModel proteinRef = await _getMaxRef('protein');
+        final DictionaryItemModel vitaminRef = await _getMaxRef('vitamin');
+        final DictionaryItemModel mineralRef = await _getMaxRef('mineral');
+        final DictionaryItemModel carbohydrateRef = await _getMaxRef('carbohydrate');
+        final DictionaryItemModel lipidRef = await _getMaxRef('lipid');
 
-    if (item == null) return <double>[0, 0, 0, 0, 0, 0];
-
-    final DictionaryItemModel energyRef = await _getMaxRef('energy');
-    final DictionaryItemModel proteinRef = await _getMaxRef('protein');
-    final DictionaryItemModel vitaminRef = await _getMaxRef('vitamin');
-    final DictionaryItemModel mineralRef = await _getMaxRef('mineral');
-    final DictionaryItemModel carbohydrateRef = await _getMaxRef('carbohydrate');
-    final DictionaryItemModel lipidRef = await _getMaxRef('lipid');
-
-    return <double>[
-      item.nutrients.energy / energyRef.nutrients.energy * 100,
-      item.nutrients.protein / proteinRef.nutrients.protein * 100,
-      item.nutrients.vitamin / vitaminRef.nutrients.vitamin * 100,
-      item.nutrients.mineral / mineralRef.nutrients.mineral * 100,
-      item.nutrients.carbohydrate / carbohydrateRef.nutrients.carbohydrate * 100,
-      item.nutrients.lipid / lipidRef.nutrients.lipid * 100,
-    ].map((double value) => (value > maxValue) ? maxValue : value).toList();
+        return <double>[
+          item.nutrients.energy / energyRef.nutrients.energy * 100,
+          item.nutrients.protein / proteinRef.nutrients.protein * 100,
+          item.nutrients.vitamin / vitaminRef.nutrients.vitamin * 100,
+          item.nutrients.mineral / mineralRef.nutrients.mineral * 100,
+          item.nutrients.carbohydrate / carbohydrateRef.nutrients.carbohydrate * 100,
+          item.nutrients.lipid / lipidRef.nutrients.lipid * 100,
+        ].map((double value) => (value > maxValue) ? maxValue : value).toList();
+      },
+      orElse: () => <double>[0, 0, 0, 0, 0, 0],
+    );
   }
 
   Future<DictionaryItemModel> _getMaxRef(String nutrient) async {

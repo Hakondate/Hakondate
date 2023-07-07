@@ -13,10 +13,13 @@ class DictionaryGroupList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final DictionaryState state = ref.watch(dictionaryViewModelProvider);
+    final AsyncValue<DictionaryState> state = ref.watch(dictionaryViewModelProvider);
 
-    return state.when(
-      data: (DictionaryGroup? selectedGroup, List<DictionaryItemModel>? selectedGroupItems, _) {
+    return state.maybeWhen(
+      data: (DictionaryState data) {
+        final DictionaryGroup? selectedGroup = data.selectedGroup;
+        final List<DictionaryItemModel>? selectedGroupItems = data.selectedGroupItems;
+
         if (selectedGroup == null || selectedGroupItems == null) return _loading();
 
         return Scaffold(
@@ -45,7 +48,7 @@ class DictionaryGroupList extends ConsumerWidget {
           ),
         );
       },
-      load: _loading,
+      orElse: _loading,
     );
   }
 
