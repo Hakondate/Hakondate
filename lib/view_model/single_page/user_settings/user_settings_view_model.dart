@@ -41,7 +41,7 @@ class UserSettingsViewModel extends _$UserSettingsViewModel {
   }
 
   Future<void> updateUsers() async {
-    state = const AsyncValue.loading();
+    state = const AsyncLoading<UserSettingsState>();
 
     state = await AsyncValue.guard(() async {
       final List<UserModel> users = await getUsersFromLocalRepository();
