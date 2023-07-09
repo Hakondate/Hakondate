@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:hakondate/view_model/single_page/user_settings/user_settings_view_model.dart';
 
 import 'package:path_provider/path_provider.dart';
+import 'package:hakondate/view_model/single_page/user_settings/user_settings_view_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -71,7 +72,8 @@ class UserViewModel extends _$UserViewModel {
 
     if (currentUserId == null) {
       throw SharedPreferencesException(
-          'Failed to get ${AppKey.sharedPreferencesKey.currentUserId} value');
+        'Failed to get ${AppKey.sharedPreferencesKey.currentUserId} value',
+      );
     }
 
     await changeCurrentUser(currentUserId, isSetPrefs: false);

@@ -4,107 +4,137 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/school/school_model.dart';
+import 'package:hakondate/model/user/user_model.dart';
 import 'package:hakondate/state/signup/signup_state.dart';
+import 'package:hakondate/state/user_settings/user_settings_state.dart';
 import 'package:hakondate/view/component/dialog/help_dialog.dart';
 import 'package:hakondate/view/component/frame/fade_up_app_bar.dart';
 import 'package:hakondate/view/component/label/setting_label.dart';
 import 'package:hakondate/view/signup/signing_up_dialog.dart';
 import 'package:hakondate/view_model/single_page/signup/signup_view_model.dart';
+import 'package:hakondate/view_model/single_page/user_settings/user_settings_view_model.dart';
 
 class UserSettingsDetail extends ConsumerWidget {
-  UserSettingsDetail({
-    required this.id,
-    super.key,
-  }) : isNew = id < 0;
+  UserSettingsDetail({super.key});
 
-  final int id;
-  final bool isNew;
   final GlobalKey _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: FadeUpAppBar(
-        title: isNew ? const Text('お子様の追加登録') : const Text('お子様情報の変更'),
-      ),
-      body: Form(
-        key: _formKey,
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              _nameForm(),
-              _schoolForm(),
-              _submitButton(),
-            ],
+    final AsyncValue<UserSettingsState> userSettingsState =
+        ref.watch(userSettingsProvider);
+
+    return userSettingsState.when(
+      loading: () => const SigningUpDialog(),
+      error: (Object error, StackTrace? stackTrace) {
+        return Center(
+          child: Text(error.toString()),
+        );
+      },
+      data: (UserSettingsState userSettingsState) {
+        final UserModel? editingUser = userSettingsState.editingUser;
+
+        return Scaffold(
+          appBar: FadeUpAppBar(
+            title: userSettingsState.editingUser == null
+                ? const Text('お子様の追加登録')
+                : const Text('お子様情報の変更'),
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _nameForm() {
-    return Consumer(
-      builder: (BuildContext context, WidgetRef ref, _) {
-        final AsyncValue<SignupState> state =
-            ref.watch(signupViewModelProvider);
-
-        return Padding(
-          padding: const EdgeInsets.all(PaddingSize.normal),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
+          body: Form(
+            key: _formKey,
+            child: SingleChildScrollView(
+              child: Column(
                 children: <Widget>[
-                  const Text(
-                    'お名前',
-                    style: TextStyle(fontSize: FontSize.subheading),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.help),
-                    iconSize: IconSize.help,
-                    color: Theme.of(context).primaryIconTheme.color,
-                    onPressed: () async => showDialog(
-                      context: context,
-                      builder: (BuildContext context) => const HelpDialog(
-                        title: Text('お名前について'),
-                        content: Text('　お名前情報は，本アプリ内でユーザを識別するために利用されます．'
-                            'あだ名などを入力していただいても構いません．また，あとで変更することもできます．\n'
-                            '　お名前情報は，端末内に保存され収集されることはありません．また，あとから変更することができます．'),
-                      ),
-                    ),
-                  ),
-                  const Spacer(),
-                  if (state is AsyncData<SignupState>)
-                    _errorIndication(state.value.nameErrorState),
+                  _nameForm(editingUser),
+                  _schoolForm(editingUser),
+                  _submitButton(editingUser),
                 ],
               ),
-              TextFormField(
-                initialValue:
-                    (state is AsyncData<SignupState>) ? state.value.name : '',
-                keyboardType: TextInputType.name,
-                maxLength: 15,
-                decoration: InputDecoration(
-                  hintText: 'お子様の名前かあだ名を入力',
-                  border: const OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: AppColor.brand.secondary,
-                      width: 2,
-                    ),
-                  ),
-                ),
-                onChanged: (String value) => ref
-                    .read(signupViewModelProvider.notifier)
-                    .updateName(value),
-              ),
-            ],
+            ),
           ),
         );
       },
     );
   }
 
-  Widget _schoolForm() {
+  Widget _nameForm(UserModel? editingUser) {
+    return Consumer(
+      builder: (BuildContext context, WidgetRef ref, _) {
+        final AsyncValue<SignupState> state =
+            ref.watch(signupViewModelProvider);
+        // if (state is AsyncData<SignupState>) {
+        //   debugPrint('user name in detail page: ${state.value.name}');
+        // }
+
+        return state.when(
+          loading: () => const Center(
+            child: CircularProgressIndicator(),
+          ),
+          error: (Object error, StackTrace? stackTrace) {
+            return Center(
+              child: Text(error.toString()),
+            );
+          },
+          data: (SignupState state) => Padding(
+            padding: const EdgeInsets.all(PaddingSize.normal),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    const Text(
+                      'お名前',
+                      style: TextStyle(fontSize: FontSize.subheading),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.help),
+                      iconSize: IconSize.help,
+                      color: Theme.of(context).primaryIconTheme.color,
+                      onPressed: () async => showDialog(
+                        context: context,
+                        builder: (BuildContext context) => const HelpDialog(
+                          title: Text('お名前について'),
+                          content: Text('　お名前情報は，本アプリ内でユーザを識別するために利用されます．'
+                              'あだ名などを入力していただいても構いません．また，あとで変更することもできます．\n'
+                              '　お名前情報は，端末内に保存され収集されることはありません．また，あとから変更することができます．'),
+                        ),
+                      ),
+                    ),
+                    const Spacer(),
+                    // if (state is AsyncData<SignupState>)
+                    //   _errorIndication(state.value.nameErrorState),
+                  ],
+                ),
+                TextFormField(
+                  initialValue: state.name,
+                  keyboardType: TextInputType.name,
+                  maxLength: 15,
+                  decoration: InputDecoration(
+                    hintText: 'お子様の名前かあだ名を入力',
+                    border: const OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: AppColor.brand.secondary,
+                        width: 2,
+                      ),
+                    ),
+                  ),
+                  onChanged: (String value) {
+                    debugPrint('name: $value');
+                    ref
+                        .read(signupViewModelProvider.notifier)
+                        .updateName(value);
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _schoolForm(UserModel? editingUser) {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
         final AsyncValue<SignupState> state =
@@ -193,7 +223,7 @@ class UserSettingsDetail extends ConsumerWidget {
     );
   }
 
-  Widget _submitButton() {
+  Widget _submitButton(UserModel? editingUser) {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
         return Padding(

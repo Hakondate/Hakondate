@@ -41,7 +41,7 @@ class UserSettings extends ConsumerWidget {
                   _userSettingsCard(
                     context,
                     user: user,
-                    isActive: user.id == currentUser.id,
+                    isCurrentUser: user.id == currentUser.id,
                   ),
                 const SizedBox(
                   height: 8,
@@ -58,13 +58,13 @@ class UserSettings extends ConsumerWidget {
   Widget _userSettingsCard(
     BuildContext context, {
     required UserModel user,
-    required bool isActive,
+    required bool isCurrentUser,
   }) {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
         return GestureDetector(
           onTap: () async {
-            if (!isActive) {
+            if (!isCurrentUser) {
               return showDialog(
                 context: context,
                 builder: (_) => UserSwitchDialog(id: user.id),
@@ -80,7 +80,7 @@ class UserSettings extends ConsumerWidget {
             shadowColor: AppColor.brand.secondary,
             shape: RoundedRectangleBorder(
               side: BorderSide(
-                color: isActive
+                color: isCurrentUser
                     ? AppColor.brand.secondary
                     : AppColor.ui.secondaryUltraLight,
                 width: 2,
@@ -132,9 +132,12 @@ class UserSettings extends ConsumerWidget {
                     ],
                   ),
                   IconButton(
-                    isSelected: isActive,
-                    onPressed: isActive
+                    isSelected: isCurrentUser,
+                    onPressed: isCurrentUser
                         ? () {
+                            ref
+                                .read(userSettingsProvider.notifier)
+                                .setEditingUser(user);
                             routemaster.push('/home/user_settings/${user.id}');
                           }
                         : () async {
@@ -143,7 +146,7 @@ class UserSettings extends ConsumerWidget {
                                 builder: (_) => UserDeleteDialog(id: user.id));
                           },
                     icon: Icon(
-                      isActive ? Icons.edit : Icons.delete,
+                      isCurrentUser ? Icons.edit : Icons.delete,
                       color: AppColor.brand.secondary,
                     ),
                   )
@@ -157,18 +160,23 @@ class UserSettings extends ConsumerWidget {
   }
 
   Widget _userAddButton() {
-    return Center(
-      child: FloatingActionButton(
-        elevation: 3,
-        backgroundColor: AppColor.ui.secondaryUltraLight,
-        child: Icon(
-          Icons.person_add,
-          color: AppColor.brand.secondary,
-        ),
-        onPressed: () {
-          routemaster.push('/home/user_settings/-1');
-        },
-      ),
+    return Consumer(
+      builder: (BuildContext context, WidgetRef ref, _) {
+        return Center(
+          child: FloatingActionButton(
+            elevation: 3,
+            backgroundColor: AppColor.ui.secondaryUltraLight,
+            child: Icon(
+              Icons.person_add,
+              color: AppColor.brand.secondary,
+            ),
+            onPressed: () {
+              ref.read(userSettingsProvider.notifier).setEditingUser(null);
+              routemaster.push('/home/user_settings/-1');
+            },
+          ),
+        );
+      },
     );
   }
 }
