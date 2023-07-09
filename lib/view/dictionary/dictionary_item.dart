@@ -109,9 +109,15 @@ class DictionaryItem extends ConsumerWidget {
                     return const SizedBox.shrink();
                   },
                 ),
+                const Divider(
+                  height: 0,
+                ),
                 NutrientsList(
                   nutrients: selectedItem.nutrients,
                   backgroundColor: AppColor.ui.secondaryUltraLight,
+                ),
+                const Divider(
+                  height: 0,
                 ),
                 if (selectedItem.note != null && selectedItem.note != '') Padding(
                   padding: const EdgeInsets.only(
