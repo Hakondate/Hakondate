@@ -7,5 +7,6 @@ part 'user_settings_state.freezed.dart';
 class UserSettingsState with _$UserSettingsState {
   const factory UserSettingsState({
     List<UserModel>? users,
+    UserModel? editingUser,
   }) = _UserSettingsState;
 }

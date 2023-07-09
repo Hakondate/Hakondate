@@ -56,8 +56,8 @@ final RoutemasterDelegate routemaster = RoutemasterDelegate(
           const MaterialPage<dynamic>(child: UserSettings()),
       '/home/user_settings/:id': (RouteData route) => FadeUpPage(
             child: UserSettingsDetail(
-              id: int.parse(route.pathParameters['id'] ?? '-1'),
-            ),
+                // id: int.parse(route.pathParameters['id'] ?? '-1'),
+                ),
           ),
       '/home/origin': (_) =>
           MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),

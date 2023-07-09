@@ -51,6 +51,18 @@ class UserSettingsViewModel extends _$UserSettingsViewModel {
     });
   }
 
+  void setEditingUser(UserModel? editingUser) {
+    state.whenData(
+      (UserSettingsState data) {
+        state = AsyncData<UserSettingsState>(
+          data.copyWith(
+            editingUser: editingUser,
+          ),
+        );
+      },
+    );
+  }
+
   Future<void> deleteUser(int id) async {
     final UsersLocalRepository usersLocalRepository =
         ref.read(usersLocalRepositoryProvider);
