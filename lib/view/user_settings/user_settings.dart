@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
+import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/model/user/user_model.dart';
+import 'package:hakondate/repository/local/sqlite/schools/schools_local_repository.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/user_settings/user_settings_state.dart';
 import 'package:hakondate/view/user_settings/user_delete_dialog.dart';
@@ -108,13 +110,34 @@ class UserSettings extends ConsumerWidget {
                       ),
                       Row(
                         children: <Widget>[
-                          Text(
-                            '五稜郭中学校',
-                            style: TextStyle(
-                              fontSize: FontSize.body,
-                              color: AppColor.text.gray,
-                              height: 1,
-                            ),
+                          FutureBuilder<SchoolModel>(
+                            future: ref
+                                .read(schoolsLocalRepositoryProvider)
+                                .getById(user.schoolId),
+                            builder: (
+                              BuildContext context,
+                              AsyncSnapshot<SchoolModel> snapshot,
+                            ) {
+                              if (snapshot.hasData) {
+                                return Text(
+                                  snapshot.data!.name,
+                                  style: TextStyle(
+                                    fontSize: FontSize.body,
+                                    color: AppColor.text.gray,
+                                    height: 1,
+                                  ),
+                                );
+                              }
+
+                              return Text(
+                                '学校情報を取得中...',
+                                style: TextStyle(
+                                  fontSize: FontSize.body,
+                                  color: AppColor.text.gray,
+                                  height: 1,
+                                ),
+                              );
+                            },
                           ),
                           const SizedBox(
                             width: 10,
