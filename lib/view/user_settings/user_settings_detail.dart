@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/constant/app_color.dart';
@@ -22,7 +23,7 @@ class UserSettingsDetail extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<UserSettingsState> userSettingsState =
-        ref.watch(userSettingsProvider);
+        ref.watch(userSettingsViewModelProvider);
 
     return userSettingsState.when(
       loading: () => const SigningUpDialog(),

@@ -44,7 +44,8 @@ class UserSettingsViewModel extends _$UserSettingsViewModel {
     state = const AsyncLoading<UserSettingsState>();
 
     state = await AsyncValue.guard(() async {
-      final List<UserModel> users = await getUsersFromLocalRepository();
+      final List<UserModel> users =
+          await ref.read(usersLocalRepositoryProvider).list();
       return UserSettingsState(
         users: users,
       );
@@ -64,9 +65,7 @@ class UserSettingsViewModel extends _$UserSettingsViewModel {
   }
 
   Future<void> deleteUser(int id) async {
-    final UsersLocalRepository usersLocalRepository =
-        ref.read(usersLocalRepositoryProvider);
-    await usersLocalRepository.delete(id);
+    await ref.read(usersLocalRepositoryProvider).delete(id);
     await updateUsers();
   }
 

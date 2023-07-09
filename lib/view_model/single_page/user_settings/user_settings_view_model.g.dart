@@ -7,7 +7,15 @@ part of 'user_settings_view_model.dart';
 // **************************************************************************
 
 String _$userSettingsViewModelHash() =>
+<<<<<<< HEAD
     r'74f2e3174513d412e19ff6f924ca889549ec5866';
+=======
+<<<<<<< HEAD
+    r'a420705b28cb14a0cc040ea48f70f51c6bef9617';
+=======
+    r'b95bcba0e6f2dd4039b7a4493c97101efea5d70a';
+>>>>>>> ff58070 (refactor: add code generatioin to UserSettingsViewModel and run import sorter)
+>>>>>>> ebdc344 (refactor: add code generatioin to UserSettingsViewModel and run import sorter)
 
 /// See also [UserSettingsViewModel].
 @ProviderFor(UserSettingsViewModel)
