@@ -165,8 +165,9 @@ class UserSettings extends ConsumerWidget {
                           }
                         : () async {
                             return showDialog(
-                                context: context,
-                                builder: (_) => UserDeleteDialog(id: user.id));
+                              context: context,
+                              builder: (_) => UserDeleteDialog(id: user.id),
+                            );
                           },
                     icon: Icon(
                       isCurrentUser ? Icons.edit : Icons.delete,
