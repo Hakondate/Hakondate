@@ -15,17 +15,16 @@ part 'signup_view_model.g.dart';
 
 @riverpod
 class SignupViewModel extends _$SignupViewModel {
-  late final SchoolsLocalRepositoryAPI _schoolLocalRepository;
-
   @override
   FutureOr<SignupState> build() async {
     UserModel? editingUser;
-    ref.watch(userSettingsViewModelProvider).whenData((UserSettingsState data) {
+    ref.read(userSettingsViewModelProvider).whenData((UserSettingsState data) {
       editingUser = data.editingUser;
     });
 
-    _schoolLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
-    final List<SchoolModel> schools = await _schoolLocalRepository.list();
+    final SchoolsLocalRepository schoolLocalRepository =
+        ref.watch(schoolsLocalRepositoryProvider);
+    final List<SchoolModel> schools = await schoolLocalRepository.list();
     for (final SchoolModel school in schools) {
       debugPrint(school.name);
     }
@@ -33,7 +32,7 @@ class SignupViewModel extends _$SignupViewModel {
     if (editingUser != null) {
       debugPrint('SignupViewModel build with editingUser');
       final SchoolModel school =
-          await _schoolLocalRepository.getById(editingUser!.schoolId);
+          await schoolLocalRepository.getById(editingUser!.schoolId);
       debugPrint('school: ${school.name}');
 
       final List<String> schoolYears =
@@ -56,10 +55,6 @@ class SignupViewModel extends _$SignupViewModel {
     return SignupState(
       schools: schools,
     );
-  }
-
-  void damy() {
-    debugPrint('damy');
   }
 
   Future<void> signup() async {
@@ -109,7 +104,8 @@ class SignupViewModel extends _$SignupViewModel {
 
   Future<void> updateSchool(int id) async {
     state.whenData((SignupState data) async {
-      final SchoolModel school = await _schoolLocalRepository.getById(id);
+      final SchoolModel school =
+          await ref.read(schoolsLocalRepositoryProvider).getById(id);
       final List<String> schoolYears =
           (school.classification == SchoolClassification.primary)
               ? <String>['1年生', '2年生', '3年生', '4年生', '5年生', '6年生']

@@ -115,9 +115,7 @@ class SigningUpDialog extends ConsumerWidget {
             body: const Text('ユーザ情報の登録が成功しました'),
             firstAction: HakondateActionButton.primary(
               text: const Text('はじめる'),
-              onTap: () => routemaster
-                  .pop()
-                  .whenComplete(() => routemaster.replace('/splash')),
+              onTap: () => routemaster.push('/splash'),
             ),
           );
         }

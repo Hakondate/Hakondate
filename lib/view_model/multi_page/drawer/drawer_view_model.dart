@@ -6,7 +6,7 @@ import 'package:hakondate/state/drawer/drawer_state.dart';
 
 part 'drawer_view_model.g.dart';
 
-@Riverpod(keepAlive: true)
+@riverpod
 class DrawerViewModel extends _$DrawerViewModel {
   @override
   DrawerState build() => DrawerState(
