@@ -98,8 +98,10 @@ class SignupViewModel extends _$SignupViewModel {
   }
 
   void updateName(String? name) {
-    state.whenData((SignupState data) =>
-        state = AsyncData<SignupState>(data.copyWith(name: name)));
+    state.whenData(
+      (SignupState data) =>
+          state = AsyncData<SignupState>(data.copyWith(name: name)),
+    );
   }
 
   Future<void> updateSchool(int id) async {
@@ -173,13 +175,16 @@ class SignupViewModel extends _$SignupViewModel {
 
       if (data.schoolId == null && data.schoolYear == null) {
         state = AsyncData<SignupState>(
-            data.copyWith(schoolErrorState: '学校・学年を選択してください'));
+          data.copyWith(schoolErrorState: '学校・学年を選択してください'),
+        );
       } else if (data.schoolId == null) {
         state = AsyncData<SignupState>(
-            data.copyWith(schoolErrorState: '学校を選択してください'));
+          data.copyWith(schoolErrorState: '学校を選択してください'),
+        );
       } else if (data.schoolYear == null) {
         state = AsyncData<SignupState>(
-            data.copyWith(schoolErrorState: '学年を選択してください'));
+          data.copyWith(schoolErrorState: '学年を選択してください'),
+        );
       }
     });
   }

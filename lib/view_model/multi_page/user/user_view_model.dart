@@ -158,8 +158,9 @@ class UserViewModel extends _$UserViewModel {
 
   Future<int> getParentId() async {
     final UserModel? user = state.currentUser;
-    if (user == null)
+    if (user == null) {
       throw const SignInException('Current user does not exist');
+    }
     final SchoolModel school =
         await _schoolsLocalRepository.getById(user.schoolId);
 
