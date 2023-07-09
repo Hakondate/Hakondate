@@ -150,9 +150,8 @@ class UserViewModel extends _$UserViewModel {
   }) async {
     final int id = await _usersLocalRepository.add(name, schoolId, schoolYear);
     await changeCurrentUser(id);
-    await ref.read(analyticsControllerProvider.notifier).logSignup();
-
     await ref.read(userSettingsViewModelProvider.notifier).updateUsers();
+    await ref.read(analyticsControllerProvider.notifier).logSignup();
 
     return id;
   }

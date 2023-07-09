@@ -81,7 +81,7 @@ class SplashViewModel extends _$SplashViewModel {
         }
 
         await _initializeMenus();
-        routemaster.replace('/home');
+        routemaster.push('/home');
         state = SplashState();
       } on Exception catch (error, stack) {
         debugPrint(error.toString());

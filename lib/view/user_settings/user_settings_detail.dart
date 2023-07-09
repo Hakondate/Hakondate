@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/school/school_model.dart';
-import 'package:hakondate/model/user/user_model.dart';
 import 'package:hakondate/state/signup/signup_state.dart';
 import 'package:hakondate/state/user_settings/user_settings_state.dart';
 import 'package:hakondate/view/component/dialog/help_dialog.dart';
@@ -33,8 +32,6 @@ class UserSettingsDetail extends ConsumerWidget {
         );
       },
       data: (UserSettingsState userSettingsState) {
-        final UserModel? editingUser = userSettingsState.editingUser;
-
         return Scaffold(
           appBar: FadeUpAppBar(
             title: userSettingsState.editingUser == null
@@ -46,9 +43,9 @@ class UserSettingsDetail extends ConsumerWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  _nameForm(editingUser),
-                  _schoolForm(editingUser),
-                  _submitButton(editingUser),
+                  _nameForm(),
+                  _schoolForm(),
+                  _submitButton(),
                 ],
               ),
             ),
@@ -58,14 +55,11 @@ class UserSettingsDetail extends ConsumerWidget {
     );
   }
 
-  Widget _nameForm(UserModel? editingUser) {
+  Widget _nameForm() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
         final AsyncValue<SignupState> state =
             ref.watch(signupViewModelProvider);
-        // if (state is AsyncData<SignupState>) {
-        //   debugPrint('user name in detail page: ${state.value.name}');
-        // }
 
         return state.when(
           loading: () => const Center(
@@ -102,8 +96,7 @@ class UserSettingsDetail extends ConsumerWidget {
                       ),
                     ),
                     const Spacer(),
-                    // if (state is AsyncData<SignupState>)
-                    //   _errorIndication(state.value.nameErrorState),
+                    _errorIndication(state.nameErrorState),
                   ],
                 ),
                 TextFormField(
@@ -121,7 +114,6 @@ class UserSettingsDetail extends ConsumerWidget {
                     ),
                   ),
                   onChanged: (String value) {
-                    debugPrint('name: $value');
                     ref
                         .read(signupViewModelProvider.notifier)
                         .updateName(value);
@@ -135,7 +127,7 @@ class UserSettingsDetail extends ConsumerWidget {
     );
   }
 
-  Widget _schoolForm(UserModel? editingUser) {
+  Widget _schoolForm() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
         final AsyncValue<SignupState> state =
@@ -224,7 +216,7 @@ class UserSettingsDetail extends ConsumerWidget {
     );
   }
 
-  Widget _submitButton(UserModel? editingUser) {
+  Widget _submitButton() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
         return Padding(
