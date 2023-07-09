@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/school/school_model.dart';
+import 'package:hakondate/model/user/user_model.dart';
 import 'package:hakondate/repository/local/sqlite/schools/schools_local_repository.dart';
 import 'package:hakondate/state/signup/signup_state.dart';
+import 'package:hakondate/state/user_settings/user_settings_state.dart';
 import 'package:hakondate/util/exception/parameters_exception.dart';
 import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
+import 'package:hakondate/view_model/single_page/user_settings/user_settings_view_model.dart';
 
 part 'signup_view_model.g.dart';
 
@@ -17,7 +20,7 @@ class SignupViewModel extends _$SignupViewModel {
   @override
   FutureOr<SignupState> build() async {
     UserModel? editingUser;
-    ref.watch(userSettingsProvider).whenData((UserSettingsState data) {
+    ref.watch(userSettingsViewModelProvider).whenData((UserSettingsState data) {
       editingUser = data.editingUser;
     });
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/constant/app_color.dart';
@@ -159,7 +160,7 @@ class UserSettings extends ConsumerWidget {
                     onPressed: isCurrentUser
                         ? () {
                             ref
-                                .read(userSettingsProvider.notifier)
+                                .read(userSettingsViewModelProvider.notifier)
                                 .setEditingUser(user);
                             routemaster.push('/home/user_settings/${user.id}');
                           }
@@ -195,7 +196,9 @@ class UserSettings extends ConsumerWidget {
               color: AppColor.brand.secondary,
             ),
             onPressed: () {
-              ref.read(userSettingsProvider.notifier).setEditingUser(null);
+              ref
+                  .read(userSettingsViewModelProvider.notifier)
+                  .setEditingUser(null);
               routemaster.push('/home/user_settings/-1');
             },
           ),
