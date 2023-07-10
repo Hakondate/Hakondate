@@ -256,4 +256,34 @@ class MenuModel with _$MenuModel {
 
     return sum;
   }
+
+  double get vitamin {
+    final MenuModel menu = this;
+
+    if (menu is! LunchesDayMenuModel) {
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
+    }
+
+    double sum = 0;
+    for (final DishModel dish in menu.dishes) {
+      sum += dish.vitamin;
+    }
+
+    return sum;
+  }
+
+  double get mineral {
+    final MenuModel menu = this;
+
+    if (menu is! LunchesDayMenuModel) {
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
+    }
+
+    double sum = 0;
+    for (final DishModel dish in menu.dishes) {
+      sum += dish.mineral;
+    }
+
+    return sum;
+  }
 }

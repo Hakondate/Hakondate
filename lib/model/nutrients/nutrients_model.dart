@@ -24,7 +24,11 @@ class NutrientsModel with _$NutrientsModel {
     @Default(0.0) double dietaryFiber,  // 食物繊維
     @Default(0.0) double salt,          // 食塩相当量
   }) = _NutrientsModel;
+  const NutrientsModel._();
 
   factory NutrientsModel.fromJson(Map<String, Object?> json) =>
       _$NutrientsModelFromJson(json);
+
+  double get vitamin => retinol / 1000 + vitaminB1 + vitaminB2 + vitaminC;
+  double get mineral => calcium + magnesium + iron + zinc;
 }

@@ -1,10 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:hakondate/constant/app_key.dart';
 import 'package:hakondate/constant/record_date.dart';
+import 'package:hakondate/repository/local/sqlite/dictionary_items/dictionary_items_local_repository.dart';
 import 'package:hakondate/repository/local/sqlite/menus/menus_local_repository.dart';
 import 'package:hakondate/repository/local/sqlite/schools/schools_local_repository.dart';
 import 'package:hakondate/repository/remote/menus/menus_remote_repository.dart';
@@ -22,6 +26,7 @@ class SplashViewModel extends _$SplashViewModel {
   late final SchoolsRemoteRepositoryAPI _schoolsRemoteRepository;
   late final MenusLocalRepositoryAPI _menusLocalRepository;
   late final MenusRemoteRepositoryAPI _menusRemoteRepository;
+  late final DictionaryItemsLocalRepositoryAPI _dictionaryItemsLocalRepository;
 
   @override
   SplashState build() {
@@ -29,6 +34,7 @@ class SplashViewModel extends _$SplashViewModel {
     _schoolsRemoteRepository = ref.watch(schoolsRemoteRepositoryProvider);
     _menusLocalRepository = ref.watch(menusLocalRepositoryProvider);
     _menusRemoteRepository = ref.watch(menusRemoteRepositoryProvider);
+    _dictionaryItemsLocalRepository = ref.watch(dictionaryItemsLocalRepositoryProvider);
 
     return SplashState();
   }
@@ -57,6 +63,15 @@ class SplashViewModel extends _$SplashViewModel {
           if (termsUpdated != null) return await termsUpdated();
         }
 
+        final DateTime dictionaryInitializedDay = DateTime.fromMillisecondsSinceEpoch(
+          prefs.getInt(AppKey.sharedPreferencesKey.initializedDictionaryDay) ?? 0,
+        );
+
+        if (dictionaryInitializedDay.isBefore(RecordDate.dictionaryLastUpdateDay)) {
+          await _initializeDictionaries();
+          await prefs.setInt(AppKey.sharedPreferencesKey.initializedDictionaryDay, DateTime.now().millisecondsSinceEpoch);
+        }
+
         await _initializeMenus();
         routemaster.replace('/home');
         state = SplashState();
@@ -67,6 +82,18 @@ class SplashViewModel extends _$SplashViewModel {
 
         if (errorOccurred != null) return errorOccurred(error, stack);
       }
+    });
+  }
+
+  Future<void> _initializeDictionaries() async {
+    state = SplashState(status: LoadingStatus.reading);
+    final String loadString = await rootBundle.loadString('assets/initialization_data/dictionary.json');
+    final Map<String, dynamic> decodedJson = json.decode(loadString) as Map<String, dynamic>;
+    final List<dynamic> dictionary = decodedJson['dictionary'] as List<dynamic>;
+
+    state = SplashState(status: LoadingStatus.updating);
+    await Future.forEach(dictionary, (dynamic item) async {
+      await _dictionaryItemsLocalRepository.add(item as Map<String, dynamic>);
     });
   }
 
