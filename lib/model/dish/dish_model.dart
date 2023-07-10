@@ -148,4 +148,22 @@ class DishModel with _$DishModel {
 
     return sum;
   }
+
+  double get vitamin {
+    double sum = 0;
+    for (final FoodstuffModel foodstuff in foodstuffs) {
+      sum += foodstuff.nutrients.vitamin;
+    }
+
+    return sum;
+  }
+
+  double get mineral {
+    double sum = 0;
+    for (final FoodstuffModel foodstuff in foodstuffs) {
+      sum += foodstuff.nutrients.mineral;
+    }
+
+    return sum;
+  }
 }

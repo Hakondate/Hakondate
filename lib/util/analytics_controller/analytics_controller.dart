@@ -34,7 +34,7 @@ class AnalyticsController extends _$AnalyticsController {
 
   Future<void> logViewDictionary(int id) async {
     await state.logSelectContent(
-      contentType: 'foodstuff',
+      contentType: 'dictionary_item',
       itemId: id.toString(),
     );
     await state.logScreenView(

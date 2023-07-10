@@ -6,6 +6,7 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import 'package:hakondate/repository/local/sqlite/table/dictionary_items_table.dart';
 import 'package:hakondate/repository/local/sqlite/table/dish_foodstuffs_table.dart';
 import 'package:hakondate/repository/local/sqlite/table/dishes_table.dart';
 import 'package:hakondate/repository/local/sqlite/table/foodstuffs_table.dart';
@@ -37,6 +38,7 @@ LocalDatabase localDatabase (LocalDatabaseRef ref) {
     DishFoodstuffsTable,
     FoodstuffsTable,
     UsersTable,
+    DictionaryItemsTable,
   ],
 )
 class LocalDatabase extends _$LocalDatabase {
