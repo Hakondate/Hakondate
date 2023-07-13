@@ -56,10 +56,8 @@ class UserViewModel extends _$UserViewModel {
       );
 
       await v1UserFile.delete(recursive: true);
-    } on Exception catch (error, stack) {
+    } on Exception catch (_) {
       debugPrint('Infomation: User for v1 does not exist or cannot be read');
-      debugPrint(error.toString());
-      debugPrint(stack.toString());
     }
   }
 
