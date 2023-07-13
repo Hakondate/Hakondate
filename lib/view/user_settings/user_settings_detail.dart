@@ -11,6 +11,7 @@ import 'package:hakondate/view/component/dialog/help_dialog.dart';
 import 'package:hakondate/view/component/frame/fade_up_app_bar.dart';
 import 'package:hakondate/view/component/label/setting_label.dart';
 import 'package:hakondate/view/signup/signing_up_dialog.dart';
+import 'package:hakondate/view/user_settings/user_edit_dialog.dart';
 import 'package:hakondate/view_model/single_page/signup/signup_view_model.dart';
 import 'package:hakondate/view_model/single_page/user_settings/user_settings_view_model.dart';
 
@@ -219,6 +220,9 @@ class UserSettingsDetail extends ConsumerWidget {
   Widget _submitButton() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
+        final AsyncValue<UserSettingsState> state =
+            ref.watch(userSettingsViewModelProvider);
+
         return Padding(
           padding: const EdgeInsets.all(PaddingSize.normal),
           child: Row(
@@ -241,8 +245,15 @@ class UserSettingsDetail extends ConsumerWidget {
                       .checkValidation()) {
                     return showDialog(
                       context: context,
-                      builder: (BuildContext context) =>
-                          const SigningUpDialog(),
+                      builder: (BuildContext context) {
+                        state.whenData((UserSettingsState data) {
+                          if (data.editingUser != null) {
+                            debugPrint(data.editingUser!.name);
+                            return const UserEditDialog();
+                          }
+                        });
+                        return const SigningUpDialog();
+                      },
                     );
                   }
                 },

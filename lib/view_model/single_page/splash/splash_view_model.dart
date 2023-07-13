@@ -81,8 +81,9 @@ class SplashViewModel extends _$SplashViewModel {
         }
 
         await _initializeMenus();
-        routemaster.push('/home');
+        routemaster.replace('/home');
         state = SplashState();
+        debugPrint('initilize completed');
       } on Exception catch (error, stack) {
         debugPrint(error.toString());
         debugPrint(stack.toString());
@@ -107,10 +108,12 @@ class SplashViewModel extends _$SplashViewModel {
 
   Future<void> _initializeSchools() async {
     state = SplashState(status: LoadingStatus.reading);
-    final DateTime latestUpdate = await _schoolsLocalRepository.getLatestUpdateDay();
+    final DateTime latestUpdate =
+        await _schoolsLocalRepository.getLatestUpdateDay();
 
     state = SplashState(status: LoadingStatus.checkingUpdate);
-    final List<dynamic> schools = await _schoolsRemoteRepository.get(updateAt: latestUpdate.add(const Duration(seconds: 1)));
+    final List<dynamic> schools = await _schoolsRemoteRepository.get(
+        updateAt: latestUpdate.add(const Duration(seconds: 1)));
 
     state = SplashState(status: LoadingStatus.updating);
     await Future.forEach(schools, (dynamic school) async {
@@ -120,10 +123,12 @@ class SplashViewModel extends _$SplashViewModel {
 
   Future<void> _initializeMenus() async {
     state = SplashState(status: LoadingStatus.reading);
-    final DateTime latestUpdate = await _menusLocalRepository.getLatestUpdateDay();
+    final DateTime latestUpdate =
+        await _menusLocalRepository.getLatestUpdateDay();
 
     state = SplashState(status: LoadingStatus.checkingUpdate);
-    final List<dynamic> menus = await _menusRemoteRepository.get(updateAt: latestUpdate.add(const Duration(seconds: 1)));
+    final List<dynamic> menus = await _menusRemoteRepository.get(
+        updateAt: latestUpdate.add(const Duration(seconds: 1)));
 
     state = SplashState(status: LoadingStatus.updating);
     await Future.forEach(menus, (dynamic menu) async {

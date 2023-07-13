@@ -12,8 +12,8 @@ import 'package:hakondate/view/component/dialog/hakondate_dialog/hakondate_dialo
 import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
 import 'package:hakondate/view_model/single_page/signup/signup_view_model.dart';
 
-class SigningUpDialog extends ConsumerWidget {
-  const SigningUpDialog({super.key});
+class UserEditDialog extends ConsumerWidget {
+  const UserEditDialog({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -31,10 +31,7 @@ class SigningUpDialog extends ConsumerWidget {
                   margin: const EdgeInsets.symmetric(
                     vertical: MarginSize.minimum,
                   ),
-                  child: const Text(
-                    '以下の内容でお子様を登録します\n'
-                    '※ あとで変更することができます',
-                  ),
+                  child: const Text('以下の内容でお子様の変更を登録します'),
                 ),
                 DefaultTextStyle(
                   style: TextStyle(
@@ -71,9 +68,9 @@ class SigningUpDialog extends ConsumerWidget {
             ),
           ),
           firstAction: HakondateActionButton.primary(
-            text: const Text('登録する'),
+            text: const Text('変更を登録する'),
             onTap: () async {
-              unawaited(ref.read(signupViewModelProvider.notifier).signup());
+              unawaited(ref.read(signupViewModelProvider.notifier).edit());
               await routemaster.pop().whenComplete(
                     () async => showDialog(
                       context: context,
@@ -115,9 +112,7 @@ class SigningUpDialog extends ConsumerWidget {
             body: const Text('ユーザ情報の登録が成功しました'),
             firstAction: HakondateActionButton.primary(
               text: const Text('はじめる'),
-              onTap: () => routemaster
-                  .pop()
-                  .whenComplete(() => routemaster.replace('/splash')),
+              onTap: () => routemaster.push('/splash'),
             ),
           );
         }

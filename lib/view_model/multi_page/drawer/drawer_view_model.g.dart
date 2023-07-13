@@ -6,12 +6,12 @@ part of 'drawer_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$drawerViewModelHash() => r'b573079f2b4d61d9c3b537d3c4f75968229916cb';
+String _$drawerViewModelHash() => r'fc93230080345677694a31ef11617f6daa1a5cee';
 
 /// See also [DrawerViewModel].
 @ProviderFor(DrawerViewModel)
 final drawerViewModelProvider =
-    AutoDisposeNotifierProvider<DrawerViewModel, DrawerState>.internal(
+    NotifierProvider<DrawerViewModel, DrawerState>.internal(
   DrawerViewModel.new,
   name: r'drawerViewModelProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')

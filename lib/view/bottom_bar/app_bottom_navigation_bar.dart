@@ -16,6 +16,7 @@ class AppBottomNavigationBar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final TabPageState tabState = TabPage.of(context);
+    debugPrint('tabState.controller.index: ${tabState.controller.index}');
 
     return Scaffold(
       key: ref.watch(drawerViewModelProvider).scaffoldKey,
@@ -25,7 +26,8 @@ class AppBottomNavigationBar extends ConsumerWidget {
         controller: tabState.controller,
         physics: const NeverScrollableScrollPhysics(),
         children: <Widget>[
-          for (final PageStack stack in tabState.stacks) PageStackNavigator(stack: stack),
+          for (final PageStack stack in tabState.stacks)
+            PageStackNavigator(stack: stack),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -52,7 +54,8 @@ class AppBottomNavigationBar extends ConsumerWidget {
           ),
           _svgBottomNavigationBarItem(
             activeIconPath: SvgPath.bottomNavigationBarIcons.activeDictionary,
-            inactiveIconPath: SvgPath.bottomNavigationBarIcons.inactiveDictionary,
+            inactiveIconPath:
+                SvgPath.bottomNavigationBarIcons.inactiveDictionary,
             label: 'ずかん',
           ),
           _svgBottomNavigationBarItem(
