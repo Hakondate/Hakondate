@@ -25,9 +25,6 @@ class SignupViewModel extends _$SignupViewModel {
     final SchoolsLocalRepository schoolLocalRepository =
         ref.watch(schoolsLocalRepositoryProvider);
     final List<SchoolModel> schools = await schoolLocalRepository.list();
-    for (final SchoolModel school in schools) {
-      debugPrint(school.name);
-    }
 
     if (editingUser != null) {
       debugPrint('SignupViewModel build with editingUser');
@@ -73,6 +70,35 @@ class SignupViewModel extends _$SignupViewModel {
         }
 
         await ref.read(userViewModelProvider.notifier).createUser(
+              name: name,
+              schoolId: schoolId,
+              schoolYear: schoolYear,
+            );
+        state = cache;
+      } on Exception catch (error, stack) {
+        debugPrint(error.toString());
+        debugPrint(stack.toString());
+        state = AsyncError<SignupState>(error, stack).copyWithPrevious(cache);
+      }
+    });
+  }
+
+  Future<void> edit() async {
+    final AsyncValue<SignupState> cache = state;
+
+    cache.whenData((SignupState data) async {
+      state = const AsyncLoading<SignupState>();
+
+      final String? name = data.name;
+      final int? schoolId = data.schoolId;
+      final int? schoolYear = data.schoolYear;
+
+      try {
+        if (name == null || schoolId == null || schoolYear == null) {
+          throw const ParametersException('Do not allow Null parameter');
+        }
+
+        await ref.read(userViewModelProvider.notifier).updateCurrentUser(
               name: name,
               schoolId: schoolId,
               schoolYear: schoolYear,
