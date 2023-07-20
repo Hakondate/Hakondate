@@ -1,8 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:path_provider/path_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -30,6 +33,32 @@ class UserViewModel extends _$UserViewModel {
     _schoolsLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
     
     return const UserState();
+  }
+
+  Future<void> migrate() async {
+    final Directory directory = await getApplicationDocumentsDirectory();
+    try {
+      final File v1UserFile = File('${directory.path}/child.json');
+      final dynamic v1UserJson = jsonDecode(await v1UserFile.readAsString());
+
+      if (v1UserJson is! Map<String, dynamic>) return;
+
+      final String name = v1UserJson['name'] as String;
+      final SchoolModel? school = await _schoolsLocalRepository.getByName(v1UserJson['school'] as String);
+      final int schoolYear = v1UserJson['schoolYear'] as int;
+
+      if (school == null) return;
+
+      await createUser(
+        name: name,
+        schoolId: school.id,
+        schoolYear: schoolYear - 6,
+      );
+
+      await v1UserFile.delete(recursive: true);
+    } on Exception catch (_) {
+      debugPrint('Infomation: User for v1 does not exist or cannot be read');
+    }
   }
 
   Future<bool> signIn() async {

@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:hakondate/constant/app_key.dart';
 import 'package:hakondate/constant/record_date.dart';
+import 'package:hakondate/constant/version.dart';
 import 'package:hakondate/repository/local/sqlite/dictionary_items/dictionary_items_local_repository.dart';
 import 'package:hakondate/repository/local/sqlite/menus/menus_local_repository.dart';
 import 'package:hakondate/repository/local/sqlite/schools/schools_local_repository.dart';
@@ -49,11 +50,18 @@ class SplashViewModel extends _$SplashViewModel {
         await _initializeSchools();
 
         state = SplashState(status: LoadingStatus.reading);
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+        final int migrateVersion = prefs.getInt(AppKey.sharedPreferencesKey.migrateVersion) ?? 0;
+
+        if (migrateVersion < Version.migration) {
+          await ref.read(userViewModelProvider.notifier).migrate();
+          await prefs.setInt(AppKey.sharedPreferencesKey.migrateVersion, Version.migration);
+        }
+
         if (!await ref.read(userViewModelProvider.notifier).signIn()) {
           return routemaster.replace('/terms');
         }
 
-        final SharedPreferences prefs = await SharedPreferences.getInstance();
         final DateTime termsAgreedDay = DateTime.fromMillisecondsSinceEpoch(
           prefs.getInt(AppKey.sharedPreferencesKey.agreedTermsDay) ?? 0,
         );
