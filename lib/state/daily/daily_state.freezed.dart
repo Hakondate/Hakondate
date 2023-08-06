@@ -21,7 +21,7 @@ mixin _$DailyState {
   DateTime get calendarTabFirstDay => throw _privateConstructorUsedError;
   DateTime get calendarTabLastDay => throw _privateConstructorUsedError;
   MenuModel get menu => throw _privateConstructorUsedError;
-  bool get isFetching => throw _privateConstructorUsedError;
+  DishModel? get selectedDish => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DailyStateCopyWith<DailyState> get copyWith =>
@@ -40,9 +40,10 @@ abstract class $DailyStateCopyWith<$Res> {
       DateTime calendarTabFirstDay,
       DateTime calendarTabLastDay,
       MenuModel menu,
-      bool isFetching});
+      DishModel? selectedDish});
 
   $MenuModelCopyWith<$Res> get menu;
+  $DishModelCopyWith<$Res>? get selectedDish;
 }
 
 /// @nodoc
@@ -63,7 +64,7 @@ class _$DailyStateCopyWithImpl<$Res, $Val extends DailyState>
     Object? calendarTabFirstDay = null,
     Object? calendarTabLastDay = null,
     Object? menu = null,
-    Object? isFetching = null,
+    Object? selectedDish = freezed,
   }) {
     return _then(_value.copyWith(
       selectedDay: null == selectedDay
@@ -86,10 +87,10 @@ class _$DailyStateCopyWithImpl<$Res, $Val extends DailyState>
           ? _value.menu
           : menu // ignore: cast_nullable_to_non_nullable
               as MenuModel,
-      isFetching: null == isFetching
-          ? _value.isFetching
-          : isFetching // ignore: cast_nullable_to_non_nullable
-              as bool,
+      selectedDish: freezed == selectedDish
+          ? _value.selectedDish
+          : selectedDish // ignore: cast_nullable_to_non_nullable
+              as DishModel?,
     ) as $Val);
   }
 
@@ -98,6 +99,18 @@ class _$DailyStateCopyWithImpl<$Res, $Val extends DailyState>
   $MenuModelCopyWith<$Res> get menu {
     return $MenuModelCopyWith<$Res>(_value.menu, (value) {
       return _then(_value.copyWith(menu: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DishModelCopyWith<$Res>? get selectedDish {
+    if (_value.selectedDish == null) {
+      return null;
+    }
+
+    return $DishModelCopyWith<$Res>(_value.selectedDish!, (value) {
+      return _then(_value.copyWith(selectedDish: value) as $Val);
     });
   }
 }
@@ -116,10 +129,12 @@ abstract class _$$_DailyStateCopyWith<$Res>
       DateTime calendarTabFirstDay,
       DateTime calendarTabLastDay,
       MenuModel menu,
-      bool isFetching});
+      DishModel? selectedDish});
 
   @override
   $MenuModelCopyWith<$Res> get menu;
+  @override
+  $DishModelCopyWith<$Res>? get selectedDish;
 }
 
 /// @nodoc
@@ -138,7 +153,7 @@ class __$$_DailyStateCopyWithImpl<$Res>
     Object? calendarTabFirstDay = null,
     Object? calendarTabLastDay = null,
     Object? menu = null,
-    Object? isFetching = null,
+    Object? selectedDish = freezed,
   }) {
     return _then(_$_DailyState(
       selectedDay: null == selectedDay
@@ -161,10 +176,10 @@ class __$$_DailyStateCopyWithImpl<$Res>
           ? _value.menu
           : menu // ignore: cast_nullable_to_non_nullable
               as MenuModel,
-      isFetching: null == isFetching
-          ? _value.isFetching
-          : isFetching // ignore: cast_nullable_to_non_nullable
-              as bool,
+      selectedDish: freezed == selectedDish
+          ? _value.selectedDish
+          : selectedDish // ignore: cast_nullable_to_non_nullable
+              as DishModel?,
     ));
   }
 }
@@ -178,7 +193,7 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
       required this.calendarTabFirstDay,
       required this.calendarTabLastDay,
       this.menu = const MenuModel.noData(),
-      this.isFetching = true});
+      this.selectedDish});
 
   @override
   final DateTime selectedDay;
@@ -192,12 +207,11 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
   @JsonKey()
   final MenuModel menu;
   @override
-  @JsonKey()
-  final bool isFetching;
+  final DishModel? selectedDish;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DailyState(selectedDay: $selectedDay, focusedDay: $focusedDay, calendarTabFirstDay: $calendarTabFirstDay, calendarTabLastDay: $calendarTabLastDay, menu: $menu, isFetching: $isFetching)';
+    return 'DailyState(selectedDay: $selectedDay, focusedDay: $focusedDay, calendarTabFirstDay: $calendarTabFirstDay, calendarTabLastDay: $calendarTabLastDay, menu: $menu, selectedDish: $selectedDish)';
   }
 
   @override
@@ -210,7 +224,7 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
       ..add(DiagnosticsProperty('calendarTabFirstDay', calendarTabFirstDay))
       ..add(DiagnosticsProperty('calendarTabLastDay', calendarTabLastDay))
       ..add(DiagnosticsProperty('menu', menu))
-      ..add(DiagnosticsProperty('isFetching', isFetching));
+      ..add(DiagnosticsProperty('selectedDish', selectedDish));
   }
 
   @override
@@ -227,13 +241,13 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
             (identical(other.calendarTabLastDay, calendarTabLastDay) ||
                 other.calendarTabLastDay == calendarTabLastDay) &&
             (identical(other.menu, menu) || other.menu == menu) &&
-            (identical(other.isFetching, isFetching) ||
-                other.isFetching == isFetching));
+            (identical(other.selectedDish, selectedDish) ||
+                other.selectedDish == selectedDish));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, selectedDay, focusedDay,
-      calendarTabFirstDay, calendarTabLastDay, menu, isFetching);
+      calendarTabFirstDay, calendarTabLastDay, menu, selectedDish);
 
   @JsonKey(ignore: true)
   @override
@@ -249,7 +263,7 @@ abstract class _DailyState implements DailyState {
       required final DateTime calendarTabFirstDay,
       required final DateTime calendarTabLastDay,
       final MenuModel menu,
-      final bool isFetching}) = _$_DailyState;
+      final DishModel? selectedDish}) = _$_DailyState;
 
   @override
   DateTime get selectedDay;
@@ -262,7 +276,7 @@ abstract class _DailyState implements DailyState {
   @override
   MenuModel get menu;
   @override
-  bool get isFetching;
+  DishModel? get selectedDish;
   @override
   @JsonKey(ignore: true)
   _$$_DailyStateCopyWith<_$_DailyState> get copyWith =>

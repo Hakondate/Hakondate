@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/constant/app_color.dart';
+import 'package:hakondate/constant/size.dart';
 
 class LinkedAnnotation extends StatelessWidget {
   const LinkedAnnotation ({

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:hakondate/view/component/sentence/underlined_sentence.dart';
-import 'package:hakondate/view/component/sentence/square_and_headline.dart';
-import 'package:hakondate/view/component/sentence/padded_sentence.dart';
-import 'package:hakondate/view/component/sentence/linked_sentence.dart';
-import 'package:hakondate/view/component/sentence/linked_annotation.dart';
 import 'package:hakondate/constant/size.dart';
+import 'package:hakondate/view/component/sentence/linked_annotation.dart';
+import 'package:hakondate/view/component/sentence/linked_sentence.dart';
+import 'package:hakondate/view/component/sentence/padded_sentence.dart';
+import 'package:hakondate/view/component/sentence/square_and_headline.dart';
+import 'package:hakondate/view/component/sentence/underlined_sentence.dart';
 
 class InformationContentColumn extends StatelessWidget {
   const InformationContentColumn({super.key});

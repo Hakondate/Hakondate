@@ -1,17 +1,14 @@
 import 'package:drift/drift.dart';
 
+import 'package:hakondate/repository/local/sqlite/table/dishes_table.dart';
+import 'package:hakondate/repository/local/sqlite/table/foodstuffs_table.dart';
+
 @DataClassName('DishFoodstuffsSchema')
 class DishFoodstuffsTable extends Table {
-  IntColumn get dishId => integer()();
-  IntColumn get foodstuffId => integer()();
+  IntColumn get dishId => integer().references(DishesTable, #id)();
+  IntColumn get foodstuffId => integer().references(FoodstuffsTable, #id)();
 
   @override
   // ignore: always_specify_types
   Set<Column> get primaryKey => {dishId, foodstuffId};
-
-  @override
-  List<String> get customConstraints => <String>[
-    'FOREIGN KEY(dish_id) REFERENCES dishes_table(id)',
-    'FOREIGN KEY(foodstuff_id) REFERENCES foodstuffs_table(id)',
-  ];
 }
