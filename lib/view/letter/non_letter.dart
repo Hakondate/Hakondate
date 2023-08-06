@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
-import 'package:hakondate/view_model/single_page/letter_view_model.dart';
+import 'package:hakondate/view_model/single_page/letter/letter_view_model.dart';
 
 class NonLetter extends StatelessWidget {
   const NonLetter({super.key});
@@ -35,7 +35,7 @@ class NonLetter extends StatelessWidget {
           Consumer(
             builder: (BuildContext context, WidgetRef ref, _) {
               return GestureDetector(
-                onTap: () => ref.read(letterProvider.notifier).reloadLetters(),
+                onTap: () => ref.read(letterViewModelProvider.notifier).reloadLetters(),
                 child: Text(
                   '更新する',
                   style: TextStyle(

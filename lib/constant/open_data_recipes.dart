@@ -335,13 +335,11 @@ class OpenDataRecipes {
     OpenDataRecipeModel(
       id: 43,
       name: '学校給食のだしの取り方',
-      type: RecipeType.other,
       pdf: 'dashi.pdf',
     ),
     OpenDataRecipeModel(
       id: 44,
       name: '児童が考案したメニュー',
-      type: RecipeType.other,
       pdf: 'jidou.pdf',
     ),
   ];

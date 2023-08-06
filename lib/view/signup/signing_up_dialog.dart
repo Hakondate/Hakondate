@@ -9,8 +9,8 @@ import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/signup/signup_state.dart';
 import 'package:hakondate/view/component/dialog/hakondate_dialog/hakondate_dialog.dart';
-import 'package:hakondate/view_model/multi_page/user_view_model.dart';
-import 'package:hakondate/view_model/single_page/signup_view_model.dart';
+import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
+import 'package:hakondate/view_model/single_page/signup/signup_view_model.dart';
 
 class SigningUpDialog extends ConsumerWidget {
   const SigningUpDialog({super.key});
@@ -19,7 +19,7 @@ class SigningUpDialog extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        final SignupState store = ref.watch(signupProvider);
+        final AsyncValue<SignupState> state = ref.watch(signupViewModelProvider);
         return HakondateDialog(
           title: const Text('確認'),
           body: Padding(
@@ -30,7 +30,7 @@ class SigningUpDialog extends ConsumerWidget {
                   margin: const EdgeInsets.symmetric(vertical: MarginSize.minimum),
                   child: const Text(
                     '以下の内容でお子様を登録します\n'
-                        '※ あとで変更することができます',
+                    '※ あとで変更することができます',
                   ),
                 ),
                 DefaultTextStyle(
@@ -43,9 +43,9 @@ class SigningUpDialog extends ConsumerWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Column(
+                      const Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
-                        children: const <Widget>[
+                        children: <Widget>[
                           Text('お名前：　'),
                           Text('学校：　'),
                           Text('学年：　'),
@@ -54,10 +54,10 @@ class SigningUpDialog extends ConsumerWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          if (store is SignupStateData) ...<Widget>[
-                            Text(store.name!),
-                            Text(store.schoolTrailing),
-                            Text(store.schoolYearTrailing),
+                          if (state is AsyncData<SignupState>) ...<Widget>[
+                            Text(state.value.name!),
+                            Text(state.value.schoolTrailing),
+                            Text(state.value.schoolYearTrailing),
                           ],
                         ],
                       ),
@@ -70,7 +70,7 @@ class SigningUpDialog extends ConsumerWidget {
           firstAction: HakondateActionButton.primary(
             text: const Text('登録する'),
             onTap: () async {
-              unawaited(ref.read(signupProvider.notifier).signup());
+              unawaited(ref.read(signupViewModelProvider.notifier).signup());
               await routemaster.pop().whenComplete(() async => showDialog(
                   context: context,
                   barrierDismissible: false,
@@ -91,19 +91,19 @@ class SigningUpDialog extends ConsumerWidget {
   Widget _statusDialog() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        final SignupState store = ref.watch(signupProvider);
-        if (store is SignupStateError) {
+        final AsyncValue<SignupState> state = ref.watch(signupViewModelProvider);
+        if (state is AsyncError<SignupState>) {
           return HakondateDialog(
             title: const Text('登録失敗'),
             body: const Text('ユーザ情報の登録に失敗しました\nもう一度お試しください'),
             firstAction: HakondateActionButton.primary(
               text: const Text('リトライ'),
-              onTap: () => ref.read(signupProvider.notifier).retry(),
+              onTap: () => ref.read(signupViewModelProvider.notifier).retry(),
             ),
           );
         }
 
-        if (store is! SignupStateLoad && ref.watch(userProvider).currentUser != null) {
+        if (state is! AsyncLoading<SignupState> && ref.watch(userViewModelProvider).currentUser != null) {
           return HakondateDialog(
             title: const Text('登録完了'),
             body: const Text('ユーザ情報の登録が成功しました'),

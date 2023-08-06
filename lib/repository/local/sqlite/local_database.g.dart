@@ -383,7 +383,10 @@ class $MenusTableTable extends MenusTable
   @override
   late final GeneratedColumn<int> schoolId = GeneratedColumn<int>(
       'school_id', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
+      type: DriftSqlType.int,
+      requiredDuringInsert: true,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES schools_table (id)'));
   static const VerificationMeta _eventMeta = const VerificationMeta('event');
   @override
   late final GeneratedColumn<String> event = GeneratedColumn<String>(
@@ -678,178 +681,6 @@ class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
   }
 }
 
-class $MenuDishesTableTable extends MenuDishesTable
-    with TableInfo<$MenuDishesTableTable, MenuDishesSchema> {
-  @override
-  final GeneratedDatabase attachedDatabase;
-  final String? _alias;
-  $MenuDishesTableTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _menuIdMeta = const VerificationMeta('menuId');
-  @override
-  late final GeneratedColumn<int> menuId = GeneratedColumn<int>(
-      'menu_id', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
-  static const VerificationMeta _dishIdMeta = const VerificationMeta('dishId');
-  @override
-  late final GeneratedColumn<int> dishId = GeneratedColumn<int>(
-      'dish_id', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
-  @override
-  List<GeneratedColumn> get $columns => [menuId, dishId];
-  @override
-  String get aliasedName => _alias ?? 'menu_dishes_table';
-  @override
-  String get actualTableName => 'menu_dishes_table';
-  @override
-  VerificationContext validateIntegrity(Insertable<MenuDishesSchema> instance,
-      {bool isInserting = false}) {
-    final context = VerificationContext();
-    final data = instance.toColumns(true);
-    if (data.containsKey('menu_id')) {
-      context.handle(_menuIdMeta,
-          menuId.isAcceptableOrUnknown(data['menu_id']!, _menuIdMeta));
-    } else if (isInserting) {
-      context.missing(_menuIdMeta);
-    }
-    if (data.containsKey('dish_id')) {
-      context.handle(_dishIdMeta,
-          dishId.isAcceptableOrUnknown(data['dish_id']!, _dishIdMeta));
-    } else if (isInserting) {
-      context.missing(_dishIdMeta);
-    }
-    return context;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {menuId, dishId};
-  @override
-  MenuDishesSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return MenuDishesSchema(
-      menuId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}menu_id'])!,
-      dishId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}dish_id'])!,
-    );
-  }
-
-  @override
-  $MenuDishesTableTable createAlias(String alias) {
-    return $MenuDishesTableTable(attachedDatabase, alias);
-  }
-}
-
-class MenuDishesSchema extends DataClass
-    implements Insertable<MenuDishesSchema> {
-  final int menuId;
-  final int dishId;
-  const MenuDishesSchema({required this.menuId, required this.dishId});
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    map['menu_id'] = Variable<int>(menuId);
-    map['dish_id'] = Variable<int>(dishId);
-    return map;
-  }
-
-  MenuDishesTableCompanion toCompanion(bool nullToAbsent) {
-    return MenuDishesTableCompanion(
-      menuId: Value(menuId),
-      dishId: Value(dishId),
-    );
-  }
-
-  factory MenuDishesSchema.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return MenuDishesSchema(
-      menuId: serializer.fromJson<int>(json['menuId']),
-      dishId: serializer.fromJson<int>(json['dishId']),
-    );
-  }
-  @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{
-      'menuId': serializer.toJson<int>(menuId),
-      'dishId': serializer.toJson<int>(dishId),
-    };
-  }
-
-  MenuDishesSchema copyWith({int? menuId, int? dishId}) => MenuDishesSchema(
-        menuId: menuId ?? this.menuId,
-        dishId: dishId ?? this.dishId,
-      );
-  @override
-  String toString() {
-    return (StringBuffer('MenuDishesSchema(')
-          ..write('menuId: $menuId, ')
-          ..write('dishId: $dishId')
-          ..write(')'))
-        .toString();
-  }
-
-  @override
-  int get hashCode => Object.hash(menuId, dishId);
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is MenuDishesSchema &&
-          other.menuId == this.menuId &&
-          other.dishId == this.dishId);
-}
-
-class MenuDishesTableCompanion extends UpdateCompanion<MenuDishesSchema> {
-  final Value<int> menuId;
-  final Value<int> dishId;
-  const MenuDishesTableCompanion({
-    this.menuId = const Value.absent(),
-    this.dishId = const Value.absent(),
-  });
-  MenuDishesTableCompanion.insert({
-    required int menuId,
-    required int dishId,
-  })  : menuId = Value(menuId),
-        dishId = Value(dishId);
-  static Insertable<MenuDishesSchema> custom({
-    Expression<int>? menuId,
-    Expression<int>? dishId,
-  }) {
-    return RawValuesInsertable({
-      if (menuId != null) 'menu_id': menuId,
-      if (dishId != null) 'dish_id': dishId,
-    });
-  }
-
-  MenuDishesTableCompanion copyWith({Value<int>? menuId, Value<int>? dishId}) {
-    return MenuDishesTableCompanion(
-      menuId: menuId ?? this.menuId,
-      dishId: dishId ?? this.dishId,
-    );
-  }
-
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    if (menuId.present) {
-      map['menu_id'] = Variable<int>(menuId.value);
-    }
-    if (dishId.present) {
-      map['dish_id'] = Variable<int>(dishId.value);
-    }
-    return map;
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('MenuDishesTableCompanion(')
-          ..write('menuId: $menuId, ')
-          ..write('dishId: $dishId')
-          ..write(')'))
-        .toString();
-  }
-}
-
 class $DishesTableTable extends DishesTable
     with TableInfo<$DishesTableTable, DishesSchema> {
   @override
@@ -1062,180 +893,194 @@ class DishesTableCompanion extends UpdateCompanion<DishesSchema> {
   }
 }
 
-class $DishFoodstuffsTableTable extends DishFoodstuffsTable
-    with TableInfo<$DishFoodstuffsTableTable, DishFoodstuffsSchema> {
+class $MenuDishesTableTable extends MenuDishesTable
+    with TableInfo<$MenuDishesTableTable, MenuDishesSchema> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $DishFoodstuffsTableTable(this.attachedDatabase, [this._alias]);
+  $MenuDishesTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _menuIdMeta = const VerificationMeta('menuId');
+  @override
+  late final GeneratedColumn<int> menuId = GeneratedColumn<int>(
+      'menu_id', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: true,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES menus_table (id)'));
   static const VerificationMeta _dishIdMeta = const VerificationMeta('dishId');
   @override
   late final GeneratedColumn<int> dishId = GeneratedColumn<int>(
       'dish_id', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
-  static const VerificationMeta _foodstuffIdMeta =
-      const VerificationMeta('foodstuffId');
+      type: DriftSqlType.int,
+      requiredDuringInsert: true,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES dishes_table (id)'));
   @override
-  late final GeneratedColumn<int> foodstuffId = GeneratedColumn<int>(
-      'foodstuff_id', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
+  List<GeneratedColumn> get $columns => [menuId, dishId];
   @override
-  List<GeneratedColumn> get $columns => [dishId, foodstuffId];
+  String get aliasedName => _alias ?? 'menu_dishes_table';
   @override
-  String get aliasedName => _alias ?? 'dish_foodstuffs_table';
+  String get actualTableName => 'menu_dishes_table';
   @override
-  String get actualTableName => 'dish_foodstuffs_table';
-  @override
-  VerificationContext validateIntegrity(
-      Insertable<DishFoodstuffsSchema> instance,
+  VerificationContext validateIntegrity(Insertable<MenuDishesSchema> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
+    if (data.containsKey('menu_id')) {
+      context.handle(_menuIdMeta,
+          menuId.isAcceptableOrUnknown(data['menu_id']!, _menuIdMeta));
+    } else if (isInserting) {
+      context.missing(_menuIdMeta);
+    }
     if (data.containsKey('dish_id')) {
       context.handle(_dishIdMeta,
           dishId.isAcceptableOrUnknown(data['dish_id']!, _dishIdMeta));
     } else if (isInserting) {
       context.missing(_dishIdMeta);
     }
-    if (data.containsKey('foodstuff_id')) {
-      context.handle(
-          _foodstuffIdMeta,
-          foodstuffId.isAcceptableOrUnknown(
-              data['foodstuff_id']!, _foodstuffIdMeta));
-    } else if (isInserting) {
-      context.missing(_foodstuffIdMeta);
-    }
     return context;
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => {dishId, foodstuffId};
+  Set<GeneratedColumn> get $primaryKey => const {};
   @override
-  DishFoodstuffsSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
+  List<Set<GeneratedColumn>> get uniqueKeys => [
+        {menuId, dishId},
+      ];
+  @override
+  MenuDishesSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return DishFoodstuffsSchema(
+    return MenuDishesSchema(
+      menuId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}menu_id'])!,
       dishId: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}dish_id'])!,
-      foodstuffId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}foodstuff_id'])!,
     );
   }
 
   @override
-  $DishFoodstuffsTableTable createAlias(String alias) {
-    return $DishFoodstuffsTableTable(attachedDatabase, alias);
+  $MenuDishesTableTable createAlias(String alias) {
+    return $MenuDishesTableTable(attachedDatabase, alias);
   }
 }
 
-class DishFoodstuffsSchema extends DataClass
-    implements Insertable<DishFoodstuffsSchema> {
+class MenuDishesSchema extends DataClass
+    implements Insertable<MenuDishesSchema> {
+  final int menuId;
   final int dishId;
-  final int foodstuffId;
-  const DishFoodstuffsSchema({required this.dishId, required this.foodstuffId});
+  const MenuDishesSchema({required this.menuId, required this.dishId});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
+    map['menu_id'] = Variable<int>(menuId);
     map['dish_id'] = Variable<int>(dishId);
-    map['foodstuff_id'] = Variable<int>(foodstuffId);
     return map;
   }
 
-  DishFoodstuffsTableCompanion toCompanion(bool nullToAbsent) {
-    return DishFoodstuffsTableCompanion(
+  MenuDishesTableCompanion toCompanion(bool nullToAbsent) {
+    return MenuDishesTableCompanion(
+      menuId: Value(menuId),
       dishId: Value(dishId),
-      foodstuffId: Value(foodstuffId),
     );
   }
 
-  factory DishFoodstuffsSchema.fromJson(Map<String, dynamic> json,
+  factory MenuDishesSchema.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return DishFoodstuffsSchema(
+    return MenuDishesSchema(
+      menuId: serializer.fromJson<int>(json['menuId']),
       dishId: serializer.fromJson<int>(json['dishId']),
-      foodstuffId: serializer.fromJson<int>(json['foodstuffId']),
     );
   }
   @override
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
+      'menuId': serializer.toJson<int>(menuId),
       'dishId': serializer.toJson<int>(dishId),
-      'foodstuffId': serializer.toJson<int>(foodstuffId),
     };
   }
 
-  DishFoodstuffsSchema copyWith({int? dishId, int? foodstuffId}) =>
-      DishFoodstuffsSchema(
+  MenuDishesSchema copyWith({int? menuId, int? dishId}) => MenuDishesSchema(
+        menuId: menuId ?? this.menuId,
         dishId: dishId ?? this.dishId,
-        foodstuffId: foodstuffId ?? this.foodstuffId,
       );
   @override
   String toString() {
-    return (StringBuffer('DishFoodstuffsSchema(')
-          ..write('dishId: $dishId, ')
-          ..write('foodstuffId: $foodstuffId')
+    return (StringBuffer('MenuDishesSchema(')
+          ..write('menuId: $menuId, ')
+          ..write('dishId: $dishId')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(dishId, foodstuffId);
+  int get hashCode => Object.hash(menuId, dishId);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is DishFoodstuffsSchema &&
-          other.dishId == this.dishId &&
-          other.foodstuffId == this.foodstuffId);
+      (other is MenuDishesSchema &&
+          other.menuId == this.menuId &&
+          other.dishId == this.dishId);
 }
 
-class DishFoodstuffsTableCompanion
-    extends UpdateCompanion<DishFoodstuffsSchema> {
+class MenuDishesTableCompanion extends UpdateCompanion<MenuDishesSchema> {
+  final Value<int> menuId;
   final Value<int> dishId;
-  final Value<int> foodstuffId;
-  const DishFoodstuffsTableCompanion({
+  final Value<int> rowid;
+  const MenuDishesTableCompanion({
+    this.menuId = const Value.absent(),
     this.dishId = const Value.absent(),
-    this.foodstuffId = const Value.absent(),
+    this.rowid = const Value.absent(),
   });
-  DishFoodstuffsTableCompanion.insert({
+  MenuDishesTableCompanion.insert({
+    required int menuId,
     required int dishId,
-    required int foodstuffId,
-  })  : dishId = Value(dishId),
-        foodstuffId = Value(foodstuffId);
-  static Insertable<DishFoodstuffsSchema> custom({
+    this.rowid = const Value.absent(),
+  })  : menuId = Value(menuId),
+        dishId = Value(dishId);
+  static Insertable<MenuDishesSchema> custom({
+    Expression<int>? menuId,
     Expression<int>? dishId,
-    Expression<int>? foodstuffId,
+    Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
+      if (menuId != null) 'menu_id': menuId,
       if (dishId != null) 'dish_id': dishId,
-      if (foodstuffId != null) 'foodstuff_id': foodstuffId,
+      if (rowid != null) 'rowid': rowid,
     });
   }
 
-  DishFoodstuffsTableCompanion copyWith(
-      {Value<int>? dishId, Value<int>? foodstuffId}) {
-    return DishFoodstuffsTableCompanion(
+  MenuDishesTableCompanion copyWith(
+      {Value<int>? menuId, Value<int>? dishId, Value<int>? rowid}) {
+    return MenuDishesTableCompanion(
+      menuId: menuId ?? this.menuId,
       dishId: dishId ?? this.dishId,
-      foodstuffId: foodstuffId ?? this.foodstuffId,
+      rowid: rowid ?? this.rowid,
     );
   }
 
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
+    if (menuId.present) {
+      map['menu_id'] = Variable<int>(menuId.value);
+    }
     if (dishId.present) {
       map['dish_id'] = Variable<int>(dishId.value);
     }
-    if (foodstuffId.present) {
-      map['foodstuff_id'] = Variable<int>(foodstuffId.value);
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
     }
     return map;
   }
 
   @override
   String toString() {
-    return (StringBuffer('DishFoodstuffsTableCompanion(')
+    return (StringBuffer('MenuDishesTableCompanion(')
+          ..write('menuId: $menuId, ')
           ..write('dishId: $dishId, ')
-          ..write('foodstuffId: $foodstuffId')
+          ..write('rowid: $rowid')
           ..write(')'))
         .toString();
   }
@@ -2196,6 +2041,201 @@ class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
   }
 }
 
+class $DishFoodstuffsTableTable extends DishFoodstuffsTable
+    with TableInfo<$DishFoodstuffsTableTable, DishFoodstuffsSchema> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $DishFoodstuffsTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _dishIdMeta = const VerificationMeta('dishId');
+  @override
+  late final GeneratedColumn<int> dishId = GeneratedColumn<int>(
+      'dish_id', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: true,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES dishes_table (id)'));
+  static const VerificationMeta _foodstuffIdMeta =
+      const VerificationMeta('foodstuffId');
+  @override
+  late final GeneratedColumn<int> foodstuffId = GeneratedColumn<int>(
+      'foodstuff_id', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: true,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'REFERENCES foodstuffs_table (id)'));
+  @override
+  List<GeneratedColumn> get $columns => [dishId, foodstuffId];
+  @override
+  String get aliasedName => _alias ?? 'dish_foodstuffs_table';
+  @override
+  String get actualTableName => 'dish_foodstuffs_table';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<DishFoodstuffsSchema> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('dish_id')) {
+      context.handle(_dishIdMeta,
+          dishId.isAcceptableOrUnknown(data['dish_id']!, _dishIdMeta));
+    } else if (isInserting) {
+      context.missing(_dishIdMeta);
+    }
+    if (data.containsKey('foodstuff_id')) {
+      context.handle(
+          _foodstuffIdMeta,
+          foodstuffId.isAcceptableOrUnknown(
+              data['foodstuff_id']!, _foodstuffIdMeta));
+    } else if (isInserting) {
+      context.missing(_foodstuffIdMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {dishId, foodstuffId};
+  @override
+  DishFoodstuffsSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return DishFoodstuffsSchema(
+      dishId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}dish_id'])!,
+      foodstuffId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}foodstuff_id'])!,
+    );
+  }
+
+  @override
+  $DishFoodstuffsTableTable createAlias(String alias) {
+    return $DishFoodstuffsTableTable(attachedDatabase, alias);
+  }
+}
+
+class DishFoodstuffsSchema extends DataClass
+    implements Insertable<DishFoodstuffsSchema> {
+  final int dishId;
+  final int foodstuffId;
+  const DishFoodstuffsSchema({required this.dishId, required this.foodstuffId});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['dish_id'] = Variable<int>(dishId);
+    map['foodstuff_id'] = Variable<int>(foodstuffId);
+    return map;
+  }
+
+  DishFoodstuffsTableCompanion toCompanion(bool nullToAbsent) {
+    return DishFoodstuffsTableCompanion(
+      dishId: Value(dishId),
+      foodstuffId: Value(foodstuffId),
+    );
+  }
+
+  factory DishFoodstuffsSchema.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return DishFoodstuffsSchema(
+      dishId: serializer.fromJson<int>(json['dishId']),
+      foodstuffId: serializer.fromJson<int>(json['foodstuffId']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'dishId': serializer.toJson<int>(dishId),
+      'foodstuffId': serializer.toJson<int>(foodstuffId),
+    };
+  }
+
+  DishFoodstuffsSchema copyWith({int? dishId, int? foodstuffId}) =>
+      DishFoodstuffsSchema(
+        dishId: dishId ?? this.dishId,
+        foodstuffId: foodstuffId ?? this.foodstuffId,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('DishFoodstuffsSchema(')
+          ..write('dishId: $dishId, ')
+          ..write('foodstuffId: $foodstuffId')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(dishId, foodstuffId);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is DishFoodstuffsSchema &&
+          other.dishId == this.dishId &&
+          other.foodstuffId == this.foodstuffId);
+}
+
+class DishFoodstuffsTableCompanion
+    extends UpdateCompanion<DishFoodstuffsSchema> {
+  final Value<int> dishId;
+  final Value<int> foodstuffId;
+  final Value<int> rowid;
+  const DishFoodstuffsTableCompanion({
+    this.dishId = const Value.absent(),
+    this.foodstuffId = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  DishFoodstuffsTableCompanion.insert({
+    required int dishId,
+    required int foodstuffId,
+    this.rowid = const Value.absent(),
+  })  : dishId = Value(dishId),
+        foodstuffId = Value(foodstuffId);
+  static Insertable<DishFoodstuffsSchema> custom({
+    Expression<int>? dishId,
+    Expression<int>? foodstuffId,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (dishId != null) 'dish_id': dishId,
+      if (foodstuffId != null) 'foodstuff_id': foodstuffId,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  DishFoodstuffsTableCompanion copyWith(
+      {Value<int>? dishId, Value<int>? foodstuffId, Value<int>? rowid}) {
+    return DishFoodstuffsTableCompanion(
+      dishId: dishId ?? this.dishId,
+      foodstuffId: foodstuffId ?? this.foodstuffId,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (dishId.present) {
+      map['dish_id'] = Variable<int>(dishId.value);
+    }
+    if (foodstuffId.present) {
+      map['foodstuff_id'] = Variable<int>(foodstuffId.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DishFoodstuffsTableCompanion(')
+          ..write('dishId: $dishId, ')
+          ..write('foodstuffId: $foodstuffId, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 class $UsersTableTable extends UsersTable
     with TableInfo<$UsersTableTable, UsersSchema> {
   @override
@@ -2221,7 +2261,10 @@ class $UsersTableTable extends UsersTable
   @override
   late final GeneratedColumn<int> schoolId = GeneratedColumn<int>(
       'school_id', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
+      type: DriftSqlType.int,
+      requiredDuringInsert: true,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES schools_table (id)'));
   static const VerificationMeta _schoolYearMeta =
       const VerificationMeta('schoolYear');
   @override
@@ -2445,18 +2488,847 @@ class UsersTableCompanion extends UpdateCompanion<UsersSchema> {
   }
 }
 
+class $DictionaryItemsTableTable extends DictionaryItemsTable
+    with TableInfo<$DictionaryItemsTableTable, DictionaryItemsSchema> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $DictionaryItemsTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      hasAutoIncrement: true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _groupMeta = const VerificationMeta('group');
+  @override
+  late final GeneratedColumn<int> group = GeneratedColumn<int>(
+      'group', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+      'name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _energyMeta = const VerificationMeta('energy');
+  @override
+  late final GeneratedColumn<double> energy = GeneratedColumn<double>(
+      'energy', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _proteinMeta =
+      const VerificationMeta('protein');
+  @override
+  late final GeneratedColumn<double> protein = GeneratedColumn<double>(
+      'protein', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _lipidMeta = const VerificationMeta('lipid');
+  @override
+  late final GeneratedColumn<double> lipid = GeneratedColumn<double>(
+      'lipid', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _sodiumMeta = const VerificationMeta('sodium');
+  @override
+  late final GeneratedColumn<double> sodium = GeneratedColumn<double>(
+      'sodium', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _carbohydrateMeta =
+      const VerificationMeta('carbohydrate');
+  @override
+  late final GeneratedColumn<double> carbohydrate = GeneratedColumn<double>(
+      'carbohydrate', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _calciumMeta =
+      const VerificationMeta('calcium');
+  @override
+  late final GeneratedColumn<double> calcium = GeneratedColumn<double>(
+      'calcium', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _magnesiumMeta =
+      const VerificationMeta('magnesium');
+  @override
+  late final GeneratedColumn<double> magnesium = GeneratedColumn<double>(
+      'magnesium', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _ironMeta = const VerificationMeta('iron');
+  @override
+  late final GeneratedColumn<double> iron = GeneratedColumn<double>(
+      'iron', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _zincMeta = const VerificationMeta('zinc');
+  @override
+  late final GeneratedColumn<double> zinc = GeneratedColumn<double>(
+      'zinc', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _retinolMeta =
+      const VerificationMeta('retinol');
+  @override
+  late final GeneratedColumn<double> retinol = GeneratedColumn<double>(
+      'retinol', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _vitaminB1Meta =
+      const VerificationMeta('vitaminB1');
+  @override
+  late final GeneratedColumn<double> vitaminB1 = GeneratedColumn<double>(
+      'vitamin_b1', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _vitaminB2Meta =
+      const VerificationMeta('vitaminB2');
+  @override
+  late final GeneratedColumn<double> vitaminB2 = GeneratedColumn<double>(
+      'vitamin_b2', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _vitaminCMeta =
+      const VerificationMeta('vitaminC');
+  @override
+  late final GeneratedColumn<double> vitaminC = GeneratedColumn<double>(
+      'vitamin_c', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _dietaryFiberMeta =
+      const VerificationMeta('dietaryFiber');
+  @override
+  late final GeneratedColumn<double> dietaryFiber = GeneratedColumn<double>(
+      'dietary_fiber', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _saltMeta = const VerificationMeta('salt');
+  @override
+  late final GeneratedColumn<double> salt = GeneratedColumn<double>(
+      'salt', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _noteMeta = const VerificationMeta('note');
+  @override
+  late final GeneratedColumn<String> note = GeneratedColumn<String>(
+      'note', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        group,
+        name,
+        energy,
+        protein,
+        lipid,
+        sodium,
+        carbohydrate,
+        calcium,
+        magnesium,
+        iron,
+        zinc,
+        retinol,
+        vitaminB1,
+        vitaminB2,
+        vitaminC,
+        dietaryFiber,
+        salt,
+        note
+      ];
+  @override
+  String get aliasedName => _alias ?? 'dictionary_items_table';
+  @override
+  String get actualTableName => 'dictionary_items_table';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<DictionaryItemsSchema> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('group')) {
+      context.handle(
+          _groupMeta, group.isAcceptableOrUnknown(data['group']!, _groupMeta));
+    } else if (isInserting) {
+      context.missing(_groupMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('energy')) {
+      context.handle(_energyMeta,
+          energy.isAcceptableOrUnknown(data['energy']!, _energyMeta));
+    } else if (isInserting) {
+      context.missing(_energyMeta);
+    }
+    if (data.containsKey('protein')) {
+      context.handle(_proteinMeta,
+          protein.isAcceptableOrUnknown(data['protein']!, _proteinMeta));
+    } else if (isInserting) {
+      context.missing(_proteinMeta);
+    }
+    if (data.containsKey('lipid')) {
+      context.handle(
+          _lipidMeta, lipid.isAcceptableOrUnknown(data['lipid']!, _lipidMeta));
+    } else if (isInserting) {
+      context.missing(_lipidMeta);
+    }
+    if (data.containsKey('sodium')) {
+      context.handle(_sodiumMeta,
+          sodium.isAcceptableOrUnknown(data['sodium']!, _sodiumMeta));
+    } else if (isInserting) {
+      context.missing(_sodiumMeta);
+    }
+    if (data.containsKey('carbohydrate')) {
+      context.handle(
+          _carbohydrateMeta,
+          carbohydrate.isAcceptableOrUnknown(
+              data['carbohydrate']!, _carbohydrateMeta));
+    } else if (isInserting) {
+      context.missing(_carbohydrateMeta);
+    }
+    if (data.containsKey('calcium')) {
+      context.handle(_calciumMeta,
+          calcium.isAcceptableOrUnknown(data['calcium']!, _calciumMeta));
+    } else if (isInserting) {
+      context.missing(_calciumMeta);
+    }
+    if (data.containsKey('magnesium')) {
+      context.handle(_magnesiumMeta,
+          magnesium.isAcceptableOrUnknown(data['magnesium']!, _magnesiumMeta));
+    } else if (isInserting) {
+      context.missing(_magnesiumMeta);
+    }
+    if (data.containsKey('iron')) {
+      context.handle(
+          _ironMeta, iron.isAcceptableOrUnknown(data['iron']!, _ironMeta));
+    } else if (isInserting) {
+      context.missing(_ironMeta);
+    }
+    if (data.containsKey('zinc')) {
+      context.handle(
+          _zincMeta, zinc.isAcceptableOrUnknown(data['zinc']!, _zincMeta));
+    } else if (isInserting) {
+      context.missing(_zincMeta);
+    }
+    if (data.containsKey('retinol')) {
+      context.handle(_retinolMeta,
+          retinol.isAcceptableOrUnknown(data['retinol']!, _retinolMeta));
+    } else if (isInserting) {
+      context.missing(_retinolMeta);
+    }
+    if (data.containsKey('vitamin_b1')) {
+      context.handle(_vitaminB1Meta,
+          vitaminB1.isAcceptableOrUnknown(data['vitamin_b1']!, _vitaminB1Meta));
+    } else if (isInserting) {
+      context.missing(_vitaminB1Meta);
+    }
+    if (data.containsKey('vitamin_b2')) {
+      context.handle(_vitaminB2Meta,
+          vitaminB2.isAcceptableOrUnknown(data['vitamin_b2']!, _vitaminB2Meta));
+    } else if (isInserting) {
+      context.missing(_vitaminB2Meta);
+    }
+    if (data.containsKey('vitamin_c')) {
+      context.handle(_vitaminCMeta,
+          vitaminC.isAcceptableOrUnknown(data['vitamin_c']!, _vitaminCMeta));
+    } else if (isInserting) {
+      context.missing(_vitaminCMeta);
+    }
+    if (data.containsKey('dietary_fiber')) {
+      context.handle(
+          _dietaryFiberMeta,
+          dietaryFiber.isAcceptableOrUnknown(
+              data['dietary_fiber']!, _dietaryFiberMeta));
+    } else if (isInserting) {
+      context.missing(_dietaryFiberMeta);
+    }
+    if (data.containsKey('salt')) {
+      context.handle(
+          _saltMeta, salt.isAcceptableOrUnknown(data['salt']!, _saltMeta));
+    } else if (isInserting) {
+      context.missing(_saltMeta);
+    }
+    if (data.containsKey('note')) {
+      context.handle(
+          _noteMeta, note.isAcceptableOrUnknown(data['note']!, _noteMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  DictionaryItemsSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return DictionaryItemsSchema(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      group: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}group'])!,
+      name: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      energy: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}energy'])!,
+      protein: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}protein'])!,
+      lipid: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}lipid'])!,
+      sodium: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}sodium'])!,
+      carbohydrate: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}carbohydrate'])!,
+      calcium: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}calcium'])!,
+      magnesium: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}magnesium'])!,
+      iron: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}iron'])!,
+      zinc: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}zinc'])!,
+      retinol: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}retinol'])!,
+      vitaminB1: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}vitamin_b1'])!,
+      vitaminB2: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}vitamin_b2'])!,
+      vitaminC: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}vitamin_c'])!,
+      dietaryFiber: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}dietary_fiber'])!,
+      salt: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}salt'])!,
+      note: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}note']),
+    );
+  }
+
+  @override
+  $DictionaryItemsTableTable createAlias(String alias) {
+    return $DictionaryItemsTableTable(attachedDatabase, alias);
+  }
+}
+
+class DictionaryItemsSchema extends DataClass
+    implements Insertable<DictionaryItemsSchema> {
+  final int id;
+  final int group;
+  final String name;
+  final double energy;
+  final double protein;
+  final double lipid;
+  final double sodium;
+  final double carbohydrate;
+  final double calcium;
+  final double magnesium;
+  final double iron;
+  final double zinc;
+  final double retinol;
+  final double vitaminB1;
+  final double vitaminB2;
+  final double vitaminC;
+  final double dietaryFiber;
+  final double salt;
+  final String? note;
+  const DictionaryItemsSchema(
+      {required this.id,
+      required this.group,
+      required this.name,
+      required this.energy,
+      required this.protein,
+      required this.lipid,
+      required this.sodium,
+      required this.carbohydrate,
+      required this.calcium,
+      required this.magnesium,
+      required this.iron,
+      required this.zinc,
+      required this.retinol,
+      required this.vitaminB1,
+      required this.vitaminB2,
+      required this.vitaminC,
+      required this.dietaryFiber,
+      required this.salt,
+      this.note});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['group'] = Variable<int>(group);
+    map['name'] = Variable<String>(name);
+    map['energy'] = Variable<double>(energy);
+    map['protein'] = Variable<double>(protein);
+    map['lipid'] = Variable<double>(lipid);
+    map['sodium'] = Variable<double>(sodium);
+    map['carbohydrate'] = Variable<double>(carbohydrate);
+    map['calcium'] = Variable<double>(calcium);
+    map['magnesium'] = Variable<double>(magnesium);
+    map['iron'] = Variable<double>(iron);
+    map['zinc'] = Variable<double>(zinc);
+    map['retinol'] = Variable<double>(retinol);
+    map['vitamin_b1'] = Variable<double>(vitaminB1);
+    map['vitamin_b2'] = Variable<double>(vitaminB2);
+    map['vitamin_c'] = Variable<double>(vitaminC);
+    map['dietary_fiber'] = Variable<double>(dietaryFiber);
+    map['salt'] = Variable<double>(salt);
+    if (!nullToAbsent || note != null) {
+      map['note'] = Variable<String>(note);
+    }
+    return map;
+  }
+
+  DictionaryItemsTableCompanion toCompanion(bool nullToAbsent) {
+    return DictionaryItemsTableCompanion(
+      id: Value(id),
+      group: Value(group),
+      name: Value(name),
+      energy: Value(energy),
+      protein: Value(protein),
+      lipid: Value(lipid),
+      sodium: Value(sodium),
+      carbohydrate: Value(carbohydrate),
+      calcium: Value(calcium),
+      magnesium: Value(magnesium),
+      iron: Value(iron),
+      zinc: Value(zinc),
+      retinol: Value(retinol),
+      vitaminB1: Value(vitaminB1),
+      vitaminB2: Value(vitaminB2),
+      vitaminC: Value(vitaminC),
+      dietaryFiber: Value(dietaryFiber),
+      salt: Value(salt),
+      note: note == null && nullToAbsent ? const Value.absent() : Value(note),
+    );
+  }
+
+  factory DictionaryItemsSchema.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return DictionaryItemsSchema(
+      id: serializer.fromJson<int>(json['id']),
+      group: serializer.fromJson<int>(json['group']),
+      name: serializer.fromJson<String>(json['name']),
+      energy: serializer.fromJson<double>(json['energy']),
+      protein: serializer.fromJson<double>(json['protein']),
+      lipid: serializer.fromJson<double>(json['lipid']),
+      sodium: serializer.fromJson<double>(json['sodium']),
+      carbohydrate: serializer.fromJson<double>(json['carbohydrate']),
+      calcium: serializer.fromJson<double>(json['calcium']),
+      magnesium: serializer.fromJson<double>(json['magnesium']),
+      iron: serializer.fromJson<double>(json['iron']),
+      zinc: serializer.fromJson<double>(json['zinc']),
+      retinol: serializer.fromJson<double>(json['retinol']),
+      vitaminB1: serializer.fromJson<double>(json['vitaminB1']),
+      vitaminB2: serializer.fromJson<double>(json['vitaminB2']),
+      vitaminC: serializer.fromJson<double>(json['vitaminC']),
+      dietaryFiber: serializer.fromJson<double>(json['dietaryFiber']),
+      salt: serializer.fromJson<double>(json['salt']),
+      note: serializer.fromJson<String?>(json['note']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'group': serializer.toJson<int>(group),
+      'name': serializer.toJson<String>(name),
+      'energy': serializer.toJson<double>(energy),
+      'protein': serializer.toJson<double>(protein),
+      'lipid': serializer.toJson<double>(lipid),
+      'sodium': serializer.toJson<double>(sodium),
+      'carbohydrate': serializer.toJson<double>(carbohydrate),
+      'calcium': serializer.toJson<double>(calcium),
+      'magnesium': serializer.toJson<double>(magnesium),
+      'iron': serializer.toJson<double>(iron),
+      'zinc': serializer.toJson<double>(zinc),
+      'retinol': serializer.toJson<double>(retinol),
+      'vitaminB1': serializer.toJson<double>(vitaminB1),
+      'vitaminB2': serializer.toJson<double>(vitaminB2),
+      'vitaminC': serializer.toJson<double>(vitaminC),
+      'dietaryFiber': serializer.toJson<double>(dietaryFiber),
+      'salt': serializer.toJson<double>(salt),
+      'note': serializer.toJson<String?>(note),
+    };
+  }
+
+  DictionaryItemsSchema copyWith(
+          {int? id,
+          int? group,
+          String? name,
+          double? energy,
+          double? protein,
+          double? lipid,
+          double? sodium,
+          double? carbohydrate,
+          double? calcium,
+          double? magnesium,
+          double? iron,
+          double? zinc,
+          double? retinol,
+          double? vitaminB1,
+          double? vitaminB2,
+          double? vitaminC,
+          double? dietaryFiber,
+          double? salt,
+          Value<String?> note = const Value.absent()}) =>
+      DictionaryItemsSchema(
+        id: id ?? this.id,
+        group: group ?? this.group,
+        name: name ?? this.name,
+        energy: energy ?? this.energy,
+        protein: protein ?? this.protein,
+        lipid: lipid ?? this.lipid,
+        sodium: sodium ?? this.sodium,
+        carbohydrate: carbohydrate ?? this.carbohydrate,
+        calcium: calcium ?? this.calcium,
+        magnesium: magnesium ?? this.magnesium,
+        iron: iron ?? this.iron,
+        zinc: zinc ?? this.zinc,
+        retinol: retinol ?? this.retinol,
+        vitaminB1: vitaminB1 ?? this.vitaminB1,
+        vitaminB2: vitaminB2 ?? this.vitaminB2,
+        vitaminC: vitaminC ?? this.vitaminC,
+        dietaryFiber: dietaryFiber ?? this.dietaryFiber,
+        salt: salt ?? this.salt,
+        note: note.present ? note.value : this.note,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('DictionaryItemsSchema(')
+          ..write('id: $id, ')
+          ..write('group: $group, ')
+          ..write('name: $name, ')
+          ..write('energy: $energy, ')
+          ..write('protein: $protein, ')
+          ..write('lipid: $lipid, ')
+          ..write('sodium: $sodium, ')
+          ..write('carbohydrate: $carbohydrate, ')
+          ..write('calcium: $calcium, ')
+          ..write('magnesium: $magnesium, ')
+          ..write('iron: $iron, ')
+          ..write('zinc: $zinc, ')
+          ..write('retinol: $retinol, ')
+          ..write('vitaminB1: $vitaminB1, ')
+          ..write('vitaminB2: $vitaminB2, ')
+          ..write('vitaminC: $vitaminC, ')
+          ..write('dietaryFiber: $dietaryFiber, ')
+          ..write('salt: $salt, ')
+          ..write('note: $note')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      id,
+      group,
+      name,
+      energy,
+      protein,
+      lipid,
+      sodium,
+      carbohydrate,
+      calcium,
+      magnesium,
+      iron,
+      zinc,
+      retinol,
+      vitaminB1,
+      vitaminB2,
+      vitaminC,
+      dietaryFiber,
+      salt,
+      note);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is DictionaryItemsSchema &&
+          other.id == this.id &&
+          other.group == this.group &&
+          other.name == this.name &&
+          other.energy == this.energy &&
+          other.protein == this.protein &&
+          other.lipid == this.lipid &&
+          other.sodium == this.sodium &&
+          other.carbohydrate == this.carbohydrate &&
+          other.calcium == this.calcium &&
+          other.magnesium == this.magnesium &&
+          other.iron == this.iron &&
+          other.zinc == this.zinc &&
+          other.retinol == this.retinol &&
+          other.vitaminB1 == this.vitaminB1 &&
+          other.vitaminB2 == this.vitaminB2 &&
+          other.vitaminC == this.vitaminC &&
+          other.dietaryFiber == this.dietaryFiber &&
+          other.salt == this.salt &&
+          other.note == this.note);
+}
+
+class DictionaryItemsTableCompanion
+    extends UpdateCompanion<DictionaryItemsSchema> {
+  final Value<int> id;
+  final Value<int> group;
+  final Value<String> name;
+  final Value<double> energy;
+  final Value<double> protein;
+  final Value<double> lipid;
+  final Value<double> sodium;
+  final Value<double> carbohydrate;
+  final Value<double> calcium;
+  final Value<double> magnesium;
+  final Value<double> iron;
+  final Value<double> zinc;
+  final Value<double> retinol;
+  final Value<double> vitaminB1;
+  final Value<double> vitaminB2;
+  final Value<double> vitaminC;
+  final Value<double> dietaryFiber;
+  final Value<double> salt;
+  final Value<String?> note;
+  const DictionaryItemsTableCompanion({
+    this.id = const Value.absent(),
+    this.group = const Value.absent(),
+    this.name = const Value.absent(),
+    this.energy = const Value.absent(),
+    this.protein = const Value.absent(),
+    this.lipid = const Value.absent(),
+    this.sodium = const Value.absent(),
+    this.carbohydrate = const Value.absent(),
+    this.calcium = const Value.absent(),
+    this.magnesium = const Value.absent(),
+    this.iron = const Value.absent(),
+    this.zinc = const Value.absent(),
+    this.retinol = const Value.absent(),
+    this.vitaminB1 = const Value.absent(),
+    this.vitaminB2 = const Value.absent(),
+    this.vitaminC = const Value.absent(),
+    this.dietaryFiber = const Value.absent(),
+    this.salt = const Value.absent(),
+    this.note = const Value.absent(),
+  });
+  DictionaryItemsTableCompanion.insert({
+    this.id = const Value.absent(),
+    required int group,
+    required String name,
+    required double energy,
+    required double protein,
+    required double lipid,
+    required double sodium,
+    required double carbohydrate,
+    required double calcium,
+    required double magnesium,
+    required double iron,
+    required double zinc,
+    required double retinol,
+    required double vitaminB1,
+    required double vitaminB2,
+    required double vitaminC,
+    required double dietaryFiber,
+    required double salt,
+    this.note = const Value.absent(),
+  })  : group = Value(group),
+        name = Value(name),
+        energy = Value(energy),
+        protein = Value(protein),
+        lipid = Value(lipid),
+        sodium = Value(sodium),
+        carbohydrate = Value(carbohydrate),
+        calcium = Value(calcium),
+        magnesium = Value(magnesium),
+        iron = Value(iron),
+        zinc = Value(zinc),
+        retinol = Value(retinol),
+        vitaminB1 = Value(vitaminB1),
+        vitaminB2 = Value(vitaminB2),
+        vitaminC = Value(vitaminC),
+        dietaryFiber = Value(dietaryFiber),
+        salt = Value(salt);
+  static Insertable<DictionaryItemsSchema> custom({
+    Expression<int>? id,
+    Expression<int>? group,
+    Expression<String>? name,
+    Expression<double>? energy,
+    Expression<double>? protein,
+    Expression<double>? lipid,
+    Expression<double>? sodium,
+    Expression<double>? carbohydrate,
+    Expression<double>? calcium,
+    Expression<double>? magnesium,
+    Expression<double>? iron,
+    Expression<double>? zinc,
+    Expression<double>? retinol,
+    Expression<double>? vitaminB1,
+    Expression<double>? vitaminB2,
+    Expression<double>? vitaminC,
+    Expression<double>? dietaryFiber,
+    Expression<double>? salt,
+    Expression<String>? note,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (group != null) 'group': group,
+      if (name != null) 'name': name,
+      if (energy != null) 'energy': energy,
+      if (protein != null) 'protein': protein,
+      if (lipid != null) 'lipid': lipid,
+      if (sodium != null) 'sodium': sodium,
+      if (carbohydrate != null) 'carbohydrate': carbohydrate,
+      if (calcium != null) 'calcium': calcium,
+      if (magnesium != null) 'magnesium': magnesium,
+      if (iron != null) 'iron': iron,
+      if (zinc != null) 'zinc': zinc,
+      if (retinol != null) 'retinol': retinol,
+      if (vitaminB1 != null) 'vitamin_b1': vitaminB1,
+      if (vitaminB2 != null) 'vitamin_b2': vitaminB2,
+      if (vitaminC != null) 'vitamin_c': vitaminC,
+      if (dietaryFiber != null) 'dietary_fiber': dietaryFiber,
+      if (salt != null) 'salt': salt,
+      if (note != null) 'note': note,
+    });
+  }
+
+  DictionaryItemsTableCompanion copyWith(
+      {Value<int>? id,
+      Value<int>? group,
+      Value<String>? name,
+      Value<double>? energy,
+      Value<double>? protein,
+      Value<double>? lipid,
+      Value<double>? sodium,
+      Value<double>? carbohydrate,
+      Value<double>? calcium,
+      Value<double>? magnesium,
+      Value<double>? iron,
+      Value<double>? zinc,
+      Value<double>? retinol,
+      Value<double>? vitaminB1,
+      Value<double>? vitaminB2,
+      Value<double>? vitaminC,
+      Value<double>? dietaryFiber,
+      Value<double>? salt,
+      Value<String?>? note}) {
+    return DictionaryItemsTableCompanion(
+      id: id ?? this.id,
+      group: group ?? this.group,
+      name: name ?? this.name,
+      energy: energy ?? this.energy,
+      protein: protein ?? this.protein,
+      lipid: lipid ?? this.lipid,
+      sodium: sodium ?? this.sodium,
+      carbohydrate: carbohydrate ?? this.carbohydrate,
+      calcium: calcium ?? this.calcium,
+      magnesium: magnesium ?? this.magnesium,
+      iron: iron ?? this.iron,
+      zinc: zinc ?? this.zinc,
+      retinol: retinol ?? this.retinol,
+      vitaminB1: vitaminB1 ?? this.vitaminB1,
+      vitaminB2: vitaminB2 ?? this.vitaminB2,
+      vitaminC: vitaminC ?? this.vitaminC,
+      dietaryFiber: dietaryFiber ?? this.dietaryFiber,
+      salt: salt ?? this.salt,
+      note: note ?? this.note,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (group.present) {
+      map['group'] = Variable<int>(group.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (energy.present) {
+      map['energy'] = Variable<double>(energy.value);
+    }
+    if (protein.present) {
+      map['protein'] = Variable<double>(protein.value);
+    }
+    if (lipid.present) {
+      map['lipid'] = Variable<double>(lipid.value);
+    }
+    if (sodium.present) {
+      map['sodium'] = Variable<double>(sodium.value);
+    }
+    if (carbohydrate.present) {
+      map['carbohydrate'] = Variable<double>(carbohydrate.value);
+    }
+    if (calcium.present) {
+      map['calcium'] = Variable<double>(calcium.value);
+    }
+    if (magnesium.present) {
+      map['magnesium'] = Variable<double>(magnesium.value);
+    }
+    if (iron.present) {
+      map['iron'] = Variable<double>(iron.value);
+    }
+    if (zinc.present) {
+      map['zinc'] = Variable<double>(zinc.value);
+    }
+    if (retinol.present) {
+      map['retinol'] = Variable<double>(retinol.value);
+    }
+    if (vitaminB1.present) {
+      map['vitamin_b1'] = Variable<double>(vitaminB1.value);
+    }
+    if (vitaminB2.present) {
+      map['vitamin_b2'] = Variable<double>(vitaminB2.value);
+    }
+    if (vitaminC.present) {
+      map['vitamin_c'] = Variable<double>(vitaminC.value);
+    }
+    if (dietaryFiber.present) {
+      map['dietary_fiber'] = Variable<double>(dietaryFiber.value);
+    }
+    if (salt.present) {
+      map['salt'] = Variable<double>(salt.value);
+    }
+    if (note.present) {
+      map['note'] = Variable<String>(note.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DictionaryItemsTableCompanion(')
+          ..write('id: $id, ')
+          ..write('group: $group, ')
+          ..write('name: $name, ')
+          ..write('energy: $energy, ')
+          ..write('protein: $protein, ')
+          ..write('lipid: $lipid, ')
+          ..write('sodium: $sodium, ')
+          ..write('carbohydrate: $carbohydrate, ')
+          ..write('calcium: $calcium, ')
+          ..write('magnesium: $magnesium, ')
+          ..write('iron: $iron, ')
+          ..write('zinc: $zinc, ')
+          ..write('retinol: $retinol, ')
+          ..write('vitaminB1: $vitaminB1, ')
+          ..write('vitaminB2: $vitaminB2, ')
+          ..write('vitaminC: $vitaminC, ')
+          ..write('dietaryFiber: $dietaryFiber, ')
+          ..write('salt: $salt, ')
+          ..write('note: $note')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$LocalDatabase extends GeneratedDatabase {
   _$LocalDatabase(QueryExecutor e) : super(e);
   late final $SchoolsTableTable schoolsTable = $SchoolsTableTable(this);
   late final $MenusTableTable menusTable = $MenusTableTable(this);
+  late final $DishesTableTable dishesTable = $DishesTableTable(this);
   late final $MenuDishesTableTable menuDishesTable =
       $MenuDishesTableTable(this);
-  late final $DishesTableTable dishesTable = $DishesTableTable(this);
-  late final $DishFoodstuffsTableTable dishFoodstuffsTable =
-      $DishFoodstuffsTableTable(this);
   late final $FoodstuffsTableTable foodstuffsTable =
       $FoodstuffsTableTable(this);
+  late final $DishFoodstuffsTableTable dishFoodstuffsTable =
+      $DishFoodstuffsTableTable(this);
   late final $UsersTableTable usersTable = $UsersTableTable(this);
+  late final $DictionaryItemsTableTable dictionaryItemsTable =
+      $DictionaryItemsTableTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -2464,10 +3336,32 @@ abstract class _$LocalDatabase extends GeneratedDatabase {
   List<DatabaseSchemaEntity> get allSchemaEntities => [
         schoolsTable,
         menusTable,
-        menuDishesTable,
         dishesTable,
-        dishFoodstuffsTable,
+        menuDishesTable,
         foodstuffsTable,
-        usersTable
+        dishFoodstuffsTable,
+        usersTable,
+        dictionaryItemsTable
       ];
 }
+
+// **************************************************************************
+// RiverpodGenerator
+// **************************************************************************
+
+String _$localDatabaseHash() => r'7fc59fd746d4d230c41f4608259788260f0b95bf';
+
+/// See also [localDatabase].
+@ProviderFor(localDatabase)
+final localDatabaseProvider = Provider<LocalDatabase>.internal(
+  localDatabase,
+  name: r'localDatabaseProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$localDatabaseHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef LocalDatabaseRef = ProviderRef<LocalDatabase>;
+// ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

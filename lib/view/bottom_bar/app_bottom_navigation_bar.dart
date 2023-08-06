@@ -8,7 +8,7 @@ import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/constant/svg_path.dart';
 import 'package:hakondate/view/daily/daily_drawer.dart';
-import 'package:hakondate/view_model/multi_page/drawer_view_model.dart';
+import 'package:hakondate/view_model/multi_page/drawer/drawer_view_model.dart';
 
 class AppBottomNavigationBar extends ConsumerWidget {
   const AppBottomNavigationBar({super.key});
@@ -18,7 +18,7 @@ class AppBottomNavigationBar extends ConsumerWidget {
     final TabPageState tabState = TabPage.of(context);
 
     return Scaffold(
-      key: ref.watch(drawerProvider).scaffoldKey,
+      key: ref.watch(drawerViewModelProvider).scaffoldKey,
       drawer: const DailyDrawer(),
       drawerEnableOpenDragGesture: false,
       body: TabBarView(

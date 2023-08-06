@@ -19,8 +19,9 @@ mixin _$SchoolModel {
   int get id => throw _privateConstructorUsedError; // ID
   int get parentId => throw _privateConstructorUsedError; // 親学校(給食センター)のID
   String get name => throw _privateConstructorUsedError; // 学校名
-  int? get lunchBlock => throw _privateConstructorUsedError; // 給食区分: 1 ~ 10
-  SchoolClassification get classification => throw _privateConstructorUsedError;
+  SchoolClassification get classification =>
+      throw _privateConstructorUsedError; // 学校区分
+  int? get lunchBlock => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SchoolModelCopyWith<SchoolModel> get copyWith =>
@@ -37,8 +38,8 @@ abstract class $SchoolModelCopyWith<$Res> {
       {int id,
       int parentId,
       String name,
-      int? lunchBlock,
-      SchoolClassification classification});
+      SchoolClassification classification,
+      int? lunchBlock});
 }
 
 /// @nodoc
@@ -57,8 +58,8 @@ class _$SchoolModelCopyWithImpl<$Res, $Val extends SchoolModel>
     Object? id = null,
     Object? parentId = null,
     Object? name = null,
-    Object? lunchBlock = freezed,
     Object? classification = null,
+    Object? lunchBlock = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -73,14 +74,14 @@ class _$SchoolModelCopyWithImpl<$Res, $Val extends SchoolModel>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      lunchBlock: freezed == lunchBlock
-          ? _value.lunchBlock
-          : lunchBlock // ignore: cast_nullable_to_non_nullable
-              as int?,
       classification: null == classification
           ? _value.classification
           : classification // ignore: cast_nullable_to_non_nullable
               as SchoolClassification,
+      lunchBlock: freezed == lunchBlock
+          ? _value.lunchBlock
+          : lunchBlock // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -97,8 +98,8 @@ abstract class _$$_SchoolModelCopyWith<$Res>
       {int id,
       int parentId,
       String name,
-      int? lunchBlock,
-      SchoolClassification classification});
+      SchoolClassification classification,
+      int? lunchBlock});
 }
 
 /// @nodoc
@@ -115,8 +116,8 @@ class __$$_SchoolModelCopyWithImpl<$Res>
     Object? id = null,
     Object? parentId = null,
     Object? name = null,
-    Object? lunchBlock = freezed,
     Object? classification = null,
+    Object? lunchBlock = freezed,
   }) {
     return _then(_$_SchoolModel(
       id: null == id
@@ -131,14 +132,14 @@ class __$$_SchoolModelCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      lunchBlock: freezed == lunchBlock
-          ? _value.lunchBlock
-          : lunchBlock // ignore: cast_nullable_to_non_nullable
-              as int?,
       classification: null == classification
           ? _value.classification
           : classification // ignore: cast_nullable_to_non_nullable
               as SchoolClassification,
+      lunchBlock: freezed == lunchBlock
+          ? _value.lunchBlock
+          : lunchBlock // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -150,8 +151,8 @@ class _$_SchoolModel implements _SchoolModel {
       {required this.id,
       required this.parentId,
       required this.name,
-      this.lunchBlock,
-      required this.classification});
+      required this.classification,
+      this.lunchBlock});
 
   @override
   final int id;
@@ -163,14 +164,14 @@ class _$_SchoolModel implements _SchoolModel {
   final String name;
 // 学校名
   @override
-  final int? lunchBlock;
-// 給食区分: 1 ~ 10
-  @override
   final SchoolClassification classification;
+// 学校区分
+  @override
+  final int? lunchBlock;
 
   @override
   String toString() {
-    return 'SchoolModel(id: $id, parentId: $parentId, name: $name, lunchBlock: $lunchBlock, classification: $classification)';
+    return 'SchoolModel(id: $id, parentId: $parentId, name: $name, classification: $classification, lunchBlock: $lunchBlock)';
   }
 
   @override
@@ -182,15 +183,15 @@ class _$_SchoolModel implements _SchoolModel {
             (identical(other.parentId, parentId) ||
                 other.parentId == parentId) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.lunchBlock, lunchBlock) ||
-                other.lunchBlock == lunchBlock) &&
             (identical(other.classification, classification) ||
-                other.classification == classification));
+                other.classification == classification) &&
+            (identical(other.lunchBlock, lunchBlock) ||
+                other.lunchBlock == lunchBlock));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, parentId, name, lunchBlock, classification);
+      Object.hash(runtimeType, id, parentId, name, classification, lunchBlock);
 
   @JsonKey(ignore: true)
   @override
@@ -204,8 +205,8 @@ abstract class _SchoolModel implements SchoolModel {
       {required final int id,
       required final int parentId,
       required final String name,
-      final int? lunchBlock,
-      required final SchoolClassification classification}) = _$_SchoolModel;
+      required final SchoolClassification classification,
+      final int? lunchBlock}) = _$_SchoolModel;
 
   @override
   int get id;
@@ -214,9 +215,9 @@ abstract class _SchoolModel implements SchoolModel {
   @override // 親学校(給食センター)のID
   String get name;
   @override // 学校名
-  int? get lunchBlock;
-  @override // 給食区分: 1 ~ 10
   SchoolClassification get classification;
+  @override // 学校区分
+  int? get lunchBlock;
   @override
   @JsonKey(ignore: true)
   _$$_SchoolModelCopyWith<_$_SchoolModel> get copyWith =>

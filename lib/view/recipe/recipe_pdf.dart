@@ -10,7 +10,7 @@ import 'package:hakondate/model/recipe/open_data_recipe_model.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/view/component/dialog/exception_dialog/download_exception_dialog.dart';
 import 'package:hakondate/view/component/frame/fade_up_app_bar.dart';
-import 'package:hakondate/view_model/single_page/recipe_view_model.dart';
+import 'package:hakondate/view_model/single_page/recipe/recipe_view_model.dart';
 
 class RecipePDF extends ConsumerWidget {
   const RecipePDF({
@@ -22,14 +22,16 @@ class RecipePDF extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final OpenDataRecipeModel recipe = OpenDataRecipes.all.firstWhere((OpenDataRecipeModel recipe) => recipe.id == int.parse(id ?? '0'));
+    final OpenDataRecipeModel recipe = OpenDataRecipes.all.firstWhere(
+          (OpenDataRecipeModel recipe) => recipe.id == int.parse(id ?? '0'),
+    );
 
     return Scaffold(
       appBar: FadeUpAppBar(
         title: Text(recipe.name),
       ),
       body: FutureBuilder<String>(
-        future: ref.read(recipeProvider.notifier).getPath(recipe: recipe),
+        future: ref.read(recipeViewModelProvider.notifier).getPath(recipe: recipe),
         builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return Center(
@@ -47,7 +49,7 @@ class RecipePDF extends ConsumerWidget {
                 context: context,
                 builder: (BuildContext context) => DownloadExceptionDialog(
                   onTapRetry: () => routemaster.pop().whenComplete(() =>
-                      ref.read(recipeProvider.notifier).reDownload(recipe: recipe),
+                      ref.read(recipeViewModelProvider.notifier).reDownload(recipe: recipe),
                   ),
                   onTapPop: () => routemaster.pop().whenComplete(routemaster.pop),
                 ),
