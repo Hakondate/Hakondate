@@ -22,6 +22,7 @@ class _Text {
   final Color blackMid = const Color(0x61000000);
   final Color white = const Color(0xFFFFFFFF);
   final Color blue = const Color(0xFF448AFF);
+  final Color link = const Color(0xFF4065C5);
 }
 
 class _Ui {
