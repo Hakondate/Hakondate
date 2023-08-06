@@ -1,6 +1,6 @@
 /*import 'package:flutter/material.dart';
-import 'package:hakondate/view/component/sentence/padded_sentence.dart';
 
+import 'package:hakondate/view/component/sentence/padded_sentence.dart';
 import 'package:hakondate/view/component/sentence/sentence.dart';
 import 'package:hakondate/view/component/sentence/square_and_headline.dart';
 import 'package:hakondate/view/component/sentence/underlined_sentence.dart';
