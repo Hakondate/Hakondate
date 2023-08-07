@@ -5,7 +5,7 @@ import 'package:hakondate/constant/size.dart';
 class SquareAndHeading extends StatelessWidget {
   const SquareAndHeading ({
     required this.text,    
-    super.key
+    super.key,
     });
 
     final String text;
@@ -42,5 +42,4 @@ class SquareAndHeading extends StatelessWidget {
     );  
   }
 }
-    
  

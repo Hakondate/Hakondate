@@ -9,7 +9,7 @@ class LinkedAnnotation extends StatelessWidget {
   const LinkedAnnotation ({
     required this.text, 
     required this.url,
-    super.key
+    super.key,
     });
 
     final String text;

@@ -9,7 +9,7 @@ class LinkedSentence extends StatelessWidget {
   const LinkedSentence ({
     required this.text,    
     required this.url,
-    super.key
+    super.key,
     });
 
     final String text;

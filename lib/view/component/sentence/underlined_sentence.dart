@@ -5,7 +5,7 @@ import 'package:hakondate/constant/size.dart';
 class UnderlinedTitle extends StatelessWidget {
   const UnderlinedTitle ({
     required this.text,    
-    super.key
+    super.key,
     });
 
     final String text;
@@ -20,9 +20,9 @@ class UnderlinedTitle extends StatelessWidget {
           text, 
           style: const TextStyle(
             fontSize: 25,
-            decoration: TextDecoration.underline, 
-            decorationStyle: TextDecorationStyle.dashed,
-            decorationColor: Colors.orange,
+            fontWeight: FontWeight.w500,
+             
+            //decorationColor: Colors.orange,
           ),
         ),
         const SizedBox(height: SpaceSize.line),

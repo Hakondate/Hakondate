@@ -5,7 +5,7 @@ import 'package:hakondate/constant/size.dart';
 class PaddedSentence extends StatelessWidget {
   const PaddedSentence ({
     required this.text,    
-    super.key
+    super.key,
     });
 
     final String text;
