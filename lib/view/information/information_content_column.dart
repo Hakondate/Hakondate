@@ -64,7 +64,7 @@ class InformationContentColumn extends StatelessWidget {
         const SizedBox(height: SpaceSize.paragraph),
         const SquareAndHeading(text: '協力していただいている学校(敬称略)'),
         const PaddedSentence(
-          text: '現在協力校なし'
+          text: '現在協力校無し',
         ),
         const UnderlinedTitle(text: '個人情報の扱い'),
         const PaddedSentence(text: '　本サービスは個人のプライバシー，名誉，その他第三者の権利を侵害することのないよう，利用者に関する情報の取り扱いに充分配慮いたします．また，登録されたユーザのニックネーム，学校，学年等の情報は本サービス内及び協力していただいている学校内でのみ利用されます．'),
