@@ -23,7 +23,7 @@ class InformationContentColumn extends StatelessWidget {
                '　本サービスで扱っている給食の献立や材料は予告なく変更されることがあります．また，本サービス内の情報によって起きたトラブル・事故等において，本サービスの開発者及び関係団体は一切責任を負いません．正確な情報が必要な際には，函館市役所保険給食課及び各学校の担当職員へお問い合わせください．',
                ),
         const SquareAndHeading(text:'オープンデータ'),
-        Image.asset('assets/images/information/open_data.png'),//webviewのバーが表示されない
+        Image.asset('assets/images/information/open_data.png'),
         const LinkedAnnotation(
           text: '総務省 地方公共団体のオープンデータの推進',
           url: 'https://www.soumu.go.jp/menu_seisaku/ictseisaku/ictriyou/opendata/',
