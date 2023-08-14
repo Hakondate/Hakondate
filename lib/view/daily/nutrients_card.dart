@@ -64,7 +64,7 @@ class NutrientsCard extends StatelessWidget {
               title: const Text(
                 '詳細な栄養値',
                 style: TextStyle(
-                  fontSize: FontSize.subheading,
+                  fontSize: FontSize.heading,
                 ),
               ),
               onExpansionChanged: (bool isExpanded) => !isExpanded,
