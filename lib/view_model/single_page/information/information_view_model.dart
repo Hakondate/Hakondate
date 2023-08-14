@@ -1,6 +1,7 @@
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
 import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/repository/local/sqlite/schools/schools_local_repository.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'information_view_model.g.dart';
 
