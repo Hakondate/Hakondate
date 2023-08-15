@@ -127,7 +127,6 @@ class SplashViewModel extends _$SplashViewModel {
 
     state = SplashState(status: LoadingStatus.updating);
     await Future.forEach(menus, (dynamic menu) async {
-      debugPrint(menu.toString());
       await _menusLocalRepository.add(menu as Map<String, dynamic>);
     });
 
