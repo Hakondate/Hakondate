@@ -26,9 +26,9 @@ class MenusRemoteRepository extends MenusRemoteRepositoryAPI {
 
   @override
   Future<List<dynamic>> get({required DateTime updateAt}) async {
-    final int schoolId = await _ref.read(userViewModelProvider.notifier).getParentId();
+    final List<int> schoolIds = await _ref.read(userViewModelProvider.notifier).getParentIds();
     final QuerySnapshot<Map<String, dynamic>> firestoreData = await _db
-        .where('schoolId', isEqualTo: schoolId)
+        .where('schoolId', whereIn: schoolIds)
         .where('updateAt', isGreaterThan: updateAt)
         .get();
 

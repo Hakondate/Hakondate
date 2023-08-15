@@ -154,5 +154,18 @@ class UserViewModel extends _$UserViewModel {
     return school.parentId;
   }
 
+  Future<List<int>> getParentIds() async {
+    final List<UserModel> users = await _usersLocalRepository.list();
+    final List<int> parentIds = <int>[];
+
+    for (final UserModel user in users) {
+      final SchoolModel school = await _schoolsLocalRepository.getById(user.schoolId);
+      if (parentIds.contains(school.parentId)) continue;
+      parentIds.add(school.parentId);
+    }
+
+    return parentIds;
+  }
+
   void signOut() => state = state.copyWith(currentUser: null);
 }
