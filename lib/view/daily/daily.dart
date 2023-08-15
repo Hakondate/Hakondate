@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
+import 'package:hakondate/view_model/single_page/splash/splash_view_model.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -20,32 +22,44 @@ class Daily extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        title: _appBarTitle(),
-        leading: Consumer(
-          builder: (BuildContext context, WidgetRef ref, _) => IconButton(
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            icon: const Icon(Icons.dehaze),
+        appBar: AppBar(
+          elevation: 0,
+          title: _appBarTitle(),
+          leading: Consumer(
+            builder: (BuildContext context, WidgetRef ref, _) => IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              icon: const Icon(Icons.dehaze),
             onPressed: () => ref.read(drawerViewModelProvider.notifier).openDrawer(),
+            ),
           ),
+          actions: <Widget>[
+            IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              icon: const Icon(Icons.calendar_today_outlined),
+              onPressed: () => routemaster.replace('/home/calendar'),
+            ),
+          ],
         ),
-        actions: <Widget>[
-          IconButton(
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            icon: const Icon(Icons.calendar_today_outlined),
-            onPressed: () => routemaster.replace('/home/calendar'),
-          ),
-        ],
-      ),
-      body: Column(
-        children: <Widget>[
-          _calendarWidget(),
-          _bodyWidget(),
-        ],
-      ),
+        body: Column(
+          children: <Widget>[
+            _calendarWidget(),
+            _bodyWidget(),
+          ],
+        ),
+        floatingActionButton: Consumer(
+          builder: (context, ref, _) {
+            return FloatingActionButton(
+              onPressed: () async {
+                await ref.read(userViewModelProvider.notifier).createUser(name: 'test2', schoolId: 1, schoolYear: 2);
+                await ref.read(splashViewModelProvider.notifier).initialize();
+                
+              },
+              child: const Icon(Icons.search),
+            );
+          },
+        ),
     );
   }
 
@@ -53,15 +67,15 @@ class Daily extends StatelessWidget {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
         return ref.watch(dailyViewModelProvider).when(
-          data: (DailyState state) {
+              data: (DailyState state) {
             final String formatted = (isSameDay(state.selectedDay, DateTime.now()))
                 ? '今日' : DateFormat('M月d日').format(state.selectedDay);
 
-            return Text('$formattedの献立');
-          },
-          error: (_, __) => const Text(''),
-          loading: () => const Text('読み込み中'),
-        );
+                return Text('$formattedの献立');
+              },
+              error: (_, __) => const Text(''),
+              loading: () => const Text('読み込み中'),
+            );
       },
     );
   }
@@ -73,37 +87,37 @@ class Daily extends StatelessWidget {
       child: Consumer(
         builder: (BuildContext context, WidgetRef ref, _) {
           return ref.watch(dailyViewModelProvider).maybeWhen(
-            data: (DailyState state) => TableCalendar<dynamic>(
-              headerVisible: false,
-              locale: 'ja_JP',
-              calendarFormat: CalendarFormat.week,
-              focusedDay: state.focusedDay,
-              firstDay: state.calendarTabFirstDay,
-              lastDay: state.calendarTabLastDay,
+                data: (DailyState state) => TableCalendar<dynamic>(
+                  headerVisible: false,
+                  locale: 'ja_JP',
+                  calendarFormat: CalendarFormat.week,
+                  focusedDay: state.focusedDay,
+                  firstDay: state.calendarTabFirstDay,
+                  lastDay: state.calendarTabLastDay,
               selectedDayPredicate: (DateTime day) => isSameDay(state.selectedDay, day),
               onDaySelected: (DateTime selectedDay, DateTime focusedDay) async {
-                if (isSameDay(state.selectedDay, selectedDay)) return;
+                    if (isSameDay(state.selectedDay, selectedDay)) return;
                 await ref.read(dailyViewModelProvider.notifier).updateSelectedDay(selectedDay: selectedDay);
-              },
+                  },
               onPageChanged: (DateTime focusedDay) => ref.read(dailyViewModelProvider.notifier).updateFocusedDay(focusedDay),
-              daysOfWeekHeight: 20,
-              calendarStyle: CalendarStyle(
-                todayTextStyle: const CalendarStyle().defaultTextStyle,
-                todayDecoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: AppColor.brand.secondary,
+                  daysOfWeekHeight: 20,
+                  calendarStyle: CalendarStyle(
+                    todayTextStyle: const CalendarStyle().defaultTextStyle,
+                    todayDecoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: AppColor.brand.secondary,
+                      ),
+                    ),
+                    selectedDecoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColor.brand.secondary,
+                    ),
+                    outsideTextStyle: const CalendarStyle().defaultTextStyle,
                   ),
                 ),
-                selectedDecoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppColor.brand.secondary,
-                ),
-                outsideTextStyle: const CalendarStyle().defaultTextStyle,
-              ),
-            ),
-            orElse: () => const SizedBox.shrink(),
-          );
+                orElse: () => const SizedBox.shrink(),
+              );
         },
       ),
     );
@@ -113,30 +127,30 @@ class Daily extends StatelessWidget {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
         return ref.watch(dailyViewModelProvider).maybeWhen(
-          data: (DailyState state) {
-            if (state.menu is LunchesDayMenuModel) {
-              return Expanded(
-                child: ListView(
-                  children: const <Widget>[
-                    MenuCard(),
-                    NutrientsCard(),
-                  ],
-                ),
-              );
-            } else if (state.menu is HolidayMenuModel) {
-              return const NonLunchesDayBody(
-                imageFileName: 'holiday.png',
-                text: '給食はお休みです...',
-              );
-            }
+              data: (DailyState state) {
+                if (state.menu is LunchesDayMenuModel) {
+                  return Expanded(
+                    child: ListView(
+                      children: const <Widget>[
+                        MenuCard(),
+                        NutrientsCard(),
+                      ],
+                    ),
+                  );
+                } else if (state.menu is HolidayMenuModel) {
+                  return const NonLunchesDayBody(
+                    imageFileName: 'holiday.png',
+                    text: '給食はお休みです...',
+                  );
+                }
 
-            return const NonLunchesDayBody(
-              imageFileName: 'no_data.png',
-              text: '献立は準備中です...',
+                return const NonLunchesDayBody(
+                  imageFileName: 'no_data.png',
+                  text: '献立は準備中です...',
+                );
+              },
+              orElse: () => const SizedBox.shrink(),
             );
-          },
-          orElse: () => const SizedBox.shrink(),
-        );
       },
     );
   }
