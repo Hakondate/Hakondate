@@ -85,7 +85,8 @@ flutter:
 
   assets:
     - assets/debug/
-    - assets/slns/
+    - assets/slns/json/
+    - assets/slns/image/
     - assets/images/
     - assets/images/calendar_hedgehog/
     - assets/images/drawer/
