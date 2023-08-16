@@ -24,7 +24,7 @@ class Help extends StatelessWidget{
               HelpFrame.baseNut(),
               HelpFrame.formula(),
 
-              _title("データ"),
+              _title('データ'),
               HelpFrame.input(),
               HelpFrame.updateCycle(),
               HelpFrame.tr(),
@@ -52,7 +52,7 @@ class Help extends StatelessWidget{
         children: <Widget>[
           Text(
             label,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 30,
             ),
           )
