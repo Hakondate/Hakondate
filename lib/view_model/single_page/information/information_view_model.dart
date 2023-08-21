@@ -18,64 +18,23 @@ class InformationViewModel {
 
   final SchoolsLocalRepositoryAPI _schoolLocalRepository;
 
-  // TODO: 学校のリストを文字列で返却する関数
-  /**
-   * 期待値：
-   *  '巴中学校\n青柳中学校'
-   * 
-   * ルール：
-   *  1. DBに入っている学校の名前の一覧をStringで返す
-   *  2. 各学校名は改行でつなげる
-   *  3. 学校はID順で返す（昇順）
-   *  4. DBの学校が0個の場合は'協力学校を募集しています'と返す
-   */
   Future<String> getSchoolNameListText() async {
     final List<SchoolModel> schools = await _schoolLocalRepository.list();
-    if (schools.isNotEmpty) {
-      schools.sort((SchoolModel a, SchoolModel b) => a.id.compareTo(b.id));
-      final StringBuffer buffer = StringBuffer();
-      for (int i = 1; i < schools.length; i++) {
-        buffer.write('${schools[i].name}\n');
-      }
-      return buffer.toString();
-    } else {
-      return '協力学校を募集しています';
-    }
+
+    if (schools.isEmpty) return '協力学校を募集しています';
+ 
+    schools.sort((SchoolModel a, SchoolModel b) => a.id.compareTo(b.id));
+
+    return schools.map((SchoolModel school) => school.name).join('\n');
   }
 
-  // TODO: リンクをタップした時の関数
-
-  Future<void> onTap({required String scheme, required String path}) async {
-    final Uri uri = Uri(
-      scheme: scheme, //'mailto'
-      path: path, //'editorhakondate@gmail.com',
+  Future<void> onTap() async {
+    final Uri emailLaunchUri = Uri(
+      scheme: 'mailto',
+      path: 'editorhakondate@gmail.com',
+      query: 'subject=はこんだて運営への問い合わせ',
     );
-    if(scheme == 'mailto'){
-      print(scheme);
-      final Uri emailLaunchUri = Uri(
-     scheme: 'mailto',
-     path: path,
-     query: encodeQueryParameters(<String, String>{
-      'subject': 'Example Subject & Symbols are allowed!',
-    }),
 
-     );
-     await launchUrl(emailLaunchUri);}
-    
-    if (await canLaunchUrl(
-      Uri.parse(uri.toString()),
-    )) {
-      await launchUrl(
-        Uri.parse(uri.toString()),
-        mode: LaunchMode.inAppWebView,
-      );
-    }
+    await launchUrl(emailLaunchUri);
   }
-  
-  String? encodeQueryParameters(Map<String, String> params) {
-  return params.entries
-      .map((MapEntry<String, String> e) =>
-          '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
-      .join('&');
-}
 }
