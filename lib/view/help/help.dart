@@ -16,7 +16,7 @@ class Help extends StatelessWidget{
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: [
+            children: <Widget>[
               const SizedBox(
                 height: 20,
               ),

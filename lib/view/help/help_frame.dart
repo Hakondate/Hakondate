@@ -14,14 +14,14 @@ class HelpFrame extends StatelessWidget {
       children: <Widget>[
         const Text('　グラフなどの数値は，文部科学省が定めている「児童又は生徒一人当たりの学校給食摂取基準」に基づいて表示しています．以下の表は，登録されている情報に基づいた基準値を示しています．本サービス内の献立表時における「栄養」の%表示も以下の基準値を基に算出されています'),
         Consumer(
-          builder: (_, ref, __) {
+          builder: (_, WidgetRef ref, __) {
             final AsyncValue<HelpState> state = ref.watch(helpViewModelProvider);
             return state.when(
                 loading: () => const CircularProgressIndicator(),
-                error: (err, stack) => Text('Error: $err'),
-                data: (state){
+                error: (Object err, StackTrace stack) => Text('Error: $err'),
+                data: (HelpState state){
                   return Column(
-                    children: [
+                    children: <Widget>[
                       Image.asset(state.schoolGrade.slnsImagePath),
                       const Text('上記の他に摂取量について配慮するものは以下のようになっています'),
                       Image.asset(state.schoolGrade.slnsZincImagePath),
@@ -32,13 +32,13 @@ class HelpFrame extends StatelessWidget {
           },
         ),
       ],
-    )
+    ),
   );
 
   factory HelpFrame.formula() => HelpFrame(
     label: '各項目の計算方法',
     content: Column(
-      children: [
+      children: <Widget>[
         const Text('　グラフの各要素は以下のような計算式で算出しております．また，上限を120(%)としており，小数第二位以下で四捨五入をし算出しています．それにより多少表示している値と誤差が生じる場合があります，タンパク質・脂質・炭水化物は基準値に幅がありますが，本サービスでは最低値を基準としております．'),
         Image.asset('assets/slns/image/graphFormula.png'),
       ],
@@ -56,14 +56,14 @@ class HelpFrame extends StatelessWidget {
   factory HelpFrame.updateCycle() => const HelpFrame(
     label: '更新頻度',
     content: Text(
-      '　このアプリに使用しているデータは，1日に1回1:00に更新されます．'
+      '　このアプリに使用しているデータは，1日に1回1:00に更新されます．',
     ),
   );
 
   factory HelpFrame.tr() => const HelpFrame(
     label: 'Trについて',
     content: Text(
-      '　Trとは，Traceの略です．微量を意味し，成分が含まれてはいるが，最小記載量に達してないことを示します．しかし，本アプリでは，鉄分を便宜上小数第2位まで記載しています．'
+      '　Trとは，Traceの略です．微量を意味し，成分が含まれてはいるが，最小記載量に達してないことを示します．しかし，本アプリでは，鉄分を便宜上小数第2位まで記載しています．',
     ),
   );
 
@@ -91,7 +91,7 @@ class HelpFrame extends StatelessWidget {
         const Text('　献立がある日の料理名を選択すると，選択した料理の食材と栄養素を見ることができます．違う料理の詳細を知りたい時は，サイドメニューを使用します．'
         'サイドメニューは詳細画面のメニューアイコンか，画面を右から左ヘスワイプすることで開き，詳細情報を見たい料理をタップすることで詳細画面へ遷移します．'),
         Padding(
-          padding: const EdgeInsets.all(5.0),
+          padding: const EdgeInsets.all(5),
           child: Row(
             children: <Widget>[
               Icon(
