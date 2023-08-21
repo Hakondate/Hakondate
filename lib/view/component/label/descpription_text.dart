@@ -1,10 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hakondate/view_model/single_page/information/information_view_model.dart';
 
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
+import 'package:hakondate/view_model/single_page/information/information_view_model.dart';
 
 class DescriptionText extends StatelessWidget {
   const DescriptionText({

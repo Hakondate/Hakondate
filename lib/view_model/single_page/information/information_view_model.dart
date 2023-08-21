@@ -1,8 +1,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/repository/local/sqlite/schools/schools_local_repository.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 part 'information_view_model.g.dart';
 
