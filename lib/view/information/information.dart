@@ -76,7 +76,7 @@ class Information extends StatelessWidget {
                     builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
                       if(snapshot.hasData){
                         return DescriptionText.body(
-                        label: snapshot.data!
+                        label: snapshot.data!,
                       );
                     }else if(snapshot.hasError){
                       return const SizedBox.shrink();
@@ -94,7 +94,7 @@ class Information extends StatelessWidget {
                   DescriptionText.headline(label: 'お問い合わせ'),
                   DescriptionText.subheading(label: '開発者'),
                   DescriptionText.body(
-                    label: '公立はこだて未来大学　はこんだて開発チーム\n'
+                    label: '公立はこだて未来大学　はこんだて開発チーム\n',
                   ),
                   DescriptionText.linked(
                    label: 'editorhakondate@gmail.com',
