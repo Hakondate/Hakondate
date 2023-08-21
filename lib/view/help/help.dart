@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hakondate/view/component/label/descpription_text.dart';
 import 'package:hakondate/view/help/help_frame.dart';
 import 'package:hakondate/view/component/frame/fade_up_app_bar.dart';
 
@@ -20,24 +21,26 @@ class Help extends StatelessWidget{
               const SizedBox(
                 height: 20,
               ),
-              _title('栄養値の分類'),
+              DescriptionText.headline(label: '栄養素の分類'),
               HelpFrame.baseNut(),
               HelpFrame.formula(),
-
-              _title('データ'),
               HelpFrame.input(),
+
+              DescriptionText.headline(label: 'データ'),
+              HelpFrame.misprint(),
               HelpFrame.updateCycle(),
               HelpFrame.tr(),
 
-              _title('操作ヘルプ'),
+              DescriptionText.headline(label: '操作方法'),
               HelpFrame.nickName(),
               HelpFrame.schoolAndSchoolYear(),
               HelpFrame.dishDetail(),
+              HelpFrame.recommendedIngredients(),
               HelpFrame.menuList(),
-              HelpFrame.menuTable(),
               HelpFrame.origin(),
-              HelpFrame.dictionaly(),
-              HelpFrame.registration(),
+              Container(
+                height: 20,
+              ),
             ],
           ),
         ),
