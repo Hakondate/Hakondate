@@ -16,6 +16,7 @@ class HelpViewModel extends _$HelpViewModel {
     if (user == null) throw const SignInException('Current user does not exist');
 
     final SchoolGrade schoolGrade = await ref.read(userViewModelProvider.notifier).getSchoolGrade(user.id);
+
     return HelpState(
       schoolGrade: schoolGrade,
     );

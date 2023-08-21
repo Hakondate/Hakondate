@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hakondate/view/help/help_frame.dart';
-import '../component/frame/fade_up_app_bar.dart';
+import 'package:hakondate/view/component/frame/fade_up_app_bar.dart';
 
 class Help extends StatelessWidget{
   const Help({super.key});

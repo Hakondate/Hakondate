@@ -15,8 +15,6 @@ class HelpFrame extends StatelessWidget {
         const Text('　グラフなどの数値は，文部科学省が定めている「児童又は生徒一人当たりの学校給食摂取基準」に基づいて表示しています．以下の表は，登録されている情報に基づいた基準値を示しています．本サービス内の献立表時における「栄養」の%表示も以下の基準値を基に算出されています'),
         Consumer(
           builder: (_, ref, __) {
-            //type 'AutoDisposeAsyncNotifierProviderImpl<HelpViewModel, HelpState>' is not a subtype of type 'ProviderListenable<HelpState>' in type cast
-            //final HelpState state = ref.watch(helpViewModelProvider as ProviderListenable<HelpState>);//キャスト
             final AsyncValue<HelpState> state = ref.watch(helpViewModelProvider);
             return state.when(
                 loading: () => const CircularProgressIndicator(),
@@ -33,7 +31,6 @@ class HelpFrame extends StatelessWidget {
             );
           },
         ),
-
       ],
     )
   );

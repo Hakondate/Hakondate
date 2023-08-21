@@ -7,15 +7,9 @@ part of 'user_state.dart';
 ///  中学生    => "junior"
 ///  データ不備 => "junior"
 enum SchoolGrade {
-  /*
-  lower(slnsJsonFileName: 'lower.json', slnsImageFileName: 'lower.png'),
-  middle(slnsJsonFileName: 'middle.json', slnsImageFileName: 'middle.png'),
-  upper(slnsJsonFileName: 'upper.json', slnsImageFileName: 'upper.png'),
-  junior(slnsJsonFileName: 'junior.json', slnsImageFileName: 'junior.png');*/
-
-  lower(slnsJsonFileName: 'lower.json', slnsImageFileName: 'lowSLIS.png', slnsZincFileName: 'elementalZinc.png'),
+  lower(slnsJsonFileName: 'lower.json', slnsImageFileName: 'lowerSLIS.png', slnsZincFileName: 'elementalZinc.png'),
   middle(slnsJsonFileName: 'middle.json', slnsImageFileName: 'middleSLIS.png', slnsZincFileName: 'elementalZinc.png'),
-  upper(slnsJsonFileName: 'upper.json', slnsImageFileName: 'highSLIS.png', slnsZincFileName: 'elementalZinc.png'),
+  upper(slnsJsonFileName: 'upper.json', slnsImageFileName: 'upperSLIS.png', slnsZincFileName: 'elementalZinc.png'),
   junior(slnsJsonFileName: 'junior.json', slnsImageFileName: 'juniorSLIS.png', slnsZincFileName: 'juniorZinc.png');
 
   const SchoolGrade({
@@ -23,6 +17,7 @@ enum SchoolGrade {
     required this.slnsImageFileName,
     required this.slnsZincFileName,
   });
+
   final String slnsJsonFileName;
   final String slnsImageFileName;
   final String slnsZincFileName;
