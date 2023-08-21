@@ -2,12 +2,14 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/repository/local/sqlite/schools/schools_local_repository.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 part 'information_view_model.g.dart';
 
 @riverpod
-InformationViewModel informationViewModel (InformationViewModelRef ref) {
-  final SchoolsLocalRepository schoolsLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
+InformationViewModel informationViewModel(InformationViewModelRef ref) {
+  final SchoolsLocalRepository schoolsLocalRepository =
+      ref.watch(schoolsLocalRepositoryProvider);
   return InformationViewModel(schoolsLocalRepository);
 }
 
@@ -29,10 +31,51 @@ class InformationViewModel {
    */
   Future<String> getSchoolNameListText() async {
     final List<SchoolModel> schools = await _schoolLocalRepository.list();
-    
-    return '';
+    if (schools.isNotEmpty) {
+      schools.sort((SchoolModel a, SchoolModel b) => a.id.compareTo(b.id));
+      final StringBuffer buffer = StringBuffer();
+      for (int i = 1; i < schools.length; i++) {
+        buffer.write('${schools[i].name}\n');
+      }
+      return buffer.toString();
+    } else {
+      return '協力学校を募集しています';
+    }
   }
 
   // TODO: リンクをタップした時の関数
-  Future<void> onTap() async {}
+
+  Future<void> onTap({required String scheme, required String path}) async {
+    final Uri uri = Uri(
+      scheme: scheme, //'mailto'
+      path: path, //'editorhakondate@gmail.com',
+    );
+    if(scheme == 'mailto'){
+      print(scheme);
+      final Uri emailLaunchUri = Uri(
+     scheme: 'mailto',
+     path: path,
+     query: encodeQueryParameters(<String, String>{
+      'subject': 'Example Subject & Symbols are allowed!',
+    }),
+
+     );
+     await launchUrl(emailLaunchUri);}
+    
+    if (await canLaunchUrl(
+      Uri.parse(uri.toString()),
+    )) {
+      await launchUrl(
+        Uri.parse(uri.toString()),
+        mode: LaunchMode.inAppWebView,
+      );
+    }
+  }
+  
+  String? encodeQueryParameters(Map<String, String> params) {
+  return params.entries
+      .map((MapEntry<String, String> e) =>
+          '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+      .join('&');
+}
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
-import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate/view_model/single_page/information/information_view_model.dart';
 
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
@@ -77,34 +77,30 @@ class DescriptionText extends StatelessWidget {
 
   factory DescriptionText.linked({
     required String label,
-    required String url,
+    required String scheme,
+    required String path,
     bool isAnnotation = false,
   }) => DescriptionText(
-    text: Padding(
-      padding: const EdgeInsets.only(
-        left: PaddingSize.minimum,
-      ),
-      child: RichText(
-        text: TextSpan(
-          style: TextStyle(
-            color: AppColor.text.link,
-            fontFamily: 'MPLUSRounded1c',
-            fontSize: isAnnotation ? FontSize.annotation : FontSize.body,
+    text: Consumer(
+      builder: (BuildContext context, WidgetRef ref, _) {
+        return Padding(
+          padding: const EdgeInsets.only(
+            left: PaddingSize.minimum,
           ),
-          recognizer: TapGestureRecognizer()
-            ..onTap = () async {
-              if (await canLaunchUrl(
-                Uri.parse(url),
-              )) {
-                await launchUrl(
-                  Uri.parse(url),
-                  mode: LaunchMode.inAppWebView,
-                );
-              }
-            },
-          text: label,
-        ),
-      ),
+          child: RichText(
+            text: TextSpan(
+              style: TextStyle(
+                color: AppColor.text.link,
+                fontFamily: 'MPLUSRounded1c',
+                fontSize: isAnnotation ? FontSize.annotation : FontSize.body,
+              ),
+              recognizer: TapGestureRecognizer()
+                ..onTap = () => ref.read(informationViewModelProvider).onTap(scheme: scheme,path: path),
+              text: label,
+            ),
+          ),
+        );
+      },
     ),
   );
 
