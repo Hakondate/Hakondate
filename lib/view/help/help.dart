@@ -17,6 +17,7 @@ class Help extends StatelessWidget{
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               const SizedBox(
                 height: 20,
@@ -31,7 +32,7 @@ class Help extends StatelessWidget{
               HelpFrame.updateCycle(),
               HelpFrame.tr(),
 
-              DescriptionText.headline(label: '操作方法'),
+              DescriptionText.headline(label: '操作ヘルプ'),
               HelpFrame.nickName(),
               HelpFrame.schoolAndSchoolYear(),
               HelpFrame.dishDetail(),
@@ -44,22 +45,6 @@ class Help extends StatelessWidget{
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _title(String label){
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 5),
-      child: Row(
-        children: <Widget>[
-          Text(
-            label,
-            style: const TextStyle(
-              fontSize: 30,
-            ),
-          )
-        ],
       ),
     );
   }
