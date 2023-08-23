@@ -63,8 +63,7 @@ class HelpFrame extends StatelessWidget {
   factory HelpFrame.input() => HelpFrame(
         label: '登録情報について',
         content: DescriptionText.body(
-            label:
-                '　ご登録された学年に応じて，栄養基準値が異なります．学年が変わるごとに，登録データをを手動で変更する必要があります．',),
+            label: '　ご登録された学年に応じて，栄養基準値が異なります．学年が変わるごとに，登録データをを手動で変更する必要があります．',),
       );
 
   factory HelpFrame.misprint() => HelpFrame(

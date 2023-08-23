@@ -3,7 +3,7 @@ import 'package:hakondate/view/component/label/descpription_text.dart';
 import 'package:hakondate/view/help/help_frame.dart';
 import 'package:hakondate/view/component/frame/fade_up_app_bar.dart';
 
-class Help extends StatelessWidget{
+class Help extends StatelessWidget {
   const Help({super.key});
 
   @override
@@ -22,6 +22,7 @@ class Help extends StatelessWidget{
               const SizedBox(
                 height: 20,
               ),
+
               DescriptionText.headline(label: '栄養素の分類'),
               HelpFrame.baseNut(),
               HelpFrame.formula(),
@@ -39,7 +40,8 @@ class Help extends StatelessWidget{
               HelpFrame.recommendedIngredients(),
               HelpFrame.menuList(),
               HelpFrame.origin(),
-              Container(
+
+              const SizedBox(
                 height: 20,
               ),
             ],
