@@ -1,6 +1,6 @@
 /* 定数定義 */
 class FontSize {
-  static const double indication = 12;  // 注意文
+  static const double annotation = 12;  // 注意文
   static const double body = 16;        // 本文
   static const double label = 18;       // ラベル内
   static const double heading = 20;     // 大見出し
