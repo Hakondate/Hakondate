@@ -32,7 +32,17 @@ class HelpFrame extends StatelessWidget {
                     return Column(
                       children: <Widget>[
                         Image.asset(state.schoolGrade.slnsImagePath),
-                        // 表右下に学校給食実施基準・日本人の食事摂取基準へのリンクテキスト
+                        Container(
+                          width: double.infinity,
+                          alignment: Alignment.centerRight,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              DescriptionText.linked(label: '学校給食実施基準（2021年）', url: 'https://www.mext.go.jp/content/20210212-mxt_kenshoku-100003357_2.pdf', isAnnotation: true),
+                              DescriptionText.linked(label: '日本人の食事摂取基準（2020年）', url: 'https://www.mhlw.go.jp/stf/newpage_08517.html', isAnnotation: true)
+                            ],
+                          ),
+                        ),
                         DescriptionText.body(
                             label: '上記の他に摂取量について配慮するものは以下のようになっています．',),
                         Image.asset(state.schoolGrade.slnsZincImagePath),
