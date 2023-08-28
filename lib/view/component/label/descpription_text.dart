@@ -6,6 +6,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 
+import 'dart:io';
+
 class DescriptionText extends StatelessWidget {
   const DescriptionText({
     required this.text,
@@ -43,9 +45,7 @@ class DescriptionText extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(
-            width: SpaceSize.line,
-          ),
+          const SizedBox(width: SpaceSize.line),
           DefaultTextStyle.merge(
             style: const TextStyle(
               fontSize: FontSize.subheading,
@@ -97,18 +97,24 @@ class DescriptionText extends StatelessWidget {
               if (await canLaunchUrl(
                 Uri.parse(url),
               )) {
-                await launchUrl(
-                  Uri.parse(url),
-                  mode:LaunchMode.inAppWebView,
-                );
+                if (Platform.operatingSystem == 'android' && url.substring(url.length-4) == '.pdf') {
+                  await launchUrl(
+                    Uri.parse(url),
+                    mode: LaunchMode.externalNonBrowserApplication,
+                  );
+                } else {
+                  await launchUrl(
+                    Uri.parse(url),
+                    mode: LaunchMode.inAppWebView,
+                  );
+                }
               }    
             },
           text: label,
         ),
       ),
     ),
-  );
-
+  ); 
   final Widget text;
 
   @override

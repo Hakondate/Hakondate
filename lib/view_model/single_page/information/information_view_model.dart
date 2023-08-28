@@ -28,13 +28,13 @@ class InformationViewModel {
     return schools.map((SchoolModel school) => school.name).join('\n');
   }
 
-  Future<void> onTap() async {
+  void onTap() {
     final Uri emailLaunchUri = Uri(
       scheme: 'mailto',
       path: 'editorhakondate@gmail.com',
       query: 'subject=はこんだて運営への問い合わせ',
     );
 
-    await launchUrl(emailLaunchUri);
+    launchUrl(emailLaunchUri);
   }
 }
