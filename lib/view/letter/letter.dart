@@ -86,7 +86,7 @@ class Letter extends ConsumerWidget {
                   Text(
                     letter.title,
                     style: const TextStyle(
-                      fontSize: FontSize.subheading,
+                      fontSize: FontSize.heading,
                       fontWeight: FontWeight.bold,
                       height: 1.1,
                     ),

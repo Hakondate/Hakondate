@@ -41,7 +41,7 @@ class SettingLabel extends StatelessWidget {
                     '完了',
                     style: TextStyle(
                       fontSize: 20,
-                      color: AppColor.text.blue,
+                      color: AppColor.text.link,
                     ),
                   ),
                 ),

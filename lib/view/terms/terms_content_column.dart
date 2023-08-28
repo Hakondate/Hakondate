@@ -88,7 +88,7 @@ class TermsContentColumn extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(title, style: const TextStyle(fontSize: FontSize.subheading)),
+        Text(title, style: const TextStyle(fontSize: FontSize.heading)),
         const SizedBox(height: SpaceSize.line),
         Text(sentence, style: const TextStyle(fontSize: FontSize.body)),
         const SizedBox(height: SpaceSize.paragraph),
