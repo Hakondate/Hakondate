@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hakondate/view/help/help.dart';
 
 import 'package:routemaster/routemaster.dart';
 
@@ -51,7 +52,7 @@ final RoutemasterDelegate routemaster = RoutemasterDelegate(
       '/home/origin': (_) => MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
       '/home/drawer_terms': (_) => const FadeUpPage(child: DrawerTerms()),
       '/home/information': (_) => MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
-      '/home/help': (_) => MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
+      '/home/help': (_) => const FadeUpPage(child: Help()),
       '/home/license': (_) => const FadeUpPage(child: License()),
       '/home/license/:index': (RouteData route) => FadeUpPage(
         child: LicenseDetail(

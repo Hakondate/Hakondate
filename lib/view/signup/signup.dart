@@ -164,7 +164,7 @@ class Signup extends StatelessWidget {
         return Text(
           errorState,
           style: TextStyle(
-            fontSize: FontSize.indication,
+            fontSize: FontSize.annotation,
             color: Theme.of(context).colorScheme.error,
           ),
         );
