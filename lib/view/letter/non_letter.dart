@@ -40,7 +40,7 @@ class NonLetter extends StatelessWidget {
                   '更新する',
                   style: TextStyle(
                     fontSize: FontSize.body,
-                    color: AppColor.text.blue,
+                    color: AppColor.text.link,
                   ),
                 ),
               );
