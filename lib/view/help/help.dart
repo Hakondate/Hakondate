@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hakondate/constant/size.dart';
 
 import 'package:hakondate/view/component/frame/fade_up_app_bar.dart';
 import 'package:hakondate/view/component/label/descpription_text.dart';
@@ -10,19 +11,15 @@ class Help extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const FadeUpAppBar(
-        title: Text('ヘルプ'),
-      ),
+      appBar: const FadeUpAppBar(title: Text('ヘルプ')),
       body: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20),
+        padding: const EdgeInsets.only(left: MarginSize.normalVertical, right: MarginSize.normalVertical),
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: MarginSize.normalHorizontal),
 
               DescriptionText.headline(label: '栄養素の分類'),
               HelpFrame.baseNut(),
@@ -42,9 +39,7 @@ class Help extends StatelessWidget {
               HelpFrame.menuList(),
               HelpFrame.origin(),
 
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: MarginSize.normalHorizontal),
             ],
           ),
         ),
