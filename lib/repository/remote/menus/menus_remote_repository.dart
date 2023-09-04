@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate/view_model/single_page/user_settings/user_settings_view_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/repository/remote/firestore/firestore_api.dart';
-import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
 
 part 'menus_remote_repository.g.dart';
 
@@ -26,7 +26,7 @@ class MenusRemoteRepository extends MenusRemoteRepositoryAPI {
 
   @override
   Future<List<dynamic>> get({required DateTime updateAt}) async {
-    final List<int> schoolIds = await _ref.read(userViewModelProvider.notifier).getParentIds();
+    final List<int> schoolIds = await _ref.read(userSettingsViewModelProvider.notifier).getParentIdList();
     final QuerySnapshot<Map<String, dynamic>> firestoreData = await _db
         .where('schoolId', whereIn: schoolIds)
         .where('updateAt', isGreaterThan: updateAt)

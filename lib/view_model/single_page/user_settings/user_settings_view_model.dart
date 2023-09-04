@@ -22,19 +22,19 @@ class UserSettingsViewModel extends _$UserSettingsViewModel {
   }
 
   Future<List<int>> getParentIdList() async {
-    return state.maybeWhen(
-      orElse: () => <int>[],
-      data: (UserSettingsState state) async {
-        final List<int> parentIds = <int>[];
-
-        for (final UserModel user in state.users!) {
-          final SchoolModel school = await ref.read(schoolsLocalRepositoryProvider).getById(user.schoolId);
-          if (parentIds.contains(school.parentId)) continue;
-          parentIds.add(school.parentId);
-        }
-        
-        return parentIds;
-      },
+    final List<UserModel> users = await state.maybeWhen(
+      orElse: () async => ref.read(usersLocalRepositoryProvider).list(),
+      data: (UserSettingsState state) async => state.users!,
     );
+
+    final List<int> parentIds = <int>[];
+
+    for (final UserModel user in users) {
+      final SchoolModel school = await ref.read(schoolsLocalRepositoryProvider).getById(user.schoolId);
+      if (parentIds.contains(school.parentId)) continue;
+      parentIds.add(school.parentId);
+    }
+    
+    return parentIds;
   }
 }
