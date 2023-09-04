@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:multi_charts/multi_charts.dart';
 
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:hakondate/state/daily/daily_state.dart';
 import 'package:hakondate/util/exception/class_type_exception.dart';
+import 'package:hakondate/view/component/graph/nutrients_radar_chart.dart';
 import 'package:hakondate/view/component/label/nutrients_list.dart';
 import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
 import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
@@ -36,24 +36,13 @@ class NutrientsCard extends StatelessWidget {
         return SizedBox(
           width: MediaQuery.of(context).size.width * 3/4,
           height: MediaQuery.of(context).size.width * 3/4,
-          child: RadarChart(
+          child: NutrientsRadarChart(
             values: ref.read(dailyViewModelProvider.notifier).getGraphValues(
               slns: ref.watch(userViewModelProvider).currentUser!.slns,
               graphMaxValue: graphMaxValue,
             ),
-            labels: const <String>[
-              'エネルギー',
-              'たんぱく質',
-              'ビタミン',
-              'ミネラル',
-              '炭水化物',
-              '脂質',
-            ],
+            rowValues: ref.read(dailyViewModelProvider.notifier).getGraphRowValues(),
             maxValue: graphMaxValue,
-            chartRadiusFactor: 0.7,
-            textScaleFactor: 0.05,
-            animate: false,
-            fillColor: AppColor.brand.secondary,
           ),
         );
       },

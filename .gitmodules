@@ -1,0 +1,3 @@
+[submodule "submodules/dictionary_json_generator"]
+	path = submodules/dictionary_json_generator
+	url = https://github.com/Hakondate/dictionary_json_generator.git

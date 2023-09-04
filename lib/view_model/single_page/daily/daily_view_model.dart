@@ -29,35 +29,33 @@ class DailyViewModel extends _$DailyViewModel {
   }
 
   Future<void> updateSelectedDay({DateTime? selectedDay, DateTime? focusedDay}) async {
-    final AsyncValue<DailyState> store = state;
+    state.whenData((DailyState data) async {
+      state = const AsyncLoading<DailyState>();
 
-    if (store is! AsyncData<DailyState>) return;
+      DateTime? selectedInputDay = selectedDay;
+      switch (Environment.flavor) {
+        case Flavor.dev:
+          selectedInputDay ??= DateTime(2022, 5, 16);
+          break;
+        case Flavor.stg:
+        case Flavor.prod:
+        selectedInputDay ??= DateTime.now();
+          break;
+      }
+      final MenuModel menu = await _menusLocalRepository.getMenuByDay(selectedInputDay);
 
-    state = const AsyncLoading<DailyState>();
+      state = AsyncData<DailyState>(
+        data.copyWith(
+          selectedDay: selectedInputDay,
+          focusedDay: focusedDay ?? selectedInputDay,
+          menu: menu,
+        ),
+      );
 
-    DateTime? selectedInputDay = selectedDay;
-    switch (Environment.flavor) {
-      case Flavor.dev:
-        selectedInputDay ??= DateTime(2022, 5, 16);
-        break;
-      case Flavor.stg:
-      case Flavor.prod:
-      selectedInputDay ??= DateTime.now();
-        break;
-    }
-    final MenuModel menu = await _menusLocalRepository.getMenuByDay(selectedInputDay);
-
-    state = AsyncData<DailyState>(
-      store.value.copyWith(
-        selectedDay: selectedInputDay,
-        focusedDay: focusedDay ?? selectedInputDay,
-        menu: menu,
-      ),
-    );
-
-    if (menu is LunchesDayMenuModel) {
-      await ref.read(analyticsControllerProvider.notifier).logViewMenu(menu.id);
-    }
+      if (menu is LunchesDayMenuModel) {
+        await ref.read(analyticsControllerProvider.notifier).logViewMenu(menu.id);
+      }
+    });
   }
 
   void updateFocusedDay(DateTime day) {
@@ -94,6 +92,28 @@ class DailyViewModel extends _$DailyViewModel {
         ].map((double element) => (element > graphMaxValue) ? graphMaxValue : element).toList();
       },
       orElse: () => <double>[0, 0, 0, 0, 0, 0],
+    );
+  }
+
+  List<double> getGraphRowValues() {
+    return state.maybeWhen(
+      data: (DailyState data) {
+        final MenuModel menu = data.menu;
+
+        if (menu is! LunchesDayMenuModel) {
+          return <double>[0, 0, 0, 0, 0, 0];
+        }
+
+        return <double>[
+          menu.energy,
+          menu.protein,
+          menu.vitamin,
+          menu.mineral,
+          menu.carbohydrate,
+          menu.lipid,
+        ];
+      },
+      orElse: () => <double>[0, 0, 0, 0, 0],
     );
   }
 

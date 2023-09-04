@@ -20,19 +20,22 @@ class MarginSize {
   static const double normalHorizontal = 25;  // 垂直方向の基本マージン
   static const double kTabBarHeight = 50;     // BottomNavigationBarの高さ
   static const double shadow = 1;             // 影のサイズ
+  static const double minimumGrid = 2;        // 小さなグリッド用マージン
 }
 
 class PaddingSize {
   static const double minimum = 8;                // 小さめ
   static const double normal = 16;                // 基本余白
   static const double content = 32;               // ラベル内の左右余白など
-  static const double buttonVertical = 5;         // ボタンの水平方向の基本マージン
-  static const double buttonHorizontal = 25;      // ボタンの垂直方向の基本マージン
-  static const double buttonHorizontalLarge = 30; // ボタンの垂直方向の大きなマージン
+  static const double contentLarge = 40;          // コンテンツ用の大きめの余白
+  static const double buttonVertical = 5;         // ボタンの水平方向の基本余白
+  static const double buttonHorizontal = 25;      // ボタンの垂直方向の基本余白
+  static const double buttonHorizontalLarge = 30; // ボタンの垂直方向の大きな余白
 }
 
 class BorderSize {
   static const double normal = 2;           // 標準の太さ
+  static const double bold = 4;             // 太めの太さ
 }
 
 class IconSize {
@@ -45,4 +48,6 @@ class IconSize {
 
 class UiSize {
   static const double calendarTileHeight = 180; // カレンダー画面の高さ
+  static const double minimumGridCircular = 8;  // 小さいグリッドの角丸の大きさ
+  static const double dictionaryGroupBox = 48;  // Dictionary機能の食品群のBoxの大きさ
 }

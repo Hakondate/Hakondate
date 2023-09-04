@@ -280,9 +280,7 @@ class __$$_NutrientsModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_NutrientsModel
-    with DiagnosticableTreeMixin
-    implements _NutrientsModel {
+class _$_NutrientsModel extends _NutrientsModel with DiagnosticableTreeMixin {
   const _$_NutrientsModel(
       {this.energy = 0.0,
       this.protein = 0.0,
@@ -298,7 +296,8 @@ class _$_NutrientsModel
       this.vitaminB2 = 0.0,
       this.vitaminC = 0.0,
       this.dietaryFiber = 0.0,
-      this.salt = 0.0});
+      this.salt = 0.0})
+      : super._();
 
   factory _$_NutrientsModel.fromJson(Map<String, dynamic> json) =>
       _$$_NutrientsModelFromJson(json);
@@ -452,7 +451,7 @@ class _$_NutrientsModel
   }
 }
 
-abstract class _NutrientsModel implements NutrientsModel {
+abstract class _NutrientsModel extends NutrientsModel {
   const factory _NutrientsModel(
       {final double energy,
       final double protein,
@@ -469,6 +468,7 @@ abstract class _NutrientsModel implements NutrientsModel {
       final double vitaminC,
       final double dietaryFiber,
       final double salt}) = _$_NutrientsModel;
+  const _NutrientsModel._() : super._();
 
   factory _NutrientsModel.fromJson(Map<String, dynamic> json) =
       _$_NutrientsModel.fromJson;

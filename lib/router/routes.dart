@@ -8,6 +8,9 @@ import 'package:hakondate/view/calendar/calendar.dart';
 import 'package:hakondate/view/component/frame/fade_up_page.dart';
 import 'package:hakondate/view/daily/daily.dart';
 import 'package:hakondate/view/daily/dish.dart';
+import 'package:hakondate/view/dictionary/dictionary.dart';
+import 'package:hakondate/view/dictionary/dictionary_group_list.dart';
+import 'package:hakondate/view/dictionary/dictionary_item.dart';
 import 'package:hakondate/view/letter/letter.dart';
 import 'package:hakondate/view/letter/letter_pdf.dart';
 import 'package:hakondate/view/license/license.dart';
@@ -40,7 +43,9 @@ final RoutemasterDelegate routemaster = RoutemasterDelegate(
       '/home/calendar': (_) => const FadeUpPage(child: Calendar()),
       '/home/recipes': (_) => const MaterialPage<dynamic>(child: Recipe()),
       '/home/recipes_pdf/:id': (RouteData route) => FadeUpPage(child: RecipePDF(id: route.pathParameters['id'])),
-      '/home/dictionary': (_) => MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
+      '/home/dictionary': (_) => const MaterialPage<dynamic>(child: Dictionary()),
+      '/home/dictionary/:group': (_) => const MaterialPage<dynamic>(child: DictionaryGroupList()),
+      '/home/dictionary_item/:id': (_) => const FadeUpPage(child: DictionaryItem()),
       '/home/letter': (_) => const MaterialPage<dynamic>(child: Letter()),
       '/home/letter/:title': (_) => const MaterialPage<dynamic>(child: LetterPDF()),
       '/home/user_settings': (_) => MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
