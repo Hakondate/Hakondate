@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hakondate/view/help/help.dart';
 
 import 'package:routemaster/routemaster.dart';
 
@@ -11,6 +10,7 @@ import 'package:hakondate/view/daily/dish.dart';
 import 'package:hakondate/view/dictionary/dictionary.dart';
 import 'package:hakondate/view/dictionary/dictionary_group_list.dart';
 import 'package:hakondate/view/dictionary/dictionary_item.dart';
+import 'package:hakondate/view/help/help.dart';
 import 'package:hakondate/view/letter/letter.dart';
 import 'package:hakondate/view/letter/letter_pdf.dart';
 import 'package:hakondate/view/license/license.dart';
