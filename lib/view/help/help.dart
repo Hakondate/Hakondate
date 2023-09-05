@@ -13,14 +13,12 @@ class Help extends StatelessWidget {
     return Scaffold(
       appBar: const FadeUpAppBar(title: Text('ヘルプ')),
       body: Padding(
-        padding: const EdgeInsets.only(left: MarginSize.normalVertical, right: MarginSize.normalVertical),
+        padding: const EdgeInsets.symmetric(vertical: MarginSize.normal, horizontal: MarginSize.normalHorizontal),
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const SizedBox(height: MarginSize.normalHorizontal),
-
               DescriptionText.headline(label: '栄養素の分類'),
               HelpFrame.baseNut(),
               HelpFrame.formula(),
@@ -38,8 +36,6 @@ class Help extends StatelessWidget {
               HelpFrame.recommendedIngredients(),
               HelpFrame.menuList(),
               HelpFrame.origin(),
-
-              const SizedBox(height: MarginSize.normalHorizontal),
             ],
           ),
         ),
