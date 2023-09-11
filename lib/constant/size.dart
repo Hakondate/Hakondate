@@ -4,7 +4,7 @@ class FontSize {
   static const double body = 16;        // 本文
   static const double label = 18;       // ラベル内
   static const double heading = 20;     // 大見出し
-  static const double subheading = 20;  // 副見出し
+  static const double subheading = 18;  // 副見出し
   static const double status = 24;      // ステータス表示
 }
 

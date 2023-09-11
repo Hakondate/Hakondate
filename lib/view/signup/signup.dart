@@ -51,7 +51,7 @@ class Signup extends StatelessWidget {
                 children: <Widget>[
                   const Text(
                     'お名前',
-                    style: TextStyle(fontSize: FontSize.subheading),
+                    style: TextStyle(fontSize: FontSize.heading),
                   ),
                   IconButton(
                     icon: const Icon(Icons.help),
@@ -110,7 +110,7 @@ class Signup extends StatelessWidget {
                 children: <Widget>[
                   const Text(
                     '学校・学年',
-                    style: TextStyle(fontSize: FontSize.subheading),
+                    style: TextStyle(fontSize: FontSize.heading),
                   ),
                   IconButton(
                     icon: const Icon(Icons.help),

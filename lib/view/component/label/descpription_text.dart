@@ -43,9 +43,7 @@ class DescriptionText extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(
-            width: SpaceSize.line,
-          ),
+          const SizedBox(width: SpaceSize.line),
           DefaultTextStyle.merge(
             style: const TextStyle(
               fontSize: FontSize.subheading,
@@ -94,14 +92,12 @@ class DescriptionText extends StatelessWidget {
           ),
           recognizer: TapGestureRecognizer()
             ..onTap = () async {
-              if (await canLaunchUrl(
-                Uri.parse(url),
-              )) {
+              if (await canLaunchUrl(Uri.parse(url))) {
                 await launchUrl(
                   Uri.parse(url),
-                  mode:LaunchMode.inAppWebView,
+                  mode: LaunchMode.inAppWebView,
                 );
-              }
+              }    
             },
           text: label,
         ),
