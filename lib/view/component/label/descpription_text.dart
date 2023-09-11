@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -94,20 +92,11 @@ class DescriptionText extends StatelessWidget {
           ),
           recognizer: TapGestureRecognizer()
             ..onTap = () async {
-              if (await canLaunchUrl(
-                Uri.parse(url),
-              )) {
-                if (Platform.operatingSystem == 'android' && url.substring(url.length-4) == '.pdf') {
-                  await launchUrl(
-                    Uri.parse(url),
-                    mode: LaunchMode.externalNonBrowserApplication,
-                  );
-                } else {
-                  await launchUrl(
-                    Uri.parse(url),
-                    mode: LaunchMode.inAppWebView,
-                  );
-                }
+              if (await canLaunchUrl(Uri.parse(url))) {
+                await launchUrl(
+                  Uri.parse(url),
+                  mode: LaunchMode.inAppWebView,
+                );
               }    
             },
           text: label,
