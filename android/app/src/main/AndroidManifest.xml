@@ -1,6 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="jp.ac.fun.hakondate">
-  <!--#enddocregion android-queries-->
    <application
         android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher">
@@ -40,21 +39,14 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
-    <!--#docregion android-queries-->
-    <!-- Provide required visibility configuration for API level 30 and above -->
     <queries>
-        <!-- If your app checks for mail support -->
         <intent>
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="mailto" />
         </intent>
-        <!--#enddocregion android-queries-->
-        <!-- The "https" scheme is only required for integration tests of this package.
-         It shouldn't be needed in most actual apps, or show up in the README! -->
         <intent>
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="https" />
         </intent>
-        <!--#docregion android-queries-->
     </queries>
 </manifest>
