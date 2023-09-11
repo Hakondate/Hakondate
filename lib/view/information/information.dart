@@ -48,7 +48,8 @@ class Information extends ConsumerWidget {
               ),
               DescriptionText.linked(
                 label: '文部科学省 学校給食実施基準',
-                url:   'https://www.mext.go.jp/a_menu/sports/syokuiku/__icsFiles/afieldfile/2019/06/06/1407704_001.pdf',
+                //url:   'https://www.mext.go.jp/a_menu/sports/syokuiku/__icsFiles/afieldfile/2019/06/06/1407704_001.pdf',
+                url:   'https://www.mext.go.jp/a_menu/sports/syokuiku/1407704.htm'
               ),
               DescriptionText.linked(
                 label: '文部科学省 日本食品標準成分表',
