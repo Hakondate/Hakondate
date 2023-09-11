@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/constant/app_color.dart';
+import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/state/help/help_state.dart';
 import 'package:hakondate/view/component/label/descpription_text.dart';
 import 'package:hakondate/view_model/single_page/help/help_view_model.dart';
@@ -37,7 +38,7 @@ class HelpFrame extends StatelessWidget {
                       width: double.infinity,
                       alignment: Alignment.centerRight,
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
                           DescriptionText.linked(
                             label: '学校給食実施基準（2021年）',
@@ -52,8 +53,9 @@ class HelpFrame extends StatelessWidget {
                         ],
                       ),
                     ),
-                  DescriptionText.body(label: '上記の他に摂取量について配慮するものは以下のようになっています．',),
-                  Image.asset(state.schoolGrade.slnsZincImagePath),
+                    DescriptionText.body(label: '上記の他に摂取量について配慮するものは以下のようになっています．',),
+                    Image.asset(state.schoolGrade.slnsZincImagePath),
+                    const SizedBox(height: SpaceSize.paragraph),
                   ],
                 );
               },
@@ -74,6 +76,7 @@ class HelpFrame extends StatelessWidget {
             'それにより多少表示している値と誤差が生じる場合があります．一部の栄養素の基準値は幅がありますが，本サービスでは中央値を基準として採用しております．',
         ),
         Image.asset('assets/slns/image/graphFormula.png'),
+        const SizedBox(height: SpaceSize.paragraph),
       ],
     ),
   );
@@ -142,7 +145,7 @@ class HelpFrame extends StatelessWidget {
     content: Column(
       children: <Widget>[
         DescriptionText.body(
-          label: '別日の献立が知りたい場合は献立リストを使用します．献立画面右上にあるカレンダーアイコンをタップすることで献立リスト画面に遷移できます．',
+          label: '　別日の献立が知りたい場合は献立リストを使用します．献立画面右上にあるカレンダーアイコンをタップすることで献立リスト画面に遷移できます．',
           isZeroBottomPadding: true,
         ),
         _iconWithText('献立リストアイコン', Icons.calendar_today_outlined),
@@ -166,6 +169,7 @@ class HelpFrame extends StatelessWidget {
           isZeroBottomPadding: true,
         ),
         _iconWithText('ドロワーアイコン', Icons.dehaze),
+        const SizedBox(height: SpaceSize.paragraph),
       ],
     ),
   );

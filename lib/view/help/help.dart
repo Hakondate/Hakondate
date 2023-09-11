@@ -14,10 +14,7 @@ class Help extends StatelessWidget {
       appBar: const FadeUpAppBar(title: Text('ヘルプ')),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-              vertical: MarginSize.normal,
-              horizontal: MarginSize.normalHorizontal,
-          ),
+          padding: const EdgeInsets.all(MarginSize.normal),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
