@@ -10,6 +10,7 @@ import 'package:hakondate/view/daily/dish.dart';
 import 'package:hakondate/view/dictionary/dictionary.dart';
 import 'package:hakondate/view/dictionary/dictionary_group_list.dart';
 import 'package:hakondate/view/dictionary/dictionary_item.dart';
+import 'package:hakondate/view/information/information.dart';
 import 'package:hakondate/view/letter/letter.dart';
 import 'package:hakondate/view/letter/letter_pdf.dart';
 import 'package:hakondate/view/license/license.dart';
@@ -50,7 +51,7 @@ final RoutemasterDelegate routemaster = RoutemasterDelegate(
       '/home/user_settings': (_) => MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
       '/home/origin': (_) => MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
       '/home/drawer_terms': (_) => const FadeUpPage(child: DrawerTerms()),
-      '/home/information': (_) => MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
+      '/home/information': (_) => const FadeUpPage(child: Information()),
       '/home/help': (_) => MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
       '/home/license': (_) => const FadeUpPage(child: License()),
       '/home/license/:index': (RouteData route) => FadeUpPage(
