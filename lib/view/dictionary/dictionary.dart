@@ -12,6 +12,12 @@ class Dictionary extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('ずかん'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () => {},//showSearch(context: context, delegate: CustomSearchDelegate(foods)),
+          ),
+        ],
       ),
       body: GridView.count(
         padding: const EdgeInsets.all(MarginSize.minimumGrid),
