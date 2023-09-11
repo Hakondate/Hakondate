@@ -6991,7 +6991,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     description: 'Android implementation of the url_launcher plugin.',
     repository: 'https://github.com/flutter/packages/tree/main/packages/url_launcher/url_launcher_android',
     authors: [],
-    version: '6.0.37',
+    version: '6.0.38',
     license: '''Copyright 2013 The Flutter Authors. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
