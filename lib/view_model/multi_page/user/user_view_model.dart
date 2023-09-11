@@ -111,14 +111,14 @@ class UserViewModel extends _$UserViewModel {
   }
 
   Future<NutrientsModel> _getSLNS(int userId) async {
-    final SchoolGrade schoolGrade = await _getSchoolGrade(userId);
-    final String jsonSLNS = await rootBundle.loadString(schoolGrade.slnsPath);
+    final SchoolGrade schoolGrade = await getSchoolGrade(userId);
+    final String jsonSLNS = await rootBundle.loadString(schoolGrade.slnsJsonPath);
     final Map<String, dynamic> decodeSLNS = json.decode(jsonSLNS) as Map<String, dynamic>;
 
     return NutrientsModel.fromJson(decodeSLNS);
   }
 
-  Future<SchoolGrade> _getSchoolGrade(int userId) async {
+  Future<SchoolGrade> getSchoolGrade(int userId) async {
     final UserModel user = await _usersLocalRepository.getById(userId);
     final SchoolModel school = await _schoolsLocalRepository.getById(user.schoolId);
     if (school.classification != SchoolClassification.secondary) {

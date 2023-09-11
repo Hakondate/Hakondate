@@ -103,7 +103,8 @@ class DescriptionText extends StatelessWidget {
         ),
       ),
     ),
-  ); 
+  );
+
   final Widget text;
 
   @override
