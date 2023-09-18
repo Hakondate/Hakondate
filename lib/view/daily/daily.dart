@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
+import 'package:hakondate/view_model/single_page/splash/splash_view_model.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -46,6 +48,17 @@ class Daily extends StatelessWidget {
           _bodyWidget(),
         ],
       ),
+      floatingActionButton: Consumer(
+          builder: (context, ref, _) {
+            return FloatingActionButton(
+              onPressed: () async {
+                await ref.read(userViewModelProvider.notifier).createUser(name: 'test2', schoolId: 1, schoolYear: 2);
+                await ref.read(splashViewModelProvider.notifier).initialize();
+              },
+              child: const Icon(Icons.search),
+            );
+          },
+        ),
     );
   }
 
