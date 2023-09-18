@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/model/user/user_model.dart';
 import 'package:hakondate/repository/local/sqlite/schools/schools_local_repository.dart';
 import 'package:hakondate/repository/local/sqlite/users/users_local_repository.dart';
@@ -21,20 +20,12 @@ class UserSettingsViewModel extends _$UserSettingsViewModel {
     );
   }
 
-  Future<List<int>> getParentIdList() async {
+  Future<List<int>> listParentIds() async {
     final List<UserModel> users = await state.maybeWhen(
       orElse: () async => ref.read(usersLocalRepositoryProvider).list(),
       data: (UserSettingsState state) async => state.users!,
     );
-
-    final List<int> parentIds = <int>[];
-
-    for (final UserModel user in users) {
-      final SchoolModel school = await ref.read(schoolsLocalRepositoryProvider).getById(user.schoolId);
-      if (parentIds.contains(school.parentId)) continue;
-      parentIds.add(school.parentId);
-    }
     
-    return parentIds;
+    return ref.read(schoolsLocalRepositoryProvider).listParentIdsByUsers(users);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate/model/user/user_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/school/school_model.dart';
@@ -19,6 +20,7 @@ abstract class SchoolsLocalRepositoryAPI {
   Future<int> count();
   Future<List<SchoolModel>> list();
   Future<SchoolModel> getById(int id);
+  Future<List<int>> listParentIdsByUsers(List<UserModel> users);
   Future<SchoolModel?> getByName(String name);
   Future<List<SchoolModel>> getByParentId(int parentId);
   Future<int> add(Map<String, dynamic> school);
@@ -74,6 +76,18 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryAPI {
   }
 
   @override
+  Future<List<int>> listParentIdsByUsers(List<UserModel> users) async {
+    final List<int> userIds = users.map((UserModel user) => user.schoolId).toList();
+
+    final List<SchoolsSchema> schoolsSchemas = await (_db.select(_db.schoolsTable, distinct: true)
+              ..where(($SchoolsTableTable t) => t.id.isIn(userIds))).get();
+
+    final List<int> parentIds = schoolsSchemas.map((SchoolsSchema schoolsSchema) => schoolsSchema.parentId).toSet().toList();
+
+    return parentIds;
+  }
+
+  @override
   Future<SchoolModel?> getByName(String name) async {
     final SchoolsSchema? schoolsSchema =
         await (_db.select(_db.schoolsTable)..where(($SchoolsTableTable t) => t.name.equals(name))).getSingleOrNull();
@@ -120,15 +134,15 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryAPI {
 
   @override
   Future<int> add(Map<String, dynamic> school) => _db.into(_db.schoolsTable).insertOnConflictUpdate(
-        SchoolsTableCompanion(
-          id: Value<int>(school['id'] as int),
-          parentId: Value<int>(school['parentId'] as int),
-          name: Value<String>(school['name'] as String),
-          lunchBlock: Value<int>(school['lunchBlock'] as int),
-          classification: Value<String>(school['classification'] as String),
-          updateAt: Value<DateTime>(_ref.read(commonFunctionProvider).getDayFromTimestamp(school['updateAt'])),
-        ),
-      );
+            SchoolsTableCompanion(
+              id: Value<int>(school['id'] as int),
+              parentId: Value<int>(school['parentId'] as int),
+              name: Value<String>(school['name'] as String),
+              lunchBlock: Value<int>(school['lunchBlock'] as int),
+              classification: Value<String>(school['classification'] as String),
+              updateAt: Value<DateTime>(_ref.read(commonFunctionProvider).getDayFromTimestamp(school['updateAt'])),
+            ),
+          );
 
   @override
   Future<DateTime> getLatestUpdateDay() async {
