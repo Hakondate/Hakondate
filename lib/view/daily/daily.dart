@@ -48,17 +48,6 @@ class Daily extends StatelessWidget {
           _bodyWidget(),
         ],
       ),
-      floatingActionButton: Consumer(
-          builder: (context, ref, _) {
-            return FloatingActionButton(
-              onPressed: () async {
-                await ref.read(userViewModelProvider.notifier).createUser(name: 'test2', schoolId: 1, schoolYear: 2);
-                await ref.read(splashViewModelProvider.notifier).initialize();
-              },
-              child: const Icon(Icons.search),
-            );
-          },
-        ),
     );
   }
 
