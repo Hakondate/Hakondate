@@ -39,7 +39,7 @@ class OpenDataRecipeHeader extends StatelessWidget {
             child: DefaultTextStyle(
               style: TextStyle(
                 color: AppColor.text.primary,
-                fontSize: FontSize.subheading,
+                fontSize: FontSize.heading,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'MPLUSRounded1c',
               ),

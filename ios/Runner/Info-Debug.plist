@@ -53,6 +53,10 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
+    <false/>
+    <key>LSApplicationQueriesSchemes</key>
+	<array>
+	    <string>mailto</string>
+	</array>
 </dict>
 </plist>
