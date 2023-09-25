@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
@@ -6,11 +7,11 @@ import 'package:hakondate/view/dictionary/dictionary_grid.dart';
 
 import 'CustomSearchDelegate.dart';
 
-class Dictionary extends StatelessWidget {
+class Dictionary extends ConsumerWidget {
   const Dictionary({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('ずかん'),
@@ -18,11 +19,8 @@ class Dictionary extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () => {
-
-              showSearch(context: context, delegate: CustomSearchDelegate())
-
+              showSearch(context: context, delegate: CustomSearchDelegate(ref))
             }
-
           ),
         ],
       ),
