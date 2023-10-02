@@ -1,3 +1,4 @@
+import 'package:hakondate/view/dictionary/dictionary.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
@@ -24,6 +25,15 @@ class DictionaryViewModel extends _$DictionaryViewModel {
         selectedGroup: group,
         selectedGroupItems: await _dictionaryItemsLocalRepository.listGroup(group.groupNumber),
       ),
+    );
+  }
+
+  Future<void> getAll(String expression) async{
+    state = const AsyncLoading<DictionaryState>();
+    state = AsyncData<DictionaryState>(
+      DictionaryState(
+        allItems: await _dictionaryItemsLocalRepository.getAll(expression),
+      )
     );
   }
 

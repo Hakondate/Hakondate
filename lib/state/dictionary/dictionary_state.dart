@@ -9,6 +9,8 @@ class DictionaryState with _$DictionaryState {
   const factory DictionaryState({
     DictionaryGroup? selectedGroup,
     List<DictionaryItemModel>? selectedGroupItems,
+    List<DictionaryItemModel>? allItems,
+    String? query,
     DictionaryItemModel? selectedItem,
   }) = _DictionaryState;
 }

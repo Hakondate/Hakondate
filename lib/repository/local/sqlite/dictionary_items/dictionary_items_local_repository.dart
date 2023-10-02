@@ -16,6 +16,7 @@ DictionaryItemsLocalRepository dictionaryItemsLocalRepository(DictionaryItemsLoc
 
 abstract class DictionaryItemsLocalRepositoryAPI {
   Future<int> add(Map<String, dynamic> item);
+  Future<List<DictionaryItemModel>> getAll(String expression);
   Future<List<DictionaryItemModel>> listGroup(int group);
   Future<DictionaryItemModel> getById(int id);
   Future<List<DictionaryItemModel>> getRanking({required String nutrient, int limit = 5});
@@ -99,6 +100,42 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
     final List<DictionaryItemModel> items = <DictionaryItemModel>[];
     final List<DictionaryItemsSchema> schemas = await (_db.select(_db.dictionaryItemsTable)
       ..where(($DictionaryItemsTableTable t) => t.group.equals(group))).get();
+
+    for (final DictionaryItemsSchema schema in schemas) {
+      items.add(
+        DictionaryItemModel(
+          id: schema.id,
+          group: _getGroup(schema.group),
+          name: schema.name,
+          nutrients: NutrientsModel(
+            energy: schema.energy,
+            protein: schema.protein,
+            lipid: schema.lipid,
+            carbohydrate: schema.carbohydrate,
+            sodium: schema.sodium,
+            calcium: schema.calcium,
+            magnesium: schema.magnesium,
+            iron: schema.iron,
+            zinc: schema.zinc,
+            retinol: schema.retinol,
+            vitaminB1: schema.vitaminB1,
+            vitaminB2: schema.vitaminB2,
+            vitaminC: schema.vitaminC,
+            dietaryFiber: schema.dietaryFiber,
+            salt: schema.salt,
+          ),
+          note: schema.note,
+        ),
+      );
+    }
+
+    return items;
+  }
+
+  @override
+  Future<List<DictionaryItemModel>> getAll(String expression) async{
+    final List<DictionaryItemModel> items = <DictionaryItemModel>[];
+    final List<DictionaryItemsSchema> schemas = await (_db.select(_db.dictionaryItemsTable)..where(($DictionaryItemsTableTable tbl) => tbl.name.contains(expression))).get();
 
     for (final DictionaryItemsSchema schema in schemas) {
       items.add(
