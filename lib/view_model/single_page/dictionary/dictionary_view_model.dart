@@ -32,7 +32,18 @@ class DictionaryViewModel extends _$DictionaryViewModel {
     state = const AsyncLoading<DictionaryState>();
     state = AsyncData<DictionaryState>(
       DictionaryState(
+        query: expression,
         allItems: await _dictionaryItemsLocalRepository.getAll(expression),
+      )
+    );
+  }
+
+  Future<void> clearQuery () async{
+    state = const AsyncLoading<DictionaryState>();
+    state = AsyncData<DictionaryState>(
+      DictionaryState(
+        query: '',
+        allItems: await _dictionaryItemsLocalRepository.getAll(''),
       )
     );
   }

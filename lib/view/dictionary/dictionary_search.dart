@@ -24,15 +24,19 @@ class DictionarySearch extends ConsumerWidget {
       appBar: AppBar(
         title:
           TextFormField(
-            onChanged: (value) {
+              controller: _controller,
+              onChanged: (String value) {
               ref.read(dictionaryViewModelProvider.notifier).getAll(value);
             },
             cursorColor:AppColor.brand.secondary,
             decoration: InputDecoration(
-              hintText: 'search',
-              enabledBorder: InputBorder.none,
-              suffixIcon: IconButton(
-                onPressed: () => {},
+            hintText: 'search',
+            enabledBorder: InputBorder.none,
+            suffixIcon: IconButton(
+                onPressed: () {
+                  ref.read(dictionaryViewModelProvider.notifier).clearQuery();
+                  _controller.clear();
+                },
                 icon: const Icon(
                   color: Colors.orange,
                   Icons.clear,
