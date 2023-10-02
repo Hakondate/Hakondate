@@ -39,7 +39,7 @@ class DictionarySearch extends ConsumerWidget {
                 },
                 icon: const Icon(
                   color: Colors.orange,
-                  Icons.clear,
+                  Icons.delete_outline,
                 ),
               )
             ),
