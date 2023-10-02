@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -14,6 +15,7 @@ class DailyState with _$DailyState {
     required DateTime focusedDay,
     required DateTime calendarTabFirstDay,
     required DateTime calendarTabLastDay,
+    required ScrollController scrollController,
     @Default(MenuModel.noData()) MenuModel menu,
     DishModel? selectedDish,
   }) = _DailyState;
