@@ -1202,27 +1202,21 @@ class $FoodstuffsTableTable extends FoodstuffsTable
       type: DriftSqlType.double, requiredDuringInsert: true);
   static const VerificationMeta _isHeatMeta = const VerificationMeta('isHeat');
   @override
-  late final GeneratedColumn<bool> isHeat =
-      GeneratedColumn<bool>('is_heat', aliasedName, false,
-          type: DriftSqlType.bool,
-          requiredDuringInsert: true,
-          defaultConstraints: GeneratedColumn.constraintsDependsOnDialect({
-            SqlDialect.sqlite: 'CHECK ("is_heat" IN (0, 1))',
-            SqlDialect.mysql: '',
-            SqlDialect.postgres: '',
-          }));
+  late final GeneratedColumn<bool> isHeat = GeneratedColumn<bool>(
+      'is_heat', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: true,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('CHECK ("is_heat" IN (0, 1))'));
   static const VerificationMeta _isAllergyMeta =
       const VerificationMeta('isAllergy');
   @override
-  late final GeneratedColumn<bool> isAllergy =
-      GeneratedColumn<bool>('is_allergy', aliasedName, false,
-          type: DriftSqlType.bool,
-          requiredDuringInsert: true,
-          defaultConstraints: GeneratedColumn.constraintsDependsOnDialect({
-            SqlDialect.sqlite: 'CHECK ("is_allergy" IN (0, 1))',
-            SqlDialect.mysql: '',
-            SqlDialect.postgres: '',
-          }));
+  late final GeneratedColumn<bool> isAllergy = GeneratedColumn<bool>(
+      'is_allergy', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: true,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('CHECK ("is_allergy" IN (0, 1))'));
   static const VerificationMeta _originMeta = const VerificationMeta('origin');
   @override
   late final GeneratedColumn<String> origin = GeneratedColumn<String>(
@@ -3364,4 +3358,5 @@ final localDatabaseProvider = Provider<LocalDatabase>.internal(
 );
 
 typedef LocalDatabaseRef = ProviderRef<LocalDatabase>;
-// ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

@@ -14,9 +14,10 @@ import 'package:hakondate/view/daily/nutrients_card.dart';
 import 'package:hakondate/view_model/multi_page/drawer/drawer_view_model.dart';
 import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
 
+final ScrollController _controller =ScrollController();
+
 class Daily extends StatelessWidget {
   const Daily({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,6 +118,7 @@ class Daily extends StatelessWidget {
             if (state.menu is LunchesDayMenuModel) {
               return Expanded(
                 child: ListView(
+                  controller: state.scrollController,
                   children: const <Widget>[
                     MenuCard(),
                     NutrientsCard(),

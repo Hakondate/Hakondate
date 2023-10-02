@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
 import 'package:routemaster/routemaster.dart';
 
 import 'package:hakondate/constant/app_color.dart';
@@ -31,7 +32,13 @@ class AppBottomNavigationBar extends ConsumerWidget {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: tabState.controller.index,
-        onTap: (int index) => tabState.controller.animateTo(index),
+        onTap: (int index) {
+          if (tabState.controller.index==index) {
+            ref.read(dailyViewModelProvider.notifier).scrollToTop();
+          } else {
+            tabState.controller.animateTo(index);
+          }
+        },
         backgroundColor: AppColor.ui.white,
         selectedItemColor: AppColor.brand.secondary,
         selectedLabelStyle: const TextStyle(
