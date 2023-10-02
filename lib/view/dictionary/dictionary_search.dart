@@ -1,4 +1,5 @@
 
+
 import 'package:drift/drift.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,7 @@ import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/dictionary/dictionary_state.dart';
 import 'package:hakondate/view_model/single_page/dictionary/dictionary_view_model.dart';
+import 'package:path/path.dart';
 
 class DictionarySearch extends ConsumerWidget {
   DictionarySearch({super.key});
@@ -25,8 +27,9 @@ class DictionarySearch extends ConsumerWidget {
             onChanged: (value) {
               ref.read(dictionaryViewModelProvider.notifier).getAll(value);
             },
-            initialValue: 'ああ',
+            cursorColor:AppColor.brand.secondary,
             decoration: InputDecoration(
+              hintText: 'search',
               enabledBorder: InputBorder.none,
               suffixIcon: IconButton(
                 onPressed: () => {},
