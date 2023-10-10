@@ -14,7 +14,6 @@ import 'package:hakondate/view/daily/nutrients_card.dart';
 import 'package:hakondate/view_model/multi_page/drawer/drawer_view_model.dart';
 import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
 
-final ScrollController _controller =ScrollController();
 
 class Daily extends StatelessWidget {
   const Daily({super.key});
