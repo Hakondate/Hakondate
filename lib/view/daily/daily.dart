@@ -16,7 +16,6 @@ import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
 
 class Daily extends StatelessWidget {
   const Daily({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,6 +116,7 @@ class Daily extends StatelessWidget {
             if (state.menu is LunchesDayMenuModel) {
               return Expanded(
                 child: ListView(
+                  controller: state.scrollController,
                   children: const <Widget>[
                     MenuCard(),
                     NutrientsCard(),

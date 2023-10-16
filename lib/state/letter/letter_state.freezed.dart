@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$LetterState {
+  ScrollController get scrollController => throw _privateConstructorUsedError;
   LetterConnectionStatus get status => throw _privateConstructorUsedError;
   List<LetterMetadataModel> get letters => throw _privateConstructorUsedError;
   LetterMetadataModelData? get selectedLetter =>
@@ -35,7 +36,8 @@ abstract class $LetterStateCopyWith<$Res> {
       _$LetterStateCopyWithImpl<$Res, LetterState>;
   @useResult
   $Res call(
-      {LetterConnectionStatus status,
+      {ScrollController scrollController,
+      LetterConnectionStatus status,
       List<LetterMetadataModel> letters,
       LetterMetadataModelData? selectedLetter,
       bool isEndListing,
@@ -55,6 +57,7 @@ class _$LetterStateCopyWithImpl<$Res, $Val extends LetterState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? scrollController = null,
     Object? status = null,
     Object? letters = null,
     Object? selectedLetter = freezed,
@@ -62,6 +65,10 @@ class _$LetterStateCopyWithImpl<$Res, $Val extends LetterState>
     Object? pageToken = freezed,
   }) {
     return _then(_value.copyWith(
+      scrollController: null == scrollController
+          ? _value.scrollController
+          : scrollController // ignore: cast_nullable_to_non_nullable
+              as ScrollController,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -95,7 +102,8 @@ abstract class _$$_LetterStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {LetterConnectionStatus status,
+      {ScrollController scrollController,
+      LetterConnectionStatus status,
       List<LetterMetadataModel> letters,
       LetterMetadataModelData? selectedLetter,
       bool isEndListing,
@@ -113,6 +121,7 @@ class __$$_LetterStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? scrollController = null,
     Object? status = null,
     Object? letters = null,
     Object? selectedLetter = freezed,
@@ -120,6 +129,10 @@ class __$$_LetterStateCopyWithImpl<$Res>
     Object? pageToken = freezed,
   }) {
     return _then(_$_LetterState(
+      scrollController: null == scrollController
+          ? _value.scrollController
+          : scrollController // ignore: cast_nullable_to_non_nullable
+              as ScrollController,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -148,13 +161,16 @@ class __$$_LetterStateCopyWithImpl<$Res>
 
 class _$_LetterState with DiagnosticableTreeMixin implements _LetterState {
   const _$_LetterState(
-      {this.status = LetterConnectionStatus.done,
+      {required this.scrollController,
+      this.status = LetterConnectionStatus.done,
       final List<LetterMetadataModel> letters = const <LetterMetadataModel>[],
       this.selectedLetter,
       this.isEndListing = false,
       this.pageToken})
       : _letters = letters;
 
+  @override
+  final ScrollController scrollController;
   @override
   @JsonKey()
   final LetterConnectionStatus status;
@@ -177,7 +193,7 @@ class _$_LetterState with DiagnosticableTreeMixin implements _LetterState {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'LetterState(status: $status, letters: $letters, selectedLetter: $selectedLetter, isEndListing: $isEndListing, pageToken: $pageToken)';
+    return 'LetterState(scrollController: $scrollController, status: $status, letters: $letters, selectedLetter: $selectedLetter, isEndListing: $isEndListing, pageToken: $pageToken)';
   }
 
   @override
@@ -185,6 +201,7 @@ class _$_LetterState with DiagnosticableTreeMixin implements _LetterState {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'LetterState'))
+      ..add(DiagnosticsProperty('scrollController', scrollController))
       ..add(DiagnosticsProperty('status', status))
       ..add(DiagnosticsProperty('letters', letters))
       ..add(DiagnosticsProperty('selectedLetter', selectedLetter))
@@ -197,6 +214,8 @@ class _$_LetterState with DiagnosticableTreeMixin implements _LetterState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LetterState &&
+            (identical(other.scrollController, scrollController) ||
+                other.scrollController == scrollController) &&
             (identical(other.status, status) || other.status == status) &&
             const DeepCollectionEquality().equals(other._letters, _letters) &&
             const DeepCollectionEquality()
@@ -210,6 +229,7 @@ class _$_LetterState with DiagnosticableTreeMixin implements _LetterState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      scrollController,
       status,
       const DeepCollectionEquality().hash(_letters),
       const DeepCollectionEquality().hash(selectedLetter),
@@ -225,12 +245,15 @@ class _$_LetterState with DiagnosticableTreeMixin implements _LetterState {
 
 abstract class _LetterState implements LetterState {
   const factory _LetterState(
-      {final LetterConnectionStatus status,
+      {required final ScrollController scrollController,
+      final LetterConnectionStatus status,
       final List<LetterMetadataModel> letters,
       final LetterMetadataModelData? selectedLetter,
       final bool isEndListing,
       final String? pageToken}) = _$_LetterState;
 
+  @override
+  ScrollController get scrollController;
   @override
   LetterConnectionStatus get status;
   @override

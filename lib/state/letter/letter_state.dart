@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -9,6 +10,7 @@ part 'letter_state.freezed.dart';
 @freezed
 class LetterState with _$LetterState {
   const factory LetterState({
+    required ScrollController scrollController,
     @Default(LetterConnectionStatus.done) LetterConnectionStatus status,
     @Default(<LetterMetadataModel>[]) List<LetterMetadataModel> letters,
     LetterMetadataModelData? selectedLetter,
