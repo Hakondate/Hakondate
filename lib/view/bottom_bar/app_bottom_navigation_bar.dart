@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hakondate/router/routes.dart';
 import 'package:routemaster/routemaster.dart';
 
 import 'package:hakondate/constant/app_color.dart';
@@ -33,7 +34,18 @@ class AppBottomNavigationBar extends ConsumerWidget {
         type: BottomNavigationBarType.fixed,
         currentIndex: tabState.controller.index,
         onTap: (int index) {
-          if (tabState.controller.index==index) {
+          final String? path = routemaster.currentConfiguration?.path;
+          if (path == 'daily' && index == 0) {
+            ref.read(dailyViewModelProvider.notifier).scrollToTop();
+          } else if (tabState.controller.index == 1 && index == 1) {
+            // レシピのときの処理
+          } else if (tabState.controller.index == 2 && index == 2) {
+            // ずかんのときの処理
+          } else if (tabState.controller.index == 3 && index == 3) {
+            // お便りのときの処理
+          } else {}
+
+          if (tabState.controller.index == index) {
             ref.read(dailyViewModelProvider.notifier).scrollToTop();
           } else {
             tabState.controller.animateTo(index);
