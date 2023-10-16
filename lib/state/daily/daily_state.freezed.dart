@@ -20,6 +20,7 @@ mixin _$DailyState {
   DateTime get focusedDay => throw _privateConstructorUsedError;
   DateTime get calendarTabFirstDay => throw _privateConstructorUsedError;
   DateTime get calendarTabLastDay => throw _privateConstructorUsedError;
+  ScrollController get scrollController => throw _privateConstructorUsedError;
   MenuModel get menu => throw _privateConstructorUsedError;
   DishModel? get selectedDish => throw _privateConstructorUsedError;
 
@@ -39,6 +40,7 @@ abstract class $DailyStateCopyWith<$Res> {
       DateTime focusedDay,
       DateTime calendarTabFirstDay,
       DateTime calendarTabLastDay,
+      ScrollController scrollController,
       MenuModel menu,
       DishModel? selectedDish});
 
@@ -63,6 +65,7 @@ class _$DailyStateCopyWithImpl<$Res, $Val extends DailyState>
     Object? focusedDay = null,
     Object? calendarTabFirstDay = null,
     Object? calendarTabLastDay = null,
+    Object? scrollController = null,
     Object? menu = null,
     Object? selectedDish = freezed,
   }) {
@@ -83,6 +86,10 @@ class _$DailyStateCopyWithImpl<$Res, $Val extends DailyState>
           ? _value.calendarTabLastDay
           : calendarTabLastDay // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      scrollController: null == scrollController
+          ? _value.scrollController
+          : scrollController // ignore: cast_nullable_to_non_nullable
+              as ScrollController,
       menu: null == menu
           ? _value.menu
           : menu // ignore: cast_nullable_to_non_nullable
@@ -128,6 +135,7 @@ abstract class _$$_DailyStateCopyWith<$Res>
       DateTime focusedDay,
       DateTime calendarTabFirstDay,
       DateTime calendarTabLastDay,
+      ScrollController scrollController,
       MenuModel menu,
       DishModel? selectedDish});
 
@@ -152,6 +160,7 @@ class __$$_DailyStateCopyWithImpl<$Res>
     Object? focusedDay = null,
     Object? calendarTabFirstDay = null,
     Object? calendarTabLastDay = null,
+    Object? scrollController = null,
     Object? menu = null,
     Object? selectedDish = freezed,
   }) {
@@ -172,6 +181,10 @@ class __$$_DailyStateCopyWithImpl<$Res>
           ? _value.calendarTabLastDay
           : calendarTabLastDay // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      scrollController: null == scrollController
+          ? _value.scrollController
+          : scrollController // ignore: cast_nullable_to_non_nullable
+              as ScrollController,
       menu: null == menu
           ? _value.menu
           : menu // ignore: cast_nullable_to_non_nullable
@@ -192,6 +205,7 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
       required this.focusedDay,
       required this.calendarTabFirstDay,
       required this.calendarTabLastDay,
+      required this.scrollController,
       this.menu = const MenuModel.noData(),
       this.selectedDish});
 
@@ -204,6 +218,8 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
   @override
   final DateTime calendarTabLastDay;
   @override
+  final ScrollController scrollController;
+  @override
   @JsonKey()
   final MenuModel menu;
   @override
@@ -211,7 +227,7 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DailyState(selectedDay: $selectedDay, focusedDay: $focusedDay, calendarTabFirstDay: $calendarTabFirstDay, calendarTabLastDay: $calendarTabLastDay, menu: $menu, selectedDish: $selectedDish)';
+    return 'DailyState(selectedDay: $selectedDay, focusedDay: $focusedDay, calendarTabFirstDay: $calendarTabFirstDay, calendarTabLastDay: $calendarTabLastDay, scrollController: $scrollController, menu: $menu, selectedDish: $selectedDish)';
   }
 
   @override
@@ -223,6 +239,7 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
       ..add(DiagnosticsProperty('focusedDay', focusedDay))
       ..add(DiagnosticsProperty('calendarTabFirstDay', calendarTabFirstDay))
       ..add(DiagnosticsProperty('calendarTabLastDay', calendarTabLastDay))
+      ..add(DiagnosticsProperty('scrollController', scrollController))
       ..add(DiagnosticsProperty('menu', menu))
       ..add(DiagnosticsProperty('selectedDish', selectedDish));
   }
@@ -240,14 +257,23 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
                 other.calendarTabFirstDay == calendarTabFirstDay) &&
             (identical(other.calendarTabLastDay, calendarTabLastDay) ||
                 other.calendarTabLastDay == calendarTabLastDay) &&
+            (identical(other.scrollController, scrollController) ||
+                other.scrollController == scrollController) &&
             (identical(other.menu, menu) || other.menu == menu) &&
             (identical(other.selectedDish, selectedDish) ||
                 other.selectedDish == selectedDish));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, selectedDay, focusedDay,
-      calendarTabFirstDay, calendarTabLastDay, menu, selectedDish);
+  int get hashCode => Object.hash(
+      runtimeType,
+      selectedDay,
+      focusedDay,
+      calendarTabFirstDay,
+      calendarTabLastDay,
+      scrollController,
+      menu,
+      selectedDish);
 
   @JsonKey(ignore: true)
   @override
@@ -262,6 +288,7 @@ abstract class _DailyState implements DailyState {
       required final DateTime focusedDay,
       required final DateTime calendarTabFirstDay,
       required final DateTime calendarTabLastDay,
+      required final ScrollController scrollController,
       final MenuModel menu,
       final DishModel? selectedDish}) = _$_DailyState;
 
@@ -273,6 +300,8 @@ abstract class _DailyState implements DailyState {
   DateTime get calendarTabFirstDay;
   @override
   DateTime get calendarTabLastDay;
+  @override
+  ScrollController get scrollController;
   @override
   MenuModel get menu;
   @override

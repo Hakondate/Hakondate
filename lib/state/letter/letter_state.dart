@@ -14,6 +14,7 @@ class LetterState with _$LetterState {
     LetterMetadataModelData? selectedLetter,
     @Default(false) bool isEndListing,
     String? pageToken,
+    required ScrollController scrollController,
   }) = _LetterState;
 }
 

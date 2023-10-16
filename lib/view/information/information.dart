@@ -23,7 +23,7 @@ class Information extends ConsumerWidget {
         child: Padding(
           padding: const EdgeInsets.all(PaddingSize.normal),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
               DescriptionText.headline(label: '利用データについて'),
               DescriptionText.body(
