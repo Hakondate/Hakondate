@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'package:hakondate/model/origin/origin_category_model.dart';
 import 'package:hakondate/util/exception/firestore_exception.dart';
 
