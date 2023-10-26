@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'package:hakondate/model/origin/origin_item_model.dart';
 
 export 'package:hakondate/model/origin/origin_item_model.dart';

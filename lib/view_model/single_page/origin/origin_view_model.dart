@@ -1,7 +1,8 @@
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
 import 'package:hakondate/model/origin/origin_model.dart';
 import 'package:hakondate/repository/remote/origins/origins_remote_repository.dart';
 import 'package:hakondate/state/origin/origin_state.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'origin_view_model.g.dart';
 
