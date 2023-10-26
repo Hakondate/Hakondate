@@ -102,10 +102,11 @@ class __$$_OriginCategoryModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OriginCategoryModel implements _OriginCategoryModel {
+class _$_OriginCategoryModel extends _OriginCategoryModel {
   const _$_OriginCategoryModel(
       {required this.name, required final List<OriginItemModel> items})
-      : _items = items;
+      : _items = items,
+        super._();
 
   @override
   final String name;
@@ -143,10 +144,11 @@ class _$_OriginCategoryModel implements _OriginCategoryModel {
           this, _$identity);
 }
 
-abstract class _OriginCategoryModel implements OriginCategoryModel {
+abstract class _OriginCategoryModel extends OriginCategoryModel {
   const factory _OriginCategoryModel(
       {required final String name,
       required final List<OriginItemModel> items}) = _$_OriginCategoryModel;
+  const _OriginCategoryModel._() : super._();
 
   @override
   String get name;

@@ -103,10 +103,11 @@ class __$$_OriginModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OriginModel implements _OriginModel {
+class _$_OriginModel extends _OriginModel {
   const _$_OriginModel(
       {required this.date, required final List<OriginCategoryModel> categories})
-      : _categories = categories;
+      : _categories = categories,
+        super._();
 
   @override
   final DateTime date;
@@ -144,10 +145,11 @@ class _$_OriginModel implements _OriginModel {
       __$$_OriginModelCopyWithImpl<_$_OriginModel>(this, _$identity);
 }
 
-abstract class _OriginModel implements OriginModel {
+abstract class _OriginModel extends OriginModel {
   const factory _OriginModel(
       {required final DateTime date,
       required final List<OriginCategoryModel> categories}) = _$_OriginModel;
+  const _OriginModel._() : super._();
 
   @override
   DateTime get date;
