@@ -21,7 +21,7 @@ class Dictionary extends ConsumerWidget {
           IconButton(
             icon: Icon(Icons.search),
             onPressed: ()  {
-              ref.read(dictionaryViewModelProvider.notifier).getAll('');
+              ref.read(dictionaryViewModelProvider.notifier).getSearchedList('');
               routemaster.push('/home/dictionary/search');
              //showSearch(context: context, delegate: CustomSearchDelegate(ref))
             }

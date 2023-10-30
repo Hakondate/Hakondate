@@ -1,3 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
+import 'package:hakondate/repository/local/sqlite/dictionary_items/dictionary_items_local_repository.dart';
+import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
+import 'package:hakondate/view_model/single_page/dictionary/dictionary_view_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/dish/dish_model.dart';
@@ -12,11 +17,16 @@ part 'daily_view_model.g.dart';
 
 @Riverpod(keepAlive: true)
 class DailyViewModel extends _$DailyViewModel {
+  late final DictionaryItemsLocalRepositoryAPI _dictionaryItemsLocalRepository;
   late final MenusLocalRepository _menusLocalRepository;
-
+  
   @override
   FutureOr<DailyState> build() {
+    debugPrint("build");
+    _dictionaryItemsLocalRepository =
+        ref.watch(dictionaryItemsLocalRepositoryProvider);
     _menusLocalRepository = ref.watch(menusLocalRepositoryProvider);
+
     return DailyState(
       selectedDay: DateTime.now(),
       focusedDay: DateTime.now(),
@@ -29,26 +39,68 @@ class DailyViewModel extends _$DailyViewModel {
   }
 
   Future<void> updateSelectedDay({DateTime? selectedDay, DateTime? focusedDay}) async {
+    debugPrint("updateSelectedDay");
     state.whenData((DailyState data) async {
       state = const AsyncLoading<DailyState>();
 
       DateTime? selectedInputDay = selectedDay;
+      debugPrint(Environment.flavor.toString());
       switch (Environment.flavor) {
         case Flavor.dev:
+          debugPrint(selectedInputDay.toString());
           selectedInputDay ??= DateTime(2022, 5, 16);
           break;
         case Flavor.stg:
         case Flavor.prod:
-        selectedInputDay ??= DateTime.now();
+          selectedInputDay ??= DateTime.now();
           break;
       }
       final MenuModel menu = await _menusLocalRepository.getMenuByDay(selectedInputDay);
+    /*
+    final NutrientsModel? slns =
+        ref.watch(userViewModelProvider).currentUser!.slns;
+
+    final List<double> nutrientsPercentage =
+        ref.read(dailyViewModelProvider.notifier).getGraphValues(
+              graphMaxValue: 120,
+              slns: slns,
+            );
+
+    final Map<String, double> nutrientsMap = {}..addAll({
+        'protein': nutrientsPercentage[1],
+        'vitamin': nutrientsPercentage[2],
+        'mineral': nutrientsPercentage[3],
+        'carbohydrate': nutrientsPercentage[4],
+        'lipid': nutrientsPercentage[5],
+      });
+      MapEntry<String, double> minValue = nutrientsMap.entries.elementAt(0);
+      MapEntry<String, double> secondMinValue = nutrientsMap.entries.elementAt(1);
+      MapEntry<String, double> temp;
+
+      for (int i = 1; i < nutrientsMap.length; i++) {
+        temp = nutrientsMap.entries.elementAt(i);
+        if (minValue.value > temp.value) {
+          secondMinValue = minValue;
+          minValue = temp;
+        } else if (secondMinValue.value > temp.value) {
+          secondMinValue = temp;
+        }
+      }
+      final Map<String, List<DictionaryItemModel>> recommendDishes = {
+        minValue.key: await _dictionaryItemsLocalRepository.getRanking(
+          nutrient: minValue.key,
+        ),
+        secondMinValue.key: await _dictionaryItemsLocalRepository.getRanking(
+          nutrient: secondMinValue.key,
+        ),
+      };*/
 
       state = AsyncData<DailyState>(
         data.copyWith(
           selectedDay: selectedInputDay,
           focusedDay: focusedDay ?? selectedInputDay,
           menu: menu,
+          //recommendDishes: recommendDishes,
         ),
       );
 
@@ -157,5 +209,43 @@ class DailyViewModel extends _$DailyViewModel {
       },
       orElse: () => 0,
     );
+  }
+
+  Future<void> getRecommendDishes(List<double> nutrientsPercentage) async{
+    state = const AsyncLoading<DailyState>();
+    Map<String, double> nutrientsMap = {}
+          ..addAll(
+            {
+              'protein' : nutrientsPercentage[1],
+              'vitamin' : nutrientsPercentage[2],
+              'mineral' : nutrientsPercentage[3],
+              'carbohydrate': nutrientsPercentage[4],
+              'lipid': nutrientsPercentage[5],
+            }
+          );
+        MapEntry<String, double> minValue = nutrientsMap.entries.elementAt(0);
+        MapEntry<String, double> secondMinValue = nutrientsMap.entries.elementAt(1);
+        MapEntry<String, double> temp;
+
+        for(int i = 1; i < nutrientsMap.length; i++){
+          temp = nutrientsMap.entries.elementAt(i);
+          if(minValue.value > temp.value){
+            secondMinValue = minValue;
+            minValue = temp;
+          }else if(secondMinValue.value > temp.value){
+            secondMinValue = temp;
+          }
+        }
+        final Map<String, List<DictionaryItemModel>> recommendDishes = {
+          minValue.key: await _dictionaryItemsLocalRepository.getRanking(nutrient: minValue.key),
+          secondMinValue.key: await _dictionaryItemsLocalRepository.getRanking(nutrient: secondMinValue.key),
+        };
+      state.whenData((DailyState data) {
+        state = AsyncData<DailyState> (
+          data.copyWith(
+            recommendDishes: recommendDishes,
+          )
+        );
+      });
   }
 }

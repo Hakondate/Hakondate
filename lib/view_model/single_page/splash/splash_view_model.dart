@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hakondate/state/daily/daily_state.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -129,7 +130,6 @@ class SplashViewModel extends _$SplashViewModel {
     await Future.forEach(menus, (dynamic menu) async {
       await _menusLocalRepository.add(menu as Map<String, dynamic>);
     });
-
     await ref.read(dailyViewModelProvider.notifier).updateSelectedDay();
   }
 }

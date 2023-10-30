@@ -16,7 +16,7 @@ DictionaryItemsLocalRepository dictionaryItemsLocalRepository(DictionaryItemsLoc
 
 abstract class DictionaryItemsLocalRepositoryAPI {
   Future<int> add(Map<String, dynamic> item);
-  Future<List<DictionaryItemModel>> getAll(String expression);
+  Future<List<DictionaryItemModel>> getSearchedList(String query);
   Future<List<DictionaryItemModel>> listGroup(int group);
   Future<DictionaryItemModel> getById(int id);
   Future<List<DictionaryItemModel>> getRanking({required String nutrient, int limit = 5});
@@ -133,9 +133,9 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
   }
 
   @override
-  Future<List<DictionaryItemModel>> getAll(String expression) async{
+  Future<List<DictionaryItemModel>> getSearchedList(String query) async{
     final List<DictionaryItemModel> items = <DictionaryItemModel>[];
-    final List<DictionaryItemsSchema> schemas = await (_db.select(_db.dictionaryItemsTable)..where(($DictionaryItemsTableTable tbl) => tbl.name.contains(expression))).get();
+    final List<DictionaryItemsSchema> schemas = await (_db.select(_db.dictionaryItemsTable)..where(($DictionaryItemsTableTable tbl) => tbl.name.contains(query))).get();
 
     for (final DictionaryItemsSchema schema in schemas) {
       items.add(

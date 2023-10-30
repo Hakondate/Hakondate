@@ -24,9 +24,9 @@ class DictionarySearch extends ConsumerWidget {
       appBar: AppBar(
         title:
           TextFormField(
-              controller: _controller,
-              onChanged: (String value) {
-              ref.read(dictionaryViewModelProvider.notifier).getAll(value);
+            controller: _controller,
+            onChanged: (String value) {
+            ref.read(dictionaryViewModelProvider.notifier).getSearchedList(value);
             },
             cursorColor:AppColor.brand.secondary,
             decoration: InputDecoration(
@@ -47,11 +47,11 @@ class DictionarySearch extends ConsumerWidget {
         
       ),
       body: state.maybeWhen(
-        data:(data) {
+        data:(DictionaryState data) {
           final DictionaryGroup? selectedGroup = data.selectedGroup;
             final List<DictionaryItemModel>? selectedGroupItems = data.allItems;
             //final List<DictionaryItemModel>? allItem = data.allItems;
-
+            
             if (selectedGroupItems == null) {
               return const Text('loading');
             }
@@ -69,8 +69,7 @@ class DictionarySearch extends ConsumerWidget {
                   title: Text(item.name),
                   trailing: const Icon(Icons.chevron_right_rounded),
                   onTap: () {
-                    ref.read(dictionaryViewModelProvider.notifier).selectItem(
-                        item.id);
+                    ref.read(dictionaryViewModelProvider.notifier).selectItem(item.id);
                     routemaster.push('/home/dictionary_item/${item.id}');
                   },
                 );
