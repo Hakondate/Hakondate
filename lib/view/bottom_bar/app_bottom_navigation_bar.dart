@@ -12,6 +12,8 @@ import 'package:hakondate/view/daily/daily_drawer.dart';
 import 'package:hakondate/view_model/multi_page/drawer/drawer_view_model.dart';
 import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
 
+import 'package:hakondate/view_model/single_page/dictionary/dictionary_view_model.dart';
+
 class AppBottomNavigationBar extends ConsumerWidget {
   const AppBottomNavigationBar({super.key});
 
@@ -37,10 +39,10 @@ class AppBottomNavigationBar extends ConsumerWidget {
           final String? path = routemaster.currentConfiguration?.path;
           if (path == 'daily' && index == 0) {
             ref.read(dailyViewModelProvider.notifier).scrollToTop();
-          } else if (tabState.controller.index == 1 && index == 1) {
-            // レシピのときの処理
-          } else if (tabState.controller.index == 2 && index == 2) {
-            // ずかんのときの処理
+          } else if (path =='recipes' && index == 1) {
+            ref.read(dailyViewModelProvider.notifier).scrollToTop();// レシピのときの処理
+          } else if (path =='dictionary' && index == 2) {
+            ref.read(dictionaryViewModelProvider.notifier).scrollToTop();// ずかんのときの処理
           } else if (tabState.controller.index == 3 && index == 3) {
             // お便りのときの処理
           } else {}

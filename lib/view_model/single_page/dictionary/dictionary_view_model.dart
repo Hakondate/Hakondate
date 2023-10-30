@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
@@ -14,13 +15,16 @@ class DictionaryViewModel extends _$DictionaryViewModel {
   @override
   FutureOr<DictionaryState> build() {
     _dictionaryItemsLocalRepository = ref.watch(dictionaryItemsLocalRepositoryProvider);
-    return const DictionaryState();
+    return  DictionaryState(
+      scrollController: ScrollController(),
+    );
   }
 
   Future<void> selectGroup(DictionaryGroup group) async {
     state = const AsyncLoading<DictionaryState>();
     state = AsyncData<DictionaryState>(
       DictionaryState(
+        //scrollController: ScrollController(),
         selectedGroup: group,
         selectedGroupItems: await _dictionaryItemsLocalRepository.listGroup(group.groupNumber),
       ),
@@ -74,5 +78,12 @@ class DictionaryViewModel extends _$DictionaryViewModel {
     );
 
     return schemas.last;
+  }
+
+  void scrollToTop() {
+    state.whenData((DictionaryState data) {
+      data.scrollController!.animateTo(0, duration: const Duration(milliseconds: 500), curve: Curves.easeOutCubic);
+      state = AsyncData<DictionaryState>(data);
+    });
   }
 }
