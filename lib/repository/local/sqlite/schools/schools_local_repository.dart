@@ -77,12 +77,16 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryAPI {
 
   @override
   Future<List<int>> listParentIdsByUsers(List<UserModel> users) async {
-    final List<int> userIds = users.map((UserModel user) => user.schoolId).toList();
+    final List<int> schoolIds = users.map((UserModel user) => user.schoolId).toSet().toList();
 
-    final List<SchoolsSchema> schoolsSchemas = await (_db.select(_db.schoolsTable, distinct: true)
-              ..where(($SchoolsTableTable t) => t.id.isIn(userIds))).get();
+    final List<TypedResult> rows =
+        await (_db.selectOnly(_db.schoolsTable, distinct: true)
+              ..where(_db.schoolsTable.id.isIn(schoolIds))
+              ..addColumns(<Expression<int>>[_db.schoolsTable.parentId])).get();
 
-    final List<int> parentIds = schoolsSchemas.map((SchoolsSchema schoolsSchema) => schoolsSchema.parentId).toSet().toList();
+    final List<int> parentIds = rows
+        .map((TypedResult row) => row.read(_db.schoolsTable.parentId))
+        .whereType<int>().toList();
 
     return parentIds;
   }
