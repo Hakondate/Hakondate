@@ -7,8 +7,12 @@ import 'package:routemaster/routemaster.dart';
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/constant/svg_path.dart';
+import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/view/daily/daily_drawer.dart';
 import 'package:hakondate/view_model/multi_page/drawer/drawer_view_model.dart';
+import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
+
+import 'package:hakondate/view_model/single_page/dictionary/dictionary_view_model.dart';
 
 class AppBottomNavigationBar extends ConsumerWidget {
   const AppBottomNavigationBar({super.key});
@@ -31,7 +35,24 @@ class AppBottomNavigationBar extends ConsumerWidget {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: tabState.controller.index,
-        onTap: (int index) => tabState.controller.animateTo(index),
+        onTap: (int index) {
+          final String? path = routemaster.currentConfiguration?.path;
+          if (path == 'daily' && index == 0) {
+            ref.read(dailyViewModelProvider.notifier).scrollToTop();
+          } else if (path =='recipes' && index == 1) {
+            ref.read(dailyViewModelProvider.notifier).scrollToTop();// レシピのときの処理
+          } else if (path =='dictionary' && index == 2) {
+            ref.read(dictionaryViewModelProvider.notifier).scrollToTop();// ずかんのときの処理
+          } else if (tabState.controller.index == 3 && index == 3) {
+            // お便りのときの処理
+          } else {}
+
+          if (tabState.controller.index == index) {
+            ref.read(dailyViewModelProvider.notifier).scrollToTop();
+          } else {
+            tabState.controller.animateTo(index);
+          }
+        },
         backgroundColor: AppColor.ui.white,
         selectedItemColor: AppColor.brand.secondary,
         selectedLabelStyle: const TextStyle(
