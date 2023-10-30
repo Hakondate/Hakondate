@@ -22,8 +22,8 @@ class UserSettingsViewModel extends _$UserSettingsViewModel {
 
   Future<List<int>> listParentIds() async {
     final List<UserModel> users = await state.maybeWhen(
+      data: (UserSettingsState state) => state.users!,
       orElse: () async => ref.read(usersLocalRepositoryProvider).list(),
-      data: (UserSettingsState state) async => state.users!,
     );
     
     return ref.read(schoolsLocalRepositoryProvider).listParentIdsByUsers(users);
