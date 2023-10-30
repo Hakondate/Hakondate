@@ -11,7 +11,6 @@ import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/view/daily/daily_drawer.dart';
 import 'package:hakondate/view_model/multi_page/drawer/drawer_view_model.dart';
 import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
-
 import 'package:hakondate/view_model/single_page/dictionary/dictionary_view_model.dart';
 
 class AppBottomNavigationBar extends ConsumerWidget {
