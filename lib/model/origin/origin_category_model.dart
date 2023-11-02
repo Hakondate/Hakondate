@@ -14,16 +14,12 @@ class OriginCategoryModel with _$OriginCategoryModel {
   }) = _OriginCategoryModel;
   const OriginCategoryModel._();
 
-  factory OriginCategoryModel.fromFirestore({
-    required String name,
-    required Map<String, List<String>> items,
-  }) => OriginCategoryModel(
-    name: name,
-    items: items.entries.map(
-      (MapEntry<String, List<String>> item) => OriginItemModel(
-        name: item.key,
-        prefectures: item.value,
-      ),
-    ).toList(),
-  );
+  factory OriginCategoryModel.fromFirestore(MapEntry<String, dynamic> category) {
+    final Map<String, dynamic> items = category.value as Map<String, dynamic>;
+
+    return OriginCategoryModel(
+      name: category.key,
+      items: items.entries.map(OriginItemModel.fromFirestore).toList(),
+    );
+  }
 }
