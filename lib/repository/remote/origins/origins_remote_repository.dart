@@ -38,7 +38,7 @@ class OriginsRemoteRepository extends OriginsRemoteRepositoryAPI {
   
   @override
   Future<List<OriginModel>> list() async {
-    final QuerySnapshot<Map<String, dynamic>> firestoreData = await _db.get();
+    final QuerySnapshot<Map<String, dynamic>> firestoreData = await _db.orderBy('date', descending: true).get();
 
     return firestoreData.docs.map(OriginModel.fromFirestore).toList();
   }

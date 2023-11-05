@@ -14,7 +14,7 @@ class OriginViewModel extends _$OriginViewModel {
   FutureOr<OriginState> build() async {
     _originsRemoteRepository = ref.watch(originsRemoteRepositoryProvider);
     final List<OriginModel> origins = await _originsRemoteRepository.list();
-    final OriginModel selectedOrigin = await _originsRemoteRepository.getById();
+    final OriginModel selectedOrigin = await _originsRemoteRepository.getById().catchError((_) => origins.first);
 
     return OriginState(
       origins: origins,
