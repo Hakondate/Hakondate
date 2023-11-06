@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:hakondate/model/letter/letter_metadata_model.dart';
+import 'package:hakondate/view/component/frame/stateful_wrapper.dart';
 
 part 'letter_state.freezed.dart';
 
@@ -17,6 +18,8 @@ class LetterState with _$LetterState {
     @Default(false) bool isEndListing,
     String? pageToken,
   }) = _LetterState;
+
+  Widget when({required StatefulWrapper Function(LetterState data) data, required Text Function(dynamic _, dynamic __) error, required Text Function() loading}) {}
 }
 
 enum LetterConnectionStatus {

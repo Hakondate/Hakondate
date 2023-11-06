@@ -36,21 +36,21 @@ class AppBottomNavigationBar extends ConsumerWidget {
         type: BottomNavigationBarType.fixed,
         currentIndex: tabState.controller.index,
         onTap: (int index) {
-          final String? path = routemaster.currentConfiguration?.path;
-          if (path == 'daily' && index == 0) {
+          final String? path = routemaster.currentConfiguration?.fullPath;
+          
+          debugPrint('index: $index');
+          if (path == '/home/daily' && index == 0) {
             ref.read(dailyViewModelProvider.notifier).scrollToTop();
-          } else if (path =='recipes' && index == 1) {
+          } else if (path =='/home/recipes' && index == 1) {
             ref.read(dailyViewModelProvider.notifier).scrollToTop();// レシピのときの処理
-          } else if (path =='dictionary' && index == 2) {
+          } else if (path =='/home/dictionary' && index == 2) {
+            debugPrint('dictionary');
             ref.read(dictionaryViewModelProvider.notifier).scrollToTop();// ずかんのときの処理
           } else if (tabState.controller.index == 3 && index == 3) {
             // お便りのときの処理
-          } else {}
-
-          if (tabState.controller.index == index) {
-            ref.read(dailyViewModelProvider.notifier).scrollToTop();
           } else {
             tabState.controller.animateTo(index);
+            debugPrint('path: $path');
           }
         },
         backgroundColor: AppColor.ui.white,
