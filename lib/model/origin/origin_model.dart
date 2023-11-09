@@ -19,7 +19,7 @@ class OriginModel with _$OriginModel {
   factory OriginModel.fromFirestore(DocumentSnapshot<Map<String, dynamic>> originRef) {
     final Map<String, dynamic>? data = originRef.data();
 
-    if (data == null) throw const FirestoreException('Faild to convert Firestore to OriginModel');
+    if (data == null) throw const FirestoreException('Failed to convert Firestore to OriginModel');
 
     return OriginModel(
       date: (data['date'] as Timestamp).toDate(),
