@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hakondate/view/origin/origin.dart';
 
 import 'package:routemaster/routemaster.dart';
 
@@ -17,6 +16,7 @@ import 'package:hakondate/view/letter/letter.dart';
 import 'package:hakondate/view/letter/letter_pdf.dart';
 import 'package:hakondate/view/license/license.dart';
 import 'package:hakondate/view/license/license_detail.dart';
+import 'package:hakondate/view/origin/origin.dart';
 import 'package:hakondate/view/recipe/recipe.dart';
 import 'package:hakondate/view/recipe/recipe_pdf.dart';
 import 'package:hakondate/view/signup/signup.dart';
