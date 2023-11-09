@@ -60,7 +60,7 @@ class OriginItemList extends ConsumerWidget {
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ),
               ],
             ),
