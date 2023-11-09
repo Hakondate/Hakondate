@@ -2,5 +2,10 @@
   "dart.flutterSdkPath": ".fvm/flutter_sdk",
   "search.exclude": {
     "**/.fvm": true
-  }
+  },
+  "cSpell.words": [
+    "hakondate",
+    "routemaster",
+    "slns"
+  ]
 }
