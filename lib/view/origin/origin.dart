@@ -7,7 +7,7 @@ import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/view/component/frame/fade_up_app_bar.dart';
 import 'package:hakondate/view/component/label/description_text.dart';
 import 'package:hakondate/view/origin/dropdown_month_selector.dart';
-import 'package:hakondate/view/origin/selected_month_table.dart';
+import 'package:hakondate/view/origin/origin_item_list.dart';
 
 class Origin extends ConsumerWidget {
   const Origin({super.key});
@@ -46,7 +46,7 @@ class Origin extends ConsumerWidget {
                 ),
                 DescriptionText.headline(label: '月毎の産地情報'),
                 const DropdownMonthSelector(),
-                const SelectedMonthTable(),
+                const OriginItemList(),
               ],
             ),
           ),
