@@ -19,80 +19,74 @@ class SigningUpDialog extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        final AsyncValue<SignupViewModel> store =
-            ref.watch(signupProvider(null));
-        return store.when(
-          loading: () => const CircularProgressIndicator(),
-          error: (err, stack) => Text('Error: $err'),
-          data: (SignupState store) {
-            return HakondateDialog(
-              title: const Text('確認'),
-              body: Padding(
-                padding: const EdgeInsets.all(PaddingSize.normal),
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                        vertical: MarginSize.minimum,
-                      ),
-                      child: const Text(
-                        '以下の内容でお子様を登録します\n'
-                        '※ あとで変更することができます',
-                      ),
-                    ),
-                    DefaultTextStyle(
-                      style: TextStyle(
-                        color: AppColor.brand.secondary,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        height: 1.4,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+        final AsyncValue<SignupState> state =
+            ref.watch(signupViewModelProvider);
+        return HakondateDialog(
+          title: const Text('確認'),
+          body: Padding(
+            padding: const EdgeInsets.all(PaddingSize.normal),
+            child: Column(
+              children: <Widget>[
+                Container(
+                  margin: const EdgeInsets.symmetric(
+                    vertical: MarginSize.minimum,
+                  ),
+                  child: const Text(
+                    '以下の内容でお子様を登録します\n'
+                    '※ あとで変更することができます',
+                  ),
+                ),
+                DefaultTextStyle(
+                  style: TextStyle(
+                    color: AppColor.brand.secondary,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    height: 1.4,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
-                          const Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: <Widget>[
-                              Text('お名前：　'),
-                              Text('学校：　'),
-                              Text('学年：　'),
-                            ],
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              ...<Widget>[
-                                Text(store.name!),
-                                Text(store.schoolTrailing),
-                                Text(store.schoolYearTrailing),
-                              ],
-                            ],
-                          ),
+                          Text('お名前：　'),
+                          Text('学校：　'),
+                          Text('学年：　'),
                         ],
                       ),
-                    ),
-                  ],
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          if (state is AsyncData<SignupState>) ...<Widget>[
+                            Text(state.value.name!),
+                            Text(state.value.schoolTrailing),
+                            Text(state.value.schoolYearTrailing),
+                          ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              firstAction: HakondateActionButton.primary(
-                text: const Text('登録する'),
-                onTap: () async {
-                  unawaited(ref.read(signupProvider.notifier).signup());
-                  await routemaster.pop().whenComplete(
-                        () async => showDialog(
-                          context: context,
-                          barrierDismissible: false,
-                          builder: (BuildContext context) => _statusDialog(),
-                        ),
-                      );
-                },
-              ),
-              secondAction: HakondateActionButton(
-                text: const Text('修正する'),
-                onTap: routemaster.pop,
-              ),
-            );
-          },
+              ],
+            ),
+          ),
+          firstAction: HakondateActionButton.primary(
+            text: const Text('登録する'),
+            onTap: () async {
+              unawaited(ref.read(signupViewModelProvider.notifier).signup());
+              await routemaster.pop().whenComplete(
+                    () async => showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context) => _statusDialog(),
+                    ),
+                  );
+            },
+          ),
+          secondAction: HakondateActionButton(
+            text: const Text('修正する'),
+            onTap: routemaster.pop,
+          ),
         );
       },
     );
@@ -114,8 +108,8 @@ class SigningUpDialog extends ConsumerWidget {
           );
         }
 
-        if (store is! SignupStateLoad &&
-            ref.watch(userProvider).currentUser != null) {
+        if (state is! AsyncLoading<SignupState> &&
+            ref.watch(userViewModelProvider).currentUser != null) {
           return HakondateDialog(
             title: const Text('登録完了'),
             body: const Text('ユーザ情報の登録が成功しました'),

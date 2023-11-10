@@ -40,7 +40,8 @@ class Signup extends StatelessWidget {
   Widget _nameForm() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        final SignupState store = ref.watch(signupProvider(null));
+        final AsyncValue<SignupState> state =
+            ref.watch(signupViewModelProvider);
 
         return Padding(
           padding: const EdgeInsets.all(PaddingSize.normal),
@@ -68,8 +69,8 @@ class Signup extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                  if (store is SignupStateData)
-                    _errorIndication(store.nameErrorState),
+                  if (state is AsyncData<SignupState>)
+                    _errorIndication(state.value.nameErrorState),
                 ],
               ),
               TextFormField(
@@ -87,8 +88,9 @@ class Signup extends StatelessWidget {
                     ),
                   ),
                 ),
-                onChanged: (String value) =>
-                    ref.read(signupProvider.notifier).updateName(value),
+                onChanged: (String value) => ref
+                    .read(signupViewModelProvider.notifier)
+                    .updateName(value),
               ),
             ],
           ),
@@ -130,15 +132,15 @@ class Signup extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                  if (store is SignupStateData)
-                    _errorIndication(store.schoolErrorState),
+                  if (state is AsyncData<SignupState>)
+                    _errorIndication(state.value.schoolErrorState),
                 ],
               ),
             ),
             SettingLabel(
               title: '学校',
-              dialList: (store is SignupStateData)
-                  ? store.schools
+              dialList: (state is AsyncData<SignupState>)
+                  ? state.value.schools
                       .map((SchoolModel school) => school.name)
                       .toList()
                   : <String>[],
@@ -153,12 +155,15 @@ class Signup extends StatelessWidget {
             ),
             SettingLabel(
               title: '学年',
-              dialList:
-                  (store is SignupStateData) ? store.schoolYears : <String>[],
-              completed: (int index) =>
-                  ref.read(signupProvider.notifier).updateSchoolYear(index + 1),
-              trailing:
-                  (store is SignupStateData) ? store.schoolYearTrailing : '',
+              dialList: (state is AsyncData<SignupState>)
+                  ? state.value.schoolYears
+                  : <String>[],
+              completed: (int index) => ref
+                  .read(signupViewModelProvider.notifier)
+                  .updateSchoolYear(index + 1),
+              trailing: (state is AsyncData<SignupState>)
+                  ? state.value.schoolYearTrailing
+                  : '',
             ),
             const SizedBox(height: PaddingSize.normal),
           ],

@@ -8,16 +8,16 @@ import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/user_settings/user_settings_state.dart';
 import 'package:hakondate/view/user_settings/user_delete_dialog.dart';
 import 'package:hakondate/view/user_settings/user_switch_dialog.dart';
-import 'package:hakondate/view_model/multi_page/user_view_model.dart';
-import 'package:hakondate/view_model/single_page/user_settings_view_model.dart';
+import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
+import 'package:hakondate/view_model/single_page/user_settings/user_settings_view_model.dart';
 
 class UserSettings extends ConsumerWidget {
   const UserSettings({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<UserSettingsState> users = ref.watch(userSettingsProvider);
-    final UserModel currentUser = ref.watch(userProvider).currentUser!;
+    final AsyncValue<UserSettingsState> users = ref.watch(userSettingsViewModelProvider);
+    final UserModel currentUser = ref.watch(userViewModelProvider).currentUser!;
 
     return Scaffold(
       appBar: AppBar(
