@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hakondate/model/school/school_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/repository/remote/firestore/firestore_api.dart';
@@ -10,7 +11,7 @@ part 'schools_remote_repository.g.dart';
 @riverpod
 SchoolsRemoteRepository schoolsRemoteRepository(SchoolsRemoteRepositoryRef ref) {
   final FirebaseFirestore firestoreAPI = ref.watch(firestoreAPIProvider);
-  final schoolCollectionReference = firestoreAPI.collection('schools').withConverter(
+  final CollectionReference<SchoolModel?> schoolCollectionReference = firestoreAPI.collection('schools').withConverter(
     fromFirestore: (DocumentSnapshot<Map<String, dynamic>> doc) => ,
     toFirestore: toFirestore,
   );
