@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate/router/routes.dart';
 
 import 'package:hakondate/view/component/dialog/hakondate_dialog/hakondate_dialog.dart';
-import 'package:hakondate/view_model/single_page/user_settings_view_model.dart';
+import 'package:hakondate/view_model/single_page/user_settings/user_settings_view_model.dart';
 
 class UserDeleteDialog extends ConsumerWidget {
   const UserDeleteDialog({required this.id, super.key});
@@ -17,7 +17,7 @@ class UserDeleteDialog extends ConsumerWidget {
       firstAction: HakondateActionButton.primary(
         text: const Text('はい'),
         onTap: () async {
-          await ref.read(userSettingsProvider.notifier).deleteUser(id);
+          await ref.read(userSettingsViewModelProvider.notifier).deleteUser(id);
           await routemaster.pop();
         },
       ),

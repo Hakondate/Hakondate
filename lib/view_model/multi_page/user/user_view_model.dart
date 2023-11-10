@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hakondate/view_model/single_page/user_settings_view_model.dart';
+import 'package:hakondate/view_model/single_page/user_settings/user_settings_view_model.dart';
 
 import 'package:path_provider/path_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -110,7 +110,7 @@ class UserViewModel extends _$UserViewModel {
     );
     await _usersLocalRepository.update(newUser);
 
-    await ref.read(userSettingsProvider.notifier).updateUsers();
+    await ref.read(userSettingsViewModelProvider.notifier).updateUsers();
 
     state = state.copyWith(currentUser: newUser);
   }
@@ -149,7 +149,7 @@ class UserViewModel extends _$UserViewModel {
     await changeCurrentUser(id);
     await ref.read(analyticsControllerProvider.notifier).logSignup();
 
-    await ref.read(userSettingsProvider.notifier).updateUsers();
+    await ref.read(userSettingsViewModelProvider.notifier).updateUsers();
 
     return id;
   }

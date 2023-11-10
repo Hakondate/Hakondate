@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate/router/routes.dart';
 
 import 'package:hakondate/view/component/dialog/hakondate_dialog/hakondate_dialog.dart';
-import 'package:hakondate/view_model/multi_page/user_view_model.dart';
+import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
 
 class UserSwitchDialog extends ConsumerWidget {
   const UserSwitchDialog({required this.id, super.key});
@@ -17,7 +17,7 @@ class UserSwitchDialog extends ConsumerWidget {
       firstAction: HakondateActionButton.primary(
         text: const Text('はい'),
         onTap: () async {
-          await ref.read(userProvider.notifier).changeCurrentUser(id);
+          await ref.read(userViewModelProvider.notifier).changeCurrentUser(id);
           await routemaster.pop();
         },
       ),
