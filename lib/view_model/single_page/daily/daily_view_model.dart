@@ -58,6 +58,24 @@ class DailyViewModel extends _$DailyViewModel {
     });
   }
 
+  Future<void> updateMenu() async {
+    state.whenData((DailyState data) async {
+      state = const AsyncLoading<DailyState>();
+
+      final MenuModel menu = await _menusLocalRepository.getMenuByDay(data.selectedDay);
+
+      state = AsyncData<DailyState>(
+        data.copyWith(
+          menu: menu,
+        ),
+      );
+
+      if (menu is LunchesDayMenuModel) {
+        await ref.read(analyticsControllerProvider.notifier).logViewMenu(menu.id);
+      }
+    });
+  }
+
   void updateFocusedDay(DateTime day) {
     state.whenData((DailyState data) {
       state = AsyncData<DailyState>(data.copyWith(focusedDay: day));

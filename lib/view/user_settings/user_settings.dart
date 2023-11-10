@@ -41,15 +41,11 @@ class UserSettings extends ConsumerWidget {
                   height: 8,
                 ),
                 for (final UserModel user in users.users!)
-                  _userSettingsCard(
-                    context,
-                    user: user,
-                    isCurrentUser: user.id == currentUser.id,
-                  ),
+                  UserSettingsCard(context: context, user: user, isCurrentUser: user.id == currentUser.id),
                 const SizedBox(
                   height: 8,
                 ),
-                _userAddButton(),
+                const UserAddButton(),
               ],
             );
           },
@@ -57,153 +53,159 @@ class UserSettings extends ConsumerWidget {
       ),
     );
   }
+}
 
-  Widget _userSettingsCard(
-    BuildContext context, {
-    required UserModel user,
-    required bool isCurrentUser,
-  }) {
-    return Consumer(
-      builder: (BuildContext context, WidgetRef ref, _) {
-        return GestureDetector(
-          onTap: () async {
-            if (!isCurrentUser) {
-              return showDialog(
-                context: context,
-                builder: (_) => UserSwitchDialog(id: user.id),
-              );
-            }
-          },
-          child: Card(
-            margin: const EdgeInsets.symmetric(
-              vertical: MarginSize.minimum,
-              horizontal: MarginSize.normalHorizontal,
-            ),
-            elevation: 0,
-            shadowColor: AppColor.brand.secondary,
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                color: isCurrentUser
-                    ? AppColor.brand.secondary
-                    : AppColor.ui.secondaryUltraLight,
-                width: 2,
-              ),
-              borderRadius: const BorderRadius.all(Radius.circular(15)),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(PaddingSize.normal),
-              child: Row(
+class UserAddButton extends ConsumerWidget {
+  const UserAddButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Center(
+      child: FloatingActionButton(
+        elevation: 3,
+        backgroundColor: AppColor.ui.secondaryUltraLight,
+        child: Icon(
+          Icons.person_add,
+          color: AppColor.brand.secondary,
+        ),
+        onPressed: () {
+          ref
+              .read(userSettingsViewModelProvider.notifier)
+              .setEditingUser(null);
+          routemaster.push('/home/user_settings/-1');
+        },
+      ),
+    );
+  }
+}
+
+class UserSettingsCard extends ConsumerWidget {
+  const UserSettingsCard({
+    required this.context, required this.user, required this.isCurrentUser, super.key,
+  });
+
+  final BuildContext context;
+  final UserModel user;
+  final bool isCurrentUser;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return GestureDetector(
+      onTap: () async {
+        if (!isCurrentUser) {
+          return showDialog(
+            context: context,
+            builder: (_) => UserSwitchDialog(id: user.id),
+          );
+        }
+      },
+      child: Card(
+        margin: const EdgeInsets.symmetric(
+          vertical: MarginSize.minimum,
+          horizontal: MarginSize.normalHorizontal,
+        ),
+        elevation: 0,
+        shadowColor: AppColor.brand.secondary,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: isCurrentUser
+                ? AppColor.brand.secondary
+                : AppColor.ui.secondaryUltraLight,
+            width: 2,
+          ),
+          borderRadius: const BorderRadius.all(Radius.circular(15)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(PaddingSize.normal),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Text(
+                    user.name,
+                    style: const TextStyle(
+                      fontSize: FontSize.subheading,
+                      height: 1,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
                     children: <Widget>[
-                      Text(
-                        user.name,
-                        style: const TextStyle(
-                          fontSize: FontSize.subheading,
-                          height: 1,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        children: <Widget>[
-                          FutureBuilder<SchoolModel>(
-                            future: ref
-                                .read(schoolsLocalRepositoryProvider)
-                                .getById(user.schoolId),
-                            builder: (
-                              BuildContext context,
-                              AsyncSnapshot<SchoolModel> snapshot,
-                            ) {
-                              if (snapshot.hasData) {
-                                return Text(
-                                  snapshot.data!.name,
-                                  style: TextStyle(
-                                    fontSize: FontSize.body,
-                                    color: AppColor.text.gray,
-                                    height: 1,
-                                  ),
-                                );
-                              }
+                      FutureBuilder<SchoolModel>(
+                        future: ref
+                            .read(schoolsLocalRepositoryProvider)
+                            .getById(user.schoolId),
+                        builder: (
+                          BuildContext context,
+                          AsyncSnapshot<SchoolModel> snapshot,
+                        ) {
+                          if (snapshot.hasData) {
+                            return Text(
+                              snapshot.data!.name,
+                              style: TextStyle(
+                                fontSize: FontSize.body,
+                                color: AppColor.text.gray,
+                                height: 1,
+                              ),
+                            );
+                          }
 
-                              return Text(
-                                '学校情報を取得中...',
-                                style: TextStyle(
-                                  fontSize: FontSize.body,
-                                  color: AppColor.text.gray,
-                                  height: 1,
-                                ),
-                              );
-                            },
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            '${user.schoolYear}年',
+                          return Text(
+                            '学校情報を取得中...',
                             style: TextStyle(
                               fontSize: FontSize.body,
                               color: AppColor.text.gray,
                               height: 1,
                             ),
-                          ),
-                        ],
-                      )
+                          );
+                        },
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        '${user.schoolYear}年',
+                        style: TextStyle(
+                          fontSize: FontSize.body,
+                          color: AppColor.text.gray,
+                          height: 1,
+                        ),
+                      ),
                     ],
-                  ),
-                  IconButton(
-                    isSelected: isCurrentUser,
-                    onPressed: isCurrentUser
-                        ? () {
-                            ref
-                                .read(userSettingsViewModelProvider.notifier)
-                                .setEditingUser(user);
-                            routemaster.push('/home/user_settings/${user.id}');
-                          }
-                        : () async {
-                            return showDialog(
-                              context: context,
-                              builder: (_) => UserDeleteDialog(id: user.id),
-                            );
-                          },
-                    icon: Icon(
-                      isCurrentUser ? Icons.edit : Icons.delete,
-                      color: AppColor.brand.secondary,
-                    ),
                   )
                 ],
               ),
-            ),
+              IconButton(
+                isSelected: isCurrentUser,
+                onPressed: isCurrentUser
+                    ? () {
+                        ref
+                            .read(userSettingsViewModelProvider.notifier)
+                            .setEditingUser(user);
+                        routemaster.push('/home/user_settings/${user.id}');
+                      }
+                    : () async {
+                        return showDialog(
+                          context: context,
+                          builder: (_) => UserDeleteDialog(id: user.id),
+                        );
+                      },
+                icon: Icon(
+                  isCurrentUser ? Icons.edit : Icons.delete,
+                  color: AppColor.brand.secondary,
+                ),
+              )
+            ],
           ),
-        );
-      },
-    );
-  }
-
-  Widget _userAddButton() {
-    return Consumer(
-      builder: (BuildContext context, WidgetRef ref, _) {
-        return Center(
-          child: FloatingActionButton(
-            elevation: 3,
-            backgroundColor: AppColor.ui.secondaryUltraLight,
-            child: Icon(
-              Icons.person_add,
-              color: AppColor.brand.secondary,
-            ),
-            onPressed: () {
-              ref
-                  .read(userSettingsViewModelProvider.notifier)
-                  .setEditingUser(null);
-              routemaster.push('/home/user_settings/-1');
-            },
-          ),
-        );
-      },
-    );
+        ),
+      ),
+    );  
   }
 }
