@@ -1,10 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:hakondate/repository/local/sqlite/schools/schools_local_repository.dart';
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/user/user_model.dart';
+import 'package:hakondate/repository/local/sqlite/schools/schools_local_repository.dart';
 import 'package:hakondate/repository/local/sqlite/users/users_local_repository.dart';
 import 'package:hakondate/state/user_settings/user_settings_state.dart';
 
