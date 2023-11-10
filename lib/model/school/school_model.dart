@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:drift/drift.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hakondate/repository/local/sqlite/local_database.dart';
 import 'package:hakondate/util/exception/firestore_exception.dart';
 
 part 'school_model.freezed.dart';
@@ -12,10 +14,11 @@ class SchoolModel with _$SchoolModel {
     required int parentId,                        // 親学校(給食センター)のID
     required String name,                         // 学校名
     required SchoolClassification classification, // 学校区分
-    int? lunchBlock,                              // 給食区分: 1 ~ 10
+    required int lunchBlock,                      // 給食区分: 1 ~ 10
+    required DateTime updateAt,                   // 更新日時
   }) = _SchoolModel;
 
-  factory SchoolModel.fromFirebase(DocumentSnapshot<Map<String, dynamic>> doc) {
+  factory SchoolModel.fromFirestore(DocumentSnapshot<Map<String, dynamic>> doc) {
     final Map<String, dynamic>? data = doc.data();
 
     if (data == null) throw const FirestoreException('Failed to convert Firestore to SchoolModel');
@@ -32,6 +35,42 @@ class SchoolModel with _$SchoolModel {
       name: data['name'] as String,
       classification: classification,
       lunchBlock: data['lunchBlock'] as int,
+      updateAt: (data['updatedAt'] as Timestamp).toDate(),
     );
   }
+
+  factory SchoolModel.fromDrift(SchoolsSchema schema) {
+    final SchoolClassification classification = switch (schema.classification) {
+      'primary' => SchoolClassification.primary,
+      'secondary' => SchoolClassification.secondary,
+      _ => SchoolClassification.secondary,
+    };
+
+    return SchoolModel(
+      id: schema.id,
+      parentId: schema.parentId,
+      name: schema.name,
+      classification: classification,
+      lunchBlock: schema.lunchBlock,
+      updateAt: schema.updateAt,
+    );
+  }
+
+  Map<String, Object> toFirestore() => <String, Object>{
+    'id': id,
+    'parentId': parentId,
+    'name': name,
+    'classification': classification.toString(),
+    'lunchBlock': lunchBlock,
+    'updatedAt': updateAt.millisecondsSinceEpoch,
+  };
+
+  SchoolsTableCompanion toDrift() => SchoolsTableCompanion(
+    id: Value<int>(id),
+    parentId: Value<int>(parentId),
+    name: Value<String>(name),
+    classification: Value<String>(classification.toString()),
+    lunchBlock: Value<int>(lunchBlock),
+    updateAt: Value<DateTime>(updateAt),
+  );
 }

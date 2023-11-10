@@ -7,7 +7,7 @@ class SchoolsTable extends Table {
   IntColumn get id => integer()();
   IntColumn get parentId => integer()();
   TextColumn get name => text()();
-  IntColumn get lunchBlock => integer().nullable()();
+  IntColumn get lunchBlock => integer()();
   TextColumn get classification => text()();
   DateTimeColumn get createAt => dateTime().withDefault(Constant(DateTime.now()))();
   DateTimeColumn get updateAt => dateTime().withDefault(Constant(DateTime.now()))();

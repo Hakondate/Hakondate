@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hakondate/model/school/school_model.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -110,11 +111,11 @@ class SplashViewModel extends _$SplashViewModel {
     final DateTime latestUpdate = await _schoolsLocalRepository.getLatestUpdateDay();
 
     state = SplashState(status: LoadingStatus.checkingUpdate);
-    final List<dynamic> schools = await _schoolsRemoteRepository.get(updateAt: latestUpdate.add(const Duration(seconds: 1)));
+    final List<SchoolModel> schools = await _schoolsRemoteRepository.get(updateAt: latestUpdate.add(const Duration(seconds: 1)));
 
     state = SplashState(status: LoadingStatus.updating);
-    await Future.forEach(schools, (dynamic school) async {
-      await _schoolsLocalRepository.add(school as Map<String, dynamic>);
+    await Future.forEach(schools, (SchoolModel school) async {
+      await _schoolsLocalRepository.add(school);
     });
   }
 
