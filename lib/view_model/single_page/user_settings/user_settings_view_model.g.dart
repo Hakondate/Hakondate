@@ -10,6 +10,7 @@ String _$userSettingsViewModelHash() =>
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     r'74f2e3174513d412e19ff6f924ca889549ec5866';
 =======
 =======
@@ -34,6 +35,9 @@ String _$userSettingsViewModelHash() =>
     r'6f102a82d4eb3821013efc1e5f05491d014b7816';
 >>>>>>> 4560485 (タックしたのでミット)
 >>>>>>> 2bafba0 (タックしたのでミット)
+=======
+    r'f5da619861817859c0aeb0a82ded4620b396f417';
+>>>>>>> 6357ae0 ([update]: update menue when user switched)
 
 /// See also [UserSettingsViewModel].
 @ProviderFor(UserSettingsViewModel)
@@ -52,6 +56,7 @@ final userSettingsViewModelProvider = AutoDisposeAsyncNotifierProvider<
 <<<<<<< HEAD
 typedef _$UserSettingsViewModel = AutoDisposeAsyncNotifier<UserSettingsState>;
 // ignore_for_file: type=lint
+<<<<<<< HEAD
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
 =======
 typedef _$UserSettingsViewModel = AsyncNotifier<UserSettingsState>;
@@ -60,3 +65,6 @@ typedef _$UserSettingsViewModel = AutoDisposeAsyncNotifier<UserSettingsState>;
 >>>>>>> 2bafba0 (タックしたのでミット)
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
 >>>>>>> d1b9720 (fix: fix signup error from userSettingsDetail page. main changes are routmaster.pop.replace to routmaster.push and DrawerViewModel keepAlive false.)
+=======
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
+>>>>>>> 6357ae0 ([update]: update menue when user switched)
