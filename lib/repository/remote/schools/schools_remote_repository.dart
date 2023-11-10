@@ -10,7 +10,14 @@ part 'schools_remote_repository.g.dart';
 @riverpod
 SchoolsRemoteRepository schoolsRemoteRepository(SchoolsRemoteRepositoryRef ref) {
   final FirebaseFirestore firestoreAPI = ref.watch(firestoreAPIProvider);
-  return SchoolsRemoteRepository(firestoreAPI.collection('schools'));
+  final schoolCollectionReference = firestoreAPI.collection('schools').withConverter(
+    fromFirestore: (DocumentSnapshot<Map<String, dynamic>> doc) => ,
+    toFirestore: toFirestore,
+  );
+  return SchoolsRemoteRepository(firestoreAPI.collection('schools').withConverter(
+    fromFirestore: fromFirestore,
+    toFirestore: toFirestore,
+  ));
 }
 
 // ignore: one_member_abstracts

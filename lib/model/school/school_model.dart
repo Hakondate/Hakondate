@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'school_model.freezed.dart';
@@ -12,4 +13,8 @@ class SchoolModel with _$SchoolModel {
     required SchoolClassification classification, // 学校区分
     int? lunchBlock,                              // 給食区分: 1 ~ 10
   }) = _SchoolModel;
+
+  const factory SchoolModel.fromFirebase(DocumentSnapshot<Map<String, dynamic>> doc) {
+    if (doc.data()
+  }
 }
