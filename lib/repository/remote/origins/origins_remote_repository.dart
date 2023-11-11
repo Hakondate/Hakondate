@@ -11,7 +11,11 @@ part 'origins_remote_repository.g.dart';
 @Riverpod(keepAlive: true)
 OriginsRemoteRepository originsRemoteRepository(OriginsRemoteRepositoryRef ref) {
   final FirebaseFirestore firestoreAPI = ref.watch(firestoreAPIProvider);
-  return OriginsRemoteRepository(firestoreAPI.collection('origins'));
+  final CollectionReference<OriginModel?> originCollectionReference = firestoreAPI.collection('origins').withConverter(
+    fromFirestore: (DocumentSnapshot<Map<String, dynamic>> doc, _) => OriginModel.fromFirestore(doc),
+    toFirestore: (OriginModel? origin, _) => (origin != null) ? origin.toFirestore() : <String, Object>{},
+  );
+  return OriginsRemoteRepository(originCollectionReference);
 }
 
 abstract class OriginsRemoteRepositoryAPI {
@@ -22,24 +26,27 @@ abstract class OriginsRemoteRepositoryAPI {
 class OriginsRemoteRepository extends OriginsRemoteRepositoryAPI {
   OriginsRemoteRepository(this._db);
 
-  final CollectionReference<Map<String, dynamic>> _db;
+  final CollectionReference<OriginModel?> _db;
 
   @override
   Future<OriginModel> getById({String? id}) async {
     id ??= DateFormat('yyyyMM').format(DateTime.now());
-    final DocumentSnapshot<Map<String, dynamic>> doc = await _db.doc(id).get();
+    final DocumentSnapshot<OriginModel?> doc = await _db.doc(id).get();
 
     if (!doc.exists) {
       throw FirestoreException('Document $id does not exist on the database');
     }
 
-    return OriginModel.fromFirestore(doc);
+    return doc.data()!;
   }
   
   @override
   Future<List<OriginModel>> list() async {
-    final QuerySnapshot<Map<String, dynamic>> firestoreData = await _db.orderBy('date', descending: true).get();
+    final QuerySnapshot<OriginModel?> origins = await _db.orderBy('date', descending: true).get();
 
-    return firestoreData.docs.map(OriginModel.fromFirestore).toList();
+    return origins.docs
+              .map((QueryDocumentSnapshot<OriginModel?> doc) => doc.data())
+              .whereType<OriginModel>()
+              .toList();
   }
 }

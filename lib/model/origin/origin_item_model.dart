@@ -18,4 +18,8 @@ class OriginItemModel with _$OriginItemModel {
       prefectures: prefectures,
     );
   }
+
+  Map<String, Object> toFirestore() => <String, Object>{
+    name: prefectures,
+  };
 }
