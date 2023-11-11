@@ -15,7 +15,6 @@ class SchoolModel with _$SchoolModel {
     required String name,                         // 学校名
     required SchoolClassification classification, // 学校区分
     required int lunchBlock,                      // 給食区分: 1 ~ 10
-    required DateTime updateAt,                   // 更新日時
   }) = _SchoolModel;
 
   factory SchoolModel.fromFirestore(DocumentSnapshot<Map<String, dynamic>> doc) {
@@ -34,7 +33,6 @@ class SchoolModel with _$SchoolModel {
       name: data['name'] as String,
       classification: classification,
       lunchBlock: data['lunchBlock'] as int,
-      updateAt: (data['updatedAt'] as Timestamp).toDate(),
     );
   }
 
@@ -51,7 +49,6 @@ class SchoolModel with _$SchoolModel {
       name: schema.name,
       classification: classification,
       lunchBlock: schema.lunchBlock,
-      updateAt: schema.updateAt,
     );
   }
 
@@ -61,7 +58,7 @@ class SchoolModel with _$SchoolModel {
     'name': name,
     'classification': classification.toString(),
     'lunchBlock': lunchBlock,
-    'updatedAt': updateAt.millisecondsSinceEpoch,
+    'updatedAt': DateTime.now(),
   };
 
   SchoolsTableCompanion toDrift() => SchoolsTableCompanion(
@@ -70,6 +67,6 @@ class SchoolModel with _$SchoolModel {
     name: Value<String>(name),
     classification: Value<String>(classification.toString()),
     lunchBlock: Value<int>(lunchBlock),
-    updateAt: Value<DateTime>(updateAt),
+    updateAt: Value<DateTime>(DateTime.now()),
   );
 }

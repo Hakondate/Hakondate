@@ -21,8 +21,7 @@ mixin _$SchoolModel {
   String get name => throw _privateConstructorUsedError; // 学校名
   SchoolClassification get classification =>
       throw _privateConstructorUsedError; // 学校区分
-  int get lunchBlock => throw _privateConstructorUsedError; // 給食区分: 1 ~ 10
-  DateTime get updateAt => throw _privateConstructorUsedError;
+  int get lunchBlock => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SchoolModelCopyWith<SchoolModel> get copyWith =>
@@ -40,8 +39,7 @@ abstract class $SchoolModelCopyWith<$Res> {
       int parentId,
       String name,
       SchoolClassification classification,
-      int lunchBlock,
-      DateTime updateAt});
+      int lunchBlock});
 }
 
 /// @nodoc
@@ -62,7 +60,6 @@ class _$SchoolModelCopyWithImpl<$Res, $Val extends SchoolModel>
     Object? name = null,
     Object? classification = null,
     Object? lunchBlock = null,
-    Object? updateAt = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -85,10 +82,6 @@ class _$SchoolModelCopyWithImpl<$Res, $Val extends SchoolModel>
           ? _value.lunchBlock
           : lunchBlock // ignore: cast_nullable_to_non_nullable
               as int,
-      updateAt: null == updateAt
-          ? _value.updateAt
-          : updateAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
     ) as $Val);
   }
 }
@@ -106,8 +99,7 @@ abstract class _$$_SchoolModelCopyWith<$Res>
       int parentId,
       String name,
       SchoolClassification classification,
-      int lunchBlock,
-      DateTime updateAt});
+      int lunchBlock});
 }
 
 /// @nodoc
@@ -126,7 +118,6 @@ class __$$_SchoolModelCopyWithImpl<$Res>
     Object? name = null,
     Object? classification = null,
     Object? lunchBlock = null,
-    Object? updateAt = null,
   }) {
     return _then(_$_SchoolModel(
       id: null == id
@@ -149,10 +140,6 @@ class __$$_SchoolModelCopyWithImpl<$Res>
           ? _value.lunchBlock
           : lunchBlock // ignore: cast_nullable_to_non_nullable
               as int,
-      updateAt: null == updateAt
-          ? _value.updateAt
-          : updateAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
     ));
   }
 }
@@ -165,8 +152,7 @@ class _$_SchoolModel implements _SchoolModel {
       required this.parentId,
       required this.name,
       required this.classification,
-      required this.lunchBlock,
-      required this.updateAt});
+      required this.lunchBlock});
 
   @override
   final int id;
@@ -182,13 +168,10 @@ class _$_SchoolModel implements _SchoolModel {
 // 学校区分
   @override
   final int lunchBlock;
-// 給食区分: 1 ~ 10
-  @override
-  final DateTime updateAt;
 
   @override
   String toString() {
-    return 'SchoolModel(id: $id, parentId: $parentId, name: $name, classification: $classification, lunchBlock: $lunchBlock, updateAt: $updateAt)';
+    return 'SchoolModel(id: $id, parentId: $parentId, name: $name, classification: $classification, lunchBlock: $lunchBlock)';
   }
 
   @override
@@ -203,14 +186,12 @@ class _$_SchoolModel implements _SchoolModel {
             (identical(other.classification, classification) ||
                 other.classification == classification) &&
             (identical(other.lunchBlock, lunchBlock) ||
-                other.lunchBlock == lunchBlock) &&
-            (identical(other.updateAt, updateAt) ||
-                other.updateAt == updateAt));
+                other.lunchBlock == lunchBlock));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, parentId, name, classification, lunchBlock, updateAt);
+  int get hashCode =>
+      Object.hash(runtimeType, id, parentId, name, classification, lunchBlock);
 
   @JsonKey(ignore: true)
   @override
@@ -225,8 +206,7 @@ abstract class _SchoolModel implements SchoolModel {
       required final int parentId,
       required final String name,
       required final SchoolClassification classification,
-      required final int lunchBlock,
-      required final DateTime updateAt}) = _$_SchoolModel;
+      required final int lunchBlock}) = _$_SchoolModel;
 
   @override
   int get id;
@@ -238,8 +218,6 @@ abstract class _SchoolModel implements SchoolModel {
   SchoolClassification get classification;
   @override // 学校区分
   int get lunchBlock;
-  @override // 給食区分: 1 ~ 10
-  DateTime get updateAt;
   @override
   @JsonKey(ignore: true)
   _$$_SchoolModelCopyWith<_$_SchoolModel> get copyWith =>
