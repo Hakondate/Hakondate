@@ -56,7 +56,7 @@ class SchoolModel with _$SchoolModel {
     'id': id,
     'parentId': parentId,
     'name': name,
-    'classification': classification.toString(),
+    'classification': classification.name,
     'lunchBlock': lunchBlock,
     'updatedAt': DateTime.now(),
   };
@@ -65,7 +65,7 @@ class SchoolModel with _$SchoolModel {
     id: Value<int>(id),
     parentId: Value<int>(parentId),
     name: Value<String>(name),
-    classification: Value<String>(classification.toString()),
+    classification: Value<String>(classification.name),
     lunchBlock: Value<int>(lunchBlock),
     updateAt: Value<DateTime>(DateTime.now()),
   );
