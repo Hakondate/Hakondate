@@ -19,10 +19,9 @@ class SchoolModel with _$SchoolModel {
   }) = _SchoolModel;
 
   factory SchoolModel.fromFirestore(DocumentSnapshot<Map<String, dynamic>> doc) {
-    final Map<String, dynamic>? data = doc.data();
+    if (!doc.exists) throw const FirestoreException('Failed to convert Firestore to SchoolModel');
 
-    if (data == null) throw const FirestoreException('Failed to convert Firestore to SchoolModel');
-
+    final Map<String, dynamic> data = doc.data()!;
     final SchoolClassification classification = switch (data['classification'] as String) {
       'primary' => SchoolClassification.primary,
       'secondary' => SchoolClassification.secondary,
