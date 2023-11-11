@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hakondate/model/school/school_model.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hakondate/constant/app_key.dart';
 import 'package:hakondate/constant/record_date.dart';
 import 'package:hakondate/constant/version.dart';
+import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/repository/local/sqlite/dictionary_items/dictionary_items_local_repository.dart';
 import 'package:hakondate/repository/local/sqlite/menus/menus_local_repository.dart';
 import 'package:hakondate/repository/local/sqlite/schools/schools_local_repository.dart';
