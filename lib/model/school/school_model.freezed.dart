@@ -21,7 +21,7 @@ mixin _$SchoolModel {
   String get name => throw _privateConstructorUsedError; // 学校名
   SchoolClassification get classification =>
       throw _privateConstructorUsedError; // 学校区分
-  int? get lunchBlock => throw _privateConstructorUsedError;
+  int get lunchBlock => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SchoolModelCopyWith<SchoolModel> get copyWith =>
@@ -39,7 +39,7 @@ abstract class $SchoolModelCopyWith<$Res> {
       int parentId,
       String name,
       SchoolClassification classification,
-      int? lunchBlock});
+      int lunchBlock});
 }
 
 /// @nodoc
@@ -59,7 +59,7 @@ class _$SchoolModelCopyWithImpl<$Res, $Val extends SchoolModel>
     Object? parentId = null,
     Object? name = null,
     Object? classification = null,
-    Object? lunchBlock = freezed,
+    Object? lunchBlock = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -78,10 +78,10 @@ class _$SchoolModelCopyWithImpl<$Res, $Val extends SchoolModel>
           ? _value.classification
           : classification // ignore: cast_nullable_to_non_nullable
               as SchoolClassification,
-      lunchBlock: freezed == lunchBlock
+      lunchBlock: null == lunchBlock
           ? _value.lunchBlock
           : lunchBlock // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
     ) as $Val);
   }
 }
@@ -99,7 +99,7 @@ abstract class _$$_SchoolModelCopyWith<$Res>
       int parentId,
       String name,
       SchoolClassification classification,
-      int? lunchBlock});
+      int lunchBlock});
 }
 
 /// @nodoc
@@ -117,7 +117,7 @@ class __$$_SchoolModelCopyWithImpl<$Res>
     Object? parentId = null,
     Object? name = null,
     Object? classification = null,
-    Object? lunchBlock = freezed,
+    Object? lunchBlock = null,
   }) {
     return _then(_$_SchoolModel(
       id: null == id
@@ -136,10 +136,10 @@ class __$$_SchoolModelCopyWithImpl<$Res>
           ? _value.classification
           : classification // ignore: cast_nullable_to_non_nullable
               as SchoolClassification,
-      lunchBlock: freezed == lunchBlock
+      lunchBlock: null == lunchBlock
           ? _value.lunchBlock
           : lunchBlock // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
     ));
   }
 }
@@ -152,7 +152,7 @@ class _$_SchoolModel implements _SchoolModel {
       required this.parentId,
       required this.name,
       required this.classification,
-      this.lunchBlock});
+      required this.lunchBlock});
 
   @override
   final int id;
@@ -167,7 +167,7 @@ class _$_SchoolModel implements _SchoolModel {
   final SchoolClassification classification;
 // 学校区分
   @override
-  final int? lunchBlock;
+  final int lunchBlock;
 
   @override
   String toString() {
@@ -206,7 +206,7 @@ abstract class _SchoolModel implements SchoolModel {
       required final int parentId,
       required final String name,
       required final SchoolClassification classification,
-      final int? lunchBlock}) = _$_SchoolModel;
+      required final int lunchBlock}) = _$_SchoolModel;
 
   @override
   int get id;
@@ -217,7 +217,7 @@ abstract class _SchoolModel implements SchoolModel {
   @override // 学校名
   SchoolClassification get classification;
   @override // 学校区分
-  int? get lunchBlock;
+  int get lunchBlock;
   @override
   @JsonKey(ignore: true)
   _$$_SchoolModelCopyWith<_$_SchoolModel> get copyWith =>

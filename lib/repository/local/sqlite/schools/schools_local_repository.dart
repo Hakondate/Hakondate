@@ -1,11 +1,9 @@
 import 'package:drift/drift.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/model/user/user_model.dart';
 import 'package:hakondate/repository/local/sqlite/local_database.dart';
-import 'package:hakondate/util/common_function/common_function.dart';
 import 'package:hakondate/util/exception/sqlite_exception.dart';
 
 part 'schools_local_repository.g.dart';
@@ -13,7 +11,7 @@ part 'schools_local_repository.g.dart';
 @Riverpod(keepAlive: true)
 SchoolsLocalRepository schoolsLocalRepository(SchoolsLocalRepositoryRef ref) {
   final LocalDatabase localDatabase = ref.watch(localDatabaseProvider);
-  return SchoolsLocalRepository(localDatabase, ref);
+  return SchoolsLocalRepository(localDatabase);
 }
 
 abstract class SchoolsLocalRepositoryAPI {
@@ -23,15 +21,14 @@ abstract class SchoolsLocalRepositoryAPI {
   Future<List<int>> listParentIdsByUsers(List<UserModel> users);
   Future<SchoolModel?> getByName(String name);
   Future<List<SchoolModel>> getByParentId(int parentId);
-  Future<int> add(Map<String, dynamic> school);
+  Future<int> add(SchoolModel school);
   Future<DateTime> getLatestUpdateDay();
 }
 
 class SchoolsLocalRepository extends SchoolsLocalRepositoryAPI {
-  SchoolsLocalRepository(this._db, this._ref);
+  SchoolsLocalRepository(this._db);
 
   final LocalDatabase _db;
-  final Ref _ref;
 
   @override
   Future<int> count() async {
@@ -47,15 +44,8 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryAPI {
     final List<SchoolModel> schools = <SchoolModel>[];
     final List<SchoolsSchema> schoolsSchemas = await _db.select(_db.schoolsTable).get();
 
-    for (final SchoolsSchema schoolSchema in schoolsSchemas) {
-      schools.add(
-        SchoolModel(
-          id: schoolSchema.id,
-          parentId: schoolSchema.parentId,
-          name: schoolSchema.name,
-          classification: _judgeClassification(schoolSchema.classification),
-        ),
-      );
+    for (final SchoolsSchema schoolsSchema in schoolsSchemas) {
+      schools.add(SchoolModel.fromDrift(schoolsSchema));
     }
 
     return schools;
@@ -67,12 +57,7 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryAPI {
 
     if (schoolsSchema == null) throw SQLiteException('Failed to select $id from schoolsTable');
 
-    return SchoolModel(
-      id: schoolsSchema.id,
-      parentId: schoolsSchema.parentId,
-      name: schoolsSchema.name,
-      classification: _judgeClassification(schoolsSchema.classification),
-    );
+    return SchoolModel.fromDrift(schoolsSchema);
   }
 
   @override
@@ -98,12 +83,7 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryAPI {
 
     if (schoolsSchema == null) return null;
 
-    return SchoolModel(
-      id: schoolsSchema.id,
-      parentId: schoolsSchema.parentId,
-      name: schoolsSchema.name,
-      classification: _judgeClassification(schoolsSchema.classification),
-    );
+    return SchoolModel.fromDrift(schoolsSchema);
   }
 
   @override
@@ -112,41 +92,15 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryAPI {
     final List<SchoolsSchema> schoolsSchemas = await (_db.select(_db.schoolsTable)..where(($SchoolsTableTable t) => t.parentId.equals(parentId))).get();
 
     for (final SchoolsSchema schoolsSchema in schoolsSchemas) {
-      schools.add(
-        SchoolModel(
-          id: schoolsSchema.id,
-          parentId: schoolsSchema.parentId,
-          name: schoolsSchema.name,
-          classification: _judgeClassification(schoolsSchema.classification),
-        ),
-      );
+      schools.add(SchoolModel.fromDrift(schoolsSchema));
     }
 
     return schools;
   }
 
-  SchoolClassification _judgeClassification(String classificationStr) {
-    switch (classificationStr) {
-      case 'primary':
-        return SchoolClassification.primary;
-      case 'secondary':
-        return SchoolClassification.secondary;
-      default:
-        return SchoolClassification.secondary;
-    }
-  }
 
   @override
-  Future<int> add(Map<String, dynamic> school) => _db.into(_db.schoolsTable).insertOnConflictUpdate(
-            SchoolsTableCompanion(
-              id: Value<int>(school['id'] as int),
-              parentId: Value<int>(school['parentId'] as int),
-              name: Value<String>(school['name'] as String),
-              lunchBlock: Value<int>(school['lunchBlock'] as int),
-              classification: Value<String>(school['classification'] as String),
-              updateAt: Value<DateTime>(_ref.read(commonFunctionProvider).getDayFromTimestamp(school['updateAt'])),
-            ),
-          );
+  Future<int> add(SchoolModel school) => _db.into(_db.schoolsTable).insertOnConflictUpdate(school.toDrift());
 
   @override
   Future<DateTime> getLatestUpdateDay() async {

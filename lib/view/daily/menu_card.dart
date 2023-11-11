@@ -63,7 +63,7 @@ class MenuCard extends StatelessWidget {
                 width: 3,
               ),
               image: DecorationImage(
-                image: AssetImage('assets/images/menu_tile/${(dish.category != null) ? dish.category!.value : 'side'}.png'),
+                image: AssetImage('assets/images/menu_tile/${(dish.category != null) ? dish.category!.name : 'side'}.png'),
                 fit: BoxFit.fitWidth,
               ),
               color: AppColor.brand.secondary,

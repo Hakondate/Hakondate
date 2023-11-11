@@ -14,6 +14,31 @@ class DishModel with _$DishModel {
   }) = _DishModel;
   const DishModel._();
 
+  factory DishModel.fromFirestore(Map<String, dynamic> data) {
+    final List<FoodstuffModel> foodstuffs = 
+        (data['foodstuffs'] as List<dynamic>).map(
+          (dynamic foodstuff) => FoodstuffModel.fromFirestore(foodstuff as Map<String, dynamic>),
+        ).toList();
+    final DishCategory? category = switch (data['category'] as String?) {
+      'main' => DishCategory.main,
+      'side' => DishCategory.side,
+      'drink' => DishCategory.drink,
+      _ => null,
+    };
+
+    return DishModel(
+      name: data['name'] as String,
+      foodstuffs: foodstuffs,
+      category: category,
+    );
+  }
+
+  Map<String, Object> toFirestore() => <String, Object>{
+    'name': name,
+    'foodstuffs': foodstuffs.map((FoodstuffModel foodstuff) => foodstuff.toFirestore()).toList(),
+    if (category != null) 'category': category!.name,
+  };
+
   double get energy {
     double sum = 0;
     for (final FoodstuffModel foodstuff in foodstuffs) {
