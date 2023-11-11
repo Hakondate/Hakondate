@@ -10,7 +10,10 @@ part 'menus_remote_repository.g.dart';
 @Riverpod(keepAlive: true)
 MenusRemoteRepository menusRemoteRepository(MenusRemoteRepositoryRef ref) {
   final FirebaseFirestore firestoreAPI = ref.watch(firestoreAPIProvider);
-  return MenusRemoteRepository(firestoreAPI.collection('menus'), ref);
+  return MenusRemoteRepository(firestoreAPI.collection('menus').withConverter(
+    fromFirestore: fromFirestore,
+    toFirestore: toFirestore,
+  ), ref);
 }
 
 // ignore: one_member_abstracts
