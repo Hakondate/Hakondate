@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:drift/drift.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'package:hakondate/repository/local/sqlite/local_database.dart';
 import 'package:hakondate/util/exception/firestore_exception.dart';
 

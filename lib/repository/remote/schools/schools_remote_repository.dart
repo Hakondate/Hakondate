@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:hakondate/model/school/school_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/repository/remote/firestore/firestore_api.dart';
 
 part 'schools_remote_repository.g.dart';
