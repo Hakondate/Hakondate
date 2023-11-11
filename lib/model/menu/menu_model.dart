@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:hakondate/model/dish/dish_model.dart';
 import 'package:hakondate/util/exception/class_type_exception.dart';
+import 'package:hakondate/util/exception/firestore_exception.dart';
 
 part 'menu_model.freezed.dart';
 
@@ -31,6 +33,38 @@ class MenuModel with _$MenuModel {
   }) = LunchesDayMenuModel;
   const factory MenuModel.holiday() = HolidayMenuModel;
   const factory MenuModel.noData() = NodataMenuModel;
+
+  factory MenuModel.fromFirestore(DocumentSnapshot<Map<String, dynamic>> doc) {
+    if (!doc.exists) throw const FirestoreException('Failed to convert Firestore to MenuModel');
+
+    final Map<String, dynamic> data = doc.data()!;
+    final List<DishModel> dishes = (data['dishes'] as List<dynamic>).map(
+                                     (dynamic dish) => DishModel.fromFirestore(dish as Map<String, dynamic>),
+                                   ).toList();
+
+    return MenuModel(
+      id: data['id'] as int,
+      day: DateTime.parse(data['day'] as String),
+      schoolId: data['schoolId'] as int,
+      dishes: dishes,
+      event: data['event'] as String?,
+    );
+  }
+
+  Map<String, Object> toFirestore() {
+    final MenuModel menu = this;
+
+    if (menu is! LunchesDayMenuModel) return <String, Object>{};
+
+    return  <String, Object>{
+      'id': menu.id,
+      'day': menu.day,
+      'schoolId': menu.schoolId,
+      'dishes': menu.dishes.map((DishModel dish) => dish.toFirestore()).toList(),
+      if (menu.event != null) 'event': menu.event!,
+      'updatedAt': DateTime.now(),
+    };
+  }
 
   double get energy {
     final MenuModel menu = this;
