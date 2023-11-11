@@ -11,9 +11,9 @@ part 'schools_remote_repository.g.dart';
 @riverpod
 SchoolsRemoteRepository schoolsRemoteRepository(SchoolsRemoteRepositoryRef ref) {
   final FirebaseFirestore firestoreAPI = ref.watch(firestoreAPIProvider);
-  final CollectionReference<SchoolModel?> schoolCollectionReference = firestoreAPI.collection('schools').withConverter(
+  final CollectionReference<SchoolModel> schoolCollectionReference = firestoreAPI.collection('schools').withConverter(
     fromFirestore: (DocumentSnapshot<Map<String, dynamic>> doc, _) => SchoolModel.fromFirestore(doc),
-    toFirestore: (SchoolModel? school, _) => (school != null) ? school.toFirestore() : <String, Object>{},
+    toFirestore: (SchoolModel school, _) => school.toFirestore(),
   );
 
   return SchoolsRemoteRepository(schoolCollectionReference);

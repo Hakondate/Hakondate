@@ -7,7 +7,7 @@ part of 'schools_remote_repository.dart';
 // **************************************************************************
 
 String _$schoolsRemoteRepositoryHash() =>
-    r'8f84fac8ef3001fecc1e729c2e697c86847d494a';
+    r'ecc8299394c00512da622cb8a481831b3f233bfc';
 
 /// See also [schoolsRemoteRepository].
 @ProviderFor(schoolsRemoteRepository)
