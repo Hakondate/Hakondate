@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:hakondate/repository/remote/firestore/firestore_api.dart';
 import 'package:hakondate/view_model/single_page/user_settings/user_settings_view_model.dart';
 
@@ -21,7 +21,7 @@ MenusRemoteRepository menusRemoteRepository(MenusRemoteRepositoryRef ref) {
 
 // ignore: one_member_abstracts
 abstract class MenusRemoteRepositoryAPI {
-  Future<List<dynamic>> get({required DateTime updateAt});
+  Future<List<MenuModel>> get({required DateTime updateAt});
 }
 
 class MenusRemoteRepository extends MenusRemoteRepositoryAPI {
@@ -31,7 +31,7 @@ class MenusRemoteRepository extends MenusRemoteRepositoryAPI {
   final Ref _ref;
 
   @override
-  Future<List<dynamic>> get({required DateTime updateAt}) async {
+  Future<List<MenuModel>> get({required DateTime updateAt}) async {
     final List<int> schoolIds = await _ref.read(userSettingsViewModelProvider.notifier).listParentIds();
     final  QuerySnapshot<MenuModel> menus = await _db
         .where('schoolId', whereIn: schoolIds)

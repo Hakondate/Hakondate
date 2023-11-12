@@ -1,7 +1,9 @@
+import 'package:drift/drift.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:hakondate/model/nutrients/nutrients_model.dart';
 import 'package:hakondate/model/quantity/quantity_model.dart';
+import 'package:hakondate/repository/local/sqlite/local_database.dart';
 
 part 'foodstuff_model.freezed.dart';
 
@@ -46,6 +48,34 @@ class FoodstuffModel with _$FoodstuffModel {
     );
   }
 
+  factory FoodstuffModel.fromDrift(FoodstuffsSchema schema) => FoodstuffModel(
+    name: schema.name,
+    quantity: QuantityModel(
+      piece: schema.piece,
+      gram: schema.gram,
+    ),
+    nutrients: NutrientsModel(
+      energy: schema.energy,
+      protein: schema.protein,
+      lipid: schema.lipid,
+      carbohydrate: schema.carbohydrate,
+      sodium: schema.sodium,
+      calcium: schema.calcium,
+      magnesium: schema.magnesium,
+      iron: schema.iron,
+      zinc: schema.zinc,
+      retinol: schema.retinol,
+      vitaminB1: schema.vitaminB1,
+      vitaminB2: schema.vitaminB2,
+      vitaminC: schema.vitaminC,
+      dietaryFiber: schema.dietaryFiber,
+      salt: schema.salt,
+    ),
+    isAllergy: schema.isAllergy,
+    isHeat: schema.isHeat,
+    origin: schema.origin,
+  );
+
   Map<String, Object> toFirestore() => <String, Object>{
     'name': name,
     if (quantity.piece != null) 'piece': quantity.piece!,
@@ -69,4 +99,28 @@ class FoodstuffModel with _$FoodstuffModel {
     'isHeat': isHeat,
     if (origin != null) 'origin': origin!,
   };
+
+  FoodstuffsTableCompanion toDrift() => FoodstuffsTableCompanion(
+    name: Value<String>(name),
+    piece: Value<int?>(quantity.piece),
+    gram: Value<double>(quantity.gram),
+    energy: Value<double>(nutrients.energy),
+    protein: Value<double>(nutrients.protein),
+    lipid: Value<double>(nutrients.lipid),
+    carbohydrate: Value<double>(nutrients.carbohydrate),
+    sodium: Value<double>(nutrients.sodium),
+    calcium: Value<double>(nutrients.calcium),
+    magnesium: Value<double>(nutrients.magnesium),
+    iron: Value<double>(nutrients.iron),
+    zinc: Value<double>(nutrients.zinc),
+    retinol: Value<double>(nutrients.retinol),
+    vitaminB1: Value<double>(nutrients.vitaminB1),
+    vitaminB2: Value<double>(nutrients.vitaminB2),
+    vitaminC: Value<double>(nutrients.vitaminC),
+    dietaryFiber: Value<double>(nutrients.dietaryFiber),
+    salt: Value<double>(nutrients.salt),
+    isAllergy: Value<bool>(isAllergy),
+    isHeat: Value<bool>(isHeat),
+    origin: Value<String?>(origin),
+  );
 }
