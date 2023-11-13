@@ -12,7 +12,7 @@ part 'daily_view_model.g.dart';
 
 @Riverpod(keepAlive: true)
 class DailyViewModel extends _$DailyViewModel {
-  late final MenusLocalRepository _menusLocalRepository;
+  late final MenusLocalRepositoryAPI _menusLocalRepository;
 
   @override
   FutureOr<DailyState> build() {

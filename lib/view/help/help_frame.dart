@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/state/help/help_state.dart';
-import 'package:hakondate/view/component/label/descpription_text.dart';
+import 'package:hakondate/view/component/label/description_text.dart';
 import 'package:hakondate/view_model/single_page/help/help_view_model.dart';
 
 class HelpFrame extends StatelessWidget {
