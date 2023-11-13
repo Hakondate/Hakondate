@@ -24,7 +24,7 @@ class Letter extends ConsumerWidget {
       ),
       body: Consumer(
         builder: (BuildContext context, WidgetRef ref, _) {
-          final state = ref.watch(letterViewModelProvider);
+          final LetterState state = ref.watch(letterViewModelProvider);
       
       return StatefulWrapper(
         onInit: () => ref.read(letterViewModelProvider.notifier).getLetters(),
