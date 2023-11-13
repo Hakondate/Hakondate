@@ -72,7 +72,7 @@ class UserEditDialog extends ConsumerWidget {
             onTap: () async {
               unawaited(ref.read(signupViewModelProvider.notifier).edit());
               await routemaster.pop().whenComplete(
-                    () async => showDialog(
+                    () => showDialog(
                       context: context,
                       barrierDismissible: false,
                       builder: (BuildContext context) => _statusDialog(),
