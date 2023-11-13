@@ -6,7 +6,7 @@ part of 'origin_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$originViewModelHash() => r'b9ca864d3e37d86451c6aab1b0ec6d0ad51aa284';
+String _$originViewModelHash() => r'0e21e36c35558f9d3f5f5fbed6ba6029212bff8c';
 
 /// See also [OriginViewModel].
 @ProviderFor(OriginViewModel)
