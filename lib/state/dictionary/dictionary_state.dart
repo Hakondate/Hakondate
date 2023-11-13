@@ -13,6 +13,6 @@ class DictionaryState with _$DictionaryState {
     DictionaryGroup? selectedGroup,
     List<DictionaryItemModel>? selectedGroupItems,
     DictionaryItemModel? selectedItem,
-    ScrollController? scrollController,
+    required ScrollController? scrollController,
   }) = _DictionaryState;
 }

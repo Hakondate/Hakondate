@@ -19,9 +19,9 @@ class Dictionary extends StatelessWidget {
       ),
       body: Consumer(builder: (BuildContext context, WidgetRef ref, _) {
         return ref.watch(dictionaryViewModelProvider).when(
-          data: (DictionaryState data) {
+          data: (DictionaryState state) {
             return GridView.count(
-              controller: data.scrollController,
+              controller: state.scrollController,
               padding: const EdgeInsets.all(MarginSize.minimumGrid),
               mainAxisSpacing: MarginSize.minimumGrid,
               crossAxisSpacing: MarginSize.minimumGrid,

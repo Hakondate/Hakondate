@@ -68,7 +68,7 @@ class LetterViewModel extends _$LetterViewModel {
 
   Future<void> reloadLetters() async {
     state = state.copyWith(
-      letters: <LetterMetadataModel>[],
+      //letters: <LetterMetadataModel>[],
       isEndListing: false,
       pageToken: null,
     );
@@ -89,5 +89,9 @@ class LetterViewModel extends _$LetterViewModel {
   Future<Uint8List> getLetterPDF({required String path}) async {
     await ref.read(analyticsControllerProvider.notifier).logViewLetter(path);
     return _lettersRemoteRepository.get(path: path);
+  }
+  void scrollToTop() {
+      state.scrollController.animateTo(0, duration: const Duration(milliseconds: 500), curve: Curves.easeOutCubic);
+      debugPrint('scrolled');
   }
 }

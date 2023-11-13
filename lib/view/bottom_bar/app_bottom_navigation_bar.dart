@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hakondate/view_model/single_page/letter/letter_view_model.dart';
 import 'package:routemaster/routemaster.dart';
 
 import 'package:hakondate/constant/app_color.dart';
@@ -45,8 +46,8 @@ class AppBottomNavigationBar extends ConsumerWidget {
           } else if (path =='/home/dictionary' && index == 2) {
             debugPrint('dictionary');
             ref.read(dictionaryViewModelProvider.notifier).scrollToTop();// ずかんのときの処理
-          } else if (tabState.controller.index == 3 && index == 3) {
-            // お便りのときの処理
+          } else if (path == '/home/letter' && index == 3) {
+            ref.read(letterViewModelProvider.notifier).scrollToTop();// お便りのときの処理
           } else {
             tabState.controller.animateTo(index);
             debugPrint('path: $path');

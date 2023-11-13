@@ -25,7 +25,7 @@ class DictionaryViewModel extends _$DictionaryViewModel {
     state = const AsyncLoading<DictionaryState>();
     state = AsyncData<DictionaryState>(
       DictionaryState(
-        //scrollController: ScrollController(),
+        scrollController: ScrollController(),
         selectedGroup: group,
         selectedGroupItems: await _dictionaryItemsLocalRepository.listGroup(group.groupNumber),
       ),
@@ -84,7 +84,7 @@ class DictionaryViewModel extends _$DictionaryViewModel {
   void scrollToTop() {
     state.whenData((DictionaryState data) {
       data.scrollController!.animateTo(0, duration: const Duration(milliseconds: 500), curve: Curves.easeOutCubic);
-      state = AsyncData<DictionaryState>(data);
+      debugPrint('aa');
     });
   }
 }
