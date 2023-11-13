@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/view/component/frame/fade_up_app_bar.dart';
@@ -9,11 +7,11 @@ import 'package:hakondate/view/component/label/description_text.dart';
 import 'package:hakondate/view/origin/dropdown_month_selector.dart';
 import 'package:hakondate/view/origin/origin_item_list.dart';
 
-class Origin extends ConsumerWidget {
+class Origin extends StatelessWidget {
   const Origin({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.ui.white,
       appBar: const FadeUpAppBar(
