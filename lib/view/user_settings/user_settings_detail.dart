@@ -6,34 +6,53 @@ import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/state/signup/signup_state.dart';
+import 'package:hakondate/state/user_settings/user_settings_state.dart';
 import 'package:hakondate/view/component/dialog/help_dialog.dart';
+import 'package:hakondate/view/component/frame/fade_up_app_bar.dart';
 import 'package:hakondate/view/component/label/setting_label.dart';
 import 'package:hakondate/view/signup/signing_up_dialog.dart';
+import 'package:hakondate/view/user_settings/user_edit_dialog.dart';
 import 'package:hakondate/view_model/single_page/signup/signup_view_model.dart';
+import 'package:hakondate/view_model/single_page/user_settings/user_settings_view_model.dart';
 
-class Signup extends StatelessWidget {
-  Signup({super.key});
+class UserSettingsDetail extends ConsumerWidget {
+  UserSettingsDetail({super.key});
 
   final GlobalKey _formKey = GlobalKey<FormState>();
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('お子様の新規登録'),
-      ),
-      body: Form(
-        key: _formKey,
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              _nameForm(),
-              _schoolForm(),
-              _submitButton(),
-            ],
+  Widget build(BuildContext context, WidgetRef ref) {
+    final AsyncValue<UserSettingsState> userSettingsState =
+        ref.watch(userSettingsViewModelProvider);
+
+    return userSettingsState.when(
+      loading: () => const SigningUpDialog(),
+      error: (Object error, StackTrace? stackTrace) {
+        return Center(
+          child: Text(error.toString()),
+        );
+      },
+      data: (UserSettingsState userSettingsState) {
+        return Scaffold(
+          appBar: FadeUpAppBar(
+            title: userSettingsState.editingUser == null
+                ? const Text('お子様の追加登録')
+                : const Text('お子様情報の変更'),
           ),
-        ),
-      ),
+          body: Form(
+            key: _formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  _nameForm(),
+                  _schoolForm(),
+                  _submitButton(),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -43,56 +62,66 @@ class Signup extends StatelessWidget {
         final AsyncValue<SignupState> state =
             ref.watch(signupViewModelProvider);
 
-        return Padding(
-          padding: const EdgeInsets.all(PaddingSize.normal),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  const Text(
-                    'お名前',
-                    style: TextStyle(fontSize: FontSize.heading),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.help),
-                    iconSize: IconSize.help,
-                    color: Theme.of(context).primaryIconTheme.color,
-                    onPressed: () async => showDialog(
-                      context: context,
-                      builder: (BuildContext context) => const HelpDialog(
-                        title: Text('お名前について'),
-                        content: Text('　お名前情報は，本アプリ内でユーザを識別するために利用されます．'
-                            'あだ名などを入力していただいても構いません．また，あとで変更することもできます．\n'
-                            '　お名前情報は，端末内に保存され収集されることはありません．また，あとから変更することができます．'),
+        return state.when(
+          loading: () => const Center(
+            child: CircularProgressIndicator(),
+          ),
+          error: (Object error, StackTrace? stackTrace) {
+            return Center(
+              child: Text(error.toString()),
+            );
+          },
+          data: (SignupState state) => Padding(
+            padding: const EdgeInsets.all(PaddingSize.normal),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    const Text(
+                      'お名前',
+                      style: TextStyle(fontSize: FontSize.subheading),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.help),
+                      iconSize: IconSize.help,
+                      color: Theme.of(context).primaryIconTheme.color,
+                      onPressed: () async => showDialog(
+                        context: context,
+                        builder: (BuildContext context) => const HelpDialog(
+                          title: Text('お名前について'),
+                          content: Text('　お名前情報は，本アプリ内でユーザを識別するために利用されます．'
+                              'あだ名などを入力していただいても構いません．また，あとで変更することもできます．\n'
+                              '　お名前情報は，端末内に保存され収集されることはありません．また，あとから変更することができます．'),
+                        ),
+                      ),
+                    ),
+                    const Spacer(),
+                    _errorIndication(state.nameErrorState),
+                  ],
+                ),
+                TextFormField(
+                  initialValue: state.name,
+                  keyboardType: TextInputType.name,
+                  maxLength: 15,
+                  decoration: InputDecoration(
+                    hintText: 'お子様の名前かあだ名を入力',
+                    border: const OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: AppColor.brand.secondary,
+                        width: 2,
                       ),
                     ),
                   ),
-                  const Spacer(),
-                  if (state is AsyncData<SignupState>)
-                    _errorIndication(state.value.nameErrorState),
-                ],
-              ),
-              TextFormField(
-                initialValue:
-                    (state is AsyncData<SignupState>) ? state.value.name : '',
-                keyboardType: TextInputType.name,
-                maxLength: 15,
-                decoration: InputDecoration(
-                  hintText: 'お子様の名前かあだ名を入力',
-                  border: const OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: AppColor.brand.secondary,
-                      width: 2,
-                    ),
-                  ),
+                  onChanged: (String value) {
+                    ref
+                        .read(signupViewModelProvider.notifier)
+                        .updateName(value);
+                  },
                 ),
-                onChanged: (String value) => ref
-                    .read(signupViewModelProvider.notifier)
-                    .updateName(value),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
@@ -114,7 +143,7 @@ class Signup extends StatelessWidget {
                 children: <Widget>[
                   const Text(
                     '学校・学年',
-                    style: TextStyle(fontSize: FontSize.heading),
+                    style: TextStyle(fontSize: FontSize.subheading),
                   ),
                   IconButton(
                     icon: const Icon(Icons.help),
@@ -191,6 +220,9 @@ class Signup extends StatelessWidget {
   Widget _submitButton() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
+        final AsyncValue<UserSettingsState> state =
+            ref.watch(userSettingsViewModelProvider);
+
         return Padding(
           padding: const EdgeInsets.all(PaddingSize.normal),
           child: Row(
@@ -213,8 +245,17 @@ class Signup extends StatelessWidget {
                       .checkValidation()) {
                     return showDialog(
                       context: context,
-                      builder: (BuildContext context) =>
-                          const SigningUpDialog(),
+                      builder: (BuildContext context) {
+                        Widget dialog = const SigningUpDialog();
+
+                        state.whenData((UserSettingsState data) {
+                          if (data.editingUser != null) {
+                            dialog = const UserEditDialog();
+                          }
+                        });
+                    
+                        return dialog;
+                      },
                     );
                   }
                 },

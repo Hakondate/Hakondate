@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$UserSettingsState {
   List<UserModel>? get users => throw _privateConstructorUsedError;
+  UserModel? get editingUser => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserSettingsStateCopyWith<UserSettingsState> get copyWith =>
@@ -29,7 +30,9 @@ abstract class $UserSettingsStateCopyWith<$Res> {
           UserSettingsState value, $Res Function(UserSettingsState) then) =
       _$UserSettingsStateCopyWithImpl<$Res, UserSettingsState>;
   @useResult
-  $Res call({List<UserModel>? users});
+  $Res call({List<UserModel>? users, UserModel? editingUser});
+
+  $UserModelCopyWith<$Res>? get editingUser;
 }
 
 /// @nodoc
@@ -46,13 +49,30 @@ class _$UserSettingsStateCopyWithImpl<$Res, $Val extends UserSettingsState>
   @override
   $Res call({
     Object? users = freezed,
+    Object? editingUser = freezed,
   }) {
     return _then(_value.copyWith(
       users: freezed == users
           ? _value.users
           : users // ignore: cast_nullable_to_non_nullable
               as List<UserModel>?,
+      editingUser: freezed == editingUser
+          ? _value.editingUser
+          : editingUser // ignore: cast_nullable_to_non_nullable
+              as UserModel?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserModelCopyWith<$Res>? get editingUser {
+    if (_value.editingUser == null) {
+      return null;
+    }
+
+    return $UserModelCopyWith<$Res>(_value.editingUser!, (value) {
+      return _then(_value.copyWith(editingUser: value) as $Val);
+    });
   }
 }
 
@@ -64,7 +84,10 @@ abstract class _$$_UserSettingsStateCopyWith<$Res>
       __$$_UserSettingsStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<UserModel>? users});
+  $Res call({List<UserModel>? users, UserModel? editingUser});
+
+  @override
+  $UserModelCopyWith<$Res>? get editingUser;
 }
 
 /// @nodoc
@@ -79,12 +102,17 @@ class __$$_UserSettingsStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? users = freezed,
+    Object? editingUser = freezed,
   }) {
     return _then(_$_UserSettingsState(
       users: freezed == users
           ? _value._users
           : users // ignore: cast_nullable_to_non_nullable
               as List<UserModel>?,
+      editingUser: freezed == editingUser
+          ? _value.editingUser
+          : editingUser // ignore: cast_nullable_to_non_nullable
+              as UserModel?,
     ));
   }
 }
@@ -92,7 +120,8 @@ class __$$_UserSettingsStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_UserSettingsState implements _UserSettingsState {
-  const _$_UserSettingsState({final List<UserModel>? users}) : _users = users;
+  const _$_UserSettingsState({final List<UserModel>? users, this.editingUser})
+      : _users = users;
 
   final List<UserModel>? _users;
   @override
@@ -105,8 +134,11 @@ class _$_UserSettingsState implements _UserSettingsState {
   }
 
   @override
+  final UserModel? editingUser;
+
+  @override
   String toString() {
-    return 'UserSettingsState(users: $users)';
+    return 'UserSettingsState(users: $users, editingUser: $editingUser)';
   }
 
   @override
@@ -114,12 +146,14 @@ class _$_UserSettingsState implements _UserSettingsState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserSettingsState &&
-            const DeepCollectionEquality().equals(other._users, _users));
+            const DeepCollectionEquality().equals(other._users, _users) &&
+            (identical(other.editingUser, editingUser) ||
+                other.editingUser == editingUser));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_users));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_users), editingUser);
 
   @JsonKey(ignore: true)
   @override
@@ -130,11 +164,14 @@ class _$_UserSettingsState implements _UserSettingsState {
 }
 
 abstract class _UserSettingsState implements UserSettingsState {
-  const factory _UserSettingsState({final List<UserModel>? users}) =
-      _$_UserSettingsState;
+  const factory _UserSettingsState(
+      {final List<UserModel>? users,
+      final UserModel? editingUser}) = _$_UserSettingsState;
 
   @override
   List<UserModel>? get users;
+  @override
+  UserModel? get editingUser;
   @override
   @JsonKey(ignore: true)
   _$$_UserSettingsStateCopyWith<_$_UserSettingsState> get copyWith =>
