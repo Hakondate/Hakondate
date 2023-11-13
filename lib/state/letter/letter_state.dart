@@ -19,7 +19,7 @@ class LetterState with _$LetterState {
     String? pageToken,
   }) = _LetterState;
 
-  Widget when({required StatefulWrapper Function(LetterState data) data, required Text Function(dynamic _, dynamic __) error, required Text Function() loading}) {}
+  // Widget when({required StatefulWrapper Function(LetterState data) data, required Text Function(dynamic _, dynamic __) error, required Text Function() loading}) {}
 }
 
 enum LetterConnectionStatus {
