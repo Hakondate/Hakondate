@@ -57,9 +57,10 @@ class $SchoolsTableTable extends SchoolsTable
   List<GeneratedColumn> get $columns =>
       [id, parentId, name, lunchBlock, classification, createAt, updateAt];
   @override
-  String get aliasedName => _alias ?? 'schools_table';
+  String get aliasedName => _alias ?? actualTableName;
   @override
-  String get actualTableName => 'schools_table';
+  String get actualTableName => $name;
+  static const String $name = 'schools_table';
   @override
   VerificationContext validateIntegrity(Insertable<SchoolsSchema> instance,
       {bool isInserting = false}) {
@@ -412,9 +413,10 @@ class $MenusTableTable extends MenusTable
   List<GeneratedColumn> get $columns =>
       [id, day, schoolId, event, createAt, updateAt];
   @override
-  String get aliasedName => _alias ?? 'menus_table';
+  String get aliasedName => _alias ?? actualTableName;
   @override
-  String get actualTableName => 'menus_table';
+  String get actualTableName => $name;
+  static const String $name = 'menus_table';
   @override
   VerificationContext validateIntegrity(Insertable<MenusSchema> instance,
       {bool isInserting = false}) {
@@ -712,9 +714,10 @@ class $DishesTableTable extends DishesTable
   @override
   List<GeneratedColumn> get $columns => [id, name, category];
   @override
-  String get aliasedName => _alias ?? 'dishes_table';
+  String get aliasedName => _alias ?? actualTableName;
   @override
-  String get actualTableName => 'dishes_table';
+  String get actualTableName => $name;
+  static const String $name = 'dishes_table';
   @override
   VerificationContext validateIntegrity(Insertable<DishesSchema> instance,
       {bool isInserting = false}) {
@@ -918,9 +921,10 @@ class $MenuDishesTableTable extends MenuDishesTable
   @override
   List<GeneratedColumn> get $columns => [menuId, dishId];
   @override
-  String get aliasedName => _alias ?? 'menu_dishes_table';
+  String get aliasedName => _alias ?? actualTableName;
   @override
-  String get actualTableName => 'menu_dishes_table';
+  String get actualTableName => $name;
+  static const String $name = 'menu_dishes_table';
   @override
   VerificationContext validateIntegrity(Insertable<MenuDishesSchema> instance,
       {bool isInserting = false}) {
@@ -1202,27 +1206,21 @@ class $FoodstuffsTableTable extends FoodstuffsTable
       type: DriftSqlType.double, requiredDuringInsert: true);
   static const VerificationMeta _isHeatMeta = const VerificationMeta('isHeat');
   @override
-  late final GeneratedColumn<bool> isHeat =
-      GeneratedColumn<bool>('is_heat', aliasedName, false,
-          type: DriftSqlType.bool,
-          requiredDuringInsert: true,
-          defaultConstraints: GeneratedColumn.constraintsDependsOnDialect({
-            SqlDialect.sqlite: 'CHECK ("is_heat" IN (0, 1))',
-            SqlDialect.mysql: '',
-            SqlDialect.postgres: '',
-          }));
+  late final GeneratedColumn<bool> isHeat = GeneratedColumn<bool>(
+      'is_heat', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: true,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('CHECK ("is_heat" IN (0, 1))'));
   static const VerificationMeta _isAllergyMeta =
       const VerificationMeta('isAllergy');
   @override
-  late final GeneratedColumn<bool> isAllergy =
-      GeneratedColumn<bool>('is_allergy', aliasedName, false,
-          type: DriftSqlType.bool,
-          requiredDuringInsert: true,
-          defaultConstraints: GeneratedColumn.constraintsDependsOnDialect({
-            SqlDialect.sqlite: 'CHECK ("is_allergy" IN (0, 1))',
-            SqlDialect.mysql: '',
-            SqlDialect.postgres: '',
-          }));
+  late final GeneratedColumn<bool> isAllergy = GeneratedColumn<bool>(
+      'is_allergy', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: true,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('CHECK ("is_allergy" IN (0, 1))'));
   static const VerificationMeta _originMeta = const VerificationMeta('origin');
   @override
   late final GeneratedColumn<String> origin = GeneratedColumn<String>(
@@ -1254,9 +1252,10 @@ class $FoodstuffsTableTable extends FoodstuffsTable
         origin
       ];
   @override
-  String get aliasedName => _alias ?? 'foodstuffs_table';
+  String get aliasedName => _alias ?? actualTableName;
   @override
-  String get actualTableName => 'foodstuffs_table';
+  String get actualTableName => $name;
+  static const String $name = 'foodstuffs_table';
   @override
   VerificationContext validateIntegrity(Insertable<FoodstuffsSchema> instance,
       {bool isInserting = false}) {
@@ -2067,9 +2066,10 @@ class $DishFoodstuffsTableTable extends DishFoodstuffsTable
   @override
   List<GeneratedColumn> get $columns => [dishId, foodstuffId];
   @override
-  String get aliasedName => _alias ?? 'dish_foodstuffs_table';
+  String get aliasedName => _alias ?? actualTableName;
   @override
-  String get actualTableName => 'dish_foodstuffs_table';
+  String get actualTableName => $name;
+  static const String $name = 'dish_foodstuffs_table';
   @override
   VerificationContext validateIntegrity(
       Insertable<DishFoodstuffsSchema> instance,
@@ -2274,9 +2274,10 @@ class $UsersTableTable extends UsersTable
   @override
   List<GeneratedColumn> get $columns => [id, name, schoolId, schoolYear];
   @override
-  String get aliasedName => _alias ?? 'users_table';
+  String get aliasedName => _alias ?? actualTableName;
   @override
-  String get actualTableName => 'users_table';
+  String get actualTableName => $name;
+  static const String $name = 'users_table';
   @override
   VerificationContext validateIntegrity(Insertable<UsersSchema> instance,
       {bool isInserting = false}) {
@@ -2625,9 +2626,10 @@ class $DictionaryItemsTableTable extends DictionaryItemsTable
         note
       ];
   @override
-  String get aliasedName => _alias ?? 'dictionary_items_table';
+  String get aliasedName => _alias ?? actualTableName;
   @override
-  String get actualTableName => 'dictionary_items_table';
+  String get actualTableName => $name;
+  static const String $name = 'dictionary_items_table';
   @override
   VerificationContext validateIntegrity(
       Insertable<DictionaryItemsSchema> instance,

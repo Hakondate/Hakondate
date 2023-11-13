@@ -22,7 +22,11 @@ class Letter extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('お便り'),
       ),
-      body: StatefulWrapper(
+      body: Consumer(
+        builder: (BuildContext context, WidgetRef ref, _) {
+          final LetterState state = ref.watch(letterViewModelProvider);
+      
+      return StatefulWrapper(
         onInit: () => ref.read(letterViewModelProvider.notifier).getLetters(),
         child: Builder(
           builder: (BuildContext context) {
@@ -31,6 +35,7 @@ class Letter extends ConsumerWidget {
             if (letters.isEmpty) return const NonLetter();
       
             return Scrollbar(
+              controller: state.scrollController,
               child: Padding(
                 padding: const EdgeInsets.all(PaddingSize.minimum),
                 child: RefreshIndicator(
@@ -39,6 +44,7 @@ class Letter extends ConsumerWidget {
                   backgroundColor: AppColor.ui.white,
                   displacement: 0,
                   child: GridView.builder(
+                    controller:  state.scrollController,
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       mainAxisSpacing: MarginSize.minimum,
@@ -60,7 +66,8 @@ class Letter extends ConsumerWidget {
             );
           },
         ),
-      ),
+      );
+      },),
     );
   }
 
@@ -160,3 +167,5 @@ class Letter extends ConsumerWidget {
     );
   }
 }
+
+
