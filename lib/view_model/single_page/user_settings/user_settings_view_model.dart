@@ -15,12 +15,9 @@ part 'user_settings_view_model.g.dart';
 class UserSettingsViewModel extends _$UserSettingsViewModel {
   @override
   Future<UserSettingsState> build() async {
-    final List<UserModel> users = await getUsersFromLocalRepository();
+    final List<UserModel> users =
+          await ref.read(usersLocalRepositoryProvider).list();
     
-    for (final UserModel user in users) {
-      debugPrint(user.name);
-    }
-
     return UserSettingsState(
       users: users,
     );
@@ -33,12 +30,6 @@ class UserSettingsViewModel extends _$UserSettingsViewModel {
     );
 
     return ref.read(schoolsLocalRepositoryProvider).listParentIdsByUsers(users);
-  }
-
-  Future<List<UserModel>> getUsersFromLocalRepository() {
-    final UsersLocalRepository usersLocalRepository =
-        ref.read(usersLocalRepositoryProvider);
-    return usersLocalRepository.list();
   }
 
   Future<void> updateUsers() async {
@@ -68,9 +59,5 @@ class UserSettingsViewModel extends _$UserSettingsViewModel {
   Future<void> deleteUser(int id) async {
     await ref.read(usersLocalRepositoryProvider).delete(id);
     await updateUsers();
-  }
-
-  Future<UserModel> getUserById(int id) async {
-    return ref.read(usersLocalRepositoryProvider).getById(id);
   }
 }

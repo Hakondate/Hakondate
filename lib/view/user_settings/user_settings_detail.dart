@@ -246,13 +246,15 @@ class UserSettingsDetail extends ConsumerWidget {
                     return showDialog(
                       context: context,
                       builder: (BuildContext context) {
+                        Widget dialog = const SigningUpDialog();
+
                         state.whenData((UserSettingsState data) {
                           if (data.editingUser != null) {
-                            debugPrint(data.editingUser!.name);
-                            return const UserEditDialog();
+                            dialog = const UserEditDialog();
                           }
                         });
-                        return const SigningUpDialog();
+                    
+                        return dialog;
                       },
                     );
                   }

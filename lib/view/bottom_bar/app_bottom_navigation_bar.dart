@@ -16,7 +16,6 @@ class AppBottomNavigationBar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final TabPageState tabState = TabPage.of(context);
-    debugPrint('tabState.controller.index: ${tabState.controller.index}');
 
     return Scaffold(
       key: ref.watch(drawerViewModelProvider).scaffoldKey,

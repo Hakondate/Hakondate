@@ -27,10 +27,8 @@ class SignupViewModel extends _$SignupViewModel {
     final List<SchoolModel> schools = await schoolLocalRepository.list();
 
     if (editingUser != null) {
-      debugPrint('SignupViewModel build with editingUser');
       final SchoolModel school =
           await schoolLocalRepository.getById(editingUser!.schoolId);
-      debugPrint('school: ${school.name}');
 
       final List<String> schoolYears =
           (school.classification == SchoolClassification.primary)
@@ -48,7 +46,6 @@ class SignupViewModel extends _$SignupViewModel {
       );
     }
 
-    debugPrint('SignupViewModel build without editingUser');
     return SignupState(
       schools: schools,
     );
@@ -103,6 +100,7 @@ class SignupViewModel extends _$SignupViewModel {
               schoolId: schoolId,
               schoolYear: schoolYear,
             );
+
         state = cache;
       } on Exception catch (error, stack) {
         debugPrint(error.toString());
