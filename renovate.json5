@@ -40,8 +40,18 @@
     },
     /** マイナーアップデートはまとめる */
     {
-      "groupName": "all minor and patch dependencies",
-      "matchUpdateTypes": ["minor"],
+      "groupName": "All minor and patch dependencies",
+      "matchUpdateTypes": ["minor", "patch"],
+      "excludePackageNames":[
+        "cloud_firestore",
+        "firebase_messaging",
+        "firebase_remote_config",
+        "firebase_crashlytics",
+        "firebase_analytics",
+        "firebase_core",
+        "firebase_dynamic_links",
+        "firebase_messaging"
+      ],
     },
   ],
 
