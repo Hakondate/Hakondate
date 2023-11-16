@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -73,7 +71,7 @@ class SigningUpDialog extends ConsumerWidget {
           firstAction: HakondateActionButton.primary(
             text: const Text('登録する'),
             onTap: () async {
-              unawaited(ref.read(signupViewModelProvider.notifier).signup());
+              await ref.read(signupViewModelProvider.notifier).signup();
               await routemaster.pop().whenComplete(
                     () async => showDialog(
                       context: context,

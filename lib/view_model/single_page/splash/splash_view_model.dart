@@ -112,7 +112,7 @@ class SplashViewModel extends _$SplashViewModel {
 
     state = SplashState(status: LoadingStatus.checkingUpdate);
     final List<dynamic> schools = await _schoolsRemoteRepository.get(
-        updateAt: latestUpdate.add(const Duration(seconds: 1)),);
+      updateAt: latestUpdate.add(const Duration(seconds: 1)),);
 
     state = SplashState(status: LoadingStatus.updating);
     await Future.forEach(schools, (dynamic school) async {
@@ -127,7 +127,7 @@ class SplashViewModel extends _$SplashViewModel {
 
     state = SplashState(status: LoadingStatus.checkingUpdate);
     final List<dynamic> menus = await _menusRemoteRepository.get(
-        updateAt: latestUpdate.add(const Duration(seconds: 1)),
+      updateAt: latestUpdate.add(const Duration(seconds: 1)),
     );
 
     state = SplashState(status: LoadingStatus.updating);
