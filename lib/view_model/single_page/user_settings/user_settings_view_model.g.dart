@@ -11,6 +11,7 @@ String _$userSettingsViewModelHash() =>
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     r'74f2e3174513d412e19ff6f924ca889549ec5866';
 =======
 =======
@@ -38,6 +39,9 @@ String _$userSettingsViewModelHash() =>
 =======
     r'f5da619861817859c0aeb0a82ded4620b396f417';
 >>>>>>> 6357ae0 ([update]: update menue when user switched)
+=======
+    r'37ff01e65cc36e8f6890e11169604085194a00d1';
+>>>>>>> 7fa4687 ([refactor] remove debugPrint and more)
 
 /// See also [UserSettingsViewModel].
 @ProviderFor(UserSettingsViewModel)

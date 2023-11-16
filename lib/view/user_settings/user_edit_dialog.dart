@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -70,7 +68,7 @@ class UserEditDialog extends ConsumerWidget {
           firstAction: HakondateActionButton.primary(
             text: const Text('変更を登録する'),
             onTap: () async {
-              unawaited(ref.read(signupViewModelProvider.notifier).edit());
+              await ref.read(signupViewModelProvider.notifier).edit();
               await routemaster.pop().whenComplete(
                     () => showDialog(
                       context: context,
@@ -112,7 +110,7 @@ class UserEditDialog extends ConsumerWidget {
             body: const Text('ユーザ情報の登録が成功しました'),
             firstAction: HakondateActionButton.primary(
               text: const Text('はじめる'),
-              onTap: () => routemaster.push('/splash'),
+              onTap: () => routemaster.replace('/splash'),
             ),
           );
         }
