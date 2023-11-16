@@ -12,7 +12,7 @@ part 'daily_view_model.g.dart';
 
 @Riverpod(keepAlive: true)
 class DailyViewModel extends _$DailyViewModel {
-  late final MenusLocalRepository _menusLocalRepository;
+  late final MenusLocalRepositoryAPI _menusLocalRepository;
 
   @override
   FutureOr<DailyState> build() {
@@ -36,11 +36,8 @@ class DailyViewModel extends _$DailyViewModel {
       switch (Environment.flavor) {
         case Flavor.dev:
           selectedInputDay ??= DateTime(2022, 5, 16);
-          break;
-        case Flavor.stg:
-        case Flavor.prod:
-        selectedInputDay ??= DateTime.now();
-          break;
+        case Flavor.stg ||  Flavor.prod:
+          selectedInputDay ??= DateTime.now();
       }
       final MenuModel menu = await _menusLocalRepository.getMenuByDay(selectedInputDay);
 

@@ -16,6 +16,7 @@ import 'package:hakondate/view/letter/letter.dart';
 import 'package:hakondate/view/letter/letter_pdf.dart';
 import 'package:hakondate/view/license/license.dart';
 import 'package:hakondate/view/license/license_detail.dart';
+import 'package:hakondate/view/origin/origin.dart';
 import 'package:hakondate/view/recipe/recipe.dart';
 import 'package:hakondate/view/recipe/recipe_pdf.dart';
 import 'package:hakondate/view/signup/signup.dart';
@@ -50,17 +51,10 @@ final RoutemasterDelegate routemaster = RoutemasterDelegate(
       '/home/dictionary/:group': (_) => const MaterialPage<dynamic>(child: DictionaryGroupList()),
       '/home/dictionary_item/:id': (_) => const FadeUpPage(child: DictionaryItem()),
       '/home/letter': (_) => const MaterialPage<dynamic>(child: Letter()),
-      '/home/letter/:title': (_) =>
-          const MaterialPage<dynamic>(child: LetterPDF()),
-      '/home/user_settings': (_) =>
-          const MaterialPage<dynamic>(child: UserSettings()),
-      '/home/user_settings/:id': (RouteData route) => FadeUpPage(
-            child: UserSettingsDetail(
-                // id: int.parse(route.pathParameters['id'] ?? '-1'),
-                ),
-          ),
-      '/home/origin': (_) =>
-          MaterialPage<dynamic>(child: Scaffold(appBar: AppBar())),
+      '/home/letter/:title': (_) => const MaterialPage<dynamic>(child: LetterPDF()),
+      '/home/user_settings': (_) => const MaterialPage<dynamic>(child: UserSettings()),
+      '/home/user_settings/:id': (RouteData route) => FadeUpPage(child: UserSettingsDetail()),
+      '/home/origin': (_) => const FadeUpPage(child: Origin()),
       '/home/drawer_terms': (_) => const FadeUpPage(child: DrawerTerms()),
       '/home/help': (_) => const FadeUpPage(child: Help()),
       '/home/information': (_) => const FadeUpPage(child: Information()),
