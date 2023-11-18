@@ -65,10 +65,9 @@ class UserAddButton extends ConsumerWidget {
     return Center(
       child: FloatingActionButton(
         elevation: 3,
-        backgroundColor: AppColor.ui.secondaryUltraLight,
         child: Icon(
           Icons.person_add,
-          color: AppColor.brand.secondary,
+          color: AppColor.ui.white,
         ),
         onPressed: () {
           ref
@@ -104,18 +103,17 @@ class UserSettingsCard extends ConsumerWidget {
       child: Card(
         margin: const EdgeInsets.symmetric(
           vertical: MarginSize.minimum,
-          horizontal: MarginSize.normalHorizontal,
+          horizontal: MarginSize.normal,
         ),
-        elevation: 0,
-        shadowColor: AppColor.brand.secondary,
+        elevation: 2,
         shape: RoundedRectangleBorder(
           side: BorderSide(
             color: isCurrentUser
                 ? AppColor.brand.secondary
                 : AppColor.ui.secondaryUltraLight,
-            width: 2,
+            width: 3,
           ),
-          borderRadius: const BorderRadius.all(Radius.circular(15)),
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
         ),
         child: Padding(
           padding: const EdgeInsets.all(PaddingSize.normal),
@@ -129,7 +127,8 @@ class UserSettingsCard extends ConsumerWidget {
                   Text(
                     user.name,
                     style: const TextStyle(
-                      fontSize: FontSize.subheading,
+                      fontSize: FontSize.heading,
+                      fontWeight: FontWeight.bold,
                       height: 1,
                     ),
                   ),
@@ -200,6 +199,7 @@ class UserSettingsCard extends ConsumerWidget {
                 icon: Icon(
                   isCurrentUser ? Icons.edit : Icons.delete,
                   color: AppColor.brand.secondary,
+                  size: IconSize.help,
                 ),
               )
             ],

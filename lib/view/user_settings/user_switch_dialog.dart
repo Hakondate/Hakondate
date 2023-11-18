@@ -21,7 +21,7 @@ class UserSwitchDialog extends ConsumerWidget {
         onTap: () async {
           await ref.read(userViewModelProvider.notifier).changeCurrentUser(id);
           await ref.read(dailyViewModelProvider.notifier).updateMenu();
-          await routemaster.pop();
+          routemaster.replace('/home');
         },
       ),
       secondAction: HakondateActionButton(
