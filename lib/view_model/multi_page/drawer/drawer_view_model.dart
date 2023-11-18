@@ -11,7 +11,6 @@ class DrawerViewModel extends _$DrawerViewModel {
   @override
   DrawerState build() {
     ref.onDispose(() {
-      debugPrint('dispose drawer');
       state.scaffoldKey.currentState?.dispose();
     });
 
