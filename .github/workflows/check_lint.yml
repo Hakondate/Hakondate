@@ -1,0 +1,20 @@
+name: Check Lint
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+
+jobs:  
+  run-linter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Flutter
+        uses: ./.github/workflows/setup-flutter
+      
+      - name: Run Flutter Analyzer
+        run: flutter analyze
+        
+      - name: Run Custom Linter
+        run: flutter pub run custom_lint
