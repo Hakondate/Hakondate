@@ -4,10 +4,16 @@ description: Setup your Flutter
 runs:
   using: "composite"
   steps:
+    - name: Get Flutter Version From fvm_config.json
+      shell: bash
+      run: |
+        version=$(cat ./.fvn/fvm_config.json | jq -r .flutterSdkVersion)
+        echo "FLUTTER_VERSION=${version}" >> $GITHUB_ENV
+
     - name: Set Flutter Environment
       uses: subosito/flutter-action@v2
       with:
-        channel: 'stable'
+        channel: $FLUTTER_VERSION
         cache: true
     - shell: bash
       run: flutter --version
