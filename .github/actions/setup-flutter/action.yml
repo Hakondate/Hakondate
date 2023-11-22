@@ -13,12 +13,8 @@ runs:
     - name: Set Flutter Environment
       uses: subosito/flutter-action@v2
       with:
-        channel: $FLUTTER_VERSION
+        channel: 'stable'
         cache: true
-    - shell: bash
-      run: |
-        git config --global --add safe.directory /opt/hostedtoolcache/flutter/${{ steps.flutter-action.outputs.CHANNEL }}-${{ steps.flutter-action.outputs.VERSION }}-${{ steps.flutter-action.outputs.ARCHITECTURE }}
-        flutter --version
     - shell: bash
       run: flutter --version
 
