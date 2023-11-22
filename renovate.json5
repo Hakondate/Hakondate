@@ -10,11 +10,11 @@
   /** タイムゾーン */
   "timezone": "Asia/Tokyo",
 
-  // /** 実行日時設定 */
-  // "schedule": [
-  //   /** 毎週月曜の早朝 */
-  //   "before 4am on Monday",
-  // ],
+  /** 実行日時設定 */
+  "schedule": [
+    /** 毎週月曜の早朝 */
+    "before 4am on Monday",
+  ],
 
   /** 監視対象のライブラリ群 */
   "enabledManagers": [
