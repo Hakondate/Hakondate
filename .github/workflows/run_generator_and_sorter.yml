@@ -1,0 +1,36 @@
+name: Run Generator and Sorter
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+
+jobs:  
+  generate_and_sort_code:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+      
+      - name: Setup Flutter
+        uses: ./.github/actions/setup-flutter
+      
+      - name: Run OSS Licenses Generator
+        run: flutter pub run flutter_oss_licenses:generate.dart -o lib/constant/oss_licenses.dart
+        
+      - name: Run Build Runner
+        run: flutter packages pub run build_runner build --delete-conflicting-outputs
+      
+      - name: Run Import Sorter
+        run: flutter pub run import_sorter:main
+      
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'bot: run generator and sorter'
+          commit_options: '--no-verify --signoff'
