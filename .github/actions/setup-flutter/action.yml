@@ -4,8 +4,6 @@ description: Setup your Flutter
 runs:
   using: "composite"
   steps:
-    - uses: actions/checkout@v4
-
     - name: Set Flutter Environment
       uses: subosito/flutter-action@v2
       with:

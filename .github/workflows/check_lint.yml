@@ -10,6 +10,8 @@ jobs:
   run-linter:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+      
       - name: Setup Flutter
         uses: ./.github/actions/setup-flutter
       
