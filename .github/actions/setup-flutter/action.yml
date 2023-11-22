@@ -13,7 +13,7 @@ runs:
     - name: Set Flutter Environment
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: $FLUTTER_VERSION
+        flutter-version: "$FLUTTER_VERSION"
         channel: 'stable'
         cache: true
     - shell: bash
