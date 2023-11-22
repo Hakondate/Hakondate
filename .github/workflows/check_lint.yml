@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup Flutter
-        uses: ./.github/workflows/setup-flutter
+        uses: ./.github/actions/setup-flutter
       
       - name: Run Flutter Analyzer
         run: flutter analyze
