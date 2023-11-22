@@ -59,7 +59,7 @@
   "prHourlyLimit": 0,
 
   /** PRの同時上限数 */
-  "prConcurrentLimit": 5,
+  "prConcurrentLimit": 0,
 
   /** PRにつけるラベル */
   "labels": [
