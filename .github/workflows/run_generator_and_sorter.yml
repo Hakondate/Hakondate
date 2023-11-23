@@ -5,9 +5,15 @@ on:
     branches:
       - develop
       - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
 
-jobs:  
+jobs:
   generate_and_sort_code:
+    if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
 
     permissions:
