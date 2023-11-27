@@ -1,4 +1,3 @@
-//import 'package:drift/drift.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,10 +7,8 @@ import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
 import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:hakondate/model/nutrients/nutrient_unit.dart';
-import 'package:hakondate/model/nutrients/nutrients_model.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/daily/daily_state.dart';
-import 'package:hakondate/state/dictionary/dictionary_state.dart';
 import 'package:hakondate/util/exception/class_type_exception.dart';
 import 'package:hakondate/view/component/graph/nutrients_radar_chart.dart';
 import 'package:hakondate/view/component/label/nutrients_list.dart';
@@ -30,7 +27,7 @@ class NutrientsCard extends StatelessWidget {
           Image.asset('assets/images/label/nutrientsLabel.png'),
           _nutrientsGraph(),
           _nutrientsExpansionTile(),
-          _recommendFood(),
+          _recommendFoodExpansionTile(),
         ],
       ),
     );
@@ -40,7 +37,6 @@ class NutrientsCard extends StatelessWidget {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
         const double graphMaxValue = 120;
-        debugPrint("nutrientsGraph");
         return SizedBox(
           width: MediaQuery.of(context).size.width * 3/4,
           height: MediaQuery.of(context).size.width * 3/4,
@@ -92,65 +88,70 @@ class NutrientsCard extends StatelessWidget {
     );
   }
 
-  Widget _recommendFood() {
+  Widget _recommendFoodExpansionTile() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _){
-        debugPrint("aiu");
-        ref.read(dailyViewModelProvider.notifier).updateRecommendDishes();
-        return ref.watch(dailyViewModelProvider).maybeWhen(
-          data: (DailyState data) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: IconButton(
-                    icon: const Icon(Icons.help),
-                    color: Colors.black54,
-                    onPressed: () {},
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: () {
-                    if(data.recommendDishes != null) {
-                      return Text(
-                    '${_getNutrientJapaneseName(data.recommendDishes!.entries.first.key)}を多く含む食材',
-                    style: const TextStyle(
-                      fontSize: 25,
-                    ),
-                  );
-                    }else{
-                      return Text("null");
-                    }
-                  }()
-                  
-                ),
-                if (data.recommendDishes != null) _rankingContents(
-                  data.recommendDishes!.entries.elementAt(0).value,
-                  data.recommendDishes!.entries.elementAt(0).key,
-                ) else const SizedBox.shrink()             
-              ],
-            );
-          },
-          orElse: () => const Text('loading'),
+        return ExpansionTile(
+          title: const Text(
+            'おすすめ食材',
+            style: TextStyle(
+              fontSize: FontSize.heading,
+            ),
+          ),
+          onExpansionChanged: (bool value) => !value,
+          textColor: AppColor.brand.secondary,
+          iconColor: AppColor.brand.secondary,
+          children: <Widget>[
+           ref.watch(dailyViewModelProvider).maybeWhen(
+              data: (DailyState data) {
+                return Column(
+                  children: <Widget>[
+                    _recommendFood(data.recommendDishes,0),
+                    _recommendFood(data.recommendDishes,1),
+                  ],
+                );
+              },
+              orElse: () => const Text('loading'),
+            ),
+          ],
         );
-
       },
     );
   }
+  
+  Widget _recommendFood(Map<String, List<DictionaryItemModel>>? recommendDishes, int index){
+    if (recommendDishes == null) return const SizedBox.shrink();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Text(
+            '${_getNutrientJapaneseName(recommendDishes.entries.elementAt(index).key)}を多く含む食材',
+            style: const TextStyle(fontSize: 25),
+          ),
+        ),
+        _rankingContents(
+          recommendDishes.entries.elementAt(index).value,
+          recommendDishes.entries.elementAt(index).key,
+        ),
+      ],
+    ); 
+  }
+
   /* 1食品群のランキング */
   Widget _rankingContents(List<DictionaryItemModel> list, String key) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10.0),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: List.generate(list.length * 2, (int i) {
-          if (i.isOdd) return Divider();
-          int index = i ~/ 2;
+        children: List<Widget>.generate(list.length * 2, (int i) {
+          if (i.isOdd) return const Divider();
+          final int index = i ~/ 2;
           return GestureDetector(
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 8.0),
+              padding: const EdgeInsets.symmetric(vertical: 8),
               child: Row(
                 children: <Widget>[
                   /* 順位 */
@@ -159,7 +160,7 @@ class NutrientsCard extends StatelessWidget {
                     child: Center(
                       child: Text(
                         '${index + 1}.',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -174,8 +175,8 @@ class NutrientsCard extends StatelessWidget {
                         /* 料理名 */
                         Text(
                           list[index].name,
-                          style: TextStyle(
-                            fontSize: 16.0,
+                          style: const TextStyle(
+                            fontSize: FontSize.subheading,
                           ),
                         ),
                         /* 数値 */
@@ -184,15 +185,15 @@ class NutrientsCard extends StatelessWidget {
                           children: <Widget>[
                             Text(
                               _getNutrient(key, list[index]).toString() + _getNutrientUnit(key).value,
-                              style: TextStyle(
-                                fontSize: 16.0,
+                              style: const TextStyle(
+                                fontSize: FontSize.subheading,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            Text(
+                            const Text(
                               '/100g',
                               style: TextStyle(
-                              fontSize: 16.0,
+                              fontSize: 16,
                               ),
                             ),
                           ],
@@ -224,8 +225,9 @@ class NutrientsCard extends StatelessWidget {
           return item.nutrients.carbohydrate;
         case 'lipid':
           return item.nutrients.lipid;
+        default:
+          return 0;
       }
-      return 0;
   }
   
   String _getNutrientJapaneseName(String key){
@@ -263,15 +265,4 @@ class NutrientsCard extends StatelessWidget {
     }
     throw Exception();
   }
-  
-}
-
-class NutrientPercentage{
-  NutrientPercentage(String? nutrientsName, double percentage){
-    this.Percentage = percentage;
-    this.NutrientsName = nutrientsName;
-  }
-
-  double? Percentage;
-  String? NutrientsName;
 }

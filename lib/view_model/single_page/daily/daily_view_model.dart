@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
 import 'package:hakondate/repository/local/sqlite/dictionary_items/dictionary_items_local_repository.dart';
 import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
-import 'package:hakondate/view_model/single_page/dictionary/dictionary_view_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/dish/dish_model.dart';
@@ -22,7 +21,6 @@ class DailyViewModel extends _$DailyViewModel {
   
   @override
   FutureOr<DailyState> build() {
-    debugPrint("build");
     _dictionaryItemsLocalRepository =
         ref.watch(dictionaryItemsLocalRepositoryProvider);
     _menusLocalRepository = ref.watch(menusLocalRepositoryProvider);
@@ -39,8 +37,6 @@ class DailyViewModel extends _$DailyViewModel {
   }
 
   Future<void> updateSelectedDay({DateTime? selectedDay, DateTime? focusedDay}) async {
-    debugPrint("updateSelectedDay");
-    //var recommend = await _calculateReccomendDishes();
     state.whenData((DailyState data) async {
       
       state = const AsyncLoading<DailyState>();
@@ -64,13 +60,13 @@ class DailyViewModel extends _$DailyViewModel {
           selectedDay: selectedInputDay,
           focusedDay: focusedDay ?? selectedInputDay,
           menu: menu,
-          //recommendDishes: recommend,
         ),
       );
 
       if (menu is LunchesDayMenuModel) {
         await ref.read(analyticsControllerProvider.notifier).logViewMenu(menu.id);
       }
+      await ref.read(dailyViewModelProvider.notifier).updateRecommendDishes();
     });
   }
 
@@ -87,27 +83,19 @@ class DailyViewModel extends _$DailyViewModel {
   }
 
   Future<void>  updateRecommendDishes() async {
-    state.whenData((DailyState data) async {
-      state = AsyncData<DailyState>(data.copyWith(recommendDishes: await _calculateReccomendDishes()));
-    });
-    
+    state.whenData((DailyState data) async => state = AsyncData<DailyState>(data.copyWith(recommendDishes: await _calculateReccomendDishes())));
   }
 
   Future<Map<String, List<DictionaryItemModel>>> _calculateReccomendDishes() async{
     final NutrientsModel? slns =
         ref.watch(userViewModelProvider).currentUser!.slns;
-debugPrint("計算");
     final List<double> nutrientsPercentage =
         ref.read(dailyViewModelProvider.notifier).getGraphValues(
               graphMaxValue: 120,
               slns: slns,
             );
-    int i = 0;
-    nutrientsPercentage.forEach((double element) {
-      i++;
-      debugPrint("$i: $element");});
 
-    final Map<String, double> nutrientsMap = {}..addAll({
+    final Map<String, double> nutrientsMap = <String, double>{}..addAll(<String, double>{
         'protein': nutrientsPercentage[1],
         'vitamin': nutrientsPercentage[2],
         'mineral': nutrientsPercentage[3],
@@ -118,7 +106,7 @@ debugPrint("計算");
       MapEntry<String, double> secondMinValue = nutrientsMap.entries.elementAt(1);
       MapEntry<String, double> temp;
 
-      nutrientsMap.forEach((String key, double value) {debugPrint("$key: $value");});
+      nutrientsMap.forEach((String key, double value) {debugPrint('$key: $value');});
 
       for (int i = 1; i < nutrientsMap.length; i++) {
         temp = nutrientsMap.entries.elementAt(i);
@@ -129,7 +117,7 @@ debugPrint("計算");
           secondMinValue = temp;
         }
       }
-      final Map<String, List<DictionaryItemModel>> recommendDishes = {
+      final Map<String, List<DictionaryItemModel>> recommendDishes = <String, List<DictionaryItemModel>>{
         minValue.key: await _dictionaryItemsLocalRepository.getRanking(
           nutrient: minValue.key,
         ),
@@ -163,9 +151,8 @@ debugPrint("計算");
         ].map((double element) => (element > graphMaxValue) ? graphMaxValue : element).toList();
       },
       orElse: () {
-        debugPrint("orElse"); 
         return <double>[0, 0, 0, 0, 0, 0];
-      }
+      },
     );
   }
 
@@ -232,6 +219,4 @@ debugPrint("計算");
       orElse: () => 0,
     );
   }
-  
-  
 }
