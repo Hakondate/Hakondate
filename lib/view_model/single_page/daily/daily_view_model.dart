@@ -18,7 +18,7 @@ part 'daily_view_model.g.dart';
 class DailyViewModel extends _$DailyViewModel {
   late final DictionaryItemsLocalRepositoryAPI _dictionaryItemsLocalRepository;
   late final MenusLocalRepository _menusLocalRepository;
-  
+
   @override
   FutureOr<DailyState> build() {
     _dictionaryItemsLocalRepository =
@@ -47,11 +47,8 @@ class DailyViewModel extends _$DailyViewModel {
         case Flavor.dev:
           debugPrint(selectedInputDay.toString());
           selectedInputDay ??= DateTime(2022, 5, 16);
-          break;
-        case Flavor.stg:
-        case Flavor.prod:
+        case Flavor.stg ||  Flavor.prod:
           selectedInputDay ??= DateTime.now();
-          break;
       }
       final MenuModel menu = await _menusLocalRepository.getMenuByDay(selectedInputDay);
 

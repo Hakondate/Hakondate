@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'daily_view_model.dart';
+part of 'origin_view_model.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$dailyViewModelHash() => r'62a2907f0383118bab6d9452b6cdc3f496970376';
+String _$originViewModelHash() => r'0e21e36c35558f9d3f5f5fbed6ba6029212bff8c';
 
-/// See also [DailyViewModel].
-@ProviderFor(DailyViewModel)
-final dailyViewModelProvider =
-    AsyncNotifierProvider<DailyViewModel, DailyState>.internal(
-  DailyViewModel.new,
-  name: r'dailyViewModelProvider',
+/// See also [OriginViewModel].
+@ProviderFor(OriginViewModel)
+final originViewModelProvider =
+    AutoDisposeAsyncNotifierProvider<OriginViewModel, OriginState>.internal(
+  OriginViewModel.new,
+  name: r'originViewModelProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$dailyViewModelHash,
+      : _$originViewModelHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$DailyViewModel = AsyncNotifier<DailyState>;
+typedef _$OriginViewModel = AutoDisposeAsyncNotifier<OriginState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
