@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
 
+import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
 import 'package:hakondate/model/dish/dish_model.dart';
 import 'package:hakondate/model/menu/menu_model.dart';
 
