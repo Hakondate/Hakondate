@@ -162,9 +162,9 @@ class DailyViewModel extends _$DailyViewModel {
     );
   }
 
-  void scrollToTop() {
+  void scrollTo(double place) {
     state.whenData((DailyState data) {
-      data.scrollController.animateTo(0, duration: const Duration(milliseconds: 500), curve: Curves.easeOutCubic);
+      data.scrollController.animateTo(place, duration: const Duration(milliseconds: 500), curve: Curves.easeOutCubic);
       debugPrint('scrolled');
     });
   }

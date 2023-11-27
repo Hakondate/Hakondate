@@ -155,7 +155,7 @@ class _$_DictionaryState implements _DictionaryState {
       {this.selectedGroup,
       final List<DictionaryItemModel>? selectedGroupItems,
       this.selectedItem,
-      this.scrollController})
+      required this.scrollController})
       : _selectedGroupItems = selectedGroupItems;
 
   @override
@@ -216,7 +216,7 @@ abstract class _DictionaryState implements DictionaryState {
       {final DictionaryGroup? selectedGroup,
       final List<DictionaryItemModel>? selectedGroupItems,
       final DictionaryItemModel? selectedItem,
-      final ScrollController? scrollController}) = _$_DictionaryState;
+      required final ScrollController? scrollController}) = _$_DictionaryState;
 
   @override
   DictionaryGroup? get selectedGroup;

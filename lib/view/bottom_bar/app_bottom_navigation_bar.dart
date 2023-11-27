@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hakondate/view_model/single_page/letter/letter_view_model.dart';
+import 'package:hakondate/view_model/single_page/recipe/recipe_view_model.dart';
 import 'package:routemaster/routemaster.dart';
 
 import 'package:hakondate/constant/app_color.dart';
@@ -40,9 +41,9 @@ class AppBottomNavigationBar extends ConsumerWidget {
           
           debugPrint('index: $index');
           if (path == '/home/daily' && index == 0) {
-            ref.read(dailyViewModelProvider.notifier).scrollToTop();
+            ref.read(dailyViewModelProvider.notifier).scrollTo(0);
           } else if (path =='/home/recipes' && index == 1) {
-            ref.read(dailyViewModelProvider.notifier).scrollToTop();// レシピのときの処理
+            ref.read(recipeViewModelProvider.notifier).scrollToTop();// レシピのときの処理
           } else if (path =='/home/dictionary' && index == 2) {
             debugPrint('dictionary');
             ref.read(dictionaryViewModelProvider.notifier).scrollToTop();// ずかんのときの処理
