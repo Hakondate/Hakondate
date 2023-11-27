@@ -1,32 +1,28 @@
-
-
-import 'package:drift/drift.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/constant/app_color.dart';
-import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/dictionary/dictionary_state.dart';
 import 'package:hakondate/view_model/single_page/dictionary/dictionary_view_model.dart';
-import 'package:path/path.dart';
 
 class DictionarySearch extends ConsumerWidget {
   DictionarySearch({super.key});
-  var _controller = TextEditingController();
-  late AsyncValue<DictionaryState> state;
+  final TextEditingController _controller = TextEditingController();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    state = ref.watch(dictionaryViewModelProvider);
+    final AsyncValue<DictionaryState> state = ref.watch(dictionaryViewModelProvider);
+
     return Scaffold(
       appBar: AppBar(
         title:
           TextFormField(
             controller: _controller,
             onChanged: (String value) {
-            ref.read(dictionaryViewModelProvider.notifier).getSearchedList(value);
+              ref.read(dictionaryViewModelProvider.notifier).getSearchedList(value);
             },
             cursorColor:AppColor.brand.secondary,
             decoration: InputDecoration(
@@ -41,16 +37,13 @@ class DictionarySearch extends ConsumerWidget {
                   color: Colors.orange,
                   Icons.delete_outline,
                 ),
-              )
+              ),
             ),
-          ),
-        
+          ),     
       ),
       body: state.maybeWhen(
         data:(DictionaryState data) {
-          final DictionaryGroup? selectedGroup = data.selectedGroup;
             final List<DictionaryItemModel>? selectedGroupItems = data.allItems;
-            //final List<DictionaryItemModel>? allItem = data.allItems;
             
             if (selectedGroupItems == null) {
               return const Text('loading');
@@ -77,9 +70,9 @@ class DictionarySearch extends ConsumerWidget {
             );
         },
         orElse: () {
-          return Text('loading');
+          return const Text('loading');
         },
-      )
+      ),
     );
   }
 }

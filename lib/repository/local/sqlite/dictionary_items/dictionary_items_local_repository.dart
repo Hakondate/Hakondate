@@ -16,9 +16,9 @@ DictionaryItemsLocalRepository dictionaryItemsLocalRepository(DictionaryItemsLoc
 
 abstract class DictionaryItemsLocalRepositoryAPI {
   Future<int> add(Map<String, dynamic> item);
-  Future<List<DictionaryItemModel>> getSearchedList(String query);
   Future<List<DictionaryItemModel>> listGroup(int group);
   Future<DictionaryItemModel> getById(int id);
+  Future<List<DictionaryItemModel>> getSearchedList(String query);
   Future<List<DictionaryItemModel>> getRanking({required String nutrient, int limit = 5});
 }
 
@@ -135,8 +135,13 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
   @override
   Future<List<DictionaryItemModel>> getSearchedList(String query) async{
     final List<DictionaryItemModel> items = <DictionaryItemModel>[];
-    final List<DictionaryItemsSchema> schemas = await (_db.select(_db.dictionaryItemsTable)..where(($DictionaryItemsTableTable tbl) => tbl.name.contains(query))).get();
+    final String hiraQuery = query.replaceAllMapped(RegExp('[ァ-ヴ]'), (Match match) => String.fromCharCode(match.group(0)!.codeUnitAt(0) - 0x60));
+    final String kataQuery = query.replaceAllMapped(RegExp('[ぁ-ゔ]'), (Match match) => String.fromCharCode(match.group(0)!.codeUnitAt(0) + 0x60));
 
+    final List<DictionaryItemsSchema> schemas = await (_db.select(_db.dictionaryItemsTable)..where(($DictionaryItemsTableTable tbl) => tbl.name.contains(query))).get();
+    schemas..addAll(await (_db.select(_db.dictionaryItemsTable)..where(($DictionaryItemsTableTable tbl) => tbl.name.contains(hiraQuery))).get())
+    ..addAll(await (_db.select(_db.dictionaryItemsTable)..where(($DictionaryItemsTableTable tbl) => tbl.name.contains(kataQuery))).get())
+    ..sort((DictionaryItemsSchema a,DictionaryItemsSchema b) => a.name.compareTo(b.name));
     for (final DictionaryItemsSchema schema in schemas) {
       items.add(
         DictionaryItemModel(
@@ -164,7 +169,6 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
         ),
       );
     }
-
     return items;
   }
 

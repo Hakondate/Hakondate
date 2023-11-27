@@ -1,11 +1,4 @@
-
-
-import 'package:hakondate/model/nutrients/nutrients_model.dart';
-import 'package:hakondate/view/dictionary/dictionary.dart';
-import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
-import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
 import 'package:hakondate/repository/local/sqlite/dictionary_items/dictionary_items_local_repository.dart';
 import 'package:hakondate/state/dictionary/dictionary_state.dart';
@@ -36,7 +29,6 @@ class DictionaryViewModel extends _$DictionaryViewModel {
     state = const AsyncLoading<DictionaryState>();
     state = AsyncData<DictionaryState>(
       DictionaryState(
-        query: expression,
         allItems: await _dictionaryItemsLocalRepository.getSearchedList(expression),
       ),
     );
@@ -46,9 +38,8 @@ class DictionaryViewModel extends _$DictionaryViewModel {
     state = const AsyncLoading<DictionaryState>();
     state = AsyncData<DictionaryState>(
       DictionaryState(
-        query: '',
         allItems: await _dictionaryItemsLocalRepository.getSearchedList(''),
-        )
+        ),
     );
   }
 

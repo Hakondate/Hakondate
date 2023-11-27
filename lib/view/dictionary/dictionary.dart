@@ -7,8 +7,6 @@ import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/view/dictionary/dictionary_grid.dart';
 import 'package:hakondate/view_model/single_page/dictionary/dictionary_view_model.dart';
 
-import 'CustomSearchDelegate.dart';
-
 class Dictionary extends ConsumerWidget {
   const Dictionary({super.key});
 
@@ -19,12 +17,11 @@ class Dictionary extends ConsumerWidget {
         title: const Text('ずかん'),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
             onPressed: ()  {
               ref.read(dictionaryViewModelProvider.notifier).getSearchedList('');
               routemaster.push('/home/dictionary/search');
-             //showSearch(context: context, delegate: CustomSearchDelegate(ref))
-            }
+            },
           ),
         ],
       ),
