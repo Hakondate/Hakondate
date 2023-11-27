@@ -138,10 +138,9 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
     final String hiraQuery = query.replaceAllMapped(RegExp('[ァ-ヴ]'), (Match match) => String.fromCharCode(match.group(0)!.codeUnitAt(0) - 0x60));
     final String kataQuery = query.replaceAllMapped(RegExp('[ぁ-ゔ]'), (Match match) => String.fromCharCode(match.group(0)!.codeUnitAt(0) + 0x60));
 
-    final List<DictionaryItemsSchema> schemas = await (_db.select(_db.dictionaryItemsTable)..where(($DictionaryItemsTableTable tbl) => tbl.name.contains(query))).get();
-    schemas..addAll(await (_db.select(_db.dictionaryItemsTable)..where(($DictionaryItemsTableTable tbl) => tbl.name.contains(hiraQuery))).get())
-    ..addAll(await (_db.select(_db.dictionaryItemsTable)..where(($DictionaryItemsTableTable tbl) => tbl.name.contains(kataQuery))).get())
-    ..sort((DictionaryItemsSchema a,DictionaryItemsSchema b) => a.name.compareTo(b.name));
+    final List<DictionaryItemsSchema> schemas = 
+      await (_db.select(_db.dictionaryItemsTable)..where(($DictionaryItemsTableTable tbl) => tbl.name.contains(query) | tbl.name.contains(hiraQuery) | tbl.name.contains(kataQuery)))
+      .get()..sort((DictionaryItemsSchema a,DictionaryItemsSchema b) => a.name.compareTo(b.name));
     for (final DictionaryItemsSchema schema in schemas) {
       items.add(
         DictionaryItemModel(

@@ -46,7 +46,7 @@ class DictionarySearch extends ConsumerWidget {
             final List<DictionaryItemModel>? selectedGroupItems = data.allItems;
             
             if (selectedGroupItems == null) {
-              return const Text('loading');
+              return const SizedBox.shrink();
             }
 
             return ListView.separated(
@@ -70,7 +70,7 @@ class DictionarySearch extends ConsumerWidget {
             );
         },
         orElse: () {
-          return const Text('loading');
+          return const SizedBox.shrink();
         },
       ),
     );

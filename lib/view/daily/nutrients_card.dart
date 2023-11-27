@@ -106,12 +106,12 @@ class NutrientsCard extends StatelessWidget {
               data: (DailyState data) {
                 return Column(
                   children: <Widget>[
-                    _recommendFood(data.recommendDishes,0),
-                    _recommendFood(data.recommendDishes,1),
+                    _recommendFoodWidget(data.recommendDishes,0),
+                    _recommendFoodWidget(data.recommendDishes,1),
                   ],
                 );
               },
-              orElse: () => const Text('loading'),
+              orElse: () => const SizedBox.shrink(),
             ),
           ],
         );
@@ -119,7 +119,7 @@ class NutrientsCard extends StatelessWidget {
     );
   }
   
-  Widget _recommendFood(Map<String, List<DictionaryItemModel>>? recommendDishes, int index){
+  Widget _recommendFoodWidget(Map<String, List<DictionaryItemModel>>? recommendDishes, int index){
     if (recommendDishes == null) return const SizedBox.shrink();
 
     return Column(
@@ -245,7 +245,7 @@ class NutrientsCard extends StatelessWidget {
         case 'lipid':
           return '脂質';
       }
-      throw Exception();
+      throw Exception('invalid nutrientKey');
   }
 
   NutrientUnit _getNutrientUnit(String key){
@@ -263,6 +263,6 @@ class NutrientsCard extends StatelessWidget {
         case 'lipid':
           return NutrientUnit.gram;
     }
-    throw Exception();
+    throw Exception('invalid nutrientKey');
   }
 }
