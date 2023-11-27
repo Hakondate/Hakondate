@@ -1,3 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
+import 'package:hakondate/repository/local/sqlite/dictionary_items/dictionary_items_local_repository.dart';
+import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/dish/dish_model.dart';
@@ -12,11 +16,15 @@ part 'daily_view_model.g.dart';
 
 @Riverpod(keepAlive: true)
 class DailyViewModel extends _$DailyViewModel {
-  late final MenusLocalRepositoryAPI _menusLocalRepository;
+  late final DictionaryItemsLocalRepositoryAPI _dictionaryItemsLocalRepository;
+  late final MenusLocalRepository _menusLocalRepository;
 
   @override
   FutureOr<DailyState> build() {
+    _dictionaryItemsLocalRepository =
+        ref.watch(dictionaryItemsLocalRepositoryProvider);
     _menusLocalRepository = ref.watch(menusLocalRepositoryProvider);
+
     return DailyState(
       selectedDay: DateTime.now(),
       focusedDay: DateTime.now(),
@@ -30,11 +38,14 @@ class DailyViewModel extends _$DailyViewModel {
 
   Future<void> updateSelectedDay({DateTime? selectedDay, DateTime? focusedDay}) async {
     state.whenData((DailyState data) async {
+      
       state = const AsyncLoading<DailyState>();
 
       DateTime? selectedInputDay = selectedDay;
+      debugPrint(Environment.flavor.toString());
       switch (Environment.flavor) {
         case Flavor.dev:
+          debugPrint(selectedInputDay.toString());
           selectedInputDay ??= DateTime(2022, 5, 16);
         case Flavor.stg ||  Flavor.prod:
           selectedInputDay ??= DateTime.now();
@@ -52,6 +63,7 @@ class DailyViewModel extends _$DailyViewModel {
       if (menu is LunchesDayMenuModel) {
         await ref.read(analyticsControllerProvider.notifier).logViewMenu(menu.id);
       }
+      await ref.read(dailyViewModelProvider.notifier).updateRecommendDishes();
     });
   }
 
@@ -67,11 +79,58 @@ class DailyViewModel extends _$DailyViewModel {
     });
   }
 
+  Future<void>  updateRecommendDishes() async {
+    state.whenData((DailyState data) async => state = AsyncData<DailyState>(data.copyWith(recommendDishes: await _calculateReccomendDishes())));
+  }
+
+  Future<Map<String, List<DictionaryItemModel>>> _calculateReccomendDishes() async{
+    final NutrientsModel? slns =
+        ref.watch(userViewModelProvider).currentUser!.slns;
+    final List<double> nutrientsPercentage =
+        ref.read(dailyViewModelProvider.notifier).getGraphValues(
+              graphMaxValue: 120,
+              slns: slns,
+            );
+
+    final Map<String, double> nutrientsMap = <String, double>{}..addAll(<String, double>{
+        'protein': nutrientsPercentage[1],
+        'vitamin': nutrientsPercentage[2],
+        'mineral': nutrientsPercentage[3],
+        'carbohydrate': nutrientsPercentage[4],
+        'lipid': nutrientsPercentage[5],
+      });
+      MapEntry<String, double> minValue = nutrientsMap.entries.elementAt(0);
+      MapEntry<String, double> secondMinValue = nutrientsMap.entries.elementAt(1);
+      MapEntry<String, double> temp;
+
+      nutrientsMap.forEach((String key, double value) {debugPrint('$key: $value');});
+
+      for (int i = 1; i < nutrientsMap.length; i++) {
+        temp = nutrientsMap.entries.elementAt(i);
+        if (minValue.value > temp.value) {
+          secondMinValue = minValue;
+          minValue = temp;
+        } else if (secondMinValue.value > temp.value) {
+          secondMinValue = temp;
+        }
+      }
+      final Map<String, List<DictionaryItemModel>> recommendDishes = <String, List<DictionaryItemModel>>{
+        minValue.key: await _dictionaryItemsLocalRepository.getRanking(
+          nutrient: minValue.key,
+        ),
+        secondMinValue.key: await _dictionaryItemsLocalRepository.getRanking(
+          nutrient: secondMinValue.key,
+        ),
+      };
+      return recommendDishes;
+  }
+
   List<double> getGraphValues({
     required double graphMaxValue,
     NutrientsModel? slns,
   }) {
-    return state.maybeWhen(
+    return state.maybeWhen
+    (
       data: (DailyState data) {
         final MenuModel menu = data.menu;
 
@@ -88,7 +147,9 @@ class DailyViewModel extends _$DailyViewModel {
           menu.lipid / slns.lipid * 100.0,
         ].map((double element) => (element > graphMaxValue) ? graphMaxValue : element).toList();
       },
-      orElse: () => <double>[0, 0, 0, 0, 0, 0],
+      orElse: () {
+        return <double>[0, 0, 0, 0, 0, 0];
+      },
     );
   }
 

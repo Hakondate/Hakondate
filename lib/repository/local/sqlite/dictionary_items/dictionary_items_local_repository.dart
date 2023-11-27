@@ -18,6 +18,7 @@ abstract class DictionaryItemsLocalRepositoryAPI {
   Future<int> add(Map<String, dynamic> item);
   Future<List<DictionaryItemModel>> listGroup(int group);
   Future<DictionaryItemModel> getById(int id);
+  Future<List<DictionaryItemModel>> getSearchedList(String query);
   Future<List<DictionaryItemModel>> getRanking({required String nutrient, int limit = 5});
 }
 
@@ -128,6 +129,45 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
       );
     }
 
+    return items;
+  }
+
+  @override
+  Future<List<DictionaryItemModel>> getSearchedList(String query) async{
+    final List<DictionaryItemModel> items = <DictionaryItemModel>[];
+    final String hiraQuery = query.replaceAllMapped(RegExp('[ァ-ヴ]'), (Match match) => String.fromCharCode(match.group(0)!.codeUnitAt(0) - 0x60));
+    final String kataQuery = query.replaceAllMapped(RegExp('[ぁ-ゔ]'), (Match match) => String.fromCharCode(match.group(0)!.codeUnitAt(0) + 0x60));
+
+    final List<DictionaryItemsSchema> schemas = 
+      await (_db.select(_db.dictionaryItemsTable)..where(($DictionaryItemsTableTable tbl) => tbl.name.contains(query) | tbl.name.contains(hiraQuery) | tbl.name.contains(kataQuery)))
+      .get()..sort((DictionaryItemsSchema a,DictionaryItemsSchema b) => a.name.compareTo(b.name));
+    for (final DictionaryItemsSchema schema in schemas) {
+      items.add(
+        DictionaryItemModel(
+          id: schema.id,
+          group: _getGroup(schema.group),
+          name: schema.name,
+          nutrients: NutrientsModel(
+            energy: schema.energy,
+            protein: schema.protein,
+            lipid: schema.lipid,
+            carbohydrate: schema.carbohydrate,
+            sodium: schema.sodium,
+            calcium: schema.calcium,
+            magnesium: schema.magnesium,
+            iron: schema.iron,
+            zinc: schema.zinc,
+            retinol: schema.retinol,
+            vitaminB1: schema.vitaminB1,
+            vitaminB2: schema.vitaminB2,
+            vitaminC: schema.vitaminC,
+            dietaryFiber: schema.dietaryFiber,
+            salt: schema.salt,
+          ),
+          note: schema.note,
+        ),
+      );
+    }
     return items;
   }
 

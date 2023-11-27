@@ -1,5 +1,4 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
 import 'package:hakondate/repository/local/sqlite/dictionary_items/dictionary_items_local_repository.dart';
 import 'package:hakondate/state/dictionary/dictionary_state.dart';
@@ -10,7 +9,7 @@ part 'dictionary_view_model.g.dart';
 @Riverpod(keepAlive: true)
 class DictionaryViewModel extends _$DictionaryViewModel {
   late final DictionaryItemsLocalRepositoryAPI _dictionaryItemsLocalRepository;
-
+  
   @override
   FutureOr<DictionaryState> build() {
     _dictionaryItemsLocalRepository = ref.watch(dictionaryItemsLocalRepositoryProvider);
@@ -18,12 +17,29 @@ class DictionaryViewModel extends _$DictionaryViewModel {
   }
 
   Future<void> selectGroup(DictionaryGroup group) async {
-    state = const AsyncLoading<DictionaryState>();
     state = AsyncData<DictionaryState>(
       DictionaryState(
         selectedGroup: group,
         selectedGroupItems: await _dictionaryItemsLocalRepository.listGroup(group.groupNumber),
       ),
+    );
+  }
+
+  Future<void> getSearchedList(String expression) async{
+    state = const AsyncLoading<DictionaryState>();
+    state = AsyncData<DictionaryState>(
+      DictionaryState(
+        allItems: await _dictionaryItemsLocalRepository.getSearchedList(expression),
+      ),
+    );
+  }
+
+  Future<void> clearQuery () async{
+    state = const AsyncLoading<DictionaryState>();
+    state = AsyncData<DictionaryState>(
+      DictionaryState(
+        allItems: await _dictionaryItemsLocalRepository.getSearchedList(''),
+        ),
     );
   }
 

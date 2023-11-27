@@ -129,7 +129,6 @@ class SplashViewModel extends _$SplashViewModel {
     await Future.forEach(menus, (dynamic menu) async {
       await _menusLocalRepository.add(menu as Map<String, dynamic>);
     });
-
     await ref.read(dailyViewModelProvider.notifier).updateSelectedDay();
   }
 }
