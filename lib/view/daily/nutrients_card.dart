@@ -26,8 +26,8 @@ class NutrientsCard extends StatelessWidget {
         children: <Widget>[
           Image.asset('assets/images/label/nutrientsLabel.png'),
           _nutrientsGraph(),
-          _nutrientsExpansionTile(),
           _recommendFoodExpansionTile(),
+          _nutrientsExpansionTile(),
         ],
       ),
     );
