@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/view/component/frame/fade_up_app_bar.dart';
-import 'package:hakondate/view/component/label/descpription_text.dart';
+import 'package:hakondate/view/component/label/description_text.dart';
 import 'package:hakondate/view_model/single_page/information/information_view_model.dart';
 
 class Information extends ConsumerWidget {
