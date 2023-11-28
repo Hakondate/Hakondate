@@ -26,9 +26,9 @@ class DictionarySearch extends ConsumerWidget {
             },
             cursorColor:AppColor.brand.secondary,
             decoration: InputDecoration(
-            hintText: 'search',
-            enabledBorder: InputBorder.none,
-            suffixIcon: IconButton(
+              hintText: 'search',
+              enabledBorder: InputBorder.none,
+              suffixIcon: IconButton(
                 onPressed: () {
                   ref.read(dictionaryViewModelProvider.notifier).clearQuery();
                   _controller.clear();
@@ -39,11 +39,11 @@ class DictionarySearch extends ConsumerWidget {
                 ),
               ),
             ),
-          ),     
+          ),
       ),
       body: state.maybeWhen(
         data:(DictionaryState data) {
-            final List<DictionaryItemModel>? selectedGroupItems = data.allItems;
+            final List<DictionaryItemModel>? selectedGroupItems = data.searchedItems;
             
             if (selectedGroupItems == null) {
               return const SizedBox.shrink();

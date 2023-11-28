@@ -130,5 +130,6 @@ class SplashViewModel extends _$SplashViewModel {
       await _menusLocalRepository.add(menu as Map<String, dynamic>);
     });
     await ref.read(dailyViewModelProvider.notifier).updateSelectedDay();
+
   }
 }

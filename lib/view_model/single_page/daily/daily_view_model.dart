@@ -39,18 +39,16 @@ class DailyViewModel extends _$DailyViewModel {
 
   Future<void> updateSelectedDay({DateTime? selectedDay, DateTime? focusedDay}) async {
     state.whenData((DailyState data) async {
-      
       state = const AsyncLoading<DailyState>();
-
       DateTime? selectedInputDay = selectedDay;
-      debugPrint(Environment.flavor.toString());
+
       switch (Environment.flavor) {
         case Flavor.dev:
-          debugPrint(selectedInputDay.toString());
           selectedInputDay ??= DateTime(2022, 5, 16);
         case Flavor.stg ||  Flavor.prod:
           selectedInputDay ??= DateTime.now();
       }
+
       final MenuModel menu = await _menusLocalRepository.getMenuByDay(selectedInputDay);
 
       state = AsyncData<DailyState>(
@@ -81,17 +79,17 @@ class DailyViewModel extends _$DailyViewModel {
   }
 
   Future<void>  updateRecommendDishes() async {
-    state.whenData((DailyState data) async => state = AsyncData<DailyState>(data.copyWith(recommendDishes: await _calculateReccomendDishes())));
+    state.whenData((DailyState data) async => 
+      state = AsyncData<DailyState>(data.copyWith(recommendDishes: await _calculateReccomendDishes())),);
   }
 
   Future<Map<String, List<DictionaryItemModel>>> _calculateReccomendDishes() async{
-    final NutrientsModel? slns =
-        ref.watch(userViewModelProvider).currentUser!.slns;
-    final List<double> nutrientsPercentage =
-        ref.read(dailyViewModelProvider.notifier).getGraphValues(
-              graphMaxValue: 120,
-              slns: slns,
-            );
+    final NutrientsModel? slns = ref.watch(userViewModelProvider).currentUser!.slns;
+    final List<double> nutrientsPercentage = ref.read(dailyViewModelProvider.notifier)
+      .getGraphValues(
+        graphMaxValue: 120,
+        slns: slns,
+      );
 
     final Map<String, double> nutrientsMap = <String, double>{}..addAll(<String, double>{
         'protein': nutrientsPercentage[1],

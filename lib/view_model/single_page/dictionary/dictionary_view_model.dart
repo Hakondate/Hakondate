@@ -18,6 +18,7 @@ class DictionaryViewModel extends _$DictionaryViewModel {
   }
 
   Future<void> selectGroup(DictionaryGroup group) async {
+    state = const AsyncLoading<DictionaryState>();
     state = AsyncData<DictionaryState>(
       DictionaryState(
         selectedGroup: group,
@@ -30,7 +31,7 @@ class DictionaryViewModel extends _$DictionaryViewModel {
     state = const AsyncLoading<DictionaryState>();
     state = AsyncData<DictionaryState>(
       DictionaryState(
-        allItems: await _dictionaryItemsLocalRepository.getSearchedList(expression),
+        searchedItems: await _dictionaryItemsLocalRepository.getSearchedList(expression),
       ),
     );
   }
@@ -39,7 +40,7 @@ class DictionaryViewModel extends _$DictionaryViewModel {
     state = const AsyncLoading<DictionaryState>();
     state = AsyncData<DictionaryState>(
       DictionaryState(
-        allItems: await _dictionaryItemsLocalRepository.getSearchedList(''),
+        searchedItems: await _dictionaryItemsLocalRepository.getSearchedList(''),
         ),
     );
   }
