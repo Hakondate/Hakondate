@@ -8,6 +8,7 @@ class OriginItemModel with _$OriginItemModel {
     required String name,
     required List<String> prefectures,
   }) = _OriginItemModel;
+  const OriginItemModel._();
 
   factory OriginItemModel.fromFirestore(MapEntry<String, dynamic> item) {
     final List<dynamic> dynamicPrefectures = item.value as List<dynamic>;

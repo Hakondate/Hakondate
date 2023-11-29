@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:drift/drift.dart';
+import 'package:drift/drift.dart' hide JsonKey;
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:hakondate/model/nutrients/nutrients_model.dart';
@@ -18,6 +18,7 @@ class DictionaryItemModel with _$DictionaryItemModel {
     required NutrientsModel nutrients,  // 栄養素
     String? note,                       // 備考
   }) = _DictionaryItemModel;
+  const DictionaryItemModel._();
 
   factory DictionaryItemModel.fromDrift(DictionaryItemsSchema schema) {
     final DictionaryGroup group = DictionaryGroup.values.firstWhere((DictionaryGroup group) => group.groupNumber == schema.group);

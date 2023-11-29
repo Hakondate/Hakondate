@@ -146,13 +146,14 @@ class __$$_SchoolModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SchoolModel implements _SchoolModel {
+class _$_SchoolModel extends _SchoolModel {
   const _$_SchoolModel(
       {required this.id,
       required this.parentId,
       required this.name,
       required this.classification,
-      required this.lunchBlock});
+      required this.lunchBlock})
+      : super._();
 
   @override
   final int id;
@@ -200,13 +201,14 @@ class _$_SchoolModel implements _SchoolModel {
       __$$_SchoolModelCopyWithImpl<_$_SchoolModel>(this, _$identity);
 }
 
-abstract class _SchoolModel implements SchoolModel {
+abstract class _SchoolModel extends SchoolModel {
   const factory _SchoolModel(
       {required final int id,
       required final int parentId,
       required final String name,
       required final SchoolClassification classification,
       required final int lunchBlock}) = _$_SchoolModel;
+  const _SchoolModel._() : super._();
 
   @override
   int get id;

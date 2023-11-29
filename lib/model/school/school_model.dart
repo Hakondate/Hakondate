@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:drift/drift.dart';
+import 'package:drift/drift.dart' hide JsonKey;
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:hakondate/repository/local/sqlite/local_database.dart';
@@ -17,6 +17,7 @@ class SchoolModel with _$SchoolModel {
     required SchoolClassification classification, // 学校区分
     required int lunchBlock,                      // 給食区分: 1 ~ 10
   }) = _SchoolModel;
+  const SchoolModel._();
 
   factory SchoolModel.fromFirestore(DocumentSnapshot<Map<String, dynamic>> doc) {
     if (!doc.exists) throw const FirestoreException('Failed to convert Firestore to SchoolModel');

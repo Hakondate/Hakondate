@@ -1,4 +1,4 @@
-import 'package:drift/drift.dart';
+import 'package:drift/drift.dart' hide JsonKey;
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:hakondate/model/nutrients/nutrients_model.dart';
@@ -17,6 +17,7 @@ class FoodstuffModel with _$FoodstuffModel {
     @Default(false) bool isHeat,        // 熱加工食品
     String? origin,                     // 原産地
   }) = _FoodstuffModel;
+  const FoodstuffModel._();
 
   factory FoodstuffModel.fromFirestore(Map<String, dynamic> data) {
     return FoodstuffModel(
