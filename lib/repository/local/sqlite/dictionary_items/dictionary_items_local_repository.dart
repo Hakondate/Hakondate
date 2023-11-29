@@ -146,7 +146,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
             ($DictionaryItemsTableTable t) => OrderingTerm(
               expression: t.energy,
               mode: OrderingMode.desc,
-            )
+            ),
           ])..limit(limit)).get();
       case 'protein':
         schemas = await (_db.select(_db.dictionaryItemsTable)
@@ -154,7 +154,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
                 ($DictionaryItemsTableTable t) => OrderingTerm(
               expression: t.protein,
               mode: OrderingMode.desc,
-            )
+            ),
           ])..limit(limit)).get();
       case 'lipid':
         schemas = await (_db.select(_db.dictionaryItemsTable)
@@ -162,7 +162,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
                 ($DictionaryItemsTableTable t) => OrderingTerm(
               expression: t.lipid,
               mode: OrderingMode.desc,
-            )
+            ),
           ])..limit(limit)).get();
       case 'carbohydrate':
         schemas = await (_db.select(_db.dictionaryItemsTable)
@@ -170,7 +170,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
                 ($DictionaryItemsTableTable t) => OrderingTerm(
               expression: t.carbohydrate,
               mode: OrderingMode.desc,
-            )
+            ),
           ])..limit(limit)).get();
       case 'sodium':
         schemas = await (_db.select(_db.dictionaryItemsTable)
@@ -178,7 +178,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
                 ($DictionaryItemsTableTable t) => OrderingTerm(
               expression: t.sodium,
               mode: OrderingMode.desc,
-            )
+            ),
           ])..limit(limit)).get();
       case 'calcium':
         schemas = await (_db.select(_db.dictionaryItemsTable)
@@ -186,7 +186,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
                 ($DictionaryItemsTableTable t) => OrderingTerm(
               expression: t.calcium,
               mode: OrderingMode.desc,
-            )
+            ),
           ])..limit(limit)).get();
       case 'magnesium':
         schemas = await (_db.select(_db.dictionaryItemsTable)
@@ -194,7 +194,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
                 ($DictionaryItemsTableTable t) => OrderingTerm(
               expression: t.magnesium,
               mode: OrderingMode.desc,
-            )
+            ),
           ])..limit(limit)).get();
       case 'iron':
         schemas = await (_db.select(_db.dictionaryItemsTable)
@@ -202,7 +202,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
                 ($DictionaryItemsTableTable t) => OrderingTerm(
               expression: t.iron,
               mode: OrderingMode.desc,
-            )
+            ),
           ])..limit(limit)).get();
       case 'zinc':
         schemas = await (_db.select(_db.dictionaryItemsTable)
@@ -210,7 +210,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
                 ($DictionaryItemsTableTable t) => OrderingTerm(
               expression: t.zinc,
               mode: OrderingMode.desc,
-            )
+            ),
           ])..limit(limit)).get();
       case 'retinol':
         schemas = await (_db.select(_db.dictionaryItemsTable)
@@ -218,7 +218,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
                 ($DictionaryItemsTableTable t) => OrderingTerm(
               expression: t.retinol,
               mode: OrderingMode.desc,
-            )
+            ),
           ])..limit(limit)).get();
       case 'vitaminB1':
         schemas = await (_db.select(_db.dictionaryItemsTable)
@@ -226,7 +226,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
                 ($DictionaryItemsTableTable t) => OrderingTerm(
               expression: t.vitaminB1,
               mode: OrderingMode.desc,
-            )
+            ),
           ])..limit(limit)).get();
       case 'vitaminB2':
         schemas = await (_db.select(_db.dictionaryItemsTable)
@@ -234,7 +234,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
                 ($DictionaryItemsTableTable t) => OrderingTerm(
               expression: t.vitaminB2,
               mode: OrderingMode.desc,
-            )
+            ),
           ])..limit(limit)).get();
       case 'vitaminC':
         schemas = await (_db.select(_db.dictionaryItemsTable)
@@ -242,7 +242,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
                 ($DictionaryItemsTableTable t) => OrderingTerm(
               expression: t.vitaminC,
               mode: OrderingMode.desc,
-            )
+            ),
           ])..limit(limit)).get();
       case 'dietaryFiber':
         schemas = await (_db.select(_db.dictionaryItemsTable)
@@ -250,7 +250,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
                 ($DictionaryItemsTableTable t) => OrderingTerm(
               expression: t.dietaryFiber,
               mode: OrderingMode.desc,
-            )
+            ),
           ])..limit(limit)).get();
       case 'salt':
         schemas = await (_db.select(_db.dictionaryItemsTable)
@@ -258,7 +258,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
                 ($DictionaryItemsTableTable t) => OrderingTerm(
               expression: t.salt,
               mode: OrderingMode.desc,
-            )
+            ),
           ])..limit(limit)).get();
       case 'vitamin':
         schemas = await (_db.select(_db.dictionaryItemsTable)
@@ -266,7 +266,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
                 ($DictionaryItemsTableTable t) => OrderingTerm(
               expression: t.retinol / const Variable<double>(1000) + t.vitaminB1 + t.vitaminB2 + t.vitaminC,
               mode: OrderingMode.desc,
-            )
+            ),
           ])..limit(limit)).get();
       case 'mineral':
         schemas = await (_db.select(_db.dictionaryItemsTable)
@@ -274,7 +274,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
                 ($DictionaryItemsTableTable t) => OrderingTerm(
               expression: t.calcium + t.magnesium + t.iron + t.zinc,
               mode: OrderingMode.desc,
-            )
+            ),
           ])..limit(limit)).get();
       default:
         throw SQLiteException("Failed to find nutrient '$nutrient'");

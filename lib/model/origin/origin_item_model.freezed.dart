@@ -63,22 +63,22 @@ class _$OriginItemModelCopyWithImpl<$Res, $Val extends OriginItemModel>
 }
 
 /// @nodoc
-abstract class _$$_OriginItemModelCopyWith<$Res>
+abstract class _$$OriginItemModelImplCopyWith<$Res>
     implements $OriginItemModelCopyWith<$Res> {
-  factory _$$_OriginItemModelCopyWith(
-          _$_OriginItemModel value, $Res Function(_$_OriginItemModel) then) =
-      __$$_OriginItemModelCopyWithImpl<$Res>;
+  factory _$$OriginItemModelImplCopyWith(_$OriginItemModelImpl value,
+          $Res Function(_$OriginItemModelImpl) then) =
+      __$$OriginItemModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String name, List<String> prefectures});
 }
 
 /// @nodoc
-class __$$_OriginItemModelCopyWithImpl<$Res>
-    extends _$OriginItemModelCopyWithImpl<$Res, _$_OriginItemModel>
-    implements _$$_OriginItemModelCopyWith<$Res> {
-  __$$_OriginItemModelCopyWithImpl(
-      _$_OriginItemModel _value, $Res Function(_$_OriginItemModel) _then)
+class __$$OriginItemModelImplCopyWithImpl<$Res>
+    extends _$OriginItemModelCopyWithImpl<$Res, _$OriginItemModelImpl>
+    implements _$$OriginItemModelImplCopyWith<$Res> {
+  __$$OriginItemModelImplCopyWithImpl(
+      _$OriginItemModelImpl _value, $Res Function(_$OriginItemModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_OriginItemModelCopyWithImpl<$Res>
     Object? name = null,
     Object? prefectures = null,
   }) {
-    return _then(_$_OriginItemModel(
+    return _then(_$OriginItemModelImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_OriginItemModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OriginItemModel implements _OriginItemModel {
-  const _$_OriginItemModel(
+class _$OriginItemModelImpl implements _OriginItemModel {
+  const _$OriginItemModelImpl(
       {required this.name, required final List<String> prefectures})
       : _prefectures = prefectures;
 
@@ -126,7 +126,7 @@ class _$_OriginItemModel implements _OriginItemModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OriginItemModel &&
+            other is _$OriginItemModelImpl &&
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality()
                 .equals(other._prefectures, _prefectures));
@@ -139,14 +139,15 @@ class _$_OriginItemModel implements _OriginItemModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OriginItemModelCopyWith<_$_OriginItemModel> get copyWith =>
-      __$$_OriginItemModelCopyWithImpl<_$_OriginItemModel>(this, _$identity);
+  _$$OriginItemModelImplCopyWith<_$OriginItemModelImpl> get copyWith =>
+      __$$OriginItemModelImplCopyWithImpl<_$OriginItemModelImpl>(
+          this, _$identity);
 }
 
 abstract class _OriginItemModel implements OriginItemModel {
   const factory _OriginItemModel(
       {required final String name,
-      required final List<String> prefectures}) = _$_OriginItemModel;
+      required final List<String> prefectures}) = _$OriginItemModelImpl;
 
   @override
   String get name;
@@ -154,6 +155,6 @@ abstract class _OriginItemModel implements OriginItemModel {
   List<String> get prefectures;
   @override
   @JsonKey(ignore: true)
-  _$$_OriginItemModelCopyWith<_$_OriginItemModel> get copyWith =>
+  _$$OriginItemModelImplCopyWith<_$OriginItemModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
