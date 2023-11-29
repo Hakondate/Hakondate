@@ -60,8 +60,8 @@ dev_dependencies:
     sdk: flutter
 
   # コード整形
-  flutter_lints: 2.0.3
-  very_good_analysis: 5.1.0
+  flutter_lints: 3.0.1
+  very_good_analysis: 5.0.0+1
   import_sorter: 4.6.0
 
   # コード生成
