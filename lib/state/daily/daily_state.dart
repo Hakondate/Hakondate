@@ -15,8 +15,8 @@ class DailyState with _$DailyState {
     required DateTime focusedDay,
     required DateTime calendarTabFirstDay,
     required DateTime calendarTabLastDay,
+    @Default(<String, List<DictionaryItemModel>> {}) Map<String, List<DictionaryItemModel>> recommendDishes, 
     @Default(MenuModel.noData()) MenuModel menu,
     DishModel? selectedDish,
-    Map<String, List<DictionaryItemModel>>? recommendDishes,
   }) = _DailyState;
 }

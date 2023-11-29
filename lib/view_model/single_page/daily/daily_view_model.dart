@@ -17,8 +17,8 @@ part 'daily_view_model.g.dart';
 
 @Riverpod(keepAlive: true)
 class DailyViewModel extends _$DailyViewModel {
+  late final MenusLocalRepositoryAPI _menusLocalRepository;
   late final DictionaryItemsLocalRepositoryAPI _dictionaryItemsLocalRepository;
-  late final MenusLocalRepository _menusLocalRepository;
 
   @override
   FutureOr<DailyState> build() {
@@ -58,7 +58,6 @@ class DailyViewModel extends _$DailyViewModel {
           menu: menu,
         ),
       );
-
       if (menu is LunchesDayMenuModel) {
         await ref.read(analyticsControllerProvider.notifier).logViewMenu(menu.id);
       }

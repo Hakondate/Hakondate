@@ -104,12 +104,16 @@ class NutrientsCard extends StatelessWidget {
           children: <Widget>[
            ref.watch(dailyViewModelProvider).maybeWhen(
               data: (DailyState data) {
-                return Column(
-                  children: <Widget>[
-                    _recommendFoodWidget(data.recommendDishes,0),
-                    _recommendFoodWidget(data.recommendDishes,1),
-                  ],
-                );
+                if(data.recommendDishes.isNotEmpty){
+                  return Column(
+                    children: <Widget>[
+                      _recommendFoodWidget(data.recommendDishes,0),
+                      _recommendFoodWidget(data.recommendDishes,1),
+                    ],
+                  );
+                }else{
+                  return const SizedBox.shrink();
+                }
               },
               orElse: () => const SizedBox.shrink(),
             ),
@@ -119,9 +123,7 @@ class NutrientsCard extends StatelessWidget {
     );
   }
   
-  Widget _recommendFoodWidget(Map<String, List<DictionaryItemModel>>? recommendDishes, int index){
-    if (recommendDishes == null) return const SizedBox.shrink();
-
+  Widget _recommendFoodWidget(Map<String, List<DictionaryItemModel>> recommendDishes, int index){
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[

@@ -35,7 +35,7 @@ class DictionarySearch extends ConsumerWidget {
                 },
                 icon: const Icon(
                   color: Colors.orange,
-                  Icons.delete_outline,
+                  Icons.clear,
                 ),
               ),
             ),
@@ -43,20 +43,16 @@ class DictionarySearch extends ConsumerWidget {
       ),
       body: state.maybeWhen(
         data:(DictionaryState data) {
-            final List<DictionaryItemModel>? selectedGroupItems = data.searchedItems;
+            final List<DictionaryItemModel> searchedItems = data.searchedItems;
             
-            if (selectedGroupItems == null) {
-              return const SizedBox.shrink();
-            }
-
             return ListView.separated(
-              itemCount: selectedGroupItems.length,
+              itemCount: searchedItems.length,
               separatorBuilder: (_, __) =>
               const Divider(
                 height: 0,
               ),
               itemBuilder: (_, int index) {
-                final DictionaryItemModel item = selectedGroupItems[index];
+                final DictionaryItemModel item = searchedItems[index];
                 return ListTile(
                   tileColor: AppColor.ui.white,
                   title: Text(item.name),

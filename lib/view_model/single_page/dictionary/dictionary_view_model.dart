@@ -31,7 +31,16 @@ class DictionaryViewModel extends _$DictionaryViewModel {
     state = const AsyncLoading<DictionaryState>();
     state = AsyncData<DictionaryState>(
       DictionaryState(
-        searchedItems: await _dictionaryItemsLocalRepository.getSearchedList(expression),
+        searchedItems: await _dictionaryItemsLocalRepository.search(expression),
+      ),
+    );
+  }
+  
+  Future<void> initializeSearchedList() async {
+    state = const AsyncLoading<DictionaryState>();
+    state = AsyncData<DictionaryState>(
+      DictionaryState(
+        searchedItems: await _dictionaryItemsLocalRepository.getAll(),
       ),
     );
   }
@@ -40,7 +49,7 @@ class DictionaryViewModel extends _$DictionaryViewModel {
     state = const AsyncLoading<DictionaryState>();
     state = AsyncData<DictionaryState>(
       DictionaryState(
-        searchedItems: await _dictionaryItemsLocalRepository.getSearchedList(''),
+        searchedItems: await _dictionaryItemsLocalRepository.search(''),
         ),
     );
   }
