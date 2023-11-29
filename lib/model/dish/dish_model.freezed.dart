@@ -70,10 +70,11 @@ class _$DishModelCopyWithImpl<$Res, $Val extends DishModel>
 }
 
 /// @nodoc
-abstract class _$$_DishModelCopyWith<$Res> implements $DishModelCopyWith<$Res> {
-  factory _$$_DishModelCopyWith(
-          _$_DishModel value, $Res Function(_$_DishModel) then) =
-      __$$_DishModelCopyWithImpl<$Res>;
+abstract class _$$DishModelImplCopyWith<$Res>
+    implements $DishModelCopyWith<$Res> {
+  factory _$$DishModelImplCopyWith(
+          _$DishModelImpl value, $Res Function(_$DishModelImpl) then) =
+      __$$DishModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -81,11 +82,11 @@ abstract class _$$_DishModelCopyWith<$Res> implements $DishModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_DishModelCopyWithImpl<$Res>
-    extends _$DishModelCopyWithImpl<$Res, _$_DishModel>
-    implements _$$_DishModelCopyWith<$Res> {
-  __$$_DishModelCopyWithImpl(
-      _$_DishModel _value, $Res Function(_$_DishModel) _then)
+class __$$DishModelImplCopyWithImpl<$Res>
+    extends _$DishModelCopyWithImpl<$Res, _$DishModelImpl>
+    implements _$$DishModelImplCopyWith<$Res> {
+  __$$DishModelImplCopyWithImpl(
+      _$DishModelImpl _value, $Res Function(_$DishModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -95,7 +96,7 @@ class __$$_DishModelCopyWithImpl<$Res>
     Object? foodstuffs = null,
     Object? category = freezed,
   }) {
-    return _then(_$_DishModel(
+    return _then(_$DishModelImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -114,8 +115,8 @@ class __$$_DishModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DishModel extends _DishModel {
-  const _$_DishModel(
+class _$DishModelImpl extends _DishModel {
+  const _$DishModelImpl(
       {required this.name,
       required final List<FoodstuffModel> foodstuffs,
       this.category})
@@ -147,7 +148,7 @@ class _$_DishModel extends _DishModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DishModel &&
+            other is _$DishModelImpl &&
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality()
                 .equals(other._foodstuffs, _foodstuffs) &&
@@ -162,15 +163,15 @@ class _$_DishModel extends _DishModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DishModelCopyWith<_$_DishModel> get copyWith =>
-      __$$_DishModelCopyWithImpl<_$_DishModel>(this, _$identity);
+  _$$DishModelImplCopyWith<_$DishModelImpl> get copyWith =>
+      __$$DishModelImplCopyWithImpl<_$DishModelImpl>(this, _$identity);
 }
 
 abstract class _DishModel extends DishModel {
   const factory _DishModel(
       {required final String name,
       required final List<FoodstuffModel> foodstuffs,
-      final DishCategory? category}) = _$_DishModel;
+      final DishCategory? category}) = _$DishModelImpl;
   const _DishModel._() : super._();
 
   @override
@@ -181,6 +182,6 @@ abstract class _DishModel extends DishModel {
   DishCategory? get category;
   @override
   @JsonKey(ignore: true)
-  _$$_DishModelCopyWith<_$_DishModel> get copyWith =>
+  _$$DishModelImplCopyWith<_$DishModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
