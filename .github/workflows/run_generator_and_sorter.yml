@@ -1,6 +1,7 @@
 name: Run Generator and Sorter
 
 on:
+  workflow_dispatch:
   pull_request:
     branches:
       - develop
