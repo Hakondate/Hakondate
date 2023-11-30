@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:hakondate/model/nutrients/nutrient_major.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -82,7 +82,7 @@ class DailyViewModel extends _$DailyViewModel {
       state = AsyncData<DailyState>(data.copyWith(recommendDishes: await _calculateReccomendDishes())),);
   }
 
-  Future<Map<String, List<DictionaryItemModel>>> _calculateReccomendDishes() async{
+  Future<Map<MajorNutrient, List<DictionaryItemModel>>> _calculateReccomendDishes() async{
     final NutrientsModel? slns = ref.watch(userViewModelProvider).currentUser!.slns;
     final List<double> nutrientsPercentage = ref.read(dailyViewModelProvider.notifier)
       .getGraphValues(
@@ -90,18 +90,16 @@ class DailyViewModel extends _$DailyViewModel {
         slns: slns,
       );
 
-    final Map<String, double> nutrientsMap = <String, double>{}..addAll(<String, double>{
-        'protein': nutrientsPercentage[1],
-        'vitamin': nutrientsPercentage[2],
-        'mineral': nutrientsPercentage[3],
-        'carbohydrate': nutrientsPercentage[4],
-        'lipid': nutrientsPercentage[5],
+    final Map<MajorNutrient, double> nutrientsMap = <MajorNutrient, double>{}..addAll(<MajorNutrient, double>{
+        MajorNutrient.protein: nutrientsPercentage[1],
+        MajorNutrient.vitamin: nutrientsPercentage[2],
+        MajorNutrient.mineral: nutrientsPercentage[3],
+        MajorNutrient.carbohydrate: nutrientsPercentage[4],
+        MajorNutrient.lipid: nutrientsPercentage[5],
       });
-      MapEntry<String, double> minValue = nutrientsMap.entries.elementAt(0);
-      MapEntry<String, double> secondMinValue = nutrientsMap.entries.elementAt(1);
-      MapEntry<String, double> temp;
-
-      nutrientsMap.forEach((String key, double value) {debugPrint('$key: $value');});
+      MapEntry<MajorNutrient, double> minValue = nutrientsMap.entries.elementAt(0);
+      MapEntry<MajorNutrient, double> secondMinValue = nutrientsMap.entries.elementAt(1);
+      MapEntry<MajorNutrient, double> temp;
 
       for (int i = 1; i < nutrientsMap.length; i++) {
         temp = nutrientsMap.entries.elementAt(i);
@@ -112,12 +110,12 @@ class DailyViewModel extends _$DailyViewModel {
           secondMinValue = temp;
         }
       }
-      final Map<String, List<DictionaryItemModel>> recommendDishes = <String, List<DictionaryItemModel>>{
+      final Map<MajorNutrient, List<DictionaryItemModel>> recommendDishes = <MajorNutrient, List<DictionaryItemModel>>{
         minValue.key: await _dictionaryItemsLocalRepository.getRanking(
-          nutrient: minValue.key,
+          nutrient: minValue.key.key,
         ),
         secondMinValue.key: await _dictionaryItemsLocalRepository.getRanking(
-          nutrient: secondMinValue.key,
+          nutrient: secondMinValue.key.key,
         ),
       };
       return recommendDishes;

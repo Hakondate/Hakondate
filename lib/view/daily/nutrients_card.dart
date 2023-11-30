@@ -6,7 +6,7 @@ import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
 import 'package:hakondate/model/menu/menu_model.dart';
-import 'package:hakondate/model/nutrients/nutrient_unit.dart';
+import 'package:hakondate/model/nutrients/nutrient_major.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/daily/daily_state.dart';
 import 'package:hakondate/util/exception/class_type_exception.dart';
@@ -123,14 +123,14 @@ class NutrientsCard extends StatelessWidget {
     );
   }
   
-  Widget _recommendFoodWidget(Map<String, List<DictionaryItemModel>> recommendDishes, int index){
+  Widget _recommendFoodWidget(Map<MajorNutrient, List<DictionaryItemModel>> recommendDishes, int index){
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Text(
-            '${_getNutrientJapaneseName(recommendDishes.entries.elementAt(index).key)}を多く含む食材',
+            '${recommendDishes.entries.elementAt(index).key.japaneseName}を多く含む食材',
             style: const TextStyle(fontSize: 25),
           ),
         ),
@@ -143,7 +143,7 @@ class NutrientsCard extends StatelessWidget {
   }
 
   /* 1食品群のランキング */
-  Widget _rankingContents(List<DictionaryItemModel> list, String key) {
+  Widget _rankingContents(List<DictionaryItemModel> list, MajorNutrient key) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
@@ -186,7 +186,7 @@ class NutrientsCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             Text(
-                              _getNutrient(key, list[index]).toString() + _getNutrientUnit(key).value,
+                              key.getNutrient(list[index]).toString() + key.unit.toString(),
                               style: const TextStyle(
                                 fontSize: FontSize.subheading,
                                 fontWeight: FontWeight.bold,
@@ -211,60 +211,5 @@ class NutrientsCard extends StatelessWidget {
         }),
       ),
     );
-  }
-  
-  double _getNutrient(String key, DictionaryItemModel item){
-      switch(key){
-        case 'energy': 
-          return item.nutrients.energy;
-        case 'protein':
-          return item.nutrients.protein;
-        case 'vitamin':
-          return item.nutrients.vitamin;
-        case 'mineral':
-          return item.nutrients.mineral;
-        case 'carbohydrate':
-          return item.nutrients.carbohydrate;
-        case 'lipid':
-          return item.nutrients.lipid;
-        default:
-          return 0;
-      }
-  }
-  
-  String _getNutrientJapaneseName(String key){
-      switch(key){
-        case 'energy':
-          return 'エネルギー';
-        case 'protein':
-          return 'タンパク質';
-        case 'vitamin':
-          return 'ビタミン';
-        case 'mineral':
-          return 'ミネラル';
-        case 'carbohydrate':
-          return '炭水化物';
-        case 'lipid':
-          return '脂質';
-      }
-      throw Exception('invalid nutrientKey');
-  }
-
-  NutrientUnit _getNutrientUnit(String key){
-    switch(key){
-        case 'energy':
-          return NutrientUnit.kcal;
-        case 'protein':
-          return NutrientUnit.gram;
-        case 'vitamin':
-          return NutrientUnit.mGram;
-        case 'mineral':
-          return NutrientUnit.mGram;
-        case 'carbohydrate':
-          return NutrientUnit.gram;
-        case 'lipid':
-          return NutrientUnit.gram;
-    }
-    throw Exception('invalid nutrientKey');
   }
 }
