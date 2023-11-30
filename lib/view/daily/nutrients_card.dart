@@ -14,6 +14,7 @@ import 'package:hakondate/view/component/graph/nutrients_radar_chart.dart';
 import 'package:hakondate/view/component/label/nutrients_list.dart';
 import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
 import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
+import 'package:hakondate/view_model/single_page/dictionary/dictionary_view_model.dart';
 
 class NutrientsCard extends StatelessWidget {
   const NutrientsCard({super.key});
@@ -144,72 +145,79 @@ class NutrientsCard extends StatelessWidget {
 
   /* 1食品群のランキング */
   Widget _rankingContents(List<DictionaryItemModel> list, MajorNutrient key) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: List<Widget>.generate(list.length * 2, (int i) {
-          if (i.isOdd) return const Divider();
-          final int index = i ~/ 2;
-          return GestureDetector(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: Row(
-                children: <Widget>[
-                  /* 順位 */
-                  Expanded(
-                    flex: 2,
-                    child: Center(
-                      child: Text(
-                        '${index + 1}.',
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Flexible(
-                    flex: 8,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        /* 料理名 */
-                        Text(
-                          list[index].name,
-                          style: const TextStyle(
-                            fontSize: FontSize.subheading,
+    return Consumer(
+      builder: (BuildContext context, WidgetRef ref, Widget? widet) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: List<Widget>.generate(list.length * 2, (int i) {
+              if (i.isOdd) return const Divider();
+              final int index = i ~/ 2;
+              return GestureDetector(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Row(
+                    children: <Widget>[
+                      /* 順位 */
+                      Expanded(
+                        flex: 2,
+                        child: Center(
+                          child: Text(
+                            '${index + 1}.',
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                        /* 数値 */
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                      ),
+                      Flexible(
+                        flex: 8,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
+                            /* 料理名 */
                             Text(
-                              key.getNutrient(list[index]).toString() + key.unit.toString(),
+                              list[index].name,
                               style: const TextStyle(
                                 fontSize: FontSize.subheading,
-                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                            const Text(
-                              '/100g',
-                              style: TextStyle(
-                              fontSize: 16,
-                              ),
+                            /* 数値 */
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: <Widget>[
+                                Text(
+                                  key.getNutrient(list[index]).toString() + key.unit.value,
+                                  style: const TextStyle(
+                                    fontSize: FontSize.subheading,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const Text(
+                                  '/100g',
+                                  style: TextStyle(
+                                  fontSize: 16,
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-            onTap: () => routemaster.push('/home/dictionary_item/${list[index].id}'),
-          );
-        }),
-      ),
+                ),
+                onTap: () {
+                  ref.read(dictionaryViewModelProvider.notifier).selectItem(list[index].id);
+                  routemaster.push('/home/dictionary_item/${list[index].id}');
+                },           
+              );
+            }),
+          ),
+        );
+      },
     );
   }
 }
