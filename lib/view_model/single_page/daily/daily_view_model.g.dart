@@ -6,7 +6,7 @@ part of 'daily_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$dailyViewModelHash() => r'6fc08980a3e878c954bdf0af04ebbcf8c9ed1fb7';
+String _$dailyViewModelHash() => r'da0dbd0ad7e0cedbf3ccc2eff348de6160eed609';
 
 /// See also [DailyViewModel].
 @ProviderFor(DailyViewModel)
@@ -23,4 +23,4 @@ final dailyViewModelProvider =
 
 typedef _$DailyViewModel = AsyncNotifier<DailyState>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

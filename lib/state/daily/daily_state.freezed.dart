@@ -124,11 +124,11 @@ class _$DailyStateCopyWithImpl<$Res, $Val extends DailyState>
 }
 
 /// @nodoc
-abstract class _$$_DailyStateCopyWith<$Res>
+abstract class _$$DailyStateImplCopyWith<$Res>
     implements $DailyStateCopyWith<$Res> {
-  factory _$$_DailyStateCopyWith(
-          _$_DailyState value, $Res Function(_$_DailyState) then) =
-      __$$_DailyStateCopyWithImpl<$Res>;
+  factory _$$DailyStateImplCopyWith(
+          _$DailyStateImpl value, $Res Function(_$DailyStateImpl) then) =
+      __$$DailyStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -147,11 +147,11 @@ abstract class _$$_DailyStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_DailyStateCopyWithImpl<$Res>
-    extends _$DailyStateCopyWithImpl<$Res, _$_DailyState>
-    implements _$$_DailyStateCopyWith<$Res> {
-  __$$_DailyStateCopyWithImpl(
-      _$_DailyState _value, $Res Function(_$_DailyState) _then)
+class __$$DailyStateImplCopyWithImpl<$Res>
+    extends _$DailyStateCopyWithImpl<$Res, _$DailyStateImpl>
+    implements _$$DailyStateImplCopyWith<$Res> {
+  __$$DailyStateImplCopyWithImpl(
+      _$DailyStateImpl _value, $Res Function(_$DailyStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -165,7 +165,7 @@ class __$$_DailyStateCopyWithImpl<$Res>
     Object? menu = null,
     Object? selectedDish = freezed,
   }) {
-    return _then(_$_DailyState(
+    return _then(_$DailyStateImpl(
       selectedDay: null == selectedDay
           ? _value.selectedDay
           : selectedDay // ignore: cast_nullable_to_non_nullable
@@ -200,8 +200,8 @@ class __$$_DailyStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
-  const _$_DailyState(
+class _$DailyStateImpl with DiagnosticableTreeMixin implements _DailyState {
+  const _$DailyStateImpl(
       {required this.selectedDay,
       required this.focusedDay,
       required this.calendarTabFirstDay,
@@ -258,7 +258,7 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DailyState &&
+            other is _$DailyStateImpl &&
             (identical(other.selectedDay, selectedDay) ||
                 other.selectedDay == selectedDay) &&
             (identical(other.focusedDay, focusedDay) ||
@@ -288,8 +288,8 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DailyStateCopyWith<_$_DailyState> get copyWith =>
-      __$$_DailyStateCopyWithImpl<_$_DailyState>(this, _$identity);
+  _$$DailyStateImplCopyWith<_$DailyStateImpl> get copyWith =>
+      __$$DailyStateImplCopyWithImpl<_$DailyStateImpl>(this, _$identity);
 }
 
 abstract class _DailyState implements DailyState {
@@ -300,7 +300,7 @@ abstract class _DailyState implements DailyState {
       required final DateTime calendarTabLastDay,
       final Map<MajorNutrient, List<DictionaryItemModel>> recommendDishes,
       final MenuModel menu,
-      final DishModel? selectedDish}) = _$_DailyState;
+      final DishModel? selectedDish}) = _$DailyStateImpl;
 
   @override
   DateTime get selectedDay;
@@ -318,6 +318,6 @@ abstract class _DailyState implements DailyState {
   DishModel? get selectedDish;
   @override
   @JsonKey(ignore: true)
-  _$$_DailyStateCopyWith<_$_DailyState> get copyWith =>
+  _$$DailyStateImplCopyWith<_$DailyStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
