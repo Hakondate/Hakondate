@@ -1,4 +1,4 @@
-import 'package:hakondate/model/nutrients/nutrient_major.dart';
+import 'package:hakondate/model/nutrients/nutrient_five_major.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -61,7 +61,7 @@ class DailyViewModel extends _$DailyViewModel {
       if (menu is LunchesDayMenuModel) {
         await ref.read(analyticsControllerProvider.notifier).logViewMenu(menu.id);
       }
-      await ref.read(dailyViewModelProvider.notifier).updateRecommendDishes();
+      await updateRecommendDishes();
     });
   }
 
@@ -79,10 +79,10 @@ class DailyViewModel extends _$DailyViewModel {
 
   Future<void>  updateRecommendDishes() async {
     state.whenData((DailyState data) async => 
-      state = AsyncData<DailyState>(data.copyWith(recommendDishes: await _calculateReccomendDishes())),);
+      state = AsyncData<DailyState>(data.copyWith(recommendIncredients: await _calculateReccomendDishes())),);
   }
 
-  Future<Map<MajorNutrient, List<DictionaryItemModel>>> _calculateReccomendDishes() async{
+  Future<Map<FiveMajorNutrient, List<DictionaryItemModel>>> _calculateReccomendDishes() async{
     final NutrientsModel? slns = ref.watch(userViewModelProvider).currentUser!.slns;
     final List<double> nutrientsPercentage = ref.read(dailyViewModelProvider.notifier)
       .getGraphValues(
@@ -90,16 +90,16 @@ class DailyViewModel extends _$DailyViewModel {
         slns: slns,
       );
 
-    final Map<MajorNutrient, double> nutrientsMap = <MajorNutrient, double>{}..addAll(<MajorNutrient, double>{
-        MajorNutrient.protein: nutrientsPercentage[1],
-        MajorNutrient.vitamin: nutrientsPercentage[2],
-        MajorNutrient.mineral: nutrientsPercentage[3],
-        MajorNutrient.carbohydrate: nutrientsPercentage[4],
-        MajorNutrient.lipid: nutrientsPercentage[5],
+    final Map<FiveMajorNutrient, double> nutrientsMap = <FiveMajorNutrient, double>{}..addAll(<FiveMajorNutrient, double>{
+        FiveMajorNutrient.protein: nutrientsPercentage[1],
+        FiveMajorNutrient.vitamin: nutrientsPercentage[2],
+        FiveMajorNutrient.mineral: nutrientsPercentage[3],
+        FiveMajorNutrient.carbohydrate: nutrientsPercentage[4],
+        FiveMajorNutrient.lipid: nutrientsPercentage[5],
       });
-      MapEntry<MajorNutrient, double> minValue = nutrientsMap.entries.elementAt(0);
-      MapEntry<MajorNutrient, double> secondMinValue = nutrientsMap.entries.elementAt(1);
-      MapEntry<MajorNutrient, double> temp;
+      MapEntry<FiveMajorNutrient, double> minValue = nutrientsMap.entries.elementAt(0);
+      MapEntry<FiveMajorNutrient, double> secondMinValue = nutrientsMap.entries.elementAt(1);
+      MapEntry<FiveMajorNutrient, double> temp;
 
       for (int i = 1; i < nutrientsMap.length; i++) {
         temp = nutrientsMap.entries.elementAt(i);
@@ -110,7 +110,7 @@ class DailyViewModel extends _$DailyViewModel {
           secondMinValue = temp;
         }
       }
-      final Map<MajorNutrient, List<DictionaryItemModel>> recommendDishes = <MajorNutrient, List<DictionaryItemModel>>{
+      final Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendDishes = <FiveMajorNutrient, List<DictionaryItemModel>>{
         minValue.key: await _dictionaryItemsLocalRepository.getRanking(
           nutrient: minValue.key.key,
         ),
@@ -125,8 +125,7 @@ class DailyViewModel extends _$DailyViewModel {
     required double graphMaxValue,
     NutrientsModel? slns,
   }) {
-    return state.maybeWhen
-    (
+    return state.maybeWhen(
       data: (DailyState data) {
         final MenuModel menu = data.menu;
 
@@ -143,9 +142,7 @@ class DailyViewModel extends _$DailyViewModel {
           menu.lipid / slns.lipid * 100.0,
         ].map((double element) => (element > graphMaxValue) ? graphMaxValue : element).toList();
       },
-      orElse: () {
-        return <double>[0, 0, 0, 0, 0, 0];
-      },
+      orElse: () => <double>[0, 0, 0, 0, 0, 0],
     );
   }
 

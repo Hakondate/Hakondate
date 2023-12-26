@@ -1,4 +1,5 @@
 import 'package:drift/drift.dart';
+import 'package:hakondate/util/extension/string_extension.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
@@ -134,12 +135,60 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
   }
 
   @override
+  Future<List<DictionaryItemModel>> getAll() async{
+    final List<DictionaryItemModel> items = <DictionaryItemModel>[];
+
+    final List<DictionaryItemsSchema> schemas = 
+      await (_db.select(_db.dictionaryItemsTable))
+      	.get()
+	  	..sort((DictionaryItemsSchema a, DictionaryItemsSchema b) => a.name.compareTo(b.name));
+    for (final DictionaryItemsSchema schema in schemas) {
+      items.add(
+        DictionaryItemModel(
+          id: schema.id,
+          group: _getGroup(schema.group),
+          name: schema.name,
+          nutrients: NutrientsModel(
+            energy: schema.energy,
+            protein: schema.protein,
+            lipid: schema.lipid,
+            carbohydrate: schema.carbohydrate,
+            sodium: schema.sodium,
+            calcium: schema.calcium,
+            magnesium: schema.magnesium,
+            iron: schema.iron,
+            zinc: schema.zinc,
+            retinol: schema.retinol,
+            vitaminB1: schema.vitaminB1,
+            vitaminB2: schema.vitaminB2,
+            vitaminC: schema.vitaminC,
+            dietaryFiber: schema.dietaryFiber,
+            salt: schema.salt,
+          ),
+          note: schema.note,
+        ),
+      );
+    }
+    return items;
+  }
+
+  @override
   Future<List<DictionaryItemModel>> search(String query) async{
     final List<DictionaryItemModel> items = <DictionaryItemModel>[];
 
     final List<DictionaryItemsSchema> schemas = 
-      await (_db.select(_db.dictionaryItemsTable)..where(($DictionaryItemsTableTable tbl) => tbl.name.contains(query) | tbl.name.contains(query.toHiragana()) | tbl.name.contains(query.toKatakana())))
-      .get()..sort((DictionaryItemsSchema a,DictionaryItemsSchema b) => a.name.compareTo(b.name));
+		await (
+		  _db.select(_db.dictionaryItemsTable)
+		..where(
+			($DictionaryItemsTableTable t) => 
+				t.name.contains(query) | 
+				t.name.contains(query.toHiragana()) | 
+				t.name.contains(query.toKatakana()),
+			)
+		).get()
+		..sort(
+			(DictionaryItemsSchema a, DictionaryItemsSchema b) => a.name.compareTo(b.name),
+		);
     for (final DictionaryItemsSchema schema in schemas) {
       items.add(
         DictionaryItemModel(
@@ -171,42 +220,6 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
     return items;
   }
 
-  @override
-  Future<List<DictionaryItemModel>> getAll() async{
-    final List<DictionaryItemModel> items = <DictionaryItemModel>[];
-
-    final List<DictionaryItemsSchema> schemas = 
-      await (_db.select(_db.dictionaryItemsTable))
-      .get()..sort((DictionaryItemsSchema a,DictionaryItemsSchema b) => a.name.compareTo(b.name));
-    for (final DictionaryItemsSchema schema in schemas) {
-      items.add(
-        DictionaryItemModel(
-          id: schema.id,
-          group: _getGroup(schema.group),
-          name: schema.name,
-          nutrients: NutrientsModel(
-            energy: schema.energy,
-            protein: schema.protein,
-            lipid: schema.lipid,
-            carbohydrate: schema.carbohydrate,
-            sodium: schema.sodium,
-            calcium: schema.calcium,
-            magnesium: schema.magnesium,
-            iron: schema.iron,
-            zinc: schema.zinc,
-            retinol: schema.retinol,
-            vitaminB1: schema.vitaminB1,
-            vitaminB2: schema.vitaminB2,
-            vitaminC: schema.vitaminC,
-            dietaryFiber: schema.dietaryFiber,
-            salt: schema.salt,
-          ),
-          note: schema.note,
-        ),
-      );
-    }
-    return items;
-  }
 
   @override
   Future<List<DictionaryItemModel>> getRanking({
@@ -390,13 +403,4 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
 
   DictionaryGroup _getGroup(int groupNumber) =>
       DictionaryGroup.values.firstWhere((DictionaryGroup group) => group.groupNumber == groupNumber);
-}
-
-extension HiraKataConvertion on String {
-  String toHiragana() {
-    return replaceAllMapped(RegExp('[ァ-ヴ]'), (Match match) => String.fromCharCode(match.group(0)!.codeUnitAt(0) - 0x60));
-  }
-  String toKatakana() {
-    return replaceAllMapped(RegExp('[ぁ-ゔ]'), (Match match) => String.fromCharCode(match.group(0)!.codeUnitAt(0) + 0x60));
-  }
 }
