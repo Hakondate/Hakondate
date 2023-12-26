@@ -226,7 +226,7 @@ abstract class _DictionaryState implements DictionaryState {
       {final DictionaryGroup? selectedGroup,
       final List<DictionaryItemModel>? selectedGroupItems,
       final DictionaryItemModel? selectedItem,
-      final List<DictionaryItemModel> searchedItems}) = _$_DictionaryState;
+      final List<DictionaryItemModel> searchedItems}) = _$DictionaryStateImpl;
 
   @override
   DictionaryGroup? get selectedGroup;

@@ -1,11 +1,11 @@
 import 'package:drift/drift.dart';
-import 'package:hakondate/util/extension/string_extension.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
 import 'package:hakondate/model/nutrients/nutrients_model.dart';
 import 'package:hakondate/repository/local/sqlite/local_database.dart';
 import 'package:hakondate/util/exception/sqlite_exception.dart';
+import 'package:hakondate/util/extension/string_extension.dart';
 
 part 'dictionary_items_local_repository.g.dart';
 
