@@ -16,7 +16,7 @@ class DailyState with _$DailyState {
     required DateTime focusedDay,
     required DateTime calendarTabFirstDay,
     required DateTime calendarTabLastDay,
-    @Default(<FiveMajorNutrient, List<DictionaryItemModel>> {}) Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendIncredients, 
+    @Default(<FiveMajorNutrient, List<DictionaryItemModel>> {}) Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendIncredientsMap, 
     @Default(MenuModel.noData()) MenuModel menu,
     DishModel? selectedDish,
   }) = _DailyState;

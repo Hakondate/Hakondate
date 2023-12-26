@@ -130,7 +130,6 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
         ),
       );
     }
-
     return items;
   }
 
@@ -179,12 +178,12 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
     final List<DictionaryItemsSchema> schemas = 
 		await (
 		  _db.select(_db.dictionaryItemsTable)
-		..where(
-			($DictionaryItemsTableTable t) => 
-				t.name.contains(query) | 
-				t.name.contains(query.toHiragana()) | 
-				t.name.contains(query.toKatakana()),
-			)
+      ..where(
+        ($DictionaryItemsTableTable t) => 
+          t.name.contains(query) | 
+          t.name.contains(query.toHiragana()) | 
+          t.name.contains(query.toKatakana()),
+      )
 		).get()
 		..sort(
 			(DictionaryItemsSchema a, DictionaryItemsSchema b) => a.name.compareTo(b.name),
@@ -216,10 +215,8 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
         ),
       );
     }
-    
     return items;
   }
-
 
   @override
   Future<List<DictionaryItemModel>> getRanking({

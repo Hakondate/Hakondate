@@ -20,8 +20,8 @@ mixin _$DailyState {
   DateTime get focusedDay => throw _privateConstructorUsedError;
   DateTime get calendarTabFirstDay => throw _privateConstructorUsedError;
   DateTime get calendarTabLastDay => throw _privateConstructorUsedError;
-  Map<FiveMajorNutrient, List<DictionaryItemModel>> get recommendIncredients =>
-      throw _privateConstructorUsedError;
+  Map<FiveMajorNutrient, List<DictionaryItemModel>>
+      get recommendIncredientsMap => throw _privateConstructorUsedError;
   MenuModel get menu => throw _privateConstructorUsedError;
   DishModel? get selectedDish => throw _privateConstructorUsedError;
 
@@ -41,7 +41,7 @@ abstract class $DailyStateCopyWith<$Res> {
       DateTime focusedDay,
       DateTime calendarTabFirstDay,
       DateTime calendarTabLastDay,
-      Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendIncredients,
+      Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendIncredientsMap,
       MenuModel menu,
       DishModel? selectedDish});
 
@@ -66,7 +66,7 @@ class _$DailyStateCopyWithImpl<$Res, $Val extends DailyState>
     Object? focusedDay = null,
     Object? calendarTabFirstDay = null,
     Object? calendarTabLastDay = null,
-    Object? recommendIncredients = null,
+    Object? recommendIncredientsMap = null,
     Object? menu = null,
     Object? selectedDish = freezed,
   }) {
@@ -87,9 +87,9 @@ class _$DailyStateCopyWithImpl<$Res, $Val extends DailyState>
           ? _value.calendarTabLastDay
           : calendarTabLastDay // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      recommendIncredients: null == recommendIncredients
-          ? _value.recommendIncredients
-          : recommendIncredients // ignore: cast_nullable_to_non_nullable
+      recommendIncredientsMap: null == recommendIncredientsMap
+          ? _value.recommendIncredientsMap
+          : recommendIncredientsMap // ignore: cast_nullable_to_non_nullable
               as Map<FiveMajorNutrient, List<DictionaryItemModel>>,
       menu: null == menu
           ? _value.menu
@@ -136,7 +136,7 @@ abstract class _$$_DailyStateCopyWith<$Res>
       DateTime focusedDay,
       DateTime calendarTabFirstDay,
       DateTime calendarTabLastDay,
-      Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendIncredients,
+      Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendIncredientsMap,
       MenuModel menu,
       DishModel? selectedDish});
 
@@ -161,7 +161,7 @@ class __$$_DailyStateCopyWithImpl<$Res>
     Object? focusedDay = null,
     Object? calendarTabFirstDay = null,
     Object? calendarTabLastDay = null,
-    Object? recommendIncredients = null,
+    Object? recommendIncredientsMap = null,
     Object? menu = null,
     Object? selectedDish = freezed,
   }) {
@@ -182,9 +182,9 @@ class __$$_DailyStateCopyWithImpl<$Res>
           ? _value.calendarTabLastDay
           : calendarTabLastDay // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      recommendIncredients: null == recommendIncredients
-          ? _value._recommendIncredients
-          : recommendIncredients // ignore: cast_nullable_to_non_nullable
+      recommendIncredientsMap: null == recommendIncredientsMap
+          ? _value._recommendIncredientsMap
+          : recommendIncredientsMap // ignore: cast_nullable_to_non_nullable
               as Map<FiveMajorNutrient, List<DictionaryItemModel>>,
       menu: null == menu
           ? _value.menu
@@ -206,11 +206,11 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
       required this.focusedDay,
       required this.calendarTabFirstDay,
       required this.calendarTabLastDay,
-      final Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendIncredients =
+      final Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendIncredientsMap =
           const <FiveMajorNutrient, List<DictionaryItemModel>>{},
       this.menu = const MenuModel.noData(),
       this.selectedDish})
-      : _recommendIncredients = recommendIncredients;
+      : _recommendIncredientsMap = recommendIncredientsMap;
 
   @override
   final DateTime selectedDay;
@@ -220,14 +220,16 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
   final DateTime calendarTabFirstDay;
   @override
   final DateTime calendarTabLastDay;
-  final Map<FiveMajorNutrient, List<DictionaryItemModel>> _recommendIncredients;
+  final Map<FiveMajorNutrient, List<DictionaryItemModel>>
+      _recommendIncredientsMap;
   @override
   @JsonKey()
-  Map<FiveMajorNutrient, List<DictionaryItemModel>> get recommendIncredients {
-    if (_recommendIncredients is EqualUnmodifiableMapView)
-      return _recommendIncredients;
+  Map<FiveMajorNutrient, List<DictionaryItemModel>>
+      get recommendIncredientsMap {
+    if (_recommendIncredientsMap is EqualUnmodifiableMapView)
+      return _recommendIncredientsMap;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_recommendIncredients);
+    return EqualUnmodifiableMapView(_recommendIncredientsMap);
   }
 
   @override
@@ -238,7 +240,7 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DailyState(selectedDay: $selectedDay, focusedDay: $focusedDay, calendarTabFirstDay: $calendarTabFirstDay, calendarTabLastDay: $calendarTabLastDay, recommendIncredients: $recommendIncredients, menu: $menu, selectedDish: $selectedDish)';
+    return 'DailyState(selectedDay: $selectedDay, focusedDay: $focusedDay, calendarTabFirstDay: $calendarTabFirstDay, calendarTabLastDay: $calendarTabLastDay, recommendIncredientsMap: $recommendIncredientsMap, menu: $menu, selectedDish: $selectedDish)';
   }
 
   @override
@@ -250,7 +252,8 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
       ..add(DiagnosticsProperty('focusedDay', focusedDay))
       ..add(DiagnosticsProperty('calendarTabFirstDay', calendarTabFirstDay))
       ..add(DiagnosticsProperty('calendarTabLastDay', calendarTabLastDay))
-      ..add(DiagnosticsProperty('recommendIncredients', recommendIncredients))
+      ..add(DiagnosticsProperty(
+          'recommendIncredientsMap', recommendIncredientsMap))
       ..add(DiagnosticsProperty('menu', menu))
       ..add(DiagnosticsProperty('selectedDish', selectedDish));
   }
@@ -268,8 +271,8 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
                 other.calendarTabFirstDay == calendarTabFirstDay) &&
             (identical(other.calendarTabLastDay, calendarTabLastDay) ||
                 other.calendarTabLastDay == calendarTabLastDay) &&
-            const DeepCollectionEquality()
-                .equals(other._recommendIncredients, _recommendIncredients) &&
+            const DeepCollectionEquality().equals(
+                other._recommendIncredientsMap, _recommendIncredientsMap) &&
             (identical(other.menu, menu) || other.menu == menu) &&
             (identical(other.selectedDish, selectedDish) ||
                 other.selectedDish == selectedDish));
@@ -282,7 +285,7 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
       focusedDay,
       calendarTabFirstDay,
       calendarTabLastDay,
-      const DeepCollectionEquality().hash(_recommendIncredients),
+      const DeepCollectionEquality().hash(_recommendIncredientsMap),
       menu,
       selectedDish);
 
@@ -300,7 +303,7 @@ abstract class _DailyState implements DailyState {
       required final DateTime calendarTabFirstDay,
       required final DateTime calendarTabLastDay,
       final Map<FiveMajorNutrient, List<DictionaryItemModel>>
-          recommendIncredients,
+          recommendIncredientsMap,
       final MenuModel menu,
       final DishModel? selectedDish}) = _$_DailyState;
 
@@ -313,7 +316,7 @@ abstract class _DailyState implements DailyState {
   @override
   DateTime get calendarTabLastDay;
   @override
-  Map<FiveMajorNutrient, List<DictionaryItemModel>> get recommendIncredients;
+  Map<FiveMajorNutrient, List<DictionaryItemModel>> get recommendIncredientsMap;
   @override
   MenuModel get menu;
   @override

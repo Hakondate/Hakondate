@@ -79,7 +79,7 @@ class DailyViewModel extends _$DailyViewModel {
 
   Future<void>  updateRecommendDishes() async {
     state.whenData((DailyState data) async => 
-      state = AsyncData<DailyState>(data.copyWith(recommendIncredients: await _calculateReccomendDishes())),);
+      state = AsyncData<DailyState>(data.copyWith(recommendIncredientsMap: await _calculateReccomendDishes())),);
   }
 
   Future<Map<FiveMajorNutrient, List<DictionaryItemModel>>> _calculateReccomendDishes() async{
