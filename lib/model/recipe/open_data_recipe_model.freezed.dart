@@ -82,11 +82,11 @@ class _$OpenDataRecipeModelCopyWithImpl<$Res, $Val extends OpenDataRecipeModel>
 }
 
 /// @nodoc
-abstract class _$$_OpenDataRecipeModelCopyWith<$Res>
+abstract class _$$OpenDataRecipeModelImplCopyWith<$Res>
     implements $OpenDataRecipeModelCopyWith<$Res> {
-  factory _$$_OpenDataRecipeModelCopyWith(_$_OpenDataRecipeModel value,
-          $Res Function(_$_OpenDataRecipeModel) then) =
-      __$$_OpenDataRecipeModelCopyWithImpl<$Res>;
+  factory _$$OpenDataRecipeModelImplCopyWith(_$OpenDataRecipeModelImpl value,
+          $Res Function(_$OpenDataRecipeModelImpl) then) =
+      __$$OpenDataRecipeModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -94,11 +94,11 @@ abstract class _$$_OpenDataRecipeModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OpenDataRecipeModelCopyWithImpl<$Res>
-    extends _$OpenDataRecipeModelCopyWithImpl<$Res, _$_OpenDataRecipeModel>
-    implements _$$_OpenDataRecipeModelCopyWith<$Res> {
-  __$$_OpenDataRecipeModelCopyWithImpl(_$_OpenDataRecipeModel _value,
-      $Res Function(_$_OpenDataRecipeModel) _then)
+class __$$OpenDataRecipeModelImplCopyWithImpl<$Res>
+    extends _$OpenDataRecipeModelCopyWithImpl<$Res, _$OpenDataRecipeModelImpl>
+    implements _$$OpenDataRecipeModelImplCopyWith<$Res> {
+  __$$OpenDataRecipeModelImplCopyWithImpl(_$OpenDataRecipeModelImpl _value,
+      $Res Function(_$OpenDataRecipeModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -110,7 +110,7 @@ class __$$_OpenDataRecipeModelCopyWithImpl<$Res>
     Object? type = null,
     Object? thumbnail = freezed,
   }) {
-    return _then(_$_OpenDataRecipeModel(
+    return _then(_$OpenDataRecipeModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -137,8 +137,8 @@ class __$$_OpenDataRecipeModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OpenDataRecipeModel extends _OpenDataRecipeModel {
-  _$_OpenDataRecipeModel(
+class _$OpenDataRecipeModelImpl extends _OpenDataRecipeModel {
+  _$OpenDataRecipeModelImpl(
       {required this.id,
       required this.name,
       required this.pdf,
@@ -171,7 +171,7 @@ class _$_OpenDataRecipeModel extends _OpenDataRecipeModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OpenDataRecipeModel &&
+            other is _$OpenDataRecipeModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.pdf, pdf) || other.pdf == pdf) &&
@@ -186,8 +186,8 @@ class _$_OpenDataRecipeModel extends _OpenDataRecipeModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OpenDataRecipeModelCopyWith<_$_OpenDataRecipeModel> get copyWith =>
-      __$$_OpenDataRecipeModelCopyWithImpl<_$_OpenDataRecipeModel>(
+  _$$OpenDataRecipeModelImplCopyWith<_$OpenDataRecipeModelImpl> get copyWith =>
+      __$$OpenDataRecipeModelImplCopyWithImpl<_$OpenDataRecipeModelImpl>(
           this, _$identity);
 }
 
@@ -197,7 +197,7 @@ abstract class _OpenDataRecipeModel extends OpenDataRecipeModel {
       required final String name,
       required final String pdf,
       final RecipeType type,
-      final String? thumbnail}) = _$_OpenDataRecipeModel;
+      final String? thumbnail}) = _$OpenDataRecipeModelImpl;
   _OpenDataRecipeModel._() : super._();
 
   @override
@@ -212,6 +212,6 @@ abstract class _OpenDataRecipeModel extends OpenDataRecipeModel {
   String? get thumbnail;
   @override
   @JsonKey(ignore: true)
-  _$$_OpenDataRecipeModelCopyWith<_$_OpenDataRecipeModel> get copyWith =>
+  _$$OpenDataRecipeModelImplCopyWith<_$OpenDataRecipeModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -63,22 +63,22 @@ class _$OriginCategoryModelCopyWithImpl<$Res, $Val extends OriginCategoryModel>
 }
 
 /// @nodoc
-abstract class _$$_OriginCategoryModelCopyWith<$Res>
+abstract class _$$OriginCategoryModelImplCopyWith<$Res>
     implements $OriginCategoryModelCopyWith<$Res> {
-  factory _$$_OriginCategoryModelCopyWith(_$_OriginCategoryModel value,
-          $Res Function(_$_OriginCategoryModel) then) =
-      __$$_OriginCategoryModelCopyWithImpl<$Res>;
+  factory _$$OriginCategoryModelImplCopyWith(_$OriginCategoryModelImpl value,
+          $Res Function(_$OriginCategoryModelImpl) then) =
+      __$$OriginCategoryModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String name, List<OriginItemModel> items});
 }
 
 /// @nodoc
-class __$$_OriginCategoryModelCopyWithImpl<$Res>
-    extends _$OriginCategoryModelCopyWithImpl<$Res, _$_OriginCategoryModel>
-    implements _$$_OriginCategoryModelCopyWith<$Res> {
-  __$$_OriginCategoryModelCopyWithImpl(_$_OriginCategoryModel _value,
-      $Res Function(_$_OriginCategoryModel) _then)
+class __$$OriginCategoryModelImplCopyWithImpl<$Res>
+    extends _$OriginCategoryModelCopyWithImpl<$Res, _$OriginCategoryModelImpl>
+    implements _$$OriginCategoryModelImplCopyWith<$Res> {
+  __$$OriginCategoryModelImplCopyWithImpl(_$OriginCategoryModelImpl _value,
+      $Res Function(_$OriginCategoryModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_OriginCategoryModelCopyWithImpl<$Res>
     Object? name = null,
     Object? items = null,
   }) {
-    return _then(_$_OriginCategoryModel(
+    return _then(_$OriginCategoryModelImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_OriginCategoryModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OriginCategoryModel extends _OriginCategoryModel {
-  const _$_OriginCategoryModel(
+class _$OriginCategoryModelImpl extends _OriginCategoryModel {
+  const _$OriginCategoryModelImpl(
       {required this.name, required final List<OriginItemModel> items})
       : _items = items,
         super._();
@@ -127,7 +127,7 @@ class _$_OriginCategoryModel extends _OriginCategoryModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OriginCategoryModel &&
+            other is _$OriginCategoryModelImpl &&
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality().equals(other._items, _items));
   }
@@ -139,15 +139,15 @@ class _$_OriginCategoryModel extends _OriginCategoryModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OriginCategoryModelCopyWith<_$_OriginCategoryModel> get copyWith =>
-      __$$_OriginCategoryModelCopyWithImpl<_$_OriginCategoryModel>(
+  _$$OriginCategoryModelImplCopyWith<_$OriginCategoryModelImpl> get copyWith =>
+      __$$OriginCategoryModelImplCopyWithImpl<_$OriginCategoryModelImpl>(
           this, _$identity);
 }
 
 abstract class _OriginCategoryModel extends OriginCategoryModel {
   const factory _OriginCategoryModel(
       {required final String name,
-      required final List<OriginItemModel> items}) = _$_OriginCategoryModel;
+      required final List<OriginItemModel> items}) = _$OriginCategoryModelImpl;
   const _OriginCategoryModel._() : super._();
 
   @override
@@ -156,6 +156,6 @@ abstract class _OriginCategoryModel extends OriginCategoryModel {
   List<OriginItemModel> get items;
   @override
   @JsonKey(ignore: true)
-  _$$_OriginCategoryModelCopyWith<_$_OriginCategoryModel> get copyWith =>
+  _$$OriginCategoryModelImplCopyWith<_$OriginCategoryModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
