@@ -30,16 +30,14 @@ Future<void> main() async {
           options: DefaultFirebaseOptions.currentPlatform,
         );
       }
-      FlutterError.onError =
-          FirebaseCrashlytics.instance.recordFlutterFatalError;
+      FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
       runApp(
         const ProviderScope(
           child: Hakondate(),
         ),
       );
     },
-    (Object error, StackTrace stack) =>
-        FirebaseCrashlytics.instance.recordError(error, stack, fatal: true),
+    (Object error, StackTrace stack) => FirebaseCrashlytics.instance.recordError(error, stack, fatal: true),
   );
 }
 
@@ -59,6 +57,8 @@ class Hakondate extends StatelessWidget {
             iconTheme: IconThemeData(
               color: AppColor.brand.secondary,
             ),
+            // elevation: 4,
+            // shadowColor: AppColor.ui.shadow,
             systemOverlayStyle: SystemUiOverlayStyle.dark,
           ),
       primaryIconTheme: Theme.of(context).primaryIconTheme.copyWith(
@@ -72,6 +72,9 @@ class Hakondate extends StatelessWidget {
       colorScheme: Theme.of(context).colorScheme.copyWith(
             primary: AppColor.brand.primary,
             secondary: AppColor.brand.secondary,
+            background: AppColor.ui.white,
+            surface: AppColor.ui.white,
+            surfaceTint: AppColor.ui.white,
           ),
       scaffoldBackgroundColor: AppColor.ui.white,
     );
