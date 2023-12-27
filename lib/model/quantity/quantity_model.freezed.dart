@@ -118,7 +118,7 @@ class _$QuantityModelImpl implements _QuantityModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$QuantityModelImpl &&
