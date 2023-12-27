@@ -78,7 +78,9 @@ class SplashViewModel extends _$SplashViewModel {
         if (dictionaryInitializedDay.isBefore(RecordDate.dictionaryLastUpdateDay)) {
           await _initializeDictionaries();
           await prefs.setInt(
-              AppKey.sharedPreferencesKey.initializedDictionaryDay, DateTime.now().millisecondsSinceEpoch);
+            AppKey.sharedPreferencesKey.initializedDictionaryDay,
+            DateTime.now().millisecondsSinceEpoch,
+          );
         }
 
         await _initializeMenus();
