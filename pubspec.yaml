@@ -1,13 +1,13 @@
 name: hakondate
 description: はこんだて開発用プロジェクト
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
-  flutter: "3.16.1"
+  flutter: "3.16.5"
 
 dependencies:
   flutter:
@@ -26,13 +26,13 @@ dependencies:
   # 状態管理関連
   flutter_riverpod: 2.4.9
   riverpod_annotation: 2.3.3
-  freezed: 2.4.5
+  freezed: 2.4.6
   freezed_annotation: 2.4.1
   json_serializable: 6.7.1
   json_annotation: 4.8.1
 
   # Drift(SQLite)関連
-  drift: 2.13.2
+  drift: 2.14.1
   sqlite3_flutter_libs: 0.5.18
 
   # 起動時データ関連
@@ -46,14 +46,14 @@ dependencies:
 
   # Firebase関連
   app_tracking_transparency: 2.0.4
-  firebase_storage: 11.5.3
-  firebase_core: 2.24.0
+  firebase_storage: 11.5.6
+  firebase_core: 2.24.2
   cloud_firestore: 4.13.3
   firebase_crashlytics: 3.4.6
   firebase_analytics: 10.7.2
-  
+
   # URL関連
-  url_launcher: 6.2.1
+  url_launcher: 6.2.2
 
 dev_dependencies:
   flutter_test:
@@ -61,7 +61,7 @@ dev_dependencies:
 
   # コード整形
   flutter_lints: 3.0.1
-  very_good_analysis: 5.0.0+1
+  very_good_analysis: 5.1.0
   import_sorter: 4.6.0
 
   # コード生成
@@ -69,13 +69,13 @@ dev_dependencies:
   custom_lint: 0.5.7
   riverpod_generator: 2.3.9
   riverpod_lint: 2.3.7
-  drift_dev: 2.13.2
+  drift_dev: 2.14.1
   flutter_oss_licenses: 2.0.1
 
   # デザイン生成
-  flutter_native_splash: 2.3.6
+  flutter_native_splash: 2.3.8
   flutter_launcher_icons: 0.13.1
-  
+
   # build_runner の実行コマンド
   # flutter packages pub run build_runner build --delete-conflicting-outputs
 
@@ -83,7 +83,6 @@ dev_dependencies:
   # flutter pub run flutter_oss_licenses:generate.dart -o lib/constant/oss_licenses.dart
 
 flutter:
-
   uses-material-design: true
 
   assets:
@@ -126,8 +125,8 @@ flutter_native_splash:
   android: true
   ios: true
   info_plist_files:
-    - 'ios/Runner/Info-Debug.plist'
-    - 'ios/Runner/Info-Release.plist'
+    - "ios/Runner/Info-Debug.plist"
+    - "ios/Runner/Info-Release.plist"
 
   # 更新コマンド
   # flutter pub run flutter_native_splash:create
