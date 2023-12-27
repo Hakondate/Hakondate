@@ -64,22 +64,22 @@ class _$OriginModelCopyWithImpl<$Res, $Val extends OriginModel>
 }
 
 /// @nodoc
-abstract class _$$_OriginModelCopyWith<$Res>
+abstract class _$$OriginModelImplCopyWith<$Res>
     implements $OriginModelCopyWith<$Res> {
-  factory _$$_OriginModelCopyWith(
-          _$_OriginModel value, $Res Function(_$_OriginModel) then) =
-      __$$_OriginModelCopyWithImpl<$Res>;
+  factory _$$OriginModelImplCopyWith(
+          _$OriginModelImpl value, $Res Function(_$OriginModelImpl) then) =
+      __$$OriginModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({DateTime date, List<OriginCategoryModel> categories});
 }
 
 /// @nodoc
-class __$$_OriginModelCopyWithImpl<$Res>
-    extends _$OriginModelCopyWithImpl<$Res, _$_OriginModel>
-    implements _$$_OriginModelCopyWith<$Res> {
-  __$$_OriginModelCopyWithImpl(
-      _$_OriginModel _value, $Res Function(_$_OriginModel) _then)
+class __$$OriginModelImplCopyWithImpl<$Res>
+    extends _$OriginModelCopyWithImpl<$Res, _$OriginModelImpl>
+    implements _$$OriginModelImplCopyWith<$Res> {
+  __$$OriginModelImplCopyWithImpl(
+      _$OriginModelImpl _value, $Res Function(_$OriginModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -88,7 +88,7 @@ class __$$_OriginModelCopyWithImpl<$Res>
     Object? date = null,
     Object? categories = null,
   }) {
-    return _then(_$_OriginModel(
+    return _then(_$OriginModelImpl(
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -103,8 +103,8 @@ class __$$_OriginModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OriginModel extends _OriginModel {
-  const _$_OriginModel(
+class _$OriginModelImpl extends _OriginModel {
+  const _$OriginModelImpl(
       {required this.date, required final List<OriginCategoryModel> categories})
       : _categories = categories,
         super._();
@@ -128,7 +128,7 @@ class _$_OriginModel extends _OriginModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OriginModel &&
+            other is _$OriginModelImpl &&
             (identical(other.date, date) || other.date == date) &&
             const DeepCollectionEquality()
                 .equals(other._categories, _categories));
@@ -141,14 +141,14 @@ class _$_OriginModel extends _OriginModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OriginModelCopyWith<_$_OriginModel> get copyWith =>
-      __$$_OriginModelCopyWithImpl<_$_OriginModel>(this, _$identity);
+  _$$OriginModelImplCopyWith<_$OriginModelImpl> get copyWith =>
+      __$$OriginModelImplCopyWithImpl<_$OriginModelImpl>(this, _$identity);
 }
 
 abstract class _OriginModel extends OriginModel {
   const factory _OriginModel(
       {required final DateTime date,
-      required final List<OriginCategoryModel> categories}) = _$_OriginModel;
+      required final List<OriginCategoryModel> categories}) = _$OriginModelImpl;
   const _OriginModel._() : super._();
 
   @override
@@ -157,6 +157,6 @@ abstract class _OriginModel extends OriginModel {
   List<OriginCategoryModel> get categories;
   @override
   @JsonKey(ignore: true)
-  _$$_OriginModelCopyWith<_$_OriginModel> get copyWith =>
+  _$$OriginModelImplCopyWith<_$OriginModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

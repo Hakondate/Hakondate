@@ -58,22 +58,22 @@ class _$DrawerStateCopyWithImpl<$Res, $Val extends DrawerState>
 }
 
 /// @nodoc
-abstract class _$$_DrawerStateCopyWith<$Res>
+abstract class _$$DrawerStateImplCopyWith<$Res>
     implements $DrawerStateCopyWith<$Res> {
-  factory _$$_DrawerStateCopyWith(
-          _$_DrawerState value, $Res Function(_$_DrawerState) then) =
-      __$$_DrawerStateCopyWithImpl<$Res>;
+  factory _$$DrawerStateImplCopyWith(
+          _$DrawerStateImpl value, $Res Function(_$DrawerStateImpl) then) =
+      __$$DrawerStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({GlobalKey<ScaffoldState> scaffoldKey});
 }
 
 /// @nodoc
-class __$$_DrawerStateCopyWithImpl<$Res>
-    extends _$DrawerStateCopyWithImpl<$Res, _$_DrawerState>
-    implements _$$_DrawerStateCopyWith<$Res> {
-  __$$_DrawerStateCopyWithImpl(
-      _$_DrawerState _value, $Res Function(_$_DrawerState) _then)
+class __$$DrawerStateImplCopyWithImpl<$Res>
+    extends _$DrawerStateCopyWithImpl<$Res, _$DrawerStateImpl>
+    implements _$$DrawerStateImplCopyWith<$Res> {
+  __$$DrawerStateImplCopyWithImpl(
+      _$DrawerStateImpl _value, $Res Function(_$DrawerStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -81,7 +81,7 @@ class __$$_DrawerStateCopyWithImpl<$Res>
   $Res call({
     Object? scaffoldKey = null,
   }) {
-    return _then(_$_DrawerState(
+    return _then(_$DrawerStateImpl(
       scaffoldKey: null == scaffoldKey
           ? _value.scaffoldKey
           : scaffoldKey // ignore: cast_nullable_to_non_nullable
@@ -92,8 +92,8 @@ class __$$_DrawerStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DrawerState with DiagnosticableTreeMixin implements _DrawerState {
-  const _$_DrawerState({required this.scaffoldKey});
+class _$DrawerStateImpl with DiagnosticableTreeMixin implements _DrawerState {
+  const _$DrawerStateImpl({required this.scaffoldKey});
 
   @override
   final GlobalKey<ScaffoldState> scaffoldKey;
@@ -115,7 +115,7 @@ class _$_DrawerState with DiagnosticableTreeMixin implements _DrawerState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DrawerState &&
+            other is _$DrawerStateImpl &&
             (identical(other.scaffoldKey, scaffoldKey) ||
                 other.scaffoldKey == scaffoldKey));
   }
@@ -126,18 +126,19 @@ class _$_DrawerState with DiagnosticableTreeMixin implements _DrawerState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DrawerStateCopyWith<_$_DrawerState> get copyWith =>
-      __$$_DrawerStateCopyWithImpl<_$_DrawerState>(this, _$identity);
+  _$$DrawerStateImplCopyWith<_$DrawerStateImpl> get copyWith =>
+      __$$DrawerStateImplCopyWithImpl<_$DrawerStateImpl>(this, _$identity);
 }
 
 abstract class _DrawerState implements DrawerState {
   const factory _DrawerState(
-      {required final GlobalKey<ScaffoldState> scaffoldKey}) = _$_DrawerState;
+          {required final GlobalKey<ScaffoldState> scaffoldKey}) =
+      _$DrawerStateImpl;
 
   @override
   GlobalKey<ScaffoldState> get scaffoldKey;
   @override
   @JsonKey(ignore: true)
-  _$$_DrawerStateCopyWith<_$_DrawerState> get copyWith =>
+  _$$DrawerStateImplCopyWith<_$DrawerStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

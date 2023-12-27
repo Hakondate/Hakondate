@@ -1,5 +1,5 @@
 {
-  /** このファイルの入力保管を有効化 */
+  /** このファイルの入力補完を有効化 */
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
 
   /** 依存設定 */
@@ -59,7 +59,7 @@
   "prHourlyLimit": 0,
 
   /** PRの同時上限数 */
-  "prConcurrentLimit": 5,
+  "prConcurrentLimit": 0,
 
   /** PRにつけるラベル */
   "labels": [

@@ -90,6 +90,7 @@ app.*.map.json
 **/ios/firebase_app_id_file.json
 **/ios/Podfile.lock
 **/ios/Runner.xcodeproj/project.pbxproj
+**/ios/**/dgph
 
 # macOS
 **/macos/Flutter/GeneratedPluginRegistrant.swift
