@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/state/signup/signup_state.dart';
