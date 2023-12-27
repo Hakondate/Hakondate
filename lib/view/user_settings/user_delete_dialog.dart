@@ -13,8 +13,8 @@ class UserDeleteDialog extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return HakondateDialog(
-      title: const Text('ユーザーを削除しますか？'),
-      body: const Text('はいを押すとユーザーが削除されます'),
+      title: const Text('お子様の削除'),
+      body: const Text('お子様を削除しますか？'),
       firstAction: HakondateActionButton.primary(
         text: const Text('はい'),
         onTap: () async {
