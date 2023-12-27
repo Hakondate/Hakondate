@@ -22,18 +22,15 @@ class SignupViewModel extends _$SignupViewModel {
       editingUser = data.editingUser;
     });
 
-    final SchoolsLocalRepository schoolLocalRepository =
-        ref.watch(schoolsLocalRepositoryProvider);
+    final SchoolsLocalRepository schoolLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
     final List<SchoolModel> schools = await schoolLocalRepository.list();
 
     if (editingUser != null) {
-      final SchoolModel school =
-          await schoolLocalRepository.getById(editingUser!.schoolId);
+      final SchoolModel school = await schoolLocalRepository.getById(editingUser!.schoolId);
 
-      final List<String> schoolYears =
-          (school.classification == SchoolClassification.primary)
-              ? <String>['1年生', '2年生', '3年生', '4年生', '5年生', '6年生']
-              : <String>['1年生', '2年生', '3年生'];
+      final List<String> schoolYears = (school.classification == SchoolClassification.primary)
+          ? <String>['1年生', '2年生', '3年生', '4年生', '5年生', '6年生']
+          : <String>['1年生', '2年生', '3年生'];
 
       return SignupState(
         schools: schools,
@@ -121,22 +118,17 @@ class SignupViewModel extends _$SignupViewModel {
 
   void updateName(String? name) {
     state.whenData(
-      (SignupState data) =>
-          state = AsyncData<SignupState>(data.copyWith(name: name)),
+      (SignupState data) => state = AsyncData<SignupState>(data.copyWith(name: name)),
     );
   }
 
   Future<void> updateSchool(int id) async {
     state.whenData((SignupState data) async {
-      final SchoolModel school =
-          await ref.read(schoolsLocalRepositoryProvider).getById(id);
-      final List<String> schoolYears =
-          (school.classification == SchoolClassification.primary)
-              ? <String>['1年生', '2年生', '3年生', '4年生', '5年生', '6年生']
-              : <String>['1年生', '2年生', '3年生'];
-      if (data.schoolYear != null &&
-          data.schoolYear! > 3 &&
-          school.classification == SchoolClassification.secondary) {
+      final SchoolModel school = await ref.read(schoolsLocalRepositoryProvider).getById(id);
+      final List<String> schoolYears = (school.classification == SchoolClassification.primary)
+          ? <String>['1年生', '2年生', '3年生', '4年生', '5年生', '6年生']
+          : <String>['1年生', '2年生', '3年生'];
+      if (data.schoolYear != null && data.schoolYear! > 3 && school.classification == SchoolClassification.secondary) {
         state = AsyncData<SignupState>(
           data.copyWith(
             schoolId: id,
@@ -174,18 +166,15 @@ class SignupViewModel extends _$SignupViewModel {
     _checkSchoolValidation();
 
     return state.maybeWhen(
-      data: (SignupState data) =>
-          data.nameErrorState == null && data.schoolErrorState == null,
+      data: (SignupState data) => data.nameErrorState == null && data.schoolErrorState == null,
       orElse: () => false,
     );
   }
 
   void _checkNameValidation() {
     state.whenData((SignupState data) {
-      final String? nameErrorState =
-          (data.name == null || data.name!.isEmpty) ? 'お子様の名前を入力してください' : null;
-      state =
-          AsyncData<SignupState>(data.copyWith(nameErrorState: nameErrorState));
+      final String? nameErrorState = (data.name == null || data.name!.isEmpty) ? 'お子様の名前を入力してください' : null;
+      state = AsyncData<SignupState>(data.copyWith(nameErrorState: nameErrorState));
     });
   }
 

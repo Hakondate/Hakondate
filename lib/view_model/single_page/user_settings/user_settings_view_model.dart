@@ -13,9 +13,8 @@ part 'user_settings_view_model.g.dart';
 class UserSettingsViewModel extends _$UserSettingsViewModel {
   @override
   Future<UserSettingsState> build() async {
-    final List<UserModel> users =
-          await ref.read(usersLocalRepositoryProvider).list();
-    
+    final List<UserModel> users = await ref.read(usersLocalRepositoryProvider).list();
+
     return UserSettingsState(
       users: users,
     );
@@ -34,8 +33,7 @@ class UserSettingsViewModel extends _$UserSettingsViewModel {
     state = const AsyncLoading<UserSettingsState>();
 
     state = await AsyncValue.guard(() async {
-      final List<UserModel> users =
-          await ref.read(usersLocalRepositoryProvider).list();
+      final List<UserModel> users = await ref.read(usersLocalRepositoryProvider).list();
       return UserSettingsState(
         users: users,
       );

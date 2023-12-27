@@ -66,8 +66,7 @@ class UserViewModel extends _$UserViewModel {
     if (await _usersLocalRepository.count() == 0) return false;
 
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final int? currentUserId =
-        prefs.getInt(AppKey.sharedPreferencesKey.currentUserId);
+    final int? currentUserId = prefs.getInt(AppKey.sharedPreferencesKey.currentUserId);
 
     if (currentUserId == null) {
       throw SharedPreferencesException(
@@ -100,9 +99,8 @@ class UserViewModel extends _$UserViewModel {
     int? schoolYear,
   }) async {
     if (state.currentUser == null) return;
-    final NutrientsModel? slns = (schoolId != null || schoolYear != null)
-        ? await _getSLNS(state.currentUser!.id)
-        : state.currentUser!.slns;
+    final NutrientsModel? slns =
+        (schoolId != null || schoolYear != null) ? await _getSLNS(state.currentUser!.id) : state.currentUser!.slns;
     final UserModel newUser = state.currentUser!.copyWith(
       name: name ?? state.currentUser!.name,
       schoolId: schoolId ?? state.currentUser!.schoolId,
@@ -126,8 +124,7 @@ class UserViewModel extends _$UserViewModel {
 
   Future<SchoolGrade> getSchoolGrade(int userId) async {
     final UserModel user = await _usersLocalRepository.getById(userId);
-    final SchoolModel school =
-        await _schoolsLocalRepository.getById(user.schoolId);
+    final SchoolModel school = await _schoolsLocalRepository.getById(user.schoolId);
     if (school.classification != SchoolClassification.secondary) {
       if (user.schoolYear <= 2) {
         return SchoolGrade.lower;
@@ -159,8 +156,7 @@ class UserViewModel extends _$UserViewModel {
     if (user == null) {
       throw const SignInException('Current user does not exist');
     }
-    final SchoolModel school =
-        await _schoolsLocalRepository.getById(user.schoolId);
+    final SchoolModel school = await _schoolsLocalRepository.getById(user.schoolId);
 
     return school.parentId;
   }
