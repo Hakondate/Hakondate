@@ -21,12 +21,12 @@ class DictionarySearch extends ConsumerWidget {
         title:
           TextFormField(
             controller: _controller,
-            onChanged: (String value) {
-              ref.read(dictionaryViewModelProvider.notifier).getSearchedList(value);
+            onChanged: (String value) async {
+              await ref.read(dictionaryViewModelProvider.notifier).getSearchedList(value);
             },
             cursorColor:AppColor.brand.secondary,
             decoration: InputDecoration(
-              hintText: 'search',
+              hintText: '食材名を入力してください',
               enabledBorder: InputBorder.none,
               suffixIcon: IconButton(
                 onPressed: () {

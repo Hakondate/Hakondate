@@ -19,8 +19,8 @@ class Dictionary extends ConsumerWidget {
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.search),
-            onPressed: ()  {
-              ref.read(dictionaryViewModelProvider.notifier).initializeSearchedList();
+            onPressed: () async {
+              await ref.read(dictionaryViewModelProvider.notifier).initializeSearchedList();
               routemaster.push('/home/dictionary/search');
             },
           ),

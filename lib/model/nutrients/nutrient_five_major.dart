@@ -1,7 +1,7 @@
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
 import 'package:hakondate/model/nutrients/nutrient_unit.dart';
 
-enum MajorNutrient {  
+enum FiveMajorNutrient {  
   energy('energy', 'エネルギー', NutrientUnit.kcal),
   protein('protein', 'タンパク質', NutrientUnit.gram),
   vitamin('vitamin', 'ビタミン', NutrientUnit.mGram),
@@ -9,14 +9,14 @@ enum MajorNutrient {
   carbohydrate('carbohydrate', '炭水化物', NutrientUnit.gram),
   lipid('lipid', '脂質', NutrientUnit.gram);
 
-  const MajorNutrient(this.key, this.japaneseName, this.unit);
+  const FiveMajorNutrient(this.key, this.japaneseName, this.unit);
 
   final String key;
   final String japaneseName;
   final NutrientUnit unit;
 }
 
-extension MajorNutrientExtension on MajorNutrient {
+extension MajorNutrientExtension on FiveMajorNutrient {
   double getNutrient(DictionaryItemModel item){
     switch(key){
       case 'energy': 
