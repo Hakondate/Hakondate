@@ -14,8 +14,8 @@ class UserSwitchDialog extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return HakondateDialog(
-      title: const Text('ユーザーを変更しますか？'),
-      body: const Text('はいを押すとユーザーが変更されます'),
+      title: const Text('選択中のお子様の変更'),
+      body: const Text('選択中のお子様を変更しますか？'),
       firstAction: HakondateActionButton.primary(
         text: const Text('はい'),
         onTap: () async {
