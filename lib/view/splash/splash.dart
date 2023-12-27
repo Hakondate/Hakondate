@@ -37,7 +37,9 @@ class Splash extends ConsumerWidget {
                       barrierDismissible: false,
                       builder: (_) => TermsUpdatedDialog(
                         onTap: () {
-                          routemaster..pop()..replace('/terms');
+                          routemaster
+                            ..pop()
+                            ..replace('/terms');
                         },
                       ),
                     ),
@@ -47,15 +49,15 @@ class Splash extends ConsumerWidget {
                       builder: (BuildContext context) {
                         if (error is ConnectionException) {
                           return ConnectionExceptionDialog(
-                            onTapRetry: () => routemaster.pop().whenComplete(() =>
-                            ref.read(appUniqueKeyProvider.notifier).restartApp(),
+                            onTapRetry: () => routemaster.pop().whenComplete(
+                                  () => ref.read(appUniqueKeyProvider.notifier).restartApp(),
                                 ),
                           );
                         }
 
                         return LocalDatabaseExceptionDialog(
-                          onTapRetry: () => routemaster.pop().whenComplete(() =>
-                          ref.read(appUniqueKeyProvider.notifier).restartApp(),
+                          onTapRetry: () => routemaster.pop().whenComplete(
+                                () => ref.read(appUniqueKeyProvider.notifier).restartApp(),
                               ),
                         );
                       },
@@ -67,7 +69,7 @@ class Splash extends ConsumerWidget {
                   builder: (BuildContext context) {
                     final SplashState state = ref.watch(splashViewModelProvider);
                     if (state is SplashStateLoad) return Image.asset(state.status.imagePath);
-                                        return Image.asset('assets/loading_animation/data_reading.gif');
+                    return Image.asset('assets/loading_animation/data_reading.gif');
                   },
                 ),
               ),

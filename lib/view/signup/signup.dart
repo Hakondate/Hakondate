@@ -40,8 +40,7 @@ class Signup extends StatelessWidget {
   Widget _nameForm() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        final AsyncValue<SignupState> state =
-            ref.watch(signupViewModelProvider);
+        final AsyncValue<SignupState> state = ref.watch(signupViewModelProvider);
 
         return Padding(
           padding: const EdgeInsets.all(PaddingSize.normal),
@@ -69,13 +68,11 @@ class Signup extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                  if (state is AsyncData<SignupState>)
-                    _errorIndication(state.value.nameErrorState),
+                  if (state is AsyncData<SignupState>) _errorIndication(state.value.nameErrorState),
                 ],
               ),
               TextFormField(
-                initialValue:
-                    (state is AsyncData<SignupState>) ? state.value.name : '',
+                initialValue: (state is AsyncData<SignupState>) ? state.value.name : '',
                 keyboardType: TextInputType.name,
                 maxLength: 15,
                 decoration: InputDecoration(
@@ -88,9 +85,7 @@ class Signup extends StatelessWidget {
                     ),
                   ),
                 ),
-                onChanged: (String value) => ref
-                    .read(signupViewModelProvider.notifier)
-                    .updateName(value),
+                onChanged: (String value) => ref.read(signupViewModelProvider.notifier).updateName(value),
               ),
             ],
           ),
@@ -102,8 +97,7 @@ class Signup extends StatelessWidget {
   Widget _schoolForm() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        final AsyncValue<SignupState> state =
-            ref.watch(signupViewModelProvider);
+        final AsyncValue<SignupState> state = ref.watch(signupViewModelProvider);
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -124,46 +118,34 @@ class Signup extends StatelessWidget {
                       context: context,
                       builder: (BuildContext context) => const HelpDialog(
                         title: Text('学校・学年について'),
-                        content: Text(
-                            '　学校情報は，本アプリ内でお子様の通っている学校の献立を表示するために利用されます．選択肢にない学校は，本アプリ未対応の学校です．\n'
+                        content: Text('　学校情報は，本アプリ内でお子様の通っている学校の献立を表示するために利用されます．選択肢にない学校は，本アプリ未対応の学校です．\n'
                             '　学年情報は，本アプリ内でお子様の年齢に合わせた情報(栄養基準値など)を表示するために利用されます．\n'
                             '　どちらの情報も，端末内に保存され収集されることはありません．また，あとから変更することができます．'),
                       ),
                     ),
                   ),
                   const Spacer(),
-                  if (state is AsyncData<SignupState>)
-                    _errorIndication(state.value.schoolErrorState),
+                  if (state is AsyncData<SignupState>) _errorIndication(state.value.schoolErrorState),
                 ],
               ),
             ),
             SettingLabel(
               title: '学校',
               dialList: (state is AsyncData<SignupState>)
-                  ? state.value.schools
-                      .map((SchoolModel school) => school.name)
-                      .toList()
+                  ? state.value.schools.map((SchoolModel school) => school.name).toList()
                   : <String>[],
               completed: (int index) {
                 if (state is! AsyncData<SignupState>) return;
                 final int id = state.value.schools[index].id;
                 ref.read(signupViewModelProvider.notifier).updateSchool(id);
               },
-              trailing: (state is AsyncData<SignupState>)
-                  ? state.value.schoolTrailing
-                  : '',
+              trailing: (state is AsyncData<SignupState>) ? state.value.schoolTrailing : '',
             ),
             SettingLabel(
               title: '学年',
-              dialList: (state is AsyncData<SignupState>)
-                  ? state.value.schoolYears
-                  : <String>[],
-              completed: (int index) => ref
-                  .read(signupViewModelProvider.notifier)
-                  .updateSchoolYear(index + 1),
-              trailing: (state is AsyncData<SignupState>)
-                  ? state.value.schoolYearTrailing
-                  : '',
+              dialList: (state is AsyncData<SignupState>) ? state.value.schoolYears : <String>[],
+              completed: (int index) => ref.read(signupViewModelProvider.notifier).updateSchoolYear(index + 1),
+              trailing: (state is AsyncData<SignupState>) ? state.value.schoolYearTrailing : '',
             ),
             const SizedBox(height: PaddingSize.normal),
           ],
@@ -208,13 +190,10 @@ class Signup extends StatelessWidget {
                 ),
                 child: const Text('登録する'),
                 onPressed: () async {
-                  if (ref
-                      .read(signupViewModelProvider.notifier)
-                      .checkValidation()) {
+                  if (ref.read(signupViewModelProvider.notifier).checkValidation()) {
                     return showDialog(
                       context: context,
-                      builder: (BuildContext context) =>
-                          const SigningUpDialog(),
+                      builder: (BuildContext context) => const SigningUpDialog(),
                     );
                   }
                 },

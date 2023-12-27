@@ -17,8 +17,7 @@ class SigningUpDialog extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        final AsyncValue<SignupState> state =
-            ref.watch(signupViewModelProvider);
+        final AsyncValue<SignupState> state = ref.watch(signupViewModelProvider);
         return HakondateDialog(
           title: const Text('確認'),
           body: Padding(
@@ -26,9 +25,7 @@ class SigningUpDialog extends ConsumerWidget {
             child: Column(
               children: <Widget>[
                 Container(
-                  margin: const EdgeInsets.symmetric(
-                    vertical: MarginSize.minimum,
-                  ),
+                  margin: const EdgeInsets.symmetric(vertical: MarginSize.minimum),
                   child: const Text(
                     '以下の内容でお子様を登録します\n'
                     '※ あとで変更することができます',
@@ -93,8 +90,7 @@ class SigningUpDialog extends ConsumerWidget {
   Widget _statusDialog() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        final AsyncValue<SignupState> state =
-            ref.watch(signupViewModelProvider);
+        final AsyncValue<SignupState> state = ref.watch(signupViewModelProvider);
         if (state is AsyncError<SignupState>) {
           return HakondateDialog(
             title: const Text('登録失敗'),
@@ -106,16 +102,13 @@ class SigningUpDialog extends ConsumerWidget {
           );
         }
 
-        if (state is! AsyncLoading<SignupState> &&
-            ref.watch(userViewModelProvider).currentUser != null) {
+        if (state is! AsyncLoading<SignupState> && ref.watch(userViewModelProvider).currentUser != null) {
           return HakondateDialog(
             title: const Text('登録完了'),
             body: const Text('ユーザ情報の登録が成功しました'),
             firstAction: HakondateActionButton.primary(
               text: const Text('はじめる'),
-              onTap: () => routemaster
-                  .pop()
-                  .whenComplete(() => routemaster.replace('/splash')),
+              onTap: () => routemaster.pop().whenComplete(() => routemaster.replace('/splash')),
             ),
           );
         }
