@@ -7,6 +7,7 @@ import 'package:routemaster/routemaster.dart';
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/constant/svg_path.dart';
+import 'package:hakondate/util/environment.dart';
 import 'package:hakondate/view/daily/daily_drawer.dart';
 import 'package:hakondate/view_model/multi_page/drawer/drawer_view_model.dart';
 
@@ -55,11 +56,12 @@ class AppBottomNavigationBar extends ConsumerWidget {
             inactiveIconPath: SvgPath.bottomNavigationBarIcons.inactiveDictionary,
             label: 'ずかん',
           ),
-          _svgBottomNavigationBarItem(
-            activeIconPath: SvgPath.bottomNavigationBarIcons.activeLetter,
-            inactiveIconPath: SvgPath.bottomNavigationBarIcons.inactiveLetter,
-            label: 'お便り',
-          ),
+          if (Environment.flavor == Flavor.dev)
+            _svgBottomNavigationBarItem(
+              activeIconPath: SvgPath.bottomNavigationBarIcons.activeLetter,
+              inactiveIconPath: SvgPath.bottomNavigationBarIcons.inactiveLetter,
+              label: 'お便り',
+            ),
         ],
       ),
     );
