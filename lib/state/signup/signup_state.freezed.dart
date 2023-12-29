@@ -114,11 +114,11 @@ class _$SignupStateCopyWithImpl<$Res, $Val extends SignupState>
 }
 
 /// @nodoc
-abstract class _$$_SignupStateCopyWith<$Res>
+abstract class _$$SignupStateImplCopyWith<$Res>
     implements $SignupStateCopyWith<$Res> {
-  factory _$$_SignupStateCopyWith(
-          _$_SignupState value, $Res Function(_$_SignupState) then) =
-      __$$_SignupStateCopyWithImpl<$Res>;
+  factory _$$SignupStateImplCopyWith(
+          _$SignupStateImpl value, $Res Function(_$SignupStateImpl) then) =
+      __$$SignupStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -134,11 +134,11 @@ abstract class _$$_SignupStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SignupStateCopyWithImpl<$Res>
-    extends _$SignupStateCopyWithImpl<$Res, _$_SignupState>
-    implements _$$_SignupStateCopyWith<$Res> {
-  __$$_SignupStateCopyWithImpl(
-      _$_SignupState _value, $Res Function(_$_SignupState) _then)
+class __$$SignupStateImplCopyWithImpl<$Res>
+    extends _$SignupStateCopyWithImpl<$Res, _$SignupStateImpl>
+    implements _$$SignupStateImplCopyWith<$Res> {
+  __$$SignupStateImplCopyWithImpl(
+      _$SignupStateImpl _value, $Res Function(_$SignupStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -154,7 +154,7 @@ class __$$_SignupStateCopyWithImpl<$Res>
     Object? nameErrorState = freezed,
     Object? schoolErrorState = freezed,
   }) {
-    return _then(_$_SignupState(
+    return _then(_$SignupStateImpl(
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -197,8 +197,8 @@ class __$$_SignupStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SignupState with DiagnosticableTreeMixin implements _SignupState {
-  const _$_SignupState(
+class _$SignupStateImpl with DiagnosticableTreeMixin implements _SignupState {
+  const _$SignupStateImpl(
       {this.name,
       this.schoolId,
       this.schoolYear,
@@ -271,7 +271,7 @@ class _$_SignupState with DiagnosticableTreeMixin implements _SignupState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SignupState &&
+            other is _$SignupStateImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.schoolId, schoolId) ||
                 other.schoolId == schoolId) &&
@@ -306,8 +306,8 @@ class _$_SignupState with DiagnosticableTreeMixin implements _SignupState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SignupStateCopyWith<_$_SignupState> get copyWith =>
-      __$$_SignupStateCopyWithImpl<_$_SignupState>(this, _$identity);
+  _$$SignupStateImplCopyWith<_$SignupStateImpl> get copyWith =>
+      __$$SignupStateImplCopyWithImpl<_$SignupStateImpl>(this, _$identity);
 }
 
 abstract class _SignupState implements SignupState {
@@ -320,7 +320,7 @@ abstract class _SignupState implements SignupState {
       final List<SchoolModel> schools,
       final List<String> schoolYears,
       final String? nameErrorState,
-      final String? schoolErrorState}) = _$_SignupState;
+      final String? schoolErrorState}) = _$SignupStateImpl;
 
   @override
   String? get name;
@@ -342,6 +342,6 @@ abstract class _SignupState implements SignupState {
   String? get schoolErrorState;
   @override
   @JsonKey(ignore: true)
-  _$$_SignupStateCopyWith<_$_SignupState> get copyWith =>
+  _$$SignupStateImplCopyWith<_$SignupStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

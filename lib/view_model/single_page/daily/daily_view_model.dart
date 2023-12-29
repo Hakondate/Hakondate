@@ -1,5 +1,4 @@
 import 'package:hakondate/model/nutrients/five_major_nutrient.dart';
-
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';

@@ -97,11 +97,11 @@ class _$DictionaryItemModelCopyWithImpl<$Res, $Val extends DictionaryItemModel>
 }
 
 /// @nodoc
-abstract class _$$_DictionaryItemModelCopyWith<$Res>
+abstract class _$$DictionaryItemModelImplCopyWith<$Res>
     implements $DictionaryItemModelCopyWith<$Res> {
-  factory _$$_DictionaryItemModelCopyWith(_$_DictionaryItemModel value,
-          $Res Function(_$_DictionaryItemModel) then) =
-      __$$_DictionaryItemModelCopyWithImpl<$Res>;
+  factory _$$DictionaryItemModelImplCopyWith(_$DictionaryItemModelImpl value,
+          $Res Function(_$DictionaryItemModelImpl) then) =
+      __$$DictionaryItemModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -116,11 +116,11 @@ abstract class _$$_DictionaryItemModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_DictionaryItemModelCopyWithImpl<$Res>
-    extends _$DictionaryItemModelCopyWithImpl<$Res, _$_DictionaryItemModel>
-    implements _$$_DictionaryItemModelCopyWith<$Res> {
-  __$$_DictionaryItemModelCopyWithImpl(_$_DictionaryItemModel _value,
-      $Res Function(_$_DictionaryItemModel) _then)
+class __$$DictionaryItemModelImplCopyWithImpl<$Res>
+    extends _$DictionaryItemModelCopyWithImpl<$Res, _$DictionaryItemModelImpl>
+    implements _$$DictionaryItemModelImplCopyWith<$Res> {
+  __$$DictionaryItemModelImplCopyWithImpl(_$DictionaryItemModelImpl _value,
+      $Res Function(_$DictionaryItemModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -132,7 +132,7 @@ class __$$_DictionaryItemModelCopyWithImpl<$Res>
     Object? nutrients = null,
     Object? note = freezed,
   }) {
-    return _then(_$_DictionaryItemModel(
+    return _then(_$DictionaryItemModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -159,8 +159,8 @@ class __$$_DictionaryItemModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DictionaryItemModel implements _DictionaryItemModel {
-  const _$_DictionaryItemModel(
+class _$DictionaryItemModelImpl implements _DictionaryItemModel {
+  const _$DictionaryItemModelImpl(
       {required this.id,
       required this.group,
       required this.name,
@@ -191,7 +191,7 @@ class _$_DictionaryItemModel implements _DictionaryItemModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DictionaryItemModel &&
+            other is _$DictionaryItemModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.group, group) || other.group == group) &&
             (identical(other.name, name) || other.name == name) &&
@@ -207,8 +207,8 @@ class _$_DictionaryItemModel implements _DictionaryItemModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DictionaryItemModelCopyWith<_$_DictionaryItemModel> get copyWith =>
-      __$$_DictionaryItemModelCopyWithImpl<_$_DictionaryItemModel>(
+  _$$DictionaryItemModelImplCopyWith<_$DictionaryItemModelImpl> get copyWith =>
+      __$$DictionaryItemModelImplCopyWithImpl<_$DictionaryItemModelImpl>(
           this, _$identity);
 }
 
@@ -218,7 +218,7 @@ abstract class _DictionaryItemModel implements DictionaryItemModel {
       required final DictionaryGroup group,
       required final String name,
       required final NutrientsModel nutrients,
-      final String? note}) = _$_DictionaryItemModel;
+      final String? note}) = _$DictionaryItemModelImpl;
 
   @override
   int get id;
@@ -232,6 +232,6 @@ abstract class _DictionaryItemModel implements DictionaryItemModel {
   String? get note;
   @override
   @JsonKey(ignore: true)
-  _$$_DictionaryItemModelCopyWith<_$_DictionaryItemModel> get copyWith =>
+  _$$DictionaryItemModelImplCopyWith<_$DictionaryItemModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
