@@ -18,6 +18,15 @@ class DictionaryViewModel extends _$DictionaryViewModel {
     return const DictionaryState();
   }
 
+	Future<void> selectGroup(DictionaryGroup group) async {
+		state = const AsyncLoading<DictionaryState>();
+		state = AsyncData<DictionaryState>(
+			DictionaryState(
+				selectedGroup: group,
+				selectedGroupItems: await _dictionaryItemsLocalRepository.listGroup(group.groupNumber),
+			),
+		);
+	}
 
   Future<void> selectItem(int id) async {
     state.whenData((DictionaryState data) async {
@@ -31,16 +40,6 @@ class DictionaryViewModel extends _$DictionaryViewModel {
 
     await ref.read(analyticsControllerProvider.notifier).logViewDictionary(id);
   }
-
-	Future<void> selectGroup(DictionaryGroup group) async {
-		state = const AsyncLoading<DictionaryState>();
-		state = AsyncData<DictionaryState>(
-			DictionaryState(
-				selectedGroup: group,
-				selectedGroupItems: await _dictionaryItemsLocalRepository.listGroup(group.groupNumber),
-			),
-		);
-	}
 
   Future<List<double>> getGraphValues(double maxValue) async {
     return state.maybeWhen(
