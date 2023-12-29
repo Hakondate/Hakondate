@@ -78,7 +78,7 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
 
   /* 1食品群のランキング */
   Widget _rankingContents(
-      MapEntry<FiveMajorNutrient, List<DictionaryItemModel>> nutrientMap) {
+      MapEntry<FiveMajorNutrient, List<DictionaryItemModel>> nutrientMap,) {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
         return Padding(
@@ -152,7 +152,7 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
                       .read(dictionaryViewModelProvider.notifier)
                       .selectItem(nutrientMap.value[index].id);
                   routemaster.push(
-                      '/home/dictionary_item/${nutrientMap.value[index].id}');
+                      '/home/dictionary_item/${nutrientMap.value[index].id}',);
                 },
               );
             }),
