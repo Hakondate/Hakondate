@@ -20,8 +20,6 @@ mixin _$DictionaryState {
   List<DictionaryItemModel>? get selectedGroupItems =>
       throw _privateConstructorUsedError;
   DictionaryItemModel? get selectedItem => throw _privateConstructorUsedError;
-  List<DictionaryItemModel> get searchedItems =>
-      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DictionaryStateCopyWith<DictionaryState> get copyWith =>
@@ -37,8 +35,7 @@ abstract class $DictionaryStateCopyWith<$Res> {
   $Res call(
       {DictionaryGroup? selectedGroup,
       List<DictionaryItemModel>? selectedGroupItems,
-      DictionaryItemModel? selectedItem,
-      List<DictionaryItemModel> searchedItems});
+      DictionaryItemModel? selectedItem});
 
   $DictionaryItemModelCopyWith<$Res>? get selectedItem;
 }
@@ -59,7 +56,6 @@ class _$DictionaryStateCopyWithImpl<$Res, $Val extends DictionaryState>
     Object? selectedGroup = freezed,
     Object? selectedGroupItems = freezed,
     Object? selectedItem = freezed,
-    Object? searchedItems = null,
   }) {
     return _then(_value.copyWith(
       selectedGroup: freezed == selectedGroup
@@ -74,10 +70,6 @@ class _$DictionaryStateCopyWithImpl<$Res, $Val extends DictionaryState>
           ? _value.selectedItem
           : selectedItem // ignore: cast_nullable_to_non_nullable
               as DictionaryItemModel?,
-      searchedItems: null == searchedItems
-          ? _value.searchedItems
-          : searchedItems // ignore: cast_nullable_to_non_nullable
-              as List<DictionaryItemModel>,
     ) as $Val);
   }
 
@@ -105,8 +97,7 @@ abstract class _$$DictionaryStateImplCopyWith<$Res>
   $Res call(
       {DictionaryGroup? selectedGroup,
       List<DictionaryItemModel>? selectedGroupItems,
-      DictionaryItemModel? selectedItem,
-      List<DictionaryItemModel> searchedItems});
+      DictionaryItemModel? selectedItem});
 
   @override
   $DictionaryItemModelCopyWith<$Res>? get selectedItem;
@@ -126,7 +117,6 @@ class __$$DictionaryStateImplCopyWithImpl<$Res>
     Object? selectedGroup = freezed,
     Object? selectedGroupItems = freezed,
     Object? selectedItem = freezed,
-    Object? searchedItems = null,
   }) {
     return _then(_$DictionaryStateImpl(
       selectedGroup: freezed == selectedGroup
@@ -141,10 +131,6 @@ class __$$DictionaryStateImplCopyWithImpl<$Res>
           ? _value.selectedItem
           : selectedItem // ignore: cast_nullable_to_non_nullable
               as DictionaryItemModel?,
-      searchedItems: null == searchedItems
-          ? _value._searchedItems
-          : searchedItems // ignore: cast_nullable_to_non_nullable
-              as List<DictionaryItemModel>,
     ));
   }
 }
@@ -155,11 +141,8 @@ class _$DictionaryStateImpl implements _DictionaryState {
   const _$DictionaryStateImpl(
       {this.selectedGroup,
       final List<DictionaryItemModel>? selectedGroupItems,
-      this.selectedItem,
-      final List<DictionaryItemModel> searchedItems =
-          const <DictionaryItemModel>[]})
-      : _selectedGroupItems = selectedGroupItems,
-        _searchedItems = searchedItems;
+      this.selectedItem})
+      : _selectedGroupItems = selectedGroupItems;
 
   @override
   final DictionaryGroup? selectedGroup;
@@ -176,18 +159,10 @@ class _$DictionaryStateImpl implements _DictionaryState {
 
   @override
   final DictionaryItemModel? selectedItem;
-  final List<DictionaryItemModel> _searchedItems;
-  @override
-  @JsonKey()
-  List<DictionaryItemModel> get searchedItems {
-    if (_searchedItems is EqualUnmodifiableListView) return _searchedItems;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_searchedItems);
-  }
 
   @override
   String toString() {
-    return 'DictionaryState(selectedGroup: $selectedGroup, selectedGroupItems: $selectedGroupItems, selectedItem: $selectedItem, searchedItems: $searchedItems)';
+    return 'DictionaryState(selectedGroup: $selectedGroup, selectedGroupItems: $selectedGroupItems, selectedItem: $selectedItem)';
   }
 
   @override
@@ -200,18 +175,12 @@ class _$DictionaryStateImpl implements _DictionaryState {
             const DeepCollectionEquality()
                 .equals(other._selectedGroupItems, _selectedGroupItems) &&
             (identical(other.selectedItem, selectedItem) ||
-                other.selectedItem == selectedItem) &&
-            const DeepCollectionEquality()
-                .equals(other._searchedItems, _searchedItems));
+                other.selectedItem == selectedItem));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      selectedGroup,
-      const DeepCollectionEquality().hash(_selectedGroupItems),
-      selectedItem,
-      const DeepCollectionEquality().hash(_searchedItems));
+  int get hashCode => Object.hash(runtimeType, selectedGroup,
+      const DeepCollectionEquality().hash(_selectedGroupItems), selectedItem);
 
   @JsonKey(ignore: true)
   @override
@@ -225,8 +194,7 @@ abstract class _DictionaryState implements DictionaryState {
   const factory _DictionaryState(
       {final DictionaryGroup? selectedGroup,
       final List<DictionaryItemModel>? selectedGroupItems,
-      final DictionaryItemModel? selectedItem,
-      final List<DictionaryItemModel> searchedItems}) = _$DictionaryStateImpl;
+      final DictionaryItemModel? selectedItem}) = _$DictionaryStateImpl;
 
   @override
   DictionaryGroup? get selectedGroup;
@@ -234,8 +202,6 @@ abstract class _DictionaryState implements DictionaryState {
   List<DictionaryItemModel>? get selectedGroupItems;
   @override
   DictionaryItemModel? get selectedItem;
-  @override
-  List<DictionaryItemModel> get searchedItems;
   @override
   @JsonKey(ignore: true)
   _$$DictionaryStateImplCopyWith<_$DictionaryStateImpl> get copyWith =>

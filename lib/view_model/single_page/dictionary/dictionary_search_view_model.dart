@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart';
+
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
 import 'package:hakondate/repository/local/sqlite/dictionary_items/dictionary_items_local_repository.dart';
 import 'package:hakondate/state/dictionary/dictionary_search_state.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:flutter/material.dart';
 
 part 'dictionary_search_view_model.g.dart';
 
