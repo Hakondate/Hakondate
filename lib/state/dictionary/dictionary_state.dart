@@ -10,6 +10,5 @@ class DictionaryState with _$DictionaryState {
     DictionaryGroup? selectedGroup,
     List<DictionaryItemModel>? selectedGroupItems,
     DictionaryItemModel? selectedItem,
-    @Default(<DictionaryItemModel>[]) List<DictionaryItemModel> searchedItems,
   }) = _DictionaryState;
 }
