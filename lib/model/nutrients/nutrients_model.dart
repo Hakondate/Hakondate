@@ -33,7 +33,7 @@ class NutrientsModel with _$NutrientsModel {
   double get vitamin => retinol / 1000 + vitaminB1 + vitaminB2 + vitaminC;
   double get mineral => calcium + magnesium + iron + zinc;
 
-	double getNutrient(FiveMajorNutrient nutrient) {
+ 	double getNutrient(FiveMajorNutrient nutrient) {
     switch (nutrient.name) {
       case 'energy':
         return energy;
