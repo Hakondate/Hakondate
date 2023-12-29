@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
 import 'package:hakondate/model/dish/dish_model.dart';
 import 'package:hakondate/model/menu/menu_model.dart';
-import 'package:hakondate/model/nutrients/nutrient_five_major.dart';
+import 'package:hakondate/model/nutrients/five_major_nutrient.dart';
 
 part 'daily_state.freezed.dart';
 

@@ -1,4 +1,4 @@
-import 'package:hakondate/model/nutrients/nutrient_five_major.dart';
+import 'package:hakondate/model/nutrients/five_major_nutrient.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -112,10 +112,10 @@ class DailyViewModel extends _$DailyViewModel {
       }
       final Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendDishes = <FiveMajorNutrient, List<DictionaryItemModel>>{
         minValue.key: await _dictionaryItemsLocalRepository.getRanking(
-          nutrient: minValue.key.key,
+          nutrient: minValue.key.toString(),
         ),
         secondMinValue.key: await _dictionaryItemsLocalRepository.getRanking(
-          nutrient: secondMinValue.key.key,
+          nutrient: secondMinValue.key.toString(),
         ),
       };
       return recommendDishes;

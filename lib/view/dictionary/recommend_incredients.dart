@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
-import 'package:hakondate/model/nutrients/nutrient_five_major.dart';
+import 'package:hakondate/model/nutrients/five_major_nutrient.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/daily/daily_state.dart';
 import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
@@ -114,7 +114,7 @@ class RecommendedIncredientExpansionTile extends StatelessWidget{
                          mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
                                 Text(
-                                  key.getNutrient(list[index]).toString() + key.unit.value,
+                                  key.getNutrient(list[index]).toString() + key.unit.toString(),
                                   style: const TextStyle(
                                     fontSize: FontSize.subheading,
                                     fontWeight: FontWeight.bold,

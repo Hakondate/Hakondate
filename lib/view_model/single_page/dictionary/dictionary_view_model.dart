@@ -1,4 +1,4 @@
-import 'package:hakondate/model/nutrients/nutrient_five_major.dart';
+import 'package:hakondate/model/nutrients/five_major_nutrient.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
@@ -97,7 +97,7 @@ class DictionaryViewModel extends _$DictionaryViewModel {
 
   Future<DictionaryItemModel> _getMaxRef(FiveMajorNutrient nutrient) async {
     final List<DictionaryItemModel> schemas = await _dictionaryItemsLocalRepository.getRanking(
-      nutrient: nutrient.key,
+      nutrient: nutrient.toString(),
       limit: 200,
     );
 
