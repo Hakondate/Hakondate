@@ -27,7 +27,6 @@ class DictionarySearch extends StatelessWidget {
                             .read(dictionarySearchViewModelProvider.notifier)
                             .getSearchedList(value);
                       },
-                      autofocus: true,
                       cursorColor: AppColor.brand.secondary,
                       decoration: InputDecoration(
                         hintText: '食材名を入力してください',
