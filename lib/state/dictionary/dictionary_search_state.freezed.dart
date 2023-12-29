@@ -68,11 +68,12 @@ class _$DictionarySearchStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_DictionarySearchStateCopyWith<$Res>
+abstract class _$$DictionarySearchStateImplCopyWith<$Res>
     implements $DictionarySearchStateCopyWith<$Res> {
-  factory _$$_DictionarySearchStateCopyWith(_$_DictionarySearchState value,
-          $Res Function(_$_DictionarySearchState) then) =
-      __$$_DictionarySearchStateCopyWithImpl<$Res>;
+  factory _$$DictionarySearchStateImplCopyWith(
+          _$DictionarySearchStateImpl value,
+          $Res Function(_$DictionarySearchStateImpl) then) =
+      __$$DictionarySearchStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -81,11 +82,12 @@ abstract class _$$_DictionarySearchStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_DictionarySearchStateCopyWithImpl<$Res>
-    extends _$DictionarySearchStateCopyWithImpl<$Res, _$_DictionarySearchState>
-    implements _$$_DictionarySearchStateCopyWith<$Res> {
-  __$$_DictionarySearchStateCopyWithImpl(_$_DictionarySearchState _value,
-      $Res Function(_$_DictionarySearchState) _then)
+class __$$DictionarySearchStateImplCopyWithImpl<$Res>
+    extends _$DictionarySearchStateCopyWithImpl<$Res,
+        _$DictionarySearchStateImpl>
+    implements _$$DictionarySearchStateImplCopyWith<$Res> {
+  __$$DictionarySearchStateImplCopyWithImpl(_$DictionarySearchStateImpl _value,
+      $Res Function(_$DictionarySearchStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -94,7 +96,7 @@ class __$$_DictionarySearchStateCopyWithImpl<$Res>
     Object? searchBarTextController = null,
     Object? searchedItems = null,
   }) {
-    return _then(_$_DictionarySearchState(
+    return _then(_$DictionarySearchStateImpl(
       searchBarTextController: null == searchBarTextController
           ? _value.searchBarTextController
           : searchBarTextController // ignore: cast_nullable_to_non_nullable
@@ -109,8 +111,8 @@ class __$$_DictionarySearchStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DictionarySearchState implements _DictionarySearchState {
-  const _$_DictionarySearchState(
+class _$DictionarySearchStateImpl implements _DictionarySearchState {
+  const _$DictionarySearchStateImpl(
       {required this.searchBarTextController,
       final List<DictionaryItemModel> searchedItems =
           const <DictionaryItemModel>[]})
@@ -136,7 +138,7 @@ class _$_DictionarySearchState implements _DictionarySearchState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DictionarySearchState &&
+            other is _$DictionarySearchStateImpl &&
             (identical(
                     other.searchBarTextController, searchBarTextController) ||
                 other.searchBarTextController == searchBarTextController) &&
@@ -151,16 +153,16 @@ class _$_DictionarySearchState implements _DictionarySearchState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DictionarySearchStateCopyWith<_$_DictionarySearchState> get copyWith =>
-      __$$_DictionarySearchStateCopyWithImpl<_$_DictionarySearchState>(
-          this, _$identity);
+  _$$DictionarySearchStateImplCopyWith<_$DictionarySearchStateImpl>
+      get copyWith => __$$DictionarySearchStateImplCopyWithImpl<
+          _$DictionarySearchStateImpl>(this, _$identity);
 }
 
 abstract class _DictionarySearchState implements DictionarySearchState {
   const factory _DictionarySearchState(
           {required final TextEditingController searchBarTextController,
           final List<DictionaryItemModel> searchedItems}) =
-      _$_DictionarySearchState;
+      _$DictionarySearchStateImpl;
 
   @override
   TextEditingController get searchBarTextController;
@@ -168,6 +170,6 @@ abstract class _DictionarySearchState implements DictionarySearchState {
   List<DictionaryItemModel> get searchedItems;
   @override
   @JsonKey(ignore: true)
-  _$$_DictionarySearchStateCopyWith<_$_DictionarySearchState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$DictionarySearchStateImplCopyWith<_$DictionarySearchStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

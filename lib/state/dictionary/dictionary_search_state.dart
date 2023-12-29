@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
 
 part 'dictionary_search_state.freezed.dart';
