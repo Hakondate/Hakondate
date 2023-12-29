@@ -36,7 +36,7 @@ class RecommendedIncredientExpansionTile extends StatelessWidget {
                               i < data.recommendIncredientsMap.length;
                               i++)
                             _recommendFoodWidget(
-                                data.recommendIncredientsMap, i),
+                                data.recommendIncredientsMap, i,),
                         ],
                       );
                     } else {
@@ -53,7 +53,7 @@ class RecommendedIncredientExpansionTile extends StatelessWidget {
 
   Widget _recommendFoodWidget(
       Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendIncredients,
-      int index) {
+      int index,) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -65,23 +65,21 @@ class RecommendedIncredientExpansionTile extends StatelessWidget {
           ),
         ),
         _rankingContents(
-          recommendIncredients.entries.elementAt(index).value,
-          recommendIncredients.entries.elementAt(index).key,
+					recommendIncredients.entries.elementAt(index),
         ),
       ],
     );
   }
 
   /* 1食品群のランキング */
-  Widget _rankingContents(
-      List<DictionaryItemModel> list, FiveMajorNutrient key) {
+  Widget _rankingContents(MapEntry<FiveMajorNutrient, List<DictionaryItemModel>> nutrientMap) {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: PaddingSize.minimum),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: List<Widget>.generate(list.length * 2, (int i) {
+            children: List<Widget>.generate(nutrientMap.value.length * 2, (int i) {
               if (i.isOdd) return const Divider();
               final int index = i ~/ 2;
               return GestureDetector(
@@ -109,7 +107,7 @@ class RecommendedIncredientExpansionTile extends StatelessWidget {
                           children: <Widget>[
                             /* 料理名 */
                             Text(
-                              list[index].name,
+                              nutrientMap.value[index].name,
                               style: const TextStyle(
                                 fontSize: FontSize.subheading,
                               ),
@@ -119,8 +117,8 @@ class RecommendedIncredientExpansionTile extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
                                 Text(
-                                  key.getNutrient(list[index]).toString() +
-                                      key.unit.toString(),
+                                 nutrientMap.key.getNutrient(nutrientMap.value[index]).toString() +
+                                      nutrientMap.key.unit.value,
                                   style: const TextStyle(
                                     fontSize: FontSize.subheading,
                                     fontWeight: FontWeight.bold,
@@ -143,8 +141,8 @@ class RecommendedIncredientExpansionTile extends StatelessWidget {
                 onTap: () async {
                   await ref
                       .read(dictionaryViewModelProvider.notifier)
-                      .selectItem(list[index].id);
-                  routemaster.push('/home/dictionary_item/${list[index].id}');
+                      .selectItem(nutrientMap.value[index].id);
+                  routemaster.push('/home/dictionary_item/${nutrientMap.value[index].id}');
                 },
               );
             }),

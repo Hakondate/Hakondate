@@ -21,7 +21,7 @@ enum FiveMajorNutrient {
 
 extension MajorNutrientExtension on FiveMajorNutrient {
   double getNutrient(DictionaryItemModel item) {
-    switch (item.toString()) {
+    switch (name) {
       case 'energy':
         return item.nutrients.energy;
       case 'protein':

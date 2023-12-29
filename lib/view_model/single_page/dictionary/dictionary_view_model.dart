@@ -46,7 +46,7 @@ class DictionaryViewModel extends _$DictionaryViewModel {
     );
   }
 
-  Future<void> clearQuery () async {
+  Future<void> clearQuery() async {
     state = const AsyncLoading<DictionaryState>();
     state = AsyncData<DictionaryState>(
       DictionaryState(

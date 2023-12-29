@@ -77,48 +77,56 @@ class DailyViewModel extends _$DailyViewModel {
     });
   }
 
-  Future<void>  updateRecommendDishes() async {
-    state.whenData((DailyState data) async => 
-      state = AsyncData<DailyState>(data.copyWith(recommendIncredientsMap: await _calculateReccomendDishes())),);
+  Future<void> updateRecommendDishes() async {
+    state.whenData(
+      (DailyState data) async => state = AsyncData<DailyState>(data.copyWith(
+          recommendIncredientsMap: await _calculateReccomendDishes(),),),
+    );
   }
 
-  Future<Map<FiveMajorNutrient, List<DictionaryItemModel>>> _calculateReccomendDishes() async {
-    final NutrientsModel? slns = ref.watch(userViewModelProvider).currentUser!.slns;
-    final List<double> nutrientsPercentage = ref.read(dailyViewModelProvider.notifier)
-      .getGraphValues(
-        graphMaxValue: 120,
-        slns: slns,
-      );
+  Future<Map<FiveMajorNutrient, List<DictionaryItemModel>>>
+      _calculateReccomendDishes() async {
+    final NutrientsModel? slns =
+        ref.watch(userViewModelProvider).currentUser!.slns;
+    final List<double> nutrientsPercentage =
+        ref.read(dailyViewModelProvider.notifier).getGraphValues(
+              graphMaxValue: 120,
+              slns: slns,
+            );
 
-    final Map<FiveMajorNutrient, double> nutrientsMap = <FiveMajorNutrient, double>{}..addAll(<FiveMajorNutrient, double>{
-        FiveMajorNutrient.protein: nutrientsPercentage[1],
-        FiveMajorNutrient.vitamin: nutrientsPercentage[2],
-        FiveMajorNutrient.mineral: nutrientsPercentage[3],
-        FiveMajorNutrient.carbohydrate: nutrientsPercentage[4],
-        FiveMajorNutrient.lipid: nutrientsPercentage[5],
-      });
-      MapEntry<FiveMajorNutrient, double> minValue = nutrientsMap.entries.elementAt(0);
-      MapEntry<FiveMajorNutrient, double> secondMinValue = nutrientsMap.entries.elementAt(1);
-      MapEntry<FiveMajorNutrient, double> temp;
+    final Map<FiveMajorNutrient, double> nutrientsMap =
+        <FiveMajorNutrient, double>{}..addAll(<FiveMajorNutrient, double>{
+            FiveMajorNutrient.protein: nutrientsPercentage[1],
+            FiveMajorNutrient.vitamin: nutrientsPercentage[2],
+            FiveMajorNutrient.mineral: nutrientsPercentage[3],
+            FiveMajorNutrient.carbohydrate: nutrientsPercentage[4],
+            FiveMajorNutrient.lipid: nutrientsPercentage[5],
+          });
+    MapEntry<FiveMajorNutrient, double> minValue =
+        nutrientsMap.entries.elementAt(0);
+    MapEntry<FiveMajorNutrient, double> secondMinValue =
+        nutrientsMap.entries.elementAt(1);
+    MapEntry<FiveMajorNutrient, double> temp;
 
-      for (int i = 1; i < nutrientsMap.length; i++) {
-        temp = nutrientsMap.entries.elementAt(i);
-        if (minValue.value > temp.value) {
-          secondMinValue = minValue;
-          minValue = temp;
-        } else if (secondMinValue.value > temp.value) {
-          secondMinValue = temp;
-        }
+    for (int i = 1; i < nutrientsMap.length; i++) {
+      temp = nutrientsMap.entries.elementAt(i);
+      if (minValue.value > temp.value) {
+        secondMinValue = minValue;
+        minValue = temp;
+      } else if (secondMinValue.value > temp.value) {
+        secondMinValue = temp;
       }
-      final Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendDishes = <FiveMajorNutrient, List<DictionaryItemModel>>{
-        minValue.key: await _dictionaryItemsLocalRepository.getRanking(
-          nutrient: minValue.key.toString(),
-        ),
-        secondMinValue.key: await _dictionaryItemsLocalRepository.getRanking(
-          nutrient: secondMinValue.key.toString(),
-        ),
-      };
-      return recommendDishes;
+    }
+    final Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendDishes =
+        <FiveMajorNutrient, List<DictionaryItemModel>>{
+      minValue.key: await _dictionaryItemsLocalRepository.getRanking(
+        nutrient: minValue.key.name,
+      ),
+      secondMinValue.key: await _dictionaryItemsLocalRepository.getRanking(
+        nutrient: secondMinValue.key.name,
+      ),
+    };
+    return recommendDishes;
   }
 
   List<double> getGraphValues({
@@ -169,11 +177,11 @@ class DailyViewModel extends _$DailyViewModel {
   }
 
   double _calcVitaminSufficiency(
-      double retinolRef,
-      double vitaminB1Ref,
-      double vitaminB2Ref,
-      double vitaminCRef,
-      ) {
+    double retinolRef,
+    double vitaminB1Ref,
+    double vitaminB2Ref,
+    double vitaminCRef,
+  ) {
     return state.maybeWhen(
       data: (DailyState data) {
         final MenuModel menu = data.menu;
@@ -190,11 +198,11 @@ class DailyViewModel extends _$DailyViewModel {
   }
 
   double _calcMineralSufficiency(
-      double calciumRef,
-      double magnesiumRef,
-      double ironRef,
-      double zincRef,
-      ) {
+    double calciumRef,
+    double magnesiumRef,
+    double ironRef,
+    double zincRef,
+  ) {
     return state.maybeWhen(
       data: (DailyState data) {
         final MenuModel menu = data.menu;
