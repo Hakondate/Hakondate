@@ -82,7 +82,7 @@ class DailyViewModel extends _$DailyViewModel {
       state = AsyncData<DailyState>(data.copyWith(recommendIncredientsMap: await _calculateReccomendDishes())),);
   }
 
-  Future<Map<FiveMajorNutrient, List<DictionaryItemModel>>> _calculateReccomendDishes() async{
+  Future<Map<FiveMajorNutrient, List<DictionaryItemModel>>> _calculateReccomendDishes() async {
     final NutrientsModel? slns = ref.watch(userViewModelProvider).currentUser!.slns;
     final List<double> nutrientsPercentage = ref.read(dailyViewModelProvider.notifier)
       .getGraphValues(

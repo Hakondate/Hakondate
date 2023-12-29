@@ -9,14 +9,13 @@ import 'package:hakondate/state/daily/daily_state.dart';
 import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
 import 'package:hakondate/view_model/single_page/dictionary/dictionary_view_model.dart';
 
-class RecommendedIncredientExpansionTile extends StatelessWidget{
+class RecommendedIncredientExpansionTile extends StatelessWidget {
   const RecommendedIncredientExpansionTile({super.key});
 
-
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Consumer(
-      builder: (BuildContext context, WidgetRef ref, _){
+      builder: (BuildContext context, WidgetRef ref, _) {
         return ExpansionTile(
           title: const Text(
             'おすすめ食材',
@@ -28,28 +27,33 @@ class RecommendedIncredientExpansionTile extends StatelessWidget{
           textColor: AppColor.brand.secondary,
           iconColor: AppColor.brand.secondary,
           children: <Widget>[
-           ref.watch(dailyViewModelProvider).maybeWhen(
-              data: (DailyState data) {
-                if(data.recommendIncredientsMap.isNotEmpty){
-                  return Column(
-                    children: <Widget>[
-                      for(int i = 0; i < data.recommendIncredientsMap.length; i++)
-                        _recommendFoodWidget(data.recommendIncredientsMap, i),
-                    ],
-                  );
-                } else {
-                  return const SizedBox.shrink();
-                }
-              },
-              orElse: () => const SizedBox.shrink(),
-            ),
+            ref.watch(dailyViewModelProvider).maybeWhen(
+                  data: (DailyState data) {
+                    if (data.recommendIncredientsMap.isNotEmpty) {
+                      return Column(
+                        children: <Widget>[
+                          for (int i = 0;
+                              i < data.recommendIncredientsMap.length;
+                              i++)
+                            _recommendFoodWidget(
+                                data.recommendIncredientsMap, i),
+                        ],
+                      );
+                    } else {
+                      return const SizedBox.shrink();
+                    }
+                  },
+                  orElse: () => const SizedBox.shrink(),
+                ),
           ],
         );
       },
     );
   }
 
-  Widget _recommendFoodWidget(Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendIncredients, int index){
+  Widget _recommendFoodWidget(
+      Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendIncredients,
+      int index) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -65,11 +69,12 @@ class RecommendedIncredientExpansionTile extends StatelessWidget{
           recommendIncredients.entries.elementAt(index).key,
         ),
       ],
-    ); 
+    );
   }
-  
+
   /* 1食品群のランキング */
-  Widget _rankingContents(List<DictionaryItemModel> list, FiveMajorNutrient key) {
+  Widget _rankingContents(
+      List<DictionaryItemModel> list, FiveMajorNutrient key) {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
         return Padding(
@@ -111,10 +116,11 @@ class RecommendedIncredientExpansionTile extends StatelessWidget{
                             ),
                             /* 数値 */
                             Row(
-                         mainAxisAlignment: MainAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
                                 Text(
-                                  key.getNutrient(list[index]).toString() + key.unit.toString(),
+                                  key.getNutrient(list[index]).toString() +
+                                      key.unit.toString(),
                                   style: const TextStyle(
                                     fontSize: FontSize.subheading,
                                     fontWeight: FontWeight.bold,
@@ -123,7 +129,7 @@ class RecommendedIncredientExpansionTile extends StatelessWidget{
                                 const Text(
                                   '/100g',
                                   style: TextStyle(
-                                  fontSize: 16,
+                                    fontSize: 16,
                                   ),
                                 ),
                               ],
@@ -135,9 +141,11 @@ class RecommendedIncredientExpansionTile extends StatelessWidget{
                   ),
                 ),
                 onTap: () async {
-                  await ref.read(dictionaryViewModelProvider.notifier).selectItem(list[index].id);
+                  await ref
+                      .read(dictionaryViewModelProvider.notifier)
+                      .selectItem(list[index].id);
                   routemaster.push('/home/dictionary_item/${list[index].id}');
-                },           
+                },
               );
             }),
           ),

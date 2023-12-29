@@ -14,56 +14,59 @@ class DictionarySearch extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<DictionaryState> state = ref.watch(dictionaryViewModelProvider);
+    final AsyncValue<DictionaryState> state =
+        ref.watch(dictionaryViewModelProvider);
 
     return Scaffold(
       appBar: AppBar(
-        title:
-          TextFormField(
-            controller: _controller,
-            onChanged: (String value) async {
-              await ref.read(dictionaryViewModelProvider.notifier).getSearchedList(value);
-            },
-            cursorColor:AppColor.brand.secondary,
-            decoration: InputDecoration(
-              hintText: '食材名を入力してください',
-              enabledBorder: InputBorder.none,
-              suffixIcon: IconButton(
-                onPressed: () {
-                  ref.read(dictionaryViewModelProvider.notifier).clearQuery();
-                  _controller.clear();
-                },
-                icon: const Icon(
-                  color: Colors.orange,
-                  Icons.clear,
-                ),
+        title: TextFormField(
+          controller: _controller,
+          onChanged: (String value) async {
+            await ref
+                .read(dictionaryViewModelProvider.notifier)
+                .getSearchedList(value);
+          },
+          cursorColor: AppColor.brand.secondary,
+          decoration: InputDecoration(
+            hintText: '食材名を入力してください',
+            enabledBorder: InputBorder.none,
+            suffixIcon: IconButton(
+              onPressed: () {
+                ref.read(dictionaryViewModelProvider.notifier).clearQuery();
+                _controller.clear();
+              },
+              icon: const Icon(
+                color: Colors.orange,
+                Icons.clear,
               ),
             ),
           ),
+        ),
       ),
       body: state.maybeWhen(
-        data:(DictionaryState data) {
-            final List<DictionaryItemModel> searchedItems = data.searchedItems;
-            
-            return ListView.separated(
-              itemCount: searchedItems.length,
-              separatorBuilder: (_, __) =>
-              const Divider(
-                height: 0,
-              ),
-              itemBuilder: (_, int index) {
-                final DictionaryItemModel item = searchedItems[index];
-                return ListTile(
-                  tileColor: AppColor.ui.white,
-                  title: Text(item.name),
-                  trailing: const Icon(Icons.chevron_right_rounded),
-                  onTap: () {
-                    ref.read(dictionaryViewModelProvider.notifier).selectItem(item.id);
-                    routemaster.push('/home/dictionary_item/${item.id}');
-                  },
-                );
-              },
-            );
+        data: (DictionaryState data) {
+          final List<DictionaryItemModel> searchedItems = data.searchedItems;
+
+          return ListView.separated(
+            itemCount: searchedItems.length,
+            separatorBuilder: (_, __) => const Divider(
+              height: 0,
+            ),
+            itemBuilder: (_, int index) {
+              final DictionaryItemModel item = searchedItems[index];
+              return ListTile(
+                tileColor: AppColor.ui.white,
+                title: Text(item.name),
+                trailing: const Icon(Icons.chevron_right_rounded),
+                onTap: () {
+                  ref
+                      .read(dictionaryViewModelProvider.notifier)
+                      .selectItem(item.id);
+                  routemaster.push('/home/dictionary_item/${item.id}');
+                },
+              );
+            },
+          );
         },
         orElse: () {
           return const SizedBox.shrink();
