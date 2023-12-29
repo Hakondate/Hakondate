@@ -1,4 +1,3 @@
-import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
 import 'package:hakondate/model/nutrients/nutrient_unit.dart';
 
 enum FiveMajorNutrient {
@@ -19,23 +18,4 @@ enum FiveMajorNutrient {
   final NutrientUnit unit;
 }
 
-extension MajorNutrientExtension on FiveMajorNutrient {
-  double getNutrient(DictionaryItemModel item) {
-    switch (name) {
-      case 'energy':
-        return item.nutrients.energy;
-      case 'protein':
-        return item.nutrients.protein;
-      case 'vitamin':
-        return item.nutrients.vitamin;
-      case 'mineral':
-        return item.nutrients.mineral;
-      case 'carbohydrate':
-        return item.nutrients.carbohydrate;
-      case 'lipid':
-        return item.nutrients.lipid;
-      default:
-        return 0;
-    }
-  }
-}
+  

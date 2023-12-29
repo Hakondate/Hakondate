@@ -78,7 +78,8 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
 
   /* 1食品群のランキング */
   Widget _rankingContents(
-      MapEntry<FiveMajorNutrient, List<DictionaryItemModel>> nutrientMap,) {
+    MapEntry<FiveMajorNutrient, List<DictionaryItemModel>> nutrientMap,
+  ) {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
         return Padding(
@@ -124,8 +125,8 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
                                 Text(
-                                  nutrientMap.key
-                                          .getNutrient(nutrientMap.value[index])
+                                  nutrientMap.value[index].nutrients
+                                          .getNutrient(nutrientMap.key)
                                           .toString() +
                                       nutrientMap.key.unit.value,
                                   style: const TextStyle(
@@ -152,7 +153,8 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
                       .read(dictionaryViewModelProvider.notifier)
                       .selectItem(nutrientMap.value[index].id);
                   routemaster.push(
-                      '/home/dictionary_item/${nutrientMap.value[index].id}',);
+                    '/home/dictionary_item/${nutrientMap.value[index].id}',
+                  );
                 },
               );
             }),
