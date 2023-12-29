@@ -9,8 +9,8 @@ import 'package:hakondate/state/daily/daily_state.dart';
 import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
 import 'package:hakondate/view_model/single_page/dictionary/dictionary_view_model.dart';
 
-class RecommendedIncredientExpansionTile extends StatelessWidget {
-  const RecommendedIncredientExpansionTile({super.key});
+class RecommendedFoodStuffExpansionTile extends StatelessWidget {
+  const RecommendedFoodStuffExpansionTile({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +29,14 @@ class RecommendedIncredientExpansionTile extends StatelessWidget {
           children: <Widget>[
             ref.watch(dailyViewModelProvider).maybeWhen(
                   data: (DailyState data) {
-                    if (data.recommendIncredientsMap.isNotEmpty) {
+                    if (data.recommendFoodStuffMap.isNotEmpty) {
                       return Column(
                         children: <Widget>[
                           for (int i = 0;
-                              i < data.recommendIncredientsMap.length;
+                              i < data.recommendFoodStuffMap.length;
                               i++)
                             _recommendFoodWidget(
-                                data.recommendIncredientsMap, i,),
+                                data.recommendFoodStuffMap, i,),
                         ],
                       );
                     } else {
@@ -52,7 +52,7 @@ class RecommendedIncredientExpansionTile extends StatelessWidget {
   }
 
   Widget _recommendFoodWidget(
-      Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendIncredients,
+      Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendFoodStuffs,
       int index,) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,12 +60,12 @@ class RecommendedIncredientExpansionTile extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: PaddingSize.normal),
           child: Text(
-            '${recommendIncredients.entries.elementAt(index).key.japaneseName}を多く含む食材',
+            '${recommendFoodStuffs.entries.elementAt(index).key.japaneseName}を多く含む食材',
             style: const TextStyle(fontSize: FontSize.heading),
           ),
         ),
         _rankingContents(
-					recommendIncredients.entries.elementAt(index),
+					recommendFoodStuffs.entries.elementAt(index),
         ),
       ],
     );

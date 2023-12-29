@@ -31,8 +31,8 @@ class DictionarySearch extends ConsumerWidget {
             hintText: '食材名を入力してください',
             enabledBorder: InputBorder.none,
             suffixIcon: IconButton(
-              onPressed: () {
-                ref.read(dictionaryViewModelProvider.notifier).clearQuery();
+              onPressed: () async {
+                await ref.read(dictionaryViewModelProvider.notifier).clearQuery();
                 _controller.clear();
               },
               icon: const Icon(
