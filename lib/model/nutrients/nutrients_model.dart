@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'package:hakondate/model/nutrients/five_major_nutrient.dart';
 
 part 'nutrients_model.freezed.dart';
