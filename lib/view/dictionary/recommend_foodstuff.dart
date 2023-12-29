@@ -36,7 +36,9 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
                               i < data.recommendFoodStuffMap.length;
                               i++)
                             _recommendFoodWidget(
-                                data.recommendFoodStuffMap, i,),
+                              data.recommendFoodStuffMap,
+                              i,
+                            ),
                         ],
                       );
                     } else {
@@ -52,8 +54,9 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
   }
 
   Widget _recommendFoodWidget(
-      Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendFoodStuffs,
-      int index,) {
+    Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendFoodStuffs,
+    int index,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -65,21 +68,23 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
           ),
         ),
         _rankingContents(
-					recommendFoodStuffs.entries.elementAt(index),
+          recommendFoodStuffs.entries.elementAt(index),
         ),
       ],
     );
   }
 
   /* 1食品群のランキング */
-  Widget _rankingContents(MapEntry<FiveMajorNutrient, List<DictionaryItemModel>> nutrientMap) {
+  Widget _rankingContents(
+      MapEntry<FiveMajorNutrient, List<DictionaryItemModel>> nutrientMap) {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: PaddingSize.minimum),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: List<Widget>.generate(nutrientMap.value.length * 2, (int i) {
+            children:
+                List<Widget>.generate(nutrientMap.value.length * 2, (int i) {
               if (i.isOdd) return const Divider();
               final int index = i ~/ 2;
               return GestureDetector(
@@ -117,7 +122,9 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
                                 Text(
-                                 nutrientMap.key.getNutrient(nutrientMap.value[index]).toString() +
+                                  nutrientMap.key
+                                          .getNutrient(nutrientMap.value[index])
+                                          .toString() +
                                       nutrientMap.key.unit.value,
                                   style: const TextStyle(
                                     fontSize: FontSize.subheading,
@@ -142,7 +149,8 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
                   await ref
                       .read(dictionaryViewModelProvider.notifier)
                       .selectItem(nutrientMap.value[index].id);
-                  routemaster.push('/home/dictionary_item/${nutrientMap.value[index].id}');
+                  routemaster.push(
+                      '/home/dictionary_item/${nutrientMap.value[index].id}');
                 },
               );
             }),
