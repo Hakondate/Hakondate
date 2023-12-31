@@ -19,7 +19,6 @@ import 'package:hakondate/state/user/user_state.dart';
 import 'package:hakondate/util/analytics_controller/analytics_controller.dart';
 import 'package:hakondate/util/exception/shared_preferences_exception.dart';
 import 'package:hakondate/util/exception/sign_in_exception.dart';
-import 'package:hakondate/view_model/single_page/user_settings/user_settings_view_model.dart';
 
 part 'user_view_model.g.dart';
 
@@ -109,8 +108,6 @@ class UserViewModel extends _$UserViewModel {
     );
     await _usersLocalRepository.update(newUser);
 
-    await ref.read(userSettingsViewModelProvider.notifier).updateUsers();
-
     state = state.copyWith(currentUser: newUser);
   }
 
@@ -145,7 +142,6 @@ class UserViewModel extends _$UserViewModel {
   }) async {
     final int id = await _usersLocalRepository.add(name, schoolId, schoolYear);
     await changeCurrentUser(id);
-    await ref.read(userSettingsViewModelProvider.notifier).updateUsers();
     await ref.read(analyticsControllerProvider.notifier).logSignup();
 
     return id;
