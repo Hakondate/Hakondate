@@ -28,9 +28,7 @@ class SignupViewModel extends _$SignupViewModel {
     if (editingUser != null) {
       final SchoolModel school = await schoolLocalRepository.getById(editingUser!.schoolId);
 
-      final List<String> schoolYears = (school.classification == SchoolClassification.primary)
-          ? <String>['1年生', '2年生', '3年生', '4年生', '5年生', '6年生']
-          : <String>['1年生', '2年生', '3年生'];
+      final List<String> schoolYears = _getSchoolYears(school);
 
       return SignupState(
         schools: schools,
@@ -125,9 +123,7 @@ class SignupViewModel extends _$SignupViewModel {
   Future<void> updateSchool(int id) async {
     state.whenData((SignupState data) async {
       final SchoolModel school = await ref.read(schoolsLocalRepositoryProvider).getById(id);
-      final List<String> schoolYears = (school.classification == SchoolClassification.primary)
-          ? <String>['1年生', '2年生', '3年生', '4年生', '5年生', '6年生']
-          : <String>['1年生', '2年生', '3年生'];
+      final List<String> schoolYears = _getSchoolYears(school);
       if (data.schoolYear != null && data.schoolYear! > 3 && school.classification == SchoolClassification.secondary) {
         state = AsyncData<SignupState>(
           data.copyWith(
@@ -199,5 +195,11 @@ class SignupViewModel extends _$SignupViewModel {
         );
       }
     });
+  }
+
+  List<String> _getSchoolYears(SchoolModel school) {
+    return (school.classification == SchoolClassification.primary)
+        ? <String>['1年生', '2年生', '3年生', '4年生', '5年生', '6年生']
+        : <String>['1年生', '2年生', '3年生'];
   }
 }
