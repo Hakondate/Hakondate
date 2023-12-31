@@ -6,7 +6,7 @@ import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/state/signup/signup_state.dart';
 import 'package:hakondate/view/component/dialog/help_dialog.dart';
-import 'package:hakondate/view/component/form/error_indication.dart';
+import 'package:hakondate/view/component/signing_form/error_indication.dart';
 import 'package:hakondate/view_model/single_page/signup/signup_view_model.dart';
 
 class NameForm extends ConsumerWidget {

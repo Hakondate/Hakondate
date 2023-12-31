@@ -17,9 +17,10 @@ class SigningUpDialog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<SignupState> state = ref.watch(signupViewModelProvider);
-    final AsyncValue<UserSettingsState> settingsState = ref.watch(userSettingsViewModelProvider);
-    final bool isEditing = settingsState is AsyncData<UserSettingsState> && settingsState.value.editingUser != null;
+    final AsyncValue<SignupState> sginupState = ref.watch(signupViewModelProvider);
+    final AsyncValue<UserSettingsState> userSettingsState = ref.watch(userSettingsViewModelProvider);
+    final bool isEditing =
+        userSettingsState is AsyncData<UserSettingsState> && userSettingsState.value.editingUser != null;
 
     return HakondateDialog(
       title: const Text('確認'),
@@ -57,10 +58,10 @@ class SigningUpDialog extends ConsumerWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      if (state is AsyncData<SignupState>) ...<Widget>[
-                        Text(state.value.name!),
-                        Text(state.value.schoolTrailing),
-                        Text(state.value.schoolYearTrailing),
+                      if (sginupState is AsyncData<SignupState>) ...<Widget>[
+                        Text(sginupState.value.name!),
+                        Text(sginupState.value.schoolTrailing),
+                        Text(sginupState.value.schoolYearTrailing),
                       ],
                     ],
                   ),
