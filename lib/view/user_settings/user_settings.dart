@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/constant/app_color.dart';
+import 'package:hakondate/constant/new_user_id.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/model/user/user_model.dart';
@@ -38,12 +39,12 @@ class UserSettings extends ConsumerWidget {
             return Column(
               children: <Widget>[
                 const SizedBox(
-                  height: 8,
+                  height: SpaceSize.line,
                 ),
                 for (final UserModel user in users.users!)
                   UserSettingsCard(context: context, user: user, isCurrentUser: user.id == currentUser.id),
                 const SizedBox(
-                  height: 8,
+                  height: SpaceSize.line,
                 ),
                 const UserAddButton(),
               ],
@@ -71,7 +72,7 @@ class UserAddButton extends ConsumerWidget {
         ),
         onPressed: () {
           ref.read(userSettingsViewModelProvider.notifier).setEditingUser(null);
-          routemaster.push('/home/user_settings/-1');
+          routemaster.push('/home/user_settings/${NewUserId.id}}');
         },
       ),
     );
@@ -132,7 +133,7 @@ class UserSettingsCard extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: SpaceSize.line,
                   ),
                   Row(
                     children: <Widget>[
@@ -164,7 +165,7 @@ class UserSettingsCard extends ConsumerWidget {
                         },
                       ),
                       const SizedBox(
-                        width: 10,
+                        width: SpaceSize.line,
                       ),
                       Text(
                         '${user.schoolYear}年',
