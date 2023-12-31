@@ -14,13 +14,14 @@ class HakondateActionButton extends StatelessWidget {
     void Function()? onTap,
     Color? color,
     Key? key,
-  }) => HakondateActionButton(
-    key: key,
-    text: text,
-    onTap: onTap,
-    color: color,
-    isPrimary: true,
-  );
+  }) =>
+      HakondateActionButton(
+        key: key,
+        text: text,
+        onTap: onTap,
+        color: color,
+        isPrimary: true,
+      );
 
   final Widget text;
   final void Function()? onTap;

@@ -23,7 +23,7 @@ class RecipePDF extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final OpenDataRecipeModel recipe = OpenDataRecipes.all.firstWhere(
-          (OpenDataRecipeModel recipe) => recipe.id == int.parse(id ?? '0'),
+      (OpenDataRecipeModel recipe) => recipe.id == int.parse(id ?? '0'),
     );
 
     return Scaffold(
@@ -48,9 +48,9 @@ class RecipePDF extends ConsumerWidget {
               onError: (_) async => showDialog(
                 context: context,
                 builder: (BuildContext context) => DownloadExceptionDialog(
-                  onTapRetry: () => routemaster.pop().whenComplete(() =>
-                      ref.read(recipeViewModelProvider.notifier).reDownload(recipe: recipe),
-                  ),
+                  onTapRetry: () => routemaster.pop().whenComplete(
+                        () => ref.read(recipeViewModelProvider.notifier).reDownload(recipe: recipe),
+                      ),
                   onTapPop: () => routemaster.pop().whenComplete(routemaster.pop),
                 ),
               ),

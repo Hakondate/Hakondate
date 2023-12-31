@@ -71,12 +71,13 @@ class SigningUpDialog extends ConsumerWidget {
             text: const Text('登録する'),
             onTap: () async {
               unawaited(ref.read(signupViewModelProvider.notifier).signup());
-              await routemaster.pop().whenComplete(() async => showDialog(
-                  context: context,
-                  barrierDismissible: false,
-                  builder: (BuildContext context) => _statusDialog(),
-                ),
-              );
+              await routemaster.pop().whenComplete(
+                    () async => showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context) => _statusDialog(),
+                    ),
+                  );
             },
           ),
           secondAction: HakondateActionButton(

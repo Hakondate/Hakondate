@@ -89,12 +89,14 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
       name: Value<String>(dish['name'] as String),
       category: Value<String?>(dish['category'] as String?),
     );
-    final DishesSchema? conflictSchema = await (_db.select(_db.dishesTable)..where(($DishesTableTable t) => t.name.equals(companion.name.value))).getSingleOrNull();
+    final DishesSchema? conflictSchema =
+        await (_db.select(_db.dishesTable)..where(($DishesTableTable t) => t.name.equals(companion.name.value))).getSingleOrNull();
 
     if (conflictSchema == null) {
       dishId = await _db.into(_db.dishesTable).insert(companion);
     } else if (conflictSchema.category != companion.category.value) {
-      dishId = await (_db.update(_db.dishesTable)..where(($DishesTableTable t) => t.name.equals(companion.name.value))).write(DishesTableCompanion(category: companion.category));
+      dishId = await (_db.update(_db.dishesTable)..where(($DishesTableTable t) => t.name.equals(companion.name.value)))
+          .write(DishesTableCompanion(category: companion.category));
     } else {
       dishId = conflictSchema.id;
     }
@@ -154,7 +156,10 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
     final FoodstuffsSchema? conflictSchema = await (_db.select(_db.foodstuffsTable)
           ..where(
             ($FoodstuffsTableTable t) =>
-                t.name.equals(companion.name.value) & t.gram.equals(companion.gram.value) & t.isHeat.equals(companion.isHeat.value) & t.isAllergy.equals(companion.isAllergy.value),
+                t.name.equals(companion.name.value) &
+                t.gram.equals(companion.gram.value) &
+                t.isHeat.equals(companion.isHeat.value) &
+                t.isAllergy.equals(companion.isAllergy.value),
           ))
         .getSingleOrNull();
 
@@ -180,7 +185,10 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
       return (_db.update(_db.foodstuffsTable)
             ..where(
               ($FoodstuffsTableTable t) =>
-                  t.name.equals(companion.name.value) & t.gram.equals(companion.gram.value) & t.isHeat.equals(companion.isHeat.value) & t.isAllergy.equals(companion.isAllergy.value),
+                  t.name.equals(companion.name.value) &
+                  t.gram.equals(companion.gram.value) &
+                  t.isHeat.equals(companion.isHeat.value) &
+                  t.isAllergy.equals(companion.isAllergy.value),
             ))
           .write(
         FoodstuffsTableCompanion(
@@ -211,7 +219,8 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
   Future<List<MenuModel>> list() async {
     final List<MenuModel> menus = <MenuModel>[];
     final int schoolId = await _ref.read(userViewModelProvider.notifier).getParentId();
-    final List<MenusSchema> menusSchemas = await (_db.select(_db.menusTable)..where(($MenusTableTable t) => t.schoolId.equals(schoolId))).get();
+    final List<MenusSchema> menusSchemas =
+        await (_db.select(_db.menusTable)..where(($MenusTableTable t) => t.schoolId.equals(schoolId))).get();
 
     await Future.forEach(menusSchemas, (MenusSchema menusSchema) async {
       final MenuModel menu = await _getBySchema(menusSchema);
@@ -268,7 +277,8 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
 
   Future<MenuModel> _getBySchema(MenusSchema menusSchema) async {
     final List<DishModel> dishes = <DishModel>[];
-    final List<MenuDishesSchema> menuDishesSchemas = await (_db.select(_db.menuDishesTable)..where(($MenuDishesTableTable t) => t.menuId.equals(menusSchema.id))).get();
+    final List<MenuDishesSchema> menuDishesSchemas =
+        await (_db.select(_db.menuDishesTable)..where(($MenuDishesTableTable t) => t.menuId.equals(menusSchema.id))).get();
 
     await Future.forEach(menuDishesSchemas, (MenuDishesSchema menuDishesSchema) async {
       final DishModel dish = await _getDishById(menuDishesSchema.dishId);
@@ -287,7 +297,8 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
   Future<DishModel> _getDishById(int dishId) async {
     final DishesSchema dishesSchema = await (_db.select(_db.dishesTable)..where(($DishesTableTable t) => t.id.equals(dishId))).getSingle();
     final List<FoodstuffModel> foodstuffs = <FoodstuffModel>[];
-    final List<DishFoodstuffsSchema> dishFoodstuffsSchemas = await (_db.select(_db.dishFoodstuffsTable)..where(($DishFoodstuffsTableTable t) => t.dishId.equals(dishesSchema.id))).get();
+    final List<DishFoodstuffsSchema> dishFoodstuffsSchemas =
+        await (_db.select(_db.dishFoodstuffsTable)..where(($DishFoodstuffsTableTable t) => t.dishId.equals(dishesSchema.id))).get();
 
     await Future.forEach(dishFoodstuffsSchemas, (DishFoodstuffsSchema dishFoodstuffsSchema) async {
       final FoodstuffModel foodstuff = await _getFoodstuffById(dishFoodstuffsSchema.foodstuffId);
@@ -322,7 +333,8 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
   }
 
   Future<FoodstuffModel> _getFoodstuffById(int foodstuffId) async {
-    final FoodstuffsSchema foodstuffsSchema = await (_db.select(_db.foodstuffsTable)..where(($FoodstuffsTableTable t) => t.id.equals(foodstuffId))).getSingle();
+    final FoodstuffsSchema foodstuffsSchema =
+        await (_db.select(_db.foodstuffsTable)..where(($FoodstuffsTableTable t) => t.id.equals(foodstuffId))).getSingle();
 
     return FoodstuffModel(
       name: foodstuffsSchema.name,

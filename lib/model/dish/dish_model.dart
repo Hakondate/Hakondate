@@ -8,9 +8,9 @@ part 'dish_category.dart';
 @freezed
 class DishModel with _$DishModel {
   const factory DishModel({
-    required String name,                     // 料理名
+    required String name, // 料理名
     required List<FoodstuffModel> foodstuffs, // 食材
-    DishCategory? category,                   // 分類
+    DishCategory? category, // 分類
   }) = _DishModel;
   const DishModel._();
 

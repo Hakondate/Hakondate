@@ -34,13 +34,13 @@ class NutrientsCard extends StatelessWidget {
       builder: (BuildContext context, WidgetRef ref, _) {
         const double graphMaxValue = 120;
         return SizedBox(
-          width: MediaQuery.of(context).size.width * 3/4,
-          height: MediaQuery.of(context).size.width * 3/4,
+          width: MediaQuery.of(context).size.width * 3 / 4,
+          height: MediaQuery.of(context).size.width * 3 / 4,
           child: NutrientsRadarChart(
             values: ref.read(dailyViewModelProvider.notifier).getGraphValues(
-              slns: ref.watch(userViewModelProvider).currentUser!.slns,
-              graphMaxValue: graphMaxValue,
-            ),
+                  slns: ref.watch(userViewModelProvider).currentUser!.slns,
+                  graphMaxValue: graphMaxValue,
+                ),
             rowValues: ref.read(dailyViewModelProvider.notifier).getGraphRowValues(),
             maxValue: graphMaxValue,
           ),
@@ -53,33 +53,33 @@ class NutrientsCard extends StatelessWidget {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
         return ref.watch(dailyViewModelProvider).maybeWhen(
-          data: (DailyState state) {
-            final MenuModel menu = state.menu;
+              data: (DailyState state) {
+                final MenuModel menu = state.menu;
 
-            if (menu is! LunchesDayMenuModel) {
-              throw const ClassTypeException("'menu' is not 'LunchesDayMenuModel'");
-            }
+                if (menu is! LunchesDayMenuModel) {
+                  throw const ClassTypeException("'menu' is not 'LunchesDayMenuModel'");
+                }
 
-            return ExpansionTile(
-              title: const Text(
-                '詳細な栄養値',
-                style: TextStyle(
-                  fontSize: FontSize.heading,
-                ),
-              ),
-              onExpansionChanged: (bool isExpanded) => !isExpanded,
-              textColor: AppColor.brand.secondary,
-              iconColor: AppColor.brand.secondary,
-              children: <Widget>[
-                NutrientsList(
-                  nutrients: menu,
-                  backgroundColor: AppColor.ui.secondaryUltraLight,
-                ),
-              ],
+                return ExpansionTile(
+                  title: const Text(
+                    '詳細な栄養値',
+                    style: TextStyle(
+                      fontSize: FontSize.heading,
+                    ),
+                  ),
+                  onExpansionChanged: (bool isExpanded) => !isExpanded,
+                  textColor: AppColor.brand.secondary,
+                  iconColor: AppColor.brand.secondary,
+                  children: <Widget>[
+                    NutrientsList(
+                      nutrients: menu,
+                      backgroundColor: AppColor.ui.secondaryUltraLight,
+                    ),
+                  ],
+                );
+              },
+              orElse: () => const SizedBox.shrink(),
             );
-          },
-          orElse: () => const SizedBox.shrink(),
-        );
       },
     );
   }

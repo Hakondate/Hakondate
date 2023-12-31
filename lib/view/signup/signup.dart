@@ -61,11 +61,9 @@ class Signup extends StatelessWidget {
                       context: context,
                       builder: (BuildContext context) => const HelpDialog(
                         title: Text('お名前について'),
-                        content: Text(
-                            '　お名前情報は，本アプリ内でユーザを識別するために利用されます．'
+                        content: Text('　お名前情報は，本アプリ内でユーザを識別するために利用されます．'
                             'あだ名などを入力していただいても構いません．また，あとで変更することもできます．\n'
-                            '　お名前情報は，端末内に保存され収集されることはありません．また，あとから変更することができます．'
-                        ),
+                            '　お名前情報は，端末内に保存され収集されることはありません．また，あとから変更することができます．'),
                       ),
                     ),
                   ),
@@ -120,11 +118,9 @@ class Signup extends StatelessWidget {
                       context: context,
                       builder: (BuildContext context) => const HelpDialog(
                         title: Text('学校・学年について'),
-                        content: Text(
-                            '　学校情報は，本アプリ内でお子様の通っている学校の献立を表示するために利用されます．選択肢にない学校は，本アプリ未対応の学校です．\n'
+                        content: Text('　学校情報は，本アプリ内でお子様の通っている学校の献立を表示するために利用されます．選択肢にない学校は，本アプリ未対応の学校です．\n'
                             '　学年情報は，本アプリ内でお子様の年齢に合わせた情報(栄養基準値など)を表示するために利用されます．\n'
-                            '　どちらの情報も，端末内に保存され収集されることはありません．また，あとから変更することができます．'
-                        ),
+                            '　どちらの情報も，端末内に保存され収集されることはありません．また，あとから変更することができます．'),
                       ),
                     ),
                   ),
@@ -135,7 +131,8 @@ class Signup extends StatelessWidget {
             ),
             SettingLabel(
               title: '学校',
-              dialList: (state is AsyncData<SignupState>) ? state.value.schools.map((SchoolModel school) => school.name).toList() : <String>[],
+              dialList:
+                  (state is AsyncData<SignupState>) ? state.value.schools.map((SchoolModel school) => school.name).toList() : <String>[],
               completed: (int index) {
                 if (state is! AsyncData<SignupState>) return;
                 final int id = state.value.schools[index].id;

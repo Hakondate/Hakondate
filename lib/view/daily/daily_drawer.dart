@@ -55,8 +55,7 @@ class DailyDrawer extends StatelessWidget {
           _drawerLabel(
             icon: Icons.info_outlined,
             labelText: 'インフォメーション',
-            onTap: () =>
-            routemaster.push('/home/information'),
+            onTap: () => routemaster.push('/home/information'),
           ),
           _drawerLabel(
             icon: Icons.help_outlined,
@@ -101,7 +100,7 @@ class DailyDrawer extends StatelessWidget {
           ],
         ),
       ),
-      onTap: () => onTap != null ? routemaster.pop().whenComplete(onTap): null,
+      onTap: () => onTap != null ? routemaster.pop().whenComplete(onTap) : null,
     );
   }
 }

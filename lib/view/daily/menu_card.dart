@@ -19,34 +19,34 @@ class MenuCard extends StatelessWidget {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
         return ref.watch(dailyViewModelProvider).maybeWhen(
-          data: (DailyState state) {
-            final MenuModel menu = state.menu;
+              data: (DailyState state) {
+                final MenuModel menu = state.menu;
 
-            if (menu is! LunchesDayMenuModel) {
-              throw const ClassTypeException("'menu' is not 'LunchesDayMenuModel'");
-            }
+                if (menu is! LunchesDayMenuModel) {
+                  throw const ClassTypeException("'menu' is not 'LunchesDayMenuModel'");
+                }
 
-            return Card(
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              child: Column(
-                children: <Widget>[
-                  Image.asset('assets/images/label/menuLabel.png'),
-                  GridView.count(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    crossAxisCount: 2,
-                    padding: const EdgeInsets.all(PaddingSize.minimum),
-                    mainAxisSpacing: MarginSize.minimum,
-                    crossAxisSpacing: MarginSize.minimum,
-                    childAspectRatio: 2 / 1,
-                    children: menu.dishes.map(_menuTile).toList(),
+                return Card(
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  child: Column(
+                    children: <Widget>[
+                      Image.asset('assets/images/label/menuLabel.png'),
+                      GridView.count(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        crossAxisCount: 2,
+                        padding: const EdgeInsets.all(PaddingSize.minimum),
+                        mainAxisSpacing: MarginSize.minimum,
+                        crossAxisSpacing: MarginSize.minimum,
+                        childAspectRatio: 2 / 1,
+                        children: menu.dishes.map(_menuTile).toList(),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                );
+              },
+              orElse: () => const SizedBox.shrink(),
             );
-          },
-          orElse: () => const SizedBox.shrink(),
-        );
       },
     );
   }

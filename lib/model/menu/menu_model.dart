@@ -8,18 +8,19 @@ part 'menu_model.freezed.dart';
 @freezed
 class MenuModel with _$MenuModel {
   factory MenuModel({
-    required int id,                  // Day: 2021/06/30 & ScID: 1 → 2021063001
-    required DateTime day,            // 日付
-    required int schoolId,            // 学校
-    required List<DishModel> dishes,  // 料理
-    String? event,                    // イベント
-  }) => MenuModel.lunchesDay(
-    id: id,
-    day: day,
-    schoolId: schoolId,
-    dishes: dishes,
-    event: event,
-  );
+    required int id, // Day: 2021/06/30 & ScID: 1 → 2021063001
+    required DateTime day, // 日付
+    required int schoolId, // 学校
+    required List<DishModel> dishes, // 料理
+    String? event, // イベント
+  }) =>
+      MenuModel.lunchesDay(
+        id: id,
+        day: day,
+        schoolId: schoolId,
+        dishes: dishes,
+        event: event,
+      );
   const MenuModel._();
 
   const factory MenuModel.lunchesDay({

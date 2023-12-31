@@ -10,8 +10,8 @@ part 'drawer_view_model.g.dart';
 class DrawerViewModel extends _$DrawerViewModel {
   @override
   DrawerState build() => DrawerState(
-    scaffoldKey: GlobalKey<ScaffoldState>(),
-  );
+        scaffoldKey: GlobalKey<ScaffoldState>(),
+      );
 
   void openDrawer() => state.scaffoldKey.currentState!.openDrawer();
 }

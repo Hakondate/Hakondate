@@ -37,12 +37,10 @@ class Recipe extends StatelessWidget {
                 OpenDataRecipeGrid(type: RecipeType.original),
                 OpenDataRecipeHeader(
                   title: Text('スチームコンベクションオーブンを使ったメニュー'),
-                  description: Text(
-                      'スチームコンベクションオーブンを使用したメニューです．ご家庭では，オーブントースターで代用できます．\n'
+                  description: Text('スチームコンベクションオーブンを使用したメニューです．ご家庭では，オーブントースターで代用できます．\n'
                       'もちろん，フライパンやオーブンレンジ，魚焼きグリルなどを使用しても大丈夫です．\n\n'
                       '★材料は４人分です．目安量なので，味付けなどはお好みで調整してください．\n'
-                      '★給食で実施した材料を載せています。ご家庭にある材料でいろいろアレンジしてお試しください．'
-                  ),
+                      '★給食で実施した材料を載せています。ご家庭にある材料でいろいろアレンジしてお試しください．'),
                 ),
                 OpenDataRecipeGrid(type: RecipeType.steamConvectionOven),
                 OpenDataRecipeHeader(

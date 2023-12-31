@@ -48,26 +48,27 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
       salt: Value<double>(double.parse(item['salt'].toString())),
       note: Value<String?>(item['note'] as String?),
     );
-    final DictionaryItemsSchema? conflictSchema =
-      await (_db.select(_db.dictionaryItemsTable)..where(($DictionaryItemsTableTable t) =>
-          t.group.equals(companion.group.value) &
-          t.name.equals(companion.name.value),
-    )).getSingleOrNull();
+    final DictionaryItemsSchema? conflictSchema = await (_db.select(_db.dictionaryItemsTable)
+          ..where(
+            ($DictionaryItemsTableTable t) => t.group.equals(companion.group.value) & t.name.equals(companion.name.value),
+          ))
+        .getSingleOrNull();
 
     if (conflictSchema == null) {
       return _db.into(_db.dictionaryItemsTable).insert(companion);
     } else {
-      return (_db.update(_db.dictionaryItemsTable)..where(($DictionaryItemsTableTable t) =>
-        t.group.equals(companion.group.value) &
-        t.name.equals(companion.name.value),
-      )).write(companion);
+      return (_db.update(_db.dictionaryItemsTable)
+            ..where(
+              ($DictionaryItemsTableTable t) => t.group.equals(companion.group.value) & t.name.equals(companion.name.value),
+            ))
+          .write(companion);
     }
   }
 
   @override
   Future<DictionaryItemModel> getById(int id) async {
-    final DictionaryItemsSchema schema = await (_db.select(_db.dictionaryItemsTable)
-      ..where(($DictionaryItemsTableTable t) => t.id.equals(id))).getSingle();
+    final DictionaryItemsSchema schema =
+        await (_db.select(_db.dictionaryItemsTable)..where(($DictionaryItemsTableTable t) => t.id.equals(id))).getSingle();
 
     return DictionaryItemModel(
       id: schema.id,
@@ -97,8 +98,8 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
   @override
   Future<List<DictionaryItemModel>> listGroup(int group) async {
     final List<DictionaryItemModel> items = <DictionaryItemModel>[];
-    final List<DictionaryItemsSchema> schemas = await (_db.select(_db.dictionaryItemsTable)
-      ..where(($DictionaryItemsTableTable t) => t.group.equals(group))).get();
+    final List<DictionaryItemsSchema> schemas =
+        await (_db.select(_db.dictionaryItemsTable)..where(($DictionaryItemsTableTable t) => t.group.equals(group))).get();
 
     for (final DictionaryItemsSchema schema in schemas) {
       items.add(
@@ -142,140 +143,174 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
     switch (nutrient) {
       case 'energy':
         schemas = await (_db.select(_db.dictionaryItemsTable)
-          ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
-            ($DictionaryItemsTableTable t) => OrderingTerm(
-              expression: t.energy,
-              mode: OrderingMode.desc,
-            ),
-          ])..limit(limit)).get();
+              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
+                ($DictionaryItemsTableTable t) => OrderingTerm(
+                      expression: t.energy,
+                      mode: OrderingMode.desc,
+                    ),
+              ])
+              ..limit(limit))
+            .get();
       case 'protein':
         schemas = await (_db.select(_db.dictionaryItemsTable)
-          ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
+              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
-              expression: t.protein,
-              mode: OrderingMode.desc,
-            ),
-          ])..limit(limit)).get();
+                      expression: t.protein,
+                      mode: OrderingMode.desc,
+                    ),
+              ])
+              ..limit(limit))
+            .get();
       case 'lipid':
         schemas = await (_db.select(_db.dictionaryItemsTable)
-          ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
+              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
-              expression: t.lipid,
-              mode: OrderingMode.desc,
-            ),
-          ])..limit(limit)).get();
+                      expression: t.lipid,
+                      mode: OrderingMode.desc,
+                    ),
+              ])
+              ..limit(limit))
+            .get();
       case 'carbohydrate':
         schemas = await (_db.select(_db.dictionaryItemsTable)
-          ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
+              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
-              expression: t.carbohydrate,
-              mode: OrderingMode.desc,
-            ),
-          ])..limit(limit)).get();
+                      expression: t.carbohydrate,
+                      mode: OrderingMode.desc,
+                    ),
+              ])
+              ..limit(limit))
+            .get();
       case 'sodium':
         schemas = await (_db.select(_db.dictionaryItemsTable)
-          ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
+              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
-              expression: t.sodium,
-              mode: OrderingMode.desc,
-            ),
-          ])..limit(limit)).get();
+                      expression: t.sodium,
+                      mode: OrderingMode.desc,
+                    ),
+              ])
+              ..limit(limit))
+            .get();
       case 'calcium':
         schemas = await (_db.select(_db.dictionaryItemsTable)
-          ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
+              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
-              expression: t.calcium,
-              mode: OrderingMode.desc,
-            ),
-          ])..limit(limit)).get();
+                      expression: t.calcium,
+                      mode: OrderingMode.desc,
+                    ),
+              ])
+              ..limit(limit))
+            .get();
       case 'magnesium':
         schemas = await (_db.select(_db.dictionaryItemsTable)
-          ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
+              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
-              expression: t.magnesium,
-              mode: OrderingMode.desc,
-            ),
-          ])..limit(limit)).get();
+                      expression: t.magnesium,
+                      mode: OrderingMode.desc,
+                    ),
+              ])
+              ..limit(limit))
+            .get();
       case 'iron':
         schemas = await (_db.select(_db.dictionaryItemsTable)
-          ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
+              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
-              expression: t.iron,
-              mode: OrderingMode.desc,
-            ),
-          ])..limit(limit)).get();
+                      expression: t.iron,
+                      mode: OrderingMode.desc,
+                    ),
+              ])
+              ..limit(limit))
+            .get();
       case 'zinc':
         schemas = await (_db.select(_db.dictionaryItemsTable)
-          ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
+              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
-              expression: t.zinc,
-              mode: OrderingMode.desc,
-            ),
-          ])..limit(limit)).get();
+                      expression: t.zinc,
+                      mode: OrderingMode.desc,
+                    ),
+              ])
+              ..limit(limit))
+            .get();
       case 'retinol':
         schemas = await (_db.select(_db.dictionaryItemsTable)
-          ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
+              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
-              expression: t.retinol,
-              mode: OrderingMode.desc,
-            ),
-          ])..limit(limit)).get();
+                      expression: t.retinol,
+                      mode: OrderingMode.desc,
+                    ),
+              ])
+              ..limit(limit))
+            .get();
       case 'vitaminB1':
         schemas = await (_db.select(_db.dictionaryItemsTable)
-          ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
+              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
-              expression: t.vitaminB1,
-              mode: OrderingMode.desc,
-            ),
-          ])..limit(limit)).get();
+                      expression: t.vitaminB1,
+                      mode: OrderingMode.desc,
+                    ),
+              ])
+              ..limit(limit))
+            .get();
       case 'vitaminB2':
         schemas = await (_db.select(_db.dictionaryItemsTable)
-          ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
+              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
-              expression: t.vitaminB2,
-              mode: OrderingMode.desc,
-            ),
-          ])..limit(limit)).get();
+                      expression: t.vitaminB2,
+                      mode: OrderingMode.desc,
+                    ),
+              ])
+              ..limit(limit))
+            .get();
       case 'vitaminC':
         schemas = await (_db.select(_db.dictionaryItemsTable)
-          ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
+              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
-              expression: t.vitaminC,
-              mode: OrderingMode.desc,
-            ),
-          ])..limit(limit)).get();
+                      expression: t.vitaminC,
+                      mode: OrderingMode.desc,
+                    ),
+              ])
+              ..limit(limit))
+            .get();
       case 'dietaryFiber':
         schemas = await (_db.select(_db.dictionaryItemsTable)
-          ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
+              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
-              expression: t.dietaryFiber,
-              mode: OrderingMode.desc,
-            ),
-          ])..limit(limit)).get();
+                      expression: t.dietaryFiber,
+                      mode: OrderingMode.desc,
+                    ),
+              ])
+              ..limit(limit))
+            .get();
       case 'salt':
         schemas = await (_db.select(_db.dictionaryItemsTable)
-          ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
+              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
-              expression: t.salt,
-              mode: OrderingMode.desc,
-            ),
-          ])..limit(limit)).get();
+                      expression: t.salt,
+                      mode: OrderingMode.desc,
+                    ),
+              ])
+              ..limit(limit))
+            .get();
       case 'vitamin':
         schemas = await (_db.select(_db.dictionaryItemsTable)
-          ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
+              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
-              expression: t.retinol / const Variable<double>(1000) + t.vitaminB1 + t.vitaminB2 + t.vitaminC,
-              mode: OrderingMode.desc,
-            ),
-          ])..limit(limit)).get();
+                      expression: t.retinol / const Variable<double>(1000) + t.vitaminB1 + t.vitaminB2 + t.vitaminC,
+                      mode: OrderingMode.desc,
+                    ),
+              ])
+              ..limit(limit))
+            .get();
       case 'mineral':
         schemas = await (_db.select(_db.dictionaryItemsTable)
-          ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
+              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
-              expression: t.calcium + t.magnesium + t.iron + t.zinc,
-              mode: OrderingMode.desc,
-            ),
-          ])..limit(limit)).get();
+                      expression: t.calcium + t.magnesium + t.iron + t.zinc,
+                      mode: OrderingMode.desc,
+                    ),
+              ])
+              ..limit(limit))
+            .get();
       default:
         throw SQLiteException("Failed to find nutrient '$nutrient'");
     }

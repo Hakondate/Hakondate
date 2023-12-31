@@ -40,10 +40,10 @@ class SignupViewModel extends _$SignupViewModel {
         }
 
         await ref.read(userViewModelProvider.notifier).createUser(
-          name: name,
-          schoolId: schoolId,
-          schoolYear: schoolYear,
-        );
+              name: name,
+              schoolId: schoolId,
+              schoolYear: schoolYear,
+            );
         state = cache;
       } on Exception catch (error, stack) {
         debugPrint(error.toString());
@@ -72,9 +72,7 @@ class SignupViewModel extends _$SignupViewModel {
       final List<String> schoolYears = (school.classification == SchoolClassification.primary)
           ? <String>['1年生', '2年生', '3年生', '4年生', '5年生', '6年生']
           : <String>['1年生', '2年生', '3年生'];
-      if (data.schoolYear != null &&
-          data.schoolYear! > 3 &&
-          school.classification == SchoolClassification.secondary) {
+      if (data.schoolYear != null && data.schoolYear! > 3 && school.classification == SchoolClassification.secondary) {
         state = AsyncData<SignupState>(
           data.copyWith(
             schoolId: id,
@@ -97,13 +95,13 @@ class SignupViewModel extends _$SignupViewModel {
   }
 
   void updateSchoolYear(int year) {
-    state.whenData((SignupState data) =>
-        state = AsyncData<SignupState>(
-          data.copyWith(
-            schoolYear: year,
-            schoolYearTrailing: '$year年生',
-          ),
+    state.whenData(
+      (SignupState data) => state = AsyncData<SignupState>(
+        data.copyWith(
+          schoolYear: year,
+          schoolYearTrailing: '$year年生',
         ),
+      ),
     );
   }
 
@@ -119,9 +117,7 @@ class SignupViewModel extends _$SignupViewModel {
 
   void _checkNameValidation() {
     state.whenData((SignupState data) {
-      final String? nameErrorState = (data.name == null || data.name!.isEmpty)
-              ? 'お子様の名前を入力してください'
-              : null;
+      final String? nameErrorState = (data.name == null || data.name!.isEmpty) ? 'お子様の名前を入力してください' : null;
       state = AsyncData<SignupState>(data.copyWith(nameErrorState: nameErrorState));
     });
   }

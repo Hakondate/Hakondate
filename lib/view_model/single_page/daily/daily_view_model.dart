@@ -36,7 +36,7 @@ class DailyViewModel extends _$DailyViewModel {
       switch (Environment.flavor) {
         case Flavor.dev:
           selectedInputDay ??= DateTime(2022, 5, 16);
-        case Flavor.stg ||  Flavor.prod:
+        case Flavor.stg || Flavor.prod:
           selectedInputDay ??= DateTime.now();
       }
       final MenuModel menu = await _menusLocalRepository.getMenuByDay(selectedInputDay);
@@ -115,42 +115,38 @@ class DailyViewModel extends _$DailyViewModel {
   }
 
   double _calcVitaminSufficiency(
-      double retinolRef,
-      double vitaminB1Ref,
-      double vitaminB2Ref,
-      double vitaminCRef,
-      ) {
+    double retinolRef,
+    double vitaminB1Ref,
+    double vitaminB2Ref,
+    double vitaminCRef,
+  ) {
     return state.maybeWhen(
       data: (DailyState data) {
         final MenuModel menu = data.menu;
 
         if (menu is! LunchesDayMenuModel) return 0;
 
-        return (menu.retinol / retinolRef +
-                menu.vitaminB1 / vitaminB1Ref +
-                menu.vitaminB2 / vitaminB2Ref +
-                menu.vitaminC / vitaminCRef) / 4 * 100.0;
+        return (menu.retinol / retinolRef + menu.vitaminB1 / vitaminB1Ref + menu.vitaminB2 / vitaminB2Ref + menu.vitaminC / vitaminCRef) /
+            4 *
+            100.0;
       },
       orElse: () => 0,
     );
   }
 
   double _calcMineralSufficiency(
-      double calciumRef,
-      double magnesiumRef,
-      double ironRef,
-      double zincRef,
-      ) {
+    double calciumRef,
+    double magnesiumRef,
+    double ironRef,
+    double zincRef,
+  ) {
     return state.maybeWhen(
       data: (DailyState data) {
         final MenuModel menu = data.menu;
 
         if (menu is! LunchesDayMenuModel) return 0;
 
-        return (menu.calcium / calciumRef +
-                menu.magnesium / magnesiumRef +
-                menu.iron / ironRef +
-                menu.zinc / zincRef) / 4 * 100.0;
+        return (menu.calcium / calciumRef + menu.magnesium / magnesiumRef + menu.iron / ironRef + menu.zinc / zincRef) / 4 * 100.0;
       },
       orElse: () => 0,
     );

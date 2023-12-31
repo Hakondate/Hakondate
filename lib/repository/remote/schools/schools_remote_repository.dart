@@ -25,8 +25,7 @@ class SchoolsRemoteRepository extends SchoolsRemoteRepositoryAPI {
 
   @override
   Future<List<dynamic>> get({required DateTime updateAt}) async {
-    final QuerySnapshot<Map<String, dynamic>> firestoreData =
-        await _db.where('updateAt', isGreaterThan: updateAt).get();
+    final QuerySnapshot<Map<String, dynamic>> firestoreData = await _db.where('updateAt', isGreaterThan: updateAt).get();
 
     return firestoreData.docs.map((QueryDocumentSnapshot<Map<String, dynamic>> doc) => doc.data()).toList();
   }

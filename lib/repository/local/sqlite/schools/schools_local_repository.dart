@@ -36,7 +36,8 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryAPI {
   @override
   Future<int> count() async {
     final Expression<int> exp = _db.schoolsTable.id.count();
-    final JoinedSelectStatement<$SchoolsTableTable, SchoolsSchema> query = _db.selectOnly(_db.schoolsTable)..addColumns(<Expression<int>>[exp]);
+    final JoinedSelectStatement<$SchoolsTableTable, SchoolsSchema> query = _db.selectOnly(_db.schoolsTable)
+      ..addColumns(<Expression<int>>[exp]);
     final int? count = await query.map((TypedResult scheme) => scheme.read(exp)).getSingleOrNull();
 
     return count ?? 0;
@@ -63,7 +64,8 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryAPI {
 
   @override
   Future<SchoolModel> getById(int id) async {
-    final SchoolsSchema? schoolsSchema = await (_db.select(_db.schoolsTable)..where(($SchoolsTableTable t) => t.id.equals(id))).getSingleOrNull();
+    final SchoolsSchema? schoolsSchema =
+        await (_db.select(_db.schoolsTable)..where(($SchoolsTableTable t) => t.id.equals(id))).getSingleOrNull();
 
     if (schoolsSchema == null) throw SQLiteException('Failed to select $id from schoolsTable');
 
@@ -79,14 +81,12 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryAPI {
   Future<List<int>> listParentIdsByUsers(List<UserModel> users) async {
     final List<int> schoolIds = users.map((UserModel user) => user.schoolId).toSet().toList();
 
-    final List<TypedResult> rows =
-        await (_db.selectOnly(_db.schoolsTable, distinct: true)
-              ..where(_db.schoolsTable.id.isIn(schoolIds))
-              ..addColumns(<Expression<int>>[_db.schoolsTable.parentId])).get();
+    final List<TypedResult> rows = await (_db.selectOnly(_db.schoolsTable, distinct: true)
+          ..where(_db.schoolsTable.id.isIn(schoolIds))
+          ..addColumns(<Expression<int>>[_db.schoolsTable.parentId]))
+        .get();
 
-    final List<int> parentIds = rows
-        .map((TypedResult row) => row.read(_db.schoolsTable.parentId))
-        .whereType<int>().toList();
+    final List<int> parentIds = rows.map((TypedResult row) => row.read(_db.schoolsTable.parentId)).whereType<int>().toList();
 
     return parentIds;
   }
@@ -109,7 +109,8 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryAPI {
   @override
   Future<List<SchoolModel>> getByParentId(int parentId) async {
     final List<SchoolModel> schools = <SchoolModel>[];
-    final List<SchoolsSchema> schoolsSchemas = await (_db.select(_db.schoolsTable)..where(($SchoolsTableTable t) => t.parentId.equals(parentId))).get();
+    final List<SchoolsSchema> schoolsSchemas =
+        await (_db.select(_db.schoolsTable)..where(($SchoolsTableTable t) => t.parentId.equals(parentId))).get();
 
     for (final SchoolsSchema schoolsSchema in schoolsSchemas) {
       schools.add(
@@ -138,22 +139,23 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryAPI {
 
   @override
   Future<int> add(Map<String, dynamic> school) => _db.into(_db.schoolsTable).insertOnConflictUpdate(
-            SchoolsTableCompanion(
-              id: Value<int>(school['id'] as int),
-              parentId: Value<int>(school['parentId'] as int),
-              name: Value<String>(school['name'] as String),
-              lunchBlock: Value<int>(school['lunchBlock'] as int),
-              classification: Value<String>(school['classification'] as String),
-              updateAt: Value<DateTime>(_ref.read(commonFunctionProvider).getDayFromTimestamp(school['updateAt'])),
-            ),
-          );
+        SchoolsTableCompanion(
+          id: Value<int>(school['id'] as int),
+          parentId: Value<int>(school['parentId'] as int),
+          name: Value<String>(school['name'] as String),
+          lunchBlock: Value<int>(school['lunchBlock'] as int),
+          classification: Value<String>(school['classification'] as String),
+          updateAt: Value<DateTime>(_ref.read(commonFunctionProvider).getDayFromTimestamp(school['updateAt'])),
+        ),
+      );
 
   @override
   Future<DateTime> getLatestUpdateDay() async {
     if (await count() < 1) return DateTime(1970);
 
     final Expression<DateTime> exp = _db.schoolsTable.updateAt.max();
-    final JoinedSelectStatement<$SchoolsTableTable, SchoolsSchema> query = _db.selectOnly(_db.schoolsTable)..addColumns(<Expression<DateTime>>[exp]);
+    final JoinedSelectStatement<$SchoolsTableTable, SchoolsSchema> query = _db.selectOnly(_db.schoolsTable)
+      ..addColumns(<Expression<DateTime>>[exp]);
     final DateTime? day = await query.map((TypedResult scheme) => scheme.read(exp)).getSingleOrNull();
 
     return day ?? DateTime(1970);

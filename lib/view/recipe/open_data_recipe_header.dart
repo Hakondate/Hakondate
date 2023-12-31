@@ -47,22 +47,23 @@ class OpenDataRecipeHeader extends StatelessWidget {
             ),
           ),
         ),
-        if (description != null) Flexible(
-          child: Padding(
-            padding: const EdgeInsets.only(
-              left: PaddingSize.minimum,
-              right: PaddingSize.minimum,
-              bottom: PaddingSize.minimum,
-            ),
-            child: DefaultTextStyle(
-              style: TextStyle(
-                color: AppColor.text.primary,
-                fontFamily: 'MPLUSRounded1c',
+        if (description != null)
+          Flexible(
+            child: Padding(
+              padding: const EdgeInsets.only(
+                left: PaddingSize.minimum,
+                right: PaddingSize.minimum,
+                bottom: PaddingSize.minimum,
               ),
-              child: description!,
+              child: DefaultTextStyle(
+                style: TextStyle(
+                  color: AppColor.text.primary,
+                  fontFamily: 'MPLUSRounded1c',
+                ),
+                child: description!,
+              ),
             ),
           ),
-        ),
       ],
     );
   }

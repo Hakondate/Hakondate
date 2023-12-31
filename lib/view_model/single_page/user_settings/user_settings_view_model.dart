@@ -25,7 +25,7 @@ class UserSettingsViewModel extends _$UserSettingsViewModel {
       data: (UserSettingsState state) => state.users!,
       orElse: () async => ref.read(usersLocalRepositoryProvider).list(),
     );
-    
+
     return ref.read(schoolsLocalRepositoryProvider).listParentIdsByUsers(users);
   }
 }

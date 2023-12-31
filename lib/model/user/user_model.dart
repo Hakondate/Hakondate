@@ -8,10 +8,10 @@ part 'user_model.freezed.dart';
 class UserModel with _$UserModel {
   const factory UserModel({
     required int id,
-    required String name,     // ニックネーム
-    required int schoolId,    // 学校ID
-    required int schoolYear,  // 学年
-    NutrientsModel? slns,     // 学校給食摂取基準
+    required String name, // ニックネーム
+    required int schoolId, // 学校ID
+    required int schoolYear, // 学年
+    NutrientsModel? slns, // 学校給食摂取基準
   }) = _UserModel;
   const UserModel._();
 }

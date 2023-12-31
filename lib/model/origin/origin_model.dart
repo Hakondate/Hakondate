@@ -23,9 +23,7 @@ class OriginModel with _$OriginModel {
 
     return OriginModel(
       date: (data['date'] as Timestamp).toDate(),
-      categories: (data['categories'] as Map<String, dynamic>).entries
-          .map(OriginCategoryModel.fromFirestore)
-          .toList(),
+      categories: (data['categories'] as Map<String, dynamic>).entries.map(OriginCategoryModel.fromFirestore).toList(),
     );
   }
 }

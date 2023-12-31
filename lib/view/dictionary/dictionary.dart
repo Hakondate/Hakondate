@@ -18,9 +18,11 @@ class Dictionary extends StatelessWidget {
         mainAxisSpacing: MarginSize.minimumGrid,
         crossAxisSpacing: MarginSize.minimumGrid,
         crossAxisCount: 3,
-        children: DictionaryGroup.values.map((DictionaryGroup group) =>
-            DictionaryGrid(group: group),
-        ).toList(),
+        children: DictionaryGroup.values
+            .map(
+              (DictionaryGroup group) => DictionaryGrid(group: group),
+            )
+            .toList(),
       ),
     );
   }
