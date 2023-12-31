@@ -127,7 +127,7 @@ class _$UserStateImpl with DiagnosticableTreeMixin implements _UserState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserStateImpl &&

@@ -27,12 +27,14 @@ mixin _$SignupState {
   String? get schoolErrorState => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $SignupStateCopyWith<SignupState> get copyWith => throw _privateConstructorUsedError;
+  $SignupStateCopyWith<SignupState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $SignupStateCopyWith<$Res> {
-  factory $SignupStateCopyWith(SignupState value, $Res Function(SignupState) then) =
+  factory $SignupStateCopyWith(
+          SignupState value, $Res Function(SignupState) then) =
       _$SignupStateCopyWithImpl<$Res, SignupState>;
   @useResult
   $Res call(
@@ -48,7 +50,8 @@ abstract class $SignupStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SignupStateCopyWithImpl<$Res, $Val extends SignupState> implements $SignupStateCopyWith<$Res> {
+class _$SignupStateCopyWithImpl<$Res, $Val extends SignupState>
+    implements $SignupStateCopyWith<$Res> {
   _$SignupStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -111,8 +114,10 @@ class _$SignupStateCopyWithImpl<$Res, $Val extends SignupState> implements $Sign
 }
 
 /// @nodoc
-abstract class _$$SignupStateImplCopyWith<$Res> implements $SignupStateCopyWith<$Res> {
-  factory _$$SignupStateImplCopyWith(_$SignupStateImpl value, $Res Function(_$SignupStateImpl) then) =
+abstract class _$$SignupStateImplCopyWith<$Res>
+    implements $SignupStateCopyWith<$Res> {
+  factory _$$SignupStateImplCopyWith(
+          _$SignupStateImpl value, $Res Function(_$SignupStateImpl) then) =
       __$$SignupStateImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -129,9 +134,11 @@ abstract class _$$SignupStateImplCopyWith<$Res> implements $SignupStateCopyWith<
 }
 
 /// @nodoc
-class __$$SignupStateImplCopyWithImpl<$Res> extends _$SignupStateCopyWithImpl<$Res, _$SignupStateImpl>
+class __$$SignupStateImplCopyWithImpl<$Res>
+    extends _$SignupStateCopyWithImpl<$Res, _$SignupStateImpl>
     implements _$$SignupStateImplCopyWith<$Res> {
-  __$$SignupStateImplCopyWithImpl(_$SignupStateImpl _value, $Res Function(_$SignupStateImpl) _then)
+  __$$SignupStateImplCopyWithImpl(
+      _$SignupStateImpl _value, $Res Function(_$SignupStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -147,7 +154,7 @@ class __$$SignupStateImplCopyWithImpl<$Res> extends _$SignupStateCopyWithImpl<$R
     Object? nameErrorState = freezed,
     Object? schoolErrorState = freezed,
   }) {
-    return _then(_$_SignupState(
+    return _then(_$SignupStateImpl(
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -190,8 +197,8 @@ class __$$SignupStateImplCopyWithImpl<$Res> extends _$SignupStateCopyWithImpl<$R
 
 /// @nodoc
 
-class _$_SignupState with DiagnosticableTreeMixin implements _SignupState {
-  const _$_SignupState(
+class _$SignupStateImpl with DiagnosticableTreeMixin implements _SignupState {
+  const _$SignupStateImpl(
       {this.name,
       this.schoolId,
       this.schoolYear,
@@ -264,17 +271,23 @@ class _$_SignupState with DiagnosticableTreeMixin implements _SignupState {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SignupState &&
+            other is _$SignupStateImpl &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.schoolId, schoolId) || other.schoolId == schoolId) &&
-            (identical(other.schoolYear, schoolYear) || other.schoolYear == schoolYear) &&
-            (identical(other.schoolTrailing, schoolTrailing) || other.schoolTrailing == schoolTrailing) &&
+            (identical(other.schoolId, schoolId) ||
+                other.schoolId == schoolId) &&
+            (identical(other.schoolYear, schoolYear) ||
+                other.schoolYear == schoolYear) &&
+            (identical(other.schoolTrailing, schoolTrailing) ||
+                other.schoolTrailing == schoolTrailing) &&
             (identical(other.schoolYearTrailing, schoolYearTrailing) ||
                 other.schoolYearTrailing == schoolYearTrailing) &&
             const DeepCollectionEquality().equals(other._schools, _schools) &&
-            const DeepCollectionEquality().equals(other._schoolYears, _schoolYears) &&
-            (identical(other.nameErrorState, nameErrorState) || other.nameErrorState == nameErrorState) &&
-            (identical(other.schoolErrorState, schoolErrorState) || other.schoolErrorState == schoolErrorState));
+            const DeepCollectionEquality()
+                .equals(other._schoolYears, _schoolYears) &&
+            (identical(other.nameErrorState, nameErrorState) ||
+                other.nameErrorState == nameErrorState) &&
+            (identical(other.schoolErrorState, schoolErrorState) ||
+                other.schoolErrorState == schoolErrorState));
   }
 
   @override
@@ -293,8 +306,8 @@ class _$_SignupState with DiagnosticableTreeMixin implements _SignupState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SignupStateCopyWith<_$_SignupState> get copyWith =>
-      __$$_SignupStateCopyWithImpl<_$_SignupState>(this, _$identity);
+  _$$SignupStateImplCopyWith<_$SignupStateImpl> get copyWith =>
+      __$$SignupStateImplCopyWithImpl<_$SignupStateImpl>(this, _$identity);
 }
 
 abstract class _SignupState implements SignupState {
@@ -329,5 +342,6 @@ abstract class _SignupState implements SignupState {
   String? get schoolErrorState;
   @override
   @JsonKey(ignore: true)
-  _$$_SignupStateCopyWith<_$_SignupState> get copyWith => throw _privateConstructorUsedError;
+  _$$SignupStateImplCopyWith<_$SignupStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

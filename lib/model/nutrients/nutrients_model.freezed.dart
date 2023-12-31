@@ -391,7 +391,7 @@ class _$NutrientsModelImpl extends _NutrientsModel
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NutrientsModelImpl &&

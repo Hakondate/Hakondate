@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/constant/app_color.dart';
+import 'package:hakondate/constant/new_user_id.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/model/user/user_model.dart';
@@ -38,12 +39,12 @@ class UserSettings extends ConsumerWidget {
             return Column(
               children: <Widget>[
                 const SizedBox(
-                  height: 8,
+                  height: SpaceSize.line,
                 ),
                 for (final UserModel user in users.users!)
                   UserSettingsCard(context: context, user: user, isCurrentUser: user.id == currentUser.id),
                 const SizedBox(
-                  height: 8,
+                  height: SpaceSize.line,
                 ),
                 const UserAddButton(),
               ],
@@ -70,10 +71,8 @@ class UserAddButton extends ConsumerWidget {
           color: AppColor.ui.white,
         ),
         onPressed: () {
-          ref
-              .read(userSettingsViewModelProvider.notifier)
-              .setEditingUser(null);
-          routemaster.push('/home/user_settings/-1');
+          ref.read(userSettingsViewModelProvider.notifier).setEditingUser(null);
+          routemaster.push('/home/user_settings/${NewUserId.id}}');
         },
       ),
     );
@@ -82,7 +81,10 @@ class UserAddButton extends ConsumerWidget {
 
 class UserSettingsCard extends ConsumerWidget {
   const UserSettingsCard({
-    required this.context, required this.user, required this.isCurrentUser, super.key,
+    required this.context,
+    required this.user,
+    required this.isCurrentUser,
+    super.key,
   });
 
   final BuildContext context;
@@ -108,9 +110,7 @@ class UserSettingsCard extends ConsumerWidget {
         elevation: 2,
         shape: RoundedRectangleBorder(
           side: BorderSide(
-            color: isCurrentUser
-                ? AppColor.brand.secondary
-                : AppColor.ui.secondaryUltraLight,
+            color: isCurrentUser ? AppColor.brand.secondary : AppColor.ui.secondaryUltraLight,
             width: 3,
           ),
           borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -133,14 +133,12 @@ class UserSettingsCard extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: SpaceSize.line,
                   ),
                   Row(
                     children: <Widget>[
                       FutureBuilder<SchoolModel>(
-                        future: ref
-                            .read(schoolsLocalRepositoryProvider)
-                            .getById(user.schoolId),
+                        future: ref.read(schoolsLocalRepositoryProvider).getById(user.schoolId),
                         builder: (
                           BuildContext context,
                           AsyncSnapshot<SchoolModel> snapshot,
@@ -167,7 +165,7 @@ class UserSettingsCard extends ConsumerWidget {
                         },
                       ),
                       const SizedBox(
-                        width: 10,
+                        width: SpaceSize.line,
                       ),
                       Text(
                         '${user.schoolYear}年',
@@ -178,16 +176,14 @@ class UserSettingsCard extends ConsumerWidget {
                         ),
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
               IconButton(
                 isSelected: isCurrentUser,
                 onPressed: isCurrentUser
                     ? () {
-                        ref
-                            .read(userSettingsViewModelProvider.notifier)
-                            .setEditingUser(user);
+                        ref.read(userSettingsViewModelProvider.notifier).setEditingUser(user);
                         routemaster.push('/home/user_settings/${user.id}');
                       }
                     : () async {
@@ -201,11 +197,11 @@ class UserSettingsCard extends ConsumerWidget {
                   color: AppColor.brand.secondary,
                   size: IconSize.help,
                 ),
-              )
+              ),
             ],
           ),
         ),
       ),
-    );  
+    );
   }
 }

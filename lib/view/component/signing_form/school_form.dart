@@ -6,8 +6,8 @@ import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/state/signup/signup_state.dart';
 import 'package:hakondate/view/component/dialog/help_dialog.dart';
-import 'package:hakondate/view/component/signing_form/error_indication.dart';
 import 'package:hakondate/view/component/label/setting_label.dart';
+import 'package:hakondate/view/component/signing_form/error_indication.dart';
 import 'package:hakondate/view_model/single_page/signup/signup_view_model.dart';
 
 class SchoolForm extends ConsumerWidget {

@@ -14,7 +14,10 @@ class UserDeleteDialog extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return HakondateDialog(
       title: const Text('お子様の削除'),
-      body: const Text('お子様を削除しますか？'),
+      body: const Text(
+        'お子様を削除しますか？\n'
+        'お子様情報の削除を実行した場合，取り消すことはできません．',
+      ),
       firstAction: HakondateActionButton.primary(
         text: const Text('はい'),
         onTap: () async {
