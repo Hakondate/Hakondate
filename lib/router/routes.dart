@@ -53,11 +53,7 @@ final RoutemasterDelegate routemaster = RoutemasterDelegate(
       '/home/letter': (_) => const MaterialPage<dynamic>(child: Letter()),
       '/home/letter/:title': (_) => const MaterialPage<dynamic>(child: LetterPDF()),
       '/home/user_settings': (_) => const MaterialPage<dynamic>(child: UserSettings()),
-      '/home/user_settings/:id': (RouteData route) => FadeUpPage(
-            child: UserSettingsDetail(
-                // id: int.parse(route.pathParameters['id'] ?? '-1'),
-                ),
-          ),
+      '/home/user_settings/:id': (RouteData route) => FadeUpPage(child: UserSettingsDetail()),
       '/home/origin': (_) => const FadeUpPage(child: Origin()),
       '/home/drawer_terms': (_) => const FadeUpPage(child: DrawerTerms()),
       '/home/help': (_) => const FadeUpPage(child: Help()),
