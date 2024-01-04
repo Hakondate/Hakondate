@@ -34,9 +34,7 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
                     if (data.recommendFoodStuffMap.isNotEmpty) {
                       return Column(
                         children: <Widget>[
-                          for (int i = 0;
-                              i < data.recommendFoodStuffMap.length;
-                              i++)
+                          for (int i = 0; i < data.recommendFoodStuffMap.length; i++)
                             _recommendFoodWidget(
                               data.recommendFoodStuffMap,
                               i,
@@ -86,8 +84,7 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: PaddingSize.minimum),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children:
-                List<Widget>.generate(nutrientMap.value.length * 2, (int i) {
+            children: List<Widget>.generate(nutrientMap.value.length * 2, (int i) {
               if (i.isOdd) return const Divider();
               final int index = i ~/ 2;
               return GestureDetector(
@@ -125,9 +122,7 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
                                 Text(
-                                  nutrientMap.value[index].nutrients
-                                          .getNutrient(nutrientMap.key)
-                                          .toString() +
+                                  nutrientMap.value[index].nutrients.getNutrient(nutrientMap.key).toString() +
                                       nutrientMap.key.unit.value,
                                   style: const TextStyle(
                                     fontSize: FontSize.subheading,
@@ -149,9 +144,7 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
                   ),
                 ),
                 onTap: () async {
-                  await ref
-                      .read(dictionaryViewModelProvider.notifier)
-                      .selectItem(nutrientMap.value[index].id);
+                  await ref.read(dictionaryViewModelProvider.notifier).selectItem(nutrientMap.value[index].id);
                   routemaster.push(
                     '/home/dictionary_item/${nutrientMap.value[index].id}',
                   );

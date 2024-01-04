@@ -21,8 +21,7 @@ class DailyViewModel extends _$DailyViewModel {
 
   @override
   FutureOr<DailyState> build() {
-    _dictionaryItemsLocalRepository =
-        ref.watch(dictionaryItemsLocalRepositoryProvider);
+    _dictionaryItemsLocalRepository = ref.watch(dictionaryItemsLocalRepositoryProvider);
     _menusLocalRepository = ref.watch(menusLocalRepositoryProvider);
 
     return DailyState(
@@ -44,7 +43,7 @@ class DailyViewModel extends _$DailyViewModel {
       switch (Environment.flavor) {
         case Flavor.dev:
           selectedInputDay ??= DateTime(2022, 5, 16);
-        case Flavor.stg ||  Flavor.prod:
+        case Flavor.stg || Flavor.prod:
           selectedInputDay ??= DateTime.now();
       }
 
@@ -78,33 +77,31 @@ class DailyViewModel extends _$DailyViewModel {
 
   Future<void> updateRecommendDishes() async {
     state.whenData(
-      (DailyState data) async => state = AsyncData<DailyState>(data.copyWith(
-          recommendFoodStuffMap: await _calculateReccomendDishes(),),),
+      (DailyState data) async => state = AsyncData<DailyState>(
+        data.copyWith(
+          recommendFoodStuffMap: await _calculateReccomendDishes(),
+        ),
+      ),
     );
   }
 
-  Future<Map<FiveMajorNutrient, List<DictionaryItemModel>>>
-      _calculateReccomendDishes() async {
-    final NutrientsModel? slns =
-        ref.watch(userViewModelProvider).currentUser!.slns;
-    final List<double> nutrientsPercentage =
-        ref.read(dailyViewModelProvider.notifier).getGraphValues(
-              graphMaxValue: 120,
-              slns: slns,
-            );
+  Future<Map<FiveMajorNutrient, List<DictionaryItemModel>>> _calculateReccomendDishes() async {
+    final NutrientsModel? slns = ref.watch(userViewModelProvider).currentUser!.slns;
+    final List<double> nutrientsPercentage = ref.read(dailyViewModelProvider.notifier).getGraphValues(
+          graphMaxValue: 120,
+          slns: slns,
+        );
 
-    final Map<FiveMajorNutrient, double> nutrientsMap =
-        <FiveMajorNutrient, double>{}..addAll(<FiveMajorNutrient, double>{
-            FiveMajorNutrient.protein: nutrientsPercentage[1],
-            FiveMajorNutrient.vitamin: nutrientsPercentage[2],
-            FiveMajorNutrient.mineral: nutrientsPercentage[3],
-            FiveMajorNutrient.carbohydrate: nutrientsPercentage[4],
-            FiveMajorNutrient.lipid: nutrientsPercentage[5],
-          });
-    MapEntry<FiveMajorNutrient, double> minValue =
-        nutrientsMap.entries.elementAt(0);
-    MapEntry<FiveMajorNutrient, double> secondMinValue =
-        nutrientsMap.entries.elementAt(1);
+    final Map<FiveMajorNutrient, double> nutrientsMap = <FiveMajorNutrient, double>{}
+      ..addAll(<FiveMajorNutrient, double>{
+        FiveMajorNutrient.protein: nutrientsPercentage[1],
+        FiveMajorNutrient.vitamin: nutrientsPercentage[2],
+        FiveMajorNutrient.mineral: nutrientsPercentage[3],
+        FiveMajorNutrient.carbohydrate: nutrientsPercentage[4],
+        FiveMajorNutrient.lipid: nutrientsPercentage[5],
+      });
+    MapEntry<FiveMajorNutrient, double> minValue = nutrientsMap.entries.elementAt(0);
+    MapEntry<FiveMajorNutrient, double> secondMinValue = nutrientsMap.entries.elementAt(1);
     MapEntry<FiveMajorNutrient, double> temp;
 
     for (int i = 1; i < nutrientsMap.length; i++) {
@@ -208,10 +205,7 @@ class DailyViewModel extends _$DailyViewModel {
 
         if (menu is! LunchesDayMenuModel) return 0;
 
-        return (menu.calcium / calciumRef +
-                menu.magnesium / magnesiumRef +
-                menu.iron / ironRef +
-                menu.zinc / zincRef) / 4 * 100.0;
+        return (menu.calcium / calciumRef + menu.magnesium / magnesiumRef + menu.iron / ironRef + menu.zinc / zincRef) / 4 * 100.0;
       },
       orElse: () => 0,
     );

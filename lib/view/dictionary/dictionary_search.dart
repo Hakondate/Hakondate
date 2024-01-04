@@ -23,9 +23,7 @@ class DictionarySearch extends StatelessWidget {
                     return TextFormField(
                       controller: data.searchBarTextController,
                       onChanged: (String value) async {
-                        await ref
-                            .read(dictionarySearchViewModelProvider.notifier)
-                            .getSearchedList(value);
+                        await ref.read(dictionarySearchViewModelProvider.notifier).getSearchedList(value);
                       },
                       cursorColor: AppColor.brand.secondary,
                       decoration: InputDecoration(
@@ -57,8 +55,7 @@ class DictionarySearch extends StatelessWidget {
         builder: (BuildContext context, WidgetRef ref, _) {
           return ref.watch(dictionarySearchViewModelProvider).maybeWhen(
                 data: (DictionarySearchState data) {
-                  final List<DictionaryItemModel> searchedItems =
-                      data.searchedItems;
+                  final List<DictionaryItemModel> searchedItems = data.searchedItems;
                   return ListView.separated(
                     itemCount: searchedItems.length,
                     separatorBuilder: (_, __) => const Divider(
@@ -71,9 +68,7 @@ class DictionarySearch extends StatelessWidget {
                         title: Text(item.name),
                         trailing: const Icon(Icons.chevron_right_rounded),
                         onTap: () {
-                          ref
-                              .read(dictionaryViewModelProvider.notifier)
-                              .selectItem(item.id);
+                          ref.read(dictionaryViewModelProvider.notifier).selectItem(item.id);
                           routemaster.push('/home/dictionary_item/${item.id}');
                         },
                       );
