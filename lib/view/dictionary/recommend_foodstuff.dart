@@ -122,7 +122,8 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
                                 Text(
-                                  nutrientMap.value[index].nutrients.getNutrient(nutrientMap.key).toString() +
+                                  ((nutrientMap.value[index].nutrients.getNutrient(nutrientMap.key) * 10).ceil() / 10)
+                                          .toString() +
                                       nutrientMap.key.unit.value,
                                   style: const TextStyle(
                                     fontSize: FontSize.subheading,
