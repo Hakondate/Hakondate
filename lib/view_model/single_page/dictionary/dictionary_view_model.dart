@@ -70,7 +70,7 @@ class DictionaryViewModel extends _$DictionaryViewModel {
 
   Future<DictionaryItemModel> _getMaxRef(FiveMajorNutrient nutrient) async {
     final List<DictionaryItemModel> schemas = await _dictionaryItemsLocalRepository.getRanking(
-      nutrient: nutrient.toString(),
+      nutrient: nutrient.name,
       limit: 200,
     );
 
