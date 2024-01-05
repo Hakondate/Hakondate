@@ -57,8 +57,6 @@ class Hakondate extends StatelessWidget {
             iconTheme: IconThemeData(
               color: AppColor.brand.secondary,
             ),
-            // elevation: 4,
-            // shadowColor: AppColor.ui.shadow,
             systemOverlayStyle: SystemUiOverlayStyle.dark,
           ),
       primaryIconTheme: Theme.of(context).primaryIconTheme.copyWith(

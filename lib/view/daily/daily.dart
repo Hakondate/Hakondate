@@ -16,13 +16,11 @@ import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
 
 class Daily extends StatelessWidget {
   const Daily({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        scrolledUnderElevation: 0,
         title: _appBarTitle(),
         leading: Consumer(
           builder: (BuildContext context, WidgetRef ref, _) => IconButton(
@@ -49,25 +47,22 @@ class Daily extends StatelessWidget {
       ),
     );
   }
-
   Widget _appBarTitle() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
         return ref.watch(dailyViewModelProvider).when(
-              data: (DailyState state) {
-                final String formatted = (isSameDay(state.selectedDay, DateTime.now()))
-                    ? '今日'
-                    : DateFormat('M月d日').format(state.selectedDay);
+          data: (DailyState state) {
+            final String formatted = (isSameDay(state.selectedDay, DateTime.now()))
+                ? '今日' : DateFormat('M月d日').format(state.selectedDay);
 
-                return Text('$formattedの献立');
-              },
-              error: (_, __) => const Text(''),
-              loading: () => const Text('読み込み中'),
-            );
+            return Text('$formattedの献立');
+          },
+          error: (_, __) => const Text(''),
+          loading: () => const Text('読み込み中'),
+        );
       },
     );
   }
-
   Widget _calendarWidget() {
     return Material(
       color: AppColor.brand.primary,
@@ -75,71 +70,69 @@ class Daily extends StatelessWidget {
       child: Consumer(
         builder: (BuildContext context, WidgetRef ref, _) {
           return ref.watch(dailyViewModelProvider).maybeWhen(
-                data: (DailyState state) => TableCalendar<dynamic>(
-                  headerVisible: false,
-                  locale: 'ja_JP',
-                  calendarFormat: CalendarFormat.week,
-                  focusedDay: state.focusedDay,
-                  firstDay: state.calendarTabFirstDay,
-                  lastDay: state.calendarTabLastDay,
-                  selectedDayPredicate: (DateTime day) => isSameDay(state.selectedDay, day),
-                  onDaySelected: (DateTime selectedDay, DateTime focusedDay) async {
-                    if (isSameDay(state.selectedDay, selectedDay)) return;
-                    await ref.read(dailyViewModelProvider.notifier).updateSelectedDay(selectedDay: selectedDay);
-                  },
-                  onPageChanged: (DateTime focusedDay) =>
-                      ref.read(dailyViewModelProvider.notifier).updateFocusedDay(focusedDay),
-                  daysOfWeekHeight: 20,
-                  calendarStyle: CalendarStyle(
-                    todayTextStyle: const CalendarStyle().defaultTextStyle,
-                    todayDecoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: AppColor.brand.secondary,
-                      ),
-                    ),
-                    selectedDecoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColor.brand.secondary,
-                    ),
-                    outsideTextStyle: const CalendarStyle().defaultTextStyle,
+            data: (DailyState state) => TableCalendar<dynamic>(
+              headerVisible: false,
+              locale: 'ja_JP',
+              calendarFormat: CalendarFormat.week,
+              focusedDay: state.focusedDay,
+              firstDay: state.calendarTabFirstDay,
+              lastDay: state.calendarTabLastDay,
+              selectedDayPredicate: (DateTime day) => isSameDay(state.selectedDay, day),
+              onDaySelected: (DateTime selectedDay, DateTime focusedDay) async {
+                if (isSameDay(state.selectedDay, selectedDay)) return;
+                await ref.read(dailyViewModelProvider.notifier).updateSelectedDay(selectedDay: selectedDay);
+              },
+              onPageChanged: (DateTime focusedDay) => ref.read(dailyViewModelProvider.notifier).updateFocusedDay(focusedDay),
+              daysOfWeekHeight: 20,
+              calendarStyle: CalendarStyle(
+                todayTextStyle: const CalendarStyle().defaultTextStyle,
+                todayDecoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: AppColor.brand.secondary,
                   ),
                 ),
-                orElse: () => const SizedBox.shrink(),
-              );
+                selectedDecoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColor.brand.secondary,
+                ),
+                outsideTextStyle: const CalendarStyle().defaultTextStyle,
+              ),
+            ),
+            orElse: () => const SizedBox.shrink(),
+          );
         },
       ),
     );
   }
-
   Widget _bodyWidget() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
         return ref.watch(dailyViewModelProvider).maybeWhen(
-              data: (DailyState state) {
-                if (state.menu is LunchesDayMenuModel) {
-                  return Expanded(
-                    child: ListView(
-                      children: const <Widget>[
-                        MenuCard(),
-                        NutrientsCard(),
-                      ],
-                    ),
-                  );
-                } else if (state.menu is HolidayMenuModel) {
-                  return const NonLunchesDayBody(
-                    imageFileName: 'holiday.png',
-                    text: '給食はお休みです...',
-                  );
-                }
+          data: (DailyState state) {
+            if (state.menu is LunchesDayMenuModel) {
+              return Expanded(
+                child: ListView(
+                  children: const <Widget>[
+                    MenuCard(),
+                    NutrientsCard(),
+                  ],
+                ),
+              );
+            } else if (state.menu is HolidayMenuModel) {
+              return const NonLunchesDayBody(
+                imageFileName: 'holiday.png',
+                text: '給食はお休みです...',
+              );
+            }
 
-                return const NonLunchesDayBody(
-                  imageFileName: 'no_data.png',
-                  text: '献立は準備中です...',
-                );
-              },
-              orElse: () => const SizedBox.shrink(),
+            return const NonLunchesDayBody(
+              imageFileName: 'no_data.png',
+              text: '献立は準備中です...',
             );
+          },
+          orElse: () => const SizedBox.shrink(),
+        );
       },
     );
   }
