@@ -35,21 +35,19 @@ class NutrientsModel with _$NutrientsModel {
   double get mineral => calcium + magnesium + iron + zinc;
 
  	double getNutrient(FiveMajorNutrient nutrient) {
-    switch (nutrient.name) {
-      case 'energy':
+    switch (nutrient) {
+      case FiveMajorNutrient.energy:
         return energy;
-      case 'protein':
+      case FiveMajorNutrient.protein:
         return protein;
-      case 'vitamin':
+      case FiveMajorNutrient.vitamin:
         return vitamin;
-      case 'mineral':
+      case FiveMajorNutrient.mineral:
         return mineral;
-      case 'carbohydrate':
+      case FiveMajorNutrient.carbohydrate:
         return carbohydrate;
-      case 'lipid':
+      case FiveMajorNutrient.lipid:
         return lipid;
-      default:
-        return 0;
     }
   }
 }

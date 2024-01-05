@@ -31,12 +31,12 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
           children: <Widget>[
             ref.watch(dailyViewModelProvider).maybeWhen(
                   data: (DailyState data) {
-                    if (data.recommendFoodStuffMap.isNotEmpty) {
+                    if (data.recommendFoodStuffs.isNotEmpty) {
                       return Column(
                         children: <Widget>[
-                          for (int i = 0; i < data.recommendFoodStuffMap.length; i++)
+                          for (int i = 0; i < data.recommendFoodStuffs.length; i++)
                             _recommendFoodWidget(
-                              data.recommendFoodStuffMap,
+                              data.recommendFoodStuffs,
                               i,
                             ),
                         ],

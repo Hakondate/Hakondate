@@ -20,7 +20,6 @@ class Dictionary extends ConsumerWidget {
           IconButton(
             icon: const Icon(Icons.search),
             onPressed: () async {
-              await ref.read(dictionarySearchViewModelProvider.notifier).initializeSearchedList();
               routemaster.push('/home/dictionary/search');
             },
           ),

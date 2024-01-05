@@ -7,11 +7,11 @@ part of 'dictionary_search_view_model.dart';
 // **************************************************************************
 
 String _$dictionarySearchViewModelHash() =>
-    r'fa27db13f228c801c93600854e43d6aa5029b8cb';
+    r'475c9752e6480a9951cb179d55312132cad0ba3f';
 
 /// See also [DictionarySearchViewModel].
 @ProviderFor(DictionarySearchViewModel)
-final dictionarySearchViewModelProvider = AsyncNotifierProvider<
+final dictionarySearchViewModelProvider = AutoDisposeAsyncNotifierProvider<
     DictionarySearchViewModel, DictionarySearchState>.internal(
   DictionarySearchViewModel.new,
   name: r'dictionarySearchViewModelProvider',
@@ -22,6 +22,7 @@ final dictionarySearchViewModelProvider = AsyncNotifierProvider<
   allTransitiveDependencies: null,
 );
 
-typedef _$DictionarySearchViewModel = AsyncNotifier<DictionarySearchState>;
+typedef _$DictionarySearchViewModel
+    = AutoDisposeAsyncNotifier<DictionarySearchState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

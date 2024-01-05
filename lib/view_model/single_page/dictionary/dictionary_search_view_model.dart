@@ -7,13 +7,14 @@ import 'package:hakondate/state/dictionary/dictionary_search_state.dart';
 
 part 'dictionary_search_view_model.g.dart';
 
-@Riverpod(keepAlive: true)
+@riverpod
 class DictionarySearchViewModel extends _$DictionarySearchViewModel {
   late final DictionaryItemsLocalRepositoryAPI _dictionaryItemsLocalRepository;
   @override
   Future<DictionarySearchState> build() async {
     _dictionaryItemsLocalRepository =
         ref.watch(dictionaryItemsLocalRepositoryProvider);
+    ref.onDispose(() => state.whenData((DictionarySearchState data) => data.searchBarTextController.dispose()));
     return DictionarySearchState(
       searchBarTextController: TextEditingController(),
       searchedItems: await _dictionaryItemsLocalRepository.getAll(),
@@ -25,18 +26,6 @@ class DictionarySearchViewModel extends _$DictionarySearchViewModel {
       state = AsyncData<DictionarySearchState>(
         data.copyWith(
           searchedItems: await _dictionaryItemsLocalRepository.search(query),
-        ),
-      );
-    });
-  }
-
-  Future<void> initializeSearchedList() async {
-    state.whenData((DictionarySearchState data) async {
-      state = const AsyncLoading<DictionarySearchState>();
-      state = AsyncData<DictionarySearchState>(
-        data.copyWith(
-          searchedItems: await _dictionaryItemsLocalRepository.getAll(),
-          searchBarTextController: TextEditingController(),
         ),
       );
     });

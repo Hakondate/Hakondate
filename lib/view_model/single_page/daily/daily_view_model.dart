@@ -79,7 +79,7 @@ class DailyViewModel extends _$DailyViewModel {
     state.whenData(
       (DailyState data) async => state = AsyncData<DailyState>(
         data.copyWith(
-          recommendFoodStuffMap: await _calculateReccomendDishes(),
+          recommendFoodStuffs: await _calculateReccomendDishes(),
         ),
       ),
     );
