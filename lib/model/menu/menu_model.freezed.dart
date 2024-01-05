@@ -86,10 +86,10 @@ class _$MenuModelCopyWithImpl<$Res, $Val extends MenuModel>
 }
 
 /// @nodoc
-abstract class _$$LunchesDayMenuModelCopyWith<$Res> {
-  factory _$$LunchesDayMenuModelCopyWith(_$LunchesDayMenuModel value,
-          $Res Function(_$LunchesDayMenuModel) then) =
-      __$$LunchesDayMenuModelCopyWithImpl<$Res>;
+abstract class _$$LunchesDayMenuModelImplCopyWith<$Res> {
+  factory _$$LunchesDayMenuModelImplCopyWith(_$LunchesDayMenuModelImpl value,
+          $Res Function(_$LunchesDayMenuModelImpl) then) =
+      __$$LunchesDayMenuModelImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {int id,
@@ -100,11 +100,11 @@ abstract class _$$LunchesDayMenuModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$LunchesDayMenuModelCopyWithImpl<$Res>
-    extends _$MenuModelCopyWithImpl<$Res, _$LunchesDayMenuModel>
-    implements _$$LunchesDayMenuModelCopyWith<$Res> {
-  __$$LunchesDayMenuModelCopyWithImpl(
-      _$LunchesDayMenuModel _value, $Res Function(_$LunchesDayMenuModel) _then)
+class __$$LunchesDayMenuModelImplCopyWithImpl<$Res>
+    extends _$MenuModelCopyWithImpl<$Res, _$LunchesDayMenuModelImpl>
+    implements _$$LunchesDayMenuModelImplCopyWith<$Res> {
+  __$$LunchesDayMenuModelImplCopyWithImpl(_$LunchesDayMenuModelImpl _value,
+      $Res Function(_$LunchesDayMenuModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -116,7 +116,7 @@ class __$$LunchesDayMenuModelCopyWithImpl<$Res>
     Object? dishes = null,
     Object? event = freezed,
   }) {
-    return _then(_$LunchesDayMenuModel(
+    return _then(_$LunchesDayMenuModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -143,8 +143,8 @@ class __$$LunchesDayMenuModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LunchesDayMenuModel extends LunchesDayMenuModel {
-  const _$LunchesDayMenuModel(
+class _$LunchesDayMenuModelImpl extends LunchesDayMenuModel {
+  const _$LunchesDayMenuModelImpl(
       {required this.id,
       required this.day,
       required this.schoolId,
@@ -176,10 +176,10 @@ class _$LunchesDayMenuModel extends LunchesDayMenuModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LunchesDayMenuModel &&
+            other is _$LunchesDayMenuModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.day, day) || other.day == day) &&
             (identical(other.schoolId, schoolId) ||
@@ -195,8 +195,8 @@ class _$LunchesDayMenuModel extends LunchesDayMenuModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$LunchesDayMenuModelCopyWith<_$LunchesDayMenuModel> get copyWith =>
-      __$$LunchesDayMenuModelCopyWithImpl<_$LunchesDayMenuModel>(
+  _$$LunchesDayMenuModelImplCopyWith<_$LunchesDayMenuModelImpl> get copyWith =>
+      __$$LunchesDayMenuModelImplCopyWithImpl<_$LunchesDayMenuModelImpl>(
           this, _$identity);
 
   @override
@@ -280,7 +280,7 @@ abstract class LunchesDayMenuModel extends MenuModel {
       required final DateTime day,
       required final int schoolId,
       required final List<DishModel> dishes,
-      final String? event}) = _$LunchesDayMenuModel;
+      final String? event}) = _$LunchesDayMenuModelImpl;
   const LunchesDayMenuModel._() : super._();
 
   int get id;
@@ -289,30 +289,30 @@ abstract class LunchesDayMenuModel extends MenuModel {
   List<DishModel> get dishes;
   String? get event;
   @JsonKey(ignore: true)
-  _$$LunchesDayMenuModelCopyWith<_$LunchesDayMenuModel> get copyWith =>
+  _$$LunchesDayMenuModelImplCopyWith<_$LunchesDayMenuModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$HolidayMenuModelCopyWith<$Res> {
-  factory _$$HolidayMenuModelCopyWith(
-          _$HolidayMenuModel value, $Res Function(_$HolidayMenuModel) then) =
-      __$$HolidayMenuModelCopyWithImpl<$Res>;
+abstract class _$$HolidayMenuModelImplCopyWith<$Res> {
+  factory _$$HolidayMenuModelImplCopyWith(_$HolidayMenuModelImpl value,
+          $Res Function(_$HolidayMenuModelImpl) then) =
+      __$$HolidayMenuModelImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$HolidayMenuModelCopyWithImpl<$Res>
-    extends _$MenuModelCopyWithImpl<$Res, _$HolidayMenuModel>
-    implements _$$HolidayMenuModelCopyWith<$Res> {
-  __$$HolidayMenuModelCopyWithImpl(
-      _$HolidayMenuModel _value, $Res Function(_$HolidayMenuModel) _then)
+class __$$HolidayMenuModelImplCopyWithImpl<$Res>
+    extends _$MenuModelCopyWithImpl<$Res, _$HolidayMenuModelImpl>
+    implements _$$HolidayMenuModelImplCopyWith<$Res> {
+  __$$HolidayMenuModelImplCopyWithImpl(_$HolidayMenuModelImpl _value,
+      $Res Function(_$HolidayMenuModelImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$HolidayMenuModel extends HolidayMenuModel {
-  const _$HolidayMenuModel() : super._();
+class _$HolidayMenuModelImpl extends HolidayMenuModel {
+  const _$HolidayMenuModelImpl() : super._();
 
   @override
   String toString() {
@@ -320,9 +320,9 @@ class _$HolidayMenuModel extends HolidayMenuModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$HolidayMenuModel);
+        (other.runtimeType == runtimeType && other is _$HolidayMenuModelImpl);
   }
 
   @override
@@ -404,30 +404,30 @@ class _$HolidayMenuModel extends HolidayMenuModel {
 }
 
 abstract class HolidayMenuModel extends MenuModel {
-  const factory HolidayMenuModel() = _$HolidayMenuModel;
+  const factory HolidayMenuModel() = _$HolidayMenuModelImpl;
   const HolidayMenuModel._() : super._();
 }
 
 /// @nodoc
-abstract class _$$NoDataMenuModelCopyWith<$Res> {
-  factory _$$NoDataMenuModelCopyWith(
-          _$NoDataMenuModel value, $Res Function(_$NoDataMenuModel) then) =
-      __$$NoDataMenuModelCopyWithImpl<$Res>;
+abstract class _$$NoDataMenuModelImplCopyWith<$Res> {
+  factory _$$NoDataMenuModelImplCopyWith(_$NoDataMenuModelImpl value,
+          $Res Function(_$NoDataMenuModelImpl) then) =
+      __$$NoDataMenuModelImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$NoDataMenuModelCopyWithImpl<$Res>
-    extends _$MenuModelCopyWithImpl<$Res, _$NoDataMenuModel>
-    implements _$$NoDataMenuModelCopyWith<$Res> {
-  __$$NoDataMenuModelCopyWithImpl(
-      _$NoDataMenuModel _value, $Res Function(_$NoDataMenuModel) _then)
+class __$$NoDataMenuModelImplCopyWithImpl<$Res>
+    extends _$MenuModelCopyWithImpl<$Res, _$NoDataMenuModelImpl>
+    implements _$$NoDataMenuModelImplCopyWith<$Res> {
+  __$$NoDataMenuModelImplCopyWithImpl(
+      _$NoDataMenuModelImpl _value, $Res Function(_$NoDataMenuModelImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$NoDataMenuModel extends NoDataMenuModel {
-  const _$NoDataMenuModel() : super._();
+class _$NoDataMenuModelImpl extends NoDataMenuModel {
+  const _$NoDataMenuModelImpl() : super._();
 
   @override
   String toString() {
@@ -435,9 +435,9 @@ class _$NoDataMenuModel extends NoDataMenuModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$NoDataMenuModel);
+        (other.runtimeType == runtimeType && other is _$NoDataMenuModelImpl);
   }
 
   @override
@@ -519,6 +519,6 @@ class _$NoDataMenuModel extends NoDataMenuModel {
 }
 
 abstract class NoDataMenuModel extends MenuModel {
-  const factory NoDataMenuModel() = _$NoDataMenuModel;
+  const factory NoDataMenuModel() = _$NoDataMenuModelImpl;
   const NoDataMenuModel._() : super._();
 }

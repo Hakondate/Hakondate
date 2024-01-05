@@ -112,11 +112,11 @@ class _$FoodstuffModelCopyWithImpl<$Res, $Val extends FoodstuffModel>
 }
 
 /// @nodoc
-abstract class _$$_FoodstuffModelCopyWith<$Res>
+abstract class _$$FoodstuffModelImplCopyWith<$Res>
     implements $FoodstuffModelCopyWith<$Res> {
-  factory _$$_FoodstuffModelCopyWith(
-          _$_FoodstuffModel value, $Res Function(_$_FoodstuffModel) then) =
-      __$$_FoodstuffModelCopyWithImpl<$Res>;
+  factory _$$FoodstuffModelImplCopyWith(_$FoodstuffModelImpl value,
+          $Res Function(_$FoodstuffModelImpl) then) =
+      __$$FoodstuffModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -134,11 +134,11 @@ abstract class _$$_FoodstuffModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_FoodstuffModelCopyWithImpl<$Res>
-    extends _$FoodstuffModelCopyWithImpl<$Res, _$_FoodstuffModel>
-    implements _$$_FoodstuffModelCopyWith<$Res> {
-  __$$_FoodstuffModelCopyWithImpl(
-      _$_FoodstuffModel _value, $Res Function(_$_FoodstuffModel) _then)
+class __$$FoodstuffModelImplCopyWithImpl<$Res>
+    extends _$FoodstuffModelCopyWithImpl<$Res, _$FoodstuffModelImpl>
+    implements _$$FoodstuffModelImplCopyWith<$Res> {
+  __$$FoodstuffModelImplCopyWithImpl(
+      _$FoodstuffModelImpl _value, $Res Function(_$FoodstuffModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -151,7 +151,7 @@ class __$$_FoodstuffModelCopyWithImpl<$Res>
     Object? isHeat = null,
     Object? origin = freezed,
   }) {
-    return _then(_$_FoodstuffModel(
+    return _then(_$FoodstuffModelImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -182,8 +182,8 @@ class __$$_FoodstuffModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FoodstuffModel extends _FoodstuffModel {
-  const _$_FoodstuffModel(
+class _$FoodstuffModelImpl extends _FoodstuffModel {
+  const _$FoodstuffModelImpl(
       {required this.name,
       required this.quantity,
       required this.nutrients,
@@ -218,10 +218,10 @@ class _$_FoodstuffModel extends _FoodstuffModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FoodstuffModel &&
+            other is _$FoodstuffModelImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.quantity, quantity) ||
                 other.quantity == quantity) &&
@@ -240,8 +240,9 @@ class _$_FoodstuffModel extends _FoodstuffModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FoodstuffModelCopyWith<_$_FoodstuffModel> get copyWith =>
-      __$$_FoodstuffModelCopyWithImpl<_$_FoodstuffModel>(this, _$identity);
+  _$$FoodstuffModelImplCopyWith<_$FoodstuffModelImpl> get copyWith =>
+      __$$FoodstuffModelImplCopyWithImpl<_$FoodstuffModelImpl>(
+          this, _$identity);
 }
 
 abstract class _FoodstuffModel extends FoodstuffModel {
@@ -251,7 +252,7 @@ abstract class _FoodstuffModel extends FoodstuffModel {
       required final NutrientsModel nutrients,
       final bool isAllergy,
       final bool isHeat,
-      final String? origin}) = _$_FoodstuffModel;
+      final String? origin}) = _$FoodstuffModelImpl;
   const _FoodstuffModel._() : super._();
 
   @override
@@ -268,6 +269,6 @@ abstract class _FoodstuffModel extends FoodstuffModel {
   String? get origin;
   @override
   @JsonKey(ignore: true)
-  _$$_FoodstuffModelCopyWith<_$_FoodstuffModel> get copyWith =>
+  _$$FoodstuffModelImplCopyWith<_$FoodstuffModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

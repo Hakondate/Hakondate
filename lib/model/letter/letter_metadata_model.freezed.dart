@@ -81,20 +81,23 @@ class _$LetterMetadataModelCopyWithImpl<$Res, $Val extends LetterMetadataModel>
 }
 
 /// @nodoc
-abstract class _$$LetterMetadataModelDataCopyWith<$Res> {
-  factory _$$LetterMetadataModelDataCopyWith(_$LetterMetadataModelData value,
-          $Res Function(_$LetterMetadataModelData) then) =
-      __$$LetterMetadataModelDataCopyWithImpl<$Res>;
+abstract class _$$LetterMetadataModelDataImplCopyWith<$Res> {
+  factory _$$LetterMetadataModelDataImplCopyWith(
+          _$LetterMetadataModelDataImpl value,
+          $Res Function(_$LetterMetadataModelDataImpl) then) =
+      __$$LetterMetadataModelDataImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String title, String path, int parentId, DateTime updateAt});
 }
 
 /// @nodoc
-class __$$LetterMetadataModelDataCopyWithImpl<$Res>
-    extends _$LetterMetadataModelCopyWithImpl<$Res, _$LetterMetadataModelData>
-    implements _$$LetterMetadataModelDataCopyWith<$Res> {
-  __$$LetterMetadataModelDataCopyWithImpl(_$LetterMetadataModelData _value,
-      $Res Function(_$LetterMetadataModelData) _then)
+class __$$LetterMetadataModelDataImplCopyWithImpl<$Res>
+    extends _$LetterMetadataModelCopyWithImpl<$Res,
+        _$LetterMetadataModelDataImpl>
+    implements _$$LetterMetadataModelDataImplCopyWith<$Res> {
+  __$$LetterMetadataModelDataImplCopyWithImpl(
+      _$LetterMetadataModelDataImpl _value,
+      $Res Function(_$LetterMetadataModelDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -105,7 +108,7 @@ class __$$LetterMetadataModelDataCopyWithImpl<$Res>
     Object? parentId = null,
     Object? updateAt = null,
   }) {
-    return _then(_$LetterMetadataModelData(
+    return _then(_$LetterMetadataModelDataImpl(
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -128,8 +131,8 @@ class __$$LetterMetadataModelDataCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LetterMetadataModelData implements LetterMetadataModelData {
-  const _$LetterMetadataModelData(
+class _$LetterMetadataModelDataImpl implements LetterMetadataModelData {
+  const _$LetterMetadataModelDataImpl(
       {required this.title,
       required this.path,
       required this.parentId,
@@ -150,10 +153,10 @@ class _$LetterMetadataModelData implements LetterMetadataModelData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LetterMetadataModelData &&
+            other is _$LetterMetadataModelDataImpl &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.path, path) || other.path == path) &&
             (identical(other.parentId, parentId) ||
@@ -168,9 +171,9 @@ class _$LetterMetadataModelData implements LetterMetadataModelData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$LetterMetadataModelDataCopyWith<_$LetterMetadataModelData> get copyWith =>
-      __$$LetterMetadataModelDataCopyWithImpl<_$LetterMetadataModelData>(
-          this, _$identity);
+  _$$LetterMetadataModelDataImplCopyWith<_$LetterMetadataModelDataImpl>
+      get copyWith => __$$LetterMetadataModelDataImplCopyWithImpl<
+          _$LetterMetadataModelDataImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -246,40 +249,40 @@ abstract class LetterMetadataModelData implements LetterMetadataModel {
       {required final String title,
       required final String path,
       required final int parentId,
-      required final DateTime updateAt}) = _$LetterMetadataModelData;
+      required final DateTime updateAt}) = _$LetterMetadataModelDataImpl;
 
   String get title;
   String get path;
   int get parentId;
   DateTime get updateAt;
   @JsonKey(ignore: true)
-  _$$LetterMetadataModelDataCopyWith<_$LetterMetadataModelData> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$LetterMetadataModelDataImplCopyWith<_$LetterMetadataModelDataImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$LetterMetadataModelLoadingCopyWith<$Res> {
-  factory _$$LetterMetadataModelLoadingCopyWith(
-          _$LetterMetadataModelLoading value,
-          $Res Function(_$LetterMetadataModelLoading) then) =
-      __$$LetterMetadataModelLoadingCopyWithImpl<$Res>;
+abstract class _$$LetterMetadataModelLoadingImplCopyWith<$Res> {
+  factory _$$LetterMetadataModelLoadingImplCopyWith(
+          _$LetterMetadataModelLoadingImpl value,
+          $Res Function(_$LetterMetadataModelLoadingImpl) then) =
+      __$$LetterMetadataModelLoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LetterMetadataModelLoadingCopyWithImpl<$Res>
+class __$$LetterMetadataModelLoadingImplCopyWithImpl<$Res>
     extends _$LetterMetadataModelCopyWithImpl<$Res,
-        _$LetterMetadataModelLoading>
-    implements _$$LetterMetadataModelLoadingCopyWith<$Res> {
-  __$$LetterMetadataModelLoadingCopyWithImpl(
-      _$LetterMetadataModelLoading _value,
-      $Res Function(_$LetterMetadataModelLoading) _then)
+        _$LetterMetadataModelLoadingImpl>
+    implements _$$LetterMetadataModelLoadingImplCopyWith<$Res> {
+  __$$LetterMetadataModelLoadingImplCopyWithImpl(
+      _$LetterMetadataModelLoadingImpl _value,
+      $Res Function(_$LetterMetadataModelLoadingImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$LetterMetadataModelLoading implements LetterMetadataModelLoading {
-  const _$LetterMetadataModelLoading();
+class _$LetterMetadataModelLoadingImpl implements LetterMetadataModelLoading {
+  const _$LetterMetadataModelLoadingImpl();
 
   @override
   String toString() {
@@ -287,10 +290,10 @@ class _$LetterMetadataModelLoading implements LetterMetadataModelLoading {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LetterMetadataModelLoading);
+            other is _$LetterMetadataModelLoadingImpl);
   }
 
   @override
@@ -366,5 +369,5 @@ class _$LetterMetadataModelLoading implements LetterMetadataModelLoading {
 }
 
 abstract class LetterMetadataModelLoading implements LetterMetadataModel {
-  const factory LetterMetadataModelLoading() = _$LetterMetadataModelLoading;
+  const factory LetterMetadataModelLoading() = _$LetterMetadataModelLoadingImpl;
 }

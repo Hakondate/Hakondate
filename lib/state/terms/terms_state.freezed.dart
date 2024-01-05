@@ -57,22 +57,22 @@ class _$TermsStateCopyWithImpl<$Res, $Val extends TermsState>
 }
 
 /// @nodoc
-abstract class _$$_TermsStateCopyWith<$Res>
+abstract class _$$TermsStateImplCopyWith<$Res>
     implements $TermsStateCopyWith<$Res> {
-  factory _$$_TermsStateCopyWith(
-          _$_TermsState value, $Res Function(_$_TermsState) then) =
-      __$$_TermsStateCopyWithImpl<$Res>;
+  factory _$$TermsStateImplCopyWith(
+          _$TermsStateImpl value, $Res Function(_$TermsStateImpl) then) =
+      __$$TermsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool isAgree});
 }
 
 /// @nodoc
-class __$$_TermsStateCopyWithImpl<$Res>
-    extends _$TermsStateCopyWithImpl<$Res, _$_TermsState>
-    implements _$$_TermsStateCopyWith<$Res> {
-  __$$_TermsStateCopyWithImpl(
-      _$_TermsState _value, $Res Function(_$_TermsState) _then)
+class __$$TermsStateImplCopyWithImpl<$Res>
+    extends _$TermsStateCopyWithImpl<$Res, _$TermsStateImpl>
+    implements _$$TermsStateImplCopyWith<$Res> {
+  __$$TermsStateImplCopyWithImpl(
+      _$TermsStateImpl _value, $Res Function(_$TermsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -80,7 +80,7 @@ class __$$_TermsStateCopyWithImpl<$Res>
   $Res call({
     Object? isAgree = null,
   }) {
-    return _then(_$_TermsState(
+    return _then(_$TermsStateImpl(
       isAgree: null == isAgree
           ? _value.isAgree
           : isAgree // ignore: cast_nullable_to_non_nullable
@@ -91,8 +91,8 @@ class __$$_TermsStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TermsState with DiagnosticableTreeMixin implements _TermsState {
-  const _$_TermsState({this.isAgree = false});
+class _$TermsStateImpl with DiagnosticableTreeMixin implements _TermsState {
+  const _$TermsStateImpl({this.isAgree = false});
 
   @override
   @JsonKey()
@@ -112,10 +112,10 @@ class _$_TermsState with DiagnosticableTreeMixin implements _TermsState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TermsState &&
+            other is _$TermsStateImpl &&
             (identical(other.isAgree, isAgree) || other.isAgree == isAgree));
   }
 
@@ -125,17 +125,17 @@ class _$_TermsState with DiagnosticableTreeMixin implements _TermsState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TermsStateCopyWith<_$_TermsState> get copyWith =>
-      __$$_TermsStateCopyWithImpl<_$_TermsState>(this, _$identity);
+  _$$TermsStateImplCopyWith<_$TermsStateImpl> get copyWith =>
+      __$$TermsStateImplCopyWithImpl<_$TermsStateImpl>(this, _$identity);
 }
 
 abstract class _TermsState implements TermsState {
-  const factory _TermsState({final bool isAgree}) = _$_TermsState;
+  const factory _TermsState({final bool isAgree}) = _$TermsStateImpl;
 
   @override
   bool get isAgree;
   @override
   @JsonKey(ignore: true)
-  _$$_TermsStateCopyWith<_$_TermsState> get copyWith =>
+  _$$TermsStateImplCopyWith<_$TermsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

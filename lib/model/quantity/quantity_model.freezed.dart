@@ -63,22 +63,22 @@ class _$QuantityModelCopyWithImpl<$Res, $Val extends QuantityModel>
 }
 
 /// @nodoc
-abstract class _$$_QuantityModelCopyWith<$Res>
+abstract class _$$QuantityModelImplCopyWith<$Res>
     implements $QuantityModelCopyWith<$Res> {
-  factory _$$_QuantityModelCopyWith(
-          _$_QuantityModel value, $Res Function(_$_QuantityModel) then) =
-      __$$_QuantityModelCopyWithImpl<$Res>;
+  factory _$$QuantityModelImplCopyWith(
+          _$QuantityModelImpl value, $Res Function(_$QuantityModelImpl) then) =
+      __$$QuantityModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int? piece, double gram});
 }
 
 /// @nodoc
-class __$$_QuantityModelCopyWithImpl<$Res>
-    extends _$QuantityModelCopyWithImpl<$Res, _$_QuantityModel>
-    implements _$$_QuantityModelCopyWith<$Res> {
-  __$$_QuantityModelCopyWithImpl(
-      _$_QuantityModel _value, $Res Function(_$_QuantityModel) _then)
+class __$$QuantityModelImplCopyWithImpl<$Res>
+    extends _$QuantityModelCopyWithImpl<$Res, _$QuantityModelImpl>
+    implements _$$QuantityModelImplCopyWith<$Res> {
+  __$$QuantityModelImplCopyWithImpl(
+      _$QuantityModelImpl _value, $Res Function(_$QuantityModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_QuantityModelCopyWithImpl<$Res>
     Object? piece = freezed,
     Object? gram = null,
   }) {
-    return _then(_$_QuantityModel(
+    return _then(_$QuantityModelImpl(
       piece: freezed == piece
           ? _value.piece
           : piece // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_QuantityModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_QuantityModel implements _QuantityModel {
-  const _$_QuantityModel({this.piece, this.gram = 0.0});
+class _$QuantityModelImpl implements _QuantityModel {
+  const _$QuantityModelImpl({this.piece, this.gram = 0.0});
 
   @override
   final int? piece;
@@ -118,10 +118,10 @@ class _$_QuantityModel implements _QuantityModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_QuantityModel &&
+            other is _$QuantityModelImpl &&
             (identical(other.piece, piece) || other.piece == piece) &&
             (identical(other.gram, gram) || other.gram == gram));
   }
@@ -132,13 +132,13 @@ class _$_QuantityModel implements _QuantityModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_QuantityModelCopyWith<_$_QuantityModel> get copyWith =>
-      __$$_QuantityModelCopyWithImpl<_$_QuantityModel>(this, _$identity);
+  _$$QuantityModelImplCopyWith<_$QuantityModelImpl> get copyWith =>
+      __$$QuantityModelImplCopyWithImpl<_$QuantityModelImpl>(this, _$identity);
 }
 
 abstract class _QuantityModel implements QuantityModel {
   const factory _QuantityModel({final int? piece, final double gram}) =
-      _$_QuantityModel;
+      _$QuantityModelImpl;
 
   @override
   int? get piece;
@@ -146,6 +146,6 @@ abstract class _QuantityModel implements QuantityModel {
   double get gram;
   @override
   @JsonKey(ignore: true)
-  _$$_QuantityModelCopyWith<_$_QuantityModel> get copyWith =>
+  _$$QuantityModelImplCopyWith<_$QuantityModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

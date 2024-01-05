@@ -73,11 +73,11 @@ class _$OriginStateCopyWithImpl<$Res, $Val extends OriginState>
 }
 
 /// @nodoc
-abstract class _$$_OriginStateCopyWith<$Res>
+abstract class _$$OriginStateImplCopyWith<$Res>
     implements $OriginStateCopyWith<$Res> {
-  factory _$$_OriginStateCopyWith(
-          _$_OriginState value, $Res Function(_$_OriginState) then) =
-      __$$_OriginStateCopyWithImpl<$Res>;
+  factory _$$OriginStateImplCopyWith(
+          _$OriginStateImpl value, $Res Function(_$OriginStateImpl) then) =
+      __$$OriginStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<OriginModel> origins, OriginModel selectedOrigin});
@@ -87,11 +87,11 @@ abstract class _$$_OriginStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OriginStateCopyWithImpl<$Res>
-    extends _$OriginStateCopyWithImpl<$Res, _$_OriginState>
-    implements _$$_OriginStateCopyWith<$Res> {
-  __$$_OriginStateCopyWithImpl(
-      _$_OriginState _value, $Res Function(_$_OriginState) _then)
+class __$$OriginStateImplCopyWithImpl<$Res>
+    extends _$OriginStateCopyWithImpl<$Res, _$OriginStateImpl>
+    implements _$$OriginStateImplCopyWith<$Res> {
+  __$$OriginStateImplCopyWithImpl(
+      _$OriginStateImpl _value, $Res Function(_$OriginStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -100,7 +100,7 @@ class __$$_OriginStateCopyWithImpl<$Res>
     Object? origins = null,
     Object? selectedOrigin = null,
   }) {
-    return _then(_$_OriginState(
+    return _then(_$OriginStateImpl(
       origins: null == origins
           ? _value._origins
           : origins // ignore: cast_nullable_to_non_nullable
@@ -115,8 +115,8 @@ class __$$_OriginStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OriginState with DiagnosticableTreeMixin implements _OriginState {
-  const _$_OriginState(
+class _$OriginStateImpl with DiagnosticableTreeMixin implements _OriginState {
+  const _$OriginStateImpl(
       {required final List<OriginModel> origins, required this.selectedOrigin})
       : _origins = origins;
 
@@ -146,10 +146,10 @@ class _$_OriginState with DiagnosticableTreeMixin implements _OriginState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OriginState &&
+            other is _$OriginStateImpl &&
             const DeepCollectionEquality().equals(other._origins, _origins) &&
             (identical(other.selectedOrigin, selectedOrigin) ||
                 other.selectedOrigin == selectedOrigin));
@@ -162,14 +162,14 @@ class _$_OriginState with DiagnosticableTreeMixin implements _OriginState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OriginStateCopyWith<_$_OriginState> get copyWith =>
-      __$$_OriginStateCopyWithImpl<_$_OriginState>(this, _$identity);
+  _$$OriginStateImplCopyWith<_$OriginStateImpl> get copyWith =>
+      __$$OriginStateImplCopyWithImpl<_$OriginStateImpl>(this, _$identity);
 }
 
 abstract class _OriginState implements OriginState {
   const factory _OriginState(
       {required final List<OriginModel> origins,
-      required final OriginModel selectedOrigin}) = _$_OriginState;
+      required final OriginModel selectedOrigin}) = _$OriginStateImpl;
 
   @override
   List<OriginModel> get origins;
@@ -177,6 +177,6 @@ abstract class _OriginState implements OriginState {
   OriginModel get selectedOrigin;
   @override
   @JsonKey(ignore: true)
-  _$$_OriginStateCopyWith<_$_OriginState> get copyWith =>
+  _$$OriginStateImplCopyWith<_$OriginStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -87,11 +87,11 @@ class _$DictionaryStateCopyWithImpl<$Res, $Val extends DictionaryState>
 }
 
 /// @nodoc
-abstract class _$$_DictionaryStateCopyWith<$Res>
+abstract class _$$DictionaryStateImplCopyWith<$Res>
     implements $DictionaryStateCopyWith<$Res> {
-  factory _$$_DictionaryStateCopyWith(
-          _$_DictionaryState value, $Res Function(_$_DictionaryState) then) =
-      __$$_DictionaryStateCopyWithImpl<$Res>;
+  factory _$$DictionaryStateImplCopyWith(_$DictionaryStateImpl value,
+          $Res Function(_$DictionaryStateImpl) then) =
+      __$$DictionaryStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -104,11 +104,11 @@ abstract class _$$_DictionaryStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_DictionaryStateCopyWithImpl<$Res>
-    extends _$DictionaryStateCopyWithImpl<$Res, _$_DictionaryState>
-    implements _$$_DictionaryStateCopyWith<$Res> {
-  __$$_DictionaryStateCopyWithImpl(
-      _$_DictionaryState _value, $Res Function(_$_DictionaryState) _then)
+class __$$DictionaryStateImplCopyWithImpl<$Res>
+    extends _$DictionaryStateCopyWithImpl<$Res, _$DictionaryStateImpl>
+    implements _$$DictionaryStateImplCopyWith<$Res> {
+  __$$DictionaryStateImplCopyWithImpl(
+      _$DictionaryStateImpl _value, $Res Function(_$DictionaryStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,7 +118,7 @@ class __$$_DictionaryStateCopyWithImpl<$Res>
     Object? selectedGroupItems = freezed,
     Object? selectedItem = freezed,
   }) {
-    return _then(_$_DictionaryState(
+    return _then(_$DictionaryStateImpl(
       selectedGroup: freezed == selectedGroup
           ? _value.selectedGroup
           : selectedGroup // ignore: cast_nullable_to_non_nullable
@@ -137,8 +137,8 @@ class __$$_DictionaryStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DictionaryState implements _DictionaryState {
-  const _$_DictionaryState(
+class _$DictionaryStateImpl implements _DictionaryState {
+  const _$DictionaryStateImpl(
       {this.selectedGroup,
       final List<DictionaryItemModel>? selectedGroupItems,
       this.selectedItem})
@@ -166,10 +166,10 @@ class _$_DictionaryState implements _DictionaryState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DictionaryState &&
+            other is _$DictionaryStateImpl &&
             (identical(other.selectedGroup, selectedGroup) ||
                 other.selectedGroup == selectedGroup) &&
             const DeepCollectionEquality()
@@ -185,15 +185,16 @@ class _$_DictionaryState implements _DictionaryState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DictionaryStateCopyWith<_$_DictionaryState> get copyWith =>
-      __$$_DictionaryStateCopyWithImpl<_$_DictionaryState>(this, _$identity);
+  _$$DictionaryStateImplCopyWith<_$DictionaryStateImpl> get copyWith =>
+      __$$DictionaryStateImplCopyWithImpl<_$DictionaryStateImpl>(
+          this, _$identity);
 }
 
 abstract class _DictionaryState implements DictionaryState {
   const factory _DictionaryState(
       {final DictionaryGroup? selectedGroup,
       final List<DictionaryItemModel>? selectedGroupItems,
-      final DictionaryItemModel? selectedItem}) = _$_DictionaryState;
+      final DictionaryItemModel? selectedItem}) = _$DictionaryStateImpl;
 
   @override
   DictionaryGroup? get selectedGroup;
@@ -203,6 +204,6 @@ abstract class _DictionaryState implements DictionaryState {
   DictionaryItemModel? get selectedItem;
   @override
   @JsonKey(ignore: true)
-  _$$_DictionaryStateCopyWith<_$_DictionaryState> get copyWith =>
+  _$$DictionaryStateImplCopyWith<_$DictionaryStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

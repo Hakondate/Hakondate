@@ -87,11 +87,11 @@ class _$SchoolModelCopyWithImpl<$Res, $Val extends SchoolModel>
 }
 
 /// @nodoc
-abstract class _$$_SchoolModelCopyWith<$Res>
+abstract class _$$SchoolModelImplCopyWith<$Res>
     implements $SchoolModelCopyWith<$Res> {
-  factory _$$_SchoolModelCopyWith(
-          _$_SchoolModel value, $Res Function(_$_SchoolModel) then) =
-      __$$_SchoolModelCopyWithImpl<$Res>;
+  factory _$$SchoolModelImplCopyWith(
+          _$SchoolModelImpl value, $Res Function(_$SchoolModelImpl) then) =
+      __$$SchoolModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -103,11 +103,11 @@ abstract class _$$_SchoolModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SchoolModelCopyWithImpl<$Res>
-    extends _$SchoolModelCopyWithImpl<$Res, _$_SchoolModel>
-    implements _$$_SchoolModelCopyWith<$Res> {
-  __$$_SchoolModelCopyWithImpl(
-      _$_SchoolModel _value, $Res Function(_$_SchoolModel) _then)
+class __$$SchoolModelImplCopyWithImpl<$Res>
+    extends _$SchoolModelCopyWithImpl<$Res, _$SchoolModelImpl>
+    implements _$$SchoolModelImplCopyWith<$Res> {
+  __$$SchoolModelImplCopyWithImpl(
+      _$SchoolModelImpl _value, $Res Function(_$SchoolModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -119,7 +119,7 @@ class __$$_SchoolModelCopyWithImpl<$Res>
     Object? classification = null,
     Object? lunchBlock = null,
   }) {
-    return _then(_$_SchoolModel(
+    return _then(_$SchoolModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -146,8 +146,8 @@ class __$$_SchoolModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SchoolModel extends _SchoolModel {
-  const _$_SchoolModel(
+class _$SchoolModelImpl extends _SchoolModel {
+  const _$SchoolModelImpl(
       {required this.id,
       required this.parentId,
       required this.name,
@@ -176,10 +176,10 @@ class _$_SchoolModel extends _SchoolModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SchoolModel &&
+            other is _$SchoolModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.parentId, parentId) ||
                 other.parentId == parentId) &&
@@ -197,8 +197,8 @@ class _$_SchoolModel extends _SchoolModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SchoolModelCopyWith<_$_SchoolModel> get copyWith =>
-      __$$_SchoolModelCopyWithImpl<_$_SchoolModel>(this, _$identity);
+  _$$SchoolModelImplCopyWith<_$SchoolModelImpl> get copyWith =>
+      __$$SchoolModelImplCopyWithImpl<_$SchoolModelImpl>(this, _$identity);
 }
 
 abstract class _SchoolModel extends SchoolModel {
@@ -207,7 +207,7 @@ abstract class _SchoolModel extends SchoolModel {
       required final int parentId,
       required final String name,
       required final SchoolClassification classification,
-      required final int lunchBlock}) = _$_SchoolModel;
+      required final int lunchBlock}) = _$SchoolModelImpl;
   const _SchoolModel._() : super._();
 
   @override
@@ -222,6 +222,6 @@ abstract class _SchoolModel extends SchoolModel {
   int get lunchBlock;
   @override
   @JsonKey(ignore: true)
-  _$$_SchoolModelCopyWith<_$_SchoolModel> get copyWith =>
+  _$$SchoolModelImplCopyWith<_$SchoolModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

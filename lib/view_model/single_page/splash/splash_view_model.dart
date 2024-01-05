@@ -79,12 +79,15 @@ class SplashViewModel extends _$SplashViewModel {
 
         if (dictionaryInitializedDay.isBefore(RecordDate.dictionaryLastUpdateDay)) {
           await _initializeDictionaries();
-          await prefs.setInt(AppKey.sharedPreferencesKey.initializedDictionaryDay, DateTime.now().millisecondsSinceEpoch);
+          await prefs.setInt(
+            AppKey.sharedPreferencesKey.initializedDictionaryDay,
+            DateTime.now().millisecondsSinceEpoch,
+          );
         }
 
         await _initializeMenus();
-        routemaster.replace('/home');
         state = SplashState();
+        routemaster.replace('/home');
       } on Exception catch (error, stack) {
         debugPrint(error.toString());
         debugPrint(stack.toString());

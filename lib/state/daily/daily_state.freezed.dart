@@ -20,6 +20,8 @@ mixin _$DailyState {
   DateTime get focusedDay => throw _privateConstructorUsedError;
   DateTime get calendarTabFirstDay => throw _privateConstructorUsedError;
   DateTime get calendarTabLastDay => throw _privateConstructorUsedError;
+  Map<FiveMajorNutrient, List<DictionaryItemModel>> get recommendFoodStuffs =>
+      throw _privateConstructorUsedError;
   MenuModel get menu => throw _privateConstructorUsedError;
   DishModel? get selectedDish => throw _privateConstructorUsedError;
 
@@ -39,6 +41,7 @@ abstract class $DailyStateCopyWith<$Res> {
       DateTime focusedDay,
       DateTime calendarTabFirstDay,
       DateTime calendarTabLastDay,
+      Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendFoodStuffs,
       MenuModel menu,
       DishModel? selectedDish});
 
@@ -63,6 +66,7 @@ class _$DailyStateCopyWithImpl<$Res, $Val extends DailyState>
     Object? focusedDay = null,
     Object? calendarTabFirstDay = null,
     Object? calendarTabLastDay = null,
+    Object? recommendFoodStuffs = null,
     Object? menu = null,
     Object? selectedDish = freezed,
   }) {
@@ -83,6 +87,10 @@ class _$DailyStateCopyWithImpl<$Res, $Val extends DailyState>
           ? _value.calendarTabLastDay
           : calendarTabLastDay // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      recommendFoodStuffs: null == recommendFoodStuffs
+          ? _value.recommendFoodStuffs
+          : recommendFoodStuffs // ignore: cast_nullable_to_non_nullable
+              as Map<FiveMajorNutrient, List<DictionaryItemModel>>,
       menu: null == menu
           ? _value.menu
           : menu // ignore: cast_nullable_to_non_nullable
@@ -116,11 +124,11 @@ class _$DailyStateCopyWithImpl<$Res, $Val extends DailyState>
 }
 
 /// @nodoc
-abstract class _$$_DailyStateCopyWith<$Res>
+abstract class _$$DailyStateImplCopyWith<$Res>
     implements $DailyStateCopyWith<$Res> {
-  factory _$$_DailyStateCopyWith(
-          _$_DailyState value, $Res Function(_$_DailyState) then) =
-      __$$_DailyStateCopyWithImpl<$Res>;
+  factory _$$DailyStateImplCopyWith(
+          _$DailyStateImpl value, $Res Function(_$DailyStateImpl) then) =
+      __$$DailyStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -128,6 +136,7 @@ abstract class _$$_DailyStateCopyWith<$Res>
       DateTime focusedDay,
       DateTime calendarTabFirstDay,
       DateTime calendarTabLastDay,
+      Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendFoodStuffs,
       MenuModel menu,
       DishModel? selectedDish});
 
@@ -138,11 +147,11 @@ abstract class _$$_DailyStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_DailyStateCopyWithImpl<$Res>
-    extends _$DailyStateCopyWithImpl<$Res, _$_DailyState>
-    implements _$$_DailyStateCopyWith<$Res> {
-  __$$_DailyStateCopyWithImpl(
-      _$_DailyState _value, $Res Function(_$_DailyState) _then)
+class __$$DailyStateImplCopyWithImpl<$Res>
+    extends _$DailyStateCopyWithImpl<$Res, _$DailyStateImpl>
+    implements _$$DailyStateImplCopyWith<$Res> {
+  __$$DailyStateImplCopyWithImpl(
+      _$DailyStateImpl _value, $Res Function(_$DailyStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -152,10 +161,11 @@ class __$$_DailyStateCopyWithImpl<$Res>
     Object? focusedDay = null,
     Object? calendarTabFirstDay = null,
     Object? calendarTabLastDay = null,
+    Object? recommendFoodStuffs = null,
     Object? menu = null,
     Object? selectedDish = freezed,
   }) {
-    return _then(_$_DailyState(
+    return _then(_$DailyStateImpl(
       selectedDay: null == selectedDay
           ? _value.selectedDay
           : selectedDay // ignore: cast_nullable_to_non_nullable
@@ -172,6 +182,10 @@ class __$$_DailyStateCopyWithImpl<$Res>
           ? _value.calendarTabLastDay
           : calendarTabLastDay // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      recommendFoodStuffs: null == recommendFoodStuffs
+          ? _value._recommendFoodStuffs
+          : recommendFoodStuffs // ignore: cast_nullable_to_non_nullable
+              as Map<FiveMajorNutrient, List<DictionaryItemModel>>,
       menu: null == menu
           ? _value.menu
           : menu // ignore: cast_nullable_to_non_nullable
@@ -186,14 +200,17 @@ class __$$_DailyStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
-  const _$_DailyState(
+class _$DailyStateImpl with DiagnosticableTreeMixin implements _DailyState {
+  const _$DailyStateImpl(
       {required this.selectedDay,
       required this.focusedDay,
       required this.calendarTabFirstDay,
       required this.calendarTabLastDay,
+      final Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendFoodStuffs =
+          const <FiveMajorNutrient, List<DictionaryItemModel>>{},
       this.menu = const MenuModel.noData(),
-      this.selectedDish});
+      this.selectedDish})
+      : _recommendFoodStuffs = recommendFoodStuffs;
 
   @override
   final DateTime selectedDay;
@@ -203,6 +220,16 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
   final DateTime calendarTabFirstDay;
   @override
   final DateTime calendarTabLastDay;
+  final Map<FiveMajorNutrient, List<DictionaryItemModel>> _recommendFoodStuffs;
+  @override
+  @JsonKey()
+  Map<FiveMajorNutrient, List<DictionaryItemModel>> get recommendFoodStuffs {
+    if (_recommendFoodStuffs is EqualUnmodifiableMapView)
+      return _recommendFoodStuffs;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_recommendFoodStuffs);
+  }
+
   @override
   @JsonKey()
   final MenuModel menu;
@@ -211,7 +238,7 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DailyState(selectedDay: $selectedDay, focusedDay: $focusedDay, calendarTabFirstDay: $calendarTabFirstDay, calendarTabLastDay: $calendarTabLastDay, menu: $menu, selectedDish: $selectedDish)';
+    return 'DailyState(selectedDay: $selectedDay, focusedDay: $focusedDay, calendarTabFirstDay: $calendarTabFirstDay, calendarTabLastDay: $calendarTabLastDay, recommendFoodStuffs: $recommendFoodStuffs, menu: $menu, selectedDish: $selectedDish)';
   }
 
   @override
@@ -223,15 +250,16 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
       ..add(DiagnosticsProperty('focusedDay', focusedDay))
       ..add(DiagnosticsProperty('calendarTabFirstDay', calendarTabFirstDay))
       ..add(DiagnosticsProperty('calendarTabLastDay', calendarTabLastDay))
+      ..add(DiagnosticsProperty('recommendFoodStuffs', recommendFoodStuffs))
       ..add(DiagnosticsProperty('menu', menu))
       ..add(DiagnosticsProperty('selectedDish', selectedDish));
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DailyState &&
+            other is _$DailyStateImpl &&
             (identical(other.selectedDay, selectedDay) ||
                 other.selectedDay == selectedDay) &&
             (identical(other.focusedDay, focusedDay) ||
@@ -240,20 +268,29 @@ class _$_DailyState with DiagnosticableTreeMixin implements _DailyState {
                 other.calendarTabFirstDay == calendarTabFirstDay) &&
             (identical(other.calendarTabLastDay, calendarTabLastDay) ||
                 other.calendarTabLastDay == calendarTabLastDay) &&
+            const DeepCollectionEquality()
+                .equals(other._recommendFoodStuffs, _recommendFoodStuffs) &&
             (identical(other.menu, menu) || other.menu == menu) &&
             (identical(other.selectedDish, selectedDish) ||
                 other.selectedDish == selectedDish));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, selectedDay, focusedDay,
-      calendarTabFirstDay, calendarTabLastDay, menu, selectedDish);
+  int get hashCode => Object.hash(
+      runtimeType,
+      selectedDay,
+      focusedDay,
+      calendarTabFirstDay,
+      calendarTabLastDay,
+      const DeepCollectionEquality().hash(_recommendFoodStuffs),
+      menu,
+      selectedDish);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DailyStateCopyWith<_$_DailyState> get copyWith =>
-      __$$_DailyStateCopyWithImpl<_$_DailyState>(this, _$identity);
+  _$$DailyStateImplCopyWith<_$DailyStateImpl> get copyWith =>
+      __$$DailyStateImplCopyWithImpl<_$DailyStateImpl>(this, _$identity);
 }
 
 abstract class _DailyState implements DailyState {
@@ -262,8 +299,10 @@ abstract class _DailyState implements DailyState {
       required final DateTime focusedDay,
       required final DateTime calendarTabFirstDay,
       required final DateTime calendarTabLastDay,
+      final Map<FiveMajorNutrient, List<DictionaryItemModel>>
+          recommendFoodStuffs,
       final MenuModel menu,
-      final DishModel? selectedDish}) = _$_DailyState;
+      final DishModel? selectedDish}) = _$DailyStateImpl;
 
   @override
   DateTime get selectedDay;
@@ -274,11 +313,13 @@ abstract class _DailyState implements DailyState {
   @override
   DateTime get calendarTabLastDay;
   @override
+  Map<FiveMajorNutrient, List<DictionaryItemModel>> get recommendFoodStuffs;
+  @override
   MenuModel get menu;
   @override
   DishModel? get selectedDish;
   @override
   @JsonKey(ignore: true)
-  _$$_DailyStateCopyWith<_$_DailyState> get copyWith =>
+  _$$DailyStateImplCopyWith<_$DailyStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

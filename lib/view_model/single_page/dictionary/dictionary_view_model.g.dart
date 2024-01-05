@@ -7,7 +7,7 @@ part of 'dictionary_view_model.dart';
 // **************************************************************************
 
 String _$dictionaryViewModelHash() =>
-    r'6c5abcf9a8d1cbc446793e4605919d6685761e80';
+    r'1d5d93191c3184f57eba188616df66f18a990dfb';
 
 /// See also [DictionaryViewModel].
 @ProviderFor(DictionaryViewModel)
@@ -24,4 +24,4 @@ final dictionaryViewModelProvider =
 
 typedef _$DictionaryViewModel = AsyncNotifier<DictionaryState>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

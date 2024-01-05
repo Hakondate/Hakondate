@@ -56,21 +56,22 @@ class _$HelpStateCopyWithImpl<$Res, $Val extends HelpState>
 }
 
 /// @nodoc
-abstract class _$$_HelpStateCopyWith<$Res> implements $HelpStateCopyWith<$Res> {
-  factory _$$_HelpStateCopyWith(
-          _$_HelpState value, $Res Function(_$_HelpState) then) =
-      __$$_HelpStateCopyWithImpl<$Res>;
+abstract class _$$HelpStateImplCopyWith<$Res>
+    implements $HelpStateCopyWith<$Res> {
+  factory _$$HelpStateImplCopyWith(
+          _$HelpStateImpl value, $Res Function(_$HelpStateImpl) then) =
+      __$$HelpStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({SchoolGrade schoolGrade});
 }
 
 /// @nodoc
-class __$$_HelpStateCopyWithImpl<$Res>
-    extends _$HelpStateCopyWithImpl<$Res, _$_HelpState>
-    implements _$$_HelpStateCopyWith<$Res> {
-  __$$_HelpStateCopyWithImpl(
-      _$_HelpState _value, $Res Function(_$_HelpState) _then)
+class __$$HelpStateImplCopyWithImpl<$Res>
+    extends _$HelpStateCopyWithImpl<$Res, _$HelpStateImpl>
+    implements _$$HelpStateImplCopyWith<$Res> {
+  __$$HelpStateImplCopyWithImpl(
+      _$HelpStateImpl _value, $Res Function(_$HelpStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -78,7 +79,7 @@ class __$$_HelpStateCopyWithImpl<$Res>
   $Res call({
     Object? schoolGrade = null,
   }) {
-    return _then(_$_HelpState(
+    return _then(_$HelpStateImpl(
       schoolGrade: null == schoolGrade
           ? _value.schoolGrade
           : schoolGrade // ignore: cast_nullable_to_non_nullable
@@ -89,8 +90,8 @@ class __$$_HelpStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_HelpState with DiagnosticableTreeMixin implements _HelpState {
-  const _$_HelpState({required this.schoolGrade});
+class _$HelpStateImpl with DiagnosticableTreeMixin implements _HelpState {
+  const _$HelpStateImpl({required this.schoolGrade});
 
   @override
   final SchoolGrade schoolGrade;
@@ -109,10 +110,10 @@ class _$_HelpState with DiagnosticableTreeMixin implements _HelpState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_HelpState &&
+            other is _$HelpStateImpl &&
             (identical(other.schoolGrade, schoolGrade) ||
                 other.schoolGrade == schoolGrade));
   }
@@ -123,18 +124,18 @@ class _$_HelpState with DiagnosticableTreeMixin implements _HelpState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_HelpStateCopyWith<_$_HelpState> get copyWith =>
-      __$$_HelpStateCopyWithImpl<_$_HelpState>(this, _$identity);
+  _$$HelpStateImplCopyWith<_$HelpStateImpl> get copyWith =>
+      __$$HelpStateImplCopyWithImpl<_$HelpStateImpl>(this, _$identity);
 }
 
 abstract class _HelpState implements HelpState {
   const factory _HelpState({required final SchoolGrade schoolGrade}) =
-      _$_HelpState;
+      _$HelpStateImpl;
 
   @override
   SchoolGrade get schoolGrade;
   @override
   @JsonKey(ignore: true)
-  _$$_HelpStateCopyWith<_$_HelpState> get copyWith =>
+  _$$HelpStateImplCopyWith<_$HelpStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

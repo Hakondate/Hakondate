@@ -6,7 +6,7 @@ part of 'signup_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$signupViewModelHash() => r'237826a91a4d5ac6f84d4191044f41437e645656';
+String _$signupViewModelHash() => r'0596a67462018dcd9ad9a852778c66bc698bdbad';
 
 /// See also [SignupViewModel].
 @ProviderFor(SignupViewModel)
@@ -23,4 +23,4 @@ final signupViewModelProvider =
 
 typedef _$SignupViewModel = AutoDisposeAsyncNotifier<SignupState>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

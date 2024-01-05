@@ -87,11 +87,11 @@ class _$LetterStateCopyWithImpl<$Res, $Val extends LetterState>
 }
 
 /// @nodoc
-abstract class _$$_LetterStateCopyWith<$Res>
+abstract class _$$LetterStateImplCopyWith<$Res>
     implements $LetterStateCopyWith<$Res> {
-  factory _$$_LetterStateCopyWith(
-          _$_LetterState value, $Res Function(_$_LetterState) then) =
-      __$$_LetterStateCopyWithImpl<$Res>;
+  factory _$$LetterStateImplCopyWith(
+          _$LetterStateImpl value, $Res Function(_$LetterStateImpl) then) =
+      __$$LetterStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -103,11 +103,11 @@ abstract class _$$_LetterStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_LetterStateCopyWithImpl<$Res>
-    extends _$LetterStateCopyWithImpl<$Res, _$_LetterState>
-    implements _$$_LetterStateCopyWith<$Res> {
-  __$$_LetterStateCopyWithImpl(
-      _$_LetterState _value, $Res Function(_$_LetterState) _then)
+class __$$LetterStateImplCopyWithImpl<$Res>
+    extends _$LetterStateCopyWithImpl<$Res, _$LetterStateImpl>
+    implements _$$LetterStateImplCopyWith<$Res> {
+  __$$LetterStateImplCopyWithImpl(
+      _$LetterStateImpl _value, $Res Function(_$LetterStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -119,7 +119,7 @@ class __$$_LetterStateCopyWithImpl<$Res>
     Object? isEndListing = null,
     Object? pageToken = freezed,
   }) {
-    return _then(_$_LetterState(
+    return _then(_$LetterStateImpl(
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -146,8 +146,8 @@ class __$$_LetterStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_LetterState with DiagnosticableTreeMixin implements _LetterState {
-  const _$_LetterState(
+class _$LetterStateImpl with DiagnosticableTreeMixin implements _LetterState {
+  const _$LetterStateImpl(
       {this.status = LetterConnectionStatus.done,
       final List<LetterMetadataModel> letters = const <LetterMetadataModel>[],
       this.selectedLetter,
@@ -193,10 +193,10 @@ class _$_LetterState with DiagnosticableTreeMixin implements _LetterState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LetterState &&
+            other is _$LetterStateImpl &&
             (identical(other.status, status) || other.status == status) &&
             const DeepCollectionEquality().equals(other._letters, _letters) &&
             const DeepCollectionEquality()
@@ -219,8 +219,8 @@ class _$_LetterState with DiagnosticableTreeMixin implements _LetterState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LetterStateCopyWith<_$_LetterState> get copyWith =>
-      __$$_LetterStateCopyWithImpl<_$_LetterState>(this, _$identity);
+  _$$LetterStateImplCopyWith<_$LetterStateImpl> get copyWith =>
+      __$$LetterStateImplCopyWithImpl<_$LetterStateImpl>(this, _$identity);
 }
 
 abstract class _LetterState implements LetterState {
@@ -229,7 +229,7 @@ abstract class _LetterState implements LetterState {
       final List<LetterMetadataModel> letters,
       final LetterMetadataModelData? selectedLetter,
       final bool isEndListing,
-      final String? pageToken}) = _$_LetterState;
+      final String? pageToken}) = _$LetterStateImpl;
 
   @override
   LetterConnectionStatus get status;
@@ -243,6 +243,6 @@ abstract class _LetterState implements LetterState {
   String? get pageToken;
   @override
   @JsonKey(ignore: true)
-  _$$_LetterStateCopyWith<_$_LetterState> get copyWith =>
+  _$$LetterStateImplCopyWith<_$LetterStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

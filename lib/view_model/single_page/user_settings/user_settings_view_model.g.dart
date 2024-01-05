@@ -7,7 +7,7 @@ part of 'user_settings_view_model.dart';
 // **************************************************************************
 
 String _$userSettingsViewModelHash() =>
-    r'74f2e3174513d412e19ff6f924ca889549ec5866';
+    r'37ff01e65cc36e8f6890e11169604085194a00d1';
 
 /// See also [UserSettingsViewModel].
 @ProviderFor(UserSettingsViewModel)
@@ -24,4 +24,4 @@ final userSettingsViewModelProvider = AutoDisposeAsyncNotifierProvider<
 
 typedef _$UserSettingsViewModel = AutoDisposeAsyncNotifier<UserSettingsState>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

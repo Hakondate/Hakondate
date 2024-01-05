@@ -1,6 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
+import 'package:hakondate/model/nutrients/five_major_nutrient.dart';
 import 'package:hakondate/repository/local/sqlite/dictionary_items/dictionary_items_local_repository.dart';
 import 'package:hakondate/state/dictionary/dictionary_state.dart';
 import 'package:hakondate/util/analytics_controller/analytics_controller.dart';
@@ -10,22 +11,22 @@ part 'dictionary_view_model.g.dart';
 @Riverpod(keepAlive: true)
 class DictionaryViewModel extends _$DictionaryViewModel {
   late final DictionaryItemsLocalRepositoryAPI _dictionaryItemsLocalRepository;
-
+  
   @override
   FutureOr<DictionaryState> build() {
     _dictionaryItemsLocalRepository = ref.watch(dictionaryItemsLocalRepositoryProvider);
     return const DictionaryState();
   }
 
-  Future<void> selectGroup(DictionaryGroup group) async {
-    state = const AsyncLoading<DictionaryState>();
-    state = AsyncData<DictionaryState>(
-      DictionaryState(
-        selectedGroup: group,
-        selectedGroupItems: await _dictionaryItemsLocalRepository.listGroup(group.groupNumber),
-      ),
-    );
-  }
+	Future<void> selectGroup(DictionaryGroup group) async {
+		state = const AsyncLoading<DictionaryState>();
+		state = AsyncData<DictionaryState>(
+			DictionaryState(
+				selectedGroup: group,
+				selectedGroupItems: await _dictionaryItemsLocalRepository.listGroup(group.groupNumber),
+			),
+		);
+	}
 
   Future<void> selectItem(int id) async {
     state.whenData((DictionaryState data) async {
@@ -47,12 +48,12 @@ class DictionaryViewModel extends _$DictionaryViewModel {
 
         if (item == null) return <double>[0, 0, 0, 0, 0, 0];
 
-        final DictionaryItemModel energyRef = await _getMaxRef('energy');
-        final DictionaryItemModel proteinRef = await _getMaxRef('protein');
-        final DictionaryItemModel vitaminRef = await _getMaxRef('vitamin');
-        final DictionaryItemModel mineralRef = await _getMaxRef('mineral');
-        final DictionaryItemModel carbohydrateRef = await _getMaxRef('carbohydrate');
-        final DictionaryItemModel lipidRef = await _getMaxRef('lipid');
+        final DictionaryItemModel energyRef = await _getMaxRef(FiveMajorNutrient.energy);
+        final DictionaryItemModel proteinRef = await _getMaxRef(FiveMajorNutrient.protein);
+        final DictionaryItemModel vitaminRef = await _getMaxRef(FiveMajorNutrient.vitamin);
+        final DictionaryItemModel mineralRef = await _getMaxRef(FiveMajorNutrient.mineral);
+        final DictionaryItemModel carbohydrateRef = await _getMaxRef(FiveMajorNutrient.carbohydrate);
+        final DictionaryItemModel lipidRef = await _getMaxRef(FiveMajorNutrient.lipid);
 
         return <double>[
           item.nutrients.energy / energyRef.nutrients.energy * 100,
@@ -67,9 +68,9 @@ class DictionaryViewModel extends _$DictionaryViewModel {
     );
   }
 
-  Future<DictionaryItemModel> _getMaxRef(String nutrient) async {
+  Future<DictionaryItemModel> _getMaxRef(FiveMajorNutrient nutrient) async {
     final List<DictionaryItemModel> schemas = await _dictionaryItemsLocalRepository.getRanking(
-      nutrient: nutrient,
+      nutrient: nutrient.name,
       limit: 200,
     );
 

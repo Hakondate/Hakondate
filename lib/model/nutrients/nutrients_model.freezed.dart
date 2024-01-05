@@ -161,11 +161,11 @@ class _$NutrientsModelCopyWithImpl<$Res, $Val extends NutrientsModel>
 }
 
 /// @nodoc
-abstract class _$$_NutrientsModelCopyWith<$Res>
+abstract class _$$NutrientsModelImplCopyWith<$Res>
     implements $NutrientsModelCopyWith<$Res> {
-  factory _$$_NutrientsModelCopyWith(
-          _$_NutrientsModel value, $Res Function(_$_NutrientsModel) then) =
-      __$$_NutrientsModelCopyWithImpl<$Res>;
+  factory _$$NutrientsModelImplCopyWith(_$NutrientsModelImpl value,
+          $Res Function(_$NutrientsModelImpl) then) =
+      __$$NutrientsModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -187,11 +187,11 @@ abstract class _$$_NutrientsModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_NutrientsModelCopyWithImpl<$Res>
-    extends _$NutrientsModelCopyWithImpl<$Res, _$_NutrientsModel>
-    implements _$$_NutrientsModelCopyWith<$Res> {
-  __$$_NutrientsModelCopyWithImpl(
-      _$_NutrientsModel _value, $Res Function(_$_NutrientsModel) _then)
+class __$$NutrientsModelImplCopyWithImpl<$Res>
+    extends _$NutrientsModelCopyWithImpl<$Res, _$NutrientsModelImpl>
+    implements _$$NutrientsModelImplCopyWith<$Res> {
+  __$$NutrientsModelImplCopyWithImpl(
+      _$NutrientsModelImpl _value, $Res Function(_$NutrientsModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -213,7 +213,7 @@ class __$$_NutrientsModelCopyWithImpl<$Res>
     Object? dietaryFiber = null,
     Object? salt = null,
   }) {
-    return _then(_$_NutrientsModel(
+    return _then(_$NutrientsModelImpl(
       energy: null == energy
           ? _value.energy
           : energy // ignore: cast_nullable_to_non_nullable
@@ -280,8 +280,9 @@ class __$$_NutrientsModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_NutrientsModel extends _NutrientsModel with DiagnosticableTreeMixin {
-  const _$_NutrientsModel(
+class _$NutrientsModelImpl extends _NutrientsModel
+    with DiagnosticableTreeMixin {
+  const _$NutrientsModelImpl(
       {this.energy = 0.0,
       this.protein = 0.0,
       this.lipid = 0.0,
@@ -299,8 +300,8 @@ class _$_NutrientsModel extends _NutrientsModel with DiagnosticableTreeMixin {
       this.salt = 0.0})
       : super._();
 
-  factory _$_NutrientsModel.fromJson(Map<String, dynamic> json) =>
-      _$$_NutrientsModelFromJson(json);
+  factory _$NutrientsModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NutrientsModelImplFromJson(json);
 
   @override
   @JsonKey()
@@ -390,10 +391,10 @@ class _$_NutrientsModel extends _NutrientsModel with DiagnosticableTreeMixin {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_NutrientsModel &&
+            other is _$NutrientsModelImpl &&
             (identical(other.energy, energy) || other.energy == energy) &&
             (identical(other.protein, protein) || other.protein == protein) &&
             (identical(other.lipid, lipid) || other.lipid == lipid) &&
@@ -440,12 +441,13 @@ class _$_NutrientsModel extends _NutrientsModel with DiagnosticableTreeMixin {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_NutrientsModelCopyWith<_$_NutrientsModel> get copyWith =>
-      __$$_NutrientsModelCopyWithImpl<_$_NutrientsModel>(this, _$identity);
+  _$$NutrientsModelImplCopyWith<_$NutrientsModelImpl> get copyWith =>
+      __$$NutrientsModelImplCopyWithImpl<_$NutrientsModelImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_NutrientsModelToJson(
+    return _$$NutrientsModelImplToJson(
       this,
     );
   }
@@ -467,11 +469,11 @@ abstract class _NutrientsModel extends NutrientsModel {
       final double vitaminB2,
       final double vitaminC,
       final double dietaryFiber,
-      final double salt}) = _$_NutrientsModel;
+      final double salt}) = _$NutrientsModelImpl;
   const _NutrientsModel._() : super._();
 
   factory _NutrientsModel.fromJson(Map<String, dynamic> json) =
-      _$_NutrientsModel.fromJson;
+      _$NutrientsModelImpl.fromJson;
 
   @override
   double get energy;
@@ -505,6 +507,6 @@ abstract class _NutrientsModel extends NutrientsModel {
   double get salt;
   @override
   @JsonKey(ignore: true)
-  _$$_NutrientsModelCopyWith<_$_NutrientsModel> get copyWith =>
+  _$$NutrientsModelImplCopyWith<_$NutrientsModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

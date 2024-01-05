@@ -75,20 +75,20 @@ class _$SplashStateCopyWithImpl<$Res, $Val extends SplashState>
 }
 
 /// @nodoc
-abstract class _$$SplashStateLoadCopyWith<$Res> {
-  factory _$$SplashStateLoadCopyWith(
-          _$SplashStateLoad value, $Res Function(_$SplashStateLoad) then) =
-      __$$SplashStateLoadCopyWithImpl<$Res>;
+abstract class _$$SplashStateLoadImplCopyWith<$Res> {
+  factory _$$SplashStateLoadImplCopyWith(_$SplashStateLoadImpl value,
+          $Res Function(_$SplashStateLoadImpl) then) =
+      __$$SplashStateLoadImplCopyWithImpl<$Res>;
   @useResult
   $Res call({LoadingStatus status});
 }
 
 /// @nodoc
-class __$$SplashStateLoadCopyWithImpl<$Res>
-    extends _$SplashStateCopyWithImpl<$Res, _$SplashStateLoad>
-    implements _$$SplashStateLoadCopyWith<$Res> {
-  __$$SplashStateLoadCopyWithImpl(
-      _$SplashStateLoad _value, $Res Function(_$SplashStateLoad) _then)
+class __$$SplashStateLoadImplCopyWithImpl<$Res>
+    extends _$SplashStateCopyWithImpl<$Res, _$SplashStateLoadImpl>
+    implements _$$SplashStateLoadImplCopyWith<$Res> {
+  __$$SplashStateLoadImplCopyWithImpl(
+      _$SplashStateLoadImpl _value, $Res Function(_$SplashStateLoadImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -96,7 +96,7 @@ class __$$SplashStateLoadCopyWithImpl<$Res>
   $Res call({
     Object? status = null,
   }) {
-    return _then(_$SplashStateLoad(
+    return _then(_$SplashStateLoadImpl(
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -107,8 +107,8 @@ class __$$SplashStateLoadCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SplashStateLoad implements SplashStateLoad {
-  const _$SplashStateLoad({required this.status});
+class _$SplashStateLoadImpl implements SplashStateLoad {
+  const _$SplashStateLoadImpl({required this.status});
 
   @override
   final LoadingStatus status;
@@ -119,10 +119,10 @@ class _$SplashStateLoad implements SplashStateLoad {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SplashStateLoad &&
+            other is _$SplashStateLoadImpl &&
             (identical(other.status, status) || other.status == status));
   }
 
@@ -132,8 +132,9 @@ class _$SplashStateLoad implements SplashStateLoad {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SplashStateLoadCopyWith<_$SplashStateLoad> get copyWith =>
-      __$$SplashStateLoadCopyWithImpl<_$SplashStateLoad>(this, _$identity);
+  _$$SplashStateLoadImplCopyWith<_$SplashStateLoadImpl> get copyWith =>
+      __$$SplashStateLoadImplCopyWithImpl<_$SplashStateLoadImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -200,29 +201,29 @@ class _$SplashStateLoad implements SplashStateLoad {
 
 abstract class SplashStateLoad implements SplashState {
   const factory SplashStateLoad({required final LoadingStatus status}) =
-      _$SplashStateLoad;
+      _$SplashStateLoadImpl;
 
   LoadingStatus get status;
   @JsonKey(ignore: true)
-  _$$SplashStateLoadCopyWith<_$SplashStateLoad> get copyWith =>
+  _$$SplashStateLoadImplCopyWith<_$SplashStateLoadImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$SplashStateErrorCopyWith<$Res> {
-  factory _$$SplashStateErrorCopyWith(
-          _$SplashStateError value, $Res Function(_$SplashStateError) then) =
-      __$$SplashStateErrorCopyWithImpl<$Res>;
+abstract class _$$SplashStateErrorImplCopyWith<$Res> {
+  factory _$$SplashStateErrorImplCopyWith(_$SplashStateErrorImpl value,
+          $Res Function(_$SplashStateErrorImpl) then) =
+      __$$SplashStateErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Exception error});
 }
 
 /// @nodoc
-class __$$SplashStateErrorCopyWithImpl<$Res>
-    extends _$SplashStateCopyWithImpl<$Res, _$SplashStateError>
-    implements _$$SplashStateErrorCopyWith<$Res> {
-  __$$SplashStateErrorCopyWithImpl(
-      _$SplashStateError _value, $Res Function(_$SplashStateError) _then)
+class __$$SplashStateErrorImplCopyWithImpl<$Res>
+    extends _$SplashStateCopyWithImpl<$Res, _$SplashStateErrorImpl>
+    implements _$$SplashStateErrorImplCopyWith<$Res> {
+  __$$SplashStateErrorImplCopyWithImpl(_$SplashStateErrorImpl _value,
+      $Res Function(_$SplashStateErrorImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -230,7 +231,7 @@ class __$$SplashStateErrorCopyWithImpl<$Res>
   $Res call({
     Object? error = null,
   }) {
-    return _then(_$SplashStateError(
+    return _then(_$SplashStateErrorImpl(
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -241,8 +242,8 @@ class __$$SplashStateErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SplashStateError implements SplashStateError {
-  const _$SplashStateError({required this.error});
+class _$SplashStateErrorImpl implements SplashStateError {
+  const _$SplashStateErrorImpl({required this.error});
 
   @override
   final Exception error;
@@ -253,10 +254,10 @@ class _$SplashStateError implements SplashStateError {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SplashStateError &&
+            other is _$SplashStateErrorImpl &&
             (identical(other.error, error) || other.error == error));
   }
 
@@ -266,8 +267,9 @@ class _$SplashStateError implements SplashStateError {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SplashStateErrorCopyWith<_$SplashStateError> get copyWith =>
-      __$$SplashStateErrorCopyWithImpl<_$SplashStateError>(this, _$identity);
+  _$$SplashStateErrorImplCopyWith<_$SplashStateErrorImpl> get copyWith =>
+      __$$SplashStateErrorImplCopyWithImpl<_$SplashStateErrorImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -334,10 +336,10 @@ class _$SplashStateError implements SplashStateError {
 
 abstract class SplashStateError implements SplashState {
   const factory SplashStateError({required final Exception error}) =
-      _$SplashStateError;
+      _$SplashStateErrorImpl;
 
   Exception get error;
   @JsonKey(ignore: true)
-  _$$SplashStateErrorCopyWith<_$SplashStateError> get copyWith =>
+  _$$SplashStateErrorImplCopyWith<_$SplashStateErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
