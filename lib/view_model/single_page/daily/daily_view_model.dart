@@ -3,7 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
 import 'package:hakondate/model/dish/dish_model.dart';
 import 'package:hakondate/model/menu/menu_model.dart';
-import 'package:hakondate/model/nutrients/nutrient_five_major.dart';
+import 'package:hakondate/model/nutrients/five_major_nutrient.dart';
 import 'package:hakondate/model/nutrients/nutrients_model.dart';
 import 'package:hakondate/repository/local/sqlite/dictionary_items/dictionary_items_local_repository.dart';
 import 'package:hakondate/repository/local/sqlite/menus/menus_local_repository.dart';
@@ -21,8 +21,7 @@ class DailyViewModel extends _$DailyViewModel {
 
   @override
   FutureOr<DailyState> build() {
-    _dictionaryItemsLocalRepository =
-        ref.watch(dictionaryItemsLocalRepositoryProvider);
+    _dictionaryItemsLocalRepository = ref.watch(dictionaryItemsLocalRepositoryProvider);
     _menusLocalRepository = ref.watch(menusLocalRepositoryProvider);
 
     return DailyState(
@@ -44,7 +43,7 @@ class DailyViewModel extends _$DailyViewModel {
       switch (Environment.flavor) {
         case Flavor.dev:
           selectedInputDay ??= DateTime(2022, 5, 16);
-        case Flavor.stg ||  Flavor.prod:
+        case Flavor.stg || Flavor.prod:
           selectedInputDay ??= DateTime.now();
       }
 
@@ -76,48 +75,54 @@ class DailyViewModel extends _$DailyViewModel {
     });
   }
 
-  Future<void>  updateRecommendDishes() async {
-    state.whenData((DailyState data) async => 
-      state = AsyncData<DailyState>(data.copyWith(recommendIncredientsMap: await _calculateReccomendDishes())),);
+  Future<void> updateRecommendDishes() async {
+    state.whenData(
+      (DailyState data) async => state = AsyncData<DailyState>(
+        data.copyWith(
+          recommendFoodStuffMap: await _calculateReccomendDishes(),
+        ),
+      ),
+    );
   }
 
-  Future<Map<FiveMajorNutrient, List<DictionaryItemModel>>> _calculateReccomendDishes() async{
+  Future<Map<FiveMajorNutrient, List<DictionaryItemModel>>> _calculateReccomendDishes() async {
     final NutrientsModel? slns = ref.watch(userViewModelProvider).currentUser!.slns;
-    final List<double> nutrientsPercentage = ref.read(dailyViewModelProvider.notifier)
-      .getGraphValues(
-        graphMaxValue: 120,
-        slns: slns,
-      );
+    final List<double> nutrientsPercentage = ref.read(dailyViewModelProvider.notifier).getGraphValues(
+          graphMaxValue: 120,
+          slns: slns,
+        );
 
-    final Map<FiveMajorNutrient, double> nutrientsMap = <FiveMajorNutrient, double>{}..addAll(<FiveMajorNutrient, double>{
+    final Map<FiveMajorNutrient, double> nutrientsMap = <FiveMajorNutrient, double>{}
+      ..addAll(<FiveMajorNutrient, double>{
         FiveMajorNutrient.protein: nutrientsPercentage[1],
         FiveMajorNutrient.vitamin: nutrientsPercentage[2],
         FiveMajorNutrient.mineral: nutrientsPercentage[3],
         FiveMajorNutrient.carbohydrate: nutrientsPercentage[4],
         FiveMajorNutrient.lipid: nutrientsPercentage[5],
       });
-      MapEntry<FiveMajorNutrient, double> minValue = nutrientsMap.entries.elementAt(0);
-      MapEntry<FiveMajorNutrient, double> secondMinValue = nutrientsMap.entries.elementAt(1);
-      MapEntry<FiveMajorNutrient, double> temp;
+    MapEntry<FiveMajorNutrient, double> minValue = nutrientsMap.entries.elementAt(0);
+    MapEntry<FiveMajorNutrient, double> secondMinValue = nutrientsMap.entries.elementAt(1);
+    MapEntry<FiveMajorNutrient, double> temp;
 
-      for (int i = 1; i < nutrientsMap.length; i++) {
-        temp = nutrientsMap.entries.elementAt(i);
-        if (minValue.value > temp.value) {
-          secondMinValue = minValue;
-          minValue = temp;
-        } else if (secondMinValue.value > temp.value) {
-          secondMinValue = temp;
-        }
+    for (int i = 1; i < nutrientsMap.length; i++) {
+      temp = nutrientsMap.entries.elementAt(i);
+      if (minValue.value > temp.value) {
+        secondMinValue = minValue;
+        minValue = temp;
+      } else if (secondMinValue.value > temp.value) {
+        secondMinValue = temp;
       }
-      final Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendDishes = <FiveMajorNutrient, List<DictionaryItemModel>>{
-        minValue.key: await _dictionaryItemsLocalRepository.getRanking(
-          nutrient: minValue.key.key,
-        ),
-        secondMinValue.key: await _dictionaryItemsLocalRepository.getRanking(
-          nutrient: secondMinValue.key.key,
-        ),
-      };
-      return recommendDishes;
+    }
+    final Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendDishes =
+        <FiveMajorNutrient, List<DictionaryItemModel>>{
+      minValue.key: await _dictionaryItemsLocalRepository.getRanking(
+        nutrient: minValue.key.name,
+      ),
+      secondMinValue.key: await _dictionaryItemsLocalRepository.getRanking(
+        nutrient: secondMinValue.key.name,
+      ),
+    };
+    return recommendDishes;
   }
 
   List<double> getGraphValues({
@@ -168,11 +173,11 @@ class DailyViewModel extends _$DailyViewModel {
   }
 
   double _calcVitaminSufficiency(
-      double retinolRef,
-      double vitaminB1Ref,
-      double vitaminB2Ref,
-      double vitaminCRef,
-      ) {
+    double retinolRef,
+    double vitaminB1Ref,
+    double vitaminB2Ref,
+    double vitaminCRef,
+  ) {
     return state.maybeWhen(
       data: (DailyState data) {
         final MenuModel menu = data.menu;
@@ -189,21 +194,18 @@ class DailyViewModel extends _$DailyViewModel {
   }
 
   double _calcMineralSufficiency(
-      double calciumRef,
-      double magnesiumRef,
-      double ironRef,
-      double zincRef,
-      ) {
+    double calciumRef,
+    double magnesiumRef,
+    double ironRef,
+    double zincRef,
+  ) {
     return state.maybeWhen(
       data: (DailyState data) {
         final MenuModel menu = data.menu;
 
         if (menu is! LunchesDayMenuModel) return 0;
 
-        return (menu.calcium / calciumRef +
-                menu.magnesium / magnesiumRef +
-                menu.iron / ironRef +
-                menu.zinc / zincRef) / 4 * 100.0;
+        return (menu.calcium / calciumRef + menu.magnesium / magnesiumRef + menu.iron / ironRef + menu.zinc / zincRef) / 4 * 100.0;
       },
       orElse: () => 0,
     );

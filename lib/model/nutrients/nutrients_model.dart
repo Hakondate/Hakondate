@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'package:hakondate/model/nutrients/five_major_nutrient.dart';
+
 part 'nutrients_model.freezed.dart';
 part 'nutrients_model.g.dart';
 
@@ -31,4 +33,23 @@ class NutrientsModel with _$NutrientsModel {
 
   double get vitamin => retinol / 1000 + vitaminB1 + vitaminB2 + vitaminC;
   double get mineral => calcium + magnesium + iron + zinc;
+
+ 	double getNutrient(FiveMajorNutrient nutrient) {
+    switch (nutrient.name) {
+      case 'energy':
+        return energy;
+      case 'protein':
+        return protein;
+      case 'vitamin':
+        return vitamin;
+      case 'mineral':
+        return mineral;
+      case 'carbohydrate':
+        return carbohydrate;
+      case 'lipid':
+        return lipid;
+      default:
+        return 0;
+    }
+  }
 }

@@ -20,8 +20,8 @@ mixin _$DailyState {
   DateTime get focusedDay => throw _privateConstructorUsedError;
   DateTime get calendarTabFirstDay => throw _privateConstructorUsedError;
   DateTime get calendarTabLastDay => throw _privateConstructorUsedError;
-  Map<FiveMajorNutrient, List<DictionaryItemModel>>
-      get recommendIncredientsMap => throw _privateConstructorUsedError;
+  Map<FiveMajorNutrient, List<DictionaryItemModel>> get recommendFoodStuffMap =>
+      throw _privateConstructorUsedError;
   MenuModel get menu => throw _privateConstructorUsedError;
   DishModel? get selectedDish => throw _privateConstructorUsedError;
 
@@ -41,7 +41,7 @@ abstract class $DailyStateCopyWith<$Res> {
       DateTime focusedDay,
       DateTime calendarTabFirstDay,
       DateTime calendarTabLastDay,
-      Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendIncredientsMap,
+      Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendFoodStuffMap,
       MenuModel menu,
       DishModel? selectedDish});
 
@@ -66,7 +66,7 @@ class _$DailyStateCopyWithImpl<$Res, $Val extends DailyState>
     Object? focusedDay = null,
     Object? calendarTabFirstDay = null,
     Object? calendarTabLastDay = null,
-    Object? recommendIncredientsMap = null,
+    Object? recommendFoodStuffMap = null,
     Object? menu = null,
     Object? selectedDish = freezed,
   }) {
@@ -87,9 +87,9 @@ class _$DailyStateCopyWithImpl<$Res, $Val extends DailyState>
           ? _value.calendarTabLastDay
           : calendarTabLastDay // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      recommendIncredientsMap: null == recommendIncredientsMap
-          ? _value.recommendIncredientsMap
-          : recommendIncredientsMap // ignore: cast_nullable_to_non_nullable
+      recommendFoodStuffMap: null == recommendFoodStuffMap
+          ? _value.recommendFoodStuffMap
+          : recommendFoodStuffMap // ignore: cast_nullable_to_non_nullable
               as Map<FiveMajorNutrient, List<DictionaryItemModel>>,
       menu: null == menu
           ? _value.menu
@@ -136,7 +136,7 @@ abstract class _$$DailyStateImplCopyWith<$Res>
       DateTime focusedDay,
       DateTime calendarTabFirstDay,
       DateTime calendarTabLastDay,
-      Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendIncredientsMap,
+      Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendFoodStuffMap,
       MenuModel menu,
       DishModel? selectedDish});
 
@@ -161,7 +161,7 @@ class __$$DailyStateImplCopyWithImpl<$Res>
     Object? focusedDay = null,
     Object? calendarTabFirstDay = null,
     Object? calendarTabLastDay = null,
-    Object? recommendIncredientsMap = null,
+    Object? recommendFoodStuffMap = null,
     Object? menu = null,
     Object? selectedDish = freezed,
   }) {
@@ -182,9 +182,9 @@ class __$$DailyStateImplCopyWithImpl<$Res>
           ? _value.calendarTabLastDay
           : calendarTabLastDay // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      recommendIncredientsMap: null == recommendIncredientsMap
-          ? _value._recommendIncredientsMap
-          : recommendIncredientsMap // ignore: cast_nullable_to_non_nullable
+      recommendFoodStuffMap: null == recommendFoodStuffMap
+          ? _value._recommendFoodStuffMap
+          : recommendFoodStuffMap // ignore: cast_nullable_to_non_nullable
               as Map<FiveMajorNutrient, List<DictionaryItemModel>>,
       menu: null == menu
           ? _value.menu
@@ -206,11 +206,11 @@ class _$DailyStateImpl with DiagnosticableTreeMixin implements _DailyState {
       required this.focusedDay,
       required this.calendarTabFirstDay,
       required this.calendarTabLastDay,
-      final Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendIncredientsMap =
+      final Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendFoodStuffMap =
           const <FiveMajorNutrient, List<DictionaryItemModel>>{},
       this.menu = const MenuModel.noData(),
       this.selectedDish})
-      : _recommendIncredientsMap = recommendIncredientsMap;
+      : _recommendFoodStuffMap = recommendFoodStuffMap;
 
   @override
   final DateTime selectedDay;
@@ -221,15 +221,14 @@ class _$DailyStateImpl with DiagnosticableTreeMixin implements _DailyState {
   @override
   final DateTime calendarTabLastDay;
   final Map<FiveMajorNutrient, List<DictionaryItemModel>>
-      _recommendIncredientsMap;
+      _recommendFoodStuffMap;
   @override
   @JsonKey()
-  Map<FiveMajorNutrient, List<DictionaryItemModel>>
-      get recommendIncredientsMap {
-    if (_recommendIncredientsMap is EqualUnmodifiableMapView)
-      return _recommendIncredientsMap;
+  Map<FiveMajorNutrient, List<DictionaryItemModel>> get recommendFoodStuffMap {
+    if (_recommendFoodStuffMap is EqualUnmodifiableMapView)
+      return _recommendFoodStuffMap;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_recommendIncredientsMap);
+    return EqualUnmodifiableMapView(_recommendFoodStuffMap);
   }
 
   @override
@@ -240,7 +239,7 @@ class _$DailyStateImpl with DiagnosticableTreeMixin implements _DailyState {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DailyState(selectedDay: $selectedDay, focusedDay: $focusedDay, calendarTabFirstDay: $calendarTabFirstDay, calendarTabLastDay: $calendarTabLastDay, recommendIncredientsMap: $recommendIncredientsMap, menu: $menu, selectedDish: $selectedDish)';
+    return 'DailyState(selectedDay: $selectedDay, focusedDay: $focusedDay, calendarTabFirstDay: $calendarTabFirstDay, calendarTabLastDay: $calendarTabLastDay, recommendFoodStuffMap: $recommendFoodStuffMap, menu: $menu, selectedDish: $selectedDish)';
   }
 
   @override
@@ -252,8 +251,7 @@ class _$DailyStateImpl with DiagnosticableTreeMixin implements _DailyState {
       ..add(DiagnosticsProperty('focusedDay', focusedDay))
       ..add(DiagnosticsProperty('calendarTabFirstDay', calendarTabFirstDay))
       ..add(DiagnosticsProperty('calendarTabLastDay', calendarTabLastDay))
-      ..add(DiagnosticsProperty(
-          'recommendIncredientsMap', recommendIncredientsMap))
+      ..add(DiagnosticsProperty('recommendFoodStuffMap', recommendFoodStuffMap))
       ..add(DiagnosticsProperty('menu', menu))
       ..add(DiagnosticsProperty('selectedDish', selectedDish));
   }
@@ -271,8 +269,8 @@ class _$DailyStateImpl with DiagnosticableTreeMixin implements _DailyState {
                 other.calendarTabFirstDay == calendarTabFirstDay) &&
             (identical(other.calendarTabLastDay, calendarTabLastDay) ||
                 other.calendarTabLastDay == calendarTabLastDay) &&
-            const DeepCollectionEquality().equals(
-                other._recommendIncredientsMap, _recommendIncredientsMap) &&
+            const DeepCollectionEquality()
+                .equals(other._recommendFoodStuffMap, _recommendFoodStuffMap) &&
             (identical(other.menu, menu) || other.menu == menu) &&
             (identical(other.selectedDish, selectedDish) ||
                 other.selectedDish == selectedDish));
@@ -285,7 +283,7 @@ class _$DailyStateImpl with DiagnosticableTreeMixin implements _DailyState {
       focusedDay,
       calendarTabFirstDay,
       calendarTabLastDay,
-      const DeepCollectionEquality().hash(_recommendIncredientsMap),
+      const DeepCollectionEquality().hash(_recommendFoodStuffMap),
       menu,
       selectedDish);
 
@@ -303,7 +301,7 @@ abstract class _DailyState implements DailyState {
       required final DateTime calendarTabFirstDay,
       required final DateTime calendarTabLastDay,
       final Map<FiveMajorNutrient, List<DictionaryItemModel>>
-          recommendIncredientsMap,
+          recommendFoodStuffMap,
       final MenuModel menu,
       final DishModel? selectedDish}) = _$DailyStateImpl;
 
@@ -316,7 +314,7 @@ abstract class _DailyState implements DailyState {
   @override
   DateTime get calendarTabLastDay;
   @override
-  Map<FiveMajorNutrient, List<DictionaryItemModel>> get recommendIncredientsMap;
+  Map<FiveMajorNutrient, List<DictionaryItemModel>> get recommendFoodStuffMap;
   @override
   MenuModel get menu;
   @override

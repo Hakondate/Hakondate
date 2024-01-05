@@ -1,7 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
-import 'package:hakondate/model/nutrients/nutrient_five_major.dart';
+import 'package:hakondate/model/nutrients/five_major_nutrient.dart';
 import 'package:hakondate/repository/local/sqlite/dictionary_items/dictionary_items_local_repository.dart';
 import 'package:hakondate/state/dictionary/dictionary_state.dart';
 import 'package:hakondate/util/analytics_controller/analytics_controller.dart';
@@ -18,42 +18,15 @@ class DictionaryViewModel extends _$DictionaryViewModel {
     return const DictionaryState();
   }
 
-  Future<void> selectGroup(DictionaryGroup group) async {
-    state = const AsyncLoading<DictionaryState>();
-    state = AsyncData<DictionaryState>(
-      DictionaryState(
-        selectedGroup: group,
-        selectedGroupItems: await _dictionaryItemsLocalRepository.listGroup(group.groupNumber),
-      ),
-    );
-  }
-
-  Future<void> getSearchedList(String query) async{
-    state = const AsyncLoading<DictionaryState>();
-    state = AsyncData<DictionaryState>(
-      DictionaryState(
-        searchedItems: await _dictionaryItemsLocalRepository.search(query),
-      ),
-    );
-  }
-  
-  Future<void> initializeSearchedList() async {
-    state = const AsyncLoading<DictionaryState>();
-    state = AsyncData<DictionaryState>(
-      DictionaryState(
-        searchedItems: await _dictionaryItemsLocalRepository.getAll(),
-      ),
-    );
-  }
-
-  Future<void> clearQuery () async{
-    state = const AsyncLoading<DictionaryState>();
-    state = AsyncData<DictionaryState>(
-      DictionaryState(
-        searchedItems: await _dictionaryItemsLocalRepository.search(''),
-      ),
-    );
-  }
+	Future<void> selectGroup(DictionaryGroup group) async {
+		state = const AsyncLoading<DictionaryState>();
+		state = AsyncData<DictionaryState>(
+			DictionaryState(
+				selectedGroup: group,
+				selectedGroupItems: await _dictionaryItemsLocalRepository.listGroup(group.groupNumber),
+			),
+		);
+	}
 
   Future<void> selectItem(int id) async {
     state.whenData((DictionaryState data) async {
@@ -97,7 +70,7 @@ class DictionaryViewModel extends _$DictionaryViewModel {
 
   Future<DictionaryItemModel> _getMaxRef(FiveMajorNutrient nutrient) async {
     final List<DictionaryItemModel> schemas = await _dictionaryItemsLocalRepository.getRanking(
-      nutrient: nutrient.key,
+      nutrient: nutrient.name,
       limit: 200,
     );
 

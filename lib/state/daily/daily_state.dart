@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
 import 'package:hakondate/model/dish/dish_model.dart';
 import 'package:hakondate/model/menu/menu_model.dart';
-import 'package:hakondate/model/nutrients/nutrient_five_major.dart';
+import 'package:hakondate/model/nutrients/five_major_nutrient.dart';
 
 part 'daily_state.freezed.dart';
 
@@ -16,7 +16,8 @@ class DailyState with _$DailyState {
     required DateTime focusedDay,
     required DateTime calendarTabFirstDay,
     required DateTime calendarTabLastDay,
-    @Default(<FiveMajorNutrient, List<DictionaryItemModel>> {}) Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendIncredientsMap, 
+    @Default(<FiveMajorNutrient, List<DictionaryItemModel>>{})
+    Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendFoodStuffMap,
     @Default(MenuModel.noData()) MenuModel menu,
     DishModel? selectedDish,
   }) = _DailyState;
