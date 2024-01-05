@@ -6,7 +6,6 @@ import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/view/dictionary/dictionary_grid.dart';
-import 'package:hakondate/view_model/single_page/dictionary/dictionary_search_view_model.dart';
 
 class Dictionary extends ConsumerWidget {
   const Dictionary({super.key});
