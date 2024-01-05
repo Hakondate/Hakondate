@@ -9,9 +9,15 @@ part 'drawer_view_model.g.dart';
 @Riverpod(keepAlive: true)
 class DrawerViewModel extends _$DrawerViewModel {
   @override
-  DrawerState build() => DrawerState(
-        scaffoldKey: GlobalKey<ScaffoldState>(),
-      );
+  DrawerState build() {
+    ref.onDispose(() {
+      state.scaffoldKey.currentState?.dispose();
+    });
+
+    return DrawerState(
+      scaffoldKey: GlobalKey<ScaffoldState>(),
+    );
+  }
 
   void openDrawer() => state.scaffoldKey.currentState!.openDrawer();
 }

@@ -113,7 +113,7 @@ class HelpFrame extends StatelessWidget {
   factory HelpFrame.nickName() => HelpFrame(
         label: 'ニックネームの情報について',
         content: DescriptionText.body(
-          label: '　ニックネームはサービス内でユーザを識別するために利用されます．\n'
+          label: '　ニックネームはサービス内でお子様を識別するために利用されます．\n'
               '　登録情報は端末に保存されます．',
         ),
       );

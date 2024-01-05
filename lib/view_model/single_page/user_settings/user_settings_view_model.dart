@@ -13,7 +13,7 @@ part 'user_settings_view_model.g.dart';
 class UserSettingsViewModel extends _$UserSettingsViewModel {
   @override
   Future<UserSettingsState> build() async {
-    final List<UserModel> users = await ref.watch(usersLocalRepositoryProvider).list();
+    final List<UserModel> users = await ref.read(usersLocalRepositoryProvider).list();
 
     return UserSettingsState(
       users: users,
@@ -27,5 +27,33 @@ class UserSettingsViewModel extends _$UserSettingsViewModel {
     );
 
     return ref.read(schoolsLocalRepositoryProvider).listParentIdsByUsers(users);
+  }
+
+  Future<void> updateUsers() async {
+    state = const AsyncLoading<UserSettingsState>();
+
+    state = await AsyncValue.guard(() async {
+      final List<UserModel> users = await ref.read(usersLocalRepositoryProvider).list();
+      return UserSettingsState(
+        users: users,
+      );
+    });
+  }
+
+  void setEditingUser(UserModel? editingUser) {
+    state.whenData(
+      (UserSettingsState data) {
+        state = AsyncData<UserSettingsState>(
+          data.copyWith(
+            editingUser: editingUser,
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> deleteUser(int id) async {
+    await ref.read(usersLocalRepositoryProvider).delete(id);
+    await updateUsers();
   }
 }

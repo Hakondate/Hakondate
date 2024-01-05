@@ -79,7 +79,7 @@ class Information extends ConsumerWidget {
               DescriptionText.headline(label: '個人情報の扱い'),
               DescriptionText.body(
                 label: '　本サービスは個人のプライバシー，名誉，その他第三者の権利を侵害することのないよう，利用者に関する情報の取り扱いに充分配慮いたします．'
-                    'また，登録されたユーザのニックネーム，学校，学年等の情報は本サービス内及び協力していただいている学校内でのみ利用されます．',
+                    'また，登録されたお子様のニックネーム，学校，学年等の情報は本サービス内及び協力していただいている学校内でのみ利用されます．',
               ),
               DescriptionText.headline(label: 'お問い合わせ'),
               DescriptionText.subheading(label: '開発者'),
