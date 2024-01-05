@@ -16,6 +16,7 @@
 
 #### 遷移(Routing)管理
 - [Navigator 2.0](https://docs.google.com/document/d/1Q0jx0l4-xymph9O6zLaOY4d_f7YFpNWX_eGbzYxr9wY/edit#) : 宣言的な遷移の実装ができるパッケージ
+- 2022/3/6 Naivigator 2.0 がわかりにくいので，それをラップしたパッケージである[Routemaster](https://pub.dev/packages/routemaster)を利用しています
 
 ### アーキテクチャ
 MVVMを採用  

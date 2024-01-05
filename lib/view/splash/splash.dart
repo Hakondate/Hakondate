@@ -32,35 +32,37 @@ class Splash extends ConsumerWidget {
             ),
             StatefulWrapper(
               onInit: () => ref.read(splashViewModelProvider.notifier).initialize(
-                termsUpdated: () async => showDialog(
-                  context: context,
-                  barrierDismissible: false,
-                  builder: (_) => TermsUpdatedDialog(
-                    onTap: () {
-                      routemaster..pop()..replace('/terms');
-                    },
-                  ),
-                ),
-                errorOccurred: (Exception error, _) async => showDialog(
-                  context: context,
-                  barrierDismissible: false,
-                  builder: (BuildContext context) {
-                    if (error is ConnectionException) {
-                      return ConnectionExceptionDialog(
-                        onTapRetry: () => routemaster.pop().whenComplete(() =>
-                            ref.read(appUniqueKeyProvider.notifier).restartApp(),
-                        ),
-                      );
-                    }
-
-                    return LocalDatabaseExceptionDialog(
-                      onTapRetry: () => routemaster.pop().whenComplete(() =>
-                          ref.read(appUniqueKeyProvider.notifier).restartApp(),
+                    termsUpdated: () async => showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (_) => TermsUpdatedDialog(
+                        onTap: () {
+                          routemaster
+                            ..pop()
+                            ..replace('/terms');
+                        },
                       ),
-                    );
-                  },
-                ),
-              ),
+                    ),
+                    errorOccurred: (Exception error, _) async => showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context) {
+                        if (error is ConnectionException) {
+                          return ConnectionExceptionDialog(
+                            onTapRetry: () => routemaster.pop().whenComplete(
+                                  () => ref.read(appUniqueKeyProvider.notifier).restartApp(),
+                                ),
+                          );
+                        }
+
+                        return LocalDatabaseExceptionDialog(
+                          onTapRetry: () => routemaster.pop().whenComplete(
+                                () => ref.read(appUniqueKeyProvider.notifier).restartApp(),
+                              ),
+                        );
+                      },
+                    ),
+                  ),
               child: SizedBox(
                 width: screenWidth * 2.0 / 3.0,
                 child: Builder(

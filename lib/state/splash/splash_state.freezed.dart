@@ -119,7 +119,7 @@ class _$SplashStateLoadImpl implements SplashStateLoad {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SplashStateLoadImpl &&
@@ -254,7 +254,7 @@ class _$SplashStateErrorImpl implements SplashStateError {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SplashStateErrorImpl &&
