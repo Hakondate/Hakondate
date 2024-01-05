@@ -1,22 +1,29 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
 import 'package:hakondate/model/dish/dish_model.dart';
 import 'package:hakondate/model/menu/menu_model.dart';
+import 'package:hakondate/model/nutrients/five_major_nutrient.dart';
 import 'package:hakondate/model/nutrients/nutrients_model.dart';
+import 'package:hakondate/repository/local/sqlite/dictionary_items/dictionary_items_local_repository.dart';
 import 'package:hakondate/repository/local/sqlite/menus/menus_local_repository.dart';
 import 'package:hakondate/state/daily/daily_state.dart';
 import 'package:hakondate/util/analytics_controller/analytics_controller.dart';
 import 'package:hakondate/util/environment.dart';
+import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
 
 part 'daily_view_model.g.dart';
 
 @Riverpod(keepAlive: true)
 class DailyViewModel extends _$DailyViewModel {
   late final MenusLocalRepositoryAPI _menusLocalRepository;
+  late final DictionaryItemsLocalRepositoryAPI _dictionaryItemsLocalRepository;
 
   @override
   FutureOr<DailyState> build() {
+    _dictionaryItemsLocalRepository = ref.watch(dictionaryItemsLocalRepositoryProvider);
     _menusLocalRepository = ref.watch(menusLocalRepositoryProvider);
+
     return DailyState(
       selectedDay: DateTime.now(),
       focusedDay: DateTime.now(),
@@ -31,14 +38,15 @@ class DailyViewModel extends _$DailyViewModel {
   Future<void> updateSelectedDay({DateTime? selectedDay, DateTime? focusedDay}) async {
     state.whenData((DailyState data) async {
       state = const AsyncLoading<DailyState>();
-
       DateTime? selectedInputDay = selectedDay;
+
       switch (Environment.flavor) {
         case Flavor.dev:
           selectedInputDay ??= DateTime(2022, 5, 16);
-        case Flavor.stg ||  Flavor.prod:
+        case Flavor.stg || Flavor.prod:
           selectedInputDay ??= DateTime.now();
       }
+
       final MenuModel menu = await _menusLocalRepository.getMenuByDay(selectedInputDay);
 
       state = AsyncData<DailyState>(
@@ -48,10 +56,10 @@ class DailyViewModel extends _$DailyViewModel {
           menu: menu,
         ),
       );
-
       if (menu is LunchesDayMenuModel) {
         await ref.read(analyticsControllerProvider.notifier).logViewMenu(menu.id);
       }
+      await updateRecommendDishes();
     });
   }
 
@@ -83,6 +91,56 @@ class DailyViewModel extends _$DailyViewModel {
     state.whenData((DailyState data) {
       state = AsyncData<DailyState>(data.copyWith(selectedDish: dish));
     });
+  }
+
+  Future<void> updateRecommendDishes() async {
+    state.whenData(
+      (DailyState data) async => state = AsyncData<DailyState>(
+        data.copyWith(
+          recommendFoodStuffs: await _calculateReccomendDishes(),
+        ),
+      ),
+    );
+  }
+
+  Future<Map<FiveMajorNutrient, List<DictionaryItemModel>>> _calculateReccomendDishes() async {
+    final NutrientsModel? slns = ref.watch(userViewModelProvider).currentUser!.slns;
+    final List<double> nutrientsPercentage = ref.read(dailyViewModelProvider.notifier).getGraphValues(
+          graphMaxValue: 120,
+          slns: slns,
+        );
+
+    final Map<FiveMajorNutrient, double> nutrientsMap = <FiveMajorNutrient, double>{}
+      ..addAll(<FiveMajorNutrient, double>{
+        FiveMajorNutrient.protein: nutrientsPercentage[1],
+        FiveMajorNutrient.vitamin: nutrientsPercentage[2],
+        FiveMajorNutrient.mineral: nutrientsPercentage[3],
+        FiveMajorNutrient.carbohydrate: nutrientsPercentage[4],
+        FiveMajorNutrient.lipid: nutrientsPercentage[5],
+      });
+    MapEntry<FiveMajorNutrient, double> minValue = nutrientsMap.entries.elementAt(0);
+    MapEntry<FiveMajorNutrient, double> secondMinValue = nutrientsMap.entries.elementAt(1);
+    MapEntry<FiveMajorNutrient, double> temp;
+
+    for (int i = 1; i < nutrientsMap.length; i++) {
+      temp = nutrientsMap.entries.elementAt(i);
+      if (minValue.value > temp.value) {
+        secondMinValue = minValue;
+        minValue = temp;
+      } else if (secondMinValue.value > temp.value) {
+        secondMinValue = temp;
+      }
+    }
+    final Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendDishes =
+        <FiveMajorNutrient, List<DictionaryItemModel>>{
+      minValue.key: await _dictionaryItemsLocalRepository.getRanking(
+        nutrient: minValue.key.name,
+      ),
+      secondMinValue.key: await _dictionaryItemsLocalRepository.getRanking(
+        nutrient: secondMinValue.key.name,
+      ),
+    };
+    return recommendDishes;
   }
 
   List<double> getGraphValues({
@@ -133,11 +191,11 @@ class DailyViewModel extends _$DailyViewModel {
   }
 
   double _calcVitaminSufficiency(
-      double retinolRef,
-      double vitaminB1Ref,
-      double vitaminB2Ref,
-      double vitaminCRef,
-      ) {
+    double retinolRef,
+    double vitaminB1Ref,
+    double vitaminB2Ref,
+    double vitaminCRef,
+  ) {
     return state.maybeWhen(
       data: (DailyState data) {
         final MenuModel menu = data.menu;
@@ -154,21 +212,18 @@ class DailyViewModel extends _$DailyViewModel {
   }
 
   double _calcMineralSufficiency(
-      double calciumRef,
-      double magnesiumRef,
-      double ironRef,
-      double zincRef,
-      ) {
+    double calciumRef,
+    double magnesiumRef,
+    double ironRef,
+    double zincRef,
+  ) {
     return state.maybeWhen(
       data: (DailyState data) {
         final MenuModel menu = data.menu;
 
         if (menu is! LunchesDayMenuModel) return 0;
 
-        return (menu.calcium / calciumRef +
-                menu.magnesium / magnesiumRef +
-                menu.iron / ironRef +
-                menu.zinc / zincRef) / 4 * 100.0;
+        return (menu.calcium / calciumRef + menu.magnesium / magnesiumRef + menu.iron / ironRef + menu.zinc / zincRef) / 4 * 100.0;
       },
       orElse: () => 0,
     );

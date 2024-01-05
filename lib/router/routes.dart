@@ -10,6 +10,7 @@ import 'package:hakondate/view/daily/dish.dart';
 import 'package:hakondate/view/dictionary/dictionary.dart';
 import 'package:hakondate/view/dictionary/dictionary_group_list.dart';
 import 'package:hakondate/view/dictionary/dictionary_item.dart';
+import 'package:hakondate/view/dictionary/dictionary_search.dart';
 import 'package:hakondate/view/help/help.dart';
 import 'package:hakondate/view/information/information.dart';
 import 'package:hakondate/view/letter/letter.dart';
@@ -48,6 +49,7 @@ final RoutemasterDelegate routemaster = RoutemasterDelegate(
       '/home/recipes': (_) => const MaterialPage<dynamic>(child: Recipe()),
       '/home/recipes_pdf/:id': (RouteData route) => FadeUpPage(child: RecipePDF(id: route.pathParameters['id'])),
       '/home/dictionary': (_) => const MaterialPage<dynamic>(child: Dictionary()),
+      '/home/dictionary/search': (_) => const MaterialPage<dynamic>(child: DictionarySearch()),
       '/home/dictionary/:group': (_) => const MaterialPage<dynamic>(child: DictionaryGroupList()),
       '/home/dictionary_item/:id': (_) => const FadeUpPage(child: DictionaryItem()),
       '/home/letter': (_) => const MaterialPage<dynamic>(child: Letter()),

@@ -5,6 +5,7 @@ import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
 import 'package:hakondate/model/nutrients/nutrients_model.dart';
 import 'package:hakondate/repository/local/sqlite/local_database.dart';
 import 'package:hakondate/util/exception/sqlite_exception.dart';
+import 'package:hakondate/util/extension/string_extension.dart';
 
 part 'dictionary_items_local_repository.g.dart';
 
@@ -18,6 +19,8 @@ abstract class DictionaryItemsLocalRepositoryAPI {
   Future<int> add(Map<String, dynamic> item);
   Future<List<DictionaryItemModel>> listGroup(int group);
   Future<DictionaryItemModel> getById(int id);
+  Future<List<DictionaryItemModel>> getAll();
+  Future<List<DictionaryItemModel>> search(String query);
   Future<List<DictionaryItemModel>> getRanking({required String nutrient, int limit = 5});
 }
 
@@ -127,7 +130,91 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
         ),
       );
     }
+    return items;
+  }
 
+  @override
+  Future<List<DictionaryItemModel>> getAll() async{
+    final List<DictionaryItemModel> items = <DictionaryItemModel>[];
+
+    final List<DictionaryItemsSchema> schemas = 
+      await (_db.select(_db.dictionaryItemsTable))
+      	.get()
+	  	..sort((DictionaryItemsSchema a, DictionaryItemsSchema b) => a.name.compareTo(b.name));
+    for (final DictionaryItemsSchema schema in schemas) {
+      items.add(
+        DictionaryItemModel(
+          id: schema.id,
+          group: _getGroup(schema.group),
+          name: schema.name,
+          nutrients: NutrientsModel(
+            energy: schema.energy,
+            protein: schema.protein,
+            lipid: schema.lipid,
+            carbohydrate: schema.carbohydrate,
+            sodium: schema.sodium,
+            calcium: schema.calcium,
+            magnesium: schema.magnesium,
+            iron: schema.iron,
+            zinc: schema.zinc,
+            retinol: schema.retinol,
+            vitaminB1: schema.vitaminB1,
+            vitaminB2: schema.vitaminB2,
+            vitaminC: schema.vitaminC,
+            dietaryFiber: schema.dietaryFiber,
+            salt: schema.salt,
+          ),
+          note: schema.note,
+        ),
+      );
+    }
+    return items;
+  }
+
+  @override
+  Future<List<DictionaryItemModel>> search(String query) async{
+    final List<DictionaryItemModel> items = <DictionaryItemModel>[];
+
+    final List<DictionaryItemsSchema> schemas = 
+		await (
+		  _db.select(_db.dictionaryItemsTable)
+      ..where(
+        ($DictionaryItemsTableTable t) => 
+          t.name.contains(query) | 
+          t.name.contains(query.toHiragana()) | 
+          t.name.contains(query.toKatakana()),
+      )
+		).get()
+		..sort(
+			(DictionaryItemsSchema a, DictionaryItemsSchema b) => a.name.compareTo(b.name),
+		);
+    for (final DictionaryItemsSchema schema in schemas) {
+      items.add(
+        DictionaryItemModel(
+          id: schema.id,
+          group: _getGroup(schema.group),
+          name: schema.name,
+          nutrients: NutrientsModel(
+            energy: schema.energy,
+            protein: schema.protein,
+            lipid: schema.lipid,
+            carbohydrate: schema.carbohydrate,
+            sodium: schema.sodium,
+            calcium: schema.calcium,
+            magnesium: schema.magnesium,
+            iron: schema.iron,
+            zinc: schema.zinc,
+            retinol: schema.retinol,
+            vitaminB1: schema.vitaminB1,
+            vitaminB2: schema.vitaminB2,
+            vitaminC: schema.vitaminC,
+            dietaryFiber: schema.dietaryFiber,
+            salt: schema.salt,
+          ),
+          note: schema.note,
+        ),
+      );
+    }
     return items;
   }
 
