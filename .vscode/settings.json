@@ -3,6 +3,9 @@
   "search.exclude": {
     "**/.fvm": true
   },
+  "editor.rulers": [140],
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
   "cSpell.words": [
     "cupertino",
     "hakondate",
