@@ -153,7 +153,7 @@ class _$LetterMetadataModelDataImpl implements LetterMetadataModelData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LetterMetadataModelDataImpl &&
@@ -290,7 +290,7 @@ class _$LetterMetadataModelLoadingImpl implements LetterMetadataModelLoading {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LetterMetadataModelLoadingImpl);

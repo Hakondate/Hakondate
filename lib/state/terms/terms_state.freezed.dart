@@ -112,7 +112,7 @@ class _$TermsStateImpl with DiagnosticableTreeMixin implements _TermsState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TermsStateImpl &&

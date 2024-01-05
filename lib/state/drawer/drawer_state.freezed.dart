@@ -112,7 +112,7 @@ class _$DrawerStateImpl with DiagnosticableTreeMixin implements _DrawerState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DrawerStateImpl &&

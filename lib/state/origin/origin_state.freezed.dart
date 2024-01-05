@@ -146,7 +146,7 @@ class _$OriginStateImpl with DiagnosticableTreeMixin implements _OriginState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$OriginStateImpl &&
