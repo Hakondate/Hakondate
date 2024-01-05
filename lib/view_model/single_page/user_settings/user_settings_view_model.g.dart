@@ -7,7 +7,7 @@ part of 'user_settings_view_model.dart';
 // **************************************************************************
 
 String _$userSettingsViewModelHash() =>
-    r'74f2e3174513d412e19ff6f924ca889549ec5866';
+    r'37ff01e65cc36e8f6890e11169604085194a00d1';
 
 /// See also [UserSettingsViewModel].
 @ProviderFor(UserSettingsViewModel)
