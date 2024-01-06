@@ -108,7 +108,7 @@ class Daily extends StatelessWidget {
       ),
     );
   }
-  
+
   Widget _bodyWidget() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
