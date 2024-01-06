@@ -16,6 +16,7 @@ import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
 
 class Daily extends StatelessWidget {
   const Daily({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,6 +48,7 @@ class Daily extends StatelessWidget {
       ),
     );
   }
+
   Widget _appBarTitle() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
@@ -63,6 +65,7 @@ class Daily extends StatelessWidget {
       },
     );
   }
+
   Widget _calendarWidget() {
     return Material(
       color: AppColor.brand.primary,
@@ -105,6 +108,7 @@ class Daily extends StatelessWidget {
       ),
     );
   }
+  
   Widget _bodyWidget() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
