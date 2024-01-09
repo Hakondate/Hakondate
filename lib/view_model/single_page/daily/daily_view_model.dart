@@ -53,7 +53,7 @@ class DailyViewModel extends _$DailyViewModel {
       if (menu is LunchesDayMenuModel) {
         await ref.read(analyticsControllerProvider.notifier).logViewMenu(menu.id);
       }
-      await updateRecommendDishes();
+      await updateRecommendFoodstuffs();
     });
   }
 
@@ -87,17 +87,17 @@ class DailyViewModel extends _$DailyViewModel {
     });
   }
 
-  Future<void> updateRecommendDishes() async {
+  Future<void> updateRecommendFoodstuffs() async {
     state.whenData(
       (DailyState data) async => state = AsyncData<DailyState>(
         data.copyWith(
-          recommendFoodStuffs: await _calculateRecommendDishes(),
+          recommendFoodStuffs: await _calculateRecommendFoodstuffs(),
         ),
       ),
     );
   }
 
-  Future<Map<FiveMajorNutrient, List<DictionaryItemModel>>> _calculateRecommendDishes() async {
+  Future<Map<FiveMajorNutrient, List<DictionaryItemModel>>> _calculateRecommendFoodstuffs() async {
     final NutrientsModel? slns = ref.watch(userViewModelProvider).currentUser!.slns;
     final List<double> nutrientsPercentage = ref.read(dailyViewModelProvider.notifier).getGraphValues(
           graphMaxValue: 120,
@@ -126,7 +126,7 @@ class DailyViewModel extends _$DailyViewModel {
       }
     }
 
-    final Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendDishes =
+    final Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendFoodstuffs =
         <FiveMajorNutrient, List<DictionaryItemModel>>{
       minValue.key: await ref.read(dictionaryItemsLocalRepositoryProvider).getRanking(
         nutrient: minValue.key.name,
@@ -136,7 +136,7 @@ class DailyViewModel extends _$DailyViewModel {
       ),
     };
     
-    return recommendDishes;
+    return recommendFoodstuffs;
   }
 
   List<double> getGraphValues({
