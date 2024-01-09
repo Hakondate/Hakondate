@@ -9,6 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hakondate/constant/app_key.dart';
 import 'package:hakondate/constant/record_date.dart';
 import 'package:hakondate/constant/version.dart';
+import 'package:hakondate/model/menu/menu_model.dart';
+import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/repository/local/sqlite/dictionary_items/dictionary_items_local_repository.dart';
 import 'package:hakondate/repository/local/sqlite/menus/menus_local_repository.dart';
 import 'package:hakondate/repository/local/sqlite/schools/schools_local_repository.dart';
@@ -113,13 +115,11 @@ class SplashViewModel extends _$SplashViewModel {
     final DateTime latestUpdate = await _schoolsLocalRepository.getLatestUpdateDay();
 
     state = SplashState(status: LoadingStatus.checkingUpdate);
-    final List<dynamic> schools = await _schoolsRemoteRepository.get(
-      updateAt: latestUpdate.add(const Duration(seconds: 1)),
-    );
+    final List<SchoolModel> schools = await _schoolsRemoteRepository.get(updateAt: latestUpdate.add(const Duration(seconds: 1)));
 
     state = SplashState(status: LoadingStatus.updating);
-    await Future.forEach(schools, (dynamic school) async {
-      await _schoolsLocalRepository.add(school as Map<String, dynamic>);
+    await Future.forEach(schools, (SchoolModel school) async {
+      await _schoolsLocalRepository.add(school);
     });
   }
 
@@ -128,13 +128,11 @@ class SplashViewModel extends _$SplashViewModel {
     final DateTime latestUpdate = await _menusLocalRepository.getLatestUpdateDay();
 
     state = SplashState(status: LoadingStatus.checkingUpdate);
-    final List<dynamic> menus = await _menusRemoteRepository.get(
-      updateAt: latestUpdate.add(const Duration(seconds: 1)),
-    );
+    final List<MenuModel> menus = await _menusRemoteRepository.get(updateAt: latestUpdate.add(const Duration(seconds: 1)));
 
     state = SplashState(status: LoadingStatus.updating);
-    await Future.forEach(menus, (dynamic menu) async {
-      await _menusLocalRepository.add(menu as Map<String, dynamic>);
+    await Future.forEach(menus, (MenuModel menu) async {
+      await _menusLocalRepository.add(menu);
     });
 
     await ref.read(dailyViewModelProvider.notifier).updateSelectedDay();

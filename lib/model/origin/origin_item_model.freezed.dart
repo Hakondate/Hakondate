@@ -102,10 +102,11 @@ class __$$OriginItemModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$OriginItemModelImpl implements _OriginItemModel {
+class _$OriginItemModelImpl extends _OriginItemModel {
   const _$OriginItemModelImpl(
       {required this.name, required final List<String> prefectures})
-      : _prefectures = prefectures;
+      : _prefectures = prefectures,
+        super._();
 
   @override
   final String name;
@@ -144,10 +145,11 @@ class _$OriginItemModelImpl implements _OriginItemModel {
           this, _$identity);
 }
 
-abstract class _OriginItemModel implements OriginItemModel {
+abstract class _OriginItemModel extends OriginItemModel {
   const factory _OriginItemModel(
       {required final String name,
       required final List<String> prefectures}) = _$OriginItemModelImpl;
+  const _OriginItemModel._() : super._();
 
   @override
   String get name;

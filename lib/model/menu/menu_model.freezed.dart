@@ -48,21 +48,21 @@ mixin _$MenuModel {
   TResult map<TResult extends Object?>({
     required TResult Function(LunchesDayMenuModel value) lunchesDay,
     required TResult Function(HolidayMenuModel value) holiday,
-    required TResult Function(NodataMenuModel value) noData,
+    required TResult Function(NoDataMenuModel value) noData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LunchesDayMenuModel value)? lunchesDay,
     TResult? Function(HolidayMenuModel value)? holiday,
-    TResult? Function(NodataMenuModel value)? noData,
+    TResult? Function(NoDataMenuModel value)? noData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LunchesDayMenuModel value)? lunchesDay,
     TResult Function(HolidayMenuModel value)? holiday,
-    TResult Function(NodataMenuModel value)? noData,
+    TResult Function(NoDataMenuModel value)? noData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -244,7 +244,7 @@ class _$LunchesDayMenuModelImpl extends LunchesDayMenuModel {
   TResult map<TResult extends Object?>({
     required TResult Function(LunchesDayMenuModel value) lunchesDay,
     required TResult Function(HolidayMenuModel value) holiday,
-    required TResult Function(NodataMenuModel value) noData,
+    required TResult Function(NoDataMenuModel value) noData,
   }) {
     return lunchesDay(this);
   }
@@ -254,7 +254,7 @@ class _$LunchesDayMenuModelImpl extends LunchesDayMenuModel {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LunchesDayMenuModel value)? lunchesDay,
     TResult? Function(HolidayMenuModel value)? holiday,
-    TResult? Function(NodataMenuModel value)? noData,
+    TResult? Function(NoDataMenuModel value)? noData,
   }) {
     return lunchesDay?.call(this);
   }
@@ -264,7 +264,7 @@ class _$LunchesDayMenuModelImpl extends LunchesDayMenuModel {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LunchesDayMenuModel value)? lunchesDay,
     TResult Function(HolidayMenuModel value)? holiday,
-    TResult Function(NodataMenuModel value)? noData,
+    TResult Function(NoDataMenuModel value)? noData,
     required TResult orElse(),
   }) {
     if (lunchesDay != null) {
@@ -373,7 +373,7 @@ class _$HolidayMenuModelImpl extends HolidayMenuModel {
   TResult map<TResult extends Object?>({
     required TResult Function(LunchesDayMenuModel value) lunchesDay,
     required TResult Function(HolidayMenuModel value) holiday,
-    required TResult Function(NodataMenuModel value) noData,
+    required TResult Function(NoDataMenuModel value) noData,
   }) {
     return holiday(this);
   }
@@ -383,7 +383,7 @@ class _$HolidayMenuModelImpl extends HolidayMenuModel {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LunchesDayMenuModel value)? lunchesDay,
     TResult? Function(HolidayMenuModel value)? holiday,
-    TResult? Function(NodataMenuModel value)? noData,
+    TResult? Function(NoDataMenuModel value)? noData,
   }) {
     return holiday?.call(this);
   }
@@ -393,7 +393,7 @@ class _$HolidayMenuModelImpl extends HolidayMenuModel {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LunchesDayMenuModel value)? lunchesDay,
     TResult Function(HolidayMenuModel value)? holiday,
-    TResult Function(NodataMenuModel value)? noData,
+    TResult Function(NoDataMenuModel value)? noData,
     required TResult orElse(),
   }) {
     if (holiday != null) {
@@ -409,25 +409,25 @@ abstract class HolidayMenuModel extends MenuModel {
 }
 
 /// @nodoc
-abstract class _$$NodataMenuModelImplCopyWith<$Res> {
-  factory _$$NodataMenuModelImplCopyWith(_$NodataMenuModelImpl value,
-          $Res Function(_$NodataMenuModelImpl) then) =
-      __$$NodataMenuModelImplCopyWithImpl<$Res>;
+abstract class _$$NoDataMenuModelImplCopyWith<$Res> {
+  factory _$$NoDataMenuModelImplCopyWith(_$NoDataMenuModelImpl value,
+          $Res Function(_$NoDataMenuModelImpl) then) =
+      __$$NoDataMenuModelImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$NodataMenuModelImplCopyWithImpl<$Res>
-    extends _$MenuModelCopyWithImpl<$Res, _$NodataMenuModelImpl>
-    implements _$$NodataMenuModelImplCopyWith<$Res> {
-  __$$NodataMenuModelImplCopyWithImpl(
-      _$NodataMenuModelImpl _value, $Res Function(_$NodataMenuModelImpl) _then)
+class __$$NoDataMenuModelImplCopyWithImpl<$Res>
+    extends _$MenuModelCopyWithImpl<$Res, _$NoDataMenuModelImpl>
+    implements _$$NoDataMenuModelImplCopyWith<$Res> {
+  __$$NoDataMenuModelImplCopyWithImpl(
+      _$NoDataMenuModelImpl _value, $Res Function(_$NoDataMenuModelImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$NodataMenuModelImpl extends NodataMenuModel {
-  const _$NodataMenuModelImpl() : super._();
+class _$NoDataMenuModelImpl extends NoDataMenuModel {
+  const _$NoDataMenuModelImpl() : super._();
 
   @override
   String toString() {
@@ -437,7 +437,7 @@ class _$NodataMenuModelImpl extends NodataMenuModel {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$NodataMenuModelImpl);
+        (other.runtimeType == runtimeType && other is _$NoDataMenuModelImpl);
   }
 
   @override
@@ -488,7 +488,7 @@ class _$NodataMenuModelImpl extends NodataMenuModel {
   TResult map<TResult extends Object?>({
     required TResult Function(LunchesDayMenuModel value) lunchesDay,
     required TResult Function(HolidayMenuModel value) holiday,
-    required TResult Function(NodataMenuModel value) noData,
+    required TResult Function(NoDataMenuModel value) noData,
   }) {
     return noData(this);
   }
@@ -498,7 +498,7 @@ class _$NodataMenuModelImpl extends NodataMenuModel {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LunchesDayMenuModel value)? lunchesDay,
     TResult? Function(HolidayMenuModel value)? holiday,
-    TResult? Function(NodataMenuModel value)? noData,
+    TResult? Function(NoDataMenuModel value)? noData,
   }) {
     return noData?.call(this);
   }
@@ -508,7 +508,7 @@ class _$NodataMenuModelImpl extends NodataMenuModel {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LunchesDayMenuModel value)? lunchesDay,
     TResult Function(HolidayMenuModel value)? holiday,
-    TResult Function(NodataMenuModel value)? noData,
+    TResult Function(NoDataMenuModel value)? noData,
     required TResult orElse(),
   }) {
     if (noData != null) {
@@ -518,7 +518,7 @@ class _$NodataMenuModelImpl extends NodataMenuModel {
   }
 }
 
-abstract class NodataMenuModel extends MenuModel {
-  const factory NodataMenuModel() = _$NodataMenuModelImpl;
-  const NodataMenuModel._() : super._();
+abstract class NoDataMenuModel extends MenuModel {
+  const factory NoDataMenuModel() = _$NoDataMenuModelImpl;
+  const NoDataMenuModel._() : super._();
 }

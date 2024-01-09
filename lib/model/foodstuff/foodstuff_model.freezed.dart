@@ -182,14 +182,15 @@ class __$$FoodstuffModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FoodstuffModelImpl implements _FoodstuffModel {
+class _$FoodstuffModelImpl extends _FoodstuffModel {
   const _$FoodstuffModelImpl(
       {required this.name,
       required this.quantity,
       required this.nutrients,
       this.isAllergy = false,
       this.isHeat = false,
-      this.origin});
+      this.origin})
+      : super._();
 
   @override
   final String name;
@@ -244,7 +245,7 @@ class _$FoodstuffModelImpl implements _FoodstuffModel {
           this, _$identity);
 }
 
-abstract class _FoodstuffModel implements FoodstuffModel {
+abstract class _FoodstuffModel extends FoodstuffModel {
   const factory _FoodstuffModel(
       {required final String name,
       required final QuantityModel quantity,
@@ -252,6 +253,7 @@ abstract class _FoodstuffModel implements FoodstuffModel {
       final bool isAllergy,
       final bool isHeat,
       final String? origin}) = _$FoodstuffModelImpl;
+  const _FoodstuffModel._() : super._();
 
   @override
   String get name;

@@ -22,4 +22,8 @@ class OriginCategoryModel with _$OriginCategoryModel {
       items: items.entries.map(OriginItemModel.fromFirestore).toList(),
     );
   }
+
+  Map<String, Object> toFirestore() => <String, Object>{
+    name: items.map((OriginItemModel item) => item.toFirestore()).toList(),
+  };
 }

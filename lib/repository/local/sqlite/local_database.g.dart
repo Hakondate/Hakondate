@@ -29,8 +29,8 @@ class $SchoolsTableTable extends SchoolsTable
       const VerificationMeta('lunchBlock');
   @override
   late final GeneratedColumn<int> lunchBlock = GeneratedColumn<int>(
-      'lunch_block', aliasedName, true,
-      type: DriftSqlType.int, requiredDuringInsert: false);
+      'lunch_block', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
   static const VerificationMeta _classificationMeta =
       const VerificationMeta('classification');
   @override
@@ -86,6 +86,8 @@ class $SchoolsTableTable extends SchoolsTable
           _lunchBlockMeta,
           lunchBlock.isAcceptableOrUnknown(
               data['lunch_block']!, _lunchBlockMeta));
+    } else if (isInserting) {
+      context.missing(_lunchBlockMeta);
     }
     if (data.containsKey('classification')) {
       context.handle(
@@ -119,7 +121,7 @@ class $SchoolsTableTable extends SchoolsTable
       name: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
       lunchBlock: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}lunch_block']),
+          .read(DriftSqlType.int, data['${effectivePrefix}lunch_block'])!,
       classification: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}classification'])!,
       createAt: attachedDatabase.typeMapping
@@ -139,7 +141,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
   final int id;
   final int parentId;
   final String name;
-  final int? lunchBlock;
+  final int lunchBlock;
   final String classification;
   final DateTime createAt;
   final DateTime updateAt;
@@ -147,7 +149,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       {required this.id,
       required this.parentId,
       required this.name,
-      this.lunchBlock,
+      required this.lunchBlock,
       required this.classification,
       required this.createAt,
       required this.updateAt});
@@ -157,9 +159,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
     map['id'] = Variable<int>(id);
     map['parent_id'] = Variable<int>(parentId);
     map['name'] = Variable<String>(name);
-    if (!nullToAbsent || lunchBlock != null) {
-      map['lunch_block'] = Variable<int>(lunchBlock);
-    }
+    map['lunch_block'] = Variable<int>(lunchBlock);
     map['classification'] = Variable<String>(classification);
     map['create_at'] = Variable<DateTime>(createAt);
     map['update_at'] = Variable<DateTime>(updateAt);
@@ -171,9 +171,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       id: Value(id),
       parentId: Value(parentId),
       name: Value(name),
-      lunchBlock: lunchBlock == null && nullToAbsent
-          ? const Value.absent()
-          : Value(lunchBlock),
+      lunchBlock: Value(lunchBlock),
       classification: Value(classification),
       createAt: Value(createAt),
       updateAt: Value(updateAt),
@@ -187,7 +185,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       id: serializer.fromJson<int>(json['id']),
       parentId: serializer.fromJson<int>(json['parentId']),
       name: serializer.fromJson<String>(json['name']),
-      lunchBlock: serializer.fromJson<int?>(json['lunchBlock']),
+      lunchBlock: serializer.fromJson<int>(json['lunchBlock']),
       classification: serializer.fromJson<String>(json['classification']),
       createAt: serializer.fromJson<DateTime>(json['createAt']),
       updateAt: serializer.fromJson<DateTime>(json['updateAt']),
@@ -200,7 +198,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       'id': serializer.toJson<int>(id),
       'parentId': serializer.toJson<int>(parentId),
       'name': serializer.toJson<String>(name),
-      'lunchBlock': serializer.toJson<int?>(lunchBlock),
+      'lunchBlock': serializer.toJson<int>(lunchBlock),
       'classification': serializer.toJson<String>(classification),
       'createAt': serializer.toJson<DateTime>(createAt),
       'updateAt': serializer.toJson<DateTime>(updateAt),
@@ -211,7 +209,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
           {int? id,
           int? parentId,
           String? name,
-          Value<int?> lunchBlock = const Value.absent(),
+          int? lunchBlock,
           String? classification,
           DateTime? createAt,
           DateTime? updateAt}) =>
@@ -219,7 +217,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
         id: id ?? this.id,
         parentId: parentId ?? this.parentId,
         name: name ?? this.name,
-        lunchBlock: lunchBlock.present ? lunchBlock.value : this.lunchBlock,
+        lunchBlock: lunchBlock ?? this.lunchBlock,
         classification: classification ?? this.classification,
         createAt: createAt ?? this.createAt,
         updateAt: updateAt ?? this.updateAt,
@@ -258,7 +256,7 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
   final Value<int> id;
   final Value<int> parentId;
   final Value<String> name;
-  final Value<int?> lunchBlock;
+  final Value<int> lunchBlock;
   final Value<String> classification;
   final Value<DateTime> createAt;
   final Value<DateTime> updateAt;
@@ -275,12 +273,13 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
     this.id = const Value.absent(),
     required int parentId,
     required String name,
-    this.lunchBlock = const Value.absent(),
+    required int lunchBlock,
     required String classification,
     this.createAt = const Value.absent(),
     this.updateAt = const Value.absent(),
   })  : parentId = Value(parentId),
         name = Value(name),
+        lunchBlock = Value(lunchBlock),
         classification = Value(classification);
   static Insertable<SchoolsSchema> custom({
     Expression<int>? id,
@@ -306,7 +305,7 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
       {Value<int>? id,
       Value<int>? parentId,
       Value<String>? name,
-      Value<int?>? lunchBlock,
+      Value<int>? lunchBlock,
       Value<String>? classification,
       Value<DateTime>? createAt,
       Value<DateTime>? updateAt}) {
