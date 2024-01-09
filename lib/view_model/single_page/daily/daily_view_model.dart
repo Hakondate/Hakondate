@@ -61,7 +61,6 @@ class DailyViewModel extends _$DailyViewModel {
     state.whenData((DailyState data) async {
       state = const AsyncLoading<DailyState>();
 
-      // final MenuModel menu = await _menusLocalRepository.getMenuByDay(data.selectedDay);
       final MenuModel menu = await ref.read(menusLocalRepositoryProvider).getMenuByDay(data.selectedDay);
 
       state = AsyncData<DailyState>(
