@@ -30,9 +30,7 @@
 .pub-cache/
 .pub/
 /build/
-
-# Web related
-lib/generated_plugin_registrant.dart
+.fvm/flutter_sdk
 
 # Symbolication related
 app.*.symbols
@@ -54,6 +52,8 @@ app.*.map.json
 **/android/local.properties
 **/android/**/GeneratedPluginRegistrant.java
 **/android/key.properties
+**/android/app/src/main/res/mipmap*/
+**/android/app/google-services.json
 *.jks
 
 # iOS/XCode related
@@ -83,8 +83,14 @@ app.*.map.json
 **/ios/Flutter/app.zip
 **/ios/Flutter/flutter_assets/
 **/ios/Flutter/flutter_export_environment.sh
+**/ios/Flutter/DartDefines.xcconfig
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
+**/ios/GoogleService-Info.plist
+**/ios/firebase_app_id_file.json
+**/ios/Podfile.lock
+**/ios/Runner.xcodeproj/project.pbxproj
+**/ios/**/dgph
 
 # macOS
 **/macos/Flutter/GeneratedPluginRegistrant.swift
