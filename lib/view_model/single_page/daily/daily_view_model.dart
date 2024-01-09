@@ -16,14 +16,8 @@ part 'daily_view_model.g.dart';
 
 @Riverpod(keepAlive: true)
 class DailyViewModel extends _$DailyViewModel {
-  late final MenusLocalRepositoryAPI _menusLocalRepository;
-  late final DictionaryItemsLocalRepositoryAPI _dictionaryItemsLocalRepository;
-
   @override
   FutureOr<DailyState> build() {
-    _dictionaryItemsLocalRepository = ref.watch(dictionaryItemsLocalRepositoryProvider);
-    _menusLocalRepository = ref.watch(menusLocalRepositoryProvider);
-
     return DailyState(
       selectedDay: DateTime.now(),
       focusedDay: DateTime.now(),
@@ -47,7 +41,7 @@ class DailyViewModel extends _$DailyViewModel {
           selectedInputDay ??= DateTime.now();
       }
 
-      final MenuModel menu = await _menusLocalRepository.getMenuByDay(selectedInputDay);
+      final MenuModel menu = await ref.read(menusLocalRepositoryProvider).getMenuByDay(selectedInputDay);
 
       state = AsyncData<DailyState>(
         data.copyWith(
@@ -67,7 +61,8 @@ class DailyViewModel extends _$DailyViewModel {
     state.whenData((DailyState data) async {
       state = const AsyncLoading<DailyState>();
 
-      final MenuModel menu = await _menusLocalRepository.getMenuByDay(data.selectedDay);
+      // final MenuModel menu = await _menusLocalRepository.getMenuByDay(data.selectedDay);
+      final MenuModel menu = await ref.read(menusLocalRepositoryProvider).getMenuByDay(data.selectedDay);
 
       state = AsyncData<DailyState>(
         data.copyWith(
@@ -97,13 +92,13 @@ class DailyViewModel extends _$DailyViewModel {
     state.whenData(
       (DailyState data) async => state = AsyncData<DailyState>(
         data.copyWith(
-          recommendFoodStuffs: await _calculateReccomendDishes(),
+          recommendFoodStuffs: await _calculateRecommendDishes(),
         ),
       ),
     );
   }
 
-  Future<Map<FiveMajorNutrient, List<DictionaryItemModel>>> _calculateReccomendDishes() async {
+  Future<Map<FiveMajorNutrient, List<DictionaryItemModel>>> _calculateRecommendDishes() async {
     final NutrientsModel? slns = ref.watch(userViewModelProvider).currentUser!.slns;
     final List<double> nutrientsPercentage = ref.read(dailyViewModelProvider.notifier).getGraphValues(
           graphMaxValue: 120,
@@ -131,15 +126,17 @@ class DailyViewModel extends _$DailyViewModel {
         secondMinValue = temp;
       }
     }
+
     final Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendDishes =
         <FiveMajorNutrient, List<DictionaryItemModel>>{
-      minValue.key: await _dictionaryItemsLocalRepository.getRanking(
+      minValue.key: await ref.read(dictionaryItemsLocalRepositoryProvider).getRanking(
         nutrient: minValue.key.name,
       ),
-      secondMinValue.key: await _dictionaryItemsLocalRepository.getRanking(
+      secondMinValue.key: await ref.read(dictionaryItemsLocalRepositoryProvider).getRanking(
         nutrient: secondMinValue.key.name,
       ),
     };
+    
     return recommendDishes;
   }
 
