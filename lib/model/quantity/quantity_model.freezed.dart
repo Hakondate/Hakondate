@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$QuantityModel {
-  int? get piece => throw _privateConstructorUsedError; // 個数
+  PieceModel? get piece => throw _privateConstructorUsedError; // 個数
   double get gram => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +30,9 @@ abstract class $QuantityModelCopyWith<$Res> {
           QuantityModel value, $Res Function(QuantityModel) then) =
       _$QuantityModelCopyWithImpl<$Res, QuantityModel>;
   @useResult
-  $Res call({int? piece, double gram});
+  $Res call({PieceModel? piece, double gram});
+
+  $PieceModelCopyWith<$Res>? get piece;
 }
 
 /// @nodoc
@@ -53,12 +55,24 @@ class _$QuantityModelCopyWithImpl<$Res, $Val extends QuantityModel>
       piece: freezed == piece
           ? _value.piece
           : piece // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as PieceModel?,
       gram: null == gram
           ? _value.gram
           : gram // ignore: cast_nullable_to_non_nullable
               as double,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PieceModelCopyWith<$Res>? get piece {
+    if (_value.piece == null) {
+      return null;
+    }
+
+    return $PieceModelCopyWith<$Res>(_value.piece!, (value) {
+      return _then(_value.copyWith(piece: value) as $Val);
+    });
   }
 }
 
@@ -70,7 +84,10 @@ abstract class _$$QuantityModelImplCopyWith<$Res>
       __$$QuantityModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? piece, double gram});
+  $Res call({PieceModel? piece, double gram});
+
+  @override
+  $PieceModelCopyWith<$Res>? get piece;
 }
 
 /// @nodoc
@@ -91,7 +108,7 @@ class __$$QuantityModelImplCopyWithImpl<$Res>
       piece: freezed == piece
           ? _value.piece
           : piece // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as PieceModel?,
       gram: null == gram
           ? _value.gram
           : gram // ignore: cast_nullable_to_non_nullable
@@ -106,7 +123,7 @@ class _$QuantityModelImpl implements _QuantityModel {
   const _$QuantityModelImpl({this.piece, this.gram = 0.0});
 
   @override
-  final int? piece;
+  final PieceModel? piece;
 // 個数
   @override
   @JsonKey()
@@ -137,11 +154,11 @@ class _$QuantityModelImpl implements _QuantityModel {
 }
 
 abstract class _QuantityModel implements QuantityModel {
-  const factory _QuantityModel({final int? piece, final double gram}) =
+  const factory _QuantityModel({final PieceModel? piece, final double gram}) =
       _$QuantityModelImpl;
 
   @override
-  int? get piece;
+  PieceModel? get piece;
   @override // 個数
   double get gram;
   @override

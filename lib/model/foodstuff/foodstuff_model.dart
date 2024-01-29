@@ -2,6 +2,7 @@ import 'package:drift/drift.dart' hide JsonKey;
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:hakondate/model/nutrients/nutrients_model.dart';
+import 'package:hakondate/model/piece/piece_model.dart';
 import 'package:hakondate/model/quantity/quantity_model.dart';
 import 'package:hakondate/repository/local/sqlite/local_database.dart';
 
@@ -22,10 +23,7 @@ class FoodstuffModel with _$FoodstuffModel {
   factory FoodstuffModel.fromFirestore(Map<String, dynamic> data) {
     return FoodstuffModel(
       name: data['name'] as String,
-      quantity: QuantityModel(
-        piece: data['piece'] as int?,
-        gram: double.parse(data['gram'].toString()),
-      ),
+      quantity: QuantityModel.fromFirestore(data),
       nutrients: NutrientsModel(
         energy: double.parse(data['energy'].toString()),
         protein: double.parse(data['protein'].toString()),
@@ -52,7 +50,10 @@ class FoodstuffModel with _$FoodstuffModel {
   factory FoodstuffModel.fromDrift(FoodstuffsSchema schema) => FoodstuffModel(
     name: schema.name,
     quantity: QuantityModel(
-      piece: schema.piece,
+      piece: schema.pieceNumber == null ? null : PieceModel(
+        number: schema.pieceNumber!,
+        unit: schema.pieceUnit!,
+      ),
       gram: schema.gram,
     ),
     nutrients: NutrientsModel(
@@ -103,7 +104,8 @@ class FoodstuffModel with _$FoodstuffModel {
 
   FoodstuffsTableCompanion toDrift() => FoodstuffsTableCompanion(
     name: Value<String>(name),
-    piece: Value<int?>(quantity.piece),
+    pieceNumber: Value<double?>(quantity.piece?.number),
+    pieceUnit: Value<String?>(quantity.piece?.unit),
     gram: Value<double>(quantity.gram),
     energy: Value<double>(nutrients.energy),
     protein: Value<double>(nutrients.protein),

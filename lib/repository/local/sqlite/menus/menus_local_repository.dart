@@ -127,7 +127,9 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
 
     if (conflictSchema == null) {
       return _db.into(_db.foodstuffsTable).insert(companion);
-    } else if (conflictSchema.piece != companion.piece.value ||
+    } else if (
+        conflictSchema.pieceNumber != companion.pieceNumber.value ||
+        conflictSchema.pieceUnit != companion.pieceUnit.value ||
         conflictSchema.energy != companion.energy.value ||
         conflictSchema.protein != companion.protein.value ||
         conflictSchema.lipid != companion.lipid.value ||
@@ -151,7 +153,8 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
             ))
           .write(
         FoodstuffsTableCompanion(
-          piece: companion.piece,
+          pieceNumber: companion.pieceNumber,
+          pieceUnit: companion.pieceUnit,
           energy: companion.energy,
           lipid: companion.lipid,
           sodium: companion.sodium,
