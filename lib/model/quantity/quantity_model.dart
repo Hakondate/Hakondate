@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'package:hakondate/model/piece/piece_model.dart';
 
 part 'quantity_model.freezed.dart';
