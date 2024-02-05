@@ -16,11 +16,19 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$DictionaryItemModel {
-  int get id => throw _privateConstructorUsedError; // ID
-  DictionaryGroup get group =>
-      throw _privateConstructorUsedError; // 食品分類（1 ~ 18群）
-  String get name => throw _privateConstructorUsedError; // 食材名
-  NutrientsModel get nutrients => throw _privateConstructorUsedError; // 栄養素
+  /// ID
+  int get id => throw _privateConstructorUsedError;
+
+  /// 食品分類（1 ~ 18群）
+  DictionaryGroup get group => throw _privateConstructorUsedError;
+
+  /// 食材名
+  String get name => throw _privateConstructorUsedError;
+
+  /// 栄養素
+  NutrientsModel get nutrients => throw _privateConstructorUsedError;
+
+  /// 備考
   String? get note => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -168,18 +176,23 @@ class _$DictionaryItemModelImpl extends _DictionaryItemModel {
       this.note})
       : super._();
 
+  /// ID
   @override
   final int id;
-// ID
+
+  /// 食品分類（1 ~ 18群）
   @override
   final DictionaryGroup group;
-// 食品分類（1 ~ 18群）
+
+  /// 食材名
   @override
   final String name;
-// 食材名
+
+  /// 栄養素
   @override
   final NutrientsModel nutrients;
-// 栄養素
+
+  /// 備考
   @override
   final String? note;
 
@@ -223,14 +236,24 @@ abstract class _DictionaryItemModel extends DictionaryItemModel {
   const _DictionaryItemModel._() : super._();
 
   @override
+
+  /// ID
   int get id;
-  @override // ID
+  @override
+
+  /// 食品分類（1 ~ 18群）
   DictionaryGroup get group;
-  @override // 食品分類（1 ~ 18群）
+  @override
+
+  /// 食材名
   String get name;
-  @override // 食材名
+  @override
+
+  /// 栄養素
   NutrientsModel get nutrients;
-  @override // 栄養素
+  @override
+
+  /// 備考
   String? get note;
   @override
   @JsonKey(ignore: true)

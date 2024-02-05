@@ -16,11 +16,22 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$FoodstuffModel {
-  String get name => throw _privateConstructorUsedError; // 食材名
-  QuantityModel get quantity => throw _privateConstructorUsedError; // 分量
-  NutrientsModel get nutrients => throw _privateConstructorUsedError; // 栄養素
-  bool get isAllergy => throw _privateConstructorUsedError; // アレルギー食品
-  bool get isHeat => throw _privateConstructorUsedError; // 熱加工食品
+  /// 食材名
+  String get name => throw _privateConstructorUsedError;
+
+  /// 分量
+  QuantityModel get quantity => throw _privateConstructorUsedError;
+
+  /// 栄養素
+  NutrientsModel get nutrients => throw _privateConstructorUsedError;
+
+  /// アレルギー食品
+  bool get isAllergy => throw _privateConstructorUsedError;
+
+  /// 熱加工食品
+  bool get isHeat => throw _privateConstructorUsedError;
+
+  /// 原産地
   String? get origin => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -192,23 +203,29 @@ class _$FoodstuffModelImpl extends _FoodstuffModel {
       this.origin})
       : super._();
 
+  /// 食材名
   @override
   final String name;
-// 食材名
+
+  /// 分量
   @override
   final QuantityModel quantity;
-// 分量
+
+  /// 栄養素
   @override
   final NutrientsModel nutrients;
-// 栄養素
+
+  /// アレルギー食品
   @override
   @JsonKey()
   final bool isAllergy;
-// アレルギー食品
+
+  /// 熱加工食品
   @override
   @JsonKey()
   final bool isHeat;
-// 熱加工食品
+
+  /// 原産地
   @override
   final String? origin;
 
@@ -256,16 +273,28 @@ abstract class _FoodstuffModel extends FoodstuffModel {
   const _FoodstuffModel._() : super._();
 
   @override
+
+  /// 食材名
   String get name;
-  @override // 食材名
+  @override
+
+  /// 分量
   QuantityModel get quantity;
-  @override // 分量
+  @override
+
+  /// 栄養素
   NutrientsModel get nutrients;
-  @override // 栄養素
+  @override
+
+  /// アレルギー食品
   bool get isAllergy;
-  @override // アレルギー食品
+  @override
+
+  /// 熱加工食品
   bool get isHeat;
-  @override // 熱加工食品
+  @override
+
+  /// 原産地
   String? get origin;
   @override
   @JsonKey(ignore: true)
