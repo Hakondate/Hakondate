@@ -91,7 +91,6 @@ class LetterViewModel extends _$LetterViewModel {
   }
 
   void scrollToTop() {
-      state.scrollController.animateTo(0, duration: const Duration(milliseconds: 500), curve: Curves.easeOutCubic);
-      debugPrint('scrolled');
+    state.scrollController.animateTo(0, duration: const Duration(milliseconds: 500), curve: Curves.easeOutCubic);
   }
 }

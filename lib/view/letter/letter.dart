@@ -35,7 +35,6 @@ class Letter extends ConsumerWidget {
             if (letters.isEmpty) return const NonLetter();
       
             return Scrollbar(
-              controller: state.scrollController,
               child: Padding(
                 padding: const EdgeInsets.all(PaddingSize.minimum),
                 child: RefreshIndicator(
@@ -44,6 +43,7 @@ class Letter extends ConsumerWidget {
                   backgroundColor: AppColor.ui.white,
                   displacement: 0,
                   child: GridView.builder(
+                    controller: state.scrollController,
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       mainAxisSpacing: MarginSize.minimum,

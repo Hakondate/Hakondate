@@ -49,6 +49,6 @@ class RecipeViewModel extends _$RecipeViewModel {
   }
 
   void scrollToTop() {
-      state.scrollController.animateTo(0, duration: const Duration(milliseconds: 500), curve: Curves.easeOutCubic);
+    state.scrollController.animateTo(0, duration: const Duration(milliseconds: 500), curve: Curves.easeOutCubic);
   }
 }
