@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-
+import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:hakondate/model/letter/letter_metadata_model.dart';
@@ -14,6 +14,7 @@ class LetterState with _$LetterState {
     LetterMetadataModelData? selectedLetter,
     @Default(false) bool isEndListing,
     String? pageToken,
+    required ScrollController scrollController,
   }) = _LetterState;
 }
 

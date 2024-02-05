@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
@@ -26,6 +27,7 @@ class DailyViewModel extends _$DailyViewModel {
         DateTime.now().year,
         DateTime.now().month + 2,
       ).add(const Duration(seconds: -1)),
+      scrollController: ScrollController(),
     );
   }
 
@@ -223,5 +225,12 @@ class DailyViewModel extends _$DailyViewModel {
       },
       orElse: () => 0,
     );
+  }
+
+  void scrollTo(double place) {
+    state.whenData((DailyState data) {
+      data.scrollController.animateTo(place, duration: const Duration(milliseconds: 500), curve: Curves.easeOutCubic);
+      debugPrint('scrolled');
+    });
   }
 }
