@@ -159,13 +159,14 @@ class __$$DictionaryItemModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DictionaryItemModelImpl implements _DictionaryItemModel {
+class _$DictionaryItemModelImpl extends _DictionaryItemModel {
   const _$DictionaryItemModelImpl(
       {required this.id,
       required this.group,
       required this.name,
       required this.nutrients,
-      this.note});
+      this.note})
+      : super._();
 
   @override
   final int id;
@@ -212,13 +213,14 @@ class _$DictionaryItemModelImpl implements _DictionaryItemModel {
           this, _$identity);
 }
 
-abstract class _DictionaryItemModel implements DictionaryItemModel {
+abstract class _DictionaryItemModel extends DictionaryItemModel {
   const factory _DictionaryItemModel(
       {required final int id,
       required final DictionaryGroup group,
       required final String name,
       required final NutrientsModel nutrients,
       final String? note}) = _$DictionaryItemModelImpl;
+  const _DictionaryItemModel._() : super._();
 
   @override
   int get id;

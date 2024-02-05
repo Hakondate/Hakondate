@@ -16,14 +16,20 @@ class OriginModel with _$OriginModel {
   }) = _OriginModel;
   const OriginModel._();
 
-  factory OriginModel.fromFirestore(DocumentSnapshot<Map<String, dynamic>> originRef) {
-    final Map<String, dynamic>? data = originRef.data();
+  factory OriginModel.fromFirestore(DocumentSnapshot<Map<String, dynamic>> doc) {
+    if (!doc.exists) throw const FirestoreException('Failed to convert Firestore to OriginModel');
 
-    if (data == null) throw const FirestoreException('Failed to convert Firestore to OriginModel');
+    final Map<String, dynamic> data = doc.data()!;
 
     return OriginModel(
       date: (data['date'] as Timestamp).toDate(),
       categories: (data['categories'] as Map<String, dynamic>).entries.map(OriginCategoryModel.fromFirestore).toList(),
     );
   }
+
+  Map<String, Object> toFirestore() => <String, Object>{
+    'date': date,
+    'categories': categories.map((OriginCategoryModel category) => category.toFirestore()).toList(),
+    'updatedAt': DateTime.now(),
+  };
 }

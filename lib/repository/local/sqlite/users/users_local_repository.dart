@@ -34,13 +34,7 @@ class UsersLocalRepository extends UsersLocalRepositoryAPI {
     final List<UsersSchema> usersSchemas = await _db.select(_db.usersTable).get();
 
     for (final UsersSchema usersSchema in usersSchemas) {
-      final UserModel user = UserModel(
-        id: usersSchema.id,
-        name: usersSchema.name,
-        schoolId: usersSchema.schoolId,
-        schoolYear: usersSchema.schoolYear,
-      );
-      users.add(user);
+      users.add(UserModel.fromDrift(usersSchema));
     }
 
     return users;
@@ -52,12 +46,7 @@ class UsersLocalRepository extends UsersLocalRepositoryAPI {
 
     if (usersSchema == null) throw SQLiteException('Failed to select $id from usersTable');
 
-    return UserModel(
-      id: usersSchema.id,
-      name: usersSchema.name,
-      schoolId: usersSchema.schoolId,
-      schoolYear: usersSchema.schoolYear,
-    );
+    return UserModel.fromDrift(usersSchema);
   }
 
   @override
@@ -71,12 +60,7 @@ class UsersLocalRepository extends UsersLocalRepositoryAPI {
 
   @override
   Future<int> update(UserModel user) async {
-    final UsersTableCompanion companion = UsersTableCompanion(
-      id: Value<int>(user.id),
-      name: Value<String>(user.name),
-      schoolId: Value<int>(user.schoolId),
-      schoolYear: Value<int>(user.schoolYear),
-    );
+    final UsersTableCompanion companion = user.toDrift();
 
     return (_db.update(_db.usersTable)
           ..where(

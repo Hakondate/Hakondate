@@ -2,7 +2,6 @@ import 'package:drift/drift.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
-import 'package:hakondate/model/nutrients/nutrients_model.dart';
 import 'package:hakondate/repository/local/sqlite/local_database.dart';
 import 'package:hakondate/util/exception/sqlite_exception.dart';
 import 'package:hakondate/util/extension/string_extension.dart';
@@ -73,29 +72,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
     final DictionaryItemsSchema schema =
         await (_db.select(_db.dictionaryItemsTable)..where(($DictionaryItemsTableTable t) => t.id.equals(id))).getSingle();
 
-    return DictionaryItemModel(
-      id: schema.id,
-      group: _getGroup(schema.group),
-      name: schema.name,
-      nutrients: NutrientsModel(
-        energy: schema.energy,
-        protein: schema.protein,
-        lipid: schema.lipid,
-        carbohydrate: schema.carbohydrate,
-        sodium: schema.sodium,
-        calcium: schema.calcium,
-        magnesium: schema.magnesium,
-        iron: schema.iron,
-        zinc: schema.zinc,
-        retinol: schema.retinol,
-        vitaminB1: schema.vitaminB1,
-        vitaminB2: schema.vitaminB2,
-        vitaminC: schema.vitaminC,
-        dietaryFiber: schema.dietaryFiber,
-        salt: schema.salt,
-      ),
-      note: schema.note,
-    );
+    return DictionaryItemModel.fromDrift(schema);
   }
 
   @override
@@ -105,31 +82,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
         await (_db.select(_db.dictionaryItemsTable)..where(($DictionaryItemsTableTable t) => t.group.equals(group))).get();
 
     for (final DictionaryItemsSchema schema in schemas) {
-      items.add(
-        DictionaryItemModel(
-          id: schema.id,
-          group: _getGroup(schema.group),
-          name: schema.name,
-          nutrients: NutrientsModel(
-            energy: schema.energy,
-            protein: schema.protein,
-            lipid: schema.lipid,
-            carbohydrate: schema.carbohydrate,
-            sodium: schema.sodium,
-            calcium: schema.calcium,
-            magnesium: schema.magnesium,
-            iron: schema.iron,
-            zinc: schema.zinc,
-            retinol: schema.retinol,
-            vitaminB1: schema.vitaminB1,
-            vitaminB2: schema.vitaminB2,
-            vitaminC: schema.vitaminC,
-            dietaryFiber: schema.dietaryFiber,
-            salt: schema.salt,
-          ),
-          note: schema.note,
-        ),
-      );
+      items.add(DictionaryItemModel.fromDrift(schema));
     }
     return items;
   }
@@ -143,31 +96,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
       	.get()
 	  	..sort((DictionaryItemsSchema a, DictionaryItemsSchema b) => a.name.compareTo(b.name));
     for (final DictionaryItemsSchema schema in schemas) {
-      items.add(
-        DictionaryItemModel(
-          id: schema.id,
-          group: _getGroup(schema.group),
-          name: schema.name,
-          nutrients: NutrientsModel(
-            energy: schema.energy,
-            protein: schema.protein,
-            lipid: schema.lipid,
-            carbohydrate: schema.carbohydrate,
-            sodium: schema.sodium,
-            calcium: schema.calcium,
-            magnesium: schema.magnesium,
-            iron: schema.iron,
-            zinc: schema.zinc,
-            retinol: schema.retinol,
-            vitaminB1: schema.vitaminB1,
-            vitaminB2: schema.vitaminB2,
-            vitaminC: schema.vitaminC,
-            dietaryFiber: schema.dietaryFiber,
-            salt: schema.salt,
-          ),
-          note: schema.note,
-        ),
-      );
+      items.add(DictionaryItemModel.fromDrift(schema));
     }
     return items;
   }
@@ -190,31 +119,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
 			(DictionaryItemsSchema a, DictionaryItemsSchema b) => a.name.compareTo(b.name),
 		);
     for (final DictionaryItemsSchema schema in schemas) {
-      items.add(
-        DictionaryItemModel(
-          id: schema.id,
-          group: _getGroup(schema.group),
-          name: schema.name,
-          nutrients: NutrientsModel(
-            energy: schema.energy,
-            protein: schema.protein,
-            lipid: schema.lipid,
-            carbohydrate: schema.carbohydrate,
-            sodium: schema.sodium,
-            calcium: schema.calcium,
-            magnesium: schema.magnesium,
-            iron: schema.iron,
-            zinc: schema.zinc,
-            retinol: schema.retinol,
-            vitaminB1: schema.vitaminB1,
-            vitaminB2: schema.vitaminB2,
-            vitaminC: schema.vitaminC,
-            dietaryFiber: schema.dietaryFiber,
-            salt: schema.salt,
-          ),
-          note: schema.note,
-        ),
-      );
+      items.add(DictionaryItemModel.fromDrift(schema));
     }
     return items;
   }
@@ -403,36 +308,9 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
     }
 
     for (final DictionaryItemsSchema schema in schemas) {
-      items.add(
-        DictionaryItemModel(
-          id: schema.id,
-          group: _getGroup(schema.group),
-          name: schema.name,
-          nutrients: NutrientsModel(
-            energy: schema.energy,
-            protein: schema.protein,
-            lipid: schema.lipid,
-            carbohydrate: schema.carbohydrate,
-            sodium: schema.sodium,
-            calcium: schema.calcium,
-            magnesium: schema.magnesium,
-            iron: schema.iron,
-            zinc: schema.zinc,
-            retinol: schema.retinol,
-            vitaminB1: schema.vitaminB1,
-            vitaminB2: schema.vitaminB2,
-            vitaminC: schema.vitaminC,
-            dietaryFiber: schema.dietaryFiber,
-            salt: schema.salt,
-          ),
-          note: schema.note,
-        ),
-      );
+      items.add(DictionaryItemModel.fromDrift(schema));
     }
 
     return items;
   }
-
-  DictionaryGroup _getGroup(int groupNumber) =>
-      DictionaryGroup.values.firstWhere((DictionaryGroup group) => group.groupNumber == groupNumber);
 }

@@ -29,8 +29,8 @@ class $SchoolsTableTable extends SchoolsTable
       const VerificationMeta('lunchBlock');
   @override
   late final GeneratedColumn<int> lunchBlock = GeneratedColumn<int>(
-      'lunch_block', aliasedName, true,
-      type: DriftSqlType.int, requiredDuringInsert: false);
+      'lunch_block', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
   static const VerificationMeta _classificationMeta =
       const VerificationMeta('classification');
   @override
@@ -86,6 +86,8 @@ class $SchoolsTableTable extends SchoolsTable
           _lunchBlockMeta,
           lunchBlock.isAcceptableOrUnknown(
               data['lunch_block']!, _lunchBlockMeta));
+    } else if (isInserting) {
+      context.missing(_lunchBlockMeta);
     }
     if (data.containsKey('classification')) {
       context.handle(
@@ -119,7 +121,7 @@ class $SchoolsTableTable extends SchoolsTable
       name: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
       lunchBlock: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}lunch_block']),
+          .read(DriftSqlType.int, data['${effectivePrefix}lunch_block'])!,
       classification: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}classification'])!,
       createAt: attachedDatabase.typeMapping
@@ -139,7 +141,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
   final int id;
   final int parentId;
   final String name;
-  final int? lunchBlock;
+  final int lunchBlock;
   final String classification;
   final DateTime createAt;
   final DateTime updateAt;
@@ -147,7 +149,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       {required this.id,
       required this.parentId,
       required this.name,
-      this.lunchBlock,
+      required this.lunchBlock,
       required this.classification,
       required this.createAt,
       required this.updateAt});
@@ -157,9 +159,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
     map['id'] = Variable<int>(id);
     map['parent_id'] = Variable<int>(parentId);
     map['name'] = Variable<String>(name);
-    if (!nullToAbsent || lunchBlock != null) {
-      map['lunch_block'] = Variable<int>(lunchBlock);
-    }
+    map['lunch_block'] = Variable<int>(lunchBlock);
     map['classification'] = Variable<String>(classification);
     map['create_at'] = Variable<DateTime>(createAt);
     map['update_at'] = Variable<DateTime>(updateAt);
@@ -171,9 +171,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       id: Value(id),
       parentId: Value(parentId),
       name: Value(name),
-      lunchBlock: lunchBlock == null && nullToAbsent
-          ? const Value.absent()
-          : Value(lunchBlock),
+      lunchBlock: Value(lunchBlock),
       classification: Value(classification),
       createAt: Value(createAt),
       updateAt: Value(updateAt),
@@ -187,7 +185,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       id: serializer.fromJson<int>(json['id']),
       parentId: serializer.fromJson<int>(json['parentId']),
       name: serializer.fromJson<String>(json['name']),
-      lunchBlock: serializer.fromJson<int?>(json['lunchBlock']),
+      lunchBlock: serializer.fromJson<int>(json['lunchBlock']),
       classification: serializer.fromJson<String>(json['classification']),
       createAt: serializer.fromJson<DateTime>(json['createAt']),
       updateAt: serializer.fromJson<DateTime>(json['updateAt']),
@@ -200,7 +198,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       'id': serializer.toJson<int>(id),
       'parentId': serializer.toJson<int>(parentId),
       'name': serializer.toJson<String>(name),
-      'lunchBlock': serializer.toJson<int?>(lunchBlock),
+      'lunchBlock': serializer.toJson<int>(lunchBlock),
       'classification': serializer.toJson<String>(classification),
       'createAt': serializer.toJson<DateTime>(createAt),
       'updateAt': serializer.toJson<DateTime>(updateAt),
@@ -211,7 +209,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
           {int? id,
           int? parentId,
           String? name,
-          Value<int?> lunchBlock = const Value.absent(),
+          int? lunchBlock,
           String? classification,
           DateTime? createAt,
           DateTime? updateAt}) =>
@@ -219,7 +217,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
         id: id ?? this.id,
         parentId: parentId ?? this.parentId,
         name: name ?? this.name,
-        lunchBlock: lunchBlock.present ? lunchBlock.value : this.lunchBlock,
+        lunchBlock: lunchBlock ?? this.lunchBlock,
         classification: classification ?? this.classification,
         createAt: createAt ?? this.createAt,
         updateAt: updateAt ?? this.updateAt,
@@ -258,7 +256,7 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
   final Value<int> id;
   final Value<int> parentId;
   final Value<String> name;
-  final Value<int?> lunchBlock;
+  final Value<int> lunchBlock;
   final Value<String> classification;
   final Value<DateTime> createAt;
   final Value<DateTime> updateAt;
@@ -275,12 +273,13 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
     this.id = const Value.absent(),
     required int parentId,
     required String name,
-    this.lunchBlock = const Value.absent(),
+    required int lunchBlock,
     required String classification,
     this.createAt = const Value.absent(),
     this.updateAt = const Value.absent(),
   })  : parentId = Value(parentId),
         name = Value(name),
+        lunchBlock = Value(lunchBlock),
         classification = Value(classification);
   static Insertable<SchoolsSchema> custom({
     Expression<int>? id,
@@ -306,7 +305,7 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
       {Value<int>? id,
       Value<int>? parentId,
       Value<String>? name,
-      Value<int?>? lunchBlock,
+      Value<int>? lunchBlock,
       Value<String>? classification,
       Value<DateTime>? createAt,
       Value<DateTime>? updateAt}) {
@@ -1110,11 +1109,18 @@ class $FoodstuffsTableTable extends FoodstuffsTable
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
       'name', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _pieceMeta = const VerificationMeta('piece');
+  static const VerificationMeta _pieceNumberMeta =
+      const VerificationMeta('pieceNumber');
   @override
-  late final GeneratedColumn<int> piece = GeneratedColumn<int>(
-      'piece', aliasedName, true,
-      type: DriftSqlType.int, requiredDuringInsert: false);
+  late final GeneratedColumn<double> pieceNumber = GeneratedColumn<double>(
+      'piece_number', aliasedName, true,
+      type: DriftSqlType.double, requiredDuringInsert: false);
+  static const VerificationMeta _pieceUnitMeta =
+      const VerificationMeta('pieceUnit');
+  @override
+  late final GeneratedColumn<String> pieceUnit = GeneratedColumn<String>(
+      'piece_unit', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
   static const VerificationMeta _gramMeta = const VerificationMeta('gram');
   @override
   late final GeneratedColumn<double> gram = GeneratedColumn<double>(
@@ -1230,7 +1236,8 @@ class $FoodstuffsTableTable extends FoodstuffsTable
   List<GeneratedColumn> get $columns => [
         id,
         name,
-        piece,
+        pieceNumber,
+        pieceUnit,
         gram,
         energy,
         protein,
@@ -1270,9 +1277,15 @@ class $FoodstuffsTableTable extends FoodstuffsTable
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
-    if (data.containsKey('piece')) {
+    if (data.containsKey('piece_number')) {
       context.handle(
-          _pieceMeta, piece.isAcceptableOrUnknown(data['piece']!, _pieceMeta));
+          _pieceNumberMeta,
+          pieceNumber.isAcceptableOrUnknown(
+              data['piece_number']!, _pieceNumberMeta));
+    }
+    if (data.containsKey('piece_unit')) {
+      context.handle(_pieceUnitMeta,
+          pieceUnit.isAcceptableOrUnknown(data['piece_unit']!, _pieceUnitMeta));
     }
     if (data.containsKey('gram')) {
       context.handle(
@@ -1407,8 +1420,10 @@ class $FoodstuffsTableTable extends FoodstuffsTable
           .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
       name: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
-      piece: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}piece']),
+      pieceNumber: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}piece_number']),
+      pieceUnit: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}piece_unit']),
       gram: attachedDatabase.typeMapping
           .read(DriftSqlType.double, data['${effectivePrefix}gram'])!,
       energy: attachedDatabase.typeMapping
@@ -1460,7 +1475,8 @@ class FoodstuffsSchema extends DataClass
     implements Insertable<FoodstuffsSchema> {
   final int id;
   final String name;
-  final int? piece;
+  final double? pieceNumber;
+  final String? pieceUnit;
   final double gram;
   final double energy;
   final double protein;
@@ -1483,7 +1499,8 @@ class FoodstuffsSchema extends DataClass
   const FoodstuffsSchema(
       {required this.id,
       required this.name,
-      this.piece,
+      this.pieceNumber,
+      this.pieceUnit,
       required this.gram,
       required this.energy,
       required this.protein,
@@ -1508,8 +1525,11 @@ class FoodstuffsSchema extends DataClass
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
     map['name'] = Variable<String>(name);
-    if (!nullToAbsent || piece != null) {
-      map['piece'] = Variable<int>(piece);
+    if (!nullToAbsent || pieceNumber != null) {
+      map['piece_number'] = Variable<double>(pieceNumber);
+    }
+    if (!nullToAbsent || pieceUnit != null) {
+      map['piece_unit'] = Variable<String>(pieceUnit);
     }
     map['gram'] = Variable<double>(gram);
     map['energy'] = Variable<double>(energy);
@@ -1539,8 +1559,12 @@ class FoodstuffsSchema extends DataClass
     return FoodstuffsTableCompanion(
       id: Value(id),
       name: Value(name),
-      piece:
-          piece == null && nullToAbsent ? const Value.absent() : Value(piece),
+      pieceNumber: pieceNumber == null && nullToAbsent
+          ? const Value.absent()
+          : Value(pieceNumber),
+      pieceUnit: pieceUnit == null && nullToAbsent
+          ? const Value.absent()
+          : Value(pieceUnit),
       gram: Value(gram),
       energy: Value(energy),
       protein: Value(protein),
@@ -1570,7 +1594,8 @@ class FoodstuffsSchema extends DataClass
     return FoodstuffsSchema(
       id: serializer.fromJson<int>(json['id']),
       name: serializer.fromJson<String>(json['name']),
-      piece: serializer.fromJson<int?>(json['piece']),
+      pieceNumber: serializer.fromJson<double?>(json['pieceNumber']),
+      pieceUnit: serializer.fromJson<String?>(json['pieceUnit']),
       gram: serializer.fromJson<double>(json['gram']),
       energy: serializer.fromJson<double>(json['energy']),
       protein: serializer.fromJson<double>(json['protein']),
@@ -1598,7 +1623,8 @@ class FoodstuffsSchema extends DataClass
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
       'name': serializer.toJson<String>(name),
-      'piece': serializer.toJson<int?>(piece),
+      'pieceNumber': serializer.toJson<double?>(pieceNumber),
+      'pieceUnit': serializer.toJson<String?>(pieceUnit),
       'gram': serializer.toJson<double>(gram),
       'energy': serializer.toJson<double>(energy),
       'protein': serializer.toJson<double>(protein),
@@ -1624,7 +1650,8 @@ class FoodstuffsSchema extends DataClass
   FoodstuffsSchema copyWith(
           {int? id,
           String? name,
-          Value<int?> piece = const Value.absent(),
+          Value<double?> pieceNumber = const Value.absent(),
+          Value<String?> pieceUnit = const Value.absent(),
           double? gram,
           double? energy,
           double? protein,
@@ -1647,7 +1674,8 @@ class FoodstuffsSchema extends DataClass
       FoodstuffsSchema(
         id: id ?? this.id,
         name: name ?? this.name,
-        piece: piece.present ? piece.value : this.piece,
+        pieceNumber: pieceNumber.present ? pieceNumber.value : this.pieceNumber,
+        pieceUnit: pieceUnit.present ? pieceUnit.value : this.pieceUnit,
         gram: gram ?? this.gram,
         energy: energy ?? this.energy,
         protein: protein ?? this.protein,
@@ -1673,7 +1701,8 @@ class FoodstuffsSchema extends DataClass
     return (StringBuffer('FoodstuffsSchema(')
           ..write('id: $id, ')
           ..write('name: $name, ')
-          ..write('piece: $piece, ')
+          ..write('pieceNumber: $pieceNumber, ')
+          ..write('pieceUnit: $pieceUnit, ')
           ..write('gram: $gram, ')
           ..write('energy: $energy, ')
           ..write('protein: $protein, ')
@@ -1701,7 +1730,8 @@ class FoodstuffsSchema extends DataClass
   int get hashCode => Object.hashAll([
         id,
         name,
-        piece,
+        pieceNumber,
+        pieceUnit,
         gram,
         energy,
         protein,
@@ -1728,7 +1758,8 @@ class FoodstuffsSchema extends DataClass
       (other is FoodstuffsSchema &&
           other.id == this.id &&
           other.name == this.name &&
-          other.piece == this.piece &&
+          other.pieceNumber == this.pieceNumber &&
+          other.pieceUnit == this.pieceUnit &&
           other.gram == this.gram &&
           other.energy == this.energy &&
           other.protein == this.protein &&
@@ -1753,7 +1784,8 @@ class FoodstuffsSchema extends DataClass
 class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
   final Value<int> id;
   final Value<String> name;
-  final Value<int?> piece;
+  final Value<double?> pieceNumber;
+  final Value<String?> pieceUnit;
   final Value<double> gram;
   final Value<double> energy;
   final Value<double> protein;
@@ -1776,7 +1808,8 @@ class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
   const FoodstuffsTableCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
-    this.piece = const Value.absent(),
+    this.pieceNumber = const Value.absent(),
+    this.pieceUnit = const Value.absent(),
     this.gram = const Value.absent(),
     this.energy = const Value.absent(),
     this.protein = const Value.absent(),
@@ -1800,7 +1833,8 @@ class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
   FoodstuffsTableCompanion.insert({
     this.id = const Value.absent(),
     required String name,
-    this.piece = const Value.absent(),
+    this.pieceNumber = const Value.absent(),
+    this.pieceUnit = const Value.absent(),
     required double gram,
     required double energy,
     required double protein,
@@ -1842,7 +1876,8 @@ class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
   static Insertable<FoodstuffsSchema> custom({
     Expression<int>? id,
     Expression<String>? name,
-    Expression<int>? piece,
+    Expression<double>? pieceNumber,
+    Expression<String>? pieceUnit,
     Expression<double>? gram,
     Expression<double>? energy,
     Expression<double>? protein,
@@ -1866,7 +1901,8 @@ class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (name != null) 'name': name,
-      if (piece != null) 'piece': piece,
+      if (pieceNumber != null) 'piece_number': pieceNumber,
+      if (pieceUnit != null) 'piece_unit': pieceUnit,
       if (gram != null) 'gram': gram,
       if (energy != null) 'energy': energy,
       if (protein != null) 'protein': protein,
@@ -1892,7 +1928,8 @@ class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
   FoodstuffsTableCompanion copyWith(
       {Value<int>? id,
       Value<String>? name,
-      Value<int?>? piece,
+      Value<double?>? pieceNumber,
+      Value<String?>? pieceUnit,
       Value<double>? gram,
       Value<double>? energy,
       Value<double>? protein,
@@ -1915,7 +1952,8 @@ class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
     return FoodstuffsTableCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
-      piece: piece ?? this.piece,
+      pieceNumber: pieceNumber ?? this.pieceNumber,
+      pieceUnit: pieceUnit ?? this.pieceUnit,
       gram: gram ?? this.gram,
       energy: energy ?? this.energy,
       protein: protein ?? this.protein,
@@ -1947,8 +1985,11 @@ class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
     if (name.present) {
       map['name'] = Variable<String>(name.value);
     }
-    if (piece.present) {
-      map['piece'] = Variable<int>(piece.value);
+    if (pieceNumber.present) {
+      map['piece_number'] = Variable<double>(pieceNumber.value);
+    }
+    if (pieceUnit.present) {
+      map['piece_unit'] = Variable<String>(pieceUnit.value);
     }
     if (gram.present) {
       map['gram'] = Variable<double>(gram.value);
@@ -2015,7 +2056,8 @@ class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
     return (StringBuffer('FoodstuffsTableCompanion(')
           ..write('id: $id, ')
           ..write('name: $name, ')
-          ..write('piece: $piece, ')
+          ..write('pieceNumber: $pieceNumber, ')
+          ..write('pieceUnit: $pieceUnit, ')
           ..write('gram: $gram, ')
           ..write('energy: $energy, ')
           ..write('protein: $protein, ')

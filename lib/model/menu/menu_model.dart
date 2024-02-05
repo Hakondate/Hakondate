@@ -1,7 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:drift/drift.dart' hide JsonKey;
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:hakondate/model/dish/dish_model.dart';
+import 'package:hakondate/repository/local/sqlite/local_database.dart';
 import 'package:hakondate/util/exception/class_type_exception.dart';
+import 'package:hakondate/util/exception/firestore_exception.dart';
 
 part 'menu_model.freezed.dart';
 
@@ -40,7 +44,63 @@ class MenuModel with _$MenuModel {
     String? event,
   }) = LunchesDayMenuModel;
   const factory MenuModel.holiday() = HolidayMenuModel;
-  const factory MenuModel.noData() = NodataMenuModel;
+  const factory MenuModel.noData() = NoDataMenuModel;
+
+  factory MenuModel.fromFirestore(DocumentSnapshot<Map<String, dynamic>> doc) {
+    if (!doc.exists) throw const FirestoreException('Failed to convert Firestore to MenuModel');
+
+    final Map<String, dynamic> data = doc.data()!;
+    final List<DishModel> dishes = (data['dishes'] as List<dynamic>).map(
+                                     (dynamic dish) => DishModel.fromFirestore(dish as Map<String, dynamic>),
+                                   ).toList();
+
+    return MenuModel(
+      id: data['id'] as int,
+      day: (data['day'] as Timestamp).toDate(),
+      schoolId: data['schoolId'] as int,
+      dishes: dishes,
+      event: data['event'] as String?,
+    );
+  }
+
+  factory MenuModel.fromDrift(MenusSchema schema, List<DishModel> dishes) => MenuModel(
+    id: schema.id,
+    day: schema.day,
+    schoolId: schema.schoolId,
+    dishes: dishes,
+    event: schema.event,
+  );
+
+  Map<String, Object> toFirestore() {
+    final MenuModel menu = this;
+
+    if (menu is! LunchesDayMenuModel) return <String, Object>{};
+
+    return  <String, Object>{
+      'id': menu.id,
+      'day': menu.day,
+      'schoolId': menu.schoolId,
+      'dishes': menu.dishes.map((DishModel dish) => dish.toFirestore()).toList(),
+      if (menu.event != null) 'event': menu.event!,
+      'updatedAt': DateTime.now(),
+    };
+  }
+
+  MenusTableCompanion toDrift() {
+    final MenuModel menu = this;
+
+    if (menu is! LunchesDayMenuModel) {
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels toDrift');
+    }
+
+    return MenusTableCompanion(
+      id: Value<int>(menu.id),
+      day: Value<DateTime>(menu.day),
+      schoolId: Value<int>(menu.schoolId),
+      event: Value<String?>(menu.event),
+      updateAt: Value<DateTime>(DateTime.now()),
+    );
+  }
 
   double get energy {
     final MenuModel menu = this;

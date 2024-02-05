@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
+import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/model/origin/origin_model.dart';
 import 'package:hakondate/state/origin/origin_state.dart';
 import 'package:hakondate/view/component/label/description_text.dart';
@@ -24,7 +25,13 @@ class DropdownMonthSelector extends ConsumerWidget {
             return DropdownMenu<OriginModel>(
               menuHeight: MediaQuery.of(context).size.height * 0.4,
               initialSelection: data.selectedOrigin,
-              onSelected: (OriginModel? value) => ref.read(originViewModelProvider.notifier).updateSelectedOrigin(origin: value!),
+              menuStyle: MenuStyle(
+                surfaceTintColor:
+                    MaterialStatePropertyAll<Color>(AppColor.ui.white),
+              ),
+              onSelected: (OriginModel? value) => ref
+                  .read(originViewModelProvider.notifier)
+                  .updateSelectedOrigin(origin: value!),
               dropdownMenuEntries: data.origins
                   .map(
                     (OriginModel origin) => DropdownMenuEntry<OriginModel>(
