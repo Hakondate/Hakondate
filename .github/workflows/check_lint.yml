@@ -27,3 +27,6 @@ jobs:
         
       - name: Run Custom Linter
         run: flutter pub run custom_lint
+      
+      - name: Run Flutter Format
+        run: dart format --set-exit-if-changed -o none $(find lib -name "*.dart" -not -wholename "**/generated/*")
