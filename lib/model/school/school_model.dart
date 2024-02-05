@@ -38,8 +38,7 @@ class SchoolModel with _$SchoolModel {
     }
 
     final Map<String, dynamic> data = doc.data()!;
-    final SchoolClassification classification =
-        switch (data['classification'] as String) {
+    final SchoolClassification classification = switch (data['classification'] as String) {
       'primary' => SchoolClassification.primary,
       'secondary' => SchoolClassification.secondary,
       _ => SchoolClassification.secondary,

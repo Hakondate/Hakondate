@@ -19,8 +19,7 @@ class SigningUpDialog extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<SignupState> sginupState = ref.watch(signupViewModelProvider);
     final AsyncValue<UserSettingsState> userSettingsState = ref.watch(userSettingsViewModelProvider);
-    final bool isEditing =
-        userSettingsState is AsyncData<UserSettingsState> && userSettingsState.value.editingUser != null;
+    final bool isEditing = userSettingsState is AsyncData<UserSettingsState> && userSettingsState.value.editingUser != null;
 
     return HakondateDialog(
       title: const Text('確認'),

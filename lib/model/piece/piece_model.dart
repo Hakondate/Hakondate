@@ -5,7 +5,7 @@ part 'piece_model.freezed.dart';
 @freezed
 class PieceModel with _$PieceModel {
   const factory PieceModel({
-    required double number, 
+    required double number,
     @Default('個') String unit,
   }) = _PieceModel;
 }

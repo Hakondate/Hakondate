@@ -12,9 +12,9 @@ part 'origins_remote_repository.g.dart';
 OriginsRemoteRepository originsRemoteRepository(OriginsRemoteRepositoryRef ref) {
   final FirebaseFirestore firestoreAPI = ref.watch(firestoreAPIProvider);
   final CollectionReference<OriginModel> originCollectionReference = firestoreAPI.collection('origins').withConverter(
-    fromFirestore: (DocumentSnapshot<Map<String, dynamic>> doc, _) => OriginModel.fromFirestore(doc),
-    toFirestore: (OriginModel origin, _) => origin.toFirestore(),
-  );
+        fromFirestore: (DocumentSnapshot<Map<String, dynamic>> doc, _) => OriginModel.fromFirestore(doc),
+        toFirestore: (OriginModel origin, _) => origin.toFirestore(),
+      );
   return OriginsRemoteRepository(originCollectionReference);
 }
 
@@ -44,9 +44,6 @@ class OriginsRemoteRepository extends OriginsRemoteRepositoryAPI {
   Future<List<OriginModel>> list() async {
     final QuerySnapshot<OriginModel?> origins = await _db.orderBy('date', descending: true).get();
 
-    return origins.docs
-              .map((QueryDocumentSnapshot<OriginModel?> doc) => doc.data())
-              .whereType<OriginModel>()
-              .toList();
+    return origins.docs.map((QueryDocumentSnapshot<OriginModel?> doc) => doc.data()).whereType<OriginModel>().toList();
   }
 }

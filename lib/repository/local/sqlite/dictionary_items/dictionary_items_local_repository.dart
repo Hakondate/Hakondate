@@ -88,13 +88,11 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
   }
 
   @override
-  Future<List<DictionaryItemModel>> getAll() async{
+  Future<List<DictionaryItemModel>> getAll() async {
     final List<DictionaryItemModel> items = <DictionaryItemModel>[];
 
-    final List<DictionaryItemsSchema> schemas = 
-      await (_db.select(_db.dictionaryItemsTable))
-      	.get()
-	  	..sort((DictionaryItemsSchema a, DictionaryItemsSchema b) => a.name.compareTo(b.name));
+    final List<DictionaryItemsSchema> schemas = await (_db.select(_db.dictionaryItemsTable)).get()
+      ..sort((DictionaryItemsSchema a, DictionaryItemsSchema b) => a.name.compareTo(b.name));
     for (final DictionaryItemsSchema schema in schemas) {
       items.add(DictionaryItemModel.fromDrift(schema));
     }
@@ -102,22 +100,18 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
   }
 
   @override
-  Future<List<DictionaryItemModel>> search(String query) async{
+  Future<List<DictionaryItemModel>> search(String query) async {
     final List<DictionaryItemModel> items = <DictionaryItemModel>[];
 
-    final List<DictionaryItemsSchema> schemas = 
-		await (
-		  _db.select(_db.dictionaryItemsTable)
-      ..where(
-        ($DictionaryItemsTableTable t) => 
-          t.name.contains(query) | 
-          t.name.contains(query.toHiragana()) | 
-          t.name.contains(query.toKatakana()),
-      )
-		).get()
-		..sort(
-			(DictionaryItemsSchema a, DictionaryItemsSchema b) => a.name.compareTo(b.name),
-		);
+    final List<DictionaryItemsSchema> schemas = await (_db.select(_db.dictionaryItemsTable)
+          ..where(
+            ($DictionaryItemsTableTable t) =>
+                t.name.contains(query) | t.name.contains(query.toHiragana()) | t.name.contains(query.toKatakana()),
+          ))
+        .get()
+      ..sort(
+        (DictionaryItemsSchema a, DictionaryItemsSchema b) => a.name.compareTo(b.name),
+      );
     for (final DictionaryItemsSchema schema in schemas) {
       items.add(DictionaryItemModel.fromDrift(schema));
     }

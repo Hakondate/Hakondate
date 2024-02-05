@@ -50,9 +50,11 @@ class MenuModel with _$MenuModel {
     if (!doc.exists) throw const FirestoreException('Failed to convert Firestore to MenuModel');
 
     final Map<String, dynamic> data = doc.data()!;
-    final List<DishModel> dishes = (data['dishes'] as List<dynamic>).map(
-                                     (dynamic dish) => DishModel.fromFirestore(dish as Map<String, dynamic>),
-                                   ).toList();
+    final List<DishModel> dishes = (data['dishes'] as List<dynamic>)
+        .map(
+          (dynamic dish) => DishModel.fromFirestore(dish as Map<String, dynamic>),
+        )
+        .toList();
 
     return MenuModel(
       id: data['id'] as int,
@@ -64,19 +66,19 @@ class MenuModel with _$MenuModel {
   }
 
   factory MenuModel.fromDrift(MenusSchema schema, List<DishModel> dishes) => MenuModel(
-    id: schema.id,
-    day: schema.day,
-    schoolId: schema.schoolId,
-    dishes: dishes,
-    event: schema.event,
-  );
+        id: schema.id,
+        day: schema.day,
+        schoolId: schema.schoolId,
+        dishes: dishes,
+        event: schema.event,
+      );
 
   Map<String, Object> toFirestore() {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) return <String, Object>{};
 
-    return  <String, Object>{
+    return <String, Object>{
       'id': menu.id,
       'day': menu.day,
       'schoolId': menu.schoolId,

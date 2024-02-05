@@ -28,8 +28,8 @@ class OriginModel with _$OriginModel {
   }
 
   Map<String, Object> toFirestore() => <String, Object>{
-    'date': date,
-    'categories': categories.map((OriginCategoryModel category) => category.toFirestore()).toList(),
-    'updatedAt': DateTime.now(),
-  };
+        'date': date,
+        'categories': categories.map((OriginCategoryModel category) => category.toFirestore()).toList(),
+        'updatedAt': DateTime.now(),
+      };
 }
