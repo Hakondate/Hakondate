@@ -47,7 +47,8 @@ class MenuModel with _$MenuModel {
 
     if (menu is! LunchesDayMenuModel) {
       throw const ClassTypeException(
-          'Non-LunchesDayMenuModel called MenuModels getter');
+        'Non-LunchesDayMenuModel called MenuModels getter',
+      );
     }
 
     double sum = 0;
@@ -63,7 +64,8 @@ class MenuModel with _$MenuModel {
 
     if (menu is! LunchesDayMenuModel) {
       throw const ClassTypeException(
-          'Non-LunchesDayMenuModel called MenuModels getter');
+        'Non-LunchesDayMenuModel called MenuModels getter',
+      );
     }
 
     double sum = 0;
@@ -79,7 +81,8 @@ class MenuModel with _$MenuModel {
 
     if (menu is! LunchesDayMenuModel) {
       throw const ClassTypeException(
-          'Non-LunchesDayMenuModel called MenuModels getter');
+        'Non-LunchesDayMenuModel called MenuModels getter',
+      );
     }
 
     double sum = 0;
@@ -95,7 +98,8 @@ class MenuModel with _$MenuModel {
 
     if (menu is! LunchesDayMenuModel) {
       throw const ClassTypeException(
-          'Non-LunchesDayMenuModel called MenuModels getter');
+        'Non-LunchesDayMenuModel called MenuModels getter',
+      );
     }
 
     double sum = 0;
@@ -111,7 +115,8 @@ class MenuModel with _$MenuModel {
 
     if (menu is! LunchesDayMenuModel) {
       throw const ClassTypeException(
-          'Non-LunchesDayMenuModel called MenuModels getter');
+        'Non-LunchesDayMenuModel called MenuModels getter',
+      );
     }
 
     double sum = 0;
@@ -127,7 +132,8 @@ class MenuModel with _$MenuModel {
 
     if (menu is! LunchesDayMenuModel) {
       throw const ClassTypeException(
-          'Non-LunchesDayMenuModel called MenuModels getter');
+        'Non-LunchesDayMenuModel called MenuModels getter',
+      );
     }
 
     double sum = 0;
@@ -143,7 +149,8 @@ class MenuModel with _$MenuModel {
 
     if (menu is! LunchesDayMenuModel) {
       throw const ClassTypeException(
-          'Non-LunchesDayMenuModel called MenuModels getter');
+        'Non-LunchesDayMenuModel called MenuModels getter',
+      );
     }
 
     double sum = 0;
@@ -159,7 +166,8 @@ class MenuModel with _$MenuModel {
 
     if (menu is! LunchesDayMenuModel) {
       throw const ClassTypeException(
-          'Non-LunchesDayMenuModel called MenuModels getter');
+        'Non-LunchesDayMenuModel called MenuModels getter',
+      );
     }
 
     double sum = 0;
@@ -175,7 +183,8 @@ class MenuModel with _$MenuModel {
 
     if (menu is! LunchesDayMenuModel) {
       throw const ClassTypeException(
-          'Non-LunchesDayMenuModel called MenuModels getter');
+        'Non-LunchesDayMenuModel called MenuModels getter',
+      );
     }
 
     double sum = 0;
@@ -191,7 +200,8 @@ class MenuModel with _$MenuModel {
 
     if (menu is! LunchesDayMenuModel) {
       throw const ClassTypeException(
-          'Non-LunchesDayMenuModel called MenuModels getter');
+        'Non-LunchesDayMenuModel called MenuModels getter',
+      );
     }
 
     double sum = 0;
@@ -207,7 +217,8 @@ class MenuModel with _$MenuModel {
 
     if (menu is! LunchesDayMenuModel) {
       throw const ClassTypeException(
-          'Non-LunchesDayMenuModel called MenuModels getter');
+        'Non-LunchesDayMenuModel called MenuModels getter',
+      );
     }
 
     double sum = 0;
@@ -223,7 +234,8 @@ class MenuModel with _$MenuModel {
 
     if (menu is! LunchesDayMenuModel) {
       throw const ClassTypeException(
-          'Non-LunchesDayMenuModel called MenuModels getter');
+        'Non-LunchesDayMenuModel called MenuModels getter',
+      );
     }
 
     double sum = 0;
@@ -239,7 +251,8 @@ class MenuModel with _$MenuModel {
 
     if (menu is! LunchesDayMenuModel) {
       throw const ClassTypeException(
-          'Non-LunchesDayMenuModel called MenuModels getter');
+        'Non-LunchesDayMenuModel called MenuModels getter',
+      );
     }
 
     double sum = 0;
@@ -255,7 +268,8 @@ class MenuModel with _$MenuModel {
 
     if (menu is! LunchesDayMenuModel) {
       throw const ClassTypeException(
-          'Non-LunchesDayMenuModel called MenuModels getter');
+        'Non-LunchesDayMenuModel called MenuModels getter',
+      );
     }
 
     double sum = 0;
@@ -271,7 +285,8 @@ class MenuModel with _$MenuModel {
 
     if (menu is! LunchesDayMenuModel) {
       throw const ClassTypeException(
-          'Non-LunchesDayMenuModel called MenuModels getter');
+        'Non-LunchesDayMenuModel called MenuModels getter',
+      );
     }
 
     double sum = 0;
@@ -287,7 +302,8 @@ class MenuModel with _$MenuModel {
 
     if (menu is! LunchesDayMenuModel) {
       throw const ClassTypeException(
-          'Non-LunchesDayMenuModel called MenuModels getter');
+        'Non-LunchesDayMenuModel called MenuModels getter',
+      );
     }
 
     double sum = 0;
@@ -303,7 +319,8 @@ class MenuModel with _$MenuModel {
 
     if (menu is! LunchesDayMenuModel) {
       throw const ClassTypeException(
-          'Non-LunchesDayMenuModel called MenuModels getter');
+        'Non-LunchesDayMenuModel called MenuModels getter',
+      );
     }
 
     double sum = 0;
