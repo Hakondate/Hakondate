@@ -31,10 +31,11 @@ class NutrientsRadarChart extends StatelessWidget {
       textScaleFactor: 0.05,
       animate: false,
       fillColor: color ?? AppColor.brand.secondary,
-      values: values.map((double value) => (value > maxValue)
-          ? maxValue
-          : value,
-      ).toList(),
+      values: values
+          .map(
+            (double value) => (value > maxValue) ? maxValue : value,
+          )
+          .toList(),
       labels: <String>[
         'エネルギー\n${rowValues[0].toStringAsFixed(1)}${NutrientUnit.kcal.value}',
         'たんぱく質\n${rowValues[1].toStringAsFixed(1)}${NutrientUnit.gram.value}',

@@ -58,7 +58,6 @@ class LetterViewModel extends _$LetterViewModel {
         state = state.copyWith(
           status: LetterConnectionStatus.done,
           letters: currentLetters,
-
         );
       }
     });

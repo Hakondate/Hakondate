@@ -105,7 +105,7 @@ class DictionaryItem extends ConsumerWidget {
                         ),
                       );
                     }
-                    
+
                     return const SizedBox.shrink();
                   },
                 ),
@@ -119,17 +119,18 @@ class DictionaryItem extends ConsumerWidget {
                 const Divider(
                   height: 0,
                 ),
-                if (selectedItem.note != null && selectedItem.note != '') Padding(
-                  padding: const EdgeInsets.only(
-                    left: PaddingSize.contentLarge,
-                    right: PaddingSize.contentLarge,
-                    top: PaddingSize.minimum,
-                    bottom: 32,
+                if (selectedItem.note != null && selectedItem.note != '')
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: PaddingSize.contentLarge,
+                      right: PaddingSize.contentLarge,
+                      top: PaddingSize.minimum,
+                      bottom: 32,
+                    ),
+                    child: Text(
+                      '備考：\n${selectedItem.note!}',
+                    ),
                   ),
-                  child: Text(
-                    '備考：\n${selectedItem.note!}',
-                  ),
-                ),
               ],
             ),
           ),

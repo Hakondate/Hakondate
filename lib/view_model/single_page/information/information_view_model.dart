@@ -8,8 +8,7 @@ part 'information_view_model.g.dart';
 
 @riverpod
 InformationViewModel informationViewModel(InformationViewModelRef ref) {
-  final SchoolsLocalRepository schoolsLocalRepository =
-      ref.watch(schoolsLocalRepositoryProvider);
+  final SchoolsLocalRepository schoolsLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
   return InformationViewModel(schoolsLocalRepository);
 }
 
@@ -22,7 +21,7 @@ class InformationViewModel {
     final List<SchoolModel> schools = await _schoolLocalRepository.list();
 
     if (schools.isEmpty) return '協力学校を募集しています';
- 
+
     schools.sort((SchoolModel a, SchoolModel b) => a.id.compareTo(b.id));
 
     return schools.map((SchoolModel school) => school.name).join('\n');

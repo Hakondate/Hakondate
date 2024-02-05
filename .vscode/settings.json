@@ -1,8 +1,13 @@
 {
   "dart.flutterSdkPath": ".fvm/flutter_sdk",
   "search.exclude": {
-    "**/.fvm": true
+    "**/.fvm": true,
+    "**/*.g.dart": true,
+    "**/*.freezed.dart": true,
   },
+  "editor.rulers": [140],
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
   "cSpell.words": [
     "cupertino",
     "hakondate",

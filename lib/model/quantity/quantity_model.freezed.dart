@@ -16,7 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$QuantityModel {
-  PieceModel? get piece => throw _privateConstructorUsedError; // 個数
+  /// 個数
+  PieceModel? get piece => throw _privateConstructorUsedError;
+
+  /// 量(g)
   double get gram => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -122,9 +125,11 @@ class __$$QuantityModelImplCopyWithImpl<$Res>
 class _$QuantityModelImpl implements _QuantityModel {
   const _$QuantityModelImpl({this.piece, this.gram = 0.0});
 
+  /// 個数
   @override
   final PieceModel? piece;
-// 個数
+
+  /// 量(g)
   @override
   @JsonKey()
   final double gram;
@@ -158,8 +163,12 @@ abstract class _QuantityModel implements QuantityModel {
       _$QuantityModelImpl;
 
   @override
+
+  /// 個数
   PieceModel? get piece;
-  @override // 個数
+  @override
+
+  /// 量(g)
   double get gram;
   @override
   @JsonKey(ignore: true)

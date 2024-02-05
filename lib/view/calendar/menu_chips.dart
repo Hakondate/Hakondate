@@ -20,21 +20,24 @@ class MenuChips extends StatelessWidget {
       child: Wrap(
         spacing: 4,
         runSpacing: -6,
-        children: menu.dishes.map((DishModel dish) => Chip(
-            side: BorderSide(
-              color: AppColor.brand.secondaryLight,
-              width: 2,
-            ),
-            backgroundColor: AppColor.ui.white,
-            label: Text(
-              dish.name,
-              style: TextStyle(
-                color: AppColor.text.primary,
-                fontSize: 14,
+        children: menu.dishes
+            .map(
+              (DishModel dish) => Chip(
+                side: BorderSide(
+                  color: AppColor.brand.secondaryLight,
+                  width: 2,
+                ),
+                backgroundColor: AppColor.ui.white,
+                label: Text(
+                  dish.name,
+                  style: TextStyle(
+                    color: AppColor.text.primary,
+                    fontSize: 14,
+                  ),
+                ),
               ),
-            ),
-          ),
-        ).toList(),
+            )
+            .toList(),
       ),
     );
   }
