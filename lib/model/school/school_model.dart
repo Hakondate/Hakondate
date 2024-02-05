@@ -29,10 +29,13 @@ class SchoolModel with _$SchoolModel {
   const SchoolModel._();
 
   factory SchoolModel.fromFirestore(
-      DocumentSnapshot<Map<String, dynamic>> doc) {
-    if (!doc.exists)
+    DocumentSnapshot<Map<String, dynamic>> doc,
+  ) {
+    if (!doc.exists) {
       throw const FirestoreException(
-          'Failed to convert Firestore to SchoolModel');
+        'Failed to convert Firestore to SchoolModel',
+      );
+    }
 
     final Map<String, dynamic> data = doc.data()!;
     final SchoolClassification classification =

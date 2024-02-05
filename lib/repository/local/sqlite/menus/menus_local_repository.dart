@@ -33,8 +33,9 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
 
   @override
   Future<int> add(MenuModel menu) async {
-    if (menu is! LunchesDayMenuModel)
+    if (menu is! LunchesDayMenuModel) {
       throw const FormatException('Error: menu is not "LunchesDayMenuModel"');
+    }
 
     final MenusTableCompanion companion = menu.toDrift();
     final int menuId = await _db.into(_db.menusTable).insert(
@@ -89,7 +90,8 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
     } else if (conflictSchema.category != companion.category.value) {
       dishId = await (_db.update(_db.dishesTable)
             ..where(
-                ($DishesTableTable t) => t.name.equals(companion.name.value)))
+              ($DishesTableTable t) => t.name.equals(companion.name.value),
+            ))
           .write(DishesTableCompanion(category: companion.category));
     } else {
       dishId = conflictSchema.id;
@@ -218,8 +220,9 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
     final DateTime oldest = await _getOldestDay();
     final DateTime latest = await _getLatestDay();
 
-    if (day.isAfter(oldest) && day.isBefore(latest))
+    if (day.isAfter(oldest) && day.isBefore(latest)) {
       return const MenuModel.holiday();
+    }
 
     return const MenuModel.noData();
   }
@@ -289,8 +292,10 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
     final List<FoodstuffModel> foodstuffs = <FoodstuffModel>[];
     final List<DishFoodstuffsSchema> dishFoodstuffsSchemas =
         await (_db.select(_db.dishFoodstuffsTable)
-              ..where(($DishFoodstuffsTableTable t) =>
-                  t.dishId.equals(dishesSchema.id)))
+              ..where(
+                ($DishFoodstuffsTableTable t) =>
+                    t.dishId.equals(dishesSchema.id),
+              ))
             .get();
 
     await Future.forEach(dishFoodstuffsSchemas,

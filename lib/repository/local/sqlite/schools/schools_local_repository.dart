@@ -61,8 +61,9 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryAPI {
           ..where(($SchoolsTableTable t) => t.id.equals(id)))
         .getSingleOrNull();
 
-    if (schoolsSchema == null)
+    if (schoolsSchema == null) {
       throw SQLiteException('Failed to select $id from schoolsTable');
+    }
 
     return SchoolModel.fromDrift(schoolsSchema);
   }

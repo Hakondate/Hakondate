@@ -10,7 +10,8 @@ part 'schools_remote_repository.g.dart';
 
 @riverpod
 SchoolsRemoteRepository schoolsRemoteRepository(
-    SchoolsRemoteRepositoryRef ref) {
+  SchoolsRemoteRepositoryRef ref,
+) {
   final FirebaseFirestore firestoreAPI = ref.watch(firestoreAPIProvider);
   final CollectionReference<SchoolModel> schoolCollectionReference =
       firestoreAPI.collection('schools').withConverter(
