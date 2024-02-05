@@ -16,10 +16,19 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$OpenDataRecipeModel {
-  int get id => throw _privateConstructorUsedError; // ID
-  String get name => throw _privateConstructorUsedError; // 名前
-  String get pdf => throw _privateConstructorUsedError; // PDF
-  RecipeType get type => throw _privateConstructorUsedError; // タイプ
+  /// ID
+  int get id => throw _privateConstructorUsedError;
+
+  /// 名前
+  String get name => throw _privateConstructorUsedError;
+
+  /// PDF
+  String get pdf => throw _privateConstructorUsedError;
+
+  /// タイプ
+  RecipeType get type => throw _privateConstructorUsedError;
+
+  /// サムネイル
   String? get thumbnail => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -146,19 +155,24 @@ class _$OpenDataRecipeModelImpl extends _OpenDataRecipeModel {
       this.thumbnail})
       : super._();
 
+  /// ID
   @override
   final int id;
-// ID
+
+  /// 名前
   @override
   final String name;
-// 名前
+
+  /// PDF
   @override
   final String pdf;
-// PDF
+
+  /// タイプ
   @override
   @JsonKey()
   final RecipeType type;
-// タイプ
+
+  /// サムネイル
   @override
   final String? thumbnail;
 
@@ -201,14 +215,24 @@ abstract class _OpenDataRecipeModel extends OpenDataRecipeModel {
   _OpenDataRecipeModel._() : super._();
 
   @override
+
+  /// ID
   int get id;
-  @override // ID
+  @override
+
+  /// 名前
   String get name;
-  @override // 名前
+  @override
+
+  /// PDF
   String get pdf;
-  @override // PDF
+  @override
+
+  /// タイプ
   RecipeType get type;
-  @override // タイプ
+  @override
+
+  /// サムネイル
   String? get thumbnail;
   @override
   @JsonKey(ignore: true)
