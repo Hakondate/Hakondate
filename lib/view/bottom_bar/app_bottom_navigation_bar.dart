@@ -44,12 +44,12 @@ class AppBottomNavigationBar extends ConsumerWidget {
           if (path == '/home/daily' && index == 0) {
             ref.read(dailyViewModelProvider.notifier).scrollTo(0);
           } else if (path =='/home/recipes' && index == 1) {
-            ref.read(recipeViewModelProvider.notifier).scrollToTop();// レシピのときの処理
+            ref.read(recipeViewModelProvider.notifier).scrollToTop();
           } else if (path =='/home/dictionary' && index == 2) {
             debugPrint('dictionary');
-            ref.read(dictionaryViewModelProvider.notifier).scrollToTop();// ずかんのときの処理
+            ref.read(dictionaryViewModelProvider.notifier).scrollToTop();
           } else if (path == '/home/letter' && index == 3) {
-            ref.read(letterViewModelProvider.notifier).scrollToTop();// お便りのときの処理
+            ref.read(letterViewModelProvider.notifier).scrollToTop();
           } else {
             tabState.controller.animateTo(index);
             debugPrint('path: $path');
