@@ -8,9 +8,9 @@ part 'dictionary_state.freezed.dart';
 @freezed
 class DictionaryState with _$DictionaryState {
   const factory DictionaryState({
+    required ScrollController? scrollController, 
     DictionaryGroup? selectedGroup,
     List<DictionaryItemModel>? selectedGroupItems,
     DictionaryItemModel? selectedItem,
-    required ScrollController? scrollController, 
   }) = _DictionaryState;
 }
