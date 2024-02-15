@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
+import 'package:hakondate/main.dart';
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
 import 'package:hakondate/model/nutrients/five_major_nutrient.dart';
 import 'package:hakondate/router/routes.dart';
@@ -34,7 +35,9 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
                     if (data.recommendFoodStuffs.isNotEmpty) {
                       return Column(
                         children: <Widget>[
-                          for (int i = 0; i < data.recommendFoodStuffs.length; i++)
+                          for (int i = 0;
+                              i < data.recommendFoodStuffs.length;
+                              i++)
                             _recommendFoodWidget(
                               data.recommendFoodStuffs,
                               i,
@@ -62,9 +65,21 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: PaddingSize.normal),
-          child: Text(
-            '${recommendFoodStuffs.entries.elementAt(index).key.japaneseName}を多く含む食材',
-            style: const TextStyle(fontSize: FontSize.heading),
+          child: Row(
+            children: [
+              Text(
+                '${recommendFoodStuffs.entries.elementAt(index).key.japaneseName}',
+                style: const TextStyle(fontSize: FontSize.heading),
+              ),
+              const Text(
+                'を多く含む食材',
+                style: const TextStyle(fontSize: FontSize.label),
+              ),
+              const Text(
+                '(100g当たり)',
+                style: const TextStyle(fontSize: FontSize.annotation),
+              ),
+            ],
           ),
         ),
         _rankingContents(
@@ -84,68 +99,77 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: PaddingSize.minimum),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: List<Widget>.generate(nutrientMap.value.length * 2, (int i) {
+            children:
+                List<Widget>.generate(nutrientMap.value.length * 2, (int i) {
               if (i.isOdd) return const Divider();
               final int index = i ~/ 2;
               return GestureDetector(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Row(
+                  child: /* Row(
                     children: <Widget>[
+                      Padding(padding: EdgeInsets.only(right: 20)),*/
                       /* 順位 */
-                      Expanded(
-                        flex: 2,
+                      /*Expanded(
+                        flex: 1,
                         child: Center(
                           child: Text(
-                            '${index + 1}.',
+                            '・', //${index + 1}.
                             style: const TextStyle(
-                              fontSize: FontSize.heading,
+                              fontSize: FontSize.status,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
-                      ),
+                      ),*/
                       Flexible(
-                        flex: 8,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            /* 料理名 */
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        //Padding(padding: EdgeInsets.only(right: 20)),
+                        /* 料理名 */
+                        Flexible(
+                          flex: 6,
+                          child: Text(
+                            nutrientMap.value[index].name,
+                            style: const TextStyle(
+                              fontSize: FontSize.subheading,
+                            ),
+                          ),
+                        ),
+                        const Padding(
+                            padding:
+                                EdgeInsets.only(right: MarginSize.minimum)),
+                        /* 数値 */
+                        Column(
+                          children: [
                             Text(
-                              nutrientMap.value[index].name,
+                              ((nutrientMap.value[index].nutrients.getNutrient(
+                                                      nutrientMap.key) *
+                                                  10)
+                                              .ceil() /
+                                          10)
+                                      .toString() +
+                                  nutrientMap.key.unit.value,
                               style: const TextStyle(
                                 fontSize: FontSize.subheading,
+                                fontWeight: FontWeight.bold,
                               ),
-                            ),
-                            /* 数値 */
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: <Widget>[
-                                Text(
-                                  ((nutrientMap.value[index].nutrients.getNutrient(nutrientMap.key) * 10).ceil() / 10)
-                                          .toString() +
-                                      nutrientMap.key.unit.value,
-                                  style: const TextStyle(
-                                    fontSize: FontSize.subheading,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const Text(
-                                  '/100g',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ],
                             ),
                           ],
                         ),
-                      ),
-                    ],
+                        //),
+                      ],
+                    ),
                   ),
+                  // ],
+                  // ),
                 ),
                 onTap: () async {
-                  await ref.read(dictionaryViewModelProvider.notifier).selectItem(nutrientMap.value[index].id);
+                  await ref
+                      .read(dictionaryViewModelProvider.notifier)
+                      .selectItem(nutrientMap.value[index].id);
                   routemaster.push(
                     '/home/dictionary_item/${nutrientMap.value[index].id}',
                   );
