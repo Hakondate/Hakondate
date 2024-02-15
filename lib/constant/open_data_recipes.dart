@@ -62,7 +62,7 @@ class OpenDataRecipes {
       id: 5,
       name: 'そうめんすまし汁',
       type: RecipeType.dupe,
-      thumbnail: 'B5soumen.JPG',
+      thumbnail: 'B5soumen.jpg',
       pdf: 'B5soumen.pdf',
     ),
     OpenDataRecipeModel(
@@ -175,7 +175,8 @@ class OpenDataRecipes {
     ),
   ];
 
-  static final List<OpenDataRecipeModel> steamConvectionOvens = <OpenDataRecipeModel>[
+  static final List<OpenDataRecipeModel> steamConvectionOvens =
+      <OpenDataRecipeModel>[
     OpenDataRecipeModel(
       id: 21,
       name: 'ブリの豆板醤焼き',
