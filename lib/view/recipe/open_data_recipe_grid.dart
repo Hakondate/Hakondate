@@ -51,20 +51,22 @@ class OpenDataRecipeGrid extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: (recipe.thumbnailUrl != null) ? Image.network(
-              recipe.thumbnailUrl!,
-              width: double.infinity,
-              fit: BoxFit.cover,
-              loadingBuilder: (_, Widget child, ImageChunkEvent? loadingProgress) {
-                if (loadingProgress == null) return child;
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: AppColor.brand.secondary,
-                  ),
-                );
-              },
-              errorBuilder: (_, __, ___) => _noImage(),
-            ) : _noImage(),
+            child: (recipe.thumbnailUrl != null)
+                ? Image.network(
+                    recipe.thumbnailUrl!,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                    loadingBuilder: (_, Widget child, ImageChunkEvent? loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return Center(
+                        child: CircularProgressIndicator(
+                          color: AppColor.brand.secondary,
+                        ),
+                      );
+                    },
+                    errorBuilder: (_, __, ___) => _noImage(),
+                  )
+                : _noImage(),
           ),
         ],
       ),

@@ -11,16 +11,31 @@ part 'school_classification.dart';
 @freezed
 class SchoolModel with _$SchoolModel {
   const factory SchoolModel({
-    required int id,                              // ID
-    required int parentId,                        // 親学校(給食センター)のID
-    required String name,                         // 学校名
-    required SchoolClassification classification, // 学校区分
-    required int lunchBlock,                      // 給食区分: 1 ~ 10
+    /// ID
+    required int id,
+
+    /// 親学校(給食センター)のID
+    required int parentId,
+
+    /// 学校名
+    required String name,
+
+    /// 学校区分
+    required SchoolClassification classification,
+
+    /// 給食区分: 1 ~ 10
+    required int lunchBlock,
   }) = _SchoolModel;
   const SchoolModel._();
 
-  factory SchoolModel.fromFirestore(DocumentSnapshot<Map<String, dynamic>> doc) {
-    if (!doc.exists) throw const FirestoreException('Failed to convert Firestore to SchoolModel');
+  factory SchoolModel.fromFirestore(
+    DocumentSnapshot<Map<String, dynamic>> doc,
+  ) {
+    if (!doc.exists) {
+      throw const FirestoreException(
+        'Failed to convert Firestore to SchoolModel',
+      );
+    }
 
     final Map<String, dynamic> data = doc.data()!;
     final SchoolClassification classification = switch (data['classification'] as String) {
@@ -55,20 +70,20 @@ class SchoolModel with _$SchoolModel {
   }
 
   Map<String, Object> toFirestore() => <String, Object>{
-    'id': id,
-    'parentId': parentId,
-    'name': name,
-    'classification': classification.name,
-    'lunchBlock': lunchBlock,
-    'updatedAt': DateTime.now(),
-  };
+        'id': id,
+        'parentId': parentId,
+        'name': name,
+        'classification': classification.name,
+        'lunchBlock': lunchBlock,
+        'updatedAt': DateTime.now(),
+      };
 
   SchoolsTableCompanion toDrift() => SchoolsTableCompanion(
-    id: Value<int>(id),
-    parentId: Value<int>(parentId),
-    name: Value<String>(name),
-    classification: Value<String>(classification.name),
-    lunchBlock: Value<int>(lunchBlock),
-    updateAt: Value<DateTime>(DateTime.now()),
-  );
+        id: Value<int>(id),
+        parentId: Value<int>(parentId),
+        name: Value<String>(name),
+        classification: Value<String>(classification.name),
+        lunchBlock: Value<int>(lunchBlock),
+        updateAt: Value<DateTime>(DateTime.now()),
+      );
 }

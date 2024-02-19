@@ -8,7 +8,7 @@ import 'package:hakondate/util/exception/sqlite_exception.dart';
 part 'users_local_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-UsersLocalRepository usersLocalRepository (UsersLocalRepositoryRef ref) {
+UsersLocalRepository usersLocalRepository(UsersLocalRepositoryRef ref) {
   final LocalDatabase localDatabase = ref.watch(localDatabaseProvider);
   return UsersLocalRepository(localDatabase);
 }
@@ -42,8 +42,7 @@ class UsersLocalRepository extends UsersLocalRepositoryAPI {
 
   @override
   Future<UserModel> getById(int id) async {
-    final UsersSchema? usersSchema =
-        await (_db.select(_db.usersTable)..where(($UsersTableTable t) => t.id.equals(id))).getSingleOrNull();
+    final UsersSchema? usersSchema = await (_db.select(_db.usersTable)..where(($UsersTableTable t) => t.id.equals(id))).getSingleOrNull();
 
     if (usersSchema == null) throw SQLiteException('Failed to select $id from usersTable');
 
@@ -51,8 +50,7 @@ class UsersLocalRepository extends UsersLocalRepositoryAPI {
   }
 
   @override
-  Future<int> add(String name, int schoolId, int schoolYear) =>
-      _db.into(_db.usersTable).insertOnConflictUpdate(
+  Future<int> add(String name, int schoolId, int schoolYear) => _db.into(_db.usersTable).insertOnConflictUpdate(
         UsersTableCompanion(
           name: Value<String>(name),
           schoolId: Value<int>(schoolId),
@@ -64,16 +62,17 @@ class UsersLocalRepository extends UsersLocalRepositoryAPI {
   Future<int> update(UserModel user) async {
     final UsersTableCompanion companion = user.toDrift();
 
-    return (_db.update(_db.usersTable)..where(($UsersTableTable t) =>
-        t.id.equals(companion.id.value),
-    )).write(companion);
+    return (_db.update(_db.usersTable)
+          ..where(
+            ($UsersTableTable t) => t.id.equals(companion.id.value),
+          ))
+        .write(companion);
   }
 
   @override
   Future<int> count() async {
     final Expression<int> exp = _db.usersTable.id.count();
-    final JoinedSelectStatement<$UsersTableTable, UsersSchema> query =
-        _db.selectOnly(_db.usersTable)..addColumns(<Expression<int>>[exp]);
+    final JoinedSelectStatement<$UsersTableTable, UsersSchema> query = _db.selectOnly(_db.usersTable)..addColumns(<Expression<int>>[exp]);
     final int? count = await query.map((TypedResult scheme) => scheme.read(exp)).getSingleOrNull();
 
     return count ?? 0;

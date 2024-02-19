@@ -16,11 +16,19 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SchoolModel {
-  int get id => throw _privateConstructorUsedError; // ID
-  int get parentId => throw _privateConstructorUsedError; // 親学校(給食センター)のID
-  String get name => throw _privateConstructorUsedError; // 学校名
-  SchoolClassification get classification =>
-      throw _privateConstructorUsedError; // 学校区分
+  /// ID
+  int get id => throw _privateConstructorUsedError;
+
+  /// 親学校(給食センター)のID
+  int get parentId => throw _privateConstructorUsedError;
+
+  /// 学校名
+  String get name => throw _privateConstructorUsedError;
+
+  /// 学校区分
+  SchoolClassification get classification => throw _privateConstructorUsedError;
+
+  /// 給食区分: 1 ~ 10
   int get lunchBlock => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -155,18 +163,23 @@ class _$SchoolModelImpl extends _SchoolModel {
       required this.lunchBlock})
       : super._();
 
+  /// ID
   @override
   final int id;
-// ID
+
+  /// 親学校(給食センター)のID
   @override
   final int parentId;
-// 親学校(給食センター)のID
+
+  /// 学校名
   @override
   final String name;
-// 学校名
+
+  /// 学校区分
   @override
   final SchoolClassification classification;
-// 学校区分
+
+  /// 給食区分: 1 ~ 10
   @override
   final int lunchBlock;
 
@@ -211,14 +224,24 @@ abstract class _SchoolModel extends SchoolModel {
   const _SchoolModel._() : super._();
 
   @override
+
+  /// ID
   int get id;
-  @override // ID
+  @override
+
+  /// 親学校(給食センター)のID
   int get parentId;
-  @override // 親学校(給食センター)のID
+  @override
+
+  /// 学校名
   String get name;
-  @override // 学校名
+  @override
+
+  /// 学校区分
   SchoolClassification get classification;
-  @override // 学校区分
+  @override
+
+  /// 給食区分: 1 ~ 10
   int get lunchBlock;
   @override
   @JsonKey(ignore: true)

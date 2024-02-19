@@ -9,12 +9,14 @@ import 'package:hakondate/repository/remote/firestore/firestore_api.dart';
 part 'schools_remote_repository.g.dart';
 
 @riverpod
-SchoolsRemoteRepository schoolsRemoteRepository(SchoolsRemoteRepositoryRef ref) {
+SchoolsRemoteRepository schoolsRemoteRepository(
+  SchoolsRemoteRepositoryRef ref,
+) {
   final FirebaseFirestore firestoreAPI = ref.watch(firestoreAPIProvider);
   final CollectionReference<SchoolModel> schoolCollectionReference = firestoreAPI.collection('schools').withConverter(
-    fromFirestore: (DocumentSnapshot<Map<String, dynamic>> doc, _) => SchoolModel.fromFirestore(doc),
-    toFirestore: (SchoolModel school, _) => school.toFirestore(),
-  );
+        fromFirestore: (DocumentSnapshot<Map<String, dynamic>> doc, _) => SchoolModel.fromFirestore(doc),
+        toFirestore: (SchoolModel school, _) => school.toFirestore(),
+      );
 
   return SchoolsRemoteRepository(schoolCollectionReference);
 }
@@ -33,9 +35,6 @@ class SchoolsRemoteRepository extends SchoolsRemoteRepositoryAPI {
   Future<List<SchoolModel>> get({required DateTime updateAt}) async {
     final QuerySnapshot<SchoolModel?> schools = await _db.where('updateAt', isGreaterThan: updateAt).get();
 
-    return schools.docs
-              .map((QueryDocumentSnapshot<SchoolModel?> doc) => doc.data())
-              .whereType<SchoolModel>()
-              .toList();
+    return schools.docs.map((QueryDocumentSnapshot<SchoolModel?> doc) => doc.data()).whereType<SchoolModel>().toList();
   }
 }

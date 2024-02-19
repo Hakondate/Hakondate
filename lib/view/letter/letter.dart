@@ -27,9 +27,9 @@ class Letter extends ConsumerWidget {
         child: Builder(
           builder: (BuildContext context) {
             final List<LetterMetadataModel> letters = ref.watch(letterViewModelProvider).letters;
-      
+
             if (letters.isEmpty) return const NonLetter();
-      
+
             return Scrollbar(
               child: Padding(
                 padding: const EdgeInsets.all(PaddingSize.minimum),
@@ -51,7 +51,7 @@ class Letter extends ConsumerWidget {
                           index == letters.length - 4) {
                         Future<void>(ref.read(letterViewModelProvider.notifier).getLetters);
                       }
-      
+
                       return _gridTile(index);
                     },
                   ),
@@ -103,30 +103,33 @@ class Letter extends ConsumerWidget {
                             return Wrap(
                               spacing: 2,
                               runSpacing: 4,
-                              children: snapshot.data!.map((String name) => Chip(
-                                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                  visualDensity: const VisualDensity(
-                                    horizontal: -4,
-                                    vertical: -4,
-                                  ),
-                                  elevation: 0,
-                                  backgroundColor: AppColor.ui.white,
-                                  shape: StadiumBorder(
-                                    side: BorderSide(
-                                      width: 2,
-                                      color: AppColor.brand.tertiary,
+                              children: snapshot.data!
+                                  .map(
+                                    (String name) => Chip(
+                                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                      visualDensity: const VisualDensity(
+                                        horizontal: -4,
+                                        vertical: -4,
+                                      ),
+                                      elevation: 0,
+                                      backgroundColor: AppColor.ui.white,
+                                      shape: StadiumBorder(
+                                        side: BorderSide(
+                                          width: 2,
+                                          color: AppColor.brand.tertiary,
+                                        ),
+                                      ),
+                                      label: Text(
+                                        name,
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: AppColor.brand.tertiary,
+                                          height: 1,
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                  label: Text(
-                                    name,
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: AppColor.brand.tertiary,
-                                      height: 1,
-                                    ),
-                                  ),
-                                ),
-                              ).toList(),
+                                  )
+                                  .toList(),
                             );
                           }
                           return const SizedBox.shrink();

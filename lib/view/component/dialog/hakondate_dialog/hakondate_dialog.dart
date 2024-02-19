@@ -21,9 +21,7 @@ class HakondateDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double width = (MediaQuery.of(context).size.width < 320.0)
-        ? MediaQuery.of(context).size.width * 0.8
-        : 320.0;
+    final double width = (MediaQuery.of(context).size.width < 320.0) ? MediaQuery.of(context).size.width * 0.8 : 320.0;
 
     return AlertDialog(
       backgroundColor: AppColor.ui.white,

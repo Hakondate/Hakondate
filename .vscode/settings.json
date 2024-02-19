@@ -1,7 +1,9 @@
 {
   "dart.flutterSdkPath": ".fvm/flutter_sdk",
   "search.exclude": {
-    "**/.fvm": true
+    "**/.fvm": true,
+    "**/*.g.dart": true,
+    "**/*.freezed.dart": true,
   },
   "cSpell.words": [
     "cupertino",
@@ -12,5 +14,19 @@
     "slns",
     "subosito",
     "svgs"
-  ]
+  ],
+  "[dart]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.rulers": [
+      140
+    ],
+    "editor.selectionHighlight": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": "off",
+    "editor.defaultFormatter": "Dart-Code.dart-code",
+    "editor.formatOnPaste": true
+  }
 }

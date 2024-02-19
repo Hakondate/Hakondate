@@ -20,20 +20,49 @@ NutrientsModel _$NutrientsModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$NutrientsModel {
-  double get energy => throw _privateConstructorUsedError; // エネルギー
-  double get protein => throw _privateConstructorUsedError; // タンパク質
-  double get lipid => throw _privateConstructorUsedError; // 脂質
-  double get carbohydrate => throw _privateConstructorUsedError; // 炭水化物
-  double get sodium => throw _privateConstructorUsedError; // ナトリウム
-  double get calcium => throw _privateConstructorUsedError; // カルシウム
-  double get magnesium => throw _privateConstructorUsedError; // マグネシウム
-  double get iron => throw _privateConstructorUsedError; // 鉄分
-  double get zinc => throw _privateConstructorUsedError; // 亜鉛
-  double get retinol => throw _privateConstructorUsedError; // レチノール活性当量(ビタミンA)
-  double get vitaminB1 => throw _privateConstructorUsedError; // ビタミンB1
-  double get vitaminB2 => throw _privateConstructorUsedError; // ビタミンB2
-  double get vitaminC => throw _privateConstructorUsedError; // ビタミンC
-  double get dietaryFiber => throw _privateConstructorUsedError; // 食物繊維
+  /// エネルギー
+  double get energy => throw _privateConstructorUsedError;
+
+  /// タンパク質
+  double get protein => throw _privateConstructorUsedError;
+
+  /// 脂質
+  double get lipid => throw _privateConstructorUsedError;
+
+  /// 炭水化物
+  double get carbohydrate => throw _privateConstructorUsedError;
+
+  /// ナトリウム
+  double get sodium => throw _privateConstructorUsedError;
+
+  /// カルシウム
+  double get calcium => throw _privateConstructorUsedError;
+
+  /// マグネシウム
+  double get magnesium => throw _privateConstructorUsedError;
+
+  /// 鉄分
+  double get iron => throw _privateConstructorUsedError;
+
+  /// 亜鉛
+  double get zinc => throw _privateConstructorUsedError;
+
+  /// レチノール活性当量(ビタミンA)
+  double get retinol => throw _privateConstructorUsedError;
+
+  /// ビタミンB1
+  double get vitaminB1 => throw _privateConstructorUsedError;
+
+  /// ビタミンB2
+  double get vitaminB2 => throw _privateConstructorUsedError;
+
+  /// ビタミンC
+  double get vitaminC => throw _privateConstructorUsedError;
+
+  /// 食物繊維
+  double get dietaryFiber => throw _privateConstructorUsedError;
+
+  /// 食塩相当量
   double get salt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -303,62 +332,77 @@ class _$NutrientsModelImpl extends _NutrientsModel
   factory _$NutrientsModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$NutrientsModelImplFromJson(json);
 
+  /// エネルギー
   @override
   @JsonKey()
   final double energy;
-// エネルギー
+
+  /// タンパク質
   @override
   @JsonKey()
   final double protein;
-// タンパク質
+
+  /// 脂質
   @override
   @JsonKey()
   final double lipid;
-// 脂質
+
+  /// 炭水化物
   @override
   @JsonKey()
   final double carbohydrate;
-// 炭水化物
+
+  /// ナトリウム
   @override
   @JsonKey()
   final double sodium;
-// ナトリウム
+
+  /// カルシウム
   @override
   @JsonKey()
   final double calcium;
-// カルシウム
+
+  /// マグネシウム
   @override
   @JsonKey()
   final double magnesium;
-// マグネシウム
+
+  /// 鉄分
   @override
   @JsonKey()
   final double iron;
-// 鉄分
+
+  /// 亜鉛
   @override
   @JsonKey()
   final double zinc;
-// 亜鉛
+
+  /// レチノール活性当量(ビタミンA)
   @override
   @JsonKey()
   final double retinol;
-// レチノール活性当量(ビタミンA)
+
+  /// ビタミンB1
   @override
   @JsonKey()
   final double vitaminB1;
-// ビタミンB1
+
+  /// ビタミンB2
   @override
   @JsonKey()
   final double vitaminB2;
-// ビタミンB2
+
+  /// ビタミンC
   @override
   @JsonKey()
   final double vitaminC;
-// ビタミンC
+
+  /// 食物繊維
   @override
   @JsonKey()
   final double dietaryFiber;
-// 食物繊維
+
+  /// 食塩相当量
   @override
   @JsonKey()
   final double salt;
@@ -476,34 +520,64 @@ abstract class _NutrientsModel extends NutrientsModel {
       _$NutrientsModelImpl.fromJson;
 
   @override
+
+  /// エネルギー
   double get energy;
-  @override // エネルギー
+  @override
+
+  /// タンパク質
   double get protein;
-  @override // タンパク質
+  @override
+
+  /// 脂質
   double get lipid;
-  @override // 脂質
+  @override
+
+  /// 炭水化物
   double get carbohydrate;
-  @override // 炭水化物
+  @override
+
+  /// ナトリウム
   double get sodium;
-  @override // ナトリウム
+  @override
+
+  /// カルシウム
   double get calcium;
-  @override // カルシウム
+  @override
+
+  /// マグネシウム
   double get magnesium;
-  @override // マグネシウム
+  @override
+
+  /// 鉄分
   double get iron;
-  @override // 鉄分
+  @override
+
+  /// 亜鉛
   double get zinc;
-  @override // 亜鉛
+  @override
+
+  /// レチノール活性当量(ビタミンA)
   double get retinol;
-  @override // レチノール活性当量(ビタミンA)
+  @override
+
+  /// ビタミンB1
   double get vitaminB1;
-  @override // ビタミンB1
+  @override
+
+  /// ビタミンB2
   double get vitaminB2;
-  @override // ビタミンB2
+  @override
+
+  /// ビタミンC
   double get vitaminC;
-  @override // ビタミンC
+  @override
+
+  /// 食物繊維
   double get dietaryFiber;
-  @override // 食物繊維
+  @override
+
+  /// 食塩相当量
   double get salt;
   @override
   @JsonKey(ignore: true)

@@ -22,6 +22,9 @@ jobs:
       - name: Setup Flutter
         uses: ./.github/actions/setup-flutter
       
+      - name: Run Dart Format
+        run: dart format --set-exit-if-changed -o none -l 140 $(find lib -name "*.dart" -not -wholename "**/*.g*" -not -wholename "**/*.freezed.*" -not -wholename "**/firebase_options.dart" -not -wholename "**/oss_licenses.dart")      
+
       - name: Run Flutter Analyzer
         run: flutter analyze
         

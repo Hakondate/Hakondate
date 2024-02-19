@@ -98,8 +98,7 @@ class UserViewModel extends _$UserViewModel {
     int? schoolYear,
   }) async {
     if (state.currentUser == null) return;
-    final NutrientsModel? slns =
-        (schoolId != null || schoolYear != null) ? await _getSLNS(state.currentUser!.id) : state.currentUser!.slns;
+    final NutrientsModel? slns = (schoolId != null || schoolYear != null) ? await _getSLNS(state.currentUser!.id) : state.currentUser!.slns;
     final UserModel newUser = state.currentUser!.copyWith(
       name: name ?? state.currentUser!.name,
       schoolId: schoolId ?? state.currentUser!.schoolId,

@@ -4,7 +4,8 @@ import 'package:drift/drift.dart';
 class FoodstuffsTable extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get name => text()();
-  IntColumn get piece => integer().nullable()();
+  RealColumn get pieceNumber => real().nullable()();
+  TextColumn get pieceUnit => text().nullable()();
   RealColumn get gram => real()();
   RealColumn get energy => real()();
   RealColumn get protein => real()();
@@ -28,6 +29,6 @@ class FoodstuffsTable extends Table {
   @override
   // ignore: always_specify_types
   List<Set<Column>> get uniqueKeys => [
-    <Column<Object>>{name, gram, isHeat, isAllergy},
-  ];
+        <Column<Object>>{name, gram, isHeat, isAllergy},
+      ];
 }
