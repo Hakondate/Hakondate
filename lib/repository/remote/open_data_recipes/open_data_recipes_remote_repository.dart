@@ -7,7 +7,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'open_data_recipes_remote_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-OpenDataRecipesRemoteRepository openDataRecipesRemoteRepository(OpenDataRecipesRemoteRepositoryRef ref) => OpenDataRecipesRemoteRepository();
+OpenDataRecipesRemoteRepository openDataRecipesRemoteRepository(OpenDataRecipesRemoteRepositoryRef ref) =>
+    OpenDataRecipesRemoteRepository();
 
 // ignore: one_member_abstracts
 abstract class OpenDataRecipesRemoteRepositoryAPI {

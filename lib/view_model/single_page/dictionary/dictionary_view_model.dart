@@ -11,22 +11,22 @@ part 'dictionary_view_model.g.dart';
 @Riverpod(keepAlive: true)
 class DictionaryViewModel extends _$DictionaryViewModel {
   late final DictionaryItemsLocalRepositoryAPI _dictionaryItemsLocalRepository;
-  
+
   @override
   FutureOr<DictionaryState> build() {
     _dictionaryItemsLocalRepository = ref.watch(dictionaryItemsLocalRepositoryProvider);
     return const DictionaryState();
   }
 
-	Future<void> selectGroup(DictionaryGroup group) async {
-		state = const AsyncLoading<DictionaryState>();
-		state = AsyncData<DictionaryState>(
-			DictionaryState(
-				selectedGroup: group,
-				selectedGroupItems: await _dictionaryItemsLocalRepository.listGroup(group.groupNumber),
-			),
-		);
-	}
+  Future<void> selectGroup(DictionaryGroup group) async {
+    state = const AsyncLoading<DictionaryState>();
+    state = AsyncData<DictionaryState>(
+      DictionaryState(
+        selectedGroup: group,
+        selectedGroupItems: await _dictionaryItemsLocalRepository.listGroup(group.groupNumber),
+      ),
+    );
+  }
 
   Future<void> selectItem(int id) async {
     state.whenData((DictionaryState data) async {

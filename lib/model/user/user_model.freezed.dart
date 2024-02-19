@@ -17,9 +17,17 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$UserModel {
   int get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError; // ニックネーム
-  int get schoolId => throw _privateConstructorUsedError; // 学校ID
-  int get schoolYear => throw _privateConstructorUsedError; // 学年
+
+  /// ニックネーム
+  String get name => throw _privateConstructorUsedError;
+
+  /// 学校ID
+  int get schoolId => throw _privateConstructorUsedError;
+
+  /// 学年
+  int get schoolYear => throw _privateConstructorUsedError;
+
+  /// 学校給食摂取基準
   NutrientsModel? get slns => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -172,15 +180,20 @@ class _$UserModelImpl extends _UserModel {
 
   @override
   final int id;
+
+  /// ニックネーム
   @override
   final String name;
-// ニックネーム
+
+  /// 学校ID
   @override
   final int schoolId;
-// 学校ID
+
+  /// 学年
   @override
   final int schoolYear;
-// 学年
+
+  /// 学校給食摂取基準
   @override
   final NutrientsModel? slns;
 
@@ -226,12 +239,20 @@ abstract class _UserModel extends UserModel {
   @override
   int get id;
   @override
+
+  /// ニックネーム
   String get name;
-  @override // ニックネーム
+  @override
+
+  /// 学校ID
   int get schoolId;
-  @override // 学校ID
+  @override
+
+  /// 学年
   int get schoolYear;
-  @override // 学年
+  @override
+
+  /// 学校給食摂取基準
   NutrientsModel? get slns;
   @override
   @JsonKey(ignore: true)

@@ -27,10 +27,12 @@ class GridFrame extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColor.ui.white,
           borderRadius: BorderRadius.circular(16),
-          border: (borderColor != null) ? Border.all(
-            color: borderColor!,
-            width: BorderSize.normal,
-          ) : null,
+          border: (borderColor != null)
+              ? Border.all(
+                  color: borderColor!,
+                  width: BorderSize.normal,
+                )
+              : null,
           boxShadow: <BoxShadow>[
             BoxShadow(
               color: AppColor.ui.shadow,

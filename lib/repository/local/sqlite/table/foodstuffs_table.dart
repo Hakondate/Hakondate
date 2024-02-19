@@ -29,6 +29,6 @@ class FoodstuffsTable extends Table {
   @override
   // ignore: always_specify_types
   List<Set<Column>> get uniqueKeys => [
-    <Column<Object>>{name, gram, isHeat, isAllergy},
-  ];
+        <Column<Object>>{name, gram, isHeat, isAllergy},
+      ];
 }

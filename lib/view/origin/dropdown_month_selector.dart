@@ -28,8 +28,7 @@ class DropdownMonthSelector extends ConsumerWidget {
               menuStyle: MenuStyle(
                 surfaceTintColor: MaterialStatePropertyAll<Color>(AppColor.ui.white),
               ),
-              onSelected: (OriginModel? value) =>
-                  ref.read(originViewModelProvider.notifier).updateSelectedOrigin(origin: value!),
+              onSelected: (OriginModel? value) => ref.read(originViewModelProvider.notifier).updateSelectedOrigin(origin: value!),
               dropdownMenuEntries: data.origins
                   .map(
                     (OriginModel origin) => DropdownMenuEntry<OriginModel>(

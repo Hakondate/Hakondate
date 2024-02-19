@@ -7,7 +7,8 @@ part 'loading_status.dart';
 class SplashState with _$SplashState {
   factory SplashState({
     LoadingStatus status = LoadingStatus.unloading,
-  }) => SplashState.load(status: status);
+  }) =>
+      SplashState.load(status: status);
 
   const factory SplashState.load({required LoadingStatus status}) = SplashStateLoad;
   const factory SplashState.error({required Exception error}) = SplashStateError;

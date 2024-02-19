@@ -21,6 +21,6 @@ class OriginItemModel with _$OriginItemModel {
   }
 
   Map<String, Object> toFirestore() => <String, Object>{
-    name: prefectures,
-  };
+        name: prefectures,
+      };
 }

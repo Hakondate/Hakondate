@@ -8,7 +8,6 @@ part 'origin_view_model.g.dart';
 
 @riverpod
 class OriginViewModel extends _$OriginViewModel {
-
   @override
   FutureOr<OriginState> build() async {
     final OriginsRemoteRepositoryAPI originsRemoteRepository = ref.watch(originsRemoteRepositoryProvider);

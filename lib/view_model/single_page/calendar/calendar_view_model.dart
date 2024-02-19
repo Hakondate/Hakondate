@@ -21,7 +21,7 @@ class CalendarViewModel extends _$CalendarViewModel {
   CalendarState build() {
     _menusLocalRepository = ref.watch(menusLocalRepositoryProvider);
     _daily = ref.watch(dailyViewModelProvider);
-    
+
     ref.onDispose(() {
       state.scrollController.dispose();
     });

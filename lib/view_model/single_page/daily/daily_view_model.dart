@@ -104,8 +104,7 @@ class DailyViewModel extends _$DailyViewModel {
           slns: slns,
         );
 
-    final Map<FiveMajorNutrient, double> nutrientsMap = <FiveMajorNutrient, double>{}
-      ..addAll(<FiveMajorNutrient, double>{
+    final Map<FiveMajorNutrient, double> nutrientsMap = <FiveMajorNutrient, double>{}..addAll(<FiveMajorNutrient, double>{
         FiveMajorNutrient.protein: nutrientsPercentage[1],
         FiveMajorNutrient.vitamin: nutrientsPercentage[2],
         FiveMajorNutrient.mineral: nutrientsPercentage[3],
@@ -126,16 +125,15 @@ class DailyViewModel extends _$DailyViewModel {
       }
     }
 
-    final Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendFoodstuffs =
-        <FiveMajorNutrient, List<DictionaryItemModel>>{
+    final Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendFoodstuffs = <FiveMajorNutrient, List<DictionaryItemModel>>{
       minValue.key: await ref.read(dictionaryItemsLocalRepositoryProvider).getRanking(
-        nutrient: minValue.key.name,
-      ),
+            nutrient: minValue.key.name,
+          ),
       secondMinValue.key: await ref.read(dictionaryItemsLocalRepositoryProvider).getRanking(
-        nutrient: secondMinValue.key.name,
-      ),
+            nutrient: secondMinValue.key.name,
+          ),
     };
-    
+
     return recommendFoodstuffs;
   }
 
@@ -198,10 +196,9 @@ class DailyViewModel extends _$DailyViewModel {
 
         if (menu is! LunchesDayMenuModel) return 0;
 
-        return (menu.retinol / retinolRef +
-                menu.vitaminB1 / vitaminB1Ref +
-                menu.vitaminB2 / vitaminB2Ref +
-                menu.vitaminC / vitaminCRef) / 4 * 100.0;
+        return (menu.retinol / retinolRef + menu.vitaminB1 / vitaminB1Ref + menu.vitaminB2 / vitaminB2Ref + menu.vitaminC / vitaminCRef) /
+            4 *
+            100.0;
       },
       orElse: () => 0,
     );

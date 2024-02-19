@@ -10,24 +10,32 @@ part 'user_model.freezed.dart';
 class UserModel with _$UserModel {
   const factory UserModel({
     required int id,
-    required String name,     // ニックネーム
-    required int schoolId,    // 学校ID
-    required int schoolYear,  // 学年
-    NutrientsModel? slns,     // 学校給食摂取基準
+
+    /// ニックネーム
+    required String name,
+
+    /// 学校ID
+    required int schoolId,
+
+    /// 学年
+    required int schoolYear,
+
+    /// 学校給食摂取基準
+    NutrientsModel? slns,
   }) = _UserModel;
   const UserModel._();
 
   factory UserModel.fromDrift(UsersSchema schema) => UserModel(
-    id: schema.id,
-    name: schema.name,
-    schoolId: schema.schoolId,
-    schoolYear: schema.schoolYear,
-  );
+        id: schema.id,
+        name: schema.name,
+        schoolId: schema.schoolId,
+        schoolYear: schema.schoolYear,
+      );
 
   UsersTableCompanion toDrift() => UsersTableCompanion(
-    id: Value<int>(id),
-    name: Value<String>(name),
-    schoolId: Value<int>(schoolId),
-    schoolYear: Value<int>(schoolYear),
-  );
+        id: Value<int>(id),
+        name: Value<String>(name),
+        schoolId: Value<int>(schoolId),
+        schoolYear: Value<int>(schoolYear),
+      );
 }

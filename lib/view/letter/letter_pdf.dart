@@ -70,9 +70,9 @@ class LetterPDF extends ConsumerWidget {
               onError: (_) async => showDialog(
                 context: context,
                 builder: (BuildContext context) => DownloadExceptionDialog(
-                  onTapRetry: () => routemaster.pop().whenComplete(() =>
-                      ref.read(letterViewModelProvider.notifier).getLetterPDF(path: letter.path),
-                  ),
+                  onTapRetry: () => routemaster.pop().whenComplete(
+                        () => ref.read(letterViewModelProvider.notifier).getLetterPDF(path: letter.path),
+                      ),
                   onTapPop: () => routemaster.pop().whenComplete(routemaster.pop),
                 ),
               ),

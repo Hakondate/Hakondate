@@ -12,11 +12,20 @@ part 'dictionary_group.dart';
 @freezed
 class DictionaryItemModel with _$DictionaryItemModel {
   const factory DictionaryItemModel({
-    required int id,                    // ID
-    required DictionaryGroup group,     // 食品分類（1 ~ 18群）
-    required String name,               // 食材名
-    required NutrientsModel nutrients,  // 栄養素
-    String? note,                       // 備考
+    /// ID
+    required int id,
+
+    /// 食品分類（1 ~ 18群）
+    required DictionaryGroup group,
+
+    /// 食材名
+    required String name,
+
+    /// 栄養素
+    required NutrientsModel nutrients,
+
+    /// 備考
+    String? note,
   }) = _DictionaryItemModel;
   const DictionaryItemModel._();
 
@@ -49,24 +58,24 @@ class DictionaryItemModel with _$DictionaryItemModel {
   }
 
   DictionaryItemsTableCompanion toDrift() => DictionaryItemsTableCompanion(
-    id: Value<int>(id),
-    group: Value<int>(group.groupNumber),
-    name: Value<String>(name),
-    energy: Value<double>(nutrients.energy),
-    protein: Value<double>(nutrients.protein),
-    lipid: Value<double>(nutrients.lipid),
-    carbohydrate: Value<double>(nutrients.carbohydrate),
-    sodium: Value<double>(nutrients.sodium),
-    calcium: Value<double>(nutrients.calcium),
-    magnesium: Value<double>(nutrients.magnesium),
-    iron: Value<double>(nutrients.iron),
-    zinc: Value<double>(nutrients.zinc),
-    retinol: Value<double>(nutrients.retinol),
-    vitaminB1: Value<double>(nutrients.vitaminB1),
-    vitaminB2: Value<double>(nutrients.vitaminB2),
-    vitaminC: Value<double>(nutrients.vitaminC),
-    dietaryFiber: Value<double>(nutrients.dietaryFiber),
-    salt: Value<double>(nutrients.salt),
-    note: Value<String?>(note),
-  );
+        id: Value<int>(id),
+        group: Value<int>(group.groupNumber),
+        name: Value<String>(name),
+        energy: Value<double>(nutrients.energy),
+        protein: Value<double>(nutrients.protein),
+        lipid: Value<double>(nutrients.lipid),
+        carbohydrate: Value<double>(nutrients.carbohydrate),
+        sodium: Value<double>(nutrients.sodium),
+        calcium: Value<double>(nutrients.calcium),
+        magnesium: Value<double>(nutrients.magnesium),
+        iron: Value<double>(nutrients.iron),
+        zinc: Value<double>(nutrients.zinc),
+        retinol: Value<double>(nutrients.retinol),
+        vitaminB1: Value<double>(nutrients.vitaminB1),
+        vitaminB2: Value<double>(nutrients.vitaminB2),
+        vitaminC: Value<double>(nutrients.vitaminC),
+        dietaryFiber: Value<double>(nutrients.dietaryFiber),
+        salt: Value<double>(nutrients.salt),
+        note: Value<String?>(note),
+      );
 }

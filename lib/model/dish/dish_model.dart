@@ -10,17 +10,23 @@ part 'dish_category.dart';
 @freezed
 class DishModel with _$DishModel {
   const factory DishModel({
-    required String name,                     // 料理名
-    required List<FoodstuffModel> foodstuffs, // 食材
-    DishCategory? category,                   // 分類
+    /// 料理名
+    required String name,
+
+    /// 食材
+    required List<FoodstuffModel> foodstuffs,
+
+    /// 分類
+    DishCategory? category,
   }) = _DishModel;
   const DishModel._();
 
   factory DishModel.fromFirestore(Map<String, dynamic> data) {
-    final List<FoodstuffModel> foodstuffs = 
-        (data['foodstuffs'] as List<dynamic>).map(
+    final List<FoodstuffModel> foodstuffs = (data['foodstuffs'] as List<dynamic>)
+        .map(
           (dynamic foodstuff) => FoodstuffModel.fromFirestore(foodstuff as Map<String, dynamic>),
-        ).toList();
+        )
+        .toList();
     final DishCategory? category = switch (data['category'] as String?) {
       'main' => DishCategory.main,
       'side' => DishCategory.side,
@@ -36,26 +42,26 @@ class DishModel with _$DishModel {
   }
 
   factory DishModel.fromDrift(DishesSchema schema, List<FoodstuffModel> foodstuffs) => DishModel(
-    name: schema.name,
-    foodstuffs: foodstuffs,
-    category: switch (schema.category) {
-      'main' => DishCategory.main,
-      'side' => DishCategory.side,
-      'drink' => DishCategory.drink,
-      _ => null,
-    },
-  );
+        name: schema.name,
+        foodstuffs: foodstuffs,
+        category: switch (schema.category) {
+          'main' => DishCategory.main,
+          'side' => DishCategory.side,
+          'drink' => DishCategory.drink,
+          _ => null,
+        },
+      );
 
   Map<String, Object> toFirestore() => <String, Object>{
-    'name': name,
-    'foodstuffs': foodstuffs.map((FoodstuffModel foodstuff) => foodstuff.toFirestore()).toList(),
-    if (category != null) 'category': category!.name,
-  };
+        'name': name,
+        'foodstuffs': foodstuffs.map((FoodstuffModel foodstuff) => foodstuff.toFirestore()).toList(),
+        if (category != null) 'category': category!.name,
+      };
 
   DishesTableCompanion toDrift() => DishesTableCompanion(
-    name: Value<String>(name),
-    category: Value<String?>(category?.name),
-  );
+        name: Value<String>(name),
+        category: Value<String?>(category?.name),
+      );
 
   double get energy {
     double sum = 0;

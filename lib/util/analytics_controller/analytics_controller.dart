@@ -7,7 +7,7 @@ part 'analytics_controller.g.dart';
 class AnalyticsController extends _$AnalyticsController {
   @override
   FirebaseAnalytics build() => FirebaseAnalytics.instance;
-  
+
   Future<void> logSignup() => state.logSignUp(signUpMethod: 'original');
 
   Future<void> logViewMenu(int id) async {
