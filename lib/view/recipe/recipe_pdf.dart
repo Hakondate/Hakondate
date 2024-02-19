@@ -31,8 +31,7 @@ class RecipePDF extends ConsumerWidget {
         title: Text(recipe.name),
       ),
       body: FutureBuilder<String>(
-        future:
-            ref.read(recipeViewModelProvider.notifier).getPath(recipe: recipe),
+        future: ref.read(recipeViewModelProvider.notifier).getPath(recipe: recipe),
         builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return Center(
@@ -42,8 +41,7 @@ class RecipePDF extends ConsumerWidget {
             );
           }
 
-          if (snapshot.connectionState == ConnectionState.done &&
-              snapshot.hasData) {
+          if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
             return PDFView(
               filePath: snapshot.data,
               enableSwipe: false,
@@ -51,12 +49,9 @@ class RecipePDF extends ConsumerWidget {
                 context: context,
                 builder: (BuildContext context) => DownloadExceptionDialog(
                   onTapRetry: () => routemaster.pop().whenComplete(
-                        () => ref
-                            .read(recipeViewModelProvider.notifier)
-                            .reDownload(recipe: recipe),
+                        () => ref.read(recipeViewModelProvider.notifier).reDownload(recipe: recipe),
                       ),
-                  onTapPop: () =>
-                      routemaster.pop().whenComplete(routemaster.pop),
+                  onTapPop: () => routemaster.pop().whenComplete(routemaster.pop),
                 ),
               ),
             );

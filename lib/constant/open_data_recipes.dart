@@ -175,8 +175,7 @@ class OpenDataRecipes {
     ),
   ];
 
-  static final List<OpenDataRecipeModel> steamConvectionOvens =
-      <OpenDataRecipeModel>[
+  static final List<OpenDataRecipeModel> steamConvectionOvens = <OpenDataRecipeModel>[
     OpenDataRecipeModel(
       id: 21,
       name: 'ブリの豆板醤焼き',
