@@ -22,6 +22,7 @@ mixin _$LetterState {
       throw _privateConstructorUsedError;
   bool get isEndListing => throw _privateConstructorUsedError;
   String? get pageToken => throw _privateConstructorUsedError;
+  ScrollController get scrollController => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LetterStateCopyWith<LetterState> get copyWith =>
@@ -39,7 +40,8 @@ abstract class $LetterStateCopyWith<$Res> {
       List<LetterMetadataModel> letters,
       LetterMetadataModelData? selectedLetter,
       bool isEndListing,
-      String? pageToken});
+      String? pageToken,
+      ScrollController scrollController});
 }
 
 /// @nodoc
@@ -60,6 +62,7 @@ class _$LetterStateCopyWithImpl<$Res, $Val extends LetterState>
     Object? selectedLetter = freezed,
     Object? isEndListing = null,
     Object? pageToken = freezed,
+    Object? scrollController = null,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -82,6 +85,10 @@ class _$LetterStateCopyWithImpl<$Res, $Val extends LetterState>
           ? _value.pageToken
           : pageToken // ignore: cast_nullable_to_non_nullable
               as String?,
+      scrollController: null == scrollController
+          ? _value.scrollController
+          : scrollController // ignore: cast_nullable_to_non_nullable
+              as ScrollController,
     ) as $Val);
   }
 }
@@ -99,7 +106,8 @@ abstract class _$$LetterStateImplCopyWith<$Res>
       List<LetterMetadataModel> letters,
       LetterMetadataModelData? selectedLetter,
       bool isEndListing,
-      String? pageToken});
+      String? pageToken,
+      ScrollController scrollController});
 }
 
 /// @nodoc
@@ -118,6 +126,7 @@ class __$$LetterStateImplCopyWithImpl<$Res>
     Object? selectedLetter = freezed,
     Object? isEndListing = null,
     Object? pageToken = freezed,
+    Object? scrollController = null,
   }) {
     return _then(_$LetterStateImpl(
       status: null == status
@@ -140,6 +149,10 @@ class __$$LetterStateImplCopyWithImpl<$Res>
           ? _value.pageToken
           : pageToken // ignore: cast_nullable_to_non_nullable
               as String?,
+      scrollController: null == scrollController
+          ? _value.scrollController
+          : scrollController // ignore: cast_nullable_to_non_nullable
+              as ScrollController,
     ));
   }
 }
@@ -152,7 +165,8 @@ class _$LetterStateImpl with DiagnosticableTreeMixin implements _LetterState {
       final List<LetterMetadataModel> letters = const <LetterMetadataModel>[],
       this.selectedLetter,
       this.isEndListing = false,
-      this.pageToken})
+      this.pageToken,
+      required this.scrollController})
       : _letters = letters;
 
   @override
@@ -174,10 +188,12 @@ class _$LetterStateImpl with DiagnosticableTreeMixin implements _LetterState {
   final bool isEndListing;
   @override
   final String? pageToken;
+  @override
+  final ScrollController scrollController;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'LetterState(status: $status, letters: $letters, selectedLetter: $selectedLetter, isEndListing: $isEndListing, pageToken: $pageToken)';
+    return 'LetterState(status: $status, letters: $letters, selectedLetter: $selectedLetter, isEndListing: $isEndListing, pageToken: $pageToken, scrollController: $scrollController)';
   }
 
   @override
@@ -189,7 +205,8 @@ class _$LetterStateImpl with DiagnosticableTreeMixin implements _LetterState {
       ..add(DiagnosticsProperty('letters', letters))
       ..add(DiagnosticsProperty('selectedLetter', selectedLetter))
       ..add(DiagnosticsProperty('isEndListing', isEndListing))
-      ..add(DiagnosticsProperty('pageToken', pageToken));
+      ..add(DiagnosticsProperty('pageToken', pageToken))
+      ..add(DiagnosticsProperty('scrollController', scrollController));
   }
 
   @override
@@ -204,7 +221,9 @@ class _$LetterStateImpl with DiagnosticableTreeMixin implements _LetterState {
             (identical(other.isEndListing, isEndListing) ||
                 other.isEndListing == isEndListing) &&
             (identical(other.pageToken, pageToken) ||
-                other.pageToken == pageToken));
+                other.pageToken == pageToken) &&
+            (identical(other.scrollController, scrollController) ||
+                other.scrollController == scrollController));
   }
 
   @override
@@ -214,7 +233,8 @@ class _$LetterStateImpl with DiagnosticableTreeMixin implements _LetterState {
       const DeepCollectionEquality().hash(_letters),
       const DeepCollectionEquality().hash(selectedLetter),
       isEndListing,
-      pageToken);
+      pageToken,
+      scrollController);
 
   @JsonKey(ignore: true)
   @override
@@ -229,7 +249,8 @@ abstract class _LetterState implements LetterState {
       final List<LetterMetadataModel> letters,
       final LetterMetadataModelData? selectedLetter,
       final bool isEndListing,
-      final String? pageToken}) = _$LetterStateImpl;
+      final String? pageToken,
+      required final ScrollController scrollController}) = _$LetterStateImpl;
 
   @override
   LetterConnectionStatus get status;
@@ -241,6 +262,8 @@ abstract class _LetterState implements LetterState {
   bool get isEndListing;
   @override
   String? get pageToken;
+  @override
+  ScrollController get scrollController;
   @override
   @JsonKey(ignore: true)
   _$$LetterStateImplCopyWith<_$LetterStateImpl> get copyWith =>

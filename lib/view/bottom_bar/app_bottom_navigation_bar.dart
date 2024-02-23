@@ -7,9 +7,14 @@ import 'package:routemaster/routemaster.dart';
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/constant/svg_path.dart';
+import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/util/environment.dart';
 import 'package:hakondate/view/daily/daily_drawer.dart';
 import 'package:hakondate/view_model/multi_page/drawer/drawer_view_model.dart';
+import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
+import 'package:hakondate/view_model/single_page/recipe/recipe_view_model.dart';
+import 'package:hakondate/view_model/single_page/dictionary/dictionary_view_model.dart';
+import 'package:hakondate/view_model/single_page/letter/letter_view_model.dart';
 
 class AppBottomNavigationBar extends ConsumerWidget {
   const AppBottomNavigationBar({super.key});
@@ -32,7 +37,24 @@ class AppBottomNavigationBar extends ConsumerWidget {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: tabState.controller.index,
-        onTap: (int index) => tabState.controller.animateTo(index),
+        onTap: (int index) {
+          final String? path = routemaster.currentConfiguration?.fullPath;
+
+          debugPrint('index: $index');
+          if (path == '/home/daily' && index == 0) {
+            ref.read(dailyViewModelProvider.notifier).scrollTo(0);
+          } else if (path =='/home/recipes' && index == 1) {
+            ref.read(recipeViewModelProvider.notifier).scrollToTop();
+          } else if (path =='/home/dictionary' && index == 2) {
+            debugPrint('dictionary');
+            ref.read(dictionaryViewModelProvider.notifier).scrollToTop();
+          } else if (path == '/home/letter' && index == 3) {
+            ref.read(letterViewModelProvider.notifier).scrollToTop();
+          } else {
+            tabState.controller.animateTo(index);
+            debugPrint('path: $path');
+          }
+        },
         backgroundColor: AppColor.ui.white,
         selectedItemColor: AppColor.brand.secondary,
         selectedLabelStyle: const TextStyle(
