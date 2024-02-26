@@ -1,5 +1,4 @@
 import 'package:drift/drift.dart';
-import 'package:flutter/widgets.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
@@ -144,7 +143,6 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
       DictionaryItemsSchema left, DictionaryItemsSchema right, String query) {
     // TODO 文字列比較が合ってるか考える
     int score;
-    int temp;
     score = dictionarySearchItemNameCompare(
         left.name.toHiragana(), right.name.toHiragana(), query.toHiragana());
     if (score == 1) return 1;
@@ -163,7 +161,6 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
   }
 
   int dictionarySearchItemNameCompare(String left, String right, String query) {
-    const String wordSplitter = '　';
     if (left == query) return 1;
     if (right == query) return -1;
 
@@ -178,8 +175,8 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
     bool isRightWord = wordCheck(right, right_index, query);
 
     if (!(isLeftWord && isRightWord)) {
-      if (isLeftWord && !isRightWord) return 1;
-      if (!isLeftWord && isRightWord) return -1;
+      if (isLeftWord) return -1;
+      if (isRightWord) return 1;
     }
 
     //if (left[left_index - 1] == wordSplitter &&
@@ -197,24 +194,19 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
     //if (left_index < right_index) return -1;
     //if (left_index > right_index) return 1;
 
-    return left.compareTo(right);
+    return 0;
+    //return left.compareTo(right);
   }
 
   bool wordCheck(String name, int indexOfQuery, String query) {
-    bool right = false;
-    bool left = false;
+    print(indexOfQuery);
+    const String wordSplitter = '　';
 
-    if (indexOfQuery != 0)
-      left = name[indexOfQuery - 1] == '　';
-    else
-      left = true;
-
-    if (indexOfQuery + query.length < name.length)
-      right = name[indexOfQuery + query.length] == '　';
-    else
-      right = true;
-
-    return left && right;
+    bool left = name
+        .contains(RegExp(wordSplitter + query + '(' + wordSplitter + '|\$)'));
+    bool right = name
+        .contains(RegExp('(^|' + wordSplitter + ')' + query + wordSplitter));
+    return left || right;
   }
 
   @override
