@@ -1,4 +1,5 @@
 import 'package:drift/drift.dart';
+import 'package:flutter/widgets.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
@@ -130,7 +131,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
             .get()
           ..sort(
             (DictionaryItemsSchema a, DictionaryItemsSchema b) =>
-                dictionaryItemCompare(a, b, query),
+                dictionarySearchItemCompareSolo(a, b, query),
           );
     for (final DictionaryItemsSchema schema in schemas) {
       items.add(DictionaryItemModel.fromDrift(schema));
@@ -139,37 +140,81 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
   }
 
   // TODO
-  int dictionaryItemCompare(
-      DictionaryItemsSchema a, DictionaryItemsSchema b, String query) {
+  int dictionarySearchItemCompareSolo(
+      DictionaryItemsSchema left, DictionaryItemsSchema right, String query) {
     // TODO 文字列比較が合ってるか考える
-    if (a.name == query) return 1;
-    if (b.name == query) return -1;
+    int score;
+    int temp;
+    score = dictionarySearchItemNameCompare(
+        left.name.toHiragana(), right.name.toHiragana(), query.toHiragana());
+    if (score == 1) return 1;
 
-    // TODO 半角と全拍どっちも
-    List<String> separated_left = a.name.split('　');
-    List<String> separated_right = b.name.split('　');
+    //temp = dictionarySearchItemNameCompare(
+    //    left.name, right.name, query.toHiragana());
+    //if (score == 1) return 1;
+    //if (temp > score) score = temp;
+
+    //temp = dictionarySearchItemNameCompare(
+    //    left.name, right.name, query.toKatakana());
+    //if (score == 1) return 1;
+    //if (temp > score) score = temp;
+
+    return score;
+  }
+
+  int dictionarySearchItemNameCompare(String left, String right, String query) {
+    const String wordSplitter = '　';
+    if (left == query) return 1;
+    if (right == query) return -1;
 
     int left_index = 10;
     int right_index = 10;
 
-    for (int i = 0; i < separated_left.length; i++) {
-      if (separated_left[i].contains(query)) {
-        left_index = i;
-        break;
-      }
+    left_index = left.indexOf(query);
+    right_index = right.indexOf(query);
+
+    /// 完全包含チェック
+    bool isLeftWord = wordCheck(left, left_index, query);
+    bool isRightWord = wordCheck(right, right_index, query);
+
+    if (!(isLeftWord && isRightWord)) {
+      if (isLeftWord && !isRightWord) return 1;
+      if (!isLeftWord && isRightWord) return -1;
     }
 
-    for (int i = 0; i < separated_right.length; i++) {
-      if (separated_right[i].contains(query)) {
-        right_index = i;
-        break;
-      }
-    }
+    //if (left[left_index - 1] == wordSplitter &&
+    //    left[left_index + query.length] == wordSplitter) {
+    //  debugPrint("なった");
+    //  isLeftWord = true;
+    //}
 
-    if (left_index < right_index) return -1;
-    if (left_index > right_index) return 1;
+    //if (right.length > right_index + query.length && right_index - 1 >= 0) {
+    //  if (right[right_index - 1] == wordSplitter &&
+    //      right[right_index + query.length] == wordSplitter) isRightWord = true;
+    //}
 
-    return a.name.compareTo(b.name);
+    /// 部分一致チェック
+    //if (left_index < right_index) return -1;
+    //if (left_index > right_index) return 1;
+
+    return left.compareTo(right);
+  }
+
+  bool wordCheck(String name, int indexOfQuery, String query) {
+    bool right = false;
+    bool left = false;
+
+    if (indexOfQuery != 0)
+      left = name[indexOfQuery - 1] == '　';
+    else
+      left = true;
+
+    if (indexOfQuery + query.length < name.length)
+      right = name[indexOfQuery + query.length] == '　';
+    else
+      right = true;
+
+    return left && right;
   }
 
   @override
