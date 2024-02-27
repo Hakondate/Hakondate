@@ -18,6 +18,10 @@ part 'daily_view_model.g.dart';
 class DailyViewModel extends _$DailyViewModel {
   @override
   FutureOr<DailyState> build() async {
+    return _initializeState();
+  }
+
+  Future<DailyState> _initializeState() async {
     return DailyState(
       selectedDay: DateTime.now(),
       focusedDay: DateTime.now(),
@@ -43,7 +47,6 @@ class DailyViewModel extends _$DailyViewModel {
         case Flavor.stg || Flavor.prod:
           selectedInputDay ??= DateTime.now();
       }
-
       final MenuModel menu = await ref
           .read(menusLocalRepositoryProvider)
           .getMenuByDay(selectedInputDay);
