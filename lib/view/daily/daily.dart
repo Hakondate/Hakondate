@@ -125,12 +125,32 @@ class Daily extends StatelessWidget {
               data: (DailyState state) {
                 if (state.menu is LunchesDayMenuModel) {
                   return Expanded(
-                    child: ListView(
-                      controller: state.scrollController,
-                      children: const <Widget>[
-                        MenuCard(),
-                        NutrientsCard(),
-                      ],
+                    child: GestureDetector(
+                      child: ListView(
+                        children: const <Widget>[
+                          MenuCard(),
+                          NutrientsCard(),
+                        ],
+                      ),
+                      onHorizontalDragEnd: (DragEndDetails details) {
+                        if (details.primaryVelocity! < 0) {
+                          ref
+                              .read(dailyViewModelProvider.notifier)
+                              .updateSelectedDay(
+                                selectedDay: ref
+                                    .read(dailyViewModelProvider.notifier)
+                                    .getAddedSelectedDay(state, 1),
+                              );
+                        } else {
+                          ref
+                              .read(dailyViewModelProvider.notifier)
+                              .updateSelectedDay(
+                                selectedDay: ref
+                                    .read(dailyViewModelProvider.notifier)
+                                    .getAddedSelectedDay(state, -1),
+                              );
+                        }
+                      },
                     ),
                   );
                 } else if (state.menu is HolidayMenuModel) {
