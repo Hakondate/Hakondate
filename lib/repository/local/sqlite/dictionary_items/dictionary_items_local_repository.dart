@@ -145,7 +145,6 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
     int score;
     score = dictionarySearchItemNameCompare(
         left.name.toHiragana(), right.name.toHiragana(), query.toHiragana());
-    if (score == 1) return 1;
 
     //temp = dictionarySearchItemNameCompare(
     //    left.name, right.name, query.toHiragana());
@@ -191,15 +190,13 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
     //}
 
     /// 部分一致チェック
-    //if (left_index < right_index) return -1;
-    //if (left_index > right_index) return 1;
+    if (left_index < right_index) return -1;
+    if (left_index > right_index) return 1;
 
-    return 0;
-    //return left.compareTo(right);
+    return left.compareTo(right);
   }
 
   bool wordCheck(String name, int indexOfQuery, String query) {
-    print(indexOfQuery);
     const String wordSplitter = '　';
 
     bool left = name
