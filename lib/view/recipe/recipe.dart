@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hakondate/state/recipe/recipe_state.dart';
-import 'package:hakondate/view_model/single_page/recipe/recipe_view_model.dart';
 
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/recipe/recipe_type.dart';
+import 'package:hakondate/state/recipe/recipe_state.dart';
 import 'package:hakondate/view/recipe/open_data_recipe_grid.dart';
 import 'package:hakondate/view/recipe/open_data_recipe_header.dart';
+import 'package:hakondate/view_model/single_page/recipe/recipe_view_model.dart';
 
 class Recipe extends StatelessWidget {
   const Recipe({super.key});
