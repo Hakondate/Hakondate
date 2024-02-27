@@ -17,11 +17,12 @@ part 'daily_view_model.g.dart';
 @Riverpod(keepAlive: true)
 class DailyViewModel extends _$DailyViewModel {
   @override
-  FutureOr<DailyState> build() {
+  FutureOr<DailyState> build() async {
     return DailyState(
       selectedDay: DateTime.now(),
       focusedDay: DateTime.now(),
-      calendarTabFirstDay: DateTime(2019, 8),
+      calendarTabFirstDay:
+          await ref.read(menusLocalRepositoryProvider).getOldestDay(),
       calendarTabLastDay: DateTime(
         DateTime.now().year,
         DateTime.now().month + 2,
