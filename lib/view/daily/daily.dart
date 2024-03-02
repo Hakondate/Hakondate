@@ -154,7 +154,37 @@ class Daily extends StatelessWidget {
                     ),
                   );
                 } else if (state.menu is HolidayMenuModel) {
-                  return GestureDetector(
+                  return Expanded(
+                    child: GestureDetector(
+                      onHorizontalDragEnd: (DragEndDetails details) {
+                        if (details.primaryVelocity! < 0) {
+                          ref
+                              .read(dailyViewModelProvider.notifier)
+                              .updateSelectedDay(
+                                selectedDay: ref
+                                    .read(dailyViewModelProvider.notifier)
+                                    .getAddedSelectedDay(state, 1),
+                              );
+                        } else {
+                          ref
+                              .read(dailyViewModelProvider.notifier)
+                              .updateSelectedDay(
+                                selectedDay: ref
+                                    .read(dailyViewModelProvider.notifier)
+                                    .getAddedSelectedDay(state, -1),
+                              );
+                        }
+                      },
+                      child: const NonLunchesDayBody(
+                        imageFileName: 'holiday.png',
+                        text: '給食はお休みです...',
+                      ),
+                    ),
+                  );
+                }
+
+                return Expanded(
+                  child: GestureDetector(
                     onHorizontalDragEnd: (DragEndDetails details) {
                       if (details.primaryVelocity! < 0) {
                         ref
@@ -175,35 +205,9 @@ class Daily extends StatelessWidget {
                       }
                     },
                     child: const NonLunchesDayBody(
-                      imageFileName: 'holiday.png',
-                      text: '給食はお休みです...',
+                      imageFileName: 'no_data.png',
+                      text: '献立は準備中です...',
                     ),
-                  );
-                }
-
-                return GestureDetector(
-                  onHorizontalDragEnd: (DragEndDetails details) {
-                    if (details.primaryVelocity! < 0) {
-                      ref
-                          .read(dailyViewModelProvider.notifier)
-                          .updateSelectedDay(
-                            selectedDay: ref
-                                .read(dailyViewModelProvider.notifier)
-                                .getAddedSelectedDay(state, 1),
-                          );
-                    } else {
-                      ref
-                          .read(dailyViewModelProvider.notifier)
-                          .updateSelectedDay(
-                            selectedDay: ref
-                                .read(dailyViewModelProvider.notifier)
-                                .getAddedSelectedDay(state, -1),
-                          );
-                    }
-                  },
-                  child: const NonLunchesDayBody(
-                    imageFileName: 'no_data.png',
-                    text: '献立は準備中です...',
                   ),
                 );
               },
