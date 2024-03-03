@@ -152,24 +152,25 @@ class Daily extends StatelessWidget {
                             NutrientsCard(),
                           ],
                         );
-                      } else if (state.menu is HolidayMenuModel) {
-                        return const SizedBox.expand(
+                      } else {
+                        return SizedBox.expand(
                           child: Card(
-                            child: NonLunchesDayBody(
-                              imageFileName: 'holiday.png',
-                              text: '給食はお休みです...',
-                            ),
+                            child: (() {
+                              if (state.menu is HolidayMenuModel) {
+                                return const NonLunchesDayBody(
+                                  imageFileName: 'holiday.png',
+                                  text: '給食はお休みです...',
+                                );
+                              } else {
+                                return const NonLunchesDayBody(
+                                  imageFileName: 'no_data.png',
+                                  text: '献立は準備中です...',
+                                );
+                              }
+                            })(),
                           ),
                         );
                       }
-                      return const SizedBox.expand(
-                        child: Card(
-                          child: NonLunchesDayBody(
-                            imageFileName: 'no_data.png',
-                            text: '献立は準備中です...',
-                          ),
-                        ),
-                      );
                     })(),
                   ),
                 );
