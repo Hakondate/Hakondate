@@ -56,7 +56,8 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
 
       if (companion.id.value != menuId) return companion.id.value;
 
-      final MenuDishesTableCompanion menuDishesTableCompanion = MenuDishesTableCompanion(
+      final MenuDishesTableCompanion menuDishesTableCompanion =
+          MenuDishesTableCompanion(
         menuId: Value<int>(menuId),
         dishId: Value<int>(dishId),
       );
@@ -79,8 +80,9 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
 
   Future<int> _addDish(DishModel dish) async {
     final DishesTableCompanion companion = dish.toDrift();
-    final DishesSchema? conflictSchema =
-        await (_db.select(_db.dishesTable)..where(($DishesTableTable t) => t.name.equals(companion.name.value))).getSingleOrNull();
+    final DishesSchema? conflictSchema = await (_db.select(_db.dishesTable)
+          ..where(($DishesTableTable t) => t.name.equals(companion.name.value)))
+        .getSingleOrNull();
 
     final int dishId;
     if (conflictSchema == null) {
@@ -97,7 +99,8 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
 
     await Future.forEach(dish.foodstuffs, (FoodstuffModel foodstuff) async {
       final int foodstuffId = await _addFoodstuff(foodstuff);
-      final DishFoodstuffsTableCompanion dishFoodstuffsSchema = DishFoodstuffsTableCompanion(
+      final DishFoodstuffsTableCompanion dishFoodstuffsSchema =
+          DishFoodstuffsTableCompanion(
         dishId: Value<int>(dishId),
         foodstuffId: Value<int>(foodstuffId),
       );
@@ -125,15 +128,16 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
 
   Future<int> _addFoodstuff(FoodstuffModel foodstuff) async {
     final FoodstuffsTableCompanion companion = foodstuff.toDrift();
-    final FoodstuffsSchema? conflictSchema = await (_db.select(_db.foodstuffsTable)
-          ..where(
-            ($FoodstuffsTableTable t) =>
-                t.name.equals(companion.name.value) &
-                t.gram.equals(companion.gram.value) &
-                t.isHeat.equals(companion.isHeat.value) &
-                t.isAllergy.equals(companion.isAllergy.value),
-          ))
-        .getSingleOrNull();
+    final FoodstuffsSchema? conflictSchema =
+        await (_db.select(_db.foodstuffsTable)
+              ..where(
+                ($FoodstuffsTableTable t) =>
+                    t.name.equals(companion.name.value) &
+                    t.gram.equals(companion.gram.value) &
+                    t.isHeat.equals(companion.isHeat.value) &
+                    t.isAllergy.equals(companion.isAllergy.value),
+              ))
+            .getSingleOrNull();
 
     if (conflictSchema == null) {
       return _db.into(_db.foodstuffsTable).insert(companion);
@@ -192,9 +196,11 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
   @override
   Future<List<MenuModel>> list() async {
     final List<MenuModel> menus = <MenuModel>[];
-    final int schoolId = await _ref.read(userViewModelProvider.notifier).getParentId();
-    final List<MenusSchema> menusSchemas =
-        await (_db.select(_db.menusTable)..where(($MenusTableTable t) => t.schoolId.equals(schoolId))).get();
+    final int schoolId =
+        await _ref.read(userViewModelProvider.notifier).getParentId();
+    final List<MenusSchema> menusSchemas = await (_db.select(_db.menusTable)
+          ..where(($MenusTableTable t) => t.schoolId.equals(schoolId)))
+        .get();
 
     await Future.forEach(menusSchemas, (MenusSchema menusSchema) async {
       final MenuModel menu = await _getBySchema(menusSchema);
@@ -222,7 +228,9 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
   }
 
   Future<MenuModel?> _getMenuById(int id) async {
-    final MenusSchema? menusSchema = await (_db.select(_db.menusTable)..where(($MenusTableTable t) => t.id.equals(id))).getSingleOrNull();
+    final MenusSchema? menusSchema = await (_db.select(_db.menusTable)
+          ..where(($MenusTableTable t) => t.id.equals(id)))
+        .getSingleOrNull();
 
     return (menusSchema != null) ? _getBySchema(menusSchema) : null;
   }
@@ -230,33 +238,46 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
   Future<DateTime> _getOldestDay() async {
     if (await _count() == 0) return DateTime.now();
 
-    final int schoolId = await _ref.read(userViewModelProvider.notifier).getParentId();
+    final int schoolId =
+        await _ref.read(userViewModelProvider.notifier).getParentId();
     final Expression<DateTime> exp = _db.menusTable.day.min();
-    final JoinedSelectStatement<$MenusTableTable, MenusSchema> query = _db.selectOnly(_db.menusTable)
-      ..where(_db.menusTable.schoolId.equals(schoolId))
-      ..addColumns(<Expression<DateTime>>[exp]);
+    final JoinedSelectStatement<$MenusTableTable, MenusSchema> query =
+        _db.selectOnly(_db.menusTable)
+          ..where(_db.menusTable.schoolId.equals(schoolId))
+          ..addColumns(<Expression<DateTime>>[exp]);
 
-    return await query.map((TypedResult scheme) => scheme.read(exp)).getSingle() ?? DateTime.now();
+    return await query
+            .map((TypedResult scheme) => scheme.read(exp))
+            .getSingle() ??
+        DateTime.now();
   }
 
   Future<DateTime> _getLatestDay() async {
     if (await _count() == 0) return DateTime.now();
 
-    final int schoolId = await _ref.read(userViewModelProvider.notifier).getParentId();
+    final int schoolId =
+        await _ref.read(userViewModelProvider.notifier).getParentId();
     final Expression<DateTime> exp = _db.menusTable.day.max();
-    final JoinedSelectStatement<$MenusTableTable, MenusSchema> query = _db.selectOnly(_db.menusTable)
-      ..where(_db.menusTable.schoolId.equals(schoolId))
-      ..addColumns(<Expression<DateTime>>[exp]);
+    final JoinedSelectStatement<$MenusTableTable, MenusSchema> query =
+        _db.selectOnly(_db.menusTable)
+          ..where(_db.menusTable.schoolId.equals(schoolId))
+          ..addColumns(<Expression<DateTime>>[exp]);
 
-    return await query.map((TypedResult scheme) => scheme.read(exp)).getSingle() ?? DateTime.now();
+    return await query
+            .map((TypedResult scheme) => scheme.read(exp))
+            .getSingle() ??
+        DateTime.now();
   }
 
   Future<MenuModel> _getBySchema(MenusSchema menusSchema) async {
     final List<DishModel> dishes = <DishModel>[];
-    final List<MenuDishesSchema> menuDishesSchemas =
-        await (_db.select(_db.menuDishesTable)..where(($MenuDishesTableTable t) => t.menuId.equals(menusSchema.id))).get();
+    final List<MenuDishesSchema> menuDishesSchemas = await (_db
+            .select(_db.menuDishesTable)
+          ..where(($MenuDishesTableTable t) => t.menuId.equals(menusSchema.id)))
+        .get();
 
-    await Future.forEach(menuDishesSchemas, (MenuDishesSchema menuDishesSchema) async {
+    await Future.forEach(menuDishesSchemas,
+        (MenuDishesSchema menuDishesSchema) async {
       final DishModel dish = await _getDishById(menuDishesSchema.dishId);
       dishes.add(dish);
     });
@@ -265,16 +286,22 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
   }
 
   Future<DishModel> _getDishById(int dishId) async {
-    final DishesSchema dishesSchema = await (_db.select(_db.dishesTable)..where(($DishesTableTable t) => t.id.equals(dishId))).getSingle();
+    final DishesSchema dishesSchema = await (_db.select(_db.dishesTable)
+          ..where(($DishesTableTable t) => t.id.equals(dishId)))
+        .getSingle();
     final List<FoodstuffModel> foodstuffs = <FoodstuffModel>[];
-    final List<DishFoodstuffsSchema> dishFoodstuffsSchemas = await (_db.select(_db.dishFoodstuffsTable)
-          ..where(
-            ($DishFoodstuffsTableTable t) => t.dishId.equals(dishesSchema.id),
-          ))
-        .get();
+    final List<DishFoodstuffsSchema> dishFoodstuffsSchemas =
+        await (_db.select(_db.dishFoodstuffsTable)
+              ..where(
+                ($DishFoodstuffsTableTable t) =>
+                    t.dishId.equals(dishesSchema.id),
+              ))
+            .get();
 
-    await Future.forEach(dishFoodstuffsSchemas, (DishFoodstuffsSchema dishFoodstuffsSchema) async {
-      final FoodstuffModel foodstuff = await _getFoodstuffById(dishFoodstuffsSchema.foodstuffId);
+    await Future.forEach(dishFoodstuffsSchemas,
+        (DishFoodstuffsSchema dishFoodstuffsSchema) async {
+      final FoodstuffModel foodstuff =
+          await _getFoodstuffById(dishFoodstuffsSchema.foodstuffId);
       foodstuffs.add(foodstuff);
     });
 
@@ -283,7 +310,9 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
 
   Future<FoodstuffModel> _getFoodstuffById(int foodstuffId) async {
     final FoodstuffsSchema foodstuffsSchema =
-        await (_db.select(_db.foodstuffsTable)..where(($FoodstuffsTableTable t) => t.id.equals(foodstuffId))).getSingle();
+        await (_db.select(_db.foodstuffsTable)
+              ..where(($FoodstuffsTableTable t) => t.id.equals(foodstuffId)))
+            .getSingle();
 
     return FoodstuffModel.fromDrift(foodstuffsSchema);
   }
@@ -292,22 +321,31 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
   Future<DateTime> getLatestUpdateDay() async {
     if (await _count() == 0) return DateTime(1970);
 
-    final int schoolId = await _ref.read(userViewModelProvider.notifier).getParentId();
+    final int schoolId =
+        await _ref.read(userViewModelProvider.notifier).getParentId();
     final Expression<DateTime> exp = _db.menusTable.updateAt.max();
-    final JoinedSelectStatement<$MenusTableTable, MenusSchema> query = _db.selectOnly(_db.menusTable)
-      ..where(_db.menusTable.schoolId.equals(schoolId))
-      ..addColumns(<Expression<DateTime>>[exp]);
+    final JoinedSelectStatement<$MenusTableTable, MenusSchema> query =
+        _db.selectOnly(_db.menusTable)
+          ..where(_db.menusTable.schoolId.equals(schoolId))
+          ..addColumns(<Expression<DateTime>>[exp]);
 
-    return await query.map((TypedResult scheme) => scheme.read(exp)).getSingle() ?? DateTime(1970);
+    return await query
+            .map((TypedResult scheme) => scheme.read(exp))
+            .getSingle() ??
+        DateTime(1970);
   }
 
   Future<int> _count() async {
-    final int schoolId = await _ref.read(userViewModelProvider.notifier).getParentId();
+    final int schoolId =
+        await _ref.read(userViewModelProvider.notifier).getParentId();
     final Expression<int> exp = _db.menusTable.id.count();
-    final JoinedSelectStatement<$MenusTableTable, MenusSchema> query = _db.selectOnly(_db.menusTable)
-      ..where(_db.menusTable.schoolId.equals(schoolId))
-      ..addColumns(<Expression<int>>[exp]);
-    final int? count = await query.map((TypedResult scheme) => scheme.read(exp)).getSingleOrNull();
+    final JoinedSelectStatement<$MenusTableTable, MenusSchema> query =
+        _db.selectOnly(_db.menusTable)
+          ..where(_db.menusTable.schoolId.equals(schoolId))
+          ..addColumns(<Expression<int>>[exp]);
+    final int? count = await query
+        .map((TypedResult scheme) => scheme.read(exp))
+        .getSingleOrNull();
 
     return count ?? 0;
   }
