@@ -153,14 +153,22 @@ class Daily extends StatelessWidget {
                           ],
                         );
                       } else if (state.menu is HolidayMenuModel) {
-                        return const NonLunchesDayBody(
-                          imageFileName: 'holiday.png',
-                          text: '給食はお休みです...',
+                        return const SizedBox.expand(
+                          child: Card(
+                            child: NonLunchesDayBody(
+                              imageFileName: 'holiday.png',
+                              text: '給食はお休みです...',
+                            ),
+                          ),
                         );
                       }
-                      return const NonLunchesDayBody(
-                        imageFileName: 'no_data.png',
-                        text: '献立は準備中です...',
+                      return const SizedBox.expand(
+                        child: Card(
+                          child: NonLunchesDayBody(
+                            imageFileName: 'no_data.png',
+                            text: '献立は準備中です...',
+                          ),
+                        ),
                       );
                     })(),
                   ),
