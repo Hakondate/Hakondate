@@ -1,6 +1,6 @@
 part of 'splash_state.dart';
 
-enum LoadingStatus{
+enum LoadingStatus {
   unloading(imageFileName: 'data_reading.gif'),
   reading(imageFileName: 'data_reading.gif'),
   checkingUpdate(imageFileName: 'checking.gif'),

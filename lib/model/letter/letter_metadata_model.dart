@@ -9,12 +9,13 @@ class LetterMetadataModel with _$LetterMetadataModel {
     required String path,
     required int parentId,
     required DateTime updateAt,
-  }) => LetterMetadataModel.data(
-    title: title,
-    path: path,
-    parentId: parentId,
-    updateAt: updateAt,
-  );
+  }) =>
+      LetterMetadataModel.data(
+        title: title,
+        path: path,
+        parentId: parentId,
+        updateAt: updateAt,
+      );
 
   const factory LetterMetadataModel.data({
     required String title,

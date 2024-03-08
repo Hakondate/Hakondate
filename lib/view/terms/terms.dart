@@ -81,9 +81,7 @@ class Terms extends StatelessWidget {
                   ),
                   shape: const StadiumBorder(),
                 ),
-                onPressed: state.isAgree
-                    ? () => ref.read(termsViewModelProvider.notifier).transition()
-                    : null,
+                onPressed: state.isAgree ? () => ref.read(termsViewModelProvider.notifier).transition() : null,
                 child: const Text('はじめる'),
               ),
             ],

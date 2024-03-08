@@ -43,16 +43,13 @@ class Dish extends ConsumerWidget {
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: dish.foodstuffs.length,
                         itemBuilder: (BuildContext context, int index) {
-                          final FoodstuffModel foodstuff =
-                              dish.foodstuffs[index];
+                          final FoodstuffModel foodstuff = dish.foodstuffs[index];
 
                           return NutrientLabel(
                             name: foodstuff.name,
                             value: foodstuff.quantity.gram,
                             unit: NutrientUnit.gram,
-                            backgroundColor: (index.isEven)
-                                ? null
-                                : AppColor.ui.secondaryUltraLight,
+                            backgroundColor: (index.isEven) ? null : AppColor.ui.secondaryUltraLight,
                           );
                         },
                       ),

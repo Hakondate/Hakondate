@@ -23,12 +23,10 @@ class Help extends StatelessWidget {
               HelpFrame.baseNut(),
               HelpFrame.formula(),
               HelpFrame.input(),
-
               DescriptionText.headline(label: 'データ'),
               HelpFrame.misprint(),
               HelpFrame.updateCycle(),
               HelpFrame.tr(),
-
               DescriptionText.headline(label: '操作ヘルプ'),
               HelpFrame.nickName(),
               HelpFrame.schoolAndSchoolYear(),

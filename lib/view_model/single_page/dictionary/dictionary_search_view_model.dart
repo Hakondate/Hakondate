@@ -12,8 +12,7 @@ class DictionarySearchViewModel extends _$DictionarySearchViewModel {
   late final DictionaryItemsLocalRepositoryAPI _dictionaryItemsLocalRepository;
   @override
   Future<DictionarySearchState> build() async {
-    _dictionaryItemsLocalRepository =
-        ref.watch(dictionaryItemsLocalRepositoryProvider);
+    _dictionaryItemsLocalRepository = ref.watch(dictionaryItemsLocalRepositoryProvider);
     ref.onDispose(() => state.whenData((DictionarySearchState data) => data.searchBarTextController.dispose()));
     return DictionarySearchState(
       searchBarTextController: TextEditingController(),

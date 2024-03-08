@@ -16,9 +16,13 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$DishModel {
-  String get name => throw _privateConstructorUsedError; // 料理名
-  List<FoodstuffModel> get foodstuffs =>
-      throw _privateConstructorUsedError; // 食材
+  /// 料理名
+  String get name => throw _privateConstructorUsedError;
+
+  /// 食材
+  List<FoodstuffModel> get foodstuffs => throw _privateConstructorUsedError;
+
+  /// 分類
   DishCategory? get category => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -123,11 +127,14 @@ class _$DishModelImpl extends _DishModel {
       : _foodstuffs = foodstuffs,
         super._();
 
+  /// 料理名
   @override
   final String name;
-// 料理名
+
+  /// 食材
   final List<FoodstuffModel> _foodstuffs;
-// 料理名
+
+  /// 食材
   @override
   List<FoodstuffModel> get foodstuffs {
     if (_foodstuffs is EqualUnmodifiableListView) return _foodstuffs;
@@ -135,7 +142,7 @@ class _$DishModelImpl extends _DishModel {
     return EqualUnmodifiableListView(_foodstuffs);
   }
 
-// 食材
+  /// 分類
   @override
   final DishCategory? category;
 
@@ -175,10 +182,16 @@ abstract class _DishModel extends DishModel {
   const _DishModel._() : super._();
 
   @override
+
+  /// 料理名
   String get name;
-  @override // 料理名
+  @override
+
+  /// 食材
   List<FoodstuffModel> get foodstuffs;
-  @override // 食材
+  @override
+
+  /// 分類
   DishCategory? get category;
   @override
   @JsonKey(ignore: true)

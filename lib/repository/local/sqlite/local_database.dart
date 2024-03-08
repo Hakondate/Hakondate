@@ -19,7 +19,7 @@ import 'package:hakondate/util/environment.dart';
 part 'local_database.g.dart';
 
 @Riverpod(keepAlive: true)
-LocalDatabase localDatabase (LocalDatabaseRef ref) {
+LocalDatabase localDatabase(LocalDatabaseRef ref) {
   final LazyDatabase lazyDatabase = LazyDatabase(() async {
     final Directory directory = await getApplicationDocumentsDirectory();
     final File file = File(p.join(directory.path, 'db.sqlite'));

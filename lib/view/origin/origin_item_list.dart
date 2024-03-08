@@ -15,59 +15,61 @@ class OriginItemList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(originViewModelProvider).maybeWhen(
-      data: (OriginState data) {
-        if (data.origins.isEmpty) {
-          return const SizedBox.shrink();
-        }
+          data: (OriginState data) {
+            if (data.origins.isEmpty) {
+              return const SizedBox.shrink();
+            }
 
-        final OriginModel origin = data.selectedOrigin;
+            final OriginModel origin = data.selectedOrigin;
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: origin.categories.map(
-            (OriginCategoryModel category) => Column(
+            return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                const SizedBox(height: MarginSize.minimum),
-                DescriptionText.subheading(label: category.name),
-                ...category.items.map(
-                  (OriginItemModel item) => Card(
-                    child: ClipPath(
-                      clipper: ShapeBorderClipper(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                      ),
-                      child: Container(
-                        padding: const EdgeInsets.all(PaddingSize.minimum),
-                        decoration: BoxDecoration(
-                          border: Border(
-                            left: BorderSide(color: AppColor.brand.secondaryLight, width: 5),
-                          ),
-                        ),
-                        child: Row(
-                          children: <Widget>[
-                            Expanded(
-                              child: Text(
-                                item.name,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
+              children: origin.categories
+                  .map(
+                    (OriginCategoryModel category) => Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        const SizedBox(height: MarginSize.minimum),
+                        DescriptionText.subheading(label: category.name),
+                        ...category.items.map(
+                          (OriginItemModel item) => Card(
+                            child: ClipPath(
+                              clipper: ShapeBorderClipper(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                              ),
+                              child: Container(
+                                padding: const EdgeInsets.all(PaddingSize.minimum),
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                    left: BorderSide(color: AppColor.brand.secondaryLight, width: 5),
+                                  ),
+                                ),
+                                child: Row(
+                                  children: <Widget>[
+                                    Expanded(
+                                      child: Text(
+                                        item.name,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(child: Text(item.prefectures.join('，'))),
+                                  ],
                                 ),
                               ),
                             ),
-                            Expanded(child: Text(item.prefectures.join('，'))),
-                          ],
+                          ),
                         ),
-                      ),
+                      ],
                     ),
-                  ),
-                ),
-              ],
-            ),
-          ).toList(),
+                  )
+                  .toList(),
+            );
+          },
+          orElse: () => const SizedBox.shrink(),
         );
-      },
-      orElse: () => const SizedBox.shrink(),
-    );
   }
 }

@@ -30,14 +30,14 @@ class Origin extends StatelessWidget {
                   children: <Widget>[
                     DescriptionText.body(
                       label: '1. 米，小麦，牛乳，鶏卵\n'
-                             '2. 肉（牛，豚，鶏）\n'
-                             '3. 野菜，果物，魚介・海藻類',
+                          '2. 肉（牛，豚，鶏）\n'
+                          '3. 野菜，果物，魚介・海藻類',
                     ),
                     Flexible(
                       child: DescriptionText.body(
                         label: '北海道産\n'
-                               '北海道産\n'
-                               '以下の産地リストをご覧ください',
+                            '北海道産\n'
+                            '以下の産地リストをご覧ください',
                       ),
                     ),
                   ],

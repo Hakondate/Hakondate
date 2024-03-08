@@ -11,6 +11,6 @@ class MenuDishesTable extends Table {
   @override
   // ignore: always_specify_types
   List<Set<Column>> get uniqueKeys => [
-    <Column<Object>>{menuId, dishId},
-  ];
+        <Column<Object>>{menuId, dishId},
+      ];
 }

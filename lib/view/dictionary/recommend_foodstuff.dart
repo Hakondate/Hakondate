@@ -181,20 +181,45 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const Padding(
-                        padding: EdgeInsets.only(right: MarginSize.minimum)),
-                    /* 数値 */
-                    Text(
-                      ((nutrientMap.value[index].nutrients
-                                              .getNutrient(nutrientMap.key) *
-                                          10)
-                                      .ceil() /
-                                  10)
-                              .toString() +
-                          nutrientMap.key.unit.value,
-                      style: const TextStyle(
-                        fontSize: FontSize.subheading,
-                        fontWeight: FontWeight.bold,
+                    Flexible(
+                      flex: 8,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          /* 料理名 */
+                          Text(
+                            nutrientMap.value[index].name,
+                            style: const TextStyle(
+                              fontSize: FontSize.subheading,
+                            ),
+                          ),
+                          /* 数値 */
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                              Text(
+                                ((nutrientMap.value[index].nutrients
+                                                        .getNutrient(
+                                                            nutrientMap.key) *
+                                                    10)
+                                                .ceil() /
+                                            10)
+                                        .toString() +
+                                    nutrientMap.key.unit.value,
+                                style: const TextStyle(
+                                  fontSize: FontSize.subheading,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const Text(
+                                '/100g',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                   ],
