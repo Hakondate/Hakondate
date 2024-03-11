@@ -64,64 +64,55 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
     Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendFoodStuffs,
     int index,
   ) {
-    return Stack(
-      children: [
-        /*Container(
-          height: PaddingSize.buttonHorizontal * 2 + PaddingSize.normal, //56,
-          color: AppColor.ui.secondaryUltraLight,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        /*Divider(
+          height: 2,
+          thickness: 1,
+          color: AppColor.brand.secondaryLight,
         ),*/
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            /*Divider(
-              height: 2,
-              thickness: 1,
-              color: AppColor.brand.secondaryLight,
-            ),*/
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: PaddingSize.normal),
-              child: SizedBox(
-                height: PaddingSize.buttonHorizontal * 2,
-                child: Row(
-                  children: <Widget>[
-                    Text(
-                      '${recommendFoodStuffs.entries.elementAt(index).key.japaneseName}',
-                      style: TextStyle(
-                          fontSize: FontSize.heading,
-                          color: AppColor.brand.secondary,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      'を多く含む食材',
-                      style: TextStyle(
-                        fontSize: FontSize.label,
-                        fontWeight: FontWeight.bold,
-                        color: AppColor.text.appBarTitle,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: PaddingSize.minimum,
-                    ),
-                    const Text(
-                      '(100g当たり)',
-                      style: TextStyle(
-                          fontSize: FontSize.annotation,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ],
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: PaddingSize.normal),
+          child: SizedBox(
+            height: PaddingSize.buttonHorizontal * 2,
+            child: Row(
+              children: <Widget>[
+                Text(
+                  '${recommendFoodStuffs.entries.elementAt(index).key.japaneseName}',
+                  style: TextStyle(
+                      fontSize: FontSize.heading,
+                      color: AppColor.brand.secondary,
+                      fontWeight: FontWeight.bold),
                 ),
-              ),
+                Text(
+                  'を多く含む食材',
+                  style: TextStyle(
+                    fontSize: FontSize.label,
+                    fontWeight: FontWeight.bold,
+                    color: AppColor.text.darkgray,
+                  ),
+                ),
+                const SizedBox(
+                  width: PaddingSize.minimum,
+                ),
+                const Text(
+                  '(100g当たり)',
+                  style: TextStyle(
+                      fontSize: FontSize.annotation,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
             ),
-            /*Divider(
-              height: 2,
-              thickness: 1,
-              color: AppColor.brand.secondaryLight,
-            ),*/
-            _rankingContents(
-              recommendFoodStuffs.entries.elementAt(index),
-            ),
-          ],
+          ),
+        ),
+        /*Divider(
+          height: 2,
+          thickness: 1,
+          color: AppColor.brand.secondaryLight,
+        ),*/
+        _rankingContents(
+          recommendFoodStuffs.entries.elementAt(index),
         ),
       ],
     );
@@ -164,6 +155,7 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
                   children: <Widget>[
                     /* 料理名 */
                     Flexible(
+                      //flex: 8,
                       child: SizedBox(
                         height: PaddingSize.buttonHorizontal * 2,
                         child: Align(
@@ -181,45 +173,17 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Flexible(
-                      flex: 8,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          /* 料理名 */
-                          Text(
-                            nutrientMap.value[index].name,
-                            style: const TextStyle(
-                              fontSize: FontSize.subheading,
-                            ),
-                          ),
-                          /* 数値 */
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: <Widget>[
-                              Text(
-                                ((nutrientMap.value[index].nutrients
-                                                        .getNutrient(
-                                                            nutrientMap.key) *
-                                                    10)
-                                                .ceil() /
-                                            10)
-                                        .toString() +
-                                    nutrientMap.key.unit.value,
-                                style: const TextStyle(
-                                  fontSize: FontSize.subheading,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const Text(
-                                '/100g',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
+                    Text(
+                      ((nutrientMap.value[index].nutrients
+                                              .getNutrient(nutrientMap.key) *
+                                          10)
+                                      .ceil() /
+                                  10)
+                              .toString() +
+                          nutrientMap.key.unit.value,
+                      style: const TextStyle(
+                        fontSize: FontSize.subheading,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
