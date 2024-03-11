@@ -43,9 +43,9 @@ class AppBottomNavigationBar extends ConsumerWidget {
           debugPrint('index: $index');
           if (path == '/home/daily' && index == 0) {
             ref.read(dailyViewModelProvider.notifier).scrollTo(0);
-          } else if (path =='/home/recipes' && index == 1) {
+          } else if (path == '/home/recipes' && index == 1) {
             ref.read(recipeViewModelProvider.notifier).scrollToTop();
-          } else if (path =='/home/dictionary' && index == 2) {
+          } else if (path == '/home/dictionary' && index == 2) {
             debugPrint('dictionary');
             ref.read(dictionaryViewModelProvider.notifier).scrollToTop();
           } else if (path == '/home/letter' && index == 3) {

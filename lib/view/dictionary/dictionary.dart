@@ -38,8 +38,7 @@ class Dictionary extends ConsumerWidget {
                     crossAxisCount: 3,
                     children: DictionaryGroup.values
                         .map(
-                          (DictionaryGroup group) =>
-                              DictionaryGrid(group: group),
+                          (DictionaryGroup group) => DictionaryGrid(group: group),
                         )
                         .toList(),
                   );
