@@ -23,7 +23,7 @@ class RecipeViewModel extends _$RecipeViewModel {
     _openDataRemoteRepository = ref.watch(openDataRecipesRemoteRepositoryProvider);
     return RecipeState(
       scrollController: ScrollController(),
-    );  
+    );
   }
 
   Future<String> getPath({required OpenDataRecipeModel recipe}) async {
