@@ -32,8 +32,10 @@ class DailyViewModel extends _$DailyViewModel {
     );
   }
 
-  Future<void> updateSelectedDay(
-      {DateTime? selectedDay, DateTime? focusedDay}) async {
+  Future<void> updateSelectedDay({
+    DateTime? selectedDay,
+    DateTime? focusedDay,
+  }) async {
     state.whenData((DailyState data) async {
       state = const AsyncLoading<DailyState>();
       DateTime? selectedInputDay = selectedDay;
@@ -174,14 +176,24 @@ class DailyViewModel extends _$DailyViewModel {
           menu.energy / slns.energy * 100.0,
           menu.protein / slns.protein * 100.0,
           _calcVitaminSufficiency(
-              slns.retinol, slns.vitaminB1, slns.vitaminB2, slns.vitaminC),
+            slns.retinol,
+            slns.vitaminB1,
+            slns.vitaminB2,
+            slns.vitaminC,
+          ),
           _calcMineralSufficiency(
-              slns.calcium, slns.magnesium, slns.iron, slns.zinc),
+            slns.calcium,
+            slns.magnesium,
+            slns.iron,
+            slns.zinc,
+          ),
           menu.carbohydrate / slns.carbohydrate * 100.0,
           menu.lipid / slns.lipid * 100.0,
         ]
-            .map((double element) =>
-                (element > graphMaxValue) ? graphMaxValue : element)
+            .map(
+              (double element) =>
+                  (element > graphMaxValue) ? graphMaxValue : element,
+            )
             .toList();
       },
       orElse: () => <double>[0, 0, 0, 0, 0, 0],
