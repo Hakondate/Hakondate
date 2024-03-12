@@ -6,7 +6,7 @@ part of 'letter_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$letterViewModelHash() => r'c3613f08971884cec130b6b5a7947e1fb1be697e';
+String _$letterViewModelHash() => r'f401e10653480b62f06d1f12f4f924e885c706c0';
 
 /// See also [LetterViewModel].
 @ProviderFor(LetterViewModel)
