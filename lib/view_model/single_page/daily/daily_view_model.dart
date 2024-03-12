@@ -30,37 +30,56 @@ class DailyViewModel extends _$DailyViewModel {
     );
   }
 
-  Future<void> updateSelectedDay(
-      {DateTime? selectedDay, DateTime? focusedDay}) async {
-    state.whenData((DailyState data) async {
-      state = const AsyncLoading<DailyState>();
-      DateTime? selectedInputDay = selectedDay;
+  Future<void> updateSelectedDay({
+    DateTime? selectedDay,
+    DateTime? focusedDay,
+  }) async {
+    await state.maybeWhen(
+      data: (DailyState data) async {
+        state = const AsyncLoading<DailyState>();
+        DateTime? selectedInputDay = selectedDay;
+        switch (Environment.flavor) {
+          case Flavor.dev:
+            selectedInputDay ??=
+                await ref.read(menusLocalRepositoryProvider).getLatestDay();
+          case Flavor.stg || Flavor.prod:
+            selectedInputDay ??= DateTime.now();
+        }
+        final MenuModel menu = await ref
+            .read(menusLocalRepositoryProvider)
+            .getMenuByDay(selectedInputDay);
 
-      switch (Environment.flavor) {
-        case Flavor.dev:
-          selectedInputDay ??=
-              await ref.read(menusLocalRepositoryProvider).getLatestDay();
-        case Flavor.stg || Flavor.prod:
-          selectedInputDay ??= DateTime.now();
-      }
-      final MenuModel menu = await ref
-          .read(menusLocalRepositoryProvider)
-          .getMenuByDay(selectedInputDay);
-
-      state = AsyncData<DailyState>(
-        data.copyWith(
-          selectedDay: selectedInputDay,
-          focusedDay: focusedDay ?? selectedInputDay,
-          menu: menu,
-        ),
-      );
-      if (menu is LunchesDayMenuModel) {
-        await ref
-            .read(analyticsControllerProvider.notifier)
-            .logViewMenu(menu.id);
-      }
-      await updateRecommendFoodstuffs();
-    });
+        state = AsyncData<DailyState>(
+          data.copyWith(
+            selectedDay: selectedInputDay,
+            focusedDay: focusedDay ?? selectedInputDay,
+            menu: menu,
+          ),
+        );
+        if (menu is LunchesDayMenuModel) {
+          await ref
+              .read(analyticsControllerProvider.notifier)
+              .logViewMenu(menu.id);
+        }
+        await updateRecommendFoodstuffs();
+      },
+      loading: () async {
+        print('loading');
+        while (state.maybeWhen(
+          data: (DailyState data) => false,
+          loading: () => true,
+          orElse: () => false,
+        )) {
+          print('while');
+          await Future.delayed(const Duration(milliseconds: 100));
+        }
+        await updateSelectedDay(
+          selectedDay: selectedDay,
+          focusedDay: focusedDay,
+        );
+      },
+      orElse: () {},
+    );
   }
 
   Future<void> updateMenu() async {
@@ -172,14 +191,24 @@ class DailyViewModel extends _$DailyViewModel {
           menu.energy / slns.energy * 100.0,
           menu.protein / slns.protein * 100.0,
           _calcVitaminSufficiency(
-              slns.retinol, slns.vitaminB1, slns.vitaminB2, slns.vitaminC),
+            slns.retinol,
+            slns.vitaminB1,
+            slns.vitaminB2,
+            slns.vitaminC,
+          ),
           _calcMineralSufficiency(
-              slns.calcium, slns.magnesium, slns.iron, slns.zinc),
+            slns.calcium,
+            slns.magnesium,
+            slns.iron,
+            slns.zinc,
+          ),
           menu.carbohydrate / slns.carbohydrate * 100.0,
           menu.lipid / slns.lipid * 100.0,
         ]
-            .map((double element) =>
-                (element > graphMaxValue) ? graphMaxValue : element)
+            .map(
+              (double element) =>
+                  (element > graphMaxValue) ? graphMaxValue : element,
+            )
             .toList();
       },
       orElse: () => <double>[0, 0, 0, 0, 0, 0],
