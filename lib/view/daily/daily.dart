@@ -150,7 +150,7 @@ class Daily extends StatelessWidget {
                                   text: '献立は準備中です...',
                                 );
                               }
-                            })()
+                            })(),
                           ],
                         );
                       }
