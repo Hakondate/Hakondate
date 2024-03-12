@@ -28,7 +28,8 @@ class Daily extends StatelessWidget {
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
             icon: const Icon(Icons.dehaze),
-            onPressed: () => ref.read(drawerViewModelProvider.notifier).openDrawer(),
+            onPressed: () =>
+                ref.read(drawerViewModelProvider.notifier).openDrawer(),
           ),
         ),
         actions: <Widget>[
@@ -55,7 +56,9 @@ class Daily extends StatelessWidget {
         return ref.watch(dailyViewModelProvider).when(
               data: (DailyState state) {
                 final String formatted =
-                    (isSameDay(state.selectedDay, DateTime.now())) ? '今日' : DateFormat('M月d日').format(state.selectedDay);
+                    (isSameDay(state.selectedDay, DateTime.now()))
+                        ? '今日'
+                        : DateFormat('M月d日').format(state.selectedDay);
 
                 return Text('$formattedの献立');
               },
@@ -80,12 +83,18 @@ class Daily extends StatelessWidget {
                   focusedDay: state.focusedDay,
                   firstDay: state.calendarTabFirstDay,
                   lastDay: state.calendarTabLastDay,
-                  selectedDayPredicate: (DateTime day) => isSameDay(state.selectedDay, day),
-                  onDaySelected: (DateTime selectedDay, DateTime focusedDay) async {
+                  selectedDayPredicate: (DateTime day) =>
+                      isSameDay(state.selectedDay, day),
+                  onDaySelected:
+                      (DateTime selectedDay, DateTime focusedDay) async {
                     if (isSameDay(state.selectedDay, selectedDay)) return;
-                    await ref.read(dailyViewModelProvider.notifier).updateSelectedDay(selectedDay: selectedDay);
+                    await ref
+                        .read(dailyViewModelProvider.notifier)
+                        .updateSelectedDay(selectedDay: selectedDay);
                   },
-                  onPageChanged: (DateTime focusedDay) => ref.read(dailyViewModelProvider.notifier).updateFocusedDay(focusedDay),
+                  onPageChanged: (DateTime focusedDay) => ref
+                      .read(dailyViewModelProvider.notifier)
+                      .updateFocusedDay(focusedDay),
                   daysOfWeekHeight: 20,
                   calendarStyle: CalendarStyle(
                     todayTextStyle: const CalendarStyle().defaultTextStyle,
@@ -118,12 +127,20 @@ class Daily extends StatelessWidget {
                   child: GestureDetector(
                     onHorizontalDragEnd: (DragEndDetails details) {
                       if (details.primaryVelocity! < 0) {
-                        ref.read(dailyViewModelProvider.notifier).updateSelectedDay(
-                              selectedDay: ref.read(dailyViewModelProvider.notifier).getAddedSelectedDay(state, 1),
+                        ref
+                            .read(dailyViewModelProvider.notifier)
+                            .updateSelectedDay(
+                              selectedDay: ref
+                                  .read(dailyViewModelProvider.notifier)
+                                  .getAddedSelectedDay(state, 1),
                             );
                       } else {
-                        ref.read(dailyViewModelProvider.notifier).updateSelectedDay(
-                              selectedDay: ref.read(dailyViewModelProvider.notifier).getAddedSelectedDay(state, -1),
+                        ref
+                            .read(dailyViewModelProvider.notifier)
+                            .updateSelectedDay(
+                              selectedDay: ref
+                                  .read(dailyViewModelProvider.notifier)
+                                  .getAddedSelectedDay(state, -1),
                             );
                       }
                     },
@@ -136,9 +153,9 @@ class Daily extends StatelessWidget {
                           ],
                         );
                       } else {
-                        return SizedBox.expand(
-                          child: Card(
-                            child: (() {
+                        return Column(
+                          children: <Widget>[
+                            (() {
                               if (state.menu is HolidayMenuModel) {
                                 return const NonLunchesDayBody(
                                   imageFileName: 'holiday.png',
@@ -150,8 +167,8 @@ class Daily extends StatelessWidget {
                                   text: '献立は準備中です...',
                                 );
                               }
-                            })(),
-                          ),
+                            })()
+                          ],
                         );
                       }
                     })(),
