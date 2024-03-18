@@ -110,12 +110,50 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
           ))
         .get()
       ..sort(
-        (DictionaryItemsSchema a, DictionaryItemsSchema b) => a.name.compareTo(b.name),
+        (DictionaryItemsSchema a, DictionaryItemsSchema b) => _dictionarySearchItemCompareSolo(a, b, query),
       );
     for (final DictionaryItemsSchema schema in schemas) {
       items.add(DictionaryItemModel.fromDrift(schema));
     }
     return items;
+  }
+
+  int _dictionarySearchItemCompareSolo(DictionaryItemsSchema left, DictionaryItemsSchema right, String query) =>
+      _dictionarySearchItemNameCompare(left.name.toHiragana(), right.name.toHiragana(), query.toHiragana());
+
+  int _dictionarySearchItemNameCompare(String left, String right, String query) {
+    /// 完全一致チェック
+    if (left == query) return 1;
+    if (right == query) return -1;
+
+    /// 完全包含チェック
+    int leftIndexOfQuery = double.maxFinite.toInt();
+    int rightIndexOfQuery = double.maxFinite.toInt();
+
+    leftIndexOfQuery = left.indexOf(query);
+    rightIndexOfQuery = right.indexOf(query);
+
+    final bool isLeftSpaceDelimitedWord = _isSpaceDelimited(left, leftIndexOfQuery, query);
+    final bool isRightSpaceDelimitedWord = _isSpaceDelimited(right, rightIndexOfQuery, query);
+
+    if (!(isLeftSpaceDelimitedWord && isRightSpaceDelimitedWord)) {
+      if (isLeftSpaceDelimitedWord) return -1;
+      if (isRightSpaceDelimitedWord) return 1;
+    }
+
+    /// 部分一致チェック
+    if (leftIndexOfQuery < rightIndexOfQuery) return -1;
+    if (leftIndexOfQuery > rightIndexOfQuery) return 1;
+
+    return left.compareTo(right);
+  }
+
+  bool _isSpaceDelimited(String name, int indexOfQuery, String query) {
+    const String wordSplitter = '　';
+
+    final bool left = name.contains(RegExp('$wordSplitter$query($wordSplitter|\$)'));
+    final bool right = name.contains(RegExp('(^|$wordSplitter)$query$wordSplitter'));
+    return left || right;
   }
 
   @override
