@@ -143,7 +143,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
       DictionaryItemsSchema left, DictionaryItemsSchema right, String query) {
     // TODO 文字列比較が合ってるか考える
     int score;
-    score = dictionarySearchItemNameCompare(
+    score = _dictionarySearchItemNameCompare(
         left.name.toHiragana(), right.name.toHiragana(), query.toHiragana());
 
     //temp = dictionarySearchItemNameCompare(
@@ -159,23 +159,27 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
     return score;
   }
 
-  int dictionarySearchItemNameCompare(String left, String right, String query) {
+  int _dictionarySearchItemNameCompare(
+      String left, String right, String query) {
+    /// 完全一致
     if (left == query) return 1;
     if (right == query) return -1;
 
-    int left_index = 10;
-    int right_index = 10;
-
-    left_index = left.indexOf(query);
-    right_index = right.indexOf(query);
-
     /// 完全包含チェック
-    bool isLeftWord = wordCheck(left, left_index, query);
-    bool isRightWord = wordCheck(right, right_index, query);
+    int leftIndexOfQuery = double.maxFinite.toInt();
+    int rightIndexOfQuery = double.maxFinite.toInt();
 
-    if (!(isLeftWord && isRightWord)) {
-      if (isLeftWord) return -1;
-      if (isRightWord) return 1;
+    leftIndexOfQuery = left.indexOf(query);
+    rightIndexOfQuery = right.indexOf(query);
+
+    final bool isLeftSpaceDelimitedWord =
+        wordCheck(left, leftIndexOfQuery, query);
+    final bool isRightSpaceDelimitedWord =
+        wordCheck(right, rightIndexOfQuery, query);
+
+    if (!(isLeftSpaceDelimitedWord && isRightSpaceDelimitedWord)) {
+      if (isLeftSpaceDelimitedWord) return -1;
+      if (isRightSpaceDelimitedWord) return 1;
     }
 
     //if (left[left_index - 1] == wordSplitter &&
@@ -190,8 +194,8 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
     //}
 
     /// 部分一致チェック
-    if (left_index < right_index) return -1;
-    if (left_index > right_index) return 1;
+    if (leftIndexOfQuery < rightIndexOfQuery) return -1;
+    if (leftIndexOfQuery > rightIndexOfQuery) return 1;
 
     return left.compareTo(right);
   }
