@@ -118,8 +118,8 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
     return items;
   }
 
-  int _dictionarySearchItemCompareSolo(DictionaryItemsSchema left, DictionaryItemsSchema right, String query) 
-    => _dictionarySearchItemNameCompare(left.name.toHiragana(), right.name.toHiragana(), query.toHiragana());
+  int _dictionarySearchItemCompareSolo(DictionaryItemsSchema left, DictionaryItemsSchema right, String query) =>
+      _dictionarySearchItemNameCompare(left.name.toHiragana(), right.name.toHiragana(), query.toHiragana());
 
   int _dictionarySearchItemNameCompare(String left, String right, String query) {
     /// 完全一致チェック
