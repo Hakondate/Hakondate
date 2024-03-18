@@ -110,7 +110,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
           ))
         .get()
       ..sort(
-        (DictionaryItemsSchema a, DictionaryItemsSchema b) => dictionarySearchItemCompareSolo(a, b, query),
+        (DictionaryItemsSchema a, DictionaryItemsSchema b) => _dictionarySearchItemCompareSolo(a, b, query),
       );
     for (final DictionaryItemsSchema schema in schemas) {
       items.add(DictionaryItemModel.fromDrift(schema));
@@ -118,27 +118,12 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
     return items;
   }
 
-  // TODO
-  int dictionarySearchItemCompareSolo(DictionaryItemsSchema left, DictionaryItemsSchema right, String query) {
-    // TODO 文字列比較が合ってるか考える
-    int score;
-    score = _dictionarySearchItemNameCompare(left.name.toHiragana(), right.name.toHiragana(), query.toHiragana());
-
-    //temp = dictionarySearchItemNameCompare(
-    //    left.name, right.name, query.toHiragana());
-    //if (score == 1) return 1;
-    //if (temp > score) score = temp;
-
-    //temp = dictionarySearchItemNameCompare(
-    //    left.name, right.name, query.toKatakana());
-    //if (score == 1) return 1;
-    //if (temp > score) score = temp;
-
-    return score;
+  int _dictionarySearchItemCompareSolo(DictionaryItemsSchema left, DictionaryItemsSchema right, String query) {
+    return _dictionarySearchItemNameCompare(left.name.toHiragana(), right.name.toHiragana(), query.toHiragana());
   }
 
   int _dictionarySearchItemNameCompare(String left, String right, String query) {
-    /// 完全一致
+    /// 完全一致チェック
     if (left == query) return 1;
     if (right == query) return -1;
 
@@ -149,8 +134,8 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
     leftIndexOfQuery = left.indexOf(query);
     rightIndexOfQuery = right.indexOf(query);
 
-    final bool isLeftSpaceDelimitedWord = isSpaceDelimited(left, leftIndexOfQuery, query);
-    final bool isRightSpaceDelimitedWord = isSpaceDelimited(right, rightIndexOfQuery, query);
+    final bool isLeftSpaceDelimitedWord = _isSpaceDelimited(left, leftIndexOfQuery, query);
+    final bool isRightSpaceDelimitedWord = _isSpaceDelimited(right, rightIndexOfQuery, query);
 
     if (!(isLeftSpaceDelimitedWord && isRightSpaceDelimitedWord)) {
       if (isLeftSpaceDelimitedWord) return -1;
@@ -164,7 +149,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
     return left.compareTo(right);
   }
 
-  bool isSpaceDelimited(String name, int indexOfQuery, String query) {
+  bool _isSpaceDelimited(String name, int indexOfQuery, String query) {
     const String wordSplitter = '　';
 
     final bool left = name.contains(RegExp('$wordSplitter$query($wordSplitter|\$)'));
