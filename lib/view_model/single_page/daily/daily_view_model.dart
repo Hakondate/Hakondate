@@ -17,7 +17,7 @@ part 'daily_view_model.g.dart';
 @Riverpod(keepAlive: true)
 class DailyViewModel extends _$DailyViewModel {
   @override
-  FutureOr<DailyState> build() async {
+  Future<DailyState> build() async {
     return DailyState(
       selectedDay: DateTime.now(),
       focusedDay: DateTime.now(),
@@ -36,6 +36,7 @@ class DailyViewModel extends _$DailyViewModel {
   }) async {
     await state.maybeWhen(
       data: (DailyState data) async {
+        print('state is data');
         state = const AsyncLoading<DailyState>();
         DateTime? selectedInputDay = selectedDay;
         switch (Environment.flavor) {
@@ -63,20 +64,8 @@ class DailyViewModel extends _$DailyViewModel {
         }
         await updateRecommendFoodstuffs();
       },
-      loading: () async {
-        print('loading');
-        while (state.maybeWhen(
-          data: (DailyState data) => false,
-          loading: () => true,
-          orElse: () => false,
-        )) {
-          print('while');
-          await Future.delayed(const Duration(milliseconds: 100));
-        }
-        await updateSelectedDay(
-          selectedDay: selectedDay,
-          focusedDay: focusedDay,
-        );
+      loading: () {
+        print('state is loading');
       },
       orElse: () {},
     );
