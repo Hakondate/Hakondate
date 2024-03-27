@@ -7,13 +7,16 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'open_data_recipes_local_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-OpenDataRecipesLocalRepository openDataRecipesLocalRepository(OpenDataRecipesLocalRepositoryRef ref) => OpenDataRecipesLocalRepository();
+OpenDataRecipesLocalRepository openDataRecipesLocalRepository(
+        OpenDataRecipesLocalRepositoryRef ref) =>
+    OpenDataRecipesLocalRepository();
 
 abstract class OpenDataRecipesLocalRepositoryAPI {
   Future<String> add({required String path, required Uint8List bytes});
   Future<bool> isExist({required String path});
   Future<String> getPath({required String path});
   Future<void> delete({required String path});
+  Future<void> deleteAll();
 }
 
 class OpenDataRecipesLocalRepository extends OpenDataRecipesLocalRepositoryAPI {
@@ -47,7 +50,17 @@ class OpenDataRecipesLocalRepository extends OpenDataRecipesLocalRepositoryAPI {
     final String fullPath = await getPath(path: path);
     final File file = File(fullPath);
     await file.delete();
+  }
 
-    return;
+  @override
+  Future<void> deleteAll() async {
+    final Directory routeDirectory = await getApplicationDocumentsDirectory();
+    final Directory directory =
+        Directory('${routeDirectory.path}/open_data_recipes/pdfs');
+    final List<FileSystemEntity> recipeFiles = directory.listSync();
+
+    await Future.forEach(recipeFiles, (FileSystemEntity recipeFile) async {
+      await recipeFile.delete();
+    });
   }
 }

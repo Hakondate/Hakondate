@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hakondate/view/cache_management/cache_management.dart';
 
 import 'package:routemaster/routemaster.dart';
 
@@ -47,19 +48,29 @@ final RoutemasterDelegate routemaster = RoutemasterDelegate(
       '/home/daily/dish': (_) => const MaterialPage<dynamic>(child: Dish()),
       '/home/calendar': (_) => const FadeUpPage(child: Calendar()),
       '/home/recipes': (_) => const MaterialPage<dynamic>(child: Recipe()),
-      '/home/recipes_pdf/:id': (RouteData route) => FadeUpPage(child: RecipePDF(id: route.pathParameters['id'])),
-      '/home/dictionary': (_) => const MaterialPage<dynamic>(child: Dictionary()),
-      '/home/dictionary/search': (_) => const MaterialPage<dynamic>(child: DictionarySearch()),
-      '/home/dictionary/:group': (_) => const MaterialPage<dynamic>(child: DictionaryGroupList()),
-      '/home/dictionary_item/:id': (_) => const FadeUpPage(child: DictionaryItem()),
+      '/home/recipes_pdf/:id': (RouteData route) =>
+          FadeUpPage(child: RecipePDF(id: route.pathParameters['id'])),
+      '/home/dictionary': (_) =>
+          const MaterialPage<dynamic>(child: Dictionary()),
+      '/home/dictionary/search': (_) =>
+          const MaterialPage<dynamic>(child: DictionarySearch()),
+      '/home/dictionary/:group': (_) =>
+          const MaterialPage<dynamic>(child: DictionaryGroupList()),
+      '/home/dictionary_item/:id': (_) =>
+          const FadeUpPage(child: DictionaryItem()),
       '/home/letter': (_) => const MaterialPage<dynamic>(child: Letter()),
-      '/home/letter/:title': (_) => const MaterialPage<dynamic>(child: LetterPDF()),
-      '/home/user_settings': (_) => const MaterialPage<dynamic>(child: UserSettings()),
-      '/home/user_settings/:id': (RouteData route) => FadeUpPage(child: UserSettingsDetail()),
+      '/home/letter/:title': (_) =>
+          const MaterialPage<dynamic>(child: LetterPDF()),
+      '/home/user_settings': (_) =>
+          const MaterialPage<dynamic>(child: UserSettings()),
+      '/home/user_settings/:id': (RouteData route) =>
+          FadeUpPage(child: UserSettingsDetail()),
       '/home/origin': (_) => const FadeUpPage(child: Origin()),
       '/home/drawer_terms': (_) => const FadeUpPage(child: DrawerTerms()),
       '/home/help': (_) => const FadeUpPage(child: Help()),
       '/home/information': (_) => const FadeUpPage(child: Information()),
+      '/home/cache_management': (_) =>
+          const FadeUpPage(child: CacheManagement()),
       '/home/license': (_) => const FadeUpPage(child: License()),
       '/home/license/:index': (RouteData route) => FadeUpPage(
             child: LicenseDetail(
