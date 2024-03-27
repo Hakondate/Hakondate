@@ -161,7 +161,7 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 0),
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
                             child: Text(
                               nutrientMap.value[index].name,
                               maxLines: 2,
@@ -180,6 +180,7 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
                                       .ceil() /
                                   10)
                               .toString() +
+                          ' ' +
                           nutrientMap.key.unit.value,
                       style: const TextStyle(
                         fontSize: FontSize.subheading,
