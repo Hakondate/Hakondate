@@ -5,9 +5,6 @@
     "**/*.g.dart": true,
     "**/*.freezed.dart": true,
   },
-  "editor.rulers": [140],
-  "editor.formatOnSave": true,
-  "editor.formatOnPaste": true,
   "cSpell.words": [
     "cupertino",
     "hakondate",
@@ -17,5 +14,19 @@
     "slns",
     "subosito",
     "svgs"
-  ]
+  ],
+  "[dart]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.rulers": [
+      140
+    ],
+    "editor.selectionHighlight": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": "off",
+    "editor.defaultFormatter": "Dart-Code.dart-code",
+    "editor.formatOnPaste": true
+  }
 }
