@@ -151,9 +151,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
   bool _isSpaceDelimited(String name, int indexOfQuery, String query) {
     const String wordSplitter = '　';
 
-    final bool left = name.contains(RegExp('$wordSplitter$query($wordSplitter|\$)'));
-    final bool right = name.contains(RegExp('(^|$wordSplitter)$query$wordSplitter'));
-    return left || right;
+    return name.contains(RegExp('(^|$wordSplitter)$query($wordSplitter|\$)'));
   }
 
   @override
