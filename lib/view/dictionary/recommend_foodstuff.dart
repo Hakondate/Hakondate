@@ -34,9 +34,7 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
                     if (data.recommendFoodStuffs.isNotEmpty) {
                       return Column(
                         children: <Widget>[
-                          for (int i = 0;
-                              i < data.recommendFoodStuffs.length;
-                              i++)
+                          for (int i = 0; i < data.recommendFoodStuffs.length; i++)
                             _recommendFoodWidget(
                               data.recommendFoodStuffs,
                               i,
@@ -113,8 +111,7 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
       builder: (BuildContext context, WidgetRef ref, _) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children:
-              List<Widget>.generate(nutrientMap.value.length * 2, (int i) {
+          children: List<Widget>.generate(nutrientMap.value.length * 2, (int i) {
             if (i.isOdd) {
               return Divider(
                 height: 0,
@@ -166,9 +163,7 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
                 ),
               ),
               onTap: () async {
-                await ref
-                    .read(dictionaryViewModelProvider.notifier)
-                    .selectItem(nutrientMap.value[index].id);
+                await ref.read(dictionaryViewModelProvider.notifier).selectItem(nutrientMap.value[index].id);
                 routemaster.push(
                   '/home/dictionary_item/${nutrientMap.value[index].id}',
                 );
