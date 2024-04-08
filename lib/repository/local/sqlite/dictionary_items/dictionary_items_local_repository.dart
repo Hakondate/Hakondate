@@ -103,35 +103,30 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
   Future<List<DictionaryItemModel>> search(String query) async {
     final List<DictionaryItemModel> items = <DictionaryItemModel>[];
 
-    final List<DictionaryItemsSchema> schemas = await (_db.select(_db.dictionaryItemsTable)
-          ..where(
-            ($DictionaryItemsTableTable t) =>
-                t.name.contains(query) | t.name.contains(query.toHiragana()) | t.name.contains(query.toKatakana()),
-          ))
-        .get()
-      ..sort(
-        (DictionaryItemsSchema a, DictionaryItemsSchema b) => _dictionarySearchItemCompareSolo(a, b, query),
-      );
+    final List<DictionaryItemsSchema> schemas =
+        await (_db.select(_db.dictionaryItemsTable)..where(($DictionaryItemsTableTable t) => t.name.contains(query.toHiragana()))).get()
+          ..sort(
+            (DictionaryItemsSchema a, DictionaryItemsSchema b) => _compareSearchHit(a.name.toHiragana(), b.name.toHiragana(), query),
+          );
     for (final DictionaryItemsSchema schema in schemas) {
       items.add(DictionaryItemModel.fromDrift(schema));
     }
     return items;
   }
 
-  int _dictionarySearchItemCompareSolo(DictionaryItemsSchema left, DictionaryItemsSchema right, String query) =>
-      _dictionarySearchItemNameCompare(left.name.toHiragana(), right.name.toHiragana(), query.toHiragana());
+  /// 完全一致　→ 完全包含　→ 部分一致　→ 辞書順
+  ///TODO docコメント書く
+  int _compareSearchHit(String leftInput, String rightInput, String query) {
+    final String left = leftInput.toHiragana();
+    final String right = rightInput.toHiragana();
 
-  int _dictionarySearchItemNameCompare(String left, String right, String query) {
     /// 完全一致チェック
     if (left == query) return 1;
     if (right == query) return -1;
 
     /// 完全包含チェック
-    int leftIndexOfQuery = double.maxFinite.toInt();
-    int rightIndexOfQuery = double.maxFinite.toInt();
-
-    leftIndexOfQuery = left.indexOf(query);
-    rightIndexOfQuery = right.indexOf(query);
+    final int leftIndexOfQuery = left.indexOf(query);
+    final int rightIndexOfQuery = right.indexOf(query);
 
     final bool isLeftSpaceDelimitedWord = _isSpaceDelimited(left, leftIndexOfQuery, query);
     final bool isRightSpaceDelimitedWord = _isSpaceDelimited(right, rightIndexOfQuery, query);
@@ -149,9 +144,12 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
   }
 
   bool _isSpaceDelimited(String name, int indexOfQuery, String query) {
-    const String wordSplitter = '　';
+    const List<String> wordSplitters = <String>[' ', '　'];
+    for (final String wordSplitter in wordSplitters) {
+      return name.contains(RegExp('(^|$wordSplitter)$query($wordSplitter|\$)'));
+    }
 
-    return name.contains(RegExp('(^|$wordSplitter)$query($wordSplitter|\$)'));
+    return false;
   }
 
   @override
