@@ -110,18 +110,7 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
         return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: List<Widget>.generate(nutrientMap.value.length * 2, (int i) {
-            if (i.isOdd) {
-              return Divider(
-                height: 0,
-                thickness: 1,
-                color: AppColor.brand.primary,
-              );
-            }
-
-            final int index = i ~/ 2;
-
+          children: List<Widget>.generate(nutrientMap.value.length, (int i) {
             return GestureDetector(
               child: Padding(
                 padding: const EdgeInsets.symmetric(
@@ -134,7 +123,7 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
                     /* 料理名 */
                     Flexible(
                       child: SizedBox(
-                        height: PaddingSize.buttonHorizontal * 2,
+                        height: PaddingSize.buttonVerticalLarge,
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
@@ -142,7 +131,7 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
                               horizontal: PaddingSize.minimum,
                             ),
                             child: Text(
-                              nutrientMap.value[index].name,
+                              nutrientMap.value[i].name,
                               maxLines: 2,
                               style: const TextStyle(
                                 fontSize: FontSize.body,
@@ -153,7 +142,7 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${(nutrientMap.value[index].nutrients.getNutrient(nutrientMap.key) * 10).ceil() / 10} ${nutrientMap.key.unit.value}',
+                      '${(nutrientMap.value[i].nutrients.getNutrient(nutrientMap.key) * 10).ceil() / 10} ${nutrientMap.key.unit.value}',
                       style: const TextStyle(
                         fontSize: FontSize.subheading,
                         fontWeight: FontWeight.bold,
@@ -163,9 +152,9 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
                 ),
               ),
               onTap: () async {
-                await ref.read(dictionaryViewModelProvider.notifier).selectItem(nutrientMap.value[index].id);
+                await ref.read(dictionaryViewModelProvider.notifier).selectItem(nutrientMap.value[i].id);
                 routemaster.push(
-                  '/home/dictionary_item/${nutrientMap.value[index].id}',
+                  '/home/dictionary_item/${nutrientMap.value[i].id}',
                 );
               },
             );
