@@ -30,7 +30,6 @@
 .pub-cache/
 .pub/
 /build/
-.fvm/flutter_sdk
 
 # Symbolication related
 app.*.symbols
@@ -105,3 +104,6 @@ coverage/
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
+
+# FVM Version Cache
+.fvm/
