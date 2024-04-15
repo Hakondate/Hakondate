@@ -70,7 +70,7 @@ dev_dependencies:
   riverpod_generator: 2.3.9
   riverpod_lint: 2.3.7
   drift_dev: 2.14.1
-  flutter_oss_licenses: 2.0.1
+  flutter_oss_licenses: 3.0.2
 
   # デザイン生成
   flutter_native_splash: 2.3.8
