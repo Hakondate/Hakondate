@@ -62,17 +62,17 @@ class PaddingSize {
   /// コンテンツ用の大きめの余白
   static const double contentLarge = 40;
 
-  /// ボタンの水平方向の基本余白
+  /// ボタンの垂直方向の基本余白
   static const double buttonVertical = 5;
 
-  /// ボタンの垂直方向の基本余白
+  // ボタンの垂直方向の大きな余白
+  static const double buttonVerticalLarge = 50;
+
+  /// ボタンの水平方向の基本余白
   static const double buttonHorizontal = 25;
 
-  /// ボタンの垂直方向の大きな余白
+  /// ボタンの水平方向の大きな余白
   static const double buttonHorizontalLarge = 30;
-
-  // ボタンの水平方向の大きな余白
-  static const double buttonVerticalLarge = 50;
 }
 
 class BorderSize {
