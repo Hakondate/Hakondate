@@ -7,7 +7,7 @@ version: 2.0.1+9
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
-  flutter: "3.16.5"
+  flutter: "3.19.5"
 
 dependencies:
   flutter:
@@ -18,62 +18,62 @@ dependencies:
   # デザイン
   cupertino_icons: 1.0.6
   multi_charts: 0.3.0
-  table_calendar: 3.0.9
-  flutter_svg: 2.0.9
+  table_calendar: 3.1.1
+  flutter_svg: 2.0.10+1
   flutter_pdfview: 1.3.2
   shimmer: 3.0.0
 
   # 状態管理関連
-  flutter_riverpod: 2.4.9
-  riverpod_annotation: 2.3.3
-  freezed: 2.4.6
+  flutter_riverpod: 2.5.1
+  riverpod_annotation: 2.3.5
+  freezed: 2.5.2
   freezed_annotation: 2.4.1
   json_serializable: 6.7.1
   json_annotation: 4.8.1
 
   # Drift(SQLite)関連
-  drift: 2.14.1
-  sqlite3_flutter_libs: 0.5.18
+  drift: 2.16.0
+  sqlite3_flutter_libs: 0.5.20
 
   # 起動時データ関連
-  shared_preferences: 2.2.2
-  path_provider: 2.1.1
-  path: 1.8.3
-  intl: 0.18.1
+  shared_preferences: 2.2.3
+  path_provider: 2.1.3
+  path: 1.9.0
+  intl: 0.19.0
 
   # 遷移関連
   routemaster: 1.0.1
 
   # Firebase関連
   app_tracking_transparency: 2.0.4
-  firebase_storage: 11.5.6
+  firebase_storage: 11.7.1
   firebase_core: 2.24.2
   cloud_firestore: 4.13.5
   firebase_crashlytics: 3.4.8
   firebase_analytics: 10.7.4
 
   # URL関連
-  url_launcher: 6.2.2
+  url_launcher: 6.2.6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   # コード整形
-  flutter_lints: 3.0.1
+  flutter_lints: 3.0.2
   very_good_analysis: 5.1.0
   import_sorter: 4.6.0
 
   # コード生成
-  build_runner: 2.4.7
-  custom_lint: 0.5.7
-  riverpod_generator: 2.3.9
-  riverpod_lint: 2.3.7
-  drift_dev: 2.14.1
-  flutter_oss_licenses: 2.0.1
+  build_runner: 2.4.9
+  custom_lint: 0.6.4
+  riverpod_generator: 2.4.0
+  riverpod_lint: 2.3.10
+  drift_dev: 2.16.0
+  flutter_oss_licenses: 2.0.3
 
   # デザイン生成
-  flutter_native_splash: 2.3.8
+  flutter_native_splash: 2.4.0
   flutter_launcher_icons: 0.13.1
 
   # build_runner の実行コマンド
