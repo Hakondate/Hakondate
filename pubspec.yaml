@@ -47,7 +47,7 @@ dependencies:
   # Firebase関連
   app_tracking_transparency: 2.0.4
   firebase_storage: 11.7.1
-  firebase_core: 2.24.2
+  firebase_core: 2.29.0
   cloud_firestore: 4.13.6
   firebase_crashlytics: 3.4.8
   firebase_analytics: 10.7.4
