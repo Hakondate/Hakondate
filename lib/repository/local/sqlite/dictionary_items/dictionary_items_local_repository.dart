@@ -114,8 +114,17 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
     return items;
   }
 
+  /// # 優先度
   /// 完全一致　→ 完全包含　→ 部分一致　→ 辞書順
-  ///TODO docコメント書く
+  /// # 引数
+  /// - leftInput: 比較対象1（queryを完全包含している前提）
+  /// - rightInput: 比較対象2（queryを完全包含している前提）
+  /// - query: 検索クエリ
+  /// # 戻り値の仕様
+  /// StringクラスのcompareToメソッドと同じ
+  /// - return 1  : leftInputの方が優先度が高い
+  /// - return 0  : leftInputとrightInputの優先度が同じ
+  /// - return -1 : rightInputの方が優先度が高い
   int _compareSearchHit(String leftInput, String rightInput, String query) {
     final String left = leftInput.toHiragana();
     final String right = rightInput.toHiragana();
