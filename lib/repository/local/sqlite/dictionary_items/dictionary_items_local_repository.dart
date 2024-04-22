@@ -106,7 +106,8 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
     final List<DictionaryItemsSchema> schemas =
         await (_db.select(_db.dictionaryItemsTable)..where(($DictionaryItemsTableTable t) => t.name.contains(query.toHiragana()))).get()
           ..sort(
-            (DictionaryItemsSchema a, DictionaryItemsSchema b) => _compareSearchHit(a.name.toHiragana(), b.name.toHiragana(), query),
+            (DictionaryItemsSchema a, DictionaryItemsSchema b) =>
+                _compareSearchHit(a.name.toHiragana(), b.name.toHiragana(), query.toHiragana()),
           );
     for (final DictionaryItemsSchema schema in schemas) {
       items.add(DictionaryItemModel.fromDrift(schema));
