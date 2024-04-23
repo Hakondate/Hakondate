@@ -57,7 +57,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "jp.ac.fun.hakondate"
+        applicationId "org.hakondate"
         minSdkVersion 28
         targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()

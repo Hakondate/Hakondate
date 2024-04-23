@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:852115917987:android:728007dec1b8cf3c420316",
         "android_client_info": {
-          "package_name": "jp.ac.fun.hakondate.stg"
+          "package_name": "org.hakondate.stg"
         }
       },
       "oauth_client": [
@@ -34,7 +34,7 @@
               "client_id": "852115917987-4q4jmvvq9vn3dj0kihikvmbhmvg8299v.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "jp.ac.fun.hakondate.dev"
+                "bundle_id": "org.hakondate.dev"
               }
             }
           ]
