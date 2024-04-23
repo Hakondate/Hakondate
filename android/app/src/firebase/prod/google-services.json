@@ -9,6 +9,42 @@
       "client_info": {
         "mobilesdk_app_id": "1:81098517249:android:9dbb06c7c8074308748900",
         "android_client_info": {
+          "package_name": "jp.ac.fun.hakondate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "81098517249-fpfr74860c4cq4q2hfdn8h1dl943b7me.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhlZiHudKyE_Q8RnDF9vdlP3sPKqb7j_o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "81098517249-fpfr74860c4cq4q2hfdn8h1dl943b7me.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "81098517249-hfg8014ol2kp96vtss7pd5g5gkuvterd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.ac.fun.hakondate"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:81098517249:android:2f13b94ec571e8d6748900",
+        "android_client_info": {
           "package_name": "org.hakondate"
         }
       },
@@ -34,7 +70,7 @@
               "client_id": "81098517249-hfg8014ol2kp96vtss7pd5g5gkuvterd.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "org.hakondate"
+                "bundle_id": "jp.ac.fun.hakondate"
               }
             }
           ]
