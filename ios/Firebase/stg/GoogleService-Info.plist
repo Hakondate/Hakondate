@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CLIENT_ID</key>
-	<string>852115917987-k6eb6m9mchn6ksabom2g4fl69tud4c1f.apps.googleusercontent.com</string>
-	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.852115917987-k6eb6m9mchn6ksabom2g4fl69tud4c1f</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDUA4C92JkRJPesBR32_K8CJGH1dUfBXNw</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>jp.ac.fun.hakondate.stg</string>
+	<string>org.hakondate</string>
 	<key>PROJECT_ID</key>
 	<string>hakondate-staging</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:852115917987:ios:781aeda7ea585082420316</string>
+	<string>1:852115917987:ios:99293ede32037002420316</string>
 </dict>
 </plist>
