@@ -305,14 +305,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('meta')]
   );
 
-/// _flutterfire_internals 1.3.29
+/// _flutterfire_internals 1.3.32
 const __flutterfire_internals = Package(
     name: '_flutterfire_internals',
     description: 'A package hosting Dart code shared between FlutterFire plugins.',
     homepage: 'https://firebase.google.com/docs/firestore',
     repository: 'https://github.com/firebase/flutterfire/tree/master/packages/_flutterfire_internals',
     authors: [],
-    version: '1.3.29',
+    version: '1.3.32',
     license: '''Copyright 2017, the Chromium project authors. All rights reserved.
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -1715,14 +1715,14 @@ const _clock = Package(
     dependencies: []
   );
 
-/// cloud_firestore 4.16.1
+/// cloud_firestore 4.17.2
 const _cloud_firestore = Package(
     name: 'cloud_firestore',
     description: 'Flutter plugin for Cloud Firestore, a cloud-hosted, noSQL database with live synchronization and offline support on Android and iOS.',
     homepage: 'https://firebase.google.com/docs/firestore',
     repository: 'https://github.com/firebase/flutterfire/tree/master/packages/cloud_firestore/cloud_firestore',
     authors: [],
-    version: '4.16.1',
+    version: '4.17.2',
     license: '''Copyright 2017, the Chromium project authors. All rights reserved.
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -1754,14 +1754,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('cloud_firestore_platform_interface'), PackageRef('cloud_firestore_web'), PackageRef('collection'), PackageRef('firebase_core'), PackageRef('firebase_core_platform_interface'), PackageRef('flutter'), PackageRef('meta')]
   );
 
-/// cloud_firestore_platform_interface 6.1.13
+/// cloud_firestore_platform_interface 6.2.2
 const _cloud_firestore_platform_interface = Package(
     name: 'cloud_firestore_platform_interface',
     description: 'A common platform interface for the cloud_firestore plugin.',
     homepage: 'https://github.com/firebase/flutterfire/tree/master/packages/cloud_firestore/cloud_firestore_platform_interface',
     repository: 'https://github.com/firebase/flutterfire/tree/master/packages/cloud_firestore/cloud_firestore_platform_interface',
     authors: [],
-    version: '6.1.13',
+    version: '6.2.2',
     license: '''Copyright 2017, the Chromium project authors. All rights reserved.
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -1793,14 +1793,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('_flutterfire_internals'), PackageRef('collection'), PackageRef('firebase_core'), PackageRef('flutter'), PackageRef('meta'), PackageRef('plugin_platform_interface')]
   );
 
-/// cloud_firestore_web 3.11.1
+/// cloud_firestore_web 3.12.2
 const _cloud_firestore_web = Package(
     name: 'cloud_firestore_web',
     description: 'The web implementation of cloud_firestore',
     homepage: 'https://github.com/firebase/flutterfire/tree/master/packages/cloud_firestore/cloud_firestore_web',
     repository: 'https://github.com/firebase/flutterfire/tree/master/packages/cloud_firestore/cloud_firestore_web',
     authors: [],
-    version: '3.11.1',
+    version: '3.12.2',
     license: '''// Copyright 2017 The Chromium Authors. All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -3130,14 +3130,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('meta'), PackageRef('path')]
   );
 
-/// firebase_analytics 10.10.1
+/// firebase_analytics 10.10.4
 const _firebase_analytics = Package(
     name: 'firebase_analytics',
     description: 'Flutter plugin for Google Analytics for Firebase, an app measurement solution that provides insight on app usage and user engagement on Android and iOS.',
     homepage: 'https://firebase.google.com/docs/analytics',
     repository: 'https://github.com/firebase/flutterfire/tree/master/packages/firebase_analytics/firebase_analytics',
     authors: [],
-    version: '10.10.1',
+    version: '10.10.4',
     license: '''Copyright 2017, the Chromium project authors. All rights reserved.
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -3169,14 +3169,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('firebase_analytics_platform_interface'), PackageRef('firebase_analytics_web'), PackageRef('firebase_core'), PackageRef('firebase_core_platform_interface'), PackageRef('flutter')]
   );
 
-/// firebase_analytics_platform_interface 3.10.2
+/// firebase_analytics_platform_interface 3.10.5
 const _firebase_analytics_platform_interface = Package(
     name: 'firebase_analytics_platform_interface',
     description: 'A common platform interface for the firebase_analytics plugin.',
     homepage: 'https://github.com/firebase/flutterfire/tree/master/packages/firebase_analytics/firebase_analytics_platform_interface',
     repository: 'https://github.com/firebase/flutterfire/tree/master/packages/firebase_analytics/firebase_analytics_platform_interface',
     authors: [],
-    version: '3.10.2',
+    version: '3.10.5',
     license: '''Copyright 2017, the Chromium project authors. All rights reserved.
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -3208,14 +3208,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('_flutterfire_internals'), PackageRef('firebase_core'), PackageRef('flutter'), PackageRef('meta'), PackageRef('plugin_platform_interface')]
   );
 
-/// firebase_analytics_web 0.5.7+1
+/// firebase_analytics_web 0.5.7+4
 const _firebase_analytics_web = Package(
     name: 'firebase_analytics_web',
     description: 'The web implementation of firebase_analytics',
     homepage: 'https://github.com/firebase/flutterfire/tree/master/packages/firebase_analytics/firebase_analytics_web',
     repository: 'https://github.com/firebase/flutterfire/tree/master/packages/firebase_analytics/firebase_analytics_web',
     authors: [],
-    version: '0.5.7+1',
+    version: '0.5.7+4',
     license: '''Copyright 2017, the Chromium project authors. All rights reserved.
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -3247,14 +3247,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('_flutterfire_internals'), PackageRef('firebase_analytics_platform_interface'), PackageRef('firebase_core'), PackageRef('firebase_core_web'), PackageRef('flutter')]
   );
 
-/// firebase_core 2.29.0
+/// firebase_core 2.30.1
 const _firebase_core = Package(
     name: 'firebase_core',
     description: 'Flutter plugin for Firebase Core, enabling connecting to multiple Firebase apps.',
     homepage: 'https://firebase.google.com/docs/flutter/setup',
     repository: 'https://github.com/firebase/flutterfire/tree/master/packages/firebase_core/firebase_core',
     authors: [],
-    version: '2.29.0',
+    version: '2.30.1',
     license: '''// Copyright 2017 The Chromium Authors. All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -3327,14 +3327,14 @@ const _firebase_core_platform_interface = Package(
     dependencies: [PackageRef('collection'), PackageRef('flutter'), PackageRef('meta'), PackageRef('plugin_platform_interface')]
   );
 
-/// firebase_core_web 2.15.0
+/// firebase_core_web 2.16.0
 const _firebase_core_web = Package(
     name: 'firebase_core_web',
     description: 'The web implementation of firebase_core',
     homepage: 'https://github.com/firebase/flutterfire/tree/master/packages/firebase_core/firebase_core_web',
     repository: 'https://github.com/firebase/flutterfire/tree/master/packages/firebase_core/firebase_core_web',
     authors: [],
-    version: '2.15.0',
+    version: '2.16.0',
     license: '''// Copyright 2020 The Chromium Authors. All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -3367,14 +3367,14 @@ const _firebase_core_web = Package(
     dependencies: [PackageRef('firebase_core_platform_interface'), PackageRef('flutter'), PackageRef('meta'), PackageRef('web')]
   );
 
-/// firebase_crashlytics 3.5.1
+/// firebase_crashlytics 3.5.4
 const _firebase_crashlytics = Package(
     name: 'firebase_crashlytics',
     description: 'Flutter plugin for Firebase Crashlytics. It reports uncaught errors to the Firebase console.',
     homepage: 'https://firebase.google.com/docs/crashlytics',
     repository: 'https://github.com/firebase/flutterfire/tree/master/packages/firebase_crashlytics/firebase_crashlytics',
     authors: [],
-    version: '3.5.1',
+    version: '3.5.4',
     license: '''// Copyright 2019 The Chromium Authors. All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -3407,14 +3407,14 @@ const _firebase_crashlytics = Package(
     dependencies: [PackageRef('firebase_core'), PackageRef('firebase_core_platform_interface'), PackageRef('firebase_crashlytics_platform_interface'), PackageRef('flutter'), PackageRef('stack_trace')]
   );
 
-/// firebase_crashlytics_platform_interface 3.6.29
+/// firebase_crashlytics_platform_interface 3.6.32
 const _firebase_crashlytics_platform_interface = Package(
     name: 'firebase_crashlytics_platform_interface',
     description: 'A common platform interface for the firebase_crashlytics plugin.',
     homepage: 'https://github.com/firebase/flutterfire/tree/master/packages/firebase_crashlytics/firebase_crashlytics_platform_interface',
     repository: 'https://github.com/firebase/flutterfire/tree/master/packages/firebase_crashlytics/firebase_crashlytics_platform_interface',
     authors: [],
-    version: '3.6.29',
+    version: '3.6.32',
     license: '''Copyright 2020, the Chromium project authors. All rights reserved.
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
