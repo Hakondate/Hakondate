@@ -10,11 +10,7 @@ class License extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Package> directDependencyLicenses = ossLicenses
-        .where(
-          (Package package) => package.isDirectDependency,
-        )
-        .toList();
+    const List<Package> directDependencyLicenses = dependencies;
 
     return Scaffold(
       backgroundColor: AppColor.ui.white,
