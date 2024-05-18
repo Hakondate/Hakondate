@@ -20,8 +20,8 @@ part 'daily_view_model.g.dart';
 class DailyViewModel extends _$DailyViewModel {
   @override
   FutureOr<DailyState> build() {
-    final ScrollController scrollController =
-        ref.watch(dailyViewModelProvider).value!.scrollController;
+    // final ScrollController scrollController =
+    //     ref.watch(dailyViewModelProvider).value!.scrollController;
     return DailyState(
       selectedDay: DateTime.now(),
       focusedDay: DateTime.now(),
@@ -30,7 +30,7 @@ class DailyViewModel extends _$DailyViewModel {
         DateTime.now().year,
         DateTime.now().month + 2,
       ).add(const Duration(seconds: -1)),
-      scrollController: scrollController,
+      scrollController: ScrollController() /*scrollController*/,
     );
   }
 
