@@ -30,14 +30,16 @@ Future<void> main() async {
           options: DefaultFirebaseOptions.currentPlatform,
         );
       }
-      FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+      FlutterError.onError =
+          FirebaseCrashlytics.instance.recordFlutterFatalError;
       runApp(
         const ProviderScope(
           child: Hakondate(),
         ),
       );
     },
-    (Object error, StackTrace stack) => FirebaseCrashlytics.instance.recordError(error, stack, fatal: true),
+    (Object error, StackTrace stack) =>
+        FirebaseCrashlytics.instance.recordError(error, stack, fatal: true),
   );
 }
 
