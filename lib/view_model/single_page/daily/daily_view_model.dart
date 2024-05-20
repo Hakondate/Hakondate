@@ -30,8 +30,41 @@ class DailyViewModel extends _$DailyViewModel {
         DateTime.now().year,
         DateTime.now().month + 2,
       ).add(const Duration(seconds: -1)),
-      scrollController: ScrollController() /*scrollController*/,
+      scrollOffset: 0,
+      scrollController: ScrollController(
+        onDetach: (ScrollPosition position) {
+          debugPrint('detach');
+          storeOffset(position.pixels);
+        },
+        onAttach: (ScrollPosition position) {
+          debugPrint('attach');
+          scrollToPreOffset(getOffset());
+        },
+      ),
     );
+  }
+
+  double getOffset() {
+    return state.maybeWhen(
+      orElse: () => 0,
+      data: (DailyState value) => value.scrollOffset,
+    );
+  }
+
+  void scrollToPreOffset(double offset) {
+    state.whenData((DailyState value) {
+      value.scrollController.jumpTo(offset);
+    });
+  }
+
+  void storeOffset(double offset) {
+    state.whenData((DailyState value) {
+      state = AsyncValue<DailyState>.data(
+        value.copyWith(
+          scrollOffset: offset,
+        ),
+      );
+    });
   }
 
   Future<void> updateSelectedDay({
@@ -49,9 +82,7 @@ class DailyViewModel extends _$DailyViewModel {
           selectedInputDay ??= DateTime.now();
       }
 
-      final MenuModel menu = await ref
-          .read(menusLocalRepositoryProvider)
-          .getMenuByDay(selectedInputDay);
+      final MenuModel menu = await ref.read(menusLocalRepositoryProvider).getMenuByDay(selectedInputDay);
 
       state = AsyncData<DailyState>(
         data.copyWith(
@@ -61,9 +92,7 @@ class DailyViewModel extends _$DailyViewModel {
         ),
       );
       if (menu is LunchesDayMenuModel) {
-        await ref
-            .read(analyticsControllerProvider.notifier)
-            .logViewMenu(menu.id);
+        await ref.read(analyticsControllerProvider.notifier).logViewMenu(menu.id);
       }
       await updateRecommendFoodstuffs();
     });
@@ -73,9 +102,7 @@ class DailyViewModel extends _$DailyViewModel {
     state.whenData((DailyState data) async {
       state = const AsyncLoading<DailyState>();
 
-      final MenuModel menu = await ref
-          .read(menusLocalRepositoryProvider)
-          .getMenuByDay(data.selectedDay);
+      final MenuModel menu = await ref.read(menusLocalRepositoryProvider).getMenuByDay(data.selectedDay);
 
       state = AsyncData<DailyState>(
         data.copyWith(
@@ -84,9 +111,7 @@ class DailyViewModel extends _$DailyViewModel {
       );
 
       if (menu is LunchesDayMenuModel) {
-        await ref
-            .read(analyticsControllerProvider.notifier)
-            .logViewMenu(menu.id);
+        await ref.read(analyticsControllerProvider.notifier).logViewMenu(menu.id);
       }
     });
   }
@@ -113,28 +138,22 @@ class DailyViewModel extends _$DailyViewModel {
     );
   }
 
-  Future<Map<FiveMajorNutrient, List<DictionaryItemModel>>>
-      _calculateRecommendFoodstuffs() async {
-    final NutrientsModel? slns =
-        ref.watch(userViewModelProvider).currentUser!.slns;
-    final List<double> nutrientsPercentage =
-        ref.read(dailyViewModelProvider.notifier).getGraphValues(
-              graphMaxValue: 120,
-              slns: slns,
-            );
+  Future<Map<FiveMajorNutrient, List<DictionaryItemModel>>> _calculateRecommendFoodstuffs() async {
+    final NutrientsModel? slns = ref.watch(userViewModelProvider).currentUser!.slns;
+    final List<double> nutrientsPercentage = ref.read(dailyViewModelProvider.notifier).getGraphValues(
+          graphMaxValue: 120,
+          slns: slns,
+        );
 
-    final Map<FiveMajorNutrient, double> nutrientsMap =
-        <FiveMajorNutrient, double>{}..addAll(<FiveMajorNutrient, double>{
-            FiveMajorNutrient.protein: nutrientsPercentage[1],
-            FiveMajorNutrient.vitamin: nutrientsPercentage[2],
-            FiveMajorNutrient.mineral: nutrientsPercentage[3],
-            FiveMajorNutrient.carbohydrate: nutrientsPercentage[4],
-            FiveMajorNutrient.lipid: nutrientsPercentage[5],
-          });
-    MapEntry<FiveMajorNutrient, double> minValue =
-        nutrientsMap.entries.elementAt(0);
-    MapEntry<FiveMajorNutrient, double> secondMinValue =
-        nutrientsMap.entries.elementAt(1);
+    final Map<FiveMajorNutrient, double> nutrientsMap = <FiveMajorNutrient, double>{}..addAll(<FiveMajorNutrient, double>{
+        FiveMajorNutrient.protein: nutrientsPercentage[1],
+        FiveMajorNutrient.vitamin: nutrientsPercentage[2],
+        FiveMajorNutrient.mineral: nutrientsPercentage[3],
+        FiveMajorNutrient.carbohydrate: nutrientsPercentage[4],
+        FiveMajorNutrient.lipid: nutrientsPercentage[5],
+      });
+    MapEntry<FiveMajorNutrient, double> minValue = nutrientsMap.entries.elementAt(0);
+    MapEntry<FiveMajorNutrient, double> secondMinValue = nutrientsMap.entries.elementAt(1);
     MapEntry<FiveMajorNutrient, double> temp;
 
     for (int i = 1; i < nutrientsMap.length; i++) {
@@ -147,16 +166,13 @@ class DailyViewModel extends _$DailyViewModel {
       }
     }
 
-    final Map<FiveMajorNutrient, List<DictionaryItemModel>>
-        recommendFoodstuffs = <FiveMajorNutrient, List<DictionaryItemModel>>{
-      minValue.key:
-          await ref.read(dictionaryItemsLocalRepositoryProvider).getRanking(
-                nutrient: minValue.key.name,
-              ),
-      secondMinValue.key:
-          await ref.read(dictionaryItemsLocalRepositoryProvider).getRanking(
-                nutrient: secondMinValue.key.name,
-              ),
+    final Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendFoodstuffs = <FiveMajorNutrient, List<DictionaryItemModel>>{
+      minValue.key: await ref.read(dictionaryItemsLocalRepositoryProvider).getRanking(
+            nutrient: minValue.key.name,
+          ),
+      secondMinValue.key: await ref.read(dictionaryItemsLocalRepositoryProvider).getRanking(
+            nutrient: secondMinValue.key.name,
+          ),
     };
 
     return recommendFoodstuffs;
@@ -193,8 +209,7 @@ class DailyViewModel extends _$DailyViewModel {
           menu.lipid / slns.lipid * 100.0,
         ]
             .map(
-              (double element) =>
-                  (element > graphMaxValue) ? graphMaxValue : element,
+              (double element) => (element > graphMaxValue) ? graphMaxValue : element,
             )
             .toList();
       },
@@ -236,10 +251,7 @@ class DailyViewModel extends _$DailyViewModel {
 
         if (menu is! LunchesDayMenuModel) return 0;
 
-        return (menu.retinol / retinolRef +
-                menu.vitaminB1 / vitaminB1Ref +
-                menu.vitaminB2 / vitaminB2Ref +
-                menu.vitaminC / vitaminCRef) /
+        return (menu.retinol / retinolRef + menu.vitaminB1 / vitaminB1Ref + menu.vitaminB2 / vitaminB2Ref + menu.vitaminC / vitaminCRef) /
             4 *
             100.0;
       },
@@ -259,12 +271,7 @@ class DailyViewModel extends _$DailyViewModel {
 
         if (menu is! LunchesDayMenuModel) return 0;
 
-        return (menu.calcium / calciumRef +
-                menu.magnesium / magnesiumRef +
-                menu.iron / ironRef +
-                menu.zinc / zincRef) /
-            4 *
-            100.0;
+        return (menu.calcium / calciumRef + menu.magnesium / magnesiumRef + menu.iron / ironRef + menu.zinc / zincRef) / 4 * 100.0;
       },
       orElse: () => 0,
     );
