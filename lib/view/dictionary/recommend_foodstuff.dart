@@ -18,36 +18,39 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        return ExpansionTile(
-          title: const Text(
-            'おすすめ食材',
-            style: TextStyle(
-              fontSize: FontSize.heading,
+        return Theme(
+          data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+          child: ExpansionTile(
+            title: const Text(
+              'おすすめ食材',
+              style: TextStyle(
+                fontSize: FontSize.heading,
+              ),
             ),
+            onExpansionChanged: (bool value) => !value,
+            textColor: AppColor.brand.secondary,
+            iconColor: AppColor.brand.secondary,
+            children: <Widget>[
+              ref.watch(dailyViewModelProvider).maybeWhen(
+                    data: (DailyState data) {
+                      if (data.recommendFoodStuffs.isNotEmpty) {
+                        return Column(
+                          children: <Widget>[
+                            for (int i = 0; i < data.recommendFoodStuffs.length; i++)
+                              _recommendFoodWidget(
+                                data.recommendFoodStuffs,
+                                i,
+                              ),
+                          ],
+                        );
+                      } else {
+                        return const SizedBox.shrink();
+                      }
+                    },
+                    orElse: () => const SizedBox.shrink(),
+                  ),
+            ],
           ),
-          onExpansionChanged: (bool value) => !value,
-          textColor: AppColor.brand.secondary,
-          iconColor: AppColor.brand.secondary,
-          children: <Widget>[
-            ref.watch(dailyViewModelProvider).maybeWhen(
-                  data: (DailyState data) {
-                    if (data.recommendFoodStuffs.isNotEmpty) {
-                      return Column(
-                        children: <Widget>[
-                          for (int i = 0; i < data.recommendFoodStuffs.length; i++)
-                            _recommendFoodWidget(
-                              data.recommendFoodStuffs,
-                              i,
-                            ),
-                        ],
-                      );
-                    } else {
-                      return const SizedBox.shrink();
-                    }
-                  },
-                  orElse: () => const SizedBox.shrink(),
-                ),
-          ],
         );
       },
     );
