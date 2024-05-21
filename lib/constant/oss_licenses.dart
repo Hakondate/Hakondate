@@ -65,7 +65,6 @@ const allDependencies = <Package>[
   _fixnum,
   _flutter,
   _flutter_launcher_icons,
-  _flutter_lints,
   _flutter_native_splash,
   _flutter_oss_licenses,
   _flutter_pdfview,
@@ -91,7 +90,6 @@ const allDependencies = <Package>[
   _leak_tracker,
   _leak_tracker_flutter_testing,
   _leak_tracker_testing,
-  _lints,
   _logging,
   _matcher,
   _material_color_utilities,
@@ -212,7 +210,6 @@ const devDependencies = <Package>[
   _custom_lint,
   _drift_dev,
   _flutter_launcher_icons,
-  _flutter_lints,
   _flutter_native_splash,
   _flutter_oss_licenses,
   _import_sorter,
@@ -3675,43 +3672,6 @@ SOFTWARE.''',
     dependencies: [PackageRef('args'), PackageRef('checked_yaml'), PackageRef('cli_util'), PackageRef('image'), PackageRef('json_annotation'), PackageRef('path'), PackageRef('yaml')]
   );
 
-/// flutter_lints 3.0.2
-const _flutter_lints = Package(
-    name: 'flutter_lints',
-    description: 'Recommended lints for Flutter apps, packages, and plugins to encourage good coding practices.',
-    repository: 'https://github.com/flutter/packages/tree/main/packages/flutter_lints',
-    authors: [],
-    version: '3.0.2',
-    license: '''Copyright 2013 The Flutter Authors. All rights reserved.
-
-Redistribution and use in source and binary forms, with or without modification,
-are permitted provided that the following conditions are met:
-
-    * Redistributions of source code must retain the above copyright
-      notice, this list of conditions and the following disclaimer.
-    * Redistributions in binary form must reproduce the above
-      copyright notice, this list of conditions and the following
-      disclaimer in the documentation and/or other materials provided
-      with the distribution.
-    * Neither the name of Google Inc. nor the names of its
-      contributors may be used to endorse or promote products derived
-      from this software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
-ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
-    isMarkdown: false,
-    isSdk: false,
-    dependencies: [PackageRef('lints')]
-  );
-
 /// flutter_native_splash 2.4.0
 const _flutter_native_splash = Package(
     name: 'flutter_native_splash',
@@ -4765,46 +4725,6 @@ const _leak_tracker_testing = Package(
     authors: [],
     version: '2.0.1',
     license: '''Copyright 2022, the Dart project authors.
-
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are
-met:
-
-    * Redistributions of source code must retain the above copyright
-      notice, this list of conditions and the following disclaimer.
-    * Redistributions in binary form must reproduce the above
-      copyright notice, this list of conditions and the following
-      disclaimer in the documentation and/or other materials provided
-      with the distribution.
-    * Neither the name of Google LLC nor the names of its
-      contributors may be used to endorse or promote products derived
-      from this software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
-    isMarkdown: false,
-    isSdk: false,
-    dependencies: []
-  );
-
-/// lints 3.0.0
-const _lints = Package(
-    name: 'lints',
-    description: """Official Dart lint rules. Defines the 'core' and 'recommended' set of lints suggested by the Dart team.
-""",
-    repository: 'https://github.com/dart-lang/lints',
-    authors: [],
-    version: '3.0.0',
-    license: '''Copyright 2021, the Dart project authors.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
