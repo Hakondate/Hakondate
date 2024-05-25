@@ -6,14 +6,17 @@ part of 'daily_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$dailyViewModelHash() => r'c645fd722397944bf0ca07d08bb208ad79c4489d';
+String _$dailyViewModelHash() => r'69016945e2a586ffbd9bf1c44dbaf82b23741deb';
 
 /// See also [DailyViewModel].
 @ProviderFor(DailyViewModel)
-final dailyViewModelProvider = AsyncNotifierProvider<DailyViewModel, DailyState>.internal(
+final dailyViewModelProvider =
+    AsyncNotifierProvider<DailyViewModel, DailyState>.internal(
   DailyViewModel.new,
   name: r'dailyViewModelProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$dailyViewModelHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$dailyViewModelHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
