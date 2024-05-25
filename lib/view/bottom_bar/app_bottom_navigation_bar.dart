@@ -58,10 +58,10 @@ class AppBottomNavigationBar extends ConsumerWidget {
             }
             print('stored offset: ${ref.read(dailyViewModelProvider.notifier).getStoredOffset()}');
             tabState.controller.animateTo(index);
-            // if (index == 0) {
-            //   print('scrollToPreOffset called');
-            //   ref.read(dailyViewModelProvider.notifier).scrollToPreOffset(ref.read(dailyViewModelProvider.notifier).getStoredOffset());
-            // }
+            if (index == 0) {
+              print('scrollToPreOffset called');
+              ref.read(dailyViewModelProvider.notifier).scrollToPreOffset(ref.read(dailyViewModelProvider.notifier).getStoredOffset());
+            }
             debugPrint('path: $path');
           }
         },

@@ -34,7 +34,7 @@ class DailyViewModel extends _$DailyViewModel {
           //  _storeOffset(position.pixels);
         },
         onAttach: (ScrollPosition position) {
-          scrollToPreOffset(getStoredOffset());
+          //scrollToPreOffset(getStoredOffset());
         },
       ),
     );
@@ -45,7 +45,7 @@ class DailyViewModel extends _$DailyViewModel {
     DateTime? focusedDay,
   }) async {
     //debugPrint('----------------------');
-    //debugPrint('updateSelectedDay called');
+    debugPrint('updateSelectedDay called');
     state.whenData((DailyState data) async {
       state = const AsyncLoading<DailyState>();
       DateTime? selectedInputDay = selectedDay;
@@ -273,7 +273,7 @@ class DailyViewModel extends _$DailyViewModel {
 
   double getStoredOffset() {
     //debugPrint('_getOffset called');
-    print(state.maybeWhen(orElse: () => 0, data: (DailyState data) => data.scrollOffset));
+    print('scrollOffset in getStoredOffset: ${state.maybeWhen(orElse: () => 0, data: (DailyState data) => data.scrollOffset)}');
     return state.maybeWhen(
       orElse: () => 0,
       data: (DailyState data) => data.scrollOffset,
@@ -298,11 +298,17 @@ class DailyViewModel extends _$DailyViewModel {
     });
   }
 
-  void resetOffset() {
-    // debugPrint('_resetOffset called');
+  void _resetOffset() {
+    debugPrint('_resetOffset called');
     state.whenData((DailyState data) {
+      final ScrollController newScrollController = ScrollController(
+        onAttach: (ScrollPosition position) {
+          scrollToPreOffset(getStoredOffset());
+        },
+      );
       state = AsyncValue<DailyState>.data(
         data.copyWith(
+          scrollController: newScrollController,
           scrollOffset: 0,
         ),
       );
