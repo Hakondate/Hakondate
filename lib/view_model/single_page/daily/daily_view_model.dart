@@ -34,7 +34,7 @@ class DailyViewModel extends _$DailyViewModel {
           //  _storeOffset(position.pixels);
         },
         onAttach: (ScrollPosition position) {
-          //  _scrollToPreOffset(_getOffset());
+          scrollToPreOffset(getStoredOffset());
         },
       ),
     );
@@ -264,27 +264,34 @@ class DailyViewModel extends _$DailyViewModel {
     });
   }
 
-  double getOffset() {
-    //debugPrint('_getOffset called');
-    print(state.maybeWhen(orElse: () => 0, data: (DailyState value) => value.scrollOffset));
+  double getPreOffset() {
     return state.maybeWhen(
       orElse: () => 0,
-      data: (DailyState value) => value.scrollOffset,
+      data: (DailyState data) => data.scrollController.position.pixels,
+    );
+  }
+
+  double getStoredOffset() {
+    //debugPrint('_getOffset called');
+    print(state.maybeWhen(orElse: () => 0, data: (DailyState data) => data.scrollOffset));
+    return state.maybeWhen(
+      orElse: () => 0,
+      data: (DailyState data) => data.scrollOffset,
     );
   }
 
   void scrollToPreOffset(double offset) {
     // debugPrint('_scrollToPreOffset called');
-    state.whenData((DailyState value) {
-      value.scrollController.jumpTo(offset);
+    state.whenData((DailyState data) {
+      data.scrollController.jumpTo(offset);
     });
   }
 
   void storeOffset(double offset) {
     // debugPrint('_storeOffset called');
-    state.whenData((DailyState value) {
+    state.whenData((DailyState data) {
       state = AsyncValue<DailyState>.data(
-        value.copyWith(
+        data.copyWith(
           scrollOffset: offset,
         ),
       );
@@ -293,9 +300,9 @@ class DailyViewModel extends _$DailyViewModel {
 
   void resetOffset() {
     // debugPrint('_resetOffset called');
-    state.whenData((DailyState value) {
+    state.whenData((DailyState data) {
       state = AsyncValue<DailyState>.data(
-        value.copyWith(
+        data.copyWith(
           scrollOffset: 0,
         ),
       );
