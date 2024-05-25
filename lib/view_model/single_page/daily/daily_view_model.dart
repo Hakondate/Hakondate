@@ -20,8 +20,6 @@ part 'daily_view_model.g.dart';
 class DailyViewModel extends _$DailyViewModel {
   @override
   FutureOr<DailyState> build() {
-    // final ScrollController scrollController =
-    //     ref.watch(dailyViewModelProvider).value!.scrollController;
     return DailyState(
       selectedDay: DateTime.now(),
       focusedDay: DateTime.now(),
@@ -33,38 +31,13 @@ class DailyViewModel extends _$DailyViewModel {
       scrollOffset: 0,
       scrollController: ScrollController(
         onDetach: (ScrollPosition position) {
-          debugPrint('detach');
-          storeOffset(position.pixels);
+          _storeOffset(position.pixels);
         },
         onAttach: (ScrollPosition position) {
-          debugPrint('attach');
-          scrollToPreOffset(getOffset());
+          _scrollToPreOffset(_getOffset());
         },
       ),
     );
-  }
-
-  double getOffset() {
-    return state.maybeWhen(
-      orElse: () => 0,
-      data: (DailyState value) => value.scrollOffset,
-    );
-  }
-
-  void scrollToPreOffset(double offset) {
-    state.whenData((DailyState value) {
-      value.scrollController.jumpTo(offset);
-    });
-  }
-
-  void storeOffset(double offset) {
-    state.whenData((DailyState value) {
-      state = AsyncValue<DailyState>.data(
-        value.copyWith(
-          scrollOffset: offset,
-        ),
-      );
-    });
   }
 
   Future<void> updateSelectedDay({
@@ -283,6 +256,29 @@ class DailyViewModel extends _$DailyViewModel {
         place,
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeOutCubic,
+      );
+    });
+  }
+
+  double _getOffset() {
+    return state.maybeWhen(
+      orElse: () => 0,
+      data: (DailyState value) => value.scrollOffset,
+    );
+  }
+
+  void _scrollToPreOffset(double offset) {
+    state.whenData((DailyState value) {
+      value.scrollController.jumpTo(offset);
+    });
+  }
+
+  void _storeOffset(double offset) {
+    state.whenData((DailyState value) {
+      state = AsyncValue<DailyState>.data(
+        value.copyWith(
+          scrollOffset: offset,
+        ),
       );
     });
   }

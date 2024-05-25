@@ -130,6 +130,7 @@ class Daily extends StatelessWidget {
                     child: (() {
                       if (state.menu is LunchesDayMenuModel) {
                         return ListView(
+                          controller: state.scrollController,
                           children: const <Widget>[
                             MenuCard(),
                             NutrientsCard(),
