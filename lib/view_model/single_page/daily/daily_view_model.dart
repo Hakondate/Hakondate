@@ -31,10 +31,10 @@ class DailyViewModel extends _$DailyViewModel {
       scrollOffset: 0,
       scrollController: ScrollController(
         onDetach: (ScrollPosition position) {
-          _storeOffset(position.pixels);
+          //  _storeOffset(position.pixels);
         },
         onAttach: (ScrollPosition position) {
-          _scrollToPreOffset(_getOffset());
+          //  _scrollToPreOffset(_getOffset());
         },
       ),
     );
@@ -44,8 +44,8 @@ class DailyViewModel extends _$DailyViewModel {
     DateTime? selectedDay,
     DateTime? focusedDay,
   }) async {
-    debugPrint('----------------------');
-    debugPrint('updateSelectedDay called');
+    //debugPrint('----------------------');
+    //debugPrint('updateSelectedDay called');
     state.whenData((DailyState data) async {
       state = const AsyncLoading<DailyState>();
       DateTime? selectedInputDay = selectedDay;
@@ -71,7 +71,7 @@ class DailyViewModel extends _$DailyViewModel {
       }
       await updateRecommendFoodstuffs();
 
-      _resetOffset();
+      //_resetOffset();
     });
   }
 
@@ -264,23 +264,24 @@ class DailyViewModel extends _$DailyViewModel {
     });
   }
 
-  double _getOffset() {
-    debugPrint('_getOffset called');
+  double getOffset() {
+    //debugPrint('_getOffset called');
+    print(state.maybeWhen(orElse: () => 0, data: (DailyState value) => value.scrollOffset));
     return state.maybeWhen(
       orElse: () => 0,
       data: (DailyState value) => value.scrollOffset,
     );
   }
 
-  void _scrollToPreOffset(double offset) {
-    debugPrint('_scrollToPreOffset called');
+  void scrollToPreOffset(double offset) {
+    // debugPrint('_scrollToPreOffset called');
     state.whenData((DailyState value) {
       value.scrollController.jumpTo(offset);
     });
   }
 
-  void _storeOffset(double offset) {
-    debugPrint('_storeOffset called');
+  void storeOffset(double offset) {
+    // debugPrint('_storeOffset called');
     state.whenData((DailyState value) {
       state = AsyncValue<DailyState>.data(
         value.copyWith(
@@ -290,8 +291,8 @@ class DailyViewModel extends _$DailyViewModel {
     });
   }
 
-  void _resetOffset() {
-    debugPrint('_resetOffset called');
+  void resetOffset() {
+    // debugPrint('_resetOffset called');
     state.whenData((DailyState value) {
       state = AsyncValue<DailyState>.data(
         value.copyWith(

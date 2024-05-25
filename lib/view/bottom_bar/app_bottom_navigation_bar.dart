@@ -51,7 +51,16 @@ class AppBottomNavigationBar extends ConsumerWidget {
           } else if (path == '/home/letter' && index == 3) {
             ref.read(letterViewModelProvider.notifier).scrollToTop();
           } else {
+            if (path == '/home/daily') {
+              print('storeOffset called');
+              print('offset: ${ref.read(dailyViewModelProvider.notifier).getOffset()}');
+              ref.read(dailyViewModelProvider.notifier).storeOffset(ref.read(dailyViewModelProvider.notifier).getOffset());
+            }
             tabState.controller.animateTo(index);
+            if (index == 0) {
+              print('scrollToPreOffset called');
+              ref.read(dailyViewModelProvider.notifier).scrollToPreOffset(ref.read(dailyViewModelProvider.notifier).getOffset());
+            }
             debugPrint('path: $path');
           }
         },
