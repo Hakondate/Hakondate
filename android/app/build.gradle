@@ -1,12 +1,10 @@
 plugins {
     id "com.android.application"
     id "kotlin-android"
-    // id "org.jetbrains.kotlin.android" version "1.8.0" apply false
     id "org.jetbrains.kotlin.android"
-    // id "com.google.gms.google-services" version "4.3.15" apply false
     id "com.google.gms.google-services"
-    // id "com.google.firebase.crashlytics" version "2.8.1" apply false
     id "com.google.firebase.crashlytics"
+    id "dev.flutter.flutter-gradle-plugin"
 }
 
 def localProperties = new Properties()
@@ -42,7 +40,7 @@ if (project.hasProperty('dart-defines')) {
             }
 }
 
-apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+// apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 task selectGoogleServicesJson(type: Copy) {
     from "src/firebase/${dartEnvironmentVariables.FLAVOR}/google-services.json"
