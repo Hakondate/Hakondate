@@ -40,8 +40,6 @@ if (project.hasProperty('dart-defines')) {
             }
 }
 
-// apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
-
 task selectGoogleServicesJson(type: Copy) {
     from "src/firebase/${dartEnvironmentVariables.FLAVOR}/google-services.json"
     into './'
