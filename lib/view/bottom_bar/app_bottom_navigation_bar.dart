@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hakondate/state/daily/daily_state.dart';
 import 'package:routemaster/routemaster.dart';
 
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/constant/svg_path.dart';
 import 'package:hakondate/router/routes.dart';
-import 'package:hakondate/state/daily/daily_state.dart';
 import 'package:hakondate/util/environment.dart';
 import 'package:hakondate/view/daily/daily_drawer.dart';
 import 'package:hakondate/view_model/multi_page/drawer/drawer_view_model.dart';
@@ -41,30 +41,22 @@ class AppBottomNavigationBar extends ConsumerWidget {
         onTap: (int index) {
           final String? path = routemaster.currentConfiguration?.fullPath;
 
-          debugPrint('index: $index');
           if (path == '/home/daily' && index == 0) {
             ref.read(dailyViewModelProvider.notifier).scrollTo(0);
           } else if (path == '/home/recipes' && index == 1) {
             ref.read(recipeViewModelProvider.notifier).scrollToTop();
           } else if (path == '/home/dictionary' && index == 2) {
-            debugPrint('dictionary');
             ref.read(dictionaryViewModelProvider.notifier).scrollToTop();
           } else if (path == '/home/letter' && index == 3) {
             ref.read(letterViewModelProvider.notifier).scrollToTop();
           } else {
             if (path == '/home/daily') {
-              print('storeOffset called');
-              print('offset: ${ref.read(dailyViewModelProvider.notifier).getPreOffset()}');
               ref.read(dailyViewModelProvider.notifier).storeOffset(ref.read(dailyViewModelProvider.notifier).getPreOffset());
             }
-            print('stored offset: ${ref.read(dailyViewModelProvider.notifier).getStoredOffset()}');
             tabState.controller.animateTo(index);
             if (index == 0) {
-              print('scrollToPreOffset called');
-              print('getStoredOffset(): ${ref.read(dailyViewModelProvider.notifier).getStoredOffset()}');
               ref.watch(dailyViewModelProvider.notifier).jumpToPreOffset(ref.read(dailyViewModelProvider.notifier).getStoredOffset());
             }
-            debugPrint('path: $path');
           }
         },
         backgroundColor: AppColor.ui.white,
