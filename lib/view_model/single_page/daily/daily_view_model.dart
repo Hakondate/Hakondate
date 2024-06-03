@@ -280,7 +280,7 @@ class DailyViewModel extends _$DailyViewModel {
     );
   }
 
-  void scrollToPreOffset(double offset) {
+  void jumpToPreOffset(double offset) {
     // debugPrint('_scrollToPreOffset called');
     state.whenData((DailyState data) {
       data.scrollController.jumpTo(offset);
@@ -303,7 +303,7 @@ class DailyViewModel extends _$DailyViewModel {
     state.whenData((DailyState data) {
       final ScrollController newScrollController = ScrollController(
         onAttach: (ScrollPosition position) {
-          scrollToPreOffset(getStoredOffset());
+          jumpToPreOffset(getStoredOffset());
         },
       );
       state = AsyncValue<DailyState>.data(

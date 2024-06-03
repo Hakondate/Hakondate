@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hakondate/state/daily/daily_state.dart';
 import 'package:routemaster/routemaster.dart';
 
 import 'package:hakondate/constant/app_color.dart';
@@ -60,7 +61,8 @@ class AppBottomNavigationBar extends ConsumerWidget {
             tabState.controller.animateTo(index);
             if (index == 0) {
               print('scrollToPreOffset called');
-              ref.read(dailyViewModelProvider.notifier).scrollToPreOffset(ref.read(dailyViewModelProvider.notifier).getStoredOffset());
+              print('getStoredOffset(): ${ref.read(dailyViewModelProvider.notifier).getStoredOffset()}');
+              ref.watch(dailyViewModelProvider.notifier).jumpToPreOffset(ref.read(dailyViewModelProvider.notifier).getStoredOffset());
             }
             debugPrint('path: $path');
           }
