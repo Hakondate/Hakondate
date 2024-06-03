@@ -73,6 +73,23 @@ class DictionaryViewModel extends _$DictionaryViewModel {
     );
   }
 
+  double getPreOffset() {
+    return state.maybeWhen(
+      orElse: () => 0,
+      data: (DictionaryState data) => data.scrollController.position.pixels,
+    );
+  }
+
+  void storeOffset(double offset) {
+    state.whenData((DictionaryState data) {
+      state = AsyncValue<DictionaryState>.data(
+        data.copyWith(
+          scrollController: ScrollController(initialScrollOffset: offset),
+        ),
+      );
+    });
+  }
+
   Future<DictionaryItemModel> _getMaxRef(FiveMajorNutrient nutrient) async {
     final List<DictionaryItemModel> schemas = await _dictionaryItemsLocalRepository.getRanking(
       nutrient: nutrient.name,

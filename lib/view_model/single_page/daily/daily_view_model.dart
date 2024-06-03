@@ -28,7 +28,6 @@ class DailyViewModel extends _$DailyViewModel {
         DateTime.now().year,
         DateTime.now().month + 2,
       ).add(const Duration(seconds: -1)),
-      scrollOffset: 0,
       scrollController: ScrollController(),
     );
   }
@@ -245,10 +244,10 @@ class DailyViewModel extends _$DailyViewModel {
     );
   }
 
-  void scrollTo(double offset) {
+  void scrollToTop() {
     state.whenData((DailyState data) {
       data.scrollController.animateTo(
-        offset,
+        0,
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeOutCubic,
       );

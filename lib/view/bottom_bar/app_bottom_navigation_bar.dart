@@ -41,7 +41,7 @@ class AppBottomNavigationBar extends ConsumerWidget {
           final String? path = routemaster.currentConfiguration?.fullPath;
 
           if (path == '/home/daily' && index == 0) {
-            ref.read(dailyViewModelProvider.notifier).scrollTo(0);
+            ref.read(dailyViewModelProvider.notifier).scrollToTop();
           } else if (path == '/home/recipes' && index == 1) {
             ref.read(recipeViewModelProvider.notifier).scrollToTop();
           } else if (path == '/home/dictionary' && index == 2) {
