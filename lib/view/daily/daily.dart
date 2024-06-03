@@ -114,7 +114,6 @@ class Daily extends StatelessWidget {
       builder: (BuildContext context, WidgetRef ref, _) {
         return ref.watch(dailyViewModelProvider).maybeWhen(
               data: (DailyState state) {
-                debugPrint("scrollController at start of _bodyWidget(): ${state.scrollController}");
                 return Expanded(
                   child: GestureDetector(
                     onHorizontalDragEnd: (DragEndDetails details) {
@@ -130,7 +129,6 @@ class Daily extends StatelessWidget {
                     },
                     child: (() {
                       if (state.menu is LunchesDayMenuModel) {
-                        debugPrint("state.scrollController in");
                         return ListView(
                           controller: state.scrollController,
                           children: const <Widget>[

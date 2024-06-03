@@ -20,7 +20,6 @@ part 'daily_view_model.g.dart';
 class DailyViewModel extends _$DailyViewModel {
   @override
   FutureOr<DailyState> build() {
-    debugPrint("dailyViewModel build() called");
     return DailyState(
       selectedDay: DateTime.now(),
       focusedDay: DateTime.now(),
@@ -246,10 +245,10 @@ class DailyViewModel extends _$DailyViewModel {
     );
   }
 
-  void scrollTo(double place) {
+  void scrollTo(double offset) {
     state.whenData((DailyState data) {
       data.scrollController.animateTo(
-        place,
+        offset,
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeOutCubic,
       );
@@ -261,19 +260,6 @@ class DailyViewModel extends _$DailyViewModel {
       orElse: () => 0,
       data: (DailyState data) => data.scrollController.position.pixels,
     );
-  }
-
-  double getStoredOffset() {
-    return state.maybeWhen(
-      orElse: () => 0,
-      data: (DailyState data) => data.scrollOffset,
-    );
-  }
-
-  void jumpToPreOffset(double offset) {
-    state.whenData((DailyState data) {
-      data.scrollController.jumpTo(offset);
-    });
   }
 
   void storeOffset(double offset) {

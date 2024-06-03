@@ -50,7 +50,8 @@ class AppBottomNavigationBar extends ConsumerWidget {
             ref.read(letterViewModelProvider.notifier).scrollToTop();
           } else {
             if (path == '/home/daily') {
-              ref.read(dailyViewModelProvider.notifier).storeOffset(ref.read(dailyViewModelProvider.notifier).getPreOffset());
+              final DailyViewModel dailyNotifier = ref.read(dailyViewModelProvider.notifier);
+              dailyNotifier.storeOffset(dailyNotifier.getPreOffset());
             }
             tabState.controller.animateTo(index);
           }
