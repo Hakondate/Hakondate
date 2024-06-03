@@ -15,8 +15,7 @@ class CacheManagement extends ConsumerWidget {
         child: Column(
           children: [
             ListTile(
-              onTap: () =>
-                  ref.read(openDataRecipesLocalRepositoryProvider).deleteAll(),
+              onTap: () => ref.read(openDataRecipesLocalRepositoryProvider).deleteAll(),
               title: Text('すべてのレシピのキャッシュを削除'),
             )
           ],
