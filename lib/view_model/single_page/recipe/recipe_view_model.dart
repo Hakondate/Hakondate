@@ -18,10 +18,8 @@ class RecipeViewModel extends _$RecipeViewModel {
 
   @override
   void build() {
-    _openDataLocalRepository =
-        ref.watch(openDataRecipesLocalRepositoryProvider);
-    _openDataRemoteRepository =
-        ref.watch(openDataRecipesRemoteRepositoryProvider);
+    _openDataLocalRepository = ref.watch(openDataRecipesLocalRepositoryProvider);
+    _openDataRemoteRepository = ref.watch(openDataRecipesRemoteRepositoryProvider);
   }
 
   Future<String> getPath({required OpenDataRecipeModel recipe}) async {
@@ -31,11 +29,8 @@ class RecipeViewModel extends _$RecipeViewModel {
       return _openDataLocalRepository.getPath(path: path);
     }
 
-    await ref
-        .read(analyticsControllerProvider.notifier)
-        .logViewRecipe(recipe.id);
-    final Uint8List bytes =
-        await _openDataRemoteRepository.getPDF(recipe.pdfUrl);
+    await ref.read(analyticsControllerProvider.notifier).logViewRecipe(recipe.id);
+    final Uint8List bytes = await _openDataRemoteRepository.getPDF(recipe.pdfUrl);
     return _openDataLocalRepository.add(path: path, bytes: bytes);
   }
 
