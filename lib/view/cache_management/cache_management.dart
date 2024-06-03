@@ -14,11 +14,11 @@ class CacheManagement extends ConsumerWidget {
       appBar: const FadeUpAppBar(title: Text('キャッシュの管理')),
       body: SingleChildScrollView(
         child: Column(
-          children: [
+          children: <Widget>[
             ListTile(
               onTap: () => ref.read(openDataRecipesLocalRepositoryProvider).deleteAll(),
-              title: Text('すべてのレシピのキャッシュを削除'),
-            )
+              title: const Text('すべてのレシピのキャッシュを削除'),
+            ),
           ],
         ),
       ),
