@@ -56,10 +56,12 @@ class OpenDataRecipesLocalRepository extends OpenDataRecipesLocalRepositoryAPI {
     final Directory routeDirectory = await getApplicationDocumentsDirectory();
     final Directory directory = Directory('${routeDirectory.path}/open_data_recipes/pdfs');
 
-    final List<FileSystemEntity> recipeFiles = directory.listSync();
+    if (directory.existsSync()) {
+      final List<FileSystemEntity> recipeFiles = directory.listSync();
 
-    await Future.forEach(recipeFiles, (FileSystemEntity recipeFile) async {
-      await recipeFile.delete();
-    });
+      await Future.forEach(recipeFiles, (FileSystemEntity recipeFile) async {
+        await recipeFile.delete();
+      });
+    }
   }
 }
