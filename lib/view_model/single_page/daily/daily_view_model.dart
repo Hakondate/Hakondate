@@ -20,6 +20,7 @@ part 'daily_view_model.g.dart';
 class DailyViewModel extends _$DailyViewModel {
   @override
   FutureOr<DailyState> build() {
+    debugPrint("dailyViewModel build() called");
     return DailyState(
       selectedDay: DateTime.now(),
       focusedDay: DateTime.now(),
@@ -29,14 +30,7 @@ class DailyViewModel extends _$DailyViewModel {
         DateTime.now().month + 2,
       ).add(const Duration(seconds: -1)),
       scrollOffset: 0,
-      scrollController: ScrollController(
-        onDetach: (ScrollPosition position) {
-          //  _storeOffset(position.pixels);
-        },
-        onAttach: (ScrollPosition position) {
-          //scrollToPreOffset(getStoredOffset());
-        },
-      ),
+      scrollController: ScrollController(),
     );
   }
 
@@ -286,23 +280,7 @@ class DailyViewModel extends _$DailyViewModel {
     state.whenData((DailyState data) {
       state = AsyncValue<DailyState>.data(
         data.copyWith(
-          scrollOffset: offset,
-        ),
-      );
-    });
-  }
-
-  void _resetOffset() {
-    state.whenData((DailyState data) {
-      final ScrollController newScrollController = ScrollController(
-        onAttach: (ScrollPosition position) {
-          jumpToPreOffset(getStoredOffset());
-        },
-      );
-      state = AsyncValue<DailyState>.data(
-        data.copyWith(
-          scrollController: newScrollController,
-          scrollOffset: 0,
+          scrollController: ScrollController(initialScrollOffset: offset),
         ),
       );
     });

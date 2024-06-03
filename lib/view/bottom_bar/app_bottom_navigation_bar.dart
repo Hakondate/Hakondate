@@ -53,9 +53,6 @@ class AppBottomNavigationBar extends ConsumerWidget {
               ref.read(dailyViewModelProvider.notifier).storeOffset(ref.read(dailyViewModelProvider.notifier).getPreOffset());
             }
             tabState.controller.animateTo(index);
-            if (index == 0) {
-              ref.watch(dailyViewModelProvider.notifier).jumpToPreOffset(ref.read(dailyViewModelProvider.notifier).getStoredOffset());
-            }
           }
         },
         backgroundColor: AppColor.ui.white,
