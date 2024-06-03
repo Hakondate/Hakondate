@@ -281,7 +281,7 @@ class DailyViewModel extends _$DailyViewModel {
   }
 
   void jumpToPreOffset(double offset) {
-    // debugPrint('_scrollToPreOffset called');
+    debugPrint('jumpToPreOffset called');
     state.whenData((DailyState data) {
       data.scrollController.jumpTo(offset);
     });

@@ -19,6 +19,7 @@ class Daily extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("daily build start");
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -129,6 +130,10 @@ class Daily extends StatelessWidget {
                     },
                     child: (() {
                       if (state.menu is LunchesDayMenuModel) {
+                        print("storedOffset at daily.dart: ${ref.read(dailyViewModelProvider.notifier).getStoredOffset()}");
+                        ref
+                            .watch(dailyViewModelProvider.notifier)
+                            .jumpToPreOffset(ref.read(dailyViewModelProvider.notifier).getStoredOffset());
                         return ListView(
                           controller: state.scrollController,
                           children: const <Widget>[
