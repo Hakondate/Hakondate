@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/widgets.dart';
+import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -56,8 +57,6 @@ class RecipeViewModel extends _$RecipeViewModel {
   double getPreOffset() => state.scrollController.position.pixels;
 
   void storeOffset(double offset) {
-    state.copyWith(
-      scrollController: ScrollController(initialScrollOffset: offset),
-    );
+    state = RecipeState(scrollController: ScrollController(initialScrollOffset: offset));
   }
 }

@@ -52,7 +52,7 @@ class AppBottomNavigationBar extends ConsumerWidget {
             if (path == '/home/daily') {
               final DailyViewModel dailyNotifier = ref.read(dailyViewModelProvider.notifier);
               dailyNotifier.storeOffset(dailyNotifier.getPreOffset());
-            } else if (path == '/home/recipe') {
+            } else if (path == '/home/recipes') {
               final RecipeViewModel recipeNotifier = ref.read(recipeViewModelProvider.notifier);
               recipeNotifier.storeOffset(recipeNotifier.getPreOffset());
             } else if (path == '/home/dictionary') {
