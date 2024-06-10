@@ -6,7 +6,7 @@ part of 'splash_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$splashViewModelHash() => r'4df01780622a07d3c29ee718035ac4a4e6bf84de';
+String _$splashViewModelHash() => r'71b3918cf6040e25b1ec54c8f276f092d77375c7';
 
 /// See also [SplashViewModel].
 @ProviderFor(SplashViewModel)
