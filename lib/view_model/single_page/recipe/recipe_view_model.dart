@@ -52,4 +52,12 @@ class RecipeViewModel extends _$RecipeViewModel {
   void scrollToTop() {
     state.scrollController.animateTo(0, duration: const Duration(milliseconds: 500), curve: Curves.easeOutCubic);
   }
+
+  double getPreOffset() => state.scrollController.position.pixels;
+
+  void storeOffset(double offset) {
+    state.copyWith(
+      scrollController: ScrollController(initialScrollOffset: offset),
+    );
+  }
 }

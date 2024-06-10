@@ -101,7 +101,7 @@ class DictionaryViewModel extends _$DictionaryViewModel {
 
   void scrollToTop() {
     state.whenData((DictionaryState data) {
-      data.scrollController!.animateTo(
+      data.scrollController.animateTo(
         0,
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeOutCubic,
