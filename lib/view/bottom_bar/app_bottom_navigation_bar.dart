@@ -52,6 +52,15 @@ class AppBottomNavigationBar extends ConsumerWidget {
             if (path == '/home/daily') {
               final DailyViewModel dailyNotifier = ref.read(dailyViewModelProvider.notifier);
               dailyNotifier.storeOffset(dailyNotifier.getPreOffset());
+            } else if (path == '/home/recipe') {
+              final RecipeViewModel recipeNotifier = ref.read(recipeViewModelProvider.notifier);
+              recipeNotifier.storeOffset(recipeNotifier.getPreOffset());
+            } else if (path == '/home/dictionary') {
+              final DictionaryViewModel dictionaryNotifier = ref.read(dictionaryViewModelProvider.notifier);
+              dictionaryNotifier.storeOffset(dictionaryNotifier.getPreOffset());
+            } else if (path == '/home/letter') {
+              final LetterViewModel letterNotifier = ref.read(letterViewModelProvider.notifier);
+              letterNotifier.storeOffset(letterNotifier.getPreOffset());
             }
             tabState.controller.animateTo(index);
           }
