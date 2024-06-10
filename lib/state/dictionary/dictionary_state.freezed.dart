@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$DictionaryState {
-  ScrollController? get scrollController => throw _privateConstructorUsedError;
+  ScrollController get scrollController => throw _privateConstructorUsedError;
   DictionaryGroup? get selectedGroup => throw _privateConstructorUsedError;
   List<DictionaryItemModel>? get selectedGroupItems =>
       throw _privateConstructorUsedError;
@@ -34,7 +34,7 @@ abstract class $DictionaryStateCopyWith<$Res> {
       _$DictionaryStateCopyWithImpl<$Res, DictionaryState>;
   @useResult
   $Res call(
-      {ScrollController? scrollController,
+      {ScrollController scrollController,
       DictionaryGroup? selectedGroup,
       List<DictionaryItemModel>? selectedGroupItems,
       DictionaryItemModel? selectedItem});
@@ -55,16 +55,16 @@ class _$DictionaryStateCopyWithImpl<$Res, $Val extends DictionaryState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? scrollController = freezed,
+    Object? scrollController = null,
     Object? selectedGroup = freezed,
     Object? selectedGroupItems = freezed,
     Object? selectedItem = freezed,
   }) {
     return _then(_value.copyWith(
-      scrollController: freezed == scrollController
+      scrollController: null == scrollController
           ? _value.scrollController
           : scrollController // ignore: cast_nullable_to_non_nullable
-              as ScrollController?,
+              as ScrollController,
       selectedGroup: freezed == selectedGroup
           ? _value.selectedGroup
           : selectedGroup // ignore: cast_nullable_to_non_nullable
@@ -102,7 +102,7 @@ abstract class _$$DictionaryStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {ScrollController? scrollController,
+      {ScrollController scrollController,
       DictionaryGroup? selectedGroup,
       List<DictionaryItemModel>? selectedGroupItems,
       DictionaryItemModel? selectedItem});
@@ -122,16 +122,16 @@ class __$$DictionaryStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? scrollController = freezed,
+    Object? scrollController = null,
     Object? selectedGroup = freezed,
     Object? selectedGroupItems = freezed,
     Object? selectedItem = freezed,
   }) {
     return _then(_$DictionaryStateImpl(
-      scrollController: freezed == scrollController
+      scrollController: null == scrollController
           ? _value.scrollController
           : scrollController // ignore: cast_nullable_to_non_nullable
-              as ScrollController?,
+              as ScrollController,
       selectedGroup: freezed == selectedGroup
           ? _value.selectedGroup
           : selectedGroup // ignore: cast_nullable_to_non_nullable
@@ -159,7 +159,7 @@ class _$DictionaryStateImpl implements _DictionaryState {
       : _selectedGroupItems = selectedGroupItems;
 
   @override
-  final ScrollController? scrollController;
+  final ScrollController scrollController;
   @override
   final DictionaryGroup? selectedGroup;
   final List<DictionaryItemModel>? _selectedGroupItems;
@@ -210,13 +210,13 @@ class _$DictionaryStateImpl implements _DictionaryState {
 
 abstract class _DictionaryState implements DictionaryState {
   const factory _DictionaryState(
-      {required final ScrollController? scrollController,
+      {required final ScrollController scrollController,
       final DictionaryGroup? selectedGroup,
       final List<DictionaryItemModel>? selectedGroupItems,
       final DictionaryItemModel? selectedItem}) = _$DictionaryStateImpl;
 
   @override
-  ScrollController? get scrollController;
+  ScrollController get scrollController;
   @override
   DictionaryGroup? get selectedGroup;
   @override
