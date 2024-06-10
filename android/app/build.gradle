@@ -88,9 +88,13 @@ android {
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.release
+            if (dartEnvironmentVariables.FLAVOR == 'prod') {
+                signingConfig signingConfigs.release
+            } else {
+                // TODO: Add your own signing config for the non-prod release build.
+                // Signing with the debug keys for now, so `flutter run --release` works.
+                signingConfig signingConfigs.debug
+            }
         }
     }
 }
