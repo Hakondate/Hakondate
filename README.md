@@ -51,4 +51,5 @@ Null Safetyを採用
     ```
 ## リリースビルド手順
 ### Android
-Notionの[デプロイ](https://www.notion.so/hakondate/05c751dbd24645a1a40726c62e7c91fe?pvs=4)ページの必要なファイルのとこにアップロードされている`key.jks`と`key.properties`をダウンロードし，Hakondateのandroidディレクトリに配置する．
+1. Notionの[デプロイ](https://www.notion.so/hakondate/05c751dbd24645a1a40726c62e7c91fe?pvs=4)ページの必要なファイルのとこにアップロードされている`key.jks`と`key.properties`をダウンロードし，Hakondateのandroidディレクトリに配置する．
+2. `fvm flutter build appbundle --dart-define=FLAVOR=prod`をHakondateディレクトリで実行する．
