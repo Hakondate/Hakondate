@@ -49,3 +49,15 @@ Null Safetyを採用
       ]            // ここも
     );
     ```
+## リリースビルド手順
+### Android
+1. Notionの「アカウント・ツール」ページにアップロードされている`key.jks`をダウンロード
+2. Hakondateのandroidディレクトリに`key.properties`ファイルを作成し，以下を追記する．
+
+（{}で囲われてるところは適切な値に変更すること）
+```
+storePassword={Notionの「アカウント・ツール」ページのビルドのところに書いてあるパスワード}
+keyPassword={上と同じ}
+keyAlias=key
+storeFile={ダウンロードしたkey.jksへのパス}
+```
