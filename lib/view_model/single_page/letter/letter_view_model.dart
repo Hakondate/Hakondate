@@ -23,7 +23,6 @@ class LetterViewModel extends _$LetterViewModel {
 
   @override
   LetterState build() {
-    debugPrint('letter build');
     _lettersRemoteRepository = ref.watch(lettersRemoteRepositoryProvider);
     _schoolsLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
 
