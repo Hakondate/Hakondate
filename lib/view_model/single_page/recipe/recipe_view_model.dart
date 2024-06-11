@@ -56,6 +56,10 @@ class RecipeViewModel extends _$RecipeViewModel {
   double getPreOffset() => state.scrollController.position.pixels;
 
   void storeOffset(double offset) {
-    state = RecipeState(scrollController: ScrollController(initialScrollOffset: offset));
+    state = state.copyWith(
+      scrollController: ScrollController(
+        initialScrollOffset: offset,
+      ),
+    );
   }
 }

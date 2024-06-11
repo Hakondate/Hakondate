@@ -97,6 +97,10 @@ class LetterViewModel extends _$LetterViewModel {
   double getPreOffset() => state.scrollController.position.pixels;
 
   void storeOffset(double offset) {
-    state = LetterState(scrollController: ScrollController(initialScrollOffset: offset));
+    state = state.copyWith(
+      scrollController: ScrollController(
+        initialScrollOffset: offset,
+      ),
+    );
   }
 }
