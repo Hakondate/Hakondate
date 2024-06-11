@@ -39,9 +39,7 @@ class RecipeViewModel extends _$RecipeViewModel {
       await _openDataLocalRepository.delete(path: path);
     }
 
-    final Uint8List bytes = await _openDataRemoteRepository.getPDF(
-      'https://www.city.hakodate.hokkaido.jp/docs/2016012500108/file_contents/2016012500108_hk_docs_2016012500108_files_B2sawaniwan.pdf',
-    );
+    final Uint8List bytes = await _openDataRemoteRepository.getPDF(recipe.pdfUrl);
     await _openDataLocalRepository.add(path: path, bytes: bytes);
   }
 }

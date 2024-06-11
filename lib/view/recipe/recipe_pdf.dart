@@ -27,11 +27,6 @@ class RecipePDF extends ConsumerWidget {
     );
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          ref.read(recipeViewModelProvider.notifier).reDownload(recipe: recipe);
-        },
-      ),
       appBar: FadeUpAppBar(
         title: Text(recipe.name),
       ),
