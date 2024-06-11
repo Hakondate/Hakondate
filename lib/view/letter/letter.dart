@@ -33,8 +33,8 @@ class Letter extends ConsumerWidget {
                 final List<LetterMetadataModel> letters = ref.watch(letterViewModelProvider).letters;
 
                 if (letters.isEmpty) return const NonLetter();
-
                 return Scrollbar(
+                  controller: state.scrollController,
                   child: Padding(
                     padding: const EdgeInsets.all(PaddingSize.minimum),
                     child: RefreshIndicator(
