@@ -48,16 +48,9 @@ class RecipePDF extends ConsumerWidget {
               onError: (_) async => showDialog(
                 context: context,
                 builder: (BuildContext context) => DownloadExceptionDialog(
-                  // onTapRetry: () => routemaster.pop().whenComplete(
-                  //       () => ref
-                  //           .read(recipeViewModelProvider.notifier)
-                  //           .reDownload(recipe: recipe),
-                  //     ),
                   onTapRetry: () => routemaster.pop().whenComplete(
-                    () {
-                      return ref.read(recipeViewModelProvider.notifier).reDownload(recipe: recipe);
-                    },
-                  ),
+                        () => ref.read(recipeViewModelProvider.notifier).reDownload(recipe: recipe),
+                      ),
                   onTapPop: () => routemaster.pop().whenComplete(routemaster.pop),
                 ),
               ),
