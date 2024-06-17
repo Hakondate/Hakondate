@@ -19,7 +19,6 @@ import 'package:hakondate/repository/remote/schools/schools_remote_repository.da
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/splash/splash_state.dart';
 import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
-import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
 
 part 'splash_view_model.g.dart';
 
@@ -37,8 +36,7 @@ class SplashViewModel extends _$SplashViewModel {
     _schoolsRemoteRepository = ref.watch(schoolsRemoteRepositoryProvider);
     _menusLocalRepository = ref.watch(menusLocalRepositoryProvider);
     _menusRemoteRepository = ref.watch(menusRemoteRepositoryProvider);
-    _dictionaryItemsLocalRepository =
-        ref.watch(dictionaryItemsLocalRepositoryProvider);
+    _dictionaryItemsLocalRepository = ref.watch(dictionaryItemsLocalRepositoryProvider);
 
     return SplashState();
   }
@@ -54,13 +52,11 @@ class SplashViewModel extends _$SplashViewModel {
 
         state = SplashState(status: LoadingStatus.reading);
         final SharedPreferences prefs = await SharedPreferences.getInstance();
-        final int migrateVersion =
-            prefs.getInt(AppKey.sharedPreferencesKey.migrateVersion) ?? 0;
+        final int migrateVersion = prefs.getInt(AppKey.sharedPreferencesKey.migrateVersion) ?? 0;
 
         if (migrateVersion < Version.migration) {
           await ref.read(userViewModelProvider.notifier).migrate();
-          await prefs.setInt(
-              AppKey.sharedPreferencesKey.migrateVersion, Version.migration);
+          await prefs.setInt(AppKey.sharedPreferencesKey.migrateVersion, Version.migration);
         }
 
         if (!await ref.read(userViewModelProvider.notifier).signIn()) {
@@ -76,14 +72,11 @@ class SplashViewModel extends _$SplashViewModel {
           if (termsUpdated != null) return await termsUpdated();
         }
 
-        final DateTime dictionaryInitializedDay =
-            DateTime.fromMillisecondsSinceEpoch(
-          prefs.getInt(AppKey.sharedPreferencesKey.initializedDictionaryDay) ??
-              0,
+        final DateTime dictionaryInitializedDay = DateTime.fromMillisecondsSinceEpoch(
+          prefs.getInt(AppKey.sharedPreferencesKey.initializedDictionaryDay) ?? 0,
         );
 
-        if (dictionaryInitializedDay
-            .isBefore(RecordDate.dictionaryLastUpdateDay)) {
+        if (dictionaryInitializedDay.isBefore(RecordDate.dictionaryLastUpdateDay)) {
           await _initializeDictionaries();
           await prefs.setInt(
             AppKey.sharedPreferencesKey.initializedDictionaryDay,
@@ -106,10 +99,8 @@ class SplashViewModel extends _$SplashViewModel {
 
   Future<void> _initializeDictionaries() async {
     state = SplashState(status: LoadingStatus.reading);
-    final String loadString = await rootBundle
-        .loadString('assets/initialization_data/dictionary.json');
-    final Map<String, dynamic> decodedJson =
-        json.decode(loadString) as Map<String, dynamic>;
+    final String loadString = await rootBundle.loadString('assets/initialization_data/dictionary.json');
+    final Map<String, dynamic> decodedJson = json.decode(loadString) as Map<String, dynamic>;
     final List<dynamic> dictionary = decodedJson['dictionary'] as List<dynamic>;
 
     state = SplashState(status: LoadingStatus.updating);
@@ -120,12 +111,10 @@ class SplashViewModel extends _$SplashViewModel {
 
   Future<void> _initializeSchools() async {
     state = SplashState(status: LoadingStatus.reading);
-    final DateTime latestUpdate =
-        await _schoolsLocalRepository.getLatestUpdateDay();
+    final DateTime latestUpdate = await _schoolsLocalRepository.getLatestUpdateDay();
 
     state = SplashState(status: LoadingStatus.checkingUpdate);
-    final List<SchoolModel> schools = await _schoolsRemoteRepository.get(
-        updateAt: latestUpdate.add(const Duration(seconds: 1)));
+    final List<SchoolModel> schools = await _schoolsRemoteRepository.get(updateAt: latestUpdate.add(const Duration(seconds: 1)));
 
     state = SplashState(status: LoadingStatus.updating);
     await Future.forEach(schools, (SchoolModel school) async {
@@ -135,12 +124,10 @@ class SplashViewModel extends _$SplashViewModel {
 
   Future<void> _initializeMenus() async {
     state = SplashState(status: LoadingStatus.reading);
-    final DateTime latestUpdate =
-        await _menusLocalRepository.getLatestUpdateDay();
+    final DateTime latestUpdate = await _menusLocalRepository.getLatestUpdateDay();
 
     state = SplashState(status: LoadingStatus.checkingUpdate);
-    final List<MenuModel> menus = await _menusRemoteRepository.get(
-        updateAt: latestUpdate.add(const Duration(seconds: 1)));
+    final List<MenuModel> menus = await _menusRemoteRepository.get(updateAt: latestUpdate.add(const Duration(seconds: 1)));
 
     state = SplashState(status: LoadingStatus.updating);
     await Future.forEach(menus, (MenuModel menu) async {
