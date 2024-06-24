@@ -14,11 +14,7 @@ class LicenseDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Package package = ossLicenses
-        .where(
-          (Package package) => package.isDirectDependency,
-        )
-        .toList()[index];
+    final Package package = dependencies[index];
 
     return Scaffold(
       appBar: FadeUpAppBar(

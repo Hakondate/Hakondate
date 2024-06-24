@@ -41,6 +41,42 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:37711418622:android:7a7ca06b1b80af4c8ec1af",
+        "android_client_info": {
+          "package_name": "org.hakondate.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "37711418622-njljvskvabl3nn5h7s9ff8cn5k0qc919.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdebemHmmqs4JLRlV5LJvHvP6TBCLtooQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "37711418622-njljvskvabl3nn5h7s9ff8cn5k0qc919.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "37711418622-g293thetb0d0p8fmm7ul3170elhgc464.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.ac.fun.hakondate.dev"
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"
