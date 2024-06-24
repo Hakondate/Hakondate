@@ -35,7 +35,8 @@
         "firebase_analytics",
         "firebase_core",
         "firebase_dynamic_links",
-        "firebase_messaging"
+        "firebase_messaging",
+        "firebase_storage"
       ],
     },
     /** マイナーアップデートはまとめる */
@@ -50,7 +51,8 @@
         "firebase_analytics",
         "firebase_core",
         "firebase_dynamic_links",
-        "firebase_messaging"
+        "firebase_messaging",
+        "firebase_storage"
       ],
     },
   ],
