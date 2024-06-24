@@ -106,20 +106,63 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
   Future<List<DictionaryItemModel>> search(String query) async {
     final List<DictionaryItemModel> items = <DictionaryItemModel>[];
 
-    final List<DictionaryItemsSchema> schemas = await (_db.select(_db.dictionaryItemsTable)
-          ..where(
-            ($DictionaryItemsTableTable t) =>
-                t.name.contains(query) | t.name.contains(query.toHiragana()) | t.name.contains(query.toKatakana()),
-          ))
-        .get()
-      ..sort(
-        (DictionaryItemsSchema a, DictionaryItemsSchema b) => a.name.compareTo(b.name),
-      );
-
+    final List<DictionaryItemsSchema> schemas =
+        await (_db.select(_db.dictionaryItemsTable)..where(($DictionaryItemsTableTable t) => t.name.contains(query.toHiragana()))).get()
+          ..sort(
+            (DictionaryItemsSchema a, DictionaryItemsSchema b) =>
+                _compareSearchHit(a.name.toHiragana(), b.name.toHiragana(), query.toHiragana()),
+          );
     for (final DictionaryItemsSchema schema in schemas) {
       items.add(DictionaryItemModel.fromDrift(schema));
     }
     return items;
+  }
+
+  /// # 優先度
+  /// 完全一致　→ 完全包含　→ 部分一致　→ 辞書順
+  /// # 引数
+  /// - leftInput: 比較対象1（queryを完全包含している前提）
+  /// - rightInput: 比較対象2（queryを完全包含している前提）
+  /// - query: 検索クエリ
+  /// # 戻り値の仕様
+  /// StringクラスのcompareToメソッドと同じ
+  /// - return 1  : leftInputの方が優先度が高い
+  /// - return 0  : leftInputとrightInputの優先度が同じ
+  /// - return -1 : rightInputの方が優先度が高い
+  int _compareSearchHit(String leftInput, String rightInput, String query) {
+    final String left = leftInput.toHiragana();
+    final String right = rightInput.toHiragana();
+
+    /// 完全一致チェック
+    if (left == query) return 1;
+    if (right == query) return -1;
+
+    /// 完全包含チェック
+    final int leftIndexOfQuery = left.indexOf(query);
+    final int rightIndexOfQuery = right.indexOf(query);
+
+    final bool isLeftSpaceDelimitedWord = _isSpaceDelimited(left, leftIndexOfQuery, query);
+    final bool isRightSpaceDelimitedWord = _isSpaceDelimited(right, rightIndexOfQuery, query);
+
+    if (!(isLeftSpaceDelimitedWord && isRightSpaceDelimitedWord)) {
+      if (isLeftSpaceDelimitedWord) return -1;
+      if (isRightSpaceDelimitedWord) return 1;
+    }
+
+    /// 部分一致チェック
+    if (leftIndexOfQuery < rightIndexOfQuery) return -1;
+    if (leftIndexOfQuery > rightIndexOfQuery) return 1;
+
+    return left.compareTo(right);
+  }
+
+  bool _isSpaceDelimited(String name, int indexOfQuery, String query) {
+    const List<String> wordSplitters = <String>[' ', '　'];
+    for (final String wordSplitter in wordSplitters) {
+      return name.contains(RegExp('(^|$wordSplitter)$query($wordSplitter|\$)'));
+    }
+
+    return false;
   }
 
   @override
