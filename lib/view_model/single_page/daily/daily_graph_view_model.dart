@@ -24,11 +24,18 @@ Future<List<double>> graphValues(GraphValuesRef ref) async {
     return <double>[0, 0, 0, 0, 0, 0];
   }
 
+  final double vitaminSufficiency =
+      (menu.retinol / slns.retinol + menu.vitaminB1 / slns.vitaminB1 + menu.vitaminB2 / slns.vitaminB2 + menu.vitaminC / slns.vitaminC) /
+          4 *
+          100.0;
+  final double mineralSufficiency =
+      (menu.calcium / slns.calcium + menu.magnesium / slns.magnesium + menu.iron / slns.iron + menu.zinc / slns.zinc) / 4 * 100.0;
+
   return <double>[
     menu.energy / slns.energy * 100.0,
     menu.protein / slns.protein * 100.0,
-    _calcVitaminSufficiency(slns.retinol, slns.vitaminB1, slns.vitaminB2, slns.vitaminC, menu),
-    _calcMineralSufficiency(slns.calcium, slns.magnesium, slns.iron, slns.zinc, menu),
+    vitaminSufficiency,
+    mineralSufficiency,
     menu.carbohydrate / slns.carbohydrate * 100.0,
     menu.lipid / slns.lipid * 100.0,
   ].map((double element) => (element > graphMaxValue) ? graphMaxValue : element).toList();
@@ -56,30 +63,4 @@ List<double> graphRawValues(GraphRawValuesRef ref) {
     menu.carbohydrate,
     menu.lipid,
   ];
-}
-
-double _calcVitaminSufficiency(
-  double retinolRef,
-  double vitaminB1Ref,
-  double vitaminB2Ref,
-  double vitaminCRef,
-  MenuModel menu,
-) {
-  if (menu is! LunchesDayMenuModel) return 0;
-
-  return (menu.retinol / retinolRef + menu.vitaminB1 / vitaminB1Ref + menu.vitaminB2 / vitaminB2Ref + menu.vitaminC / vitaminCRef) /
-      4 *
-      100.0;
-}
-
-double _calcMineralSufficiency(
-  double calciumRef,
-  double magnesiumRef,
-  double ironRef,
-  double zincRef,
-  MenuModel menu,
-) {
-  if (menu is! LunchesDayMenuModel) return 0;
-
-  return (menu.calcium / calciumRef + menu.magnesium / magnesiumRef + menu.iron / ironRef + menu.zinc / zincRef) / 4 * 100.0;
 }
