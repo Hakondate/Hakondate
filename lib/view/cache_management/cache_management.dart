@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate/repository/local/directory/open_data_recipes/open_data_recipes_local_repository.dart';
 import 'package:hakondate/router/routes.dart';
@@ -20,7 +21,7 @@ class CacheManagement extends ConsumerWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: <Widget>[
-              Container(
+              DecoratedBox(
                 decoration: BoxDecoration(
                   color: AppColor.ui.white,
                   borderRadius: BorderRadius.circular(16.0),
@@ -38,7 +39,7 @@ class CacheManagement extends ConsumerWidget {
                             child: Text("レシピのキャッシュを削除しました。"),
                           ),
                           firstAction: HakondateActionButton.primary(
-                            text: const Text('確認'),
+                            text: const Text('閉じる'),
                             onTap: () => routemaster.pop(context),
                           ),
                         );
