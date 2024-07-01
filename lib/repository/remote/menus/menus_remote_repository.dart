@@ -33,8 +33,18 @@ class MenusRemoteRepository extends MenusRemoteRepositoryAPI {
   @override
   Future<List<MenuModel>> get({required DateTime updateAt}) async {
     final List<int> schoolIds = await _ref.read(userSettingsViewModelProvider.notifier).listParentIds();
-    final QuerySnapshot<MenuModel> menus = await _db.where('schoolId', whereIn: schoolIds).where('updateAt', isGreaterThan: updateAt).get();
-
+    final QuerySnapshot<MenuModel> menus;
+    if (updateAt.year == 1970) {
+      menus = await _db
+          .where('schoolId', whereIn: schoolIds)
+          .where(
+            'day',
+            isGreaterThanOrEqualTo: DateTime(DateTime.now().year, DateTime.now().month - 3),
+          )
+          .get();
+    } else {
+      menus = await _db.where('schoolId', whereIn: schoolIds).where('updateAt', isGreaterThan: updateAt).get();
+    }
     return menus.docs.map((QueryDocumentSnapshot<MenuModel> doc) => doc.data()).toList();
   }
 }

@@ -19,7 +19,6 @@ import 'package:hakondate/repository/remote/schools/schools_remote_repository.da
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/splash/splash_state.dart';
 import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
-import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
 
 part 'splash_view_model.g.dart';
 
@@ -135,6 +134,7 @@ class SplashViewModel extends _$SplashViewModel {
       await _menusLocalRepository.add(menu);
     });
 
-    await ref.read(dailyViewModelProvider.notifier).updateSelectedDay();
+    // ref.invalidate(dailyViewModelProvider);
+    // await ref.read(dailyViewModelProvider.notifier).updateSelectedDay();
   }
 }
