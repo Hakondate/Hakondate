@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/constant/app_color.dart';
@@ -18,36 +19,38 @@ class CacheManagement extends ConsumerWidget {
       appBar: const FadeUpAppBar(title: Text('キャッシュの管理')),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16),
           child: Column(
             children: <Widget>[
               DecoratedBox(
                 decoration: BoxDecoration(
                   color: AppColor.ui.white,
-                  borderRadius: BorderRadius.circular(16.0),
+                  borderRadius: BorderRadius.circular(16),
                 ),
                 child: ListTile(
                   onTap: () async {
                     await ref.read(openDataRecipesLocalRepositoryProvider).deleteAll();
-                    await showDialog<void>(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return HakondateDialog(
-                          title: const Text("削除完了"),
-                          body: const Padding(
-                            padding: EdgeInsets.all(PaddingSize.normal),
-                            child: Text("レシピのキャッシュを削除しました。"),
-                          ),
-                          firstAction: HakondateActionButton.primary(
-                            text: const Text('閉じる'),
-                            onTap: () => routemaster.pop(context),
-                          ),
-                        );
-                      },
-                    );
+                    if (context.mounted) {
+                      await showDialog<void>(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return HakondateDialog(
+                            title: const Text('削除完了'),
+                            body: const Padding(
+                              padding: EdgeInsets.all(PaddingSize.normal),
+                              child: Text('レシピのキャッシュを削除しました。'),
+                            ),
+                            firstAction: HakondateActionButton.primary(
+                              text: const Text('閉じる'),
+                              onTap: () => routemaster.pop(context),
+                            ),
+                          );
+                        },
+                      );
+                    }
                   },
-                  title: Center(
-                    child: const Text(
+                  title: const Center(
+                    child: Text(
                       'すべてのレシピのキャッシュを削除',
                       style: TextStyle(color: Colors.black),
                     ),
