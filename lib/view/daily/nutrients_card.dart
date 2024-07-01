@@ -62,22 +62,25 @@ class NutrientsCard extends StatelessWidget {
                   throw const ClassTypeException("'menu' is not 'LunchesDayMenuModel'");
                 }
 
-                return ExpansionTile(
-                  title: const Text(
-                    '詳細な栄養値',
-                    style: TextStyle(
-                      fontSize: FontSize.heading,
+                return Theme(
+                  data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+                  child: ExpansionTile(
+                    title: const Text(
+                      '詳細な栄養値',
+                      style: TextStyle(
+                        fontSize: FontSize.heading,
+                      ),
                     ),
+                    onExpansionChanged: (bool isExpanded) => !isExpanded,
+                    textColor: AppColor.brand.secondary,
+                    iconColor: AppColor.brand.secondary,
+                    children: <Widget>[
+                      NutrientsList(
+                        nutrients: menu,
+                        backgroundColor: AppColor.ui.secondaryUltraLight,
+                      ),
+                    ],
                   ),
-                  onExpansionChanged: (bool isExpanded) => !isExpanded,
-                  textColor: AppColor.brand.secondary,
-                  iconColor: AppColor.brand.secondary,
-                  children: <Widget>[
-                    NutrientsList(
-                      nutrients: menu,
-                      backgroundColor: AppColor.ui.secondaryUltraLight,
-                    ),
-                  ],
                 );
               },
               orElse: () => const SizedBox.shrink(),
