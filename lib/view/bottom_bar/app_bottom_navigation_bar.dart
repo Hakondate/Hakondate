@@ -7,9 +7,14 @@ import 'package:routemaster/routemaster.dart';
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/constant/svg_path.dart';
+import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/util/environment.dart';
 import 'package:hakondate/view/daily/daily_drawer.dart';
 import 'package:hakondate/view_model/multi_page/drawer/drawer_view_model.dart';
+import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
+import 'package:hakondate/view_model/single_page/dictionary/dictionary_view_model.dart';
+import 'package:hakondate/view_model/single_page/letter/letter_view_model.dart';
+import 'package:hakondate/view_model/single_page/recipe/recipe_view_model.dart';
 
 class AppBottomNavigationBar extends ConsumerWidget {
   const AppBottomNavigationBar({super.key});
@@ -32,7 +37,43 @@ class AppBottomNavigationBar extends ConsumerWidget {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: tabState.controller.index,
-        onTap: (int index) => tabState.controller.animateTo(index),
+        onTap: (int index) {
+          final String? path = routemaster.currentConfiguration?.fullPath;
+
+          if (path == '/home/daily') {
+            if (index == 0) {
+              ref.read(dailyViewModelProvider.notifier).scrollToTop();
+            } else {
+              final DailyViewModel dailyNotifier = ref.read(dailyViewModelProvider.notifier);
+              dailyNotifier.storeOffset(dailyNotifier.getPreOffset());
+              tabState.controller.animateTo(index);
+            }
+          } else if (path == '/home/recipes') {
+            if (index == 1) {
+              ref.read(recipeViewModelProvider.notifier).scrollToTop();
+            } else {
+              final RecipeViewModel recipeNotifier = ref.read(recipeViewModelProvider.notifier);
+              recipeNotifier.storeOffset(recipeNotifier.getPreOffset());
+              tabState.controller.animateTo(index);
+            }
+          } else if (path == '/home/dictionary') {
+            if (index == 2) {
+              ref.read(dictionaryViewModelProvider.notifier).scrollToTop();
+            } else {
+              final DictionaryViewModel dictionaryNotifier = ref.read(dictionaryViewModelProvider.notifier);
+              dictionaryNotifier.storeOffset(dictionaryNotifier.getPreOffset());
+              tabState.controller.animateTo(index);
+            }
+          } else if (path == '/home/letter') {
+            if (index == 3) {
+              ref.read(letterViewModelProvider.notifier).scrollToTop();
+            } else {
+              final LetterViewModel letterNotifier = ref.read(letterViewModelProvider.notifier);
+              letterNotifier.storeOffset(letterNotifier.getPreOffset());
+              tabState.controller.animateTo(index);
+            }
+          }
+        },
         backgroundColor: AppColor.ui.white,
         selectedItemColor: AppColor.brand.secondary,
         selectedLabelStyle: const TextStyle(

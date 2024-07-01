@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
@@ -15,13 +17,16 @@ class DictionaryViewModel extends _$DictionaryViewModel {
   @override
   FutureOr<DictionaryState> build() {
     _dictionaryItemsLocalRepository = ref.watch(dictionaryItemsLocalRepositoryProvider);
-    return const DictionaryState();
+    return DictionaryState(
+      scrollController: ScrollController(),
+    );
   }
 
   Future<void> selectGroup(DictionaryGroup group) async {
     state = const AsyncLoading<DictionaryState>();
     state = AsyncData<DictionaryState>(
       DictionaryState(
+        scrollController: ScrollController(),
         selectedGroup: group,
         selectedGroupItems: await _dictionaryItemsLocalRepository.listGroup(group.groupNumber),
       ),
@@ -68,6 +73,23 @@ class DictionaryViewModel extends _$DictionaryViewModel {
     );
   }
 
+  double getPreOffset() {
+    return state.maybeWhen(
+      orElse: () => 0,
+      data: (DictionaryState data) => data.scrollController.position.pixels,
+    );
+  }
+
+  void storeOffset(double offset) {
+    state.whenData((DictionaryState data) {
+      state = AsyncValue<DictionaryState>.data(
+        data.copyWith(
+          scrollController: ScrollController(initialScrollOffset: offset),
+        ),
+      );
+    });
+  }
+
   Future<DictionaryItemModel> _getMaxRef(FiveMajorNutrient nutrient) async {
     final List<DictionaryItemModel> schemas = await _dictionaryItemsLocalRepository.getRanking(
       nutrient: nutrient.name,
@@ -75,5 +97,15 @@ class DictionaryViewModel extends _$DictionaryViewModel {
     );
 
     return schemas.last;
+  }
+
+  void scrollToTop() {
+    state.whenData((DictionaryState data) {
+      data.scrollController.animateTo(
+        0,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeOutCubic,
+      );
+    });
   }
 }

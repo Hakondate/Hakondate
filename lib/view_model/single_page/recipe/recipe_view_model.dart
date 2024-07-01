@@ -1,10 +1,13 @@
 import 'dart:typed_data';
 
+import 'package:flutter/widgets.dart';
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/recipe/open_data_recipe_model.dart';
 import 'package:hakondate/repository/local/directory/open_data_recipes/open_data_recipes_local_repository.dart';
 import 'package:hakondate/repository/remote/open_data_recipes/open_data_recipes_remote_repository.dart';
+import 'package:hakondate/state/recipe/recipe_state.dart';
 import 'package:hakondate/util/analytics_controller/analytics_controller.dart';
 
 part 'recipe_view_model.g.dart';
@@ -15,9 +18,12 @@ class RecipeViewModel extends _$RecipeViewModel {
   late final OpenDataRecipesRemoteRepositoryAPI _openDataRemoteRepository;
 
   @override
-  void build() {
+  RecipeState build() {
     _openDataLocalRepository = ref.watch(openDataRecipesLocalRepositoryProvider);
     _openDataRemoteRepository = ref.watch(openDataRecipesRemoteRepositoryProvider);
+    return RecipeState(
+      scrollController: ScrollController(),
+    );
   }
 
   Future<String> getPath({required OpenDataRecipeModel recipe}) async {
@@ -41,5 +47,15 @@ class RecipeViewModel extends _$RecipeViewModel {
 
     final Uint8List bytes = await _openDataRemoteRepository.getPDF(recipe.pdfUrl);
     await _openDataLocalRepository.add(path: path, bytes: bytes);
+  }
+
+  void scrollToTop() {
+    state.scrollController.animateTo(0, duration: const Duration(milliseconds: 500), curve: Curves.easeOutCubic);
+  }
+
+  double getPreOffset() => state.scrollController.position.pixels;
+
+  void storeOffset(double offset) {
+    state = RecipeState(scrollController: ScrollController(initialScrollOffset: offset));
   }
 }

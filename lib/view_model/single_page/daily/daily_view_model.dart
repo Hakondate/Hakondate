@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
@@ -26,10 +28,14 @@ class DailyViewModel extends _$DailyViewModel {
         DateTime.now().year,
         DateTime.now().month + 2,
       ).add(const Duration(seconds: -1)),
+      scrollController: ScrollController(),
     );
   }
 
-  Future<void> updateSelectedDay({DateTime? selectedDay, DateTime? focusedDay}) async {
+  Future<void> updateSelectedDay({
+    DateTime? selectedDay,
+    DateTime? focusedDay,
+  }) async {
     state.whenData((DailyState data) async {
       state = const AsyncLoading<DailyState>();
       DateTime? selectedInputDay = selectedDay;
@@ -54,6 +60,8 @@ class DailyViewModel extends _$DailyViewModel {
         await ref.read(analyticsControllerProvider.notifier).logViewMenu(menu.id);
       }
       await updateRecommendFoodstuffs();
+
+      //_resetOffset();
     });
   }
 
@@ -152,11 +160,25 @@ class DailyViewModel extends _$DailyViewModel {
         return <double>[
           menu.energy / slns.energy * 100.0,
           menu.protein / slns.protein * 100.0,
-          _calcVitaminSufficiency(slns.retinol, slns.vitaminB1, slns.vitaminB2, slns.vitaminC),
-          _calcMineralSufficiency(slns.calcium, slns.magnesium, slns.iron, slns.zinc),
+          _calcVitaminSufficiency(
+            slns.retinol,
+            slns.vitaminB1,
+            slns.vitaminB2,
+            slns.vitaminC,
+          ),
+          _calcMineralSufficiency(
+            slns.calcium,
+            slns.magnesium,
+            slns.iron,
+            slns.zinc,
+          ),
           menu.carbohydrate / slns.carbohydrate * 100.0,
           menu.lipid / slns.lipid * 100.0,
-        ].map((double element) => (element > graphMaxValue) ? graphMaxValue : element).toList();
+        ]
+            .map(
+              (double element) => (element > graphMaxValue) ? graphMaxValue : element,
+            )
+            .toList();
       },
       orElse: () => <double>[0, 0, 0, 0, 0, 0],
     );
@@ -219,6 +241,41 @@ class DailyViewModel extends _$DailyViewModel {
         return (menu.calcium / calciumRef + menu.magnesium / magnesiumRef + menu.iron / ironRef + menu.zinc / zincRef) / 4 * 100.0;
       },
       orElse: () => 0,
+    );
+  }
+
+  void scrollToTop() {
+    state.whenData((DailyState data) {
+      data.scrollController.animateTo(
+        0,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeOutCubic,
+      );
+    });
+  }
+
+  double getPreOffset() {
+    return state.maybeWhen(
+      orElse: () => 0,
+      data: (DailyState data) => data.scrollController.position.pixels,
+    );
+  }
+
+  void storeOffset(double offset) {
+    state.whenData((DailyState data) {
+      state = AsyncValue<DailyState>.data(
+        data.copyWith(
+          scrollController: ScrollController(initialScrollOffset: offset),
+        ),
+      );
+    });
+  }
+
+  DateTime getAddedSelectedDay(DailyState state, int value) {
+    return DateTime(
+      state.selectedDay.year,
+      state.selectedDay.month,
+      state.selectedDay.day + value,
     );
   }
 }
