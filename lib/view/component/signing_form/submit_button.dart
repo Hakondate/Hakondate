@@ -30,6 +30,9 @@ class SubmitButton extends ConsumerWidget {
             child: const Text('登録する'),
             onPressed: () async {
               if (ref.read(signupViewModelProvider.notifier).checkValidation()) {
+                ref.read(signupViewModelProvider).whenData(
+                      (value) => debugPrint(value.schoolId.toString()),
+                    );
                 return showDialog(
                   context: context,
                   builder: (BuildContext context) => const SigningUpDialog(),

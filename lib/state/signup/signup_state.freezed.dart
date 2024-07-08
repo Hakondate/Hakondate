@@ -19,6 +19,7 @@ mixin _$SignupState {
   String? get name => throw _privateConstructorUsedError;
   int? get schoolId => throw _privateConstructorUsedError;
   int? get schoolYear => throw _privateConstructorUsedError;
+  bool get isAuth => throw _privateConstructorUsedError;
   String get schoolTrailing => throw _privateConstructorUsedError;
   String get schoolYearTrailing => throw _privateConstructorUsedError;
   List<SchoolModel> get schools => throw _privateConstructorUsedError;
@@ -41,6 +42,7 @@ abstract class $SignupStateCopyWith<$Res> {
       {String? name,
       int? schoolId,
       int? schoolYear,
+      bool isAuth,
       String schoolTrailing,
       String schoolYearTrailing,
       List<SchoolModel> schools,
@@ -65,6 +67,7 @@ class _$SignupStateCopyWithImpl<$Res, $Val extends SignupState>
     Object? name = freezed,
     Object? schoolId = freezed,
     Object? schoolYear = freezed,
+    Object? isAuth = null,
     Object? schoolTrailing = null,
     Object? schoolYearTrailing = null,
     Object? schools = null,
@@ -85,6 +88,10 @@ class _$SignupStateCopyWithImpl<$Res, $Val extends SignupState>
           ? _value.schoolYear
           : schoolYear // ignore: cast_nullable_to_non_nullable
               as int?,
+      isAuth: null == isAuth
+          ? _value.isAuth
+          : isAuth // ignore: cast_nullable_to_non_nullable
+              as bool,
       schoolTrailing: null == schoolTrailing
           ? _value.schoolTrailing
           : schoolTrailing // ignore: cast_nullable_to_non_nullable
@@ -125,6 +132,7 @@ abstract class _$$SignupStateImplCopyWith<$Res>
       {String? name,
       int? schoolId,
       int? schoolYear,
+      bool isAuth,
       String schoolTrailing,
       String schoolYearTrailing,
       List<SchoolModel> schools,
@@ -147,6 +155,7 @@ class __$$SignupStateImplCopyWithImpl<$Res>
     Object? name = freezed,
     Object? schoolId = freezed,
     Object? schoolYear = freezed,
+    Object? isAuth = null,
     Object? schoolTrailing = null,
     Object? schoolYearTrailing = null,
     Object? schools = null,
@@ -167,6 +176,10 @@ class __$$SignupStateImplCopyWithImpl<$Res>
           ? _value.schoolYear
           : schoolYear // ignore: cast_nullable_to_non_nullable
               as int?,
+      isAuth: null == isAuth
+          ? _value.isAuth
+          : isAuth // ignore: cast_nullable_to_non_nullable
+              as bool,
       schoolTrailing: null == schoolTrailing
           ? _value.schoolTrailing
           : schoolTrailing // ignore: cast_nullable_to_non_nullable
@@ -202,6 +215,7 @@ class _$SignupStateImpl with DiagnosticableTreeMixin implements _SignupState {
       {this.name,
       this.schoolId,
       this.schoolYear,
+      this.isAuth = false,
       this.schoolTrailing = '学校を選択',
       this.schoolYearTrailing = '学年を選択',
       final List<SchoolModel> schools = const <SchoolModel>[],
@@ -217,6 +231,9 @@ class _$SignupStateImpl with DiagnosticableTreeMixin implements _SignupState {
   final int? schoolId;
   @override
   final int? schoolYear;
+  @override
+  @JsonKey()
+  final bool isAuth;
   @override
   @JsonKey()
   final String schoolTrailing;
@@ -248,7 +265,7 @@ class _$SignupStateImpl with DiagnosticableTreeMixin implements _SignupState {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SignupState(name: $name, schoolId: $schoolId, schoolYear: $schoolYear, schoolTrailing: $schoolTrailing, schoolYearTrailing: $schoolYearTrailing, schools: $schools, schoolYears: $schoolYears, nameErrorState: $nameErrorState, schoolErrorState: $schoolErrorState)';
+    return 'SignupState(name: $name, schoolId: $schoolId, schoolYear: $schoolYear, isAuth: $isAuth, schoolTrailing: $schoolTrailing, schoolYearTrailing: $schoolYearTrailing, schools: $schools, schoolYears: $schoolYears, nameErrorState: $nameErrorState, schoolErrorState: $schoolErrorState)';
   }
 
   @override
@@ -259,6 +276,7 @@ class _$SignupStateImpl with DiagnosticableTreeMixin implements _SignupState {
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('schoolId', schoolId))
       ..add(DiagnosticsProperty('schoolYear', schoolYear))
+      ..add(DiagnosticsProperty('isAuth', isAuth))
       ..add(DiagnosticsProperty('schoolTrailing', schoolTrailing))
       ..add(DiagnosticsProperty('schoolYearTrailing', schoolYearTrailing))
       ..add(DiagnosticsProperty('schools', schools))
@@ -277,6 +295,7 @@ class _$SignupStateImpl with DiagnosticableTreeMixin implements _SignupState {
                 other.schoolId == schoolId) &&
             (identical(other.schoolYear, schoolYear) ||
                 other.schoolYear == schoolYear) &&
+            (identical(other.isAuth, isAuth) || other.isAuth == isAuth) &&
             (identical(other.schoolTrailing, schoolTrailing) ||
                 other.schoolTrailing == schoolTrailing) &&
             (identical(other.schoolYearTrailing, schoolYearTrailing) ||
@@ -296,6 +315,7 @@ class _$SignupStateImpl with DiagnosticableTreeMixin implements _SignupState {
       name,
       schoolId,
       schoolYear,
+      isAuth,
       schoolTrailing,
       schoolYearTrailing,
       const DeepCollectionEquality().hash(_schools),
@@ -315,6 +335,7 @@ abstract class _SignupState implements SignupState {
       {final String? name,
       final int? schoolId,
       final int? schoolYear,
+      final bool isAuth,
       final String schoolTrailing,
       final String schoolYearTrailing,
       final List<SchoolModel> schools,
@@ -328,6 +349,8 @@ abstract class _SignupState implements SignupState {
   int? get schoolId;
   @override
   int? get schoolYear;
+  @override
+  bool get isAuth;
   @override
   String get schoolTrailing;
   @override

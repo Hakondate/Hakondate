@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hakondate/view/auth/auth.dart';
 
 import 'package:routemaster/routemaster.dart';
 
@@ -35,6 +36,7 @@ final RoutemasterDelegate routemaster = RoutemasterDelegate(
       '/splash': (_) => const MaterialPage<dynamic>(child: Splash()),
       '/terms': (_) => const MaterialPage<dynamic>(child: Terms()),
       '/signup': (_) => MaterialPage<dynamic>(child: Signup()),
+      '/auth': (_) => const MaterialPage(child: Auth()),
       '/home': (_) => const TabPage(
             child: AppBottomNavigationBar(),
             paths: <String>[

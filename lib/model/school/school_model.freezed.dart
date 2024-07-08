@@ -31,6 +31,9 @@ mixin _$SchoolModel {
   /// 給食区分: 1 ~ 10
   int get lunchBlock => throw _privateConstructorUsedError;
 
+  ///認証の有無
+  bool get isAuth => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
   $SchoolModelCopyWith<SchoolModel> get copyWith =>
       throw _privateConstructorUsedError;
@@ -47,7 +50,8 @@ abstract class $SchoolModelCopyWith<$Res> {
       int parentId,
       String name,
       SchoolClassification classification,
-      int lunchBlock});
+      int lunchBlock,
+      bool isAuth});
 }
 
 /// @nodoc
@@ -68,6 +72,7 @@ class _$SchoolModelCopyWithImpl<$Res, $Val extends SchoolModel>
     Object? name = null,
     Object? classification = null,
     Object? lunchBlock = null,
+    Object? isAuth = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -90,6 +95,10 @@ class _$SchoolModelCopyWithImpl<$Res, $Val extends SchoolModel>
           ? _value.lunchBlock
           : lunchBlock // ignore: cast_nullable_to_non_nullable
               as int,
+      isAuth: null == isAuth
+          ? _value.isAuth
+          : isAuth // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -107,7 +116,8 @@ abstract class _$$SchoolModelImplCopyWith<$Res>
       int parentId,
       String name,
       SchoolClassification classification,
-      int lunchBlock});
+      int lunchBlock,
+      bool isAuth});
 }
 
 /// @nodoc
@@ -126,6 +136,7 @@ class __$$SchoolModelImplCopyWithImpl<$Res>
     Object? name = null,
     Object? classification = null,
     Object? lunchBlock = null,
+    Object? isAuth = null,
   }) {
     return _then(_$SchoolModelImpl(
       id: null == id
@@ -148,6 +159,10 @@ class __$$SchoolModelImplCopyWithImpl<$Res>
           ? _value.lunchBlock
           : lunchBlock // ignore: cast_nullable_to_non_nullable
               as int,
+      isAuth: null == isAuth
+          ? _value.isAuth
+          : isAuth // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -160,7 +175,8 @@ class _$SchoolModelImpl extends _SchoolModel {
       required this.parentId,
       required this.name,
       required this.classification,
-      required this.lunchBlock})
+      required this.lunchBlock,
+      required this.isAuth})
       : super._();
 
   /// ID
@@ -183,9 +199,13 @@ class _$SchoolModelImpl extends _SchoolModel {
   @override
   final int lunchBlock;
 
+  ///認証の有無
+  @override
+  final bool isAuth;
+
   @override
   String toString() {
-    return 'SchoolModel(id: $id, parentId: $parentId, name: $name, classification: $classification, lunchBlock: $lunchBlock)';
+    return 'SchoolModel(id: $id, parentId: $parentId, name: $name, classification: $classification, lunchBlock: $lunchBlock, isAuth: $isAuth)';
   }
 
   @override
@@ -200,12 +220,13 @@ class _$SchoolModelImpl extends _SchoolModel {
             (identical(other.classification, classification) ||
                 other.classification == classification) &&
             (identical(other.lunchBlock, lunchBlock) ||
-                other.lunchBlock == lunchBlock));
+                other.lunchBlock == lunchBlock) &&
+            (identical(other.isAuth, isAuth) || other.isAuth == isAuth));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, parentId, name, classification, lunchBlock);
+  int get hashCode => Object.hash(
+      runtimeType, id, parentId, name, classification, lunchBlock, isAuth);
 
   @JsonKey(ignore: true)
   @override
@@ -220,7 +241,8 @@ abstract class _SchoolModel extends SchoolModel {
       required final int parentId,
       required final String name,
       required final SchoolClassification classification,
-      required final int lunchBlock}) = _$SchoolModelImpl;
+      required final int lunchBlock,
+      required final bool isAuth}) = _$SchoolModelImpl;
   const _SchoolModel._() : super._();
 
   @override
@@ -243,6 +265,10 @@ abstract class _SchoolModel extends SchoolModel {
 
   /// 給食区分: 1 ~ 10
   int get lunchBlock;
+  @override
+
+  ///認証の有無
+  bool get isAuth;
   @override
   @JsonKey(ignore: true)
   _$$SchoolModelImplCopyWith<_$SchoolModelImpl> get copyWith =>

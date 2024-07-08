@@ -12,6 +12,7 @@ class SignupState with _$SignupState {
     String? name,
     int? schoolId,
     int? schoolYear,
+    @Default(false) bool isAuth,
     @Default('学校を選択') String schoolTrailing,
     @Default('学年を選択') String schoolYearTrailing,
     @Default(<SchoolModel>[]) List<SchoolModel> schools,

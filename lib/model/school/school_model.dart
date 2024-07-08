@@ -25,7 +25,11 @@ class SchoolModel with _$SchoolModel {
 
     /// 給食区分: 1 ~ 10
     required int lunchBlock,
+
+    ///認証の有無
+    required bool isAuth,
   }) = _SchoolModel;
+
   const SchoolModel._();
 
   factory SchoolModel.fromFirestore(
@@ -50,6 +54,7 @@ class SchoolModel with _$SchoolModel {
       name: data['name'] as String,
       classification: classification,
       lunchBlock: data['lunchBlock'] as int,
+      isAuth: data['isAuth'] as bool,
     );
   }
 
