@@ -172,14 +172,14 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
     int top = 100,
   }) async {
     final List<DictionaryItemModel> items = <DictionaryItemModel>[];
-    List<DictionaryItemsSchema> schemas = <DictionaryItemsSchema>[];
+    final List<DictionaryItemsSchema> schemas = <DictionaryItemsSchema>[];
     List<DictionaryItemsSchema> top100Items = <DictionaryItemsSchema>[];
-    var random = Random();
+    final Random random = Random();
 
     switch (nutrient) {
       case 'energy':
         top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where((tbl) => tbl.group.isNotIn([3, 14, 15, 16, 17, 18]))
+              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
               ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
                       expression: t.energy,
@@ -188,15 +188,15 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
               ])
               ..limit(top))
             .get();
+
         for (int i = 0; i < limit; i++) {
           if (top100Items.isEmpty) break;
-          debugPrint('top100Items.add');
-          final randomIndex = random.nextInt(top100Items.length);
+          final int randomIndex = random.nextInt(top100Items.length);
           schemas.add(top100Items.removeAt(randomIndex));
         }
       case 'protein':
         top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where((tbl) => tbl.group.isNotIn([3, 14, 15, 16, 17, 18]))
+              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
               ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
                       expression: t.protein,
@@ -207,13 +207,12 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
             .get();
         for (int i = 0; i < limit; i++) {
           if (top100Items.isEmpty) break;
-          debugPrint('top100Items.add');
-          final randomIndex = random.nextInt(top100Items.length);
+          final int randomIndex = random.nextInt(top100Items.length);
           schemas.add(top100Items.removeAt(randomIndex));
         }
       case 'lipid':
         top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where((tbl) => tbl.group.isNotIn([3, 14, 15, 16, 17, 18]))
+              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
               ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
                       expression: t.lipid,
@@ -224,13 +223,12 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
             .get();
         for (int i = 0; i < limit; i++) {
           if (top100Items.isEmpty) break;
-          debugPrint('top100Items.add');
-          final randomIndex = random.nextInt(top100Items.length);
+          final int randomIndex = random.nextInt(top100Items.length);
           schemas.add(top100Items.removeAt(randomIndex));
         }
       case 'carbohydrate':
         top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where((tbl) => tbl.group.isNotIn([3, 14, 15, 16, 17, 18]))
+              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
               ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
                       expression: t.carbohydrate,
@@ -241,13 +239,12 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
             .get();
         for (int i = 0; i < limit; i++) {
           if (top100Items.isEmpty) break;
-          debugPrint('top100Items.add');
-          final randomIndex = random.nextInt(top100Items.length);
+          final int randomIndex = random.nextInt(top100Items.length);
           schemas.add(top100Items.removeAt(randomIndex));
         }
       case 'sodium':
         top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where((tbl) => tbl.group.isNotIn([3, 14, 15, 16, 17, 18]))
+              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
               ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
                       expression: t.sodium,
@@ -258,13 +255,12 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
             .get();
         for (int i = 0; i < limit; i++) {
           if (top100Items.isEmpty) break;
-          debugPrint('top100Items.add');
-          final randomIndex = random.nextInt(top100Items.length);
+          final int randomIndex = random.nextInt(top100Items.length);
           schemas.add(top100Items.removeAt(randomIndex));
         }
       case 'calcium':
         top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where((tbl) => tbl.group.isNotIn([3, 14, 15, 16, 17, 18]))
+              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
               ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
                       expression: t.calcium,
@@ -275,13 +271,12 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
             .get();
         for (int i = 0; i < limit; i++) {
           if (top100Items.isEmpty) break;
-          debugPrint('top100Items.add');
-          final randomIndex = random.nextInt(top100Items.length);
+          final int randomIndex = random.nextInt(top100Items.length);
           schemas.add(top100Items.removeAt(randomIndex));
         }
       case 'magnesium':
         top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where((tbl) => tbl.group.isNotIn([3, 14, 15, 16, 17, 18]))
+              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
               ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
                       expression: t.magnesium,
@@ -292,13 +287,12 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
             .get();
         for (int i = 0; i < limit; i++) {
           if (top100Items.isEmpty) break;
-          debugPrint('top100Items.add');
-          final randomIndex = random.nextInt(top100Items.length);
+          final int randomIndex = random.nextInt(top100Items.length);
           schemas.add(top100Items.removeAt(randomIndex));
         }
       case 'iron':
         top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where((tbl) => tbl.group.isNotIn([3, 14, 15, 16, 17, 18]))
+              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
               ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
                       expression: t.iron,
@@ -309,13 +303,12 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
             .get();
         for (int i = 0; i < limit; i++) {
           if (top100Items.isEmpty) break;
-          debugPrint('top100Items.add');
-          final randomIndex = random.nextInt(top100Items.length);
+          final int randomIndex = random.nextInt(top100Items.length);
           schemas.add(top100Items.removeAt(randomIndex));
         }
       case 'zinc':
         top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where((tbl) => tbl.group.isNotIn([3, 14, 15, 16, 17, 18]))
+              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
               ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
                       expression: t.zinc,
@@ -326,13 +319,12 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
             .get();
         for (int i = 0; i < limit; i++) {
           if (top100Items.isEmpty) break;
-          debugPrint('top100Items.add');
-          final randomIndex = random.nextInt(top100Items.length);
+          final int randomIndex = random.nextInt(top100Items.length);
           schemas.add(top100Items.removeAt(randomIndex));
         }
       case 'retinol':
         top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where((tbl) => tbl.group.isNotIn([3, 14, 15, 16, 17, 18]))
+              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
               ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
                       expression: t.retinol,
@@ -343,13 +335,12 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
             .get();
         for (int i = 0; i < limit; i++) {
           if (top100Items.isEmpty) break;
-          debugPrint('top100Items.add');
-          final randomIndex = random.nextInt(top100Items.length);
+          final int randomIndex = random.nextInt(top100Items.length);
           schemas.add(top100Items.removeAt(randomIndex));
         }
       case 'vitaminB1':
         top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where((tbl) => tbl.group.isNotIn([3, 14, 15, 16, 17, 18]))
+              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
               ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
                       expression: t.vitaminB1,
@@ -360,13 +351,12 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
             .get();
         for (int i = 0; i < limit; i++) {
           if (top100Items.isEmpty) break;
-          debugPrint('top100Items.add');
-          final randomIndex = random.nextInt(top100Items.length);
+          final int randomIndex = random.nextInt(top100Items.length);
           schemas.add(top100Items.removeAt(randomIndex));
         }
       case 'vitaminB2':
         top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where((tbl) => tbl.group.isNotIn([3, 14, 15, 16, 17, 18]))
+              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
               ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
                       expression: t.vitaminB2,
@@ -377,13 +367,12 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
             .get();
         for (int i = 0; i < limit; i++) {
           if (top100Items.isEmpty) break;
-          debugPrint('top100Items.add');
-          final randomIndex = random.nextInt(top100Items.length);
+          final int randomIndex = random.nextInt(top100Items.length);
           schemas.add(top100Items.removeAt(randomIndex));
         }
       case 'vitaminC':
         top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where((tbl) => tbl.group.isNotIn([3, 14, 15, 16, 17, 18]))
+              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
               ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
                       expression: t.vitaminC,
@@ -394,13 +383,12 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
             .get();
         for (int i = 0; i < limit; i++) {
           if (top100Items.isEmpty) break;
-          debugPrint('top100Items.add');
-          final randomIndex = random.nextInt(top100Items.length);
+          final int randomIndex = random.nextInt(top100Items.length);
           schemas.add(top100Items.removeAt(randomIndex));
         }
       case 'dietaryFiber':
         top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where((tbl) => tbl.group.isNotIn([3, 14, 15, 16, 17, 18]))
+              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
               ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
                       expression: t.dietaryFiber,
@@ -411,13 +399,12 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
             .get();
         for (int i = 0; i < limit; i++) {
           if (top100Items.isEmpty) break;
-          debugPrint('top100Items.add');
-          final randomIndex = random.nextInt(top100Items.length);
+          final int randomIndex = random.nextInt(top100Items.length);
           schemas.add(top100Items.removeAt(randomIndex));
         }
       case 'salt':
         top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where((tbl) => tbl.group.isNotIn([3, 14, 15, 16, 17, 18]))
+              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
               ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
                       expression: t.salt,
@@ -428,13 +415,12 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
             .get();
         for (int i = 0; i < limit; i++) {
           if (top100Items.isEmpty) break;
-          debugPrint('top100Items.add');
-          final randomIndex = random.nextInt(top100Items.length);
+          final int randomIndex = random.nextInt(top100Items.length);
           schemas.add(top100Items.removeAt(randomIndex));
         }
       case 'vitamin':
         top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where((tbl) => tbl.group.isNotIn([3, 14, 15, 16, 17, 18]))
+              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
               ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
                       expression: t.retinol / const Variable<double>(1000) + t.vitaminB1 + t.vitaminB2 + t.vitaminC,
@@ -445,13 +431,12 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
             .get();
         for (int i = 0; i < limit; i++) {
           if (top100Items.isEmpty) break;
-          debugPrint('top100Items.add');
-          final randomIndex = random.nextInt(top100Items.length);
+          final int randomIndex = random.nextInt(top100Items.length);
           schemas.add(top100Items.removeAt(randomIndex));
         }
       case 'mineral':
         top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where((tbl) => tbl.group.isNotIn([3, 14, 15, 16, 17, 18]))
+              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
               ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
                 ($DictionaryItemsTableTable t) => OrderingTerm(
                       expression: t.calcium + t.magnesium + t.iron + t.zinc,
@@ -462,8 +447,7 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
             .get();
         for (int i = 0; i < limit; i++) {
           if (top100Items.isEmpty) break;
-          debugPrint('top100Items.add');
-          final randomIndex = random.nextInt(top100Items.length);
+          final int randomIndex = random.nextInt(top100Items.length);
           schemas.add(top100Items.removeAt(randomIndex));
         }
       default:
