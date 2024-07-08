@@ -33,6 +33,10 @@ class DailyViewModel extends _$DailyViewModel {
     DateTime? selectedDay,
     DateTime? focusedDay,
   }) async {
+    while (!state.hasValue) {
+      await Future<void>.delayed(const Duration(milliseconds: 100));
+    }
+
     await state.maybeWhen(
       data: (DailyState data) async {
         state = const AsyncLoading<DailyState>();
