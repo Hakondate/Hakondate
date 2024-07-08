@@ -1,0 +1,58 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:hakondate/constant/app_color.dart';
+import 'package:hakondate/constant/size.dart';
+import 'package:hakondate/model/origin/origin_model.dart';
+import 'package:hakondate/state/origin/origin_state.dart';
+import 'package:hakondate/view/component/frame/fade_up_app_bar.dart';
+import 'package:hakondate/view/component/label/description_text.dart';
+import 'package:hakondate/view_model/single_page/origin/origin_view_model.dart';
+
+//地場産情報のに変える
+
+class LocallyProduced extends ConsumerWidget {
+  const LocallyProduced({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return ref.watch(originViewModelProvider).maybeWhen(
+          data: (OriginState data) {
+            if (data.origins.isEmpty) {
+              return const SizedBox.shrink();
+            }
+            final OriginModel origin = data.selectedOrigin;
+            return Padding(
+              padding: const EdgeInsets.all(PaddingSize.normal),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  DescriptionText.headline(label: '基本的な産地'),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    /*children: <Widget>[
+                    DescriptionText.body(
+                      label: '1. 米，小麦，牛乳，鶏卵\n'
+                          '2. 肉（牛，豚，鶏）\n'
+                          '3. 野菜，果物，魚介・海藻類',
+                    ),
+                    Flexible(
+                      child: DescriptionText.body(
+                        label: '北海道産\n'
+                            '北海道産\n'
+                            '以下の産地リストをご覧ください',
+                      ),
+                    ),
+                  ],*/
+                  ),
+                  DescriptionText.headline(label: '地場産情報'),
+                  //const DropdownMonthSelector(),
+                  //const LocallyProducedList(),
+                ],
+              ),
+            );
+          },
+          orElse: () => const SizedBox.shrink(),
+        );
+  }
+}

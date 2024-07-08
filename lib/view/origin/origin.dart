@@ -4,6 +4,7 @@ import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/view/component/frame/fade_up_app_bar.dart';
 import 'package:hakondate/view/component/label/description_text.dart';
+import 'package:hakondate/view/locally_produced/loccaly_produced.dart';
 import 'package:hakondate/view/origin/dropdown_month_selector.dart';
 import 'package:hakondate/view/origin/origin_item_list.dart';
 
@@ -45,6 +46,7 @@ class Origin extends StatelessWidget {
                 DescriptionText.headline(label: '月毎の産地情報'),
                 const DropdownMonthSelector(),
                 const OriginItemList(),
+                LocallyProduced(),
               ],
             ),
           ),
