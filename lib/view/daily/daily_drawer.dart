@@ -40,6 +40,11 @@ class DailyDrawer extends StatelessWidget {
             labelText: '産地情報',
             onTap: () => routemaster.push('/home/origin'),
           ),
+          _drawerLabel(
+            icon: Icons.spa_outlined,
+            labelText: '地場産物情報',
+            onTap: () => routemaster.push('/home/local_product'),
+          ),
           Divider(
             color: AppColor.text.gray,
             height: SpaceSize.paragraph,
