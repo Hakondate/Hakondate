@@ -67,7 +67,7 @@ android {
     defaultConfig {
         applicationId "org.hakondate"
         minSdkVersion 28
-        targetSdkVersion 33
+        targetSdkVersion 34
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         if (dartEnvironmentVariables.FLAVOR != 'prod') {
