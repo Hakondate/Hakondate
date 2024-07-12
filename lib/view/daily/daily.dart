@@ -83,7 +83,7 @@ class Daily extends StatelessWidget {
                   selectedDayPredicate: (DateTime day) => isSameDay(state.selectedDay, day),
                   onDaySelected: (DateTime selectedDay, DateTime focusedDay) async {
                     if (isSameDay(state.selectedDay, selectedDay)) return;
-                    await ref.read(dailyViewModelProvider.notifier).updateSelectedDay(selectedDay: selectedDay);
+                    await ref.read(dailyViewModelProvider.notifier).updateSelectedDay(selectedDay);
                   },
                   onPageChanged: (DateTime focusedDay) => ref.read(dailyViewModelProvider.notifier).updateFocusedDay(focusedDay),
                   daysOfWeekHeight: 20,

@@ -12,35 +12,36 @@ part 'daily_view_model.g.dart';
 @Riverpod(keepAlive: true)
 class DailyViewModel extends _$DailyViewModel {
   @override
-  FutureOr<DailyState> build() {
+  Future<DailyState> build() async {
+    DateTime? selectedDay;
+    switch (Environment.flavor) {
+      case Flavor.dev:
+        selectedDay ??= await ref.read(menusLocalRepositoryProvider).getLatestDay();
+      case Flavor.stg || Flavor.prod:
+        selectedDay ??= DateTime.now();
+    }
+    final MenuModel menu = await ref.read(menusLocalRepositoryProvider).getMenuByDay(selectedDay);
+
     return DailyState(
-      selectedDay: DateTime.now(),
-      focusedDay: DateTime.now(),
-      calendarTabFirstDay: DateTime(2019, 8),
+      selectedDay: selectedDay,
+      focusedDay: selectedDay,
+      calendarTabFirstDay: await ref.read(menusLocalRepositoryProvider).getOldestDay(),
       calendarTabLastDay: DateTime(
         DateTime.now().year,
         DateTime.now().month + 2,
       ).add(const Duration(seconds: -1)),
+      menu: menu,
     );
   }
 
-  Future<void> updateSelectedDay({DateTime? selectedDay, DateTime? focusedDay}) async {
+  Future<void> updateSelectedDay(DateTime selectedDay, {DateTime? focusedDay}) async {
     state.whenData((DailyState data) async {
-      DateTime? selectedInputDay = selectedDay;
-
-      switch (Environment.flavor) {
-        case Flavor.dev:
-          selectedInputDay ??= DateTime(2022, 5, 16);
-        case Flavor.stg || Flavor.prod:
-          selectedInputDay ??= DateTime.now();
-      }
-
-      final MenuModel menu = await ref.read(menusLocalRepositoryProvider).getMenuByDay(selectedInputDay);
+      final MenuModel menu = await ref.read(menusLocalRepositoryProvider).getMenuByDay(selectedDay);
 
       state = AsyncData<DailyState>(
         data.copyWith(
-          selectedDay: selectedInputDay,
-          focusedDay: focusedDay ?? selectedInputDay,
+          selectedDay: selectedDay,
+          focusedDay: focusedDay ?? selectedDay,
           menu: menu,
         ),
       ).copyWithPrevious(state);
