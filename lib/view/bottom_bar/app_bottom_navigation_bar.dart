@@ -18,6 +18,10 @@ import 'package:hakondate/view_model/single_page/recipe/recipe_view_model.dart';
 
 class AppBottomNavigationBar extends ConsumerWidget {
   const AppBottomNavigationBar({super.key});
+  static const int dailyIndex = 0;
+  static const int recipesIndex = 1;
+  static const int dictionaryIndex = 2;
+  static const int letterIndex = 3;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -39,39 +43,39 @@ class AppBottomNavigationBar extends ConsumerWidget {
         currentIndex: tabState.controller.index,
         onTap: (int index) {
           final String? path = routemaster.currentConfiguration?.fullPath;
-
-          if (path == '/home/daily') {
-            if (index == 0) {
-              ref.read(dailyViewModelProvider.notifier).scrollToTop();
-            } else {
-              final DailyViewModel dailyNotifier = ref.read(dailyViewModelProvider.notifier);
-              dailyNotifier.storeOffset(dailyNotifier.getPreOffset());
-              tabState.controller.animateTo(index);
-            }
-          } else if (path == '/home/recipes') {
-            if (index == 1) {
-              ref.read(recipeViewModelProvider.notifier).scrollToTop();
-            } else {
-              final RecipeViewModel recipeNotifier = ref.read(recipeViewModelProvider.notifier);
-              recipeNotifier.storeOffset(recipeNotifier.getPreOffset());
-              tabState.controller.animateTo(index);
-            }
-          } else if (path == '/home/dictionary') {
-            if (index == 2) {
-              ref.read(dictionaryViewModelProvider.notifier).scrollToTop();
-            } else {
-              final DictionaryViewModel dictionaryNotifier = ref.read(dictionaryViewModelProvider.notifier);
-              dictionaryNotifier.storeOffset(dictionaryNotifier.getPreOffset());
-              tabState.controller.animateTo(index);
-            }
-          } else if (path == '/home/letter') {
-            if (index == 3) {
-              ref.read(letterViewModelProvider.notifier).scrollToTop();
-            } else {
-              final LetterViewModel letterNotifier = ref.read(letterViewModelProvider.notifier);
-              letterNotifier.storeOffset(letterNotifier.getPreOffset());
-              tabState.controller.animateTo(index);
-            }
+          switch (path) {
+            case '/home/daily':
+              if (index == dailyIndex) {
+                ref.read(dailyViewModelProvider.notifier).scrollToTop();
+              } else {
+                final DailyViewModel dailyNotifier = ref.read(dailyViewModelProvider.notifier);
+                dailyNotifier.storeOffset(dailyNotifier.getPreOffset());
+                tabState.controller.animateTo(index);
+              }
+            case '/home/recipes':
+              if (index == recipesIndex) {
+                ref.read(recipeViewModelProvider.notifier).scrollToTop();
+              } else {
+                final RecipeViewModel recipeNotifier = ref.read(recipeViewModelProvider.notifier);
+                recipeNotifier.storeOffset(recipeNotifier.getPreOffset());
+                tabState.controller.animateTo(index);
+              }
+            case '/home/dictionary':
+              if (index == dictionaryIndex) {
+                ref.read(dictionaryViewModelProvider.notifier).scrollToTop();
+              } else {
+                final DictionaryViewModel dictionaryNotifier = ref.read(dictionaryViewModelProvider.notifier);
+                dictionaryNotifier.storeOffset(dictionaryNotifier.getPreOffset());
+                tabState.controller.animateTo(index);
+              }
+            case '/home/letter':
+              if (index == letterIndex) {
+                ref.read(letterViewModelProvider.notifier).scrollToTop();
+              } else {
+                final LetterViewModel letterNotifier = ref.read(letterViewModelProvider.notifier);
+                letterNotifier.storeOffset(letterNotifier.getPreOffset());
+                tabState.controller.animateTo(index);
+              }
           }
         },
         backgroundColor: AppColor.ui.white,
