@@ -37,7 +37,6 @@ class DailyViewModel extends _$DailyViewModel {
     DateTime? focusedDay,
   }) async {
     state.whenData((DailyState data) async {
-      state = const AsyncLoading<DailyState>();
       DateTime? selectedInputDay = selectedDay;
 
       switch (Environment.flavor) {
@@ -55,7 +54,8 @@ class DailyViewModel extends _$DailyViewModel {
           focusedDay: focusedDay ?? selectedInputDay,
           menu: menu,
         ),
-      );
+      ).copyWithPrevious(state);
+
       if (menu is LunchesDayMenuModel) {
         await ref.read(analyticsControllerProvider.notifier).logViewMenu(menu.id);
       }
