@@ -60,7 +60,6 @@ class DailyViewModel extends _$DailyViewModel {
         await ref.read(analyticsControllerProvider.notifier).logViewMenu(menu.id);
       }
       await updateRecommendFoodstuffs();
-      debugPrint('_resetOffset will call.');
       _resetOffset();
     });
   }
@@ -263,25 +262,20 @@ class DailyViewModel extends _$DailyViewModel {
 
   void storeOffset(double offset) {
     state.whenData((DailyState data) {
-      debugPrint('storeOffset before: ${data.scrollController.position.pixels}');
       state = AsyncValue<DailyState>.data(
         data.copyWith(
           scrollController: ScrollController(initialScrollOffset: offset),
         ),
       );
-      debugPrint('storeOffset after: ${data.scrollController.position.pixels}');
     });
   }
 
   void _resetOffset() {
-    debugPrint('first line in _resetOffset');
     state.whenData((DailyState data) {
-      debugPrint('_resetOffset before: ${data.scrollController.position.pixels}');
       data.scrollController.jumpTo(0);
       state = AsyncValue<DailyState>.data(
         data.copyWith(scrollController: ScrollController()),
       );
-      debugPrint('_resetOffset after: ${data.scrollController.position.pixels}');
     });
   }
 
