@@ -24,6 +24,15 @@ class NutrientsCard extends StatelessWidget {
         children: <Widget>[
           Image.asset('assets/images/label/nutrientsLabel.png'),
           _nutrientsGraph(),
+          const SizedBox(height: 10),
+          const Text(
+            '※不足している栄養素がある場合がありますが、\n足りない栄養素はご家庭で補ってください。',
+            style: TextStyle(
+              color: Colors.black38,
+              fontSize: 12,
+            ),
+          ),
+          const SizedBox(height: 10),
           const RecommendedFoodStuffExpansionTile(),
           _nutrientsExpansionTile(),
         ],
