@@ -13,13 +13,10 @@ part 'daily_view_model.g.dart';
 class DailyViewModel extends _$DailyViewModel {
   @override
   Future<DailyState> build() async {
-    DateTime? selectedDay;
-    switch (Environment.flavor) {
-      case Flavor.dev:
-        selectedDay ??= await ref.read(menusLocalRepositoryProvider).getLatestDay();
-      case Flavor.stg || Flavor.prod:
-        selectedDay ??= DateTime.now();
-    }
+    final DateTime selectedDay = switch (Environment.flavor) {
+      Flavor.dev => await ref.read(menusLocalRepositoryProvider).getLatestUpdateDay(),
+      Flavor.stg || Flavor.prod => DateTime.now()
+    };
     final MenuModel menu = await ref.read(menusLocalRepositoryProvider).getMenuByDay(selectedDay);
 
     return DailyState(
@@ -34,7 +31,7 @@ class DailyViewModel extends _$DailyViewModel {
     );
   }
 
-  Future<void> updateSelectedDay(DateTime selectedDay, {DateTime? focusedDay}) async {
+  Future<void> updateSelectedDay({required DateTime selectedDay, DateTime? focusedDay}) async {
     state.whenData((DailyState data) async {
       final MenuModel menu = await ref.read(menusLocalRepositoryProvider).getMenuByDay(selectedDay);
 
