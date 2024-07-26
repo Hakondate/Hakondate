@@ -7,7 +7,7 @@ runs:
     - name: Get Flutter Version From fvm_config.json
       shell: bash
       run: |
-        version=$(cat ./.fvm/fvm_config.json | jq -r .flutterSdkVersion)
+        version=$(cat ./.fvmrc | jq -r .flutter)
         echo "FLUTTER_VERSION=${version}" >> $GITHUB_ENV
 
     - name: Set Flutter Environment

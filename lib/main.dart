@@ -70,11 +70,13 @@ class Hakondate extends StatelessWidget {
       colorScheme: Theme.of(context).colorScheme.copyWith(
             primary: AppColor.brand.primary,
             secondary: AppColor.brand.secondary,
-            background: AppColor.ui.white,
             surface: AppColor.ui.white,
             surfaceTint: AppColor.ui.white,
           ),
       scaffoldBackgroundColor: AppColor.ui.white,
+      drawerTheme: Theme.of(context).drawerTheme.copyWith(
+            backgroundColor: AppColor.ui.white,
+          ),
     );
 
     return Consumer(
