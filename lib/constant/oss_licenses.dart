@@ -632,13 +632,13 @@ const _ansicolor = Package(
     dependencies: []
   );
 
-/// app_tracking_transparency 2.0.4
+/// app_tracking_transparency 2.0.5
 const _app_tracking_transparency = Package(
     name: 'app_tracking_transparency',
     description: 'This Flutter plugin allows you to display ios tracking authorization dialogue and request permission to collect data.',
     homepage: 'https://github.com/deniza/app_tracking_transparency',
     authors: [],
-    version: '2.0.4',
+    version: '2.0.5',
     license: '''MIT License
 
 Copyright (c) 2020 Deniz Aydinoglu
@@ -699,13 +699,13 @@ THE SOFTWARE.''',
     dependencies: [PackageRef('crypto'), PackageRef('path'), PackageRef('pointycastle')]
   );
 
-/// args 2.4.2
+/// args 2.5.0
 const _args = Package(
     name: 'args',
     description: 'Library for defining parsers for parsing raw command-line arguments into a set of options and values using GNU and POSIX style options.',
     repository: 'https://github.com/dart-lang/args',
     authors: [],
-    version: '2.4.2',
+    version: '2.5.0',
     license: '''Copyright 2013, the Dart project authors. 
 
 Redistribution and use in source and binary forms, with or without
@@ -972,13 +972,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('analyzer'), PackageRef('async'), PackageRef('build'), PackageRef('collection'), PackageRef('convert'), PackageRef('crypto'), PackageRef('graphs'), PackageRef('logging'), PackageRef('package_config'), PackageRef('path'), PackageRef('pool'), PackageRef('pub_semver'), PackageRef('stream_transform'), PackageRef('yaml')]
   );
 
-/// build_runner 2.4.9
+/// build_runner 2.4.11
 const _build_runner = Package(
     name: 'build_runner',
     description: 'A build system for Dart code generation and modular compilation.',
     repository: 'https://github.com/dart-lang/build/tree/master/build_runner',
     authors: [],
-    version: '2.4.9',
+    version: '2.4.11',
     license: '''Copyright 2016, the Dart project authors. 
 
 Redistribution and use in source and binary forms, with or without
@@ -2025,13 +2025,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('source_span')]
   );
 
-/// cupertino_icons 1.0.6
+/// cupertino_icons 1.0.8
 const _cupertino_icons = Package(
     name: 'cupertino_icons',
     description: 'Default icons asset for Cupertino widgets based on Apple styled icons',
     repository: 'https://github.com/flutter/packages/tree/main/third_party/packages/cupertino_icons',
     authors: [],
-    version: '1.0.6',
+    version: '1.0.8',
     license: '''The MIT License (MIT)
 
 Copyright (c) 2016 Vladimir Kharlampidi
@@ -2769,14 +2769,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('analyzer'), PackageRef('args'), PackageRef('path'), PackageRef('pub_semver'), PackageRef('source_span')]
   );
 
-/// drift 2.16.0
+/// drift 2.19.1+1
 const _drift = Package(
     name: 'drift',
     description: 'Drift is a reactive library to store relational data in Dart and Flutter applications.',
     homepage: 'https://drift.simonbinder.eu/',
     repository: 'https://github.com/simolus3/drift',
     authors: [],
-    version: '2.16.0',
+    version: '2.19.1+1',
     license: '''MIT License
 
 Copyright (c) 2021 Simon Binder
@@ -2803,14 +2803,14 @@ SOFTWARE.''',
     dependencies: [PackageRef('async'), PackageRef('convert'), PackageRef('collection'), PackageRef('js'), PackageRef('meta'), PackageRef('stream_channel'), PackageRef('sqlite3'), PackageRef('path'), PackageRef('stack_trace'), PackageRef('web')]
   );
 
-/// drift_dev 2.16.0
+/// drift_dev 2.19.1
 const _drift_dev = Package(
     name: 'drift_dev',
     description: 'Dev-dependency for users of drift. Contains the generator and development tools.',
     homepage: 'https://drift.simonbinder.eu/',
     repository: 'https://github.com/simolus3/drift',
     authors: [],
-    version: '2.16.0',
+    version: '2.19.1',
     license: '''MIT License
 
 Copyright (c) 2021 Simon Binder
@@ -3601,13 +3601,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: []
   );
 
-/// flutter 3.19.5
+/// flutter 3.22.3
 const _flutter = Package(
     name: 'flutter',
     description: 'A framework for writing Flutter applications',
     homepage: 'https://flutter.dev',
     authors: [],
-    version: '3.19.5',
+    version: '3.22.3',
     license: '''Copyright 2014 The Flutter Authors. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
@@ -3672,13 +3672,13 @@ SOFTWARE.''',
     dependencies: [PackageRef('args'), PackageRef('checked_yaml'), PackageRef('cli_util'), PackageRef('image'), PackageRef('json_annotation'), PackageRef('path'), PackageRef('yaml')]
   );
 
-/// flutter_native_splash 2.4.0
+/// flutter_native_splash 2.4.1
 const _flutter_native_splash = Package(
     name: 'flutter_native_splash',
     description: "Customize Flutter's default white native splash screen with background color and splash image. Supports dark mode, full screen, and more.",
     repository: 'https://github.com/jonbhanson/flutter_native_splash',
     authors: [],
-    version: '2.4.0',
+    version: '2.4.1',
     license: '''MIT License
 
 Copyright (c) 2022 Jon Hanson
@@ -3872,14 +3872,14 @@ SOFTWARE.''',
     dependencies: [PackageRef('analyzer'), PackageRef('build'), PackageRef('build_config'), PackageRef('collection'), PackageRef('meta'), PackageRef('source_gen'), PackageRef('freezed_annotation'), PackageRef('json_annotation')]
   );
 
-/// freezed_annotation 2.4.1
+/// freezed_annotation 2.4.4
 const _freezed_annotation = Package(
     name: 'freezed_annotation',
     description: '''Annotations for the freezed code-generator. This package does nothing without freezed too.
 ''',
     repository: 'https://github.com/rrousselGit/freezed',
     authors: [],
-    version: '2.4.1',
+    version: '2.4.4',
     license: '''MIT License
 
 Copyright (c) 2020 Remi Rousselet
@@ -4390,13 +4390,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('collection'), PackageRef('source_span'), PackageRef('string_scanner'), PackageRef('typed_data')]
   );
 
-/// image 4.1.7
+/// image 4.2.0
 const _image = Package(
     name: 'image',
     description: 'Dart Image Library provides server and web apps the ability to load, manipulate, and save images with various image file formats.',
     homepage: 'https://github.com/brendan-duncan/image',
     authors: [],
-    version: '4.1.7',
+    version: '4.2.0',
     license: '''The MIT License
 
 Copyright (c) 2013-2022 Brendan Duncan.
@@ -4446,13 +4446,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     dependencies: [PackageRef('args'), PackageRef('tint'), PackageRef('yaml')]
   );
 
-/// intl 0.18.1
+/// intl 0.19.0
 const _intl = Package(
     name: 'intl',
     description: 'Contains code to deal with internationalized/localized messages, date and number formatting and parsing, bi-directional text, and other internationalization issues.',
     repository: 'https://github.com/dart-lang/i18n/tree/main/pkgs/intl',
     authors: [],
-    version: '0.18.1',
+    version: '0.19.0',
     license: '''Copyright 2013, the Dart project authors.
 
 Redistribution and use in source and binary forms, with or without
@@ -4563,13 +4563,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('meta')]
   );
 
-/// json_annotation 4.8.1
+/// json_annotation 4.9.0
 const _json_annotation = Package(
     name: 'json_annotation',
     description: 'Classes and helper functions that support JSON code generation via the `json_serializable` package.',
     repository: 'https://github.com/google/json_serializable.dart/tree/master/json_annotation',
     authors: [],
-    version: '4.8.1',
+    version: '4.9.0',
     license: '''Copyright 2017, the Dart project authors. All rights reserved.
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -4601,13 +4601,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('meta')]
   );
 
-/// json_serializable 6.7.1
+/// json_serializable 6.8.0
 const _json_serializable = Package(
     name: 'json_serializable',
     description: 'Automatically generate code for converting to and from JSON by annotating Dart classes.',
     repository: 'https://github.com/google/json_serializable.dart/tree/master/json_serializable',
     authors: [],
-    version: '6.7.1',
+    version: '6.8.0',
     license: '''Copyright 2017, the Dart project authors. All rights reserved.
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -4639,13 +4639,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('analyzer'), PackageRef('async'), PackageRef('build'), PackageRef('build_config'), PackageRef('collection'), PackageRef('json_annotation'), PackageRef('meta'), PackageRef('path'), PackageRef('pub_semver'), PackageRef('pubspec_parse'), PackageRef('source_gen'), PackageRef('source_helper')]
   );
 
-/// leak_tracker 10.0.0
+/// leak_tracker 10.0.4
 const _leak_tracker = Package(
     name: 'leak_tracker',
     description: 'A framework for memory leak tracking for Dart and Flutter applications.',
     repository: 'https://github.com/dart-lang/leak_tracker/tree/main/pkgs/leak_tracker',
     authors: [],
-    version: '10.0.0',
+    version: '10.0.4',
     license: '''Copyright 2022, the Dart project authors.
 
 Redistribution and use in source and binary forms, with or without
@@ -4678,13 +4678,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: []
   );
 
-/// leak_tracker_flutter_testing 2.0.1
+/// leak_tracker_flutter_testing 3.0.3
 const _leak_tracker_flutter_testing = Package(
     name: 'leak_tracker_flutter_testing',
     description: 'An internal package to test leak tracking with Flutter.',
     repository: 'https://github.com/dart-lang/leak_tracker/tree/main/pkgs/leak_tracker_flutter_testing',
     authors: [],
-    version: '2.0.1',
+    version: '3.0.3',
     license: '''Copyright 2022, the Dart project authors.
 
 Redistribution and use in source and binary forms, with or without
@@ -4717,13 +4717,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: []
   );
 
-/// leak_tracker_testing 2.0.1
+/// leak_tracker_testing 3.0.1
 const _leak_tracker_testing = Package(
     name: 'leak_tracker_testing',
     description: 'Leak tracking code intended for usage in tests.',
     repository: 'https://github.com/dart-lang/leak_tracker/tree/main/pkgs/leak_tracker_testing',
     authors: [],
-    version: '2.0.1',
+    version: '3.0.1',
     license: '''Copyright 2022, the Dart project authors.
 
 Redistribution and use in source and binary forms, with or without
@@ -5036,13 +5036,13 @@ const _material_color_utilities = Package(
     dependencies: [PackageRef('collection')]
   );
 
-/// meta 1.11.0
+/// meta 1.12.0
 const _meta = Package(
     name: 'meta',
     description: "Annotations used to express developer intentions that can't otherwise be deduced by statically analyzing source code.",
     repository: 'https://github.com/dart-lang/sdk/tree/main/pkg/meta',
     authors: [],
-    version: '1.11.0',
+    version: '1.12.0',
     license: '''Copyright 2016, the Dart project authors.
 
 Redistribution and use in source and binary forms, with or without
@@ -5540,13 +5540,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: []
   );
 
-/// plugin_platform_interface 2.1.5
+/// plugin_platform_interface 2.1.8
 const _plugin_platform_interface = Package(
     name: 'plugin_platform_interface',
     description: 'Reusable base class for platform interfaces of Flutter federated plugins, to help enforce best practices.',
     repository: 'https://github.com/flutter/packages/tree/main/packages/plugin_platform_interface',
     authors: [],
-    version: '2.1.5',
+    version: '2.1.8',
     license: '''Copyright 2013 The Flutter Authors. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
@@ -6852,13 +6852,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('collection'), PackageRef('path'), PackageRef('term_glyph')]
   );
 
-/// sqlite3 2.4.2
+/// sqlite3 2.4.4
 const _sqlite3 = Package(
     name: 'sqlite3',
     description: 'Provides lightweight yet convenient bindings to SQLite by using dart:ffi',
     homepage: 'https://github.com/simolus3/sqlite3.dart/tree/main/sqlite3',
     authors: [],
-    version: '2.4.2',
+    version: '2.4.4',
     license: '''MIT License
 
 Copyright (c) 2020 Simon Binder
@@ -6882,16 +6882,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('collection'), PackageRef('ffi'), PackageRef('js'), PackageRef('meta'), PackageRef('path')]
+    dependencies: [PackageRef('collection'), PackageRef('ffi'), PackageRef('meta'), PackageRef('path'), PackageRef('web')]
   );
 
-/// sqlite3_flutter_libs 0.5.20
+/// sqlite3_flutter_libs 0.5.24
 const _sqlite3_flutter_libs = Package(
     name: 'sqlite3_flutter_libs',
     description: 'Flutter plugin to include native sqlite3 libraries with your app',
     homepage: 'https://github.com/simolus3/sqlite3.dart/tree/main/sqlite3_flutter_libs',
     authors: [],
-    version: '0.5.20',
+    version: '0.5.24',
     license: '''MIT License
 
 Copyright (c) 2020 Simon Binder
@@ -6918,14 +6918,14 @@ SOFTWARE.''',
     dependencies: [PackageRef('flutter')]
   );
 
-/// sqlparser 0.34.1
+/// sqlparser 0.37.1
 const _sqlparser = Package(
     name: 'sqlparser',
     description: 'Parses sqlite statements and performs static analysis on them',
     homepage: 'https://github.com/simolus3/drift/tree/develop/sqlparser',
     repository: 'https://github.com/simolus3/drift',
     authors: [],
-    version: '0.34.1',
+    version: '0.37.1',
     license: '''MIT License
 
 Copyright (c) 2019 Simon Binder
@@ -7141,13 +7141,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('source_span')]
   );
 
-/// table_calendar 3.0.9
+/// table_calendar 3.1.2
 const _table_calendar = Package(
     name: 'table_calendar',
     description: 'Highly customizable, feature-packed calendar widget for Flutter.',
     homepage: 'https://github.com/aleksanderwozniak/table_calendar',
     authors: ['Aleksander Woźniak <aleksanderwozniak96@gmail.com>'],
-    version: '3.0.9',
+    version: '3.1.2',
     license: '''Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -7393,13 +7393,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: []
   );
 
-/// test_api 0.6.1
+/// test_api 0.7.0
 const _test_api = Package(
     name: 'test_api',
     description: 'The user facing API for structuring Dart tests and checking expectations.',
     repository: 'https://github.com/dart-lang/test/tree/master/pkgs/test_api',
     authors: [],
-    version: '0.6.1',
+    version: '0.7.0',
     license: '''Copyright 2018, the Dart project authors. 
 
 Redistribution and use in source and binary forms, with or without
@@ -7731,13 +7731,13 @@ const _universal_io = Package(
     dependencies: [PackageRef('collection'), PackageRef('meta'), PackageRef('typed_data')]
   );
 
-/// url_launcher 6.2.6
+/// url_launcher 6.3.0
 const _url_launcher = Package(
     name: 'url_launcher',
     description: 'Flutter plugin for launching a URL. Supports web, phone, SMS, and email schemes.',
     repository: 'https://github.com/flutter/packages/tree/main/packages/url_launcher/url_launcher',
     authors: [],
-    version: '6.2.6',
+    version: '6.3.0',
     license: '''Copyright 2013 The Flutter Authors. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
@@ -7768,13 +7768,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('flutter'), PackageRef('url_launcher_android'), PackageRef('url_launcher_ios'), PackageRef('url_launcher_linux'), PackageRef('url_launcher_macos'), PackageRef('url_launcher_platform_interface'), PackageRef('url_launcher_web'), PackageRef('url_launcher_windows')]
   );
 
-/// url_launcher_android 6.2.0
+/// url_launcher_android 6.3.5
 const _url_launcher_android = Package(
     name: 'url_launcher_android',
     description: 'Android implementation of the url_launcher plugin.',
     repository: 'https://github.com/flutter/packages/tree/main/packages/url_launcher/url_launcher_android',
     authors: [],
-    version: '6.2.0',
+    version: '6.3.5',
     license: '''Copyright 2013 The Flutter Authors. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
@@ -7916,13 +7916,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('flutter'), PackageRef('url_launcher_platform_interface')]
   );
 
-/// url_launcher_platform_interface 2.2.0
+/// url_launcher_platform_interface 2.3.2
 const _url_launcher_platform_interface = Package(
     name: 'url_launcher_platform_interface',
     description: 'A common platform interface for the url_launcher plugin.',
     repository: 'https://github.com/flutter/packages/tree/main/packages/url_launcher/url_launcher_platform_interface',
     authors: [],
-    version: '2.2.0',
+    version: '2.3.2',
     license: '''Copyright 2013 The Flutter Authors. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
@@ -8422,14 +8422,14 @@ freely, subject to the following restrictions:
     dependencies: []
   );
 
-/// very_good_analysis 5.1.0
+/// very_good_analysis 6.0.0
 const _very_good_analysis = Package(
     name: 'very_good_analysis',
     description: 'Lint rules for Dart and Flutter used internally at Very Good Ventures.',
     homepage: 'https://github.com/VeryGoodOpenSource/very_good_analysis',
     repository: 'https://github.com/VeryGoodOpenSource/very_good_analysis',
     authors: [],
-    version: '5.1.0',
+    version: '6.0.0',
     license: '''MIT License
 
 Copyright (c) 2020 Very Good Ventures
@@ -8456,13 +8456,13 @@ SOFTWARE.''',
     dependencies: []
   );
 
-/// vm_service 13.0.0
+/// vm_service 14.2.1
 const _vm_service = Package(
     name: 'vm_service',
     description: 'A library to communicate with a service implementing the Dart VM service protocol.',
     repository: 'https://github.com/dart-lang/sdk/tree/main/pkg/vm_service',
     authors: [],
-    version: '13.0.0',
+    version: '14.2.1',
     license: '''Copyright 2015, the Dart project authors.
 
 Redistribution and use in source and binary forms, with or without
