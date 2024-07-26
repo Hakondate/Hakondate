@@ -26,7 +26,7 @@ dependencies:
   # 状態管理関連
   flutter_riverpod: 2.5.1
   riverpod_annotation: 2.3.5
-  freezed: 2.5.7
+  freezed: 2.5.2
   freezed_annotation: 2.4.4
   json_serializable: 6.8.0
   json_annotation: 4.9.0
@@ -66,8 +66,8 @@ dev_dependencies:
   # コード生成
   build_runner: 2.4.11
   custom_lint: 0.6.4
-  riverpod_generator: 2.4.2
-  riverpod_lint: 2.3.12
+  riverpod_generator: 2.4.0
+  riverpod_lint: 2.3.10
   drift_dev: 2.19.1
   flutter_oss_licenses: 3.0.2
 
