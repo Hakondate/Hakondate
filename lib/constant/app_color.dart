@@ -22,6 +22,7 @@ class _Text {
   final Color blackMid = const Color(0x61000000);
   final Color white = const Color(0xFFFFFFFF);
   final Color link = const Color(0xFF6699ff);
+  final Color darkgray = const Color(0xFF404040);
 }
 
 class _Ui {
@@ -34,4 +35,5 @@ class _Ui {
   final Color unsupported = const Color(0xFFD3D3D3);
   final Color shimmerBase = const Color(0xFFE0E0E0);
   final Color shimmerHighlight = const Color(0xFFFFFFFF);
+  final Color background = const Color(0xFFf2f2f2);
 }

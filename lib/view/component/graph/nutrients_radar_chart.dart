@@ -8,7 +8,7 @@ import 'package:hakondate/model/nutrients/nutrient_unit.dart';
 class NutrientsRadarChart extends StatelessWidget {
   const NutrientsRadarChart({
     required this.values,
-    required this.rowValues,
+    required this.rawValues,
     required this.maxValue,
     this.color,
     this.size,
@@ -16,7 +16,7 @@ class NutrientsRadarChart extends StatelessWidget {
   });
 
   final List<double> values;
-  final List<double> rowValues;
+  final List<double> rawValues;
   final double maxValue;
   final Color? color;
   final double? size;
@@ -37,12 +37,12 @@ class NutrientsRadarChart extends StatelessWidget {
           )
           .toList(),
       labels: <String>[
-        'エネルギー\n${rowValues[0].toStringAsFixed(1)}${NutrientUnit.kcal.value}',
-        'たんぱく質\n${rowValues[1].toStringAsFixed(1)}${NutrientUnit.gram.value}',
-        'ビタミン\n${rowValues[2].toStringAsFixed(1)}${NutrientUnit.mGram.value}',
-        'ミネラル\n${rowValues[3].toStringAsFixed(1)}${NutrientUnit.mGram.value}',
-        '炭水化物\n${rowValues[4].toStringAsFixed(1)}${NutrientUnit.gram.value}',
-        '脂質\n${rowValues[5].toStringAsFixed(1)}${NutrientUnit.gram.value}',
+        'エネルギー\n${rawValues[0].toStringAsFixed(1)}${NutrientUnit.kcal.value}',
+        'たんぱく質\n${rawValues[1].toStringAsFixed(1)}${NutrientUnit.gram.value}',
+        'ビタミン\n${rawValues[2].toStringAsFixed(1)}${NutrientUnit.mGram.value}',
+        'ミネラル\n${rawValues[3].toStringAsFixed(1)}${NutrientUnit.mGram.value}',
+        '炭水化物\n${rawValues[4].toStringAsFixed(1)}${NutrientUnit.gram.value}',
+        '脂質\n${rawValues[5].toStringAsFixed(1)}${NutrientUnit.gram.value}',
       ],
     );
   }

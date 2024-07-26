@@ -1,4 +1,4 @@
-package jp.ac.`fun`.hakondate
+package org.hakondate
 
 import io.flutter.embedding.android.FlutterActivity
 
