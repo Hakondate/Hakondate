@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:routemaster/routemaster.dart';
 
 import 'package:hakondate/view/bottom_bar/app_bottom_navigation_bar.dart';
+import 'package:hakondate/view/cache_management/cache_management.dart';
 import 'package:hakondate/view/calendar/calendar.dart';
 import 'package:hakondate/view/component/frame/fade_up_page.dart';
 import 'package:hakondate/view/daily/daily.dart';
@@ -60,6 +61,7 @@ final RoutemasterDelegate routemaster = RoutemasterDelegate(
       '/home/drawer_terms': (_) => const FadeUpPage(child: DrawerTerms()),
       '/home/help': (_) => const FadeUpPage(child: Help()),
       '/home/information': (_) => const FadeUpPage(child: Information()),
+      '/home/cache_management': (_) => const FadeUpPage(child: CacheManagement()),
       '/home/license': (_) => const FadeUpPage(child: License()),
       '/home/license/:index': (RouteData route) => FadeUpPage(
             child: LicenseDetail(
