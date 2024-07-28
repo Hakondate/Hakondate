@@ -7,7 +7,7 @@ part of 'app_bottom_navigation_bar_view_model.dart';
 // **************************************************************************
 
 String _$appBottomNavigationBarViewModelHash() =>
-    r'82d0ef5d64d04991f438619e02009b48c64df5d8';
+    r'3e6618ae3b899909cb99f82501fcdf1542594bba';
 
 /// See also [AppBottomNavigationBarViewModel].
 @ProviderFor(AppBottomNavigationBarViewModel)

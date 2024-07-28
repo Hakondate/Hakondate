@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AppBottomNavigationBarState {
-  int? get tappedButtonIndex => throw _privateConstructorUsedError;
+  int get tappedButtonIndex => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AppBottomNavigationBarStateCopyWith<AppBottomNavigationBarState>
@@ -31,7 +31,7 @@ abstract class $AppBottomNavigationBarStateCopyWith<$Res> {
       _$AppBottomNavigationBarStateCopyWithImpl<$Res,
           AppBottomNavigationBarState>;
   @useResult
-  $Res call({int? tappedButtonIndex});
+  $Res call({int tappedButtonIndex});
 }
 
 /// @nodoc
@@ -48,13 +48,13 @@ class _$AppBottomNavigationBarStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tappedButtonIndex = freezed,
+    Object? tappedButtonIndex = null,
   }) {
     return _then(_value.copyWith(
-      tappedButtonIndex: freezed == tappedButtonIndex
+      tappedButtonIndex: null == tappedButtonIndex
           ? _value.tappedButtonIndex
           : tappedButtonIndex // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
     ) as $Val);
   }
 }
@@ -68,7 +68,7 @@ abstract class _$$AppBottomNavigationBarStateImplCopyWith<$Res>
       __$$AppBottomNavigationBarStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? tappedButtonIndex});
+  $Res call({int tappedButtonIndex});
 }
 
 /// @nodoc
@@ -84,13 +84,13 @@ class __$$AppBottomNavigationBarStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tappedButtonIndex = freezed,
+    Object? tappedButtonIndex = null,
   }) {
     return _then(_$AppBottomNavigationBarStateImpl(
-      tappedButtonIndex: freezed == tappedButtonIndex
+      tappedButtonIndex: null == tappedButtonIndex
           ? _value.tappedButtonIndex
           : tappedButtonIndex // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
     ));
   }
 }
@@ -100,10 +100,10 @@ class __$$AppBottomNavigationBarStateImplCopyWithImpl<$Res>
 class _$AppBottomNavigationBarStateImpl
     with DiagnosticableTreeMixin
     implements _AppBottomNavigationBarState {
-  const _$AppBottomNavigationBarStateImpl({this.tappedButtonIndex});
+  const _$AppBottomNavigationBarStateImpl({required this.tappedButtonIndex});
 
   @override
-  final int? tappedButtonIndex;
+  final int tappedButtonIndex;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -140,11 +140,12 @@ class _$AppBottomNavigationBarStateImpl
 
 abstract class _AppBottomNavigationBarState
     implements AppBottomNavigationBarState {
-  const factory _AppBottomNavigationBarState({final int? tappedButtonIndex}) =
+  const factory _AppBottomNavigationBarState(
+          {required final int tappedButtonIndex}) =
       _$AppBottomNavigationBarStateImpl;
 
   @override
-  int? get tappedButtonIndex;
+  int get tappedButtonIndex;
   @override
   @JsonKey(ignore: true)
   _$$AppBottomNavigationBarStateImplCopyWith<_$AppBottomNavigationBarStateImpl>
