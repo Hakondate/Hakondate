@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate/state/bottom_bar/app_bottom_navigation_bar_state.dart';
 import 'package:hakondate/util/scroll/scroll_function.dart';
+import 'package:hakondate/view/bottom_bar/app_bottom_navigation_bar.dart';
 import 'package:hakondate/view_model/multi_page/bottom_bar/app_bottom_navigation_bar_view_model.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -134,7 +135,7 @@ class Daily extends StatelessWidget {
                       if (state.menu is LunchesDayMenuModel) {
                         //.select()とすることで、１つの要素だけを聴くこともできるらしい
                         ref.listen<AppBottomNavigationBarState>(appBottomNavigationBarViewModelProvider, (_, __) {
-                          if (ref.read(appBottomNavigationBarViewModelProvider).tappedButtonIndex == 0) {
+                          if (ref.read(appBottomNavigationBarViewModelProvider).tappedButtonIndex == dailyIndex) {
                             ref.read(scrollFunctionProvider).scrollToTop(scrollController: state.scrollController);
                           }
                         });

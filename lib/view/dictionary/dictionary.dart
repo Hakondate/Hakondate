@@ -5,8 +5,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
 import 'package:hakondate/router/routes.dart';
+import 'package:hakondate/state/bottom_bar/app_bottom_navigation_bar_state.dart';
 import 'package:hakondate/state/dictionary/dictionary_state.dart';
+import 'package:hakondate/util/scroll/scroll_function.dart';
+import 'package:hakondate/view/bottom_bar/app_bottom_navigation_bar.dart';
 import 'package:hakondate/view/dictionary/dictionary_grid.dart';
+import 'package:hakondate/view_model/multi_page/bottom_bar/app_bottom_navigation_bar_view_model.dart';
 import 'package:hakondate/view_model/single_page/dictionary/dictionary_view_model.dart';
 
 class Dictionary extends ConsumerWidget {
@@ -30,6 +34,11 @@ class Dictionary extends ConsumerWidget {
         builder: (BuildContext context, WidgetRef ref, _) {
           return ref.watch(dictionaryViewModelProvider).when(
                 data: (DictionaryState state) {
+                  ref.listen<AppBottomNavigationBarState>(appBottomNavigationBarViewModelProvider, (_, __) {
+                    if (ref.read(appBottomNavigationBarViewModelProvider).tappedButtonIndex == dictionaryIndex) {
+                      ref.read(scrollFunctionProvider).scrollToTop(scrollController: state.scrollController);
+                    }
+                  });
                   return GridView.count(
                     controller: state.scrollController,
                     padding: const EdgeInsets.all(MarginSize.minimumGrid),

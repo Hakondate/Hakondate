@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate/state/bottom_bar/app_bottom_navigation_bar_state.dart';
+import 'package:hakondate/util/scroll/scroll_function.dart';
+import 'package:hakondate/view/bottom_bar/app_bottom_navigation_bar.dart';
+import 'package:hakondate/view_model/multi_page/bottom_bar/app_bottom_navigation_bar_view_model.dart';
 import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -26,6 +30,11 @@ class Letter extends ConsumerWidget {
         builder: (BuildContext context, WidgetRef ref, _) {
           final LetterState state = ref.watch(letterViewModelProvider);
 
+          ref.listen<AppBottomNavigationBarState>(appBottomNavigationBarViewModelProvider, (_, __) {
+            if (ref.read(appBottomNavigationBarViewModelProvider).tappedButtonIndex == letterIndex) {
+              ref.read(scrollFunctionProvider).scrollToTop(scrollController: state.scrollController);
+            }
+          });
           return StatefulWrapper(
             onInit: () => ref.read(letterViewModelProvider.notifier).getLetters(),
             child: Builder(
