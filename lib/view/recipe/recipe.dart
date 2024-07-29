@@ -7,7 +7,6 @@ import 'package:hakondate/model/recipe/recipe_type.dart';
 import 'package:hakondate/state/bottom_bar/app_bottom_navigation_bar_state.dart';
 import 'package:hakondate/state/recipe/recipe_state.dart';
 import 'package:hakondate/util/scroll/scroll_function.dart';
-import 'package:hakondate/view/bottom_bar/app_bottom_navigation_bar.dart';
 import 'package:hakondate/view/recipe/open_data_recipe_grid.dart';
 import 'package:hakondate/view/recipe/open_data_recipe_header.dart';
 import 'package:hakondate/view_model/multi_page/bottom_bar/app_bottom_navigation_bar_view_model.dart';

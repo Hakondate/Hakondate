@@ -10,7 +10,6 @@ import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/bottom_bar/app_bottom_navigation_bar_state.dart';
 import 'package:hakondate/state/daily/daily_state.dart';
 import 'package:hakondate/util/scroll/scroll_function.dart';
-import 'package:hakondate/view/bottom_bar/app_bottom_navigation_bar.dart';
 import 'package:hakondate/view/daily/menu_card.dart';
 import 'package:hakondate/view/daily/non_lunches_day_body.dart';
 import 'package:hakondate/view/daily/nutrients_card.dart';

@@ -10,7 +10,6 @@ import 'package:hakondate/model/letter/letter_metadata_model.dart';
 import 'package:hakondate/state/bottom_bar/app_bottom_navigation_bar_state.dart';
 import 'package:hakondate/state/letter/letter_state.dart';
 import 'package:hakondate/util/scroll/scroll_function.dart';
-import 'package:hakondate/view/bottom_bar/app_bottom_navigation_bar.dart';
 import 'package:hakondate/view/component/frame/stateful_wrapper.dart';
 import 'package:hakondate/view/component/tile/grid_frame.dart';
 import 'package:hakondate/view/letter/non_letter.dart';

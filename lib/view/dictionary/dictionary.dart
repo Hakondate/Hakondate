@@ -8,7 +8,6 @@ import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/bottom_bar/app_bottom_navigation_bar_state.dart';
 import 'package:hakondate/state/dictionary/dictionary_state.dart';
 import 'package:hakondate/util/scroll/scroll_function.dart';
-import 'package:hakondate/view/bottom_bar/app_bottom_navigation_bar.dart';
 import 'package:hakondate/view/dictionary/dictionary_grid.dart';
 import 'package:hakondate/view_model/multi_page/bottom_bar/app_bottom_navigation_bar_view_model.dart';
 import 'package:hakondate/view_model/single_page/dictionary/dictionary_view_model.dart';
