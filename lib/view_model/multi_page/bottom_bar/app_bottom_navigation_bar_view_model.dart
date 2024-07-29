@@ -1,4 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
 import 'package:hakondate/state/bottom_bar/app_bottom_navigation_bar_state.dart';
 
 part 'app_bottom_navigation_bar_view_model.g.dart';
