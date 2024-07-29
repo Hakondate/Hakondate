@@ -7,7 +7,7 @@ part of 'dictionary_view_model.dart';
 // **************************************************************************
 
 String _$dictionaryViewModelHash() =>
-    r'1f6a83988e86df4786de6df2f47e30a637c40c5c';
+    r'10a5a52c28a5f50df02329fe172847d60b1436b4';
 
 /// See also [DictionaryViewModel].
 @ProviderFor(DictionaryViewModel)
