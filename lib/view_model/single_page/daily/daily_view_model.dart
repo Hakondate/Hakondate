@@ -243,33 +243,6 @@ class DailyViewModel extends _$DailyViewModel {
     );
   }
 
-  void scrollToTop() {
-    state.whenData((DailyState data) {
-      data.scrollController.animateTo(
-        0,
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.easeOutCubic,
-      );
-    });
-  }
-
-  double getPreOffset() {
-    return state.maybeWhen(
-      orElse: () => 0,
-      data: (DailyState data) => data.scrollController.position.pixels,
-    );
-  }
-
-  void storeOffset(double offset) {
-    state.whenData((DailyState data) {
-      state = AsyncValue<DailyState>.data(
-        data.copyWith(
-          scrollController: ScrollController(initialScrollOffset: offset),
-        ),
-      );
-    });
-  }
-
   void _resetOffset() {
     state.whenData((DailyState data) {
       data.scrollController.jumpTo(0);

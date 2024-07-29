@@ -88,18 +88,4 @@ class LetterViewModel extends _$LetterViewModel {
     await ref.read(analyticsControllerProvider.notifier).logViewLetter(path);
     return _lettersRemoteRepository.get(path: path);
   }
-
-  void scrollToTop() {
-    state.scrollController.animateTo(0, duration: const Duration(milliseconds: 500), curve: Curves.easeOutCubic);
-  }
-
-  double getPreOffset() => state.scrollController.position.pixels;
-
-  void storeOffset(double offset) {
-    state = state.copyWith(
-      scrollController: ScrollController(
-        initialScrollOffset: offset,
-      ),
-    );
-  }
 }

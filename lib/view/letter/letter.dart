@@ -31,6 +31,7 @@ class Letter extends ConsumerWidget {
           final LetterState state = ref.watch(letterViewModelProvider);
 
           ref.listen<AppBottomNavigationBarState>(appBottomNavigationBarViewModelProvider, (_, __) {
+            const int letterIndex = 3;
             if (ref.read(appBottomNavigationBarViewModelProvider).tappedButtonIndex == letterIndex) {
               ref.read(scrollFunctionProvider).scrollToTop(scrollController: state.scrollController);
             }

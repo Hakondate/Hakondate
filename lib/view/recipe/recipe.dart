@@ -25,6 +25,7 @@ class Recipe extends StatelessWidget {
         builder: (BuildContext context, WidgetRef ref, _) {
           final RecipeState state = ref.watch(recipeViewModelProvider);
           ref.listen<AppBottomNavigationBarState>(appBottomNavigationBarViewModelProvider, (_, __) {
+            const int recipesIndex = 1;
             if (ref.read(appBottomNavigationBarViewModelProvider).tappedButtonIndex == recipesIndex) {
               ref.read(scrollFunctionProvider).scrollToTop(scrollController: state.scrollController);
             }

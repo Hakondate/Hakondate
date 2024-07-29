@@ -35,6 +35,7 @@ class Dictionary extends ConsumerWidget {
           return ref.watch(dictionaryViewModelProvider).when(
                 data: (DictionaryState state) {
                   ref.listen<AppBottomNavigationBarState>(appBottomNavigationBarViewModelProvider, (_, __) {
+                    const int dictionaryIndex = 2;
                     if (ref.read(appBottomNavigationBarViewModelProvider).tappedButtonIndex == dictionaryIndex) {
                       ref.read(scrollFunctionProvider).scrollToTop(scrollController: state.scrollController);
                     }

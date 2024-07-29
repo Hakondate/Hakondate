@@ -20,14 +20,10 @@ class ScrollFunction {
     );
   }
 
-  // void _storeOffset(double offset) {
-  //   state.whenData((DailyState data) {
-  //     state = AsyncValue<DailyState>.data(
-  //       data.copyWith(
-  //         scrollController: ScrollController(initialScrollOffset: offset),
-  //       ),
-  //     );
-  //   });
+  // void storeOffset(State state) {
+  //   state.copyWith(
+  //     scrollController: ScrollController(initialScrollOffset: state.scrollController.position.pixels),
+  //   );
   // }
 
   //   double getPreOffset() {

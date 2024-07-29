@@ -118,6 +118,13 @@ class Daily extends StatelessWidget {
       builder: (BuildContext context, WidgetRef ref, _) {
         return ref.watch(dailyViewModelProvider).maybeWhen(
               data: (DailyState state) {
+                //.select()とすることで、１つの要素だけを聴くこともできるらしい
+                ref.listen<AppBottomNavigationBarState>(appBottomNavigationBarViewModelProvider, (_, __) {
+                  const int dailyIndex = 0;
+                  if (ref.read(appBottomNavigationBarViewModelProvider).tappedButtonIndex == dailyIndex) {
+                    ref.read(scrollFunctionProvider).scrollToTop(scrollController: state.scrollController);
+                  }
+                });
                 return Expanded(
                   child: GestureDetector(
                     onHorizontalDragEnd: (DragEndDetails details) {
@@ -133,12 +140,6 @@ class Daily extends StatelessWidget {
                     },
                     child: (() {
                       if (state.menu is LunchesDayMenuModel) {
-                        //.select()とすることで、１つの要素だけを聴くこともできるらしい
-                        ref.listen<AppBottomNavigationBarState>(appBottomNavigationBarViewModelProvider, (_, __) {
-                          if (ref.read(appBottomNavigationBarViewModelProvider).tappedButtonIndex == dailyIndex) {
-                            ref.read(scrollFunctionProvider).scrollToTop(scrollController: state.scrollController);
-                          }
-                        });
                         return ListView(
                           controller: state.scrollController,
                           children: const <Widget>[
