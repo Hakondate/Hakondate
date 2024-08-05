@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter/foundation.dart';
+//import 'package:flutter/foundation.dart';
 
 import 'package:drift/drift.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -177,282 +177,40 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
     List<DictionaryItemsSchema> top100Items = <DictionaryItemsSchema>[];
     final Random random = Random();
 
-    switch (nutrient) {
-      case 'energy':
-        top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
-              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
-                ($DictionaryItemsTableTable t) => OrderingTerm(
-                      expression: t.energy,
-                      mode: OrderingMode.desc,
-                    ),
-              ])
-              ..limit(top))
-            .get();
+    top100Items = await (_db.select(_db.dictionaryItemsTable)
+          ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
+          ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
+            ($DictionaryItemsTableTable t) => OrderingTerm(
+                  expression: switch (nutrient) {
+                    'energy' => t.energy,
+                    'protein' => t.protein,
+                    'lipid' => t.lipid,
+                    'carbohydrate' => t.carbohydrate,
+                    'sodium' => t.sodium,
+                    'calcium' => t.calcium,
+                    'magnesium' => t.magnesium,
+                    'iron' => t.iron,
+                    'zinc' => t.zinc,
+                    'retinol' => t.retinol,
+                    'vitaminB1' => t.vitaminB1,
+                    'vitaminB2' => t.vitaminB2,
+                    'vitaminC' => t.vitaminC,
+                    'dietaryFiber' => t.dietaryFiber,
+                    'salt' => t.salt,
+                    'vitamin' => t.retinol / const Variable<double>(1000) + t.vitaminB1 + t.vitaminB2 + t.vitaminC,
+                    'mineral' => t.calcium + t.magnesium + t.iron + t.zinc,
+                    _ => throw SQLiteException("Failed to find nutrient '$nutrient'"),
+                  },
+                  mode: OrderingMode.desc,
+                ),
+          ])
+          ..limit(top))
+        .get();
 
-        for (int i = 0; i < limit; i++) {
-          if (top100Items.isEmpty) break;
-          final int randomIndex = random.nextInt(top100Items.length);
-          schemas.add(top100Items.removeAt(randomIndex));
-        }
-      case 'protein':
-        top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
-              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
-                ($DictionaryItemsTableTable t) => OrderingTerm(
-                      expression: t.protein,
-                      mode: OrderingMode.desc,
-                    ),
-              ])
-              ..limit(top))
-            .get();
-        for (int i = 0; i < limit; i++) {
-          if (top100Items.isEmpty) break;
-          final int randomIndex = random.nextInt(top100Items.length);
-          schemas.add(top100Items.removeAt(randomIndex));
-        }
-      case 'lipid':
-        top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
-              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
-                ($DictionaryItemsTableTable t) => OrderingTerm(
-                      expression: t.lipid,
-                      mode: OrderingMode.desc,
-                    ),
-              ])
-              ..limit(top))
-            .get();
-        for (int i = 0; i < limit; i++) {
-          if (top100Items.isEmpty) break;
-          final int randomIndex = random.nextInt(top100Items.length);
-          schemas.add(top100Items.removeAt(randomIndex));
-        }
-      case 'carbohydrate':
-        top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
-              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
-                ($DictionaryItemsTableTable t) => OrderingTerm(
-                      expression: t.carbohydrate,
-                      mode: OrderingMode.desc,
-                    ),
-              ])
-              ..limit(top))
-            .get();
-        for (int i = 0; i < limit; i++) {
-          if (top100Items.isEmpty) break;
-          final int randomIndex = random.nextInt(top100Items.length);
-          schemas.add(top100Items.removeAt(randomIndex));
-        }
-      case 'sodium':
-        top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
-              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
-                ($DictionaryItemsTableTable t) => OrderingTerm(
-                      expression: t.sodium,
-                      mode: OrderingMode.desc,
-                    ),
-              ])
-              ..limit(top))
-            .get();
-        for (int i = 0; i < limit; i++) {
-          if (top100Items.isEmpty) break;
-          final int randomIndex = random.nextInt(top100Items.length);
-          schemas.add(top100Items.removeAt(randomIndex));
-        }
-      case 'calcium':
-        top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
-              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
-                ($DictionaryItemsTableTable t) => OrderingTerm(
-                      expression: t.calcium,
-                      mode: OrderingMode.desc,
-                    ),
-              ])
-              ..limit(top))
-            .get();
-        for (int i = 0; i < limit; i++) {
-          if (top100Items.isEmpty) break;
-          final int randomIndex = random.nextInt(top100Items.length);
-          schemas.add(top100Items.removeAt(randomIndex));
-        }
-      case 'magnesium':
-        top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
-              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
-                ($DictionaryItemsTableTable t) => OrderingTerm(
-                      expression: t.magnesium,
-                      mode: OrderingMode.desc,
-                    ),
-              ])
-              ..limit(top))
-            .get();
-        for (int i = 0; i < limit; i++) {
-          if (top100Items.isEmpty) break;
-          final int randomIndex = random.nextInt(top100Items.length);
-          schemas.add(top100Items.removeAt(randomIndex));
-        }
-      case 'iron':
-        top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
-              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
-                ($DictionaryItemsTableTable t) => OrderingTerm(
-                      expression: t.iron,
-                      mode: OrderingMode.desc,
-                    ),
-              ])
-              ..limit(top))
-            .get();
-        for (int i = 0; i < limit; i++) {
-          if (top100Items.isEmpty) break;
-          final int randomIndex = random.nextInt(top100Items.length);
-          schemas.add(top100Items.removeAt(randomIndex));
-        }
-      case 'zinc':
-        top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
-              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
-                ($DictionaryItemsTableTable t) => OrderingTerm(
-                      expression: t.zinc,
-                      mode: OrderingMode.desc,
-                    ),
-              ])
-              ..limit(top))
-            .get();
-        for (int i = 0; i < limit; i++) {
-          if (top100Items.isEmpty) break;
-          final int randomIndex = random.nextInt(top100Items.length);
-          schemas.add(top100Items.removeAt(randomIndex));
-        }
-      case 'retinol':
-        top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
-              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
-                ($DictionaryItemsTableTable t) => OrderingTerm(
-                      expression: t.retinol,
-                      mode: OrderingMode.desc,
-                    ),
-              ])
-              ..limit(top))
-            .get();
-        for (int i = 0; i < limit; i++) {
-          if (top100Items.isEmpty) break;
-          final int randomIndex = random.nextInt(top100Items.length);
-          schemas.add(top100Items.removeAt(randomIndex));
-        }
-      case 'vitaminB1':
-        top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
-              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
-                ($DictionaryItemsTableTable t) => OrderingTerm(
-                      expression: t.vitaminB1,
-                      mode: OrderingMode.desc,
-                    ),
-              ])
-              ..limit(top))
-            .get();
-        for (int i = 0; i < limit; i++) {
-          if (top100Items.isEmpty) break;
-          final int randomIndex = random.nextInt(top100Items.length);
-          schemas.add(top100Items.removeAt(randomIndex));
-        }
-      case 'vitaminB2':
-        top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
-              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
-                ($DictionaryItemsTableTable t) => OrderingTerm(
-                      expression: t.vitaminB2,
-                      mode: OrderingMode.desc,
-                    ),
-              ])
-              ..limit(top))
-            .get();
-        for (int i = 0; i < limit; i++) {
-          if (top100Items.isEmpty) break;
-          final int randomIndex = random.nextInt(top100Items.length);
-          schemas.add(top100Items.removeAt(randomIndex));
-        }
-      case 'vitaminC':
-        top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
-              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
-                ($DictionaryItemsTableTable t) => OrderingTerm(
-                      expression: t.vitaminC,
-                      mode: OrderingMode.desc,
-                    ),
-              ])
-              ..limit(top))
-            .get();
-        for (int i = 0; i < limit; i++) {
-          if (top100Items.isEmpty) break;
-          final int randomIndex = random.nextInt(top100Items.length);
-          schemas.add(top100Items.removeAt(randomIndex));
-        }
-      case 'dietaryFiber':
-        top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
-              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
-                ($DictionaryItemsTableTable t) => OrderingTerm(
-                      expression: t.dietaryFiber,
-                      mode: OrderingMode.desc,
-                    ),
-              ])
-              ..limit(top))
-            .get();
-        for (int i = 0; i < limit; i++) {
-          if (top100Items.isEmpty) break;
-          final int randomIndex = random.nextInt(top100Items.length);
-          schemas.add(top100Items.removeAt(randomIndex));
-        }
-      case 'salt':
-        top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
-              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
-                ($DictionaryItemsTableTable t) => OrderingTerm(
-                      expression: t.salt,
-                      mode: OrderingMode.desc,
-                    ),
-              ])
-              ..limit(top))
-            .get();
-        for (int i = 0; i < limit; i++) {
-          if (top100Items.isEmpty) break;
-          final int randomIndex = random.nextInt(top100Items.length);
-          schemas.add(top100Items.removeAt(randomIndex));
-        }
-      case 'vitamin':
-        top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
-              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
-                ($DictionaryItemsTableTable t) => OrderingTerm(
-                      expression: t.retinol / const Variable<double>(1000) + t.vitaminB1 + t.vitaminB2 + t.vitaminC,
-                      mode: OrderingMode.desc,
-                    ),
-              ])
-              ..limit(top))
-            .get();
-        for (int i = 0; i < limit; i++) {
-          if (top100Items.isEmpty) break;
-          final int randomIndex = random.nextInt(top100Items.length);
-          schemas.add(top100Items.removeAt(randomIndex));
-        }
-      case 'mineral':
-        top100Items = await (_db.select(_db.dictionaryItemsTable)
-              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
-              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
-                ($DictionaryItemsTableTable t) => OrderingTerm(
-                      expression: t.calcium + t.magnesium + t.iron + t.zinc,
-                      mode: OrderingMode.desc,
-                    ),
-              ])
-              ..limit(top))
-            .get();
-        for (int i = 0; i < limit; i++) {
-          if (top100Items.isEmpty) break;
-          final int randomIndex = random.nextInt(top100Items.length);
-          schemas.add(top100Items.removeAt(randomIndex));
-        }
-      default:
-        throw SQLiteException("Failed to find nutrient '$nutrient'");
+    for (int i = 0; i < limit; i++) {
+      if (top100Items.isEmpty) break;
+      final int randomIndex = random.nextInt(top100Items.length);
+      schemas.add(top100Items.removeAt(randomIndex));
     }
 
     for (final DictionaryItemsSchema schema in schemas) {
