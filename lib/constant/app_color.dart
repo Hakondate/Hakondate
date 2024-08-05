@@ -35,4 +35,5 @@ class _Ui {
   final Color unsupported = const Color(0xFFD3D3D3);
   final Color shimmerBase = const Color(0xFFE0E0E0);
   final Color shimmerHighlight = const Color(0xFFFFFFFF);
+  final Color background = const Color(0xFFf2f2f2);
 }

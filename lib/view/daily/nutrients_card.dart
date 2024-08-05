@@ -10,7 +10,7 @@ import 'package:hakondate/util/exception/class_type_exception.dart';
 import 'package:hakondate/view/component/graph/nutrients_radar_chart.dart';
 import 'package:hakondate/view/component/label/nutrients_list.dart';
 import 'package:hakondate/view/dictionary/recommend_foodstuff.dart';
-import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
+import 'package:hakondate/view_model/single_page/daily/daily_graph_view_model.dart';
 import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
 
 class NutrientsCard extends StatelessWidget {
@@ -35,17 +35,24 @@ class NutrientsCard extends StatelessWidget {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
         const double graphMaxValue = 120;
-        return SizedBox(
-          width: MediaQuery.of(context).size.width * 3 / 4,
-          height: MediaQuery.of(context).size.width * 3 / 4,
-          child: NutrientsRadarChart(
-            values: ref.read(dailyViewModelProvider.notifier).getGraphValues(
-                  slns: ref.watch(userViewModelProvider).currentUser!.slns,
-                  graphMaxValue: graphMaxValue,
-                ),
-            rowValues: ref.read(dailyViewModelProvider.notifier).getGraphRowValues(),
-            maxValue: graphMaxValue,
-          ),
+        final AsyncValue<List<double>> graphValues = ref.watch(graphValuesProvider);
+
+        return graphValues.when(
+          data: (List<double> graphValue) {
+            return SizedBox(
+              width: MediaQuery.of(context).size.width * 3 / 4,
+              height: MediaQuery.of(context).size.width * 3 / 4,
+              child: NutrientsRadarChart(
+                values: graphValue,
+                rawValues: ref.watch(graphRawValuesProvider),
+                maxValue: graphMaxValue,
+              ),
+            );
+          },
+          loading: () => const CircularProgressIndicator(),
+          error: (Object error, StackTrace? stackTrace) {
+            return Text('Error: $error');
+          },
         );
       },
     );

@@ -155,7 +155,7 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
         conflictSchema.dietaryFiber != companion.dietaryFiber.value ||
         conflictSchema.salt != companion.salt.value ||
         conflictSchema.origin != companion.origin.value) {
-      return (_db.update(_db.foodstuffsTable)
+      await (_db.update(_db.foodstuffsTable)
             ..where(
               ($FoodstuffsTableTable t) =>
                   t.name.equals(companion.name.value) &
@@ -184,6 +184,8 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
           origin: companion.origin,
         ),
       );
+
+      return conflictSchema.id;
     }
 
     return conflictSchema.id;
