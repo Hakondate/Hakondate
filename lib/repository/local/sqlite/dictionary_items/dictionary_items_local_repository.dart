@@ -8,10 +8,6 @@ import 'package:hakondate/repository/local/sqlite/local_database.dart';
 import 'package:hakondate/util/exception/sqlite_exception.dart';
 import 'package:hakondate/util/extension/string_extension.dart';
 
-//import 'package:flutter/foundation.dart';
-
-
-
 part 'dictionary_items_local_repository.g.dart';
 
 @Riverpod(keepAlive: true)
