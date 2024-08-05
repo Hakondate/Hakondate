@@ -6,8 +6,8 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 2.0.2+11
 
 environment:
-  sdk: "3.3.3"
-  flutter: "3.19.5"
+  sdk: "3.4.4"
+  flutter: "3.22.3"
 
 dependencies:
   flutter:
@@ -16,9 +16,9 @@ dependencies:
     sdk: flutter
 
   # デザイン
-  cupertino_icons: 1.0.6
+  cupertino_icons: 1.0.8
   multi_charts: 0.3.0
-  table_calendar: 3.0.9
+  table_calendar: 3.1.2
   flutter_svg: 2.0.10+1
   flutter_pdfview: 1.3.2
   shimmer: 3.0.0
@@ -27,52 +27,52 @@ dependencies:
   flutter_riverpod: 2.5.1
   riverpod_annotation: 2.3.5
   freezed: 2.5.2
-  freezed_annotation: 2.4.1
-  json_serializable: 6.7.1
-  json_annotation: 4.8.1
+  freezed_annotation: 2.4.4
+  json_serializable: 6.8.0
+  json_annotation: 4.9.0
 
   # Drift(SQLite)関連
-  drift: 2.16.0
-  sqlite3_flutter_libs: 0.5.20
+  drift: 2.19.1+1
+  sqlite3_flutter_libs: 0.5.24
 
   # 起動時データ関連
   shared_preferences: 2.2.3
   path_provider: 2.1.3
   path: 1.9.0
-  intl: 0.18.1
+  intl: 0.19.0
 
   # 遷移関連
   routemaster: 1.0.1
 
   # Firebase関連
-  app_tracking_transparency: 2.0.4
-  firebase_storage: 11.7.1
-  firebase_core: 2.29.0
-  cloud_firestore: 4.16.1
-  firebase_crashlytics: 3.5.1
-  firebase_analytics: 10.10.1
+  app_tracking_transparency: 2.0.5
+  firebase_storage: 12.0.0
+  firebase_core: 3.0.0
+  cloud_firestore: 5.0.0
+  firebase_crashlytics: 4.0.0
+  firebase_analytics: 11.0.0
 
   # URL関連
-  url_launcher: 6.2.6
+  url_launcher: 6.3.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   # コード整形
-  very_good_analysis: 5.1.0
+  very_good_analysis: 6.0.0
   import_sorter: 4.6.0
 
   # コード生成
-  build_runner: 2.4.9
+  build_runner: 2.4.11
   custom_lint: 0.6.4
   riverpod_generator: 2.4.0
   riverpod_lint: 2.3.10
-  drift_dev: 2.16.0
+  drift_dev: 2.19.1
   flutter_oss_licenses: 3.0.2
 
   # デザイン生成
-  flutter_native_splash: 2.4.0
+  flutter_native_splash: 2.4.1
   flutter_launcher_icons: 0.13.1
 
   # build_runner の実行コマンド
