@@ -7,8 +7,7 @@ import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
 import 'package:hakondate/model/nutrients/five_major_nutrient.dart';
 import 'package:hakondate/router/routes.dart';
-import 'package:hakondate/state/daily/daily_state.dart';
-import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
+import 'package:hakondate/view_model/single_page/daily/daily_recommend_foodstuffs_view_model.dart';
 import 'package:hakondate/view_model/single_page/dictionary/dictionary_view_model.dart';
 
 class RecommendedFoodStuffExpansionTile extends StatelessWidget {
@@ -31,14 +30,14 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
             textColor: AppColor.brand.secondary,
             iconColor: AppColor.brand.secondary,
             children: <Widget>[
-              ref.watch(dailyViewModelProvider).maybeWhen(
-                    data: (DailyState data) {
-                      if (data.recommendFoodStuffs.isNotEmpty) {
+              ref.watch(recommendFoodstuffsProvider).maybeWhen(
+                    data: (Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendFoodStuffs) {
+                      if (recommendFoodStuffs.isNotEmpty) {
                         return Column(
                           children: <Widget>[
-                            for (int i = 0; i < data.recommendFoodStuffs.length; i++)
+                            for (int i = 0; i < recommendFoodStuffs.length; i++)
                               _recommendFoodWidget(
-                                data.recommendFoodStuffs,
+                                recommendFoodStuffs,
                                 i,
                               ),
                           ],

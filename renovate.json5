@@ -73,4 +73,9 @@
 
   /** DependencyDashboardを有効にするか */
   "dependencyDashboard": false,
+
+  /** fvmの関連ファイルのアップデートを行うかどうか */
+  "fvm": {
+    "enabled": true
+  }
 }
