@@ -107,3 +107,4 @@ coverage/
 
 # FVM Version Cache
 .fvm/
+.fvm/release
