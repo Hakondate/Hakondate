@@ -22,6 +22,7 @@ abstract class MenusLocalRepositoryAPI {
   Future<List<MenuModel>> list();
   Future<MenuModel> getMenuByDay(DateTime day);
   Future<DateTime> getOldestDay();
+  Future<DateTime> getLatestDay();
   Future<DateTime> getLatestUpdateDay();
   Future<int> deleteAll();
 }
@@ -215,7 +216,7 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
     if (menu != null) return menu;
 
     final DateTime oldest = await getOldestDay();
-    final DateTime latest = await getLatestUpdateDay();
+    final DateTime latest = await getLatestDay();
 
     if (day.isAfter(oldest) && day.isBefore(latest)) {
       return const MenuModel.holiday();
@@ -273,6 +274,19 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
 
     final int schoolId = await _ref.read(userViewModelProvider.notifier).getParentId();
     final Expression<DateTime> exp = _db.menusTable.day.min();
+    final JoinedSelectStatement<$MenusTableTable, MenusSchema> query = _db.selectOnly(_db.menusTable)
+      ..where(_db.menusTable.schoolId.equals(schoolId))
+      ..addColumns(<Expression<DateTime>>[exp]);
+
+    return await query.map((TypedResult scheme) => scheme.read(exp)).getSingle() ?? DateTime.now();
+  }
+
+  @override
+  Future<DateTime> getLatestDay() async {
+    if (await _count() == 0) return DateTime.now();
+
+    final int schoolId = await _ref.read(userViewModelProvider.notifier).getParentId();
+    final Expression<DateTime> exp = _db.menusTable.day.max();
     final JoinedSelectStatement<$MenusTableTable, MenusSchema> query = _db.selectOnly(_db.menusTable)
       ..where(_db.menusTable.schoolId.equals(schoolId))
       ..addColumns(<Expression<DateTime>>[exp]);

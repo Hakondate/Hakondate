@@ -129,7 +129,7 @@ class SplashViewModel extends _$SplashViewModel {
     state = SplashState(status: LoadingStatus.checkingUpdate);
     final List<MenuModel> menus = await _menusRemoteRepository.get(
       from: DateTime.now().subtract(const Duration(days: 90)),
-      updateAt: latestUpdate.add(const Duration(seconds: 1)),
+      updateAt: latestUpdate,
     );
 
     state = SplashState(status: LoadingStatus.updating);

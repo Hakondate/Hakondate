@@ -14,7 +14,7 @@ class DailyViewModel extends _$DailyViewModel {
   @override
   Future<DailyState> build() async {
     final DateTime selectedDay = switch (Environment.flavor) {
-      Flavor.dev => await ref.read(menusLocalRepositoryProvider).getLatestUpdateDay(),
+      Flavor.dev => await ref.read(menusLocalRepositoryProvider).getLatestDay(),
       Flavor.stg || Flavor.prod => DateTime.now()
     };
     final MenuModel menu = await ref.read(menusLocalRepositoryProvider).getMenuByDay(selectedDay);
