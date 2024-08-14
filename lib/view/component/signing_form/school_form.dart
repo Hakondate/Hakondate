@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/state/signup/signup_state.dart';
+import 'package:hakondate/view/component/dialog/hakondate_dialog/hakondate_dialog.dart';
 import 'package:hakondate/view/component/dialog/help_dialog.dart';
 import 'package:hakondate/view/component/label/setting_label.dart';
 import 'package:hakondate/view/component/signing_form/error_indication.dart';
@@ -50,17 +51,33 @@ class SchoolForm extends ConsumerWidget {
         SettingLabel(
           title: '学校',
           dialList: (state is AsyncData<SignupState>) ? state.value.schools.map((SchoolModel school) => school.name).toList() : <String>[],
-          completed: (int index) {
+          completed: (int index) async {
             if (state is! AsyncData<SignupState>) return;
-            final int id = state.value.schools[index].id;
-            ref.read(signupViewModelProvider.notifier).updateSchool(id);
+            final SchoolModel selectedSchool = state.value.schools[index];
+            if (selectedSchool.authorizationRequired) {
+              debugPrint('学校認証が必要です');
+              final bool? authorized = await showDialog<bool>(
+                context: context,
+                builder: (BuildContext context) => HakondateDialog(
+                  title: const Text('学校認証について'),
+                  body: const Text('この学校は，学校認証が必要です．\n'
+                      '学校認証を行うことで，学校の献立を表示することができます．\n'
+                      '学校認証を行いますか？'),
+                  firstAction: HakondateActionButton(text: const Text('はい'), onTap: () => Navigator.of(context).pop(true)),
+                  secondAction: HakondateActionButton(text: const Text('いいえ'), onTap: () => Navigator.of(context).pop(false)),
+                ),
+              );
+              if (authorized == null || !authorized) return;
+            }
+            final int id = selectedSchool.id;
+            await ref.read(signupViewModelProvider.notifier).updateSchool(id);
           },
           trailing: (state is AsyncData<SignupState>) ? state.value.schoolTrailing : '',
         ),
         SettingLabel(
           title: '学年',
           dialList: (state is AsyncData<SignupState>) ? state.value.schoolYears : <String>[],
-          completed: (int index) => ref.read(signupViewModelProvider.notifier).updateSchoolYear(index + 1),
+          completed: (int index) async => ref.read(signupViewModelProvider.notifier).updateSchoolYear(index + 1),
           trailing: (state is AsyncData<SignupState>) ? state.value.schoolYearTrailing : '',
         ),
         const SizedBox(height: PaddingSize.normal),

@@ -157,4 +157,28 @@ class UserViewModel extends _$UserViewModel {
   }
 
   void signOut() => state = state.copyWith(currentUser: null);
+
+  Future<bool> isAuthorized() async {
+    final SchoolsLocalRepository schoolLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
+    final SchoolModel school = await schoolLocalRepository.getById(state.currentUser!.schoolId);
+
+    if (!school.authorizationRequired) return true;
+
+    final DateTime? authorizedAt = state.currentUser!.authorizedAt;
+    if (authorizedAt == null) return false;
+
+    final DateTime authorizationKeyUpdatedAt = school.authorizationKeyUpdatedAt ?? DateTime(0);
+
+    return authorizedAt.isAfter(authorizationKeyUpdatedAt);
+  }
+
+  Future<void> authorize() async {
+    final UserModel user = state.currentUser!;
+
+    await _usersLocalRepository.update(user.copyWith(authorizedAt: DateTime.now()));
+
+    state = state.copyWith(
+      currentUser: user.copyWith(authorizedAt: DateTime.now()),
+    );
+  }
 }

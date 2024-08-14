@@ -128,6 +128,11 @@ class Daily extends StatelessWidget {
                     imageFileName: 'holiday.png',
                     text: '給食はお休みです...',
                   );
+                } else if (state.menu is NotAuthorizedMenuModel) {
+                  return const NonLunchesDayBody(
+                    imageFileName: 'holiday.png',
+                    text: '認可が必要です...',
+                  );
                 }
 
                 return const NonLunchesDayBody(

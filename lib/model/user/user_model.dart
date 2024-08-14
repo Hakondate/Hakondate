@@ -22,6 +22,9 @@ class UserModel with _$UserModel {
 
     /// 学校給食摂取基準
     NutrientsModel? slns,
+
+    /// 認可された日
+    DateTime? authorizedAt,
   }) = _UserModel;
   const UserModel._();
 
