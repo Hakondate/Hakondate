@@ -125,10 +125,11 @@ class SplashViewModel extends _$SplashViewModel {
   Future<void> _initializeMenus() async {
     state = SplashState(status: LoadingStatus.reading);
     final DateTime latestUpdate = await _menusLocalRepository.getLatestUpdateDay();
+    final DateTime now = DateTime.now();
 
     state = SplashState(status: LoadingStatus.checkingUpdate);
     final List<MenuModel> menus = await _menusRemoteRepository.get(
-      from: DateTime.now().subtract(const Duration(days: 90)),
+      from: DateTime(now.year, now.month - 2),
       updateAt: latestUpdate,
     );
 
