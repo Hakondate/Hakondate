@@ -13,19 +13,24 @@ import * as logger from "firebase-functions/logger";
 // Start writing functions
 // https://firebase.google.com/docs/functions/typescript
 
+import * as admin from "firebase-admin";
+admin.initializeApp();
+
 export const helloWorld = onRequest((request, response) => {
   logger.info("Hello logs!", {structuredData: true});
   response.send("Hello from Firebase!");
 });
 
 export const authorize = onRequest((request, response) => {
-  logger.info("Authorize logs!", {structuredData: true});
-  console.log("body is :" + request.body);
-  
   let input: string = JSON.stringify(request.body);
-  // stringifyでJSON to stringしなきゃダメみたい
-  
+  logger.debug("authorize called: " + input);
+
   let obj: AuthorizationDto = JSON.parse(input);
+  admin.firestore().collection("schools").get().then((snapshot) => {
+    snapshot.forEach((doc) => {
+      console.log(doc.data());
+    });
+  });
 
   response.send(obj.authorizationKey);
 })
