@@ -21,7 +21,7 @@ MenusRemoteRepository menusRemoteRepository(MenusRemoteRepositoryRef ref) {
 
 // ignore: one_member_abstracts
 abstract class MenusRemoteRepositoryAPI {
-  Future<List<MenuModel>> get({required DateTime updateAt});
+  Future<List<MenuModel>> get({required DateTime updateAt, required DateTime from});
 }
 
 class MenusRemoteRepository extends MenusRemoteRepositoryAPI {
@@ -31,9 +31,13 @@ class MenusRemoteRepository extends MenusRemoteRepositoryAPI {
   final Ref _ref;
 
   @override
-  Future<List<MenuModel>> get({required DateTime updateAt}) async {
+  Future<List<MenuModel>> get({required DateTime updateAt, required DateTime from}) async {
     final List<int> schoolIds = await _ref.read(userSettingsViewModelProvider.notifier).listParentIds();
-    final QuerySnapshot<MenuModel> menus = await _db.where('schoolId', whereIn: schoolIds).where('updateAt', isGreaterThan: updateAt).get();
+    final QuerySnapshot<MenuModel> menus = await _db
+        .where('schoolId', whereIn: schoolIds)
+        .where('day', isGreaterThanOrEqualTo: from)
+        .where('updateAt', isGreaterThan: updateAt)
+        .get();
 
     return menus.docs.map((QueryDocumentSnapshot<MenuModel> doc) => doc.data()).toList();
   }

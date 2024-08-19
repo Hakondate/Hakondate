@@ -6,7 +6,7 @@ part of 'daily_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$dailyViewModelHash() => r'cee4c0447e9f4b4372573512beec5bc355d268a6';
+String _$dailyViewModelHash() => r'3bc464a06d3713adfa5cb25c723e0baecc51035d';
 
 /// See also [DailyViewModel].
 @ProviderFor(DailyViewModel)
