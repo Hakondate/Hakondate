@@ -50,10 +50,10 @@ class SchoolForm extends ConsumerWidget {
         SettingLabel(
           title: '学校',
           dialList: (state is AsyncData<SignupState>) ? state.value.schools.map((SchoolModel school) => school.name).toList() : <String>[],
-          completed: (int index) async {
+          completed: (int index) {
             if (state is! AsyncData<SignupState>) return;
             final int id = state.value.schools[index].id;
-            await ref.read(signupViewModelProvider.notifier).updateSchool(id);
+            ref.read(signupViewModelProvider.notifier).updateSchool(id);
           },
           trailing: (state is AsyncData<SignupState>) ? state.value.schoolTrailing : '',
         ),
