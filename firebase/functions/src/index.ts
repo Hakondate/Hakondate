@@ -22,10 +22,10 @@ export const helloWorld = onRequest((request, response) => {
 });
 
 export const authorize = onRequest((request, response) => {
-  let input: string = JSON.stringify(request.body);
+  const input: string = JSON.stringify(request.body);
   logger.debug("authorize called: " + input);
 
-  let obj: AuthorizationDto = JSON.parse(input);
+  const obj: AuthorizationDto = JSON.parse(input);
   admin.firestore().collection("schools").get().then((snapshot) => {
     snapshot.forEach((doc) => {
       console.log(doc.data());
@@ -33,4 +33,4 @@ export const authorize = onRequest((request, response) => {
   });
 
   response.send(obj.authorizationKey);
-})
+});
