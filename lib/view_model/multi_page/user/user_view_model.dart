@@ -174,11 +174,12 @@ class UserViewModel extends _$UserViewModel {
 
   Future<void> authorize() async {
     final UserModel user = state.currentUser!;
+    final DateTime now = DateTime.now();
 
-    await _usersLocalRepository.update(user.copyWith(authorizedAt: DateTime.now()));
+    await _usersLocalRepository.update(user.copyWith(authorizedAt: now));
 
     state = state.copyWith(
-      currentUser: user.copyWith(authorizedAt: DateTime.now()),
+      currentUser: user.copyWith(authorizedAt: now),
     );
   }
 }

@@ -45,7 +45,6 @@ class MenuModel with _$MenuModel {
   }) = LunchesDayMenuModel;
   const factory MenuModel.holiday() = HolidayMenuModel;
   const factory MenuModel.noData() = NoDataMenuModel;
-  const factory MenuModel.notAuthorized() = NotAuthorizedMenuModel;
 
   factory MenuModel.fromFirestore(DocumentSnapshot<Map<String, dynamic>> doc) {
     if (!doc.exists) throw const FirestoreException('Failed to convert Firestore to MenuModel');

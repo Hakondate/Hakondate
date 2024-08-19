@@ -16,7 +16,7 @@ class SettingLabel extends StatelessWidget {
 
   final String title;
   final List<String> dialList;
-  final Future<void> Function(int) completed;
+  final void Function(int) completed;
   final String trailing;
 
   void _showDialPickerModal(BuildContext context) {
@@ -33,9 +33,9 @@ class SettingLabel extends StatelessWidget {
               title: Text('$titleを選択'),
               actions: <Widget>[
                 TextButton(
-                  onPressed: () async {
-                    await completed(selected);
-                    await routemaster.pop(context);
+                  onPressed: () {
+                    completed(selected);
+                    routemaster.pop(context);
                   },
                   child: Text(
                     '完了',

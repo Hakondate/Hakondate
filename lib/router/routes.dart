@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:routemaster/routemaster.dart';
 
+import 'package:hakondate/view/authorization/authorization.dart';
 import 'package:hakondate/view/bottom_bar/app_bottom_navigation_bar.dart';
 import 'package:hakondate/view/cache_management/cache_management.dart';
 import 'package:hakondate/view/calendar/calendar.dart';
@@ -35,6 +36,7 @@ final RoutemasterDelegate routemaster = RoutemasterDelegate(
       '/splash': (_) => const MaterialPage<dynamic>(child: Splash()),
       '/terms': (_) => const MaterialPage<dynamic>(child: Terms()),
       '/signup': (_) => MaterialPage<dynamic>(child: Signup()),
+      '/authorization': (_) => const MaterialPage<dynamic>(child: Authorization()),
       '/home': (_) => const TabPage(
             child: AppBottomNavigationBar(),
             paths: <String>[

@@ -33,6 +33,7 @@ class UserModel with _$UserModel {
         name: schema.name,
         schoolId: schema.schoolId,
         schoolYear: schema.schoolYear,
+        authorizedAt: schema.authorizedAt,
       );
 
   UsersTableCompanion toDrift() => UsersTableCompanion(
@@ -40,5 +41,6 @@ class UserModel with _$UserModel {
         name: Value<String>(name),
         schoolId: Value<int>(schoolId),
         schoolYear: Value<int>(schoolYear),
+        authorizedAt: Value<DateTime?>(authorizedAt),
       );
 }

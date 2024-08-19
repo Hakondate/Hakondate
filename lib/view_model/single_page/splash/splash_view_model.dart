@@ -64,6 +64,10 @@ class SplashViewModel extends _$SplashViewModel {
           return routemaster.replace('/terms');
         }
 
+        if (!await ref.read(userViewModelProvider.notifier).isAuthorized()) {
+          return routemaster.replace('/authorization');
+        }
+
         final DateTime termsAgreedDay = DateTime.fromMillisecondsSinceEpoch(
           prefs.getInt(AppKey.sharedPreferencesKey.agreedTermsDay) ?? 0,
         );
