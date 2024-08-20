@@ -48,7 +48,7 @@ class Authorization extends ConsumerWidget {
                 ),
                 shape: const StadiumBorder(),
               ),
-              onPressed: () => ref.read(authorizationViewModelProvider.notifier).authorize(),
+              onPressed: () => ref.read(authorizationViewModelProvider.notifier).authorize(99, '000000'),
               child: const Text('招待コードを送信'),
             ),
             ElevatedButton(
