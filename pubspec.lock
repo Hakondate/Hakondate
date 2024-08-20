@@ -1163,13 +1163,14 @@ packages:
     source: hosted
     version: "6.3.5"
   url_launcher_ios:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: url_launcher_ios
-      sha256: "9149d493b075ed740901f3ee844a38a00b33116c7c5c10d7fb27df8987fb51d5"
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.2.5"
+      path: "packages/url_launcher/url_launcher_ios"
+      ref: urllauncher_fix_main_actor_completion_conformance
+      resolved-ref: ce455e87a4db3642fe2d9d36c8da1ee72d7cffea
+      url: "https://github.com/hellohuanlin/packages"
+    source: git
+    version: "6.3.1"
   url_launcher_linux:
     dependency: transitive
     description:
