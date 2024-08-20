@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:collection/collection.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,6 +20,7 @@ import 'package:hakondate/state/user/user_state.dart';
 import 'package:hakondate/util/analytics_controller/analytics_controller.dart';
 import 'package:hakondate/util/exception/shared_preferences_exception.dart';
 import 'package:hakondate/util/exception/sign_in_exception.dart';
+import 'package:hakondate/view_model/single_page/user_settings/user_settings_view_model.dart';
 
 part 'user_view_model.g.dart';
 
@@ -99,13 +101,21 @@ class UserViewModel extends _$UserViewModel {
   }) async {
     if (state.currentUser == null) return;
     final NutrientsModel? slns = (schoolId != null || schoolYear != null) ? await _getSLNS(state.currentUser!.id) : state.currentUser!.slns;
+
+    DateTime? authorizedAt = state.currentUser!.authorizedAt;
+    if (schoolId != null && schoolId != state.currentUser!.schoolId) {
+      authorizedAt = await _getSameSchoolAuthorizedAt(schoolId);
+    }
+
     final UserModel newUser = state.currentUser!.copyWith(
       name: name ?? state.currentUser!.name,
       schoolId: schoolId ?? state.currentUser!.schoolId,
       schoolYear: schoolYear ?? state.currentUser!.schoolYear,
       slns: slns,
+      authorizedAt: authorizedAt,
     );
     await _usersLocalRepository.update(newUser);
+    await ref.read(userSettingsViewModelProvider.notifier).updateUsers();
 
     state = state.copyWith(currentUser: newUser);
   }
@@ -139,9 +149,11 @@ class UserViewModel extends _$UserViewModel {
     required int schoolId,
     required int schoolYear,
   }) async {
-    final int id = await _usersLocalRepository.add(name, schoolId, schoolYear);
+    final DateTime? authrizedAt = await _getSameSchoolAuthorizedAt(schoolId);
+    final int id = await _usersLocalRepository.add(name, schoolId, schoolYear, authrizedAt);
     await changeCurrentUser(id);
     await ref.read(analyticsControllerProvider.notifier).logSignup();
+    await ref.read(userSettingsViewModelProvider.notifier).updateUsers();
 
     return id;
   }
@@ -181,5 +193,20 @@ class UserViewModel extends _$UserViewModel {
     state = state.copyWith(
       currentUser: user.copyWith(authorizedAt: now),
     );
+  }
+
+  Future<DateTime?> _getSameSchoolAuthorizedAt(int schoolId) async {
+    final SchoolModel school = await _schoolsLocalRepository.getById(schoolId);
+    if (school.authorizationRequired) {
+      final List<UserModel> users = await ref.read(usersLocalRepositoryProvider).list();
+      final List<UserModel> usersWithaoutCurrent = users.where((UserModel user) => user.id != state.currentUser!.id).toList();
+
+      return usersWithaoutCurrent
+          .firstWhereOrNull(
+            (UserModel user) => user.schoolId == schoolId,
+          )
+          ?.authorizedAt;
+    }
+    return null;
   }
 }

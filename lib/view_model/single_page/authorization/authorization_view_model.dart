@@ -1,9 +1,9 @@
-import 'package:hakondate/repository/local/sqlite/users/users_local_repository.dart';
-import 'package:hakondate/router/routes.dart';
-import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import 'package:hakondate/repository/local/sqlite/users/users_local_repository.dart';
+import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/authorization/authorization_state.dart';
+import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
 
 part 'authorization_view_model.g.dart';
 

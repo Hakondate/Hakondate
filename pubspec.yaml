@@ -56,6 +56,9 @@ dependencies:
   # URL関連
   url_launcher: 6.3.0
 
+  # Utility
+  collection: 1.18.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
