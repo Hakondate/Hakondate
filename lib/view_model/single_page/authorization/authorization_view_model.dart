@@ -13,7 +13,9 @@ part 'authorization_view_model.g.dart';
 class AuthorizationViewModel extends _$AuthorizationViewModel {
   @override
   Future<AuthorizationState> build() async {
-    return const AuthorizationState();
+    return AuthorizationState(
+      authorizationCodeController: TextEditingController(),
+    );
   }
 
   Future<void> authorize(int schoolId, String authorizationKey) async {
