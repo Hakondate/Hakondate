@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'authorization_state.freezed.dart';

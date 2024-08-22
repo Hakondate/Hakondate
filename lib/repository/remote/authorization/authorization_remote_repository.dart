@@ -1,38 +1,35 @@
-import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:hakondate/repository/remote/firebase_functions/firebase_functions_api.dart';
+
+import 'package:http/http.dart' as http;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'authorization_remote_repository.g.dart';
 
 @Riverpod(keepAlive: true)
 AuthorizationRemoteRepository authorizationRemoteRepository(AuthorizationRemoteRepositoryRef ref) {
-  final FirebaseFunctions instance = ref.watch(firebaseFunctionsApiProvider);
-  return AuthorizationRemoteRepository(instance);
+  return AuthorizationRemoteRepository();
 }
 
 class AuthorizationRemoteRepository {
-  AuthorizationRemoteRepository(this.instance);
-
-  final FirebaseFunctions instance;
+  AuthorizationRemoteRepository();
 
   Future<bool> checkAuthorizationCode(int schoolId, String authorizationKey) async {
     try {
-      final HttpsCallableResult<dynamic> response = await instance
-          .httpsCallableFromUrl(
-        'https://authorize-mdq5vdl66q-uc.a.run.app',
-        options: HttpsCallableOptions(
-          timeout: const Duration(seconds: 10),
-        ),
-      )
-          .call(
-        <String, Object>{
-          'schoolId': schoolId,
+      final Uri url = Uri.https('authorize-mdq5vdl66q-uc.a.run.app');
+      final http.Response response = await http.post(
+        url,
+        body: <String, Object>{
+          'schoolId': schoolId.toString(),
           'authorizationKey': authorizationKey,
         },
       );
 
-      debugPrint('respose1: $response');
+      if (response.statusCode != 200 && response.statusCode != 404) {
+        debugPrint('Response status: ${response.statusCode}');
+        debugPrint('Response body: ${response.body}');
+
+        return false;
+      }
 
       return true;
     } catch (error) {
