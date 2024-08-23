@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hakondate/view_model/multi_page/scroll/scroll_view_model.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -28,7 +29,6 @@ class DailyViewModel extends _$DailyViewModel {
         DateTime.now().year,
         DateTime.now().month + 2,
       ).add(const Duration(seconds: -1)),
-      scrollController: ScrollController(),
     );
   }
 
@@ -60,7 +60,6 @@ class DailyViewModel extends _$DailyViewModel {
         await ref.read(analyticsControllerProvider.notifier).logViewMenu(menu.id);
       }
       await updateRecommendFoodstuffs();
-      _resetOffset();
     });
   }
 
@@ -241,15 +240,6 @@ class DailyViewModel extends _$DailyViewModel {
       },
       orElse: () => 0,
     );
-  }
-
-  void _resetOffset() {
-    state.whenData((DailyState data) {
-      data.scrollController.jumpTo(0);
-      state = AsyncValue<DailyState>.data(
-        data.copyWith(scrollController: ScrollController()),
-      );
-    });
   }
 
   DateTime getAddedSelectedDay(DailyState state, int value) {

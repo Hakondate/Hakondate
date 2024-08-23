@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate/router/routes.dart';
+import 'package:hakondate/view_model/multi_page/scroll/scroll_view_model.dart';
 import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -15,6 +17,9 @@ import 'package:hakondate/view/component/tile/grid_frame.dart';
 import 'package:hakondate/view/letter/non_letter.dart';
 import 'package:hakondate/view_model/multi_page/bottom_bar/app_bottom_navigation_bar_view_model.dart';
 import 'package:hakondate/view_model/single_page/letter/letter_view_model.dart';
+//TODO: 子ページを開いた時にスクロール位置が初期値に戻ってしまう。
+
+final PageStorageBucket bucket = PageStorageBucket();
 
 class Letter extends ConsumerWidget {
   const Letter({super.key});
@@ -27,12 +32,12 @@ class Letter extends ConsumerWidget {
       ),
       body: Consumer(
         builder: (BuildContext context, WidgetRef ref, _) {
-          final LetterState state = ref.watch(letterViewModelProvider);
+          final ScrollController scrollController = ref.watch(scrollViewModelProvider(path: routemaster.currentConfiguration!.fullPath));
 
           ref.listen<AppBottomNavigationBarState>(appBottomNavigationBarViewModelProvider, (_, __) {
             const int letterIndex = 3;
             if (ref.read(appBottomNavigationBarViewModelProvider).tappedButtonIndex == letterIndex) {
-              ref.read(scrollFunctionProvider).scrollToTop(scrollController: state.scrollController);
+              ref.read(scrollFunctionProvider).scrollToTop(scrollController: scrollController);
             }
           });
           return StatefulWrapper(
@@ -42,32 +47,37 @@ class Letter extends ConsumerWidget {
                 final List<LetterMetadataModel> letters = ref.watch(letterViewModelProvider).letters;
 
                 if (letters.isEmpty) return const NonLetter();
-                return Scrollbar(
-                  controller: state.scrollController,
-                  child: Padding(
-                    padding: const EdgeInsets.all(PaddingSize.minimum),
-                    child: RefreshIndicator(
-                      onRefresh: () => ref.read(letterViewModelProvider.notifier).reloadLetters(),
-                      color: AppColor.brand.secondary,
-                      backgroundColor: AppColor.ui.white,
-                      displacement: 0,
-                      child: GridView.builder(
-                        controller: state.scrollController,
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: MarginSize.minimum,
-                          crossAxisSpacing: MarginSize.minimum,
-                        ),
-                        itemCount: letters.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          if (!ref.watch(letterViewModelProvider).isEndListing &&
-                              ref.watch(letterViewModelProvider).status != LetterConnectionStatus.loading &&
-                              index == letters.length - 4) {
-                            Future<void>(ref.read(letterViewModelProvider.notifier).getLetters);
-                          }
+                return PageStorage(
+                  bucket: bucket,
+                  child: Scrollbar(
+                    key: PageStorageKey<String>(routemaster.currentConfiguration!.fullPath),
+                    controller: scrollController,
+                    child: Padding(
+                      padding: const EdgeInsets.all(PaddingSize.minimum),
+                      child: RefreshIndicator(
+                        onRefresh: () => ref.read(letterViewModelProvider.notifier).reloadLetters(),
+                        color: AppColor.brand.secondary,
+                        backgroundColor: AppColor.ui.white,
+                        displacement: 0,
+                        child: GridView.builder(
+                          key: PageStorageKey<String>(routemaster.currentConfiguration!.fullPath),
+                          controller: scrollController,
+                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: MarginSize.minimum,
+                            crossAxisSpacing: MarginSize.minimum,
+                          ),
+                          itemCount: letters.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            if (!ref.watch(letterViewModelProvider).isEndListing &&
+                                ref.watch(letterViewModelProvider).status != LetterConnectionStatus.loading &&
+                                index == letters.length - 4) {
+                              Future<void>(ref.read(letterViewModelProvider.notifier).getLetters);
+                            }
 
-                          return _gridTile(index);
-                        },
+                            return _gridTile(index);
+                          },
+                        ),
                       ),
                     ),
                   ),

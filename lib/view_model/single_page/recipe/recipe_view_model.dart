@@ -7,7 +7,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:hakondate/model/recipe/open_data_recipe_model.dart';
 import 'package:hakondate/repository/local/directory/open_data_recipes/open_data_recipes_local_repository.dart';
 import 'package:hakondate/repository/remote/open_data_recipes/open_data_recipes_remote_repository.dart';
-import 'package:hakondate/state/recipe/recipe_state.dart';
 import 'package:hakondate/util/analytics_controller/analytics_controller.dart';
 
 part 'recipe_view_model.g.dart';
@@ -18,12 +17,9 @@ class RecipeViewModel extends _$RecipeViewModel {
   late final OpenDataRecipesRemoteRepositoryAPI _openDataRemoteRepository;
 
   @override
-  RecipeState build() {
+  void build() {
     _openDataLocalRepository = ref.watch(openDataRecipesLocalRepositoryProvider);
     _openDataRemoteRepository = ref.watch(openDataRecipesRemoteRepositoryProvider);
-    return RecipeState(
-      scrollController: ScrollController(),
-    );
   }
 
   Future<String> getPath({required OpenDataRecipeModel recipe}) async {

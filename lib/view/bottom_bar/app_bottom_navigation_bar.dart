@@ -37,43 +37,6 @@ class AppBottomNavigationBar extends ConsumerWidget {
           tabState.controller.animateTo(index);
           ref.read(appBottomNavigationBarViewModelProvider.notifier).setTappedButtonIndex(index);
         },
-        // onTap: (int index) {
-        //   final String? path = routemaster.currentConfiguration?.fullPath;
-        //   switch (path) {
-        //     case '/home/daily':
-        //       if (index == dailyIndex) {
-        //         ref.read(dailyViewModelProvider.notifier).scrollToTop();
-        //       } else {
-        //         final DailyViewModel dailyNotifier = ref.read(dailyViewModelProvider.notifier);
-        //         dailyNotifier.storeOffset(dailyNotifier.getPreOffset());
-        //         tabState.controller.animateTo(index);
-        //       }
-        //     case '/home/recipes':
-        //       if (index == recipesIndex) {
-        //         ref.read(recipeViewModelProvider.notifier).scrollToTop();
-        //       } else {
-        //         final RecipeViewModel recipeNotifier = ref.read(recipeViewModelProvider.notifier);
-        //         recipeNotifier.storeOffset(recipeNotifier.getPreOffset());
-        //         tabState.controller.animateTo(index);
-        //       }
-        //     case '/home/dictionary':
-        //       if (index == dictionaryIndex) {
-        //         ref.read(dictionaryViewModelProvider.notifier).scrollToTop();
-        //       } else {
-        //         final DictionaryViewModel dictionaryNotifier = ref.read(dictionaryViewModelProvider.notifier);
-        //         dictionaryNotifier.storeOffset(dictionaryNotifier.getPreOffset());
-        //         tabState.controller.animateTo(index);
-        //       }
-        //     case '/home/letter':
-        //       if (index == letterIndex) {
-        //         ref.read(letterViewModelProvider.notifier).scrollToTop();
-        //       } else {
-        //         final LetterViewModel letterNotifier = ref.read(letterViewModelProvider.notifier);
-        //         letterNotifier.storeOffset(letterNotifier.getPreOffset());
-        //         tabState.controller.animateTo(index);
-        //       }
-        //   }
-        // },
         backgroundColor: AppColor.ui.white,
         selectedItemColor: AppColor.brand.secondary,
         selectedLabelStyle: const TextStyle(

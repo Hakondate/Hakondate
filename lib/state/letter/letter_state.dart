@@ -10,7 +10,6 @@ part 'letter_state.freezed.dart';
 @freezed
 class LetterState with _$LetterState {
   const factory LetterState({
-    required ScrollController scrollController,
     @Default(LetterConnectionStatus.done) LetterConnectionStatus status,
     @Default(<LetterMetadataModel>[]) List<LetterMetadataModel> letters,
     @Default(false) bool isEndListing,

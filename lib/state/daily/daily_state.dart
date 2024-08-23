@@ -17,7 +17,6 @@ class DailyState with _$DailyState {
     required DateTime focusedDay,
     required DateTime calendarTabFirstDay,
     required DateTime calendarTabLastDay,
-    required ScrollController scrollController,
     @Default(<FiveMajorNutrient, List<DictionaryItemModel>>{}) Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendFoodStuffs,
     @Default(MenuModel.noData()) MenuModel menu,
     DishModel? selectedDish,

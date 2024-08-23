@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate/view_model/multi_page/scroll/scroll_view_model.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -16,6 +17,8 @@ import 'package:hakondate/view/daily/nutrients_card.dart';
 import 'package:hakondate/view_model/multi_page/bottom_bar/app_bottom_navigation_bar_view_model.dart';
 import 'package:hakondate/view_model/multi_page/drawer/drawer_view_model.dart';
 import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
+
+final PageStorageBucket bucket = PageStorageBucket();
 
 class Daily extends StatelessWidget {
   const Daily({super.key});
@@ -115,57 +118,62 @@ class Daily extends StatelessWidget {
   Widget _bodyWidget() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
+        final ScrollController scrollController = ref.watch(scrollViewModelProvider(path: routemaster.currentConfiguration!.fullPath));
         return ref.watch(dailyViewModelProvider).maybeWhen(
               data: (DailyState state) {
                 //.select()とすることで、１つの要素だけを聴くこともできるらしい
                 ref.listen<AppBottomNavigationBarState>(appBottomNavigationBarViewModelProvider, (_, __) {
                   const int dailyIndex = 0;
                   if (ref.read(appBottomNavigationBarViewModelProvider).tappedButtonIndex == dailyIndex) {
-                    ref.read(scrollFunctionProvider).scrollToTop(scrollController: state.scrollController);
-                  }
+                    ref.read(scrollViewModelProvider(path: routemaster.currentConfiguration!.fullPath).notifier).scrollToTop();
+                  } else {}
                 });
-                return Expanded(
-                  child: GestureDetector(
-                    onHorizontalDragEnd: (DragEndDetails details) {
-                      if (details.primaryVelocity! < 0) {
-                        ref.read(dailyViewModelProvider.notifier).updateSelectedDay(
-                              selectedDay: ref.read(dailyViewModelProvider.notifier).getAddedSelectedDay(state, 1),
-                            );
-                      } else {
-                        ref.read(dailyViewModelProvider.notifier).updateSelectedDay(
-                              selectedDay: ref.read(dailyViewModelProvider.notifier).getAddedSelectedDay(state, -1),
-                            );
-                      }
-                    },
-                    child: (() {
-                      if (state.menu is LunchesDayMenuModel) {
-                        return ListView(
-                          controller: state.scrollController,
-                          children: const <Widget>[
-                            MenuCard(),
-                            NutrientsCard(),
-                          ],
-                        );
-                      } else {
-                        return Column(
-                          children: <Widget>[
-                            (() {
-                              if (state.menu is HolidayMenuModel) {
-                                return const NonLunchesDayBody(
-                                  imageFileName: 'holiday.png',
-                                  text: '給食はお休みです...',
-                                );
-                              } else {
-                                return const NonLunchesDayBody(
-                                  imageFileName: 'no_data.png',
-                                  text: '献立は準備中です...',
-                                );
-                              }
-                            })(),
-                          ],
-                        );
-                      }
-                    })(),
+                return PageStorage(
+                  bucket: bucket,
+                  child: Expanded(
+                    key: PageStorageKey<String>(routemaster.currentConfiguration!.fullPath),
+                    child: GestureDetector(
+                      onHorizontalDragEnd: (DragEndDetails details) {
+                        if (details.primaryVelocity! < 0) {
+                          ref.read(dailyViewModelProvider.notifier).updateSelectedDay(
+                                selectedDay: ref.read(dailyViewModelProvider.notifier).getAddedSelectedDay(state, 1),
+                              );
+                        } else {
+                          ref.read(dailyViewModelProvider.notifier).updateSelectedDay(
+                                selectedDay: ref.read(dailyViewModelProvider.notifier).getAddedSelectedDay(state, -1),
+                              );
+                        }
+                      },
+                      child: (() {
+                        if (state.menu is LunchesDayMenuModel) {
+                          return ListView(
+                            controller: scrollController,
+                            children: const <Widget>[
+                              MenuCard(),
+                              NutrientsCard(),
+                            ],
+                          );
+                        } else {
+                          return Column(
+                            children: <Widget>[
+                              (() {
+                                if (state.menu is HolidayMenuModel) {
+                                  return const NonLunchesDayBody(
+                                    imageFileName: 'holiday.png',
+                                    text: '給食はお休みです...',
+                                  );
+                                } else {
+                                  return const NonLunchesDayBody(
+                                    imageFileName: 'no_data.png',
+                                    text: '献立は準備中です...',
+                                  );
+                                }
+                              })(),
+                            ],
+                          );
+                        }
+                      })(),
+                    ),
                   ),
                 );
               },

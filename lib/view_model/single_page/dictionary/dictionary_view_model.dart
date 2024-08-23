@@ -81,4 +81,11 @@ class DictionaryViewModel extends _$DictionaryViewModel {
 
     return schemas.last;
   }
+
+  ScrollController? getScrollController() {
+    state.whenData((DictionaryState data) {
+      return data.scrollController;
+    });
+    return null;
+  }
 }

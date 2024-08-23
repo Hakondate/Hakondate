@@ -26,9 +26,7 @@ class LetterViewModel extends _$LetterViewModel {
     _lettersRemoteRepository = ref.watch(lettersRemoteRepositoryProvider);
     _schoolsLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
 
-    return LetterState(
-      scrollController: ScrollController(),
-    );
+    return const LetterState();
   }
 
   Future<void> getLetters() async {
