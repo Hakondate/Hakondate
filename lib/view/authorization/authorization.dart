@@ -11,6 +11,7 @@ import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/state/authorization/authorization_state.dart';
 import 'package:hakondate/view_model/single_page/authorization/authorization_view_model.dart';
+import 'package:routemaster/routemaster.dart';
 
 // class Authorization extends ConsumerWidget {
 //   const Authorization({super.key});
@@ -81,19 +82,6 @@ import 'package:hakondate/view_model/single_page/authorization/authorization_vie
 class Authorization extends ConsumerWidget {
   const Authorization({super.key});
 
-  // void check() {
-  //   if (_controller.text == seikai) {
-  //     setState(() {
-  //       _errorMessage = '正解です';
-  //     });
-  //   } else {
-  //     setState(() {
-  //       _errorMessage = '違うよ';
-  //       _controller.clear(); // テキストフィールドをリセット
-  //     });
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<AuthorizationState> state = ref.watch(authorizationViewModelProvider);
@@ -104,13 +92,11 @@ class Authorization extends ConsumerWidget {
         return Scaffold(
           appBar: AppBar(
             title: const Text('招待コード入力'),
-            leading: Consumer(
-              builder: (BuildContext context, WidgetRef ref, _) => IconButton(
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                icon: const Icon(Icons.dehaze),
-                onPressed: () => ref.read(signupViewModelProvider.notifier),
-              ),
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back_ios),
+              onPressed: () {
+                Routemaster.of(context).pop();
+              },
             ),
           ),
           body: Center(
