@@ -6,7 +6,7 @@ part of 'scroll_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$scrollViewModelHash() => r'99eadbd85ab47748e6fcee0342f5af72cdeecd20';
+String _$scrollViewModelHash() => r'6aa4633ac92519e348a17e55146b5e885e577c1a';
 
 /// Copied from Dart SDK
 class _SystemHash {

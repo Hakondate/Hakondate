@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/widgets.dart';
 
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:hakondate/view_model/multi_page/scroll/scroll_view_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/constant/firebase_apis.dart';
@@ -26,7 +27,7 @@ class LetterViewModel extends _$LetterViewModel {
     _lettersRemoteRepository = ref.watch(lettersRemoteRepositoryProvider);
     _schoolsLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
 
-    return const LetterState();
+    return LetterState(scrollController: ref.read(scrollViewModelProvider(path: '/home/letter')));
   }
 
   Future<void> getLetters() async {

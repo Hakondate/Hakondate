@@ -33,51 +33,40 @@ class Letter extends ConsumerWidget {
       body: Consumer(
         builder: (BuildContext context, WidgetRef ref, _) {
           final ScrollController scrollController = ref.watch(scrollViewModelProvider(path: routemaster.currentConfiguration!.fullPath));
-
-          ref.listen<AppBottomNavigationBarState>(appBottomNavigationBarViewModelProvider, (_, __) {
-            const int letterIndex = 3;
-            if (ref.read(appBottomNavigationBarViewModelProvider).tappedButtonIndex == letterIndex) {
-              ref.read(scrollFunctionProvider).scrollToTop(scrollController: scrollController);
-            }
-          });
           return StatefulWrapper(
             onInit: () => ref.read(letterViewModelProvider.notifier).getLetters(),
             child: Builder(
               builder: (BuildContext context) {
                 final List<LetterMetadataModel> letters = ref.watch(letterViewModelProvider).letters;
-
                 if (letters.isEmpty) return const NonLetter();
-                return PageStorage(
-                  bucket: bucket,
-                  child: Scrollbar(
-                    key: PageStorageKey<String>(routemaster.currentConfiguration!.fullPath),
-                    controller: scrollController,
-                    child: Padding(
-                      padding: const EdgeInsets.all(PaddingSize.minimum),
-                      child: RefreshIndicator(
-                        onRefresh: () => ref.read(letterViewModelProvider.notifier).reloadLetters(),
-                        color: AppColor.brand.secondary,
-                        backgroundColor: AppColor.ui.white,
-                        displacement: 0,
-                        child: GridView.builder(
-                          key: PageStorageKey<String>(routemaster.currentConfiguration!.fullPath),
-                          controller: scrollController,
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            mainAxisSpacing: MarginSize.minimum,
-                            crossAxisSpacing: MarginSize.minimum,
-                          ),
-                          itemCount: letters.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            if (!ref.watch(letterViewModelProvider).isEndListing &&
-                                ref.watch(letterViewModelProvider).status != LetterConnectionStatus.loading &&
-                                index == letters.length - 4) {
-                              Future<void>(ref.read(letterViewModelProvider.notifier).getLetters);
-                            }
-
-                            return _gridTile(index);
-                          },
+                return Scrollbar(
+                  key: PageStorageKey<String>(routemaster.currentConfiguration!.fullPath),
+                  controller: scrollController,
+                  child: Padding(
+                    padding: const EdgeInsets.all(PaddingSize.minimum),
+                    child: RefreshIndicator(
+                      onRefresh: () => ref.read(letterViewModelProvider.notifier).reloadLetters(),
+                      color: AppColor.brand.secondary,
+                      backgroundColor: AppColor.ui.white,
+                      displacement: 0,
+                      child: GridView.builder(
+                        key: PageStorageKey<String>(routemaster.currentConfiguration!.fullPath),
+                        controller: scrollController,
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: MarginSize.minimum,
+                          crossAxisSpacing: MarginSize.minimum,
                         ),
+                        itemCount: letters.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          if (!ref.watch(letterViewModelProvider).isEndListing &&
+                              ref.watch(letterViewModelProvider).status != LetterConnectionStatus.loading &&
+                              index == letters.length - 4) {
+                            Future<void>(ref.read(letterViewModelProvider.notifier).getLetters);
+                          }
+
+                          return _gridTile(index);
+                        },
                       ),
                     ),
                   ),

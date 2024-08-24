@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hakondate/view_model/multi_page/scroll/scroll_view_model.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -18,7 +19,7 @@ class DictionaryViewModel extends _$DictionaryViewModel {
   FutureOr<DictionaryState> build() {
     _dictionaryItemsLocalRepository = ref.watch(dictionaryItemsLocalRepositoryProvider);
     return DictionaryState(
-      scrollController: ScrollController(),
+      scrollController: ref.read(scrollViewModelProvider(path: '/home/dictionary')),
     );
   }
 

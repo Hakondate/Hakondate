@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:hakondate/view_model/multi_page/scroll/scroll_view_model.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -29,6 +28,7 @@ class DailyViewModel extends _$DailyViewModel {
         DateTime.now().year,
         DateTime.now().month + 2,
       ).add(const Duration(seconds: -1)),
+      scrollController: ref.read(scrollViewModelProvider(path: '/home/daily')),
     );
   }
 

@@ -27,53 +27,45 @@ class Recipe extends StatelessWidget {
       ),
       body: Consumer(
         builder: (BuildContext context, WidgetRef ref, _) {
-          final ScrollController scrollController = ref.watch(scrollViewModelProvider(path: routemaster.currentConfiguration!.fullPath));
-          ref.listen<AppBottomNavigationBarState>(appBottomNavigationBarViewModelProvider, (_, __) {
-            const int recipesIndex = 1;
-            if (ref.read(appBottomNavigationBarViewModelProvider).tappedButtonIndex == recipesIndex) {
-              ref.read(scrollFunctionProvider).scrollToTop(scrollController: scrollController);
-            }
-          });
-          return PageStorage(
-            bucket: bucket,
-            child: SingleChildScrollView(
-              key: PageStorageKey<String>(routemaster.currentConfiguration!.fullPath),
-              child: const Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: PaddingSize.normal,
-                  horizontal: PaddingSize.minimum,
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    OpenDataRecipeHeader(
-                      isRemoveTopMargin: true,
-                      title: Text('だしを活用した和食メニュー'),
-                      description: Text(
-                        '★ふだん洋風だしを使って作っている，カレーやスープなどのメニューを，和風だしを使ってアレンジしてみるのもお勧めです．',
-                      ),
+          final RecipeState state = ref.watch(recipeViewModelProvider);
+          return SingleChildScrollView(
+            key: PageStorageKey<String>(routemaster.currentConfiguration!.fullPath),
+            controller: state.scrollController,
+            child: const Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: PaddingSize.normal,
+                horizontal: PaddingSize.minimum,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  OpenDataRecipeHeader(
+                    isRemoveTopMargin: true,
+                    title: Text('だしを活用した和食メニュー'),
+                    description: Text(
+                      '★ふだん洋風だしを使って作っている，カレーやスープなどのメニューを，和風だしを使ってアレンジしてみるのもお勧めです．',
                     ),
-                    OpenDataRecipeGrid(type: RecipeType.dupe),
-                    OpenDataRecipeHeader(
-                      title: Text('各調理場自慢のオリジナルレシピ'),
-                    ),
-                    OpenDataRecipeGrid(type: RecipeType.original),
-                    OpenDataRecipeHeader(
-                      title: Text('スチームコンベクションオーブンを使ったメニュー'),
-                      description: Text('スチームコンベクションオーブンを使用したメニューです．ご家庭では，オーブントースターで代用できます．\n'
-                          'もちろん，フライパンやオーブンレンジ，魚焼きグリルなどを使用しても大丈夫です．\n\n'
-                          '★材料は４人分です．目安量なので，味付けなどはお好みで調整してください．\n'
-                          '★給食で実施した材料を載せています。ご家庭にある材料でいろいろアレンジしてお試しください．'),
-                    ),
-                    OpenDataRecipeGrid(type: RecipeType.steamConvectionOven),
-                    OpenDataRecipeHeader(
-                      title: Text('その他'),
-                      description: Text('食育活動の一環として児童が考案し，給食に取り入れたメニューを紹介します．'),
-                    ),
-                    OpenDataRecipeGrid(type: RecipeType.other),
-                  ],
-                ),
+                  ),
+                  OpenDataRecipeGrid(type: RecipeType.dupe),
+                  OpenDataRecipeHeader(
+                    title: Text('各調理場自慢のオリジナルレシピ'),
+                  ),
+                  OpenDataRecipeGrid(type: RecipeType.original),
+                  OpenDataRecipeHeader(
+                    title: Text('スチームコンベクションオーブンを使ったメニュー'),
+                    description: Text('スチームコンベクションオーブンを使用したメニューです．ご家庭では，オーブントースターで代用できます．\n'
+                        'もちろん，フライパンやオーブンレンジ，魚焼きグリルなどを使用しても大丈夫です．\n\n'
+                        '★材料は４人分です．目安量なので，味付けなどはお好みで調整してください．\n'
+                        '★給食で実施した材料を載せています。ご家庭にある材料でいろいろアレンジしてお試しください．'),
+                  ),
+                  OpenDataRecipeGrid(type: RecipeType.steamConvectionOven),
+                  OpenDataRecipeHeader(
+                    title: Text('その他'),
+                    description: Text('食育活動の一環として児童が考案し，給食に取り入れたメニューを紹介します．'),
+                  ),
+                  OpenDataRecipeGrid(type: RecipeType.other),
+                ],
               ),
             ),
           );

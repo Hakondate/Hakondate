@@ -1,6 +1,8 @@
 import 'dart:typed_data';
 
 import 'package:flutter/widgets.dart';
+import 'package:hakondate/state/recipe/recipe_state.dart';
+import 'package:hakondate/view_model/multi_page/scroll/scroll_view_model.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -17,9 +19,10 @@ class RecipeViewModel extends _$RecipeViewModel {
   late final OpenDataRecipesRemoteRepositoryAPI _openDataRemoteRepository;
 
   @override
-  void build() {
+  RecipeState build() {
     _openDataLocalRepository = ref.watch(openDataRecipesLocalRepositoryProvider);
     _openDataRemoteRepository = ref.watch(openDataRecipesRemoteRepositoryProvider);
+    return RecipeState(scrollController: ref.read(scrollViewModelProvider(path: '/home/recipes')));
   }
 
   Future<String> getPath({required OpenDataRecipeModel recipe}) async {
