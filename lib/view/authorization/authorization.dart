@@ -178,13 +178,20 @@ class Authorization extends ConsumerWidget {
       },
       loading: () {
         return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-            title: const Text('招待コード'),
-          ),
-          body: Center(
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(AppColor.brand.secondary),
+          backgroundColor: AppColor.brand.secondaryLight,
+          body: const Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  '招待コードを確認中です・・・',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                  ),
+                ),
+              ],
             ),
           ),
         );
