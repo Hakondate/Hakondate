@@ -36,7 +36,8 @@ final RoutemasterDelegate routemaster = RoutemasterDelegate(
       '/splash': (_) => const MaterialPage<dynamic>(child: Splash()),
       '/terms': (_) => const MaterialPage<dynamic>(child: Terms()),
       '/signup': (_) => MaterialPage<dynamic>(child: Signup()),
-      '/authorization': (_) => const MaterialPage<dynamic>(child: Authorization()),
+      // 'authorization': (_) => const MaterialPage<dynamic>(child: Authorization()),
+      '/signup/authorization': (_) => const MaterialPage<dynamic>(child: Authorization()),
       '/home': (_) => const TabPage(
             child: AppBottomNavigationBar(),
             paths: <String>[
@@ -59,6 +60,7 @@ final RoutemasterDelegate routemaster = RoutemasterDelegate(
       '/home/letter/:title': (_) => const MaterialPage<dynamic>(child: LetterPDF()),
       '/home/user_settings': (_) => const MaterialPage<dynamic>(child: UserSettings()),
       '/home/user_settings/:id': (RouteData route) => FadeUpPage(child: UserSettingsDetail()),
+      '/home/user_settings/:id/authorization': (_) => const MaterialPage<dynamic>(child: Authorization()),
       '/home/origin': (_) => const FadeUpPage(child: Origin()),
       '/home/drawer_terms': (_) => const FadeUpPage(child: DrawerTerms()),
       '/home/help': (_) => const FadeUpPage(child: Help()),

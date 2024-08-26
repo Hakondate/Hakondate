@@ -10,6 +10,7 @@ part 'signup_state.freezed.dart';
 class SignupState with _$SignupState {
   const factory SignupState({
     String? name,
+    SchoolModel? school,
     int? schoolId,
     int? schoolYear,
     @Default('学校を選択') String schoolTrailing,

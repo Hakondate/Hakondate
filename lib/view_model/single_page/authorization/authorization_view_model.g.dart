@@ -6,8 +6,26 @@ part of 'authorization_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+String _$authorizationCodeControllerHash() =>
+    r'9e152710cae4ddedbfbf36911ced2d17588acf37';
+
+/// See also [AuthorizationCodeController].
+@ProviderFor(AuthorizationCodeController)
+final authorizationCodeControllerProvider = AutoDisposeNotifierProvider<
+    AuthorizationCodeController, TextEditingController>.internal(
+  AuthorizationCodeController.new,
+  name: r'authorizationCodeControllerProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$authorizationCodeControllerHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$AuthorizationCodeController
+    = AutoDisposeNotifier<TextEditingController>;
 String _$authorizationViewModelHash() =>
-    r'441a8d78bdcf2f240385cc1ec5387e54376167b5';
+    r'b19ac43708ad32f05dc30078ba327dbca6751248';
 
 /// See also [AuthorizationViewModel].
 @ProviderFor(AuthorizationViewModel)

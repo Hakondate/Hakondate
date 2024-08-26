@@ -16,9 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AuthorizationState {
-  TextEditingController get authorizationCodeController =>
-      throw _privateConstructorUsedError;
-  String get authorizationCode => throw _privateConstructorUsedError;
+  SchoolModel get school => throw _privateConstructorUsedError;
   String get statusMessage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -32,10 +30,9 @@ abstract class $AuthorizationStateCopyWith<$Res> {
           AuthorizationState value, $Res Function(AuthorizationState) then) =
       _$AuthorizationStateCopyWithImpl<$Res, AuthorizationState>;
   @useResult
-  $Res call(
-      {TextEditingController authorizationCodeController,
-      String authorizationCode,
-      String statusMessage});
+  $Res call({SchoolModel school, String statusMessage});
+
+  $SchoolModelCopyWith<$Res> get school;
 }
 
 /// @nodoc
@@ -51,24 +48,27 @@ class _$AuthorizationStateCopyWithImpl<$Res, $Val extends AuthorizationState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? authorizationCodeController = null,
-    Object? authorizationCode = null,
+    Object? school = null,
     Object? statusMessage = null,
   }) {
     return _then(_value.copyWith(
-      authorizationCodeController: null == authorizationCodeController
-          ? _value.authorizationCodeController
-          : authorizationCodeController // ignore: cast_nullable_to_non_nullable
-              as TextEditingController,
-      authorizationCode: null == authorizationCode
-          ? _value.authorizationCode
-          : authorizationCode // ignore: cast_nullable_to_non_nullable
-              as String,
+      school: null == school
+          ? _value.school
+          : school // ignore: cast_nullable_to_non_nullable
+              as SchoolModel,
       statusMessage: null == statusMessage
           ? _value.statusMessage
           : statusMessage // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SchoolModelCopyWith<$Res> get school {
+    return $SchoolModelCopyWith<$Res>(_value.school, (value) {
+      return _then(_value.copyWith(school: value) as $Val);
+    });
   }
 }
 
@@ -80,10 +80,10 @@ abstract class _$$AuthorizationStateImplCopyWith<$Res>
       __$$AuthorizationStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {TextEditingController authorizationCodeController,
-      String authorizationCode,
-      String statusMessage});
+  $Res call({SchoolModel school, String statusMessage});
+
+  @override
+  $SchoolModelCopyWith<$Res> get school;
 }
 
 /// @nodoc
@@ -97,19 +97,14 @@ class __$$AuthorizationStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? authorizationCodeController = null,
-    Object? authorizationCode = null,
+    Object? school = null,
     Object? statusMessage = null,
   }) {
     return _then(_$AuthorizationStateImpl(
-      authorizationCodeController: null == authorizationCodeController
-          ? _value.authorizationCodeController
-          : authorizationCodeController // ignore: cast_nullable_to_non_nullable
-              as TextEditingController,
-      authorizationCode: null == authorizationCode
-          ? _value.authorizationCode
-          : authorizationCode // ignore: cast_nullable_to_non_nullable
-              as String,
+      school: null == school
+          ? _value.school
+          : school // ignore: cast_nullable_to_non_nullable
+              as SchoolModel,
       statusMessage: null == statusMessage
           ? _value.statusMessage
           : statusMessage // ignore: cast_nullable_to_non_nullable
@@ -122,22 +117,17 @@ class __$$AuthorizationStateImplCopyWithImpl<$Res>
 
 class _$AuthorizationStateImpl implements _AuthorizationState {
   const _$AuthorizationStateImpl(
-      {required this.authorizationCodeController,
-      this.authorizationCode = '',
-      this.statusMessage = ''});
+      {required this.school, this.statusMessage = ''});
 
   @override
-  final TextEditingController authorizationCodeController;
-  @override
-  @JsonKey()
-  final String authorizationCode;
+  final SchoolModel school;
   @override
   @JsonKey()
   final String statusMessage;
 
   @override
   String toString() {
-    return 'AuthorizationState(authorizationCodeController: $authorizationCodeController, authorizationCode: $authorizationCode, statusMessage: $statusMessage)';
+    return 'AuthorizationState(school: $school, statusMessage: $statusMessage)';
   }
 
   @override
@@ -145,19 +135,13 @@ class _$AuthorizationStateImpl implements _AuthorizationState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AuthorizationStateImpl &&
-            (identical(other.authorizationCodeController,
-                    authorizationCodeController) ||
-                other.authorizationCodeController ==
-                    authorizationCodeController) &&
-            (identical(other.authorizationCode, authorizationCode) ||
-                other.authorizationCode == authorizationCode) &&
+            (identical(other.school, school) || other.school == school) &&
             (identical(other.statusMessage, statusMessage) ||
                 other.statusMessage == statusMessage));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, authorizationCodeController,
-      authorizationCode, statusMessage);
+  int get hashCode => Object.hash(runtimeType, school, statusMessage);
 
   @JsonKey(ignore: true)
   @override
@@ -169,14 +153,11 @@ class _$AuthorizationStateImpl implements _AuthorizationState {
 
 abstract class _AuthorizationState implements AuthorizationState {
   const factory _AuthorizationState(
-      {required final TextEditingController authorizationCodeController,
-      final String authorizationCode,
+      {required final SchoolModel school,
       final String statusMessage}) = _$AuthorizationStateImpl;
 
   @override
-  TextEditingController get authorizationCodeController;
-  @override
-  String get authorizationCode;
+  SchoolModel get school;
   @override
   String get statusMessage;
   @override

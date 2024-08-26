@@ -33,6 +33,7 @@ class SignupViewModel extends _$SignupViewModel {
       return SignupState(
         schools: schools,
         name: editingUser!.name,
+        school: school,
         schoolId: editingUser!.schoolId,
         schoolYears: schoolYears,
         schoolTrailing: school.name,
@@ -127,6 +128,7 @@ class SignupViewModel extends _$SignupViewModel {
       if (data.schoolYear != null && data.schoolYear! > 3 && school.classification == SchoolClassification.secondary) {
         state = AsyncData<SignupState>(
           data.copyWith(
+            school: school,
             schoolId: id,
             schoolYear: 3,
             schoolYears: schoolYears,
@@ -137,6 +139,7 @@ class SignupViewModel extends _$SignupViewModel {
       } else {
         state = AsyncData<SignupState>(
           data.copyWith(
+            school: school,
             schoolId: id,
             schoolYears: schoolYears,
             schoolTrailing: school.name,

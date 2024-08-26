@@ -2,82 +2,15 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate/state/signup/signup_state.dart';
+import 'package:hakondate/view/component/dialog/signing_up_dialog.dart';
 import 'package:hakondate/view/component/label/description_text.dart';
 import 'package:hakondate/view_model/single_page/signup/signup_view_model.dart';
-import 'package:path/path.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/state/authorization/authorization_state.dart';
 import 'package:hakondate/view_model/single_page/authorization/authorization_view_model.dart';
-import 'package:routemaster/routemaster.dart';
-
-// class Authorization extends ConsumerWidget {
-//   const Authorization({super.key});
-
-//   @override
-//   Widget build(BuildContext context, WidgetRef ref) {
-//     final AsyncValue<AuthorizationState> state = ref.watch(authorizationViewModelProvider);
-
-//     if (state is AsyncLoading) {
-//       return Scaffold(
-//         appBar: AppBar(
-//           title: const Text('招待コード'),
-//         ),
-//         body: Center(
-//           child: CircularProgressIndicator(
-//             valueColor: AlwaysStoppedAnimation<Color>(AppColor.brand.secondary),
-//           ),
-//         ),
-//       );
-//     }
-
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('招待コード'),
-//       ),
-//       body: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: <Widget>[
-//             const Text('招待コードを入力してください'),
-//             ElevatedButton(
-//               style: ElevatedButton.styleFrom(
-//                 backgroundColor: AppColor.brand.secondary,
-//                 padding: const EdgeInsets.symmetric(
-//                   vertical: PaddingSize.buttonVertical,
-//                   horizontal: PaddingSize.buttonHorizontal,
-//                 ),
-//                 textStyle: TextStyle(
-//                   color: AppColor.text.white,
-//                 ),
-//                 shape: const StadiumBorder(),
-//               ),
-//               onPressed: () => ref.read(authorizationViewModelProvider.notifier).authorize(99, '000000'),
-//               child: const Text('招待コードを送信'),
-//             ),
-//             ElevatedButton(
-//               style: ElevatedButton.styleFrom(
-//                 backgroundColor: AppColor.brand.secondary,
-//                 padding: const EdgeInsets.symmetric(
-//                   vertical: PaddingSize.buttonVertical,
-//                   horizontal: PaddingSize.buttonHorizontal,
-//                 ),
-//                 textStyle: TextStyle(
-//                   color: AppColor.text.white,
-//                 ),
-//                 shape: const StadiumBorder(),
-//               ),
-//               onPressed: () => ref.read(authorizationViewModelProvider.notifier).cancel(),
-//               child: const Text('キャンセル'),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
 
 class Authorization extends ConsumerWidget {
   const Authorization({super.key});
@@ -85,39 +18,34 @@ class Authorization extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<AuthorizationState> state = ref.watch(authorizationViewModelProvider);
-    final AsyncValue<SignupState> getSchool = ref.watch(signupViewModelProvider);
+    final TextEditingController authorizationCodeController = ref.watch(authorizationCodeControllerProvider);
+    final AsyncValue<SignupState> sginupState = ref.watch(signupViewModelProvider);
 
     return state.when(
       data: (AuthorizationState data) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text('招待コード入力'),
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios),
-              onPressed: () {
-                Routemaster.of(context).pop();
-              },
-            ),
+            title: const Text('招待コードの登録'),
           ),
           body: Center(
             child: Column(
-              children: [
+              children: <Widget>[
                 const SizedBox(height: 32),
                 Row(
-                  children: [
-                    SizedBox(width: 16),
+                  children: <Widget>[
+                    const SizedBox(width: 16),
                     Flexible(
                       child: DescriptionText.body(
                         label: '　この学校の給食を見るには招待コードの入力が必要です．招待コードは学校から案内がございます．給食だより等をご確認ください．',
                       ),
                     ),
-                    SizedBox(width: 16),
+                    const SizedBox(width: 16),
                   ],
                 ),
                 const SizedBox(height: 32),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  children: <Widget>[
                     const Text(
                       '登録する学校：',
                       style: TextStyle(
@@ -126,8 +54,8 @@ class Authorization extends ConsumerWidget {
                       ),
                     ),
                     Text(
-                      getSchool.value!.schoolTrailing,
-                      style: TextStyle(
+                      sginupState.value!.schoolTrailing,
+                      style: const TextStyle(
                         fontSize: FontSize.status,
                         fontWeight: FontWeight.bold,
                       ),
@@ -144,14 +72,15 @@ class Authorization extends ConsumerWidget {
                 ),
                 const SizedBox(height: 5),
                 Row(
-                  children: [
+                  children: <Widget>[
                     const SizedBox(width: 32),
                     Flexible(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           PinCodeTextField(
-                            controller: data.authorizationCodeController,
+                            controller: authorizationCodeController,
+                            autoDisposeControllers: false,
                             appContext: context,
                             pastedTextStyle: TextStyle(
                               color: Colors.green.shade600,
@@ -169,19 +98,14 @@ class Authorization extends ConsumerWidget {
                               inactiveColor: Colors.grey,
                             ),
                             onChanged: (_) {
-                              data = data.copyWith(
-                                statusMessage: '',
-                              );
+                              ref.read(authorizationViewModelProvider.notifier).onCodeChanged();
                             },
                           ),
                           const SizedBox(height: 8),
                           Text(
                             data.statusMessage,
                             style: TextStyle(
-                              color: data.statusMessage == '正解です' ? Colors.orange : Colors.red,
-                              //条件式 ? 式1 : 式2 三項演算子
-                              //条件式 が true の場合は 式1 が実行
-                              //条件式 が false の場合は 式2 が実行
+                              color: data.statusMessage == '認証に成功しました' ? Colors.orange : Colors.red,
                             ),
                           ),
                         ],
@@ -202,8 +126,17 @@ class Authorization extends ConsumerWidget {
                       shape: const StadiumBorder(),
                     ),
                     child: const Text('登録する'),
-                    onPressed: () {
-                      ref.read(authorizationViewModelProvider.notifier).authorize(99, '000000');
+                    onPressed: () async {
+                      final bool result =
+                          await ref.read(authorizationViewModelProvider.notifier).authorize(authorizationCodeController.text);
+                      debugPrint('result: $result');
+                      if (!result) return;
+                      debugPrint('pressed');
+                      if (!context.mounted) return;
+                      return showDialog(
+                        context: context,
+                        builder: (BuildContext context) => const SigningUpDialog(),
+                      );
                     },
                   ),
                 ),
@@ -212,7 +145,7 @@ class Authorization extends ConsumerWidget {
           ),
         );
       },
-      error: (error, stackTrace) {
+      error: (Object error, StackTrace stackTrace) {
         return Scaffold(
           appBar: AppBar(
             backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -262,7 +195,7 @@ class Authorization extends ConsumerWidget {
 
 class TextFormBorders {
   // キーボード表示時のフォームの枠線
-  static const textFormFocusedBorder = OutlineInputBorder(
+  static const OutlineInputBorder textFormFocusedBorder = OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.circular(8)),
     borderSide: BorderSide(
       color: Color.fromARGB(255, 255, 255, 255),
@@ -271,7 +204,7 @@ class TextFormBorders {
   );
 
   // 平常時のフォームの枠線。
-  static const textFormEnabledBorder = OutlineInputBorder(
+  static const OutlineInputBorder textFormEnabledBorder = OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.circular(8)),
     borderSide: BorderSide(
       color: Colors.grey,
