@@ -8,48 +8,97 @@
  */
 
 import {onRequest} from "firebase-functions/v2/https";
-import * as logger from "firebase-functions/logger";
 
 import * as admin from "firebase-admin";
 import {
   ISchoolsRepository, SchoolsRepository,
 } from "./repository/schoolsRepository";
-import {AuthorizationDto} from "./model/authorizationDto";
 import {School} from "./model/school";
+import {AuthorizationResultDto} from "./model/authorizationResultDto";
+import {AuthorizationRequestDto} from "./model/authorizationRequestDto";
+import {getFirestore} from "firebase-admin/firestore";
+import {logger} from "firebase-functions/v1";
 
 admin.initializeApp();
 
-const schoolsRepository: ISchoolsRepository = new SchoolsRepository();
+const schoolsRepository: ISchoolsRepository =
+  new SchoolsRepository(getFirestore());
 
-export const fetch = onRequest(async (request, response) => {
+export const fetch = onRequest(async (_, response) => {
   await schoolsRepository.fetch();
   response.status(200).send("Fetched");
 });
 
 export const authorize = onRequest(async (request, response) => {
-  const input: string = JSON.stringify(request.body);
-  logger.debug("authorize called: " + JSON.stringify(input));
-  // #TODO AuthorizationRequiredがfalseの時の処理
+  logger.debug("authorize");
+  const result: AuthorizationResultDto = {
+    authorizationSucceeded: false,
+    message: "",
+  };
 
-  const obj: AuthorizationDto = JSON.parse(input);
+  const parsed = parseJsonIntoAuthorizationRequestDto(request.body);
+
+  logger.debug("parsed");
+
+  if (parsed === undefined) {
+    result.message = "Jsonの型が違います";
+    response.sendStatus(401).send(result);
+    return;
+  }
+
   const school: School | undefined = await schoolsRepository.getSchoolById(
-    obj.schoolId,
+    parsed.schoolId,
   );
+  logger.debug("getSchool");
 
   if (school === undefined) {
-    response.status(404).send("School not found");
+    result.message = "学校が見つかりません";
+    response.status(401).send(result);
     return;
   }
 
-  if (school.authorizationKey === obj.authorizationKey) {
-    response.status(200).send("Authorized");
+  if (school.authorizationRequired === false) {
+    result.authorizationSucceeded = true;
+    result.message = "認証が不要な学校です";
+    response.status(200).send(result);
     return;
   }
 
-  response.status(401).send("Unauthorized");
+  if (school.authorizationKey === parsed.authorizationKey) {
+    result.authorizationSucceeded = true;
+    response.status(200).send(result);
+    return;
+  }
+
+  result.message = "認証コードが間違っています";
+  response.status(401).send(result);
+  return;
 });
 
-export const getSchools = onRequest(async (request, response) => {
+export const getSchools = onRequest(async (_, response) => {
   const schools: School[] = await schoolsRepository.getSchools();
   response.status(200).send(schools);
 });
+
+const parseJsonIntoAuthorizationRequestDto =
+(body: string) : AuthorizationRequestDto | undefined => {
+  let parsed: AuthorizationRequestDto;
+  try {
+    parsed = JSON.parse(JSON.stringify(body),
+      (key: string, value: string) => {
+        if (key === "schoolId") {
+          const parsed = Number(value);
+          if (Number.isNaN(parsed)) {
+            throw Error("schoolIdの変換に失敗しました");
+          } else {
+            return parsed;
+          }
+        }
+        return value;
+      });
+  } catch (error) {
+    if (error instanceof Error) throw error;
+    return undefined;
+  }
+  return parsed;
+};

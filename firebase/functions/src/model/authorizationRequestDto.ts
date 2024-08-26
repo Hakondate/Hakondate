@@ -1,4 +1,4 @@
-export interface AuthorizationDto {
+export interface AuthorizationRequestDto {
   schoolId: number;
   authorizationKey: string;
 }
