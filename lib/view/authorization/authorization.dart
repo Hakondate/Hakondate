@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate/state/signup/signup_state.dart';
 import 'package:hakondate/view/component/label/description_text.dart';
 import 'package:hakondate/view_model/single_page/signup/signup_view_model.dart';
-import 'package:path/path.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import 'package:hakondate/constant/app_color.dart';
@@ -245,13 +244,20 @@ class Authorization extends ConsumerWidget {
       },
       loading: () {
         return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-            title: const Text('招待コード'),
-          ),
-          body: Center(
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(AppColor.brand.secondary),
+          backgroundColor: AppColor.brand.secondaryLight,
+          body: const Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  '招待コードを確認中です・・・',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                  ),
+                ),
+              ],
             ),
           ),
         );
