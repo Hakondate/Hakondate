@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -34,11 +35,21 @@ class NutrientsCard extends StatelessWidget {
   Widget _nutrientsGraph() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        const double graphMaxValue = 100;
         final AsyncValue<List<double>> graphValues = ref.watch(graphValuesProvider);
 
         return graphValues.when(
           data: (List<double> graphValue) {
+            double graphMaxValue() {
+              int i = 5;
+              final double maxValueInValues = graphValue.reduce(max);
+              while (true) {
+                if (maxValueInValues < 20 * i) {
+                  return 20.0 * i;
+                }
+                i++;
+              }
+            }
+
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 15),
               child: Column(
@@ -51,12 +62,13 @@ class NutrientsCard extends StatelessWidget {
                         child: SizedBox(
                           width: MediaQuery.of(context).size.width,
                           height: MediaQuery.of(context).size.width * 3 / 4,
-                          child: const Align(
+                          child: Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              '外枠：000%\n青エリア：100%の基準',
-                              style: TextStyle(
+                              '青エリア：摂取基準\n外枠　　：${graphMaxValue().toStringAsFixed(0)}%',
+                              style: const TextStyle(
                                 fontSize: 12,
+                                color: Colors.black38,
                               ),
                             ),
                           ),
@@ -68,7 +80,7 @@ class NutrientsCard extends StatelessWidget {
                         child: NutrientsRadarChart(
                           values: graphValue,
                           rawValues: ref.watch(graphRawValuesProvider),
-                          maxValue: graphMaxValue,
+                          maxValue: graphMaxValue(),
                         ),
                       ),
                     ],

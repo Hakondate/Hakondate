@@ -28,17 +28,17 @@ class NutrientsRadarChart extends StatelessWidget {
     return Stack(
       children: <Widget>[
         RadarChart(
-          maxValue: _calcMaxValue(),
+          maxValue: maxValue,
           chartRadiusFactor: size ?? 0.7,
           textScaleFactor: 0.05,
           animate: false,
           fillColor: AppColor.brand.tertiary,
-          strokeColor: Color.fromARGB(0, 255, 255, 255),
+          strokeColor: const Color.fromARGB(0, 255, 255, 255),
           values: const <double>[100, 100, 100, 100, 100, 100],
           labels: const <String>['', '', '', '', '', ''],
         ),
         RadarChart(
-          maxValue: _calcMaxValue(),
+          maxValue: maxValue,
           chartRadiusFactor: size ?? 0.7,
           textScaleFactor: 0.05,
           animate: false,
@@ -55,17 +55,6 @@ class NutrientsRadarChart extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  double _calcMaxValue() {
-    int i = 5;
-    final double maxValueInValues = values.reduce(max);
-    while (true) {
-      if (maxValueInValues < 20 * i) {
-        return 20.0 * i;
-      }
-      i++;
-    }
   }
 }
 // import 'package:flutter/material.dart';
