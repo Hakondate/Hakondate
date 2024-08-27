@@ -10,7 +10,6 @@ part 'daily_graph_view_model.g.dart';
 
 @riverpod
 Future<List<double>> graphValues(GraphValuesRef ref) async {
-  const double graphMaxValue = 120;
   final NutrientsModel? slns = ref.watch(userViewModelProvider).currentUser!.slns;
   final AsyncValue<DailyState> data = ref.watch(dailyViewModelProvider);
 

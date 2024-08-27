@@ -24,15 +24,6 @@ class NutrientsCard extends StatelessWidget {
         children: <Widget>[
           Image.asset('assets/images/label/nutrientsLabel.png'),
           _nutrientsGraph(),
-          const SizedBox(height: 10),
-          const Text(
-            '※不足している栄養素がある場合がありますが、\n足りない栄養素はご家庭で補ってください。',
-            style: TextStyle(
-              color: Colors.black38,
-              fontSize: 12,
-            ),
-          ),
-          const SizedBox(height: 10),
           const RecommendedFoodStuffExpansionTile(),
           _nutrientsExpansionTile(),
         ],
@@ -50,14 +41,48 @@ class NutrientsCard extends StatelessWidget {
           data: (List<double> graphValue) {
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 15),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width * 3 / 4,
-                height: MediaQuery.of(context).size.width * 3 / 4,
-                child: NutrientsRadarChart(
-                  values: graphValue,
-                  rawValues: ref.watch(graphRawValuesProvider),
-                  maxValue: graphMaxValue,
-                ),
+              child: Column(
+                children: <Widget>[
+                  Stack(
+                    alignment: Alignment.topCenter,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.width * 3 / 4,
+                          child: const Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              '外枠：000%\n青エリア：100%の基準',
+                              style: TextStyle(
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 3 / 4,
+                        height: MediaQuery.of(context).size.width * 3 / 4,
+                        child: NutrientsRadarChart(
+                          values: graphValue,
+                          rawValues: ref.watch(graphRawValuesProvider),
+                          maxValue: graphMaxValue,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    '※不足している栄養素がある場合がありますが、\n足りない栄養素はご家庭で補ってください。',
+                    style: TextStyle(
+                      color: Colors.black38,
+                      fontSize: 12,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                ],
               ),
             );
           },
