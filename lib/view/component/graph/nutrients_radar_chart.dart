@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hakondate/model/nutrients/nutrients_model.dart';
-import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
-
+import 'dart:math';
 import 'package:multi_charts/multi_charts.dart';
 
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/model/nutrients/nutrient_unit.dart';
 
-class NutrientsRadarChart extends ConsumerWidget {
+class NutrientsRadarChart extends StatelessWidget {
   const NutrientsRadarChart({
     required this.values,
     required this.rawValues,
@@ -25,29 +22,43 @@ class NutrientsRadarChart extends ConsumerWidget {
   final double? size;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final NutrientsModel? slns = ref.watch(userViewModelProvider).currentUser!.slns;
+  Widget build(BuildContext context) {
     if (values.length < 6) return Container();
 
-    return RadarChart(
-      maxValue: maxValue,
-      chartRadiusFactor: size ?? 0.7,
-      textScaleFactor: 0.05,
-      animate: false,
-      fillColor: color ?? AppColor.brand.secondary,
-      values: values
-          .map(
-            (double value) => (value > maxValue) ? maxValue : value,
-          )
-          .toList(),
-      labels: <String>[
-        'エネルギー\n${rawValues[0].toStringAsFixed(1)}${NutrientUnit.kcal.value}\n(${values[0].toStringAsFixed(1)}%)',
-        'たんぱく質\n${rawValues[1].toStringAsFixed(1)}${NutrientUnit.gram.value}\n(${values[1].toStringAsFixed(1)}%)',
-        'ビタミン\n${rawValues[2].toStringAsFixed(1)}${NutrientUnit.mGram.value}\n(${values[2].toStringAsFixed(1)}%)',
-        'ミネラル\n${rawValues[3].toStringAsFixed(1)}${NutrientUnit.mGram.value}\n(${values[3].toStringAsFixed(1)}%)',
-        '炭水化物\n${rawValues[4].toStringAsFixed(1)}${NutrientUnit.gram.value}\n(${values[4].toStringAsFixed(1)}%)',
-        '脂質\n${rawValues[5].toStringAsFixed(1)}${NutrientUnit.gram.value}\n(${values[5].toStringAsFixed(1)}%)',
+    return Stack(
+      children: <Widget>[
+        Align(
+          alignment: Alignment.topRight,
+          child: Text('外枠：${_calcMaxValue().toStringAsFixed(0)}%'),
+        ),
+        RadarChart(
+          maxValue: _calcMaxValue(),
+          chartRadiusFactor: size ?? 0.7,
+          textScaleFactor: 0.05,
+          animate: false,
+          fillColor: color ?? AppColor.brand.secondary,
+          values: values,
+          labels: <String>[
+            'エネルギー\n${rawValues[0].toStringAsFixed(1)}${NutrientUnit.kcal.value}\n(${values[0].toStringAsFixed(1)}%)',
+            'たんぱく質\n${rawValues[1].toStringAsFixed(1)}${NutrientUnit.gram.value}\n(${values[1].toStringAsFixed(1)}%)',
+            'ビタミン\n${rawValues[2].toStringAsFixed(1)}${NutrientUnit.mGram.value}\n(${values[2].toStringAsFixed(1)}%)',
+            'ミネラル\n${rawValues[3].toStringAsFixed(1)}${NutrientUnit.mGram.value}\n(${values[3].toStringAsFixed(1)}%)',
+            '炭水化物\n${rawValues[4].toStringAsFixed(1)}${NutrientUnit.gram.value}\n(${values[4].toStringAsFixed(1)}%)',
+            '脂質\n${rawValues[5].toStringAsFixed(1)}${NutrientUnit.gram.value}\n(${values[5].toStringAsFixed(1)}%)',
+          ],
+        ),
       ],
     );
+  }
+
+  double _calcMaxValue() {
+    int i = 0;
+    final double maxValueInValues = values.reduce(max);
+    while (true) {
+      if (maxValueInValues < 20 * i) {
+        return 20.0 * i;
+      }
+      i++;
+    }
   }
 }

@@ -43,7 +43,7 @@ class NutrientsCard extends StatelessWidget {
   Widget _nutrientsGraph() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        const double graphMaxValue = 120;
+        const double graphMaxValue = 100;
         final AsyncValue<List<double>> graphValues = ref.watch(graphValuesProvider);
 
         return graphValues.when(

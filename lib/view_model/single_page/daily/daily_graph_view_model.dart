@@ -38,7 +38,7 @@ Future<List<double>> graphValues(GraphValuesRef ref) async {
     mineralSufficiency,
     menu.carbohydrate / slns.carbohydrate * 100.0,
     menu.lipid / slns.lipid * 100.0,
-  ].map((double element) => (element > graphMaxValue) ? graphMaxValue : element).toList();
+  ];
 }
 
 @riverpod
