@@ -48,13 +48,16 @@ class NutrientsCard extends StatelessWidget {
 
         return graphValues.when(
           data: (List<double> graphValue) {
-            return SizedBox(
-              width: MediaQuery.of(context).size.width * 3 / 4,
-              height: MediaQuery.of(context).size.width * 3 / 4,
-              child: NutrientsRadarChart(
-                values: graphValue,
-                rawValues: ref.watch(graphRawValuesProvider),
-                maxValue: graphMaxValue,
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 3 / 4,
+                height: MediaQuery.of(context).size.width * 3 / 4,
+                child: NutrientsRadarChart(
+                  values: graphValue,
+                  rawValues: ref.watch(graphRawValuesProvider),
+                  maxValue: graphMaxValue,
+                ),
               ),
             );
           },
