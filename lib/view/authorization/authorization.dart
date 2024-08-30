@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hakondate/router/routes.dart';
-import 'package:hakondate/state/signup/signup_state.dart';
-import 'package:hakondate/view/component/dialog/signing_up_dialog.dart';
-import 'package:hakondate/view/component/label/description_text.dart';
-import 'package:hakondate/view_model/single_page/signup/signup_view_model.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
+import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/authorization/authorization_state.dart';
+import 'package:hakondate/state/signup/signup_state.dart';
+import 'package:hakondate/view/component/dialog/signing_up_dialog.dart';
+import 'package:hakondate/view/component/label/description_text.dart';
 import 'package:hakondate/view_model/single_page/authorization/authorization_view_model.dart';
+import 'package:hakondate/view_model/single_page/signup/signup_view_model.dart';
 
 class Authorization extends ConsumerWidget {
   const Authorization({super.key});

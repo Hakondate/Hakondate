@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:hakondate/model/school/school_model.dart';
-import 'package:hakondate/view_model/single_page/signup/signup_view_model.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/repository/remote/authorization/authorization_remote_repository.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/authorization/authorization_state.dart';
 import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
+import 'package:hakondate/view_model/single_page/signup/signup_view_model.dart';
 
 part 'authorization_view_model.g.dart';
 
