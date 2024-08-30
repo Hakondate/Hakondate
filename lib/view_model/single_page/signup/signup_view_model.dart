@@ -134,6 +134,7 @@ class SignupViewModel extends _$SignupViewModel {
             schoolYears: schoolYears,
             schoolTrailing: school.name,
             schoolYearTrailing: '3年生',
+            authorized: !school.authorizationRequired,
           ),
         );
       } else {
@@ -143,6 +144,7 @@ class SignupViewModel extends _$SignupViewModel {
             schoolId: id,
             schoolYears: schoolYears,
             schoolTrailing: school.name,
+            authorized: !school.authorizationRequired,
           ),
         );
       }

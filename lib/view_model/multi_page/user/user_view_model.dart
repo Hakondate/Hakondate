@@ -149,8 +149,7 @@ class UserViewModel extends _$UserViewModel {
     required int schoolId,
     required int schoolYear,
   }) async {
-    final DateTime? authrizedAt = await _getSameSchoolAuthorizedAt(schoolId);
-    final int id = await _usersLocalRepository.add(name, schoolId, schoolYear, authrizedAt);
+    final int id = await _usersLocalRepository.add(name, schoolId, schoolYear, DateTime.now());
     await changeCurrentUser(id);
     await ref.read(analyticsControllerProvider.notifier).logSignup();
     await ref.read(userSettingsViewModelProvider.notifier).updateUsers();
@@ -184,7 +183,7 @@ class UserViewModel extends _$UserViewModel {
     return authorizedAt.isAfter(authorizationKeyUpdatedAt);
   }
 
-  Future<void> authorize() async {
+  Future<void> updateAuthorization() async {
     final UserModel user = state.currentUser!;
     final DateTime now = DateTime.now();
 

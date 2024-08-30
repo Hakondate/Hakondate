@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/signup/signup_state.dart';
 import 'package:hakondate/view/component/dialog/signing_up_dialog.dart';
 import 'package:hakondate/view/component/label/description_text.dart';
@@ -129,10 +130,15 @@ class Authorization extends ConsumerWidget {
                     onPressed: () async {
                       final bool result =
                           await ref.read(authorizationViewModelProvider.notifier).authorize(authorizationCodeController.text);
-                      debugPrint('result: $result');
+
                       if (!result) return;
-                      debugPrint('pressed');
+
+                      if (routemaster.currentConfiguration!.path.startsWith('/home/daily')) {
+                        routemaster.push('/home');
+                      }
+
                       if (!context.mounted) return;
+
                       return showDialog(
                         context: context,
                         builder: (BuildContext context) => const SigningUpDialog(),
@@ -145,76 +151,60 @@ class Authorization extends ConsumerWidget {
           ),
         );
       },
-      error: (Object error, StackTrace stackTrace) {
-        return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-            title: const Text('招待コード'),
-          ),
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text('エラーが発生しました'),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColor.brand.secondary,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: PaddingSize.buttonVertical,
-                      horizontal: PaddingSize.buttonHorizontal,
-                    ),
-                    textStyle: TextStyle(
-                      color: AppColor.text.white,
-                    ),
-                    shape: const StadiumBorder(),
-                  ),
-                  onPressed: () => ref.read(authorizationViewModelProvider.notifier).cancel(),
-                  child: const Text('キャンセル'),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-      loading: () {
-        return Scaffold(
-          backgroundColor: AppColor.brand.secondaryLight,
-          body: const Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  '招待コードを確認中です・・・',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
+      error: (Object error, StackTrace stackTrace) => const AuthorizationErrorPage(),
+      loading: () => const AuthorizationLoadingPage(),
     );
   }
 }
 
-class TextFormBorders {
-  // キーボード表示時のフォームの枠線
-  static const OutlineInputBorder textFormFocusedBorder = OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(8)),
-    borderSide: BorderSide(
-      color: Color.fromARGB(255, 255, 255, 255),
-      width: 2,
-    ),
-  );
+class AuthorizationLoadingPage extends StatelessWidget {
+  const AuthorizationLoadingPage({
+    super.key,
+  });
 
-  // 平常時のフォームの枠線。
-  static const OutlineInputBorder textFormEnabledBorder = OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(8)),
-    borderSide: BorderSide(
-      color: Colors.grey,
-    ),
-  );
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColor.brand.secondaryLight,
+      body: const Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              '招待コードを確認中です・・・',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 22,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class AuthorizationErrorPage extends StatelessWidget {
+  const AuthorizationErrorPage({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text('招待コード'),
+      ),
+      body: const Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text('エラーが発生しました'),
+          ],
+        ),
+      ),
+    );
+  }
 }

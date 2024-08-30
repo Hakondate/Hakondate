@@ -36,7 +36,6 @@ final RoutemasterDelegate routemaster = RoutemasterDelegate(
       '/splash': (_) => const MaterialPage<dynamic>(child: Splash()),
       '/terms': (_) => const MaterialPage<dynamic>(child: Terms()),
       '/signup': (_) => MaterialPage<dynamic>(child: Signup()),
-      // 'authorization': (_) => const MaterialPage<dynamic>(child: Authorization()),
       '/signup/authorization': (_) => const MaterialPage<dynamic>(child: Authorization()),
       '/home': (_) => const TabPage(
             child: AppBottomNavigationBar(),
@@ -49,6 +48,7 @@ final RoutemasterDelegate routemaster = RoutemasterDelegate(
           ),
       '/home/daily': (_) => const MaterialPage<dynamic>(child: Daily()),
       '/home/daily/dish': (_) => const MaterialPage<dynamic>(child: Dish()),
+      '/home/daily/authorization': (_) => const MaterialPage<dynamic>(child: Authorization()),
       '/home/calendar': (_) => const FadeUpPage(child: Calendar()),
       '/home/recipes': (_) => const MaterialPage<dynamic>(child: Recipe()),
       '/home/recipes_pdf/:id': (RouteData route) => FadeUpPage(child: RecipePDF(id: route.pathParameters['id'])),
