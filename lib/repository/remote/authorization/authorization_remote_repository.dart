@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -13,7 +15,7 @@ AuthorizationRemoteRepository authorizationRemoteRepository(AuthorizationRemoteR
 class AuthorizationRemoteRepository {
   AuthorizationRemoteRepository();
 
-  Future<bool> checkAuthorizationCode(int schoolId, String authorizationKey) async {
+  Future<AuthorizationResult> checkAuthorizationCode(int schoolId, String authorizationKey) async {
     try {
       final Uri url = Uri.https('authorize-mdq5vdl66q-uc.a.run.app');
       final http.Response response = await http.post(
@@ -24,17 +26,39 @@ class AuthorizationRemoteRepository {
         },
       );
 
-      if (response.statusCode != 200 && response.statusCode != 404) {
-        debugPrint('Response status: ${response.statusCode}');
-        debugPrint('Response body: ${response.body}');
+      final AuthorizationResult result = await compute(parseAuthorizationResult, response.body);
 
-        return false;
-      }
-
-      return true;
+      return result;
     } catch (error) {
       debugPrint('error: $error');
-      return false;
+
+      return const AuthorizationResult(
+        authorizationSucceeded: false,
+        message: '正常に処理できませんでした',
+      );
     }
   }
+}
+
+AuthorizationResult parseAuthorizationResult(String responseBody) {
+  final Map<String, dynamic> json = jsonDecode(responseBody) as Map<String, dynamic>;
+
+  return AuthorizationResult.fromJson(json);
+}
+
+class AuthorizationResult {
+  const AuthorizationResult({
+    required this.authorizationSucceeded,
+    required this.message,
+  });
+
+  factory AuthorizationResult.fromJson(Map<String, dynamic> json) {
+    return AuthorizationResult(
+      authorizationSucceeded: json['authorizationSucceeded'] as bool,
+      message: json['message'] as String,
+    );
+  }
+
+  final bool authorizationSucceeded;
+  final String message;
 }

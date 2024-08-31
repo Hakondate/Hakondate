@@ -33,13 +33,15 @@ class AuthorizationViewModel extends _$AuthorizationViewModel {
     final TextEditingController controller = ref.watch(authorizationCodeControllerProvider);
     final SchoolModel school = ref.watch(signupViewModelProvider).value!.school!;
 
-    final bool res = await ref.watch(authorizationRemoteRepositoryProvider).checkAuthorizationCode(school.id, authorizationKey);
-    debugPrint('res: $res');
+    final AuthorizationResult result =
+        await ref.watch(authorizationRemoteRepositoryProvider).checkAuthorizationCode(school.id, authorizationKey);
+    debugPrint('res: $result');
 
-    if (!res) {
+    if (!result.authorizationSucceeded) {
       controller.text = '';
-      state = AsyncData<AuthorizationState>(data.copyWith(statusMessage: '認証に失敗しました'));
+      state = AsyncData<AuthorizationState>(data.copyWith(statusMessage: result.message));
       debugPrint('failed');
+
       return false;
     }
 
