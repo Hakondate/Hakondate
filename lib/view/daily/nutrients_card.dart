@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -39,48 +38,20 @@ class NutrientsCard extends StatelessWidget {
 
         return graphValues.when(
           data: (List<double> graphValue) {
-            double graphMaxValue() {
-              int i = 5;
-              final double maxValueInValues = graphValue.reduce(max);
-              while (true) {
-                if (maxValueInValues < 20 * i) {
-                  return 20.0 * i;
-                }
-                i++;
-              }
-            }
-
             return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15),
+              padding: const EdgeInsets.all(15),
               child: Column(
                 children: <Widget>[
                   Stack(
                     alignment: Alignment.topCenter,
                     children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.width * 3 / 4,
-                          child: Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              '青エリア：摂取基準\n外枠　　：${graphMaxValue().toStringAsFixed(0)}%',
-                              style: const TextStyle(
-                                fontSize: 12,
-                                color: Colors.black38,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width * 3 / 4,
+                        width: MediaQuery.of(context).size.width * 4 / 4,
                         height: MediaQuery.of(context).size.width * 3 / 4,
                         child: NutrientsRadarChart(
                           values: graphValue,
                           rawValues: ref.watch(graphRawValuesProvider),
-                          maxValue: graphMaxValue(),
+                          maxValue: 120,
                         ),
                       ),
                     ],
@@ -90,7 +61,7 @@ class NutrientsCard extends StatelessWidget {
                     child: Text(
                       '※不足している栄養素がある場合がありますが、\n足りない栄養素はご家庭で補ってください。',
                       style: TextStyle(
-                        color: Colors.black38,
+                        color: Colors.black54,
                         fontSize: 12,
                       ),
                     ),
