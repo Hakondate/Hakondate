@@ -15,8 +15,7 @@ class SubmitButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<SignupState> signupState = ref.watch(signupViewModelProvider);
-    final bool authorizationRequired =
-        signupState is AsyncData<SignupState> && signupState.value.school != null && signupState.value.school!.authorizationRequired;
+    final bool authorizationRequired = !(signupState is AsyncData<SignupState> && signupState.value.authorized);
 
     return Padding(
       padding: const EdgeInsets.all(PaddingSize.normal),

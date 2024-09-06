@@ -20,7 +20,6 @@ class SchoolForm extends ConsumerWidget {
     final AsyncValue<SignupState> state = ref.watch(signupViewModelProvider);
     final AsyncValue<UserSettingsState> userSettingsState = ref.watch(userSettingsViewModelProvider);
     final bool isEditing = userSettingsState is AsyncData<UserSettingsState> && userSettingsState.value.editingUser != null;
-    debugPrint('SchoolForm: isEditing: $isEditing');
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

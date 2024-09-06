@@ -7,11 +7,10 @@ import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/authorization/authorization_state.dart';
-import 'package:hakondate/state/signup/signup_state.dart';
 import 'package:hakondate/view/component/dialog/signing_up_dialog.dart';
 import 'package:hakondate/view/component/label/description_text.dart';
 import 'package:hakondate/view_model/single_page/authorization/authorization_view_model.dart';
-import 'package:hakondate/view_model/single_page/signup/signup_view_model.dart';
+import 'package:hakondate/view/component/frame/fade_up_app_bar.dart';
 
 class Authorization extends ConsumerWidget {
   const Authorization({super.key});
@@ -37,12 +36,16 @@ class AuthorizationPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<AuthorizationState> state = ref.watch(authorizationViewModelProvider);
     final TextEditingController authorizationCodeController = ref.watch(authorizationCodeControllerProvider);
-    final AsyncValue<SignupState> sginupState = ref.watch(signupViewModelProvider);
+    final bool onHomeAuthorization = routemaster.currentConfiguration!.path.startsWith('/home/authorization');
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('招待コードの登録'),
-      ),
+      appBar: onHomeAuthorization
+          ? const FadeUpAppBar(
+              title: Text('招待コード'),
+            )
+          : AppBar(
+              title: const Text('招待コード'),
+            ),
       body: Center(
         child: Column(
           children: <Widget>[
@@ -70,7 +73,11 @@ class AuthorizationPage extends ConsumerWidget {
                   ),
                 ),
                 Text(
-                  sginupState.value!.schoolTrailing,
+                  state.when(
+                    data: (AuthorizationState data) => data.school.name,
+                    loading: () => '',
+                    error: (Object error, StackTrace? stackTrace) => '',
+                  ),
                   style: const TextStyle(
                     fontSize: FontSize.status,
                     fontWeight: FontWeight.bold,
@@ -114,7 +121,7 @@ class AuthorizationPage extends ConsumerWidget {
                           inactiveColor: Colors.grey,
                         ),
                         onChanged: (_) {
-                          // ref.read(authorizationViewModelProvider.notifier).onCodeChanged();
+                          ref.read(authorizationViewModelProvider.notifier).onCodeChanged();
                         },
                       ),
                       const SizedBox(height: 8),
@@ -149,14 +156,20 @@ class AuthorizationPage extends ConsumerWidget {
                   textStyle: TextStyle(color: AppColor.text.white),
                   shape: const StadiumBorder(),
                 ),
-                child: const Text('登録する'),
+                child: const Text(
+                  '登録する',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 onPressed: () async {
                   final bool result = await ref.read(authorizationViewModelProvider.notifier).authorize(authorizationCodeController.text);
 
                   if (!result) return;
 
-                  if (routemaster.currentConfiguration!.path.startsWith('/home/daily')) {
-                    routemaster.push('/home');
+                  if (routemaster.currentConfiguration!.path.startsWith('/home/authorization')) {
+                    await routemaster.pop();
+                    return;
                   }
 
                   if (!context.mounted) return;
@@ -184,15 +197,16 @@ class AuthorizationLoadingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Positioned.fill(
       child: ColoredBox(
-        color: AppColor.brand.secondaryLight.withOpacity(0.8),
+        color: AppColor.brand.secondaryLight.withOpacity(0.9),
         child: Center(
           child: Text(
             '招待コードを確認中です・・・',
             style: TextStyle(
-              color: AppColor.text.primary,
+              color: AppColor.text.white,
               fontWeight: FontWeight.bold,
               fontSize: 22,
-              decoration: TextDecoration.none,
+              decoration: TextDecoration.none, // なぜか全体のテーマがきかず下線がついてしまうので追加した
+              fontFamily: 'MPLUSRounded1c', // TextDecoration.none を追加するとフォントが変わってしまうので追加
             ),
           ),
         ),

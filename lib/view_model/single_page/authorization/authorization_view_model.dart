@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hakondate/repository/local/sqlite/schools/schools_local_repository.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -21,7 +22,16 @@ class AuthorizationCodeController extends _$AuthorizationCodeController {
 class AuthorizationViewModel extends _$AuthorizationViewModel {
   @override
   Future<AuthorizationState> build() async {
-    return const AuthorizationState();
+    final SchoolModel school;
+    if (routemaster.currentConfiguration!.path.startsWith('/home/authorization')) {
+      final int id = ref.watch(userViewModelProvider).currentUser!.schoolId;
+      school = await ref.read(schoolsLocalRepositoryProvider).getById(id);
+    } else {
+      school = ref.watch(signupViewModelProvider).value!.school!;
+    }
+    return AuthorizationState(
+      school: school,
+    );
   }
 
   Future<bool> authorize(String authorizationKey) async {
@@ -31,24 +41,19 @@ class AuthorizationViewModel extends _$AuthorizationViewModel {
     state = const AsyncLoading<AuthorizationState>();
 
     final TextEditingController controller = ref.watch(authorizationCodeControllerProvider);
-    final SchoolModel school = ref.watch(signupViewModelProvider).value!.school!;
 
     final AuthorizationResult result =
-        await ref.watch(authorizationRemoteRepositoryProvider).checkAuthorizationCode(school.id, authorizationKey);
-    debugPrint('res: $result');
+        await ref.watch(authorizationRemoteRepositoryProvider).checkAuthorizationCode(data.school.id, authorizationKey);
 
     if (!result.authorizationSucceeded) {
       controller.text = '';
       state = AsyncData<AuthorizationState>(data.copyWith(statusMessage: result.message));
-      debugPrint('failed');
 
       return false;
     }
 
-    debugPrint('routemaster.currentConfiguration!.path: ${routemaster.currentConfiguration!.path}');
-    if (routemaster.currentConfiguration!.path.startsWith('/home/daily')) {
+    if (routemaster.currentConfiguration!.path.startsWith('/home/authorization')) {
       await ref.read(userViewModelProvider.notifier).updateAuthorization();
-      return true;
     }
 
     state = AsyncData<AuthorizationState>(data.copyWith(statusMessage: '認証に成功しました'));

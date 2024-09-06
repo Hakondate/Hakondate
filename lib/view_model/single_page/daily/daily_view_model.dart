@@ -1,3 +1,4 @@
+import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/dish/dish_model.dart';
@@ -17,7 +18,12 @@ class DailyViewModel extends _$DailyViewModel {
       Flavor.dev => await ref.read(menusLocalRepositoryProvider).getLatestDay(),
       Flavor.stg || Flavor.prod => DateTime.now()
     };
-    final MenuModel menu = await ref.read(menusLocalRepositoryProvider).getMenuByDay(selectedDay);
+    final MenuModel menu;
+    if (await ref.read(userViewModelProvider.notifier).isAuthorized()) {
+      menu = await ref.read(menusLocalRepositoryProvider).getMenuByDay(selectedDay);
+    } else {
+      menu = const UnauthorizedMenuModel();
+    }
 
     return DailyState(
       selectedDay: selectedDay,
@@ -33,7 +39,12 @@ class DailyViewModel extends _$DailyViewModel {
 
   Future<void> updateSelectedDay({required DateTime selectedDay, DateTime? focusedDay}) async {
     state.whenData((DailyState data) async {
-      final MenuModel menu = await ref.read(menusLocalRepositoryProvider).getMenuByDay(selectedDay);
+      final MenuModel menu;
+      if (await ref.read(userViewModelProvider.notifier).isAuthorized()) {
+        menu = await ref.read(menusLocalRepositoryProvider).getMenuByDay(selectedDay);
+      } else {
+        menu = const UnauthorizedMenuModel();
+      }
 
       state = AsyncData<DailyState>(
         data.copyWith(

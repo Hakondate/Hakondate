@@ -149,7 +149,7 @@ class UserViewModel extends _$UserViewModel {
     required int schoolId,
     required int schoolYear,
   }) async {
-    final int id = await _usersLocalRepository.add(name, schoolId, schoolYear, DateTime.now());
+    final int id = await _usersLocalRepository.add(name, schoolId, schoolYear, DateTime.now().subtract(const Duration(days: 90)));
     await changeCurrentUser(id);
     await ref.read(analyticsControllerProvider.notifier).logSignup();
     await ref.read(userSettingsViewModelProvider.notifier).updateUsers();
@@ -173,12 +173,15 @@ class UserViewModel extends _$UserViewModel {
     final SchoolsLocalRepository schoolLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
     final SchoolModel school = await schoolLocalRepository.getById(state.currentUser!.schoolId);
 
+    debugPrint('school.authorizationRequired: ${school.authorizationRequired}');
     if (!school.authorizationRequired) return true;
 
     final DateTime? authorizedAt = state.currentUser!.authorizedAt;
     if (authorizedAt == null) return false;
 
     final DateTime authorizationKeyUpdatedAt = school.authorizationKeyUpdatedAt ?? DateTime(0);
+    debugPrint('authorizedAt: $authorizedAt');
+    debugPrint('authorizationKeyUpdatedAt: $authorizationKeyUpdatedAt');
 
     return authorizedAt.isAfter(authorizationKeyUpdatedAt);
   }

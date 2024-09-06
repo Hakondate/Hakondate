@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate/view/daily/unauthorized_day_body.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -129,10 +130,7 @@ class Daily extends StatelessWidget {
                     text: '給食はお休みです...',
                   );
                 } else if (state.menu is UnauthorizedMenuModel) {
-                  return const NonLunchesDayBody(
-                    imageFileName: 'holiday.png',
-                    text: '認証が必要です...',
-                  );
+                  return const UnauthorizedDayBody();
                 }
 
                 return const NonLunchesDayBody(
