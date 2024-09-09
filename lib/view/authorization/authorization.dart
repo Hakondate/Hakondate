@@ -8,9 +8,9 @@ import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/authorization/authorization_state.dart';
 import 'package:hakondate/view/component/dialog/signing_up_dialog.dart';
+import 'package:hakondate/view/component/frame/fade_up_app_bar.dart';
 import 'package:hakondate/view/component/label/description_text.dart';
 import 'package:hakondate/view_model/single_page/authorization/authorization_view_model.dart';
-import 'package:hakondate/view/component/frame/fade_up_app_bar.dart';
 
 class Authorization extends ConsumerWidget {
   const Authorization({super.key});

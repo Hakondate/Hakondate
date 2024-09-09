@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hakondate/repository/local/sqlite/schools/schools_local_repository.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/school/school_model.dart';
+import 'package:hakondate/repository/local/sqlite/schools/schools_local_repository.dart';
 import 'package:hakondate/repository/remote/authorization/authorization_remote_repository.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/authorization/authorization_state.dart';
@@ -13,6 +13,9 @@ import 'package:hakondate/view_model/single_page/signup/signup_view_model.dart';
 part 'authorization_view_model.g.dart';
 
 @riverpod
+// StatefullWidgetかflutter_hooksに変更することが推奨されているため，hooksが導入されるまでの暫定的な対応
+// https://github.com/rrousselGit/riverpod/discussions/2680
+// ignore: unsupported_provider_value
 class AuthorizationCodeController extends _$AuthorizationCodeController {
   @override
   TextEditingController build() => TextEditingController();

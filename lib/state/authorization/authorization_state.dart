@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'package:hakondate/model/school/school_model.dart';
 
 part 'authorization_state.freezed.dart';

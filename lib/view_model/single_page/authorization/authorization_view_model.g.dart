@@ -25,7 +25,7 @@ final authorizationCodeControllerProvider = AutoDisposeNotifierProvider<
 typedef _$AuthorizationCodeController
     = AutoDisposeNotifier<TextEditingController>;
 String _$authorizationViewModelHash() =>
-    r'57825d528d4a81b61c48affbf259aeeec9323818';
+    r'5fdce59e96fb8df64bfb657a5f3d121eeee54761';
 
 /// See also [AuthorizationViewModel].
 @ProviderFor(AuthorizationViewModel)
