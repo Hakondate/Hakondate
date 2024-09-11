@@ -7,7 +7,7 @@ import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:hakondate/state/daily/daily_state.dart';
 import 'package:hakondate/util/exception/class_type_exception.dart';
-import 'package:hakondate/view/component/graph/nutrients_radar_chart.dart';
+import 'package:hakondate/view/component/graph/daily_nutrients_radar_chart.dart';
 import 'package:hakondate/view/component/label/nutrients_list.dart';
 import 'package:hakondate/view/dictionary/recommend_foodstuff.dart';
 import 'package:hakondate/view_model/single_page/daily/daily_graph_view_model.dart';
@@ -45,14 +45,10 @@ class NutrientsCard extends StatelessWidget {
                   Stack(
                     alignment: Alignment.topCenter,
                     children: <Widget>[
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 4 / 4,
-                        height: MediaQuery.of(context).size.width * 3 / 4,
-                        child: NutrientsRadarChart(
-                          values: graphValue,
-                          rawValues: ref.watch(graphRawValuesProvider),
-                          maxValue: 120,
-                        ),
+                      DailyNutrientsRadarChart(
+                        values: graphValue,
+                        rawValues: ref.watch(graphRawValuesProvider),
+                        maxValue: 120,
                       ),
                     ],
                   ),
