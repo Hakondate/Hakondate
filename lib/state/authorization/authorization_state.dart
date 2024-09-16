@@ -8,6 +8,7 @@ part 'authorization_state.freezed.dart';
 class AuthorizationState with _$AuthorizationState {
   const factory AuthorizationState({
     required SchoolModel school,
+    @Default('') String authorizationKey,
     @Default('') String statusMessage,
   }) = _AuthorizationState;
 }

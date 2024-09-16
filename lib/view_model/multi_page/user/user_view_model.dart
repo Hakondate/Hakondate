@@ -169,23 +169,6 @@ class UserViewModel extends _$UserViewModel {
 
   void signOut() => state = state.copyWith(currentUser: null);
 
-  Future<bool> isAuthorized() async {
-    final SchoolsLocalRepository schoolLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
-    final SchoolModel school = await schoolLocalRepository.getById(state.currentUser!.schoolId);
-
-    debugPrint('school.authorizationRequired: ${school.authorizationRequired}');
-    if (!school.authorizationRequired) return true;
-
-    final DateTime? authorizedAt = state.currentUser!.authorizedAt;
-    if (authorizedAt == null) return false;
-
-    final DateTime authorizationKeyUpdatedAt = school.authorizationKeyUpdatedAt ?? DateTime(0);
-    debugPrint('authorizedAt: $authorizedAt');
-    debugPrint('authorizationKeyUpdatedAt: $authorizationKeyUpdatedAt');
-
-    return authorizedAt.isAfter(authorizationKeyUpdatedAt);
-  }
-
   Future<void> updateAuthorization() async {
     final UserModel user = state.currentUser!;
     final DateTime now = DateTime.now();
@@ -211,4 +194,20 @@ class UserViewModel extends _$UserViewModel {
     }
     return null;
   }
+}
+
+@Riverpod(keepAlive: true)
+Future<bool> userAuthorized(UserAuthorizedRef ref) async {
+  final SchoolsLocalRepository schoolLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
+  final UserState state = ref.watch(userViewModelProvider);
+  final SchoolModel school = await schoolLocalRepository.getById(state.currentUser!.schoolId);
+
+  if (!school.authorizationRequired) return true;
+
+  final DateTime? authorizedAt = state.currentUser!.authorizedAt;
+  if (authorizedAt == null) return false;
+
+  final DateTime authorizationKeyUpdatedAt = school.authorizationKeyUpdatedAt ?? DateTime(0);
+
+  return authorizedAt.isAfter(authorizationKeyUpdatedAt);
 }

@@ -35,7 +35,6 @@ class AuthorizationPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<AuthorizationState> state = ref.watch(authorizationViewModelProvider);
-    final TextEditingController authorizationCodeController = ref.watch(authorizationCodeControllerProvider);
     final bool onHomeAuthorization = routemaster.currentConfiguration!.path.startsWith('/home/authorization');
 
     return Scaffold(
@@ -102,7 +101,6 @@ class AuthorizationPage extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       PinCodeTextField(
-                        controller: authorizationCodeController,
                         autoDisposeControllers: false,
                         appContext: context,
                         pastedTextStyle: TextStyle(
@@ -120,8 +118,25 @@ class AuthorizationPage extends ConsumerWidget {
                           selectedColor: AppColor.brand.secondary,
                           inactiveColor: Colors.grey,
                         ),
-                        onChanged: (_) {
-                          ref.read(authorizationViewModelProvider.notifier).onCodeChanged();
+                        onChanged: (String value) {
+                          ref.read(authorizationViewModelProvider.notifier).onCodeChanged(value);
+                        },
+                        onCompleted: (_) async {
+                          final bool result = await ref.read(authorizationViewModelProvider.notifier).authorize();
+
+                          if (!result) return;
+
+                          if (routemaster.currentConfiguration!.path.startsWith('/home/authorization')) {
+                            await routemaster.pop();
+                            return;
+                          }
+
+                          if (!context.mounted) return;
+
+                          return showDialog(
+                            context: context,
+                            builder: (BuildContext context) => const SigningUpDialog(),
+                          );
                         },
                       ),
                       const SizedBox(height: 8),
@@ -133,7 +148,7 @@ class AuthorizationPage extends ConsumerWidget {
                         ),
                         style: TextStyle(
                           color: state.when(
-                            data: (AuthorizationState data) => data.statusMessage == '認証に成功しました' ? Colors.green : Colors.red,
+                            data: (AuthorizationState data) => data.statusMessage == '成功しました' ? Colors.green : Colors.red,
                             loading: () => Colors.white,
                             error: (Object error, StackTrace? stackTrace) => Colors.red,
                           ),
@@ -144,42 +159,6 @@ class AuthorizationPage extends ConsumerWidget {
                 ),
                 const SizedBox(width: 32),
               ],
-            ),
-            Center(
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColor.brand.secondary,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: PaddingSize.buttonVertical,
-                    horizontal: PaddingSize.buttonHorizontal,
-                  ),
-                  textStyle: TextStyle(color: AppColor.text.white),
-                  shape: const StadiumBorder(),
-                ),
-                child: const Text(
-                  '登録する',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                onPressed: () async {
-                  final bool result = await ref.read(authorizationViewModelProvider.notifier).authorize(authorizationCodeController.text);
-
-                  if (!result) return;
-
-                  if (routemaster.currentConfiguration!.path.startsWith('/home/authorization')) {
-                    await routemaster.pop();
-                    return;
-                  }
-
-                  if (!context.mounted) return;
-
-                  return showDialog(
-                    context: context,
-                    builder: (BuildContext context) => const SigningUpDialog(),
-                  );
-                },
-              ),
             ),
           ],
         ),

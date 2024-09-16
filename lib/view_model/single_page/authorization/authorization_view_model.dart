@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/school/school_model.dart';
@@ -11,15 +9,6 @@ import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
 import 'package:hakondate/view_model/single_page/signup/signup_view_model.dart';
 
 part 'authorization_view_model.g.dart';
-
-@riverpod
-// StatefullWidgetかflutter_hooksに変更することが推奨されているため，hooksが導入されるまでの暫定的な対応
-// https://github.com/rrousselGit/riverpod/discussions/2680
-// ignore: unsupported_provider_value
-class AuthorizationCodeController extends _$AuthorizationCodeController {
-  @override
-  TextEditingController build() => TextEditingController();
-}
 
 @riverpod
 class AuthorizationViewModel extends _$AuthorizationViewModel {
@@ -37,19 +26,16 @@ class AuthorizationViewModel extends _$AuthorizationViewModel {
     );
   }
 
-  Future<bool> authorize(String authorizationKey) async {
+  Future<bool> authorize() async {
     if (state is! AsyncData) return false;
 
     final AuthorizationState data = state.value!;
     state = const AsyncLoading<AuthorizationState>();
 
-    final TextEditingController controller = ref.watch(authorizationCodeControllerProvider);
-
     final AuthorizationResult result =
-        await ref.watch(authorizationRemoteRepositoryProvider).checkAuthorizationCode(data.school.id, authorizationKey);
+        await ref.watch(authorizationRemoteRepositoryProvider).checkAuthorizationCode(data.school.id, data.authorizationKey);
 
     if (!result.authorizationSucceeded) {
-      controller.text = '';
       state = AsyncData<AuthorizationState>(data.copyWith(statusMessage: result.message));
 
       return false;
@@ -59,13 +45,13 @@ class AuthorizationViewModel extends _$AuthorizationViewModel {
       await ref.read(userViewModelProvider.notifier).updateAuthorization();
     }
 
-    state = AsyncData<AuthorizationState>(data.copyWith(statusMessage: '認証に成功しました'));
+    state = AsyncData<AuthorizationState>(data.copyWith(statusMessage: '成功しました'));
     return true;
   }
 
-  Future<void> onCodeChanged() async {
+  Future<void> onCodeChanged(String value) async {
     state.whenData((AuthorizationState data) {
-      state = AsyncData<AuthorizationState>(data.copyWith(statusMessage: ''));
+      state = AsyncData<AuthorizationState>(data.copyWith(authorizationKey: value, statusMessage: ''));
     });
   }
 }
