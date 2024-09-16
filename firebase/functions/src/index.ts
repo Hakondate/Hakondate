@@ -11,7 +11,8 @@ import {onRequest} from "firebase-functions/v2/https";
 
 import * as admin from "firebase-admin";
 import {
-  ISchoolsRepository, SchoolsRepository,
+  ISchoolsRepository,
+  SchoolsRepository,
 } from "./repository/schoolsRepository";
 import {School} from "./model/school";
 import {AuthorizationResultDto} from "./model/authorizationResultDto";
@@ -21,8 +22,9 @@ import {logger} from "firebase-functions/v1";
 
 admin.initializeApp();
 
-const schoolsRepository: ISchoolsRepository =
-  new SchoolsRepository(getFirestore());
+const schoolsRepository: ISchoolsRepository = new SchoolsRepository(
+  getFirestore(),
+);
 
 export const fetch = onRequest(async (_, response) => {
   await schoolsRepository.fetch();
@@ -59,7 +61,7 @@ export const authorize = onRequest(async (request, response) => {
 
   if (school.authorizationRequired === false) {
     result.authorizationSucceeded = true;
-    result.message = "認証が不要な学校です";
+    result.message = "招待コードが不要な学校です";
     response.status(200).send(result);
     return;
   }
@@ -70,7 +72,7 @@ export const authorize = onRequest(async (request, response) => {
     return;
   }
 
-  result.message = "認証コードが間違っています";
+  result.message = "招待コードが間違っています";
   response.status(401).send(result);
   return;
 });
@@ -80,22 +82,22 @@ export const getSchools = onRequest(async (_, response) => {
   response.status(200).send(schools);
 });
 
-const parseJsonIntoAuthorizationRequestDto =
-(body: string) : AuthorizationRequestDto | undefined => {
+const parseJsonIntoAuthorizationRequestDto = (
+  body: string,
+): AuthorizationRequestDto | undefined => {
   let parsed: AuthorizationRequestDto;
   try {
-    parsed = JSON.parse(JSON.stringify(body),
-      (key: string, value: string) => {
-        if (key === "schoolId") {
-          const parsed = Number(value);
-          if (Number.isNaN(parsed)) {
-            throw Error("schoolIdの変換に失敗しました");
-          } else {
-            return parsed;
-          }
+    parsed = JSON.parse(JSON.stringify(body), (key: string, value: string) => {
+      if (key === "schoolId") {
+        const parsed = Number(value);
+        if (Number.isNaN(parsed)) {
+          throw Error("schoolIdの変換に失敗しました");
+        } else {
+          return parsed;
         }
-        return value;
-      });
+      }
+      return value;
+    });
   } catch (error) {
     if (error instanceof Error) throw error;
     return undefined;
