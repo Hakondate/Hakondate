@@ -84,7 +84,7 @@ dev_dependencies:
   # flutter packages pub run build_runner build --delete-conflicting-outputs
 
   # oss_licenses.dart の生成コマンド（パッケージを追加したら実行する）
-  # flutter pub run flutter_oss_licenses:generate.dart -o lib/constant/oss_licenses.dart
+  # fvm dart run flutter_oss_licenses:generate.dart -o lib/constant/oss_licenses.dart
 
 flutter:
   uses-material-design: true
@@ -133,7 +133,7 @@ flutter_native_splash:
     - "ios/Runner/Info-Release.plist"
 
   # 更新コマンド
-  # flutter pub run flutter_native_splash:create
+  # fvm dart run flutter_native_splash:create
 
 flutter_icons:
   android: true
@@ -143,7 +143,7 @@ flutter_icons:
   remove_alpha_ios: true
 
   # 更新コマンド
-  # flutter pub run flutter_launcher_icons:main
+  # fvm dart run flutter_launcher_icons:main
 
 import_sorter:
   comments: false
@@ -154,4 +154,4 @@ import_sorter:
     - \/lib\/*\/firebase_options.dart
 
   # 実行コマンド
-  # flutter pub run import_sorter:main
+  # fvm dart run import_sorter:main
