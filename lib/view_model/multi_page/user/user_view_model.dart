@@ -149,7 +149,7 @@ class UserViewModel extends _$UserViewModel {
     required int schoolId,
     required int schoolYear,
   }) async {
-    final int id = await _usersLocalRepository.add(name, schoolId, schoolYear, DateTime.now().subtract(const Duration(days: 90)));
+    final int id = await _usersLocalRepository.add(name, schoolId, schoolYear, DateTime.now());
     await changeCurrentUser(id);
     await ref.read(analyticsControllerProvider.notifier).logSignup();
     await ref.read(userSettingsViewModelProvider.notifier).updateUsers();
