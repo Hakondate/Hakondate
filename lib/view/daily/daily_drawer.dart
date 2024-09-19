@@ -63,6 +63,11 @@ class DailyDrawer extends StatelessWidget {
             onTap: () => routemaster.push('/home/help'),
           ),
           _drawerLabel(
+            icon: Icons.cached_outlined,
+            labelText: 'キャッシュの管理',
+            onTap: () => routemaster.push('/home/cache_management'),
+          ),
+          _drawerLabel(
             icon: Icons.credit_card_outlined,
             labelText: 'ライセンス情報',
             onTap: () => routemaster.push('/home/license'),

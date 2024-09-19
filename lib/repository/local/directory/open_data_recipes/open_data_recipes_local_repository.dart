@@ -14,6 +14,7 @@ abstract class OpenDataRecipesLocalRepositoryAPI {
   Future<bool> isExist({required String path});
   Future<String> getPath({required String path});
   Future<void> delete({required String path});
+  Future<void> deleteAll();
 }
 
 class OpenDataRecipesLocalRepository extends OpenDataRecipesLocalRepositoryAPI {
@@ -47,7 +48,19 @@ class OpenDataRecipesLocalRepository extends OpenDataRecipesLocalRepositoryAPI {
     final String fullPath = await getPath(path: path);
     final File file = File(fullPath);
     await file.delete();
+  }
 
-    return;
+  @override
+  Future<void> deleteAll() async {
+    final Directory routeDirectory = await getApplicationDocumentsDirectory();
+    final Directory directory = Directory('${routeDirectory.path}/open_data_recipes/pdfs');
+
+    if (directory.existsSync()) {
+      final List<FileSystemEntity> recipeFiles = directory.listSync();
+
+      await Future.forEach(recipeFiles, (FileSystemEntity recipeFile) async {
+        await recipeFile.delete();
+      });
+    }
   }
 }
