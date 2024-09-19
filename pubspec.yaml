@@ -55,6 +55,13 @@ dependencies:
   # URL関連
   url_launcher: 6.3.0
 
+dependency_overrides:
+  url_launcher_ios:
+    git:
+      url: https://github.com/hellohuanlin/packages
+      path: packages/url_launcher/url_launcher_ios
+      ref: urllauncher_fix_main_actor_completion_conformance
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
