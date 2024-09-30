@@ -1,11 +1,13 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/dish/dish_model.dart';
+import 'package:hakondate/model/foodstuff/foodstuff_model.dart';
 import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:hakondate/repository/local/sqlite/menus/menus_local_repository.dart';
 import 'package:hakondate/state/daily/daily_state.dart';
 import 'package:hakondate/util/analytics_controller/analytics_controller.dart';
 import 'package:hakondate/util/environment.dart';
+import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
 
 part 'daily_view_model.g.dart';
 
@@ -75,7 +77,36 @@ class DailyViewModel extends _$DailyViewModel {
 
   void selectDish(DishModel dish) {
     state.whenData((DailyState data) {
-      state = AsyncData<DailyState>(data.copyWith(selectedDish: dish));
+      // 桔梗小と巴中で同じ料理の対して異なる食材を使う場合の対応
+      // 現在把握している問題はごはんとコッペパンのみ
+      // 将来的にはDBを修正して対応する
+      DishModel? newDish;
+      if (dish.name == 'ごはん' || dish.name == 'ごはん【茶碗なし】') {
+        if (dish.foodstuffs.length == 2) {
+          final int? currentSchool = ref.watch(userViewModelProvider).currentUser?.schoolId;
+          final List<FoodstuffModel> newFoodstuffs = dish.foodstuffs.where((FoodstuffModel foodstuff) {
+            if (currentSchool == 1 || currentSchool == 2 || currentSchool == 3) {
+              return foodstuff.name == '精白米100';
+            } else {
+              return foodstuff.name == '精白米70';
+            }
+          }).toList();
+          newDish = dish.copyWith(foodstuffs: newFoodstuffs);
+        }
+      } else if (dish.name == 'コッペパン') {
+        if (dish.foodstuffs.length == 2) {
+          final int? currentSchool = ref.watch(userViewModelProvider).currentUser?.schoolId;
+          final List<FoodstuffModel> newFoodstuffs = dish.foodstuffs.where((FoodstuffModel foodstuff) {
+            if (currentSchool == 1 || currentSchool == 2 || currentSchool == 3) {
+              return foodstuff.name == 'コッペパン65';
+            } else {
+              return foodstuff.name == 'コッペパン50';
+            }
+          }).toList();
+          newDish = dish.copyWith(foodstuffs: newFoodstuffs);
+        }
+      }
+      state = AsyncData<DailyState>(data.copyWith(selectedDish: newDish ?? dish));
     });
   }
 }
