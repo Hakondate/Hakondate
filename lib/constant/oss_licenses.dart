@@ -3739,13 +3739,13 @@ SOFTWARE.''',
     dependencies: [PackageRef('path'), PackageRef('meta'), PackageRef('yaml'), PackageRef('dart_pubspec_licenses'), PackageRef('args')]
   );
 
-/// flutter_pdfview 1.3.2
+/// flutter_pdfview 1.3.3
 const _flutter_pdfview = Package(
     name: 'flutter_pdfview',
     description: 'A Flutter plugin that provides a PDFView widget on Android and iOS.',
     homepage: 'https://github.com/endigo/flutter_pdfview',
     authors: [],
-    version: '1.3.2',
+    version: '1.3.3',
     license: '''MIT License
 
 Copyright (c) 2019 endigo
