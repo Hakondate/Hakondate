@@ -3,7 +3,6 @@ import 'dart:typed_data';
 import 'package:flutter/widgets.dart';
 
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:hakondate/view_model/multi_page/scroll/scroll_view_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/constant/firebase_apis.dart';
@@ -14,6 +13,7 @@ import 'package:hakondate/repository/remote/letters/letters_remote_repository.da
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/letter/letter_state.dart';
 import 'package:hakondate/util/analytics_controller/analytics_controller.dart';
+import 'package:hakondate/view_model/multi_page/scroll/scroll_view_model.dart';
 
 part 'letter_view_model.g.dart';
 

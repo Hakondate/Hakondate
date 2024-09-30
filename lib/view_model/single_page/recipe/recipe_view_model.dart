@@ -1,15 +1,15 @@
 import 'dart:typed_data';
 
 import 'package:flutter/widgets.dart';
-import 'package:hakondate/state/recipe/recipe_state.dart';
-import 'package:hakondate/view_model/multi_page/scroll/scroll_view_model.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/recipe/open_data_recipe_model.dart';
 import 'package:hakondate/repository/local/directory/open_data_recipes/open_data_recipes_local_repository.dart';
 import 'package:hakondate/repository/remote/open_data_recipes/open_data_recipes_remote_repository.dart';
+import 'package:hakondate/state/recipe/recipe_state.dart';
 import 'package:hakondate/util/analytics_controller/analytics_controller.dart';
+import 'package:hakondate/view_model/multi_page/scroll/scroll_view_model.dart';
 
 part 'recipe_view_model.g.dart';
 

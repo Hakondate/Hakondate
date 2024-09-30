@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'scroll_view_model.g.dart';

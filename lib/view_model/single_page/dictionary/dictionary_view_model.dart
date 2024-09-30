@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hakondate/view_model/multi_page/scroll/scroll_view_model.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -8,6 +7,7 @@ import 'package:hakondate/model/nutrients/five_major_nutrient.dart';
 import 'package:hakondate/repository/local/sqlite/dictionary_items/dictionary_items_local_repository.dart';
 import 'package:hakondate/state/dictionary/dictionary_state.dart';
 import 'package:hakondate/util/analytics_controller/analytics_controller.dart';
+import 'package:hakondate/view_model/multi_page/scroll/scroll_view_model.dart';
 
 part 'dictionary_view_model.g.dart';
 
