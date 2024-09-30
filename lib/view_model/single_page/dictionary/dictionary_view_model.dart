@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
@@ -5,6 +7,7 @@ import 'package:hakondate/model/nutrients/five_major_nutrient.dart';
 import 'package:hakondate/repository/local/sqlite/dictionary_items/dictionary_items_local_repository.dart';
 import 'package:hakondate/state/dictionary/dictionary_state.dart';
 import 'package:hakondate/util/analytics_controller/analytics_controller.dart';
+import 'package:hakondate/view_model/multi_page/scroll/scroll_view_model.dart';
 
 part 'dictionary_view_model.g.dart';
 
@@ -15,13 +18,16 @@ class DictionaryViewModel extends _$DictionaryViewModel {
   @override
   FutureOr<DictionaryState> build() {
     _dictionaryItemsLocalRepository = ref.watch(dictionaryItemsLocalRepositoryProvider);
-    return const DictionaryState();
+    return DictionaryState(
+      scrollController: ref.read(scrollViewModelProvider(path: '/home/dictionary')),
+    );
   }
 
   Future<void> selectGroup(DictionaryGroup group) async {
     state = const AsyncLoading<DictionaryState>();
     state = AsyncData<DictionaryState>(
       DictionaryState(
+        scrollController: ScrollController(),
         selectedGroup: group,
         selectedGroupItems: await _dictionaryItemsLocalRepository.listGroup(group.groupNumber),
       ),
@@ -75,5 +81,12 @@ class DictionaryViewModel extends _$DictionaryViewModel {
     );
 
     return schemas.last;
+  }
+
+  ScrollController? getScrollController() {
+    state.whenData((DictionaryState data) {
+      return data.scrollController;
+    });
+    return null;
   }
 }

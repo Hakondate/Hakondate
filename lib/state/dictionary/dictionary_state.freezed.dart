@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$DictionaryState {
+  ScrollController get scrollController => throw _privateConstructorUsedError;
   DictionaryGroup? get selectedGroup => throw _privateConstructorUsedError;
   List<DictionaryItemModel>? get selectedGroupItems =>
       throw _privateConstructorUsedError;
@@ -33,7 +34,8 @@ abstract class $DictionaryStateCopyWith<$Res> {
       _$DictionaryStateCopyWithImpl<$Res, DictionaryState>;
   @useResult
   $Res call(
-      {DictionaryGroup? selectedGroup,
+      {ScrollController scrollController,
+      DictionaryGroup? selectedGroup,
       List<DictionaryItemModel>? selectedGroupItems,
       DictionaryItemModel? selectedItem});
 
@@ -53,11 +55,16 @@ class _$DictionaryStateCopyWithImpl<$Res, $Val extends DictionaryState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? scrollController = null,
     Object? selectedGroup = freezed,
     Object? selectedGroupItems = freezed,
     Object? selectedItem = freezed,
   }) {
     return _then(_value.copyWith(
+      scrollController: null == scrollController
+          ? _value.scrollController
+          : scrollController // ignore: cast_nullable_to_non_nullable
+              as ScrollController,
       selectedGroup: freezed == selectedGroup
           ? _value.selectedGroup
           : selectedGroup // ignore: cast_nullable_to_non_nullable
@@ -95,7 +102,8 @@ abstract class _$$DictionaryStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {DictionaryGroup? selectedGroup,
+      {ScrollController scrollController,
+      DictionaryGroup? selectedGroup,
       List<DictionaryItemModel>? selectedGroupItems,
       DictionaryItemModel? selectedItem});
 
@@ -114,11 +122,16 @@ class __$$DictionaryStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? scrollController = null,
     Object? selectedGroup = freezed,
     Object? selectedGroupItems = freezed,
     Object? selectedItem = freezed,
   }) {
     return _then(_$DictionaryStateImpl(
+      scrollController: null == scrollController
+          ? _value.scrollController
+          : scrollController // ignore: cast_nullable_to_non_nullable
+              as ScrollController,
       selectedGroup: freezed == selectedGroup
           ? _value.selectedGroup
           : selectedGroup // ignore: cast_nullable_to_non_nullable
@@ -139,11 +152,14 @@ class __$$DictionaryStateImplCopyWithImpl<$Res>
 
 class _$DictionaryStateImpl implements _DictionaryState {
   const _$DictionaryStateImpl(
-      {this.selectedGroup,
+      {required this.scrollController,
+      this.selectedGroup,
       final List<DictionaryItemModel>? selectedGroupItems,
       this.selectedItem})
       : _selectedGroupItems = selectedGroupItems;
 
+  @override
+  final ScrollController scrollController;
   @override
   final DictionaryGroup? selectedGroup;
   final List<DictionaryItemModel>? _selectedGroupItems;
@@ -162,7 +178,7 @@ class _$DictionaryStateImpl implements _DictionaryState {
 
   @override
   String toString() {
-    return 'DictionaryState(selectedGroup: $selectedGroup, selectedGroupItems: $selectedGroupItems, selectedItem: $selectedItem)';
+    return 'DictionaryState(scrollController: $scrollController, selectedGroup: $selectedGroup, selectedGroupItems: $selectedGroupItems, selectedItem: $selectedItem)';
   }
 
   @override
@@ -170,6 +186,8 @@ class _$DictionaryStateImpl implements _DictionaryState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DictionaryStateImpl &&
+            (identical(other.scrollController, scrollController) ||
+                other.scrollController == scrollController) &&
             (identical(other.selectedGroup, selectedGroup) ||
                 other.selectedGroup == selectedGroup) &&
             const DeepCollectionEquality()
@@ -179,7 +197,7 @@ class _$DictionaryStateImpl implements _DictionaryState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, selectedGroup,
+  int get hashCode => Object.hash(runtimeType, scrollController, selectedGroup,
       const DeepCollectionEquality().hash(_selectedGroupItems), selectedItem);
 
   @JsonKey(ignore: true)
@@ -192,10 +210,13 @@ class _$DictionaryStateImpl implements _DictionaryState {
 
 abstract class _DictionaryState implements DictionaryState {
   const factory _DictionaryState(
-      {final DictionaryGroup? selectedGroup,
+      {required final ScrollController scrollController,
+      final DictionaryGroup? selectedGroup,
       final List<DictionaryItemModel>? selectedGroupItems,
       final DictionaryItemModel? selectedItem}) = _$DictionaryStateImpl;
 
+  @override
+  ScrollController get scrollController;
   @override
   DictionaryGroup? get selectedGroup;
   @override

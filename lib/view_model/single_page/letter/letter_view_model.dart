@@ -13,6 +13,7 @@ import 'package:hakondate/repository/remote/letters/letters_remote_repository.da
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/letter/letter_state.dart';
 import 'package:hakondate/util/analytics_controller/analytics_controller.dart';
+import 'package:hakondate/view_model/multi_page/scroll/scroll_view_model.dart';
 
 part 'letter_view_model.g.dart';
 
@@ -26,7 +27,7 @@ class LetterViewModel extends _$LetterViewModel {
     _lettersRemoteRepository = ref.watch(lettersRemoteRepositoryProvider);
     _schoolsLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
 
-    return const LetterState();
+    return LetterState(scrollController: ref.read(scrollViewModelProvider(path: '/home/letter')));
   }
 
   Future<void> getLetters() async {
@@ -65,7 +66,6 @@ class LetterViewModel extends _$LetterViewModel {
 
   Future<void> reloadLetters() async {
     state = state.copyWith(
-      letters: <LetterMetadataModel>[],
       isEndListing: false,
       pageToken: null,
     );

@@ -7,12 +7,19 @@ import 'package:routemaster/routemaster.dart';
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/constant/svg_path.dart';
+import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/util/environment.dart';
 import 'package:hakondate/view/daily/daily_drawer.dart';
+import 'package:hakondate/view_model/multi_page/bottom_bar/app_bottom_navigation_bar_view_model.dart';
 import 'package:hakondate/view_model/multi_page/drawer/drawer_view_model.dart';
+import 'package:hakondate/view_model/multi_page/scroll/scroll_view_model.dart';
 
 class AppBottomNavigationBar extends ConsumerWidget {
   const AppBottomNavigationBar({super.key});
+  static const int dailyIndex = 0;
+  static const int recipesIndex = 1;
+  static const int dictionaryIndex = 2;
+  static const int letterIndex = 3;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -32,7 +39,28 @@ class AppBottomNavigationBar extends ConsumerWidget {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: tabState.controller.index,
-        onTap: (int index) => tabState.controller.animateTo(index),
+        //TODO: ここでトップへのスクロールも行う
+        onTap: (int index) {
+          tabState.controller.animateTo(index);
+          // switch (index) {
+          //   case dailyIndex:
+          //     if (routemaster.currentConfiguration!.fullPath == '/home/daily') {
+          //       ref.read(scrollViewModelProvider(path: '/home/daily').notifier).scrollToTop();
+          //     }
+          //   case recipesIndex:
+          //     if (routemaster.currentConfiguration!.fullPath == '/home/recipes') {
+          //       ref.read(scrollViewModelProvider(path: '/home/recipes').notifier).scrollToTop();
+          //     }
+          //   case dictionaryIndex:
+          //     if (routemaster.currentConfiguration!.fullPath == '/home/dictionary') {
+          //       ref.read(scrollViewModelProvider(path: '/home/dictionary').notifier).scrollToTop();
+          //     }
+          //   case letterIndex:
+          //     if (routemaster.currentConfiguration!.fullPath == '/home/letter') {
+          //       ref.read(scrollViewModelProvider(path: '/home/letter').notifier).scrollToTop();
+          //     }
+          // }
+        },
         backgroundColor: AppColor.ui.white,
         selectedItemColor: AppColor.brand.secondary,
         selectedLabelStyle: const TextStyle(

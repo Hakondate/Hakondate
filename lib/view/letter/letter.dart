@@ -7,11 +7,20 @@ import 'package:shimmer/shimmer.dart';
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/letter/letter_metadata_model.dart';
+import 'package:hakondate/router/routes.dart';
+import 'package:hakondate/state/bottom_bar/app_bottom_navigation_bar_state.dart';
 import 'package:hakondate/state/letter/letter_state.dart';
+import 'package:hakondate/util/scroll/scroll_function.dart';
 import 'package:hakondate/view/component/frame/stateful_wrapper.dart';
 import 'package:hakondate/view/component/tile/grid_frame.dart';
 import 'package:hakondate/view/letter/non_letter.dart';
+import 'package:hakondate/view_model/multi_page/bottom_bar/app_bottom_navigation_bar_view_model.dart';
+import 'package:hakondate/view_model/multi_page/scroll/scroll_view_model.dart';
 import 'package:hakondate/view_model/single_page/letter/letter_view_model.dart';
+
+//TODO: 子ページを開いた時にスクロール位置が初期値に戻ってしまう。
+
+final PageStorageBucket bucket = PageStorageBucket();
 
 class Letter extends ConsumerWidget {
   const Letter({super.key});
@@ -22,44 +31,51 @@ class Letter extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('お便り'),
       ),
-      body: StatefulWrapper(
-        onInit: () => ref.read(letterViewModelProvider.notifier).getLetters(),
-        child: Builder(
-          builder: (BuildContext context) {
-            final List<LetterMetadataModel> letters = ref.watch(letterViewModelProvider).letters;
+      body: Consumer(
+        builder: (BuildContext context, WidgetRef ref, _) {
+          final ScrollController scrollController = ref.watch(scrollViewModelProvider(path: routemaster.currentConfiguration!.fullPath));
+          return StatefulWrapper(
+            onInit: () => ref.read(letterViewModelProvider.notifier).getLetters(),
+            child: Builder(
+              builder: (BuildContext context) {
+                final List<LetterMetadataModel> letters = ref.watch(letterViewModelProvider).letters;
+                if (letters.isEmpty) return const NonLetter();
+                return Scrollbar(
+                  key: PageStorageKey<String>(routemaster.currentConfiguration!.fullPath),
+                  controller: scrollController,
+                  child: Padding(
+                    padding: const EdgeInsets.all(PaddingSize.minimum),
+                    child: RefreshIndicator(
+                      onRefresh: () => ref.read(letterViewModelProvider.notifier).reloadLetters(),
+                      color: AppColor.brand.secondary,
+                      backgroundColor: AppColor.ui.white,
+                      displacement: 0,
+                      child: GridView.builder(
+                        key: PageStorageKey<String>(routemaster.currentConfiguration!.fullPath),
+                        controller: scrollController,
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: MarginSize.minimum,
+                          crossAxisSpacing: MarginSize.minimum,
+                        ),
+                        itemCount: letters.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          if (!ref.watch(letterViewModelProvider).isEndListing &&
+                              ref.watch(letterViewModelProvider).status != LetterConnectionStatus.loading &&
+                              index == letters.length - 4) {
+                            Future<void>(ref.read(letterViewModelProvider.notifier).getLetters);
+                          }
 
-            if (letters.isEmpty) return const NonLetter();
-
-            return Scrollbar(
-              child: Padding(
-                padding: const EdgeInsets.all(PaddingSize.minimum),
-                child: RefreshIndicator(
-                  onRefresh: () => ref.read(letterViewModelProvider.notifier).reloadLetters(),
-                  color: AppColor.brand.secondary,
-                  backgroundColor: AppColor.ui.white,
-                  displacement: 0,
-                  child: GridView.builder(
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: MarginSize.minimum,
-                      crossAxisSpacing: MarginSize.minimum,
+                          return _gridTile(index);
+                        },
+                      ),
                     ),
-                    itemCount: letters.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      if (!ref.watch(letterViewModelProvider).isEndListing &&
-                          ref.watch(letterViewModelProvider).status != LetterConnectionStatus.loading &&
-                          index == letters.length - 4) {
-                        Future<void>(ref.read(letterViewModelProvider.notifier).getLetters);
-                      }
-
-                      return _gridTile(index);
-                    },
                   ),
-                ),
-              ),
-            );
-          },
-        ),
+                );
+              },
+            ),
+          );
+        },
       ),
     );
   }

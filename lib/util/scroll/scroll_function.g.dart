@@ -1,26 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'letter_view_model.dart';
+part of 'scroll_function.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$letterViewModelHash() => r'e6da65d57eb53d016824dab0e91fcb5e6d395409';
+String _$scrollFunctionHash() => r'21b17d75d83a0364295c5a6e7267c48496d1b771';
 
-/// See also [LetterViewModel].
-@ProviderFor(LetterViewModel)
-final letterViewModelProvider =
-    NotifierProvider<LetterViewModel, LetterState>.internal(
-  LetterViewModel.new,
-  name: r'letterViewModelProvider',
+/// See also [scrollFunction].
+@ProviderFor(scrollFunction)
+final scrollFunctionProvider = AutoDisposeProvider<ScrollFunction>.internal(
+  scrollFunction,
+  name: r'scrollFunctionProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$letterViewModelHash,
+      : _$scrollFunctionHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$LetterViewModel = Notifier<LetterState>;
+typedef ScrollFunctionRef = AutoDisposeProviderRef<ScrollFunction>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -14,11 +14,14 @@ import 'package:hakondate/view/daily/nutrients_card.dart';
 import 'package:hakondate/view_model/multi_page/drawer/drawer_view_model.dart';
 import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
 
+final PageStorageBucket bucket = PageStorageBucket();
+
 class Daily extends StatelessWidget {
   const Daily({super.key});
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('daily routemaster.currentConfiguration!.fullPath: ${routemaster.currentConfiguration!.fullPath}');
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -56,7 +59,6 @@ class Daily extends StatelessWidget {
               data: (DailyState state) {
                 final String formatted =
                     (isSameDay(state.selectedDay, DateTime.now())) ? '今日' : DateFormat('M月d日').format(state.selectedDay);
-
                 return Text('$formattedの献立');
               },
               error: (_, __) => const Text(''),
@@ -114,25 +116,53 @@ class Daily extends StatelessWidget {
       builder: (BuildContext context, WidgetRef ref, _) {
         return ref.watch(dailyViewModelProvider).maybeWhen(
               data: (DailyState state) {
-                if (state.menu is LunchesDayMenuModel) {
-                  return Expanded(
-                    child: ListView(
-                      children: const <Widget>[
-                        MenuCard(),
-                        NutrientsCard(),
-                      ],
-                    ),
-                  );
-                } else if (state.menu is HolidayMenuModel) {
-                  return const NonLunchesDayBody(
-                    imageFileName: 'holiday.png',
-                    text: '給食はお休みです...',
-                  );
-                }
-
-                return const NonLunchesDayBody(
-                  imageFileName: 'no_data.png',
-                  text: '献立は準備中です...',
+                return Expanded(
+                  child: GestureDetector(
+                    onHorizontalDragEnd: (DragEndDetails details) {
+                      if (details.primaryVelocity! < 0) {
+                        ref.read(dailyViewModelProvider.notifier).updateSelectedDay(
+                              selectedDay: ref.read(dailyViewModelProvider.notifier).getAddedSelectedDay(state, 1),
+                            );
+                      } else {
+                        ref.read(dailyViewModelProvider.notifier).updateSelectedDay(
+                              selectedDay: ref.read(dailyViewModelProvider.notifier).getAddedSelectedDay(state, -1),
+                            );
+                      }
+                    },
+                    child: (() {
+                      if (state.menu is LunchesDayMenuModel) {
+                        return PageStorage(
+                          bucket: bucket,
+                          child: ListView(
+                            key: PageStorageKey(routemaster.currentConfiguration!.fullPath),
+                            controller: state.scrollController,
+                            children: const <Widget>[
+                              MenuCard(),
+                              NutrientsCard(),
+                            ],
+                          ),
+                        );
+                      } else {
+                        return Column(
+                          children: <Widget>[
+                            (() {
+                              if (state.menu is HolidayMenuModel) {
+                                return const NonLunchesDayBody(
+                                  imageFileName: 'holiday.png',
+                                  text: '給食はお休みです...',
+                                );
+                              } else {
+                                return const NonLunchesDayBody(
+                                  imageFileName: 'no_data.png',
+                                  text: '献立は準備中です...',
+                                );
+                              }
+                            })(),
+                          ],
+                        );
+                      }
+                    })(),
+                  ),
                 );
               },
               orElse: () => const SizedBox.shrink(),

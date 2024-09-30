@@ -8,6 +8,8 @@ import 'package:hakondate/model/recipe/recipe_type.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/view/component/tile/grid_frame.dart';
 
+final bucket = PageStorageBucket();
+
 class OpenDataRecipeGrid extends StatelessWidget {
   const OpenDataRecipeGrid({
     required this.type,
@@ -20,13 +22,17 @@ class OpenDataRecipeGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<OpenDataRecipeModel> recipes = OpenDataRecipes.recipes(type);
 
-    return GridView.count(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      crossAxisCount: 2,
-      mainAxisSpacing: MarginSize.minimum,
-      crossAxisSpacing: MarginSize.minimum,
-      children: recipes.map(_gridTile).toList(),
+    return PageStorage(
+      bucket: bucket,
+      child: GridView.count(
+        key: PageStorageKey<String>(routemaster.currentConfiguration!.fullPath),
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        crossAxisCount: 2,
+        mainAxisSpacing: MarginSize.minimum,
+        crossAxisSpacing: MarginSize.minimum,
+        children: recipes.map(_gridTile).toList(),
+      ),
     );
   }
 
