@@ -1174,11 +1174,11 @@ packages:
     dependency: "direct overridden"
     description:
       path: "packages/url_launcher/url_launcher_ios"
-      ref: urllauncher_fix_main_actor_completion_conformance
-      resolved-ref: ce455e87a4db3642fe2d9d36c8da1ee72d7cffea
+      ref: HEAD
+      resolved-ref: c11149c63e2ed2101e1257b8e048aa1b923a98ed
       url: "https://github.com/hellohuanlin/packages"
     source: git
-    version: "6.3.1"
+    version: "6.1.4"
   url_launcher_linux:
     dependency: transitive
     description:
