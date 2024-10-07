@@ -5,9 +5,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/state/signup/signup_state.dart';
-import 'package:hakondate/view/component/dialog/help_dialog.dart';
+import 'package:hakondate/view/component/button/help_button.dart';
 import 'package:hakondate/view/component/label/setting_label.dart';
 import 'package:hakondate/view/component/signing_form/error_indication.dart';
+import 'package:hakondate/view/help/help_frame.dart';
 import 'package:hakondate/view_model/single_page/signup/signup_view_model.dart';
 
 class SchoolForm extends ConsumerWidget {
@@ -28,19 +29,9 @@ class SchoolForm extends ConsumerWidget {
                 '学校・学年',
                 style: TextStyle(fontSize: FontSize.subheading),
               ),
-              IconButton(
-                icon: const Icon(Icons.help),
-                iconSize: IconSize.help,
-                color: Theme.of(context).primaryIconTheme.color,
-                onPressed: () async => showDialog(
-                  context: context,
-                  builder: (BuildContext context) => const HelpDialog(
-                    title: Text('学校・学年について'),
-                    content: Text('　学校情報は，本アプリ内でお子様の通っている学校の献立を表示するために利用されます．選択肢にない学校は，本アプリ未対応の学校です．\n'
-                        '　学年情報は，本アプリ内でお子様の年齢に合わせた情報(栄養基準値など)を表示するために利用されます．\n'
-                        '　どちらの情報も，端末内に保存され収集されることはありません．また，あとから変更することができます．'),
-                  ),
-                ),
+              HelpButton(
+                helpFrame: HelpFrame.schoolAndSchoolYear(),
+                key: key,
               ),
               const Spacer(),
               if (state is AsyncData<SignupState>) ErrorIndication(errorState: state.value.schoolErrorState),
