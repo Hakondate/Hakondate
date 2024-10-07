@@ -6,7 +6,22 @@ part of 'user_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userViewModelHash() => r'1aa6940d7df4473e2c746e94ec46e31171c39edf';
+String _$userAuthorizedHash() => r'9d36c22e6a27b921c852bef0017725d640d4fdad';
+
+/// See also [userAuthorized].
+@ProviderFor(userAuthorized)
+final userAuthorizedProvider = FutureProvider<bool>.internal(
+  userAuthorized,
+  name: r'userAuthorizedProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$userAuthorizedHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef UserAuthorizedRef = FutureProviderRef<bool>;
+String _$userViewModelHash() => r'242d80303794aea2036a6df7f76b58f9a1dc4ef1';
 
 /// See also [UserViewModel].
 @ProviderFor(UserViewModel)

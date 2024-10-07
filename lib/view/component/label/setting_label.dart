@@ -11,6 +11,7 @@ class SettingLabel extends StatelessWidget {
     required this.dialList,
     required this.completed,
     required this.trailing,
+    this.disabled = false,
     super.key,
   });
 
@@ -18,6 +19,7 @@ class SettingLabel extends StatelessWidget {
   final List<String> dialList;
   final void Function(int) completed;
   final String trailing;
+  final bool disabled;
 
   void _showDialPickerModal(BuildContext context) {
     int selected = 0;
@@ -80,7 +82,10 @@ class SettingLabel extends StatelessWidget {
             fontSize: FontSize.label,
           ),
         ),
-        onTap: () => _showDialPickerModal(context),
+        onTap: () {
+          if (disabled) return;
+          _showDialPickerModal(context);
+        },
       ),
     );
   }

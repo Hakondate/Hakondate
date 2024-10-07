@@ -6,6 +6,7 @@ import 'package:hakondate/repository/local/sqlite/menus/menus_local_repository.d
 import 'package:hakondate/state/daily/daily_state.dart';
 import 'package:hakondate/util/analytics_controller/analytics_controller.dart';
 import 'package:hakondate/util/environment.dart';
+import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
 
 part 'daily_view_model.g.dart';
 
@@ -17,7 +18,13 @@ class DailyViewModel extends _$DailyViewModel {
       Flavor.dev => await ref.read(menusLocalRepositoryProvider).getLatestDay(),
       Flavor.stg || Flavor.prod => DateTime.now()
     };
-    final MenuModel menu = await ref.read(menusLocalRepositoryProvider).getMenuByDay(selectedDay);
+    final MenuModel menu;
+    final AsyncValue<bool> userAuthorizedState = ref.watch(userAuthorizedProvider);
+    if (userAuthorizedState is AsyncData<bool> && userAuthorizedState.value) {
+      menu = await ref.read(menusLocalRepositoryProvider).getMenuByDay(selectedDay);
+    } else {
+      menu = const UnauthorizedMenuModel();
+    }
 
     return DailyState(
       selectedDay: selectedDay,
@@ -33,7 +40,13 @@ class DailyViewModel extends _$DailyViewModel {
 
   Future<void> updateSelectedDay({required DateTime selectedDay, DateTime? focusedDay}) async {
     state.whenData((DailyState data) async {
-      final MenuModel menu = await ref.read(menusLocalRepositoryProvider).getMenuByDay(selectedDay);
+      final MenuModel menu;
+      final AsyncValue<bool> userAuthorizedState = ref.watch(userAuthorizedProvider);
+      if (userAuthorizedState is AsyncData<bool> && userAuthorizedState.value) {
+        menu = await ref.read(menusLocalRepositoryProvider).getMenuByDay(selectedDay);
+      } else {
+        menu = const UnauthorizedMenuModel();
+      }
 
       state = AsyncData<DailyState>(
         data.copyWith(
