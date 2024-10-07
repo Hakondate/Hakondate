@@ -8,8 +8,10 @@ import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:hakondate/state/daily/daily_state.dart';
 import 'package:hakondate/util/exception/class_type_exception.dart';
 import 'package:hakondate/view/component/graph/nutrients_radar_chart.dart';
+import 'package:hakondate/view/component/help_button/help_button.dart';
 import 'package:hakondate/view/component/label/nutrients_list.dart';
 import 'package:hakondate/view/dictionary/recommend_foodstuff.dart';
+import 'package:hakondate/view/help/help_frame.dart';
 import 'package:hakondate/view_model/single_page/daily/daily_graph_view_model.dart';
 import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
 
@@ -24,6 +26,10 @@ class NutrientsCard extends StatelessWidget {
         children: <Widget>[
           Image.asset('assets/images/label/nutrientsLabel.png'),
           _nutrientsGraph(),
+          HelpButton(
+            helpFrame: HelpFrame.recommendedIngredients(),
+            key: key,
+          ),
           const RecommendedFoodStuffExpansionTile(),
           _nutrientsExpansionTile(),
         ],

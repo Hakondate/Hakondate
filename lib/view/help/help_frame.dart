@@ -84,7 +84,7 @@ class HelpFrame extends StatelessWidget {
   factory HelpFrame.input() => HelpFrame(
         label: '登録情報について',
         content: DescriptionText.body(
-          label: '　ご登録された学年に応じて，栄養基準値が異なります．学年が変わるごとに，登録データをを手動で変更する必要があります．',
+          label: '　ご登録された学年に応じて，栄養基準値が異なります．学年が変わるごとに，登録データを手動で変更する必要があります．',
         ),
       );
 
@@ -135,9 +135,9 @@ class HelpFrame extends StatelessWidget {
       );
 
   factory HelpFrame.recommendedIngredients() => HelpFrame(
-        label: 'オススメ食材',
+        label: 'おすすめ食材',
         content: DescriptionText.body(
-          label: '　オススメ食材は，5大栄養素の内，最も不足している栄養素と次に不足している栄養素が多く含まれる食材を表示しています．また，給食が休みの日は表示されません．',
+          label: '　おすすめ食材は，5大栄養素の内，最も不足している栄養素と次に不足している栄養素が多く含まれる食材を表示しています．また，給食が休みの日は表示されません．',
         ),
       );
 
