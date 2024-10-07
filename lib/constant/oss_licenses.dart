@@ -3743,13 +3743,13 @@ SOFTWARE.''',
     dependencies: [PackageRef('path'), PackageRef('meta'), PackageRef('yaml'), PackageRef('dart_pubspec_licenses'), PackageRef('args')]
   );
 
-/// flutter_pdfview 1.3.2
+/// flutter_pdfview 1.3.3
 const _flutter_pdfview = Package(
     name: 'flutter_pdfview',
     description: 'A Flutter plugin that provides a PDFView widget on Android and iOS.',
     homepage: 'https://github.com/endigo/flutter_pdfview',
     authors: [],
-    version: '1.3.2',
+    version: '1.3.3',
     license: '''MIT License
 
 Copyright (c) 2019 endigo
@@ -7843,13 +7843,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('flutter'), PackageRef('url_launcher_platform_interface')]
   );
 
-/// url_launcher_ios 6.2.5
+/// url_launcher_ios 6.3.1
 const _url_launcher_ios = Package(
     name: 'url_launcher_ios',
     description: 'iOS implementation of the url_launcher plugin.',
     repository: 'https://github.com/flutter/packages/tree/main/packages/url_launcher/url_launcher_ios',
     authors: [],
-    version: '6.2.5',
+    version: '6.3.1',
     license: '''Copyright 2013 The Flutter Authors. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
