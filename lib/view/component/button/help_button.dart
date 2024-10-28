@@ -22,7 +22,11 @@ class HelpButton extends StatelessWidget {
             return Dialog(
               child: ListView.builder(
                 shrinkWrap: true,
-                padding: const EdgeInsets.all(MarginSize.minimum),
+                padding: const EdgeInsets.only(
+                  left: MarginSize.minimum,
+                  right: MarginSize.minimum,
+                  top: MarginSize.minimum,
+                ),
                 itemCount: helpFrame.length,
                 itemBuilder: (BuildContext contextex, int index) {
                   return helpFrame[index];

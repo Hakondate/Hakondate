@@ -9,6 +9,8 @@ import 'package:hakondate/model/nutrients/five_major_nutrient.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/view_model/single_page/daily/daily_recommend_foodstuffs_view_model.dart';
 import 'package:hakondate/view_model/single_page/dictionary/dictionary_view_model.dart';
+import 'package:hakondate/view/component/button/help_button.dart';
+import 'package:hakondate/view/help/help_frame.dart';
 
 class RecommendedFoodStuffExpansionTile extends StatelessWidget {
   const RecommendedFoodStuffExpansionTile({super.key});
@@ -40,6 +42,13 @@ class RecommendedFoodStuffExpansionTile extends StatelessWidget {
                                 recommendFoodStuffs,
                                 i,
                               ),
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: HelpButton(
+                                helpFrame: <HelpFrame>[HelpFrame.recommendedIngredients()],
+                                key: key,
+                              ),
+                            ),
                           ],
                         );
                       } else {

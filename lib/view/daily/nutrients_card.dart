@@ -26,9 +26,12 @@ class NutrientsCard extends StatelessWidget {
         children: <Widget>[
           Image.asset('assets/images/label/nutrientsLabel.png'),
           _nutrientsGraph(),
-          HelpButton(
-            helpFrame: <HelpFrame>[HelpFrame.baseNut(), HelpFrame.formula()],
-            key: key,
+          Align(
+            alignment: Alignment.centerRight,
+            child: HelpButton(
+              helpFrame: <HelpFrame>[HelpFrame.baseNut(), HelpFrame.formula()],
+              key: key,
+            ),
           ),
           const RecommendedFoodStuffExpansionTile(),
           _nutrientsExpansionTile(),
