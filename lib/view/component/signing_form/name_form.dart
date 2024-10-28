@@ -38,7 +38,7 @@ class NameForm extends ConsumerWidget {
                   style: TextStyle(fontSize: FontSize.subheading),
                 ),
                 HelpButton(
-                  helpFrame: HelpFrame.nickName(),
+                  helpFrame: [HelpFrame.nickName()],
                   key: key,
                 ),
                 const Spacer(),

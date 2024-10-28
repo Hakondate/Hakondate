@@ -5,7 +5,7 @@ import 'package:hakondate/view/help/help_frame.dart';
 
 class HelpButton extends StatelessWidget {
   const HelpButton({required this.helpFrame, super.key});
-  final HelpFrame helpFrame;
+  final List<HelpFrame> helpFrame;
 
   @override
   Widget build(BuildContext context) {
@@ -16,26 +16,20 @@ class HelpButton extends StatelessWidget {
       ),
       color: Theme.of(context).primaryIconTheme.color,
       onPressed: () {
-        showModalBottomSheet<void>(
+        showDialog<void>(
           context: context,
-          isScrollControlled: true,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
-          ),
-          backgroundColor: Colors.white,
-          builder: (BuildContext context) => Container(
-            padding: const EdgeInsets.all(MarginSize.normal),
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
+          builder: (BuildContext context) {
+            return Dialog(
+              child: ListView.builder(
+                shrinkWrap: true,
+                padding: const EdgeInsets.all(MarginSize.minimum),
+                itemCount: helpFrame.length,
+                itemBuilder: (BuildContext contextex, int index) {
+                  return helpFrame[index];
+                },
               ),
-            ),
-            child: helpFrame,
-          ),
+            );
+          },
         );
       },
     );
