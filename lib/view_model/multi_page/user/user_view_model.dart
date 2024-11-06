@@ -43,14 +43,16 @@ class UserViewModel extends _$UserViewModel {
 
       if (v1UserJson is! Map<String, dynamic>) return;
 
-      final String name = v1UserJson['name'] as String;
+      final String lastName = v1UserJson['lastName'] as String;
+      final String firstName = v1UserJson['firstName'] as String;
       final SchoolModel? school = await _schoolsLocalRepository.getByName(v1UserJson['school'] as String);
       final int schoolYear = v1UserJson['schoolYear'] as int;
 
       if (school == null) return;
 
       await createUser(
-        name: name,
+        lastName: lastName,
+        firstName: firstName,
         schoolId: school.id,
         schoolYear: schoolYear - 6,
       );
@@ -93,14 +95,16 @@ class UserViewModel extends _$UserViewModel {
   }
 
   Future<void> updateCurrentUser({
-    String? name,
+    String? lastName,
+    String? firstName,
     int? schoolId,
     int? schoolYear,
   }) async {
     if (state.currentUser == null) return;
     final NutrientsModel? slns = (schoolId != null || schoolYear != null) ? await _getSLNS(state.currentUser!.id) : state.currentUser!.slns;
     final UserModel newUser = state.currentUser!.copyWith(
-      name: name ?? state.currentUser!.name,
+      lastName: lastName ?? state.currentUser!.lastName,
+      firstName: firstName ?? state.currentUser!.firstName,
       schoolId: schoolId ?? state.currentUser!.schoolId,
       schoolYear: schoolYear ?? state.currentUser!.schoolYear,
       slns: slns,
@@ -135,11 +139,12 @@ class UserViewModel extends _$UserViewModel {
   }
 
   Future<int> createUser({
-    required String name,
+    required String lastName,
+    required String firstName,
     required int schoolId,
     required int schoolYear,
   }) async {
-    final int id = await _usersLocalRepository.add(name, schoolId, schoolYear);
+    final int id = await _usersLocalRepository.add(lastName, firstName, schoolId, schoolYear);
     await changeCurrentUser(id);
     await ref.read(analyticsControllerProvider.notifier).logSignup();
 

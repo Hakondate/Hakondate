@@ -16,7 +16,7 @@ UsersLocalRepository usersLocalRepository(UsersLocalRepositoryRef ref) {
 abstract class UsersLocalRepositoryAPI {
   Future<List<UserModel>> list();
   Future<UserModel> getById(int id);
-  Future<int> add(String name, int schoolId, int schoolYear);
+  Future<int> add(String lastName, String firstName, int schoolId, int schoolYear);
   Future<int> update(UserModel user);
   Future<int> count();
   Future<int> delete(int id);
@@ -50,9 +50,10 @@ class UsersLocalRepository extends UsersLocalRepositoryAPI {
   }
 
   @override
-  Future<int> add(String name, int schoolId, int schoolYear) => _db.into(_db.usersTable).insertOnConflictUpdate(
+  Future<int> add(String lastName, String firstName, int schoolId, int schoolYear) => _db.into(_db.usersTable).insertOnConflictUpdate(
         UsersTableCompanion(
-          name: Value<String>(name),
+          lastName: Value<String>(lastName),
+          firstName: Value<String>(firstName),
           schoolId: Value<int>(schoolId),
           schoolYear: Value<int>(schoolYear),
         ),
