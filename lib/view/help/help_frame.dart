@@ -113,9 +113,10 @@ class HelpFrame extends StatelessWidget {
   factory HelpFrame.nickName() => HelpFrame(
         label: 'お名前について',
         content: DescriptionText.body(
-            label: '　お名前情報は本アプリ内でお子様を識別するために利用されます．\n'
-                'ニックネームなどを入力していただいても構いません．また，あとで変更することもできます．\n'
-                '　登録情報は端末に保存され，収集されることはありません．また，あとから変更することができます．'),
+          label: '　お名前情報は本アプリ内でお子様を識別するために利用されます．\n'
+              'ニックネームなどを入力していただいても構いません．また，あとで変更することもできます．\n'
+              '　登録情報は端末に保存され，収集されることはありません．また，あとから変更することができます．',
+        ),
       );
 
   factory HelpFrame.schoolAndSchoolYear() => HelpFrame(

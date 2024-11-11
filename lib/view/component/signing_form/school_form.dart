@@ -30,7 +30,7 @@ class SchoolForm extends ConsumerWidget {
                 style: TextStyle(fontSize: FontSize.subheading),
               ),
               HelpButton(
-                helpFrame: [HelpFrame.schoolAndSchoolYear()],
+                helpFrame: <HelpFrame>[HelpFrame.schoolAndSchoolYear()],
                 key: key,
               ),
               const Spacer(),
