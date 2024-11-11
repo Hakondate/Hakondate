@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hakondate/constant/size.dart';
 
+import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/view/help/help_frame.dart';
 
 class HelpButton extends StatelessWidget {
