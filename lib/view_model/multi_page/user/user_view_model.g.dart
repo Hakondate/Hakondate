@@ -21,7 +21,7 @@ final userAuthorizedProvider = FutureProvider<bool>.internal(
 );
 
 typedef UserAuthorizedRef = FutureProviderRef<bool>;
-String _$userViewModelHash() => r'242d80303794aea2036a6df7f76b58f9a1dc4ef1';
+String _$userViewModelHash() => r'4b29469389fc1cb5dd6a5c4b37132857021c103d';
 
 /// See also [UserViewModel].
 @ProviderFor(UserViewModel)
