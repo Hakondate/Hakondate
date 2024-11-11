@@ -48,19 +48,19 @@ class AuthorizationPage extends ConsumerWidget {
       body: Center(
         child: Column(
           children: <Widget>[
-            const SizedBox(height: 32),
+            const SizedBox(height: PaddingSize.content),
             Row(
               children: <Widget>[
-                const SizedBox(width: 16),
+                const SizedBox(width: MarginSize.normal),
                 Flexible(
                   child: DescriptionText.body(
                     label: '　この学校の給食を見るには招待コードの入力が必要です．招待コードは学校から案内がございます．給食だより等をご確認ください．',
                   ),
                 ),
-                const SizedBox(width: 16),
+                const SizedBox(width: MarginSize.normal),
               ],
             ),
-            const SizedBox(height: 32),
+            const SizedBox(height: PaddingSize.content),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -84,7 +84,7 @@ class AuthorizationPage extends ConsumerWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 32),
+            const SizedBox(height: PaddingSize.content),
             const Text(
               '招待コードを入力してください',
               style: TextStyle(
@@ -95,7 +95,7 @@ class AuthorizationPage extends ConsumerWidget {
             const SizedBox(height: 5),
             Row(
               children: <Widget>[
-                const SizedBox(width: 32),
+                const SizedBox(width: PaddingSize.content),
                 Flexible(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -139,7 +139,7 @@ class AuthorizationPage extends ConsumerWidget {
                           );
                         },
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: PaddingSize.minimum),
                       Text(
                         state.when(
                           data: (AuthorizationState data) => data.statusMessage,
@@ -157,7 +157,7 @@ class AuthorizationPage extends ConsumerWidget {
                     ],
                   ),
                 ),
-                const SizedBox(width: 32),
+                const SizedBox(width: PaddingSize.content),
               ],
             ),
           ],

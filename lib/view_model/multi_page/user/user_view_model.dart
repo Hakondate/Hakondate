@@ -104,7 +104,7 @@ class UserViewModel extends _$UserViewModel {
 
     DateTime? authorizedAt = state.currentUser!.authorizedAt;
     if (schoolId != null && schoolId != state.currentUser!.schoolId) {
-      authorizedAt = await _getSameSchoolAuthorizedAt(schoolId);
+      authorizedAt = await _getSchoolAuthorizedAt(schoolId);
     }
 
     final UserModel newUser = state.currentUser!.copyWith(
@@ -180,7 +180,7 @@ class UserViewModel extends _$UserViewModel {
     );
   }
 
-  Future<DateTime?> _getSameSchoolAuthorizedAt(int schoolId) async {
+  Future<DateTime?> _getSchoolAuthorizedAt(int schoolId) async {
     final SchoolModel school = await _schoolsLocalRepository.getById(schoolId);
     if (school.authorizationRequired) {
       final List<UserModel> users = await ref.read(usersLocalRepositoryProvider).list();
