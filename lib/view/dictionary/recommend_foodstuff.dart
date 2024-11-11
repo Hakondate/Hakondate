@@ -7,10 +7,10 @@ import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
 import 'package:hakondate/model/nutrients/five_major_nutrient.dart';
 import 'package:hakondate/router/routes.dart';
-import 'package:hakondate/view_model/single_page/daily/daily_recommend_foodstuffs_view_model.dart';
-import 'package:hakondate/view_model/single_page/dictionary/dictionary_view_model.dart';
 import 'package:hakondate/view/component/button/help_button.dart';
 import 'package:hakondate/view/help/help_frame.dart';
+import 'package:hakondate/view_model/single_page/daily/daily_recommend_foodstuffs_view_model.dart';
+import 'package:hakondate/view_model/single_page/dictionary/dictionary_view_model.dart';
 
 class RecommendedFoodStuffExpansionTile extends StatelessWidget {
   const RecommendedFoodStuffExpansionTile({super.key});
