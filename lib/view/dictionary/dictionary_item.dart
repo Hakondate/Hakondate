@@ -136,7 +136,7 @@ class DictionaryItem extends ConsumerWidget {
                         Align(
                           alignment: Alignment.centerRight,
                           child: HelpButton(
-                            helpFrame: <HelpFrame>[HelpFrame.dishDetail()],
+                            helpFrame: <HelpFrame>[HelpFrame.tr()],
                             key: key,
                           ),
                         ),
