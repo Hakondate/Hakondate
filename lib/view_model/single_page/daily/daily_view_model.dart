@@ -19,7 +19,13 @@ class DailyViewModel extends _$DailyViewModel {
       Flavor.dev => await ref.read(menusLocalRepositoryProvider).getLatestDay(),
       Flavor.stg || Flavor.prod => DateTime.now()
     };
-    final MenuModel menu = await ref.read(menusLocalRepositoryProvider).getMenuByDay(selectedDay);
+    final MenuModel menu;
+    final AsyncValue<bool> userAuthorizedState = ref.watch(userAuthorizedProvider);
+    if (userAuthorizedState is AsyncData<bool> && userAuthorizedState.value) {
+      menu = await ref.read(menusLocalRepositoryProvider).getMenuByDay(selectedDay);
+    } else {
+      menu = const UnauthorizedMenuModel();
+    }
 
     return DailyState(
       selectedDay: selectedDay,
@@ -35,7 +41,13 @@ class DailyViewModel extends _$DailyViewModel {
 
   Future<void> updateSelectedDay({required DateTime selectedDay, DateTime? focusedDay}) async {
     state.whenData((DailyState data) async {
-      final MenuModel menu = await ref.read(menusLocalRepositoryProvider).getMenuByDay(selectedDay);
+      final MenuModel menu;
+      final AsyncValue<bool> userAuthorizedState = ref.watch(userAuthorizedProvider);
+      if (userAuthorizedState is AsyncData<bool> && userAuthorizedState.value) {
+        menu = await ref.read(menusLocalRepositoryProvider).getMenuByDay(selectedDay);
+      } else {
+        menu = const UnauthorizedMenuModel();
+      }
 
       state = AsyncData<DailyState>(
         data.copyWith(
