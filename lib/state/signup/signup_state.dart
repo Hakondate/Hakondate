@@ -12,6 +12,7 @@ class SignupState with _$SignupState {
     String? lastName,
     String? firstName,
     int? schoolId,
+    SchoolModel? school,
     int? schoolYear,
     @Default('学校を選択') String schoolTrailing,
     @Default('学年を選択') String schoolYearTrailing,
