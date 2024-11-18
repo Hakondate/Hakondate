@@ -40,7 +40,7 @@ class DailyNutrientsRadarChart extends ConsumerWidget {
                   Align(
                     alignment: Alignment.topRight,
                     child: Text(
-                      '　　外枠：120%\n 1メモリ：  ${120 ~/ 5}%',
+                      '　　外枠 : 120%\n 1メモリ :   ${120 ~/ 5}%',
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.black54,
