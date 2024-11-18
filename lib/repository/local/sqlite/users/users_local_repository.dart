@@ -1,6 +1,8 @@
 import 'package:drift/drift.dart';
+import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/model/user/user_model.dart';
 import 'package:hakondate/repository/local/sqlite/local_database.dart';
 import 'package:hakondate/util/exception/sqlite_exception.dart';
@@ -42,8 +44,16 @@ class UsersLocalRepository extends UsersLocalRepositoryAPI {
 
   @override
   Future<UserModel> getById(int id) async {
-    final UsersSchema? usersSchema = await (_db.select(_db.usersTable)..where(($UsersTableTable t) => t.id.equals(id))).getSingleOrNull();
-
+    /*あとで戻す*/ UsersSchema? usersSchema;
+    try {
+      usersSchema = await (_db.select(_db.usersTable)..where(($UsersTableTable t) => t.id.equals(id))).getSingleOrNull();
+    } catch (e) {
+      if (e is TypeError) {
+        routemaster.replace('/real_name_error');
+      } else {
+        throw Exception(e);
+      }
+    }
     if (usersSchema == null) throw SQLiteException('Failed to select $id from usersTable');
 
     return UserModel.fromDrift(usersSchema);

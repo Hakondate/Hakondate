@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hakondate/view/splash/real_name_update_error.dart';
 
 import 'package:routemaster/routemaster.dart';
 
@@ -34,6 +35,7 @@ final RoutemasterDelegate routemaster = RoutemasterDelegate(
     onUnknownRoute: (_) => const Redirect('/splash'),
     routes: <String, RouteSettings Function(RouteData)>{
       '/splash': (_) => const MaterialPage<dynamic>(child: Splash()),
+      '/real_name_error': (_) => const MaterialPage<dynamic>(child: RealNameUpdateError()),
       '/terms': (_) => const MaterialPage<dynamic>(child: Terms()),
       '/signup': (_) => MaterialPage<dynamic>(child: Signup()),
       '/signup/authorization': (_) => const MaterialPage<dynamic>(child: Authorization()),
