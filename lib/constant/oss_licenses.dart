@@ -106,6 +106,7 @@ const allDependencies = <Package>[
   _path_provider_platform_interface,
   _path_provider_windows,
   _petitparser,
+  _pin_code_fields,
   _platform,
   _plugin_platform_interface,
   _pointycastle,
@@ -177,6 +178,7 @@ const allDependencies = <Package>[
 const dependencies = <Package>[
   _app_tracking_transparency,
   _cloud_firestore,
+  _collection,
   _cupertino_icons,
   _drift,
   _firebase_analytics,
@@ -189,12 +191,14 @@ const dependencies = <Package>[
   _flutter_svg,
   _freezed,
   _freezed_annotation,
+  _http,
   _intl,
   _json_annotation,
   _json_serializable,
   _multi_charts,
   _path,
   _path_provider,
+  _pin_code_fields,
   _riverpod_annotation,
   _routemaster,
   _shared_preferences,
@@ -3739,13 +3743,13 @@ SOFTWARE.''',
     dependencies: [PackageRef('path'), PackageRef('meta'), PackageRef('yaml'), PackageRef('dart_pubspec_licenses'), PackageRef('args')]
   );
 
-/// flutter_pdfview 1.3.2
+/// flutter_pdfview 1.3.3
 const _flutter_pdfview = Package(
     name: 'flutter_pdfview',
     description: 'A Flutter plugin that provides a PDFView widget on Android and iOS.',
     homepage: 'https://github.com/endigo/flutter_pdfview',
     authors: [],
-    version: '1.3.2',
+    version: '1.3.3',
     license: '''MIT License
 
 Copyright (c) 2019 endigo
@@ -4273,13 +4277,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     dependencies: [PackageRef('csslib'), PackageRef('source_span')]
   );
 
-/// http 1.1.0
+/// http 1.2.2
 const _http = Package(
     name: 'http',
     description: 'A composable, multi-platform, Future-based API for HTTP requests.',
     repository: 'https://github.com/dart-lang/http/tree/master/pkgs/http',
     authors: [],
-    version: '1.1.0',
+    version: '1.2.2',
     license: '''Copyright 2014, the Dart project authors. 
 
 Redistribution and use in source and binary forms, with or without
@@ -4309,7 +4313,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('async'), PackageRef('http_parser'), PackageRef('meta')]
+    dependencies: [PackageRef('async'), PackageRef('http_parser'), PackageRef('meta'), PackageRef('web')]
   );
 
 /// http_multi_server 3.2.1
@@ -5500,6 +5504,40 @@ THE SOFTWARE.''',
     isMarkdown: false,
     isSdk: false,
     dependencies: [PackageRef('meta')]
+  );
+
+/// pin_code_fields 8.0.1
+const _pin_code_fields = Package(
+    name: 'pin_code_fields',
+    description: 'A flutter package which will help you to generate pin code fields. Can be useful for OTP for example.',
+    homepage: 'https://github.com/adar2378',
+    repository: 'https://github.com/adar2378/pin_code_fields',
+    authors: [],
+    version: '8.0.1',
+    license: '''MIT License
+
+Copyright (c) 2019 A. K. M. Saiful Islam
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.''',
+    isMarkdown: false,
+    isSdk: false,
+    dependencies: [PackageRef('flutter')]
   );
 
 /// platform 3.1.0
@@ -7805,13 +7843,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('flutter'), PackageRef('url_launcher_platform_interface')]
   );
 
-/// url_launcher_ios 6.2.5
+/// url_launcher_ios 6.1.4
 const _url_launcher_ios = Package(
     name: 'url_launcher_ios',
     description: 'iOS implementation of the url_launcher plugin.',
     repository: 'https://github.com/flutter/packages/tree/main/packages/url_launcher/url_launcher_ios',
     authors: [],
-    version: '6.2.5',
+    version: '6.1.4',
     license: '''Copyright 2013 The Flutter Authors. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,

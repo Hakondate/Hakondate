@@ -88,11 +88,12 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
     if (conflictSchema == null) {
       dishId = await _db.into(_db.dishesTable).insert(companion);
     } else if (conflictSchema.category != companion.category.value) {
-      dishId = await (_db.update(_db.dishesTable)
+      await (_db.update(_db.dishesTable)
             ..where(
               ($DishesTableTable t) => t.name.equals(companion.name.value),
             ))
           .write(DishesTableCompanion(category: companion.category));
+      dishId = conflictSchema.id;
     } else {
       dishId = conflictSchema.id;
     }
