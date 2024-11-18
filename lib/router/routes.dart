@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hakondate/view/splash/real_name_update_error.dart';
 
 import 'package:routemaster/routemaster.dart';
 
@@ -24,6 +23,7 @@ import 'package:hakondate/view/origin/origin.dart';
 import 'package:hakondate/view/recipe/recipe.dart';
 import 'package:hakondate/view/recipe/recipe_pdf.dart';
 import 'package:hakondate/view/signup/signup.dart';
+import 'package:hakondate/view/splash/real_name_update_error.dart';
 import 'package:hakondate/view/splash/splash.dart';
 import 'package:hakondate/view/terms/drawer_terms.dart';
 import 'package:hakondate/view/terms/terms.dart';
