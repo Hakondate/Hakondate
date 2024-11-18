@@ -45,7 +45,7 @@ class NameForm extends ConsumerWidget {
                     builder: (BuildContext context) => const HelpDialog(
                       title: Text('お名前について'),
                       content: Text('　お名前情報は，本アプリ内でお子様を識別するために利用されます．\n'
-                          '　原則，本名を入力してください．また，あとで変更することもできます．\n'
+                          '　お子様の本名を入力してください．また，あとで変更することもできます．\n'
                           '　お名前情報は，端末内に保存され収集されることはありません．'),
                     ),
                   ),

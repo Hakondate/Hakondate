@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import 'package:drift/drift.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -45,11 +43,12 @@ class UsersLocalRepository extends UsersLocalRepositoryAPI {
 
   @override
   Future<UserModel> getById(int id) async {
-    /*あとで戻す*/ UsersSchema? usersSchema;
+    late UsersSchema? usersSchema;
     try {
       usersSchema = await (_db.select(_db.usersTable)..where(($UsersTableTable t) => t.id.equals(id))).getSingleOrNull();
     } catch (e) {
       if (e is TypeError) {
+        usersSchema = UsersSchema(id: id, lastName: "error", firstName: "error", schoolId: -1, schoolYear: -1);
         routemaster.replace('/real_name_error');
       } else {
         throw Exception(e);

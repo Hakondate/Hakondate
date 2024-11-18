@@ -47,7 +47,6 @@ class Splash extends ConsumerWidget {
                       context: context,
                       barrierDismissible: false,
                       builder: (BuildContext context) {
-                        debugPrint(error.toString());
                         if (error is ConnectionException) {
                           return ConnectionExceptionDialog(
                             onTapRetry: () => routemaster.pop().whenComplete(

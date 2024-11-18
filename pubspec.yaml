@@ -89,7 +89,7 @@ dev_dependencies:
   # build_runner の実行コマンド
   # fvm flutter packages pub run build_runner build --delete-conflicting-outputs
 
-  # build_runner をセーブするたびに自動実行
+  # ファイルをセーブするたびに build_runner を自動実行するコマンド
   # fvm flutter packages pub run build_runner watch --delete-conflicting-outputs
 
 
