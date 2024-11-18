@@ -56,6 +56,7 @@ class UsersLocalRepository extends UsersLocalRepositoryAPI {
           firstName: Value<String>(firstName),
           schoolId: Value<int>(schoolId),
           schoolYear: Value<int>(schoolYear),
+          authorizedAt: Value<DateTime?>(authorizedAt),
         ),
       );
 

@@ -26,6 +26,7 @@ mixin _$SignupState {
   List<String> get schoolYears => throw _privateConstructorUsedError;
   String? get nameErrorState => throw _privateConstructorUsedError;
   String? get schoolErrorState => throw _privateConstructorUsedError;
+  bool get authorized => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SignupStateCopyWith<SignupState> get copyWith =>
@@ -48,7 +49,8 @@ abstract class $SignupStateCopyWith<$Res> {
       List<SchoolModel> schools,
       List<String> schoolYears,
       String? nameErrorState,
-      String? schoolErrorState});
+      String? schoolErrorState,
+      bool authorized});
 }
 
 /// @nodoc
@@ -74,6 +76,7 @@ class _$SignupStateCopyWithImpl<$Res, $Val extends SignupState>
     Object? schoolYears = null,
     Object? nameErrorState = freezed,
     Object? schoolErrorState = freezed,
+    Object? authorized = null,
   }) {
     return _then(_value.copyWith(
       lastName: freezed == lastName
@@ -116,6 +119,10 @@ class _$SignupStateCopyWithImpl<$Res, $Val extends SignupState>
           ? _value.schoolErrorState
           : schoolErrorState // ignore: cast_nullable_to_non_nullable
               as String?,
+      authorized: null == authorized
+          ? _value.authorized
+          : authorized // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -138,7 +145,8 @@ abstract class _$$SignupStateImplCopyWith<$Res>
       List<SchoolModel> schools,
       List<String> schoolYears,
       String? nameErrorState,
-      String? schoolErrorState});
+      String? schoolErrorState,
+      bool authorized});
 }
 
 /// @nodoc
@@ -162,6 +170,7 @@ class __$$SignupStateImplCopyWithImpl<$Res>
     Object? schoolYears = null,
     Object? nameErrorState = freezed,
     Object? schoolErrorState = freezed,
+    Object? authorized = null,
   }) {
     return _then(_$SignupStateImpl(
       lastName: freezed == lastName
@@ -204,6 +213,10 @@ class __$$SignupStateImplCopyWithImpl<$Res>
           ? _value.schoolErrorState
           : schoolErrorState // ignore: cast_nullable_to_non_nullable
               as String?,
+      authorized: null == authorized
+          ? _value.authorized
+          : authorized // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -221,7 +234,8 @@ class _$SignupStateImpl with DiagnosticableTreeMixin implements _SignupState {
       final List<SchoolModel> schools = const <SchoolModel>[],
       final List<String> schoolYears = const <String>['1年生', '2年生', '3年生'],
       this.nameErrorState,
-      this.schoolErrorState})
+      this.schoolErrorState,
+      this.authorized = false})
       : _schools = schools,
         _schoolYears = schoolYears;
 
@@ -261,10 +275,13 @@ class _$SignupStateImpl with DiagnosticableTreeMixin implements _SignupState {
   final String? nameErrorState;
   @override
   final String? schoolErrorState;
+  @override
+  @JsonKey()
+  final bool authorized;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SignupState(lastName: $lastName, firstName: $firstName, schoolId: $schoolId, schoolYear: $schoolYear, schoolTrailing: $schoolTrailing, schoolYearTrailing: $schoolYearTrailing, schools: $schools, schoolYears: $schoolYears, nameErrorState: $nameErrorState, schoolErrorState: $schoolErrorState)';
+    return 'SignupState(lastName: $lastName, firstName: $firstName, schoolId: $schoolId, schoolYear: $schoolYear, schoolTrailing: $schoolTrailing, schoolYearTrailing: $schoolYearTrailing, schools: $schools, schoolYears: $schoolYears, nameErrorState: $nameErrorState, schoolErrorState: $schoolErrorState, authorized: $authorized)';
   }
 
   @override
@@ -281,7 +298,8 @@ class _$SignupStateImpl with DiagnosticableTreeMixin implements _SignupState {
       ..add(DiagnosticsProperty('schools', schools))
       ..add(DiagnosticsProperty('schoolYears', schoolYears))
       ..add(DiagnosticsProperty('nameErrorState', nameErrorState))
-      ..add(DiagnosticsProperty('schoolErrorState', schoolErrorState));
+      ..add(DiagnosticsProperty('schoolErrorState', schoolErrorState))
+      ..add(DiagnosticsProperty('authorized', authorized));
   }
 
   @override
@@ -307,7 +325,9 @@ class _$SignupStateImpl with DiagnosticableTreeMixin implements _SignupState {
             (identical(other.nameErrorState, nameErrorState) ||
                 other.nameErrorState == nameErrorState) &&
             (identical(other.schoolErrorState, schoolErrorState) ||
-                other.schoolErrorState == schoolErrorState));
+                other.schoolErrorState == schoolErrorState) &&
+            (identical(other.authorized, authorized) ||
+                other.authorized == authorized));
   }
 
   @override
@@ -322,7 +342,8 @@ class _$SignupStateImpl with DiagnosticableTreeMixin implements _SignupState {
       const DeepCollectionEquality().hash(_schools),
       const DeepCollectionEquality().hash(_schoolYears),
       nameErrorState,
-      schoolErrorState);
+      schoolErrorState,
+      authorized);
 
   @JsonKey(ignore: true)
   @override
@@ -342,7 +363,8 @@ abstract class _SignupState implements SignupState {
       final List<SchoolModel> schools,
       final List<String> schoolYears,
       final String? nameErrorState,
-      final String? schoolErrorState}) = _$SignupStateImpl;
+      final String? schoolErrorState,
+      final bool authorized}) = _$SignupStateImpl;
 
   @override
   String? get lastName;
@@ -364,6 +386,8 @@ abstract class _SignupState implements SignupState {
   String? get nameErrorState;
   @override
   String? get schoolErrorState;
+  @override
+  bool get authorized;
   @override
   @JsonKey(ignore: true)
   _$$SignupStateImplCopyWith<_$SignupStateImpl> get copyWith =>

@@ -53,9 +53,35 @@ class $SchoolsTableTable extends SchoolsTable
       type: DriftSqlType.dateTime,
       requiredDuringInsert: false,
       defaultValue: Constant(DateTime.now()));
+  static const VerificationMeta _authorizationRequiredMeta =
+      const VerificationMeta('authorizationRequired');
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, parentId, name, lunchBlock, classification, createAt, updateAt];
+  late final GeneratedColumn<bool> authorizationRequired =
+      GeneratedColumn<bool>('authorization_required', aliasedName, false,
+          type: DriftSqlType.bool,
+          requiredDuringInsert: false,
+          defaultConstraints: GeneratedColumn.constraintIsAlways(
+              'CHECK ("authorization_required" IN (0, 1))'),
+          defaultValue: const Constant(false));
+  static const VerificationMeta _authorizationKeyUpdatedAtMeta =
+      const VerificationMeta('authorizationKeyUpdatedAt');
+  @override
+  late final GeneratedColumn<DateTime> authorizationKeyUpdatedAt =
+      GeneratedColumn<DateTime>(
+          'authorization_key_updated_at', aliasedName, true,
+          type: DriftSqlType.dateTime, requiredDuringInsert: false);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        parentId,
+        name,
+        lunchBlock,
+        classification,
+        createAt,
+        updateAt,
+        authorizationRequired,
+        authorizationKeyUpdatedAt
+      ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -105,6 +131,19 @@ class $SchoolsTableTable extends SchoolsTable
       context.handle(_updateAtMeta,
           updateAt.isAcceptableOrUnknown(data['update_at']!, _updateAtMeta));
     }
+    if (data.containsKey('authorization_required')) {
+      context.handle(
+          _authorizationRequiredMeta,
+          authorizationRequired.isAcceptableOrUnknown(
+              data['authorization_required']!, _authorizationRequiredMeta));
+    }
+    if (data.containsKey('authorization_key_updated_at')) {
+      context.handle(
+          _authorizationKeyUpdatedAtMeta,
+          authorizationKeyUpdatedAt.isAcceptableOrUnknown(
+              data['authorization_key_updated_at']!,
+              _authorizationKeyUpdatedAtMeta));
+    }
     return context;
   }
 
@@ -128,6 +167,11 @@ class $SchoolsTableTable extends SchoolsTable
           .read(DriftSqlType.dateTime, data['${effectivePrefix}create_at'])!,
       updateAt: attachedDatabase.typeMapping
           .read(DriftSqlType.dateTime, data['${effectivePrefix}update_at'])!,
+      authorizationRequired: attachedDatabase.typeMapping.read(
+          DriftSqlType.bool, data['${effectivePrefix}authorization_required'])!,
+      authorizationKeyUpdatedAt: attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime,
+          data['${effectivePrefix}authorization_key_updated_at']),
     );
   }
 
@@ -145,6 +189,8 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
   final String classification;
   final DateTime createAt;
   final DateTime updateAt;
+  final bool authorizationRequired;
+  final DateTime? authorizationKeyUpdatedAt;
   const SchoolsSchema(
       {required this.id,
       required this.parentId,
@@ -152,7 +198,9 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       required this.lunchBlock,
       required this.classification,
       required this.createAt,
-      required this.updateAt});
+      required this.updateAt,
+      required this.authorizationRequired,
+      this.authorizationKeyUpdatedAt});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -163,6 +211,11 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
     map['classification'] = Variable<String>(classification);
     map['create_at'] = Variable<DateTime>(createAt);
     map['update_at'] = Variable<DateTime>(updateAt);
+    map['authorization_required'] = Variable<bool>(authorizationRequired);
+    if (!nullToAbsent || authorizationKeyUpdatedAt != null) {
+      map['authorization_key_updated_at'] =
+          Variable<DateTime>(authorizationKeyUpdatedAt);
+    }
     return map;
   }
 
@@ -175,6 +228,11 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       classification: Value(classification),
       createAt: Value(createAt),
       updateAt: Value(updateAt),
+      authorizationRequired: Value(authorizationRequired),
+      authorizationKeyUpdatedAt:
+          authorizationKeyUpdatedAt == null && nullToAbsent
+              ? const Value.absent()
+              : Value(authorizationKeyUpdatedAt),
     );
   }
 
@@ -189,6 +247,10 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       classification: serializer.fromJson<String>(json['classification']),
       createAt: serializer.fromJson<DateTime>(json['createAt']),
       updateAt: serializer.fromJson<DateTime>(json['updateAt']),
+      authorizationRequired:
+          serializer.fromJson<bool>(json['authorizationRequired']),
+      authorizationKeyUpdatedAt:
+          serializer.fromJson<DateTime?>(json['authorizationKeyUpdatedAt']),
     );
   }
   @override
@@ -202,6 +264,9 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       'classification': serializer.toJson<String>(classification),
       'createAt': serializer.toJson<DateTime>(createAt),
       'updateAt': serializer.toJson<DateTime>(updateAt),
+      'authorizationRequired': serializer.toJson<bool>(authorizationRequired),
+      'authorizationKeyUpdatedAt':
+          serializer.toJson<DateTime?>(authorizationKeyUpdatedAt),
     };
   }
 
@@ -212,7 +277,9 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
           int? lunchBlock,
           String? classification,
           DateTime? createAt,
-          DateTime? updateAt}) =>
+          DateTime? updateAt,
+          bool? authorizationRequired,
+          Value<DateTime?> authorizationKeyUpdatedAt = const Value.absent()}) =>
       SchoolsSchema(
         id: id ?? this.id,
         parentId: parentId ?? this.parentId,
@@ -221,6 +288,11 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
         classification: classification ?? this.classification,
         createAt: createAt ?? this.createAt,
         updateAt: updateAt ?? this.updateAt,
+        authorizationRequired:
+            authorizationRequired ?? this.authorizationRequired,
+        authorizationKeyUpdatedAt: authorizationKeyUpdatedAt.present
+            ? authorizationKeyUpdatedAt.value
+            : this.authorizationKeyUpdatedAt,
       );
   SchoolsSchema copyWithCompanion(SchoolsTableCompanion data) {
     return SchoolsSchema(
@@ -234,6 +306,12 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
           : this.classification,
       createAt: data.createAt.present ? data.createAt.value : this.createAt,
       updateAt: data.updateAt.present ? data.updateAt.value : this.updateAt,
+      authorizationRequired: data.authorizationRequired.present
+          ? data.authorizationRequired.value
+          : this.authorizationRequired,
+      authorizationKeyUpdatedAt: data.authorizationKeyUpdatedAt.present
+          ? data.authorizationKeyUpdatedAt.value
+          : this.authorizationKeyUpdatedAt,
     );
   }
 
@@ -246,14 +324,24 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
           ..write('lunchBlock: $lunchBlock, ')
           ..write('classification: $classification, ')
           ..write('createAt: $createAt, ')
-          ..write('updateAt: $updateAt')
+          ..write('updateAt: $updateAt, ')
+          ..write('authorizationRequired: $authorizationRequired, ')
+          ..write('authorizationKeyUpdatedAt: $authorizationKeyUpdatedAt')
           ..write(')'))
         .toString();
   }
 
   @override
   int get hashCode => Object.hash(
-      id, parentId, name, lunchBlock, classification, createAt, updateAt);
+      id,
+      parentId,
+      name,
+      lunchBlock,
+      classification,
+      createAt,
+      updateAt,
+      authorizationRequired,
+      authorizationKeyUpdatedAt);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -264,7 +352,9 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
           other.lunchBlock == this.lunchBlock &&
           other.classification == this.classification &&
           other.createAt == this.createAt &&
-          other.updateAt == this.updateAt);
+          other.updateAt == this.updateAt &&
+          other.authorizationRequired == this.authorizationRequired &&
+          other.authorizationKeyUpdatedAt == this.authorizationKeyUpdatedAt);
 }
 
 class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
@@ -275,6 +365,8 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
   final Value<String> classification;
   final Value<DateTime> createAt;
   final Value<DateTime> updateAt;
+  final Value<bool> authorizationRequired;
+  final Value<DateTime?> authorizationKeyUpdatedAt;
   const SchoolsTableCompanion({
     this.id = const Value.absent(),
     this.parentId = const Value.absent(),
@@ -283,6 +375,8 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
     this.classification = const Value.absent(),
     this.createAt = const Value.absent(),
     this.updateAt = const Value.absent(),
+    this.authorizationRequired = const Value.absent(),
+    this.authorizationKeyUpdatedAt = const Value.absent(),
   });
   SchoolsTableCompanion.insert({
     this.id = const Value.absent(),
@@ -292,6 +386,8 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
     required String classification,
     this.createAt = const Value.absent(),
     this.updateAt = const Value.absent(),
+    this.authorizationRequired = const Value.absent(),
+    this.authorizationKeyUpdatedAt = const Value.absent(),
   })  : parentId = Value(parentId),
         name = Value(name),
         lunchBlock = Value(lunchBlock),
@@ -304,6 +400,8 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
     Expression<String>? classification,
     Expression<DateTime>? createAt,
     Expression<DateTime>? updateAt,
+    Expression<bool>? authorizationRequired,
+    Expression<DateTime>? authorizationKeyUpdatedAt,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -313,6 +411,10 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
       if (classification != null) 'classification': classification,
       if (createAt != null) 'create_at': createAt,
       if (updateAt != null) 'update_at': updateAt,
+      if (authorizationRequired != null)
+        'authorization_required': authorizationRequired,
+      if (authorizationKeyUpdatedAt != null)
+        'authorization_key_updated_at': authorizationKeyUpdatedAt,
     });
   }
 
@@ -323,7 +425,9 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
       Value<int>? lunchBlock,
       Value<String>? classification,
       Value<DateTime>? createAt,
-      Value<DateTime>? updateAt}) {
+      Value<DateTime>? updateAt,
+      Value<bool>? authorizationRequired,
+      Value<DateTime?>? authorizationKeyUpdatedAt}) {
     return SchoolsTableCompanion(
       id: id ?? this.id,
       parentId: parentId ?? this.parentId,
@@ -332,6 +436,10 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
       classification: classification ?? this.classification,
       createAt: createAt ?? this.createAt,
       updateAt: updateAt ?? this.updateAt,
+      authorizationRequired:
+          authorizationRequired ?? this.authorizationRequired,
+      authorizationKeyUpdatedAt:
+          authorizationKeyUpdatedAt ?? this.authorizationKeyUpdatedAt,
     );
   }
 
@@ -359,6 +467,14 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
     if (updateAt.present) {
       map['update_at'] = Variable<DateTime>(updateAt.value);
     }
+    if (authorizationRequired.present) {
+      map['authorization_required'] =
+          Variable<bool>(authorizationRequired.value);
+    }
+    if (authorizationKeyUpdatedAt.present) {
+      map['authorization_key_updated_at'] =
+          Variable<DateTime>(authorizationKeyUpdatedAt.value);
+    }
     return map;
   }
 
@@ -371,7 +487,9 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
           ..write('lunchBlock: $lunchBlock, ')
           ..write('classification: $classification, ')
           ..write('createAt: $createAt, ')
-          ..write('updateAt: $updateAt')
+          ..write('updateAt: $updateAt, ')
+          ..write('authorizationRequired: $authorizationRequired, ')
+          ..write('authorizationKeyUpdatedAt: $authorizationKeyUpdatedAt')
           ..write(')'))
         .toString();
   }
@@ -2402,9 +2520,15 @@ class $UsersTableTable extends UsersTable
   late final GeneratedColumn<int> schoolYear = GeneratedColumn<int>(
       'school_year', aliasedName, false,
       type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _authorizedAtMeta =
+      const VerificationMeta('authorizedAt');
+  @override
+  late final GeneratedColumn<DateTime> authorizedAt = GeneratedColumn<DateTime>(
+      'authorized_at', aliasedName, true,
+      type: DriftSqlType.dateTime, requiredDuringInsert: false);
   @override
   List<GeneratedColumn> get $columns =>
-      [id, lastName, firstName, schoolId, schoolYear];
+      [id, lastName, firstName, schoolId, schoolYear, authorizedAt];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -2444,6 +2568,12 @@ class $UsersTableTable extends UsersTable
     } else if (isInserting) {
       context.missing(_schoolYearMeta);
     }
+    if (data.containsKey('authorized_at')) {
+      context.handle(
+          _authorizedAtMeta,
+          authorizedAt.isAcceptableOrUnknown(
+              data['authorized_at']!, _authorizedAtMeta));
+    }
     return context;
   }
 
@@ -2463,6 +2593,8 @@ class $UsersTableTable extends UsersTable
           .read(DriftSqlType.int, data['${effectivePrefix}school_id'])!,
       schoolYear: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}school_year'])!,
+      authorizedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}authorized_at']),
     );
   }
 
@@ -2478,12 +2610,14 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
   final String firstName;
   final int schoolId;
   final int schoolYear;
+  final DateTime? authorizedAt;
   const UsersSchema(
       {required this.id,
       required this.lastName,
       required this.firstName,
       required this.schoolId,
-      required this.schoolYear});
+      required this.schoolYear,
+      this.authorizedAt});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -2492,6 +2626,9 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
     map['first_name'] = Variable<String>(firstName);
     map['school_id'] = Variable<int>(schoolId);
     map['school_year'] = Variable<int>(schoolYear);
+    if (!nullToAbsent || authorizedAt != null) {
+      map['authorized_at'] = Variable<DateTime>(authorizedAt);
+    }
     return map;
   }
 
@@ -2502,6 +2639,9 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
       firstName: Value(firstName),
       schoolId: Value(schoolId),
       schoolYear: Value(schoolYear),
+      authorizedAt: authorizedAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(authorizedAt),
     );
   }
 
@@ -2514,6 +2654,7 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
       firstName: serializer.fromJson<String>(json['firstName']),
       schoolId: serializer.fromJson<int>(json['schoolId']),
       schoolYear: serializer.fromJson<int>(json['schoolYear']),
+      authorizedAt: serializer.fromJson<DateTime?>(json['authorizedAt']),
     );
   }
   @override
@@ -2525,6 +2666,7 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
       'firstName': serializer.toJson<String>(firstName),
       'schoolId': serializer.toJson<int>(schoolId),
       'schoolYear': serializer.toJson<int>(schoolYear),
+      'authorizedAt': serializer.toJson<DateTime?>(authorizedAt),
     };
   }
 
@@ -2533,13 +2675,16 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
           String? lastName,
           String? firstName,
           int? schoolId,
-          int? schoolYear}) =>
+          int? schoolYear,
+          Value<DateTime?> authorizedAt = const Value.absent()}) =>
       UsersSchema(
         id: id ?? this.id,
         lastName: lastName ?? this.lastName,
         firstName: firstName ?? this.firstName,
         schoolId: schoolId ?? this.schoolId,
         schoolYear: schoolYear ?? this.schoolYear,
+        authorizedAt:
+            authorizedAt.present ? authorizedAt.value : this.authorizedAt,
       );
   UsersSchema copyWithCompanion(UsersTableCompanion data) {
     return UsersSchema(
@@ -2549,6 +2694,9 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
       schoolId: data.schoolId.present ? data.schoolId.value : this.schoolId,
       schoolYear:
           data.schoolYear.present ? data.schoolYear.value : this.schoolYear,
+      authorizedAt: data.authorizedAt.present
+          ? data.authorizedAt.value
+          : this.authorizedAt,
     );
   }
 
@@ -2559,14 +2707,15 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
           ..write('lastName: $lastName, ')
           ..write('firstName: $firstName, ')
           ..write('schoolId: $schoolId, ')
-          ..write('schoolYear: $schoolYear')
+          ..write('schoolYear: $schoolYear, ')
+          ..write('authorizedAt: $authorizedAt')
           ..write(')'))
         .toString();
   }
 
   @override
   int get hashCode =>
-      Object.hash(id, lastName, firstName, schoolId, schoolYear);
+      Object.hash(id, lastName, firstName, schoolId, schoolYear, authorizedAt);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -2575,7 +2724,8 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
           other.lastName == this.lastName &&
           other.firstName == this.firstName &&
           other.schoolId == this.schoolId &&
-          other.schoolYear == this.schoolYear);
+          other.schoolYear == this.schoolYear &&
+          other.authorizedAt == this.authorizedAt);
 }
 
 class UsersTableCompanion extends UpdateCompanion<UsersSchema> {
@@ -2584,12 +2734,14 @@ class UsersTableCompanion extends UpdateCompanion<UsersSchema> {
   final Value<String> firstName;
   final Value<int> schoolId;
   final Value<int> schoolYear;
+  final Value<DateTime?> authorizedAt;
   const UsersTableCompanion({
     this.id = const Value.absent(),
     this.lastName = const Value.absent(),
     this.firstName = const Value.absent(),
     this.schoolId = const Value.absent(),
     this.schoolYear = const Value.absent(),
+    this.authorizedAt = const Value.absent(),
   });
   UsersTableCompanion.insert({
     this.id = const Value.absent(),
@@ -2597,6 +2749,7 @@ class UsersTableCompanion extends UpdateCompanion<UsersSchema> {
     required String firstName,
     required int schoolId,
     required int schoolYear,
+    this.authorizedAt = const Value.absent(),
   })  : lastName = Value(lastName),
         firstName = Value(firstName),
         schoolId = Value(schoolId),
@@ -2607,6 +2760,7 @@ class UsersTableCompanion extends UpdateCompanion<UsersSchema> {
     Expression<String>? firstName,
     Expression<int>? schoolId,
     Expression<int>? schoolYear,
+    Expression<DateTime>? authorizedAt,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -2614,6 +2768,7 @@ class UsersTableCompanion extends UpdateCompanion<UsersSchema> {
       if (firstName != null) 'first_name': firstName,
       if (schoolId != null) 'school_id': schoolId,
       if (schoolYear != null) 'school_year': schoolYear,
+      if (authorizedAt != null) 'authorized_at': authorizedAt,
     });
   }
 
@@ -2622,13 +2777,15 @@ class UsersTableCompanion extends UpdateCompanion<UsersSchema> {
       Value<String>? lastName,
       Value<String>? firstName,
       Value<int>? schoolId,
-      Value<int>? schoolYear}) {
+      Value<int>? schoolYear,
+      Value<DateTime?>? authorizedAt}) {
     return UsersTableCompanion(
       id: id ?? this.id,
       lastName: lastName ?? this.lastName,
       firstName: firstName ?? this.firstName,
       schoolId: schoolId ?? this.schoolId,
       schoolYear: schoolYear ?? this.schoolYear,
+      authorizedAt: authorizedAt ?? this.authorizedAt,
     );
   }
 
@@ -2650,6 +2807,9 @@ class UsersTableCompanion extends UpdateCompanion<UsersSchema> {
     if (schoolYear.present) {
       map['school_year'] = Variable<int>(schoolYear.value);
     }
+    if (authorizedAt.present) {
+      map['authorized_at'] = Variable<DateTime>(authorizedAt.value);
+    }
     return map;
   }
 
@@ -2660,7 +2820,8 @@ class UsersTableCompanion extends UpdateCompanion<UsersSchema> {
           ..write('lastName: $lastName, ')
           ..write('firstName: $firstName, ')
           ..write('schoolId: $schoolId, ')
-          ..write('schoolYear: $schoolYear')
+          ..write('schoolYear: $schoolYear, ')
+          ..write('authorizedAt: $authorizedAt')
           ..write(')'))
         .toString();
   }
@@ -3562,6 +3723,8 @@ typedef $$SchoolsTableTableCreateCompanionBuilder = SchoolsTableCompanion
   required String classification,
   Value<DateTime> createAt,
   Value<DateTime> updateAt,
+  Value<bool> authorizationRequired,
+  Value<DateTime?> authorizationKeyUpdatedAt,
 });
 typedef $$SchoolsTableTableUpdateCompanionBuilder = SchoolsTableCompanion
     Function({
@@ -3572,6 +3735,8 @@ typedef $$SchoolsTableTableUpdateCompanionBuilder = SchoolsTableCompanion
   Value<String> classification,
   Value<DateTime> createAt,
   Value<DateTime> updateAt,
+  Value<bool> authorizationRequired,
+  Value<DateTime?> authorizationKeyUpdatedAt,
 });
 
 class $$SchoolsTableTableTableManager extends RootTableManager<
@@ -3598,6 +3763,8 @@ class $$SchoolsTableTableTableManager extends RootTableManager<
             Value<String> classification = const Value.absent(),
             Value<DateTime> createAt = const Value.absent(),
             Value<DateTime> updateAt = const Value.absent(),
+            Value<bool> authorizationRequired = const Value.absent(),
+            Value<DateTime?> authorizationKeyUpdatedAt = const Value.absent(),
           }) =>
               SchoolsTableCompanion(
             id: id,
@@ -3607,6 +3774,8 @@ class $$SchoolsTableTableTableManager extends RootTableManager<
             classification: classification,
             createAt: createAt,
             updateAt: updateAt,
+            authorizationRequired: authorizationRequired,
+            authorizationKeyUpdatedAt: authorizationKeyUpdatedAt,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
@@ -3616,6 +3785,8 @@ class $$SchoolsTableTableTableManager extends RootTableManager<
             required String classification,
             Value<DateTime> createAt = const Value.absent(),
             Value<DateTime> updateAt = const Value.absent(),
+            Value<bool> authorizationRequired = const Value.absent(),
+            Value<DateTime?> authorizationKeyUpdatedAt = const Value.absent(),
           }) =>
               SchoolsTableCompanion.insert(
             id: id,
@@ -3625,6 +3796,8 @@ class $$SchoolsTableTableTableManager extends RootTableManager<
             classification: classification,
             createAt: createAt,
             updateAt: updateAt,
+            authorizationRequired: authorizationRequired,
+            authorizationKeyUpdatedAt: authorizationKeyUpdatedAt,
           ),
         ));
 }
@@ -3666,6 +3839,17 @@ class $$SchoolsTableTableFilterComposer
       column: $state.table.updateAt,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<bool> get authorizationRequired => $state.composableBuilder(
+      column: $state.table.authorizationRequired,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<DateTime> get authorizationKeyUpdatedAt => $state
+      .composableBuilder(
+          column: $state.table.authorizationKeyUpdatedAt,
+          builder: (column, joinBuilders) =>
+              ColumnFilters(column, joinBuilders: joinBuilders));
 
   ComposableFilter menusTableRefs(
       ComposableFilter Function($$MenusTableTableFilterComposer f) f) {
@@ -3731,6 +3915,17 @@ class $$SchoolsTableTableOrderingComposer
       column: $state.table.updateAt,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<bool> get authorizationRequired => $state.composableBuilder(
+      column: $state.table.authorizationRequired,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<DateTime> get authorizationKeyUpdatedAt =>
+      $state.composableBuilder(
+          column: $state.table.authorizationKeyUpdatedAt,
+          builder: (column, joinBuilders) =>
+              ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
 typedef $$MenusTableTableCreateCompanionBuilder = MenusTableCompanion Function({
@@ -4672,6 +4867,7 @@ typedef $$UsersTableTableCreateCompanionBuilder = UsersTableCompanion Function({
   required String firstName,
   required int schoolId,
   required int schoolYear,
+  Value<DateTime?> authorizedAt,
 });
 typedef $$UsersTableTableUpdateCompanionBuilder = UsersTableCompanion Function({
   Value<int> id,
@@ -4679,6 +4875,7 @@ typedef $$UsersTableTableUpdateCompanionBuilder = UsersTableCompanion Function({
   Value<String> firstName,
   Value<int> schoolId,
   Value<int> schoolYear,
+  Value<DateTime?> authorizedAt,
 });
 
 class $$UsersTableTableTableManager extends RootTableManager<
@@ -4703,6 +4900,7 @@ class $$UsersTableTableTableManager extends RootTableManager<
             Value<String> firstName = const Value.absent(),
             Value<int> schoolId = const Value.absent(),
             Value<int> schoolYear = const Value.absent(),
+            Value<DateTime?> authorizedAt = const Value.absent(),
           }) =>
               UsersTableCompanion(
             id: id,
@@ -4710,6 +4908,7 @@ class $$UsersTableTableTableManager extends RootTableManager<
             firstName: firstName,
             schoolId: schoolId,
             schoolYear: schoolYear,
+            authorizedAt: authorizedAt,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
@@ -4717,6 +4916,7 @@ class $$UsersTableTableTableManager extends RootTableManager<
             required String firstName,
             required int schoolId,
             required int schoolYear,
+            Value<DateTime?> authorizedAt = const Value.absent(),
           }) =>
               UsersTableCompanion.insert(
             id: id,
@@ -4724,6 +4924,7 @@ class $$UsersTableTableTableManager extends RootTableManager<
             firstName: firstName,
             schoolId: schoolId,
             schoolYear: schoolYear,
+            authorizedAt: authorizedAt,
           ),
         ));
 }
@@ -4748,6 +4949,11 @@ class $$UsersTableTableFilterComposer
 
   ColumnFilters<int> get schoolYear => $state.composableBuilder(
       column: $state.table.schoolYear,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<DateTime> get authorizedAt => $state.composableBuilder(
+      column: $state.table.authorizedAt,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
@@ -4784,6 +4990,11 @@ class $$UsersTableTableOrderingComposer
 
   ColumnOrderings<int> get schoolYear => $state.composableBuilder(
       column: $state.table.schoolYear,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<DateTime> get authorizedAt => $state.composableBuilder(
+      column: $state.table.authorizedAt,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 

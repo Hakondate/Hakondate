@@ -25,6 +25,9 @@ class UserModel with _$UserModel {
 
     /// 学校給食摂取基準
     NutrientsModel? slns,
+
+    /// 認可された日
+    DateTime? authorizedAt,
   }) = _UserModel;
   const UserModel._();
 
@@ -34,6 +37,7 @@ class UserModel with _$UserModel {
         firstName: schema.firstName,
         schoolId: schema.schoolId,
         schoolYear: schema.schoolYear,
+        authorizedAt: schema.authorizedAt,
       );
 
   UsersTableCompanion toDrift() => UsersTableCompanion(
@@ -42,5 +46,6 @@ class UserModel with _$UserModel {
         firstName: Value<String>(firstName),
         schoolId: Value<int>(schoolId),
         schoolYear: Value<int>(schoolYear),
+        authorizedAt: Value<DateTime?>(authorizedAt),
       );
 }

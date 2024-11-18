@@ -33,6 +33,9 @@ mixin _$UserModel {
   /// 学校給食摂取基準
   NutrientsModel? get slns => throw _privateConstructorUsedError;
 
+  /// 認可された日
+  DateTime? get authorizedAt => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
   $UserModelCopyWith<UserModel> get copyWith =>
       throw _privateConstructorUsedError;
@@ -49,7 +52,8 @@ abstract class $UserModelCopyWith<$Res> {
       String firstName,
       int schoolId,
       int schoolYear,
-      NutrientsModel? slns});
+      NutrientsModel? slns,
+      DateTime? authorizedAt});
 
   $NutrientsModelCopyWith<$Res>? get slns;
 }
@@ -73,6 +77,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? schoolId = null,
     Object? schoolYear = null,
     Object? slns = freezed,
+    Object? authorizedAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -99,6 +104,10 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.slns
           : slns // ignore: cast_nullable_to_non_nullable
               as NutrientsModel?,
+      authorizedAt: freezed == authorizedAt
+          ? _value.authorizedAt
+          : authorizedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 
@@ -129,7 +138,8 @@ abstract class _$$UserModelImplCopyWith<$Res>
       String firstName,
       int schoolId,
       int schoolYear,
-      NutrientsModel? slns});
+      NutrientsModel? slns,
+      DateTime? authorizedAt});
 
   @override
   $NutrientsModelCopyWith<$Res>? get slns;
@@ -152,6 +162,7 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? schoolId = null,
     Object? schoolYear = null,
     Object? slns = freezed,
+    Object? authorizedAt = freezed,
   }) {
     return _then(_$UserModelImpl(
       id: null == id
@@ -178,6 +189,10 @@ class __$$UserModelImplCopyWithImpl<$Res>
           ? _value.slns
           : slns // ignore: cast_nullable_to_non_nullable
               as NutrientsModel?,
+      authorizedAt: freezed == authorizedAt
+          ? _value.authorizedAt
+          : authorizedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -191,7 +206,8 @@ class _$UserModelImpl extends _UserModel {
       required this.firstName,
       required this.schoolId,
       required this.schoolYear,
-      this.slns})
+      this.slns,
+      this.authorizedAt})
       : super._();
 
   @override
@@ -217,9 +233,13 @@ class _$UserModelImpl extends _UserModel {
   @override
   final NutrientsModel? slns;
 
+  /// 認可された日
+  @override
+  final DateTime? authorizedAt;
+
   @override
   String toString() {
-    return 'UserModel(id: $id, lastName: $lastName, firstName: $firstName, schoolId: $schoolId, schoolYear: $schoolYear, slns: $slns)';
+    return 'UserModel(id: $id, lastName: $lastName, firstName: $firstName, schoolId: $schoolId, schoolYear: $schoolYear, slns: $slns, authorizedAt: $authorizedAt)';
   }
 
   @override
@@ -236,12 +256,14 @@ class _$UserModelImpl extends _UserModel {
                 other.schoolId == schoolId) &&
             (identical(other.schoolYear, schoolYear) ||
                 other.schoolYear == schoolYear) &&
-            (identical(other.slns, slns) || other.slns == slns));
+            (identical(other.slns, slns) || other.slns == slns) &&
+            (identical(other.authorizedAt, authorizedAt) ||
+                other.authorizedAt == authorizedAt));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, lastName, firstName, schoolId, schoolYear, slns);
+  int get hashCode => Object.hash(runtimeType, id, lastName, firstName,
+      schoolId, schoolYear, slns, authorizedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -257,7 +279,8 @@ abstract class _UserModel extends UserModel {
       required final String firstName,
       required final int schoolId,
       required final int schoolYear,
-      final NutrientsModel? slns}) = _$UserModelImpl;
+      final NutrientsModel? slns,
+      final DateTime? authorizedAt}) = _$UserModelImpl;
   const _UserModel._() : super._();
 
   @override
@@ -282,6 +305,10 @@ abstract class _UserModel extends UserModel {
 
   /// 学校給食摂取基準
   NutrientsModel? get slns;
+  @override
+
+  /// 認可された日
+  DateTime? get authorizedAt;
   @override
   @JsonKey(ignore: true)
   _$$UserModelImplCopyWith<_$UserModelImpl> get copyWith =>
