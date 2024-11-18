@@ -28,19 +28,19 @@ class DailyNutrientsRadarChart extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.all(15),
       child: SizedBox(
-        width: MediaQuery.of(context).size.width * 4 / 4,
+        width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.width * 3 / 4,
         child: Stack(
           children: <Widget>[
             SizedBox(
-              width: MediaQuery.of(context).size.width * 4 / 4,
+              width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.width * 3 / 4,
               child: const Stack(
                 children: <Widget>[
                   Align(
                     alignment: Alignment.topRight,
                     child: Text(
-                      '　　外枠：120%\n 1メモリ：${120 ~/ 5}%',
+                      '　　外枠：120%\n 1メモリ：  ${120 ~/ 5}%',
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.black54,
