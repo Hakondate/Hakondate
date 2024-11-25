@@ -62,7 +62,7 @@ class NutrientsCard extends StatelessWidget {
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 10),
                   child: Text(
-                    '※不足している栄養素がある場合がありますが、\n足りない栄養素はご家庭で補ってください。',
+                    '※不足している栄養素がある場合がありますが，\n足りない栄養素はご家庭で補ってください．',
                     style: TextStyle(
                       color: Colors.black54,
                       fontSize: 12,

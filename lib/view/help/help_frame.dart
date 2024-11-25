@@ -165,7 +165,7 @@ class HelpFrame extends StatelessWidget {
           children: <Widget>[
             DescriptionText.body(
               label: '　給食で利用されている食材の原産地を知りたい場合は，ドロワーから産地情報を閲覧する画面に遷移することができます．'
-                  'ドロワーはこんだて画面で左上にあるドロワーアイコンをタップ又は，左端から右へ画面をスワイプすることで表示させることができます．',
+                  'ドロワーは，こんだて画面で左上にあるドロワーアイコンをタップ又は，左端から右へ画面をスワイプすることで表示させることができます．',
               isZeroBottomPadding: true,
             ),
             _iconWithText('ドロワーアイコン', Icons.dehaze),
