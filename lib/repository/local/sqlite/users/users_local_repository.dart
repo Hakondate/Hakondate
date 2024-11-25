@@ -48,7 +48,7 @@ class UsersLocalRepository extends UsersLocalRepositoryAPI {
       usersSchema = await (_db.select(_db.usersTable)..where(($UsersTableTable t) => t.id.equals(id))).getSingleOrNull();
     } catch (e) {
       if (e is TypeError) {
-        usersSchema = UsersSchema(id: id, lastName: "error", firstName: "error", schoolId: -1, schoolYear: -1);
+        usersSchema = UsersSchema(id: id, lastName: 'error', firstName: 'error', schoolId: -1, schoolYear: -1);
         routemaster.replace('/real_name_error');
       } else {
         throw Exception(e);
