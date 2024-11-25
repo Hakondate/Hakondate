@@ -22,6 +22,7 @@ abstract class DictionaryItemsLocalRepositoryAPI {
   Future<DictionaryItemModel> getById(int id);
   Future<List<DictionaryItemModel>> getAll();
   Future<List<DictionaryItemModel>> search(String query);
+  Future<List<DictionaryItemModel>> getRadarChartValues({required String nutrient, int limit = 5});
   Future<List<DictionaryItemModel>> getRanking({required String nutrient, int limit = 5});
 }
 
@@ -162,6 +163,47 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
     }
 
     return false;
+  }
+
+  @override
+  Future<List<DictionaryItemModel>> getRadarChartValues({
+    required String nutrient,
+    int limit = 5,
+  }) async {
+    final List<DictionaryItemModel> items = <DictionaryItemModel>[];
+    final List<DictionaryItemsSchema> schemas = await (_db.select(_db.dictionaryItemsTable)
+          ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
+            ($DictionaryItemsTableTable t) => OrderingTerm(
+                  expression: switch (nutrient) {
+                    'energy' => t.energy,
+                    'protein' => t.protein,
+                    'lipid' => t.lipid,
+                    'carbohydrate' => t.carbohydrate,
+                    'sodium' => t.sodium,
+                    'calcium' => t.calcium,
+                    'magnesium' => t.magnesium,
+                    'iron' => t.iron,
+                    'zinc' => t.zinc,
+                    'retinol' => t.retinol,
+                    'vitaminB1' => t.vitaminB1,
+                    'vitaminB2' => t.vitaminB2,
+                    'vitaminC' => t.vitaminC,
+                    'dietaryFiber' => t.dietaryFiber,
+                    'salt' => t.salt,
+                    'vitamin' => t.retinol / const Variable<double>(1000) + t.vitaminB1 + t.vitaminB2 + t.vitaminC,
+                    'mineral' => t.calcium + t.magnesium + t.iron + t.zinc,
+                    _ => throw SQLiteException("Failed to find nutrient '$nutrient'"),
+                  },
+                  mode: OrderingMode.desc,
+                ),
+          ])
+          ..limit(limit))
+        .get();
+
+    for (final DictionaryItemsSchema schema in schemas) {
+      items.add(DictionaryItemModel.fromDrift(schema));
+    }
+    return items;
   }
 
   @override
