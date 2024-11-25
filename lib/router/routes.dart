@@ -23,6 +23,7 @@ import 'package:hakondate/view/origin/origin.dart';
 import 'package:hakondate/view/recipe/recipe.dart';
 import 'package:hakondate/view/recipe/recipe_pdf.dart';
 import 'package:hakondate/view/signup/signup.dart';
+import 'package:hakondate/view/splash/real_name_update_error.dart';
 import 'package:hakondate/view/splash/splash.dart';
 import 'package:hakondate/view/terms/drawer_terms.dart';
 import 'package:hakondate/view/terms/terms.dart';
@@ -34,6 +35,7 @@ final RoutemasterDelegate routemaster = RoutemasterDelegate(
     onUnknownRoute: (_) => const Redirect('/splash'),
     routes: <String, RouteSettings Function(RouteData)>{
       '/splash': (_) => const MaterialPage<dynamic>(child: Splash()),
+      '/real_name_error': (_) => const MaterialPage<dynamic>(child: RealNameUpdateError()),
       '/terms': (_) => const MaterialPage<dynamic>(child: Terms()),
       '/signup': (_) => MaterialPage<dynamic>(child: Signup()),
       '/signup/authorization': (_) => const MaterialPage<dynamic>(child: Authorization()),

@@ -87,7 +87,11 @@ dev_dependencies:
   flutter_launcher_icons: 0.13.1
 
   # build_runner の実行コマンド
-  # flutter packages pub run build_runner build --delete-conflicting-outputs
+  # fvm flutter packages pub run build_runner build --delete-conflicting-outputs
+
+  # ファイルをセーブするたびに build_runner を自動実行するコマンド
+  # fvm flutter packages pub run build_runner watch --delete-conflicting-outputs
+
 
   # oss_licenses.dart の生成コマンド（パッケージを追加したら実行する）
   # fvm dart run flutter_oss_licenses:generate.dart -o lib/constant/oss_licenses.dart

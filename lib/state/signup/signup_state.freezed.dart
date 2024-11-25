@@ -16,9 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SignupState {
-  String? get name => throw _privateConstructorUsedError;
-  SchoolModel? get school => throw _privateConstructorUsedError;
+  String? get lastName => throw _privateConstructorUsedError;
+  String? get firstName => throw _privateConstructorUsedError;
   int? get schoolId => throw _privateConstructorUsedError;
+  SchoolModel? get school => throw _privateConstructorUsedError;
   int? get schoolYear => throw _privateConstructorUsedError;
   String get schoolTrailing => throw _privateConstructorUsedError;
   String get schoolYearTrailing => throw _privateConstructorUsedError;
@@ -40,9 +41,10 @@ abstract class $SignupStateCopyWith<$Res> {
       _$SignupStateCopyWithImpl<$Res, SignupState>;
   @useResult
   $Res call(
-      {String? name,
-      SchoolModel? school,
+      {String? lastName,
+      String? firstName,
       int? schoolId,
+      SchoolModel? school,
       int? schoolYear,
       String schoolTrailing,
       String schoolYearTrailing,
@@ -68,9 +70,10 @@ class _$SignupStateCopyWithImpl<$Res, $Val extends SignupState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? school = freezed,
+    Object? lastName = freezed,
+    Object? firstName = freezed,
     Object? schoolId = freezed,
+    Object? school = freezed,
     Object? schoolYear = freezed,
     Object? schoolTrailing = null,
     Object? schoolYearTrailing = null,
@@ -81,18 +84,22 @@ class _$SignupStateCopyWithImpl<$Res, $Val extends SignupState>
     Object? authorized = null,
   }) {
     return _then(_value.copyWith(
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
-      school: freezed == school
-          ? _value.school
-          : school // ignore: cast_nullable_to_non_nullable
-              as SchoolModel?,
+      firstName: freezed == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String?,
       schoolId: freezed == schoolId
           ? _value.schoolId
           : schoolId // ignore: cast_nullable_to_non_nullable
               as int?,
+      school: freezed == school
+          ? _value.school
+          : school // ignore: cast_nullable_to_non_nullable
+              as SchoolModel?,
       schoolYear: freezed == schoolYear
           ? _value.schoolYear
           : schoolYear // ignore: cast_nullable_to_non_nullable
@@ -150,9 +157,10 @@ abstract class _$$SignupStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? name,
-      SchoolModel? school,
+      {String? lastName,
+      String? firstName,
       int? schoolId,
+      SchoolModel? school,
       int? schoolYear,
       String schoolTrailing,
       String schoolYearTrailing,
@@ -177,9 +185,10 @@ class __$$SignupStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? school = freezed,
+    Object? lastName = freezed,
+    Object? firstName = freezed,
     Object? schoolId = freezed,
+    Object? school = freezed,
     Object? schoolYear = freezed,
     Object? schoolTrailing = null,
     Object? schoolYearTrailing = null,
@@ -190,18 +199,22 @@ class __$$SignupStateImplCopyWithImpl<$Res>
     Object? authorized = null,
   }) {
     return _then(_$SignupStateImpl(
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
-      school: freezed == school
-          ? _value.school
-          : school // ignore: cast_nullable_to_non_nullable
-              as SchoolModel?,
+      firstName: freezed == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String?,
       schoolId: freezed == schoolId
           ? _value.schoolId
           : schoolId // ignore: cast_nullable_to_non_nullable
               as int?,
+      school: freezed == school
+          ? _value.school
+          : school // ignore: cast_nullable_to_non_nullable
+              as SchoolModel?,
       schoolYear: freezed == schoolYear
           ? _value.schoolYear
           : schoolYear // ignore: cast_nullable_to_non_nullable
@@ -242,9 +255,10 @@ class __$$SignupStateImplCopyWithImpl<$Res>
 
 class _$SignupStateImpl with DiagnosticableTreeMixin implements _SignupState {
   const _$SignupStateImpl(
-      {this.name,
-      this.school,
+      {this.lastName,
+      this.firstName,
       this.schoolId,
+      this.school,
       this.schoolYear,
       this.schoolTrailing = '学校を選択',
       this.schoolYearTrailing = '学年を選択',
@@ -257,11 +271,13 @@ class _$SignupStateImpl with DiagnosticableTreeMixin implements _SignupState {
         _schoolYears = schoolYears;
 
   @override
-  final String? name;
+  final String? lastName;
   @override
-  final SchoolModel? school;
+  final String? firstName;
   @override
   final int? schoolId;
+  @override
+  final SchoolModel? school;
   @override
   final int? schoolYear;
   @override
@@ -298,7 +314,7 @@ class _$SignupStateImpl with DiagnosticableTreeMixin implements _SignupState {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SignupState(name: $name, school: $school, schoolId: $schoolId, schoolYear: $schoolYear, schoolTrailing: $schoolTrailing, schoolYearTrailing: $schoolYearTrailing, schools: $schools, schoolYears: $schoolYears, nameErrorState: $nameErrorState, schoolErrorState: $schoolErrorState, authorized: $authorized)';
+    return 'SignupState(lastName: $lastName, firstName: $firstName, schoolId: $schoolId, school: $school, schoolYear: $schoolYear, schoolTrailing: $schoolTrailing, schoolYearTrailing: $schoolYearTrailing, schools: $schools, schoolYears: $schoolYears, nameErrorState: $nameErrorState, schoolErrorState: $schoolErrorState, authorized: $authorized)';
   }
 
   @override
@@ -306,9 +322,10 @@ class _$SignupStateImpl with DiagnosticableTreeMixin implements _SignupState {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'SignupState'))
-      ..add(DiagnosticsProperty('name', name))
-      ..add(DiagnosticsProperty('school', school))
+      ..add(DiagnosticsProperty('lastName', lastName))
+      ..add(DiagnosticsProperty('firstName', firstName))
       ..add(DiagnosticsProperty('schoolId', schoolId))
+      ..add(DiagnosticsProperty('school', school))
       ..add(DiagnosticsProperty('schoolYear', schoolYear))
       ..add(DiagnosticsProperty('schoolTrailing', schoolTrailing))
       ..add(DiagnosticsProperty('schoolYearTrailing', schoolYearTrailing))
@@ -324,10 +341,13 @@ class _$SignupStateImpl with DiagnosticableTreeMixin implements _SignupState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SignupStateImpl &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.school, school) || other.school == school) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
             (identical(other.schoolId, schoolId) ||
                 other.schoolId == schoolId) &&
+            (identical(other.school, school) || other.school == school) &&
             (identical(other.schoolYear, schoolYear) ||
                 other.schoolYear == schoolYear) &&
             (identical(other.schoolTrailing, schoolTrailing) ||
@@ -348,9 +368,10 @@ class _$SignupStateImpl with DiagnosticableTreeMixin implements _SignupState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      name,
-      school,
+      lastName,
+      firstName,
       schoolId,
+      school,
       schoolYear,
       schoolTrailing,
       schoolYearTrailing,
@@ -369,9 +390,10 @@ class _$SignupStateImpl with DiagnosticableTreeMixin implements _SignupState {
 
 abstract class _SignupState implements SignupState {
   const factory _SignupState(
-      {final String? name,
-      final SchoolModel? school,
+      {final String? lastName,
+      final String? firstName,
       final int? schoolId,
+      final SchoolModel? school,
       final int? schoolYear,
       final String schoolTrailing,
       final String schoolYearTrailing,
@@ -382,11 +404,13 @@ abstract class _SignupState implements SignupState {
       final bool authorized}) = _$SignupStateImpl;
 
   @override
-  String? get name;
+  String? get lastName;
   @override
-  SchoolModel? get school;
+  String? get firstName;
   @override
   int? get schoolId;
+  @override
+  SchoolModel? get school;
   @override
   int? get schoolYear;
   @override
