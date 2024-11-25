@@ -3,7 +3,7 @@ description: はこんだて開発用プロジェクト
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-version: 2.0.2+11
+version: 2.0.3+12
 
 environment:
   sdk: "3.4.4"
@@ -20,8 +20,9 @@ dependencies:
   multi_charts: 0.3.0
   table_calendar: 3.1.2
   flutter_svg: 2.0.10+1
-  flutter_pdfview: 1.3.2
+  flutter_pdfview: 1.3.3
   shimmer: 3.0.0
+  pin_code_fields: 8.0.1
 
   # 状態管理関連
   flutter_riverpod: 2.5.1
@@ -55,6 +56,16 @@ dependencies:
   # URL関連
   url_launcher: 6.3.0
 
+  # Utility
+  collection: 1.18.0
+  http: 1.2.2 
+
+dependency_overrides:
+  url_launcher_ios:
+    git:
+      url: https://github.com/hellohuanlin/packages
+      path: packages/url_launcher/url_launcher_ios
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -79,7 +90,7 @@ dev_dependencies:
   # flutter packages pub run build_runner build --delete-conflicting-outputs
 
   # oss_licenses.dart の生成コマンド（パッケージを追加したら実行する）
-  # flutter pub run flutter_oss_licenses:generate.dart -o lib/constant/oss_licenses.dart
+  # fvm dart run flutter_oss_licenses:generate.dart -o lib/constant/oss_licenses.dart
 
 flutter:
   uses-material-design: true
@@ -128,7 +139,7 @@ flutter_native_splash:
     - "ios/Runner/Info-Release.plist"
 
   # 更新コマンド
-  # flutter pub run flutter_native_splash:create
+  # fvm dart run flutter_native_splash:create
 
 flutter_icons:
   android: true
@@ -138,7 +149,7 @@ flutter_icons:
   remove_alpha_ios: true
 
   # 更新コマンド
-  # flutter pub run flutter_launcher_icons:main
+  # fvm dart run flutter_launcher_icons:main
 
 import_sorter:
   comments: false
@@ -149,4 +160,4 @@ import_sorter:
     - \/lib\/*\/firebase_options.dart
 
   # 実行コマンド
-  # flutter pub run import_sorter:main
+  # fvm dart run import_sorter:main

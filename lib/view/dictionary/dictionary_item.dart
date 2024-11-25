@@ -8,7 +8,7 @@ import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
 import 'package:hakondate/state/dictionary/dictionary_state.dart';
 import 'package:hakondate/view/component/button/help_button.dart';
 import 'package:hakondate/view/component/frame/fade_up_app_bar.dart';
-import 'package:hakondate/view/component/graph/nutrients_radar_chart.dart';
+import 'package:hakondate/view/component/graph/dictionary_nutrients_radar_chart.dart';
 import 'package:hakondate/view/component/label/nutrients_list.dart';
 import 'package:hakondate/view/help/help_frame.dart';
 import 'package:hakondate/view_model/single_page/dictionary/dictionary_view_model.dart';
@@ -92,7 +92,7 @@ class DictionaryItem extends ConsumerWidget {
                         padding: const EdgeInsets.symmetric(
                           vertical: PaddingSize.contentLarge,
                         ),
-                        child: NutrientsRadarChart(
+                        child: DictionaryNutrientsRadarChart(
                           values: snapshot.data!,
                           rawValues: <double>[
                             selectedItem.nutrients.energy,

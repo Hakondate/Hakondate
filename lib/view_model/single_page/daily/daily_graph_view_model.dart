@@ -10,7 +10,6 @@ part 'daily_graph_view_model.g.dart';
 
 @riverpod
 Future<List<double>> graphValues(GraphValuesRef ref) async {
-  const double graphMaxValue = 120;
   final NutrientsModel? slns = ref.watch(userViewModelProvider).currentUser!.slns;
   final AsyncValue<DailyState> data = ref.watch(dailyViewModelProvider);
 
@@ -38,7 +37,7 @@ Future<List<double>> graphValues(GraphValuesRef ref) async {
     mineralSufficiency,
     menu.carbohydrate / slns.carbohydrate * 100.0,
     menu.lipid / slns.lipid * 100.0,
-  ].map((double element) => (element > graphMaxValue) ? graphMaxValue : element).toList();
+  ];
 }
 
 @riverpod

@@ -8,7 +8,7 @@ import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:hakondate/state/daily/daily_state.dart';
 import 'package:hakondate/util/exception/class_type_exception.dart';
 import 'package:hakondate/view/component/button/help_button.dart';
-import 'package:hakondate/view/component/graph/nutrients_radar_chart.dart';
+import 'package:hakondate/view/component/graph/daily_nutrients_radar_chart.dart';
 import 'package:hakondate/view/component/label/nutrients_list.dart';
 import 'package:hakondate/view/dictionary/recommend_foodstuff.dart';
 import 'package:hakondate/view/help/help_frame.dart';
@@ -43,19 +43,33 @@ class NutrientsCard extends StatelessWidget {
   Widget _nutrientsGraph() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        const double graphMaxValue = 120;
         final AsyncValue<List<double>> graphValues = ref.watch(graphValuesProvider);
 
         return graphValues.when(
           data: (List<double> graphValue) {
-            return SizedBox(
-              width: MediaQuery.of(context).size.width * 3 / 4,
-              height: MediaQuery.of(context).size.width * 3 / 4,
-              child: NutrientsRadarChart(
-                values: graphValue,
-                rawValues: ref.watch(graphRawValuesProvider),
-                maxValue: graphMaxValue,
-              ),
+            return Column(
+              children: <Widget>[
+                Stack(
+                  alignment: Alignment.topCenter,
+                  children: <Widget>[
+                    DailyNutrientsRadarChart(
+                      values: graphValue,
+                      rawValues: ref.watch(graphRawValuesProvider),
+                      maxValue: 120,
+                    ),
+                  ],
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10),
+                  child: Text(
+                    '※不足している栄養素がある場合がありますが、\n足りない栄養素はご家庭で補ってください。',
+                    style: TextStyle(
+                      color: Colors.black54,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+              ],
             );
           },
           loading: () => const CircularProgressIndicator(),

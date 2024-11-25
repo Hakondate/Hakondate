@@ -6,10 +6,12 @@ import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/school/school_model.dart';
 import 'package:hakondate/state/signup/signup_state.dart';
 import 'package:hakondate/view/component/button/help_button.dart';
+import 'package:hakondate/state/user_settings/user_settings_state.dart';
 import 'package:hakondate/view/component/label/setting_label.dart';
 import 'package:hakondate/view/component/signing_form/error_indication.dart';
 import 'package:hakondate/view/help/help_frame.dart';
 import 'package:hakondate/view_model/single_page/signup/signup_view_model.dart';
+import 'package:hakondate/view_model/single_page/user_settings/user_settings_view_model.dart';
 
 class SchoolForm extends ConsumerWidget {
   const SchoolForm({super.key});
@@ -17,6 +19,8 @@ class SchoolForm extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<SignupState> state = ref.watch(signupViewModelProvider);
+    final AsyncValue<UserSettingsState> userSettingsState = ref.watch(userSettingsViewModelProvider);
+    final bool isEditing = userSettingsState is AsyncData<UserSettingsState> && userSettingsState.value.editingUser != null;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,6 +51,7 @@ class SchoolForm extends ConsumerWidget {
             ref.read(signupViewModelProvider.notifier).updateSchool(id);
           },
           trailing: (state is AsyncData<SignupState>) ? state.value.schoolTrailing : '',
+          disabled: isEditing,
         ),
         SettingLabel(
           title: '学年',
