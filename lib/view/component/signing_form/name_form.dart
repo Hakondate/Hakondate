@@ -64,7 +64,6 @@ class NameForm extends ConsumerWidget {
                     child: TextFormField(
                       initialValue: state.lastName,
                       keyboardType: TextInputType.name,
-                      maxLength: 5,
                       decoration: InputDecoration(
                         hintText: '姓',
                         border: const OutlineInputBorder(),
@@ -88,7 +87,6 @@ class NameForm extends ConsumerWidget {
                     child: TextFormField(
                       initialValue: state.firstName,
                       keyboardType: TextInputType.name,
-                      maxLength: 10,
                       decoration: InputDecoration(
                         hintText: '名',
                         border: const OutlineInputBorder(),
