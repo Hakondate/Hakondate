@@ -18,8 +18,11 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$UserModel {
   int get id => throw _privateConstructorUsedError;
 
-  /// ニックネーム
-  String get name => throw _privateConstructorUsedError;
+  /// 姓
+  String get lastName => throw _privateConstructorUsedError;
+
+  /// 名
+  String get firstName => throw _privateConstructorUsedError;
 
   /// 学校ID
   int get schoolId => throw _privateConstructorUsedError;
@@ -45,7 +48,8 @@ abstract class $UserModelCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      String name,
+      String lastName,
+      String firstName,
       int schoolId,
       int schoolYear,
       NutrientsModel? slns,
@@ -68,7 +72,8 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
+    Object? lastName = null,
+    Object? firstName = null,
     Object? schoolId = null,
     Object? schoolYear = null,
     Object? slns = freezed,
@@ -79,9 +84,13 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      lastName: null == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String,
+      firstName: null == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
               as String,
       schoolId: null == schoolId
           ? _value.schoolId
@@ -125,7 +134,8 @@ abstract class _$$UserModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {int id,
-      String name,
+      String lastName,
+      String firstName,
       int schoolId,
       int schoolYear,
       NutrientsModel? slns,
@@ -147,7 +157,8 @@ class __$$UserModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
+    Object? lastName = null,
+    Object? firstName = null,
     Object? schoolId = null,
     Object? schoolYear = null,
     Object? slns = freezed,
@@ -158,9 +169,13 @@ class __$$UserModelImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      lastName: null == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String,
+      firstName: null == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
               as String,
       schoolId: null == schoolId
           ? _value.schoolId
@@ -187,7 +202,8 @@ class __$$UserModelImplCopyWithImpl<$Res>
 class _$UserModelImpl extends _UserModel {
   const _$UserModelImpl(
       {required this.id,
-      required this.name,
+      required this.lastName,
+      required this.firstName,
       required this.schoolId,
       required this.schoolYear,
       this.slns,
@@ -197,9 +213,13 @@ class _$UserModelImpl extends _UserModel {
   @override
   final int id;
 
-  /// ニックネーム
+  /// 姓
   @override
-  final String name;
+  final String lastName;
+
+  /// 名
+  @override
+  final String firstName;
 
   /// 学校ID
   @override
@@ -219,7 +239,7 @@ class _$UserModelImpl extends _UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, name: $name, schoolId: $schoolId, schoolYear: $schoolYear, slns: $slns, authorizedAt: $authorizedAt)';
+    return 'UserModel(id: $id, lastName: $lastName, firstName: $firstName, schoolId: $schoolId, schoolYear: $schoolYear, slns: $slns, authorizedAt: $authorizedAt)';
   }
 
   @override
@@ -228,7 +248,10 @@ class _$UserModelImpl extends _UserModel {
         (other.runtimeType == runtimeType &&
             other is _$UserModelImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
             (identical(other.schoolId, schoolId) ||
                 other.schoolId == schoolId) &&
             (identical(other.schoolYear, schoolYear) ||
@@ -239,8 +262,8 @@ class _$UserModelImpl extends _UserModel {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, name, schoolId, schoolYear, slns, authorizedAt);
+  int get hashCode => Object.hash(runtimeType, id, lastName, firstName,
+      schoolId, schoolYear, slns, authorizedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -252,7 +275,8 @@ class _$UserModelImpl extends _UserModel {
 abstract class _UserModel extends UserModel {
   const factory _UserModel(
       {required final int id,
-      required final String name,
+      required final String lastName,
+      required final String firstName,
       required final int schoolId,
       required final int schoolYear,
       final NutrientsModel? slns,
@@ -263,8 +287,12 @@ abstract class _UserModel extends UserModel {
   int get id;
   @override
 
-  /// ニックネーム
-  String get name;
+  /// 姓
+  String get lastName;
+  @override
+
+  /// 名
+  String get firstName;
   @override
 
   /// 学校ID

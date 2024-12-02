@@ -45,23 +45,56 @@ class NameForm extends ConsumerWidget {
                 ErrorIndication(errorState: state.nameErrorState),
               ],
             ),
-            TextFormField(
-              initialValue: state.name,
-              keyboardType: TextInputType.name,
-              maxLength: 15,
-              decoration: InputDecoration(
-                hintText: 'お子様の名前かニックネームを入力',
-                border: const OutlineInputBorder(),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: AppColor.brand.secondary,
-                    width: 2,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 41 / 100,
+                    child: TextFormField(
+                      initialValue: state.lastName,
+                      keyboardType: TextInputType.name,
+                      decoration: InputDecoration(
+                        hintText: '姓',
+                        border: const OutlineInputBorder(),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: AppColor.brand.secondary,
+                            width: 2,
+                          ),
+                        ),
+                      ),
+                      onChanged: (String value) {
+                        ref.read(signupViewModelProvider.notifier).updateLastName(value);
+                      },
+                    ),
                   ),
                 ),
-              ),
-              onChanged: (String value) {
-                ref.read(signupViewModelProvider.notifier).updateName(value);
-              },
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 41 / 100,
+                    child: TextFormField(
+                      initialValue: state.firstName,
+                      keyboardType: TextInputType.name,
+                      decoration: InputDecoration(
+                        hintText: '名',
+                        border: const OutlineInputBorder(),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: AppColor.brand.secondary,
+                            width: 2,
+                          ),
+                        ),
+                      ),
+                      onChanged: (String value) {
+                        ref.read(signupViewModelProvider.notifier).updateFirstName(value);
+                      },
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

@@ -2493,10 +2493,17 @@ class $UsersTableTable extends UsersTable
       requiredDuringInsert: false,
       defaultConstraints:
           GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
-  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  static const VerificationMeta _lastNameMeta =
+      const VerificationMeta('lastName');
   @override
-  late final GeneratedColumn<String> name = GeneratedColumn<String>(
-      'name', aliasedName, false,
+  late final GeneratedColumn<String> lastName = GeneratedColumn<String>(
+      'last_name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _firstNameMeta =
+      const VerificationMeta('firstName');
+  @override
+  late final GeneratedColumn<String> firstName = GeneratedColumn<String>(
+      'first_name', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _schoolIdMeta =
       const VerificationMeta('schoolId');
@@ -2521,7 +2528,7 @@ class $UsersTableTable extends UsersTable
       type: DriftSqlType.dateTime, requiredDuringInsert: false);
   @override
   List<GeneratedColumn> get $columns =>
-      [id, name, schoolId, schoolYear, authorizedAt];
+      [id, lastName, firstName, schoolId, schoolYear, authorizedAt];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -2535,11 +2542,17 @@ class $UsersTableTable extends UsersTable
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
-    if (data.containsKey('name')) {
-      context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    if (data.containsKey('last_name')) {
+      context.handle(_lastNameMeta,
+          lastName.isAcceptableOrUnknown(data['last_name']!, _lastNameMeta));
     } else if (isInserting) {
-      context.missing(_nameMeta);
+      context.missing(_lastNameMeta);
+    }
+    if (data.containsKey('first_name')) {
+      context.handle(_firstNameMeta,
+          firstName.isAcceptableOrUnknown(data['first_name']!, _firstNameMeta));
+    } else if (isInserting) {
+      context.missing(_firstNameMeta);
     }
     if (data.containsKey('school_id')) {
       context.handle(_schoolIdMeta,
@@ -2572,8 +2585,10 @@ class $UsersTableTable extends UsersTable
     return UsersSchema(
       id: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      name: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      lastName: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}last_name'])!,
+      firstName: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}first_name'])!,
       schoolId: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}school_id'])!,
       schoolYear: attachedDatabase.typeMapping
@@ -2591,13 +2606,15 @@ class $UsersTableTable extends UsersTable
 
 class UsersSchema extends DataClass implements Insertable<UsersSchema> {
   final int id;
-  final String name;
+  final String lastName;
+  final String firstName;
   final int schoolId;
   final int schoolYear;
   final DateTime? authorizedAt;
   const UsersSchema(
       {required this.id,
-      required this.name,
+      required this.lastName,
+      required this.firstName,
       required this.schoolId,
       required this.schoolYear,
       this.authorizedAt});
@@ -2605,7 +2622,8 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
-    map['name'] = Variable<String>(name);
+    map['last_name'] = Variable<String>(lastName);
+    map['first_name'] = Variable<String>(firstName);
     map['school_id'] = Variable<int>(schoolId);
     map['school_year'] = Variable<int>(schoolYear);
     if (!nullToAbsent || authorizedAt != null) {
@@ -2617,7 +2635,8 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
   UsersTableCompanion toCompanion(bool nullToAbsent) {
     return UsersTableCompanion(
       id: Value(id),
-      name: Value(name),
+      lastName: Value(lastName),
+      firstName: Value(firstName),
       schoolId: Value(schoolId),
       schoolYear: Value(schoolYear),
       authorizedAt: authorizedAt == null && nullToAbsent
@@ -2631,7 +2650,8 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return UsersSchema(
       id: serializer.fromJson<int>(json['id']),
-      name: serializer.fromJson<String>(json['name']),
+      lastName: serializer.fromJson<String>(json['lastName']),
+      firstName: serializer.fromJson<String>(json['firstName']),
       schoolId: serializer.fromJson<int>(json['schoolId']),
       schoolYear: serializer.fromJson<int>(json['schoolYear']),
       authorizedAt: serializer.fromJson<DateTime?>(json['authorizedAt']),
@@ -2642,7 +2662,8 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
-      'name': serializer.toJson<String>(name),
+      'lastName': serializer.toJson<String>(lastName),
+      'firstName': serializer.toJson<String>(firstName),
       'schoolId': serializer.toJson<int>(schoolId),
       'schoolYear': serializer.toJson<int>(schoolYear),
       'authorizedAt': serializer.toJson<DateTime?>(authorizedAt),
@@ -2651,13 +2672,15 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
 
   UsersSchema copyWith(
           {int? id,
-          String? name,
+          String? lastName,
+          String? firstName,
           int? schoolId,
           int? schoolYear,
           Value<DateTime?> authorizedAt = const Value.absent()}) =>
       UsersSchema(
         id: id ?? this.id,
-        name: name ?? this.name,
+        lastName: lastName ?? this.lastName,
+        firstName: firstName ?? this.firstName,
         schoolId: schoolId ?? this.schoolId,
         schoolYear: schoolYear ?? this.schoolYear,
         authorizedAt:
@@ -2666,7 +2689,8 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
   UsersSchema copyWithCompanion(UsersTableCompanion data) {
     return UsersSchema(
       id: data.id.present ? data.id.value : this.id,
-      name: data.name.present ? data.name.value : this.name,
+      lastName: data.lastName.present ? data.lastName.value : this.lastName,
+      firstName: data.firstName.present ? data.firstName.value : this.firstName,
       schoolId: data.schoolId.present ? data.schoolId.value : this.schoolId,
       schoolYear:
           data.schoolYear.present ? data.schoolYear.value : this.schoolYear,
@@ -2680,7 +2704,8 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
   String toString() {
     return (StringBuffer('UsersSchema(')
           ..write('id: $id, ')
-          ..write('name: $name, ')
+          ..write('lastName: $lastName, ')
+          ..write('firstName: $firstName, ')
           ..write('schoolId: $schoolId, ')
           ..write('schoolYear: $schoolYear, ')
           ..write('authorizedAt: $authorizedAt')
@@ -2689,13 +2714,15 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
   }
 
   @override
-  int get hashCode => Object.hash(id, name, schoolId, schoolYear, authorizedAt);
+  int get hashCode =>
+      Object.hash(id, lastName, firstName, schoolId, schoolYear, authorizedAt);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is UsersSchema &&
           other.id == this.id &&
-          other.name == this.name &&
+          other.lastName == this.lastName &&
+          other.firstName == this.firstName &&
           other.schoolId == this.schoolId &&
           other.schoolYear == this.schoolYear &&
           other.authorizedAt == this.authorizedAt);
@@ -2703,36 +2730,42 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
 
 class UsersTableCompanion extends UpdateCompanion<UsersSchema> {
   final Value<int> id;
-  final Value<String> name;
+  final Value<String> lastName;
+  final Value<String> firstName;
   final Value<int> schoolId;
   final Value<int> schoolYear;
   final Value<DateTime?> authorizedAt;
   const UsersTableCompanion({
     this.id = const Value.absent(),
-    this.name = const Value.absent(),
+    this.lastName = const Value.absent(),
+    this.firstName = const Value.absent(),
     this.schoolId = const Value.absent(),
     this.schoolYear = const Value.absent(),
     this.authorizedAt = const Value.absent(),
   });
   UsersTableCompanion.insert({
     this.id = const Value.absent(),
-    required String name,
+    required String lastName,
+    required String firstName,
     required int schoolId,
     required int schoolYear,
     this.authorizedAt = const Value.absent(),
-  })  : name = Value(name),
+  })  : lastName = Value(lastName),
+        firstName = Value(firstName),
         schoolId = Value(schoolId),
         schoolYear = Value(schoolYear);
   static Insertable<UsersSchema> custom({
     Expression<int>? id,
-    Expression<String>? name,
+    Expression<String>? lastName,
+    Expression<String>? firstName,
     Expression<int>? schoolId,
     Expression<int>? schoolYear,
     Expression<DateTime>? authorizedAt,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
-      if (name != null) 'name': name,
+      if (lastName != null) 'last_name': lastName,
+      if (firstName != null) 'first_name': firstName,
       if (schoolId != null) 'school_id': schoolId,
       if (schoolYear != null) 'school_year': schoolYear,
       if (authorizedAt != null) 'authorized_at': authorizedAt,
@@ -2741,13 +2774,15 @@ class UsersTableCompanion extends UpdateCompanion<UsersSchema> {
 
   UsersTableCompanion copyWith(
       {Value<int>? id,
-      Value<String>? name,
+      Value<String>? lastName,
+      Value<String>? firstName,
       Value<int>? schoolId,
       Value<int>? schoolYear,
       Value<DateTime?>? authorizedAt}) {
     return UsersTableCompanion(
       id: id ?? this.id,
-      name: name ?? this.name,
+      lastName: lastName ?? this.lastName,
+      firstName: firstName ?? this.firstName,
       schoolId: schoolId ?? this.schoolId,
       schoolYear: schoolYear ?? this.schoolYear,
       authorizedAt: authorizedAt ?? this.authorizedAt,
@@ -2760,8 +2795,11 @@ class UsersTableCompanion extends UpdateCompanion<UsersSchema> {
     if (id.present) {
       map['id'] = Variable<int>(id.value);
     }
-    if (name.present) {
-      map['name'] = Variable<String>(name.value);
+    if (lastName.present) {
+      map['last_name'] = Variable<String>(lastName.value);
+    }
+    if (firstName.present) {
+      map['first_name'] = Variable<String>(firstName.value);
     }
     if (schoolId.present) {
       map['school_id'] = Variable<int>(schoolId.value);
@@ -2779,7 +2817,8 @@ class UsersTableCompanion extends UpdateCompanion<UsersSchema> {
   String toString() {
     return (StringBuffer('UsersTableCompanion(')
           ..write('id: $id, ')
-          ..write('name: $name, ')
+          ..write('lastName: $lastName, ')
+          ..write('firstName: $firstName, ')
           ..write('schoolId: $schoolId, ')
           ..write('schoolYear: $schoolYear, ')
           ..write('authorizedAt: $authorizedAt')
@@ -4824,14 +4863,16 @@ class $$DishFoodstuffsTableTableOrderingComposer
 
 typedef $$UsersTableTableCreateCompanionBuilder = UsersTableCompanion Function({
   Value<int> id,
-  required String name,
+  required String lastName,
+  required String firstName,
   required int schoolId,
   required int schoolYear,
   Value<DateTime?> authorizedAt,
 });
 typedef $$UsersTableTableUpdateCompanionBuilder = UsersTableCompanion Function({
   Value<int> id,
-  Value<String> name,
+  Value<String> lastName,
+  Value<String> firstName,
   Value<int> schoolId,
   Value<int> schoolYear,
   Value<DateTime?> authorizedAt,
@@ -4855,28 +4896,32 @@ class $$UsersTableTableTableManager extends RootTableManager<
               $$UsersTableTableOrderingComposer(ComposerState(db, table)),
           updateCompanionCallback: ({
             Value<int> id = const Value.absent(),
-            Value<String> name = const Value.absent(),
+            Value<String> lastName = const Value.absent(),
+            Value<String> firstName = const Value.absent(),
             Value<int> schoolId = const Value.absent(),
             Value<int> schoolYear = const Value.absent(),
             Value<DateTime?> authorizedAt = const Value.absent(),
           }) =>
               UsersTableCompanion(
             id: id,
-            name: name,
+            lastName: lastName,
+            firstName: firstName,
             schoolId: schoolId,
             schoolYear: schoolYear,
             authorizedAt: authorizedAt,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
-            required String name,
+            required String lastName,
+            required String firstName,
             required int schoolId,
             required int schoolYear,
             Value<DateTime?> authorizedAt = const Value.absent(),
           }) =>
               UsersTableCompanion.insert(
             id: id,
-            name: name,
+            lastName: lastName,
+            firstName: firstName,
             schoolId: schoolId,
             schoolYear: schoolYear,
             authorizedAt: authorizedAt,
@@ -4892,8 +4937,13 @@ class $$UsersTableTableFilterComposer
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
-  ColumnFilters<String> get name => $state.composableBuilder(
-      column: $state.table.name,
+  ColumnFilters<String> get lastName => $state.composableBuilder(
+      column: $state.table.lastName,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get firstName => $state.composableBuilder(
+      column: $state.table.firstName,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
@@ -4928,8 +4978,13 @@ class $$UsersTableTableOrderingComposer
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
-  ColumnOrderings<String> get name => $state.composableBuilder(
-      column: $state.table.name,
+  ColumnOrderings<String> get lastName => $state.composableBuilder(
+      column: $state.table.lastName,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get firstName => $state.composableBuilder(
+      column: $state.table.firstName,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 

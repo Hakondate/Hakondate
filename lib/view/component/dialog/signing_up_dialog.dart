@@ -58,7 +58,7 @@ class SigningUpDialog extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       if (signupState is AsyncData<SignupState>) ...<Widget>[
-                        Text(signupState.value.name!),
+                        Text(signupState.value.lastName! + signupState.value.firstName!),
                         Text(signupState.value.schoolTrailing),
                         Text(signupState.value.schoolYearTrailing),
                       ],
