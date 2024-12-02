@@ -19,19 +19,27 @@ class HelpButton extends StatelessWidget {
         showDialog<void>(
           context: context,
           builder: (BuildContext context) {
-            return Dialog(
-              child: ListView.builder(
-                shrinkWrap: true,
-                padding: const EdgeInsets.only(
-                  left: MarginSize.minimum,
-                  right: MarginSize.minimum,
-                  top: MarginSize.minimum,
-                ),
-                itemCount: helpFrame.length,
-                itemBuilder: (BuildContext contextex, int index) {
-                  return helpFrame[index];
-                },
+            return AlertDialog(
+              contentPadding: const EdgeInsets.only(
+                top: MarginSize.minimum,
+                right: MarginSize.minimum,
+                left: MarginSize.minimum,
               ),
+              content: SingleChildScrollView(
+                child: Column(
+                  children: helpFrame,
+                ),
+              ),
+              actionsPadding: EdgeInsets.zero,
+              actions: <Widget>[
+                IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  icon: const Icon(Icons.disabled_by_default),
+                  color: Theme.of(context).primaryIconTheme.color,
+                ),
+              ],
             );
           },
         );
