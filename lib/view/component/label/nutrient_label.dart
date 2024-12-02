@@ -18,15 +18,15 @@ class NutrientLabel extends StatelessWidget {
   final Color? backgroundColor;
   @override
   Widget build(BuildContext context) {
-    double wordheight;
+    double labelHeight;
     if (name.length > 13) {
-      wordheight = 45.0;
+      labelHeight = 45.0;
     } else {
-      wordheight = 30.0;
+      labelHeight = 30.0;
     }
 
     return Container(
-      height: wordheight,
+      height: labelHeight,
       color: backgroundColor,
       child: Row(
         children: <Widget>[
