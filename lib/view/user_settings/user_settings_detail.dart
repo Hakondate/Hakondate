@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/state/user_settings/user_settings_state.dart';
+import 'package:hakondate/util/analytics_controller/analytics_controller.dart';
 import 'package:hakondate/view/component/dialog/signing_up_dialog.dart';
 import 'package:hakondate/view/component/frame/fade_up_app_bar.dart';
 import 'package:hakondate/view/component/signing_form/name_form.dart';
@@ -17,6 +18,7 @@ class UserSettingsDetail extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    int tapCounter = 0;
     final AsyncValue<UserSettingsState> userSettingsState = ref.watch(userSettingsViewModelProvider);
 
     return userSettingsState.when(
@@ -31,17 +33,33 @@ class UserSettingsDetail extends ConsumerWidget {
           appBar: FadeUpAppBar(
             title: userSettingsState.editingUser == null ? const Text('お子様の追加登録') : const Text('お子様情報の変更'),
           ),
-          body: Form(
-            key: _formKey,
-            child: const SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  NameForm(),
-                  SchoolForm(),
-                  SubmitButton(),
-                ],
+          body: Stack(
+            children: <Widget>[
+              Consumer(
+                builder: (BuildContext context, WidgetRef ref, _) {
+                  return GestureDetector(
+                    onTap: () async {
+                      tapCounter++;
+                      if (tapCounter > 9) {
+                        await ref.read(isDeveloperProvider.notifier).setDeveloper(value: true);
+                      }
+                    },
+                  );
+                },
               ),
-            ),
+              Form(
+                key: _formKey,
+                child: const SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      NameForm(),
+                      SchoolForm(),
+                      SubmitButton(),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         );
       },
