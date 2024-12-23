@@ -6,7 +6,7 @@ part of 'daily_graph_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$graphValuesHash() => r'b43044d94338d356f1361d68795e828fc103cd13';
+String _$graphValuesHash() => r'6234ee6b4083ccd18e8bb0463ce091c56804a538';
 
 /// See also [graphValues].
 @ProviderFor(graphValues)

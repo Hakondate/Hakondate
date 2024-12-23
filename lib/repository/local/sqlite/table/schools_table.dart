@@ -11,6 +11,8 @@ class SchoolsTable extends Table {
   TextColumn get classification => text()();
   DateTimeColumn get createAt => dateTime().withDefault(Constant(DateTime.now()))();
   DateTimeColumn get updateAt => dateTime().withDefault(Constant(DateTime.now()))();
+  BoolColumn get authorizationRequired => boolean().withDefault(const Constant(false))();
+  DateTimeColumn get authorizationKeyUpdatedAt => dateTime().nullable()();
 
   @override
   Set<Column> get primaryKey => {id};

@@ -125,7 +125,7 @@ class UserSettingsCard extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    user.name,
+                    user.lastName + user.firstName,
                     style: const TextStyle(
                       fontSize: FontSize.heading,
                       fontWeight: FontWeight.bold,
