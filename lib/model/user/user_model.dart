@@ -11,8 +11,11 @@ class UserModel with _$UserModel {
   const factory UserModel({
     required int id,
 
-    /// ニックネーム
-    required String name,
+    /// 姓
+    required String lastName,
+
+    /// 名
+    required String firstName,
 
     /// 学校ID
     required int schoolId,
@@ -22,20 +25,27 @@ class UserModel with _$UserModel {
 
     /// 学校給食摂取基準
     NutrientsModel? slns,
+
+    /// 認可された日
+    DateTime? authorizedAt,
   }) = _UserModel;
   const UserModel._();
 
   factory UserModel.fromDrift(UsersSchema schema) => UserModel(
         id: schema.id,
-        name: schema.name,
+        lastName: schema.lastName,
+        firstName: schema.firstName,
         schoolId: schema.schoolId,
         schoolYear: schema.schoolYear,
+        authorizedAt: schema.authorizedAt,
       );
 
   UsersTableCompanion toDrift() => UsersTableCompanion(
         id: Value<int>(id),
-        name: Value<String>(name),
+        lastName: Value<String>(lastName),
+        firstName: Value<String>(firstName),
         schoolId: Value<int>(schoolId),
         schoolYear: Value<int>(schoolYear),
+        authorizedAt: Value<DateTime?>(authorizedAt),
       );
 }

@@ -9,7 +9,7 @@ import 'package:hakondate/state/user_settings/user_settings_state.dart';
 
 part 'user_settings_view_model.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class UserSettingsViewModel extends _$UserSettingsViewModel {
   @override
   Future<UserSettingsState> build() async {

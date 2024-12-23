@@ -44,9 +44,9 @@ class NameForm extends ConsumerWidget {
                     context: context,
                     builder: (BuildContext context) => const HelpDialog(
                       title: Text('お名前について'),
-                      content: Text('　お名前情報は，本アプリ内でお子様を識別するために利用されます．'
-                          'あだ名などを入力していただいても構いません．また，あとで変更することもできます．\n'
-                          '　お名前情報は，端末内に保存され収集されることはありません．また，あとから変更することができます．'),
+                      content: Text('　お名前情報は，本アプリ内でお子様を識別するために利用されます．\n'
+                          '　お子様の本名を入力してください．また，あとで変更することもできます．\n'
+                          '　お名前情報は，端末内に保存され収集されることはありません．'),
                     ),
                   ),
                 ),
@@ -54,23 +54,56 @@ class NameForm extends ConsumerWidget {
                 ErrorIndication(errorState: state.nameErrorState),
               ],
             ),
-            TextFormField(
-              initialValue: state.name,
-              keyboardType: TextInputType.name,
-              maxLength: 15,
-              decoration: InputDecoration(
-                hintText: 'お子様の名前かあだ名を入力',
-                border: const OutlineInputBorder(),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: AppColor.brand.secondary,
-                    width: 2,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 41 / 100,
+                    child: TextFormField(
+                      initialValue: state.lastName,
+                      keyboardType: TextInputType.name,
+                      decoration: InputDecoration(
+                        hintText: '姓',
+                        border: const OutlineInputBorder(),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: AppColor.brand.secondary,
+                            width: 2,
+                          ),
+                        ),
+                      ),
+                      onChanged: (String value) {
+                        ref.read(signupViewModelProvider.notifier).updateLastName(value);
+                      },
+                    ),
                   ),
                 ),
-              ),
-              onChanged: (String value) {
-                ref.read(signupViewModelProvider.notifier).updateName(value);
-              },
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 41 / 100,
+                    child: TextFormField(
+                      initialValue: state.firstName,
+                      keyboardType: TextInputType.name,
+                      decoration: InputDecoration(
+                        hintText: '名',
+                        border: const OutlineInputBorder(),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: AppColor.brand.secondary,
+                            width: 2,
+                          ),
+                        ),
+                      ),
+                      onChanged: (String value) {
+                        ref.read(signupViewModelProvider.notifier).updateFirstName(value);
+                      },
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
