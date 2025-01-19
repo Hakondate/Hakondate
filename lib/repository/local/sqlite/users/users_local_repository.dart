@@ -3,7 +3,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/user/user_model.dart';
 import 'package:hakondate/repository/local/sqlite/local_database.dart';
-import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/util/exception/sqlite_exception.dart';
 
 part 'users_local_repository.g.dart';

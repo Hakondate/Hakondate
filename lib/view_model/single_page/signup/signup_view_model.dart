@@ -53,12 +53,12 @@ class SignupViewModel extends _$SignupViewModel {
     cache.whenData((SignupState data) async {
       state = const AsyncLoading<SignupState>();
 
-      final String? name = _getFullName(data.lastName!, data.firstName!);
+      final String name = _getFullName(data.lastName!, data.firstName!);
       final int? schoolId = data.schoolId;
       final int? schoolYear = data.schoolYear;
 
       try {
-        if (name == null || schoolId == null || schoolYear == null) {
+        if (schoolId == null || schoolYear == null) {
           throw const ParametersException('Do not allow Null parameter');
         }
 
@@ -82,12 +82,12 @@ class SignupViewModel extends _$SignupViewModel {
     cache.whenData((SignupState data) async {
       state = const AsyncLoading<SignupState>();
 
-      final String? name = _getFullName(data.lastName!, data.firstName!);
+      final String name = _getFullName(data.lastName!, data.firstName!);
       final int? schoolId = data.schoolId;
       final int? schoolYear = data.schoolYear;
 
       try {
-        if (name == null || schoolId == null || schoolYear == null) {
+        if (schoolId == null || schoolYear == null) {
           throw const ParametersException('Do not allow Null parameter');
         }
 
