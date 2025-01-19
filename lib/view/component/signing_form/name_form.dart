@@ -80,7 +80,6 @@ class NameForm extends ConsumerWidget {
                         FilteringTextInputFormatter.deny(' '),
                       ],
                       onChanged: (String value) {
-                        debugPrint('onChanged()');
                         ref.read(signupViewModelProvider.notifier).updateLastName(value);
                       },
                     ),
