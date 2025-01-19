@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -63,6 +64,7 @@ class NameForm extends ConsumerWidget {
                     width: MediaQuery.of(context).size.width * 41 / 100,
                     child: TextFormField(
                       initialValue: state.lastName,
+                      maxLength: 6,
                       keyboardType: TextInputType.name,
                       decoration: InputDecoration(
                         hintText: '姓',
@@ -74,7 +76,11 @@ class NameForm extends ConsumerWidget {
                           ),
                         ),
                       ),
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.deny(' '),
+                      ],
                       onChanged: (String value) {
+                        debugPrint('onChanged()');
                         ref.read(signupViewModelProvider.notifier).updateLastName(value);
                       },
                     ),
@@ -86,6 +92,7 @@ class NameForm extends ConsumerWidget {
                     width: MediaQuery.of(context).size.width * 41 / 100,
                     child: TextFormField(
                       initialValue: state.firstName,
+                      maxLength: 6,
                       keyboardType: TextInputType.name,
                       decoration: InputDecoration(
                         hintText: '名',
@@ -97,6 +104,9 @@ class NameForm extends ConsumerWidget {
                           ),
                         ),
                       ),
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.deny(' '),
+                      ],
                       onChanged: (String value) {
                         ref.read(signupViewModelProvider.notifier).updateFirstName(value);
                       },
