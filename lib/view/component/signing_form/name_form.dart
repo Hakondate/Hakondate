@@ -75,6 +75,7 @@ class NameForm extends ConsumerWidget {
                         ),
                       ),
                       onChanged: (String value) {
+                        debugPrint('onChanged()');
                         ref.read(signupViewModelProvider.notifier).updateLastName(value);
                       },
                     ),

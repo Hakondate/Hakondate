@@ -17,7 +17,7 @@ UsersLocalRepository usersLocalRepository(UsersLocalRepositoryRef ref) {
 abstract class UsersLocalRepositoryAPI {
   Future<List<UserModel>> list();
   Future<UserModel> getById(int id);
-  Future<int> add(String lastName, String firstName, int schoolId, int schoolYear, DateTime? authorizedAt);
+  Future<int> add(String name, int schoolId, int schoolYear, DateTime? authorizedAt);
   Future<int> update(UserModel user);
   Future<int> count();
   Future<int> delete(int id);
@@ -43,33 +43,21 @@ class UsersLocalRepository extends UsersLocalRepositoryAPI {
 
   @override
   Future<UserModel> getById(int id) async {
-    late UsersSchema? usersSchema;
-    try {
-      usersSchema = await (_db.select(_db.usersTable)..where(($UsersTableTable t) => t.id.equals(id))).getSingleOrNull();
-    } catch (e) {
-      if (e is TypeError) {
-        usersSchema = UsersSchema(id: id, lastName: 'error', firstName: 'error', schoolId: -1, schoolYear: -1);
-        routemaster.replace('/real_name_error');
-      } else {
-        throw Exception(e);
-      }
-    }
+    final UsersSchema? usersSchema = await (_db.select(_db.usersTable)..where(($UsersTableTable t) => t.id.equals(id))).getSingleOrNull();
     if (usersSchema == null) throw SQLiteException('Failed to select $id from usersTable');
 
     return UserModel.fromDrift(usersSchema);
   }
 
   @override
-  Future<int> add(String lastName, String firstName, int schoolId, int schoolYear, DateTime? authorizedAt) =>
-      _db.into(_db.usersTable).insertOnConflictUpdate(
-            UsersTableCompanion(
-              lastName: Value<String>(lastName),
-              firstName: Value<String>(firstName),
-              schoolId: Value<int>(schoolId),
-              schoolYear: Value<int>(schoolYear),
-              authorizedAt: Value<DateTime?>(authorizedAt),
-            ),
-          );
+  Future<int> add(String name, int schoolId, int schoolYear, DateTime? authorizedAt) => _db.into(_db.usersTable).insertOnConflictUpdate(
+        UsersTableCompanion(
+          name: Value<String>(name),
+          schoolId: Value<int>(schoolId),
+          schoolYear: Value<int>(schoolYear),
+          authorizedAt: Value<DateTime?>(authorizedAt),
+        ),
+      );
 
   @override
   Future<int> update(UserModel user) async {
