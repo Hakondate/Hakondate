@@ -11,11 +11,8 @@ class UserModel with _$UserModel {
   const factory UserModel({
     required int id,
 
-    /// 姓
-    required String lastName,
-
-    /// 名
-    required String firstName,
+    /// 名前
+    required String name,
 
     /// 学校ID
     required int schoolId,
@@ -33,8 +30,7 @@ class UserModel with _$UserModel {
 
   factory UserModel.fromDrift(UsersSchema schema) => UserModel(
         id: schema.id,
-        lastName: schema.lastName,
-        firstName: schema.firstName,
+        name: schema.name,
         schoolId: schema.schoolId,
         schoolYear: schema.schoolYear,
         authorizedAt: schema.authorizedAt,
@@ -42,8 +38,7 @@ class UserModel with _$UserModel {
 
   UsersTableCompanion toDrift() => UsersTableCompanion(
         id: Value<int>(id),
-        lastName: Value<String>(lastName),
-        firstName: Value<String>(firstName),
+        name: Value<String>(name),
         schoolId: Value<int>(schoolId),
         schoolYear: Value<int>(schoolYear),
         authorizedAt: Value<DateTime?>(authorizedAt),
