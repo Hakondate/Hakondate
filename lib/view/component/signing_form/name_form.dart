@@ -6,8 +6,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/state/signup/signup_state.dart';
-import 'package:hakondate/view/component/dialog/help_dialog.dart';
+import 'package:hakondate/view/component/button/help_button.dart';
 import 'package:hakondate/view/component/signing_form/error_indication.dart';
+import 'package:hakondate/view/help/help_frame.dart';
 import 'package:hakondate/view_model/single_page/signup/signup_view_model.dart';
 
 class NameForm extends ConsumerWidget {
@@ -37,19 +38,9 @@ class NameForm extends ConsumerWidget {
                   'お名前',
                   style: TextStyle(fontSize: FontSize.subheading),
                 ),
-                IconButton(
-                  icon: const Icon(Icons.help),
-                  iconSize: IconSize.help,
-                  color: Theme.of(context).primaryIconTheme.color,
-                  onPressed: () async => showDialog(
-                    context: context,
-                    builder: (BuildContext context) => const HelpDialog(
-                      title: Text('お名前について'),
-                      content: Text('　お名前情報は，本アプリ内でお子様を識別するために利用されます．\n'
-                          '　お子様の本名を入力してください．また，あとで変更することもできます．\n'
-                          '　お名前情報は，端末内に保存され収集されることはありません．'),
-                    ),
-                  ),
+                HelpButton(
+                  helpFrame: <HelpFrame>[HelpFrame.nickName()],
+                  key: key,
                 ),
                 const Spacer(),
                 ErrorIndication(errorState: state.nameErrorState),
