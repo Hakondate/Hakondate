@@ -32,7 +32,8 @@ class SignupViewModel extends _$SignupViewModel {
 
       return SignupState(
         schools: schools,
-        name: editingUser!.name,
+        lastName: editingUser!.name.split(' ')[0],
+        firstName: editingUser!.name.split(' ')[1],
         schoolId: editingUser!.schoolId,
         schoolYears: schoolYears,
         schoolTrailing: school.name,
@@ -52,12 +53,12 @@ class SignupViewModel extends _$SignupViewModel {
     cache.whenData((SignupState data) async {
       state = const AsyncLoading<SignupState>();
 
-      final String? name = data.name;
+      final String name = _getFullName(data.lastName!, data.firstName!);
       final int? schoolId = data.schoolId;
       final int? schoolYear = data.schoolYear;
 
       try {
-        if (name == null || schoolId == null || schoolYear == null) {
+        if (schoolId == null || schoolYear == null) {
           throw const ParametersException('Do not allow Null parameter');
         }
 
@@ -81,12 +82,12 @@ class SignupViewModel extends _$SignupViewModel {
     cache.whenData((SignupState data) async {
       state = const AsyncLoading<SignupState>();
 
-      final String? name = data.name;
+      final String name = _getFullName(data.lastName!, data.firstName!);
       final int? schoolId = data.schoolId;
       final int? schoolYear = data.schoolYear;
 
       try {
-        if (name == null || schoolId == null || schoolYear == null) {
+        if (schoolId == null || schoolYear == null) {
           throw const ParametersException('Do not allow Null parameter');
         }
 
@@ -114,9 +115,23 @@ class SignupViewModel extends _$SignupViewModel {
     await signup();
   }
 
-  void updateName(String? name) {
+  void updateLastName(String? lastName) {
     state.whenData(
-      (SignupState data) => state = AsyncData<SignupState>(data.copyWith(name: name)),
+      (SignupState data) => state = AsyncData<SignupState>(
+        data.copyWith(
+          lastName: lastName,
+        ),
+      ),
+    );
+  }
+
+  void updateFirstName(String? firstName) {
+    state.whenData(
+      (SignupState data) => state = AsyncData<SignupState>(
+        data.copyWith(
+          firstName: firstName,
+        ),
+      ),
     );
   }
 
@@ -124,22 +139,27 @@ class SignupViewModel extends _$SignupViewModel {
     state.whenData((SignupState data) async {
       final SchoolModel school = await ref.read(schoolsLocalRepositoryProvider).getById(id);
       final List<String> schoolYears = _getSchoolYears(school);
+      debugPrint('!school.authorizationRequired: ${!school.authorizationRequired}');
       if (data.schoolYear != null && data.schoolYear! > 3 && school.classification == SchoolClassification.secondary) {
         state = AsyncData<SignupState>(
           data.copyWith(
+            school: school,
             schoolId: id,
             schoolYear: 3,
             schoolYears: schoolYears,
             schoolTrailing: school.name,
             schoolYearTrailing: '3年生',
+            authorized: !school.authorizationRequired,
           ),
         );
       } else {
         state = AsyncData<SignupState>(
           data.copyWith(
+            school: school,
             schoolId: id,
             schoolYears: schoolYears,
             schoolTrailing: school.name,
+            authorized: !school.authorizationRequired,
           ),
         );
       }
@@ -167,9 +187,17 @@ class SignupViewModel extends _$SignupViewModel {
     );
   }
 
+  void updateAuthorization({required bool authorized}) {
+    state.whenData(
+      (SignupState data) => state = AsyncData<SignupState>(data.copyWith(authorized: authorized)),
+    );
+  }
+
   void _checkNameValidation() {
     state.whenData((SignupState data) {
-      final String? nameErrorState = (data.name == null || data.name!.isEmpty) ? 'お子様の名前を入力してください' : null;
+      final String? nameErrorState = (data.lastName == null || data.firstName == null || data.lastName!.isEmpty || data.firstName!.isEmpty)
+          ? 'お子様のお名前を入力してください'
+          : null;
       state = AsyncData<SignupState>(data.copyWith(nameErrorState: nameErrorState));
     });
   }
@@ -201,5 +229,9 @@ class SignupViewModel extends _$SignupViewModel {
     return (school.classification == SchoolClassification.primary)
         ? <String>['1年生', '2年生', '3年生', '4年生', '5年生', '6年生']
         : <String>['1年生', '2年生', '3年生'];
+  }
+
+  String _getFullName(String lastName, String firstName) {
+    return '$lastName $firstName';
   }
 }

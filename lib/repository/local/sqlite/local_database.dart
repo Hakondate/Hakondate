@@ -45,16 +45,21 @@ class LocalDatabase extends _$LocalDatabase {
   LocalDatabase(LazyDatabase super.lazyDatabase);
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 
   @override
   MigrationStrategy get migration {
     return MigrationStrategy(
-      onUpgrade: (_, __, ___) async {
+      onUpgrade: (Migrator m, int from, ___) async {
         await customStatement('PRAGMA foreign_keys = OFF');
 
         await transaction(() async {
           /* migrarion logic here */
+          if (from < 2) {
+            await m.addColumn(schoolsTable, schoolsTable.authorizationRequired);
+            await m.addColumn(schoolsTable, schoolsTable.authorizationKeyUpdatedAt);
+            await m.addColumn(usersTable, usersTable.authorizedAt);
+          }
         });
 
         if (Environment.flavor == Flavor.dev) {

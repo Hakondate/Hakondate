@@ -69,11 +69,10 @@ class DictionaryViewModel extends _$DictionaryViewModel {
   }
 
   Future<DictionaryItemModel> _getMaxRef(FiveMajorNutrient nutrient) async {
-    final List<DictionaryItemModel> schemas = await _dictionaryItemsLocalRepository.getRanking(
+    final List<DictionaryItemModel> schemas = await _dictionaryItemsLocalRepository.getRadarChartValues(
       nutrient: nutrient.name,
       limit: 200,
     );
-
     return schemas.last;
   }
 }

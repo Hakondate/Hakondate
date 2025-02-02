@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:url_launcher/url_launcher_string.dart';
+
 import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/router/routes.dart';
@@ -71,6 +73,17 @@ class DailyDrawer extends StatelessWidget {
             icon: Icons.credit_card_outlined,
             labelText: 'ライセンス情報',
             onTap: () => routemaster.push('/home/license'),
+          ),
+          _drawerLabel(
+            icon: Icons.forum_outlined,
+            labelText: 'ご意見',
+            onTap: () async {
+              const String url =
+                  'https://docs.google.com/forms/d/e/1FAIpQLSdh-0ffd0-EPukB-8FqUgPA4i4ToTfs1Ax2UWvM1TuiqyJqlQ/viewform?usp=sharing';
+              if (await canLaunchUrlString(url)) {
+                await launchUrlString(url);
+              }
+            },
           ),
         ],
       ),

@@ -9,6 +9,8 @@ import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/daily/daily_state.dart';
 import 'package:hakondate/util/exception/class_type_exception.dart';
+import 'package:hakondate/view/component/button/help_button.dart';
+import 'package:hakondate/view/help/help_frame.dart';
 import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
 
 class MenuCard extends StatelessWidget {
@@ -40,6 +42,13 @@ class MenuCard extends StatelessWidget {
                         crossAxisSpacing: MarginSize.minimum,
                         childAspectRatio: 2 / 1,
                         children: menu.dishes.map(_menuTile).toList(),
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: HelpButton(
+                          helpFrame: <HelpFrame>[HelpFrame.dishDetail(), HelpFrame.origin()],
+                          key: key,
+                        ),
                       ),
                     ],
                   ),

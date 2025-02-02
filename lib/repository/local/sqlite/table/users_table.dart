@@ -8,4 +8,5 @@ class UsersTable extends Table {
   TextColumn get name => text()();
   IntColumn get schoolId => integer().references(SchoolsTable, #id)();
   IntColumn get schoolYear => integer()();
+  DateTimeColumn get authorizedAt => dateTime().nullable()();
 }
