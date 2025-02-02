@@ -84,7 +84,7 @@ class HelpFrame extends StatelessWidget {
   factory HelpFrame.input() => HelpFrame(
         label: '登録情報について',
         content: DescriptionText.body(
-          label: '　ご登録された学年に応じて，栄養基準値が異なります．学年が変わるごとに，登録データをを手動で変更する必要があります．',
+          label: '　ご登録された学年に応じて，栄養基準値が異なります．学年が変わるごとに，登録データを手動で変更する必要があります．',
         ),
       );
 
@@ -111,19 +111,20 @@ class HelpFrame extends StatelessWidget {
       );
 
   factory HelpFrame.nickName() => HelpFrame(
-        label: 'ニックネームの情報について',
+        label: 'お名前について',
         content: DescriptionText.body(
-          label: '　ニックネームはサービス内でお子様を識別するために利用されます．\n'
-              '　登録情報は端末に保存されます．',
+          label: '　お名前情報は本アプリ内でお子様を識別するために利用されます．\n'
+              'ニックネームなどを入力していただいても構いません．また，あとで変更することもできます．\n'
+              '　登録情報は端末に保存され，収集されることはありません．また，あとから変更することができます．',
         ),
       );
 
   factory HelpFrame.schoolAndSchoolYear() => HelpFrame(
         label: '学校・学年の情報について',
         content: DescriptionText.body(
-          label: '　学校の情報は，選択した学校の献立を表示するために利用します．\n'
-              '　学年の情報は，本アプリで使用している不足栄養素を算出するために利用します．\n'
-              '　登録情報は，端末に保存されます',
+          label: '　学校の情報は，選択した学校の献立を表示するために利用します．選択肢にない学校は，本アプリ未対応の学校です．\n'
+              '　学年の情報は，本アプリ内でお子様の年齢に合わせた情報(栄養基準値など)を表示するために利用されます．\n'
+              '　どちらの情報も，端末内に保存され収集されることはありません．また，あとから変更することができます．',
         ),
       );
 
@@ -135,9 +136,9 @@ class HelpFrame extends StatelessWidget {
       );
 
   factory HelpFrame.recommendedIngredients() => HelpFrame(
-        label: 'オススメ食材',
+        label: 'おすすめ食材',
         content: DescriptionText.body(
-          label: '　オススメ食材は，5大栄養素の内，最も不足している栄養素と次に不足している栄養素が多く含まれる食材を表示しています．また，給食が休みの日は表示されません．',
+          label: '　おすすめ食材は，5大栄養素の内，最も不足している栄養素と次に不足している栄養素が多く含まれる食材を表示しています．また，給食が休みの日は表示されません．',
         ),
       );
 
@@ -164,7 +165,7 @@ class HelpFrame extends StatelessWidget {
           children: <Widget>[
             DescriptionText.body(
               label: '　給食で利用されている食材の原産地を知りたい場合は，ドロワーから産地情報を閲覧する画面に遷移することができます．'
-                  'ドロワーはこんだて画面で左上にあるドロワーアイコンをタップ又は，左端から右へ画面をスワイプすることで表示させることができます．',
+                  'ドロワーは，こんだて画面で左上にあるドロワーアイコンをタップ又は，左端から右へ画面をスワイプすることで表示させることができます．',
               isZeroBottomPadding: true,
             ),
             _iconWithText('ドロワーアイコン', Icons.dehaze),

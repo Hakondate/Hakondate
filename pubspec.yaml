@@ -3,7 +3,7 @@ description: はこんだて開発用プロジェクト
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-version: 2.1.0+13
+version: 2.1.1+14
 
 environment:
   sdk: "3.4.4"
