@@ -21,7 +21,9 @@ mixin _$DictionaryState {
       throw _privateConstructorUsedError;
   DictionaryItemModel? get selectedItem => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DictionaryState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DictionaryStateCopyWith<DictionaryState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -50,6 +52,8 @@ class _$DictionaryStateCopyWithImpl<$Res, $Val extends DictionaryState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DictionaryState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -73,6 +77,8 @@ class _$DictionaryStateCopyWithImpl<$Res, $Val extends DictionaryState>
     ) as $Val);
   }
 
+  /// Create a copy of DictionaryState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DictionaryItemModelCopyWith<$Res>? get selectedItem {
@@ -111,6 +117,8 @@ class __$$DictionaryStateImplCopyWithImpl<$Res>
       _$DictionaryStateImpl _value, $Res Function(_$DictionaryStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DictionaryState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -182,7 +190,9 @@ class _$DictionaryStateImpl implements _DictionaryState {
   int get hashCode => Object.hash(runtimeType, selectedGroup,
       const DeepCollectionEquality().hash(_selectedGroupItems), selectedItem);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DictionaryState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DictionaryStateImplCopyWith<_$DictionaryStateImpl> get copyWith =>
@@ -202,8 +212,11 @@ abstract class _DictionaryState implements DictionaryState {
   List<DictionaryItemModel>? get selectedGroupItems;
   @override
   DictionaryItemModel? get selectedItem;
+
+  /// Create a copy of DictionaryState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DictionaryStateImplCopyWith<_$DictionaryStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

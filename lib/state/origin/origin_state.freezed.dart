@@ -19,7 +19,9 @@ mixin _$OriginState {
   List<OriginModel> get origins => throw _privateConstructorUsedError;
   OriginModel get selectedOrigin => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of OriginState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $OriginStateCopyWith<OriginState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -45,6 +47,8 @@ class _$OriginStateCopyWithImpl<$Res, $Val extends OriginState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of OriginState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -63,6 +67,8 @@ class _$OriginStateCopyWithImpl<$Res, $Val extends OriginState>
     ) as $Val);
   }
 
+  /// Create a copy of OriginState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $OriginModelCopyWith<$Res> get selectedOrigin {
@@ -94,6 +100,8 @@ class __$$OriginStateImplCopyWithImpl<$Res>
       _$OriginStateImpl _value, $Res Function(_$OriginStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of OriginState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -159,7 +167,9 @@ class _$OriginStateImpl with DiagnosticableTreeMixin implements _OriginState {
   int get hashCode => Object.hash(runtimeType,
       const DeepCollectionEquality().hash(_origins), selectedOrigin);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of OriginState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$OriginStateImplCopyWith<_$OriginStateImpl> get copyWith =>
@@ -175,8 +185,11 @@ abstract class _OriginState implements OriginState {
   List<OriginModel> get origins;
   @override
   OriginModel get selectedOrigin;
+
+  /// Create a copy of OriginState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$OriginStateImplCopyWith<_$OriginStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

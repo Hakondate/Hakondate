@@ -34,7 +34,9 @@ mixin _$FoodstuffModel {
   /// 原産地
   String? get origin => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of FoodstuffModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $FoodstuffModelCopyWith<FoodstuffModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -67,6 +69,8 @@ class _$FoodstuffModelCopyWithImpl<$Res, $Val extends FoodstuffModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of FoodstuffModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -105,6 +109,8 @@ class _$FoodstuffModelCopyWithImpl<$Res, $Val extends FoodstuffModel>
     ) as $Val);
   }
 
+  /// Create a copy of FoodstuffModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $QuantityModelCopyWith<$Res> get quantity {
@@ -113,6 +119,8 @@ class _$FoodstuffModelCopyWithImpl<$Res, $Val extends FoodstuffModel>
     });
   }
 
+  /// Create a copy of FoodstuffModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $NutrientsModelCopyWith<$Res> get nutrients {
@@ -152,6 +160,8 @@ class __$$FoodstuffModelImplCopyWithImpl<$Res>
       _$FoodstuffModelImpl _value, $Res Function(_$FoodstuffModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of FoodstuffModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -254,7 +264,9 @@ class _$FoodstuffModelImpl extends _FoodstuffModel {
   int get hashCode => Object.hash(
       runtimeType, name, quantity, nutrients, isAllergy, isHeat, origin);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of FoodstuffModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$FoodstuffModelImplCopyWith<_$FoodstuffModelImpl> get copyWith =>
@@ -272,32 +284,34 @@ abstract class _FoodstuffModel extends FoodstuffModel {
       final String? origin}) = _$FoodstuffModelImpl;
   const _FoodstuffModel._() : super._();
 
-  @override
-
   /// 食材名
-  String get name;
   @override
+  String get name;
 
   /// 分量
-  QuantityModel get quantity;
   @override
+  QuantityModel get quantity;
 
   /// 栄養素
-  NutrientsModel get nutrients;
   @override
+  NutrientsModel get nutrients;
 
   /// アレルギー食品
-  bool get isAllergy;
   @override
+  bool get isAllergy;
 
   /// 熱加工食品
-  bool get isHeat;
   @override
+  bool get isHeat;
 
   /// 原産地
-  String? get origin;
   @override
-  @JsonKey(ignore: true)
+  String? get origin;
+
+  /// Create a copy of FoodstuffModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FoodstuffModelImplCopyWith<_$FoodstuffModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

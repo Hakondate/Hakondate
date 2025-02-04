@@ -20,7 +20,9 @@ mixin _$OriginModel {
   List<OriginCategoryModel> get categories =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of OriginModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $OriginModelCopyWith<OriginModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -44,6 +46,8 @@ class _$OriginModelCopyWithImpl<$Res, $Val extends OriginModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of OriginModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -82,6 +86,8 @@ class __$$OriginModelImplCopyWithImpl<$Res>
       _$OriginModelImpl _value, $Res Function(_$OriginModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of OriginModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -138,7 +144,9 @@ class _$OriginModelImpl extends _OriginModel {
   int get hashCode => Object.hash(
       runtimeType, date, const DeepCollectionEquality().hash(_categories));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of OriginModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$OriginModelImplCopyWith<_$OriginModelImpl> get copyWith =>
@@ -155,8 +163,11 @@ abstract class _OriginModel extends OriginModel {
   DateTime get date;
   @override
   List<OriginCategoryModel> get categories;
+
+  /// Create a copy of OriginModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$OriginModelImplCopyWith<_$OriginModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
