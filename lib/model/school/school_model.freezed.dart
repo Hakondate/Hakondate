@@ -37,7 +37,9 @@ mixin _$SchoolModel {
   /// 認可のkeyの更新日時
   DateTime? get authorizationKeyUpdatedAt => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SchoolModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SchoolModelCopyWith<SchoolModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -68,6 +70,8 @@ class _$SchoolModelCopyWithImpl<$Res, $Val extends SchoolModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SchoolModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -138,6 +142,8 @@ class __$$SchoolModelImplCopyWithImpl<$Res>
       _$SchoolModelImpl _value, $Res Function(_$SchoolModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SchoolModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -259,7 +265,9 @@ class _$SchoolModelImpl extends _SchoolModel {
       authorizationRequired,
       authorizationKeyUpdatedAt);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SchoolModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SchoolModelImplCopyWith<_$SchoolModelImpl> get copyWith =>
@@ -277,36 +285,38 @@ abstract class _SchoolModel extends SchoolModel {
       final DateTime? authorizationKeyUpdatedAt}) = _$SchoolModelImpl;
   const _SchoolModel._() : super._();
 
-  @override
-
   /// ID
-  int get id;
   @override
+  int get id;
 
   /// 親学校(給食センター)のID
-  int get parentId;
   @override
+  int get parentId;
 
   /// 学校名
-  String get name;
   @override
+  String get name;
 
   /// 学校区分
-  SchoolClassification get classification;
   @override
+  SchoolClassification get classification;
 
   /// 給食区分: 1 ~ 10
-  int get lunchBlock;
   @override
+  int get lunchBlock;
 
   /// 認可が必要かどうか: trueの場合、認可が必要
-  bool get authorizationRequired;
   @override
+  bool get authorizationRequired;
 
   /// 認可のkeyの更新日時
-  DateTime? get authorizationKeyUpdatedAt;
   @override
-  @JsonKey(ignore: true)
+  DateTime? get authorizationKeyUpdatedAt;
+
+  /// Create a copy of SchoolModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SchoolModelImplCopyWith<_$SchoolModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

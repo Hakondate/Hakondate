@@ -21,7 +21,9 @@ mixin _$DictionarySearchState {
   List<DictionaryItemModel> get searchedItems =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DictionarySearchState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DictionarySearchStateCopyWith<DictionarySearchState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -48,6 +50,8 @@ class _$DictionarySearchStateCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DictionarySearchState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -90,6 +94,8 @@ class __$$DictionarySearchStateImplCopyWithImpl<$Res>
       $Res Function(_$DictionarySearchStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DictionarySearchState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -150,7 +156,9 @@ class _$DictionarySearchStateImpl implements _DictionarySearchState {
   int get hashCode => Object.hash(runtimeType, searchBarTextController,
       const DeepCollectionEquality().hash(_searchedItems));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DictionarySearchState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DictionarySearchStateImplCopyWith<_$DictionarySearchStateImpl>
@@ -168,8 +176,11 @@ abstract class _DictionarySearchState implements DictionarySearchState {
   TextEditingController get searchBarTextController;
   @override
   List<DictionaryItemModel> get searchedItems;
+
+  /// Create a copy of DictionarySearchState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DictionarySearchStateImplCopyWith<_$DictionarySearchStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
