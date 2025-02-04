@@ -32,8 +32,8 @@ class SignupViewModel extends _$SignupViewModel {
 
       return SignupState(
         schools: schools,
-        lastName: editingUser!.lastName,
-        firstName: editingUser!.firstName,
+        lastName: editingUser!.name.split(' ')[0],
+        firstName: editingUser!.name.split(' ')[1],
         schoolId: editingUser!.schoolId,
         schoolYears: schoolYears,
         schoolTrailing: school.name,
@@ -53,19 +53,17 @@ class SignupViewModel extends _$SignupViewModel {
     cache.whenData((SignupState data) async {
       state = const AsyncLoading<SignupState>();
 
-      final String? lastName = data.lastName;
-      final String? firstName = data.firstName;
+      final String name = _getFullName(data.lastName!, data.firstName!);
       final int? schoolId = data.schoolId;
       final int? schoolYear = data.schoolYear;
 
       try {
-        if (lastName == null || firstName == null || schoolId == null || schoolYear == null) {
+        if (schoolId == null || schoolYear == null) {
           throw const ParametersException('Do not allow Null parameter');
         }
 
         await ref.read(userViewModelProvider.notifier).createUser(
-              lastName: lastName,
-              firstName: firstName,
+              name: name,
               schoolId: schoolId,
               schoolYear: schoolYear,
             );
@@ -84,19 +82,17 @@ class SignupViewModel extends _$SignupViewModel {
     cache.whenData((SignupState data) async {
       state = const AsyncLoading<SignupState>();
 
-      final String? lastName = data.lastName;
-      final String? firstName = data.firstName;
+      final String name = _getFullName(data.lastName!, data.firstName!);
       final int? schoolId = data.schoolId;
       final int? schoolYear = data.schoolYear;
 
       try {
-        if (lastName == null || schoolId == null || schoolYear == null) {
+        if (schoolId == null || schoolYear == null) {
           throw const ParametersException('Do not allow Null parameter');
         }
 
         await ref.read(userViewModelProvider.notifier).updateCurrentUser(
-              lastName: lastName,
-              firstName: firstName,
+              name: name,
               schoolId: schoolId,
               schoolYear: schoolYear,
             );
@@ -233,5 +229,9 @@ class SignupViewModel extends _$SignupViewModel {
     return (school.classification == SchoolClassification.primary)
         ? <String>['1年生', '2年生', '3年生', '4年生', '5年生', '6年生']
         : <String>['1年生', '2年生', '3年生'];
+  }
+
+  String _getFullName(String lastName, String firstName) {
+    return '$lastName $firstName';
   }
 }
