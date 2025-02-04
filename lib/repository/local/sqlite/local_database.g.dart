@@ -6548,7 +6548,7 @@ class $LocalDatabaseManager {
 // RiverpodGenerator
 // **************************************************************************
 
-String _$localDatabaseHash() => r'7fc59fd746d4d230c41f4608259788260f0b95bf';
+String _$localDatabaseHash() => r'85a394115a4fcf2e1aa60a7d7be49fa0afd3a743';
 
 /// See also [localDatabase].
 @ProviderFor(localDatabase)

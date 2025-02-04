@@ -7,7 +7,7 @@ part of 'open_data_recipes_local_repository.dart';
 // **************************************************************************
 
 String _$openDataRecipesLocalRepositoryHash() =>
-    r'8b22ab6560f34e96723428036bb5c67890508893';
+    r'3b062e0930cdec4e5e81a13fcde176d177894f40';
 
 /// See also [openDataRecipesLocalRepository].
 @ProviderFor(openDataRecipesLocalRepository)

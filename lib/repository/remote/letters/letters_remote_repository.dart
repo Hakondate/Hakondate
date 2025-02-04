@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/constant/firebase_apis.dart';
@@ -13,7 +14,7 @@ import 'package:hakondate/util/exception/firestorage_exception.dart';
 part 'letters_remote_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-LettersRemoteRepository lettersRemoteRepository(LettersRemoteRepositoryRef ref) {
+LettersRemoteRepository lettersRemoteRepository(Ref ref) {
   final FirebaseStorage firestorageAPI = ref.watch(firestorageAPIProvider);
   return LettersRemoteRepository(firestorageAPI.ref().child('letters'));
 }

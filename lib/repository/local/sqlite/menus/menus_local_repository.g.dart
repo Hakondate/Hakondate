@@ -7,7 +7,7 @@ part of 'menus_local_repository.dart';
 // **************************************************************************
 
 String _$menusLocalRepositoryHash() =>
-    r'443c286aaa76053cf1c1c09425c92b80e9d572a6';
+    r'3416e93ae8cf513c4a997381c4287e49bd4146e4';
 
 /// See also [menusLocalRepository].
 @ProviderFor(menusLocalRepository)

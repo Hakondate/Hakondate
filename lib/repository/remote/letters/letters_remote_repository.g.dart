@@ -7,7 +7,7 @@ part of 'letters_remote_repository.dart';
 // **************************************************************************
 
 String _$lettersRemoteRepositoryHash() =>
-    r'c21ff9f1e905c4e02f6502f995b1ee31839c9250';
+    r'b8fad8b9eafca9aaa96c29726f927f75188ebda5';
 
 /// See also [lettersRemoteRepository].
 @ProviderFor(lettersRemoteRepository)

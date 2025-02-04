@@ -7,7 +7,7 @@ part of 'origins_remote_repository.dart';
 // **************************************************************************
 
 String _$originsRemoteRepositoryHash() =>
-    r'564f5d30f41a957c2bca401a66a266d591c3ab2d';
+    r'1e4aa0d5dc15f71c61c0da73f74db8aca7234cee';
 
 /// See also [originsRemoteRepository].
 @ProviderFor(originsRemoteRepository)

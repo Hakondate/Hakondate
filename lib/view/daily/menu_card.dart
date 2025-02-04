@@ -68,7 +68,7 @@ class MenuCard extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
-                color: AppColor.ui.white.withOpacity(0.5),
+                color: AppColor.ui.white.withValues(alpha: .5),
                 width: 3,
               ),
               image: DecorationImage(
@@ -89,7 +89,7 @@ class MenuCard extends StatelessWidget {
               height: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
-                color: AppColor.ui.white.withOpacity(0.7),
+                color: AppColor.ui.white.withValues(alpha: .7),
               ),
               child: Center(
                 child: Text(

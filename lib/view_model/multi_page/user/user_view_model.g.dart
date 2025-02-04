@@ -6,7 +6,7 @@ part of 'user_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userAuthorizedHash() => r'9d36c22e6a27b921c852bef0017725d640d4fdad';
+String _$userAuthorizedHash() => r'522577a8a4f15d312ff72e4b63b851f9ec58fff8';
 
 /// See also [userAuthorized].
 @ProviderFor(userAuthorized)

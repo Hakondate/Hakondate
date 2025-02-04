@@ -7,7 +7,7 @@ part of 'dictionary_items_local_repository.dart';
 // **************************************************************************
 
 String _$dictionaryItemsLocalRepositoryHash() =>
-    r'2ceba1aa11b45fbb72aca502f75c8603830c268b';
+    r'7c62ba9ab701d4f321753c7e1b6c71ac953cb026';
 
 /// See also [dictionaryItemsLocalRepository].
 @ProviderFor(dictionaryItemsLocalRepository)

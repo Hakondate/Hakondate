@@ -7,7 +7,7 @@ part of 'information_view_model.dart';
 // **************************************************************************
 
 String _$informationViewModelHash() =>
-    r'3efa471d0d738225d7f3f63af16c97d29f32cc94';
+    r'5b2d4fcb60f3cf21d5a06ab9aa4aa70dc7284599';
 
 /// See also [informationViewModel].
 @ProviderFor(informationViewModel)
