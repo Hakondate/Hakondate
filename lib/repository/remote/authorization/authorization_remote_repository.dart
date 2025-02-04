@@ -8,8 +8,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'authorization_remote_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-//　説明
-// ignore: deprecated_member_use_from_same_package
 AuthorizationRemoteRepository authorizationRemoteRepository(AuthorizationRemoteRepositoryRef ref) {
   return AuthorizationRemoteRepository();
 }

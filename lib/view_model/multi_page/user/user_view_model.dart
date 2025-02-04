@@ -197,8 +197,6 @@ class UserViewModel extends _$UserViewModel {
 }
 
 @Riverpod(keepAlive: true)
-//　説明
-// ignore: deprecated_member_use_from_same_package
 Future<bool> userAuthorized(UserAuthorizedRef ref) async {
   final SchoolsLocalRepository schoolLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
   final UserState state = ref.watch(userViewModelProvider);

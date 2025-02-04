@@ -7,8 +7,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'open_data_recipes_local_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-//　説明
-// ignore: deprecated_member_use_from_same_package
 OpenDataRecipesLocalRepository openDataRecipesLocalRepository(OpenDataRecipesLocalRepositoryRef ref) => OpenDataRecipesLocalRepository();
 
 abstract class OpenDataRecipesLocalRepositoryAPI {

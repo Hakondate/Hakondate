@@ -9,8 +9,6 @@ import 'package:hakondate/view_model/single_page/user_settings/user_settings_vie
 part 'menus_remote_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-//　説明
-// ignore: deprecated_member_use_from_same_package
 MenusRemoteRepository menusRemoteRepository(MenusRemoteRepositoryRef ref) {
   final FirebaseFirestore firestoreAPI = ref.watch(firestoreAPIProvider);
   final CollectionReference<MenuModel> menuCollectionReference = firestoreAPI.collection('menus').withConverter(

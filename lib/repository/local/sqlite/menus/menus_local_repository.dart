@@ -12,8 +12,6 @@ import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
 part 'menus_local_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-//　説明
-// ignore: deprecated_member_use_from_same_package
 MenusLocalRepository menusLocalRepository(MenusLocalRepositoryRef ref) {
   final LocalDatabase localDatabase = ref.watch(localDatabaseProvider);
   return MenusLocalRepository(localDatabase, ref);

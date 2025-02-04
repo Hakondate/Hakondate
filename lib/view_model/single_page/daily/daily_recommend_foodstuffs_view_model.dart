@@ -8,8 +8,6 @@ import 'package:hakondate/view_model/single_page/daily/daily_graph_view_model.da
 part 'daily_recommend_foodstuffs_view_model.g.dart';
 
 @riverpod
-//　説明
-// ignore: deprecated_member_use_from_same_package
 Future<Map<FiveMajorNutrient, List<DictionaryItemModel>>> recommendFoodstuffs(RecommendFoodstuffsRef ref) async {
   final AsyncValue<List<double>> nutrientsPercentage = ref.watch(graphValuesProvider);
 

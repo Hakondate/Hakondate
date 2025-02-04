@@ -13,8 +13,6 @@ import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
 part 'common_function.g.dart';
 
 @riverpod
-//　説明
-// ignore: deprecated_member_use_from_same_package
 CommonFunction commonFunction(CommonFunctionRef ref) => CommonFunction(ref);
 
 class CommonFunction {

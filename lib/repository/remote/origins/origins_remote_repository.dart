@@ -9,8 +9,6 @@ import 'package:hakondate/util/exception/firestore_exception.dart';
 part 'origins_remote_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-//　説明
-// ignore: deprecated_member_use_from_same_package
 OriginsRemoteRepository originsRemoteRepository(OriginsRemoteRepositoryRef ref) {
   final FirebaseFirestore firestoreAPI = ref.watch(firestoreAPIProvider);
   final CollectionReference<OriginModel> originCollectionReference = firestoreAPI.collection('origins').withConverter(

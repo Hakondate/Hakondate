@@ -9,8 +9,6 @@ import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
 part 'daily_graph_view_model.g.dart';
 
 @riverpod
-//　説明
-// ignore: deprecated_member_use_from_same_package
 Future<List<double>> graphValues(GraphValuesRef ref) async {
   final NutrientsModel? slns = ref.watch(userViewModelProvider).currentUser!.slns;
   final AsyncValue<DailyState> data = ref.watch(dailyViewModelProvider);
@@ -43,8 +41,6 @@ Future<List<double>> graphValues(GraphValuesRef ref) async {
 }
 
 @riverpod
-//　説明
-// ignore: deprecated_member_use_from_same_package
 List<double> graphRawValues(GraphRawValuesRef ref) {
   final AsyncValue<DailyState> data = ref.watch(dailyViewModelProvider);
 

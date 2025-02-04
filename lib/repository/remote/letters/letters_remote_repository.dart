@@ -13,8 +13,6 @@ import 'package:hakondate/util/exception/firestorage_exception.dart';
 part 'letters_remote_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-//　説明
-// ignore: deprecated_member_use_from_same_package
 LettersRemoteRepository lettersRemoteRepository(LettersRemoteRepositoryRef ref) {
   final FirebaseStorage firestorageAPI = ref.watch(firestorageAPIProvider);
   return LettersRemoteRepository(firestorageAPI.ref().child('letters'));
