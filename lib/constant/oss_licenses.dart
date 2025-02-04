@@ -8952,14 +8952,14 @@ freely, subject to the following restrictions:
     dependencies: []
   );
 
-/// very_good_analysis 6.0.0
+/// very_good_analysis 7.0.0
 const _very_good_analysis = Package(
     name: 'very_good_analysis',
     description: 'Lint rules for Dart and Flutter used internally at Very Good Ventures.',
     homepage: 'https://github.com/VeryGoodOpenSource/very_good_analysis',
     repository: 'https://github.com/VeryGoodOpenSource/very_good_analysis',
     authors: [],
-    version: '6.0.0',
+    version: '7.0.0',
     license: '''MIT License
 
 Copyright (c) 2020 Very Good Ventures
