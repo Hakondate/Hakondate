@@ -7,9 +7,12 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'open_data_recipes_remote_repository.g.dart';
 
 @Riverpod(keepAlive: true)
+//　説明
+// ignore: deprecated_member_use_from_same_package
 OpenDataRecipesRemoteRepository openDataRecipesRemoteRepository(OpenDataRecipesRemoteRepositoryRef ref) =>
     OpenDataRecipesRemoteRepository();
 
+// 説明
 // ignore: one_member_abstracts
 abstract class OpenDataRecipesRemoteRepositoryAPI {
   Future<Uint8List> getPDF(String url);

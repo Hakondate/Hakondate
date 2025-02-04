@@ -7,6 +7,8 @@ import 'package:hakondate/repository/local/sqlite/schools/schools_local_reposito
 part 'information_view_model.g.dart';
 
 @riverpod
+//　説明
+// ignore: deprecated_member_use_from_same_package
 InformationViewModel informationViewModel(InformationViewModelRef ref) {
   final SchoolsLocalRepository schoolsLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
   return InformationViewModel(schoolsLocalRepository);

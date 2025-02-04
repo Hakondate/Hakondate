@@ -19,6 +19,8 @@ import 'package:hakondate/util/environment.dart';
 part 'local_database.g.dart';
 
 @Riverpod(keepAlive: true)
+//　説明
+// ignore: deprecated_member_use_from_same_package
 LocalDatabase localDatabase(LocalDatabaseRef ref) {
   final LazyDatabase lazyDatabase = LazyDatabase(() async {
     final Directory directory = await getApplicationDocumentsDirectory();

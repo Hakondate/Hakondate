@@ -10,6 +10,8 @@ part 'schools_remote_repository.g.dart';
 
 @riverpod
 SchoolsRemoteRepository schoolsRemoteRepository(
+  //　説明
+  // ignore: deprecated_member_use_from_same_package
   SchoolsRemoteRepositoryRef ref,
 ) {
   final FirebaseFirestore firestoreAPI = ref.watch(firestoreAPIProvider);
@@ -21,6 +23,7 @@ SchoolsRemoteRepository schoolsRemoteRepository(
   return SchoolsRemoteRepository(schoolCollectionReference);
 }
 
+// 説明
 // ignore: one_member_abstracts
 abstract class SchoolsRemoteRepositoryAPI {
   Future<List<SchoolModel>> get({required DateTime updateAt});

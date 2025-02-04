@@ -11,6 +11,8 @@ import 'package:hakondate/util/extension/string_extension.dart';
 part 'dictionary_items_local_repository.g.dart';
 
 @Riverpod(keepAlive: true)
+//　説明
+// ignore: deprecated_member_use_from_same_package
 DictionaryItemsLocalRepository dictionaryItemsLocalRepository(DictionaryItemsLocalRepositoryRef ref) {
   final LocalDatabase localDatabase = ref.watch(localDatabaseProvider);
   return DictionaryItemsLocalRepository(localDatabase);

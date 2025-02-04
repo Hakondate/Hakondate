@@ -28,7 +28,7 @@ class DictionaryGrid extends ConsumerWidget {
         height: double.infinity,
         clipBehavior: Clip.antiAliasWithSaveLayer,
         decoration: BoxDecoration(
-          color: group.color.withOpacity(0.1),
+          color: group.color.withValues(alpha: .1),
           borderRadius: BorderRadius.circular(UiSize.minimumGridCircular),
           border: Border.all(
             color: group.color,

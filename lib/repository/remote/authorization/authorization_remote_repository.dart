@@ -8,6 +8,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'authorization_remote_repository.g.dart';
 
 @Riverpod(keepAlive: true)
+//　説明
+// ignore: deprecated_member_use_from_same_package
 AuthorizationRemoteRepository authorizationRemoteRepository(AuthorizationRemoteRepositoryRef ref) {
   return AuthorizationRemoteRepository();
 }
@@ -29,7 +31,7 @@ class AuthorizationRemoteRepository {
       final AuthorizationResult result = await compute(parseAuthorizationResult, response.body);
 
       return result;
-    } catch (error) {
+    } on Exception catch (error) {
       debugPrint('error: $error');
 
       return const AuthorizationResult(

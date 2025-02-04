@@ -9,6 +9,8 @@ import 'package:hakondate/util/exception/sqlite_exception.dart';
 part 'schools_local_repository.g.dart';
 
 @Riverpod(keepAlive: true)
+//　説明
+// ignore: deprecated_member_use_from_same_package
 SchoolsLocalRepository schoolsLocalRepository(SchoolsLocalRepositoryRef ref) {
   final LocalDatabase localDatabase = ref.watch(localDatabaseProvider);
   return SchoolsLocalRepository(localDatabase);
