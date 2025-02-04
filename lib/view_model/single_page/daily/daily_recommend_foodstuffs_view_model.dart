@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
@@ -8,7 +9,7 @@ import 'package:hakondate/view_model/single_page/daily/daily_graph_view_model.da
 part 'daily_recommend_foodstuffs_view_model.g.dart';
 
 @riverpod
-Future<Map<FiveMajorNutrient, List<DictionaryItemModel>>> recommendFoodstuffs(RecommendFoodstuffsRef ref) async {
+Future<Map<FiveMajorNutrient, List<DictionaryItemModel>>> recommendFoodstuffs(Ref ref) async {
   final AsyncValue<List<double>> nutrientsPercentage = ref.watch(graphValuesProvider);
 
   return nutrientsPercentage.maybeWhen(

@@ -7,7 +7,7 @@ part of 'schools_local_repository.dart';
 // **************************************************************************
 
 String _$schoolsLocalRepositoryHash() =>
-    r'7c57ba6c9362d9ecd354c62d516d5f20357a0669';
+    r'61dbe4070a100d1b64ecb8f5b66393c0662624e1';
 
 /// See also [schoolsLocalRepository].
 @ProviderFor(schoolsLocalRepository)

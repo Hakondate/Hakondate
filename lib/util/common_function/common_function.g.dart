@@ -6,7 +6,7 @@ part of 'common_function.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$commonFunctionHash() => r'3c5c19970faef45936bc03d0e28616a6c43bad9d';
+String _$commonFunctionHash() => r'498a41d713d6629b0bac13c85758699d131986ed';
 
 /// See also [commonFunction].
 @ProviderFor(commonFunction)

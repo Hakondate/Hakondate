@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:collection/collection.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -197,7 +198,7 @@ class UserViewModel extends _$UserViewModel {
 }
 
 @Riverpod(keepAlive: true)
-Future<bool> userAuthorized(UserAuthorizedRef ref) async {
+Future<bool> userAuthorized(Ref ref) async {
   final SchoolsLocalRepository schoolLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
   final UserState state = ref.watch(userViewModelProvider);
   final SchoolModel school = await schoolLocalRepository.getById(state.currentUser!.schoolId);

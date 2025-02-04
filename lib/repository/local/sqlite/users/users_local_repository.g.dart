@@ -7,7 +7,7 @@ part of 'users_local_repository.dart';
 // **************************************************************************
 
 String _$usersLocalRepositoryHash() =>
-    r'26817a51093e6e766f1493a956f14d038b88762d';
+    r'd49324a5490c200b686ead57c1a18b2131e940f9';
 
 /// See also [usersLocalRepository].
 @ProviderFor(usersLocalRepository)

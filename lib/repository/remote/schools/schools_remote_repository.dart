@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/school/school_model.dart';
@@ -9,11 +10,7 @@ import 'package:hakondate/repository/remote/firestore/firestore_api.dart';
 part 'schools_remote_repository.g.dart';
 
 @riverpod
-SchoolsRemoteRepository schoolsRemoteRepository(
-  //　説明
-  // ignore: deprecated_member_use_from_same_package
-  SchoolsRemoteRepositoryRef ref,
-) {
+SchoolsRemoteRepository schoolsRemoteRepository(Ref ref) {
   final FirebaseFirestore firestoreAPI = ref.watch(firestoreAPIProvider);
   final CollectionReference<SchoolModel> schoolCollectionReference = firestoreAPI.collection('schools').withConverter(
         fromFirestore: (DocumentSnapshot<Map<String, dynamic>> doc, _) => SchoolModel.fromFirestore(doc),

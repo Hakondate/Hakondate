@@ -7,7 +7,7 @@ part of 'daily_recommend_foodstuffs_view_model.dart';
 // **************************************************************************
 
 String _$recommendFoodstuffsHash() =>
-    r'd7310b8535cdbd36ef35c685c114560ef4ce5997';
+    r'34925492679a9befb0bf25b747e780b7a956640a';
 
 /// See also [recommendFoodstuffs].
 @ProviderFor(recommendFoodstuffs)
