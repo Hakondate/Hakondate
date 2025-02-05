@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -7,7 +8,7 @@ import 'package:hakondate/repository/local/sqlite/schools/schools_local_reposito
 part 'information_view_model.g.dart';
 
 @riverpod
-InformationViewModel informationViewModel(InformationViewModelRef ref) {
+InformationViewModel informationViewModel(Ref ref) {
   final SchoolsLocalRepository schoolsLocalRepository = ref.watch(schoolsLocalRepositoryProvider);
   return InformationViewModel(schoolsLocalRepository);
 }

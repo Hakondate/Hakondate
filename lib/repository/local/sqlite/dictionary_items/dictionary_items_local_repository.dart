@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:drift/drift.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/dictionary/dictionary_item_model.dart';
@@ -11,7 +12,7 @@ import 'package:hakondate/util/extension/string_extension.dart';
 part 'dictionary_items_local_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-DictionaryItemsLocalRepository dictionaryItemsLocalRepository(DictionaryItemsLocalRepositoryRef ref) {
+DictionaryItemsLocalRepository dictionaryItemsLocalRepository(Ref ref) {
   final LocalDatabase localDatabase = ref.watch(localDatabaseProvider);
   return DictionaryItemsLocalRepository(localDatabase);
 }

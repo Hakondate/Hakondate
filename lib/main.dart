@@ -85,6 +85,7 @@ class Hakondate extends StatelessWidget {
           key: key ?? ref.watch(appUniqueKeyProvider),
           title: 'はこんだて',
           theme: theme.copyWith(
+            // material3のデザインを使用したくないため
             // ignore: deprecated_member_use
             useMaterial3: false,
             colorScheme: theme.colorScheme.copyWith(

@@ -176,7 +176,7 @@ class AuthorizationLoadingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Positioned.fill(
       child: ColoredBox(
-        color: AppColor.brand.secondaryLight.withOpacity(0.9),
+        color: AppColor.brand.secondaryLight.withValues(alpha: .9),
         child: Center(
           child: Text(
             '招待コードを確認中です・・・',

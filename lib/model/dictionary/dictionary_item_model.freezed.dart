@@ -31,7 +31,9 @@ mixin _$DictionaryItemModel {
   /// 備考
   String? get note => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DictionaryItemModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DictionaryItemModelCopyWith<DictionaryItemModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -62,6 +64,8 @@ class _$DictionaryItemModelCopyWithImpl<$Res, $Val extends DictionaryItemModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DictionaryItemModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -95,6 +99,8 @@ class _$DictionaryItemModelCopyWithImpl<$Res, $Val extends DictionaryItemModel>
     ) as $Val);
   }
 
+  /// Create a copy of DictionaryItemModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $NutrientsModelCopyWith<$Res> get nutrients {
@@ -131,6 +137,8 @@ class __$$DictionaryItemModelImplCopyWithImpl<$Res>
       $Res Function(_$DictionaryItemModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DictionaryItemModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -218,7 +226,9 @@ class _$DictionaryItemModelImpl extends _DictionaryItemModel {
   int get hashCode =>
       Object.hash(runtimeType, id, group, name, nutrients, note);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DictionaryItemModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DictionaryItemModelImplCopyWith<_$DictionaryItemModelImpl> get copyWith =>
@@ -235,28 +245,30 @@ abstract class _DictionaryItemModel extends DictionaryItemModel {
       final String? note}) = _$DictionaryItemModelImpl;
   const _DictionaryItemModel._() : super._();
 
-  @override
-
   /// ID
-  int get id;
   @override
+  int get id;
 
   /// 食品分類（1 ~ 18群）
-  DictionaryGroup get group;
   @override
+  DictionaryGroup get group;
 
   /// 食材名
-  String get name;
   @override
+  String get name;
 
   /// 栄養素
-  NutrientsModel get nutrients;
   @override
+  NutrientsModel get nutrients;
 
   /// 備考
-  String? get note;
   @override
-  @JsonKey(ignore: true)
+  String? get note;
+
+  /// Create a copy of DictionaryItemModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DictionaryItemModelImplCopyWith<_$DictionaryItemModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -2,13 +2,14 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'authorization_remote_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-AuthorizationRemoteRepository authorizationRemoteRepository(AuthorizationRemoteRepositoryRef ref) {
+AuthorizationRemoteRepository authorizationRemoteRepository(Ref ref) {
   return AuthorizationRemoteRepository();
 }
 
@@ -29,7 +30,7 @@ class AuthorizationRemoteRepository {
       final AuthorizationResult result = await compute(parseAuthorizationResult, response.body);
 
       return result;
-    } catch (error) {
+    } on Exception catch (error) {
       debugPrint('error: $error');
 
       return const AuthorizationResult(

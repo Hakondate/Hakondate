@@ -22,7 +22,9 @@ mixin _$QuantityModel {
   /// 量(g)
   double get gram => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of QuantityModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $QuantityModelCopyWith<QuantityModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -48,6 +50,8 @@ class _$QuantityModelCopyWithImpl<$Res, $Val extends QuantityModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of QuantityModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -66,6 +70,8 @@ class _$QuantityModelCopyWithImpl<$Res, $Val extends QuantityModel>
     ) as $Val);
   }
 
+  /// Create a copy of QuantityModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PieceModelCopyWith<$Res>? get piece {
@@ -101,6 +107,8 @@ class __$$QuantityModelImplCopyWithImpl<$Res>
       _$QuantityModelImpl _value, $Res Function(_$QuantityModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of QuantityModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -151,7 +159,9 @@ class _$QuantityModelImpl implements _QuantityModel {
   @override
   int get hashCode => Object.hash(runtimeType, piece, gram);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of QuantityModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$QuantityModelImplCopyWith<_$QuantityModelImpl> get copyWith =>
@@ -162,16 +172,18 @@ abstract class _QuantityModel implements QuantityModel {
   const factory _QuantityModel({final PieceModel? piece, final double gram}) =
       _$QuantityModelImpl;
 
-  @override
-
   /// 個数
-  PieceModel? get piece;
   @override
+  PieceModel? get piece;
 
   /// 量(g)
-  double get gram;
   @override
-  @JsonKey(ignore: true)
+  double get gram;
+
+  /// Create a copy of QuantityModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$QuantityModelImplCopyWith<_$QuantityModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

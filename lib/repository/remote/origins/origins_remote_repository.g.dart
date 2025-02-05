@@ -7,7 +7,7 @@ part of 'origins_remote_repository.dart';
 // **************************************************************************
 
 String _$originsRemoteRepositoryHash() =>
-    r'564f5d30f41a957c2bca401a66a266d591c3ab2d';
+    r'1e4aa0d5dc15f71c61c0da73f74db8aca7234cee';
 
 /// See also [originsRemoteRepository].
 @ProviderFor(originsRemoteRepository)
@@ -22,6 +22,8 @@ final originsRemoteRepositoryProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef OriginsRemoteRepositoryRef = ProviderRef<OriginsRemoteRepository>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

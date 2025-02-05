@@ -19,7 +19,9 @@ mixin _$DrawerState {
   GlobalKey<ScaffoldState> get scaffoldKey =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DrawerState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DrawerStateCopyWith<DrawerState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -43,6 +45,8 @@ class _$DrawerStateCopyWithImpl<$Res, $Val extends DrawerState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DrawerState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -76,6 +80,8 @@ class __$$DrawerStateImplCopyWithImpl<$Res>
       _$DrawerStateImpl _value, $Res Function(_$DrawerStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DrawerState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -123,7 +129,9 @@ class _$DrawerStateImpl with DiagnosticableTreeMixin implements _DrawerState {
   @override
   int get hashCode => Object.hash(runtimeType, scaffoldKey);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DrawerState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DrawerStateImplCopyWith<_$DrawerStateImpl> get copyWith =>
@@ -137,8 +145,11 @@ abstract class _DrawerState implements DrawerState {
 
   @override
   GlobalKey<ScaffoldState> get scaffoldKey;
+
+  /// Create a copy of DrawerState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DrawerStateImplCopyWith<_$DrawerStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
