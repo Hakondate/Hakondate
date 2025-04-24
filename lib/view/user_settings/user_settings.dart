@@ -50,8 +50,8 @@ class UserSettings extends ConsumerWidget {
                 const Padding(
                   padding: EdgeInsets.all(PaddingSize.normal),
                   child: Text(
-                    '※現在ユーザー情報の変更に関して不具合が発生しているため，変更が必要な場合は新しくユーザーを作成して対応していただくようお願いします．',
-                    style: TextStyle(color: Colors.red),
+                    '※現在ユーザー情報の変更機能が完成していないため，変更が必要な場合は新しくユーザーを作成して対応していただくようお願いします．',
+                    style: TextStyle(color: Colors.grey),
                   ),
                 ),
               ],
@@ -185,25 +185,6 @@ class UserSettingsCard extends ConsumerWidget {
                     ],
                   ),
                 ],
-              ),
-              IconButton(
-                isSelected: isCurrentUser,
-                onPressed: isCurrentUser
-                    ? () {
-                        ref.read(userSettingsViewModelProvider.notifier).setEditingUser(user);
-                        routemaster.push('/home/user_settings/${user.id}');
-                      }
-                    : () async {
-                        return showDialog(
-                          context: context,
-                          builder: (_) => UserDeleteDialog(id: user.id),
-                        );
-                      },
-                icon: Icon(
-                  isCurrentUser ? Icons.edit : Icons.delete,
-                  color: AppColor.brand.secondary,
-                  size: IconSize.help,
-                ),
               ),
             ],
           ),
