@@ -10,7 +10,6 @@ import 'package:hakondate/model/user/user_model.dart';
 import 'package:hakondate/repository/local/sqlite/schools/schools_local_repository.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/user_settings/user_settings_state.dart';
-import 'package:hakondate/view/user_settings/user_delete_dialog.dart';
 import 'package:hakondate/view/user_settings/user_switch_dialog.dart';
 import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
 import 'package:hakondate/view_model/single_page/user_settings/user_settings_view_model.dart';
