@@ -50,8 +50,8 @@ class UserSettings extends ConsumerWidget {
                 const Padding(
                   padding: EdgeInsets.all(PaddingSize.normal),
                   child: Text(
-                    '※現在ユーザー情報の変更に関して不具合が発生しているため，編集が必要な場合は新しくユーザーを作成して対応していただくようお願いします．',
-                    style: TextStyle(color: Colors.grey),
+                    '※現在ユーザー情報の変更に関して不具合が発生しているため，変更が必要な場合は新しくユーザーを作成して対応していただくようお願いします．',
+                    style: TextStyle(color: Colors.red),
                   ),
                 ),
               ],
