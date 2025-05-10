@@ -37,6 +37,7 @@ class SignupViewModel extends _$SignupViewModel {
         schoolId: editingUser!.schoolId,
         schoolYears: schoolYears,
         schoolTrailing: school.name,
+        school: school,
         schoolYear: editingUser!.schoolYear,
         schoolYearTrailing: '${editingUser!.schoolYear}年生',
       );
