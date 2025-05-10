@@ -36,7 +36,13 @@ class Daily extends StatelessWidget {
         ),
         actions: <Widget>[
           HelpButton(
-            helpFrame: <HelpFrame>[HelpFrame.misprint(), HelpFrame.changemenu(), HelpFrame.menuList(), HelpFrame.contact()],
+            helpFrame: <HelpFrame>[
+              HelpFrame.misprint(),
+              HelpFrame.changemenu(),
+              HelpFrame.menuList(),
+              HelpFrame.contact(),
+              HelpFrame.menuIcon()
+            ],
             key: key,
           ),
           IconButton(

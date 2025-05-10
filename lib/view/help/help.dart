@@ -34,6 +34,7 @@ class Help extends StatelessWidget {
               HelpFrame.dishDetail(),
               HelpFrame.recommendedIngredients(),
               HelpFrame.menuList(),
+              HelpFrame.menuIcon(),
               HelpFrame.origin(),
               DescriptionText.headline(label: 'その他'),
               HelpFrame.contact()

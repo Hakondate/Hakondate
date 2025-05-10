@@ -167,7 +167,7 @@ class HelpFrame extends StatelessWidget {
       );
 
   factory HelpFrame.menuIcon() => HelpFrame(
-        label: 'メニューアイコン',
+        label: 'メニュー画面',
         content: Column(
           children: <Widget>[
             DescriptionText.body(
@@ -199,8 +199,7 @@ class HelpFrame extends StatelessWidget {
             DescriptionText.body(
               label:
                   '　このアプリに関するご質問やご意見は，アプリ開発チームまでご連絡ください．学校関係者様はお問い合わせに対応しておりませんので，ご了承ください．ご連絡は，アプリ内メニューの「ご意見・お問い合わせ」または下記のメールアドレスよりお願いいたします．\n'
-                  '　こんだて画面左上にあるメニューアイコンをタップすることでメニュー画面に遷移することができます．\n'
-                  '　editorhakondate@gmail.com',
+                  '　editorhakondate@gmail.com\n',
               isZeroBottomPadding: true,
             ),
           ],
