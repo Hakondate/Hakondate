@@ -154,14 +154,28 @@ class HelpFrame extends StatelessWidget {
         content: Column(
           children: <Widget>[
             DescriptionText.body(
-              label: '　別日の献立が知りたい場合は献立リストを使用します．献立画面右上にあるカレンダーアイコンをタップすることで献立リスト画面に遷移できます．',
+              label: '　別日の献立が知りたい場合は献立リストを使用します．こんだて画面右上にあるカレンダーアイコンをタップすることで献立リスト画面に遷移することができます．',
               isZeroBottomPadding: true,
             ),
             _iconWithText('献立リストアイコン', Icons.calendar_today_outlined),
             DescriptionText.body(
               label: '　画面を上下にスクロールし，該当日をタップすることで別日の献立を閲覧することができます．\n'
-                  '　また，ホーム画面上部の日付バーから日付を選択することでも，別日の献立を閲覧することができます．',
+                  '　また，こんだて画面上部の日付バーから日付を選択することでも，別日の献立を閲覧することができます．',
             ),
+          ],
+        ),
+      );
+
+  factory HelpFrame.menuIcon() => HelpFrame(
+        label: 'メニューアイコン',
+        content: Column(
+          children: <Widget>[
+            DescriptionText.body(
+              label: '　こんだて画面左上にあるメニューアイコンをタップすることでメニュー画面に遷移することができます．',
+              isZeroBottomPadding: true,
+            ),
+            _iconWithText('メニューアイコン', Icons.dehaze),
+            const SizedBox(height: SpaceSize.paragraph),
           ],
         ),
       );
@@ -171,12 +185,9 @@ class HelpFrame extends StatelessWidget {
         content: Column(
           children: <Widget>[
             DescriptionText.body(
-              label: '　給食で利用されている食材の原産地を知りたい場合は，ドロワーから産地情報を閲覧する画面に遷移することができます．'
-                  'ドロワーは，こんだて画面で左上にあるドロワーアイコンをタップ又は，左端から右へ画面をスワイプすることで表示させることができます．',
+              label: '　給食で利用されている食材の原産地を知りたい場合は，アプリ内メニューの「産地情報」から産地情報を閲覧することができます．\n',
               isZeroBottomPadding: true,
             ),
-            _iconWithText('ドロワーアイコン', Icons.dehaze),
-            const SizedBox(height: SpaceSize.paragraph),
           ],
         ),
       );
@@ -187,11 +198,11 @@ class HelpFrame extends StatelessWidget {
           children: <Widget>[
             DescriptionText.body(
               label:
-                  '　このアプリに関するご質問等がある場合は、本アプリ開発チームまでご連絡ください。学校関係者はこのアプリに関するご質問にはお答えできませんので、ご了承ください。ご連絡は、メニュー一覧内の「ご意見」または下記メールアドレス宛にお願いいたします。',
+                  '　このアプリに関するご質問やご意見は，アプリ開発チームまでご連絡ください．学校関係者様はお問い合わせに対応しておりませんので，ご了承ください．ご連絡は，アプリ内メニューの「ご意見・お問い合わせ」または下記のメールアドレスよりお願いいたします．\n'
+                  '　こんだて画面左上にあるメニューアイコンをタップすることでメニュー画面に遷移することができます．\n'
+                  '　editorhakondate@gmail.com',
               isZeroBottomPadding: true,
             ),
-            _iconWithText('ドロワーアイコン', Icons.dehaze),
-            const SizedBox(height: SpaceSize.paragraph),
           ],
         ),
       );
