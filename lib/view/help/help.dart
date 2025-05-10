@@ -25,6 +25,7 @@ class Help extends StatelessWidget {
               HelpFrame.input(),
               DescriptionText.headline(label: 'データ'),
               HelpFrame.misprint(),
+              HelpFrame.changemenu(),
               HelpFrame.updateCycle(),
               HelpFrame.tr(),
               DescriptionText.headline(label: '操作ヘルプ'),
@@ -34,6 +35,8 @@ class Help extends StatelessWidget {
               HelpFrame.recommendedIngredients(),
               HelpFrame.menuList(),
               HelpFrame.origin(),
+              DescriptionText.headline(label: 'その他'),
+              HelpFrame.contact()
             ],
           ),
         ),

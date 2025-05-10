@@ -96,6 +96,13 @@ class HelpFrame extends StatelessWidget {
         ),
       );
 
+  factory HelpFrame.changemenu() => HelpFrame(
+        label: '献立情報の変更について',
+        content: DescriptionText.body(
+          label: '　物資納入の都合により．食材の準備の関係でメニューが変更になる場合があります．その場合はこのアプリに反映されません．ご了承ください．',
+        ),
+      );
+
   factory HelpFrame.updateCycle() => HelpFrame(
         label: '更新頻度',
         content: DescriptionText.body(
@@ -166,6 +173,21 @@ class HelpFrame extends StatelessWidget {
             DescriptionText.body(
               label: '　給食で利用されている食材の原産地を知りたい場合は，ドロワーから産地情報を閲覧する画面に遷移することができます．'
                   'ドロワーは，こんだて画面で左上にあるドロワーアイコンをタップ又は，左端から右へ画面をスワイプすることで表示させることができます．',
+              isZeroBottomPadding: true,
+            ),
+            _iconWithText('ドロワーアイコン', Icons.dehaze),
+            const SizedBox(height: SpaceSize.paragraph),
+          ],
+        ),
+      );
+
+  factory HelpFrame.contact() => HelpFrame(
+        label: 'お問い合わせ',
+        content: Column(
+          children: <Widget>[
+            DescriptionText.body(
+              label:
+                  '　このアプリに関するご質問等がある場合は、本アプリ開発チームまでご連絡ください。学校関係者はこのアプリに関するご質問にはお答えできませんので、ご了承ください。ご連絡は、メニュー一覧内の「ご意見」または下記メールアドレス宛にお願いいたします。',
               isZeroBottomPadding: true,
             ),
             _iconWithText('ドロワーアイコン', Icons.dehaze),
