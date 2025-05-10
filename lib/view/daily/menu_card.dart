@@ -46,7 +46,11 @@ class MenuCard extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerRight,
                         child: HelpButton(
-                          helpFrame: <HelpFrame>[HelpFrame.dishDetail(), HelpFrame.origin(), HelpFrame.menuIcon()],
+                          helpFrame: <HelpFrame>[
+                            HelpFrame.dishDetail(),
+                            HelpFrame.origin(),
+                            HelpFrame.menuIcon(),
+                          ],
                           key: key,
                         ),
                       ),

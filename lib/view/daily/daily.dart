@@ -41,7 +41,7 @@ class Daily extends StatelessWidget {
               HelpFrame.changemenu(),
               HelpFrame.menuList(),
               HelpFrame.contact(),
-              HelpFrame.menuIcon()
+              HelpFrame.menuIcon(),
             ],
             key: key,
           ),

@@ -37,7 +37,7 @@ class Help extends StatelessWidget {
               HelpFrame.menuIcon(),
               HelpFrame.origin(),
               DescriptionText.headline(label: 'その他'),
-              HelpFrame.contact()
+              HelpFrame.contact(),
             ],
           ),
         ),
