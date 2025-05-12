@@ -17,7 +17,7 @@ class SigningUpDialog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<SignupState> sginupState = ref.watch(signupViewModelProvider);
+    final AsyncValue<SignupState> signupState = ref.watch(signupViewModelProvider);
     final AsyncValue<UserSettingsState> userSettingsState = ref.watch(userSettingsViewModelProvider);
     final bool isEditing = userSettingsState is AsyncData<UserSettingsState> && userSettingsState.value.editingUser != null;
 
@@ -57,10 +57,10 @@ class SigningUpDialog extends ConsumerWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      if (sginupState is AsyncData<SignupState>) ...<Widget>[
-                        Text(sginupState.value.name!),
-                        Text(sginupState.value.schoolTrailing),
-                        Text(sginupState.value.schoolYearTrailing),
+                      if (signupState is AsyncData<SignupState>) ...<Widget>[
+                        Text('${signupState.value.lastName!} ${signupState.value.firstName!}'),
+                        Text(signupState.value.schoolTrailing),
+                        Text(signupState.value.schoolYearTrailing),
                       ],
                     ],
                   ),
@@ -80,6 +80,8 @@ class SigningUpDialog extends ConsumerWidget {
           }
           await routemaster.pop().whenComplete(
                 () async => showDialog(
+                  // 説明
+                  // ignore: use_build_context_synchronously
                   context: context,
                   barrierDismissible: false,
                   builder: (BuildContext context) => _statusDialog(),

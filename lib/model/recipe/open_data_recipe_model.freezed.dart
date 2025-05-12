@@ -31,7 +31,9 @@ mixin _$OpenDataRecipeModel {
   /// サムネイル
   String? get thumbnail => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of OpenDataRecipeModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $OpenDataRecipeModelCopyWith<OpenDataRecipeModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,6 +58,8 @@ class _$OpenDataRecipeModelCopyWithImpl<$Res, $Val extends OpenDataRecipeModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of OpenDataRecipeModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -110,6 +114,8 @@ class __$$OpenDataRecipeModelImplCopyWithImpl<$Res>
       $Res Function(_$OpenDataRecipeModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of OpenDataRecipeModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -197,7 +203,9 @@ class _$OpenDataRecipeModelImpl extends _OpenDataRecipeModel {
   @override
   int get hashCode => Object.hash(runtimeType, id, name, pdf, type, thumbnail);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of OpenDataRecipeModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$OpenDataRecipeModelImplCopyWith<_$OpenDataRecipeModelImpl> get copyWith =>
@@ -214,28 +222,30 @@ abstract class _OpenDataRecipeModel extends OpenDataRecipeModel {
       final String? thumbnail}) = _$OpenDataRecipeModelImpl;
   _OpenDataRecipeModel._() : super._();
 
-  @override
-
   /// ID
-  int get id;
   @override
+  int get id;
 
   /// 名前
-  String get name;
   @override
+  String get name;
 
   /// PDF
-  String get pdf;
   @override
+  String get pdf;
 
   /// タイプ
-  RecipeType get type;
   @override
+  RecipeType get type;
 
   /// サムネイル
-  String? get thumbnail;
   @override
-  @JsonKey(ignore: true)
+  String? get thumbnail;
+
+  /// Create a copy of OpenDataRecipeModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$OpenDataRecipeModelImplCopyWith<_$OpenDataRecipeModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

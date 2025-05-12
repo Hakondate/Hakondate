@@ -1,13 +1,14 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'open_data_recipes_local_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-OpenDataRecipesLocalRepository openDataRecipesLocalRepository(OpenDataRecipesLocalRepositoryRef ref) => OpenDataRecipesLocalRepository();
+OpenDataRecipesLocalRepository openDataRecipesLocalRepository(Ref ref) => OpenDataRecipesLocalRepository();
 
 abstract class OpenDataRecipesLocalRepositoryAPI {
   Future<String> add({required String path, required Uint8List bytes});

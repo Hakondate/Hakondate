@@ -23,6 +23,7 @@ mixin _$MenuModel {
         lunchesDay,
     required TResult Function() holiday,
     required TResult Function() noData,
+    required TResult Function() unauthorized,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,6 +33,7 @@ mixin _$MenuModel {
         lunchesDay,
     TResult? Function()? holiday,
     TResult? Function()? noData,
+    TResult? Function()? unauthorized,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,6 +43,7 @@ mixin _$MenuModel {
         lunchesDay,
     TResult Function()? holiday,
     TResult Function()? noData,
+    TResult Function()? unauthorized,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -49,6 +52,7 @@ mixin _$MenuModel {
     required TResult Function(LunchesDayMenuModel value) lunchesDay,
     required TResult Function(HolidayMenuModel value) holiday,
     required TResult Function(NoDataMenuModel value) noData,
+    required TResult Function(UnauthorizedMenuModel value) unauthorized,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,6 +60,7 @@ mixin _$MenuModel {
     TResult? Function(LunchesDayMenuModel value)? lunchesDay,
     TResult? Function(HolidayMenuModel value)? holiday,
     TResult? Function(NoDataMenuModel value)? noData,
+    TResult? Function(UnauthorizedMenuModel value)? unauthorized,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +68,7 @@ mixin _$MenuModel {
     TResult Function(LunchesDayMenuModel value)? lunchesDay,
     TResult Function(HolidayMenuModel value)? holiday,
     TResult Function(NoDataMenuModel value)? noData,
+    TResult Function(UnauthorizedMenuModel value)? unauthorized,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -83,6 +89,9 @@ class _$MenuModelCopyWithImpl<$Res, $Val extends MenuModel>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of MenuModel
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -107,6 +116,8 @@ class __$$LunchesDayMenuModelImplCopyWithImpl<$Res>
       $Res Function(_$LunchesDayMenuModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MenuModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -192,7 +203,9 @@ class _$LunchesDayMenuModelImpl extends LunchesDayMenuModel {
   int get hashCode => Object.hash(runtimeType, id, day, schoolId,
       const DeepCollectionEquality().hash(_dishes), event);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MenuModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LunchesDayMenuModelImplCopyWith<_$LunchesDayMenuModelImpl> get copyWith =>
@@ -207,6 +220,7 @@ class _$LunchesDayMenuModelImpl extends LunchesDayMenuModel {
         lunchesDay,
     required TResult Function() holiday,
     required TResult Function() noData,
+    required TResult Function() unauthorized,
   }) {
     return lunchesDay(id, day, schoolId, dishes, event);
   }
@@ -219,6 +233,7 @@ class _$LunchesDayMenuModelImpl extends LunchesDayMenuModel {
         lunchesDay,
     TResult? Function()? holiday,
     TResult? Function()? noData,
+    TResult? Function()? unauthorized,
   }) {
     return lunchesDay?.call(id, day, schoolId, dishes, event);
   }
@@ -231,6 +246,7 @@ class _$LunchesDayMenuModelImpl extends LunchesDayMenuModel {
         lunchesDay,
     TResult Function()? holiday,
     TResult Function()? noData,
+    TResult Function()? unauthorized,
     required TResult orElse(),
   }) {
     if (lunchesDay != null) {
@@ -245,6 +261,7 @@ class _$LunchesDayMenuModelImpl extends LunchesDayMenuModel {
     required TResult Function(LunchesDayMenuModel value) lunchesDay,
     required TResult Function(HolidayMenuModel value) holiday,
     required TResult Function(NoDataMenuModel value) noData,
+    required TResult Function(UnauthorizedMenuModel value) unauthorized,
   }) {
     return lunchesDay(this);
   }
@@ -255,6 +272,7 @@ class _$LunchesDayMenuModelImpl extends LunchesDayMenuModel {
     TResult? Function(LunchesDayMenuModel value)? lunchesDay,
     TResult? Function(HolidayMenuModel value)? holiday,
     TResult? Function(NoDataMenuModel value)? noData,
+    TResult? Function(UnauthorizedMenuModel value)? unauthorized,
   }) {
     return lunchesDay?.call(this);
   }
@@ -265,6 +283,7 @@ class _$LunchesDayMenuModelImpl extends LunchesDayMenuModel {
     TResult Function(LunchesDayMenuModel value)? lunchesDay,
     TResult Function(HolidayMenuModel value)? holiday,
     TResult Function(NoDataMenuModel value)? noData,
+    TResult Function(UnauthorizedMenuModel value)? unauthorized,
     required TResult orElse(),
   }) {
     if (lunchesDay != null) {
@@ -288,7 +307,10 @@ abstract class LunchesDayMenuModel extends MenuModel {
   int get schoolId;
   List<DishModel> get dishes;
   String? get event;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of MenuModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LunchesDayMenuModelImplCopyWith<_$LunchesDayMenuModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -307,6 +329,9 @@ class __$$HolidayMenuModelImplCopyWithImpl<$Res>
   __$$HolidayMenuModelImplCopyWithImpl(_$HolidayMenuModelImpl _value,
       $Res Function(_$HolidayMenuModelImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of MenuModel
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -336,6 +361,7 @@ class _$HolidayMenuModelImpl extends HolidayMenuModel {
         lunchesDay,
     required TResult Function() holiday,
     required TResult Function() noData,
+    required TResult Function() unauthorized,
   }) {
     return holiday();
   }
@@ -348,6 +374,7 @@ class _$HolidayMenuModelImpl extends HolidayMenuModel {
         lunchesDay,
     TResult? Function()? holiday,
     TResult? Function()? noData,
+    TResult? Function()? unauthorized,
   }) {
     return holiday?.call();
   }
@@ -360,6 +387,7 @@ class _$HolidayMenuModelImpl extends HolidayMenuModel {
         lunchesDay,
     TResult Function()? holiday,
     TResult Function()? noData,
+    TResult Function()? unauthorized,
     required TResult orElse(),
   }) {
     if (holiday != null) {
@@ -374,6 +402,7 @@ class _$HolidayMenuModelImpl extends HolidayMenuModel {
     required TResult Function(LunchesDayMenuModel value) lunchesDay,
     required TResult Function(HolidayMenuModel value) holiday,
     required TResult Function(NoDataMenuModel value) noData,
+    required TResult Function(UnauthorizedMenuModel value) unauthorized,
   }) {
     return holiday(this);
   }
@@ -384,6 +413,7 @@ class _$HolidayMenuModelImpl extends HolidayMenuModel {
     TResult? Function(LunchesDayMenuModel value)? lunchesDay,
     TResult? Function(HolidayMenuModel value)? holiday,
     TResult? Function(NoDataMenuModel value)? noData,
+    TResult? Function(UnauthorizedMenuModel value)? unauthorized,
   }) {
     return holiday?.call(this);
   }
@@ -394,6 +424,7 @@ class _$HolidayMenuModelImpl extends HolidayMenuModel {
     TResult Function(LunchesDayMenuModel value)? lunchesDay,
     TResult Function(HolidayMenuModel value)? holiday,
     TResult Function(NoDataMenuModel value)? noData,
+    TResult Function(UnauthorizedMenuModel value)? unauthorized,
     required TResult orElse(),
   }) {
     if (holiday != null) {
@@ -422,6 +453,9 @@ class __$$NoDataMenuModelImplCopyWithImpl<$Res>
   __$$NoDataMenuModelImplCopyWithImpl(
       _$NoDataMenuModelImpl _value, $Res Function(_$NoDataMenuModelImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of MenuModel
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -451,6 +485,7 @@ class _$NoDataMenuModelImpl extends NoDataMenuModel {
         lunchesDay,
     required TResult Function() holiday,
     required TResult Function() noData,
+    required TResult Function() unauthorized,
   }) {
     return noData();
   }
@@ -463,6 +498,7 @@ class _$NoDataMenuModelImpl extends NoDataMenuModel {
         lunchesDay,
     TResult? Function()? holiday,
     TResult? Function()? noData,
+    TResult? Function()? unauthorized,
   }) {
     return noData?.call();
   }
@@ -475,6 +511,7 @@ class _$NoDataMenuModelImpl extends NoDataMenuModel {
         lunchesDay,
     TResult Function()? holiday,
     TResult Function()? noData,
+    TResult Function()? unauthorized,
     required TResult orElse(),
   }) {
     if (noData != null) {
@@ -489,6 +526,7 @@ class _$NoDataMenuModelImpl extends NoDataMenuModel {
     required TResult Function(LunchesDayMenuModel value) lunchesDay,
     required TResult Function(HolidayMenuModel value) holiday,
     required TResult Function(NoDataMenuModel value) noData,
+    required TResult Function(UnauthorizedMenuModel value) unauthorized,
   }) {
     return noData(this);
   }
@@ -499,6 +537,7 @@ class _$NoDataMenuModelImpl extends NoDataMenuModel {
     TResult? Function(LunchesDayMenuModel value)? lunchesDay,
     TResult? Function(HolidayMenuModel value)? holiday,
     TResult? Function(NoDataMenuModel value)? noData,
+    TResult? Function(UnauthorizedMenuModel value)? unauthorized,
   }) {
     return noData?.call(this);
   }
@@ -509,6 +548,7 @@ class _$NoDataMenuModelImpl extends NoDataMenuModel {
     TResult Function(LunchesDayMenuModel value)? lunchesDay,
     TResult Function(HolidayMenuModel value)? holiday,
     TResult Function(NoDataMenuModel value)? noData,
+    TResult Function(UnauthorizedMenuModel value)? unauthorized,
     required TResult orElse(),
   }) {
     if (noData != null) {
@@ -521,4 +561,130 @@ class _$NoDataMenuModelImpl extends NoDataMenuModel {
 abstract class NoDataMenuModel extends MenuModel {
   const factory NoDataMenuModel() = _$NoDataMenuModelImpl;
   const NoDataMenuModel._() : super._();
+}
+
+/// @nodoc
+abstract class _$$UnauthorizedMenuModelImplCopyWith<$Res> {
+  factory _$$UnauthorizedMenuModelImplCopyWith(
+          _$UnauthorizedMenuModelImpl value,
+          $Res Function(_$UnauthorizedMenuModelImpl) then) =
+      __$$UnauthorizedMenuModelImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$UnauthorizedMenuModelImplCopyWithImpl<$Res>
+    extends _$MenuModelCopyWithImpl<$Res, _$UnauthorizedMenuModelImpl>
+    implements _$$UnauthorizedMenuModelImplCopyWith<$Res> {
+  __$$UnauthorizedMenuModelImplCopyWithImpl(_$UnauthorizedMenuModelImpl _value,
+      $Res Function(_$UnauthorizedMenuModelImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of MenuModel
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$UnauthorizedMenuModelImpl extends UnauthorizedMenuModel {
+  const _$UnauthorizedMenuModelImpl() : super._();
+
+  @override
+  String toString() {
+    return 'MenuModel.unauthorized()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UnauthorizedMenuModelImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int id, DateTime day, int schoolId,
+            List<DishModel> dishes, String? event)
+        lunchesDay,
+    required TResult Function() holiday,
+    required TResult Function() noData,
+    required TResult Function() unauthorized,
+  }) {
+    return unauthorized();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int id, DateTime day, int schoolId,
+            List<DishModel> dishes, String? event)?
+        lunchesDay,
+    TResult? Function()? holiday,
+    TResult? Function()? noData,
+    TResult? Function()? unauthorized,
+  }) {
+    return unauthorized?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int id, DateTime day, int schoolId, List<DishModel> dishes,
+            String? event)?
+        lunchesDay,
+    TResult Function()? holiday,
+    TResult Function()? noData,
+    TResult Function()? unauthorized,
+    required TResult orElse(),
+  }) {
+    if (unauthorized != null) {
+      return unauthorized();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LunchesDayMenuModel value) lunchesDay,
+    required TResult Function(HolidayMenuModel value) holiday,
+    required TResult Function(NoDataMenuModel value) noData,
+    required TResult Function(UnauthorizedMenuModel value) unauthorized,
+  }) {
+    return unauthorized(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LunchesDayMenuModel value)? lunchesDay,
+    TResult? Function(HolidayMenuModel value)? holiday,
+    TResult? Function(NoDataMenuModel value)? noData,
+    TResult? Function(UnauthorizedMenuModel value)? unauthorized,
+  }) {
+    return unauthorized?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LunchesDayMenuModel value)? lunchesDay,
+    TResult Function(HolidayMenuModel value)? holiday,
+    TResult Function(NoDataMenuModel value)? noData,
+    TResult Function(UnauthorizedMenuModel value)? unauthorized,
+    required TResult orElse(),
+  }) {
+    if (unauthorized != null) {
+      return unauthorized(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UnauthorizedMenuModel extends MenuModel {
+  const factory UnauthorizedMenuModel() = _$UnauthorizedMenuModelImpl;
+  const UnauthorizedMenuModel._() : super._();
 }

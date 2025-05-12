@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$UserModel {
   int get id => throw _privateConstructorUsedError;
 
-  /// ニックネーム
+  /// 名前
   String get name => throw _privateConstructorUsedError;
 
   /// 学校ID
@@ -30,7 +30,12 @@ mixin _$UserModel {
   /// 学校給食摂取基準
   NutrientsModel? get slns => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// 認可された日
+  DateTime? get authorizedAt => throw _privateConstructorUsedError;
+
+  /// Create a copy of UserModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UserModelCopyWith<UserModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -45,7 +50,8 @@ abstract class $UserModelCopyWith<$Res> {
       String name,
       int schoolId,
       int schoolYear,
-      NutrientsModel? slns});
+      NutrientsModel? slns,
+      DateTime? authorizedAt});
 
   $NutrientsModelCopyWith<$Res>? get slns;
 }
@@ -60,6 +66,8 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UserModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -68,6 +76,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? schoolId = null,
     Object? schoolYear = null,
     Object? slns = freezed,
+    Object? authorizedAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -90,9 +99,15 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.slns
           : slns // ignore: cast_nullable_to_non_nullable
               as NutrientsModel?,
+      authorizedAt: freezed == authorizedAt
+          ? _value.authorizedAt
+          : authorizedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 
+  /// Create a copy of UserModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $NutrientsModelCopyWith<$Res>? get slns {
@@ -119,7 +134,8 @@ abstract class _$$UserModelImplCopyWith<$Res>
       String name,
       int schoolId,
       int schoolYear,
-      NutrientsModel? slns});
+      NutrientsModel? slns,
+      DateTime? authorizedAt});
 
   @override
   $NutrientsModelCopyWith<$Res>? get slns;
@@ -133,6 +149,8 @@ class __$$UserModelImplCopyWithImpl<$Res>
       _$UserModelImpl _value, $Res Function(_$UserModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -141,6 +159,7 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? schoolId = null,
     Object? schoolYear = null,
     Object? slns = freezed,
+    Object? authorizedAt = freezed,
   }) {
     return _then(_$UserModelImpl(
       id: null == id
@@ -163,6 +182,10 @@ class __$$UserModelImplCopyWithImpl<$Res>
           ? _value.slns
           : slns // ignore: cast_nullable_to_non_nullable
               as NutrientsModel?,
+      authorizedAt: freezed == authorizedAt
+          ? _value.authorizedAt
+          : authorizedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -175,13 +198,14 @@ class _$UserModelImpl extends _UserModel {
       required this.name,
       required this.schoolId,
       required this.schoolYear,
-      this.slns})
+      this.slns,
+      this.authorizedAt})
       : super._();
 
   @override
   final int id;
 
-  /// ニックネーム
+  /// 名前
   @override
   final String name;
 
@@ -197,9 +221,13 @@ class _$UserModelImpl extends _UserModel {
   @override
   final NutrientsModel? slns;
 
+  /// 認可された日
+  @override
+  final DateTime? authorizedAt;
+
   @override
   String toString() {
-    return 'UserModel(id: $id, name: $name, schoolId: $schoolId, schoolYear: $schoolYear, slns: $slns)';
+    return 'UserModel(id: $id, name: $name, schoolId: $schoolId, schoolYear: $schoolYear, slns: $slns, authorizedAt: $authorizedAt)';
   }
 
   @override
@@ -213,14 +241,18 @@ class _$UserModelImpl extends _UserModel {
                 other.schoolId == schoolId) &&
             (identical(other.schoolYear, schoolYear) ||
                 other.schoolYear == schoolYear) &&
-            (identical(other.slns, slns) || other.slns == slns));
+            (identical(other.slns, slns) || other.slns == slns) &&
+            (identical(other.authorizedAt, authorizedAt) ||
+                other.authorizedAt == authorizedAt));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, name, schoolId, schoolYear, slns);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, schoolId, schoolYear, slns, authorizedAt);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserModelImplCopyWith<_$UserModelImpl> get copyWith =>
@@ -233,29 +265,37 @@ abstract class _UserModel extends UserModel {
       required final String name,
       required final int schoolId,
       required final int schoolYear,
-      final NutrientsModel? slns}) = _$UserModelImpl;
+      final NutrientsModel? slns,
+      final DateTime? authorizedAt}) = _$UserModelImpl;
   const _UserModel._() : super._();
 
   @override
   int get id;
-  @override
 
-  /// ニックネーム
-  String get name;
+  /// 名前
   @override
+  String get name;
 
   /// 学校ID
-  int get schoolId;
   @override
+  int get schoolId;
 
   /// 学年
-  int get schoolYear;
   @override
+  int get schoolYear;
 
   /// 学校給食摂取基準
-  NutrientsModel? get slns;
   @override
-  @JsonKey(ignore: true)
+  NutrientsModel? get slns;
+
+  /// 認可された日
+  @override
+  DateTime? get authorizedAt;
+
+  /// Create a copy of UserModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserModelImplCopyWith<_$UserModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

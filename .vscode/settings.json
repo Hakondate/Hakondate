@@ -1,5 +1,5 @@
 {
-  "dart.flutterSdkPath": ".fvm/versions/3.22.3",
+  "dart.flutterSdkPath": ".fvm/versions/3.27.3",
   "dart.lineLength": 140,
   "search.exclude": {
     "**/.fvm": true,
@@ -8,8 +8,10 @@
   },
   "cSpell.words": [
     "cupertino",
+    "dehaze",
     "hakondate",
     "pdfview",
+    "riverpod",
     "routemaster",
     "signup",
     "slns",

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -19,7 +20,7 @@ import 'package:hakondate/util/environment.dart';
 part 'local_database.g.dart';
 
 @Riverpod(keepAlive: true)
-LocalDatabase localDatabase(LocalDatabaseRef ref) {
+LocalDatabase localDatabase(Ref ref) {
   final LazyDatabase lazyDatabase = LazyDatabase(() async {
     final Directory directory = await getApplicationDocumentsDirectory();
     final File file = File(p.join(directory.path, 'db.sqlite'));
@@ -45,16 +46,21 @@ class LocalDatabase extends _$LocalDatabase {
   LocalDatabase(LazyDatabase super.lazyDatabase);
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 
   @override
   MigrationStrategy get migration {
     return MigrationStrategy(
-      onUpgrade: (_, __, ___) async {
+      onUpgrade: (Migrator m, int from, ___) async {
         await customStatement('PRAGMA foreign_keys = OFF');
 
         await transaction(() async {
           /* migrarion logic here */
+          if (from < 2) {
+            await m.addColumn(schoolsTable, schoolsTable.authorizationRequired);
+            await m.addColumn(schoolsTable, schoolsTable.authorizationKeyUpdatedAt);
+            await m.addColumn(usersTable, usersTable.authorizedAt);
+          }
         });
 
         if (Environment.flavor == Flavor.dev) {

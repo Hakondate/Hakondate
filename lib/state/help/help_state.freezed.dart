@@ -18,7 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$HelpState {
   SchoolGrade get schoolGrade => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of HelpState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $HelpStateCopyWith<HelpState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -41,6 +43,8 @@ class _$HelpStateCopyWithImpl<$Res, $Val extends HelpState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of HelpState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -74,6 +78,8 @@ class __$$HelpStateImplCopyWithImpl<$Res>
       _$HelpStateImpl _value, $Res Function(_$HelpStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of HelpState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -121,7 +127,9 @@ class _$HelpStateImpl with DiagnosticableTreeMixin implements _HelpState {
   @override
   int get hashCode => Object.hash(runtimeType, schoolGrade);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of HelpState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$HelpStateImplCopyWith<_$HelpStateImpl> get copyWith =>
@@ -134,8 +142,11 @@ abstract class _HelpState implements HelpState {
 
   @override
   SchoolGrade get schoolGrade;
+
+  /// Create a copy of HelpState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$HelpStateImplCopyWith<_$HelpStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

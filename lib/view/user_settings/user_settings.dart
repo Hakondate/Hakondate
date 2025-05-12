@@ -10,7 +10,6 @@ import 'package:hakondate/model/user/user_model.dart';
 import 'package:hakondate/repository/local/sqlite/schools/schools_local_repository.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/user_settings/user_settings_state.dart';
-import 'package:hakondate/view/user_settings/user_delete_dialog.dart';
 import 'package:hakondate/view/user_settings/user_switch_dialog.dart';
 import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
 import 'package:hakondate/view_model/single_page/user_settings/user_settings_view_model.dart';
@@ -47,6 +46,13 @@ class UserSettings extends ConsumerWidget {
                   height: SpaceSize.line,
                 ),
                 const UserAddButton(),
+                const Padding(
+                  padding: EdgeInsets.all(PaddingSize.normal),
+                  child: Text(
+                    '※現在ユーザー情報の変更機能が完成していないため，変更が必要な場合は新しくユーザーを作成して対応していただくようお願いします．',
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                ),
               ],
             );
           },
@@ -178,25 +184,6 @@ class UserSettingsCard extends ConsumerWidget {
                     ],
                   ),
                 ],
-              ),
-              IconButton(
-                isSelected: isCurrentUser,
-                onPressed: isCurrentUser
-                    ? () {
-                        ref.read(userSettingsViewModelProvider.notifier).setEditingUser(user);
-                        routemaster.push('/home/user_settings/${user.id}');
-                      }
-                    : () async {
-                        return showDialog(
-                          context: context,
-                          builder: (_) => UserDeleteDialog(id: user.id),
-                        );
-                      },
-                icon: Icon(
-                  isCurrentUser ? Icons.edit : Icons.delete,
-                  color: AppColor.brand.secondary,
-                  size: IconSize.help,
-                ),
               ),
             ],
           ),

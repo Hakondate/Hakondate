@@ -31,7 +31,15 @@ mixin _$SchoolModel {
   /// 給食区分: 1 ~ 10
   int get lunchBlock => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// 認可が必要かどうか: trueの場合、認可が必要
+  bool get authorizationRequired => throw _privateConstructorUsedError;
+
+  /// 認可のkeyの更新日時
+  DateTime? get authorizationKeyUpdatedAt => throw _privateConstructorUsedError;
+
+  /// Create a copy of SchoolModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SchoolModelCopyWith<SchoolModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -47,7 +55,9 @@ abstract class $SchoolModelCopyWith<$Res> {
       int parentId,
       String name,
       SchoolClassification classification,
-      int lunchBlock});
+      int lunchBlock,
+      bool authorizationRequired,
+      DateTime? authorizationKeyUpdatedAt});
 }
 
 /// @nodoc
@@ -60,6 +70,8 @@ class _$SchoolModelCopyWithImpl<$Res, $Val extends SchoolModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SchoolModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -68,6 +80,8 @@ class _$SchoolModelCopyWithImpl<$Res, $Val extends SchoolModel>
     Object? name = null,
     Object? classification = null,
     Object? lunchBlock = null,
+    Object? authorizationRequired = null,
+    Object? authorizationKeyUpdatedAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -90,6 +104,14 @@ class _$SchoolModelCopyWithImpl<$Res, $Val extends SchoolModel>
           ? _value.lunchBlock
           : lunchBlock // ignore: cast_nullable_to_non_nullable
               as int,
+      authorizationRequired: null == authorizationRequired
+          ? _value.authorizationRequired
+          : authorizationRequired // ignore: cast_nullable_to_non_nullable
+              as bool,
+      authorizationKeyUpdatedAt: freezed == authorizationKeyUpdatedAt
+          ? _value.authorizationKeyUpdatedAt
+          : authorizationKeyUpdatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -107,7 +129,9 @@ abstract class _$$SchoolModelImplCopyWith<$Res>
       int parentId,
       String name,
       SchoolClassification classification,
-      int lunchBlock});
+      int lunchBlock,
+      bool authorizationRequired,
+      DateTime? authorizationKeyUpdatedAt});
 }
 
 /// @nodoc
@@ -118,6 +142,8 @@ class __$$SchoolModelImplCopyWithImpl<$Res>
       _$SchoolModelImpl _value, $Res Function(_$SchoolModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SchoolModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -126,6 +152,8 @@ class __$$SchoolModelImplCopyWithImpl<$Res>
     Object? name = null,
     Object? classification = null,
     Object? lunchBlock = null,
+    Object? authorizationRequired = null,
+    Object? authorizationKeyUpdatedAt = freezed,
   }) {
     return _then(_$SchoolModelImpl(
       id: null == id
@@ -148,6 +176,14 @@ class __$$SchoolModelImplCopyWithImpl<$Res>
           ? _value.lunchBlock
           : lunchBlock // ignore: cast_nullable_to_non_nullable
               as int,
+      authorizationRequired: null == authorizationRequired
+          ? _value.authorizationRequired
+          : authorizationRequired // ignore: cast_nullable_to_non_nullable
+              as bool,
+      authorizationKeyUpdatedAt: freezed == authorizationKeyUpdatedAt
+          ? _value.authorizationKeyUpdatedAt
+          : authorizationKeyUpdatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -160,7 +196,9 @@ class _$SchoolModelImpl extends _SchoolModel {
       required this.parentId,
       required this.name,
       required this.classification,
-      required this.lunchBlock})
+      required this.lunchBlock,
+      required this.authorizationRequired,
+      this.authorizationKeyUpdatedAt})
       : super._();
 
   /// ID
@@ -183,9 +221,17 @@ class _$SchoolModelImpl extends _SchoolModel {
   @override
   final int lunchBlock;
 
+  /// 認可が必要かどうか: trueの場合、認可が必要
+  @override
+  final bool authorizationRequired;
+
+  /// 認可のkeyの更新日時
+  @override
+  final DateTime? authorizationKeyUpdatedAt;
+
   @override
   String toString() {
-    return 'SchoolModel(id: $id, parentId: $parentId, name: $name, classification: $classification, lunchBlock: $lunchBlock)';
+    return 'SchoolModel(id: $id, parentId: $parentId, name: $name, classification: $classification, lunchBlock: $lunchBlock, authorizationRequired: $authorizationRequired, authorizationKeyUpdatedAt: $authorizationKeyUpdatedAt)';
   }
 
   @override
@@ -200,14 +246,28 @@ class _$SchoolModelImpl extends _SchoolModel {
             (identical(other.classification, classification) ||
                 other.classification == classification) &&
             (identical(other.lunchBlock, lunchBlock) ||
-                other.lunchBlock == lunchBlock));
+                other.lunchBlock == lunchBlock) &&
+            (identical(other.authorizationRequired, authorizationRequired) ||
+                other.authorizationRequired == authorizationRequired) &&
+            (identical(other.authorizationKeyUpdatedAt,
+                    authorizationKeyUpdatedAt) ||
+                other.authorizationKeyUpdatedAt == authorizationKeyUpdatedAt));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, parentId, name, classification, lunchBlock);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      parentId,
+      name,
+      classification,
+      lunchBlock,
+      authorizationRequired,
+      authorizationKeyUpdatedAt);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SchoolModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SchoolModelImplCopyWith<_$SchoolModelImpl> get copyWith =>
@@ -220,31 +280,43 @@ abstract class _SchoolModel extends SchoolModel {
       required final int parentId,
       required final String name,
       required final SchoolClassification classification,
-      required final int lunchBlock}) = _$SchoolModelImpl;
+      required final int lunchBlock,
+      required final bool authorizationRequired,
+      final DateTime? authorizationKeyUpdatedAt}) = _$SchoolModelImpl;
   const _SchoolModel._() : super._();
 
-  @override
-
   /// ID
-  int get id;
   @override
+  int get id;
 
   /// 親学校(給食センター)のID
-  int get parentId;
   @override
+  int get parentId;
 
   /// 学校名
-  String get name;
   @override
+  String get name;
 
   /// 学校区分
-  SchoolClassification get classification;
   @override
+  SchoolClassification get classification;
 
   /// 給食区分: 1 ~ 10
-  int get lunchBlock;
   @override
-  @JsonKey(ignore: true)
+  int get lunchBlock;
+
+  /// 認可が必要かどうか: trueの場合、認可が必要
+  @override
+  bool get authorizationRequired;
+
+  /// 認可のkeyの更新日時
+  @override
+  DateTime? get authorizationKeyUpdatedAt;
+
+  /// Create a copy of SchoolModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SchoolModelImplCopyWith<_$SchoolModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

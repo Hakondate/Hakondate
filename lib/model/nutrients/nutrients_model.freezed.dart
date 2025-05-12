@@ -65,8 +65,12 @@ mixin _$NutrientsModel {
   /// 食塩相当量
   double get salt => throw _privateConstructorUsedError;
 
+  /// Serializes this NutrientsModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of NutrientsModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $NutrientsModelCopyWith<NutrientsModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -105,6 +109,8 @@ class _$NutrientsModelCopyWithImpl<$Res, $Val extends NutrientsModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of NutrientsModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -223,6 +229,8 @@ class __$$NutrientsModelImplCopyWithImpl<$Res>
       _$NutrientsModelImpl _value, $Res Function(_$NutrientsModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of NutrientsModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -462,7 +470,7 @@ class _$NutrientsModelImpl extends _NutrientsModel
             (identical(other.salt, salt) || other.salt == salt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -482,7 +490,9 @@ class _$NutrientsModelImpl extends _NutrientsModel
       dietaryFiber,
       salt);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of NutrientsModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$NutrientsModelImplCopyWith<_$NutrientsModelImpl> get copyWith =>
@@ -519,68 +529,70 @@ abstract class _NutrientsModel extends NutrientsModel {
   factory _NutrientsModel.fromJson(Map<String, dynamic> json) =
       _$NutrientsModelImpl.fromJson;
 
-  @override
-
   /// エネルギー
-  double get energy;
   @override
+  double get energy;
 
   /// タンパク質
-  double get protein;
   @override
+  double get protein;
 
   /// 脂質
-  double get lipid;
   @override
+  double get lipid;
 
   /// 炭水化物
-  double get carbohydrate;
   @override
+  double get carbohydrate;
 
   /// ナトリウム
-  double get sodium;
   @override
+  double get sodium;
 
   /// カルシウム
-  double get calcium;
   @override
+  double get calcium;
 
   /// マグネシウム
-  double get magnesium;
   @override
+  double get magnesium;
 
   /// 鉄分
-  double get iron;
   @override
+  double get iron;
 
   /// 亜鉛
-  double get zinc;
   @override
+  double get zinc;
 
   /// レチノール活性当量(ビタミンA)
-  double get retinol;
   @override
+  double get retinol;
 
   /// ビタミンB1
-  double get vitaminB1;
   @override
+  double get vitaminB1;
 
   /// ビタミンB2
-  double get vitaminB2;
   @override
+  double get vitaminB2;
 
   /// ビタミンC
-  double get vitaminC;
   @override
+  double get vitaminC;
 
   /// 食物繊維
-  double get dietaryFiber;
   @override
+  double get dietaryFiber;
 
   /// 食塩相当量
-  double get salt;
   @override
-  @JsonKey(ignore: true)
+  double get salt;
+
+  /// Create a copy of NutrientsModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$NutrientsModelImplCopyWith<_$NutrientsModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

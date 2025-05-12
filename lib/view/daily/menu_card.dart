@@ -9,6 +9,8 @@ import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/daily/daily_state.dart';
 import 'package:hakondate/util/exception/class_type_exception.dart';
+import 'package:hakondate/view/component/button/help_button.dart';
+import 'package:hakondate/view/help/help_frame.dart';
 import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
 
 class MenuCard extends StatelessWidget {
@@ -41,6 +43,13 @@ class MenuCard extends StatelessWidget {
                         childAspectRatio: 2 / 1,
                         children: menu.dishes.map(_menuTile).toList(),
                       ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: HelpButton(
+                          helpFrame: <HelpFrame>[HelpFrame.dishDetail(), HelpFrame.origin()],
+                          key: key,
+                        ),
+                      ),
                     ],
                   ),
                 );
@@ -59,7 +68,7 @@ class MenuCard extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
-                color: AppColor.ui.white.withOpacity(0.5),
+                color: AppColor.ui.white.withValues(alpha: .5),
                 width: 3,
               ),
               image: DecorationImage(
@@ -80,7 +89,7 @@ class MenuCard extends StatelessWidget {
               height: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
-                color: AppColor.ui.white.withOpacity(0.7),
+                color: AppColor.ui.white.withValues(alpha: .7),
               ),
               child: Center(
                 child: Text(

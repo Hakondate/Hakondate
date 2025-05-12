@@ -1,4 +1,5 @@
 import 'package:drift/drift.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/school/school_model.dart';
@@ -9,7 +10,7 @@ import 'package:hakondate/util/exception/sqlite_exception.dart';
 part 'schools_local_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-SchoolsLocalRepository schoolsLocalRepository(SchoolsLocalRepositoryRef ref) {
+SchoolsLocalRepository schoolsLocalRepository(Ref ref) {
   final LocalDatabase localDatabase = ref.watch(localDatabaseProvider);
   return SchoolsLocalRepository(localDatabase);
 }

@@ -53,9 +53,35 @@ class $SchoolsTableTable extends SchoolsTable
       type: DriftSqlType.dateTime,
       requiredDuringInsert: false,
       defaultValue: Constant(DateTime.now()));
+  static const VerificationMeta _authorizationRequiredMeta =
+      const VerificationMeta('authorizationRequired');
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, parentId, name, lunchBlock, classification, createAt, updateAt];
+  late final GeneratedColumn<bool> authorizationRequired =
+      GeneratedColumn<bool>('authorization_required', aliasedName, false,
+          type: DriftSqlType.bool,
+          requiredDuringInsert: false,
+          defaultConstraints: GeneratedColumn.constraintIsAlways(
+              'CHECK ("authorization_required" IN (0, 1))'),
+          defaultValue: const Constant(false));
+  static const VerificationMeta _authorizationKeyUpdatedAtMeta =
+      const VerificationMeta('authorizationKeyUpdatedAt');
+  @override
+  late final GeneratedColumn<DateTime> authorizationKeyUpdatedAt =
+      GeneratedColumn<DateTime>(
+          'authorization_key_updated_at', aliasedName, true,
+          type: DriftSqlType.dateTime, requiredDuringInsert: false);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        parentId,
+        name,
+        lunchBlock,
+        classification,
+        createAt,
+        updateAt,
+        authorizationRequired,
+        authorizationKeyUpdatedAt
+      ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -105,6 +131,19 @@ class $SchoolsTableTable extends SchoolsTable
       context.handle(_updateAtMeta,
           updateAt.isAcceptableOrUnknown(data['update_at']!, _updateAtMeta));
     }
+    if (data.containsKey('authorization_required')) {
+      context.handle(
+          _authorizationRequiredMeta,
+          authorizationRequired.isAcceptableOrUnknown(
+              data['authorization_required']!, _authorizationRequiredMeta));
+    }
+    if (data.containsKey('authorization_key_updated_at')) {
+      context.handle(
+          _authorizationKeyUpdatedAtMeta,
+          authorizationKeyUpdatedAt.isAcceptableOrUnknown(
+              data['authorization_key_updated_at']!,
+              _authorizationKeyUpdatedAtMeta));
+    }
     return context;
   }
 
@@ -128,6 +167,11 @@ class $SchoolsTableTable extends SchoolsTable
           .read(DriftSqlType.dateTime, data['${effectivePrefix}create_at'])!,
       updateAt: attachedDatabase.typeMapping
           .read(DriftSqlType.dateTime, data['${effectivePrefix}update_at'])!,
+      authorizationRequired: attachedDatabase.typeMapping.read(
+          DriftSqlType.bool, data['${effectivePrefix}authorization_required'])!,
+      authorizationKeyUpdatedAt: attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime,
+          data['${effectivePrefix}authorization_key_updated_at']),
     );
   }
 
@@ -145,6 +189,8 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
   final String classification;
   final DateTime createAt;
   final DateTime updateAt;
+  final bool authorizationRequired;
+  final DateTime? authorizationKeyUpdatedAt;
   const SchoolsSchema(
       {required this.id,
       required this.parentId,
@@ -152,7 +198,9 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       required this.lunchBlock,
       required this.classification,
       required this.createAt,
-      required this.updateAt});
+      required this.updateAt,
+      required this.authorizationRequired,
+      this.authorizationKeyUpdatedAt});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -163,6 +211,11 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
     map['classification'] = Variable<String>(classification);
     map['create_at'] = Variable<DateTime>(createAt);
     map['update_at'] = Variable<DateTime>(updateAt);
+    map['authorization_required'] = Variable<bool>(authorizationRequired);
+    if (!nullToAbsent || authorizationKeyUpdatedAt != null) {
+      map['authorization_key_updated_at'] =
+          Variable<DateTime>(authorizationKeyUpdatedAt);
+    }
     return map;
   }
 
@@ -175,6 +228,11 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       classification: Value(classification),
       createAt: Value(createAt),
       updateAt: Value(updateAt),
+      authorizationRequired: Value(authorizationRequired),
+      authorizationKeyUpdatedAt:
+          authorizationKeyUpdatedAt == null && nullToAbsent
+              ? const Value.absent()
+              : Value(authorizationKeyUpdatedAt),
     );
   }
 
@@ -189,6 +247,10 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       classification: serializer.fromJson<String>(json['classification']),
       createAt: serializer.fromJson<DateTime>(json['createAt']),
       updateAt: serializer.fromJson<DateTime>(json['updateAt']),
+      authorizationRequired:
+          serializer.fromJson<bool>(json['authorizationRequired']),
+      authorizationKeyUpdatedAt:
+          serializer.fromJson<DateTime?>(json['authorizationKeyUpdatedAt']),
     );
   }
   @override
@@ -202,6 +264,9 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       'classification': serializer.toJson<String>(classification),
       'createAt': serializer.toJson<DateTime>(createAt),
       'updateAt': serializer.toJson<DateTime>(updateAt),
+      'authorizationRequired': serializer.toJson<bool>(authorizationRequired),
+      'authorizationKeyUpdatedAt':
+          serializer.toJson<DateTime?>(authorizationKeyUpdatedAt),
     };
   }
 
@@ -212,7 +277,9 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
           int? lunchBlock,
           String? classification,
           DateTime? createAt,
-          DateTime? updateAt}) =>
+          DateTime? updateAt,
+          bool? authorizationRequired,
+          Value<DateTime?> authorizationKeyUpdatedAt = const Value.absent()}) =>
       SchoolsSchema(
         id: id ?? this.id,
         parentId: parentId ?? this.parentId,
@@ -221,6 +288,11 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
         classification: classification ?? this.classification,
         createAt: createAt ?? this.createAt,
         updateAt: updateAt ?? this.updateAt,
+        authorizationRequired:
+            authorizationRequired ?? this.authorizationRequired,
+        authorizationKeyUpdatedAt: authorizationKeyUpdatedAt.present
+            ? authorizationKeyUpdatedAt.value
+            : this.authorizationKeyUpdatedAt,
       );
   SchoolsSchema copyWithCompanion(SchoolsTableCompanion data) {
     return SchoolsSchema(
@@ -234,6 +306,12 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
           : this.classification,
       createAt: data.createAt.present ? data.createAt.value : this.createAt,
       updateAt: data.updateAt.present ? data.updateAt.value : this.updateAt,
+      authorizationRequired: data.authorizationRequired.present
+          ? data.authorizationRequired.value
+          : this.authorizationRequired,
+      authorizationKeyUpdatedAt: data.authorizationKeyUpdatedAt.present
+          ? data.authorizationKeyUpdatedAt.value
+          : this.authorizationKeyUpdatedAt,
     );
   }
 
@@ -246,14 +324,24 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
           ..write('lunchBlock: $lunchBlock, ')
           ..write('classification: $classification, ')
           ..write('createAt: $createAt, ')
-          ..write('updateAt: $updateAt')
+          ..write('updateAt: $updateAt, ')
+          ..write('authorizationRequired: $authorizationRequired, ')
+          ..write('authorizationKeyUpdatedAt: $authorizationKeyUpdatedAt')
           ..write(')'))
         .toString();
   }
 
   @override
   int get hashCode => Object.hash(
-      id, parentId, name, lunchBlock, classification, createAt, updateAt);
+      id,
+      parentId,
+      name,
+      lunchBlock,
+      classification,
+      createAt,
+      updateAt,
+      authorizationRequired,
+      authorizationKeyUpdatedAt);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -264,7 +352,9 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
           other.lunchBlock == this.lunchBlock &&
           other.classification == this.classification &&
           other.createAt == this.createAt &&
-          other.updateAt == this.updateAt);
+          other.updateAt == this.updateAt &&
+          other.authorizationRequired == this.authorizationRequired &&
+          other.authorizationKeyUpdatedAt == this.authorizationKeyUpdatedAt);
 }
 
 class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
@@ -275,6 +365,8 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
   final Value<String> classification;
   final Value<DateTime> createAt;
   final Value<DateTime> updateAt;
+  final Value<bool> authorizationRequired;
+  final Value<DateTime?> authorizationKeyUpdatedAt;
   const SchoolsTableCompanion({
     this.id = const Value.absent(),
     this.parentId = const Value.absent(),
@@ -283,6 +375,8 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
     this.classification = const Value.absent(),
     this.createAt = const Value.absent(),
     this.updateAt = const Value.absent(),
+    this.authorizationRequired = const Value.absent(),
+    this.authorizationKeyUpdatedAt = const Value.absent(),
   });
   SchoolsTableCompanion.insert({
     this.id = const Value.absent(),
@@ -292,6 +386,8 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
     required String classification,
     this.createAt = const Value.absent(),
     this.updateAt = const Value.absent(),
+    this.authorizationRequired = const Value.absent(),
+    this.authorizationKeyUpdatedAt = const Value.absent(),
   })  : parentId = Value(parentId),
         name = Value(name),
         lunchBlock = Value(lunchBlock),
@@ -304,6 +400,8 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
     Expression<String>? classification,
     Expression<DateTime>? createAt,
     Expression<DateTime>? updateAt,
+    Expression<bool>? authorizationRequired,
+    Expression<DateTime>? authorizationKeyUpdatedAt,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -313,6 +411,10 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
       if (classification != null) 'classification': classification,
       if (createAt != null) 'create_at': createAt,
       if (updateAt != null) 'update_at': updateAt,
+      if (authorizationRequired != null)
+        'authorization_required': authorizationRequired,
+      if (authorizationKeyUpdatedAt != null)
+        'authorization_key_updated_at': authorizationKeyUpdatedAt,
     });
   }
 
@@ -323,7 +425,9 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
       Value<int>? lunchBlock,
       Value<String>? classification,
       Value<DateTime>? createAt,
-      Value<DateTime>? updateAt}) {
+      Value<DateTime>? updateAt,
+      Value<bool>? authorizationRequired,
+      Value<DateTime?>? authorizationKeyUpdatedAt}) {
     return SchoolsTableCompanion(
       id: id ?? this.id,
       parentId: parentId ?? this.parentId,
@@ -332,6 +436,10 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
       classification: classification ?? this.classification,
       createAt: createAt ?? this.createAt,
       updateAt: updateAt ?? this.updateAt,
+      authorizationRequired:
+          authorizationRequired ?? this.authorizationRequired,
+      authorizationKeyUpdatedAt:
+          authorizationKeyUpdatedAt ?? this.authorizationKeyUpdatedAt,
     );
   }
 
@@ -359,6 +467,14 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
     if (updateAt.present) {
       map['update_at'] = Variable<DateTime>(updateAt.value);
     }
+    if (authorizationRequired.present) {
+      map['authorization_required'] =
+          Variable<bool>(authorizationRequired.value);
+    }
+    if (authorizationKeyUpdatedAt.present) {
+      map['authorization_key_updated_at'] =
+          Variable<DateTime>(authorizationKeyUpdatedAt.value);
+    }
     return map;
   }
 
@@ -371,7 +487,9 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
           ..write('lunchBlock: $lunchBlock, ')
           ..write('classification: $classification, ')
           ..write('createAt: $createAt, ')
-          ..write('updateAt: $updateAt')
+          ..write('updateAt: $updateAt, ')
+          ..write('authorizationRequired: $authorizationRequired, ')
+          ..write('authorizationKeyUpdatedAt: $authorizationKeyUpdatedAt')
           ..write(')'))
         .toString();
   }
@@ -2395,8 +2513,15 @@ class $UsersTableTable extends UsersTable
   late final GeneratedColumn<int> schoolYear = GeneratedColumn<int>(
       'school_year', aliasedName, false,
       type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _authorizedAtMeta =
+      const VerificationMeta('authorizedAt');
   @override
-  List<GeneratedColumn> get $columns => [id, name, schoolId, schoolYear];
+  late final GeneratedColumn<DateTime> authorizedAt = GeneratedColumn<DateTime>(
+      'authorized_at', aliasedName, true,
+      type: DriftSqlType.dateTime, requiredDuringInsert: false);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, name, schoolId, schoolYear, authorizedAt];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -2430,6 +2555,12 @@ class $UsersTableTable extends UsersTable
     } else if (isInserting) {
       context.missing(_schoolYearMeta);
     }
+    if (data.containsKey('authorized_at')) {
+      context.handle(
+          _authorizedAtMeta,
+          authorizedAt.isAcceptableOrUnknown(
+              data['authorized_at']!, _authorizedAtMeta));
+    }
     return context;
   }
 
@@ -2447,6 +2578,8 @@ class $UsersTableTable extends UsersTable
           .read(DriftSqlType.int, data['${effectivePrefix}school_id'])!,
       schoolYear: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}school_year'])!,
+      authorizedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}authorized_at']),
     );
   }
 
@@ -2461,11 +2594,13 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
   final String name;
   final int schoolId;
   final int schoolYear;
+  final DateTime? authorizedAt;
   const UsersSchema(
       {required this.id,
       required this.name,
       required this.schoolId,
-      required this.schoolYear});
+      required this.schoolYear,
+      this.authorizedAt});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -2473,6 +2608,9 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
     map['name'] = Variable<String>(name);
     map['school_id'] = Variable<int>(schoolId);
     map['school_year'] = Variable<int>(schoolYear);
+    if (!nullToAbsent || authorizedAt != null) {
+      map['authorized_at'] = Variable<DateTime>(authorizedAt);
+    }
     return map;
   }
 
@@ -2482,6 +2620,9 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
       name: Value(name),
       schoolId: Value(schoolId),
       schoolYear: Value(schoolYear),
+      authorizedAt: authorizedAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(authorizedAt),
     );
   }
 
@@ -2493,6 +2634,7 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
       name: serializer.fromJson<String>(json['name']),
       schoolId: serializer.fromJson<int>(json['schoolId']),
       schoolYear: serializer.fromJson<int>(json['schoolYear']),
+      authorizedAt: serializer.fromJson<DateTime?>(json['authorizedAt']),
     );
   }
   @override
@@ -2503,16 +2645,23 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
       'name': serializer.toJson<String>(name),
       'schoolId': serializer.toJson<int>(schoolId),
       'schoolYear': serializer.toJson<int>(schoolYear),
+      'authorizedAt': serializer.toJson<DateTime?>(authorizedAt),
     };
   }
 
   UsersSchema copyWith(
-          {int? id, String? name, int? schoolId, int? schoolYear}) =>
+          {int? id,
+          String? name,
+          int? schoolId,
+          int? schoolYear,
+          Value<DateTime?> authorizedAt = const Value.absent()}) =>
       UsersSchema(
         id: id ?? this.id,
         name: name ?? this.name,
         schoolId: schoolId ?? this.schoolId,
         schoolYear: schoolYear ?? this.schoolYear,
+        authorizedAt:
+            authorizedAt.present ? authorizedAt.value : this.authorizedAt,
       );
   UsersSchema copyWithCompanion(UsersTableCompanion data) {
     return UsersSchema(
@@ -2521,6 +2670,9 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
       schoolId: data.schoolId.present ? data.schoolId.value : this.schoolId,
       schoolYear:
           data.schoolYear.present ? data.schoolYear.value : this.schoolYear,
+      authorizedAt: data.authorizedAt.present
+          ? data.authorizedAt.value
+          : this.authorizedAt,
     );
   }
 
@@ -2530,13 +2682,14 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
           ..write('id: $id, ')
           ..write('name: $name, ')
           ..write('schoolId: $schoolId, ')
-          ..write('schoolYear: $schoolYear')
+          ..write('schoolYear: $schoolYear, ')
+          ..write('authorizedAt: $authorizedAt')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, name, schoolId, schoolYear);
+  int get hashCode => Object.hash(id, name, schoolId, schoolYear, authorizedAt);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -2544,7 +2697,8 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
           other.id == this.id &&
           other.name == this.name &&
           other.schoolId == this.schoolId &&
-          other.schoolYear == this.schoolYear);
+          other.schoolYear == this.schoolYear &&
+          other.authorizedAt == this.authorizedAt);
 }
 
 class UsersTableCompanion extends UpdateCompanion<UsersSchema> {
@@ -2552,17 +2706,20 @@ class UsersTableCompanion extends UpdateCompanion<UsersSchema> {
   final Value<String> name;
   final Value<int> schoolId;
   final Value<int> schoolYear;
+  final Value<DateTime?> authorizedAt;
   const UsersTableCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
     this.schoolId = const Value.absent(),
     this.schoolYear = const Value.absent(),
+    this.authorizedAt = const Value.absent(),
   });
   UsersTableCompanion.insert({
     this.id = const Value.absent(),
     required String name,
     required int schoolId,
     required int schoolYear,
+    this.authorizedAt = const Value.absent(),
   })  : name = Value(name),
         schoolId = Value(schoolId),
         schoolYear = Value(schoolYear);
@@ -2571,12 +2728,14 @@ class UsersTableCompanion extends UpdateCompanion<UsersSchema> {
     Expression<String>? name,
     Expression<int>? schoolId,
     Expression<int>? schoolYear,
+    Expression<DateTime>? authorizedAt,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (name != null) 'name': name,
       if (schoolId != null) 'school_id': schoolId,
       if (schoolYear != null) 'school_year': schoolYear,
+      if (authorizedAt != null) 'authorized_at': authorizedAt,
     });
   }
 
@@ -2584,12 +2743,14 @@ class UsersTableCompanion extends UpdateCompanion<UsersSchema> {
       {Value<int>? id,
       Value<String>? name,
       Value<int>? schoolId,
-      Value<int>? schoolYear}) {
+      Value<int>? schoolYear,
+      Value<DateTime?>? authorizedAt}) {
     return UsersTableCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
       schoolId: schoolId ?? this.schoolId,
       schoolYear: schoolYear ?? this.schoolYear,
+      authorizedAt: authorizedAt ?? this.authorizedAt,
     );
   }
 
@@ -2608,6 +2769,9 @@ class UsersTableCompanion extends UpdateCompanion<UsersSchema> {
     if (schoolYear.present) {
       map['school_year'] = Variable<int>(schoolYear.value);
     }
+    if (authorizedAt.present) {
+      map['authorized_at'] = Variable<DateTime>(authorizedAt.value);
+    }
     return map;
   }
 
@@ -2617,7 +2781,8 @@ class UsersTableCompanion extends UpdateCompanion<UsersSchema> {
           ..write('id: $id, ')
           ..write('name: $name, ')
           ..write('schoolId: $schoolId, ')
-          ..write('schoolYear: $schoolYear')
+          ..write('schoolYear: $schoolYear, ')
+          ..write('authorizedAt: $authorizedAt')
           ..write(')'))
         .toString();
   }
@@ -3519,6 +3684,8 @@ typedef $$SchoolsTableTableCreateCompanionBuilder = SchoolsTableCompanion
   required String classification,
   Value<DateTime> createAt,
   Value<DateTime> updateAt,
+  Value<bool> authorizationRequired,
+  Value<DateTime?> authorizationKeyUpdatedAt,
 });
 typedef $$SchoolsTableTableUpdateCompanionBuilder = SchoolsTableCompanion
     Function({
@@ -3529,7 +3696,245 @@ typedef $$SchoolsTableTableUpdateCompanionBuilder = SchoolsTableCompanion
   Value<String> classification,
   Value<DateTime> createAt,
   Value<DateTime> updateAt,
+  Value<bool> authorizationRequired,
+  Value<DateTime?> authorizationKeyUpdatedAt,
 });
+
+final class $$SchoolsTableTableReferences
+    extends BaseReferences<_$LocalDatabase, $SchoolsTableTable, SchoolsSchema> {
+  $$SchoolsTableTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static MultiTypedResultKey<$MenusTableTable, List<MenusSchema>>
+      _menusTableRefsTable(_$LocalDatabase db) => MultiTypedResultKey.fromTable(
+          db.menusTable,
+          aliasName:
+              $_aliasNameGenerator(db.schoolsTable.id, db.menusTable.schoolId));
+
+  $$MenusTableTableProcessedTableManager get menusTableRefs {
+    final manager = $$MenusTableTableTableManager($_db, $_db.menusTable)
+        .filter((f) => f.schoolId.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_menusTableRefsTable($_db));
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: cache));
+  }
+
+  static MultiTypedResultKey<$UsersTableTable, List<UsersSchema>>
+      _usersTableRefsTable(_$LocalDatabase db) => MultiTypedResultKey.fromTable(
+          db.usersTable,
+          aliasName:
+              $_aliasNameGenerator(db.schoolsTable.id, db.usersTable.schoolId));
+
+  $$UsersTableTableProcessedTableManager get usersTableRefs {
+    final manager = $$UsersTableTableTableManager($_db, $_db.usersTable)
+        .filter((f) => f.schoolId.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_usersTableRefsTable($_db));
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: cache));
+  }
+}
+
+class $$SchoolsTableTableFilterComposer
+    extends Composer<_$LocalDatabase, $SchoolsTableTable> {
+  $$SchoolsTableTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get parentId => $composableBuilder(
+      column: $table.parentId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get lunchBlock => $composableBuilder(
+      column: $table.lunchBlock, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get classification => $composableBuilder(
+      column: $table.classification,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createAt => $composableBuilder(
+      column: $table.createAt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get updateAt => $composableBuilder(
+      column: $table.updateAt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<bool> get authorizationRequired => $composableBuilder(
+      column: $table.authorizationRequired,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get authorizationKeyUpdatedAt => $composableBuilder(
+      column: $table.authorizationKeyUpdatedAt,
+      builder: (column) => ColumnFilters(column));
+
+  Expression<bool> menusTableRefs(
+      Expression<bool> Function($$MenusTableTableFilterComposer f) f) {
+    final $$MenusTableTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.menusTable,
+        getReferencedColumn: (t) => t.schoolId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$MenusTableTableFilterComposer(
+              $db: $db,
+              $table: $db.menusTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+
+  Expression<bool> usersTableRefs(
+      Expression<bool> Function($$UsersTableTableFilterComposer f) f) {
+    final $$UsersTableTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.usersTable,
+        getReferencedColumn: (t) => t.schoolId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$UsersTableTableFilterComposer(
+              $db: $db,
+              $table: $db.usersTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+}
+
+class $$SchoolsTableTableOrderingComposer
+    extends Composer<_$LocalDatabase, $SchoolsTableTable> {
+  $$SchoolsTableTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get parentId => $composableBuilder(
+      column: $table.parentId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get lunchBlock => $composableBuilder(
+      column: $table.lunchBlock, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get classification => $composableBuilder(
+      column: $table.classification,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createAt => $composableBuilder(
+      column: $table.createAt, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get updateAt => $composableBuilder(
+      column: $table.updateAt, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<bool> get authorizationRequired => $composableBuilder(
+      column: $table.authorizationRequired,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get authorizationKeyUpdatedAt => $composableBuilder(
+      column: $table.authorizationKeyUpdatedAt,
+      builder: (column) => ColumnOrderings(column));
+}
+
+class $$SchoolsTableTableAnnotationComposer
+    extends Composer<_$LocalDatabase, $SchoolsTableTable> {
+  $$SchoolsTableTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<int> get parentId =>
+      $composableBuilder(column: $table.parentId, builder: (column) => column);
+
+  GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<int> get lunchBlock => $composableBuilder(
+      column: $table.lunchBlock, builder: (column) => column);
+
+  GeneratedColumn<String> get classification => $composableBuilder(
+      column: $table.classification, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createAt =>
+      $composableBuilder(column: $table.createAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get updateAt =>
+      $composableBuilder(column: $table.updateAt, builder: (column) => column);
+
+  GeneratedColumn<bool> get authorizationRequired => $composableBuilder(
+      column: $table.authorizationRequired, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get authorizationKeyUpdatedAt => $composableBuilder(
+      column: $table.authorizationKeyUpdatedAt, builder: (column) => column);
+
+  Expression<T> menusTableRefs<T extends Object>(
+      Expression<T> Function($$MenusTableTableAnnotationComposer a) f) {
+    final $$MenusTableTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.menusTable,
+        getReferencedColumn: (t) => t.schoolId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$MenusTableTableAnnotationComposer(
+              $db: $db,
+              $table: $db.menusTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+
+  Expression<T> usersTableRefs<T extends Object>(
+      Expression<T> Function($$UsersTableTableAnnotationComposer a) f) {
+    final $$UsersTableTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.usersTable,
+        getReferencedColumn: (t) => t.schoolId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$UsersTableTableAnnotationComposer(
+              $db: $db,
+              $table: $db.usersTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+}
 
 class $$SchoolsTableTableTableManager extends RootTableManager<
     _$LocalDatabase,
@@ -3537,16 +3942,22 @@ class $$SchoolsTableTableTableManager extends RootTableManager<
     SchoolsSchema,
     $$SchoolsTableTableFilterComposer,
     $$SchoolsTableTableOrderingComposer,
+    $$SchoolsTableTableAnnotationComposer,
     $$SchoolsTableTableCreateCompanionBuilder,
-    $$SchoolsTableTableUpdateCompanionBuilder> {
+    $$SchoolsTableTableUpdateCompanionBuilder,
+    (SchoolsSchema, $$SchoolsTableTableReferences),
+    SchoolsSchema,
+    PrefetchHooks Function({bool menusTableRefs, bool usersTableRefs})> {
   $$SchoolsTableTableTableManager(_$LocalDatabase db, $SchoolsTableTable table)
       : super(TableManagerState(
           db: db,
           table: table,
-          filteringComposer:
-              $$SchoolsTableTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$SchoolsTableTableOrderingComposer(ComposerState(db, table)),
+          createFilteringComposer: () =>
+              $$SchoolsTableTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$SchoolsTableTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$SchoolsTableTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<int> id = const Value.absent(),
             Value<int> parentId = const Value.absent(),
@@ -3555,6 +3966,8 @@ class $$SchoolsTableTableTableManager extends RootTableManager<
             Value<String> classification = const Value.absent(),
             Value<DateTime> createAt = const Value.absent(),
             Value<DateTime> updateAt = const Value.absent(),
+            Value<bool> authorizationRequired = const Value.absent(),
+            Value<DateTime?> authorizationKeyUpdatedAt = const Value.absent(),
           }) =>
               SchoolsTableCompanion(
             id: id,
@@ -3564,6 +3977,8 @@ class $$SchoolsTableTableTableManager extends RootTableManager<
             classification: classification,
             createAt: createAt,
             updateAt: updateAt,
+            authorizationRequired: authorizationRequired,
+            authorizationKeyUpdatedAt: authorizationKeyUpdatedAt,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
@@ -3573,6 +3988,8 @@ class $$SchoolsTableTableTableManager extends RootTableManager<
             required String classification,
             Value<DateTime> createAt = const Value.absent(),
             Value<DateTime> updateAt = const Value.absent(),
+            Value<bool> authorizationRequired = const Value.absent(),
+            Value<DateTime?> authorizationKeyUpdatedAt = const Value.absent(),
           }) =>
               SchoolsTableCompanion.insert(
             id: id,
@@ -3582,114 +3999,69 @@ class $$SchoolsTableTableTableManager extends RootTableManager<
             classification: classification,
             createAt: createAt,
             updateAt: updateAt,
+            authorizationRequired: authorizationRequired,
+            authorizationKeyUpdatedAt: authorizationKeyUpdatedAt,
           ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable(table),
+                    $$SchoolsTableTableReferences(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: (
+              {menusTableRefs = false, usersTableRefs = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [
+                if (menusTableRefs) db.menusTable,
+                if (usersTableRefs) db.usersTable
+              ],
+              addJoins: null,
+              getPrefetchedDataCallback: (items) async {
+                return [
+                  if (menusTableRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable: $$SchoolsTableTableReferences
+                            ._menusTableRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$SchoolsTableTableReferences(db, table, p0)
+                                .menusTableRefs,
+                        referencedItemsForCurrentItem: (item,
+                                referencedItems) =>
+                            referencedItems.where((e) => e.schoolId == item.id),
+                        typedResults: items),
+                  if (usersTableRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable: $$SchoolsTableTableReferences
+                            ._usersTableRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$SchoolsTableTableReferences(db, table, p0)
+                                .usersTableRefs,
+                        referencedItemsForCurrentItem: (item,
+                                referencedItems) =>
+                            referencedItems.where((e) => e.schoolId == item.id),
+                        typedResults: items)
+                ];
+              },
+            );
+          },
         ));
 }
 
-class $$SchoolsTableTableFilterComposer
-    extends FilterComposer<_$LocalDatabase, $SchoolsTableTable> {
-  $$SchoolsTableTableFilterComposer(super.$state);
-  ColumnFilters<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<int> get parentId => $state.composableBuilder(
-      column: $state.table.parentId,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get name => $state.composableBuilder(
-      column: $state.table.name,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<int> get lunchBlock => $state.composableBuilder(
-      column: $state.table.lunchBlock,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get classification => $state.composableBuilder(
-      column: $state.table.classification,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<DateTime> get createAt => $state.composableBuilder(
-      column: $state.table.createAt,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<DateTime> get updateAt => $state.composableBuilder(
-      column: $state.table.updateAt,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ComposableFilter menusTableRefs(
-      ComposableFilter Function($$MenusTableTableFilterComposer f) f) {
-    final $$MenusTableTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $state.db.menusTable,
-        getReferencedColumn: (t) => t.schoolId,
-        builder: (joinBuilder, parentComposers) =>
-            $$MenusTableTableFilterComposer(ComposerState($state.db,
-                $state.db.menusTable, joinBuilder, parentComposers)));
-    return f(composer);
-  }
-
-  ComposableFilter usersTableRefs(
-      ComposableFilter Function($$UsersTableTableFilterComposer f) f) {
-    final $$UsersTableTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $state.db.usersTable,
-        getReferencedColumn: (t) => t.schoolId,
-        builder: (joinBuilder, parentComposers) =>
-            $$UsersTableTableFilterComposer(ComposerState($state.db,
-                $state.db.usersTable, joinBuilder, parentComposers)));
-    return f(composer);
-  }
-}
-
-class $$SchoolsTableTableOrderingComposer
-    extends OrderingComposer<_$LocalDatabase, $SchoolsTableTable> {
-  $$SchoolsTableTableOrderingComposer(super.$state);
-  ColumnOrderings<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<int> get parentId => $state.composableBuilder(
-      column: $state.table.parentId,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get name => $state.composableBuilder(
-      column: $state.table.name,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<int> get lunchBlock => $state.composableBuilder(
-      column: $state.table.lunchBlock,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get classification => $state.composableBuilder(
-      column: $state.table.classification,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<DateTime> get createAt => $state.composableBuilder(
-      column: $state.table.createAt,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<DateTime> get updateAt => $state.composableBuilder(
-      column: $state.table.updateAt,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-}
-
+typedef $$SchoolsTableTableProcessedTableManager = ProcessedTableManager<
+    _$LocalDatabase,
+    $SchoolsTableTable,
+    SchoolsSchema,
+    $$SchoolsTableTableFilterComposer,
+    $$SchoolsTableTableOrderingComposer,
+    $$SchoolsTableTableAnnotationComposer,
+    $$SchoolsTableTableCreateCompanionBuilder,
+    $$SchoolsTableTableUpdateCompanionBuilder,
+    (SchoolsSchema, $$SchoolsTableTableReferences),
+    SchoolsSchema,
+    PrefetchHooks Function({bool menusTableRefs, bool usersTableRefs})>;
 typedef $$MenusTableTableCreateCompanionBuilder = MenusTableCompanion Function({
   Value<int> id,
   required DateTime day,
@@ -3707,22 +4079,242 @@ typedef $$MenusTableTableUpdateCompanionBuilder = MenusTableCompanion Function({
   Value<DateTime> updateAt,
 });
 
+final class $$MenusTableTableReferences
+    extends BaseReferences<_$LocalDatabase, $MenusTableTable, MenusSchema> {
+  $$MenusTableTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static $SchoolsTableTable _schoolIdTable(_$LocalDatabase db) =>
+      db.schoolsTable.createAlias(
+          $_aliasNameGenerator(db.menusTable.schoolId, db.schoolsTable.id));
+
+  $$SchoolsTableTableProcessedTableManager get schoolId {
+    final $_column = $_itemColumn<int>('school_id')!;
+
+    final manager = $$SchoolsTableTableTableManager($_db, $_db.schoolsTable)
+        .filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_schoolIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
+
+  static MultiTypedResultKey<$MenuDishesTableTable, List<MenuDishesSchema>>
+      _menuDishesTableRefsTable(_$LocalDatabase db) =>
+          MultiTypedResultKey.fromTable(db.menuDishesTable,
+              aliasName: $_aliasNameGenerator(
+                  db.menusTable.id, db.menuDishesTable.menuId));
+
+  $$MenuDishesTableTableProcessedTableManager get menuDishesTableRefs {
+    final manager =
+        $$MenuDishesTableTableTableManager($_db, $_db.menuDishesTable)
+            .filter((f) => f.menuId.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache =
+        $_typedResult.readTableOrNull(_menuDishesTableRefsTable($_db));
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: cache));
+  }
+}
+
+class $$MenusTableTableFilterComposer
+    extends Composer<_$LocalDatabase, $MenusTableTable> {
+  $$MenusTableTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get day => $composableBuilder(
+      column: $table.day, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get event => $composableBuilder(
+      column: $table.event, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createAt => $composableBuilder(
+      column: $table.createAt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get updateAt => $composableBuilder(
+      column: $table.updateAt, builder: (column) => ColumnFilters(column));
+
+  $$SchoolsTableTableFilterComposer get schoolId {
+    final $$SchoolsTableTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.schoolId,
+        referencedTable: $db.schoolsTable,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$SchoolsTableTableFilterComposer(
+              $db: $db,
+              $table: $db.schoolsTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+
+  Expression<bool> menuDishesTableRefs(
+      Expression<bool> Function($$MenuDishesTableTableFilterComposer f) f) {
+    final $$MenuDishesTableTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.menuDishesTable,
+        getReferencedColumn: (t) => t.menuId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$MenuDishesTableTableFilterComposer(
+              $db: $db,
+              $table: $db.menuDishesTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+}
+
+class $$MenusTableTableOrderingComposer
+    extends Composer<_$LocalDatabase, $MenusTableTable> {
+  $$MenusTableTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get day => $composableBuilder(
+      column: $table.day, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get event => $composableBuilder(
+      column: $table.event, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createAt => $composableBuilder(
+      column: $table.createAt, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get updateAt => $composableBuilder(
+      column: $table.updateAt, builder: (column) => ColumnOrderings(column));
+
+  $$SchoolsTableTableOrderingComposer get schoolId {
+    final $$SchoolsTableTableOrderingComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.schoolId,
+        referencedTable: $db.schoolsTable,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$SchoolsTableTableOrderingComposer(
+              $db: $db,
+              $table: $db.schoolsTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$MenusTableTableAnnotationComposer
+    extends Composer<_$LocalDatabase, $MenusTableTable> {
+  $$MenusTableTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get day =>
+      $composableBuilder(column: $table.day, builder: (column) => column);
+
+  GeneratedColumn<String> get event =>
+      $composableBuilder(column: $table.event, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createAt =>
+      $composableBuilder(column: $table.createAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get updateAt =>
+      $composableBuilder(column: $table.updateAt, builder: (column) => column);
+
+  $$SchoolsTableTableAnnotationComposer get schoolId {
+    final $$SchoolsTableTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.schoolId,
+        referencedTable: $db.schoolsTable,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$SchoolsTableTableAnnotationComposer(
+              $db: $db,
+              $table: $db.schoolsTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+
+  Expression<T> menuDishesTableRefs<T extends Object>(
+      Expression<T> Function($$MenuDishesTableTableAnnotationComposer a) f) {
+    final $$MenuDishesTableTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.menuDishesTable,
+        getReferencedColumn: (t) => t.menuId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$MenuDishesTableTableAnnotationComposer(
+              $db: $db,
+              $table: $db.menuDishesTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+}
+
 class $$MenusTableTableTableManager extends RootTableManager<
     _$LocalDatabase,
     $MenusTableTable,
     MenusSchema,
     $$MenusTableTableFilterComposer,
     $$MenusTableTableOrderingComposer,
+    $$MenusTableTableAnnotationComposer,
     $$MenusTableTableCreateCompanionBuilder,
-    $$MenusTableTableUpdateCompanionBuilder> {
+    $$MenusTableTableUpdateCompanionBuilder,
+    (MenusSchema, $$MenusTableTableReferences),
+    MenusSchema,
+    PrefetchHooks Function({bool schoolId, bool menuDishesTableRefs})> {
   $$MenusTableTableTableManager(_$LocalDatabase db, $MenusTableTable table)
       : super(TableManagerState(
           db: db,
           table: table,
-          filteringComposer:
-              $$MenusTableTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$MenusTableTableOrderingComposer(ComposerState(db, table)),
+          createFilteringComposer: () =>
+              $$MenusTableTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$MenusTableTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$MenusTableTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<int> id = const Value.absent(),
             Value<DateTime> day = const Value.absent(),
@@ -3755,105 +4347,78 @@ class $$MenusTableTableTableManager extends RootTableManager<
             createAt: createAt,
             updateAt: updateAt,
           ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable(table),
+                    $$MenusTableTableReferences(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: (
+              {schoolId = false, menuDishesTableRefs = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [
+                if (menuDishesTableRefs) db.menuDishesTable
+              ],
+              addJoins: <
+                  T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic>>(state) {
+                if (schoolId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.schoolId,
+                    referencedTable:
+                        $$MenusTableTableReferences._schoolIdTable(db),
+                    referencedColumn:
+                        $$MenusTableTableReferences._schoolIdTable(db).id,
+                  ) as T;
+                }
+
+                return state;
+              },
+              getPrefetchedDataCallback: (items) async {
+                return [
+                  if (menuDishesTableRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable: $$MenusTableTableReferences
+                            ._menuDishesTableRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$MenusTableTableReferences(db, table, p0)
+                                .menuDishesTableRefs,
+                        referencedItemsForCurrentItem: (item,
+                                referencedItems) =>
+                            referencedItems.where((e) => e.menuId == item.id),
+                        typedResults: items)
+                ];
+              },
+            );
+          },
         ));
 }
 
-class $$MenusTableTableFilterComposer
-    extends FilterComposer<_$LocalDatabase, $MenusTableTable> {
-  $$MenusTableTableFilterComposer(super.$state);
-  ColumnFilters<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<DateTime> get day => $state.composableBuilder(
-      column: $state.table.day,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get event => $state.composableBuilder(
-      column: $state.table.event,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<DateTime> get createAt => $state.composableBuilder(
-      column: $state.table.createAt,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<DateTime> get updateAt => $state.composableBuilder(
-      column: $state.table.updateAt,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  $$SchoolsTableTableFilterComposer get schoolId {
-    final $$SchoolsTableTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.schoolId,
-        referencedTable: $state.db.schoolsTable,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$SchoolsTableTableFilterComposer(ComposerState($state.db,
-                $state.db.schoolsTable, joinBuilder, parentComposers)));
-    return composer;
-  }
-
-  ComposableFilter menuDishesTableRefs(
-      ComposableFilter Function($$MenuDishesTableTableFilterComposer f) f) {
-    final $$MenuDishesTableTableFilterComposer composer =
-        $state.composerBuilder(
-            composer: this,
-            getCurrentColumn: (t) => t.id,
-            referencedTable: $state.db.menuDishesTable,
-            getReferencedColumn: (t) => t.menuId,
-            builder: (joinBuilder, parentComposers) =>
-                $$MenuDishesTableTableFilterComposer(ComposerState($state.db,
-                    $state.db.menuDishesTable, joinBuilder, parentComposers)));
-    return f(composer);
-  }
-}
-
-class $$MenusTableTableOrderingComposer
-    extends OrderingComposer<_$LocalDatabase, $MenusTableTable> {
-  $$MenusTableTableOrderingComposer(super.$state);
-  ColumnOrderings<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<DateTime> get day => $state.composableBuilder(
-      column: $state.table.day,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get event => $state.composableBuilder(
-      column: $state.table.event,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<DateTime> get createAt => $state.composableBuilder(
-      column: $state.table.createAt,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<DateTime> get updateAt => $state.composableBuilder(
-      column: $state.table.updateAt,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  $$SchoolsTableTableOrderingComposer get schoolId {
-    final $$SchoolsTableTableOrderingComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.schoolId,
-        referencedTable: $state.db.schoolsTable,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$SchoolsTableTableOrderingComposer(ComposerState($state.db,
-                $state.db.schoolsTable, joinBuilder, parentComposers)));
-    return composer;
-  }
-}
-
+typedef $$MenusTableTableProcessedTableManager = ProcessedTableManager<
+    _$LocalDatabase,
+    $MenusTableTable,
+    MenusSchema,
+    $$MenusTableTableFilterComposer,
+    $$MenusTableTableOrderingComposer,
+    $$MenusTableTableAnnotationComposer,
+    $$MenusTableTableCreateCompanionBuilder,
+    $$MenusTableTableUpdateCompanionBuilder,
+    (MenusSchema, $$MenusTableTableReferences),
+    MenusSchema,
+    PrefetchHooks Function({bool schoolId, bool menuDishesTableRefs})>;
 typedef $$DishesTableTableCreateCompanionBuilder = DishesTableCompanion
     Function({
   Value<int> id,
@@ -3867,22 +4432,212 @@ typedef $$DishesTableTableUpdateCompanionBuilder = DishesTableCompanion
   Value<String?> category,
 });
 
+final class $$DishesTableTableReferences
+    extends BaseReferences<_$LocalDatabase, $DishesTableTable, DishesSchema> {
+  $$DishesTableTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static MultiTypedResultKey<$MenuDishesTableTable, List<MenuDishesSchema>>
+      _menuDishesTableRefsTable(_$LocalDatabase db) =>
+          MultiTypedResultKey.fromTable(db.menuDishesTable,
+              aliasName: $_aliasNameGenerator(
+                  db.dishesTable.id, db.menuDishesTable.dishId));
+
+  $$MenuDishesTableTableProcessedTableManager get menuDishesTableRefs {
+    final manager =
+        $$MenuDishesTableTableTableManager($_db, $_db.menuDishesTable)
+            .filter((f) => f.dishId.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache =
+        $_typedResult.readTableOrNull(_menuDishesTableRefsTable($_db));
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: cache));
+  }
+
+  static MultiTypedResultKey<$DishFoodstuffsTableTable,
+      List<DishFoodstuffsSchema>> _dishFoodstuffsTableRefsTable(
+          _$LocalDatabase db) =>
+      MultiTypedResultKey.fromTable(db.dishFoodstuffsTable,
+          aliasName: $_aliasNameGenerator(
+              db.dishesTable.id, db.dishFoodstuffsTable.dishId));
+
+  $$DishFoodstuffsTableTableProcessedTableManager get dishFoodstuffsTableRefs {
+    final manager =
+        $$DishFoodstuffsTableTableTableManager($_db, $_db.dishFoodstuffsTable)
+            .filter((f) => f.dishId.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache =
+        $_typedResult.readTableOrNull(_dishFoodstuffsTableRefsTable($_db));
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: cache));
+  }
+}
+
+class $$DishesTableTableFilterComposer
+    extends Composer<_$LocalDatabase, $DishesTableTable> {
+  $$DishesTableTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get category => $composableBuilder(
+      column: $table.category, builder: (column) => ColumnFilters(column));
+
+  Expression<bool> menuDishesTableRefs(
+      Expression<bool> Function($$MenuDishesTableTableFilterComposer f) f) {
+    final $$MenuDishesTableTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.menuDishesTable,
+        getReferencedColumn: (t) => t.dishId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$MenuDishesTableTableFilterComposer(
+              $db: $db,
+              $table: $db.menuDishesTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+
+  Expression<bool> dishFoodstuffsTableRefs(
+      Expression<bool> Function($$DishFoodstuffsTableTableFilterComposer f) f) {
+    final $$DishFoodstuffsTableTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.dishFoodstuffsTable,
+        getReferencedColumn: (t) => t.dishId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$DishFoodstuffsTableTableFilterComposer(
+              $db: $db,
+              $table: $db.dishFoodstuffsTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+}
+
+class $$DishesTableTableOrderingComposer
+    extends Composer<_$LocalDatabase, $DishesTableTable> {
+  $$DishesTableTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get category => $composableBuilder(
+      column: $table.category, builder: (column) => ColumnOrderings(column));
+}
+
+class $$DishesTableTableAnnotationComposer
+    extends Composer<_$LocalDatabase, $DishesTableTable> {
+  $$DishesTableTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<String> get category =>
+      $composableBuilder(column: $table.category, builder: (column) => column);
+
+  Expression<T> menuDishesTableRefs<T extends Object>(
+      Expression<T> Function($$MenuDishesTableTableAnnotationComposer a) f) {
+    final $$MenuDishesTableTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.menuDishesTable,
+        getReferencedColumn: (t) => t.dishId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$MenuDishesTableTableAnnotationComposer(
+              $db: $db,
+              $table: $db.menuDishesTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+
+  Expression<T> dishFoodstuffsTableRefs<T extends Object>(
+      Expression<T> Function($$DishFoodstuffsTableTableAnnotationComposer a)
+          f) {
+    final $$DishFoodstuffsTableTableAnnotationComposer composer =
+        $composerBuilder(
+            composer: this,
+            getCurrentColumn: (t) => t.id,
+            referencedTable: $db.dishFoodstuffsTable,
+            getReferencedColumn: (t) => t.dishId,
+            builder: (joinBuilder,
+                    {$addJoinBuilderToRootComposer,
+                    $removeJoinBuilderFromRootComposer}) =>
+                $$DishFoodstuffsTableTableAnnotationComposer(
+                  $db: $db,
+                  $table: $db.dishFoodstuffsTable,
+                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                  joinBuilder: joinBuilder,
+                  $removeJoinBuilderFromRootComposer:
+                      $removeJoinBuilderFromRootComposer,
+                ));
+    return f(composer);
+  }
+}
+
 class $$DishesTableTableTableManager extends RootTableManager<
     _$LocalDatabase,
     $DishesTableTable,
     DishesSchema,
     $$DishesTableTableFilterComposer,
     $$DishesTableTableOrderingComposer,
+    $$DishesTableTableAnnotationComposer,
     $$DishesTableTableCreateCompanionBuilder,
-    $$DishesTableTableUpdateCompanionBuilder> {
+    $$DishesTableTableUpdateCompanionBuilder,
+    (DishesSchema, $$DishesTableTableReferences),
+    DishesSchema,
+    PrefetchHooks Function(
+        {bool menuDishesTableRefs, bool dishFoodstuffsTableRefs})> {
   $$DishesTableTableTableManager(_$LocalDatabase db, $DishesTableTable table)
       : super(TableManagerState(
           db: db,
           table: table,
-          filteringComposer:
-              $$DishesTableTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$DishesTableTableOrderingComposer(ComposerState(db, table)),
+          createFilteringComposer: () =>
+              $$DishesTableTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$DishesTableTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$DishesTableTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<int> id = const Value.absent(),
             Value<String> name = const Value.absent(),
@@ -3903,78 +4658,67 @@ class $$DishesTableTableTableManager extends RootTableManager<
             name: name,
             category: category,
           ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable(table),
+                    $$DishesTableTableReferences(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: (
+              {menuDishesTableRefs = false, dishFoodstuffsTableRefs = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [
+                if (menuDishesTableRefs) db.menuDishesTable,
+                if (dishFoodstuffsTableRefs) db.dishFoodstuffsTable
+              ],
+              addJoins: null,
+              getPrefetchedDataCallback: (items) async {
+                return [
+                  if (menuDishesTableRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable: $$DishesTableTableReferences
+                            ._menuDishesTableRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$DishesTableTableReferences(db, table, p0)
+                                .menuDishesTableRefs,
+                        referencedItemsForCurrentItem: (item,
+                                referencedItems) =>
+                            referencedItems.where((e) => e.dishId == item.id),
+                        typedResults: items),
+                  if (dishFoodstuffsTableRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable: $$DishesTableTableReferences
+                            ._dishFoodstuffsTableRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$DishesTableTableReferences(db, table, p0)
+                                .dishFoodstuffsTableRefs,
+                        referencedItemsForCurrentItem: (item,
+                                referencedItems) =>
+                            referencedItems.where((e) => e.dishId == item.id),
+                        typedResults: items)
+                ];
+              },
+            );
+          },
         ));
 }
 
-class $$DishesTableTableFilterComposer
-    extends FilterComposer<_$LocalDatabase, $DishesTableTable> {
-  $$DishesTableTableFilterComposer(super.$state);
-  ColumnFilters<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get name => $state.composableBuilder(
-      column: $state.table.name,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get category => $state.composableBuilder(
-      column: $state.table.category,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ComposableFilter menuDishesTableRefs(
-      ComposableFilter Function($$MenuDishesTableTableFilterComposer f) f) {
-    final $$MenuDishesTableTableFilterComposer composer =
-        $state.composerBuilder(
-            composer: this,
-            getCurrentColumn: (t) => t.id,
-            referencedTable: $state.db.menuDishesTable,
-            getReferencedColumn: (t) => t.dishId,
-            builder: (joinBuilder, parentComposers) =>
-                $$MenuDishesTableTableFilterComposer(ComposerState($state.db,
-                    $state.db.menuDishesTable, joinBuilder, parentComposers)));
-    return f(composer);
-  }
-
-  ComposableFilter dishFoodstuffsTableRefs(
-      ComposableFilter Function($$DishFoodstuffsTableTableFilterComposer f) f) {
-    final $$DishFoodstuffsTableTableFilterComposer composer =
-        $state.composerBuilder(
-            composer: this,
-            getCurrentColumn: (t) => t.id,
-            referencedTable: $state.db.dishFoodstuffsTable,
-            getReferencedColumn: (t) => t.dishId,
-            builder: (joinBuilder, parentComposers) =>
-                $$DishFoodstuffsTableTableFilterComposer(ComposerState(
-                    $state.db,
-                    $state.db.dishFoodstuffsTable,
-                    joinBuilder,
-                    parentComposers)));
-    return f(composer);
-  }
-}
-
-class $$DishesTableTableOrderingComposer
-    extends OrderingComposer<_$LocalDatabase, $DishesTableTable> {
-  $$DishesTableTableOrderingComposer(super.$state);
-  ColumnOrderings<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get name => $state.composableBuilder(
-      column: $state.table.name,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get category => $state.composableBuilder(
-      column: $state.table.category,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-}
-
+typedef $$DishesTableTableProcessedTableManager = ProcessedTableManager<
+    _$LocalDatabase,
+    $DishesTableTable,
+    DishesSchema,
+    $$DishesTableTableFilterComposer,
+    $$DishesTableTableOrderingComposer,
+    $$DishesTableTableAnnotationComposer,
+    $$DishesTableTableCreateCompanionBuilder,
+    $$DishesTableTableUpdateCompanionBuilder,
+    (DishesSchema, $$DishesTableTableReferences),
+    DishesSchema,
+    PrefetchHooks Function(
+        {bool menuDishesTableRefs, bool dishFoodstuffsTableRefs})>;
 typedef $$MenuDishesTableTableCreateCompanionBuilder = MenuDishesTableCompanion
     Function({
   required int menuId,
@@ -3988,23 +4732,215 @@ typedef $$MenuDishesTableTableUpdateCompanionBuilder = MenuDishesTableCompanion
   Value<int> rowid,
 });
 
+final class $$MenuDishesTableTableReferences extends BaseReferences<
+    _$LocalDatabase, $MenuDishesTableTable, MenuDishesSchema> {
+  $$MenuDishesTableTableReferences(
+      super.$_db, super.$_table, super.$_typedResult);
+
+  static $MenusTableTable _menuIdTable(_$LocalDatabase db) =>
+      db.menusTable.createAlias(
+          $_aliasNameGenerator(db.menuDishesTable.menuId, db.menusTable.id));
+
+  $$MenusTableTableProcessedTableManager get menuId {
+    final $_column = $_itemColumn<int>('menu_id')!;
+
+    final manager = $$MenusTableTableTableManager($_db, $_db.menusTable)
+        .filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_menuIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
+
+  static $DishesTableTable _dishIdTable(_$LocalDatabase db) =>
+      db.dishesTable.createAlias(
+          $_aliasNameGenerator(db.menuDishesTable.dishId, db.dishesTable.id));
+
+  $$DishesTableTableProcessedTableManager get dishId {
+    final $_column = $_itemColumn<int>('dish_id')!;
+
+    final manager = $$DishesTableTableTableManager($_db, $_db.dishesTable)
+        .filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_dishIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
+}
+
+class $$MenuDishesTableTableFilterComposer
+    extends Composer<_$LocalDatabase, $MenuDishesTableTable> {
+  $$MenuDishesTableTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  $$MenusTableTableFilterComposer get menuId {
+    final $$MenusTableTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.menuId,
+        referencedTable: $db.menusTable,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$MenusTableTableFilterComposer(
+              $db: $db,
+              $table: $db.menusTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+
+  $$DishesTableTableFilterComposer get dishId {
+    final $$DishesTableTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.dishId,
+        referencedTable: $db.dishesTable,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$DishesTableTableFilterComposer(
+              $db: $db,
+              $table: $db.dishesTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$MenuDishesTableTableOrderingComposer
+    extends Composer<_$LocalDatabase, $MenuDishesTableTable> {
+  $$MenuDishesTableTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  $$MenusTableTableOrderingComposer get menuId {
+    final $$MenusTableTableOrderingComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.menuId,
+        referencedTable: $db.menusTable,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$MenusTableTableOrderingComposer(
+              $db: $db,
+              $table: $db.menusTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+
+  $$DishesTableTableOrderingComposer get dishId {
+    final $$DishesTableTableOrderingComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.dishId,
+        referencedTable: $db.dishesTable,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$DishesTableTableOrderingComposer(
+              $db: $db,
+              $table: $db.dishesTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$MenuDishesTableTableAnnotationComposer
+    extends Composer<_$LocalDatabase, $MenuDishesTableTable> {
+  $$MenuDishesTableTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  $$MenusTableTableAnnotationComposer get menuId {
+    final $$MenusTableTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.menuId,
+        referencedTable: $db.menusTable,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$MenusTableTableAnnotationComposer(
+              $db: $db,
+              $table: $db.menusTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+
+  $$DishesTableTableAnnotationComposer get dishId {
+    final $$DishesTableTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.dishId,
+        referencedTable: $db.dishesTable,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$DishesTableTableAnnotationComposer(
+              $db: $db,
+              $table: $db.dishesTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
 class $$MenuDishesTableTableTableManager extends RootTableManager<
     _$LocalDatabase,
     $MenuDishesTableTable,
     MenuDishesSchema,
     $$MenuDishesTableTableFilterComposer,
     $$MenuDishesTableTableOrderingComposer,
+    $$MenuDishesTableTableAnnotationComposer,
     $$MenuDishesTableTableCreateCompanionBuilder,
-    $$MenuDishesTableTableUpdateCompanionBuilder> {
+    $$MenuDishesTableTableUpdateCompanionBuilder,
+    (MenuDishesSchema, $$MenuDishesTableTableReferences),
+    MenuDishesSchema,
+    PrefetchHooks Function({bool menuId, bool dishId})> {
   $$MenuDishesTableTableTableManager(
       _$LocalDatabase db, $MenuDishesTableTable table)
       : super(TableManagerState(
           db: db,
           table: table,
-          filteringComposer:
-              $$MenuDishesTableTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$MenuDishesTableTableOrderingComposer(ComposerState(db, table)),
+          createFilteringComposer: () =>
+              $$MenuDishesTableTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$MenuDishesTableTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$MenuDishesTableTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<int> menuId = const Value.absent(),
             Value<int> dishId = const Value.absent(),
@@ -4025,65 +4961,72 @@ class $$MenuDishesTableTableTableManager extends RootTableManager<
             dishId: dishId,
             rowid: rowid,
           ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable(table),
+                    $$MenuDishesTableTableReferences(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: ({menuId = false, dishId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins: <
+                  T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic>>(state) {
+                if (menuId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.menuId,
+                    referencedTable:
+                        $$MenuDishesTableTableReferences._menuIdTable(db),
+                    referencedColumn:
+                        $$MenuDishesTableTableReferences._menuIdTable(db).id,
+                  ) as T;
+                }
+                if (dishId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.dishId,
+                    referencedTable:
+                        $$MenuDishesTableTableReferences._dishIdTable(db),
+                    referencedColumn:
+                        $$MenuDishesTableTableReferences._dishIdTable(db).id,
+                  ) as T;
+                }
+
+                return state;
+              },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
         ));
 }
 
-class $$MenuDishesTableTableFilterComposer
-    extends FilterComposer<_$LocalDatabase, $MenuDishesTableTable> {
-  $$MenuDishesTableTableFilterComposer(super.$state);
-  $$MenusTableTableFilterComposer get menuId {
-    final $$MenusTableTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.menuId,
-        referencedTable: $state.db.menusTable,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$MenusTableTableFilterComposer(ComposerState($state.db,
-                $state.db.menusTable, joinBuilder, parentComposers)));
-    return composer;
-  }
-
-  $$DishesTableTableFilterComposer get dishId {
-    final $$DishesTableTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.dishId,
-        referencedTable: $state.db.dishesTable,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$DishesTableTableFilterComposer(ComposerState($state.db,
-                $state.db.dishesTable, joinBuilder, parentComposers)));
-    return composer;
-  }
-}
-
-class $$MenuDishesTableTableOrderingComposer
-    extends OrderingComposer<_$LocalDatabase, $MenuDishesTableTable> {
-  $$MenuDishesTableTableOrderingComposer(super.$state);
-  $$MenusTableTableOrderingComposer get menuId {
-    final $$MenusTableTableOrderingComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.menuId,
-        referencedTable: $state.db.menusTable,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$MenusTableTableOrderingComposer(ComposerState($state.db,
-                $state.db.menusTable, joinBuilder, parentComposers)));
-    return composer;
-  }
-
-  $$DishesTableTableOrderingComposer get dishId {
-    final $$DishesTableTableOrderingComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.dishId,
-        referencedTable: $state.db.dishesTable,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$DishesTableTableOrderingComposer(ComposerState($state.db,
-                $state.db.dishesTable, joinBuilder, parentComposers)));
-    return composer;
-  }
-}
-
+typedef $$MenuDishesTableTableProcessedTableManager = ProcessedTableManager<
+    _$LocalDatabase,
+    $MenuDishesTableTable,
+    MenuDishesSchema,
+    $$MenuDishesTableTableFilterComposer,
+    $$MenuDishesTableTableOrderingComposer,
+    $$MenuDishesTableTableAnnotationComposer,
+    $$MenuDishesTableTableCreateCompanionBuilder,
+    $$MenuDishesTableTableUpdateCompanionBuilder,
+    (MenuDishesSchema, $$MenuDishesTableTableReferences),
+    MenuDishesSchema,
+    PrefetchHooks Function({bool menuId, bool dishId})>;
 typedef $$FoodstuffsTableTableCreateCompanionBuilder = FoodstuffsTableCompanion
     Function({
   Value<int> id,
@@ -4137,23 +5080,336 @@ typedef $$FoodstuffsTableTableUpdateCompanionBuilder = FoodstuffsTableCompanion
   Value<String?> origin,
 });
 
+final class $$FoodstuffsTableTableReferences extends BaseReferences<
+    _$LocalDatabase, $FoodstuffsTableTable, FoodstuffsSchema> {
+  $$FoodstuffsTableTableReferences(
+      super.$_db, super.$_table, super.$_typedResult);
+
+  static MultiTypedResultKey<$DishFoodstuffsTableTable,
+      List<DishFoodstuffsSchema>> _dishFoodstuffsTableRefsTable(
+          _$LocalDatabase db) =>
+      MultiTypedResultKey.fromTable(db.dishFoodstuffsTable,
+          aliasName: $_aliasNameGenerator(
+              db.foodstuffsTable.id, db.dishFoodstuffsTable.foodstuffId));
+
+  $$DishFoodstuffsTableTableProcessedTableManager get dishFoodstuffsTableRefs {
+    final manager = $$DishFoodstuffsTableTableTableManager(
+            $_db, $_db.dishFoodstuffsTable)
+        .filter((f) => f.foodstuffId.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache =
+        $_typedResult.readTableOrNull(_dishFoodstuffsTableRefsTable($_db));
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: cache));
+  }
+}
+
+class $$FoodstuffsTableTableFilterComposer
+    extends Composer<_$LocalDatabase, $FoodstuffsTableTable> {
+  $$FoodstuffsTableTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get pieceNumber => $composableBuilder(
+      column: $table.pieceNumber, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get pieceUnit => $composableBuilder(
+      column: $table.pieceUnit, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get gram => $composableBuilder(
+      column: $table.gram, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get energy => $composableBuilder(
+      column: $table.energy, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get protein => $composableBuilder(
+      column: $table.protein, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get lipid => $composableBuilder(
+      column: $table.lipid, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get sodium => $composableBuilder(
+      column: $table.sodium, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get carbohydrate => $composableBuilder(
+      column: $table.carbohydrate, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get calcium => $composableBuilder(
+      column: $table.calcium, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get magnesium => $composableBuilder(
+      column: $table.magnesium, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get iron => $composableBuilder(
+      column: $table.iron, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get zinc => $composableBuilder(
+      column: $table.zinc, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get retinol => $composableBuilder(
+      column: $table.retinol, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get vitaminB1 => $composableBuilder(
+      column: $table.vitaminB1, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get vitaminB2 => $composableBuilder(
+      column: $table.vitaminB2, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get vitaminC => $composableBuilder(
+      column: $table.vitaminC, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get dietaryFiber => $composableBuilder(
+      column: $table.dietaryFiber, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get salt => $composableBuilder(
+      column: $table.salt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<bool> get isHeat => $composableBuilder(
+      column: $table.isHeat, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<bool> get isAllergy => $composableBuilder(
+      column: $table.isAllergy, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get origin => $composableBuilder(
+      column: $table.origin, builder: (column) => ColumnFilters(column));
+
+  Expression<bool> dishFoodstuffsTableRefs(
+      Expression<bool> Function($$DishFoodstuffsTableTableFilterComposer f) f) {
+    final $$DishFoodstuffsTableTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.dishFoodstuffsTable,
+        getReferencedColumn: (t) => t.foodstuffId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$DishFoodstuffsTableTableFilterComposer(
+              $db: $db,
+              $table: $db.dishFoodstuffsTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+}
+
+class $$FoodstuffsTableTableOrderingComposer
+    extends Composer<_$LocalDatabase, $FoodstuffsTableTable> {
+  $$FoodstuffsTableTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get pieceNumber => $composableBuilder(
+      column: $table.pieceNumber, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get pieceUnit => $composableBuilder(
+      column: $table.pieceUnit, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get gram => $composableBuilder(
+      column: $table.gram, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get energy => $composableBuilder(
+      column: $table.energy, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get protein => $composableBuilder(
+      column: $table.protein, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get lipid => $composableBuilder(
+      column: $table.lipid, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get sodium => $composableBuilder(
+      column: $table.sodium, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get carbohydrate => $composableBuilder(
+      column: $table.carbohydrate,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get calcium => $composableBuilder(
+      column: $table.calcium, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get magnesium => $composableBuilder(
+      column: $table.magnesium, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get iron => $composableBuilder(
+      column: $table.iron, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get zinc => $composableBuilder(
+      column: $table.zinc, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get retinol => $composableBuilder(
+      column: $table.retinol, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get vitaminB1 => $composableBuilder(
+      column: $table.vitaminB1, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get vitaminB2 => $composableBuilder(
+      column: $table.vitaminB2, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get vitaminC => $composableBuilder(
+      column: $table.vitaminC, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get dietaryFiber => $composableBuilder(
+      column: $table.dietaryFiber,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get salt => $composableBuilder(
+      column: $table.salt, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<bool> get isHeat => $composableBuilder(
+      column: $table.isHeat, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<bool> get isAllergy => $composableBuilder(
+      column: $table.isAllergy, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get origin => $composableBuilder(
+      column: $table.origin, builder: (column) => ColumnOrderings(column));
+}
+
+class $$FoodstuffsTableTableAnnotationComposer
+    extends Composer<_$LocalDatabase, $FoodstuffsTableTable> {
+  $$FoodstuffsTableTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<double> get pieceNumber => $composableBuilder(
+      column: $table.pieceNumber, builder: (column) => column);
+
+  GeneratedColumn<String> get pieceUnit =>
+      $composableBuilder(column: $table.pieceUnit, builder: (column) => column);
+
+  GeneratedColumn<double> get gram =>
+      $composableBuilder(column: $table.gram, builder: (column) => column);
+
+  GeneratedColumn<double> get energy =>
+      $composableBuilder(column: $table.energy, builder: (column) => column);
+
+  GeneratedColumn<double> get protein =>
+      $composableBuilder(column: $table.protein, builder: (column) => column);
+
+  GeneratedColumn<double> get lipid =>
+      $composableBuilder(column: $table.lipid, builder: (column) => column);
+
+  GeneratedColumn<double> get sodium =>
+      $composableBuilder(column: $table.sodium, builder: (column) => column);
+
+  GeneratedColumn<double> get carbohydrate => $composableBuilder(
+      column: $table.carbohydrate, builder: (column) => column);
+
+  GeneratedColumn<double> get calcium =>
+      $composableBuilder(column: $table.calcium, builder: (column) => column);
+
+  GeneratedColumn<double> get magnesium =>
+      $composableBuilder(column: $table.magnesium, builder: (column) => column);
+
+  GeneratedColumn<double> get iron =>
+      $composableBuilder(column: $table.iron, builder: (column) => column);
+
+  GeneratedColumn<double> get zinc =>
+      $composableBuilder(column: $table.zinc, builder: (column) => column);
+
+  GeneratedColumn<double> get retinol =>
+      $composableBuilder(column: $table.retinol, builder: (column) => column);
+
+  GeneratedColumn<double> get vitaminB1 =>
+      $composableBuilder(column: $table.vitaminB1, builder: (column) => column);
+
+  GeneratedColumn<double> get vitaminB2 =>
+      $composableBuilder(column: $table.vitaminB2, builder: (column) => column);
+
+  GeneratedColumn<double> get vitaminC =>
+      $composableBuilder(column: $table.vitaminC, builder: (column) => column);
+
+  GeneratedColumn<double> get dietaryFiber => $composableBuilder(
+      column: $table.dietaryFiber, builder: (column) => column);
+
+  GeneratedColumn<double> get salt =>
+      $composableBuilder(column: $table.salt, builder: (column) => column);
+
+  GeneratedColumn<bool> get isHeat =>
+      $composableBuilder(column: $table.isHeat, builder: (column) => column);
+
+  GeneratedColumn<bool> get isAllergy =>
+      $composableBuilder(column: $table.isAllergy, builder: (column) => column);
+
+  GeneratedColumn<String> get origin =>
+      $composableBuilder(column: $table.origin, builder: (column) => column);
+
+  Expression<T> dishFoodstuffsTableRefs<T extends Object>(
+      Expression<T> Function($$DishFoodstuffsTableTableAnnotationComposer a)
+          f) {
+    final $$DishFoodstuffsTableTableAnnotationComposer composer =
+        $composerBuilder(
+            composer: this,
+            getCurrentColumn: (t) => t.id,
+            referencedTable: $db.dishFoodstuffsTable,
+            getReferencedColumn: (t) => t.foodstuffId,
+            builder: (joinBuilder,
+                    {$addJoinBuilderToRootComposer,
+                    $removeJoinBuilderFromRootComposer}) =>
+                $$DishFoodstuffsTableTableAnnotationComposer(
+                  $db: $db,
+                  $table: $db.dishFoodstuffsTable,
+                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                  joinBuilder: joinBuilder,
+                  $removeJoinBuilderFromRootComposer:
+                      $removeJoinBuilderFromRootComposer,
+                ));
+    return f(composer);
+  }
+}
+
 class $$FoodstuffsTableTableTableManager extends RootTableManager<
     _$LocalDatabase,
     $FoodstuffsTableTable,
     FoodstuffsSchema,
     $$FoodstuffsTableTableFilterComposer,
     $$FoodstuffsTableTableOrderingComposer,
+    $$FoodstuffsTableTableAnnotationComposer,
     $$FoodstuffsTableTableCreateCompanionBuilder,
-    $$FoodstuffsTableTableUpdateCompanionBuilder> {
+    $$FoodstuffsTableTableUpdateCompanionBuilder,
+    (FoodstuffsSchema, $$FoodstuffsTableTableReferences),
+    FoodstuffsSchema,
+    PrefetchHooks Function({bool dishFoodstuffsTableRefs})> {
   $$FoodstuffsTableTableTableManager(
       _$LocalDatabase db, $FoodstuffsTableTable table)
       : super(TableManagerState(
           db: db,
           table: table,
-          filteringComposer:
-              $$FoodstuffsTableTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$FoodstuffsTableTableOrderingComposer(ComposerState(db, table)),
+          createFilteringComposer: () =>
+              $$FoodstuffsTableTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$FoodstuffsTableTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$FoodstuffsTableTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<int> id = const Value.absent(),
             Value<String> name = const Value.absent(),
@@ -4254,264 +5510,52 @@ class $$FoodstuffsTableTableTableManager extends RootTableManager<
             isAllergy: isAllergy,
             origin: origin,
           ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable(table),
+                    $$FoodstuffsTableTableReferences(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: ({dishFoodstuffsTableRefs = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [
+                if (dishFoodstuffsTableRefs) db.dishFoodstuffsTable
+              ],
+              addJoins: null,
+              getPrefetchedDataCallback: (items) async {
+                return [
+                  if (dishFoodstuffsTableRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable: $$FoodstuffsTableTableReferences
+                            ._dishFoodstuffsTableRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$FoodstuffsTableTableReferences(db, table, p0)
+                                .dishFoodstuffsTableRefs,
+                        referencedItemsForCurrentItem:
+                            (item, referencedItems) => referencedItems
+                                .where((e) => e.foodstuffId == item.id),
+                        typedResults: items)
+                ];
+              },
+            );
+          },
         ));
 }
 
-class $$FoodstuffsTableTableFilterComposer
-    extends FilterComposer<_$LocalDatabase, $FoodstuffsTableTable> {
-  $$FoodstuffsTableTableFilterComposer(super.$state);
-  ColumnFilters<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get name => $state.composableBuilder(
-      column: $state.table.name,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get pieceNumber => $state.composableBuilder(
-      column: $state.table.pieceNumber,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get pieceUnit => $state.composableBuilder(
-      column: $state.table.pieceUnit,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get gram => $state.composableBuilder(
-      column: $state.table.gram,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get energy => $state.composableBuilder(
-      column: $state.table.energy,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get protein => $state.composableBuilder(
-      column: $state.table.protein,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get lipid => $state.composableBuilder(
-      column: $state.table.lipid,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get sodium => $state.composableBuilder(
-      column: $state.table.sodium,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get carbohydrate => $state.composableBuilder(
-      column: $state.table.carbohydrate,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get calcium => $state.composableBuilder(
-      column: $state.table.calcium,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get magnesium => $state.composableBuilder(
-      column: $state.table.magnesium,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get iron => $state.composableBuilder(
-      column: $state.table.iron,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get zinc => $state.composableBuilder(
-      column: $state.table.zinc,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get retinol => $state.composableBuilder(
-      column: $state.table.retinol,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get vitaminB1 => $state.composableBuilder(
-      column: $state.table.vitaminB1,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get vitaminB2 => $state.composableBuilder(
-      column: $state.table.vitaminB2,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get vitaminC => $state.composableBuilder(
-      column: $state.table.vitaminC,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get dietaryFiber => $state.composableBuilder(
-      column: $state.table.dietaryFiber,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get salt => $state.composableBuilder(
-      column: $state.table.salt,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<bool> get isHeat => $state.composableBuilder(
-      column: $state.table.isHeat,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<bool> get isAllergy => $state.composableBuilder(
-      column: $state.table.isAllergy,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get origin => $state.composableBuilder(
-      column: $state.table.origin,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ComposableFilter dishFoodstuffsTableRefs(
-      ComposableFilter Function($$DishFoodstuffsTableTableFilterComposer f) f) {
-    final $$DishFoodstuffsTableTableFilterComposer composer =
-        $state.composerBuilder(
-            composer: this,
-            getCurrentColumn: (t) => t.id,
-            referencedTable: $state.db.dishFoodstuffsTable,
-            getReferencedColumn: (t) => t.foodstuffId,
-            builder: (joinBuilder, parentComposers) =>
-                $$DishFoodstuffsTableTableFilterComposer(ComposerState(
-                    $state.db,
-                    $state.db.dishFoodstuffsTable,
-                    joinBuilder,
-                    parentComposers)));
-    return f(composer);
-  }
-}
-
-class $$FoodstuffsTableTableOrderingComposer
-    extends OrderingComposer<_$LocalDatabase, $FoodstuffsTableTable> {
-  $$FoodstuffsTableTableOrderingComposer(super.$state);
-  ColumnOrderings<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get name => $state.composableBuilder(
-      column: $state.table.name,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get pieceNumber => $state.composableBuilder(
-      column: $state.table.pieceNumber,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get pieceUnit => $state.composableBuilder(
-      column: $state.table.pieceUnit,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get gram => $state.composableBuilder(
-      column: $state.table.gram,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get energy => $state.composableBuilder(
-      column: $state.table.energy,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get protein => $state.composableBuilder(
-      column: $state.table.protein,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get lipid => $state.composableBuilder(
-      column: $state.table.lipid,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get sodium => $state.composableBuilder(
-      column: $state.table.sodium,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get carbohydrate => $state.composableBuilder(
-      column: $state.table.carbohydrate,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get calcium => $state.composableBuilder(
-      column: $state.table.calcium,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get magnesium => $state.composableBuilder(
-      column: $state.table.magnesium,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get iron => $state.composableBuilder(
-      column: $state.table.iron,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get zinc => $state.composableBuilder(
-      column: $state.table.zinc,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get retinol => $state.composableBuilder(
-      column: $state.table.retinol,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get vitaminB1 => $state.composableBuilder(
-      column: $state.table.vitaminB1,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get vitaminB2 => $state.composableBuilder(
-      column: $state.table.vitaminB2,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get vitaminC => $state.composableBuilder(
-      column: $state.table.vitaminC,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get dietaryFiber => $state.composableBuilder(
-      column: $state.table.dietaryFiber,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get salt => $state.composableBuilder(
-      column: $state.table.salt,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<bool> get isHeat => $state.composableBuilder(
-      column: $state.table.isHeat,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<bool> get isAllergy => $state.composableBuilder(
-      column: $state.table.isAllergy,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get origin => $state.composableBuilder(
-      column: $state.table.origin,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-}
-
+typedef $$FoodstuffsTableTableProcessedTableManager = ProcessedTableManager<
+    _$LocalDatabase,
+    $FoodstuffsTableTable,
+    FoodstuffsSchema,
+    $$FoodstuffsTableTableFilterComposer,
+    $$FoodstuffsTableTableOrderingComposer,
+    $$FoodstuffsTableTableAnnotationComposer,
+    $$FoodstuffsTableTableCreateCompanionBuilder,
+    $$FoodstuffsTableTableUpdateCompanionBuilder,
+    (FoodstuffsSchema, $$FoodstuffsTableTableReferences),
+    FoodstuffsSchema,
+    PrefetchHooks Function({bool dishFoodstuffsTableRefs})>;
 typedef $$DishFoodstuffsTableTableCreateCompanionBuilder
     = DishFoodstuffsTableCompanion Function({
   required int dishId,
@@ -4525,23 +5569,218 @@ typedef $$DishFoodstuffsTableTableUpdateCompanionBuilder
   Value<int> rowid,
 });
 
+final class $$DishFoodstuffsTableTableReferences extends BaseReferences<
+    _$LocalDatabase, $DishFoodstuffsTableTable, DishFoodstuffsSchema> {
+  $$DishFoodstuffsTableTableReferences(
+      super.$_db, super.$_table, super.$_typedResult);
+
+  static $DishesTableTable _dishIdTable(_$LocalDatabase db) =>
+      db.dishesTable.createAlias($_aliasNameGenerator(
+          db.dishFoodstuffsTable.dishId, db.dishesTable.id));
+
+  $$DishesTableTableProcessedTableManager get dishId {
+    final $_column = $_itemColumn<int>('dish_id')!;
+
+    final manager = $$DishesTableTableTableManager($_db, $_db.dishesTable)
+        .filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_dishIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
+
+  static $FoodstuffsTableTable _foodstuffIdTable(_$LocalDatabase db) =>
+      db.foodstuffsTable.createAlias($_aliasNameGenerator(
+          db.dishFoodstuffsTable.foodstuffId, db.foodstuffsTable.id));
+
+  $$FoodstuffsTableTableProcessedTableManager get foodstuffId {
+    final $_column = $_itemColumn<int>('foodstuff_id')!;
+
+    final manager =
+        $$FoodstuffsTableTableTableManager($_db, $_db.foodstuffsTable)
+            .filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_foodstuffIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
+}
+
+class $$DishFoodstuffsTableTableFilterComposer
+    extends Composer<_$LocalDatabase, $DishFoodstuffsTableTable> {
+  $$DishFoodstuffsTableTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  $$DishesTableTableFilterComposer get dishId {
+    final $$DishesTableTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.dishId,
+        referencedTable: $db.dishesTable,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$DishesTableTableFilterComposer(
+              $db: $db,
+              $table: $db.dishesTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+
+  $$FoodstuffsTableTableFilterComposer get foodstuffId {
+    final $$FoodstuffsTableTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.foodstuffId,
+        referencedTable: $db.foodstuffsTable,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$FoodstuffsTableTableFilterComposer(
+              $db: $db,
+              $table: $db.foodstuffsTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$DishFoodstuffsTableTableOrderingComposer
+    extends Composer<_$LocalDatabase, $DishFoodstuffsTableTable> {
+  $$DishFoodstuffsTableTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  $$DishesTableTableOrderingComposer get dishId {
+    final $$DishesTableTableOrderingComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.dishId,
+        referencedTable: $db.dishesTable,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$DishesTableTableOrderingComposer(
+              $db: $db,
+              $table: $db.dishesTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+
+  $$FoodstuffsTableTableOrderingComposer get foodstuffId {
+    final $$FoodstuffsTableTableOrderingComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.foodstuffId,
+        referencedTable: $db.foodstuffsTable,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$FoodstuffsTableTableOrderingComposer(
+              $db: $db,
+              $table: $db.foodstuffsTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$DishFoodstuffsTableTableAnnotationComposer
+    extends Composer<_$LocalDatabase, $DishFoodstuffsTableTable> {
+  $$DishFoodstuffsTableTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  $$DishesTableTableAnnotationComposer get dishId {
+    final $$DishesTableTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.dishId,
+        referencedTable: $db.dishesTable,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$DishesTableTableAnnotationComposer(
+              $db: $db,
+              $table: $db.dishesTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+
+  $$FoodstuffsTableTableAnnotationComposer get foodstuffId {
+    final $$FoodstuffsTableTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.foodstuffId,
+        referencedTable: $db.foodstuffsTable,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$FoodstuffsTableTableAnnotationComposer(
+              $db: $db,
+              $table: $db.foodstuffsTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
 class $$DishFoodstuffsTableTableTableManager extends RootTableManager<
     _$LocalDatabase,
     $DishFoodstuffsTableTable,
     DishFoodstuffsSchema,
     $$DishFoodstuffsTableTableFilterComposer,
     $$DishFoodstuffsTableTableOrderingComposer,
+    $$DishFoodstuffsTableTableAnnotationComposer,
     $$DishFoodstuffsTableTableCreateCompanionBuilder,
-    $$DishFoodstuffsTableTableUpdateCompanionBuilder> {
+    $$DishFoodstuffsTableTableUpdateCompanionBuilder,
+    (DishFoodstuffsSchema, $$DishFoodstuffsTableTableReferences),
+    DishFoodstuffsSchema,
+    PrefetchHooks Function({bool dishId, bool foodstuffId})> {
   $$DishFoodstuffsTableTableTableManager(
       _$LocalDatabase db, $DishFoodstuffsTableTable table)
       : super(TableManagerState(
           db: db,
           table: table,
-          filteringComposer: $$DishFoodstuffsTableTableFilterComposer(
-              ComposerState(db, table)),
-          orderingComposer: $$DishFoodstuffsTableTableOrderingComposer(
-              ComposerState(db, table)),
+          createFilteringComposer: () =>
+              $$DishFoodstuffsTableTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$DishFoodstuffsTableTableOrderingComposer(
+                  $db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$DishFoodstuffsTableTableAnnotationComposer(
+                  $db: db, $table: table),
           updateCompanionCallback: ({
             Value<int> dishId = const Value.absent(),
             Value<int> foodstuffId = const Value.absent(),
@@ -4562,79 +5801,235 @@ class $$DishFoodstuffsTableTableTableManager extends RootTableManager<
             foodstuffId: foodstuffId,
             rowid: rowid,
           ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable(table),
+                    $$DishFoodstuffsTableTableReferences(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: ({dishId = false, foodstuffId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins: <
+                  T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic>>(state) {
+                if (dishId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.dishId,
+                    referencedTable:
+                        $$DishFoodstuffsTableTableReferences._dishIdTable(db),
+                    referencedColumn: $$DishFoodstuffsTableTableReferences
+                        ._dishIdTable(db)
+                        .id,
+                  ) as T;
+                }
+                if (foodstuffId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.foodstuffId,
+                    referencedTable: $$DishFoodstuffsTableTableReferences
+                        ._foodstuffIdTable(db),
+                    referencedColumn: $$DishFoodstuffsTableTableReferences
+                        ._foodstuffIdTable(db)
+                        .id,
+                  ) as T;
+                }
+
+                return state;
+              },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
         ));
 }
 
-class $$DishFoodstuffsTableTableFilterComposer
-    extends FilterComposer<_$LocalDatabase, $DishFoodstuffsTableTable> {
-  $$DishFoodstuffsTableTableFilterComposer(super.$state);
-  $$DishesTableTableFilterComposer get dishId {
-    final $$DishesTableTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.dishId,
-        referencedTable: $state.db.dishesTable,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$DishesTableTableFilterComposer(ComposerState($state.db,
-                $state.db.dishesTable, joinBuilder, parentComposers)));
-    return composer;
-  }
-
-  $$FoodstuffsTableTableFilterComposer get foodstuffId {
-    final $$FoodstuffsTableTableFilterComposer composer =
-        $state.composerBuilder(
-            composer: this,
-            getCurrentColumn: (t) => t.foodstuffId,
-            referencedTable: $state.db.foodstuffsTable,
-            getReferencedColumn: (t) => t.id,
-            builder: (joinBuilder, parentComposers) =>
-                $$FoodstuffsTableTableFilterComposer(ComposerState($state.db,
-                    $state.db.foodstuffsTable, joinBuilder, parentComposers)));
-    return composer;
-  }
-}
-
-class $$DishFoodstuffsTableTableOrderingComposer
-    extends OrderingComposer<_$LocalDatabase, $DishFoodstuffsTableTable> {
-  $$DishFoodstuffsTableTableOrderingComposer(super.$state);
-  $$DishesTableTableOrderingComposer get dishId {
-    final $$DishesTableTableOrderingComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.dishId,
-        referencedTable: $state.db.dishesTable,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$DishesTableTableOrderingComposer(ComposerState($state.db,
-                $state.db.dishesTable, joinBuilder, parentComposers)));
-    return composer;
-  }
-
-  $$FoodstuffsTableTableOrderingComposer get foodstuffId {
-    final $$FoodstuffsTableTableOrderingComposer composer =
-        $state.composerBuilder(
-            composer: this,
-            getCurrentColumn: (t) => t.foodstuffId,
-            referencedTable: $state.db.foodstuffsTable,
-            getReferencedColumn: (t) => t.id,
-            builder: (joinBuilder, parentComposers) =>
-                $$FoodstuffsTableTableOrderingComposer(ComposerState($state.db,
-                    $state.db.foodstuffsTable, joinBuilder, parentComposers)));
-    return composer;
-  }
-}
-
+typedef $$DishFoodstuffsTableTableProcessedTableManager = ProcessedTableManager<
+    _$LocalDatabase,
+    $DishFoodstuffsTableTable,
+    DishFoodstuffsSchema,
+    $$DishFoodstuffsTableTableFilterComposer,
+    $$DishFoodstuffsTableTableOrderingComposer,
+    $$DishFoodstuffsTableTableAnnotationComposer,
+    $$DishFoodstuffsTableTableCreateCompanionBuilder,
+    $$DishFoodstuffsTableTableUpdateCompanionBuilder,
+    (DishFoodstuffsSchema, $$DishFoodstuffsTableTableReferences),
+    DishFoodstuffsSchema,
+    PrefetchHooks Function({bool dishId, bool foodstuffId})>;
 typedef $$UsersTableTableCreateCompanionBuilder = UsersTableCompanion Function({
   Value<int> id,
   required String name,
   required int schoolId,
   required int schoolYear,
+  Value<DateTime?> authorizedAt,
 });
 typedef $$UsersTableTableUpdateCompanionBuilder = UsersTableCompanion Function({
   Value<int> id,
   Value<String> name,
   Value<int> schoolId,
   Value<int> schoolYear,
+  Value<DateTime?> authorizedAt,
 });
+
+final class $$UsersTableTableReferences
+    extends BaseReferences<_$LocalDatabase, $UsersTableTable, UsersSchema> {
+  $$UsersTableTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static $SchoolsTableTable _schoolIdTable(_$LocalDatabase db) =>
+      db.schoolsTable.createAlias(
+          $_aliasNameGenerator(db.usersTable.schoolId, db.schoolsTable.id));
+
+  $$SchoolsTableTableProcessedTableManager get schoolId {
+    final $_column = $_itemColumn<int>('school_id')!;
+
+    final manager = $$SchoolsTableTableTableManager($_db, $_db.schoolsTable)
+        .filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_schoolIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
+}
+
+class $$UsersTableTableFilterComposer
+    extends Composer<_$LocalDatabase, $UsersTableTable> {
+  $$UsersTableTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get schoolYear => $composableBuilder(
+      column: $table.schoolYear, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get authorizedAt => $composableBuilder(
+      column: $table.authorizedAt, builder: (column) => ColumnFilters(column));
+
+  $$SchoolsTableTableFilterComposer get schoolId {
+    final $$SchoolsTableTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.schoolId,
+        referencedTable: $db.schoolsTable,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$SchoolsTableTableFilterComposer(
+              $db: $db,
+              $table: $db.schoolsTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$UsersTableTableOrderingComposer
+    extends Composer<_$LocalDatabase, $UsersTableTable> {
+  $$UsersTableTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get schoolYear => $composableBuilder(
+      column: $table.schoolYear, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get authorizedAt => $composableBuilder(
+      column: $table.authorizedAt,
+      builder: (column) => ColumnOrderings(column));
+
+  $$SchoolsTableTableOrderingComposer get schoolId {
+    final $$SchoolsTableTableOrderingComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.schoolId,
+        referencedTable: $db.schoolsTable,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$SchoolsTableTableOrderingComposer(
+              $db: $db,
+              $table: $db.schoolsTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$UsersTableTableAnnotationComposer
+    extends Composer<_$LocalDatabase, $UsersTableTable> {
+  $$UsersTableTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<int> get schoolYear => $composableBuilder(
+      column: $table.schoolYear, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get authorizedAt => $composableBuilder(
+      column: $table.authorizedAt, builder: (column) => column);
+
+  $$SchoolsTableTableAnnotationComposer get schoolId {
+    final $$SchoolsTableTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.schoolId,
+        referencedTable: $db.schoolsTable,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$SchoolsTableTableAnnotationComposer(
+              $db: $db,
+              $table: $db.schoolsTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
 
 class $$UsersTableTableTableManager extends RootTableManager<
     _$LocalDatabase,
@@ -4642,105 +6037,106 @@ class $$UsersTableTableTableManager extends RootTableManager<
     UsersSchema,
     $$UsersTableTableFilterComposer,
     $$UsersTableTableOrderingComposer,
+    $$UsersTableTableAnnotationComposer,
     $$UsersTableTableCreateCompanionBuilder,
-    $$UsersTableTableUpdateCompanionBuilder> {
+    $$UsersTableTableUpdateCompanionBuilder,
+    (UsersSchema, $$UsersTableTableReferences),
+    UsersSchema,
+    PrefetchHooks Function({bool schoolId})> {
   $$UsersTableTableTableManager(_$LocalDatabase db, $UsersTableTable table)
       : super(TableManagerState(
           db: db,
           table: table,
-          filteringComposer:
-              $$UsersTableTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$UsersTableTableOrderingComposer(ComposerState(db, table)),
+          createFilteringComposer: () =>
+              $$UsersTableTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$UsersTableTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$UsersTableTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<int> id = const Value.absent(),
             Value<String> name = const Value.absent(),
             Value<int> schoolId = const Value.absent(),
             Value<int> schoolYear = const Value.absent(),
+            Value<DateTime?> authorizedAt = const Value.absent(),
           }) =>
               UsersTableCompanion(
             id: id,
             name: name,
             schoolId: schoolId,
             schoolYear: schoolYear,
+            authorizedAt: authorizedAt,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
             required String name,
             required int schoolId,
             required int schoolYear,
+            Value<DateTime?> authorizedAt = const Value.absent(),
           }) =>
               UsersTableCompanion.insert(
             id: id,
             name: name,
             schoolId: schoolId,
             schoolYear: schoolYear,
+            authorizedAt: authorizedAt,
           ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable(table),
+                    $$UsersTableTableReferences(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: ({schoolId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins: <
+                  T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic>>(state) {
+                if (schoolId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.schoolId,
+                    referencedTable:
+                        $$UsersTableTableReferences._schoolIdTable(db),
+                    referencedColumn:
+                        $$UsersTableTableReferences._schoolIdTable(db).id,
+                  ) as T;
+                }
+
+                return state;
+              },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
         ));
 }
 
-class $$UsersTableTableFilterComposer
-    extends FilterComposer<_$LocalDatabase, $UsersTableTable> {
-  $$UsersTableTableFilterComposer(super.$state);
-  ColumnFilters<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get name => $state.composableBuilder(
-      column: $state.table.name,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<int> get schoolYear => $state.composableBuilder(
-      column: $state.table.schoolYear,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  $$SchoolsTableTableFilterComposer get schoolId {
-    final $$SchoolsTableTableFilterComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.schoolId,
-        referencedTable: $state.db.schoolsTable,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$SchoolsTableTableFilterComposer(ComposerState($state.db,
-                $state.db.schoolsTable, joinBuilder, parentComposers)));
-    return composer;
-  }
-}
-
-class $$UsersTableTableOrderingComposer
-    extends OrderingComposer<_$LocalDatabase, $UsersTableTable> {
-  $$UsersTableTableOrderingComposer(super.$state);
-  ColumnOrderings<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get name => $state.composableBuilder(
-      column: $state.table.name,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<int> get schoolYear => $state.composableBuilder(
-      column: $state.table.schoolYear,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  $$SchoolsTableTableOrderingComposer get schoolId {
-    final $$SchoolsTableTableOrderingComposer composer = $state.composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.schoolId,
-        referencedTable: $state.db.schoolsTable,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$SchoolsTableTableOrderingComposer(ComposerState($state.db,
-                $state.db.schoolsTable, joinBuilder, parentComposers)));
-    return composer;
-  }
-}
-
+typedef $$UsersTableTableProcessedTableManager = ProcessedTableManager<
+    _$LocalDatabase,
+    $UsersTableTable,
+    UsersSchema,
+    $$UsersTableTableFilterComposer,
+    $$UsersTableTableOrderingComposer,
+    $$UsersTableTableAnnotationComposer,
+    $$UsersTableTableCreateCompanionBuilder,
+    $$UsersTableTableUpdateCompanionBuilder,
+    (UsersSchema, $$UsersTableTableReferences),
+    UsersSchema,
+    PrefetchHooks Function({bool schoolId})>;
 typedef $$DictionaryItemsTableTableCreateCompanionBuilder
     = DictionaryItemsTableCompanion Function({
   Value<int> id,
@@ -4786,23 +6182,238 @@ typedef $$DictionaryItemsTableTableUpdateCompanionBuilder
   Value<String?> note,
 });
 
+class $$DictionaryItemsTableTableFilterComposer
+    extends Composer<_$LocalDatabase, $DictionaryItemsTableTable> {
+  $$DictionaryItemsTableTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get group => $composableBuilder(
+      column: $table.group, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get energy => $composableBuilder(
+      column: $table.energy, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get protein => $composableBuilder(
+      column: $table.protein, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get lipid => $composableBuilder(
+      column: $table.lipid, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get sodium => $composableBuilder(
+      column: $table.sodium, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get carbohydrate => $composableBuilder(
+      column: $table.carbohydrate, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get calcium => $composableBuilder(
+      column: $table.calcium, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get magnesium => $composableBuilder(
+      column: $table.magnesium, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get iron => $composableBuilder(
+      column: $table.iron, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get zinc => $composableBuilder(
+      column: $table.zinc, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get retinol => $composableBuilder(
+      column: $table.retinol, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get vitaminB1 => $composableBuilder(
+      column: $table.vitaminB1, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get vitaminB2 => $composableBuilder(
+      column: $table.vitaminB2, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get vitaminC => $composableBuilder(
+      column: $table.vitaminC, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get dietaryFiber => $composableBuilder(
+      column: $table.dietaryFiber, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get salt => $composableBuilder(
+      column: $table.salt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get note => $composableBuilder(
+      column: $table.note, builder: (column) => ColumnFilters(column));
+}
+
+class $$DictionaryItemsTableTableOrderingComposer
+    extends Composer<_$LocalDatabase, $DictionaryItemsTableTable> {
+  $$DictionaryItemsTableTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get group => $composableBuilder(
+      column: $table.group, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get energy => $composableBuilder(
+      column: $table.energy, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get protein => $composableBuilder(
+      column: $table.protein, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get lipid => $composableBuilder(
+      column: $table.lipid, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get sodium => $composableBuilder(
+      column: $table.sodium, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get carbohydrate => $composableBuilder(
+      column: $table.carbohydrate,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get calcium => $composableBuilder(
+      column: $table.calcium, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get magnesium => $composableBuilder(
+      column: $table.magnesium, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get iron => $composableBuilder(
+      column: $table.iron, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get zinc => $composableBuilder(
+      column: $table.zinc, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get retinol => $composableBuilder(
+      column: $table.retinol, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get vitaminB1 => $composableBuilder(
+      column: $table.vitaminB1, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get vitaminB2 => $composableBuilder(
+      column: $table.vitaminB2, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get vitaminC => $composableBuilder(
+      column: $table.vitaminC, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get dietaryFiber => $composableBuilder(
+      column: $table.dietaryFiber,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get salt => $composableBuilder(
+      column: $table.salt, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get note => $composableBuilder(
+      column: $table.note, builder: (column) => ColumnOrderings(column));
+}
+
+class $$DictionaryItemsTableTableAnnotationComposer
+    extends Composer<_$LocalDatabase, $DictionaryItemsTableTable> {
+  $$DictionaryItemsTableTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<int> get group =>
+      $composableBuilder(column: $table.group, builder: (column) => column);
+
+  GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<double> get energy =>
+      $composableBuilder(column: $table.energy, builder: (column) => column);
+
+  GeneratedColumn<double> get protein =>
+      $composableBuilder(column: $table.protein, builder: (column) => column);
+
+  GeneratedColumn<double> get lipid =>
+      $composableBuilder(column: $table.lipid, builder: (column) => column);
+
+  GeneratedColumn<double> get sodium =>
+      $composableBuilder(column: $table.sodium, builder: (column) => column);
+
+  GeneratedColumn<double> get carbohydrate => $composableBuilder(
+      column: $table.carbohydrate, builder: (column) => column);
+
+  GeneratedColumn<double> get calcium =>
+      $composableBuilder(column: $table.calcium, builder: (column) => column);
+
+  GeneratedColumn<double> get magnesium =>
+      $composableBuilder(column: $table.magnesium, builder: (column) => column);
+
+  GeneratedColumn<double> get iron =>
+      $composableBuilder(column: $table.iron, builder: (column) => column);
+
+  GeneratedColumn<double> get zinc =>
+      $composableBuilder(column: $table.zinc, builder: (column) => column);
+
+  GeneratedColumn<double> get retinol =>
+      $composableBuilder(column: $table.retinol, builder: (column) => column);
+
+  GeneratedColumn<double> get vitaminB1 =>
+      $composableBuilder(column: $table.vitaminB1, builder: (column) => column);
+
+  GeneratedColumn<double> get vitaminB2 =>
+      $composableBuilder(column: $table.vitaminB2, builder: (column) => column);
+
+  GeneratedColumn<double> get vitaminC =>
+      $composableBuilder(column: $table.vitaminC, builder: (column) => column);
+
+  GeneratedColumn<double> get dietaryFiber => $composableBuilder(
+      column: $table.dietaryFiber, builder: (column) => column);
+
+  GeneratedColumn<double> get salt =>
+      $composableBuilder(column: $table.salt, builder: (column) => column);
+
+  GeneratedColumn<String> get note =>
+      $composableBuilder(column: $table.note, builder: (column) => column);
+}
+
 class $$DictionaryItemsTableTableTableManager extends RootTableManager<
     _$LocalDatabase,
     $DictionaryItemsTableTable,
     DictionaryItemsSchema,
     $$DictionaryItemsTableTableFilterComposer,
     $$DictionaryItemsTableTableOrderingComposer,
+    $$DictionaryItemsTableTableAnnotationComposer,
     $$DictionaryItemsTableTableCreateCompanionBuilder,
-    $$DictionaryItemsTableTableUpdateCompanionBuilder> {
+    $$DictionaryItemsTableTableUpdateCompanionBuilder,
+    (
+      DictionaryItemsSchema,
+      BaseReferences<_$LocalDatabase, $DictionaryItemsTableTable,
+          DictionaryItemsSchema>
+    ),
+    DictionaryItemsSchema,
+    PrefetchHooks Function()> {
   $$DictionaryItemsTableTableTableManager(
       _$LocalDatabase db, $DictionaryItemsTableTable table)
       : super(TableManagerState(
           db: db,
           table: table,
-          filteringComposer: $$DictionaryItemsTableTableFilterComposer(
-              ComposerState(db, table)),
-          orderingComposer: $$DictionaryItemsTableTableOrderingComposer(
-              ComposerState(db, table)),
+          createFilteringComposer: () =>
+              $$DictionaryItemsTableTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$DictionaryItemsTableTableOrderingComposer(
+                  $db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$DictionaryItemsTableTableAnnotationComposer(
+                  $db: db, $table: table),
           updateCompanionCallback: ({
             Value<int> id = const Value.absent(),
             Value<int> group = const Value.absent(),
@@ -4887,206 +6498,30 @@ class $$DictionaryItemsTableTableTableManager extends RootTableManager<
             salt: salt,
             note: note,
           ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
         ));
 }
 
-class $$DictionaryItemsTableTableFilterComposer
-    extends FilterComposer<_$LocalDatabase, $DictionaryItemsTableTable> {
-  $$DictionaryItemsTableTableFilterComposer(super.$state);
-  ColumnFilters<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<int> get group => $state.composableBuilder(
-      column: $state.table.group,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get name => $state.composableBuilder(
-      column: $state.table.name,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get energy => $state.composableBuilder(
-      column: $state.table.energy,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get protein => $state.composableBuilder(
-      column: $state.table.protein,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get lipid => $state.composableBuilder(
-      column: $state.table.lipid,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get sodium => $state.composableBuilder(
-      column: $state.table.sodium,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get carbohydrate => $state.composableBuilder(
-      column: $state.table.carbohydrate,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get calcium => $state.composableBuilder(
-      column: $state.table.calcium,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get magnesium => $state.composableBuilder(
-      column: $state.table.magnesium,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get iron => $state.composableBuilder(
-      column: $state.table.iron,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get zinc => $state.composableBuilder(
-      column: $state.table.zinc,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get retinol => $state.composableBuilder(
-      column: $state.table.retinol,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get vitaminB1 => $state.composableBuilder(
-      column: $state.table.vitaminB1,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get vitaminB2 => $state.composableBuilder(
-      column: $state.table.vitaminB2,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get vitaminC => $state.composableBuilder(
-      column: $state.table.vitaminC,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get dietaryFiber => $state.composableBuilder(
-      column: $state.table.dietaryFiber,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get salt => $state.composableBuilder(
-      column: $state.table.salt,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get note => $state.composableBuilder(
-      column: $state.table.note,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-}
-
-class $$DictionaryItemsTableTableOrderingComposer
-    extends OrderingComposer<_$LocalDatabase, $DictionaryItemsTableTable> {
-  $$DictionaryItemsTableTableOrderingComposer(super.$state);
-  ColumnOrderings<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<int> get group => $state.composableBuilder(
-      column: $state.table.group,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get name => $state.composableBuilder(
-      column: $state.table.name,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get energy => $state.composableBuilder(
-      column: $state.table.energy,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get protein => $state.composableBuilder(
-      column: $state.table.protein,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get lipid => $state.composableBuilder(
-      column: $state.table.lipid,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get sodium => $state.composableBuilder(
-      column: $state.table.sodium,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get carbohydrate => $state.composableBuilder(
-      column: $state.table.carbohydrate,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get calcium => $state.composableBuilder(
-      column: $state.table.calcium,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get magnesium => $state.composableBuilder(
-      column: $state.table.magnesium,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get iron => $state.composableBuilder(
-      column: $state.table.iron,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get zinc => $state.composableBuilder(
-      column: $state.table.zinc,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get retinol => $state.composableBuilder(
-      column: $state.table.retinol,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get vitaminB1 => $state.composableBuilder(
-      column: $state.table.vitaminB1,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get vitaminB2 => $state.composableBuilder(
-      column: $state.table.vitaminB2,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get vitaminC => $state.composableBuilder(
-      column: $state.table.vitaminC,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get dietaryFiber => $state.composableBuilder(
-      column: $state.table.dietaryFiber,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get salt => $state.composableBuilder(
-      column: $state.table.salt,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get note => $state.composableBuilder(
-      column: $state.table.note,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-}
+typedef $$DictionaryItemsTableTableProcessedTableManager
+    = ProcessedTableManager<
+        _$LocalDatabase,
+        $DictionaryItemsTableTable,
+        DictionaryItemsSchema,
+        $$DictionaryItemsTableTableFilterComposer,
+        $$DictionaryItemsTableTableOrderingComposer,
+        $$DictionaryItemsTableTableAnnotationComposer,
+        $$DictionaryItemsTableTableCreateCompanionBuilder,
+        $$DictionaryItemsTableTableUpdateCompanionBuilder,
+        (
+          DictionaryItemsSchema,
+          BaseReferences<_$LocalDatabase, $DictionaryItemsTableTable,
+              DictionaryItemsSchema>
+        ),
+        DictionaryItemsSchema,
+        PrefetchHooks Function()>;
 
 class $LocalDatabaseManager {
   final _$LocalDatabase _db;
@@ -5113,7 +6548,7 @@ class $LocalDatabaseManager {
 // RiverpodGenerator
 // **************************************************************************
 
-String _$localDatabaseHash() => r'7fc59fd746d4d230c41f4608259788260f0b95bf';
+String _$localDatabaseHash() => r'85a394115a4fcf2e1aa60a7d7be49fa0afd3a743';
 
 /// See also [localDatabase].
 @ProviderFor(localDatabase)
@@ -5127,6 +6562,8 @@ final localDatabaseProvider = Provider<LocalDatabase>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef LocalDatabaseRef = ProviderRef<LocalDatabase>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

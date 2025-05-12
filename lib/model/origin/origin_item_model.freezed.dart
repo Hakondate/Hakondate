@@ -19,7 +19,9 @@ mixin _$OriginItemModel {
   String get name => throw _privateConstructorUsedError;
   List<String> get prefectures => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of OriginItemModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $OriginItemModelCopyWith<OriginItemModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -43,6 +45,8 @@ class _$OriginItemModelCopyWithImpl<$Res, $Val extends OriginItemModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of OriginItemModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,6 +85,8 @@ class __$$OriginItemModelImplCopyWithImpl<$Res>
       _$OriginItemModelImpl _value, $Res Function(_$OriginItemModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of OriginItemModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -137,7 +143,9 @@ class _$OriginItemModelImpl extends _OriginItemModel {
   int get hashCode => Object.hash(
       runtimeType, name, const DeepCollectionEquality().hash(_prefectures));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of OriginItemModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$OriginItemModelImplCopyWith<_$OriginItemModelImpl> get copyWith =>
@@ -155,8 +163,11 @@ abstract class _OriginItemModel extends OriginItemModel {
   String get name;
   @override
   List<String> get prefectures;
+
+  /// Create a copy of OriginItemModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$OriginItemModelImplCopyWith<_$OriginItemModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

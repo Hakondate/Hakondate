@@ -6,7 +6,24 @@ part of 'user_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userViewModelHash() => r'1aa6940d7df4473e2c746e94ec46e31171c39edf';
+String _$userAuthorizedHash() => r'522577a8a4f15d312ff72e4b63b851f9ec58fff8';
+
+/// See also [userAuthorized].
+@ProviderFor(userAuthorized)
+final userAuthorizedProvider = FutureProvider<bool>.internal(
+  userAuthorized,
+  name: r'userAuthorizedProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$userAuthorizedHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef UserAuthorizedRef = FutureProviderRef<bool>;
+String _$userViewModelHash() => r'4b29469389fc1cb5dd6a5c4b37132857021c103d';
 
 /// See also [UserViewModel].
 @ProviderFor(UserViewModel)
@@ -23,4 +40,4 @@ final userViewModelProvider =
 
 typedef _$UserViewModel = Notifier<UserState>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

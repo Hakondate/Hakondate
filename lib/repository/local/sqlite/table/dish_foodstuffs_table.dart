@@ -9,6 +9,7 @@ class DishFoodstuffsTable extends Table {
   IntColumn get foodstuffId => integer().references(FoodstuffsTable, #id)();
 
   @override
+  // 説明
   // ignore: always_specify_types
   Set<Column> get primaryKey => {dishId, foodstuffId};
 }

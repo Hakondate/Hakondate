@@ -7,7 +7,7 @@ part of 'letters_remote_repository.dart';
 // **************************************************************************
 
 String _$lettersRemoteRepositoryHash() =>
-    r'c21ff9f1e905c4e02f6502f995b1ee31839c9250';
+    r'b8fad8b9eafca9aaa96c29726f927f75188ebda5';
 
 /// See also [lettersRemoteRepository].
 @ProviderFor(lettersRemoteRepository)
@@ -22,6 +22,8 @@ final lettersRemoteRepositoryProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef LettersRemoteRepositoryRef = ProviderRef<LettersRemoteRepository>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
