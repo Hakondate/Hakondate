@@ -19,7 +19,9 @@ mixin _$UserSettingsState {
   List<UserModel>? get users => throw _privateConstructorUsedError;
   UserModel? get editingUser => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserSettingsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UserSettingsStateCopyWith<UserSettingsState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -45,6 +47,8 @@ class _$UserSettingsStateCopyWithImpl<$Res, $Val extends UserSettingsState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UserSettingsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -63,6 +67,8 @@ class _$UserSettingsStateCopyWithImpl<$Res, $Val extends UserSettingsState>
     ) as $Val);
   }
 
+  /// Create a copy of UserSettingsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserModelCopyWith<$Res>? get editingUser {
@@ -98,6 +104,8 @@ class __$$UserSettingsStateImplCopyWithImpl<$Res>
       $Res Function(_$UserSettingsStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserSettingsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -156,7 +164,9 @@ class _$UserSettingsStateImpl implements _UserSettingsState {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_users), editingUser);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserSettingsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserSettingsStateImplCopyWith<_$UserSettingsStateImpl> get copyWith =>
@@ -173,8 +183,11 @@ abstract class _UserSettingsState implements UserSettingsState {
   List<UserModel>? get users;
   @override
   UserModel? get editingUser;
+
+  /// Create a copy of UserSettingsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserSettingsStateImplCopyWith<_$UserSettingsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

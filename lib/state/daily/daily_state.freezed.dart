@@ -25,7 +25,9 @@ mixin _$DailyState {
   MenuModel get menu => throw _privateConstructorUsedError;
   DishModel? get selectedDish => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DailyState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DailyStateCopyWith<DailyState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -59,6 +61,8 @@ class _$DailyStateCopyWithImpl<$Res, $Val extends DailyState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DailyState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -102,6 +106,8 @@ class _$DailyStateCopyWithImpl<$Res, $Val extends DailyState>
     ) as $Val);
   }
 
+  /// Create a copy of DailyState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $MenuModelCopyWith<$Res> get menu {
@@ -110,6 +116,8 @@ class _$DailyStateCopyWithImpl<$Res, $Val extends DailyState>
     });
   }
 
+  /// Create a copy of DailyState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DishModelCopyWith<$Res>? get selectedDish {
@@ -154,6 +162,8 @@ class __$$DailyStateImplCopyWithImpl<$Res>
       _$DailyStateImpl _value, $Res Function(_$DailyStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DailyState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -286,7 +296,9 @@ class _$DailyStateImpl with DiagnosticableTreeMixin implements _DailyState {
       menu,
       selectedDish);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DailyState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DailyStateImplCopyWith<_$DailyStateImpl> get copyWith =>
@@ -318,8 +330,11 @@ abstract class _DailyState implements DailyState {
   MenuModel get menu;
   @override
   DishModel? get selectedDish;
+
+  /// Create a copy of DailyState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DailyStateImplCopyWith<_$DailyStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

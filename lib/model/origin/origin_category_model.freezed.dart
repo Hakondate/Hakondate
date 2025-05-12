@@ -19,7 +19,9 @@ mixin _$OriginCategoryModel {
   String get name => throw _privateConstructorUsedError;
   List<OriginItemModel> get items => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of OriginCategoryModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $OriginCategoryModelCopyWith<OriginCategoryModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -43,6 +45,8 @@ class _$OriginCategoryModelCopyWithImpl<$Res, $Val extends OriginCategoryModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of OriginCategoryModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,6 +85,8 @@ class __$$OriginCategoryModelImplCopyWithImpl<$Res>
       $Res Function(_$OriginCategoryModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of OriginCategoryModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -136,7 +142,9 @@ class _$OriginCategoryModelImpl extends _OriginCategoryModel {
   int get hashCode => Object.hash(
       runtimeType, name, const DeepCollectionEquality().hash(_items));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of OriginCategoryModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$OriginCategoryModelImplCopyWith<_$OriginCategoryModelImpl> get copyWith =>
@@ -154,8 +162,11 @@ abstract class _OriginCategoryModel extends OriginCategoryModel {
   String get name;
   @override
   List<OriginItemModel> get items;
+
+  /// Create a copy of OriginCategoryModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$OriginCategoryModelImplCopyWith<_$OriginCategoryModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

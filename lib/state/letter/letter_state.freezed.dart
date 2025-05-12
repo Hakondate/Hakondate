@@ -23,7 +23,9 @@ mixin _$LetterState {
   bool get isEndListing => throw _privateConstructorUsedError;
   String? get pageToken => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of LetterState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $LetterStateCopyWith<LetterState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,6 +54,8 @@ class _$LetterStateCopyWithImpl<$Res, $Val extends LetterState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of LetterState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -110,6 +114,8 @@ class __$$LetterStateImplCopyWithImpl<$Res>
       _$LetterStateImpl _value, $Res Function(_$LetterStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of LetterState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -216,7 +222,9 @@ class _$LetterStateImpl with DiagnosticableTreeMixin implements _LetterState {
       isEndListing,
       pageToken);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of LetterState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LetterStateImplCopyWith<_$LetterStateImpl> get copyWith =>
@@ -241,8 +249,11 @@ abstract class _LetterState implements LetterState {
   bool get isEndListing;
   @override
   String? get pageToken;
+
+  /// Create a copy of LetterState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LetterStateImplCopyWith<_$LetterStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

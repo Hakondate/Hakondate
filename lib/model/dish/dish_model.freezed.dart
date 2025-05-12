@@ -25,7 +25,9 @@ mixin _$DishModel {
   /// 分類
   DishCategory? get category => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DishModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DishModelCopyWith<DishModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +51,8 @@ class _$DishModelCopyWithImpl<$Res, $Val extends DishModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DishModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -93,6 +97,8 @@ class __$$DishModelImplCopyWithImpl<$Res>
       _$DishModelImpl _value, $Res Function(_$DishModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DishModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -167,7 +173,9 @@ class _$DishModelImpl extends _DishModel {
   int get hashCode => Object.hash(runtimeType, name,
       const DeepCollectionEquality().hash(_foodstuffs), category);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DishModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DishModelImplCopyWith<_$DishModelImpl> get copyWith =>
@@ -181,20 +189,22 @@ abstract class _DishModel extends DishModel {
       final DishCategory? category}) = _$DishModelImpl;
   const _DishModel._() : super._();
 
-  @override
-
   /// 料理名
-  String get name;
   @override
+  String get name;
 
   /// 食材
-  List<FoodstuffModel> get foodstuffs;
   @override
+  List<FoodstuffModel> get foodstuffs;
 
   /// 分類
-  DishCategory? get category;
   @override
-  @JsonKey(ignore: true)
+  DishCategory? get category;
+
+  /// Create a copy of DishModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DishModelImplCopyWith<_$DishModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

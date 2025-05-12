@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:hakondate/model/menu/menu_model.dart';
@@ -9,7 +10,7 @@ import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
 part 'daily_graph_view_model.g.dart';
 
 @riverpod
-Future<List<double>> graphValues(GraphValuesRef ref) async {
+Future<List<double>> graphValues(Ref ref) async {
   final NutrientsModel? slns = ref.watch(userViewModelProvider).currentUser!.slns;
   final AsyncValue<DailyState> data = ref.watch(dailyViewModelProvider);
 
@@ -41,7 +42,7 @@ Future<List<double>> graphValues(GraphValuesRef ref) async {
 }
 
 @riverpod
-List<double> graphRawValues(GraphRawValuesRef ref) {
+List<double> graphRawValues(Ref ref) {
   final AsyncValue<DailyState> data = ref.watch(dailyViewModelProvider);
 
   if (data is! AsyncData<DailyState>) {

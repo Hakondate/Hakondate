@@ -19,7 +19,9 @@ mixin _$PieceModel {
   double get number => throw _privateConstructorUsedError;
   String get unit => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PieceModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PieceModelCopyWith<PieceModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -43,6 +45,8 @@ class _$PieceModelCopyWithImpl<$Res, $Val extends PieceModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PieceModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,6 +85,8 @@ class __$$PieceModelImplCopyWithImpl<$Res>
       _$PieceModelImpl _value, $Res Function(_$PieceModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PieceModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -128,7 +134,9 @@ class _$PieceModelImpl implements _PieceModel {
   @override
   int get hashCode => Object.hash(runtimeType, number, unit);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PieceModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PieceModelImplCopyWith<_$PieceModelImpl> get copyWith =>
@@ -143,8 +151,11 @@ abstract class _PieceModel implements PieceModel {
   double get number;
   @override
   String get unit;
+
+  /// Create a copy of PieceModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PieceModelImplCopyWith<_$PieceModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

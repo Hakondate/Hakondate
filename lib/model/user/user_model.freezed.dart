@@ -33,7 +33,9 @@ mixin _$UserModel {
   /// 認可された日
   DateTime? get authorizedAt => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UserModelCopyWith<UserModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -64,6 +66,8 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UserModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -102,6 +106,8 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     ) as $Val);
   }
 
+  /// Create a copy of UserModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $NutrientsModelCopyWith<$Res>? get slns {
@@ -143,6 +149,8 @@ class __$$UserModelImplCopyWithImpl<$Res>
       _$UserModelImpl _value, $Res Function(_$UserModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -242,7 +250,9 @@ class _$UserModelImpl extends _UserModel {
   int get hashCode => Object.hash(
       runtimeType, id, name, schoolId, schoolYear, slns, authorizedAt);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserModelImplCopyWith<_$UserModelImpl> get copyWith =>
@@ -261,28 +271,31 @@ abstract class _UserModel extends UserModel {
 
   @override
   int get id;
-  @override
 
   /// 名前
-  String get name;
   @override
+  String get name;
 
   /// 学校ID
-  int get schoolId;
   @override
+  int get schoolId;
 
   /// 学年
-  int get schoolYear;
   @override
+  int get schoolYear;
 
   /// 学校給食摂取基準
-  NutrientsModel? get slns;
   @override
+  NutrientsModel? get slns;
 
   /// 認可された日
-  DateTime? get authorizedAt;
   @override
-  @JsonKey(ignore: true)
+  DateTime? get authorizedAt;
+
+  /// Create a copy of UserModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserModelImplCopyWith<_$UserModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

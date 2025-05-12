@@ -18,7 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TermsState {
   bool get isAgree => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TermsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TermsStateCopyWith<TermsState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -42,6 +44,8 @@ class _$TermsStateCopyWithImpl<$Res, $Val extends TermsState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TermsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -75,6 +79,8 @@ class __$$TermsStateImplCopyWithImpl<$Res>
       _$TermsStateImpl _value, $Res Function(_$TermsStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TermsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -122,7 +128,9 @@ class _$TermsStateImpl with DiagnosticableTreeMixin implements _TermsState {
   @override
   int get hashCode => Object.hash(runtimeType, isAgree);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TermsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TermsStateImplCopyWith<_$TermsStateImpl> get copyWith =>
@@ -134,8 +142,11 @@ abstract class _TermsState implements TermsState {
 
   @override
   bool get isAgree;
+
+  /// Create a copy of TermsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TermsStateImplCopyWith<_$TermsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

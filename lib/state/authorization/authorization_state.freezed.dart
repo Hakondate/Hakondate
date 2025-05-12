@@ -20,7 +20,9 @@ mixin _$AuthorizationState {
   String get authorizationKey => throw _privateConstructorUsedError;
   String get statusMessage => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthorizationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AuthorizationStateCopyWith<AuthorizationState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -47,6 +49,8 @@ class _$AuthorizationStateCopyWithImpl<$Res, $Val extends AuthorizationState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AuthorizationState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -70,6 +74,8 @@ class _$AuthorizationStateCopyWithImpl<$Res, $Val extends AuthorizationState>
     ) as $Val);
   }
 
+  /// Create a copy of AuthorizationState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $SchoolModelCopyWith<$Res> get school {
@@ -102,6 +108,8 @@ class __$$AuthorizationStateImplCopyWithImpl<$Res>
       $Res Function(_$AuthorizationStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AuthorizationState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -164,7 +172,9 @@ class _$AuthorizationStateImpl implements _AuthorizationState {
   int get hashCode =>
       Object.hash(runtimeType, school, authorizationKey, statusMessage);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthorizationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AuthorizationStateImplCopyWith<_$AuthorizationStateImpl> get copyWith =>
@@ -184,8 +194,11 @@ abstract class _AuthorizationState implements AuthorizationState {
   String get authorizationKey;
   @override
   String get statusMessage;
+
+  /// Create a copy of AuthorizationState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AuthorizationStateImplCopyWith<_$AuthorizationStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

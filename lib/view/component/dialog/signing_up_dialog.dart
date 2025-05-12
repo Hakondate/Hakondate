@@ -80,6 +80,8 @@ class SigningUpDialog extends ConsumerWidget {
           }
           await routemaster.pop().whenComplete(
                 () async => showDialog(
+                  // 説明
+                  // ignore: use_build_context_synchronously
                   context: context,
                   barrierDismissible: false,
                   builder: (BuildContext context) => _statusDialog(),

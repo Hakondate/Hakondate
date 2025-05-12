@@ -89,6 +89,9 @@ class _$MenuModelCopyWithImpl<$Res, $Val extends MenuModel>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of MenuModel
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -113,6 +116,8 @@ class __$$LunchesDayMenuModelImplCopyWithImpl<$Res>
       $Res Function(_$LunchesDayMenuModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MenuModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -198,7 +203,9 @@ class _$LunchesDayMenuModelImpl extends LunchesDayMenuModel {
   int get hashCode => Object.hash(runtimeType, id, day, schoolId,
       const DeepCollectionEquality().hash(_dishes), event);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MenuModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LunchesDayMenuModelImplCopyWith<_$LunchesDayMenuModelImpl> get copyWith =>
@@ -300,7 +307,10 @@ abstract class LunchesDayMenuModel extends MenuModel {
   int get schoolId;
   List<DishModel> get dishes;
   String? get event;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of MenuModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LunchesDayMenuModelImplCopyWith<_$LunchesDayMenuModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -319,6 +329,9 @@ class __$$HolidayMenuModelImplCopyWithImpl<$Res>
   __$$HolidayMenuModelImplCopyWithImpl(_$HolidayMenuModelImpl _value,
       $Res Function(_$HolidayMenuModelImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of MenuModel
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -440,6 +453,9 @@ class __$$NoDataMenuModelImplCopyWithImpl<$Res>
   __$$NoDataMenuModelImplCopyWithImpl(
       _$NoDataMenuModelImpl _value, $Res Function(_$NoDataMenuModelImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of MenuModel
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -562,6 +578,9 @@ class __$$UnauthorizedMenuModelImplCopyWithImpl<$Res>
   __$$UnauthorizedMenuModelImplCopyWithImpl(_$UnauthorizedMenuModelImpl _value,
       $Res Function(_$UnauthorizedMenuModelImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of MenuModel
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

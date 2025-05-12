@@ -7,7 +7,7 @@ part of 'schools_local_repository.dart';
 // **************************************************************************
 
 String _$schoolsLocalRepositoryHash() =>
-    r'7c57ba6c9362d9ecd354c62d516d5f20357a0669';
+    r'61dbe4070a100d1b64ecb8f5b66393c0662624e1';
 
 /// See also [schoolsLocalRepository].
 @ProviderFor(schoolsLocalRepository)
@@ -22,6 +22,8 @@ final schoolsLocalRepositoryProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef SchoolsLocalRepositoryRef = ProviderRef<SchoolsLocalRepository>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
