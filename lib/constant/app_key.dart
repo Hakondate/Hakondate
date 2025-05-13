@@ -10,4 +10,6 @@ class _SharedPreferencesKey {
   final String agreedTermsDay = 'agreed_terms_day';
   final String initializedDictionaryDay = 'initialized_dictionary_day';
   final String currentUserId = 'current_user_id';
+  final String appOpenCount = 'app_open_count';
+  final String usageTimeInMin = 'usage_time_in_min';
 }
