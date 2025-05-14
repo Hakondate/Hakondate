@@ -16,7 +16,14 @@ class SubmitButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<SignupState> signupState = ref.watch(signupViewModelProvider);
-    bool authorizationRequired = !(signupState is AsyncData<SignupState> && signupState.value.authorized);
+
+    final bool isEditing = ref.read(userSettingsViewModelProvider).value!.editingUser != null;
+    final int schoolIdInForm = signupState.value?.school?.id ?? -1;
+    final int schoolIdInUserSettings = ref.read(userSettingsViewModelProvider).value?.editingUser?.schoolId ?? -2;
+    final bool isSchoolIdChanged = schoolIdInForm != schoolIdInUserSettings;
+    final bool isNotAuthorized = !(signupState is AsyncData<SignupState> && signupState.value.authorized);
+
+    final bool authorizationRequired = isNotAuthorized && (!isEditing || isSchoolIdChanged);
 
     return Padding(
       padding: const EdgeInsets.all(PaddingSize.normal),
@@ -36,11 +43,6 @@ class SubmitButton extends ConsumerWidget {
             child: authorizationRequired ? const Text('次へ') : const Text('登録する'),
             onPressed: () async {
               if (ref.read(signupViewModelProvider.notifier).checkValidation()) {
-                final bool isEditing = ref.read(userSettingsViewModelProvider).value!.editingUser != null;
-                if (isEditing && authorizationRequired) {
-                  final int currentSchoolId = ref.read(userSettingsViewModelProvider).value!.editingUser!.schoolId;
-                  authorizationRequired = currentSchoolId != ref.read(signupViewModelProvider).value!.school!.id;
-                }
                 if (authorizationRequired) {
                   routemaster.push('authorization');
                   return;
