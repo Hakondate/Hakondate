@@ -96,6 +96,13 @@ class HelpFrame extends StatelessWidget {
         ),
       );
 
+  factory HelpFrame.changemenu() => HelpFrame(
+        label: '献立情報の変更について',
+        content: DescriptionText.body(
+          label: '　物資納入の都合により．食材の準備の関係でメニューが変更になる場合があります．その場合はこのアプリに反映されません．ご了承ください．',
+        ),
+      );
+
   factory HelpFrame.updateCycle() => HelpFrame(
         label: '更新頻度',
         content: DescriptionText.body(
@@ -147,14 +154,28 @@ class HelpFrame extends StatelessWidget {
         content: Column(
           children: <Widget>[
             DescriptionText.body(
-              label: '　別日の献立が知りたい場合は献立リストを使用します．献立画面右上にあるカレンダーアイコンをタップすることで献立リスト画面に遷移できます．',
+              label: '　別日の献立が知りたい場合は献立リストを使用します．こんだて画面右上にあるカレンダーアイコンをタップすることで献立リスト画面に遷移することができます．',
               isZeroBottomPadding: true,
             ),
             _iconWithText('献立リストアイコン', Icons.calendar_today_outlined),
             DescriptionText.body(
               label: '　画面を上下にスクロールし，該当日をタップすることで別日の献立を閲覧することができます．\n'
-                  '　また，ホーム画面上部の日付バーから日付を選択することでも，別日の献立を閲覧することができます．',
+                  '　また，こんだて画面上部の日付バーから日付を選択することでも，別日の献立を閲覧することができます．',
             ),
+          ],
+        ),
+      );
+
+  factory HelpFrame.menuIcon() => HelpFrame(
+        label: 'メニュー画面',
+        content: Column(
+          children: <Widget>[
+            DescriptionText.body(
+              label: '　こんだて画面左上にあるメニューアイコンをタップすることでメニュー画面に遷移することができます．',
+              isZeroBottomPadding: true,
+            ),
+            _iconWithText('メニューアイコン', Icons.dehaze),
+            const SizedBox(height: SpaceSize.paragraph),
           ],
         ),
       );
@@ -164,12 +185,23 @@ class HelpFrame extends StatelessWidget {
         content: Column(
           children: <Widget>[
             DescriptionText.body(
-              label: '　給食で利用されている食材の原産地を知りたい場合は，ドロワーから産地情報を閲覧する画面に遷移することができます．'
-                  'ドロワーは，こんだて画面で左上にあるドロワーアイコンをタップ又は，左端から右へ画面をスワイプすることで表示させることができます．',
+              label: '　給食で利用されている食材の原産地を知りたい場合は，アプリ内メニューの「産地情報」から産地情報を閲覧することができます．\n',
               isZeroBottomPadding: true,
             ),
-            _iconWithText('ドロワーアイコン', Icons.dehaze),
-            const SizedBox(height: SpaceSize.paragraph),
+          ],
+        ),
+      );
+
+  factory HelpFrame.contact() => HelpFrame(
+        label: 'お問い合わせ',
+        content: Column(
+          children: <Widget>[
+            DescriptionText.body(
+              label:
+                  '　このアプリに関するご質問やご意見は，アプリ開発チームまでご連絡ください．学校関係者様はお問い合わせに対応しておりませんので，ご了承ください．ご連絡は，アプリ内メニューの「ご意見・お問い合わせ」または下記のメールアドレスよりお願いいたします．\n'
+                  '　editorhakondate@gmail.com\n',
+              isZeroBottomPadding: true,
+            ),
           ],
         ),
       );
