@@ -16,8 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AppStaticsState {
-  int get usageTimeInMin => throw _privateConstructorUsedError;
-  int get openCount => throw _privateConstructorUsedError;
+  int? get usageTimeInMin => throw _privateConstructorUsedError;
+  int? get openCount => throw _privateConstructorUsedError;
 
   /// Create a copy of AppStaticsState
   /// with the given fields replaced by the non-null parameter values.
@@ -32,7 +32,7 @@ abstract class $AppStaticsStateCopyWith<$Res> {
           AppStaticsState value, $Res Function(AppStaticsState) then) =
       _$AppStaticsStateCopyWithImpl<$Res, AppStaticsState>;
   @useResult
-  $Res call({int usageTimeInMin, int openCount});
+  $Res call({int? usageTimeInMin, int? openCount});
 }
 
 /// @nodoc
@@ -50,18 +50,18 @@ class _$AppStaticsStateCopyWithImpl<$Res, $Val extends AppStaticsState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? usageTimeInMin = null,
-    Object? openCount = null,
+    Object? usageTimeInMin = freezed,
+    Object? openCount = freezed,
   }) {
     return _then(_value.copyWith(
-      usageTimeInMin: null == usageTimeInMin
+      usageTimeInMin: freezed == usageTimeInMin
           ? _value.usageTimeInMin
           : usageTimeInMin // ignore: cast_nullable_to_non_nullable
-              as int,
-      openCount: null == openCount
+              as int?,
+      openCount: freezed == openCount
           ? _value.openCount
           : openCount // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ) as $Val);
   }
 }
@@ -74,7 +74,7 @@ abstract class _$$AppStaticsStateImplCopyWith<$Res>
       __$$AppStaticsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int usageTimeInMin, int openCount});
+  $Res call({int? usageTimeInMin, int? openCount});
 }
 
 /// @nodoc
@@ -90,18 +90,18 @@ class __$$AppStaticsStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? usageTimeInMin = null,
-    Object? openCount = null,
+    Object? usageTimeInMin = freezed,
+    Object? openCount = freezed,
   }) {
     return _then(_$AppStaticsStateImpl(
-      usageTimeInMin: null == usageTimeInMin
+      usageTimeInMin: freezed == usageTimeInMin
           ? _value.usageTimeInMin
           : usageTimeInMin // ignore: cast_nullable_to_non_nullable
-              as int,
-      openCount: null == openCount
+              as int?,
+      openCount: freezed == openCount
           ? _value.openCount
           : openCount // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -111,14 +111,12 @@ class __$$AppStaticsStateImplCopyWithImpl<$Res>
 class _$AppStaticsStateImpl
     with DiagnosticableTreeMixin
     implements _AppStaticsState {
-  const _$AppStaticsStateImpl({this.usageTimeInMin = 0, this.openCount = 0});
+  const _$AppStaticsStateImpl({this.usageTimeInMin, this.openCount});
 
   @override
-  @JsonKey()
-  final int usageTimeInMin;
+  final int? usageTimeInMin;
   @override
-  @JsonKey()
-  final int openCount;
+  final int? openCount;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -160,12 +158,13 @@ class _$AppStaticsStateImpl
 
 abstract class _AppStaticsState implements AppStaticsState {
   const factory _AppStaticsState(
-      {final int usageTimeInMin, final int openCount}) = _$AppStaticsStateImpl;
+      {final int? usageTimeInMin,
+      final int? openCount}) = _$AppStaticsStateImpl;
 
   @override
-  int get usageTimeInMin;
+  int? get usageTimeInMin;
   @override
-  int get openCount;
+  int? get openCount;
 
   /// Create a copy of AppStaticsState
   /// with the given fields replaced by the non-null parameter values.

@@ -8,5 +8,5 @@ part 'app_statics_state.freezed.dart';
 
 @freezed
 class AppStaticsState with _$AppStaticsState {
-  const factory AppStaticsState({@Default(0) int usageTimeInMin, @Default(0) int openCount}) = _AppStaticsState;
+  const factory AppStaticsState({int? usageTimeInMin, int? openCount}) = _AppStaticsState;
 }
