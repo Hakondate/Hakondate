@@ -96,7 +96,7 @@ class HelpFrame extends StatelessWidget {
         ),
       );
 
-  factory HelpFrame.changemenu() => HelpFrame(
+  factory HelpFrame.changeMenu() => HelpFrame(
         label: '献立情報の変更について',
         content: DescriptionText.body(
           label: '　物資納入の都合により．食材の準備の関係でメニューが変更になる場合があります．その場合はこのアプリに反映されません．ご了承ください．',
@@ -166,7 +166,7 @@ class HelpFrame extends StatelessWidget {
         ),
       );
 
-  factory HelpFrame.menuIcon() => HelpFrame(
+  factory HelpFrame.menuScreen() => HelpFrame(
         label: 'メニュー画面',
         content: Column(
           children: <Widget>[

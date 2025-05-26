@@ -38,10 +38,10 @@ class Daily extends StatelessWidget {
           HelpButton(
             helpFrame: <HelpFrame>[
               HelpFrame.misprint(),
-              HelpFrame.changemenu(),
+              HelpFrame.changeMenu(),
               HelpFrame.menuList(),
               HelpFrame.contact(),
-              HelpFrame.menuIcon(),
+              HelpFrame.menuScreen(),
             ],
             key: key,
           ),

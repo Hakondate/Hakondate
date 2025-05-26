@@ -49,7 +49,7 @@ class MenuCard extends StatelessWidget {
                           helpFrame: <HelpFrame>[
                             HelpFrame.dishDetail(),
                             HelpFrame.origin(),
-                            HelpFrame.menuIcon(),
+                            HelpFrame.menuScreen(),
                           ],
                           key: key,
                         ),
