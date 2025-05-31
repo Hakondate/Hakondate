@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:hakondate/state/app_statics/app_statics_state.dart';
+import 'package:routemaster/routemaster.dart';
 
 class ReviewPopup extends StatelessWidget {
   const ReviewPopup({super.key});
@@ -10,7 +11,7 @@ class ReviewPopup extends StatelessWidget {
     // if (appStaticsState.openCount >= 5 &&
     //     appStaticsState.usageTimeInMin >= 10 &&
     //     DateTime.now().difference(appStaticsState.lastPopup).inDays >= 30) {
-    if (true) {
+    if (false) {
       // ポップアップを表示する処理をここに追加
       // 例えば、ダイアログを表示するなど
       await showDialog<ReviewPopup>(
@@ -46,5 +47,12 @@ class ReviewPopup extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+class MyObserver extends RoutemasterObserver {
+  @override
+  void didChangeRoute(RouteData routeData, Page page) {
+    print('New route: ${routeData.fullPath}');
   }
 }
