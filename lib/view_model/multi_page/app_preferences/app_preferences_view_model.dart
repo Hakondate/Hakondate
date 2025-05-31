@@ -10,13 +10,13 @@ part 'app_preferences_view_model.g.dart';
 
 @riverpod
 class AppPreferencesViewModel extends _$AppPreferencesViewModel {
-  late SharedPreferences prefs;
+  late SharedPreferences _prefs;
 
   @override
   FutureOr<AppPreferencesState> build() async {
-    prefs = await SharedPreferences.getInstance();
+    _prefs = await SharedPreferences.getInstance();
 
-    final bool isReviewPopupDenied = prefs.getBool(AppKey.sharedPreferencesKey.isReviewPopupDeniedInPreferences) ?? false;
+    final bool isReviewPopupDenied = _prefs.getBool(AppKey.sharedPreferencesKey.isReviewPopupDeniedInPreferences) ?? false;
 
     return AppPreferencesState(isReviewPopupDenied: isReviewPopupDenied);
   }
@@ -25,7 +25,7 @@ class AppPreferencesViewModel extends _$AppPreferencesViewModel {
     // state = state.copyWith(isReviewPopupDenied: isReviewPopupDenied);
     if (state.hasValue) {
       state = AsyncData<AppPreferencesState>(state.value!.copyWith(isReviewPopupDenied: isReviewPopupDenied));
-      await prefs.setBool(AppKey.sharedPreferencesKey.isReviewPopupDeniedInPreferences, isReviewPopupDenied);
+      await _prefs.setBool(AppKey.sharedPreferencesKey.isReviewPopupDeniedInPreferences, isReviewPopupDenied);
     } else {
       debugPrint('AppPreferences State is not initialized yet');
     }
