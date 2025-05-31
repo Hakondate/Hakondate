@@ -5,13 +5,20 @@ import 'package:hakondate/state/app_statics/app_statics_state.dart';
 class ReviewPopup extends StatelessWidget {
   const ReviewPopup({super.key});
 
-  static void showReviewPopupIfConditionMet(AppStaticsState appStaticsState, BuildContext context) {
+  static Future<void> showReviewPopupIfConditionMet(AppStaticsState appStaticsState, BuildContext context) async {
     // 条件を満たしているかどうかをチェック
-    if (appStaticsState.openCount >= 5 &&
-        appStaticsState.usageTimeInMin >= 10 &&
-        DateTime.now().difference(appStaticsState.lastPopup).inDays >= 30) {
+    // if (appStaticsState.openCount >= 5 &&
+    //     appStaticsState.usageTimeInMin >= 10 &&
+    //     DateTime.now().difference(appStaticsState.lastPopup).inDays >= 30) {
+    if (true) {
       // ポップアップを表示する処理をここに追加
       // 例えば、ダイアログを表示するなど
+      await showDialog<ReviewPopup>(
+        context: context,
+        builder: (BuildContext context) {
+          return const ReviewPopup();
+        },
+      );
     } else {
       debugPrint('条件を満たしていません。ポップアップは表示されません。');
     }

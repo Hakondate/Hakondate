@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate/state/app_statics/app_statics_state.dart';
+import 'package:hakondate/view/component/dialog/review_dialog.dart';
+import 'package:hakondate/view_model/multi_page/app_statics/app_statics_view_model.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -119,6 +122,10 @@ class Daily extends StatelessWidget {
   Widget _bodyWidget() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
+        final AppStaticsState? appStaticsState = ref.watch(appStaticsViewModelProvider).valueOrNull;
+        if (appStaticsState != null) {
+          ReviewPopup.showReviewPopupIfConditionMet(appStaticsState, context);
+        }
         return ref.watch(dailyViewModelProvider).maybeWhen(
               data: (DailyState state) {
                 if (state.menu is LunchesDayMenuModel) {
