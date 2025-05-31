@@ -6,5 +6,5 @@ part 'app_statics_state.freezed.dart';
 
 @freezed
 class AppStaticsState with _$AppStaticsState {
-  const factory AppStaticsState({required int usageTimeInMin, required int openCount, required int popupCount}) = _AppStaticsState;
+  const factory AppStaticsState({required int usageTimeInMin, required int openCount, required DateTime lastPopup}) = _AppStaticsState;
 }

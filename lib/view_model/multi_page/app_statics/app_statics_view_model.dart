@@ -29,7 +29,7 @@ class AppStaticsViewModel extends _$AppStaticsViewModel {
     final AppStaticsState initialState = AppStaticsState(
       openCount: (prefs.getInt(AppKey.sharedPreferencesKey.appOpenCount) ?? 0) + 1,
       usageTimeInMin: prefs.getInt(AppKey.sharedPreferencesKey.usageTimeInMin) ?? 0,
-      popupCount: prefs.getInt(AppKey.sharedPreferencesKey.popupCount) ?? 0,
+      lastPopup: DateTime.parse(prefs.getString(AppKey.sharedPreferencesKey.lastPopup) ?? DateTime(1970).toIso8601String()),
     );
     await prefs.setInt(AppKey.sharedPreferencesKey.appOpenCount, initialState.openCount);
 
@@ -45,13 +45,15 @@ class AppStaticsViewModel extends _$AppStaticsViewModel {
   Future<void> _incrementUsageTimeInMin() async {
     state = AsyncData<AppStaticsState>(state.value!.copyWith(usageTimeInMin: state.value!.usageTimeInMin + 1));
     await prefs.setInt(AppKey.sharedPreferencesKey.usageTimeInMin, state.value!.usageTimeInMin);
+    // #TODO remove this
     debugPrint('state: ${state.value!.usageTimeInMin}');
   }
 
-  Future<void> countPopup() async {
+  Future<void> setLastPopup() async {
     if (state.hasValue) {
-      state = AsyncData<AppStaticsState>(state.value!.copyWith(openCount: state.value!.openCount + 1));
-      await prefs.setInt(AppKey.sharedPreferencesKey.appOpenCount, state.value!.openCount);
+      state = AsyncData<AppStaticsState>(state.value!.copyWith(lastPopup: DateTime.now()));
+      await prefs.setString(AppKey.sharedPreferencesKey.lastPopup, state.value!.lastPopup.toIso8601String());
+      // #TODO remove this
       debugPrint('openCount: ${state.value!.openCount}');
     } else {
       debugPrint('AppStatics State is not initialized yet');
