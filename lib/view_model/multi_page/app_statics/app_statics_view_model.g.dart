@@ -7,7 +7,7 @@ part of 'app_statics_view_model.dart';
 // **************************************************************************
 
 String _$appStaticsViewModelHash() =>
-    r'd8628e205f89e9c01556a52a9f5b4da0eaae4288';
+    r'50429d8c2fae57ce8902509342f736bdcd7fc96d';
 
 /// See also [AppStaticsViewModel].
 @ProviderFor(AppStaticsViewModel)
