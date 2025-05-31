@@ -1,11 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:hakondate/constant/app_key.dart';
-import 'package:hakondate/state/app_statics/app_statics_state.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:hakondate/constant/app_key.dart';
+import 'package:hakondate/state/app_statics/app_statics_state.dart';
 
 part 'app_statics_view_model.g.dart';
 
