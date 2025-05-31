@@ -19,11 +19,11 @@ class AppPreferencesViewModel extends _$AppPreferencesViewModel {
     return AppPreferencesState(isReviewPopupDenied: isReviewPopupDenied);
   }
 
-  void setIsReviewPopupDenied({bool isReviewPopupDenied = true}) {
+  Future<void> setIsReviewPopupDenied({bool isReviewPopupDenied = true}) async {
     // state = state.copyWith(isReviewPopupDenied: isReviewPopupDenied);
-    prefs.setBool(AppKey.sharedPreferencesKey.isReviewPopupDeniedInPreferences, isReviewPopupDenied);
     if (state.hasValue) {
       state = AsyncData<AppPreferencesState>(state.value!.copyWith(isReviewPopupDenied: isReviewPopupDenied));
+      await prefs.setBool(AppKey.sharedPreferencesKey.isReviewPopupDeniedInPreferences, isReviewPopupDenied);
     } else {
       debugPrint('AppPreferences State is not initialized yet');
     }

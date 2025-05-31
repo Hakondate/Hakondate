@@ -7,7 +7,7 @@ part of 'app_preferences_view_model.dart';
 // **************************************************************************
 
 String _$appPreferencesViewModelHash() =>
-    r'5bdb3354265c85bcdbfd8e34fbf68ba5d9dcab17';
+    r'f60b12dc44b82b4a3a25953c3c1f0826663e34e4';
 
 /// See also [AppPreferencesViewModel].
 @ProviderFor(AppPreferencesViewModel)

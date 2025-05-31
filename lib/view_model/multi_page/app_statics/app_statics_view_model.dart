@@ -11,28 +11,29 @@ part 'app_statics_view_model.g.dart';
 
 @Riverpod(keepAlive: true)
 class AppStaticsViewModel extends _$AppStaticsViewModel {
-  SharedPreferences? prefs;
+  late SharedPreferences prefs;
   Timer? timer;
 
   @override
   FutureOr<AppStaticsState> build() async {
     debugPrint('build');
+    prefs = await SharedPreferences.getInstance();
+
     ref.onDispose(() {
       timer?.cancel();
-      prefs?.setInt(AppKey.sharedPreferencesKey.usageTimeInMin, state.value!.usageTimeInMin!);
+      prefs.setInt(AppKey.sharedPreferencesKey.usageTimeInMin, state.value!.usageTimeInMin);
       debugPrint('usageTimeInMin: ${state.value!.usageTimeInMin}');
     });
 
     // ここでprefsからデータ読み書きする
-    prefs = await SharedPreferences.getInstance();
     final AppStaticsState initialState = AppStaticsState(
-      openCount: (prefs?.getInt(AppKey.sharedPreferencesKey.appOpenCount) ?? 0) + 1,
-      usageTimeInMin: prefs?.getInt(AppKey.sharedPreferencesKey.usageTimeInMin) ?? 0,
+      openCount: (prefs.getInt(AppKey.sharedPreferencesKey.appOpenCount) ?? 0) + 1,
+      usageTimeInMin: prefs.getInt(AppKey.sharedPreferencesKey.usageTimeInMin) ?? 0,
+      popupCount: prefs.getInt(AppKey.sharedPreferencesKey.popupCount) ?? 0,
     );
-    await prefs?.setInt(AppKey.sharedPreferencesKey.appOpenCount, initialState.openCount!);
+    await prefs.setInt(AppKey.sharedPreferencesKey.appOpenCount, initialState.openCount);
 
     // #TODO stateの名前を変更する
-
     timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
       _incrementUsageTimeInMin();
     });
@@ -42,8 +43,18 @@ class AppStaticsViewModel extends _$AppStaticsViewModel {
   }
 
   Future<void> _incrementUsageTimeInMin() async {
-    state = AsyncData<AppStaticsState>(state.value!.copyWith(usageTimeInMin: state.value!.usageTimeInMin! + 1));
-    await prefs?.setInt(AppKey.sharedPreferencesKey.usageTimeInMin, state.value!.usageTimeInMin!);
+    state = AsyncData<AppStaticsState>(state.value!.copyWith(usageTimeInMin: state.value!.usageTimeInMin + 1));
+    await prefs.setInt(AppKey.sharedPreferencesKey.usageTimeInMin, state.value!.usageTimeInMin);
     debugPrint('state: ${state.value!.usageTimeInMin}');
+  }
+
+  Future<void> countPopup() async {
+    if (state.hasValue) {
+      state = AsyncData<AppStaticsState>(state.value!.copyWith(openCount: state.value!.openCount + 1));
+      await prefs.setInt(AppKey.sharedPreferencesKey.appOpenCount, state.value!.openCount);
+      debugPrint('openCount: ${state.value!.openCount}');
+    } else {
+      debugPrint('AppStatics State is not initialized yet');
+    }
   }
 }

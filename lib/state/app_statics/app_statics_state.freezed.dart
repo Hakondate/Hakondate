@@ -16,8 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AppStaticsState {
-  int? get usageTimeInMin => throw _privateConstructorUsedError;
-  int? get openCount => throw _privateConstructorUsedError;
+  int get usageTimeInMin => throw _privateConstructorUsedError;
+  int get openCount => throw _privateConstructorUsedError;
+  int get popupCount => throw _privateConstructorUsedError;
 
   /// Create a copy of AppStaticsState
   /// with the given fields replaced by the non-null parameter values.
@@ -32,7 +33,7 @@ abstract class $AppStaticsStateCopyWith<$Res> {
           AppStaticsState value, $Res Function(AppStaticsState) then) =
       _$AppStaticsStateCopyWithImpl<$Res, AppStaticsState>;
   @useResult
-  $Res call({int? usageTimeInMin, int? openCount});
+  $Res call({int usageTimeInMin, int openCount, int popupCount});
 }
 
 /// @nodoc
@@ -50,18 +51,23 @@ class _$AppStaticsStateCopyWithImpl<$Res, $Val extends AppStaticsState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? usageTimeInMin = freezed,
-    Object? openCount = freezed,
+    Object? usageTimeInMin = null,
+    Object? openCount = null,
+    Object? popupCount = null,
   }) {
     return _then(_value.copyWith(
-      usageTimeInMin: freezed == usageTimeInMin
+      usageTimeInMin: null == usageTimeInMin
           ? _value.usageTimeInMin
           : usageTimeInMin // ignore: cast_nullable_to_non_nullable
-              as int?,
-      openCount: freezed == openCount
+              as int,
+      openCount: null == openCount
           ? _value.openCount
           : openCount // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
+      popupCount: null == popupCount
+          ? _value.popupCount
+          : popupCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -74,7 +80,7 @@ abstract class _$$AppStaticsStateImplCopyWith<$Res>
       __$$AppStaticsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? usageTimeInMin, int? openCount});
+  $Res call({int usageTimeInMin, int openCount, int popupCount});
 }
 
 /// @nodoc
@@ -90,18 +96,23 @@ class __$$AppStaticsStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? usageTimeInMin = freezed,
-    Object? openCount = freezed,
+    Object? usageTimeInMin = null,
+    Object? openCount = null,
+    Object? popupCount = null,
   }) {
     return _then(_$AppStaticsStateImpl(
-      usageTimeInMin: freezed == usageTimeInMin
+      usageTimeInMin: null == usageTimeInMin
           ? _value.usageTimeInMin
           : usageTimeInMin // ignore: cast_nullable_to_non_nullable
-              as int?,
-      openCount: freezed == openCount
+              as int,
+      openCount: null == openCount
           ? _value.openCount
           : openCount // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
+      popupCount: null == popupCount
+          ? _value.popupCount
+          : popupCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -111,16 +122,21 @@ class __$$AppStaticsStateImplCopyWithImpl<$Res>
 class _$AppStaticsStateImpl
     with DiagnosticableTreeMixin
     implements _AppStaticsState {
-  const _$AppStaticsStateImpl({this.usageTimeInMin, this.openCount});
+  const _$AppStaticsStateImpl(
+      {required this.usageTimeInMin,
+      required this.openCount,
+      required this.popupCount});
 
   @override
-  final int? usageTimeInMin;
+  final int usageTimeInMin;
   @override
-  final int? openCount;
+  final int openCount;
+  @override
+  final int popupCount;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AppStaticsState(usageTimeInMin: $usageTimeInMin, openCount: $openCount)';
+    return 'AppStaticsState(usageTimeInMin: $usageTimeInMin, openCount: $openCount, popupCount: $popupCount)';
   }
 
   @override
@@ -129,7 +145,8 @@ class _$AppStaticsStateImpl
     properties
       ..add(DiagnosticsProperty('type', 'AppStaticsState'))
       ..add(DiagnosticsProperty('usageTimeInMin', usageTimeInMin))
-      ..add(DiagnosticsProperty('openCount', openCount));
+      ..add(DiagnosticsProperty('openCount', openCount))
+      ..add(DiagnosticsProperty('popupCount', popupCount));
   }
 
   @override
@@ -140,11 +157,14 @@ class _$AppStaticsStateImpl
             (identical(other.usageTimeInMin, usageTimeInMin) ||
                 other.usageTimeInMin == usageTimeInMin) &&
             (identical(other.openCount, openCount) ||
-                other.openCount == openCount));
+                other.openCount == openCount) &&
+            (identical(other.popupCount, popupCount) ||
+                other.popupCount == popupCount));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, usageTimeInMin, openCount);
+  int get hashCode =>
+      Object.hash(runtimeType, usageTimeInMin, openCount, popupCount);
 
   /// Create a copy of AppStaticsState
   /// with the given fields replaced by the non-null parameter values.
@@ -158,13 +178,16 @@ class _$AppStaticsStateImpl
 
 abstract class _AppStaticsState implements AppStaticsState {
   const factory _AppStaticsState(
-      {final int? usageTimeInMin,
-      final int? openCount}) = _$AppStaticsStateImpl;
+      {required final int usageTimeInMin,
+      required final int openCount,
+      required final int popupCount}) = _$AppStaticsStateImpl;
 
   @override
-  int? get usageTimeInMin;
+  int get usageTimeInMin;
   @override
-  int? get openCount;
+  int get openCount;
+  @override
+  int get popupCount;
 
   /// Create a copy of AppStaticsState
   /// with the given fields replaced by the non-null parameter values.
