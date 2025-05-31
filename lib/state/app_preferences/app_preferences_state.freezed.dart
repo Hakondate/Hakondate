@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AppPreferencesState {
-  bool get isReviewPopupADenied => throw _privateConstructorUsedError;
+  bool get isReviewPopupDenied => throw _privateConstructorUsedError;
 
   /// Create a copy of AppPreferencesState
   /// with the given fields replaced by the non-null parameter values.
@@ -31,7 +31,7 @@ abstract class $AppPreferencesStateCopyWith<$Res> {
           AppPreferencesState value, $Res Function(AppPreferencesState) then) =
       _$AppPreferencesStateCopyWithImpl<$Res, AppPreferencesState>;
   @useResult
-  $Res call({bool isReviewPopupADenied});
+  $Res call({bool isReviewPopupDenied});
 }
 
 /// @nodoc
@@ -49,12 +49,12 @@ class _$AppPreferencesStateCopyWithImpl<$Res, $Val extends AppPreferencesState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isReviewPopupADenied = null,
+    Object? isReviewPopupDenied = null,
   }) {
     return _then(_value.copyWith(
-      isReviewPopupADenied: null == isReviewPopupADenied
-          ? _value.isReviewPopupADenied
-          : isReviewPopupADenied // ignore: cast_nullable_to_non_nullable
+      isReviewPopupDenied: null == isReviewPopupDenied
+          ? _value.isReviewPopupDenied
+          : isReviewPopupDenied // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -68,7 +68,7 @@ abstract class _$$AppPreferencesStateImplCopyWith<$Res>
       __$$AppPreferencesStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isReviewPopupADenied});
+  $Res call({bool isReviewPopupDenied});
 }
 
 /// @nodoc
@@ -84,12 +84,12 @@ class __$$AppPreferencesStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isReviewPopupADenied = null,
+    Object? isReviewPopupDenied = null,
   }) {
     return _then(_$AppPreferencesStateImpl(
-      isReviewPopupADenied: null == isReviewPopupADenied
-          ? _value.isReviewPopupADenied
-          : isReviewPopupADenied // ignore: cast_nullable_to_non_nullable
+      isReviewPopupDenied: null == isReviewPopupDenied
+          ? _value.isReviewPopupDenied
+          : isReviewPopupDenied // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -98,15 +98,15 @@ class __$$AppPreferencesStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AppPreferencesStateImpl implements _AppPreferencesState {
-  const _$AppPreferencesStateImpl({this.isReviewPopupADenied = false});
+  const _$AppPreferencesStateImpl({this.isReviewPopupDenied = false});
 
   @override
   @JsonKey()
-  final bool isReviewPopupADenied;
+  final bool isReviewPopupDenied;
 
   @override
   String toString() {
-    return 'AppPreferencesState(isReviewPopupADenied: $isReviewPopupADenied)';
+    return 'AppPreferencesState(isReviewPopupDenied: $isReviewPopupDenied)';
   }
 
   @override
@@ -114,12 +114,12 @@ class _$AppPreferencesStateImpl implements _AppPreferencesState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AppPreferencesStateImpl &&
-            (identical(other.isReviewPopupADenied, isReviewPopupADenied) ||
-                other.isReviewPopupADenied == isReviewPopupADenied));
+            (identical(other.isReviewPopupDenied, isReviewPopupDenied) ||
+                other.isReviewPopupDenied == isReviewPopupDenied));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isReviewPopupADenied);
+  int get hashCode => Object.hash(runtimeType, isReviewPopupDenied);
 
   /// Create a copy of AppPreferencesState
   /// with the given fields replaced by the non-null parameter values.
@@ -132,11 +132,11 @@ class _$AppPreferencesStateImpl implements _AppPreferencesState {
 }
 
 abstract class _AppPreferencesState implements AppPreferencesState {
-  const factory _AppPreferencesState({final bool isReviewPopupADenied}) =
+  const factory _AppPreferencesState({final bool isReviewPopupDenied}) =
       _$AppPreferencesStateImpl;
 
   @override
-  bool get isReviewPopupADenied;
+  bool get isReviewPopupDenied;
 
   /// Create a copy of AppPreferencesState
   /// with the given fields replaced by the non-null parameter values.

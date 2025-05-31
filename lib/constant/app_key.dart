@@ -12,4 +12,5 @@ class _SharedPreferencesKey {
   final String currentUserId = 'current_user_id';
   final String appOpenCount = 'app_open_count';
   final String usageTimeInMin = 'usage_time_in_min';
+  final String isReviewPopupDeniedInPreferences = 'is_review_popup_denied_in_preferences';
 }

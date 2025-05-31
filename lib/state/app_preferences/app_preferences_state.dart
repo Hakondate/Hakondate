@@ -5,6 +5,6 @@ part 'app_preferences_state.freezed.dart';
 @freezed
 class AppPreferencesState with _$AppPreferencesState {
   const factory AppPreferencesState({
-    @Default(false) bool isReviewPopupADenied,
+    @Default(false) bool isReviewPopupDenied,
   }) = _AppPreferencesState;
 }
