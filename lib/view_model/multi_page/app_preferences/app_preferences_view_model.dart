@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
-import 'package:hakondate/constant/app_key.dart';
-import 'package:hakondate/state/app_preferences/app_preferences_state.dart';
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:hakondate/constant/app_key.dart';
+import 'package:hakondate/state/app_preferences/app_preferences_state.dart';
 
 part 'app_preferences_view_model.g.dart';
 
