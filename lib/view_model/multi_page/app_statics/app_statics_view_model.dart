@@ -51,7 +51,7 @@ class AppStaticsViewModel extends _$AppStaticsViewModel {
 
   Future<void> setLastPopup() async {
     if (state.hasValue) {
-      DateTime now = DateTime.now();
+      final DateTime now = DateTime.now();
       await _prefs.setString(AppKey.sharedPreferencesKey.lastPopup, now.toIso8601String());
       await _prefs.setInt(AppKey.sharedPreferencesKey.usageTimeInMinWhenLastPopup, state.value!.usageTimeInMin);
       // #TODO remove this

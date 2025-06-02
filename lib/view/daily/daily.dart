@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hakondate/state/app_statics/app_statics_state.dart';
-import 'package:hakondate/view/component/dialog/review_dialog.dart';
-import 'package:hakondate/view_model/multi_page/app_statics/app_statics_view_model.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
