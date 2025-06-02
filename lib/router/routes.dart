@@ -31,9 +31,6 @@ import 'package:hakondate/view/user_settings/user_settings.dart';
 import 'package:hakondate/view/user_settings/user_settings_detail.dart';
 
 final RoutemasterDelegate routemaster = RoutemasterDelegate(
-  observers: <RoutemasterObserver>[
-    MyObserver(),
-  ],
   routesBuilder: (BuildContext context) => RouteMap(
     onUnknownRoute: (_) => const Redirect('/splash'),
     routes: <String, RouteSettings Function(RouteData)>{

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:hakondate/state/app_statics/app_statics_state.dart';
+import 'package:path/path.dart';
 import 'package:routemaster/routemaster.dart';
 
 class ReviewPopup extends StatelessWidget {
@@ -20,8 +21,6 @@ class ReviewPopup extends StatelessWidget {
           return const ReviewPopup();
         },
       );
-    } else {
-      debugPrint('条件を満たしていません。ポップアップは表示されません。');
     }
   }
 
@@ -51,8 +50,44 @@ class ReviewPopup extends StatelessWidget {
 }
 
 class MyObserver extends RoutemasterObserver {
+  MyObserver(GlobalKey navigationKey) {
+    _navigationKey = navigationKey;
+  }
+  RouteData? _previousRoute;
+  late GlobalKey _navigationKey;
+
+  // このページからDailyページに戻ってきたときに，条件が合えば意見を求めるポップアップを表示する
+  final List<String> _validPreviousRoutePathList = <String>[
+    '/terms',
+    '/home/daily',
+    '/home/daily/dish',
+    '/home/calendar',
+    '/home/recipes',
+    '/home/recipes_pdf/:id',
+    '/home/dictionary',
+    '/home/dictionary/search',
+    '/home/letter',
+    '/home/letter/pdf/:id',
+    '/home/information',
+    '/home/origin',
+    '/home/license',
+    '/home/license/detail/:id',
+  ];
+
   @override
   void didChangeRoute(RouteData routeData, Page page) {
+    if (_previousRoute != null) {
+      if (_previousRoute!.fullPath == routeData.fullPath) {
+        return;
+      } else if (_validPreviousRoutePathList.contains(_previousRoute!.fullPath) && routeData.fullPath == '/home/daily') {
+        BuildContext? context = _navigationKey.currentContext;
+        if (context == null || !context.mounted) {
+          return;
+        }
+        AppStaticsState appStaticsState = ReviewPopup.showReviewPopupIfConditionMet();
+      }
+    }
+    _previousRoute = routeData;
     print('New route: ${routeData.fullPath}');
   }
 }
