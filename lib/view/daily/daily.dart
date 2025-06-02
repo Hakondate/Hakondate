@@ -122,10 +122,6 @@ class Daily extends StatelessWidget {
   Widget _bodyWidget() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        final AppStaticsState? appStaticsState = ref.watch(appStaticsViewModelProvider).valueOrNull;
-        if (appStaticsState != null) {
-          ReviewPopup.showReviewPopupIfConditionMet(appStaticsState, context);
-        }
         return ref.watch(dailyViewModelProvider).maybeWhen(
               data: (DailyState state) {
                 if (state.menu is LunchesDayMenuModel) {

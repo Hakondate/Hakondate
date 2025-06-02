@@ -18,7 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AppStaticsState {
   int get usageTimeInMin => throw _privateConstructorUsedError;
   int get openCount => throw _privateConstructorUsedError;
-  DateTime get lastPopup => throw _privateConstructorUsedError;
+  DateTime? get lastPopup => throw _privateConstructorUsedError;
+  int? get usageTimeInMinWhenLastPopuped => throw _privateConstructorUsedError;
 
   /// Create a copy of AppStaticsState
   /// with the given fields replaced by the non-null parameter values.
@@ -33,7 +34,11 @@ abstract class $AppStaticsStateCopyWith<$Res> {
           AppStaticsState value, $Res Function(AppStaticsState) then) =
       _$AppStaticsStateCopyWithImpl<$Res, AppStaticsState>;
   @useResult
-  $Res call({int usageTimeInMin, int openCount, DateTime lastPopup});
+  $Res call(
+      {int usageTimeInMin,
+      int openCount,
+      DateTime? lastPopup,
+      int? usageTimeInMinWhenLastPopuped});
 }
 
 /// @nodoc
@@ -53,7 +58,8 @@ class _$AppStaticsStateCopyWithImpl<$Res, $Val extends AppStaticsState>
   $Res call({
     Object? usageTimeInMin = null,
     Object? openCount = null,
-    Object? lastPopup = null,
+    Object? lastPopup = freezed,
+    Object? usageTimeInMinWhenLastPopuped = freezed,
   }) {
     return _then(_value.copyWith(
       usageTimeInMin: null == usageTimeInMin
@@ -64,10 +70,14 @@ class _$AppStaticsStateCopyWithImpl<$Res, $Val extends AppStaticsState>
           ? _value.openCount
           : openCount // ignore: cast_nullable_to_non_nullable
               as int,
-      lastPopup: null == lastPopup
+      lastPopup: freezed == lastPopup
           ? _value.lastPopup
           : lastPopup // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
+      usageTimeInMinWhenLastPopuped: freezed == usageTimeInMinWhenLastPopuped
+          ? _value.usageTimeInMinWhenLastPopuped
+          : usageTimeInMinWhenLastPopuped // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -80,7 +90,11 @@ abstract class _$$AppStaticsStateImplCopyWith<$Res>
       __$$AppStaticsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int usageTimeInMin, int openCount, DateTime lastPopup});
+  $Res call(
+      {int usageTimeInMin,
+      int openCount,
+      DateTime? lastPopup,
+      int? usageTimeInMinWhenLastPopuped});
 }
 
 /// @nodoc
@@ -98,7 +112,8 @@ class __$$AppStaticsStateImplCopyWithImpl<$Res>
   $Res call({
     Object? usageTimeInMin = null,
     Object? openCount = null,
-    Object? lastPopup = null,
+    Object? lastPopup = freezed,
+    Object? usageTimeInMinWhenLastPopuped = freezed,
   }) {
     return _then(_$AppStaticsStateImpl(
       usageTimeInMin: null == usageTimeInMin
@@ -109,10 +124,14 @@ class __$$AppStaticsStateImplCopyWithImpl<$Res>
           ? _value.openCount
           : openCount // ignore: cast_nullable_to_non_nullable
               as int,
-      lastPopup: null == lastPopup
+      lastPopup: freezed == lastPopup
           ? _value.lastPopup
           : lastPopup // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
+      usageTimeInMinWhenLastPopuped: freezed == usageTimeInMinWhenLastPopuped
+          ? _value.usageTimeInMinWhenLastPopuped
+          : usageTimeInMinWhenLastPopuped // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -125,18 +144,21 @@ class _$AppStaticsStateImpl
   const _$AppStaticsStateImpl(
       {required this.usageTimeInMin,
       required this.openCount,
-      required this.lastPopup});
+      this.lastPopup,
+      this.usageTimeInMinWhenLastPopuped});
 
   @override
   final int usageTimeInMin;
   @override
   final int openCount;
   @override
-  final DateTime lastPopup;
+  final DateTime? lastPopup;
+  @override
+  final int? usageTimeInMinWhenLastPopuped;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AppStaticsState(usageTimeInMin: $usageTimeInMin, openCount: $openCount, lastPopup: $lastPopup)';
+    return 'AppStaticsState(usageTimeInMin: $usageTimeInMin, openCount: $openCount, lastPopup: $lastPopup, usageTimeInMinWhenLastPopuped: $usageTimeInMinWhenLastPopuped)';
   }
 
   @override
@@ -146,7 +168,9 @@ class _$AppStaticsStateImpl
       ..add(DiagnosticsProperty('type', 'AppStaticsState'))
       ..add(DiagnosticsProperty('usageTimeInMin', usageTimeInMin))
       ..add(DiagnosticsProperty('openCount', openCount))
-      ..add(DiagnosticsProperty('lastPopup', lastPopup));
+      ..add(DiagnosticsProperty('lastPopup', lastPopup))
+      ..add(DiagnosticsProperty(
+          'usageTimeInMinWhenLastPopuped', usageTimeInMinWhenLastPopuped));
   }
 
   @override
@@ -159,12 +183,16 @@ class _$AppStaticsStateImpl
             (identical(other.openCount, openCount) ||
                 other.openCount == openCount) &&
             (identical(other.lastPopup, lastPopup) ||
-                other.lastPopup == lastPopup));
+                other.lastPopup == lastPopup) &&
+            (identical(other.usageTimeInMinWhenLastPopuped,
+                    usageTimeInMinWhenLastPopuped) ||
+                other.usageTimeInMinWhenLastPopuped ==
+                    usageTimeInMinWhenLastPopuped));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, usageTimeInMin, openCount, lastPopup);
+  int get hashCode => Object.hash(runtimeType, usageTimeInMin, openCount,
+      lastPopup, usageTimeInMinWhenLastPopuped);
 
   /// Create a copy of AppStaticsState
   /// with the given fields replaced by the non-null parameter values.
@@ -180,14 +208,17 @@ abstract class _AppStaticsState implements AppStaticsState {
   const factory _AppStaticsState(
       {required final int usageTimeInMin,
       required final int openCount,
-      required final DateTime lastPopup}) = _$AppStaticsStateImpl;
+      final DateTime? lastPopup,
+      final int? usageTimeInMinWhenLastPopuped}) = _$AppStaticsStateImpl;
 
   @override
   int get usageTimeInMin;
   @override
   int get openCount;
   @override
-  DateTime get lastPopup;
+  DateTime? get lastPopup;
+  @override
+  int? get usageTimeInMinWhenLastPopuped;
 
   /// Create a copy of AppStaticsState
   /// with the given fields replaced by the non-null parameter values.

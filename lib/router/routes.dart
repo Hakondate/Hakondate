@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hakondate/util/app_unique_key/app_unique_key.dart';
 import 'package:hakondate/view/component/dialog/review_dialog.dart';
 
 import 'package:routemaster/routemaster.dart';
@@ -30,7 +31,13 @@ import 'package:hakondate/view/terms/terms.dart';
 import 'package:hakondate/view/user_settings/user_settings.dart';
 import 'package:hakondate/view/user_settings/user_settings_detail.dart';
 
+final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
+
 final RoutemasterDelegate routemaster = RoutemasterDelegate(
+  navigatorKey: _navigatorKey,
+  observers: <RoutemasterObserver>[
+    MyObserver(_navigatorKey),
+  ],
   routesBuilder: (BuildContext context) => RouteMap(
     onUnknownRoute: (_) => const Redirect('/splash'),
     routes: <String, RouteSettings Function(RouteData)>{
