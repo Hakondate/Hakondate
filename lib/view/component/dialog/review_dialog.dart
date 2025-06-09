@@ -50,7 +50,8 @@ class ReviewPopup extends StatelessWidget {
       }
     } else {
       if (appStaticsState.lastPopup!.difference(DateTime.now()).inDays >= ReviewPopupCondition.dayFromLastPopup &&
-          appStaticsState.usageTimeInMin >= ReviewPopupCondition.usageTimeInMin) {
+          ((appStaticsState.usageTimeInMinWhenLastPopuped ?? appStaticsState.usageTimeInMin) - appStaticsState.usageTimeInMin >=
+              ReviewPopupCondition.usageTimeFromCancelInMin)) {
         await _showPopup(context);
       }
     }
