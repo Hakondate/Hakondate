@@ -7,6 +7,7 @@ import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate/view_model/multi_page/app_preferences/app_preferences_view_model.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:routemaster/routemaster.dart';
 
@@ -82,7 +83,9 @@ class Hakondate extends StatelessWidget {
 
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        ref.read(appStaticsViewModelProvider);
+        ref
+          ..read(appStaticsViewModelProvider)
+          ..read(appPreferencesViewModelProvider);
 
         return MaterialApp.router(
           key: key ?? ref.watch(appUniqueKeyProvider),

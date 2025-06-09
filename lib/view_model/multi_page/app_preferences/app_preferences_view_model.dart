@@ -8,7 +8,7 @@ import 'package:hakondate/state/app_preferences/app_preferences_state.dart';
 
 part 'app_preferences_view_model.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class AppPreferencesViewModel extends _$AppPreferencesViewModel {
   late SharedPreferences _prefs;
 

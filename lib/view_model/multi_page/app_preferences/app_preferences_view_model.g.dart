@@ -7,11 +7,11 @@ part of 'app_preferences_view_model.dart';
 // **************************************************************************
 
 String _$appPreferencesViewModelHash() =>
-    r'45cf27cc289a007561c753eb9c97fa6b47878d0b';
+    r'06af8074de7d38e7297f25c800f1512320fb9e8c';
 
 /// See also [AppPreferencesViewModel].
 @ProviderFor(AppPreferencesViewModel)
-final appPreferencesViewModelProvider = AutoDisposeAsyncNotifierProvider<
+final appPreferencesViewModelProvider = AsyncNotifierProvider<
     AppPreferencesViewModel, AppPreferencesState>.internal(
   AppPreferencesViewModel.new,
   name: r'appPreferencesViewModelProvider',
@@ -22,7 +22,6 @@ final appPreferencesViewModelProvider = AutoDisposeAsyncNotifierProvider<
   allTransitiveDependencies: null,
 );
 
-typedef _$AppPreferencesViewModel
-    = AutoDisposeAsyncNotifier<AppPreferencesState>;
+typedef _$AppPreferencesViewModel = AsyncNotifier<AppPreferencesState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

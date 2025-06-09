@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate/constant/review_popup_condition.dart';
+import 'package:hakondate/state/app_preferences/app_preferences_state.dart';
 
 import 'package:hakondate/state/app_statics/app_statics_state.dart';
 import 'package:hakondate/view/component/dialog/hakondate_dialog/hakondate_dialog.dart';
@@ -39,11 +40,16 @@ class ReviewPopup extends StatelessWidget {
     }
   }
 
-  static Future<void> showReviewPopupIfConditionMet(AppStaticsState appStaticsState, BuildContext context) async {
-    // 条件を満たしているかどうかをチェック
-    // if (appStaticsState.openCount >= 5 &&
-    //     appStaticsState.usageTimeInMin >= 10 &&
-    //     DateTime.now().difference(appStaticsState.lastPopup).inDays >= 30) {
+  static Future<void> showReviewPopupIfConditionMet(
+    AppStaticsState appStaticsState,
+    AppPreferencesState appPreferencesState,
+    BuildContext context,
+  ) async {
+    if (appPreferencesState.isReviewPopupDenied) {
+      debugPrint('Review popup is denied by user preferences');
+      return;
+    }
+
     if (appStaticsState.lastPopup == null) {
       if (appStaticsState.usageTimeInMin >= ReviewPopupCondition.usageTimeInMin) {
         await _showPopup(context);
@@ -60,7 +66,7 @@ class ReviewPopup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer(
-      builder: (context, ref, _) {
+      builder: (BuildContext context, WidgetRef ref, _) {
         return HakondateDialog(
           body: const Text('''
 はこんだて を気に入っていただけましたか？
@@ -69,27 +75,29 @@ class ReviewPopup extends StatelessWidget {
         '''),
           title: const Text('アプリの評価をお願いします'),
           firstAction: HakondateActionButton(
-              text: const Text("評価する"),
-              isPrimary: true,
-              onTap: () async {
-                String url =
-                    'https://docs.google.com/forms/d/e/1FAIpQLSdh-0ffd0-EPukB-8FqUgPA4i4ToTfs1Ax2UWvM1TuiqyJqlQ/viewform?usp=header';
-                if (await canLaunchUrl(Uri.parse(url))) {
-                  await launchUrl(
-                    Uri.parse(url),
-                    mode: LaunchMode.inAppWebView,
-                  );
-                }
-              }),
+            text: const Text('評価する'),
+            isPrimary: true,
+            onTap: () async {
+              const String url =
+                  'https://docs.google.com/forms/d/e/1FAIpQLSdh-0ffd0-EPukB-8FqUgPA4i4ToTfs1Ax2UWvM1TuiqyJqlQ/viewform?usp=header';
+              if (await canLaunchUrl(Uri.parse(url))) {
+                await launchUrl(
+                  Uri.parse(url),
+                  mode: LaunchMode.inAppWebView,
+                );
+              }
+              await ref.read(appPreferencesViewModelProvider.notifier).setIsReviewPopupDenied();
+            },
+          ),
           secondAction: HakondateActionButton(
-            text: const Text("あとで"),
+            text: const Text('あとで'),
             onTap: () {
               Routemaster.of(context).pop();
               ref.read(appStaticsViewModelProvider.notifier).setLastPopup();
             },
           ),
           thirdAction: HakondateActionButton(
-            text: const Text("今後は解答しない"),
+            text: const Text('今後は解答しない'),
             onTap: () {
               Routemaster.of(context).pop();
               ref.read(appStaticsViewModelProvider.notifier).setLastPopup();
@@ -129,11 +137,12 @@ class MyObserver extends RoutemasterObserver {
     }
     final ProviderContainer container = ProviderScope.containerOf(context);
     final AsyncValue<AppStaticsState> appStaticsState = container.read(appStaticsViewModelProvider);
-    if (appStaticsState.hasValue) {}
-    if (appStaticsState.value != null) {
-      ReviewPopup.showReviewPopupIfConditionMet(appStaticsState.value!, context);
+    final AsyncValue<AppPreferencesState> appPreferencesState = container.read(appPreferencesViewModelProvider);
+
+    if (appStaticsState.value != null && appPreferencesState.value != null) {
+      ReviewPopup.showReviewPopupIfConditionMet(appStaticsState.value!, appPreferencesState.value!, context);
     } else {
-      debugPrint('AppStatics State is not initialized yet');
+      debugPrint('AppStatics State or AppPreferences State is not initialized yet');
     }
   }
 
