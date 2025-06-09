@@ -5,8 +5,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakondate/constant/review_popup_condition.dart';
 
 import 'package:hakondate/state/app_statics/app_statics_state.dart';
+import 'package:hakondate/view/component/dialog/hakondate_dialog/hakondate_dialog.dart';
+import 'package:hakondate/view_model/multi_page/app_preferences/app_preferences_view_model.dart';
 import 'package:hakondate/view_model/multi_page/app_statics/app_statics_view_model.dart';
 import 'package:routemaster/routemaster.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ReviewPopup extends StatelessWidget {
   const ReviewPopup({super.key});
@@ -55,25 +58,45 @@ class ReviewPopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text('レビューのお願い'),
-      content: const Text('アプリを気に入っていただけましたか？\nぜひレビューをお願いします！'),
-      actions: <Widget>[
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop(); // ダイアログを閉じる
-          },
-          child: const Text('閉じる'),
-        ),
-        TextButton(
-          onPressed: () {
-            // レビューのリンクを開く処理をここに追加
-            debugPrint('レビューリンクを開きます。');
-            Navigator.of(context).pop(); // ダイアログを閉じる
-          },
-          child: const Text('レビューを書く'),
-        ),
-      ],
+    return Consumer(
+      builder: (context, ref, _) {
+        return HakondateDialog(
+          body: const Text('''
+はこんだて を気に入っていただけましたか？
+
+レビューで応援していただけると嬉しいです（所要時間約5分）
+        '''),
+          title: const Text('アプリの評価をお願いします'),
+          firstAction: HakondateActionButton(
+              text: const Text("評価する"),
+              isPrimary: true,
+              onTap: () async {
+                String url =
+                    'https://docs.google.com/forms/d/e/1FAIpQLSdh-0ffd0-EPukB-8FqUgPA4i4ToTfs1Ax2UWvM1TuiqyJqlQ/viewform?usp=header';
+                if (await canLaunchUrl(Uri.parse(url))) {
+                  await launchUrl(
+                    Uri.parse(url),
+                    mode: LaunchMode.inAppWebView,
+                  );
+                }
+              }),
+          secondAction: HakondateActionButton(
+            text: const Text("あとで"),
+            onTap: () {
+              Routemaster.of(context).pop();
+              ref.read(appStaticsViewModelProvider.notifier).setLastPopup();
+            },
+          ),
+          thirdAction: HakondateActionButton(
+            text: const Text("今後は解答しない"),
+            onTap: () {
+              Routemaster.of(context).pop();
+              ref.read(appStaticsViewModelProvider.notifier).setLastPopup();
+              ref.read(appPreferencesViewModelProvider.notifier).setIsReviewPopupDenied();
+            },
+          ),
+        );
+      },
     );
   }
 }

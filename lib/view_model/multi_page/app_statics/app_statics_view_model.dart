@@ -54,8 +54,6 @@ class AppStaticsViewModel extends _$AppStaticsViewModel {
       final DateTime now = DateTime.now();
       await _prefs.setString(AppKey.sharedPreferencesKey.lastPopup, now.toIso8601String());
       await _prefs.setInt(AppKey.sharedPreferencesKey.usageTimeInMinWhenLastPopup, state.value!.usageTimeInMin);
-      // #TODO remove this
-      debugPrint('openCount: ${state.value!.openCount}');
       state = AsyncData<AppStaticsState>(state.value!.copyWith(lastPopup: now, usageTimeInMinWhenLastPopuped: state.value!.usageTimeInMin));
     } else {
       debugPrint('AppStatics State is not initialized yet');
