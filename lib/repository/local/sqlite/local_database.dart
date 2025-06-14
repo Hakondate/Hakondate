@@ -46,17 +46,16 @@ class LocalDatabase extends _$LocalDatabase {
   LocalDatabase(LazyDatabase super.lazyDatabase);
 
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
 
   @override
   MigrationStrategy get migration {
     return MigrationStrategy(
+      // 引数 from には、以前の schemaVersion の値が渡される
       onUpgrade: (Migrator m, int from, ___) async {
-        print('onUpgrade');
         await customStatement('PRAGMA foreign_keys = OFF');
 
         await transaction(() async {
-          print('transaction started');
           /* migration logic here */
           if (from < 2) {
             await m.addColumn(schoolsTable, schoolsTable.authorizationRequired);
@@ -64,7 +63,6 @@ class LocalDatabase extends _$LocalDatabase {
             await m.addColumn(usersTable, usersTable.authorizedAt);
           }
           if (from < 3) {
-            print('Adding publishAllowed column');
             await m.addColumn(schoolsTable, schoolsTable.publishAllowed);
           }
         });
