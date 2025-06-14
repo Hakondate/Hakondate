@@ -29,6 +29,9 @@ class SchoolModel with _$SchoolModel {
     /// 認可が必要かどうか: trueの場合、認可が必要
     required bool authorizationRequired,
 
+    /// 公開が許可されているかどうか: falseの場合、アプリから閲覧できず，登録時の学校一覧にも表示されない
+    required bool publishAllowed,
+
     /// 認可のkeyの更新日時
     DateTime? authorizationKeyUpdatedAt,
   }) = _SchoolModel;
@@ -58,6 +61,7 @@ class SchoolModel with _$SchoolModel {
       lunchBlock: data['lunchBlock'] as int,
       authorizationRequired: data['authorizationRequired'] as bool,
       authorizationKeyUpdatedAt: (data['authorizationKeyUpdatedAt'] as Timestamp?)?.toDate(),
+      publishAllowed: data['publishAllowed'] as bool,
     );
   }
 
@@ -76,6 +80,7 @@ class SchoolModel with _$SchoolModel {
       lunchBlock: schema.lunchBlock,
       authorizationRequired: schema.authorizationRequired,
       authorizationKeyUpdatedAt: schema.authorizationKeyUpdatedAt,
+      publishAllowed: schema.publishAllowed,
     );
   }
 
@@ -87,6 +92,7 @@ class SchoolModel with _$SchoolModel {
         'lunchBlock': lunchBlock,
         'updatedAt': DateTime.now(),
         'authorizationRequired': authorizationRequired,
+        'publishAllowed': publishAllowed
       };
 
   SchoolsTableCompanion toDrift() => SchoolsTableCompanion(
@@ -98,5 +104,6 @@ class SchoolModel with _$SchoolModel {
         updateAt: Value<DateTime>(DateTime.now()),
         authorizationRequired: Value<bool>(authorizationRequired),
         authorizationKeyUpdatedAt: Value<DateTime?>(authorizationKeyUpdatedAt),
+        publishAllowed: Value<bool>(publishAllowed),
       );
 }

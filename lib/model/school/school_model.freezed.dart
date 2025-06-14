@@ -34,6 +34,9 @@ mixin _$SchoolModel {
   /// 認可が必要かどうか: trueの場合、認可が必要
   bool get authorizationRequired => throw _privateConstructorUsedError;
 
+  /// 公開が許可されているかどうか: falseの場合、アプリから閲覧できず，登録時の学校一覧にも表示されない
+  bool get publishAllowed => throw _privateConstructorUsedError;
+
   /// 認可のkeyの更新日時
   DateTime? get authorizationKeyUpdatedAt => throw _privateConstructorUsedError;
 
@@ -57,6 +60,7 @@ abstract class $SchoolModelCopyWith<$Res> {
       SchoolClassification classification,
       int lunchBlock,
       bool authorizationRequired,
+      bool publishAllowed,
       DateTime? authorizationKeyUpdatedAt});
 }
 
@@ -81,6 +85,7 @@ class _$SchoolModelCopyWithImpl<$Res, $Val extends SchoolModel>
     Object? classification = null,
     Object? lunchBlock = null,
     Object? authorizationRequired = null,
+    Object? publishAllowed = null,
     Object? authorizationKeyUpdatedAt = freezed,
   }) {
     return _then(_value.copyWith(
@@ -108,6 +113,10 @@ class _$SchoolModelCopyWithImpl<$Res, $Val extends SchoolModel>
           ? _value.authorizationRequired
           : authorizationRequired // ignore: cast_nullable_to_non_nullable
               as bool,
+      publishAllowed: null == publishAllowed
+          ? _value.publishAllowed
+          : publishAllowed // ignore: cast_nullable_to_non_nullable
+              as bool,
       authorizationKeyUpdatedAt: freezed == authorizationKeyUpdatedAt
           ? _value.authorizationKeyUpdatedAt
           : authorizationKeyUpdatedAt // ignore: cast_nullable_to_non_nullable
@@ -131,6 +140,7 @@ abstract class _$$SchoolModelImplCopyWith<$Res>
       SchoolClassification classification,
       int lunchBlock,
       bool authorizationRequired,
+      bool publishAllowed,
       DateTime? authorizationKeyUpdatedAt});
 }
 
@@ -153,6 +163,7 @@ class __$$SchoolModelImplCopyWithImpl<$Res>
     Object? classification = null,
     Object? lunchBlock = null,
     Object? authorizationRequired = null,
+    Object? publishAllowed = null,
     Object? authorizationKeyUpdatedAt = freezed,
   }) {
     return _then(_$SchoolModelImpl(
@@ -180,6 +191,10 @@ class __$$SchoolModelImplCopyWithImpl<$Res>
           ? _value.authorizationRequired
           : authorizationRequired // ignore: cast_nullable_to_non_nullable
               as bool,
+      publishAllowed: null == publishAllowed
+          ? _value.publishAllowed
+          : publishAllowed // ignore: cast_nullable_to_non_nullable
+              as bool,
       authorizationKeyUpdatedAt: freezed == authorizationKeyUpdatedAt
           ? _value.authorizationKeyUpdatedAt
           : authorizationKeyUpdatedAt // ignore: cast_nullable_to_non_nullable
@@ -198,6 +213,7 @@ class _$SchoolModelImpl extends _SchoolModel {
       required this.classification,
       required this.lunchBlock,
       required this.authorizationRequired,
+      required this.publishAllowed,
       this.authorizationKeyUpdatedAt})
       : super._();
 
@@ -225,13 +241,17 @@ class _$SchoolModelImpl extends _SchoolModel {
   @override
   final bool authorizationRequired;
 
+  /// 公開が許可されているかどうか: falseの場合、アプリから閲覧できず，登録時の学校一覧にも表示されない
+  @override
+  final bool publishAllowed;
+
   /// 認可のkeyの更新日時
   @override
   final DateTime? authorizationKeyUpdatedAt;
 
   @override
   String toString() {
-    return 'SchoolModel(id: $id, parentId: $parentId, name: $name, classification: $classification, lunchBlock: $lunchBlock, authorizationRequired: $authorizationRequired, authorizationKeyUpdatedAt: $authorizationKeyUpdatedAt)';
+    return 'SchoolModel(id: $id, parentId: $parentId, name: $name, classification: $classification, lunchBlock: $lunchBlock, authorizationRequired: $authorizationRequired, publishAllowed: $publishAllowed, authorizationKeyUpdatedAt: $authorizationKeyUpdatedAt)';
   }
 
   @override
@@ -249,6 +269,8 @@ class _$SchoolModelImpl extends _SchoolModel {
                 other.lunchBlock == lunchBlock) &&
             (identical(other.authorizationRequired, authorizationRequired) ||
                 other.authorizationRequired == authorizationRequired) &&
+            (identical(other.publishAllowed, publishAllowed) ||
+                other.publishAllowed == publishAllowed) &&
             (identical(other.authorizationKeyUpdatedAt,
                     authorizationKeyUpdatedAt) ||
                 other.authorizationKeyUpdatedAt == authorizationKeyUpdatedAt));
@@ -263,6 +285,7 @@ class _$SchoolModelImpl extends _SchoolModel {
       classification,
       lunchBlock,
       authorizationRequired,
+      publishAllowed,
       authorizationKeyUpdatedAt);
 
   /// Create a copy of SchoolModel
@@ -282,6 +305,7 @@ abstract class _SchoolModel extends SchoolModel {
       required final SchoolClassification classification,
       required final int lunchBlock,
       required final bool authorizationRequired,
+      required final bool publishAllowed,
       final DateTime? authorizationKeyUpdatedAt}) = _$SchoolModelImpl;
   const _SchoolModel._() : super._();
 
@@ -308,6 +332,10 @@ abstract class _SchoolModel extends SchoolModel {
   /// 認可が必要かどうか: trueの場合、認可が必要
   @override
   bool get authorizationRequired;
+
+  /// 公開が許可されているかどうか: falseの場合、アプリから閲覧できず，登録時の学校一覧にも表示されない
+  @override
+  bool get publishAllowed;
 
   /// 認可のkeyの更新日時
   @override

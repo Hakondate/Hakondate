@@ -52,14 +52,20 @@ class LocalDatabase extends _$LocalDatabase {
   MigrationStrategy get migration {
     return MigrationStrategy(
       onUpgrade: (Migrator m, int from, ___) async {
+        print('onUpgrade');
         await customStatement('PRAGMA foreign_keys = OFF');
 
         await transaction(() async {
-          /* migrarion logic here */
+          print('transaction started');
+          /* migration logic here */
           if (from < 2) {
             await m.addColumn(schoolsTable, schoolsTable.authorizationRequired);
             await m.addColumn(schoolsTable, schoolsTable.authorizationKeyUpdatedAt);
             await m.addColumn(usersTable, usersTable.authorizedAt);
+          }
+          if (from < 3) {
+            print('Adding publishAllowed column');
+            await m.addColumn(schoolsTable, schoolsTable.publishAllowed);
           }
         });
 

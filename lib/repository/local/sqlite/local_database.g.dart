@@ -70,6 +70,16 @@ class $SchoolsTableTable extends SchoolsTable
       GeneratedColumn<DateTime>(
           'authorization_key_updated_at', aliasedName, true,
           type: DriftSqlType.dateTime, requiredDuringInsert: false);
+  static const VerificationMeta _publishAllowedMeta =
+      const VerificationMeta('publishAllowed');
+  @override
+  late final GeneratedColumn<bool> publishAllowed = GeneratedColumn<bool>(
+      'publish_allowed', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'CHECK ("publish_allowed" IN (0, 1))'),
+      defaultValue: const Constant(true));
   @override
   List<GeneratedColumn> get $columns => [
         id,
@@ -80,7 +90,8 @@ class $SchoolsTableTable extends SchoolsTable
         createAt,
         updateAt,
         authorizationRequired,
-        authorizationKeyUpdatedAt
+        authorizationKeyUpdatedAt,
+        publishAllowed
       ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -144,6 +155,12 @@ class $SchoolsTableTable extends SchoolsTable
               data['authorization_key_updated_at']!,
               _authorizationKeyUpdatedAtMeta));
     }
+    if (data.containsKey('publish_allowed')) {
+      context.handle(
+          _publishAllowedMeta,
+          publishAllowed.isAcceptableOrUnknown(
+              data['publish_allowed']!, _publishAllowedMeta));
+    }
     return context;
   }
 
@@ -172,6 +189,8 @@ class $SchoolsTableTable extends SchoolsTable
       authorizationKeyUpdatedAt: attachedDatabase.typeMapping.read(
           DriftSqlType.dateTime,
           data['${effectivePrefix}authorization_key_updated_at']),
+      publishAllowed: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}publish_allowed'])!,
     );
   }
 
@@ -191,6 +210,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
   final DateTime updateAt;
   final bool authorizationRequired;
   final DateTime? authorizationKeyUpdatedAt;
+  final bool publishAllowed;
   const SchoolsSchema(
       {required this.id,
       required this.parentId,
@@ -200,7 +220,8 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       required this.createAt,
       required this.updateAt,
       required this.authorizationRequired,
-      this.authorizationKeyUpdatedAt});
+      this.authorizationKeyUpdatedAt,
+      required this.publishAllowed});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -216,6 +237,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       map['authorization_key_updated_at'] =
           Variable<DateTime>(authorizationKeyUpdatedAt);
     }
+    map['publish_allowed'] = Variable<bool>(publishAllowed);
     return map;
   }
 
@@ -233,6 +255,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
           authorizationKeyUpdatedAt == null && nullToAbsent
               ? const Value.absent()
               : Value(authorizationKeyUpdatedAt),
+      publishAllowed: Value(publishAllowed),
     );
   }
 
@@ -251,6 +274,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
           serializer.fromJson<bool>(json['authorizationRequired']),
       authorizationKeyUpdatedAt:
           serializer.fromJson<DateTime?>(json['authorizationKeyUpdatedAt']),
+      publishAllowed: serializer.fromJson<bool>(json['publishAllowed']),
     );
   }
   @override
@@ -267,6 +291,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       'authorizationRequired': serializer.toJson<bool>(authorizationRequired),
       'authorizationKeyUpdatedAt':
           serializer.toJson<DateTime?>(authorizationKeyUpdatedAt),
+      'publishAllowed': serializer.toJson<bool>(publishAllowed),
     };
   }
 
@@ -279,7 +304,8 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
           DateTime? createAt,
           DateTime? updateAt,
           bool? authorizationRequired,
-          Value<DateTime?> authorizationKeyUpdatedAt = const Value.absent()}) =>
+          Value<DateTime?> authorizationKeyUpdatedAt = const Value.absent(),
+          bool? publishAllowed}) =>
       SchoolsSchema(
         id: id ?? this.id,
         parentId: parentId ?? this.parentId,
@@ -293,6 +319,7 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
         authorizationKeyUpdatedAt: authorizationKeyUpdatedAt.present
             ? authorizationKeyUpdatedAt.value
             : this.authorizationKeyUpdatedAt,
+        publishAllowed: publishAllowed ?? this.publishAllowed,
       );
   SchoolsSchema copyWithCompanion(SchoolsTableCompanion data) {
     return SchoolsSchema(
@@ -312,6 +339,9 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       authorizationKeyUpdatedAt: data.authorizationKeyUpdatedAt.present
           ? data.authorizationKeyUpdatedAt.value
           : this.authorizationKeyUpdatedAt,
+      publishAllowed: data.publishAllowed.present
+          ? data.publishAllowed.value
+          : this.publishAllowed,
     );
   }
 
@@ -326,7 +356,8 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
           ..write('createAt: $createAt, ')
           ..write('updateAt: $updateAt, ')
           ..write('authorizationRequired: $authorizationRequired, ')
-          ..write('authorizationKeyUpdatedAt: $authorizationKeyUpdatedAt')
+          ..write('authorizationKeyUpdatedAt: $authorizationKeyUpdatedAt, ')
+          ..write('publishAllowed: $publishAllowed')
           ..write(')'))
         .toString();
   }
@@ -341,7 +372,8 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       createAt,
       updateAt,
       authorizationRequired,
-      authorizationKeyUpdatedAt);
+      authorizationKeyUpdatedAt,
+      publishAllowed);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -354,7 +386,8 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
           other.createAt == this.createAt &&
           other.updateAt == this.updateAt &&
           other.authorizationRequired == this.authorizationRequired &&
-          other.authorizationKeyUpdatedAt == this.authorizationKeyUpdatedAt);
+          other.authorizationKeyUpdatedAt == this.authorizationKeyUpdatedAt &&
+          other.publishAllowed == this.publishAllowed);
 }
 
 class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
@@ -367,6 +400,7 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
   final Value<DateTime> updateAt;
   final Value<bool> authorizationRequired;
   final Value<DateTime?> authorizationKeyUpdatedAt;
+  final Value<bool> publishAllowed;
   const SchoolsTableCompanion({
     this.id = const Value.absent(),
     this.parentId = const Value.absent(),
@@ -377,6 +411,7 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
     this.updateAt = const Value.absent(),
     this.authorizationRequired = const Value.absent(),
     this.authorizationKeyUpdatedAt = const Value.absent(),
+    this.publishAllowed = const Value.absent(),
   });
   SchoolsTableCompanion.insert({
     this.id = const Value.absent(),
@@ -388,6 +423,7 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
     this.updateAt = const Value.absent(),
     this.authorizationRequired = const Value.absent(),
     this.authorizationKeyUpdatedAt = const Value.absent(),
+    this.publishAllowed = const Value.absent(),
   })  : parentId = Value(parentId),
         name = Value(name),
         lunchBlock = Value(lunchBlock),
@@ -402,6 +438,7 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
     Expression<DateTime>? updateAt,
     Expression<bool>? authorizationRequired,
     Expression<DateTime>? authorizationKeyUpdatedAt,
+    Expression<bool>? publishAllowed,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -415,6 +452,7 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
         'authorization_required': authorizationRequired,
       if (authorizationKeyUpdatedAt != null)
         'authorization_key_updated_at': authorizationKeyUpdatedAt,
+      if (publishAllowed != null) 'publish_allowed': publishAllowed,
     });
   }
 
@@ -427,7 +465,8 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
       Value<DateTime>? createAt,
       Value<DateTime>? updateAt,
       Value<bool>? authorizationRequired,
-      Value<DateTime?>? authorizationKeyUpdatedAt}) {
+      Value<DateTime?>? authorizationKeyUpdatedAt,
+      Value<bool>? publishAllowed}) {
     return SchoolsTableCompanion(
       id: id ?? this.id,
       parentId: parentId ?? this.parentId,
@@ -440,6 +479,7 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
           authorizationRequired ?? this.authorizationRequired,
       authorizationKeyUpdatedAt:
           authorizationKeyUpdatedAt ?? this.authorizationKeyUpdatedAt,
+      publishAllowed: publishAllowed ?? this.publishAllowed,
     );
   }
 
@@ -475,6 +515,9 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
       map['authorization_key_updated_at'] =
           Variable<DateTime>(authorizationKeyUpdatedAt.value);
     }
+    if (publishAllowed.present) {
+      map['publish_allowed'] = Variable<bool>(publishAllowed.value);
+    }
     return map;
   }
 
@@ -489,7 +532,8 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
           ..write('createAt: $createAt, ')
           ..write('updateAt: $updateAt, ')
           ..write('authorizationRequired: $authorizationRequired, ')
-          ..write('authorizationKeyUpdatedAt: $authorizationKeyUpdatedAt')
+          ..write('authorizationKeyUpdatedAt: $authorizationKeyUpdatedAt, ')
+          ..write('publishAllowed: $publishAllowed')
           ..write(')'))
         .toString();
   }
@@ -3686,6 +3730,7 @@ typedef $$SchoolsTableTableCreateCompanionBuilder = SchoolsTableCompanion
   Value<DateTime> updateAt,
   Value<bool> authorizationRequired,
   Value<DateTime?> authorizationKeyUpdatedAt,
+  Value<bool> publishAllowed,
 });
 typedef $$SchoolsTableTableUpdateCompanionBuilder = SchoolsTableCompanion
     Function({
@@ -3698,6 +3743,7 @@ typedef $$SchoolsTableTableUpdateCompanionBuilder = SchoolsTableCompanion
   Value<DateTime> updateAt,
   Value<bool> authorizationRequired,
   Value<DateTime?> authorizationKeyUpdatedAt,
+  Value<bool> publishAllowed,
 });
 
 final class $$SchoolsTableTableReferences
@@ -3772,6 +3818,10 @@ class $$SchoolsTableTableFilterComposer
 
   ColumnFilters<DateTime> get authorizationKeyUpdatedAt => $composableBuilder(
       column: $table.authorizationKeyUpdatedAt,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<bool> get publishAllowed => $composableBuilder(
+      column: $table.publishAllowed,
       builder: (column) => ColumnFilters(column));
 
   Expression<bool> menusTableRefs(
@@ -3855,6 +3905,10 @@ class $$SchoolsTableTableOrderingComposer
   ColumnOrderings<DateTime> get authorizationKeyUpdatedAt => $composableBuilder(
       column: $table.authorizationKeyUpdatedAt,
       builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<bool> get publishAllowed => $composableBuilder(
+      column: $table.publishAllowed,
+      builder: (column) => ColumnOrderings(column));
 }
 
 class $$SchoolsTableTableAnnotationComposer
@@ -3892,6 +3946,9 @@ class $$SchoolsTableTableAnnotationComposer
 
   GeneratedColumn<DateTime> get authorizationKeyUpdatedAt => $composableBuilder(
       column: $table.authorizationKeyUpdatedAt, builder: (column) => column);
+
+  GeneratedColumn<bool> get publishAllowed => $composableBuilder(
+      column: $table.publishAllowed, builder: (column) => column);
 
   Expression<T> menusTableRefs<T extends Object>(
       Expression<T> Function($$MenusTableTableAnnotationComposer a) f) {
@@ -3968,6 +4025,7 @@ class $$SchoolsTableTableTableManager extends RootTableManager<
             Value<DateTime> updateAt = const Value.absent(),
             Value<bool> authorizationRequired = const Value.absent(),
             Value<DateTime?> authorizationKeyUpdatedAt = const Value.absent(),
+            Value<bool> publishAllowed = const Value.absent(),
           }) =>
               SchoolsTableCompanion(
             id: id,
@@ -3979,6 +4037,7 @@ class $$SchoolsTableTableTableManager extends RootTableManager<
             updateAt: updateAt,
             authorizationRequired: authorizationRequired,
             authorizationKeyUpdatedAt: authorizationKeyUpdatedAt,
+            publishAllowed: publishAllowed,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
@@ -3990,6 +4049,7 @@ class $$SchoolsTableTableTableManager extends RootTableManager<
             Value<DateTime> updateAt = const Value.absent(),
             Value<bool> authorizationRequired = const Value.absent(),
             Value<DateTime?> authorizationKeyUpdatedAt = const Value.absent(),
+            Value<bool> publishAllowed = const Value.absent(),
           }) =>
               SchoolsTableCompanion.insert(
             id: id,
@@ -4001,6 +4061,7 @@ class $$SchoolsTableTableTableManager extends RootTableManager<
             updateAt: updateAt,
             authorizationRequired: authorizationRequired,
             authorizationKeyUpdatedAt: authorizationKeyUpdatedAt,
+            publishAllowed: publishAllowed,
           ),
           withReferenceMapper: (p0) => p0
               .map((e) => (
