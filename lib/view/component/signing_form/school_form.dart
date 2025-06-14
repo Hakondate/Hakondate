@@ -45,11 +45,11 @@ class SchoolForm extends ConsumerWidget {
         SettingLabel(
           title: '学校',
           dialList: (state is AsyncData<SignupState>)
-              ? state.value.schools.where((SchoolModel school) => school.publishAllowed).map((SchoolModel school) => school.name).toList()
+              ? _getAvailableSchools(state).map((SchoolModel school) => school.name).toList()
               : <String>[],
           completed: (int index) {
             if (state is! AsyncData<SignupState>) return;
-            final int id = state.value.schools[index].id;
+            final int id = _getAvailableSchools(state)[index].id;
             ref.read(signupViewModelProvider.notifier).updateSchool(id);
           },
           trailing: (state is AsyncData<SignupState>) ? state.value.schoolTrailing : '',
@@ -64,5 +64,12 @@ class SchoolForm extends ConsumerWidget {
         const SizedBox(height: PaddingSize.normal),
       ],
     );
+  }
+
+  List<SchoolModel> _getAvailableSchools(AsyncValue<SignupState> state) {
+    if (state is AsyncData<SignupState>) {
+      return state.value.schools.where((SchoolModel school) => school.publishAllowed).toList();
+    }
+    return <SchoolModel>[];
   }
 }
