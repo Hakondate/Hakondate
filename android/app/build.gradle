@@ -46,19 +46,39 @@ if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
 
-task selectGoogleServicesJson(type: Copy) {
-    from "src/firebase/${dartEnvironmentVariables.FLAVOR}/google-services.json"
-    into './'
+task copySources(type: Copy) {
+    from "src/${dartEnvironmentVariables.FLAVOR}/res"
+    into 'src/main/res'
+}
+
+task selectGoogleServicesJson {
+    doFirst {
+        copy {
+            from "src/firebase/${dartEnvironmentVariables.FLAVOR}/google-services.json"
+            into './'
+        }
+    }
 }
 
 tasks.whenTaskAdded { task ->
+    task.dependsOn copySources
     if (task.name == 'processDebugGoogleServices' || task.name == 'processReleaseGoogleServices') {
         task.dependsOn selectGoogleServicesJson
     }
 }
 
 android {
-    compileSdkVersion 34
+    namespace 'org.hakondate'
+    compileSdkVersion 35
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -67,7 +87,7 @@ android {
     defaultConfig {
         applicationId "org.hakondate"
         minSdkVersion 28
-        targetSdkVersion 34
+        targetSdkVersion 35
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         if (dartEnvironmentVariables.FLAVOR != 'prod') {
