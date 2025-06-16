@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,159 +10,59 @@ part of 'letter_metadata_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$LetterMetadataModel {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String title, String path, int parentId, DateTime updateAt)
-        data,
-    required TResult Function() loading,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String title, String path, int parentId, DateTime updateAt)?
-        data,
-    TResult? Function()? loading,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String title, String path, int parentId, DateTime updateAt)?
-        data,
-    TResult Function()? loading,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LetterMetadataModelData value) data,
-    required TResult Function(LetterMetadataModelLoading value) loading,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LetterMetadataModelData value)? data,
-    TResult? Function(LetterMetadataModelLoading value)? loading,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LetterMetadataModelData value)? data,
-    TResult Function(LetterMetadataModelLoading value)? loading,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $LetterMetadataModelCopyWith<$Res> {
-  factory $LetterMetadataModelCopyWith(
-          LetterMetadataModel value, $Res Function(LetterMetadataModel) then) =
-      _$LetterMetadataModelCopyWithImpl<$Res, LetterMetadataModel>;
-}
-
-/// @nodoc
-class _$LetterMetadataModelCopyWithImpl<$Res, $Val extends LetterMetadataModel>
-    implements $LetterMetadataModelCopyWith<$Res> {
-  _$LetterMetadataModelCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of LetterMetadataModel
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-abstract class _$$LetterMetadataModelDataImplCopyWith<$Res> {
-  factory _$$LetterMetadataModelDataImplCopyWith(
-          _$LetterMetadataModelDataImpl value,
-          $Res Function(_$LetterMetadataModelDataImpl) then) =
-      __$$LetterMetadataModelDataImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String title, String path, int parentId, DateTime updateAt});
-}
-
-/// @nodoc
-class __$$LetterMetadataModelDataImplCopyWithImpl<$Res>
-    extends _$LetterMetadataModelCopyWithImpl<$Res,
-        _$LetterMetadataModelDataImpl>
-    implements _$$LetterMetadataModelDataImplCopyWith<$Res> {
-  __$$LetterMetadataModelDataImplCopyWithImpl(
-      _$LetterMetadataModelDataImpl _value,
-      $Res Function(_$LetterMetadataModelDataImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of LetterMetadataModel
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? title = null,
-    Object? path = null,
-    Object? parentId = null,
-    Object? updateAt = null,
-  }) {
-    return _then(_$LetterMetadataModelDataImpl(
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      path: null == path
-          ? _value.path
-          : path // ignore: cast_nullable_to_non_nullable
-              as String,
-      parentId: null == parentId
-          ? _value.parentId
-          : parentId // ignore: cast_nullable_to_non_nullable
-              as int,
-      updateAt: null == updateAt
-          ? _value.updateAt
-          : updateAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-    ));
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is LetterMetadataModel);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'LetterMetadataModel()';
   }
 }
 
 /// @nodoc
+class $LetterMetadataModelCopyWith<$Res> {
+  $LetterMetadataModelCopyWith(
+      LetterMetadataModel _, $Res Function(LetterMetadataModel) __);
+}
 
-class _$LetterMetadataModelDataImpl implements LetterMetadataModelData {
-  const _$LetterMetadataModelDataImpl(
+/// @nodoc
+
+class LetterMetadataModelData implements LetterMetadataModel {
+  const LetterMetadataModelData(
       {required this.title,
       required this.path,
       required this.parentId,
       required this.updateAt});
 
-  @override
   final String title;
-  @override
   final String path;
-  @override
   final int parentId;
-  @override
   final DateTime updateAt;
 
-  @override
-  String toString() {
-    return 'LetterMetadataModel.data(title: $title, path: $path, parentId: $parentId, updateAt: $updateAt)';
-  }
+  /// Create a copy of LetterMetadataModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $LetterMetadataModelDataCopyWith<LetterMetadataModelData> get copyWith =>
+      _$LetterMetadataModelDataCopyWithImpl<LetterMetadataModelData>(
+          this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LetterMetadataModelDataImpl &&
+            other is LetterMetadataModelData &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.path, path) || other.path == path) &&
             (identical(other.parentId, parentId) ||
@@ -173,214 +74,79 @@ class _$LetterMetadataModelDataImpl implements LetterMetadataModelData {
   @override
   int get hashCode => Object.hash(runtimeType, title, path, parentId, updateAt);
 
-  /// Create a copy of LetterMetadataModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LetterMetadataModelDataImplCopyWith<_$LetterMetadataModelDataImpl>
-      get copyWith => __$$LetterMetadataModelDataImplCopyWithImpl<
-          _$LetterMetadataModelDataImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String title, String path, int parentId, DateTime updateAt)
-        data,
-    required TResult Function() loading,
-  }) {
-    return data(title, path, parentId, updateAt);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String title, String path, int parentId, DateTime updateAt)?
-        data,
-    TResult? Function()? loading,
-  }) {
-    return data?.call(title, path, parentId, updateAt);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String title, String path, int parentId, DateTime updateAt)?
-        data,
-    TResult Function()? loading,
-    required TResult orElse(),
-  }) {
-    if (data != null) {
-      return data(title, path, parentId, updateAt);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LetterMetadataModelData value) data,
-    required TResult Function(LetterMetadataModelLoading value) loading,
-  }) {
-    return data(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LetterMetadataModelData value)? data,
-    TResult? Function(LetterMetadataModelLoading value)? loading,
-  }) {
-    return data?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LetterMetadataModelData value)? data,
-    TResult Function(LetterMetadataModelLoading value)? loading,
-    required TResult orElse(),
-  }) {
-    if (data != null) {
-      return data(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class LetterMetadataModelData implements LetterMetadataModel {
-  const factory LetterMetadataModelData(
-      {required final String title,
-      required final String path,
-      required final int parentId,
-      required final DateTime updateAt}) = _$LetterMetadataModelDataImpl;
-
-  String get title;
-  String get path;
-  int get parentId;
-  DateTime get updateAt;
-
-  /// Create a copy of LetterMetadataModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LetterMetadataModelDataImplCopyWith<_$LetterMetadataModelDataImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$LetterMetadataModelLoadingImplCopyWith<$Res> {
-  factory _$$LetterMetadataModelLoadingImplCopyWith(
-          _$LetterMetadataModelLoadingImpl value,
-          $Res Function(_$LetterMetadataModelLoadingImpl) then) =
-      __$$LetterMetadataModelLoadingImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$LetterMetadataModelLoadingImplCopyWithImpl<$Res>
-    extends _$LetterMetadataModelCopyWithImpl<$Res,
-        _$LetterMetadataModelLoadingImpl>
-    implements _$$LetterMetadataModelLoadingImplCopyWith<$Res> {
-  __$$LetterMetadataModelLoadingImplCopyWithImpl(
-      _$LetterMetadataModelLoadingImpl _value,
-      $Res Function(_$LetterMetadataModelLoadingImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of LetterMetadataModel
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$LetterMetadataModelLoadingImpl implements LetterMetadataModelLoading {
-  const _$LetterMetadataModelLoadingImpl();
-
   @override
   String toString() {
-    return 'LetterMetadataModel.loading()';
+    return 'LetterMetadataModel.data(title: $title, path: $path, parentId: $parentId, updateAt: $updateAt)';
   }
+}
+
+/// @nodoc
+abstract mixin class $LetterMetadataModelDataCopyWith<$Res>
+    implements $LetterMetadataModelCopyWith<$Res> {
+  factory $LetterMetadataModelDataCopyWith(LetterMetadataModelData value,
+          $Res Function(LetterMetadataModelData) _then) =
+      _$LetterMetadataModelDataCopyWithImpl;
+  @useResult
+  $Res call({String title, String path, int parentId, DateTime updateAt});
+}
+
+/// @nodoc
+class _$LetterMetadataModelDataCopyWithImpl<$Res>
+    implements $LetterMetadataModelDataCopyWith<$Res> {
+  _$LetterMetadataModelDataCopyWithImpl(this._self, this._then);
+
+  final LetterMetadataModelData _self;
+  final $Res Function(LetterMetadataModelData) _then;
+
+  /// Create a copy of LetterMetadataModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? title = null,
+    Object? path = null,
+    Object? parentId = null,
+    Object? updateAt = null,
+  }) {
+    return _then(LetterMetadataModelData(
+      title: null == title
+          ? _self.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      path: null == path
+          ? _self.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String,
+      parentId: null == parentId
+          ? _self.parentId
+          : parentId // ignore: cast_nullable_to_non_nullable
+              as int,
+      updateAt: null == updateAt
+          ? _self.updateAt
+          : updateAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
+}
+
+/// @nodoc
+
+class LetterMetadataModelLoading implements LetterMetadataModel {
+  const LetterMetadataModelLoading();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LetterMetadataModelLoadingImpl);
+            other is LetterMetadataModelLoading);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
 
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String title, String path, int parentId, DateTime updateAt)
-        data,
-    required TResult Function() loading,
-  }) {
-    return loading();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String title, String path, int parentId, DateTime updateAt)?
-        data,
-    TResult? Function()? loading,
-  }) {
-    return loading?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String title, String path, int parentId, DateTime updateAt)?
-        data,
-    TResult Function()? loading,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LetterMetadataModelData value) data,
-    required TResult Function(LetterMetadataModelLoading value) loading,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LetterMetadataModelData value)? data,
-    TResult? Function(LetterMetadataModelLoading value)? loading,
-  }) {
-    return loading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LetterMetadataModelData value)? data,
-    TResult Function(LetterMetadataModelLoading value)? loading,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(this);
-    }
-    return orElse();
+  String toString() {
+    return 'LetterMetadataModel.loading()';
   }
 }
 
-abstract class LetterMetadataModelLoading implements LetterMetadataModel {
-  const factory LetterMetadataModelLoading() = _$LetterMetadataModelLoadingImpl;
-}
+// dart format on
