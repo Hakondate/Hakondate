@@ -1,17 +1,18 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:routemaster/routemaster.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import 'package:hakondate/constant/app_url.dart';
 import 'package:hakondate/constant/review_popup_condition.dart';
 import 'package:hakondate/state/app_preferences/app_preferences_state.dart';
-
 import 'package:hakondate/state/app_statics/app_statics_state.dart';
 import 'package:hakondate/view/component/dialog/hakondate_dialog/hakondate_dialog.dart';
 import 'package:hakondate/view_model/multi_page/app_preferences/app_preferences_view_model.dart';
 import 'package:hakondate/view_model/multi_page/app_statics/app_statics_view_model.dart';
-import 'package:routemaster/routemaster.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ReviewPopup extends StatelessWidget {
   const ReviewPopup({super.key});
