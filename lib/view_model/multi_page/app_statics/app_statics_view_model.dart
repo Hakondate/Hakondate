@@ -30,7 +30,7 @@ class AppStaticsViewModel extends _$AppStaticsViewModel {
     final AppStaticsState initialState = AppStaticsState(
       openCount: (_prefs.getInt(AppKey.sharedPreferencesKey.appOpenCount) ?? 0) + 1,
       usageTimeInSec: _prefs.getInt(AppKey.sharedPreferencesKey.usageTimeInSec) ?? 0,
-      lastPopup: lastPopupStr != null? DateTime.parse(lastPopupStr) : null,
+      lastPopup: lastPopupStr != null ? DateTime.parse(lastPopupStr) : null,
       usageTimeInMinWhenLastPopuped: usageTimeInMinWhenLastPopuped,
     );
     await _prefs.setInt(AppKey.sharedPreferencesKey.appOpenCount, initialState.openCount);
