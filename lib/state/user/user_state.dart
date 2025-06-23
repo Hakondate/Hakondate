@@ -8,7 +8,7 @@ part 'user_state.freezed.dart';
 part 'school_grade.dart';
 
 @freezed
-class UserState with _$UserState {
+abstract class UserState with _$UserState {
   const factory UserState({
     UserModel? currentUser,
   }) = _UserState;
