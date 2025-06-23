@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,75 +10,55 @@ part of 'app_preferences_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AppPreferencesState {
-  bool get isReviewPopupDenied => throw _privateConstructorUsedError;
+  bool get isReviewPopupDenied;
 
   /// Create a copy of AppPreferencesState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $AppPreferencesStateCopyWith<AppPreferencesState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $AppPreferencesStateCopyWith<$Res> {
-  factory $AppPreferencesStateCopyWith(
-          AppPreferencesState value, $Res Function(AppPreferencesState) then) =
-      _$AppPreferencesStateCopyWithImpl<$Res, AppPreferencesState>;
-  @useResult
-  $Res call({bool isReviewPopupDenied});
-}
-
-/// @nodoc
-class _$AppPreferencesStateCopyWithImpl<$Res, $Val extends AppPreferencesState>
-    implements $AppPreferencesStateCopyWith<$Res> {
-  _$AppPreferencesStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of AppPreferencesState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $AppPreferencesStateCopyWith<AppPreferencesState> get copyWith =>
+      _$AppPreferencesStateCopyWithImpl<AppPreferencesState>(
+          this as AppPreferencesState, _$identity);
+
   @override
-  $Res call({
-    Object? isReviewPopupDenied = null,
-  }) {
-    return _then(_value.copyWith(
-      isReviewPopupDenied: null == isReviewPopupDenied
-          ? _value.isReviewPopupDenied
-          : isReviewPopupDenied // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is AppPreferencesState &&
+            (identical(other.isReviewPopupDenied, isReviewPopupDenied) ||
+                other.isReviewPopupDenied == isReviewPopupDenied));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isReviewPopupDenied);
+
+  @override
+  String toString() {
+    return 'AppPreferencesState(isReviewPopupDenied: $isReviewPopupDenied)';
   }
 }
 
 /// @nodoc
-abstract class _$$AppPreferencesStateImplCopyWith<$Res>
-    implements $AppPreferencesStateCopyWith<$Res> {
-  factory _$$AppPreferencesStateImplCopyWith(_$AppPreferencesStateImpl value,
-          $Res Function(_$AppPreferencesStateImpl) then) =
-      __$$AppPreferencesStateImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $AppPreferencesStateCopyWith<$Res> {
+  factory $AppPreferencesStateCopyWith(
+          AppPreferencesState value, $Res Function(AppPreferencesState) _then) =
+      _$AppPreferencesStateCopyWithImpl;
   @useResult
   $Res call({bool isReviewPopupDenied});
 }
 
 /// @nodoc
-class __$$AppPreferencesStateImplCopyWithImpl<$Res>
-    extends _$AppPreferencesStateCopyWithImpl<$Res, _$AppPreferencesStateImpl>
-    implements _$$AppPreferencesStateImplCopyWith<$Res> {
-  __$$AppPreferencesStateImplCopyWithImpl(_$AppPreferencesStateImpl _value,
-      $Res Function(_$AppPreferencesStateImpl) _then)
-      : super(_value, _then);
+class _$AppPreferencesStateCopyWithImpl<$Res>
+    implements $AppPreferencesStateCopyWith<$Res> {
+  _$AppPreferencesStateCopyWithImpl(this._self, this._then);
+
+  final AppPreferencesState _self;
+  final $Res Function(AppPreferencesState) _then;
 
   /// Create a copy of AppPreferencesState
   /// with the given fields replaced by the non-null parameter values.
@@ -86,9 +67,9 @@ class __$$AppPreferencesStateImplCopyWithImpl<$Res>
   $Res call({
     Object? isReviewPopupDenied = null,
   }) {
-    return _then(_$AppPreferencesStateImpl(
+    return _then(_self.copyWith(
       isReviewPopupDenied: null == isReviewPopupDenied
-          ? _value.isReviewPopupDenied
+          ? _self.isReviewPopupDenied
           : isReviewPopupDenied // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
@@ -97,23 +78,27 @@ class __$$AppPreferencesStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AppPreferencesStateImpl implements _AppPreferencesState {
-  const _$AppPreferencesStateImpl({this.isReviewPopupDenied = false});
+class _AppPreferencesState implements AppPreferencesState {
+  const _AppPreferencesState({this.isReviewPopupDenied = false});
 
   @override
   @JsonKey()
   final bool isReviewPopupDenied;
 
+  /// Create a copy of AppPreferencesState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'AppPreferencesState(isReviewPopupDenied: $isReviewPopupDenied)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$AppPreferencesStateCopyWith<_AppPreferencesState> get copyWith =>
+      __$AppPreferencesStateCopyWithImpl<_AppPreferencesState>(
+          this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AppPreferencesStateImpl &&
+            other is _AppPreferencesState &&
             (identical(other.isReviewPopupDenied, isReviewPopupDenied) ||
                 other.isReviewPopupDenied == isReviewPopupDenied));
   }
@@ -121,27 +106,45 @@ class _$AppPreferencesStateImpl implements _AppPreferencesState {
   @override
   int get hashCode => Object.hash(runtimeType, isReviewPopupDenied);
 
+  @override
+  String toString() {
+    return 'AppPreferencesState(isReviewPopupDenied: $isReviewPopupDenied)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$AppPreferencesStateCopyWith<$Res>
+    implements $AppPreferencesStateCopyWith<$Res> {
+  factory _$AppPreferencesStateCopyWith(_AppPreferencesState value,
+          $Res Function(_AppPreferencesState) _then) =
+      __$AppPreferencesStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call({bool isReviewPopupDenied});
+}
+
+/// @nodoc
+class __$AppPreferencesStateCopyWithImpl<$Res>
+    implements _$AppPreferencesStateCopyWith<$Res> {
+  __$AppPreferencesStateCopyWithImpl(this._self, this._then);
+
+  final _AppPreferencesState _self;
+  final $Res Function(_AppPreferencesState) _then;
+
   /// Create a copy of AppPreferencesState
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$AppPreferencesStateImplCopyWith<_$AppPreferencesStateImpl> get copyWith =>
-      __$$AppPreferencesStateImplCopyWithImpl<_$AppPreferencesStateImpl>(
-          this, _$identity);
+  $Res call({
+    Object? isReviewPopupDenied = null,
+  }) {
+    return _then(_AppPreferencesState(
+      isReviewPopupDenied: null == isReviewPopupDenied
+          ? _self.isReviewPopupDenied
+          : isReviewPopupDenied // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
-abstract class _AppPreferencesState implements AppPreferencesState {
-  const factory _AppPreferencesState({final bool isReviewPopupDenied}) =
-      _$AppPreferencesStateImpl;
-
-  @override
-  bool get isReviewPopupDenied;
-
-  /// Create a copy of AppPreferencesState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AppPreferencesStateImplCopyWith<_$AppPreferencesStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on
