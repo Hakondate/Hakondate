@@ -6,8 +6,8 @@ part of 'nutrients_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$NutrientsModelImpl _$$NutrientsModelImplFromJson(Map<String, dynamic> json) =>
-    _$NutrientsModelImpl(
+_NutrientsModel _$NutrientsModelFromJson(Map<String, dynamic> json) =>
+    _NutrientsModel(
       energy: (json['energy'] as num?)?.toDouble() ?? 0.0,
       protein: (json['protein'] as num?)?.toDouble() ?? 0.0,
       lipid: (json['lipid'] as num?)?.toDouble() ?? 0.0,
@@ -25,8 +25,7 @@ _$NutrientsModelImpl _$$NutrientsModelImplFromJson(Map<String, dynamic> json) =>
       salt: (json['salt'] as num?)?.toDouble() ?? 0.0,
     );
 
-Map<String, dynamic> _$$NutrientsModelImplToJson(
-        _$NutrientsModelImpl instance) =>
+Map<String, dynamic> _$NutrientsModelToJson(_NutrientsModel instance) =>
     <String, dynamic>{
       'energy': instance.energy,
       'protein': instance.protein,

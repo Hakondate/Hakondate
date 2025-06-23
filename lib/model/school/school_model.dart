@@ -9,7 +9,7 @@ part 'school_model.freezed.dart';
 part 'school_classification.dart';
 
 @freezed
-class SchoolModel with _$SchoolModel {
+abstract class SchoolModel with _$SchoolModel {
   const factory SchoolModel({
     /// ID
     required int id,

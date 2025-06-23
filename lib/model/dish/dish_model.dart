@@ -8,7 +8,7 @@ part 'dish_model.freezed.dart';
 part 'dish_category.dart';
 
 @freezed
-class DishModel with _$DishModel {
+abstract class DishModel with _$DishModel {
   const factory DishModel({
     /// 料理名
     required String name,
