@@ -92,7 +92,6 @@ const allDependencies = <Package>[
   _leak_tracker_flutter_testing,
   _leak_tracker_testing,
   _logging,
-  _macros,
   _matcher,
   _material_color_utilities,
   _meta,
@@ -270,13 +269,13 @@ class PackageRef {
   Package resolve() => allDependencies.firstWhere((d) => d.name == name);
 }
 
-/// _fe_analyzer_shared 78.0.0
+/// _fe_analyzer_shared 82.0.0
 const __fe_analyzer_shared = Package(
     name: '_fe_analyzer_shared',
     description: 'Logic that is shared between the front_end and analyzer packages.',
     repository: 'https://github.com/dart-lang/sdk/tree/main/pkg/_fe_analyzer_shared',
     authors: [],
-    version: '78.0.0',
+    version: '82.0.0',
     license: '''Copyright 2019, the Dart project authors.
 
 Redistribution and use in source and binary forms, with or without
@@ -309,14 +308,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('meta')]
   );
 
-/// _flutterfire_internals 1.3.50
+/// _flutterfire_internals 1.3.56
 const __flutterfire_internals = Package(
     name: '_flutterfire_internals',
     description: 'A package hosting Dart code shared between FlutterFire plugins.',
     homepage: 'https://firebase.google.com/docs/firestore',
     repository: 'https://github.com/firebase/flutterfire/tree/main/packages/_flutterfire_internals',
     authors: [],
-    version: '1.3.50',
+    version: '1.3.56',
     license: '''Copyright 2017, the Chromium project authors. All rights reserved.
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -348,13 +347,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('collection'), PackageRef('firebase_core'), PackageRef('firebase_core_platform_interface'), PackageRef('flutter'), PackageRef('meta')]
   );
 
-/// analyzer 7.1.0
+/// analyzer 7.4.5
 const _analyzer = Package(
     name: 'analyzer',
     description: 'This package provides a library that performs static analysis of Dart code.',
     repository: 'https://github.com/dart-lang/sdk/tree/main/pkg/analyzer',
     authors: [],
-    version: '7.1.0',
+    version: '7.4.5',
     license: '''Copyright 2013, the Dart project authors.
 
 Redistribution and use in source and binary forms, with or without
@@ -384,16 +383,16 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('_fe_analyzer_shared'), PackageRef('collection'), PackageRef('convert'), PackageRef('crypto'), PackageRef('glob'), PackageRef('macros'), PackageRef('meta'), PackageRef('package_config'), PackageRef('path'), PackageRef('pub_semver'), PackageRef('source_span'), PackageRef('watcher'), PackageRef('yaml')]
+    dependencies: [PackageRef('_fe_analyzer_shared'), PackageRef('collection'), PackageRef('convert'), PackageRef('crypto'), PackageRef('glob'), PackageRef('meta'), PackageRef('package_config'), PackageRef('path'), PackageRef('pub_semver'), PackageRef('source_span'), PackageRef('watcher'), PackageRef('yaml')]
   );
 
-/// analyzer_plugin 0.12.0
+/// analyzer_plugin 0.13.1
 const _analyzer_plugin = Package(
     name: 'analyzer_plugin',
     description: 'A framework and support code for building plugins for the analysis server.',
     repository: 'https://github.com/dart-lang/sdk/tree/main/pkg/analyzer_plugin',
     authors: [],
-    version: '0.12.0',
+    version: '0.13.1',
     license: '''Copyright 2017, the Dart project authors.
 
 Redistribution and use in source and binary forms, with or without
@@ -423,7 +422,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('analyzer'), PackageRef('collection'), PackageRef('dart_style'), PackageRef('meta'), PackageRef('pub_semver'), PackageRef('yaml'), PackageRef('path')]
+    dependencies: [PackageRef('analyzer'), PackageRef('collection'), PackageRef('dart_style'), PackageRef('pub_semver'), PackageRef('yaml'), PackageRef('path')]
   );
 
 /// ansicolor 2.0.3
@@ -1719,14 +1718,14 @@ const _clock = Package(
     dependencies: []
   );
 
-/// cloud_firestore 5.6.2
+/// cloud_firestore 5.6.9
 const _cloud_firestore = Package(
     name: 'cloud_firestore',
     description: 'Flutter plugin for Cloud Firestore, a cloud-hosted, noSQL database with live synchronization and offline support on Android and iOS.',
     homepage: 'https://firebase.google.com/docs/firestore',
     repository: 'https://github.com/firebase/flutterfire/tree/main/packages/cloud_firestore/cloud_firestore',
     authors: [],
-    version: '5.6.2',
+    version: '5.6.9',
     license: '''Copyright 2017, the Chromium project authors. All rights reserved.
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -1758,14 +1757,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('cloud_firestore_platform_interface'), PackageRef('cloud_firestore_web'), PackageRef('collection'), PackageRef('firebase_core'), PackageRef('firebase_core_platform_interface'), PackageRef('flutter'), PackageRef('meta')]
   );
 
-/// cloud_firestore_platform_interface 6.6.2
+/// cloud_firestore_platform_interface 6.6.9
 const _cloud_firestore_platform_interface = Package(
     name: 'cloud_firestore_platform_interface',
     description: 'A common platform interface for the cloud_firestore plugin.',
     homepage: 'https://github.com/firebase/flutterfire/tree/main/packages/cloud_firestore/cloud_firestore_platform_interface',
     repository: 'https://github.com/firebase/flutterfire/tree/main/packages/cloud_firestore/cloud_firestore_platform_interface',
     authors: [],
-    version: '6.6.2',
+    version: '6.6.9',
     license: '''Copyright 2017, the Chromium project authors. All rights reserved.
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -1797,14 +1796,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('_flutterfire_internals'), PackageRef('collection'), PackageRef('firebase_core'), PackageRef('flutter'), PackageRef('meta'), PackageRef('plugin_platform_interface')]
   );
 
-/// cloud_firestore_web 4.4.2
+/// cloud_firestore_web 4.4.9
 const _cloud_firestore_web = Package(
     name: 'cloud_firestore_web',
     description: 'The web implementation of cloud_firestore',
     homepage: 'https://github.com/firebase/flutterfire/tree/main/packages/cloud_firestore/cloud_firestore_web',
     repository: 'https://github.com/firebase/flutterfire/tree/main/packages/cloud_firestore/cloud_firestore_web',
     authors: [],
-    version: '4.4.2',
+    version: '4.4.9',
     license: '''// Copyright 2017 The Chromium Authors. All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -2064,13 +2063,13 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.''',
     dependencies: []
   );
 
-/// custom_lint 0.7.2
+/// custom_lint 0.7.5
 const _custom_lint = Package(
     name: 'custom_lint',
     description: 'Lint rules are a powerful way to improve the maintainability of a project. Custom Lint allows package authors and developers to easily write custom lint rules.',
     repository: 'https://github.com/invertase/dart_custom_lint',
     authors: [],
-    version: '0.7.2',
+    version: '0.7.5',
     license: '''Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -2277,13 +2276,13 @@ const _custom_lint = Package(
     dependencies: [PackageRef('analyzer'), PackageRef('analyzer_plugin'), PackageRef('args'), PackageRef('async'), PackageRef('ci'), PackageRef('cli_util'), PackageRef('collection'), PackageRef('custom_lint_core'), PackageRef('freezed_annotation'), PackageRef('json_annotation'), PackageRef('meta'), PackageRef('package_config'), PackageRef('path'), PackageRef('pub_semver'), PackageRef('pubspec_parse'), PackageRef('rxdart'), PackageRef('uuid'), PackageRef('yaml')]
   );
 
-/// custom_lint_builder 0.7.2
+/// custom_lint_builder 0.7.5
 const _custom_lint_builder = Package(
     name: 'custom_lint_builder',
     description: 'A package to help writing custom linters',
     repository: 'https://github.com/invertase/dart_custom_lint',
     authors: [],
-    version: '0.7.2',
+    version: '0.7.5',
     license: '''Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -2490,13 +2489,13 @@ const _custom_lint_builder = Package(
     dependencies: [PackageRef('analyzer'), PackageRef('analyzer_plugin'), PackageRef('collection'), PackageRef('custom_lint'), PackageRef('custom_lint_core'), PackageRef('custom_lint_visitor'), PackageRef('glob'), PackageRef('hotreloader'), PackageRef('meta'), PackageRef('package_config'), PackageRef('path'), PackageRef('pubspec_parse'), PackageRef('rxdart')]
   );
 
-/// custom_lint_core 0.7.1
+/// custom_lint_core 0.7.5
 const _custom_lint_core = Package(
     name: 'custom_lint_core',
     description: 'A package to help writing custom linters',
     repository: 'https://github.com/invertase/dart_custom_lint',
     authors: [],
-    version: '0.7.1',
+    version: '0.7.5',
     license: '''Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -2703,13 +2702,13 @@ const _custom_lint_core = Package(
     dependencies: [PackageRef('analyzer'), PackageRef('analyzer_plugin'), PackageRef('collection'), PackageRef('custom_lint_visitor'), PackageRef('glob'), PackageRef('matcher'), PackageRef('meta'), PackageRef('package_config'), PackageRef('path'), PackageRef('pubspec_parse'), PackageRef('source_span'), PackageRef('uuid'), PackageRef('yaml')]
   );
 
-/// custom_lint_visitor 1.0.0+7.1.0
+/// custom_lint_visitor 1.0.0+7.4.5
 const _custom_lint_visitor = Package(
     name: 'custom_lint_visitor',
     description: 'A package that exports visitors for CustomLint.',
     repository: 'https://github.com/invertase/dart_custom_lint',
     authors: [],
-    version: '1.0.0+7.1.0',
+    version: '1.0.0+7.4.5',
     license: '''Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -3347,14 +3346,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('meta'), PackageRef('path')]
   );
 
-/// firebase_analytics 11.4.1
+/// firebase_analytics 11.5.0
 const _firebase_analytics = Package(
     name: 'firebase_analytics',
     description: 'Flutter plugin for Google Analytics for Firebase, an app measurement solution that provides insight on app usage and user engagement on Android and iOS.',
     homepage: 'https://firebase.google.com/docs/analytics',
     repository: 'https://github.com/firebase/flutterfire/tree/main/packages/firebase_analytics/firebase_analytics',
     authors: [],
-    version: '11.4.1',
+    version: '11.5.0',
     license: '''Copyright 2017, the Chromium project authors. All rights reserved.
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -3386,14 +3385,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('firebase_analytics_platform_interface'), PackageRef('firebase_analytics_web'), PackageRef('firebase_core'), PackageRef('firebase_core_platform_interface'), PackageRef('flutter')]
   );
 
-/// firebase_analytics_platform_interface 4.3.1
+/// firebase_analytics_platform_interface 4.4.0
 const _firebase_analytics_platform_interface = Package(
     name: 'firebase_analytics_platform_interface',
     description: 'A common platform interface for the firebase_analytics plugin.',
     homepage: 'https://github.com/firebase/flutterfire/tree/main/packages/firebase_analytics/firebase_analytics_platform_interface',
     repository: 'https://github.com/firebase/flutterfire/tree/main/packages/firebase_analytics/firebase_analytics_platform_interface',
     authors: [],
-    version: '4.3.1',
+    version: '4.4.0',
     license: '''Copyright 2017, the Chromium project authors. All rights reserved.
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -3425,14 +3424,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('_flutterfire_internals'), PackageRef('firebase_core'), PackageRef('flutter'), PackageRef('meta'), PackageRef('plugin_platform_interface')]
   );
 
-/// firebase_analytics_web 0.5.10+7
+/// firebase_analytics_web 0.5.10+13
 const _firebase_analytics_web = Package(
     name: 'firebase_analytics_web',
     description: 'The web implementation of firebase_analytics',
     homepage: 'https://github.com/firebase/flutterfire/tree/main/packages/firebase_analytics/firebase_analytics_web',
     repository: 'https://github.com/firebase/flutterfire/tree/main/packages/firebase_analytics/firebase_analytics_web',
     authors: [],
-    version: '0.5.10+7',
+    version: '0.5.10+13',
     license: '''Copyright 2017, the Chromium project authors. All rights reserved.
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -3464,14 +3463,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('_flutterfire_internals'), PackageRef('firebase_analytics_platform_interface'), PackageRef('firebase_core'), PackageRef('firebase_core_web'), PackageRef('flutter')]
   );
 
-/// firebase_core 3.10.1
+/// firebase_core 3.14.0
 const _firebase_core = Package(
     name: 'firebase_core',
     description: 'Flutter plugin for Firebase Core, enabling connecting to multiple Firebase apps.',
     homepage: 'https://firebase.google.com/docs/flutter/setup',
     repository: 'https://github.com/firebase/flutterfire/tree/main/packages/firebase_core/firebase_core',
     authors: [],
-    version: '3.10.1',
+    version: '3.14.0',
     license: '''// Copyright 2017 The Chromium Authors. All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -3544,14 +3543,14 @@ const _firebase_core_platform_interface = Package(
     dependencies: [PackageRef('collection'), PackageRef('flutter'), PackageRef('meta'), PackageRef('plugin_platform_interface')]
   );
 
-/// firebase_core_web 2.19.0
+/// firebase_core_web 2.23.0
 const _firebase_core_web = Package(
     name: 'firebase_core_web',
     description: 'The web implementation of firebase_core',
     homepage: 'https://github.com/firebase/flutterfire/tree/main/packages/firebase_core/firebase_core_web',
     repository: 'https://github.com/firebase/flutterfire/tree/main/packages/firebase_core/firebase_core_web',
     authors: [],
-    version: '2.19.0',
+    version: '2.23.0',
     license: '''// Copyright 2020 The Chromium Authors. All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -3584,14 +3583,14 @@ const _firebase_core_web = Package(
     dependencies: [PackageRef('firebase_core_platform_interface'), PackageRef('flutter'), PackageRef('meta'), PackageRef('web')]
   );
 
-/// firebase_crashlytics 4.3.1
+/// firebase_crashlytics 4.3.7
 const _firebase_crashlytics = Package(
     name: 'firebase_crashlytics',
     description: 'Flutter plugin for Firebase Crashlytics. It reports uncaught errors to the Firebase console.',
     homepage: 'https://firebase.google.com/docs/crashlytics',
     repository: 'https://github.com/firebase/flutterfire/tree/main/packages/firebase_crashlytics/firebase_crashlytics',
     authors: [],
-    version: '4.3.1',
+    version: '4.3.7',
     license: '''// Copyright 2019 The Chromium Authors. All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -3624,14 +3623,14 @@ const _firebase_crashlytics = Package(
     dependencies: [PackageRef('firebase_core'), PackageRef('firebase_core_platform_interface'), PackageRef('firebase_crashlytics_platform_interface'), PackageRef('flutter'), PackageRef('stack_trace')]
   );
 
-/// firebase_crashlytics_platform_interface 3.8.1
+/// firebase_crashlytics_platform_interface 3.8.7
 const _firebase_crashlytics_platform_interface = Package(
     name: 'firebase_crashlytics_platform_interface',
     description: 'A common platform interface for the firebase_crashlytics plugin.',
     homepage: 'https://github.com/firebase/flutterfire/tree/main/packages/firebase_crashlytics/firebase_crashlytics_platform_interface',
     repository: 'https://github.com/firebase/flutterfire/tree/main/packages/firebase_crashlytics/firebase_crashlytics_platform_interface',
     authors: [],
-    version: '3.8.1',
+    version: '3.8.7',
     license: '''Copyright 2020, the Chromium project authors. All rights reserved.
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -3663,14 +3662,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('_flutterfire_internals'), PackageRef('collection'), PackageRef('firebase_core'), PackageRef('flutter'), PackageRef('meta'), PackageRef('plugin_platform_interface')]
   );
 
-/// firebase_storage 12.4.1
+/// firebase_storage 12.4.7
 const _firebase_storage = Package(
     name: 'firebase_storage',
     description: 'Flutter plugin for Firebase Cloud Storage, a powerful, simple, and cost-effective object storage service for Android and iOS.',
     homepage: 'https://firebase.google.com/docs/storage/flutter/start',
     repository: 'https://github.com/firebase/flutterfire/tree/main/packages/firebase_storage/firebase_storage',
     authors: [],
-    version: '12.4.1',
+    version: '12.4.7',
     license: '''// Copyright 2017 The Chromium Authors. All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -3703,14 +3702,14 @@ const _firebase_storage = Package(
     dependencies: [PackageRef('firebase_core'), PackageRef('firebase_core_platform_interface'), PackageRef('firebase_storage_platform_interface'), PackageRef('firebase_storage_web'), PackageRef('flutter')]
   );
 
-/// firebase_storage_platform_interface 5.2.1
+/// firebase_storage_platform_interface 5.2.7
 const _firebase_storage_platform_interface = Package(
     name: 'firebase_storage_platform_interface',
     description: 'A common platform interface for the firebase_storage plugin.',
     homepage: 'https://github.com/firebase/flutterfire/tree/main/packages/firebase_storage/firebase_storage_platform_interface',
     repository: 'https://github.com/firebase/flutterfire/tree/main/packages/firebase_storage/firebase_storage_platform_interface',
     authors: [],
-    version: '5.2.1',
+    version: '5.2.7',
     license: '''Copyright 2020, the Chromium project authors. All rights reserved.
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -3742,14 +3741,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('_flutterfire_internals'), PackageRef('collection'), PackageRef('firebase_core'), PackageRef('flutter'), PackageRef('meta'), PackageRef('plugin_platform_interface')]
   );
 
-/// firebase_storage_web 3.10.8
+/// firebase_storage_web 3.10.14
 const _firebase_storage_web = Package(
     name: 'firebase_storage_web',
     description: 'The web implementation of firebase_storage',
     homepage: 'https://github.com/firebase/flutterfire/tree/main/packages/firebase_storage/firebase_storage_web',
     repository: 'https://github.com/firebase/flutterfire/tree/main/packages/firebase_storage/firebase_storage_web',
     authors: [],
-    version: '3.10.8',
+    version: '3.10.14',
     license: '''// Copyright 2017 The Chromium Authors. All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -4058,14 +4057,14 @@ SOFTWARE.''',
     dependencies: [PackageRef('flutter'), PackageRef('http'), PackageRef('vector_graphics'), PackageRef('vector_graphics_codec'), PackageRef('vector_graphics_compiler')]
   );
 
-/// freezed 2.5.8
+/// freezed 3.0.6
 const _freezed = Package(
     name: 'freezed',
     description: '''Code generation for immutable classes that has a simple syntax/API without compromising on the features.
 ''',
     repository: 'https://github.com/rrousselGit/freezed',
     authors: [],
-    version: '2.5.8',
+    version: '3.0.6',
     license: '''MIT License
 
 Copyright (c) 2020 Remi Rousselet
@@ -4089,17 +4088,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('analyzer'), PackageRef('build'), PackageRef('build_config'), PackageRef('collection'), PackageRef('meta'), PackageRef('source_gen'), PackageRef('freezed_annotation'), PackageRef('json_annotation'), PackageRef('dart_style')]
+    dependencies: [PackageRef('analyzer'), PackageRef('build'), PackageRef('build_config'), PackageRef('collection'), PackageRef('meta'), PackageRef('source_gen'), PackageRef('freezed_annotation'), PackageRef('json_annotation')]
   );
 
-/// freezed_annotation 2.4.4
+/// freezed_annotation 3.0.0
 const _freezed_annotation = Package(
     name: 'freezed_annotation',
     description: '''Annotations for the freezed code-generator. This package does nothing without freezed too.
 ''',
     repository: 'https://github.com/rrousselGit/freezed',
     authors: [],
-    version: '2.4.4',
+    version: '3.0.0',
     license: '''MIT License
 
 Copyright (c) 2020 Remi Rousselet
@@ -4821,13 +4820,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [PackageRef('meta')]
   );
 
-/// json_serializable 6.9.3
+/// json_serializable 6.9.5
 const _json_serializable = Package(
     name: 'json_serializable',
     description: 'Automatically generate code for converting to and from JSON by annotating Dart classes.',
     repository: 'https://github.com/google/json_serializable.dart/tree/master/json_serializable',
     authors: [],
-    version: '6.9.3',
+    version: '6.9.5',
     license: '''Copyright 2017, the Dart project authors. All rights reserved.
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -4984,45 +4983,6 @@ const _logging = Package(
     authors: [],
     version: '1.3.0',
     license: '''Copyright 2013, the Dart project authors. 
-
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are
-met:
-
-    * Redistributions of source code must retain the above copyright
-      notice, this list of conditions and the following disclaimer.
-    * Redistributions in binary form must reproduce the above
-      copyright notice, this list of conditions and the following
-      disclaimer in the documentation and/or other materials provided
-      with the distribution.
-    * Neither the name of Google LLC nor the names of its
-      contributors may be used to endorse or promote products derived
-      from this software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
-    isMarkdown: false,
-    isSdk: false,
-    dependencies: []
-  );
-
-/// macros 0.1.3-main.0
-const _macros = Package(
-    name: 'macros',
-    description: 'This package is for macro authors, and exposes the APIs necessary to write a macro. It exports the APIs from the private `_macros` SDK vendored package.',
-    repository: 'https://github.com/dart-lang/sdk/tree/main/pkg/macros',
-    authors: [],
-    version: '0.1.3-main.0',
-    license: '''Copyright 2024, the Dart project authors.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -6087,13 +6047,13 @@ SOFTWARE.''',
     dependencies: [PackageRef('collection'), PackageRef('meta'), PackageRef('stack_trace'), PackageRef('state_notifier')]
   );
 
-/// riverpod_analyzer_utils 0.5.9
+/// riverpod_analyzer_utils 0.5.10
 const _riverpod_analyzer_utils = Package(
     name: 'riverpod_analyzer_utils',
     description: 'A project for analyzing Riverpod code. This is internally used by riverpod_lint and riverpod_generator',
     repository: 'https://github.com/rrousselGit/river_pod',
     authors: [],
-    version: '0.5.9',
+    version: '0.5.10',
     license: '''MIT License
 
 Copyright (c) 2023 Remi Rousselet
@@ -6153,13 +6113,13 @@ SOFTWARE.''',
     dependencies: [PackageRef('meta'), PackageRef('riverpod')]
   );
 
-/// riverpod_generator 2.6.4
+/// riverpod_generator 2.6.5
 const _riverpod_generator = Package(
     name: 'riverpod_generator',
     description: 'A code generator for Riverpod. This both simplifies the syntax empowers it, such as allowing stateful hot-reload.',
     repository: 'https://github.com/rrousselGit/riverpod',
     authors: [],
-    version: '2.6.4',
+    version: '2.6.5',
     license: '''MIT License
 
 Copyright (c) 2020 Remi Rousselet
@@ -6186,14 +6146,14 @@ SOFTWARE.''',
     dependencies: [PackageRef('analyzer'), PackageRef('build'), PackageRef('build_config'), PackageRef('collection'), PackageRef('crypto'), PackageRef('meta'), PackageRef('path'), PackageRef('riverpod_analyzer_utils'), PackageRef('riverpod_annotation'), PackageRef('source_gen')]
   );
 
-/// riverpod_lint 2.6.4
+/// riverpod_lint 2.6.5
 const _riverpod_lint = Package(
     name: 'riverpod_lint',
     description: 'Riverpod_lint is a developer tool for users of Riverpod, designed to help stop common issues and simplify repetitive tasks.',
     homepage: 'https://riverpod.dev',
     repository: 'https://github.com/rrousselGit/river_pod',
     authors: [],
-    version: '2.6.4',
+    version: '2.6.5',
     license: '''MIT License
 
 Copyright (c) 2023 Remi Rousselet

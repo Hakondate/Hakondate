@@ -7,7 +7,7 @@ import 'package:hakondate/model/school/school_model.dart';
 part 'signup_state.freezed.dart';
 
 @freezed
-class SignupState with _$SignupState {
+abstract class SignupState with _$SignupState {
   const factory SignupState({
     String? lastName,
     String? firstName,
