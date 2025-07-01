@@ -35,7 +35,7 @@ final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
 final RoutemasterDelegate routemaster = RoutemasterDelegate(
   navigatorKey: _navigatorKey,
   observers: <RoutemasterObserver>[
-    MyObserver(_navigatorKey),
+    ReviewPopupObserver(_navigatorKey),
   ],
   routesBuilder: (BuildContext context) => RouteMap(
     onUnknownRoute: (_) => const Redirect('/splash'),

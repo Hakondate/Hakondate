@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hakondate/constant/app_url.dart';
 
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -78,10 +79,8 @@ class DailyDrawer extends StatelessWidget {
             icon: Icons.forum_outlined,
             labelText: 'ご意見',
             onTap: () async {
-              const String url =
-                  'https://docs.google.com/forms/d/e/1FAIpQLSdh-0ffd0-EPukB-8FqUgPA4i4ToTfs1Ax2UWvM1TuiqyJqlQ/viewform?usp=sharing';
-              if (await canLaunchUrlString(url)) {
-                await launchUrlString(url);
+              if (await canLaunchUrlString(AppUrl.reviewFormUrl)) {
+                await launchUrlString(AppUrl.reviewFormUrl);
               }
             },
           ),

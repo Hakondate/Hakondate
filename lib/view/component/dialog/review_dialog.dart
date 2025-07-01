@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hakondate/constant/app_url.dart';
 import 'package:hakondate/constant/review_popup_condition.dart';
 import 'package:hakondate/state/app_preferences/app_preferences_state.dart';
 
@@ -55,10 +56,21 @@ class ReviewPopup extends StatelessWidget {
         await _showPopup(context);
       }
     } else {
-      if (appStaticsState.lastPopup!.difference(DateTime.now()).inDays >= ReviewPopupCondition.dayFromLastPopup &&
-          ((appStaticsState.usageTimeInMinWhenLastPopuped ?? appStaticsState.usageTimeInMin) - appStaticsState.usageTimeInMin >=
-              ReviewPopupCondition.usageTimeFromCancelInMin)) {
+      if (DateTime.now().difference(appStaticsState.lastPopup!).inDays >= ReviewPopupCondition.dayFromLastPopup &&
+          (appStaticsState.usageTimeInMin - (appStaticsState.usageTimeInMinWhenLastPopuped ?? appStaticsState.usageTimeInMin) >=
+              ReviewPopupCondition.usageTimeFromLastPopupInMin)) {
         await _showPopup(context);
+      } else {
+        debugPrint(
+            "計算後：${appStaticsState.lastPopup!.difference(DateTime.now()).inDays}, usageMin: ${(appStaticsState.usageTimeInMinWhenLastPopuped! - appStaticsState.usageTimeInMin)}");
+        debugPrint('Review popup condition not met: '
+            'Last popup: ${appStaticsState.lastPopup}, '
+            'Usage time when last popuped: ${appStaticsState.usageTimeInMinWhenLastPopuped}, '
+            'Current usage time: ${appStaticsState.usageTimeInMin}');
+        debugPrint("now: ${DateTime.now()}, "
+            "lastPopup: ${appStaticsState.lastPopup}, "
+            "usageTimeInMinWhenLastPopuped: ${appStaticsState.usageTimeInMinWhenLastPopuped}, "
+            "usageTimeInMin: ${appStaticsState.usageTimeInMin}");
       }
     }
   }
@@ -78,11 +90,9 @@ class ReviewPopup extends StatelessWidget {
             text: const Text('評価する'),
             isPrimary: true,
             onTap: () async {
-              const String url =
-                  'https://docs.google.com/forms/d/e/1FAIpQLSdh-0ffd0-EPukB-8FqUgPA4i4ToTfs1Ax2UWvM1TuiqyJqlQ/viewform?usp=header';
-              if (await canLaunchUrl(Uri.parse(url))) {
+              if (await canLaunchUrl(Uri.parse(AppUrl.reviewFormUrl))) {
                 await launchUrl(
-                  Uri.parse(url),
+                  Uri.parse(AppUrl.reviewFormUrl),
                   mode: LaunchMode.inAppWebView,
                 );
               }
@@ -90,14 +100,14 @@ class ReviewPopup extends StatelessWidget {
             },
           ),
           secondAction: HakondateActionButton(
-            text: const Text('あとで'),
+            text: const Text('今はしない'),
             onTap: () {
               Routemaster.of(context).pop();
               ref.read(appStaticsViewModelProvider.notifier).setLastPopup();
             },
           ),
           thirdAction: HakondateActionButton(
-            text: const Text('今後は解答しない'),
+            text: const Text('二度と表示しない'),
             onTap: () {
               Routemaster.of(context).pop();
               ref.read(appStaticsViewModelProvider.notifier).setLastPopup();
@@ -110,8 +120,8 @@ class ReviewPopup extends StatelessWidget {
   }
 }
 
-class MyObserver extends RoutemasterObserver {
-  MyObserver(GlobalKey navigationKey) {
+class ReviewPopupObserver extends RoutemasterObserver {
+  ReviewPopupObserver(GlobalKey navigationKey) {
     _navigationKey = navigationKey;
   }
   late GlobalKey _navigationKey;

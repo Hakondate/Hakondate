@@ -26,7 +26,7 @@ class AppStaticsViewModel extends _$AppStaticsViewModel {
       debugPrint('usageTimeInMin: ${state.value!.usageTimeInMin}');
     });
     final String? lastPopupStr = _prefs.getString(AppKey.sharedPreferencesKey.lastPopup);
-    final int? usageTimeInMinWhenLastPopuped = _prefs.getInt(AppKey.sharedPreferencesKey.usageTimeInMin);
+    final int? usageTimeInMinWhenLastPopuped = _prefs.getInt(AppKey.sharedPreferencesKey.usageTimeInMinWhenLastPopup);
     // ここでprefsからデータ読み書きする
     final AppStaticsState initialState = AppStaticsState(
       openCount: (_prefs.getInt(AppKey.sharedPreferencesKey.appOpenCount) ?? 0) + 1,
@@ -36,7 +36,7 @@ class AppStaticsViewModel extends _$AppStaticsViewModel {
     );
     await _prefs.setInt(AppKey.sharedPreferencesKey.appOpenCount, initialState.openCount);
 
-    _timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
+    _timer = Timer.periodic(const Duration(minutes: 1), (Timer timer) {
       _incrementUsageTimeInMin();
     });
     debugPrint('initialState: $initialState');
