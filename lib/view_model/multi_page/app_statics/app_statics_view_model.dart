@@ -22,39 +22,40 @@ class AppStaticsViewModel extends _$AppStaticsViewModel {
 
     ref.onDispose(() {
       _timer?.cancel();
-      _prefs.setInt(AppKey.sharedPreferencesKey.usageTimeInMin, state.value!.usageTimeInMin);
-      debugPrint('usageTimeInMin: ${state.value!.usageTimeInMin}');
+      _prefs.setInt(AppKey.sharedPreferencesKey.usageTimeInSec, state.value!.usageTimeInSec);
+      debugPrint('usageTimeInMin: ${state.value!.usageTimeInSec / 60}');
     });
     final String? lastPopupStr = _prefs.getString(AppKey.sharedPreferencesKey.lastPopup);
     final int? usageTimeInMinWhenLastPopuped = _prefs.getInt(AppKey.sharedPreferencesKey.usageTimeInMinWhenLastPopup);
     // ここでprefsからデータ読み書きする
     final AppStaticsState initialState = AppStaticsState(
       openCount: (_prefs.getInt(AppKey.sharedPreferencesKey.appOpenCount) ?? 0) + 1,
-      usageTimeInMin: _prefs.getInt(AppKey.sharedPreferencesKey.usageTimeInMin) ?? 0,
+      usageTimeInSec: _prefs.getInt(AppKey.sharedPreferencesKey.usageTimeInSec) ?? 0,
       lastPopup: lastPopupStr != null? DateTime.parse(lastPopupStr) : null,
       usageTimeInMinWhenLastPopuped: usageTimeInMinWhenLastPopuped,
     );
     await _prefs.setInt(AppKey.sharedPreferencesKey.appOpenCount, initialState.openCount);
 
-    _timer = Timer.periodic(const Duration(minutes: 1), (Timer timer) {
-      _incrementUsageTimeInMin();
+    _timer = Timer.periodic(const Duration(seconds: 5), (Timer timer) {
+      _incrementUsageTimeInSec();
     });
     debugPrint('initialState: $initialState');
 
     return initialState;
   }
 
-  Future<void> _incrementUsageTimeInMin() async {
-    state = AsyncData<AppStaticsState>(state.value!.copyWith(usageTimeInMin: state.value!.usageTimeInMin + 1));
-    await _prefs.setInt(AppKey.sharedPreferencesKey.usageTimeInMin, state.value!.usageTimeInMin);
+  Future<void> _incrementUsageTimeInSec() async {
+    state = AsyncData<AppStaticsState>(state.value!.copyWith(usageTimeInSec: state.value!.usageTimeInSec + 1));
+    await _prefs.setInt(AppKey.sharedPreferencesKey.usageTimeInSec, state.value!.usageTimeInSec);
   }
 
   Future<void> setLastPopup() async {
     if (state.hasValue) {
       final DateTime now = DateTime.now();
       await _prefs.setString(AppKey.sharedPreferencesKey.lastPopup, now.toIso8601String());
-      await _prefs.setInt(AppKey.sharedPreferencesKey.usageTimeInMinWhenLastPopup, state.value!.usageTimeInMin);
-      state = AsyncData<AppStaticsState>(state.value!.copyWith(lastPopup: now, usageTimeInMinWhenLastPopuped: state.value!.usageTimeInMin));
+      final int usageTimeInMin = (state.value!.usageTimeInSec / 60).toInt();
+      await _prefs.setInt(AppKey.sharedPreferencesKey.usageTimeInMinWhenLastPopup, usageTimeInMin);
+      state = AsyncData<AppStaticsState>(state.value!.copyWith(lastPopup: now, usageTimeInMinWhenLastPopuped: usageTimeInMin));
     } else {
       debugPrint('AppStatics State is not initialized yet');
     }

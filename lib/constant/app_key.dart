@@ -13,7 +13,7 @@ class _SharedPreferencesKey {
 
   // AppStatics
   final String appOpenCount = 'app_open_count';
-  final String usageTimeInMin = 'usage_time_in_min';
+  final String usageTimeInSec = 'usage_time_in_sec';
   final String lastPopup = 'last_popup';
   final String usageTimeInMinWhenLastPopup = 'usage_time_in_min_when_last_popup';
 
