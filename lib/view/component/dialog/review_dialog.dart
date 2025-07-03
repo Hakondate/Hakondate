@@ -59,18 +59,13 @@ class ReviewPopup extends StatelessWidget {
       if (DateTime.now().difference(appStaticsState.lastPopup!).inDays >= ReviewPopupCondition.dayFromLastPopup &&
           (appStaticsState.usageTimeInSec / 60 - (appStaticsState.usageTimeInMinWhenLastPopuped ?? appStaticsState.usageTimeInSec / 60) >=
               ReviewPopupCondition.usageTimeFromLastPopupInMin)) {
+        debugPrint('Show review Popup');
         await _showPopup(context);
       } else {
+        debugPrint('Review popup condition not met. Not showing popup.');
         debugPrint(
-            "計算後：${appStaticsState.lastPopup!.difference(DateTime.now()).inDays}, usageMin: ${(appStaticsState.usageTimeInMinWhenLastPopuped! - appStaticsState.usageTimeInSec / 60)}");
-        debugPrint('Review popup condition not met: '
-            'Last popup: ${appStaticsState.lastPopup}, '
-            'Usage time when last popuped: ${appStaticsState.usageTimeInMinWhenLastPopuped}, '
-            'Current usage time: ${appStaticsState.usageTimeInSec}');
-        debugPrint("now: ${DateTime.now()}, "
-            "lastPopup: ${appStaticsState.lastPopup}, "
-            "usageTimeInMinWhenLastPopuped: ${appStaticsState.usageTimeInMinWhenLastPopuped}, "
-            "usageTimeInMin: ${appStaticsState.usageTimeInSec}");
+          'daysAfterLastPopup：${appStaticsState.lastPopup!.difference(DateTime.now()).inDays}, usageMinAfterLastPopup: ${appStaticsState.usageTimeInMinWhenLastPopuped! - appStaticsState.usageTimeInSec / 60}',
+        );
       }
     }
   }
