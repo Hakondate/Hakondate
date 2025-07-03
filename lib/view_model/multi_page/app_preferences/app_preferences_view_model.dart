@@ -18,7 +18,6 @@ class AppPreferencesViewModel extends _$AppPreferencesViewModel {
 
     final bool isReviewPopupDenied = _prefs.getBool(AppKey.sharedPreferencesKey.isReviewPopupDeniedInPreferences) ?? false;
 
-    debugPrint('AppPreferencesViewModel build: isReviewPopupDenied = $isReviewPopupDenied');
     return AppPreferencesState(isReviewPopupDenied: isReviewPopupDenied);
   }
 

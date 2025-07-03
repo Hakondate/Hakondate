@@ -60,6 +60,9 @@ class ReviewPopup extends StatelessWidget {
           (appStaticsState.usageTimeInSec / 60 - (appStaticsState.usageTimeInMinWhenLastPopuped ?? appStaticsState.usageTimeInSec / 60) >=
               ReviewPopupCondition.usageTimeFromLastPopupInMin)) {
         debugPrint('Show review Popup');
+        debugPrint(
+          'daysAfterLastPopup：${appStaticsState.lastPopup!.difference(DateTime.now()).inDays}, usageMinAfterLastPopup: ${appStaticsState.usageTimeInMinWhenLastPopuped! - appStaticsState.usageTimeInSec / 60}',
+        );
         await _showPopup(context);
       } else {
         debugPrint('Review popup condition not met. Not showing popup.');
