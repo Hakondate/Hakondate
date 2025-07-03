@@ -158,6 +158,5 @@ class ReviewPopupObserver extends RoutemasterObserver {
     } else {
       _disposeTimer();
     }
-    debugPrint('New route: ${routeData.fullPath}');
   }
 }

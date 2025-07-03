@@ -12,22 +12,21 @@ part 'app_statics_view_model.g.dart';
 
 @Riverpod(keepAlive: true)
 class AppStaticsViewModel extends _$AppStaticsViewModel {
+  static const int _timerDurationInSec = 5;
   late SharedPreferences _prefs;
   Timer? _timer;
 
   @override
   FutureOr<AppStaticsState> build() async {
-    debugPrint('build');
     _prefs = await SharedPreferences.getInstance();
 
     ref.onDispose(() {
       _timer?.cancel();
       _prefs.setInt(AppKey.sharedPreferencesKey.usageTimeInSec, state.value!.usageTimeInSec);
-      debugPrint('usageTimeInMin: ${state.value!.usageTimeInSec / 60}');
     });
     final String? lastPopupStr = _prefs.getString(AppKey.sharedPreferencesKey.lastPopup);
     final int? usageTimeInMinWhenLastPopuped = _prefs.getInt(AppKey.sharedPreferencesKey.usageTimeInMinWhenLastPopup);
-    // ここでprefsからデータ読み書きする
+
     final AppStaticsState initialState = AppStaticsState(
       openCount: (_prefs.getInt(AppKey.sharedPreferencesKey.appOpenCount) ?? 0) + 1,
       usageTimeInSec: _prefs.getInt(AppKey.sharedPreferencesKey.usageTimeInSec) ?? 0,
@@ -36,16 +35,15 @@ class AppStaticsViewModel extends _$AppStaticsViewModel {
     );
     await _prefs.setInt(AppKey.sharedPreferencesKey.appOpenCount, initialState.openCount);
 
-    _timer = Timer.periodic(const Duration(seconds: 5), (Timer timer) {
+    _timer = Timer.periodic(const Duration(seconds: _timerDurationInSec), (Timer timer) {
       _incrementUsageTimeInSec();
     });
-    debugPrint('initialState: $initialState');
 
     return initialState;
   }
 
   Future<void> _incrementUsageTimeInSec() async {
-    state = AsyncData<AppStaticsState>(state.value!.copyWith(usageTimeInSec: state.value!.usageTimeInSec + 1));
+    state = AsyncData<AppStaticsState>(state.value!.copyWith(usageTimeInSec: state.value!.usageTimeInSec + _timerDurationInSec));
     await _prefs.setInt(AppKey.sharedPreferencesKey.usageTimeInSec, state.value!.usageTimeInSec);
   }
 
