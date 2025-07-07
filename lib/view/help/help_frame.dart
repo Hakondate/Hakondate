@@ -191,7 +191,17 @@ class HelpFrame extends StatelessWidget {
           ],
         ),
       );
-
+  factory HelpFrame.allergyNotSuppoted() => HelpFrame(
+        label: 'アレルギー情報',
+        content: Column(
+          children: <Widget>[
+            DescriptionText.body(
+              label: '　このアプリでは，献立に含まれているお子様のアレルギー食材を表示する機能はありません．\n',
+              isZeroBottomPadding: true,
+            ),
+          ],
+        ),
+      );
   factory HelpFrame.contact() => HelpFrame(
         label: 'お問い合わせ',
         content: Column(
