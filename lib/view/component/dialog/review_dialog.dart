@@ -9,10 +9,10 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:hakondate/constant/app_url.dart';
 import 'package:hakondate/constant/review_popup_condition.dart';
 import 'package:hakondate/state/app_preferences/app_preferences_state.dart';
-import 'package:hakondate/state/app_statics/app_statics_state.dart';
+import 'package:hakondate/state/app_statistics/app_statistics_state.dart';
 import 'package:hakondate/view/component/dialog/hakondate_dialog/hakondate_dialog.dart';
 import 'package:hakondate/view_model/multi_page/app_preferences/app_preferences_view_model.dart';
-import 'package:hakondate/view_model/multi_page/app_statics/app_statics_view_model.dart';
+import 'package:hakondate/view_model/multi_page/app_statistics/app_statistics_view_model.dart';
 
 class ReviewPopup extends StatelessWidget {
   const ReviewPopup({super.key});
@@ -38,12 +38,12 @@ class ReviewPopup extends StatelessWidget {
       );
       // mountedのチェックを行っているため
       // ignore: use_build_context_synchronously
-      await ProviderScope.containerOf(context).read(appStaticsViewModelProvider.notifier).setLastPopup();
+      await ProviderScope.containerOf(context).read(appStatisticsViewModelProvider.notifier).setLastPopup();
     }
   }
 
   static Future<void> showReviewPopupIfConditionMet(
-    AppStaticsState appStaticsState,
+    AppStatisticsState appStaticsState,
     AppPreferencesState appPreferencesState,
     BuildContext context,
   ) async {
@@ -52,23 +52,23 @@ class ReviewPopup extends StatelessWidget {
       return;
     }
 
-    if (appStaticsState.lastPopup == null) {
-      if (appStaticsState.usageTimeInSec / 60 >= ReviewPopupCondition.usageTimeInMin) {
+    if (appStaticsState.lastPopUp == null) {
+      if (appStaticsState.usageTimeInMin >= ReviewPopupCondition.usageTimeInMin) {
         await _showPopup(context);
       }
     } else {
-      if (DateTime.now().difference(appStaticsState.lastPopup!).inDays >= ReviewPopupCondition.dayFromLastPopup &&
-          (appStaticsState.usageTimeInSec / 60 - (appStaticsState.usageTimeInMinWhenLastPopuped ?? appStaticsState.usageTimeInSec / 60) >=
+      if (DateTime.now().difference(appStaticsState.lastPopUp!).inDays >= ReviewPopupCondition.dayFromLastPopup &&
+          (appStaticsState.usageTimeInMin - (appStaticsState.usageTimeInMinWhenLastPopUp ?? appStaticsState.usageTimeInMin) >=
               ReviewPopupCondition.usageTimeFromLastPopupInMin)) {
         debugPrint('Show review Popup');
         debugPrint(
-          'daysAfterLastPopup：${appStaticsState.lastPopup!.difference(DateTime.now()).inDays}, usageMinAfterLastPopup: ${appStaticsState.usageTimeInMinWhenLastPopuped! - appStaticsState.usageTimeInSec / 60}',
+          'daysAfterLastPopup：${appStaticsState.lastPopUp!.difference(DateTime.now()).inDays}, usageMinAfterLastPopup: ${appStaticsState.usageTimeInMinWhenLastPopUp! - appStaticsState.usageTimeInMin}',
         );
         await _showPopup(context);
       } else {
         debugPrint('Review popup condition not met. Not showing popup.');
         debugPrint(
-          'daysAfterLastPopup：${appStaticsState.lastPopup!.difference(DateTime.now()).inDays}, usageMinAfterLastPopup: ${appStaticsState.usageTimeInMinWhenLastPopuped! - appStaticsState.usageTimeInSec / 60}',
+          'daysAfterLastPopup：${appStaticsState.lastPopUp!.difference(DateTime.now()).inDays}, usageMinAfterLastPopup: ${appStaticsState.usageTimeInMinWhenLastPopUp! - appStaticsState.usageTimeInMin}',
         );
       }
     }
@@ -102,14 +102,14 @@ class ReviewPopup extends StatelessWidget {
             text: const Text('今はしない'),
             onTap: () {
               Routemaster.of(context).pop();
-              ref.read(appStaticsViewModelProvider.notifier).setLastPopup();
+              ref.read(appStatisticsViewModelProvider.notifier).setLastPopup();
             },
           ),
           thirdAction: HakondateActionButton(
             text: const Text('二度と表示しない'),
             onTap: () {
               Routemaster.of(context).pop();
-              ref.read(appStaticsViewModelProvider.notifier).setLastPopup();
+              ref.read(appStatisticsViewModelProvider.notifier).setLastPopup();
               ref.read(appPreferencesViewModelProvider.notifier).setIsReviewPopupDenied();
             },
           ),
@@ -145,13 +145,13 @@ class ReviewPopupObserver extends RoutemasterObserver {
       return;
     }
     final ProviderContainer container = ProviderScope.containerOf(context);
-    final AsyncValue<AppStaticsState> appStaticsState = container.read(appStaticsViewModelProvider);
+    final AsyncValue<AppStatisticsState> appStatisticsState = container.read(appStatisticsViewModelProvider);
     final AsyncValue<AppPreferencesState> appPreferencesState = container.read(appPreferencesViewModelProvider);
 
-    if (appStaticsState.value != null && appPreferencesState.value != null) {
-      ReviewPopup.showReviewPopupIfConditionMet(appStaticsState.value!, appPreferencesState.value!, context);
+    if (appStatisticsState.value != null && appPreferencesState.value != null) {
+      ReviewPopup.showReviewPopupIfConditionMet(appStatisticsState.value!, appPreferencesState.value!, context);
     } else {
-      debugPrint('AppStatics State or AppPreferences State is not initialized yet');
+      debugPrint('AppStatistics State or AppPreferences State is not initialized yet');
     }
   }
 

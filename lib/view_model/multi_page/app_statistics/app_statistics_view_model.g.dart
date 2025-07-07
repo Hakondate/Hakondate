@@ -1,27 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'app_statics_view_model.dart';
+part of 'app_statistics_view_model.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appStaticsViewModelHash() =>
-    r'06ed65621b703bb393c24f66e705c8f1df7cf6b0';
+String _$appStatisticsViewModelHash() =>
+    r'1520e2b3eaba90eab0f9e34fcda323805b11eebf';
 
-/// See also [AppStaticsViewModel].
-@ProviderFor(AppStaticsViewModel)
-final appStaticsViewModelProvider =
-    AsyncNotifierProvider<AppStaticsViewModel, AppStaticsState>.internal(
-  AppStaticsViewModel.new,
-  name: r'appStaticsViewModelProvider',
+/// See also [AppStatisticsViewModel].
+@ProviderFor(AppStatisticsViewModel)
+final appStatisticsViewModelProvider =
+    AsyncNotifierProvider<AppStatisticsViewModel, AppStatisticsState>.internal(
+  AppStatisticsViewModel.new,
+  name: r'appStatisticsViewModelProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$appStaticsViewModelHash,
+      : _$appStatisticsViewModelHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$AppStaticsViewModel = AsyncNotifier<AppStaticsState>;
+typedef _$AppStatisticsViewModel = AsyncNotifier<AppStatisticsState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

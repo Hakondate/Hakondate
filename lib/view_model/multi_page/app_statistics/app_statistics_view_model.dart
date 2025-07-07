@@ -6,18 +6,18 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:hakondate/constant/app_key.dart';
-import 'package:hakondate/state/app_statics/app_statics_state.dart';
+import 'package:hakondate/state/app_statistics/app_statistics_state.dart';
 
-part 'app_statics_view_model.g.dart';
+part 'app_statistics_view_model.g.dart';
 
 @Riverpod(keepAlive: true)
-class AppStaticsViewModel extends _$AppStaticsViewModel {
+class AppStatisticsViewModel extends _$AppStatisticsViewModel {
   static const int _timerDurationInSec = 5;
   late SharedPreferences _prefs;
   Timer? _timer;
 
   @override
-  FutureOr<AppStaticsState> build() async {
+  FutureOr<AppStatisticsState> build() async {
     _prefs = await SharedPreferences.getInstance();
 
     ref.onDispose(() {
@@ -27,11 +27,11 @@ class AppStaticsViewModel extends _$AppStaticsViewModel {
     final String? lastPopupStr = _prefs.getString(AppKey.sharedPreferencesKey.lastPopup);
     final int? usageTimeInMinWhenLastPopuped = _prefs.getInt(AppKey.sharedPreferencesKey.usageTimeInMinWhenLastPopup);
 
-    final AppStaticsState initialState = AppStaticsState(
+    final AppStatisticsState initialState = AppStatisticsState(
       openCount: (_prefs.getInt(AppKey.sharedPreferencesKey.appOpenCount) ?? 0) + 1,
       usageTimeInSec: _prefs.getInt(AppKey.sharedPreferencesKey.usageTimeInSec) ?? 0,
-      lastPopup: lastPopupStr != null ? DateTime.parse(lastPopupStr) : null,
-      usageTimeInMinWhenLastPopuped: usageTimeInMinWhenLastPopuped,
+      lastPopUp: lastPopupStr != null ? DateTime.parse(lastPopupStr) : null,
+      usageTimeInMinWhenLastPopUp: usageTimeInMinWhenLastPopuped,
     );
     await _prefs.setInt(AppKey.sharedPreferencesKey.appOpenCount, initialState.openCount);
 
@@ -43,7 +43,7 @@ class AppStaticsViewModel extends _$AppStaticsViewModel {
   }
 
   Future<void> _incrementUsageTimeInSec() async {
-    state = AsyncData<AppStaticsState>(state.value!.copyWith(usageTimeInSec: state.value!.usageTimeInSec + _timerDurationInSec));
+    state = AsyncData<AppStatisticsState>(state.value!.copyWith(usageTimeInSec: state.value!.usageTimeInSec + _timerDurationInSec));
     await _prefs.setInt(AppKey.sharedPreferencesKey.usageTimeInSec, state.value!.usageTimeInSec);
   }
 
@@ -51,9 +51,9 @@ class AppStaticsViewModel extends _$AppStaticsViewModel {
     if (state.hasValue) {
       final DateTime now = DateTime.now();
       await _prefs.setString(AppKey.sharedPreferencesKey.lastPopup, now.toIso8601String());
-      final int usageTimeInMin = (state.value!.usageTimeInSec / 60).toInt();
+      final int usageTimeInMin = state.value!.usageTimeInMin;
       await _prefs.setInt(AppKey.sharedPreferencesKey.usageTimeInMinWhenLastPopup, usageTimeInMin);
-      state = AsyncData<AppStaticsState>(state.value!.copyWith(lastPopup: now, usageTimeInMinWhenLastPopuped: usageTimeInMin));
+      state = AsyncData<AppStatisticsState>(state.value!.copyWith(lastPopUp: now, usageTimeInMinWhenLastPopUp: usageTimeInMin));
     } else {
       debugPrint('AppStatics State is not initialized yet');
     }
