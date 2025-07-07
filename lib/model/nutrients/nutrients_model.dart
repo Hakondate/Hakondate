@@ -8,7 +8,7 @@ part 'nutrients_model.freezed.dart';
 part 'nutrients_model.g.dart';
 
 @freezed
-class NutrientsModel with _$NutrientsModel {
+abstract class NutrientsModel with _$NutrientsModel {
   const factory NutrientsModel({
     /// エネルギー
     @Default(0.0) double energy,

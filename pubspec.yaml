@@ -7,7 +7,7 @@ version: 2.1.2+15
 
 environment:
   sdk: "3.8.1"
-  flutter: "3.32.4"
+  flutter: "3.32.5"
 
 dependencies:
   flutter:
@@ -19,16 +19,16 @@ dependencies:
   cupertino_icons: 1.0.8
   multi_charts: 0.3.0
   table_calendar: 3.2.0
-  flutter_svg: 2.1.0
-  flutter_pdfview: 1.4.0
+  flutter_svg: 2.2.0
+  flutter_pdfview: 1.4.1+1
   shimmer: 3.0.0
   pin_code_fields: 8.0.1
 
   # 状態管理関連
   flutter_riverpod: 2.6.1
   riverpod_annotation: 2.6.1
-  freezed: 2.5.8
-  freezed_annotation: 2.4.4
+  freezed: 3.1.0
+  freezed_annotation: 3.1.0
   json_serializable: 6.9.5
   json_annotation: 4.9.0
 
@@ -75,7 +75,7 @@ dev_dependencies:
   import_sorter: 4.6.0
 
   # コード生成
-  build_runner: 2.4.15
+  build_runner: 2.5.4
   custom_lint: 0.7.5
   riverpod_generator: 2.6.5
   riverpod_lint: 2.6.5

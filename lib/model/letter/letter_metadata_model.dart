@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'letter_metadata_model.freezed.dart';
 
 @freezed
-class LetterMetadataModel with _$LetterMetadataModel {
+abstract class LetterMetadataModel with _$LetterMetadataModel {
   factory LetterMetadataModel({
     required String title,
     required String path,

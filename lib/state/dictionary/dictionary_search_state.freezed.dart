@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,76 +10,49 @@ part of 'dictionary_search_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$DictionarySearchState {
-  TextEditingController get searchBarTextController =>
-      throw _privateConstructorUsedError;
-  List<DictionaryItemModel> get searchedItems =>
-      throw _privateConstructorUsedError;
+  TextEditingController get searchBarTextController;
+  List<DictionaryItemModel> get searchedItems;
 
   /// Create a copy of DictionarySearchState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $DictionarySearchStateCopyWith<DictionarySearchState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $DictionarySearchStateCopyWith<$Res> {
-  factory $DictionarySearchStateCopyWith(DictionarySearchState value,
-          $Res Function(DictionarySearchState) then) =
-      _$DictionarySearchStateCopyWithImpl<$Res, DictionarySearchState>;
-  @useResult
-  $Res call(
-      {TextEditingController searchBarTextController,
-      List<DictionaryItemModel> searchedItems});
-}
-
-/// @nodoc
-class _$DictionarySearchStateCopyWithImpl<$Res,
-        $Val extends DictionarySearchState>
-    implements $DictionarySearchStateCopyWith<$Res> {
-  _$DictionarySearchStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of DictionarySearchState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $DictionarySearchStateCopyWith<DictionarySearchState> get copyWith =>
+      _$DictionarySearchStateCopyWithImpl<DictionarySearchState>(
+          this as DictionarySearchState, _$identity);
+
   @override
-  $Res call({
-    Object? searchBarTextController = null,
-    Object? searchedItems = null,
-  }) {
-    return _then(_value.copyWith(
-      searchBarTextController: null == searchBarTextController
-          ? _value.searchBarTextController
-          : searchBarTextController // ignore: cast_nullable_to_non_nullable
-              as TextEditingController,
-      searchedItems: null == searchedItems
-          ? _value.searchedItems
-          : searchedItems // ignore: cast_nullable_to_non_nullable
-              as List<DictionaryItemModel>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is DictionarySearchState &&
+            (identical(
+                    other.searchBarTextController, searchBarTextController) ||
+                other.searchBarTextController == searchBarTextController) &&
+            const DeepCollectionEquality()
+                .equals(other.searchedItems, searchedItems));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, searchBarTextController,
+      const DeepCollectionEquality().hash(searchedItems));
+
+  @override
+  String toString() {
+    return 'DictionarySearchState(searchBarTextController: $searchBarTextController, searchedItems: $searchedItems)';
   }
 }
 
 /// @nodoc
-abstract class _$$DictionarySearchStateImplCopyWith<$Res>
-    implements $DictionarySearchStateCopyWith<$Res> {
-  factory _$$DictionarySearchStateImplCopyWith(
-          _$DictionarySearchStateImpl value,
-          $Res Function(_$DictionarySearchStateImpl) then) =
-      __$$DictionarySearchStateImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $DictionarySearchStateCopyWith<$Res> {
+  factory $DictionarySearchStateCopyWith(DictionarySearchState value,
+          $Res Function(DictionarySearchState) _then) =
+      _$DictionarySearchStateCopyWithImpl;
   @useResult
   $Res call(
       {TextEditingController searchBarTextController,
@@ -86,13 +60,12 @@ abstract class _$$DictionarySearchStateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$DictionarySearchStateImplCopyWithImpl<$Res>
-    extends _$DictionarySearchStateCopyWithImpl<$Res,
-        _$DictionarySearchStateImpl>
-    implements _$$DictionarySearchStateImplCopyWith<$Res> {
-  __$$DictionarySearchStateImplCopyWithImpl(_$DictionarySearchStateImpl _value,
-      $Res Function(_$DictionarySearchStateImpl) _then)
-      : super(_value, _then);
+class _$DictionarySearchStateCopyWithImpl<$Res>
+    implements $DictionarySearchStateCopyWith<$Res> {
+  _$DictionarySearchStateCopyWithImpl(this._self, this._then);
+
+  final DictionarySearchState _self;
+  final $Res Function(DictionarySearchState) _then;
 
   /// Create a copy of DictionarySearchState
   /// with the given fields replaced by the non-null parameter values.
@@ -102,13 +75,13 @@ class __$$DictionarySearchStateImplCopyWithImpl<$Res>
     Object? searchBarTextController = null,
     Object? searchedItems = null,
   }) {
-    return _then(_$DictionarySearchStateImpl(
+    return _then(_self.copyWith(
       searchBarTextController: null == searchBarTextController
-          ? _value.searchBarTextController
+          ? _self.searchBarTextController
           : searchBarTextController // ignore: cast_nullable_to_non_nullable
               as TextEditingController,
       searchedItems: null == searchedItems
-          ? _value._searchedItems
+          ? _self.searchedItems
           : searchedItems // ignore: cast_nullable_to_non_nullable
               as List<DictionaryItemModel>,
     ));
@@ -117,8 +90,8 @@ class __$$DictionarySearchStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DictionarySearchStateImpl implements _DictionarySearchState {
-  const _$DictionarySearchStateImpl(
+class _DictionarySearchState implements DictionarySearchState {
+  const _DictionarySearchState(
       {required this.searchBarTextController,
       final List<DictionaryItemModel> searchedItems =
           const <DictionaryItemModel>[]})
@@ -135,16 +108,20 @@ class _$DictionarySearchStateImpl implements _DictionarySearchState {
     return EqualUnmodifiableListView(_searchedItems);
   }
 
+  /// Create a copy of DictionarySearchState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'DictionarySearchState(searchBarTextController: $searchBarTextController, searchedItems: $searchedItems)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$DictionarySearchStateCopyWith<_DictionarySearchState> get copyWith =>
+      __$DictionarySearchStateCopyWithImpl<_DictionarySearchState>(
+          this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DictionarySearchStateImpl &&
+            other is _DictionarySearchState &&
             (identical(
                     other.searchBarTextController, searchBarTextController) ||
                 other.searchBarTextController == searchBarTextController) &&
@@ -156,31 +133,52 @@ class _$DictionarySearchStateImpl implements _DictionarySearchState {
   int get hashCode => Object.hash(runtimeType, searchBarTextController,
       const DeepCollectionEquality().hash(_searchedItems));
 
+  @override
+  String toString() {
+    return 'DictionarySearchState(searchBarTextController: $searchBarTextController, searchedItems: $searchedItems)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$DictionarySearchStateCopyWith<$Res>
+    implements $DictionarySearchStateCopyWith<$Res> {
+  factory _$DictionarySearchStateCopyWith(_DictionarySearchState value,
+          $Res Function(_DictionarySearchState) _then) =
+      __$DictionarySearchStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {TextEditingController searchBarTextController,
+      List<DictionaryItemModel> searchedItems});
+}
+
+/// @nodoc
+class __$DictionarySearchStateCopyWithImpl<$Res>
+    implements _$DictionarySearchStateCopyWith<$Res> {
+  __$DictionarySearchStateCopyWithImpl(this._self, this._then);
+
+  final _DictionarySearchState _self;
+  final $Res Function(_DictionarySearchState) _then;
+
   /// Create a copy of DictionarySearchState
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$DictionarySearchStateImplCopyWith<_$DictionarySearchStateImpl>
-      get copyWith => __$$DictionarySearchStateImplCopyWithImpl<
-          _$DictionarySearchStateImpl>(this, _$identity);
+  $Res call({
+    Object? searchBarTextController = null,
+    Object? searchedItems = null,
+  }) {
+    return _then(_DictionarySearchState(
+      searchBarTextController: null == searchBarTextController
+          ? _self.searchBarTextController
+          : searchBarTextController // ignore: cast_nullable_to_non_nullable
+              as TextEditingController,
+      searchedItems: null == searchedItems
+          ? _self._searchedItems
+          : searchedItems // ignore: cast_nullable_to_non_nullable
+              as List<DictionaryItemModel>,
+    ));
+  }
 }
 
-abstract class _DictionarySearchState implements DictionarySearchState {
-  const factory _DictionarySearchState(
-          {required final TextEditingController searchBarTextController,
-          final List<DictionaryItemModel> searchedItems}) =
-      _$DictionarySearchStateImpl;
-
-  @override
-  TextEditingController get searchBarTextController;
-  @override
-  List<DictionaryItemModel> get searchedItems;
-
-  /// Create a copy of DictionarySearchState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DictionarySearchStateImplCopyWith<_$DictionarySearchStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
+// dart format on
