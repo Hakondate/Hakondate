@@ -7,7 +7,7 @@ part of 'app_statistics_view_model.dart';
 // **************************************************************************
 
 String _$appStatisticsViewModelHash() =>
-    r'1520e2b3eaba90eab0f9e34fcda323805b11eebf';
+    r'0e33791784caeab99dea42d6e8ae54797c0ce1a7';
 
 /// See also [AppStatisticsViewModel].
 @ProviderFor(AppStatisticsViewModel)
