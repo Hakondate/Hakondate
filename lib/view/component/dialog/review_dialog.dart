@@ -57,9 +57,16 @@ class ReviewPopup extends StatelessWidget {
         await _showPopup(context);
       }
     } else {
-      if (DateTime.now().difference(appStatisticsState.lastPopUp!).inDays >= ReviewPopupCondition.dayFromLastPopup &&
-          (appStatisticsState.usageTimeInMin - (appStatisticsState.usageTimeInMinWhenLastPopUp ?? appStatisticsState.usageTimeInMin) >=
-              ReviewPopupCondition.usageTimeFromLastPopupInMin)) {
+      bool isUsageTimeFromLastPopupMet() {
+        return appStatisticsState.usageTimeInMin - (appStatisticsState.usageTimeInMinWhenLastPopUp ?? appStatisticsState.usageTimeInMin) >=
+            ReviewPopupCondition.usageTimeFromLastPopupInMin;
+      }
+
+      bool isDaysFromLastPopupMet() {
+        return DateTime.now().difference(appStatisticsState.lastPopUp!).inDays >= ReviewPopupCondition.dayFromLastPopup;
+      }
+
+      if (isDaysFromLastPopupMet() && isUsageTimeFromLastPopupMet()) {
         debugPrint('Show review Popup');
         debugPrint(
           'daysAfterLastPopup：${appStatisticsState.lastPopUp!.difference(DateTime.now()).inDays}, usageMinAfterLastPopup: ${appStatisticsState.usageTimeInMinWhenLastPopUp! - appStatisticsState.usageTimeInMin}',
