@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,40 +10,62 @@ part of 'dictionary_item_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$DictionaryItemModel {
   /// ID
-  int get id => throw _privateConstructorUsedError;
+  int get id;
 
   /// 食品分類（1 ~ 18群）
-  DictionaryGroup get group => throw _privateConstructorUsedError;
+  DictionaryGroup get group;
 
   /// 食材名
-  String get name => throw _privateConstructorUsedError;
+  String get name;
 
   /// 栄養素
-  NutrientsModel get nutrients => throw _privateConstructorUsedError;
+  NutrientsModel get nutrients;
 
   /// 備考
-  String? get note => throw _privateConstructorUsedError;
+  String? get note;
 
   /// Create a copy of DictionaryItemModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $DictionaryItemModelCopyWith<DictionaryItemModel> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$DictionaryItemModelCopyWithImpl<DictionaryItemModel>(
+          this as DictionaryItemModel, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is DictionaryItemModel &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.group, group) || other.group == group) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.nutrients, nutrients) ||
+                other.nutrients == nutrients) &&
+            (identical(other.note, note) || other.note == note));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, id, group, name, nutrients, note);
+
+  @override
+  String toString() {
+    return 'DictionaryItemModel(id: $id, group: $group, name: $name, nutrients: $nutrients, note: $note)';
+  }
 }
 
 /// @nodoc
-abstract class $DictionaryItemModelCopyWith<$Res> {
+abstract mixin class $DictionaryItemModelCopyWith<$Res> {
   factory $DictionaryItemModelCopyWith(
-          DictionaryItemModel value, $Res Function(DictionaryItemModel) then) =
-      _$DictionaryItemModelCopyWithImpl<$Res, DictionaryItemModel>;
+          DictionaryItemModel value, $Res Function(DictionaryItemModel) _then) =
+      _$DictionaryItemModelCopyWithImpl;
   @useResult
   $Res call(
       {int id,
@@ -55,14 +78,12 @@ abstract class $DictionaryItemModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DictionaryItemModelCopyWithImpl<$Res, $Val extends DictionaryItemModel>
+class _$DictionaryItemModelCopyWithImpl<$Res>
     implements $DictionaryItemModelCopyWith<$Res> {
-  _$DictionaryItemModelCopyWithImpl(this._value, this._then);
+  _$DictionaryItemModelCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final DictionaryItemModel _self;
+  final $Res Function(DictionaryItemModel) _then;
 
   /// Create a copy of DictionaryItemModel
   /// with the given fields replaced by the non-null parameter values.
@@ -75,28 +96,28 @@ class _$DictionaryItemModelCopyWithImpl<$Res, $Val extends DictionaryItemModel>
     Object? nutrients = null,
     Object? note = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
       group: null == group
-          ? _value.group
+          ? _self.group
           : group // ignore: cast_nullable_to_non_nullable
               as DictionaryGroup,
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       nutrients: null == nutrients
-          ? _value.nutrients
+          ? _self.nutrients
           : nutrients // ignore: cast_nullable_to_non_nullable
               as NutrientsModel,
       note: freezed == note
-          ? _value.note
+          ? _self.note
           : note // ignore: cast_nullable_to_non_nullable
               as String?,
-    ) as $Val);
+    ));
   }
 
   /// Create a copy of DictionaryItemModel
@@ -104,79 +125,16 @@ class _$DictionaryItemModelCopyWithImpl<$Res, $Val extends DictionaryItemModel>
   @override
   @pragma('vm:prefer-inline')
   $NutrientsModelCopyWith<$Res> get nutrients {
-    return $NutrientsModelCopyWith<$Res>(_value.nutrients, (value) {
-      return _then(_value.copyWith(nutrients: value) as $Val);
+    return $NutrientsModelCopyWith<$Res>(_self.nutrients, (value) {
+      return _then(_self.copyWith(nutrients: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$DictionaryItemModelImplCopyWith<$Res>
-    implements $DictionaryItemModelCopyWith<$Res> {
-  factory _$$DictionaryItemModelImplCopyWith(_$DictionaryItemModelImpl value,
-          $Res Function(_$DictionaryItemModelImpl) then) =
-      __$$DictionaryItemModelImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {int id,
-      DictionaryGroup group,
-      String name,
-      NutrientsModel nutrients,
-      String? note});
 
-  @override
-  $NutrientsModelCopyWith<$Res> get nutrients;
-}
-
-/// @nodoc
-class __$$DictionaryItemModelImplCopyWithImpl<$Res>
-    extends _$DictionaryItemModelCopyWithImpl<$Res, _$DictionaryItemModelImpl>
-    implements _$$DictionaryItemModelImplCopyWith<$Res> {
-  __$$DictionaryItemModelImplCopyWithImpl(_$DictionaryItemModelImpl _value,
-      $Res Function(_$DictionaryItemModelImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of DictionaryItemModel
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? group = null,
-    Object? name = null,
-    Object? nutrients = null,
-    Object? note = freezed,
-  }) {
-    return _then(_$DictionaryItemModelImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      group: null == group
-          ? _value.group
-          : group // ignore: cast_nullable_to_non_nullable
-              as DictionaryGroup,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      nutrients: null == nutrients
-          ? _value.nutrients
-          : nutrients // ignore: cast_nullable_to_non_nullable
-              as NutrientsModel,
-      note: freezed == note
-          ? _value.note
-          : note // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$DictionaryItemModelImpl extends _DictionaryItemModel {
-  const _$DictionaryItemModelImpl(
+class _DictionaryItemModel extends DictionaryItemModel {
+  const _DictionaryItemModel(
       {required this.id,
       required this.group,
       required this.name,
@@ -204,16 +162,20 @@ class _$DictionaryItemModelImpl extends _DictionaryItemModel {
   @override
   final String? note;
 
+  /// Create a copy of DictionaryItemModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'DictionaryItemModel(id: $id, group: $group, name: $name, nutrients: $nutrients, note: $note)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$DictionaryItemModelCopyWith<_DictionaryItemModel> get copyWith =>
+      __$DictionaryItemModelCopyWithImpl<_DictionaryItemModel>(
+          this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DictionaryItemModelImpl &&
+            other is _DictionaryItemModel &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.group, group) || other.group == group) &&
             (identical(other.name, name) || other.name == name) &&
@@ -226,49 +188,83 @@ class _$DictionaryItemModelImpl extends _DictionaryItemModel {
   int get hashCode =>
       Object.hash(runtimeType, id, group, name, nutrients, note);
 
+  @override
+  String toString() {
+    return 'DictionaryItemModel(id: $id, group: $group, name: $name, nutrients: $nutrients, note: $note)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$DictionaryItemModelCopyWith<$Res>
+    implements $DictionaryItemModelCopyWith<$Res> {
+  factory _$DictionaryItemModelCopyWith(_DictionaryItemModel value,
+          $Res Function(_DictionaryItemModel) _then) =
+      __$DictionaryItemModelCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {int id,
+      DictionaryGroup group,
+      String name,
+      NutrientsModel nutrients,
+      String? note});
+
+  @override
+  $NutrientsModelCopyWith<$Res> get nutrients;
+}
+
+/// @nodoc
+class __$DictionaryItemModelCopyWithImpl<$Res>
+    implements _$DictionaryItemModelCopyWith<$Res> {
+  __$DictionaryItemModelCopyWithImpl(this._self, this._then);
+
+  final _DictionaryItemModel _self;
+  final $Res Function(_DictionaryItemModel) _then;
+
   /// Create a copy of DictionaryItemModel
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$DictionaryItemModelImplCopyWith<_$DictionaryItemModelImpl> get copyWith =>
-      __$$DictionaryItemModelImplCopyWithImpl<_$DictionaryItemModelImpl>(
-          this, _$identity);
-}
-
-abstract class _DictionaryItemModel extends DictionaryItemModel {
-  const factory _DictionaryItemModel(
-      {required final int id,
-      required final DictionaryGroup group,
-      required final String name,
-      required final NutrientsModel nutrients,
-      final String? note}) = _$DictionaryItemModelImpl;
-  const _DictionaryItemModel._() : super._();
-
-  /// ID
-  @override
-  int get id;
-
-  /// 食品分類（1 ~ 18群）
-  @override
-  DictionaryGroup get group;
-
-  /// 食材名
-  @override
-  String get name;
-
-  /// 栄養素
-  @override
-  NutrientsModel get nutrients;
-
-  /// 備考
-  @override
-  String? get note;
+  $Res call({
+    Object? id = null,
+    Object? group = null,
+    Object? name = null,
+    Object? nutrients = null,
+    Object? note = freezed,
+  }) {
+    return _then(_DictionaryItemModel(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      group: null == group
+          ? _self.group
+          : group // ignore: cast_nullable_to_non_nullable
+              as DictionaryGroup,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      nutrients: null == nutrients
+          ? _self.nutrients
+          : nutrients // ignore: cast_nullable_to_non_nullable
+              as NutrientsModel,
+      note: freezed == note
+          ? _self.note
+          : note // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 
   /// Create a copy of DictionaryItemModel
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DictionaryItemModelImplCopyWith<_$DictionaryItemModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $NutrientsModelCopyWith<$Res> get nutrients {
+    return $NutrientsModelCopyWith<$Res>(_self.nutrients, (value) {
+      return _then(_self.copyWith(nutrients: value));
+    });
+  }
 }
+
+// dart format on

@@ -9,7 +9,7 @@ import 'package:hakondate/repository/local/sqlite/local_database.dart';
 part 'foodstuff_model.freezed.dart';
 
 @freezed
-class FoodstuffModel with _$FoodstuffModel {
+abstract class FoodstuffModel with _$FoodstuffModel {
   const factory FoodstuffModel({
     /// 食材名
     required String name,

@@ -5,7 +5,7 @@ import 'package:hakondate/model/recipe/recipe_type.dart';
 part 'open_data_recipe_model.freezed.dart';
 
 @freezed
-class OpenDataRecipeModel with _$OpenDataRecipeModel {
+abstract class OpenDataRecipeModel with _$OpenDataRecipeModel {
   factory OpenDataRecipeModel({
     /// ID
     required int id,
