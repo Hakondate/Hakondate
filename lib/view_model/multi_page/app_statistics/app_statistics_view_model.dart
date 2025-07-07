@@ -25,7 +25,7 @@ class AppStatisticsViewModel extends _$AppStatisticsViewModel {
       _prefs.setInt(AppKey.sharedPreferencesKey.usageTimeInSec, state.value!.usageTimeInSec);
     });
     final String? lastPopupStr = _prefs.getString(AppKey.sharedPreferencesKey.lastPopup);
-    final int? usageTimeInMinWhenLastPopuped = _prefs.getInt(AppKey.sharedPreferencesKey.usageTimeInMinWhenLastPopup);
+    final int? usageTimeInMinWhenLastPopuped = _prefs.getInt(AppKey.sharedPreferencesKey.usageTimeInMinFromLastPopUp);
 
     final AppStatisticsState initialState = AppStatisticsState(
       openCount: (_prefs.getInt(AppKey.sharedPreferencesKey.appOpenCount) ?? 0) + 1,
@@ -52,7 +52,7 @@ class AppStatisticsViewModel extends _$AppStatisticsViewModel {
       final DateTime now = DateTime.now();
       await _prefs.setString(AppKey.sharedPreferencesKey.lastPopup, now.toIso8601String());
       final int usageTimeInMin = state.value!.usageTimeInMin;
-      await _prefs.setInt(AppKey.sharedPreferencesKey.usageTimeInMinWhenLastPopup, usageTimeInMin);
+      await _prefs.setInt(AppKey.sharedPreferencesKey.usageTimeInMinFromLastPopUp, usageTimeInMin);
       state = AsyncData<AppStatisticsState>(state.value!.copyWith(lastPopUp: now, usageTimeInMinWhenLastPopUp: usageTimeInMin));
     } else {
       debugPrint('AppStatics State is not initialized yet');

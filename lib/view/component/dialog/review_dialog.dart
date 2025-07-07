@@ -43,7 +43,7 @@ class ReviewPopup extends StatelessWidget {
   }
 
   static Future<void> showReviewPopupIfConditionMet(
-    AppStatisticsState appStaticsState,
+    AppStatisticsState appStatisticsState,
     AppPreferencesState appPreferencesState,
     BuildContext context,
   ) async {
@@ -52,23 +52,23 @@ class ReviewPopup extends StatelessWidget {
       return;
     }
 
-    if (appStaticsState.lastPopUp == null) {
-      if (appStaticsState.usageTimeInMin >= ReviewPopupCondition.usageTimeInMin) {
+    if (appStatisticsState.lastPopUp == null) {
+      if (appStatisticsState.usageTimeInMin >= ReviewPopupCondition.usageTimeInMin) {
         await _showPopup(context);
       }
     } else {
-      if (DateTime.now().difference(appStaticsState.lastPopUp!).inDays >= ReviewPopupCondition.dayFromLastPopup &&
-          (appStaticsState.usageTimeInMin - (appStaticsState.usageTimeInMinWhenLastPopUp ?? appStaticsState.usageTimeInMin) >=
+      if (DateTime.now().difference(appStatisticsState.lastPopUp!).inDays >= ReviewPopupCondition.dayFromLastPopup &&
+          (appStatisticsState.usageTimeInMin - (appStatisticsState.usageTimeInMinWhenLastPopUp ?? appStatisticsState.usageTimeInMin) >=
               ReviewPopupCondition.usageTimeFromLastPopupInMin)) {
         debugPrint('Show review Popup');
         debugPrint(
-          'daysAfterLastPopup：${appStaticsState.lastPopUp!.difference(DateTime.now()).inDays}, usageMinAfterLastPopup: ${appStaticsState.usageTimeInMinWhenLastPopUp! - appStaticsState.usageTimeInMin}',
+          'daysAfterLastPopup：${appStatisticsState.lastPopUp!.difference(DateTime.now()).inDays}, usageMinAfterLastPopup: ${appStatisticsState.usageTimeInMinWhenLastPopUp! - appStatisticsState.usageTimeInMin}',
         );
         await _showPopup(context);
       } else {
         debugPrint('Review popup condition not met. Not showing popup.');
         debugPrint(
-          'daysAfterLastPopup：${appStaticsState.lastPopUp!.difference(DateTime.now()).inDays}, usageMinAfterLastPopup: ${appStaticsState.usageTimeInMinWhenLastPopUp! - appStaticsState.usageTimeInMin}',
+          'daysAfterLastPopup：${appStatisticsState.lastPopUp!.difference(DateTime.now()).inDays}, usageMinAfterLastPopup: ${appStatisticsState.usageTimeInMinWhenLastPopUp! - appStatisticsState.usageTimeInMin}',
         );
       }
     }
@@ -92,7 +92,6 @@ class ReviewPopup extends StatelessWidget {
               if (await canLaunchUrl(Uri.parse(AppUrl.reviewFormUrl))) {
                 await launchUrl(
                   Uri.parse(AppUrl.reviewFormUrl),
-                  mode: LaunchMode.inAppWebView,
                 );
               }
               await ref.read(appPreferencesViewModelProvider.notifier).setIsReviewPopupDenied();
@@ -128,7 +127,7 @@ class ReviewPopupObserver extends RoutemasterObserver {
 
   void _initTimer() {
     _timer = Timer.periodic(ReviewPopupCondition.popupDelay, (Timer timer) {
-      _showPopup();
+      _showPopupIfConditionMet();
       _disposeTimer();
     });
   }
@@ -138,7 +137,7 @@ class ReviewPopupObserver extends RoutemasterObserver {
     _timer = null;
   }
 
-  void _showPopup() {
+  void _showPopupIfConditionMet() {
     final BuildContext? context = _navigationKey.currentContext;
     if (context == null || !context.mounted) {
       debugPrint('Context is null or not mounted');

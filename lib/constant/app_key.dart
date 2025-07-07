@@ -15,7 +15,7 @@ class _SharedPreferencesKey {
   final String appOpenCount = 'app_open_count';
   final String usageTimeInSec = 'usage_time_in_sec';
   final String lastPopup = 'last_popup';
-  final String usageTimeInMinWhenLastPopup = 'usage_time_in_min_when_last_popup';
+  final String usageTimeInMinFromLastPopUp = 'usage_time_in_min_from_last_popup';
 
   // AppPreferences
   final String isReviewPopupDeniedInPreferences = 'is_review_popup_denied_in_preferences';
