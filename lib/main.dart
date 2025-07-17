@@ -14,6 +14,8 @@ import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/repository/remote/firebase_options.dart';
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/util/app_unique_key/app_unique_key.dart';
+import 'package:hakondate/view_model/multi_page/app_preferences/app_preferences_view_model.dart';
+import 'package:hakondate/view_model/multi_page/app_statistics/app_statistics_view_model.dart';
 
 Future<void> main() async {
   await runZonedGuarded<Future<void>>(
@@ -81,6 +83,10 @@ class Hakondate extends StatelessWidget {
 
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
+        ref
+          ..read(appStatisticsViewModelProvider)
+          ..read(appPreferencesViewModelProvider);
+
         return MaterialApp.router(
           key: key ?? ref.watch(appUniqueKeyProvider),
           title: 'はこんだて',
