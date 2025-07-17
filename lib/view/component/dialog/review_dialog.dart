@@ -96,12 +96,17 @@ class ReviewPopup extends StatelessWidget {
             text: const Text('評価する'),
             isPrimary: true,
             onTap: () async {
+              await ref.read(appPreferencesViewModelProvider.notifier).setIsReviewPopupDenied();
+              if (context.mounted) {
+                await Routemaster.of(context).pop();
+              } else {
+                debugPrint('Context is not mounted, cannot pop the ReviewPopup');
+              }
               if (await canLaunchUrl(Uri.parse(AppUrl.reviewFormUrl))) {
                 await launchUrl(
                   Uri.parse(AppUrl.reviewFormUrl),
                 );
               }
-              await ref.read(appPreferencesViewModelProvider.notifier).setIsReviewPopupDenied();
             },
           ),
           secondAction: HakondateActionButton(
