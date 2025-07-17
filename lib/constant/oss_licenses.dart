@@ -3503,14 +3503,14 @@ const _firebase_core = Package(
     dependencies: [PackageRef('firebase_core_platform_interface'), PackageRef('firebase_core_web'), PackageRef('flutter'), PackageRef('meta')]
   );
 
-/// firebase_core_platform_interface 5.4.0
+/// firebase_core_platform_interface 5.4.2
 const _firebase_core_platform_interface = Package(
     name: 'firebase_core_platform_interface',
     description: 'A common platform interface for the firebase_core plugin.',
     homepage: 'https://github.com/firebase/flutterfire/tree/main/packages/firebase_core/firebase_core_platform_interface',
     repository: 'https://github.com/firebase/flutterfire/tree/main/packages/firebase_core/firebase_core_platform_interface',
     authors: [],
-    version: '5.4.0',
+    version: '5.4.2',
     license: '''// Copyright 2017 The Chromium Authors. All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -3543,14 +3543,14 @@ const _firebase_core_platform_interface = Package(
     dependencies: [PackageRef('collection'), PackageRef('flutter'), PackageRef('meta'), PackageRef('plugin_platform_interface')]
   );
 
-/// firebase_core_web 2.19.0
+/// firebase_core_web 2.24.0
 const _firebase_core_web = Package(
     name: 'firebase_core_web',
     description: 'The web implementation of firebase_core',
     homepage: 'https://github.com/firebase/flutterfire/tree/main/packages/firebase_core/firebase_core_web',
     repository: 'https://github.com/firebase/flutterfire/tree/main/packages/firebase_core/firebase_core_web',
     authors: [],
-    version: '2.19.0',
+    version: '2.24.0',
     license: '''// Copyright 2020 The Chromium Authors. All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
