@@ -6,6 +6,7 @@ import 'package:hakondate/view/authorization/authorization.dart';
 import 'package:hakondate/view/bottom_bar/app_bottom_navigation_bar.dart';
 import 'package:hakondate/view/cache_management/cache_management.dart';
 import 'package:hakondate/view/calendar/calendar.dart';
+import 'package:hakondate/view/component/dialog/review_dialog.dart';
 import 'package:hakondate/view/component/frame/fade_up_page.dart';
 import 'package:hakondate/view/daily/daily.dart';
 import 'package:hakondate/view/daily/dish.dart';
@@ -29,7 +30,13 @@ import 'package:hakondate/view/terms/terms.dart';
 import 'package:hakondate/view/user_settings/user_settings.dart';
 import 'package:hakondate/view/user_settings/user_settings_detail.dart';
 
+final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
+
 final RoutemasterDelegate routemaster = RoutemasterDelegate(
+  navigatorKey: _navigatorKey,
+  observers: <RoutemasterObserver>[
+    ReviewPopupObserver(_navigatorKey),
+  ],
   routesBuilder: (BuildContext context) => RouteMap(
     onUnknownRoute: (_) => const Redirect('/splash'),
     routes: <String, RouteSettings Function(RouteData)>{

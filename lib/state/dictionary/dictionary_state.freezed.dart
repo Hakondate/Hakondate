@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,30 +10,51 @@ part of 'dictionary_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$DictionaryState {
-  DictionaryGroup? get selectedGroup => throw _privateConstructorUsedError;
-  List<DictionaryItemModel>? get selectedGroupItems =>
-      throw _privateConstructorUsedError;
-  DictionaryItemModel? get selectedItem => throw _privateConstructorUsedError;
+  DictionaryGroup? get selectedGroup;
+  List<DictionaryItemModel>? get selectedGroupItems;
+  DictionaryItemModel? get selectedItem;
 
   /// Create a copy of DictionaryState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $DictionaryStateCopyWith<DictionaryState> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$DictionaryStateCopyWithImpl<DictionaryState>(
+          this as DictionaryState, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is DictionaryState &&
+            (identical(other.selectedGroup, selectedGroup) ||
+                other.selectedGroup == selectedGroup) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedGroupItems, selectedGroupItems) &&
+            (identical(other.selectedItem, selectedItem) ||
+                other.selectedItem == selectedItem));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, selectedGroup,
+      const DeepCollectionEquality().hash(selectedGroupItems), selectedItem);
+
+  @override
+  String toString() {
+    return 'DictionaryState(selectedGroup: $selectedGroup, selectedGroupItems: $selectedGroupItems, selectedItem: $selectedItem)';
+  }
 }
 
 /// @nodoc
-abstract class $DictionaryStateCopyWith<$Res> {
+abstract mixin class $DictionaryStateCopyWith<$Res> {
   factory $DictionaryStateCopyWith(
-          DictionaryState value, $Res Function(DictionaryState) then) =
-      _$DictionaryStateCopyWithImpl<$Res, DictionaryState>;
+          DictionaryState value, $Res Function(DictionaryState) _then) =
+      _$DictionaryStateCopyWithImpl;
   @useResult
   $Res call(
       {DictionaryGroup? selectedGroup,
@@ -43,14 +65,12 @@ abstract class $DictionaryStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DictionaryStateCopyWithImpl<$Res, $Val extends DictionaryState>
+class _$DictionaryStateCopyWithImpl<$Res>
     implements $DictionaryStateCopyWith<$Res> {
-  _$DictionaryStateCopyWithImpl(this._value, this._then);
+  _$DictionaryStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final DictionaryState _self;
+  final $Res Function(DictionaryState) _then;
 
   /// Create a copy of DictionaryState
   /// with the given fields replaced by the non-null parameter values.
@@ -61,20 +81,20 @@ class _$DictionaryStateCopyWithImpl<$Res, $Val extends DictionaryState>
     Object? selectedGroupItems = freezed,
     Object? selectedItem = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       selectedGroup: freezed == selectedGroup
-          ? _value.selectedGroup
+          ? _self.selectedGroup
           : selectedGroup // ignore: cast_nullable_to_non_nullable
               as DictionaryGroup?,
       selectedGroupItems: freezed == selectedGroupItems
-          ? _value.selectedGroupItems
+          ? _self.selectedGroupItems
           : selectedGroupItems // ignore: cast_nullable_to_non_nullable
               as List<DictionaryItemModel>?,
       selectedItem: freezed == selectedItem
-          ? _value.selectedItem
+          ? _self.selectedItem
           : selectedItem // ignore: cast_nullable_to_non_nullable
               as DictionaryItemModel?,
-    ) as $Val);
+    ));
   }
 
   /// Create a copy of DictionaryState
@@ -82,71 +102,20 @@ class _$DictionaryStateCopyWithImpl<$Res, $Val extends DictionaryState>
   @override
   @pragma('vm:prefer-inline')
   $DictionaryItemModelCopyWith<$Res>? get selectedItem {
-    if (_value.selectedItem == null) {
+    if (_self.selectedItem == null) {
       return null;
     }
 
-    return $DictionaryItemModelCopyWith<$Res>(_value.selectedItem!, (value) {
-      return _then(_value.copyWith(selectedItem: value) as $Val);
+    return $DictionaryItemModelCopyWith<$Res>(_self.selectedItem!, (value) {
+      return _then(_self.copyWith(selectedItem: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$DictionaryStateImplCopyWith<$Res>
-    implements $DictionaryStateCopyWith<$Res> {
-  factory _$$DictionaryStateImplCopyWith(_$DictionaryStateImpl value,
-          $Res Function(_$DictionaryStateImpl) then) =
-      __$$DictionaryStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {DictionaryGroup? selectedGroup,
-      List<DictionaryItemModel>? selectedGroupItems,
-      DictionaryItemModel? selectedItem});
 
-  @override
-  $DictionaryItemModelCopyWith<$Res>? get selectedItem;
-}
-
-/// @nodoc
-class __$$DictionaryStateImplCopyWithImpl<$Res>
-    extends _$DictionaryStateCopyWithImpl<$Res, _$DictionaryStateImpl>
-    implements _$$DictionaryStateImplCopyWith<$Res> {
-  __$$DictionaryStateImplCopyWithImpl(
-      _$DictionaryStateImpl _value, $Res Function(_$DictionaryStateImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of DictionaryState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? selectedGroup = freezed,
-    Object? selectedGroupItems = freezed,
-    Object? selectedItem = freezed,
-  }) {
-    return _then(_$DictionaryStateImpl(
-      selectedGroup: freezed == selectedGroup
-          ? _value.selectedGroup
-          : selectedGroup // ignore: cast_nullable_to_non_nullable
-              as DictionaryGroup?,
-      selectedGroupItems: freezed == selectedGroupItems
-          ? _value._selectedGroupItems
-          : selectedGroupItems // ignore: cast_nullable_to_non_nullable
-              as List<DictionaryItemModel>?,
-      selectedItem: freezed == selectedItem
-          ? _value.selectedItem
-          : selectedItem // ignore: cast_nullable_to_non_nullable
-              as DictionaryItemModel?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$DictionaryStateImpl implements _DictionaryState {
-  const _$DictionaryStateImpl(
+class _DictionaryState implements DictionaryState {
+  const _DictionaryState(
       {this.selectedGroup,
       final List<DictionaryItemModel>? selectedGroupItems,
       this.selectedItem})
@@ -168,16 +137,19 @@ class _$DictionaryStateImpl implements _DictionaryState {
   @override
   final DictionaryItemModel? selectedItem;
 
+  /// Create a copy of DictionaryState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'DictionaryState(selectedGroup: $selectedGroup, selectedGroupItems: $selectedGroupItems, selectedItem: $selectedItem)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$DictionaryStateCopyWith<_DictionaryState> get copyWith =>
+      __$DictionaryStateCopyWithImpl<_DictionaryState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DictionaryStateImpl &&
+            other is _DictionaryState &&
             (identical(other.selectedGroup, selectedGroup) ||
                 other.selectedGroup == selectedGroup) &&
             const DeepCollectionEquality()
@@ -190,33 +162,75 @@ class _$DictionaryStateImpl implements _DictionaryState {
   int get hashCode => Object.hash(runtimeType, selectedGroup,
       const DeepCollectionEquality().hash(_selectedGroupItems), selectedItem);
 
+  @override
+  String toString() {
+    return 'DictionaryState(selectedGroup: $selectedGroup, selectedGroupItems: $selectedGroupItems, selectedItem: $selectedItem)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$DictionaryStateCopyWith<$Res>
+    implements $DictionaryStateCopyWith<$Res> {
+  factory _$DictionaryStateCopyWith(
+          _DictionaryState value, $Res Function(_DictionaryState) _then) =
+      __$DictionaryStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {DictionaryGroup? selectedGroup,
+      List<DictionaryItemModel>? selectedGroupItems,
+      DictionaryItemModel? selectedItem});
+
+  @override
+  $DictionaryItemModelCopyWith<$Res>? get selectedItem;
+}
+
+/// @nodoc
+class __$DictionaryStateCopyWithImpl<$Res>
+    implements _$DictionaryStateCopyWith<$Res> {
+  __$DictionaryStateCopyWithImpl(this._self, this._then);
+
+  final _DictionaryState _self;
+  final $Res Function(_DictionaryState) _then;
+
   /// Create a copy of DictionaryState
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$DictionaryStateImplCopyWith<_$DictionaryStateImpl> get copyWith =>
-      __$$DictionaryStateImplCopyWithImpl<_$DictionaryStateImpl>(
-          this, _$identity);
-}
-
-abstract class _DictionaryState implements DictionaryState {
-  const factory _DictionaryState(
-      {final DictionaryGroup? selectedGroup,
-      final List<DictionaryItemModel>? selectedGroupItems,
-      final DictionaryItemModel? selectedItem}) = _$DictionaryStateImpl;
-
-  @override
-  DictionaryGroup? get selectedGroup;
-  @override
-  List<DictionaryItemModel>? get selectedGroupItems;
-  @override
-  DictionaryItemModel? get selectedItem;
+  $Res call({
+    Object? selectedGroup = freezed,
+    Object? selectedGroupItems = freezed,
+    Object? selectedItem = freezed,
+  }) {
+    return _then(_DictionaryState(
+      selectedGroup: freezed == selectedGroup
+          ? _self.selectedGroup
+          : selectedGroup // ignore: cast_nullable_to_non_nullable
+              as DictionaryGroup?,
+      selectedGroupItems: freezed == selectedGroupItems
+          ? _self._selectedGroupItems
+          : selectedGroupItems // ignore: cast_nullable_to_non_nullable
+              as List<DictionaryItemModel>?,
+      selectedItem: freezed == selectedItem
+          ? _self.selectedItem
+          : selectedItem // ignore: cast_nullable_to_non_nullable
+              as DictionaryItemModel?,
+    ));
+  }
 
   /// Create a copy of DictionaryState
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DictionaryStateImplCopyWith<_$DictionaryStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $DictionaryItemModelCopyWith<$Res>? get selectedItem {
+    if (_self.selectedItem == null) {
+      return null;
+    }
+
+    return $DictionaryItemModelCopyWith<$Res>(_self.selectedItem!, (value) {
+      return _then(_self.copyWith(selectedItem: value));
+    });
+  }
 }
+
+// dart format on

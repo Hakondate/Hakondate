@@ -8,6 +8,7 @@ import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/signup/signup_state.dart';
 import 'package:hakondate/view/component/dialog/signing_up_dialog.dart';
 import 'package:hakondate/view_model/single_page/signup/signup_view_model.dart';
+import 'package:hakondate/view_model/single_page/user_settings/user_settings_view_model.dart';
 
 class SubmitButton extends ConsumerWidget {
   const SubmitButton({super.key});
@@ -15,7 +16,14 @@ class SubmitButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<SignupState> signupState = ref.watch(signupViewModelProvider);
-    final bool authorizationRequired = !(signupState is AsyncData<SignupState> && signupState.value.authorized);
+
+    final bool isEditing = ref.read(userSettingsViewModelProvider).value!.editingUser != null;
+    final int schoolIdInForm = signupState.value?.school?.id ?? -1;
+    final int schoolIdInUserSettings = ref.read(userSettingsViewModelProvider).value?.editingUser?.schoolId ?? -2;
+    final bool isSchoolIdChanged = schoolIdInForm != schoolIdInUserSettings;
+    final bool isNotAuthorized = !(signupState is AsyncData<SignupState> && signupState.value.authorized);
+
+    final bool authorizationRequired = isNotAuthorized && (!isEditing || isSchoolIdChanged);
 
     return Padding(
       padding: const EdgeInsets.all(PaddingSize.normal),
