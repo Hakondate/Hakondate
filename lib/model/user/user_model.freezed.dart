@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,57 +10,86 @@ part of 'user_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$UserModel {
-  int get id => throw _privateConstructorUsedError;
+  int get id;
 
-  /// ニックネーム
-  String get name => throw _privateConstructorUsedError;
+  /// 名前
+  String get name;
 
   /// 学校ID
-  int get schoolId => throw _privateConstructorUsedError;
+  int get schoolId;
 
   /// 学年
-  int get schoolYear => throw _privateConstructorUsedError;
+  int get schoolYear;
 
   /// 学校給食摂取基準
-  NutrientsModel? get slns => throw _privateConstructorUsedError;
+  NutrientsModel? get slns;
 
-  @JsonKey(ignore: true)
+  /// 認可された日
+  DateTime? get authorizedAt;
+
+  /// Create a copy of UserModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $UserModelCopyWith<UserModel> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$UserModelCopyWithImpl<UserModel>(this as UserModel, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is UserModel &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.schoolId, schoolId) ||
+                other.schoolId == schoolId) &&
+            (identical(other.schoolYear, schoolYear) ||
+                other.schoolYear == schoolYear) &&
+            (identical(other.slns, slns) || other.slns == slns) &&
+            (identical(other.authorizedAt, authorizedAt) ||
+                other.authorizedAt == authorizedAt));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, id, name, schoolId, schoolYear, slns, authorizedAt);
+
+  @override
+  String toString() {
+    return 'UserModel(id: $id, name: $name, schoolId: $schoolId, schoolYear: $schoolYear, slns: $slns, authorizedAt: $authorizedAt)';
+  }
 }
 
 /// @nodoc
-abstract class $UserModelCopyWith<$Res> {
-  factory $UserModelCopyWith(UserModel value, $Res Function(UserModel) then) =
-      _$UserModelCopyWithImpl<$Res, UserModel>;
+abstract mixin class $UserModelCopyWith<$Res> {
+  factory $UserModelCopyWith(UserModel value, $Res Function(UserModel) _then) =
+      _$UserModelCopyWithImpl;
   @useResult
   $Res call(
       {int id,
       String name,
       int schoolId,
       int schoolYear,
-      NutrientsModel? slns});
+      NutrientsModel? slns,
+      DateTime? authorizedAt});
 
   $NutrientsModelCopyWith<$Res>? get slns;
 }
 
 /// @nodoc
-class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
-    implements $UserModelCopyWith<$Res> {
-  _$UserModelCopyWithImpl(this._value, this._then);
+class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
+  _$UserModelCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final UserModel _self;
+  final $Res Function(UserModel) _then;
 
+  /// Create a copy of UserModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -68,120 +98,67 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? schoolId = null,
     Object? schoolYear = null,
     Object? slns = freezed,
+    Object? authorizedAt = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       schoolId: null == schoolId
-          ? _value.schoolId
+          ? _self.schoolId
           : schoolId // ignore: cast_nullable_to_non_nullable
               as int,
       schoolYear: null == schoolYear
-          ? _value.schoolYear
+          ? _self.schoolYear
           : schoolYear // ignore: cast_nullable_to_non_nullable
               as int,
       slns: freezed == slns
-          ? _value.slns
+          ? _self.slns
           : slns // ignore: cast_nullable_to_non_nullable
               as NutrientsModel?,
-    ) as $Val);
+      authorizedAt: freezed == authorizedAt
+          ? _self.authorizedAt
+          : authorizedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
   }
 
+  /// Create a copy of UserModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $NutrientsModelCopyWith<$Res>? get slns {
-    if (_value.slns == null) {
+    if (_self.slns == null) {
       return null;
     }
 
-    return $NutrientsModelCopyWith<$Res>(_value.slns!, (value) {
-      return _then(_value.copyWith(slns: value) as $Val);
+    return $NutrientsModelCopyWith<$Res>(_self.slns!, (value) {
+      return _then(_self.copyWith(slns: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$UserModelImplCopyWith<$Res>
-    implements $UserModelCopyWith<$Res> {
-  factory _$$UserModelImplCopyWith(
-          _$UserModelImpl value, $Res Function(_$UserModelImpl) then) =
-      __$$UserModelImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {int id,
-      String name,
-      int schoolId,
-      int schoolYear,
-      NutrientsModel? slns});
 
-  @override
-  $NutrientsModelCopyWith<$Res>? get slns;
-}
-
-/// @nodoc
-class __$$UserModelImplCopyWithImpl<$Res>
-    extends _$UserModelCopyWithImpl<$Res, _$UserModelImpl>
-    implements _$$UserModelImplCopyWith<$Res> {
-  __$$UserModelImplCopyWithImpl(
-      _$UserModelImpl _value, $Res Function(_$UserModelImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? schoolId = null,
-    Object? schoolYear = null,
-    Object? slns = freezed,
-  }) {
-    return _then(_$UserModelImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      schoolId: null == schoolId
-          ? _value.schoolId
-          : schoolId // ignore: cast_nullable_to_non_nullable
-              as int,
-      schoolYear: null == schoolYear
-          ? _value.schoolYear
-          : schoolYear // ignore: cast_nullable_to_non_nullable
-              as int,
-      slns: freezed == slns
-          ? _value.slns
-          : slns // ignore: cast_nullable_to_non_nullable
-              as NutrientsModel?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$UserModelImpl extends _UserModel {
-  const _$UserModelImpl(
+class _UserModel extends UserModel {
+  const _UserModel(
       {required this.id,
       required this.name,
       required this.schoolId,
       required this.schoolYear,
-      this.slns})
+      this.slns,
+      this.authorizedAt})
       : super._();
 
   @override
   final int id;
 
-  /// ニックネーム
+  /// 名前
   @override
   final String name;
 
@@ -197,65 +174,124 @@ class _$UserModelImpl extends _UserModel {
   @override
   final NutrientsModel? slns;
 
+  /// 認可された日
   @override
-  String toString() {
-    return 'UserModel(id: $id, name: $name, schoolId: $schoolId, schoolYear: $schoolYear, slns: $slns)';
-  }
+  final DateTime? authorizedAt;
+
+  /// Create a copy of UserModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$UserModelCopyWith<_UserModel> get copyWith =>
+      __$UserModelCopyWithImpl<_UserModel>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UserModelImpl &&
+            other is _UserModel &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.schoolId, schoolId) ||
                 other.schoolId == schoolId) &&
             (identical(other.schoolYear, schoolYear) ||
                 other.schoolYear == schoolYear) &&
-            (identical(other.slns, slns) || other.slns == slns));
+            (identical(other.slns, slns) || other.slns == slns) &&
+            (identical(other.authorizedAt, authorizedAt) ||
+                other.authorizedAt == authorizedAt));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, name, schoolId, schoolYear, slns);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, schoolId, schoolYear, slns, authorizedAt);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'UserModel(id: $id, name: $name, schoolId: $schoolId, schoolYear: $schoolYear, slns: $slns, authorizedAt: $authorizedAt)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$UserModelCopyWith<$Res>
+    implements $UserModelCopyWith<$Res> {
+  factory _$UserModelCopyWith(
+          _UserModel value, $Res Function(_UserModel) _then) =
+      __$UserModelCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {int id,
+      String name,
+      int schoolId,
+      int schoolYear,
+      NutrientsModel? slns,
+      DateTime? authorizedAt});
+
+  @override
+  $NutrientsModelCopyWith<$Res>? get slns;
+}
+
+/// @nodoc
+class __$UserModelCopyWithImpl<$Res> implements _$UserModelCopyWith<$Res> {
+  __$UserModelCopyWithImpl(this._self, this._then);
+
+  final _UserModel _self;
+  final $Res Function(_UserModel) _then;
+
+  /// Create a copy of UserModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$UserModelImplCopyWith<_$UserModelImpl> get copyWith =>
-      __$$UserModelImplCopyWithImpl<_$UserModelImpl>(this, _$identity);
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? schoolId = null,
+    Object? schoolYear = null,
+    Object? slns = freezed,
+    Object? authorizedAt = freezed,
+  }) {
+    return _then(_UserModel(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      schoolId: null == schoolId
+          ? _self.schoolId
+          : schoolId // ignore: cast_nullable_to_non_nullable
+              as int,
+      schoolYear: null == schoolYear
+          ? _self.schoolYear
+          : schoolYear // ignore: cast_nullable_to_non_nullable
+              as int,
+      slns: freezed == slns
+          ? _self.slns
+          : slns // ignore: cast_nullable_to_non_nullable
+              as NutrientsModel?,
+      authorizedAt: freezed == authorizedAt
+          ? _self.authorizedAt
+          : authorizedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
+  }
+
+  /// Create a copy of UserModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $NutrientsModelCopyWith<$Res>? get slns {
+    if (_self.slns == null) {
+      return null;
+    }
+
+    return $NutrientsModelCopyWith<$Res>(_self.slns!, (value) {
+      return _then(_self.copyWith(slns: value));
+    });
+  }
 }
 
-abstract class _UserModel extends UserModel {
-  const factory _UserModel(
-      {required final int id,
-      required final String name,
-      required final int schoolId,
-      required final int schoolYear,
-      final NutrientsModel? slns}) = _$UserModelImpl;
-  const _UserModel._() : super._();
-
-  @override
-  int get id;
-  @override
-
-  /// ニックネーム
-  String get name;
-  @override
-
-  /// 学校ID
-  int get schoolId;
-  @override
-
-  /// 学年
-  int get schoolYear;
-  @override
-
-  /// 学校給食摂取基準
-  NutrientsModel? get slns;
-  @override
-  @JsonKey(ignore: true)
-  _$$UserModelImplCopyWith<_$UserModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,101 +10,22 @@ part of 'help_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
 
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
-mixin _$HelpState {
-  SchoolGrade get schoolGrade => throw _privateConstructorUsedError;
+mixin _$HelpState implements DiagnosticableTreeMixin {
+  SchoolGrade get schoolGrade;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of HelpState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $HelpStateCopyWith<HelpState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $HelpStateCopyWith<$Res> {
-  factory $HelpStateCopyWith(HelpState value, $Res Function(HelpState) then) =
-      _$HelpStateCopyWithImpl<$Res, HelpState>;
-  @useResult
-  $Res call({SchoolGrade schoolGrade});
-}
-
-/// @nodoc
-class _$HelpStateCopyWithImpl<$Res, $Val extends HelpState>
-    implements $HelpStateCopyWith<$Res> {
-  _$HelpStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? schoolGrade = null,
-  }) {
-    return _then(_value.copyWith(
-      schoolGrade: null == schoolGrade
-          ? _value.schoolGrade
-          : schoolGrade // ignore: cast_nullable_to_non_nullable
-              as SchoolGrade,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$HelpStateImplCopyWith<$Res>
-    implements $HelpStateCopyWith<$Res> {
-  factory _$$HelpStateImplCopyWith(
-          _$HelpStateImpl value, $Res Function(_$HelpStateImpl) then) =
-      __$$HelpStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({SchoolGrade schoolGrade});
-}
-
-/// @nodoc
-class __$$HelpStateImplCopyWithImpl<$Res>
-    extends _$HelpStateCopyWithImpl<$Res, _$HelpStateImpl>
-    implements _$$HelpStateImplCopyWith<$Res> {
-  __$$HelpStateImplCopyWithImpl(
-      _$HelpStateImpl _value, $Res Function(_$HelpStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? schoolGrade = null,
-  }) {
-    return _then(_$HelpStateImpl(
-      schoolGrade: null == schoolGrade
-          ? _value.schoolGrade
-          : schoolGrade // ignore: cast_nullable_to_non_nullable
-              as SchoolGrade,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$HelpStateImpl with DiagnosticableTreeMixin implements _HelpState {
-  const _$HelpStateImpl({required this.schoolGrade});
-
-  @override
-  final SchoolGrade schoolGrade;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HelpState(schoolGrade: $schoolGrade)';
-  }
+      _$HelpStateCopyWithImpl<HelpState>(this as HelpState, _$identity);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'HelpState'))
       ..add(DiagnosticsProperty('schoolGrade', schoolGrade));
@@ -113,7 +35,7 @@ class _$HelpStateImpl with DiagnosticableTreeMixin implements _HelpState {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$HelpStateImpl &&
+            other is HelpState &&
             (identical(other.schoolGrade, schoolGrade) ||
                 other.schoolGrade == schoolGrade));
   }
@@ -121,21 +43,116 @@ class _$HelpStateImpl with DiagnosticableTreeMixin implements _HelpState {
   @override
   int get hashCode => Object.hash(runtimeType, schoolGrade);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'HelpState(schoolGrade: $schoolGrade)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $HelpStateCopyWith<$Res> {
+  factory $HelpStateCopyWith(HelpState value, $Res Function(HelpState) _then) =
+      _$HelpStateCopyWithImpl;
+  @useResult
+  $Res call({SchoolGrade schoolGrade});
+}
+
+/// @nodoc
+class _$HelpStateCopyWithImpl<$Res> implements $HelpStateCopyWith<$Res> {
+  _$HelpStateCopyWithImpl(this._self, this._then);
+
+  final HelpState _self;
+  final $Res Function(HelpState) _then;
+
+  /// Create a copy of HelpState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? schoolGrade = null,
+  }) {
+    return _then(_self.copyWith(
+      schoolGrade: null == schoolGrade
+          ? _self.schoolGrade
+          : schoolGrade // ignore: cast_nullable_to_non_nullable
+              as SchoolGrade,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _HelpState with DiagnosticableTreeMixin implements HelpState {
+  const _HelpState({required this.schoolGrade});
+
+  @override
+  final SchoolGrade schoolGrade;
+
+  /// Create a copy of HelpState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$HelpStateCopyWith<_HelpState> get copyWith =>
+      __$HelpStateCopyWithImpl<_HelpState>(this, _$identity);
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'HelpState'))
+      ..add(DiagnosticsProperty('schoolGrade', schoolGrade));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _HelpState &&
+            (identical(other.schoolGrade, schoolGrade) ||
+                other.schoolGrade == schoolGrade));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, schoolGrade);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'HelpState(schoolGrade: $schoolGrade)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$HelpStateCopyWith<$Res>
+    implements $HelpStateCopyWith<$Res> {
+  factory _$HelpStateCopyWith(
+          _HelpState value, $Res Function(_HelpState) _then) =
+      __$HelpStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call({SchoolGrade schoolGrade});
+}
+
+/// @nodoc
+class __$HelpStateCopyWithImpl<$Res> implements _$HelpStateCopyWith<$Res> {
+  __$HelpStateCopyWithImpl(this._self, this._then);
+
+  final _HelpState _self;
+  final $Res Function(_HelpState) _then;
+
+  /// Create a copy of HelpState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$HelpStateImplCopyWith<_$HelpStateImpl> get copyWith =>
-      __$$HelpStateImplCopyWithImpl<_$HelpStateImpl>(this, _$identity);
+  $Res call({
+    Object? schoolGrade = null,
+  }) {
+    return _then(_HelpState(
+      schoolGrade: null == schoolGrade
+          ? _self.schoolGrade
+          : schoolGrade // ignore: cast_nullable_to_non_nullable
+              as SchoolGrade,
+    ));
+  }
 }
 
-abstract class _HelpState implements HelpState {
-  const factory _HelpState({required final SchoolGrade schoolGrade}) =
-      _$HelpStateImpl;
-
-  @override
-  SchoolGrade get schoolGrade;
-  @override
-  @JsonKey(ignore: true)
-  _$$HelpStateImplCopyWith<_$HelpStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

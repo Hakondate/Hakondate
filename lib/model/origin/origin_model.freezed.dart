@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,92 +10,72 @@ part of 'origin_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$OriginModel {
-  DateTime get date => throw _privateConstructorUsedError;
-  List<OriginCategoryModel> get categories =>
-      throw _privateConstructorUsedError;
+  DateTime get date;
+  List<OriginCategoryModel> get categories;
 
-  @JsonKey(ignore: true)
-  $OriginModelCopyWith<OriginModel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $OriginModelCopyWith<$Res> {
-  factory $OriginModelCopyWith(
-          OriginModel value, $Res Function(OriginModel) then) =
-      _$OriginModelCopyWithImpl<$Res, OriginModel>;
-  @useResult
-  $Res call({DateTime date, List<OriginCategoryModel> categories});
-}
-
-/// @nodoc
-class _$OriginModelCopyWithImpl<$Res, $Val extends OriginModel>
-    implements $OriginModelCopyWith<$Res> {
-  _$OriginModelCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of OriginModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $OriginModelCopyWith<OriginModel> get copyWith =>
+      _$OriginModelCopyWithImpl<OriginModel>(this as OriginModel, _$identity);
+
   @override
-  $Res call({
-    Object? date = null,
-    Object? categories = null,
-  }) {
-    return _then(_value.copyWith(
-      date: null == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      categories: null == categories
-          ? _value.categories
-          : categories // ignore: cast_nullable_to_non_nullable
-              as List<OriginCategoryModel>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is OriginModel &&
+            (identical(other.date, date) || other.date == date) &&
+            const DeepCollectionEquality()
+                .equals(other.categories, categories));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, date, const DeepCollectionEquality().hash(categories));
+
+  @override
+  String toString() {
+    return 'OriginModel(date: $date, categories: $categories)';
   }
 }
 
 /// @nodoc
-abstract class _$$OriginModelImplCopyWith<$Res>
-    implements $OriginModelCopyWith<$Res> {
-  factory _$$OriginModelImplCopyWith(
-          _$OriginModelImpl value, $Res Function(_$OriginModelImpl) then) =
-      __$$OriginModelImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $OriginModelCopyWith<$Res> {
+  factory $OriginModelCopyWith(
+          OriginModel value, $Res Function(OriginModel) _then) =
+      _$OriginModelCopyWithImpl;
   @useResult
   $Res call({DateTime date, List<OriginCategoryModel> categories});
 }
 
 /// @nodoc
-class __$$OriginModelImplCopyWithImpl<$Res>
-    extends _$OriginModelCopyWithImpl<$Res, _$OriginModelImpl>
-    implements _$$OriginModelImplCopyWith<$Res> {
-  __$$OriginModelImplCopyWithImpl(
-      _$OriginModelImpl _value, $Res Function(_$OriginModelImpl) _then)
-      : super(_value, _then);
+class _$OriginModelCopyWithImpl<$Res> implements $OriginModelCopyWith<$Res> {
+  _$OriginModelCopyWithImpl(this._self, this._then);
 
+  final OriginModel _self;
+  final $Res Function(OriginModel) _then;
+
+  /// Create a copy of OriginModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? date = null,
     Object? categories = null,
   }) {
-    return _then(_$OriginModelImpl(
+    return _then(_self.copyWith(
       date: null == date
-          ? _value.date
+          ? _self.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
       categories: null == categories
-          ? _value._categories
+          ? _self.categories
           : categories // ignore: cast_nullable_to_non_nullable
               as List<OriginCategoryModel>,
     ));
@@ -103,8 +84,8 @@ class __$$OriginModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$OriginModelImpl extends _OriginModel {
-  const _$OriginModelImpl(
+class _OriginModel extends OriginModel {
+  const _OriginModel(
       {required this.date, required final List<OriginCategoryModel> categories})
       : _categories = categories,
         super._();
@@ -119,16 +100,19 @@ class _$OriginModelImpl extends _OriginModel {
     return EqualUnmodifiableListView(_categories);
   }
 
+  /// Create a copy of OriginModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'OriginModel(date: $date, categories: $categories)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$OriginModelCopyWith<_OriginModel> get copyWith =>
+      __$OriginModelCopyWithImpl<_OriginModel>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$OriginModelImpl &&
+            other is _OriginModel &&
             (identical(other.date, date) || other.date == date) &&
             const DeepCollectionEquality()
                 .equals(other._categories, _categories));
@@ -138,25 +122,49 @@ class _$OriginModelImpl extends _OriginModel {
   int get hashCode => Object.hash(
       runtimeType, date, const DeepCollectionEquality().hash(_categories));
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'OriginModel(date: $date, categories: $categories)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$OriginModelCopyWith<$Res>
+    implements $OriginModelCopyWith<$Res> {
+  factory _$OriginModelCopyWith(
+          _OriginModel value, $Res Function(_OriginModel) _then) =
+      __$OriginModelCopyWithImpl;
+  @override
+  @useResult
+  $Res call({DateTime date, List<OriginCategoryModel> categories});
+}
+
+/// @nodoc
+class __$OriginModelCopyWithImpl<$Res> implements _$OriginModelCopyWith<$Res> {
+  __$OriginModelCopyWithImpl(this._self, this._then);
+
+  final _OriginModel _self;
+  final $Res Function(_OriginModel) _then;
+
+  /// Create a copy of OriginModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$OriginModelImplCopyWith<_$OriginModelImpl> get copyWith =>
-      __$$OriginModelImplCopyWithImpl<_$OriginModelImpl>(this, _$identity);
+  $Res call({
+    Object? date = null,
+    Object? categories = null,
+  }) {
+    return _then(_OriginModel(
+      date: null == date
+          ? _self.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      categories: null == categories
+          ? _self._categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<OriginCategoryModel>,
+    ));
+  }
 }
 
-abstract class _OriginModel extends OriginModel {
-  const factory _OriginModel(
-      {required final DateTime date,
-      required final List<OriginCategoryModel> categories}) = _$OriginModelImpl;
-  const _OriginModel._() : super._();
-
-  @override
-  DateTime get date;
-  @override
-  List<OriginCategoryModel> get categories;
-  @override
-  @JsonKey(ignore: true)
-  _$$OriginModelImplCopyWith<_$OriginModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,91 +10,73 @@ part of 'origin_category_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$OriginCategoryModel {
-  String get name => throw _privateConstructorUsedError;
-  List<OriginItemModel> get items => throw _privateConstructorUsedError;
+  String get name;
+  List<OriginItemModel> get items;
 
-  @JsonKey(ignore: true)
-  $OriginCategoryModelCopyWith<OriginCategoryModel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $OriginCategoryModelCopyWith<$Res> {
-  factory $OriginCategoryModelCopyWith(
-          OriginCategoryModel value, $Res Function(OriginCategoryModel) then) =
-      _$OriginCategoryModelCopyWithImpl<$Res, OriginCategoryModel>;
-  @useResult
-  $Res call({String name, List<OriginItemModel> items});
-}
-
-/// @nodoc
-class _$OriginCategoryModelCopyWithImpl<$Res, $Val extends OriginCategoryModel>
-    implements $OriginCategoryModelCopyWith<$Res> {
-  _$OriginCategoryModelCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of OriginCategoryModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $OriginCategoryModelCopyWith<OriginCategoryModel> get copyWith =>
+      _$OriginCategoryModelCopyWithImpl<OriginCategoryModel>(
+          this as OriginCategoryModel, _$identity);
+
   @override
-  $Res call({
-    Object? name = null,
-    Object? items = null,
-  }) {
-    return _then(_value.copyWith(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      items: null == items
-          ? _value.items
-          : items // ignore: cast_nullable_to_non_nullable
-              as List<OriginItemModel>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is OriginCategoryModel &&
+            (identical(other.name, name) || other.name == name) &&
+            const DeepCollectionEquality().equals(other.items, items));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, name, const DeepCollectionEquality().hash(items));
+
+  @override
+  String toString() {
+    return 'OriginCategoryModel(name: $name, items: $items)';
   }
 }
 
 /// @nodoc
-abstract class _$$OriginCategoryModelImplCopyWith<$Res>
-    implements $OriginCategoryModelCopyWith<$Res> {
-  factory _$$OriginCategoryModelImplCopyWith(_$OriginCategoryModelImpl value,
-          $Res Function(_$OriginCategoryModelImpl) then) =
-      __$$OriginCategoryModelImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $OriginCategoryModelCopyWith<$Res> {
+  factory $OriginCategoryModelCopyWith(
+          OriginCategoryModel value, $Res Function(OriginCategoryModel) _then) =
+      _$OriginCategoryModelCopyWithImpl;
   @useResult
   $Res call({String name, List<OriginItemModel> items});
 }
 
 /// @nodoc
-class __$$OriginCategoryModelImplCopyWithImpl<$Res>
-    extends _$OriginCategoryModelCopyWithImpl<$Res, _$OriginCategoryModelImpl>
-    implements _$$OriginCategoryModelImplCopyWith<$Res> {
-  __$$OriginCategoryModelImplCopyWithImpl(_$OriginCategoryModelImpl _value,
-      $Res Function(_$OriginCategoryModelImpl) _then)
-      : super(_value, _then);
+class _$OriginCategoryModelCopyWithImpl<$Res>
+    implements $OriginCategoryModelCopyWith<$Res> {
+  _$OriginCategoryModelCopyWithImpl(this._self, this._then);
 
+  final OriginCategoryModel _self;
+  final $Res Function(OriginCategoryModel) _then;
+
+  /// Create a copy of OriginCategoryModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? name = null,
     Object? items = null,
   }) {
-    return _then(_$OriginCategoryModelImpl(
+    return _then(_self.copyWith(
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       items: null == items
-          ? _value._items
+          ? _self.items
           : items // ignore: cast_nullable_to_non_nullable
               as List<OriginItemModel>,
     ));
@@ -102,8 +85,8 @@ class __$$OriginCategoryModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$OriginCategoryModelImpl extends _OriginCategoryModel {
-  const _$OriginCategoryModelImpl(
+class _OriginCategoryModel extends OriginCategoryModel {
+  const _OriginCategoryModel(
       {required this.name, required final List<OriginItemModel> items})
       : _items = items,
         super._();
@@ -118,16 +101,20 @@ class _$OriginCategoryModelImpl extends _OriginCategoryModel {
     return EqualUnmodifiableListView(_items);
   }
 
+  /// Create a copy of OriginCategoryModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'OriginCategoryModel(name: $name, items: $items)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$OriginCategoryModelCopyWith<_OriginCategoryModel> get copyWith =>
+      __$OriginCategoryModelCopyWithImpl<_OriginCategoryModel>(
+          this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$OriginCategoryModelImpl &&
+            other is _OriginCategoryModel &&
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality().equals(other._items, _items));
   }
@@ -136,26 +123,50 @@ class _$OriginCategoryModelImpl extends _OriginCategoryModel {
   int get hashCode => Object.hash(
       runtimeType, name, const DeepCollectionEquality().hash(_items));
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'OriginCategoryModel(name: $name, items: $items)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$OriginCategoryModelCopyWith<$Res>
+    implements $OriginCategoryModelCopyWith<$Res> {
+  factory _$OriginCategoryModelCopyWith(_OriginCategoryModel value,
+          $Res Function(_OriginCategoryModel) _then) =
+      __$OriginCategoryModelCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String name, List<OriginItemModel> items});
+}
+
+/// @nodoc
+class __$OriginCategoryModelCopyWithImpl<$Res>
+    implements _$OriginCategoryModelCopyWith<$Res> {
+  __$OriginCategoryModelCopyWithImpl(this._self, this._then);
+
+  final _OriginCategoryModel _self;
+  final $Res Function(_OriginCategoryModel) _then;
+
+  /// Create a copy of OriginCategoryModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$OriginCategoryModelImplCopyWith<_$OriginCategoryModelImpl> get copyWith =>
-      __$$OriginCategoryModelImplCopyWithImpl<_$OriginCategoryModelImpl>(
-          this, _$identity);
+  $Res call({
+    Object? name = null,
+    Object? items = null,
+  }) {
+    return _then(_OriginCategoryModel(
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      items: null == items
+          ? _self._items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<OriginItemModel>,
+    ));
+  }
 }
 
-abstract class _OriginCategoryModel extends OriginCategoryModel {
-  const factory _OriginCategoryModel(
-      {required final String name,
-      required final List<OriginItemModel> items}) = _$OriginCategoryModelImpl;
-  const _OriginCategoryModel._() : super._();
-
-  @override
-  String get name;
-  @override
-  List<OriginItemModel> get items;
-  @override
-  @JsonKey(ignore: true)
-  _$$OriginCategoryModelImplCopyWith<_$OriginCategoryModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

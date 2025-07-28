@@ -13,7 +13,7 @@ import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
 part 'common_function.g.dart';
 
 @riverpod
-CommonFunction commonFunction(CommonFunctionRef ref) => CommonFunction(ref);
+CommonFunction commonFunction(Ref ref) => CommonFunction(ref);
 
 class CommonFunction {
   CommonFunction(this._ref);

@@ -9,7 +9,7 @@ import 'package:hakondate/view_model/single_page/user_settings/user_settings_vie
 part 'menus_remote_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-MenusRemoteRepository menusRemoteRepository(MenusRemoteRepositoryRef ref) {
+MenusRemoteRepository menusRemoteRepository(Ref ref) {
   final FirebaseFirestore firestoreAPI = ref.watch(firestoreAPIProvider);
   final CollectionReference<MenuModel> menuCollectionReference = firestoreAPI.collection('menus').withConverter(
         fromFirestore: (DocumentSnapshot<Map<String, dynamic>> doc, _) => MenuModel.fromFirestore(doc),
@@ -19,6 +19,7 @@ MenusRemoteRepository menusRemoteRepository(MenusRemoteRepositoryRef ref) {
   return MenusRemoteRepository(menuCollectionReference, ref);
 }
 
+// 説明
 // ignore: one_member_abstracts
 abstract class MenusRemoteRepositoryAPI {
   Future<List<MenuModel>> get({required DateTime updateAt, required DateTime from});

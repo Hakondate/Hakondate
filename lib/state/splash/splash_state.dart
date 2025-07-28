@@ -4,7 +4,7 @@ part 'splash_state.freezed.dart';
 part 'loading_status.dart';
 
 @freezed
-class SplashState with _$SplashState {
+abstract class SplashState with _$SplashState {
   factory SplashState({
     LoadingStatus status = LoadingStatus.unloading,
   }) =>

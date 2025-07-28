@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,142 +10,35 @@ part of 'menu_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$MenuModel {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int id, DateTime day, int schoolId,
-            List<DishModel> dishes, String? event)
-        lunchesDay,
-    required TResult Function() holiday,
-    required TResult Function() noData,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int id, DateTime day, int schoolId,
-            List<DishModel> dishes, String? event)?
-        lunchesDay,
-    TResult? Function()? holiday,
-    TResult? Function()? noData,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int id, DateTime day, int schoolId, List<DishModel> dishes,
-            String? event)?
-        lunchesDay,
-    TResult Function()? holiday,
-    TResult Function()? noData,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LunchesDayMenuModel value) lunchesDay,
-    required TResult Function(HolidayMenuModel value) holiday,
-    required TResult Function(NoDataMenuModel value) noData,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LunchesDayMenuModel value)? lunchesDay,
-    TResult? Function(HolidayMenuModel value)? holiday,
-    TResult? Function(NoDataMenuModel value)? noData,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LunchesDayMenuModel value)? lunchesDay,
-    TResult Function(HolidayMenuModel value)? holiday,
-    TResult Function(NoDataMenuModel value)? noData,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $MenuModelCopyWith<$Res> {
-  factory $MenuModelCopyWith(MenuModel value, $Res Function(MenuModel) then) =
-      _$MenuModelCopyWithImpl<$Res, MenuModel>;
-}
-
-/// @nodoc
-class _$MenuModelCopyWithImpl<$Res, $Val extends MenuModel>
-    implements $MenuModelCopyWith<$Res> {
-  _$MenuModelCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-}
-
-/// @nodoc
-abstract class _$$LunchesDayMenuModelImplCopyWith<$Res> {
-  factory _$$LunchesDayMenuModelImplCopyWith(_$LunchesDayMenuModelImpl value,
-          $Res Function(_$LunchesDayMenuModelImpl) then) =
-      __$$LunchesDayMenuModelImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {int id,
-      DateTime day,
-      int schoolId,
-      List<DishModel> dishes,
-      String? event});
-}
-
-/// @nodoc
-class __$$LunchesDayMenuModelImplCopyWithImpl<$Res>
-    extends _$MenuModelCopyWithImpl<$Res, _$LunchesDayMenuModelImpl>
-    implements _$$LunchesDayMenuModelImplCopyWith<$Res> {
-  __$$LunchesDayMenuModelImplCopyWithImpl(_$LunchesDayMenuModelImpl _value,
-      $Res Function(_$LunchesDayMenuModelImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? id = null,
-    Object? day = null,
-    Object? schoolId = null,
-    Object? dishes = null,
-    Object? event = freezed,
-  }) {
-    return _then(_$LunchesDayMenuModelImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      day: null == day
-          ? _value.day
-          : day // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      schoolId: null == schoolId
-          ? _value.schoolId
-          : schoolId // ignore: cast_nullable_to_non_nullable
-              as int,
-      dishes: null == dishes
-          ? _value._dishes
-          : dishes // ignore: cast_nullable_to_non_nullable
-              as List<DishModel>,
-      event: freezed == event
-          ? _value.event
-          : event // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is MenuModel);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'MenuModel()';
   }
 }
 
 /// @nodoc
+class $MenuModelCopyWith<$Res> {
+  $MenuModelCopyWith(MenuModel _, $Res Function(MenuModel) __);
+}
 
-class _$LunchesDayMenuModelImpl extends LunchesDayMenuModel {
-  const _$LunchesDayMenuModelImpl(
+/// @nodoc
+
+class LunchesDayMenuModel extends MenuModel {
+  const LunchesDayMenuModel(
       {required this.id,
       required this.day,
       required this.schoolId,
@@ -153,33 +47,30 @@ class _$LunchesDayMenuModelImpl extends LunchesDayMenuModel {
       : _dishes = dishes,
         super._();
 
-  @override
   final int id;
-  @override
   final DateTime day;
-  @override
   final int schoolId;
   final List<DishModel> _dishes;
-  @override
   List<DishModel> get dishes {
     if (_dishes is EqualUnmodifiableListView) return _dishes;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_dishes);
   }
 
-  @override
   final String? event;
 
-  @override
-  String toString() {
-    return 'MenuModel.lunchesDay(id: $id, day: $day, schoolId: $schoolId, dishes: $dishes, event: $event)';
-  }
+  /// Create a copy of MenuModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $LunchesDayMenuModelCopyWith<LunchesDayMenuModel> get copyWith =>
+      _$LunchesDayMenuModelCopyWithImpl<LunchesDayMenuModel>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LunchesDayMenuModelImpl &&
+            other is LunchesDayMenuModel &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.day, day) || other.day == day) &&
             (identical(other.schoolId, schoolId) ||
@@ -192,333 +83,128 @@ class _$LunchesDayMenuModelImpl extends LunchesDayMenuModel {
   int get hashCode => Object.hash(runtimeType, id, day, schoolId,
       const DeepCollectionEquality().hash(_dishes), event);
 
-  @JsonKey(ignore: true)
   @override
+  String toString() {
+    return 'MenuModel.lunchesDay(id: $id, day: $day, schoolId: $schoolId, dishes: $dishes, event: $event)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $LunchesDayMenuModelCopyWith<$Res>
+    implements $MenuModelCopyWith<$Res> {
+  factory $LunchesDayMenuModelCopyWith(
+          LunchesDayMenuModel value, $Res Function(LunchesDayMenuModel) _then) =
+      _$LunchesDayMenuModelCopyWithImpl;
+  @useResult
+  $Res call(
+      {int id,
+      DateTime day,
+      int schoolId,
+      List<DishModel> dishes,
+      String? event});
+}
+
+/// @nodoc
+class _$LunchesDayMenuModelCopyWithImpl<$Res>
+    implements $LunchesDayMenuModelCopyWith<$Res> {
+  _$LunchesDayMenuModelCopyWithImpl(this._self, this._then);
+
+  final LunchesDayMenuModel _self;
+  final $Res Function(LunchesDayMenuModel) _then;
+
+  /// Create a copy of MenuModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  _$$LunchesDayMenuModelImplCopyWith<_$LunchesDayMenuModelImpl> get copyWith =>
-      __$$LunchesDayMenuModelImplCopyWithImpl<_$LunchesDayMenuModelImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int id, DateTime day, int schoolId,
-            List<DishModel> dishes, String? event)
-        lunchesDay,
-    required TResult Function() holiday,
-    required TResult Function() noData,
+  $Res call({
+    Object? id = null,
+    Object? day = null,
+    Object? schoolId = null,
+    Object? dishes = null,
+    Object? event = freezed,
   }) {
-    return lunchesDay(id, day, schoolId, dishes, event);
+    return _then(LunchesDayMenuModel(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      day: null == day
+          ? _self.day
+          : day // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      schoolId: null == schoolId
+          ? _self.schoolId
+          : schoolId // ignore: cast_nullable_to_non_nullable
+              as int,
+      dishes: null == dishes
+          ? _self._dishes
+          : dishes // ignore: cast_nullable_to_non_nullable
+              as List<DishModel>,
+      event: freezed == event
+          ? _self.event
+          : event // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int id, DateTime day, int schoolId,
-            List<DishModel> dishes, String? event)?
-        lunchesDay,
-    TResult? Function()? holiday,
-    TResult? Function()? noData,
-  }) {
-    return lunchesDay?.call(id, day, schoolId, dishes, event);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int id, DateTime day, int schoolId, List<DishModel> dishes,
-            String? event)?
-        lunchesDay,
-    TResult Function()? holiday,
-    TResult Function()? noData,
-    required TResult orElse(),
-  }) {
-    if (lunchesDay != null) {
-      return lunchesDay(id, day, schoolId, dishes, event);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LunchesDayMenuModel value) lunchesDay,
-    required TResult Function(HolidayMenuModel value) holiday,
-    required TResult Function(NoDataMenuModel value) noData,
-  }) {
-    return lunchesDay(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LunchesDayMenuModel value)? lunchesDay,
-    TResult? Function(HolidayMenuModel value)? holiday,
-    TResult? Function(NoDataMenuModel value)? noData,
-  }) {
-    return lunchesDay?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LunchesDayMenuModel value)? lunchesDay,
-    TResult Function(HolidayMenuModel value)? holiday,
-    TResult Function(NoDataMenuModel value)? noData,
-    required TResult orElse(),
-  }) {
-    if (lunchesDay != null) {
-      return lunchesDay(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class LunchesDayMenuModel extends MenuModel {
-  const factory LunchesDayMenuModel(
-      {required final int id,
-      required final DateTime day,
-      required final int schoolId,
-      required final List<DishModel> dishes,
-      final String? event}) = _$LunchesDayMenuModelImpl;
-  const LunchesDayMenuModel._() : super._();
-
-  int get id;
-  DateTime get day;
-  int get schoolId;
-  List<DishModel> get dishes;
-  String? get event;
-  @JsonKey(ignore: true)
-  _$$LunchesDayMenuModelImplCopyWith<_$LunchesDayMenuModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$HolidayMenuModelImplCopyWith<$Res> {
-  factory _$$HolidayMenuModelImplCopyWith(_$HolidayMenuModelImpl value,
-          $Res Function(_$HolidayMenuModelImpl) then) =
-      __$$HolidayMenuModelImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$HolidayMenuModelImplCopyWithImpl<$Res>
-    extends _$MenuModelCopyWithImpl<$Res, _$HolidayMenuModelImpl>
-    implements _$$HolidayMenuModelImplCopyWith<$Res> {
-  __$$HolidayMenuModelImplCopyWithImpl(_$HolidayMenuModelImpl _value,
-      $Res Function(_$HolidayMenuModelImpl) _then)
-      : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$HolidayMenuModelImpl extends HolidayMenuModel {
-  const _$HolidayMenuModelImpl() : super._();
+class HolidayMenuModel extends MenuModel {
+  const HolidayMenuModel() : super._();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is HolidayMenuModel);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
 
   @override
   String toString() {
     return 'MenuModel.holiday()';
   }
+}
+
+/// @nodoc
+
+class NoDataMenuModel extends MenuModel {
+  const NoDataMenuModel() : super._();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$HolidayMenuModelImpl);
+        (other.runtimeType == runtimeType && other is NoDataMenuModel);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int id, DateTime day, int schoolId,
-            List<DishModel> dishes, String? event)
-        lunchesDay,
-    required TResult Function() holiday,
-    required TResult Function() noData,
-  }) {
-    return holiday();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int id, DateTime day, int schoolId,
-            List<DishModel> dishes, String? event)?
-        lunchesDay,
-    TResult? Function()? holiday,
-    TResult? Function()? noData,
-  }) {
-    return holiday?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int id, DateTime day, int schoolId, List<DishModel> dishes,
-            String? event)?
-        lunchesDay,
-    TResult Function()? holiday,
-    TResult Function()? noData,
-    required TResult orElse(),
-  }) {
-    if (holiday != null) {
-      return holiday();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LunchesDayMenuModel value) lunchesDay,
-    required TResult Function(HolidayMenuModel value) holiday,
-    required TResult Function(NoDataMenuModel value) noData,
-  }) {
-    return holiday(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LunchesDayMenuModel value)? lunchesDay,
-    TResult? Function(HolidayMenuModel value)? holiday,
-    TResult? Function(NoDataMenuModel value)? noData,
-  }) {
-    return holiday?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LunchesDayMenuModel value)? lunchesDay,
-    TResult Function(HolidayMenuModel value)? holiday,
-    TResult Function(NoDataMenuModel value)? noData,
-    required TResult orElse(),
-  }) {
-    if (holiday != null) {
-      return holiday(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class HolidayMenuModel extends MenuModel {
-  const factory HolidayMenuModel() = _$HolidayMenuModelImpl;
-  const HolidayMenuModel._() : super._();
-}
-
-/// @nodoc
-abstract class _$$NoDataMenuModelImplCopyWith<$Res> {
-  factory _$$NoDataMenuModelImplCopyWith(_$NoDataMenuModelImpl value,
-          $Res Function(_$NoDataMenuModelImpl) then) =
-      __$$NoDataMenuModelImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$NoDataMenuModelImplCopyWithImpl<$Res>
-    extends _$MenuModelCopyWithImpl<$Res, _$NoDataMenuModelImpl>
-    implements _$$NoDataMenuModelImplCopyWith<$Res> {
-  __$$NoDataMenuModelImplCopyWithImpl(
-      _$NoDataMenuModelImpl _value, $Res Function(_$NoDataMenuModelImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$NoDataMenuModelImpl extends NoDataMenuModel {
-  const _$NoDataMenuModelImpl() : super._();
 
   @override
   String toString() {
     return 'MenuModel.noData()';
   }
+}
+
+/// @nodoc
+
+class UnauthorizedMenuModel extends MenuModel {
+  const UnauthorizedMenuModel() : super._();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$NoDataMenuModelImpl);
+        (other.runtimeType == runtimeType && other is UnauthorizedMenuModel);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
 
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int id, DateTime day, int schoolId,
-            List<DishModel> dishes, String? event)
-        lunchesDay,
-    required TResult Function() holiday,
-    required TResult Function() noData,
-  }) {
-    return noData();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int id, DateTime day, int schoolId,
-            List<DishModel> dishes, String? event)?
-        lunchesDay,
-    TResult? Function()? holiday,
-    TResult? Function()? noData,
-  }) {
-    return noData?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int id, DateTime day, int schoolId, List<DishModel> dishes,
-            String? event)?
-        lunchesDay,
-    TResult Function()? holiday,
-    TResult Function()? noData,
-    required TResult orElse(),
-  }) {
-    if (noData != null) {
-      return noData();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LunchesDayMenuModel value) lunchesDay,
-    required TResult Function(HolidayMenuModel value) holiday,
-    required TResult Function(NoDataMenuModel value) noData,
-  }) {
-    return noData(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LunchesDayMenuModel value)? lunchesDay,
-    TResult? Function(HolidayMenuModel value)? holiday,
-    TResult? Function(NoDataMenuModel value)? noData,
-  }) {
-    return noData?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LunchesDayMenuModel value)? lunchesDay,
-    TResult Function(HolidayMenuModel value)? holiday,
-    TResult Function(NoDataMenuModel value)? noData,
-    required TResult orElse(),
-  }) {
-    if (noData != null) {
-      return noData(this);
-    }
-    return orElse();
+  String toString() {
+    return 'MenuModel.unauthorized()';
   }
 }
 
-abstract class NoDataMenuModel extends MenuModel {
-  const factory NoDataMenuModel() = _$NoDataMenuModelImpl;
-  const NoDataMenuModel._() : super._();
-}
+// dart format on

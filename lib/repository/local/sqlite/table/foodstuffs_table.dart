@@ -27,6 +27,7 @@ class FoodstuffsTable extends Table {
   TextColumn get origin => text().nullable()();
 
   @override
+  //　説明
   // ignore: always_specify_types
   List<Set<Column>> get uniqueKeys => [
         <Column<Object>>{name, gram, isHeat, isAllergy},

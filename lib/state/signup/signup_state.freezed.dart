@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,143 +10,139 @@ part of 'signup_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
 
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
-mixin _$SignupState {
-  String? get name => throw _privateConstructorUsedError;
-  int? get schoolId => throw _privateConstructorUsedError;
-  int? get schoolYear => throw _privateConstructorUsedError;
-  String get schoolTrailing => throw _privateConstructorUsedError;
-  String get schoolYearTrailing => throw _privateConstructorUsedError;
-  List<SchoolModel> get schools => throw _privateConstructorUsedError;
-  List<String> get schoolYears => throw _privateConstructorUsedError;
-  String? get nameErrorState => throw _privateConstructorUsedError;
-  String? get schoolErrorState => throw _privateConstructorUsedError;
+mixin _$SignupState implements DiagnosticableTreeMixin {
+  String? get lastName;
+  String? get firstName;
+  int? get schoolId;
+  SchoolModel? get school;
+  int? get schoolYear;
+  String get schoolTrailing;
+  String get schoolYearTrailing;
+  List<SchoolModel> get schools;
+  List<String> get schoolYears;
+  String? get nameErrorState;
+  String? get schoolErrorState;
+  bool get authorized;
 
-  @JsonKey(ignore: true)
-  $SignupStateCopyWith<SignupState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $SignupStateCopyWith<$Res> {
-  factory $SignupStateCopyWith(
-          SignupState value, $Res Function(SignupState) then) =
-      _$SignupStateCopyWithImpl<$Res, SignupState>;
-  @useResult
-  $Res call(
-      {String? name,
-      int? schoolId,
-      int? schoolYear,
-      String schoolTrailing,
-      String schoolYearTrailing,
-      List<SchoolModel> schools,
-      List<String> schoolYears,
-      String? nameErrorState,
-      String? schoolErrorState});
-}
-
-/// @nodoc
-class _$SignupStateCopyWithImpl<$Res, $Val extends SignupState>
-    implements $SignupStateCopyWith<$Res> {
-  _$SignupStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of SignupState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $SignupStateCopyWith<SignupState> get copyWith =>
+      _$SignupStateCopyWithImpl<SignupState>(this as SignupState, _$identity);
+
   @override
-  $Res call({
-    Object? name = freezed,
-    Object? schoolId = freezed,
-    Object? schoolYear = freezed,
-    Object? schoolTrailing = null,
-    Object? schoolYearTrailing = null,
-    Object? schools = null,
-    Object? schoolYears = null,
-    Object? nameErrorState = freezed,
-    Object? schoolErrorState = freezed,
-  }) {
-    return _then(_value.copyWith(
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      schoolId: freezed == schoolId
-          ? _value.schoolId
-          : schoolId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      schoolYear: freezed == schoolYear
-          ? _value.schoolYear
-          : schoolYear // ignore: cast_nullable_to_non_nullable
-              as int?,
-      schoolTrailing: null == schoolTrailing
-          ? _value.schoolTrailing
-          : schoolTrailing // ignore: cast_nullable_to_non_nullable
-              as String,
-      schoolYearTrailing: null == schoolYearTrailing
-          ? _value.schoolYearTrailing
-          : schoolYearTrailing // ignore: cast_nullable_to_non_nullable
-              as String,
-      schools: null == schools
-          ? _value.schools
-          : schools // ignore: cast_nullable_to_non_nullable
-              as List<SchoolModel>,
-      schoolYears: null == schoolYears
-          ? _value.schoolYears
-          : schoolYears // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      nameErrorState: freezed == nameErrorState
-          ? _value.nameErrorState
-          : nameErrorState // ignore: cast_nullable_to_non_nullable
-              as String?,
-      schoolErrorState: freezed == schoolErrorState
-          ? _value.schoolErrorState
-          : schoolErrorState // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'SignupState'))
+      ..add(DiagnosticsProperty('lastName', lastName))
+      ..add(DiagnosticsProperty('firstName', firstName))
+      ..add(DiagnosticsProperty('schoolId', schoolId))
+      ..add(DiagnosticsProperty('school', school))
+      ..add(DiagnosticsProperty('schoolYear', schoolYear))
+      ..add(DiagnosticsProperty('schoolTrailing', schoolTrailing))
+      ..add(DiagnosticsProperty('schoolYearTrailing', schoolYearTrailing))
+      ..add(DiagnosticsProperty('schools', schools))
+      ..add(DiagnosticsProperty('schoolYears', schoolYears))
+      ..add(DiagnosticsProperty('nameErrorState', nameErrorState))
+      ..add(DiagnosticsProperty('schoolErrorState', schoolErrorState))
+      ..add(DiagnosticsProperty('authorized', authorized));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is SignupState &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
+            (identical(other.schoolId, schoolId) ||
+                other.schoolId == schoolId) &&
+            (identical(other.school, school) || other.school == school) &&
+            (identical(other.schoolYear, schoolYear) ||
+                other.schoolYear == schoolYear) &&
+            (identical(other.schoolTrailing, schoolTrailing) ||
+                other.schoolTrailing == schoolTrailing) &&
+            (identical(other.schoolYearTrailing, schoolYearTrailing) ||
+                other.schoolYearTrailing == schoolYearTrailing) &&
+            const DeepCollectionEquality().equals(other.schools, schools) &&
+            const DeepCollectionEquality()
+                .equals(other.schoolYears, schoolYears) &&
+            (identical(other.nameErrorState, nameErrorState) ||
+                other.nameErrorState == nameErrorState) &&
+            (identical(other.schoolErrorState, schoolErrorState) ||
+                other.schoolErrorState == schoolErrorState) &&
+            (identical(other.authorized, authorized) ||
+                other.authorized == authorized));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      lastName,
+      firstName,
+      schoolId,
+      school,
+      schoolYear,
+      schoolTrailing,
+      schoolYearTrailing,
+      const DeepCollectionEquality().hash(schools),
+      const DeepCollectionEquality().hash(schoolYears),
+      nameErrorState,
+      schoolErrorState,
+      authorized);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'SignupState(lastName: $lastName, firstName: $firstName, schoolId: $schoolId, school: $school, schoolYear: $schoolYear, schoolTrailing: $schoolTrailing, schoolYearTrailing: $schoolYearTrailing, schools: $schools, schoolYears: $schoolYears, nameErrorState: $nameErrorState, schoolErrorState: $schoolErrorState, authorized: $authorized)';
   }
 }
 
 /// @nodoc
-abstract class _$$SignupStateImplCopyWith<$Res>
-    implements $SignupStateCopyWith<$Res> {
-  factory _$$SignupStateImplCopyWith(
-          _$SignupStateImpl value, $Res Function(_$SignupStateImpl) then) =
-      __$$SignupStateImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $SignupStateCopyWith<$Res> {
+  factory $SignupStateCopyWith(
+          SignupState value, $Res Function(SignupState) _then) =
+      _$SignupStateCopyWithImpl;
   @useResult
   $Res call(
-      {String? name,
+      {String? lastName,
+      String? firstName,
       int? schoolId,
+      SchoolModel? school,
       int? schoolYear,
       String schoolTrailing,
       String schoolYearTrailing,
       List<SchoolModel> schools,
       List<String> schoolYears,
       String? nameErrorState,
-      String? schoolErrorState});
+      String? schoolErrorState,
+      bool authorized});
+
+  $SchoolModelCopyWith<$Res>? get school;
 }
 
 /// @nodoc
-class __$$SignupStateImplCopyWithImpl<$Res>
-    extends _$SignupStateCopyWithImpl<$Res, _$SignupStateImpl>
-    implements _$$SignupStateImplCopyWith<$Res> {
-  __$$SignupStateImplCopyWithImpl(
-      _$SignupStateImpl _value, $Res Function(_$SignupStateImpl) _then)
-      : super(_value, _then);
+class _$SignupStateCopyWithImpl<$Res> implements $SignupStateCopyWith<$Res> {
+  _$SignupStateCopyWithImpl(this._self, this._then);
 
+  final SignupState _self;
+  final $Res Function(SignupState) _then;
+
+  /// Create a copy of SignupState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
+    Object? lastName = freezed,
+    Object? firstName = freezed,
     Object? schoolId = freezed,
+    Object? school = freezed,
     Object? schoolYear = freezed,
     Object? schoolTrailing = null,
     Object? schoolYearTrailing = null,
@@ -153,68 +150,102 @@ class __$$SignupStateImplCopyWithImpl<$Res>
     Object? schoolYears = null,
     Object? nameErrorState = freezed,
     Object? schoolErrorState = freezed,
+    Object? authorized = null,
   }) {
-    return _then(_$SignupStateImpl(
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+    return _then(_self.copyWith(
+      lastName: freezed == lastName
+          ? _self.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      firstName: freezed == firstName
+          ? _self.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
               as String?,
       schoolId: freezed == schoolId
-          ? _value.schoolId
+          ? _self.schoolId
           : schoolId // ignore: cast_nullable_to_non_nullable
               as int?,
+      school: freezed == school
+          ? _self.school
+          : school // ignore: cast_nullable_to_non_nullable
+              as SchoolModel?,
       schoolYear: freezed == schoolYear
-          ? _value.schoolYear
+          ? _self.schoolYear
           : schoolYear // ignore: cast_nullable_to_non_nullable
               as int?,
       schoolTrailing: null == schoolTrailing
-          ? _value.schoolTrailing
+          ? _self.schoolTrailing
           : schoolTrailing // ignore: cast_nullable_to_non_nullable
               as String,
       schoolYearTrailing: null == schoolYearTrailing
-          ? _value.schoolYearTrailing
+          ? _self.schoolYearTrailing
           : schoolYearTrailing // ignore: cast_nullable_to_non_nullable
               as String,
       schools: null == schools
-          ? _value._schools
+          ? _self.schools
           : schools // ignore: cast_nullable_to_non_nullable
               as List<SchoolModel>,
       schoolYears: null == schoolYears
-          ? _value._schoolYears
+          ? _self.schoolYears
           : schoolYears // ignore: cast_nullable_to_non_nullable
               as List<String>,
       nameErrorState: freezed == nameErrorState
-          ? _value.nameErrorState
+          ? _self.nameErrorState
           : nameErrorState // ignore: cast_nullable_to_non_nullable
               as String?,
       schoolErrorState: freezed == schoolErrorState
-          ? _value.schoolErrorState
+          ? _self.schoolErrorState
           : schoolErrorState // ignore: cast_nullable_to_non_nullable
               as String?,
+      authorized: null == authorized
+          ? _self.authorized
+          : authorized // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
+
+  /// Create a copy of SignupState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $SchoolModelCopyWith<$Res>? get school {
+    if (_self.school == null) {
+      return null;
+    }
+
+    return $SchoolModelCopyWith<$Res>(_self.school!, (value) {
+      return _then(_self.copyWith(school: value));
+    });
+  }
 }
 
 /// @nodoc
 
-class _$SignupStateImpl with DiagnosticableTreeMixin implements _SignupState {
-  const _$SignupStateImpl(
-      {this.name,
+class _SignupState with DiagnosticableTreeMixin implements SignupState {
+  const _SignupState(
+      {this.lastName,
+      this.firstName,
       this.schoolId,
+      this.school,
       this.schoolYear,
       this.schoolTrailing = '学校を選択',
       this.schoolYearTrailing = '学年を選択',
       final List<SchoolModel> schools = const <SchoolModel>[],
       final List<String> schoolYears = const <String>['1年生', '2年生', '3年生'],
       this.nameErrorState,
-      this.schoolErrorState})
+      this.schoolErrorState,
+      this.authorized = false})
       : _schools = schools,
         _schoolYears = schoolYears;
 
   @override
-  final String? name;
+  final String? lastName;
+  @override
+  final String? firstName;
   @override
   final int? schoolId;
+  @override
+  final SchoolModel? school;
   @override
   final int? schoolYear;
   @override
@@ -245,36 +276,48 @@ class _$SignupStateImpl with DiagnosticableTreeMixin implements _SignupState {
   final String? nameErrorState;
   @override
   final String? schoolErrorState;
-
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SignupState(name: $name, schoolId: $schoolId, schoolYear: $schoolYear, schoolTrailing: $schoolTrailing, schoolYearTrailing: $schoolYearTrailing, schools: $schools, schoolYears: $schoolYears, nameErrorState: $nameErrorState, schoolErrorState: $schoolErrorState)';
-  }
+  @JsonKey()
+  final bool authorized;
+
+  /// Create a copy of SignupState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$SignupStateCopyWith<_SignupState> get copyWith =>
+      __$SignupStateCopyWithImpl<_SignupState>(this, _$identity);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'SignupState'))
-      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('lastName', lastName))
+      ..add(DiagnosticsProperty('firstName', firstName))
       ..add(DiagnosticsProperty('schoolId', schoolId))
+      ..add(DiagnosticsProperty('school', school))
       ..add(DiagnosticsProperty('schoolYear', schoolYear))
       ..add(DiagnosticsProperty('schoolTrailing', schoolTrailing))
       ..add(DiagnosticsProperty('schoolYearTrailing', schoolYearTrailing))
       ..add(DiagnosticsProperty('schools', schools))
       ..add(DiagnosticsProperty('schoolYears', schoolYears))
       ..add(DiagnosticsProperty('nameErrorState', nameErrorState))
-      ..add(DiagnosticsProperty('schoolErrorState', schoolErrorState));
+      ..add(DiagnosticsProperty('schoolErrorState', schoolErrorState))
+      ..add(DiagnosticsProperty('authorized', authorized));
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SignupStateImpl &&
-            (identical(other.name, name) || other.name == name) &&
+            other is _SignupState &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
             (identical(other.schoolId, schoolId) ||
                 other.schoolId == schoolId) &&
+            (identical(other.school, school) || other.school == school) &&
             (identical(other.schoolYear, schoolYear) ||
                 other.schoolYear == schoolYear) &&
             (identical(other.schoolTrailing, schoolTrailing) ||
@@ -287,61 +330,149 @@ class _$SignupStateImpl with DiagnosticableTreeMixin implements _SignupState {
             (identical(other.nameErrorState, nameErrorState) ||
                 other.nameErrorState == nameErrorState) &&
             (identical(other.schoolErrorState, schoolErrorState) ||
-                other.schoolErrorState == schoolErrorState));
+                other.schoolErrorState == schoolErrorState) &&
+            (identical(other.authorized, authorized) ||
+                other.authorized == authorized));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      name,
+      lastName,
+      firstName,
       schoolId,
+      school,
       schoolYear,
       schoolTrailing,
       schoolYearTrailing,
       const DeepCollectionEquality().hash(_schools),
       const DeepCollectionEquality().hash(_schoolYears),
       nameErrorState,
-      schoolErrorState);
+      schoolErrorState,
+      authorized);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'SignupState(lastName: $lastName, firstName: $firstName, schoolId: $schoolId, school: $school, schoolYear: $schoolYear, schoolTrailing: $schoolTrailing, schoolYearTrailing: $schoolYearTrailing, schools: $schools, schoolYears: $schoolYears, nameErrorState: $nameErrorState, schoolErrorState: $schoolErrorState, authorized: $authorized)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$SignupStateCopyWith<$Res>
+    implements $SignupStateCopyWith<$Res> {
+  factory _$SignupStateCopyWith(
+          _SignupState value, $Res Function(_SignupState) _then) =
+      __$SignupStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String? lastName,
+      String? firstName,
+      int? schoolId,
+      SchoolModel? school,
+      int? schoolYear,
+      String schoolTrailing,
+      String schoolYearTrailing,
+      List<SchoolModel> schools,
+      List<String> schoolYears,
+      String? nameErrorState,
+      String? schoolErrorState,
+      bool authorized});
+
+  @override
+  $SchoolModelCopyWith<$Res>? get school;
+}
+
+/// @nodoc
+class __$SignupStateCopyWithImpl<$Res> implements _$SignupStateCopyWith<$Res> {
+  __$SignupStateCopyWithImpl(this._self, this._then);
+
+  final _SignupState _self;
+  final $Res Function(_SignupState) _then;
+
+  /// Create a copy of SignupState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$SignupStateImplCopyWith<_$SignupStateImpl> get copyWith =>
-      __$$SignupStateImplCopyWithImpl<_$SignupStateImpl>(this, _$identity);
+  $Res call({
+    Object? lastName = freezed,
+    Object? firstName = freezed,
+    Object? schoolId = freezed,
+    Object? school = freezed,
+    Object? schoolYear = freezed,
+    Object? schoolTrailing = null,
+    Object? schoolYearTrailing = null,
+    Object? schools = null,
+    Object? schoolYears = null,
+    Object? nameErrorState = freezed,
+    Object? schoolErrorState = freezed,
+    Object? authorized = null,
+  }) {
+    return _then(_SignupState(
+      lastName: freezed == lastName
+          ? _self.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      firstName: freezed == firstName
+          ? _self.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      schoolId: freezed == schoolId
+          ? _self.schoolId
+          : schoolId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      school: freezed == school
+          ? _self.school
+          : school // ignore: cast_nullable_to_non_nullable
+              as SchoolModel?,
+      schoolYear: freezed == schoolYear
+          ? _self.schoolYear
+          : schoolYear // ignore: cast_nullable_to_non_nullable
+              as int?,
+      schoolTrailing: null == schoolTrailing
+          ? _self.schoolTrailing
+          : schoolTrailing // ignore: cast_nullable_to_non_nullable
+              as String,
+      schoolYearTrailing: null == schoolYearTrailing
+          ? _self.schoolYearTrailing
+          : schoolYearTrailing // ignore: cast_nullable_to_non_nullable
+              as String,
+      schools: null == schools
+          ? _self._schools
+          : schools // ignore: cast_nullable_to_non_nullable
+              as List<SchoolModel>,
+      schoolYears: null == schoolYears
+          ? _self._schoolYears
+          : schoolYears // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      nameErrorState: freezed == nameErrorState
+          ? _self.nameErrorState
+          : nameErrorState // ignore: cast_nullable_to_non_nullable
+              as String?,
+      schoolErrorState: freezed == schoolErrorState
+          ? _self.schoolErrorState
+          : schoolErrorState // ignore: cast_nullable_to_non_nullable
+              as String?,
+      authorized: null == authorized
+          ? _self.authorized
+          : authorized // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+
+  /// Create a copy of SignupState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $SchoolModelCopyWith<$Res>? get school {
+    if (_self.school == null) {
+      return null;
+    }
+
+    return $SchoolModelCopyWith<$Res>(_self.school!, (value) {
+      return _then(_self.copyWith(school: value));
+    });
+  }
 }
 
-abstract class _SignupState implements SignupState {
-  const factory _SignupState(
-      {final String? name,
-      final int? schoolId,
-      final int? schoolYear,
-      final String schoolTrailing,
-      final String schoolYearTrailing,
-      final List<SchoolModel> schools,
-      final List<String> schoolYears,
-      final String? nameErrorState,
-      final String? schoolErrorState}) = _$SignupStateImpl;
-
-  @override
-  String? get name;
-  @override
-  int? get schoolId;
-  @override
-  int? get schoolYear;
-  @override
-  String get schoolTrailing;
-  @override
-  String get schoolYearTrailing;
-  @override
-  List<SchoolModel> get schools;
-  @override
-  List<String> get schoolYears;
-  @override
-  String? get nameErrorState;
-  @override
-  String? get schoolErrorState;
-  @override
-  @JsonKey(ignore: true)
-  _$$SignupStateImplCopyWith<_$SignupStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

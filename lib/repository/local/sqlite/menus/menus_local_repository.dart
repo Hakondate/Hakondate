@@ -12,7 +12,7 @@ import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
 part 'menus_local_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-MenusLocalRepository menusLocalRepository(MenusLocalRepositoryRef ref) {
+MenusLocalRepository menusLocalRepository(Ref ref) {
   final LocalDatabase localDatabase = ref.watch(localDatabaseProvider);
   return MenusLocalRepository(localDatabase, ref);
 }
@@ -42,11 +42,14 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
     final MenusTableCompanion companion = menu.toDrift();
     final int menuId = await _db.into(_db.menusTable).insert(
           companion,
+          // 説明
           // ignore: always_specify_types
           onConflict: DoUpdate(
             ($MenusTableTable old) => MenusTableCompanion.custom(
+              // 説明
               // ignore: always_specify_types
               event: Constant(companion.event.value),
+              // 説明
               // ignore: always_specify_types
               updateAt: Constant(companion.updateAt.value),
             ),
@@ -65,6 +68,7 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
 
       await _db.into(_db.menuDishesTable).insert(
             menuDishesTableCompanion,
+            // 説明
             // ignore: always_specify_types
             onConflict: DoUpdate(
               (_) => menuDishesTableCompanion,
@@ -88,11 +92,12 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
     if (conflictSchema == null) {
       dishId = await _db.into(_db.dishesTable).insert(companion);
     } else if (conflictSchema.category != companion.category.value) {
-      dishId = await (_db.update(_db.dishesTable)
+      await (_db.update(_db.dishesTable)
             ..where(
               ($DishesTableTable t) => t.name.equals(companion.name.value),
             ))
           .write(DishesTableCompanion(category: companion.category));
+      dishId = conflictSchema.id;
     } else {
       dishId = conflictSchema.id;
     }
@@ -105,6 +110,7 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
       );
       await _db.into(_db.dishFoodstuffsTable).insert(
             dishFoodstuffsSchema,
+            // 説明
             // ignore: always_specify_types
             onConflict: DoUpdate(
               (_) => dishFoodstuffsSchema,

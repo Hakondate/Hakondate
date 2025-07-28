@@ -11,6 +11,7 @@ class HakondateDialog extends StatelessWidget {
     this.title,
     this.firstAction,
     this.secondAction,
+    this.thirdAction,
     super.key,
   });
 
@@ -18,6 +19,7 @@ class HakondateDialog extends StatelessWidget {
   final Widget body;
   final HakondateActionButton? firstAction;
   final HakondateActionButton? secondAction;
+  final HakondateActionButton? thirdAction;
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +61,14 @@ class HakondateDialog extends StatelessWidget {
                   Expanded(child: firstAction!),
                 ],
               ),
+            ],
+            if (thirdAction != null) ...<Widget>[
+              Divider(
+                thickness: 1,
+                color: AppColor.brand.secondaryLight,
+                height: 0,
+              ),
+              thirdAction!,
             ],
           ],
         ),

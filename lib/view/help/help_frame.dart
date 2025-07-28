@@ -84,7 +84,7 @@ class HelpFrame extends StatelessWidget {
   factory HelpFrame.input() => HelpFrame(
         label: '登録情報について',
         content: DescriptionText.body(
-          label: '　ご登録された学年に応じて，栄養基準値が異なります．学年が変わるごとに，登録データをを手動で変更する必要があります．',
+          label: '　ご登録された学年に応じて，栄養基準値が異なります．学年が変わるごとに，登録データを手動で変更する必要があります．',
         ),
       );
 
@@ -93,6 +93,13 @@ class HelpFrame extends StatelessWidget {
         content: DescriptionText.body(
           label: '　このアプリに使用している入力値は，稀に誤りがあります．正確な情報は函館市役所保険給食課や各学校の担当教員へお問い合わせください．以下は誤りの例です．\n'
               '例)正:コッペパン，誤:コッパパン',
+        ),
+      );
+
+  factory HelpFrame.changeMenu() => HelpFrame(
+        label: '献立情報の変更について',
+        content: DescriptionText.body(
+          label: '　物資納入の都合により．食材の準備の関係でメニューが変更になる場合があります．その場合はこのアプリに反映されません．ご了承ください．',
         ),
       );
 
@@ -111,19 +118,20 @@ class HelpFrame extends StatelessWidget {
       );
 
   factory HelpFrame.nickName() => HelpFrame(
-        label: 'ニックネームの情報について',
+        label: 'お名前について',
         content: DescriptionText.body(
-          label: '　ニックネームはサービス内でお子様を識別するために利用されます．\n'
-              '　登録情報は端末に保存されます．',
+          label: '　お名前情報は本アプリ内でお子様を識別するために利用されます．\n'
+              'ニックネームなどを入力していただいても構いません．また，あとで変更することもできます．\n'
+              '　登録情報は端末に保存され，収集されることはありません．また，あとから変更することができます．',
         ),
       );
 
   factory HelpFrame.schoolAndSchoolYear() => HelpFrame(
         label: '学校・学年の情報について',
         content: DescriptionText.body(
-          label: '　学校の情報は，選択した学校の献立を表示するために利用します．\n'
-              '　学年の情報は，本アプリで使用している不足栄養素を算出するために利用します．\n'
-              '　登録情報は，端末に保存されます',
+          label: '　学校の情報は，選択した学校の献立を表示するために利用します．選択肢にない学校は，本アプリ未対応の学校です．\n'
+              '　学年の情報は，本アプリ内でお子様の年齢に合わせた情報(栄養基準値など)を表示するために利用されます．\n'
+              '　どちらの情報も，端末内に保存され収集されることはありません．また，あとから変更することができます．',
         ),
       );
 
@@ -135,9 +143,9 @@ class HelpFrame extends StatelessWidget {
       );
 
   factory HelpFrame.recommendedIngredients() => HelpFrame(
-        label: 'オススメ食材',
+        label: 'おすすめ食材',
         content: DescriptionText.body(
-          label: '　オススメ食材は，5大栄養素の内，最も不足している栄養素と次に不足している栄養素が多く含まれる食材を表示しています．また，給食が休みの日は表示されません．',
+          label: '　おすすめ食材は，5大栄養素の内，最も不足している栄養素と次に不足している栄養素が多く含まれる食材を表示しています．また，給食が休みの日は表示されません．',
         ),
       );
 
@@ -146,14 +154,28 @@ class HelpFrame extends StatelessWidget {
         content: Column(
           children: <Widget>[
             DescriptionText.body(
-              label: '　別日の献立が知りたい場合は献立リストを使用します．献立画面右上にあるカレンダーアイコンをタップすることで献立リスト画面に遷移できます．',
+              label: '　別日の献立が知りたい場合は献立リストを使用します．こんだて画面右上にあるカレンダーアイコンをタップすることで献立リスト画面に遷移することができます．',
               isZeroBottomPadding: true,
             ),
             _iconWithText('献立リストアイコン', Icons.calendar_today_outlined),
             DescriptionText.body(
               label: '　画面を上下にスクロールし，該当日をタップすることで別日の献立を閲覧することができます．\n'
-                  '　また，ホーム画面上部の日付バーから日付を選択することでも，別日の献立を閲覧することができます．',
+                  '　また，こんだて画面上部の日付バーから日付を選択することでも，別日の献立を閲覧することができます．',
             ),
+          ],
+        ),
+      );
+
+  factory HelpFrame.menuScreen() => HelpFrame(
+        label: 'メニュー画面',
+        content: Column(
+          children: <Widget>[
+            DescriptionText.body(
+              label: '　こんだて画面左上にあるメニューアイコンをタップすることでメニュー画面に遷移することができます．',
+              isZeroBottomPadding: true,
+            ),
+            _iconWithText('メニューアイコン', Icons.dehaze),
+            const SizedBox(height: SpaceSize.paragraph),
           ],
         ),
       );
@@ -163,12 +185,33 @@ class HelpFrame extends StatelessWidget {
         content: Column(
           children: <Widget>[
             DescriptionText.body(
-              label: '　給食で利用されている食材の原産地を知りたい場合は，ドロワーから産地情報を閲覧する画面に遷移することができます．'
-                  'ドロワーはこんだて画面で左上にあるドロワーアイコンをタップ又は，左端から右へ画面をスワイプすることで表示させることができます．',
+              label: '　給食で利用されている食材の原産地を知りたい場合は，アプリ内メニューの「産地情報」から産地情報を閲覧することができます．\n',
               isZeroBottomPadding: true,
             ),
-            _iconWithText('ドロワーアイコン', Icons.dehaze),
-            const SizedBox(height: SpaceSize.paragraph),
+          ],
+        ),
+      );
+  factory HelpFrame.allergyNotSuppoted() => HelpFrame(
+        label: 'アレルギー情報',
+        content: Column(
+          children: <Widget>[
+            DescriptionText.body(
+              label: '　このアプリでは，献立に含まれているお子様のアレルギー食材を表示する機能はありません．\n',
+              isZeroBottomPadding: true,
+            ),
+          ],
+        ),
+      );
+  factory HelpFrame.contact() => HelpFrame(
+        label: 'お問い合わせ',
+        content: Column(
+          children: <Widget>[
+            DescriptionText.body(
+              label:
+                  '　このアプリに関するご質問やご意見は，アプリ開発チームまでご連絡ください．学校関係者様はお問い合わせに対応しておりませんので，ご了承ください．ご連絡は，アプリ内メニューの「ご意見・お問い合わせ」または下記のメールアドレスよりお願いいたします．\n'
+                  '　editorhakondate@gmail.com\n',
+              isZeroBottomPadding: true,
+            ),
           ],
         ),
       );
