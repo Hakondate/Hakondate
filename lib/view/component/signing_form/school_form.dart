@@ -68,6 +68,7 @@ class SchoolForm extends ConsumerWidget {
 
   List<SchoolModel> _getAvailableSchools(AsyncValue<SignupState> state) {
     if (state is AsyncData<SignupState>) {
+      print('a; ${state.value.schools.where((SchoolModel school) => school.publishAllowed).toList()}');
       return state.value.schools.where((SchoolModel school) => school.publishAllowed).toList();
     }
     return <SchoolModel>[];

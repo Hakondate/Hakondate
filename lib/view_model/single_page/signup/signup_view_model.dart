@@ -137,6 +137,7 @@ class SignupViewModel extends _$SignupViewModel {
   }
 
   Future<void> updateSchool(int id) async {
+    print('a; updateSchool() id: $id');
     state.whenData((SignupState data) async {
       final SchoolModel school = await ref.read(schoolsLocalRepositoryProvider).getById(id);
       final List<String> schoolYears = _getSchoolYears(school);

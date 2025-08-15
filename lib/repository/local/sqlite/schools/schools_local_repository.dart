@@ -55,6 +55,7 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryAPI {
 
   @override
   Future<SchoolModel> getById(int id) async {
+    print('a; getById() id: $id');
     final SchoolsSchema? schoolsSchema = await (_db.select(_db.schoolsTable)
           ..where(($SchoolsTableTable t) {
             return t.id.equals(id);

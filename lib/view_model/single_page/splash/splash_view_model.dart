@@ -118,6 +118,7 @@ class SplashViewModel extends _$SplashViewModel {
 
     state = SplashState(status: LoadingStatus.updating);
     await Future.forEach(schools, (SchoolModel school) async {
+      print('a; _initializeSchools() school: $school');
       await _schoolsLocalRepository.add(school);
     });
   }
@@ -135,6 +136,7 @@ class SplashViewModel extends _$SplashViewModel {
 
     state = SplashState(status: LoadingStatus.updating);
     await Future.forEach(menus, (MenuModel menu) async {
+      print('a; _initializeMenus() Menus: $menu');
       await _menusLocalRepository.add(menu);
     });
   }

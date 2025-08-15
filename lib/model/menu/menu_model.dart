@@ -86,6 +86,7 @@ class MenuModel with _$MenuModel {
       'dishes': menu.dishes.map((DishModel dish) => dish.toFirestore()).toList(),
       if (menu.event != null) 'event': menu.event!,
       'updatedAt': DateTime.now(),
+      //TODO: publishAllowedを追加する？
     };
   }
 
