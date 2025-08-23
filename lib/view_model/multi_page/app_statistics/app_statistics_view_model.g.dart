@@ -13,14 +13,15 @@ String _$appStatisticsViewModelHash() =>
 @ProviderFor(AppStatisticsViewModel)
 final appStatisticsViewModelProvider =
     AsyncNotifierProvider<AppStatisticsViewModel, AppStatisticsState>.internal(
-  AppStatisticsViewModel.new,
-  name: r'appStatisticsViewModelProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$appStatisticsViewModelHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      AppStatisticsViewModel.new,
+      name: r'appStatisticsViewModelProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$appStatisticsViewModelHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$AppStatisticsViewModel = AsyncNotifier<AppStatisticsState>;
 // ignore_for_file: type=lint

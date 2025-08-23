@@ -29,9 +29,10 @@ String _$graphRawValuesHash() => r'61e5c67c91a39e4e1906bbb9a8c7a415d2cf4aaa';
 final graphRawValuesProvider = AutoDisposeProvider<List<double>>.internal(
   graphRawValues,
   name: r'graphRawValuesProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$graphRawValuesHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$graphRawValuesHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

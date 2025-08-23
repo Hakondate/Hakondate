@@ -12,14 +12,15 @@ String _$splashViewModelHash() => r'fb3b8e7e373301ebe4cd0aa6c2ad1910fd6c87df';
 @ProviderFor(SplashViewModel)
 final splashViewModelProvider =
     AutoDisposeNotifierProvider<SplashViewModel, SplashState>.internal(
-  SplashViewModel.new,
-  name: r'splashViewModelProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$splashViewModelHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      SplashViewModel.new,
+      name: r'splashViewModelProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$splashViewModelHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$SplashViewModel = AutoDisposeNotifier<SplashState>;
 // ignore_for_file: type=lint

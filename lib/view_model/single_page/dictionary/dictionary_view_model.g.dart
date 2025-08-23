@@ -13,14 +13,15 @@ String _$dictionaryViewModelHash() =>
 @ProviderFor(DictionaryViewModel)
 final dictionaryViewModelProvider =
     AsyncNotifierProvider<DictionaryViewModel, DictionaryState>.internal(
-  DictionaryViewModel.new,
-  name: r'dictionaryViewModelProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$dictionaryViewModelHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      DictionaryViewModel.new,
+      name: r'dictionaryViewModelProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$dictionaryViewModelHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$DictionaryViewModel = AsyncNotifier<DictionaryState>;
 // ignore_for_file: type=lint

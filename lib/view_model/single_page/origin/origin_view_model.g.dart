@@ -12,14 +12,15 @@ String _$originViewModelHash() => r'0e21e36c35558f9d3f5f5fbed6ba6029212bff8c';
 @ProviderFor(OriginViewModel)
 final originViewModelProvider =
     AutoDisposeAsyncNotifierProvider<OriginViewModel, OriginState>.internal(
-  OriginViewModel.new,
-  name: r'originViewModelProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$originViewModelHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      OriginViewModel.new,
+      name: r'originViewModelProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$originViewModelHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$OriginViewModel = AutoDisposeAsyncNotifier<OriginState>;
 // ignore_for_file: type=lint

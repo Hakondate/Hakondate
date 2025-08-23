@@ -13,14 +13,15 @@ String _$userSettingsViewModelHash() =>
 @ProviderFor(UserSettingsViewModel)
 final userSettingsViewModelProvider =
     AsyncNotifierProvider<UserSettingsViewModel, UserSettingsState>.internal(
-  UserSettingsViewModel.new,
-  name: r'userSettingsViewModelProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$userSettingsViewModelHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      UserSettingsViewModel.new,
+      name: r'userSettingsViewModelProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$userSettingsViewModelHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$UserSettingsViewModel = AsyncNotifier<UserSettingsState>;
 // ignore_for_file: type=lint
