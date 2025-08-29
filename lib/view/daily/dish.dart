@@ -8,12 +8,12 @@ import 'package:hakondate/model/foodstuff/foodstuff_model.dart';
 import 'package:hakondate/model/nutrients/nutrient_unit.dart';
 import 'package:hakondate/model/nutrients/nutrients_model.dart';
 import 'package:hakondate/state/daily/daily_state.dart';
+import 'package:hakondate/util/nutrients/radar_chart_values.dart';
+import 'package:hakondate/view/component/graph/dictionary_nutrients_radar_chart.dart';
 import 'package:hakondate/view/component/label/nutrient_label.dart';
 import 'package:hakondate/view/component/label/nutrients_list.dart';
-import 'package:hakondate/view/component/graph/dictionary_nutrients_radar_chart.dart';
-import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
 import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
-import 'package:hakondate/util/nutrients/radar_chart_values.dart';
+import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
 
 class Dish extends ConsumerWidget {
   const Dish({super.key});

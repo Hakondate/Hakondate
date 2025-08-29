@@ -6,7 +6,7 @@ part of 'daily_graph_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$graphValuesHash() => r'395950f9d34dc6899758b2e10d34a7ee2d41a6b8';
+String _$graphValuesHash() => r'8f9840a56c1340a35e3d835938267e0cb4454401';
 
 /// See also [graphValues].
 @ProviderFor(graphValues)
@@ -22,7 +22,7 @@ final graphValuesProvider = AutoDisposeFutureProvider<List<double>>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef GraphValuesRef = AutoDisposeFutureProviderRef<List<double>>;
-String _$graphRawValuesHash() => r'61e5c67c91a39e4e1906bbb9a8c7a415d2cf4aaa';
+String _$graphRawValuesHash() => r'4359a6a83dbaadc80737841b0ca78f21f460c5b7';
 
 /// See also [graphRawValues].
 @ProviderFor(graphRawValues)

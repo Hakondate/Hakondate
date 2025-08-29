@@ -4,9 +4,9 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:hakondate/model/menu/menu_model.dart';
 import 'package:hakondate/model/nutrients/nutrients_model.dart';
 import 'package:hakondate/state/daily/daily_state.dart';
+import 'package:hakondate/util/nutrients/radar_chart_values.dart';
 import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
 import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
-import 'package:hakondate/util/nutrients/radar_chart_values.dart';
 
 part 'daily_graph_view_model.g.dart';
 
