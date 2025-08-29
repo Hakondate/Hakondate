@@ -1,7 +1,7 @@
 {
   "file_generated_by": "FlutterFire CLI",
   "purpose": "FirebaseAppID & ProjectID for this Firebase app in this directory",
-  "GOOGLE_APP_ID": "1:37711418622:ios:72f40f96456e67778ec1af",
-  "FIREBASE_PROJECT_ID": "hakondate-develop",
-  "GCM_SENDER_ID": "37711418622"
+  "GOOGLE_APP_ID": "1:81098517249:ios:128fe81a5f248fad748900",
+  "FIREBASE_PROJECT_ID": "hakondate-production",
+  "GCM_SENDER_ID": "81098517249"
 }
