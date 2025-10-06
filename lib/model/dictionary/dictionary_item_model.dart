@@ -10,7 +10,7 @@ part 'dictionary_item_model.freezed.dart';
 part 'dictionary_group.dart';
 
 @freezed
-class DictionaryItemModel with _$DictionaryItemModel {
+abstract class DictionaryItemModel with _$DictionaryItemModel {
   const factory DictionaryItemModel({
     /// ID
     required int id,

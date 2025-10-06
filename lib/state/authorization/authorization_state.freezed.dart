@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,29 +10,50 @@ part of 'authorization_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AuthorizationState {
-  SchoolModel get school => throw _privateConstructorUsedError;
-  String get authorizationKey => throw _privateConstructorUsedError;
-  String get statusMessage => throw _privateConstructorUsedError;
+  SchoolModel get school;
+  String get authorizationKey;
+  String get statusMessage;
 
   /// Create a copy of AuthorizationState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $AuthorizationStateCopyWith<AuthorizationState> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$AuthorizationStateCopyWithImpl<AuthorizationState>(
+          this as AuthorizationState, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is AuthorizationState &&
+            (identical(other.school, school) || other.school == school) &&
+            (identical(other.authorizationKey, authorizationKey) ||
+                other.authorizationKey == authorizationKey) &&
+            (identical(other.statusMessage, statusMessage) ||
+                other.statusMessage == statusMessage));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, school, authorizationKey, statusMessage);
+
+  @override
+  String toString() {
+    return 'AuthorizationState(school: $school, authorizationKey: $authorizationKey, statusMessage: $statusMessage)';
+  }
 }
 
 /// @nodoc
-abstract class $AuthorizationStateCopyWith<$Res> {
+abstract mixin class $AuthorizationStateCopyWith<$Res> {
   factory $AuthorizationStateCopyWith(
-          AuthorizationState value, $Res Function(AuthorizationState) then) =
-      _$AuthorizationStateCopyWithImpl<$Res, AuthorizationState>;
+          AuthorizationState value, $Res Function(AuthorizationState) _then) =
+      _$AuthorizationStateCopyWithImpl;
   @useResult
   $Res call(
       {SchoolModel school, String authorizationKey, String statusMessage});
@@ -40,14 +62,12 @@ abstract class $AuthorizationStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AuthorizationStateCopyWithImpl<$Res, $Val extends AuthorizationState>
+class _$AuthorizationStateCopyWithImpl<$Res>
     implements $AuthorizationStateCopyWith<$Res> {
-  _$AuthorizationStateCopyWithImpl(this._value, this._then);
+  _$AuthorizationStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final AuthorizationState _self;
+  final $Res Function(AuthorizationState) _then;
 
   /// Create a copy of AuthorizationState
   /// with the given fields replaced by the non-null parameter values.
@@ -58,20 +78,20 @@ class _$AuthorizationStateCopyWithImpl<$Res, $Val extends AuthorizationState>
     Object? authorizationKey = null,
     Object? statusMessage = null,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       school: null == school
-          ? _value.school
+          ? _self.school
           : school // ignore: cast_nullable_to_non_nullable
               as SchoolModel,
       authorizationKey: null == authorizationKey
-          ? _value.authorizationKey
+          ? _self.authorizationKey
           : authorizationKey // ignore: cast_nullable_to_non_nullable
               as String,
       statusMessage: null == statusMessage
-          ? _value.statusMessage
+          ? _self.statusMessage
           : statusMessage // ignore: cast_nullable_to_non_nullable
               as String,
-    ) as $Val);
+    ));
   }
 
   /// Create a copy of AuthorizationState
@@ -79,65 +99,16 @@ class _$AuthorizationStateCopyWithImpl<$Res, $Val extends AuthorizationState>
   @override
   @pragma('vm:prefer-inline')
   $SchoolModelCopyWith<$Res> get school {
-    return $SchoolModelCopyWith<$Res>(_value.school, (value) {
-      return _then(_value.copyWith(school: value) as $Val);
+    return $SchoolModelCopyWith<$Res>(_self.school, (value) {
+      return _then(_self.copyWith(school: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$AuthorizationStateImplCopyWith<$Res>
-    implements $AuthorizationStateCopyWith<$Res> {
-  factory _$$AuthorizationStateImplCopyWith(_$AuthorizationStateImpl value,
-          $Res Function(_$AuthorizationStateImpl) then) =
-      __$$AuthorizationStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {SchoolModel school, String authorizationKey, String statusMessage});
 
-  @override
-  $SchoolModelCopyWith<$Res> get school;
-}
-
-/// @nodoc
-class __$$AuthorizationStateImplCopyWithImpl<$Res>
-    extends _$AuthorizationStateCopyWithImpl<$Res, _$AuthorizationStateImpl>
-    implements _$$AuthorizationStateImplCopyWith<$Res> {
-  __$$AuthorizationStateImplCopyWithImpl(_$AuthorizationStateImpl _value,
-      $Res Function(_$AuthorizationStateImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of AuthorizationState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? school = null,
-    Object? authorizationKey = null,
-    Object? statusMessage = null,
-  }) {
-    return _then(_$AuthorizationStateImpl(
-      school: null == school
-          ? _value.school
-          : school // ignore: cast_nullable_to_non_nullable
-              as SchoolModel,
-      authorizationKey: null == authorizationKey
-          ? _value.authorizationKey
-          : authorizationKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      statusMessage: null == statusMessage
-          ? _value.statusMessage
-          : statusMessage // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$AuthorizationStateImpl implements _AuthorizationState {
-  const _$AuthorizationStateImpl(
+class _AuthorizationState implements AuthorizationState {
+  const _AuthorizationState(
       {required this.school,
       this.authorizationKey = '',
       this.statusMessage = ''});
@@ -151,16 +122,19 @@ class _$AuthorizationStateImpl implements _AuthorizationState {
   @JsonKey()
   final String statusMessage;
 
+  /// Create a copy of AuthorizationState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'AuthorizationState(school: $school, authorizationKey: $authorizationKey, statusMessage: $statusMessage)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$AuthorizationStateCopyWith<_AuthorizationState> get copyWith =>
+      __$AuthorizationStateCopyWithImpl<_AuthorizationState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AuthorizationStateImpl &&
+            other is _AuthorizationState &&
             (identical(other.school, school) || other.school == school) &&
             (identical(other.authorizationKey, authorizationKey) ||
                 other.authorizationKey == authorizationKey) &&
@@ -172,33 +146,69 @@ class _$AuthorizationStateImpl implements _AuthorizationState {
   int get hashCode =>
       Object.hash(runtimeType, school, authorizationKey, statusMessage);
 
+  @override
+  String toString() {
+    return 'AuthorizationState(school: $school, authorizationKey: $authorizationKey, statusMessage: $statusMessage)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$AuthorizationStateCopyWith<$Res>
+    implements $AuthorizationStateCopyWith<$Res> {
+  factory _$AuthorizationStateCopyWith(
+          _AuthorizationState value, $Res Function(_AuthorizationState) _then) =
+      __$AuthorizationStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {SchoolModel school, String authorizationKey, String statusMessage});
+
+  @override
+  $SchoolModelCopyWith<$Res> get school;
+}
+
+/// @nodoc
+class __$AuthorizationStateCopyWithImpl<$Res>
+    implements _$AuthorizationStateCopyWith<$Res> {
+  __$AuthorizationStateCopyWithImpl(this._self, this._then);
+
+  final _AuthorizationState _self;
+  final $Res Function(_AuthorizationState) _then;
+
   /// Create a copy of AuthorizationState
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$AuthorizationStateImplCopyWith<_$AuthorizationStateImpl> get copyWith =>
-      __$$AuthorizationStateImplCopyWithImpl<_$AuthorizationStateImpl>(
-          this, _$identity);
-}
-
-abstract class _AuthorizationState implements AuthorizationState {
-  const factory _AuthorizationState(
-      {required final SchoolModel school,
-      final String authorizationKey,
-      final String statusMessage}) = _$AuthorizationStateImpl;
-
-  @override
-  SchoolModel get school;
-  @override
-  String get authorizationKey;
-  @override
-  String get statusMessage;
+  $Res call({
+    Object? school = null,
+    Object? authorizationKey = null,
+    Object? statusMessage = null,
+  }) {
+    return _then(_AuthorizationState(
+      school: null == school
+          ? _self.school
+          : school // ignore: cast_nullable_to_non_nullable
+              as SchoolModel,
+      authorizationKey: null == authorizationKey
+          ? _self.authorizationKey
+          : authorizationKey // ignore: cast_nullable_to_non_nullable
+              as String,
+      statusMessage: null == statusMessage
+          ? _self.statusMessage
+          : statusMessage // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 
   /// Create a copy of AuthorizationState
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AuthorizationStateImplCopyWith<_$AuthorizationStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $SchoolModelCopyWith<$Res> get school {
+    return $SchoolModelCopyWith<$Res>(_self.school, (value) {
+      return _then(_self.copyWith(school: value));
+    });
+  }
 }
+
+// dart format on

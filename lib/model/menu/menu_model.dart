@@ -10,7 +10,7 @@ import 'package:hakondate/util/exception/firestore_exception.dart';
 part 'menu_model.freezed.dart';
 
 @freezed
-class MenuModel with _$MenuModel {
+abstract class MenuModel with _$MenuModel {
   factory MenuModel({
     /// Day: 2021/06/30 & ScID: 1 → 2021063001
     required int id,

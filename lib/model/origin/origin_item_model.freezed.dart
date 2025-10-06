@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,81 +10,58 @@ part of 'origin_item_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$OriginItemModel {
-  String get name => throw _privateConstructorUsedError;
-  List<String> get prefectures => throw _privateConstructorUsedError;
+  String get name;
+  List<String> get prefectures;
 
   /// Create a copy of OriginItemModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $OriginItemModelCopyWith<OriginItemModel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $OriginItemModelCopyWith<$Res> {
-  factory $OriginItemModelCopyWith(
-          OriginItemModel value, $Res Function(OriginItemModel) then) =
-      _$OriginItemModelCopyWithImpl<$Res, OriginItemModel>;
-  @useResult
-  $Res call({String name, List<String> prefectures});
-}
-
-/// @nodoc
-class _$OriginItemModelCopyWithImpl<$Res, $Val extends OriginItemModel>
-    implements $OriginItemModelCopyWith<$Res> {
-  _$OriginItemModelCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of OriginItemModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $OriginItemModelCopyWith<OriginItemModel> get copyWith =>
+      _$OriginItemModelCopyWithImpl<OriginItemModel>(
+          this as OriginItemModel, _$identity);
+
   @override
-  $Res call({
-    Object? name = null,
-    Object? prefectures = null,
-  }) {
-    return _then(_value.copyWith(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      prefectures: null == prefectures
-          ? _value.prefectures
-          : prefectures // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is OriginItemModel &&
+            (identical(other.name, name) || other.name == name) &&
+            const DeepCollectionEquality()
+                .equals(other.prefectures, prefectures));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, name, const DeepCollectionEquality().hash(prefectures));
+
+  @override
+  String toString() {
+    return 'OriginItemModel(name: $name, prefectures: $prefectures)';
   }
 }
 
 /// @nodoc
-abstract class _$$OriginItemModelImplCopyWith<$Res>
-    implements $OriginItemModelCopyWith<$Res> {
-  factory _$$OriginItemModelImplCopyWith(_$OriginItemModelImpl value,
-          $Res Function(_$OriginItemModelImpl) then) =
-      __$$OriginItemModelImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $OriginItemModelCopyWith<$Res> {
+  factory $OriginItemModelCopyWith(
+          OriginItemModel value, $Res Function(OriginItemModel) _then) =
+      _$OriginItemModelCopyWithImpl;
   @useResult
   $Res call({String name, List<String> prefectures});
 }
 
 /// @nodoc
-class __$$OriginItemModelImplCopyWithImpl<$Res>
-    extends _$OriginItemModelCopyWithImpl<$Res, _$OriginItemModelImpl>
-    implements _$$OriginItemModelImplCopyWith<$Res> {
-  __$$OriginItemModelImplCopyWithImpl(
-      _$OriginItemModelImpl _value, $Res Function(_$OriginItemModelImpl) _then)
-      : super(_value, _then);
+class _$OriginItemModelCopyWithImpl<$Res>
+    implements $OriginItemModelCopyWith<$Res> {
+  _$OriginItemModelCopyWithImpl(this._self, this._then);
+
+  final OriginItemModel _self;
+  final $Res Function(OriginItemModel) _then;
 
   /// Create a copy of OriginItemModel
   /// with the given fields replaced by the non-null parameter values.
@@ -93,13 +71,13 @@ class __$$OriginItemModelImplCopyWithImpl<$Res>
     Object? name = null,
     Object? prefectures = null,
   }) {
-    return _then(_$OriginItemModelImpl(
+    return _then(_self.copyWith(
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       prefectures: null == prefectures
-          ? _value._prefectures
+          ? _self.prefectures
           : prefectures // ignore: cast_nullable_to_non_nullable
               as List<String>,
     ));
@@ -108,8 +86,8 @@ class __$$OriginItemModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$OriginItemModelImpl extends _OriginItemModel {
-  const _$OriginItemModelImpl(
+class _OriginItemModel extends OriginItemModel {
+  const _OriginItemModel(
       {required this.name, required final List<String> prefectures})
       : _prefectures = prefectures,
         super._();
@@ -124,16 +102,19 @@ class _$OriginItemModelImpl extends _OriginItemModel {
     return EqualUnmodifiableListView(_prefectures);
   }
 
+  /// Create a copy of OriginItemModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'OriginItemModel(name: $name, prefectures: $prefectures)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$OriginItemModelCopyWith<_OriginItemModel> get copyWith =>
+      __$OriginItemModelCopyWithImpl<_OriginItemModel>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$OriginItemModelImpl &&
+            other is _OriginItemModel &&
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality()
                 .equals(other._prefectures, _prefectures));
@@ -143,31 +124,50 @@ class _$OriginItemModelImpl extends _OriginItemModel {
   int get hashCode => Object.hash(
       runtimeType, name, const DeepCollectionEquality().hash(_prefectures));
 
+  @override
+  String toString() {
+    return 'OriginItemModel(name: $name, prefectures: $prefectures)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$OriginItemModelCopyWith<$Res>
+    implements $OriginItemModelCopyWith<$Res> {
+  factory _$OriginItemModelCopyWith(
+          _OriginItemModel value, $Res Function(_OriginItemModel) _then) =
+      __$OriginItemModelCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String name, List<String> prefectures});
+}
+
+/// @nodoc
+class __$OriginItemModelCopyWithImpl<$Res>
+    implements _$OriginItemModelCopyWith<$Res> {
+  __$OriginItemModelCopyWithImpl(this._self, this._then);
+
+  final _OriginItemModel _self;
+  final $Res Function(_OriginItemModel) _then;
+
   /// Create a copy of OriginItemModel
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$OriginItemModelImplCopyWith<_$OriginItemModelImpl> get copyWith =>
-      __$$OriginItemModelImplCopyWithImpl<_$OriginItemModelImpl>(
-          this, _$identity);
+  $Res call({
+    Object? name = null,
+    Object? prefectures = null,
+  }) {
+    return _then(_OriginItemModel(
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      prefectures: null == prefectures
+          ? _self._prefectures
+          : prefectures // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
 }
 
-abstract class _OriginItemModel extends OriginItemModel {
-  const factory _OriginItemModel(
-      {required final String name,
-      required final List<String> prefectures}) = _$OriginItemModelImpl;
-  const _OriginItemModel._() : super._();
-
-  @override
-  String get name;
-  @override
-  List<String> get prefectures;
-
-  /// Create a copy of OriginItemModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$OriginItemModelImplCopyWith<_$OriginItemModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on
