@@ -24,6 +24,9 @@ class MenuModel with _$MenuModel {
     /// 料理
     required List<DishModel> dishes,
 
+    /// 公開が許可されているかどうか: falseの場合、アプリから閲覧できない
+    required bool publishAllowed,
+
     /// イベント
     String? event, // イベント
   }) =>
@@ -33,6 +36,7 @@ class MenuModel with _$MenuModel {
         schoolId: schoolId,
         dishes: dishes,
         event: event,
+        publishAllowed: publishAllowed,
       );
   const MenuModel._();
 
@@ -41,6 +45,7 @@ class MenuModel with _$MenuModel {
     required DateTime day,
     required int schoolId,
     required List<DishModel> dishes,
+    required bool publishAllowed,
     String? event,
   }) = LunchesDayMenuModel;
   const factory MenuModel.holiday() = HolidayMenuModel;
@@ -63,6 +68,7 @@ class MenuModel with _$MenuModel {
       schoolId: data['schoolId'] as int,
       dishes: dishes,
       event: data['event'] as String?,
+      publishAllowed: (data['publishAllowed'] as bool?) ?? false,
     );
   }
 
@@ -72,6 +78,7 @@ class MenuModel with _$MenuModel {
         schoolId: schema.schoolId,
         dishes: dishes,
         event: schema.event,
+        publishAllowed: schema.publishAllowed,
       );
 
   Map<String, Object> toFirestore() {
@@ -86,7 +93,7 @@ class MenuModel with _$MenuModel {
       'dishes': menu.dishes.map((DishModel dish) => dish.toFirestore()).toList(),
       if (menu.event != null) 'event': menu.event!,
       'updatedAt': DateTime.now(),
-      //TODO: publishAllowedを追加する？
+      'publishAllowed': menu.publishAllowed,
     };
   }
 
@@ -103,6 +110,7 @@ class MenuModel with _$MenuModel {
       schoolId: Value<int>(menu.schoolId),
       event: Value<String?>(menu.event),
       updateAt: Value<DateTime>(DateTime.now()),
+      publishAllowed: Value<bool>(menu.publishAllowed),
     );
   }
 

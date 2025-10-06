@@ -16,7 +16,7 @@ class MenusTable extends Table {
   TextColumn get event => text().nullable()();
   DateTimeColumn get createAt => dateTime().withDefault(Constant(DateTime.now()))();
   DateTimeColumn get updateAt => dateTime().withDefault(Constant(DateTime.now()))();
-
+  BoolColumn get publishAllowed => boolean().withDefault(const Constant(false))();
   @override
   Set<Column> get primaryKey => {id};
 }

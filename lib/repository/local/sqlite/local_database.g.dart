@@ -79,7 +79,7 @@ class $SchoolsTableTable extends SchoolsTable
       requiredDuringInsert: false,
       defaultConstraints: GeneratedColumn.constraintIsAlways(
           'CHECK ("publish_allowed" IN (0, 1))'),
-      defaultValue: const Constant(true));
+      defaultValue: const Constant(false));
   @override
   List<GeneratedColumn> get $columns => [
         id,
@@ -585,9 +585,19 @@ class $MenusTableTable extends MenusTable
       type: DriftSqlType.dateTime,
       requiredDuringInsert: false,
       defaultValue: Constant(DateTime.now()));
+  static const VerificationMeta _publishAllowedMeta =
+      const VerificationMeta('publishAllowed');
+  @override
+  late final GeneratedColumn<bool> publishAllowed = GeneratedColumn<bool>(
+      'publish_allowed', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'CHECK ("publish_allowed" IN (0, 1))'),
+      defaultValue: const Constant(false));
   @override
   List<GeneratedColumn> get $columns =>
-      [id, day, schoolId, event, createAt, updateAt];
+      [id, day, schoolId, event, createAt, updateAt, publishAllowed];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -625,6 +635,12 @@ class $MenusTableTable extends MenusTable
       context.handle(_updateAtMeta,
           updateAt.isAcceptableOrUnknown(data['update_at']!, _updateAtMeta));
     }
+    if (data.containsKey('publish_allowed')) {
+      context.handle(
+          _publishAllowedMeta,
+          publishAllowed.isAcceptableOrUnknown(
+              data['publish_allowed']!, _publishAllowedMeta));
+    }
     return context;
   }
 
@@ -646,6 +662,8 @@ class $MenusTableTable extends MenusTable
           .read(DriftSqlType.dateTime, data['${effectivePrefix}create_at'])!,
       updateAt: attachedDatabase.typeMapping
           .read(DriftSqlType.dateTime, data['${effectivePrefix}update_at'])!,
+      publishAllowed: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}publish_allowed'])!,
     );
   }
 
@@ -662,13 +680,15 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
   final String? event;
   final DateTime createAt;
   final DateTime updateAt;
+  final bool publishAllowed;
   const MenusSchema(
       {required this.id,
       required this.day,
       required this.schoolId,
       this.event,
       required this.createAt,
-      required this.updateAt});
+      required this.updateAt,
+      required this.publishAllowed});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -680,6 +700,7 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
     }
     map['create_at'] = Variable<DateTime>(createAt);
     map['update_at'] = Variable<DateTime>(updateAt);
+    map['publish_allowed'] = Variable<bool>(publishAllowed);
     return map;
   }
 
@@ -692,6 +713,7 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
           event == null && nullToAbsent ? const Value.absent() : Value(event),
       createAt: Value(createAt),
       updateAt: Value(updateAt),
+      publishAllowed: Value(publishAllowed),
     );
   }
 
@@ -705,6 +727,7 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
       event: serializer.fromJson<String?>(json['event']),
       createAt: serializer.fromJson<DateTime>(json['createAt']),
       updateAt: serializer.fromJson<DateTime>(json['updateAt']),
+      publishAllowed: serializer.fromJson<bool>(json['publishAllowed']),
     );
   }
   @override
@@ -717,6 +740,7 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
       'event': serializer.toJson<String?>(event),
       'createAt': serializer.toJson<DateTime>(createAt),
       'updateAt': serializer.toJson<DateTime>(updateAt),
+      'publishAllowed': serializer.toJson<bool>(publishAllowed),
     };
   }
 
@@ -726,7 +750,8 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
           int? schoolId,
           Value<String?> event = const Value.absent(),
           DateTime? createAt,
-          DateTime? updateAt}) =>
+          DateTime? updateAt,
+          bool? publishAllowed}) =>
       MenusSchema(
         id: id ?? this.id,
         day: day ?? this.day,
@@ -734,6 +759,7 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
         event: event.present ? event.value : this.event,
         createAt: createAt ?? this.createAt,
         updateAt: updateAt ?? this.updateAt,
+        publishAllowed: publishAllowed ?? this.publishAllowed,
       );
   MenusSchema copyWithCompanion(MenusTableCompanion data) {
     return MenusSchema(
@@ -743,6 +769,9 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
       event: data.event.present ? data.event.value : this.event,
       createAt: data.createAt.present ? data.createAt.value : this.createAt,
       updateAt: data.updateAt.present ? data.updateAt.value : this.updateAt,
+      publishAllowed: data.publishAllowed.present
+          ? data.publishAllowed.value
+          : this.publishAllowed,
     );
   }
 
@@ -754,13 +783,15 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
           ..write('schoolId: $schoolId, ')
           ..write('event: $event, ')
           ..write('createAt: $createAt, ')
-          ..write('updateAt: $updateAt')
+          ..write('updateAt: $updateAt, ')
+          ..write('publishAllowed: $publishAllowed')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, day, schoolId, event, createAt, updateAt);
+  int get hashCode =>
+      Object.hash(id, day, schoolId, event, createAt, updateAt, publishAllowed);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -770,7 +801,8 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
           other.schoolId == this.schoolId &&
           other.event == this.event &&
           other.createAt == this.createAt &&
-          other.updateAt == this.updateAt);
+          other.updateAt == this.updateAt &&
+          other.publishAllowed == this.publishAllowed);
 }
 
 class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
@@ -780,6 +812,7 @@ class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
   final Value<String?> event;
   final Value<DateTime> createAt;
   final Value<DateTime> updateAt;
+  final Value<bool> publishAllowed;
   const MenusTableCompanion({
     this.id = const Value.absent(),
     this.day = const Value.absent(),
@@ -787,6 +820,7 @@ class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
     this.event = const Value.absent(),
     this.createAt = const Value.absent(),
     this.updateAt = const Value.absent(),
+    this.publishAllowed = const Value.absent(),
   });
   MenusTableCompanion.insert({
     this.id = const Value.absent(),
@@ -795,6 +829,7 @@ class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
     this.event = const Value.absent(),
     this.createAt = const Value.absent(),
     this.updateAt = const Value.absent(),
+    this.publishAllowed = const Value.absent(),
   })  : day = Value(day),
         schoolId = Value(schoolId);
   static Insertable<MenusSchema> custom({
@@ -804,6 +839,7 @@ class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
     Expression<String>? event,
     Expression<DateTime>? createAt,
     Expression<DateTime>? updateAt,
+    Expression<bool>? publishAllowed,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -812,6 +848,7 @@ class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
       if (event != null) 'event': event,
       if (createAt != null) 'create_at': createAt,
       if (updateAt != null) 'update_at': updateAt,
+      if (publishAllowed != null) 'publish_allowed': publishAllowed,
     });
   }
 
@@ -821,7 +858,8 @@ class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
       Value<int>? schoolId,
       Value<String?>? event,
       Value<DateTime>? createAt,
-      Value<DateTime>? updateAt}) {
+      Value<DateTime>? updateAt,
+      Value<bool>? publishAllowed}) {
     return MenusTableCompanion(
       id: id ?? this.id,
       day: day ?? this.day,
@@ -829,6 +867,7 @@ class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
       event: event ?? this.event,
       createAt: createAt ?? this.createAt,
       updateAt: updateAt ?? this.updateAt,
+      publishAllowed: publishAllowed ?? this.publishAllowed,
     );
   }
 
@@ -853,6 +892,9 @@ class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
     if (updateAt.present) {
       map['update_at'] = Variable<DateTime>(updateAt.value);
     }
+    if (publishAllowed.present) {
+      map['publish_allowed'] = Variable<bool>(publishAllowed.value);
+    }
     return map;
   }
 
@@ -864,7 +906,8 @@ class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
           ..write('schoolId: $schoolId, ')
           ..write('event: $event, ')
           ..write('createAt: $createAt, ')
-          ..write('updateAt: $updateAt')
+          ..write('updateAt: $updateAt, ')
+          ..write('publishAllowed: $publishAllowed')
           ..write(')'))
         .toString();
   }
@@ -4130,6 +4173,7 @@ typedef $$MenusTableTableCreateCompanionBuilder = MenusTableCompanion Function({
   Value<String?> event,
   Value<DateTime> createAt,
   Value<DateTime> updateAt,
+  Value<bool> publishAllowed,
 });
 typedef $$MenusTableTableUpdateCompanionBuilder = MenusTableCompanion Function({
   Value<int> id,
@@ -4138,6 +4182,7 @@ typedef $$MenusTableTableUpdateCompanionBuilder = MenusTableCompanion Function({
   Value<String?> event,
   Value<DateTime> createAt,
   Value<DateTime> updateAt,
+  Value<bool> publishAllowed,
 });
 
 final class $$MenusTableTableReferences
@@ -4200,6 +4245,10 @@ class $$MenusTableTableFilterComposer
 
   ColumnFilters<DateTime> get updateAt => $composableBuilder(
       column: $table.updateAt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<bool> get publishAllowed => $composableBuilder(
+      column: $table.publishAllowed,
+      builder: (column) => ColumnFilters(column));
 
   $$SchoolsTableTableFilterComposer get schoolId {
     final $$SchoolsTableTableFilterComposer composer = $composerBuilder(
@@ -4267,6 +4316,10 @@ class $$MenusTableTableOrderingComposer
   ColumnOrderings<DateTime> get updateAt => $composableBuilder(
       column: $table.updateAt, builder: (column) => ColumnOrderings(column));
 
+  ColumnOrderings<bool> get publishAllowed => $composableBuilder(
+      column: $table.publishAllowed,
+      builder: (column) => ColumnOrderings(column));
+
   $$SchoolsTableTableOrderingComposer get schoolId {
     final $$SchoolsTableTableOrderingComposer composer = $composerBuilder(
         composer: this,
@@ -4311,6 +4364,9 @@ class $$MenusTableTableAnnotationComposer
 
   GeneratedColumn<DateTime> get updateAt =>
       $composableBuilder(column: $table.updateAt, builder: (column) => column);
+
+  GeneratedColumn<bool> get publishAllowed => $composableBuilder(
+      column: $table.publishAllowed, builder: (column) => column);
 
   $$SchoolsTableTableAnnotationComposer get schoolId {
     final $$SchoolsTableTableAnnotationComposer composer = $composerBuilder(
@@ -4383,6 +4439,7 @@ class $$MenusTableTableTableManager extends RootTableManager<
             Value<String?> event = const Value.absent(),
             Value<DateTime> createAt = const Value.absent(),
             Value<DateTime> updateAt = const Value.absent(),
+            Value<bool> publishAllowed = const Value.absent(),
           }) =>
               MenusTableCompanion(
             id: id,
@@ -4391,6 +4448,7 @@ class $$MenusTableTableTableManager extends RootTableManager<
             event: event,
             createAt: createAt,
             updateAt: updateAt,
+            publishAllowed: publishAllowed,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
@@ -4399,6 +4457,7 @@ class $$MenusTableTableTableManager extends RootTableManager<
             Value<String?> event = const Value.absent(),
             Value<DateTime> createAt = const Value.absent(),
             Value<DateTime> updateAt = const Value.absent(),
+            Value<bool> publishAllowed = const Value.absent(),
           }) =>
               MenusTableCompanion.insert(
             id: id,
@@ -4407,6 +4466,7 @@ class $$MenusTableTableTableManager extends RootTableManager<
             event: event,
             createAt: createAt,
             updateAt: updateAt,
+            publishAllowed: publishAllowed,
           ),
           withReferenceMapper: (p0) => p0
               .map((e) => (

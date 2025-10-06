@@ -19,7 +19,7 @@ mixin _$MenuModel {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int id, DateTime day, int schoolId,
-            List<DishModel> dishes, String? event)
+            List<DishModel> dishes, bool publishAllowed, String? event)
         lunchesDay,
     required TResult Function() holiday,
     required TResult Function() noData,
@@ -29,7 +29,7 @@ mixin _$MenuModel {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int id, DateTime day, int schoolId,
-            List<DishModel> dishes, String? event)?
+            List<DishModel> dishes, bool publishAllowed, String? event)?
         lunchesDay,
     TResult? Function()? holiday,
     TResult? Function()? noData,
@@ -39,7 +39,7 @@ mixin _$MenuModel {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int id, DateTime day, int schoolId, List<DishModel> dishes,
-            String? event)?
+            bool publishAllowed, String? event)?
         lunchesDay,
     TResult Function()? holiday,
     TResult Function()? noData,
@@ -105,6 +105,7 @@ abstract class _$$LunchesDayMenuModelImplCopyWith<$Res> {
       DateTime day,
       int schoolId,
       List<DishModel> dishes,
+      bool publishAllowed,
       String? event});
 }
 
@@ -125,6 +126,7 @@ class __$$LunchesDayMenuModelImplCopyWithImpl<$Res>
     Object? day = null,
     Object? schoolId = null,
     Object? dishes = null,
+    Object? publishAllowed = null,
     Object? event = freezed,
   }) {
     return _then(_$LunchesDayMenuModelImpl(
@@ -144,6 +146,10 @@ class __$$LunchesDayMenuModelImplCopyWithImpl<$Res>
           ? _value._dishes
           : dishes // ignore: cast_nullable_to_non_nullable
               as List<DishModel>,
+      publishAllowed: null == publishAllowed
+          ? _value.publishAllowed
+          : publishAllowed // ignore: cast_nullable_to_non_nullable
+              as bool,
       event: freezed == event
           ? _value.event
           : event // ignore: cast_nullable_to_non_nullable
@@ -160,6 +166,7 @@ class _$LunchesDayMenuModelImpl extends LunchesDayMenuModel {
       required this.day,
       required this.schoolId,
       required final List<DishModel> dishes,
+      required this.publishAllowed,
       this.event})
       : _dishes = dishes,
         super._();
@@ -179,11 +186,13 @@ class _$LunchesDayMenuModelImpl extends LunchesDayMenuModel {
   }
 
   @override
+  final bool publishAllowed;
+  @override
   final String? event;
 
   @override
   String toString() {
-    return 'MenuModel.lunchesDay(id: $id, day: $day, schoolId: $schoolId, dishes: $dishes, event: $event)';
+    return 'MenuModel.lunchesDay(id: $id, day: $day, schoolId: $schoolId, dishes: $dishes, publishAllowed: $publishAllowed, event: $event)';
   }
 
   @override
@@ -196,12 +205,14 @@ class _$LunchesDayMenuModelImpl extends LunchesDayMenuModel {
             (identical(other.schoolId, schoolId) ||
                 other.schoolId == schoolId) &&
             const DeepCollectionEquality().equals(other._dishes, _dishes) &&
+            (identical(other.publishAllowed, publishAllowed) ||
+                other.publishAllowed == publishAllowed) &&
             (identical(other.event, event) || other.event == event));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, id, day, schoolId,
-      const DeepCollectionEquality().hash(_dishes), event);
+      const DeepCollectionEquality().hash(_dishes), publishAllowed, event);
 
   /// Create a copy of MenuModel
   /// with the given fields replaced by the non-null parameter values.
@@ -216,33 +227,33 @@ class _$LunchesDayMenuModelImpl extends LunchesDayMenuModel {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int id, DateTime day, int schoolId,
-            List<DishModel> dishes, String? event)
+            List<DishModel> dishes, bool publishAllowed, String? event)
         lunchesDay,
     required TResult Function() holiday,
     required TResult Function() noData,
     required TResult Function() unauthorized,
   }) {
-    return lunchesDay(id, day, schoolId, dishes, event);
+    return lunchesDay(id, day, schoolId, dishes, publishAllowed, event);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int id, DateTime day, int schoolId,
-            List<DishModel> dishes, String? event)?
+            List<DishModel> dishes, bool publishAllowed, String? event)?
         lunchesDay,
     TResult? Function()? holiday,
     TResult? Function()? noData,
     TResult? Function()? unauthorized,
   }) {
-    return lunchesDay?.call(id, day, schoolId, dishes, event);
+    return lunchesDay?.call(id, day, schoolId, dishes, publishAllowed, event);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int id, DateTime day, int schoolId, List<DishModel> dishes,
-            String? event)?
+            bool publishAllowed, String? event)?
         lunchesDay,
     TResult Function()? holiday,
     TResult Function()? noData,
@@ -250,7 +261,7 @@ class _$LunchesDayMenuModelImpl extends LunchesDayMenuModel {
     required TResult orElse(),
   }) {
     if (lunchesDay != null) {
-      return lunchesDay(id, day, schoolId, dishes, event);
+      return lunchesDay(id, day, schoolId, dishes, publishAllowed, event);
     }
     return orElse();
   }
@@ -299,6 +310,7 @@ abstract class LunchesDayMenuModel extends MenuModel {
       required final DateTime day,
       required final int schoolId,
       required final List<DishModel> dishes,
+      required final bool publishAllowed,
       final String? event}) = _$LunchesDayMenuModelImpl;
   const LunchesDayMenuModel._() : super._();
 
@@ -306,6 +318,7 @@ abstract class LunchesDayMenuModel extends MenuModel {
   DateTime get day;
   int get schoolId;
   List<DishModel> get dishes;
+  bool get publishAllowed;
   String? get event;
 
   /// Create a copy of MenuModel
@@ -357,7 +370,7 @@ class _$HolidayMenuModelImpl extends HolidayMenuModel {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int id, DateTime day, int schoolId,
-            List<DishModel> dishes, String? event)
+            List<DishModel> dishes, bool publishAllowed, String? event)
         lunchesDay,
     required TResult Function() holiday,
     required TResult Function() noData,
@@ -370,7 +383,7 @@ class _$HolidayMenuModelImpl extends HolidayMenuModel {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int id, DateTime day, int schoolId,
-            List<DishModel> dishes, String? event)?
+            List<DishModel> dishes, bool publishAllowed, String? event)?
         lunchesDay,
     TResult? Function()? holiday,
     TResult? Function()? noData,
@@ -383,7 +396,7 @@ class _$HolidayMenuModelImpl extends HolidayMenuModel {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int id, DateTime day, int schoolId, List<DishModel> dishes,
-            String? event)?
+            bool publishAllowed, String? event)?
         lunchesDay,
     TResult Function()? holiday,
     TResult Function()? noData,
@@ -481,7 +494,7 @@ class _$NoDataMenuModelImpl extends NoDataMenuModel {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int id, DateTime day, int schoolId,
-            List<DishModel> dishes, String? event)
+            List<DishModel> dishes, bool publishAllowed, String? event)
         lunchesDay,
     required TResult Function() holiday,
     required TResult Function() noData,
@@ -494,7 +507,7 @@ class _$NoDataMenuModelImpl extends NoDataMenuModel {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int id, DateTime day, int schoolId,
-            List<DishModel> dishes, String? event)?
+            List<DishModel> dishes, bool publishAllowed, String? event)?
         lunchesDay,
     TResult? Function()? holiday,
     TResult? Function()? noData,
@@ -507,7 +520,7 @@ class _$NoDataMenuModelImpl extends NoDataMenuModel {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int id, DateTime day, int schoolId, List<DishModel> dishes,
-            String? event)?
+            bool publishAllowed, String? event)?
         lunchesDay,
     TResult Function()? holiday,
     TResult Function()? noData,
@@ -607,7 +620,7 @@ class _$UnauthorizedMenuModelImpl extends UnauthorizedMenuModel {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int id, DateTime day, int schoolId,
-            List<DishModel> dishes, String? event)
+            List<DishModel> dishes, bool publishAllowed, String? event)
         lunchesDay,
     required TResult Function() holiday,
     required TResult Function() noData,
@@ -620,7 +633,7 @@ class _$UnauthorizedMenuModelImpl extends UnauthorizedMenuModel {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int id, DateTime day, int schoolId,
-            List<DishModel> dishes, String? event)?
+            List<DishModel> dishes, bool publishAllowed, String? event)?
         lunchesDay,
     TResult? Function()? holiday,
     TResult? Function()? noData,
@@ -633,7 +646,7 @@ class _$UnauthorizedMenuModelImpl extends UnauthorizedMenuModel {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int id, DateTime day, int schoolId, List<DishModel> dishes,
-            String? event)?
+            bool publishAllowed, String? event)?
         lunchesDay,
     TResult Function()? holiday,
     TResult Function()? noData,

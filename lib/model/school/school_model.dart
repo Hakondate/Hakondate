@@ -61,7 +61,7 @@ class SchoolModel with _$SchoolModel {
       lunchBlock: data['lunchBlock'] as int,
       authorizationRequired: data['authorizationRequired'] as bool,
       authorizationKeyUpdatedAt: (data['authorizationKeyUpdatedAt'] as Timestamp?)?.toDate(),
-      publishAllowed: data['publishAllowed'] as bool,
+      publishAllowed: (data['publishAllowed'] as bool?) ?? false,
     );
   }
 
@@ -92,7 +92,7 @@ class SchoolModel with _$SchoolModel {
         'lunchBlock': lunchBlock,
         'updatedAt': DateTime.now(),
         'authorizationRequired': authorizationRequired,
-        'publishAllowed': publishAllowed
+        'publishAllowed': publishAllowed,
       };
 
   SchoolsTableCompanion toDrift() => SchoolsTableCompanion(
