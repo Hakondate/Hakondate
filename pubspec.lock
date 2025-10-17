@@ -495,10 +495,10 @@ packages:
     dependency: "direct dev"
     description:
       name: flutter_oss_licenses
-      sha256: e4bbaeb00bc768e8430ee0c95ad304d2f256fb15194d30b912cea269871c8885
+      sha256: cde6ddffeb86582d3fde92ebd7182cde6caa954059dafceb7c084ad9faf68757
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.4"
+    version: "3.0.11"
   flutter_pdfview:
     dependency: "direct main"
     description:
