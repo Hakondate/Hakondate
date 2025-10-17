@@ -12,7 +12,7 @@ import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
 part 'menus_local_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-MenusLocalRepository menusLocalRepository(MenusLocalRepositoryRef ref) {
+MenusLocalRepository menusLocalRepository(Ref ref) {
   final LocalDatabase localDatabase = ref.watch(localDatabaseProvider);
   return MenusLocalRepository(localDatabase, ref);
 }
@@ -21,6 +21,8 @@ abstract class MenusLocalRepositoryAPI {
   Future<int> add(MenuModel menu);
   Future<List<MenuModel>> list();
   Future<MenuModel> getMenuByDay(DateTime day);
+  Future<DateTime> getOldestDay();
+  Future<DateTime> getLatestDay();
   Future<DateTime> getLatestUpdateDay();
   Future<int> deleteAll();
 }
@@ -40,11 +42,14 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
     final MenusTableCompanion companion = menu.toDrift();
     final int menuId = await _db.into(_db.menusTable).insert(
           companion,
+          // 説明
           // ignore: always_specify_types
           onConflict: DoUpdate(
             ($MenusTableTable old) => MenusTableCompanion.custom(
+              // 説明
               // ignore: always_specify_types
               event: Constant(companion.event.value),
+              // 説明
               // ignore: always_specify_types
               updateAt: Constant(companion.updateAt.value),
             ),
@@ -63,6 +68,7 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
 
       await _db.into(_db.menuDishesTable).insert(
             menuDishesTableCompanion,
+            // 説明
             // ignore: always_specify_types
             onConflict: DoUpdate(
               (_) => menuDishesTableCompanion,
@@ -86,11 +92,12 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
     if (conflictSchema == null) {
       dishId = await _db.into(_db.dishesTable).insert(companion);
     } else if (conflictSchema.category != companion.category.value) {
-      dishId = await (_db.update(_db.dishesTable)
+      await (_db.update(_db.dishesTable)
             ..where(
               ($DishesTableTable t) => t.name.equals(companion.name.value),
             ))
           .write(DishesTableCompanion(category: companion.category));
+      dishId = conflictSchema.id;
     } else {
       dishId = conflictSchema.id;
     }
@@ -103,6 +110,7 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
       );
       await _db.into(_db.dishFoodstuffsTable).insert(
             dishFoodstuffsSchema,
+            // 説明
             // ignore: always_specify_types
             onConflict: DoUpdate(
               (_) => dishFoodstuffsSchema,
@@ -213,8 +221,8 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
 
     if (menu != null) return menu;
 
-    final DateTime oldest = await _getOldestDay();
-    final DateTime latest = await _getLatestDay();
+    final DateTime oldest = await getOldestDay();
+    final DateTime latest = await getLatestDay();
 
     if (day.isAfter(oldest) && day.isBefore(latest)) {
       return const MenuModel.holiday();
@@ -227,30 +235,6 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
     final MenusSchema? menusSchema = await (_db.select(_db.menusTable)..where(($MenusTableTable t) => t.id.equals(id))).getSingleOrNull();
 
     return (menusSchema != null) ? _getBySchema(menusSchema) : null;
-  }
-
-  Future<DateTime> _getOldestDay() async {
-    if (await _count() == 0) return DateTime.now();
-
-    final int schoolId = await _ref.read(userViewModelProvider.notifier).getParentId();
-    final Expression<DateTime> exp = _db.menusTable.day.min();
-    final JoinedSelectStatement<$MenusTableTable, MenusSchema> query = _db.selectOnly(_db.menusTable)
-      ..where(_db.menusTable.schoolId.equals(schoolId))
-      ..addColumns(<Expression<DateTime>>[exp]);
-
-    return await query.map((TypedResult scheme) => scheme.read(exp)).getSingle() ?? DateTime.now();
-  }
-
-  Future<DateTime> _getLatestDay() async {
-    if (await _count() == 0) return DateTime.now();
-
-    final int schoolId = await _ref.read(userViewModelProvider.notifier).getParentId();
-    final Expression<DateTime> exp = _db.menusTable.day.max();
-    final JoinedSelectStatement<$MenusTableTable, MenusSchema> query = _db.selectOnly(_db.menusTable)
-      ..where(_db.menusTable.schoolId.equals(schoolId))
-      ..addColumns(<Expression<DateTime>>[exp]);
-
-    return await query.map((TypedResult scheme) => scheme.read(exp)).getSingle() ?? DateTime.now();
   }
 
   Future<MenuModel> _getBySchema(MenusSchema menusSchema) async {
@@ -288,6 +272,32 @@ class MenusLocalRepository extends MenusLocalRepositoryAPI {
         await (_db.select(_db.foodstuffsTable)..where(($FoodstuffsTableTable t) => t.id.equals(foodstuffId))).getSingle();
 
     return FoodstuffModel.fromDrift(foodstuffsSchema);
+  }
+
+  @override
+  Future<DateTime> getOldestDay() async {
+    if (await _count() == 0) return DateTime.now();
+
+    final int schoolId = await _ref.read(userViewModelProvider.notifier).getParentId();
+    final Expression<DateTime> exp = _db.menusTable.day.min();
+    final JoinedSelectStatement<$MenusTableTable, MenusSchema> query = _db.selectOnly(_db.menusTable)
+      ..where(_db.menusTable.schoolId.equals(schoolId))
+      ..addColumns(<Expression<DateTime>>[exp]);
+
+    return await query.map((TypedResult scheme) => scheme.read(exp)).getSingle() ?? DateTime.now();
+  }
+
+  @override
+  Future<DateTime> getLatestDay() async {
+    if (await _count() == 0) return DateTime.now();
+
+    final int schoolId = await _ref.read(userViewModelProvider.notifier).getParentId();
+    final Expression<DateTime> exp = _db.menusTable.day.max();
+    final JoinedSelectStatement<$MenusTableTable, MenusSchema> query = _db.selectOnly(_db.menusTable)
+      ..where(_db.menusTable.schoolId.equals(schoolId))
+      ..addColumns(<Expression<DateTime>>[exp]);
+
+    return await query.map((TypedResult scheme) => scheme.read(exp)).getSingle() ?? DateTime.now();
   }
 
   @override

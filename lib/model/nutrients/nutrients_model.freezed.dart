@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,193 +10,147 @@ part of 'nutrients_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
 
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-NutrientsModel _$NutrientsModelFromJson(Map<String, dynamic> json) {
-  return _NutrientsModel.fromJson(json);
-}
-
 /// @nodoc
-mixin _$NutrientsModel {
+mixin _$NutrientsModel implements DiagnosticableTreeMixin {
   /// エネルギー
-  double get energy => throw _privateConstructorUsedError;
+  double get energy;
 
   /// タンパク質
-  double get protein => throw _privateConstructorUsedError;
+  double get protein;
 
   /// 脂質
-  double get lipid => throw _privateConstructorUsedError;
+  double get lipid;
 
   /// 炭水化物
-  double get carbohydrate => throw _privateConstructorUsedError;
+  double get carbohydrate;
 
   /// ナトリウム
-  double get sodium => throw _privateConstructorUsedError;
+  double get sodium;
 
   /// カルシウム
-  double get calcium => throw _privateConstructorUsedError;
+  double get calcium;
 
   /// マグネシウム
-  double get magnesium => throw _privateConstructorUsedError;
+  double get magnesium;
 
   /// 鉄分
-  double get iron => throw _privateConstructorUsedError;
+  double get iron;
 
   /// 亜鉛
-  double get zinc => throw _privateConstructorUsedError;
+  double get zinc;
 
   /// レチノール活性当量(ビタミンA)
-  double get retinol => throw _privateConstructorUsedError;
+  double get retinol;
 
   /// ビタミンB1
-  double get vitaminB1 => throw _privateConstructorUsedError;
+  double get vitaminB1;
 
   /// ビタミンB2
-  double get vitaminB2 => throw _privateConstructorUsedError;
+  double get vitaminB2;
 
   /// ビタミンC
-  double get vitaminC => throw _privateConstructorUsedError;
+  double get vitaminC;
 
   /// 食物繊維
-  double get dietaryFiber => throw _privateConstructorUsedError;
+  double get dietaryFiber;
 
   /// 食塩相当量
-  double get salt => throw _privateConstructorUsedError;
+  double get salt;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $NutrientsModelCopyWith<NutrientsModel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $NutrientsModelCopyWith<$Res> {
-  factory $NutrientsModelCopyWith(
-          NutrientsModel value, $Res Function(NutrientsModel) then) =
-      _$NutrientsModelCopyWithImpl<$Res, NutrientsModel>;
-  @useResult
-  $Res call(
-      {double energy,
-      double protein,
-      double lipid,
-      double carbohydrate,
-      double sodium,
-      double calcium,
-      double magnesium,
-      double iron,
-      double zinc,
-      double retinol,
-      double vitaminB1,
-      double vitaminB2,
-      double vitaminC,
-      double dietaryFiber,
-      double salt});
-}
-
-/// @nodoc
-class _$NutrientsModelCopyWithImpl<$Res, $Val extends NutrientsModel>
-    implements $NutrientsModelCopyWith<$Res> {
-  _$NutrientsModelCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of NutrientsModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $NutrientsModelCopyWith<NutrientsModel> get copyWith =>
+      _$NutrientsModelCopyWithImpl<NutrientsModel>(
+          this as NutrientsModel, _$identity);
+
+  /// Serializes this NutrientsModel to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? energy = null,
-    Object? protein = null,
-    Object? lipid = null,
-    Object? carbohydrate = null,
-    Object? sodium = null,
-    Object? calcium = null,
-    Object? magnesium = null,
-    Object? iron = null,
-    Object? zinc = null,
-    Object? retinol = null,
-    Object? vitaminB1 = null,
-    Object? vitaminB2 = null,
-    Object? vitaminC = null,
-    Object? dietaryFiber = null,
-    Object? salt = null,
-  }) {
-    return _then(_value.copyWith(
-      energy: null == energy
-          ? _value.energy
-          : energy // ignore: cast_nullable_to_non_nullable
-              as double,
-      protein: null == protein
-          ? _value.protein
-          : protein // ignore: cast_nullable_to_non_nullable
-              as double,
-      lipid: null == lipid
-          ? _value.lipid
-          : lipid // ignore: cast_nullable_to_non_nullable
-              as double,
-      carbohydrate: null == carbohydrate
-          ? _value.carbohydrate
-          : carbohydrate // ignore: cast_nullable_to_non_nullable
-              as double,
-      sodium: null == sodium
-          ? _value.sodium
-          : sodium // ignore: cast_nullable_to_non_nullable
-              as double,
-      calcium: null == calcium
-          ? _value.calcium
-          : calcium // ignore: cast_nullable_to_non_nullable
-              as double,
-      magnesium: null == magnesium
-          ? _value.magnesium
-          : magnesium // ignore: cast_nullable_to_non_nullable
-              as double,
-      iron: null == iron
-          ? _value.iron
-          : iron // ignore: cast_nullable_to_non_nullable
-              as double,
-      zinc: null == zinc
-          ? _value.zinc
-          : zinc // ignore: cast_nullable_to_non_nullable
-              as double,
-      retinol: null == retinol
-          ? _value.retinol
-          : retinol // ignore: cast_nullable_to_non_nullable
-              as double,
-      vitaminB1: null == vitaminB1
-          ? _value.vitaminB1
-          : vitaminB1 // ignore: cast_nullable_to_non_nullable
-              as double,
-      vitaminB2: null == vitaminB2
-          ? _value.vitaminB2
-          : vitaminB2 // ignore: cast_nullable_to_non_nullable
-              as double,
-      vitaminC: null == vitaminC
-          ? _value.vitaminC
-          : vitaminC // ignore: cast_nullable_to_non_nullable
-              as double,
-      dietaryFiber: null == dietaryFiber
-          ? _value.dietaryFiber
-          : dietaryFiber // ignore: cast_nullable_to_non_nullable
-              as double,
-      salt: null == salt
-          ? _value.salt
-          : salt // ignore: cast_nullable_to_non_nullable
-              as double,
-    ) as $Val);
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'NutrientsModel'))
+      ..add(DiagnosticsProperty('energy', energy))
+      ..add(DiagnosticsProperty('protein', protein))
+      ..add(DiagnosticsProperty('lipid', lipid))
+      ..add(DiagnosticsProperty('carbohydrate', carbohydrate))
+      ..add(DiagnosticsProperty('sodium', sodium))
+      ..add(DiagnosticsProperty('calcium', calcium))
+      ..add(DiagnosticsProperty('magnesium', magnesium))
+      ..add(DiagnosticsProperty('iron', iron))
+      ..add(DiagnosticsProperty('zinc', zinc))
+      ..add(DiagnosticsProperty('retinol', retinol))
+      ..add(DiagnosticsProperty('vitaminB1', vitaminB1))
+      ..add(DiagnosticsProperty('vitaminB2', vitaminB2))
+      ..add(DiagnosticsProperty('vitaminC', vitaminC))
+      ..add(DiagnosticsProperty('dietaryFiber', dietaryFiber))
+      ..add(DiagnosticsProperty('salt', salt));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is NutrientsModel &&
+            (identical(other.energy, energy) || other.energy == energy) &&
+            (identical(other.protein, protein) || other.protein == protein) &&
+            (identical(other.lipid, lipid) || other.lipid == lipid) &&
+            (identical(other.carbohydrate, carbohydrate) ||
+                other.carbohydrate == carbohydrate) &&
+            (identical(other.sodium, sodium) || other.sodium == sodium) &&
+            (identical(other.calcium, calcium) || other.calcium == calcium) &&
+            (identical(other.magnesium, magnesium) ||
+                other.magnesium == magnesium) &&
+            (identical(other.iron, iron) || other.iron == iron) &&
+            (identical(other.zinc, zinc) || other.zinc == zinc) &&
+            (identical(other.retinol, retinol) || other.retinol == retinol) &&
+            (identical(other.vitaminB1, vitaminB1) ||
+                other.vitaminB1 == vitaminB1) &&
+            (identical(other.vitaminB2, vitaminB2) ||
+                other.vitaminB2 == vitaminB2) &&
+            (identical(other.vitaminC, vitaminC) ||
+                other.vitaminC == vitaminC) &&
+            (identical(other.dietaryFiber, dietaryFiber) ||
+                other.dietaryFiber == dietaryFiber) &&
+            (identical(other.salt, salt) || other.salt == salt));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      energy,
+      protein,
+      lipid,
+      carbohydrate,
+      sodium,
+      calcium,
+      magnesium,
+      iron,
+      zinc,
+      retinol,
+      vitaminB1,
+      vitaminB2,
+      vitaminC,
+      dietaryFiber,
+      salt);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'NutrientsModel(energy: $energy, protein: $protein, lipid: $lipid, carbohydrate: $carbohydrate, sodium: $sodium, calcium: $calcium, magnesium: $magnesium, iron: $iron, zinc: $zinc, retinol: $retinol, vitaminB1: $vitaminB1, vitaminB2: $vitaminB2, vitaminC: $vitaminC, dietaryFiber: $dietaryFiber, salt: $salt)';
   }
 }
 
 /// @nodoc
-abstract class _$$NutrientsModelImplCopyWith<$Res>
-    implements $NutrientsModelCopyWith<$Res> {
-  factory _$$NutrientsModelImplCopyWith(_$NutrientsModelImpl value,
-          $Res Function(_$NutrientsModelImpl) then) =
-      __$$NutrientsModelImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $NutrientsModelCopyWith<$Res> {
+  factory $NutrientsModelCopyWith(
+          NutrientsModel value, $Res Function(NutrientsModel) _then) =
+      _$NutrientsModelCopyWithImpl;
   @useResult
   $Res call(
       {double energy,
@@ -216,13 +171,15 @@ abstract class _$$NutrientsModelImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$NutrientsModelImplCopyWithImpl<$Res>
-    extends _$NutrientsModelCopyWithImpl<$Res, _$NutrientsModelImpl>
-    implements _$$NutrientsModelImplCopyWith<$Res> {
-  __$$NutrientsModelImplCopyWithImpl(
-      _$NutrientsModelImpl _value, $Res Function(_$NutrientsModelImpl) _then)
-      : super(_value, _then);
+class _$NutrientsModelCopyWithImpl<$Res>
+    implements $NutrientsModelCopyWith<$Res> {
+  _$NutrientsModelCopyWithImpl(this._self, this._then);
 
+  final NutrientsModel _self;
+  final $Res Function(NutrientsModel) _then;
+
+  /// Create a copy of NutrientsModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -242,65 +199,65 @@ class __$$NutrientsModelImplCopyWithImpl<$Res>
     Object? dietaryFiber = null,
     Object? salt = null,
   }) {
-    return _then(_$NutrientsModelImpl(
+    return _then(_self.copyWith(
       energy: null == energy
-          ? _value.energy
+          ? _self.energy
           : energy // ignore: cast_nullable_to_non_nullable
               as double,
       protein: null == protein
-          ? _value.protein
+          ? _self.protein
           : protein // ignore: cast_nullable_to_non_nullable
               as double,
       lipid: null == lipid
-          ? _value.lipid
+          ? _self.lipid
           : lipid // ignore: cast_nullable_to_non_nullable
               as double,
       carbohydrate: null == carbohydrate
-          ? _value.carbohydrate
+          ? _self.carbohydrate
           : carbohydrate // ignore: cast_nullable_to_non_nullable
               as double,
       sodium: null == sodium
-          ? _value.sodium
+          ? _self.sodium
           : sodium // ignore: cast_nullable_to_non_nullable
               as double,
       calcium: null == calcium
-          ? _value.calcium
+          ? _self.calcium
           : calcium // ignore: cast_nullable_to_non_nullable
               as double,
       magnesium: null == magnesium
-          ? _value.magnesium
+          ? _self.magnesium
           : magnesium // ignore: cast_nullable_to_non_nullable
               as double,
       iron: null == iron
-          ? _value.iron
+          ? _self.iron
           : iron // ignore: cast_nullable_to_non_nullable
               as double,
       zinc: null == zinc
-          ? _value.zinc
+          ? _self.zinc
           : zinc // ignore: cast_nullable_to_non_nullable
               as double,
       retinol: null == retinol
-          ? _value.retinol
+          ? _self.retinol
           : retinol // ignore: cast_nullable_to_non_nullable
               as double,
       vitaminB1: null == vitaminB1
-          ? _value.vitaminB1
+          ? _self.vitaminB1
           : vitaminB1 // ignore: cast_nullable_to_non_nullable
               as double,
       vitaminB2: null == vitaminB2
-          ? _value.vitaminB2
+          ? _self.vitaminB2
           : vitaminB2 // ignore: cast_nullable_to_non_nullable
               as double,
       vitaminC: null == vitaminC
-          ? _value.vitaminC
+          ? _self.vitaminC
           : vitaminC // ignore: cast_nullable_to_non_nullable
               as double,
       dietaryFiber: null == dietaryFiber
-          ? _value.dietaryFiber
+          ? _self.dietaryFiber
           : dietaryFiber // ignore: cast_nullable_to_non_nullable
               as double,
       salt: null == salt
-          ? _value.salt
+          ? _self.salt
           : salt // ignore: cast_nullable_to_non_nullable
               as double,
     ));
@@ -309,9 +266,8 @@ class __$$NutrientsModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$NutrientsModelImpl extends _NutrientsModel
-    with DiagnosticableTreeMixin {
-  const _$NutrientsModelImpl(
+class _NutrientsModel extends NutrientsModel with DiagnosticableTreeMixin {
+  const _NutrientsModel(
       {this.energy = 0.0,
       this.protein = 0.0,
       this.lipid = 0.0,
@@ -328,9 +284,8 @@ class _$NutrientsModelImpl extends _NutrientsModel
       this.dietaryFiber = 0.0,
       this.salt = 0.0})
       : super._();
-
-  factory _$NutrientsModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$NutrientsModelImplFromJson(json);
+  factory _NutrientsModel.fromJson(Map<String, dynamic> json) =>
+      _$NutrientsModelFromJson(json);
 
   /// エネルギー
   @override
@@ -407,14 +362,23 @@ class _$NutrientsModelImpl extends _NutrientsModel
   @JsonKey()
   final double salt;
 
+  /// Create a copy of NutrientsModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NutrientsModel(energy: $energy, protein: $protein, lipid: $lipid, carbohydrate: $carbohydrate, sodium: $sodium, calcium: $calcium, magnesium: $magnesium, iron: $iron, zinc: $zinc, retinol: $retinol, vitaminB1: $vitaminB1, vitaminB2: $vitaminB2, vitaminC: $vitaminC, dietaryFiber: $dietaryFiber, salt: $salt)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$NutrientsModelCopyWith<_NutrientsModel> get copyWith =>
+      __$NutrientsModelCopyWithImpl<_NutrientsModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$NutrientsModelToJson(
+      this,
+    );
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'NutrientsModel'))
       ..add(DiagnosticsProperty('energy', energy))
@@ -438,7 +402,7 @@ class _$NutrientsModelImpl extends _NutrientsModel
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NutrientsModelImpl &&
+            other is _NutrientsModel &&
             (identical(other.energy, energy) || other.energy == energy) &&
             (identical(other.protein, protein) || other.protein == protein) &&
             (identical(other.lipid, lipid) || other.lipid == lipid) &&
@@ -462,7 +426,7 @@ class _$NutrientsModelImpl extends _NutrientsModel
             (identical(other.salt, salt) || other.salt == salt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -482,105 +446,130 @@ class _$NutrientsModelImpl extends _NutrientsModel
       dietaryFiber,
       salt);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$NutrientsModelImplCopyWith<_$NutrientsModelImpl> get copyWith =>
-      __$$NutrientsModelImplCopyWithImpl<_$NutrientsModelImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$NutrientsModelImplToJson(
-      this,
-    );
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'NutrientsModel(energy: $energy, protein: $protein, lipid: $lipid, carbohydrate: $carbohydrate, sodium: $sodium, calcium: $calcium, magnesium: $magnesium, iron: $iron, zinc: $zinc, retinol: $retinol, vitaminB1: $vitaminB1, vitaminB2: $vitaminB2, vitaminC: $vitaminC, dietaryFiber: $dietaryFiber, salt: $salt)';
   }
 }
 
-abstract class _NutrientsModel extends NutrientsModel {
-  const factory _NutrientsModel(
-      {final double energy,
-      final double protein,
-      final double lipid,
-      final double carbohydrate,
-      final double sodium,
-      final double calcium,
-      final double magnesium,
-      final double iron,
-      final double zinc,
-      final double retinol,
-      final double vitaminB1,
-      final double vitaminB2,
-      final double vitaminC,
-      final double dietaryFiber,
-      final double salt}) = _$NutrientsModelImpl;
-  const _NutrientsModel._() : super._();
-
-  factory _NutrientsModel.fromJson(Map<String, dynamic> json) =
-      _$NutrientsModelImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$NutrientsModelCopyWith<$Res>
+    implements $NutrientsModelCopyWith<$Res> {
+  factory _$NutrientsModelCopyWith(
+          _NutrientsModel value, $Res Function(_NutrientsModel) _then) =
+      __$NutrientsModelCopyWithImpl;
   @override
-
-  /// エネルギー
-  double get energy;
-  @override
-
-  /// タンパク質
-  double get protein;
-  @override
-
-  /// 脂質
-  double get lipid;
-  @override
-
-  /// 炭水化物
-  double get carbohydrate;
-  @override
-
-  /// ナトリウム
-  double get sodium;
-  @override
-
-  /// カルシウム
-  double get calcium;
-  @override
-
-  /// マグネシウム
-  double get magnesium;
-  @override
-
-  /// 鉄分
-  double get iron;
-  @override
-
-  /// 亜鉛
-  double get zinc;
-  @override
-
-  /// レチノール活性当量(ビタミンA)
-  double get retinol;
-  @override
-
-  /// ビタミンB1
-  double get vitaminB1;
-  @override
-
-  /// ビタミンB2
-  double get vitaminB2;
-  @override
-
-  /// ビタミンC
-  double get vitaminC;
-  @override
-
-  /// 食物繊維
-  double get dietaryFiber;
-  @override
-
-  /// 食塩相当量
-  double get salt;
-  @override
-  @JsonKey(ignore: true)
-  _$$NutrientsModelImplCopyWith<_$NutrientsModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @useResult
+  $Res call(
+      {double energy,
+      double protein,
+      double lipid,
+      double carbohydrate,
+      double sodium,
+      double calcium,
+      double magnesium,
+      double iron,
+      double zinc,
+      double retinol,
+      double vitaminB1,
+      double vitaminB2,
+      double vitaminC,
+      double dietaryFiber,
+      double salt});
 }
+
+/// @nodoc
+class __$NutrientsModelCopyWithImpl<$Res>
+    implements _$NutrientsModelCopyWith<$Res> {
+  __$NutrientsModelCopyWithImpl(this._self, this._then);
+
+  final _NutrientsModel _self;
+  final $Res Function(_NutrientsModel) _then;
+
+  /// Create a copy of NutrientsModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? energy = null,
+    Object? protein = null,
+    Object? lipid = null,
+    Object? carbohydrate = null,
+    Object? sodium = null,
+    Object? calcium = null,
+    Object? magnesium = null,
+    Object? iron = null,
+    Object? zinc = null,
+    Object? retinol = null,
+    Object? vitaminB1 = null,
+    Object? vitaminB2 = null,
+    Object? vitaminC = null,
+    Object? dietaryFiber = null,
+    Object? salt = null,
+  }) {
+    return _then(_NutrientsModel(
+      energy: null == energy
+          ? _self.energy
+          : energy // ignore: cast_nullable_to_non_nullable
+              as double,
+      protein: null == protein
+          ? _self.protein
+          : protein // ignore: cast_nullable_to_non_nullable
+              as double,
+      lipid: null == lipid
+          ? _self.lipid
+          : lipid // ignore: cast_nullable_to_non_nullable
+              as double,
+      carbohydrate: null == carbohydrate
+          ? _self.carbohydrate
+          : carbohydrate // ignore: cast_nullable_to_non_nullable
+              as double,
+      sodium: null == sodium
+          ? _self.sodium
+          : sodium // ignore: cast_nullable_to_non_nullable
+              as double,
+      calcium: null == calcium
+          ? _self.calcium
+          : calcium // ignore: cast_nullable_to_non_nullable
+              as double,
+      magnesium: null == magnesium
+          ? _self.magnesium
+          : magnesium // ignore: cast_nullable_to_non_nullable
+              as double,
+      iron: null == iron
+          ? _self.iron
+          : iron // ignore: cast_nullable_to_non_nullable
+              as double,
+      zinc: null == zinc
+          ? _self.zinc
+          : zinc // ignore: cast_nullable_to_non_nullable
+              as double,
+      retinol: null == retinol
+          ? _self.retinol
+          : retinol // ignore: cast_nullable_to_non_nullable
+              as double,
+      vitaminB1: null == vitaminB1
+          ? _self.vitaminB1
+          : vitaminB1 // ignore: cast_nullable_to_non_nullable
+              as double,
+      vitaminB2: null == vitaminB2
+          ? _self.vitaminB2
+          : vitaminB2 // ignore: cast_nullable_to_non_nullable
+              as double,
+      vitaminC: null == vitaminC
+          ? _self.vitaminC
+          : vitaminC // ignore: cast_nullable_to_non_nullable
+              as double,
+      dietaryFiber: null == dietaryFiber
+          ? _self.dietaryFiber
+          : dietaryFiber // ignore: cast_nullable_to_non_nullable
+              as double,
+      salt: null == salt
+          ? _self.salt
+          : salt // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
+}
+
+// dart format on

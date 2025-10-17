@@ -10,7 +10,7 @@ import 'package:hakondate/util/exception/firestore_exception.dart';
 part 'menu_model.freezed.dart';
 
 @freezed
-class MenuModel with _$MenuModel {
+abstract class MenuModel with _$MenuModel {
   factory MenuModel({
     /// Day: 2021/06/30 & ScID: 1 → 2021063001
     required int id,
@@ -45,6 +45,7 @@ class MenuModel with _$MenuModel {
   }) = LunchesDayMenuModel;
   const factory MenuModel.holiday() = HolidayMenuModel;
   const factory MenuModel.noData() = NoDataMenuModel;
+  const factory MenuModel.unauthorized() = UnauthorizedMenuModel;
 
   factory MenuModel.fromFirestore(DocumentSnapshot<Map<String, dynamic>> doc) {
     if (!doc.exists) throw const FirestoreException('Failed to convert Firestore to MenuModel');

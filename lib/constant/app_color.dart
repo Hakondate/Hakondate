@@ -1,3 +1,4 @@
+// アンダースコアを用いた変数名をつけたいため
 // ignore_for_file: library_private_types_in_public_api
 
 import 'dart:ui';
@@ -29,7 +30,7 @@ class _Ui {
   final Color secondaryUltraLight = const Color(0xFFFFEDCC);
   final Color white = const Color(0xFFFFFFFF);
   final Color black = const Color(0xFF000000);
-  final Color shadow = const Color(0xFF000000).withOpacity(0.4);
+  final Color shadow = const Color(0xFF000000).withValues(alpha: .4);
   final Color saturday = const Color(0xFF8EAFED);
   final Color sunday = const Color(0xFFED8EAF);
   final Color unsupported = const Color(0xFFD3D3D3);

@@ -7,7 +7,7 @@ part of 'daily_recommend_foodstuffs_view_model.dart';
 // **************************************************************************
 
 String _$recommendFoodstuffsHash() =>
-    r'd7310b8535cdbd36ef35c685c114560ef4ce5997';
+    r'34925492679a9befb0bf25b747e780b7a956640a';
 
 /// See also [recommendFoodstuffs].
 @ProviderFor(recommendFoodstuffs)
@@ -22,7 +22,9 @@ final recommendFoodstuffsProvider = AutoDisposeFutureProvider<
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef RecommendFoodstuffsRef = AutoDisposeFutureProviderRef<
     Map<FiveMajorNutrient, List<DictionaryItemModel>>>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

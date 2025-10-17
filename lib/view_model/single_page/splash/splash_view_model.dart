@@ -19,7 +19,6 @@ import 'package:hakondate/repository/remote/schools/schools_remote_repository.da
 import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/state/splash/splash_state.dart';
 import 'package:hakondate/view_model/multi_page/user/user_view_model.dart';
-import 'package:hakondate/view_model/single_page/daily/daily_view_model.dart';
 
 part 'splash_view_model.g.dart';
 
@@ -126,15 +125,17 @@ class SplashViewModel extends _$SplashViewModel {
   Future<void> _initializeMenus() async {
     state = SplashState(status: LoadingStatus.reading);
     final DateTime latestUpdate = await _menusLocalRepository.getLatestUpdateDay();
+    final DateTime now = DateTime.now();
 
     state = SplashState(status: LoadingStatus.checkingUpdate);
-    final List<MenuModel> menus = await _menusRemoteRepository.get(updateAt: latestUpdate.add(const Duration(seconds: 1)));
+    final List<MenuModel> menus = await _menusRemoteRepository.get(
+      from: DateTime(now.year, now.month - 2),
+      updateAt: latestUpdate,
+    );
 
     state = SplashState(status: LoadingStatus.updating);
     await Future.forEach(menus, (MenuModel menu) async {
       await _menusLocalRepository.add(menu);
     });
-
-    await ref.read(dailyViewModelProvider.notifier).updateSelectedDay();
   }
 }

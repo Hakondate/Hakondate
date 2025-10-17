@@ -9,7 +9,7 @@ part 'school_model.freezed.dart';
 part 'school_classification.dart';
 
 @freezed
-class SchoolModel with _$SchoolModel {
+abstract class SchoolModel with _$SchoolModel {
   const factory SchoolModel({
     /// ID
     required int id,
@@ -25,6 +25,12 @@ class SchoolModel with _$SchoolModel {
 
     /// 給食区分: 1 ~ 10
     required int lunchBlock,
+
+    /// 認可が必要かどうか: trueの場合、認可が必要
+    required bool authorizationRequired,
+
+    /// 認可のkeyの更新日時
+    DateTime? authorizationKeyUpdatedAt,
   }) = _SchoolModel;
   const SchoolModel._();
 
@@ -50,6 +56,8 @@ class SchoolModel with _$SchoolModel {
       name: data['name'] as String,
       classification: classification,
       lunchBlock: data['lunchBlock'] as int,
+      authorizationRequired: data['authorizationRequired'] as bool,
+      authorizationKeyUpdatedAt: (data['authorizationKeyUpdatedAt'] as Timestamp?)?.toDate(),
     );
   }
 
@@ -66,6 +74,8 @@ class SchoolModel with _$SchoolModel {
       name: schema.name,
       classification: classification,
       lunchBlock: schema.lunchBlock,
+      authorizationRequired: schema.authorizationRequired,
+      authorizationKeyUpdatedAt: schema.authorizationKeyUpdatedAt,
     );
   }
 
@@ -76,6 +86,7 @@ class SchoolModel with _$SchoolModel {
         'classification': classification.name,
         'lunchBlock': lunchBlock,
         'updatedAt': DateTime.now(),
+        'authorizationRequired': authorizationRequired,
       };
 
   SchoolsTableCompanion toDrift() => SchoolsTableCompanion(
@@ -85,5 +96,7 @@ class SchoolModel with _$SchoolModel {
         classification: Value<String>(classification.name),
         lunchBlock: Value<int>(lunchBlock),
         updateAt: Value<DateTime>(DateTime.now()),
+        authorizationRequired: Value<bool>(authorizationRequired),
+        authorizationKeyUpdatedAt: Value<DateTime?>(authorizationKeyUpdatedAt),
       );
 }

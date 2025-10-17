@@ -1,3 +1,4 @@
+// 説明
 // ignore_for_file: argument_type_not_assignable, avoid_dynamic_calls
 
 import 'package:flutter/material.dart';

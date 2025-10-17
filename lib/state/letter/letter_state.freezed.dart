@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,90 +10,70 @@ part of 'letter_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
 
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
-mixin _$LetterState {
-  LetterConnectionStatus get status => throw _privateConstructorUsedError;
-  List<LetterMetadataModel> get letters => throw _privateConstructorUsedError;
-  LetterMetadataModelData? get selectedLetter =>
-      throw _privateConstructorUsedError;
-  bool get isEndListing => throw _privateConstructorUsedError;
-  String? get pageToken => throw _privateConstructorUsedError;
+mixin _$LetterState implements DiagnosticableTreeMixin {
+  LetterConnectionStatus get status;
+  List<LetterMetadataModel> get letters;
+  LetterMetadataModelData? get selectedLetter;
+  bool get isEndListing;
+  String? get pageToken;
 
-  @JsonKey(ignore: true)
-  $LetterStateCopyWith<LetterState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $LetterStateCopyWith<$Res> {
-  factory $LetterStateCopyWith(
-          LetterState value, $Res Function(LetterState) then) =
-      _$LetterStateCopyWithImpl<$Res, LetterState>;
-  @useResult
-  $Res call(
-      {LetterConnectionStatus status,
-      List<LetterMetadataModel> letters,
-      LetterMetadataModelData? selectedLetter,
-      bool isEndListing,
-      String? pageToken});
-}
-
-/// @nodoc
-class _$LetterStateCopyWithImpl<$Res, $Val extends LetterState>
-    implements $LetterStateCopyWith<$Res> {
-  _$LetterStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of LetterState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $LetterStateCopyWith<LetterState> get copyWith =>
+      _$LetterStateCopyWithImpl<LetterState>(this as LetterState, _$identity);
+
   @override
-  $Res call({
-    Object? status = null,
-    Object? letters = null,
-    Object? selectedLetter = freezed,
-    Object? isEndListing = null,
-    Object? pageToken = freezed,
-  }) {
-    return _then(_value.copyWith(
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as LetterConnectionStatus,
-      letters: null == letters
-          ? _value.letters
-          : letters // ignore: cast_nullable_to_non_nullable
-              as List<LetterMetadataModel>,
-      selectedLetter: freezed == selectedLetter
-          ? _value.selectedLetter
-          : selectedLetter // ignore: cast_nullable_to_non_nullable
-              as LetterMetadataModelData?,
-      isEndListing: null == isEndListing
-          ? _value.isEndListing
-          : isEndListing // ignore: cast_nullable_to_non_nullable
-              as bool,
-      pageToken: freezed == pageToken
-          ? _value.pageToken
-          : pageToken // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'LetterState'))
+      ..add(DiagnosticsProperty('status', status))
+      ..add(DiagnosticsProperty('letters', letters))
+      ..add(DiagnosticsProperty('selectedLetter', selectedLetter))
+      ..add(DiagnosticsProperty('isEndListing', isEndListing))
+      ..add(DiagnosticsProperty('pageToken', pageToken));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is LetterState &&
+            (identical(other.status, status) || other.status == status) &&
+            const DeepCollectionEquality().equals(other.letters, letters) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedLetter, selectedLetter) &&
+            (identical(other.isEndListing, isEndListing) ||
+                other.isEndListing == isEndListing) &&
+            (identical(other.pageToken, pageToken) ||
+                other.pageToken == pageToken));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      status,
+      const DeepCollectionEquality().hash(letters),
+      const DeepCollectionEquality().hash(selectedLetter),
+      isEndListing,
+      pageToken);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'LetterState(status: $status, letters: $letters, selectedLetter: $selectedLetter, isEndListing: $isEndListing, pageToken: $pageToken)';
   }
 }
 
 /// @nodoc
-abstract class _$$LetterStateImplCopyWith<$Res>
-    implements $LetterStateCopyWith<$Res> {
-  factory _$$LetterStateImplCopyWith(
-          _$LetterStateImpl value, $Res Function(_$LetterStateImpl) then) =
-      __$$LetterStateImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $LetterStateCopyWith<$Res> {
+  factory $LetterStateCopyWith(
+          LetterState value, $Res Function(LetterState) _then) =
+      _$LetterStateCopyWithImpl;
   @useResult
   $Res call(
       {LetterConnectionStatus status,
@@ -103,13 +84,14 @@ abstract class _$$LetterStateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$LetterStateImplCopyWithImpl<$Res>
-    extends _$LetterStateCopyWithImpl<$Res, _$LetterStateImpl>
-    implements _$$LetterStateImplCopyWith<$Res> {
-  __$$LetterStateImplCopyWithImpl(
-      _$LetterStateImpl _value, $Res Function(_$LetterStateImpl) _then)
-      : super(_value, _then);
+class _$LetterStateCopyWithImpl<$Res> implements $LetterStateCopyWith<$Res> {
+  _$LetterStateCopyWithImpl(this._self, this._then);
 
+  final LetterState _self;
+  final $Res Function(LetterState) _then;
+
+  /// Create a copy of LetterState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -119,25 +101,25 @@ class __$$LetterStateImplCopyWithImpl<$Res>
     Object? isEndListing = null,
     Object? pageToken = freezed,
   }) {
-    return _then(_$LetterStateImpl(
+    return _then(_self.copyWith(
       status: null == status
-          ? _value.status
+          ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
               as LetterConnectionStatus,
       letters: null == letters
-          ? _value._letters
+          ? _self.letters
           : letters // ignore: cast_nullable_to_non_nullable
               as List<LetterMetadataModel>,
       selectedLetter: freezed == selectedLetter
-          ? _value.selectedLetter
+          ? _self.selectedLetter
           : selectedLetter // ignore: cast_nullable_to_non_nullable
               as LetterMetadataModelData?,
       isEndListing: null == isEndListing
-          ? _value.isEndListing
+          ? _self.isEndListing
           : isEndListing // ignore: cast_nullable_to_non_nullable
               as bool,
       pageToken: freezed == pageToken
-          ? _value.pageToken
+          ? _self.pageToken
           : pageToken // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
@@ -146,8 +128,8 @@ class __$$LetterStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LetterStateImpl with DiagnosticableTreeMixin implements _LetterState {
-  const _$LetterStateImpl(
+class _LetterState with DiagnosticableTreeMixin implements LetterState {
+  const _LetterState(
       {this.status = LetterConnectionStatus.done,
       final List<LetterMetadataModel> letters = const <LetterMetadataModel>[],
       this.selectedLetter,
@@ -175,14 +157,16 @@ class _$LetterStateImpl with DiagnosticableTreeMixin implements _LetterState {
   @override
   final String? pageToken;
 
+  /// Create a copy of LetterState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'LetterState(status: $status, letters: $letters, selectedLetter: $selectedLetter, isEndListing: $isEndListing, pageToken: $pageToken)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$LetterStateCopyWith<_LetterState> get copyWith =>
+      __$LetterStateCopyWithImpl<_LetterState>(this, _$identity);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'LetterState'))
       ..add(DiagnosticsProperty('status', status))
@@ -196,7 +180,7 @@ class _$LetterStateImpl with DiagnosticableTreeMixin implements _LetterState {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LetterStateImpl &&
+            other is _LetterState &&
             (identical(other.status, status) || other.status == status) &&
             const DeepCollectionEquality().equals(other._letters, _letters) &&
             const DeepCollectionEquality()
@@ -216,33 +200,69 @@ class _$LetterStateImpl with DiagnosticableTreeMixin implements _LetterState {
       isEndListing,
       pageToken);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'LetterState(status: $status, letters: $letters, selectedLetter: $selectedLetter, isEndListing: $isEndListing, pageToken: $pageToken)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$LetterStateCopyWith<$Res>
+    implements $LetterStateCopyWith<$Res> {
+  factory _$LetterStateCopyWith(
+          _LetterState value, $Res Function(_LetterState) _then) =
+      __$LetterStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {LetterConnectionStatus status,
+      List<LetterMetadataModel> letters,
+      LetterMetadataModelData? selectedLetter,
+      bool isEndListing,
+      String? pageToken});
+}
+
+/// @nodoc
+class __$LetterStateCopyWithImpl<$Res> implements _$LetterStateCopyWith<$Res> {
+  __$LetterStateCopyWithImpl(this._self, this._then);
+
+  final _LetterState _self;
+  final $Res Function(_LetterState) _then;
+
+  /// Create a copy of LetterState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$LetterStateImplCopyWith<_$LetterStateImpl> get copyWith =>
-      __$$LetterStateImplCopyWithImpl<_$LetterStateImpl>(this, _$identity);
+  $Res call({
+    Object? status = null,
+    Object? letters = null,
+    Object? selectedLetter = freezed,
+    Object? isEndListing = null,
+    Object? pageToken = freezed,
+  }) {
+    return _then(_LetterState(
+      status: null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as LetterConnectionStatus,
+      letters: null == letters
+          ? _self._letters
+          : letters // ignore: cast_nullable_to_non_nullable
+              as List<LetterMetadataModel>,
+      selectedLetter: freezed == selectedLetter
+          ? _self.selectedLetter
+          : selectedLetter // ignore: cast_nullable_to_non_nullable
+              as LetterMetadataModelData?,
+      isEndListing: null == isEndListing
+          ? _self.isEndListing
+          : isEndListing // ignore: cast_nullable_to_non_nullable
+              as bool,
+      pageToken: freezed == pageToken
+          ? _self.pageToken
+          : pageToken // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
-abstract class _LetterState implements LetterState {
-  const factory _LetterState(
-      {final LetterConnectionStatus status,
-      final List<LetterMetadataModel> letters,
-      final LetterMetadataModelData? selectedLetter,
-      final bool isEndListing,
-      final String? pageToken}) = _$LetterStateImpl;
-
-  @override
-  LetterConnectionStatus get status;
-  @override
-  List<LetterMetadataModel> get letters;
-  @override
-  LetterMetadataModelData? get selectedLetter;
-  @override
-  bool get isEndListing;
-  @override
-  String? get pageToken;
-  @override
-  @JsonKey(ignore: true)
-  _$$LetterStateImplCopyWith<_$LetterStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

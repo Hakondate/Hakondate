@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,26 +10,54 @@ part of 'origin_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
 
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
-mixin _$OriginState {
-  List<OriginModel> get origins => throw _privateConstructorUsedError;
-  OriginModel get selectedOrigin => throw _privateConstructorUsedError;
+mixin _$OriginState implements DiagnosticableTreeMixin {
+  List<OriginModel> get origins;
+  OriginModel get selectedOrigin;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of OriginState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $OriginStateCopyWith<OriginState> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$OriginStateCopyWithImpl<OriginState>(this as OriginState, _$identity);
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'OriginState'))
+      ..add(DiagnosticsProperty('origins', origins))
+      ..add(DiagnosticsProperty('selectedOrigin', selectedOrigin));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is OriginState &&
+            const DeepCollectionEquality().equals(other.origins, origins) &&
+            (identical(other.selectedOrigin, selectedOrigin) ||
+                other.selectedOrigin == selectedOrigin));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(origins), selectedOrigin);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'OriginState(origins: $origins, selectedOrigin: $selectedOrigin)';
+  }
 }
 
 /// @nodoc
-abstract class $OriginStateCopyWith<$Res> {
+abstract mixin class $OriginStateCopyWith<$Res> {
   factory $OriginStateCopyWith(
-          OriginState value, $Res Function(OriginState) then) =
-      _$OriginStateCopyWithImpl<$Res, OriginState>;
+          OriginState value, $Res Function(OriginState) _then) =
+      _$OriginStateCopyWithImpl;
   @useResult
   $Res call({List<OriginModel> origins, OriginModel selectedOrigin});
 
@@ -36,87 +65,47 @@ abstract class $OriginStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$OriginStateCopyWithImpl<$Res, $Val extends OriginState>
-    implements $OriginStateCopyWith<$Res> {
-  _$OriginStateCopyWithImpl(this._value, this._then);
+class _$OriginStateCopyWithImpl<$Res> implements $OriginStateCopyWith<$Res> {
+  _$OriginStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final OriginState _self;
+  final $Res Function(OriginState) _then;
 
+  /// Create a copy of OriginState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? origins = null,
     Object? selectedOrigin = null,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       origins: null == origins
-          ? _value.origins
+          ? _self.origins
           : origins // ignore: cast_nullable_to_non_nullable
               as List<OriginModel>,
       selectedOrigin: null == selectedOrigin
-          ? _value.selectedOrigin
+          ? _self.selectedOrigin
           : selectedOrigin // ignore: cast_nullable_to_non_nullable
               as OriginModel,
-    ) as $Val);
+    ));
   }
 
+  /// Create a copy of OriginState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $OriginModelCopyWith<$Res> get selectedOrigin {
-    return $OriginModelCopyWith<$Res>(_value.selectedOrigin, (value) {
-      return _then(_value.copyWith(selectedOrigin: value) as $Val);
+    return $OriginModelCopyWith<$Res>(_self.selectedOrigin, (value) {
+      return _then(_self.copyWith(selectedOrigin: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$OriginStateImplCopyWith<$Res>
-    implements $OriginStateCopyWith<$Res> {
-  factory _$$OriginStateImplCopyWith(
-          _$OriginStateImpl value, $Res Function(_$OriginStateImpl) then) =
-      __$$OriginStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({List<OriginModel> origins, OriginModel selectedOrigin});
 
-  @override
-  $OriginModelCopyWith<$Res> get selectedOrigin;
-}
-
-/// @nodoc
-class __$$OriginStateImplCopyWithImpl<$Res>
-    extends _$OriginStateCopyWithImpl<$Res, _$OriginStateImpl>
-    implements _$$OriginStateImplCopyWith<$Res> {
-  __$$OriginStateImplCopyWithImpl(
-      _$OriginStateImpl _value, $Res Function(_$OriginStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? origins = null,
-    Object? selectedOrigin = null,
-  }) {
-    return _then(_$OriginStateImpl(
-      origins: null == origins
-          ? _value._origins
-          : origins // ignore: cast_nullable_to_non_nullable
-              as List<OriginModel>,
-      selectedOrigin: null == selectedOrigin
-          ? _value.selectedOrigin
-          : selectedOrigin // ignore: cast_nullable_to_non_nullable
-              as OriginModel,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$OriginStateImpl with DiagnosticableTreeMixin implements _OriginState {
-  const _$OriginStateImpl(
+class _OriginState with DiagnosticableTreeMixin implements OriginState {
+  const _OriginState(
       {required final List<OriginModel> origins, required this.selectedOrigin})
       : _origins = origins;
 
@@ -131,14 +120,16 @@ class _$OriginStateImpl with DiagnosticableTreeMixin implements _OriginState {
   @override
   final OriginModel selectedOrigin;
 
+  /// Create a copy of OriginState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'OriginState(origins: $origins, selectedOrigin: $selectedOrigin)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$OriginStateCopyWith<_OriginState> get copyWith =>
+      __$OriginStateCopyWithImpl<_OriginState>(this, _$identity);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'OriginState'))
       ..add(DiagnosticsProperty('origins', origins))
@@ -149,7 +140,7 @@ class _$OriginStateImpl with DiagnosticableTreeMixin implements _OriginState {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$OriginStateImpl &&
+            other is _OriginState &&
             const DeepCollectionEquality().equals(other._origins, _origins) &&
             (identical(other.selectedOrigin, selectedOrigin) ||
                 other.selectedOrigin == selectedOrigin));
@@ -159,24 +150,62 @@ class _$OriginStateImpl with DiagnosticableTreeMixin implements _OriginState {
   int get hashCode => Object.hash(runtimeType,
       const DeepCollectionEquality().hash(_origins), selectedOrigin);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'OriginState(origins: $origins, selectedOrigin: $selectedOrigin)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$OriginStateCopyWith<$Res>
+    implements $OriginStateCopyWith<$Res> {
+  factory _$OriginStateCopyWith(
+          _OriginState value, $Res Function(_OriginState) _then) =
+      __$OriginStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call({List<OriginModel> origins, OriginModel selectedOrigin});
+
+  @override
+  $OriginModelCopyWith<$Res> get selectedOrigin;
+}
+
+/// @nodoc
+class __$OriginStateCopyWithImpl<$Res> implements _$OriginStateCopyWith<$Res> {
+  __$OriginStateCopyWithImpl(this._self, this._then);
+
+  final _OriginState _self;
+  final $Res Function(_OriginState) _then;
+
+  /// Create a copy of OriginState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$OriginStateImplCopyWith<_$OriginStateImpl> get copyWith =>
-      __$$OriginStateImplCopyWithImpl<_$OriginStateImpl>(this, _$identity);
+  $Res call({
+    Object? origins = null,
+    Object? selectedOrigin = null,
+  }) {
+    return _then(_OriginState(
+      origins: null == origins
+          ? _self._origins
+          : origins // ignore: cast_nullable_to_non_nullable
+              as List<OriginModel>,
+      selectedOrigin: null == selectedOrigin
+          ? _self.selectedOrigin
+          : selectedOrigin // ignore: cast_nullable_to_non_nullable
+              as OriginModel,
+    ));
+  }
+
+  /// Create a copy of OriginState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $OriginModelCopyWith<$Res> get selectedOrigin {
+    return $OriginModelCopyWith<$Res>(_self.selectedOrigin, (value) {
+      return _then(_self.copyWith(selectedOrigin: value));
+    });
+  }
 }
 
-abstract class _OriginState implements OriginState {
-  const factory _OriginState(
-      {required final List<OriginModel> origins,
-      required final OriginModel selectedOrigin}) = _$OriginStateImpl;
-
-  @override
-  List<OriginModel> get origins;
-  @override
-  OriginModel get selectedOrigin;
-  @override
-  @JsonKey(ignore: true)
-  _$$OriginStateImplCopyWith<_$OriginStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

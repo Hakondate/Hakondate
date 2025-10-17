@@ -16,11 +16,17 @@ class NutrientLabel extends StatelessWidget {
   final double value;
   final NutrientUnit unit;
   final Color? backgroundColor;
-
   @override
   Widget build(BuildContext context) {
+    double labelHeight;
+    if (name.length > 13) {
+      labelHeight = 45.0;
+    } else {
+      labelHeight = 30.0;
+    }
+
     return Container(
-      height: 35,
+      height: labelHeight,
       color: backgroundColor,
       child: Row(
         children: <Widget>[
@@ -32,14 +38,18 @@ class NutrientLabel extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(
-                  name,
-                  style: const TextStyle(
-                    fontSize: FontSize.body,
+                Flexible(
+                  child: Text(
+                    name,
+                    style: const TextStyle(
+                      fontSize: FontSize.body,
+                    ),
                   ),
                 ),
+                const SizedBox(width: 18),
                 Text(
                   value.toStringAsFixed(2),
+                  textAlign: TextAlign.right,
                   style: const TextStyle(
                     fontSize: FontSize.body,
                   ),

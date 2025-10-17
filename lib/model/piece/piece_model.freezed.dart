@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,91 +10,70 @@ part of 'piece_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PieceModel {
-  double get number => throw _privateConstructorUsedError;
-  String get unit => throw _privateConstructorUsedError;
+  double get number;
+  String get unit;
 
-  @JsonKey(ignore: true)
-  $PieceModelCopyWith<PieceModel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $PieceModelCopyWith<$Res> {
-  factory $PieceModelCopyWith(
-          PieceModel value, $Res Function(PieceModel) then) =
-      _$PieceModelCopyWithImpl<$Res, PieceModel>;
-  @useResult
-  $Res call({double number, String unit});
-}
-
-/// @nodoc
-class _$PieceModelCopyWithImpl<$Res, $Val extends PieceModel>
-    implements $PieceModelCopyWith<$Res> {
-  _$PieceModelCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of PieceModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $PieceModelCopyWith<PieceModel> get copyWith =>
+      _$PieceModelCopyWithImpl<PieceModel>(this as PieceModel, _$identity);
+
   @override
-  $Res call({
-    Object? number = null,
-    Object? unit = null,
-  }) {
-    return _then(_value.copyWith(
-      number: null == number
-          ? _value.number
-          : number // ignore: cast_nullable_to_non_nullable
-              as double,
-      unit: null == unit
-          ? _value.unit
-          : unit // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is PieceModel &&
+            (identical(other.number, number) || other.number == number) &&
+            (identical(other.unit, unit) || other.unit == unit));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, number, unit);
+
+  @override
+  String toString() {
+    return 'PieceModel(number: $number, unit: $unit)';
   }
 }
 
 /// @nodoc
-abstract class _$$PieceModelImplCopyWith<$Res>
-    implements $PieceModelCopyWith<$Res> {
-  factory _$$PieceModelImplCopyWith(
-          _$PieceModelImpl value, $Res Function(_$PieceModelImpl) then) =
-      __$$PieceModelImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $PieceModelCopyWith<$Res> {
+  factory $PieceModelCopyWith(
+          PieceModel value, $Res Function(PieceModel) _then) =
+      _$PieceModelCopyWithImpl;
   @useResult
   $Res call({double number, String unit});
 }
 
 /// @nodoc
-class __$$PieceModelImplCopyWithImpl<$Res>
-    extends _$PieceModelCopyWithImpl<$Res, _$PieceModelImpl>
-    implements _$$PieceModelImplCopyWith<$Res> {
-  __$$PieceModelImplCopyWithImpl(
-      _$PieceModelImpl _value, $Res Function(_$PieceModelImpl) _then)
-      : super(_value, _then);
+class _$PieceModelCopyWithImpl<$Res> implements $PieceModelCopyWith<$Res> {
+  _$PieceModelCopyWithImpl(this._self, this._then);
 
+  final PieceModel _self;
+  final $Res Function(PieceModel) _then;
+
+  /// Create a copy of PieceModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? number = null,
     Object? unit = null,
   }) {
-    return _then(_$PieceModelImpl(
+    return _then(_self.copyWith(
       number: null == number
-          ? _value.number
+          ? _self.number
           : number // ignore: cast_nullable_to_non_nullable
               as double,
       unit: null == unit
-          ? _value.unit
+          ? _self.unit
           : unit // ignore: cast_nullable_to_non_nullable
               as String,
     ));
@@ -102,8 +82,8 @@ class __$$PieceModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PieceModelImpl implements _PieceModel {
-  const _$PieceModelImpl({required this.number, this.unit = '個'});
+class _PieceModel implements PieceModel {
+  const _PieceModel({required this.number, this.unit = '個'});
 
   @override
   final double number;
@@ -111,16 +91,19 @@ class _$PieceModelImpl implements _PieceModel {
   @JsonKey()
   final String unit;
 
+  /// Create a copy of PieceModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'PieceModel(number: $number, unit: $unit)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$PieceModelCopyWith<_PieceModel> get copyWith =>
+      __$PieceModelCopyWithImpl<_PieceModel>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PieceModelImpl &&
+            other is _PieceModel &&
             (identical(other.number, number) || other.number == number) &&
             (identical(other.unit, unit) || other.unit == unit));
   }
@@ -128,23 +111,49 @@ class _$PieceModelImpl implements _PieceModel {
   @override
   int get hashCode => Object.hash(runtimeType, number, unit);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'PieceModel(number: $number, unit: $unit)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$PieceModelCopyWith<$Res>
+    implements $PieceModelCopyWith<$Res> {
+  factory _$PieceModelCopyWith(
+          _PieceModel value, $Res Function(_PieceModel) _then) =
+      __$PieceModelCopyWithImpl;
+  @override
+  @useResult
+  $Res call({double number, String unit});
+}
+
+/// @nodoc
+class __$PieceModelCopyWithImpl<$Res> implements _$PieceModelCopyWith<$Res> {
+  __$PieceModelCopyWithImpl(this._self, this._then);
+
+  final _PieceModel _self;
+  final $Res Function(_PieceModel) _then;
+
+  /// Create a copy of PieceModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$PieceModelImplCopyWith<_$PieceModelImpl> get copyWith =>
-      __$$PieceModelImplCopyWithImpl<_$PieceModelImpl>(this, _$identity);
+  $Res call({
+    Object? number = null,
+    Object? unit = null,
+  }) {
+    return _then(_PieceModel(
+      number: null == number
+          ? _self.number
+          : number // ignore: cast_nullable_to_non_nullable
+              as double,
+      unit: null == unit
+          ? _self.unit
+          : unit // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
-abstract class _PieceModel implements PieceModel {
-  const factory _PieceModel({required final double number, final String unit}) =
-      _$PieceModelImpl;
-
-  @override
-  double get number;
-  @override
-  String get unit;
-  @override
-  @JsonKey(ignore: true)
-  _$$PieceModelImplCopyWith<_$PieceModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

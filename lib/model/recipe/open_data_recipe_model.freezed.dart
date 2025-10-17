@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,107 +10,76 @@ part of 'open_data_recipe_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$OpenDataRecipeModel {
   /// ID
-  int get id => throw _privateConstructorUsedError;
+  int get id;
 
   /// 名前
-  String get name => throw _privateConstructorUsedError;
+  String get name;
 
   /// PDF
-  String get pdf => throw _privateConstructorUsedError;
+  String get pdf;
 
   /// タイプ
-  RecipeType get type => throw _privateConstructorUsedError;
+  RecipeType get type;
 
   /// サムネイル
-  String? get thumbnail => throw _privateConstructorUsedError;
+  String? get thumbnail;
 
-  @JsonKey(ignore: true)
-  $OpenDataRecipeModelCopyWith<OpenDataRecipeModel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $OpenDataRecipeModelCopyWith<$Res> {
-  factory $OpenDataRecipeModelCopyWith(
-          OpenDataRecipeModel value, $Res Function(OpenDataRecipeModel) then) =
-      _$OpenDataRecipeModelCopyWithImpl<$Res, OpenDataRecipeModel>;
-  @useResult
-  $Res call(
-      {int id, String name, String pdf, RecipeType type, String? thumbnail});
-}
-
-/// @nodoc
-class _$OpenDataRecipeModelCopyWithImpl<$Res, $Val extends OpenDataRecipeModel>
-    implements $OpenDataRecipeModelCopyWith<$Res> {
-  _$OpenDataRecipeModelCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of OpenDataRecipeModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $OpenDataRecipeModelCopyWith<OpenDataRecipeModel> get copyWith =>
+      _$OpenDataRecipeModelCopyWithImpl<OpenDataRecipeModel>(
+          this as OpenDataRecipeModel, _$identity);
+
   @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? pdf = null,
-    Object? type = null,
-    Object? thumbnail = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      pdf: null == pdf
-          ? _value.pdf
-          : pdf // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as RecipeType,
-      thumbnail: freezed == thumbnail
-          ? _value.thumbnail
-          : thumbnail // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is OpenDataRecipeModel &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.pdf, pdf) || other.pdf == pdf) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.thumbnail, thumbnail) ||
+                other.thumbnail == thumbnail));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id, name, pdf, type, thumbnail);
+
+  @override
+  String toString() {
+    return 'OpenDataRecipeModel(id: $id, name: $name, pdf: $pdf, type: $type, thumbnail: $thumbnail)';
   }
 }
 
 /// @nodoc
-abstract class _$$OpenDataRecipeModelImplCopyWith<$Res>
-    implements $OpenDataRecipeModelCopyWith<$Res> {
-  factory _$$OpenDataRecipeModelImplCopyWith(_$OpenDataRecipeModelImpl value,
-          $Res Function(_$OpenDataRecipeModelImpl) then) =
-      __$$OpenDataRecipeModelImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $OpenDataRecipeModelCopyWith<$Res> {
+  factory $OpenDataRecipeModelCopyWith(
+          OpenDataRecipeModel value, $Res Function(OpenDataRecipeModel) _then) =
+      _$OpenDataRecipeModelCopyWithImpl;
   @useResult
   $Res call(
       {int id, String name, String pdf, RecipeType type, String? thumbnail});
 }
 
 /// @nodoc
-class __$$OpenDataRecipeModelImplCopyWithImpl<$Res>
-    extends _$OpenDataRecipeModelCopyWithImpl<$Res, _$OpenDataRecipeModelImpl>
-    implements _$$OpenDataRecipeModelImplCopyWith<$Res> {
-  __$$OpenDataRecipeModelImplCopyWithImpl(_$OpenDataRecipeModelImpl _value,
-      $Res Function(_$OpenDataRecipeModelImpl) _then)
-      : super(_value, _then);
+class _$OpenDataRecipeModelCopyWithImpl<$Res>
+    implements $OpenDataRecipeModelCopyWith<$Res> {
+  _$OpenDataRecipeModelCopyWithImpl(this._self, this._then);
 
+  final OpenDataRecipeModel _self;
+  final $Res Function(OpenDataRecipeModel) _then;
+
+  /// Create a copy of OpenDataRecipeModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -119,25 +89,25 @@ class __$$OpenDataRecipeModelImplCopyWithImpl<$Res>
     Object? type = null,
     Object? thumbnail = freezed,
   }) {
-    return _then(_$OpenDataRecipeModelImpl(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       pdf: null == pdf
-          ? _value.pdf
+          ? _self.pdf
           : pdf // ignore: cast_nullable_to_non_nullable
               as String,
       type: null == type
-          ? _value.type
+          ? _self.type
           : type // ignore: cast_nullable_to_non_nullable
               as RecipeType,
       thumbnail: freezed == thumbnail
-          ? _value.thumbnail
+          ? _self.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
@@ -146,8 +116,8 @@ class __$$OpenDataRecipeModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$OpenDataRecipeModelImpl extends _OpenDataRecipeModel {
-  _$OpenDataRecipeModelImpl(
+class _OpenDataRecipeModel extends OpenDataRecipeModel {
+  _OpenDataRecipeModel(
       {required this.id,
       required this.name,
       required this.pdf,
@@ -176,16 +146,20 @@ class _$OpenDataRecipeModelImpl extends _OpenDataRecipeModel {
   @override
   final String? thumbnail;
 
+  /// Create a copy of OpenDataRecipeModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'OpenDataRecipeModel(id: $id, name: $name, pdf: $pdf, type: $type, thumbnail: $thumbnail)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$OpenDataRecipeModelCopyWith<_OpenDataRecipeModel> get copyWith =>
+      __$OpenDataRecipeModelCopyWithImpl<_OpenDataRecipeModel>(
+          this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$OpenDataRecipeModelImpl &&
+            other is _OpenDataRecipeModel &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.pdf, pdf) || other.pdf == pdf) &&
@@ -197,45 +171,66 @@ class _$OpenDataRecipeModelImpl extends _OpenDataRecipeModel {
   @override
   int get hashCode => Object.hash(runtimeType, id, name, pdf, type, thumbnail);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'OpenDataRecipeModel(id: $id, name: $name, pdf: $pdf, type: $type, thumbnail: $thumbnail)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$OpenDataRecipeModelCopyWith<$Res>
+    implements $OpenDataRecipeModelCopyWith<$Res> {
+  factory _$OpenDataRecipeModelCopyWith(_OpenDataRecipeModel value,
+          $Res Function(_OpenDataRecipeModel) _then) =
+      __$OpenDataRecipeModelCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {int id, String name, String pdf, RecipeType type, String? thumbnail});
+}
+
+/// @nodoc
+class __$OpenDataRecipeModelCopyWithImpl<$Res>
+    implements _$OpenDataRecipeModelCopyWith<$Res> {
+  __$OpenDataRecipeModelCopyWithImpl(this._self, this._then);
+
+  final _OpenDataRecipeModel _self;
+  final $Res Function(_OpenDataRecipeModel) _then;
+
+  /// Create a copy of OpenDataRecipeModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$OpenDataRecipeModelImplCopyWith<_$OpenDataRecipeModelImpl> get copyWith =>
-      __$$OpenDataRecipeModelImplCopyWithImpl<_$OpenDataRecipeModelImpl>(
-          this, _$identity);
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? pdf = null,
+    Object? type = null,
+    Object? thumbnail = freezed,
+  }) {
+    return _then(_OpenDataRecipeModel(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      pdf: null == pdf
+          ? _self.pdf
+          : pdf // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _self.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as RecipeType,
+      thumbnail: freezed == thumbnail
+          ? _self.thumbnail
+          : thumbnail // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
-abstract class _OpenDataRecipeModel extends OpenDataRecipeModel {
-  factory _OpenDataRecipeModel(
-      {required final int id,
-      required final String name,
-      required final String pdf,
-      final RecipeType type,
-      final String? thumbnail}) = _$OpenDataRecipeModelImpl;
-  _OpenDataRecipeModel._() : super._();
-
-  @override
-
-  /// ID
-  int get id;
-  @override
-
-  /// 名前
-  String get name;
-  @override
-
-  /// PDF
-  String get pdf;
-  @override
-
-  /// タイプ
-  RecipeType get type;
-  @override
-
-  /// サムネイル
-  String? get thumbnail;
-  @override
-  @JsonKey(ignore: true)
-  _$$OpenDataRecipeModelImplCopyWith<_$OpenDataRecipeModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

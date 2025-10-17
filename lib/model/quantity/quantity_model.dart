@@ -5,7 +5,7 @@ import 'package:hakondate/model/piece/piece_model.dart';
 part 'quantity_model.freezed.dart';
 
 @freezed
-class QuantityModel with _$QuantityModel {
+abstract class QuantityModel with _$QuantityModel {
   const factory QuantityModel({
     /// 個数
     PieceModel? piece,

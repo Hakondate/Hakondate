@@ -9,6 +9,7 @@ class MenuDishesTable extends Table {
   IntColumn get dishId => integer().references(DishesTable, #id)();
 
   @override
+  //　説明
   // ignore: always_specify_types
   List<Set<Column>> get uniqueKeys => [
         <Column<Object>>{menuId, dishId},
