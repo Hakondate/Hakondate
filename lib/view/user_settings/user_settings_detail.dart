@@ -25,15 +25,11 @@ class UserSettingsDetail extends ConsumerWidget {
     return userSettingsState.when(
       loading: () => const SigningUpDialog(),
       error: (Object error, StackTrace? stackTrace) {
-        return Center(
-          child: Text(error.toString()),
-        );
+        return Center(child: Text(error.toString()));
       },
       data: (UserSettingsState userSettingsState) {
         return Scaffold(
-          appBar: FadeUpAppBar(
-            title: userSettingsState.editingUser == null ? const Text('お子様の追加登録') : const Text('お子様情報の変更'),
-          ),
+          appBar: FadeUpAppBar(title: userSettingsState.editingUser == null ? const Text('お子様の追加登録') : const Text('お子様情報の変更')),
           body: Stack(
             children: <Widget>[
               Consumer(
@@ -51,15 +47,7 @@ class UserSettingsDetail extends ConsumerWidget {
               ),
               Form(
                 key: _formKey,
-                child: const SingleChildScrollView(
-                  child: Column(
-                    children: <Widget>[
-                      NameForm(),
-                      SchoolForm(),
-                      SubmitButton(),
-                    ],
-                  ),
-                ),
+                child: const SingleChildScrollView(child: Column(children: <Widget>[NameForm(), SchoolForm(), SubmitButton()])),
               ),
             ],
           ),

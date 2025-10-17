@@ -11,7 +11,9 @@ part 'menus_remote_repository.g.dart';
 @Riverpod(keepAlive: true)
 MenusRemoteRepository menusRemoteRepository(Ref ref) {
   final FirebaseFirestore firestoreAPI = ref.watch(firestoreAPIProvider);
-  final CollectionReference<MenuModel> menuCollectionReference = firestoreAPI.collection('menus').withConverter(
+  final CollectionReference<MenuModel> menuCollectionReference = firestoreAPI
+      .collection('menus')
+      .withConverter(
         fromFirestore: (DocumentSnapshot<Map<String, dynamic>> doc, _) => MenuModel.fromFirestore(doc),
         toFirestore: (MenuModel? menu, _) => (menu != null) ? menu.toFirestore() : <String, Object>{},
       );

@@ -14,9 +14,7 @@ class Origin extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.ui.white,
-      appBar: const FadeUpAppBar(
-        title: Text('産地情報'),
-      ),
+      appBar: const FadeUpAppBar(title: Text('産地情報')),
       body: Scrollbar(
         child: SingleChildScrollView(
           child: Padding(
@@ -29,13 +27,15 @@ class Origin extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     DescriptionText.body(
-                      label: '1. 米，小麦，牛乳，鶏卵\n'
+                      label:
+                          '1. 米，小麦，牛乳，鶏卵\n'
                           '2. 肉（牛，豚，鶏）\n'
                           '3. 野菜，果物，魚介・海藻類',
                     ),
                     Flexible(
                       child: DescriptionText.body(
-                        label: '北海道産\n'
+                        label:
+                            '北海道産\n'
                             '北海道産\n'
                             '以下の産地リストをご覧ください',
                       ),

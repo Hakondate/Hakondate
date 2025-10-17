@@ -17,9 +17,7 @@ class Signup extends StatelessWidget {
   Widget build(BuildContext context) {
     int tapCounter = 0;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('お子様の新規登録'),
-      ),
+      appBar: AppBar(title: const Text('お子様の新規登録')),
       body: Stack(
         children: <Widget>[
           Consumer(
@@ -37,15 +35,7 @@ class Signup extends StatelessWidget {
           ),
           Form(
             key: _formKey,
-            child: const SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  NameForm(),
-                  SchoolForm(),
-                  SubmitButton(),
-                ],
-              ),
-            ),
+            child: const SingleChildScrollView(child: Column(children: <Widget>[NameForm(), SchoolForm(), SubmitButton()])),
           ),
         ],
       ),

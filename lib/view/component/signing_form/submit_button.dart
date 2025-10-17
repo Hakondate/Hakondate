@@ -33,10 +33,7 @@ class SubmitButton extends ConsumerWidget {
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColor.brand.secondary,
-              padding: const EdgeInsets.symmetric(
-                vertical: PaddingSize.buttonVertical,
-                horizontal: PaddingSize.buttonHorizontal,
-              ),
+              padding: const EdgeInsets.symmetric(vertical: PaddingSize.buttonVertical, horizontal: PaddingSize.buttonHorizontal),
               textStyle: TextStyle(color: AppColor.text.white),
               shape: const StadiumBorder(),
             ),
@@ -48,10 +45,7 @@ class SubmitButton extends ConsumerWidget {
                   return;
                 }
 
-                return showDialog(
-                  context: context,
-                  builder: (BuildContext context) => const SigningUpDialog(),
-                );
+                return showDialog(context: context, builder: (BuildContext context) => const SigningUpDialog());
               }
             },
           ),

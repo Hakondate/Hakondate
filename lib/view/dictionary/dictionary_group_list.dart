@@ -23,15 +23,11 @@ class DictionaryGroupList extends ConsumerWidget {
         if (selectedGroup == null || selectedGroupItems == null) return _loading();
 
         return Scaffold(
-          appBar: AppBar(
-            title: Text('${selectedGroup.groupNumber}群：${selectedGroup.label}'),
-          ),
+          appBar: AppBar(title: Text('${selectedGroup.groupNumber}群：${selectedGroup.label}')),
           body: Scrollbar(
             child: ListView.separated(
               itemCount: selectedGroupItems.length,
-              separatorBuilder: (_, __) => const Divider(
-                height: 0,
-              ),
+              separatorBuilder: (_, __) => const Divider(height: 0),
               itemBuilder: (_, int index) {
                 final DictionaryItemModel item = selectedGroupItems[index];
                 return ListTile(
@@ -53,10 +49,6 @@ class DictionaryGroupList extends ConsumerWidget {
   }
 
   Widget _loading() {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('　群：　　　類'),
-      ),
-    );
+    return Scaffold(appBar: AppBar(title: const Text('　群：　　　類')));
   }
 }

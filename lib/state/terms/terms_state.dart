@@ -6,7 +6,5 @@ part 'terms_state.freezed.dart';
 
 @freezed
 abstract class TermsState with _$TermsState {
-  const factory TermsState({
-    @Default(false) bool isAgree,
-  }) = _TermsState;
+  const factory TermsState({@Default(false) bool isAgree}) = _TermsState;
 }

@@ -14,19 +14,12 @@ class OriginViewModel extends _$OriginViewModel {
     final List<OriginModel> origins = await originsRemoteRepository.list();
     final OriginModel selectedOrigin = await originsRemoteRepository.getById().catchError((_) => origins.first);
 
-    return OriginState(
-      origins: origins,
-      selectedOrigin: selectedOrigin,
-    );
+    return OriginState(origins: origins, selectedOrigin: selectedOrigin);
   }
 
   Future<void> updateSelectedOrigin({required OriginModel origin}) async {
     state.whenData((OriginState data) async {
-      state = AsyncData<OriginState>(
-        data.copyWith(
-          selectedOrigin: origin,
-        ),
-      );
+      state = AsyncData<OriginState>(data.copyWith(selectedOrigin: origin));
     });
   }
 }

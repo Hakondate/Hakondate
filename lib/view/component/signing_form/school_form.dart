@@ -29,14 +29,8 @@ class SchoolForm extends ConsumerWidget {
           padding: const EdgeInsets.all(PaddingSize.normal),
           child: Row(
             children: <Widget>[
-              const Text(
-                '学校・学年',
-                style: TextStyle(fontSize: FontSize.subheading),
-              ),
-              HelpButton(
-                helpFrame: <HelpFrame>[HelpFrame.schoolAndSchoolYear(), HelpFrame.input()],
-                key: key,
-              ),
+              const Text('学校・学年', style: TextStyle(fontSize: FontSize.subheading)),
+              HelpButton(helpFrame: <HelpFrame>[HelpFrame.schoolAndSchoolYear(), HelpFrame.input()], key: key),
               const Spacer(),
               if (state is AsyncData<SignupState>) ErrorIndication(errorState: state.value.schoolErrorState),
             ],

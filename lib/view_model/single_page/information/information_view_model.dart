@@ -29,11 +29,7 @@ class InformationViewModel {
   }
 
   void onTap() {
-    final Uri emailLaunchUri = Uri(
-      scheme: 'mailto',
-      path: 'editorhakondate@gmail.com',
-      query: 'subject=はこんだて運営への問い合わせ',
-    );
+    final Uri emailLaunchUri = Uri(scheme: 'mailto', path: 'editorhakondate@gmail.com', query: 'subject=はこんだて運営への問い合わせ');
 
     launchUrl(emailLaunchUri);
   }

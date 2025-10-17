@@ -18,29 +18,17 @@ import 'package:hakondate/view_model/multi_page/app_preferences/app_preferences_
 import 'package:hakondate/view_model/multi_page/app_statistics/app_statistics_view_model.dart';
 
 Future<void> main() async {
-  await runZonedGuarded<Future<void>>(
-    () async {
-      WidgetsFlutterBinding.ensureInitialized();
-      await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
-        DeviceOrientation.portraitUp,
-        DeviceOrientation.portraitDown,
-      ]);
-      await initializeDateFormatting('ja_JP');
-      await AppTrackingTransparency.requestTrackingAuthorization();
-      if (Firebase.apps.isEmpty) {
-        await Firebase.initializeApp(
-          options: DefaultFirebaseOptions.currentPlatform,
-        );
-      }
-      FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
-      runApp(
-        const ProviderScope(
-          child: Hakondate(),
-        ),
-      );
-    },
-    (Object error, StackTrace stack) => FirebaseCrashlytics.instance.recordError(error, stack, fatal: true),
-  );
+  await runZonedGuarded<Future<void>>(() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await SystemChrome.setPreferredOrientations(<DeviceOrientation>[DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+    await initializeDateFormatting('ja_JP');
+    await AppTrackingTransparency.requestTrackingAuthorization();
+    if (Firebase.apps.isEmpty) {
+      await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+    }
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+    runApp(const ProviderScope(child: Hakondate()));
+  }, (Object error, StackTrace stack) => FirebaseCrashlytics.instance.recordError(error, stack, fatal: true));
 }
 
 class Hakondate extends StatelessWidget {
@@ -50,35 +38,27 @@ class Hakondate extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = ThemeData(
       appBarTheme: Theme.of(context).appBarTheme.copyWith(
-            titleTextStyle: TextStyle(
-              color: AppColor.text.appBarTitle,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'MPLUSRounded1c',
-            ),
-            iconTheme: IconThemeData(
-              color: AppColor.brand.secondary,
-            ),
-            systemOverlayStyle: SystemUiOverlayStyle.dark,
-          ),
-      primaryIconTheme: Theme.of(context).primaryIconTheme.copyWith(
-            color: AppColor.brand.secondary,
-          ),
-      textTheme: Theme.of(context).textTheme.apply(
-            fontFamily: 'MPLUSRounded1c',
-            displayColor: AppColor.text.primary,
-            bodyColor: AppColor.text.primary,
-          ),
+        titleTextStyle: TextStyle(
+          color: AppColor.text.appBarTitle,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          fontFamily: 'MPLUSRounded1c',
+        ),
+        iconTheme: IconThemeData(color: AppColor.brand.secondary),
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
+      ),
+      primaryIconTheme: Theme.of(context).primaryIconTheme.copyWith(color: AppColor.brand.secondary),
+      textTheme: Theme.of(
+        context,
+      ).textTheme.apply(fontFamily: 'MPLUSRounded1c', displayColor: AppColor.text.primary, bodyColor: AppColor.text.primary),
       colorScheme: Theme.of(context).colorScheme.copyWith(
-            primary: AppColor.brand.primary,
-            secondary: AppColor.brand.secondary,
-            surface: AppColor.ui.white,
-            surfaceTint: AppColor.ui.white,
-          ),
+        primary: AppColor.brand.primary,
+        secondary: AppColor.brand.secondary,
+        surface: AppColor.ui.white,
+        surfaceTint: AppColor.ui.white,
+      ),
       scaffoldBackgroundColor: AppColor.ui.white,
-      drawerTheme: Theme.of(context).drawerTheme.copyWith(
-            backgroundColor: AppColor.ui.white,
-          ),
+      drawerTheme: Theme.of(context).drawerTheme.copyWith(backgroundColor: AppColor.ui.white),
     );
 
     return Consumer(
@@ -94,10 +74,7 @@ class Hakondate extends StatelessWidget {
             // material3のデザインを使用したくないため
             // ignore: deprecated_member_use
             useMaterial3: false,
-            colorScheme: theme.colorScheme.copyWith(
-              primary: AppColor.brand.primary,
-              secondary: AppColor.brand.secondary,
-            ),
+            colorScheme: theme.colorScheme.copyWith(primary: AppColor.brand.primary, secondary: AppColor.brand.secondary),
           ),
           routerDelegate: routemaster,
           routeInformationParser: const RoutemasterParser(),

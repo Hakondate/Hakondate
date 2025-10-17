@@ -8,7 +8,5 @@ part 'help_state.freezed.dart';
 
 @freezed
 abstract class HelpState with _$HelpState {
-  const factory HelpState({
-    required SchoolGrade schoolGrade,
-  }) = _HelpState;
+  const factory HelpState({required SchoolGrade schoolGrade}) = _HelpState;
 }

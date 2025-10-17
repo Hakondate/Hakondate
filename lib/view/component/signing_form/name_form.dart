@@ -19,13 +19,9 @@ class NameForm extends ConsumerWidget {
     final AsyncValue<SignupState> state = ref.watch(signupViewModelProvider);
 
     return state.when(
-      loading: () => const Center(
-        child: CircularProgressIndicator(),
-      ),
+      loading: () => const Center(child: CircularProgressIndicator()),
       error: (Object error, StackTrace? stackTrace) {
-        return Center(
-          child: Text(error.toString()),
-        );
+        return Center(child: Text(error.toString()));
       },
       data: (SignupState state) => Padding(
         padding: const EdgeInsets.all(PaddingSize.normal),
@@ -34,14 +30,8 @@ class NameForm extends ConsumerWidget {
           children: <Widget>[
             Row(
               children: <Widget>[
-                const Text(
-                  'お名前',
-                  style: TextStyle(fontSize: FontSize.subheading),
-                ),
-                HelpButton(
-                  helpFrame: <HelpFrame>[HelpFrame.nickName()],
-                  key: key,
-                ),
+                const Text('お名前', style: TextStyle(fontSize: FontSize.subheading)),
+                HelpButton(helpFrame: <HelpFrame>[HelpFrame.nickName()], key: key),
                 const Spacer(),
                 ErrorIndication(errorState: state.nameErrorState),
               ],
@@ -60,16 +50,9 @@ class NameForm extends ConsumerWidget {
                       decoration: InputDecoration(
                         hintText: '姓',
                         border: const OutlineInputBorder(),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: AppColor.brand.secondary,
-                            width: 2,
-                          ),
-                        ),
+                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColor.brand.secondary, width: 2)),
                       ),
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.deny(' '),
-                      ],
+                      inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.deny(' ')],
                       onChanged: (String value) {
                         ref.read(signupViewModelProvider.notifier).updateLastName(value);
                       },
@@ -87,16 +70,9 @@ class NameForm extends ConsumerWidget {
                       decoration: InputDecoration(
                         hintText: '名',
                         border: const OutlineInputBorder(),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: AppColor.brand.secondary,
-                            width: 2,
-                          ),
-                        ),
+                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColor.brand.secondary, width: 2)),
                       ),
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.deny(' '),
-                      ],
+                      inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.deny(' ')],
                       onChanged: (String value) {
                         ref.read(signupViewModelProvider.notifier).updateFirstName(value);
                       },

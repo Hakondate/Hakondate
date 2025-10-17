@@ -19,9 +19,7 @@ class Letter extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('お便り'),
-      ),
+      appBar: AppBar(title: const Text('お便り')),
       body: StatefulWrapper(
         onInit: () => ref.read(letterViewModelProvider.notifier).getLetters(),
         child: Builder(
@@ -74,22 +72,13 @@ class Letter extends ConsumerWidget {
             onTap: () => ref.read(letterViewModelProvider.notifier).transitionLetterPDF(letter: letter),
             borderColor: AppColor.brand.secondaryLight,
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(
-                PaddingSize.normal,
-                PaddingSize.normal,
-                PaddingSize.normal,
-                PaddingSize.minimum,
-              ),
+              padding: const EdgeInsets.fromLTRB(PaddingSize.normal, PaddingSize.normal, PaddingSize.normal, PaddingSize.minimum),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
                     letter.title,
-                    style: const TextStyle(
-                      fontSize: FontSize.heading,
-                      fontWeight: FontWeight.bold,
-                      height: 1.1,
-                    ),
+                    style: const TextStyle(fontSize: FontSize.heading, fontWeight: FontWeight.bold, height: 1.1),
                     maxLines: 4,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -107,26 +96,11 @@ class Letter extends ConsumerWidget {
                                   .map(
                                     (String name) => Chip(
                                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                      visualDensity: const VisualDensity(
-                                        horizontal: -4,
-                                        vertical: -4,
-                                      ),
+                                      visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
                                       elevation: 0,
                                       backgroundColor: AppColor.ui.white,
-                                      shape: StadiumBorder(
-                                        side: BorderSide(
-                                          width: 2,
-                                          color: AppColor.brand.tertiary,
-                                        ),
-                                      ),
-                                      label: Text(
-                                        name,
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          color: AppColor.brand.tertiary,
-                                          height: 1,
-                                        ),
-                                      ),
+                                      shape: StadiumBorder(side: BorderSide(width: 2, color: AppColor.brand.tertiary)),
+                                      label: Text(name, style: TextStyle(fontSize: 12, color: AppColor.brand.tertiary, height: 1)),
                                     ),
                                   )
                                   .toList(),
@@ -142,10 +116,7 @@ class Letter extends ConsumerWidget {
                     alignment: Alignment.bottomRight,
                     child: Text(
                       DateFormat('yyyy年M月d日').format(letter.updateAt),
-                      style: TextStyle(
-                        color: AppColor.text.gray,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: TextStyle(color: AppColor.text.gray, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],

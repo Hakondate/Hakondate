@@ -18,10 +18,7 @@ abstract class QuantityModel with _$QuantityModel {
     return QuantityModel(
       piece: data['pieceNumber'] == null
           ? null
-          : PieceModel(
-              number: double.parse(data['pieceNumber'].toString()),
-              unit: data['pieceUnit'] as String,
-            ),
+          : PieceModel(number: double.parse(data['pieceNumber'].toString()), unit: data['pieceUnit'] as String),
       gram: double.parse(data['gram'].toString()),
     );
   }

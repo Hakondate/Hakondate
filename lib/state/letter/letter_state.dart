@@ -17,7 +17,4 @@ abstract class LetterState with _$LetterState {
   }) = _LetterState;
 }
 
-enum LetterConnectionStatus {
-  loading,
-  done;
-}
+enum LetterConnectionStatus { loading, done }

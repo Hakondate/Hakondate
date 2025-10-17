@@ -3,20 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:hakondate/constant/app_color.dart';
 
 class NonLunchesDayCalendarTile extends StatelessWidget {
-  const NonLunchesDayCalendarTile({
-    required this.message,
-    this.backgroundColor,
-    super.key,
-  });
+  const NonLunchesDayCalendarTile({required this.message, this.backgroundColor, super.key});
   factory NonLunchesDayCalendarTile.holiday() {
     return NonLunchesDayCalendarTile(
       message: Text(
         'お休みです',
-        style: TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-          color: AppColor.text.gray,
-        ),
+        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppColor.text.gray),
       ),
     );
   }
@@ -26,19 +18,13 @@ class NonLunchesDayCalendarTile extends StatelessWidget {
       backgroundColor: AppColor.ui.black.withValues(alpha: .3),
       message: Text(
         '準備中です',
-        style: TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-          color: AppColor.text.white,
-        ),
+        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppColor.text.white),
       ),
     );
   }
 
   factory NonLunchesDayCalendarTile.loading() {
-    return NonLunchesDayCalendarTile(
-      message: Container(),
-    );
+    return NonLunchesDayCalendarTile(message: Container());
   }
 
   final Widget message;
@@ -48,9 +34,7 @@ class NonLunchesDayCalendarTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: backgroundColor,
-      child: Center(
-        child: message,
-      ),
+      child: Center(child: message),
     );
   }
 }

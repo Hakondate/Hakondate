@@ -25,9 +25,7 @@ class AppBottomNavigationBar extends ConsumerWidget {
       body: TabBarView(
         controller: tabState.controller,
         physics: const NeverScrollableScrollPhysics(),
-        children: <Widget>[
-          for (final PageStack stack in tabState.stacks) PageStackNavigator(stack: stack),
-        ],
+        children: <Widget>[for (final PageStack stack in tabState.stacks) PageStackNavigator(stack: stack)],
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
@@ -35,10 +33,7 @@ class AppBottomNavigationBar extends ConsumerWidget {
         onTap: (int index) => tabState.controller.animateTo(index),
         backgroundColor: AppColor.ui.white,
         selectedItemColor: AppColor.brand.secondary,
-        selectedLabelStyle: const TextStyle(
-          fontSize: 10,
-          fontWeight: FontWeight.bold,
-        ),
+        selectedLabelStyle: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
         showUnselectedLabels: false,
         items: <BottomNavigationBarItem>[
           _svgBottomNavigationBarItem(
@@ -79,10 +74,7 @@ class AppBottomNavigationBar extends ConsumerWidget {
           activeIconPath,
           width: IconSize.navigationItem,
           height: IconSize.navigationItem,
-          colorFilter: ColorFilter.mode(
-            AppColor.brand.secondary,
-            BlendMode.srcIn,
-          ),
+          colorFilter: ColorFilter.mode(AppColor.brand.secondary, BlendMode.srcIn),
         ),
       ),
       icon: Padding(
@@ -93,10 +85,7 @@ class AppBottomNavigationBar extends ConsumerWidget {
               inactiveIconPath,
               width: IconSize.navigationItem,
               height: IconSize.navigationItem,
-              colorFilter: ColorFilter.mode(
-                Theme.of(context).unselectedWidgetColor,
-                BlendMode.srcIn,
-              ),
+              colorFilter: ColorFilter.mode(Theme.of(context).unselectedWidgetColor, BlendMode.srcIn),
             );
           },
         ),

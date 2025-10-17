@@ -14,7 +14,8 @@ Future<Map<FiveMajorNutrient, List<DictionaryItemModel>>> recommendFoodstuffs(Re
 
   return nutrientsPercentage.maybeWhen(
     data: (List<double> nutrientsPercentage) async {
-      final Map<FiveMajorNutrient, double> nutrientsMap = <FiveMajorNutrient, double>{}..addAll(<FiveMajorNutrient, double>{
+      final Map<FiveMajorNutrient, double> nutrientsMap = <FiveMajorNutrient, double>{}
+        ..addAll(<FiveMajorNutrient, double>{
           FiveMajorNutrient.protein: nutrientsPercentage[1],
           FiveMajorNutrient.vitamin: nutrientsPercentage[2],
           FiveMajorNutrient.mineral: nutrientsPercentage[3],
@@ -36,12 +37,8 @@ Future<Map<FiveMajorNutrient, List<DictionaryItemModel>>> recommendFoodstuffs(Re
       }
 
       final Map<FiveMajorNutrient, List<DictionaryItemModel>> recommendFoodstuffs = <FiveMajorNutrient, List<DictionaryItemModel>>{
-        minValue.key: await ref.read(dictionaryItemsLocalRepositoryProvider).getRanking(
-              nutrient: minValue.key.name,
-            ),
-        secondMinValue.key: await ref.read(dictionaryItemsLocalRepositoryProvider).getRanking(
-              nutrient: secondMinValue.key.name,
-            ),
+        minValue.key: await ref.read(dictionaryItemsLocalRepositoryProvider).getRanking(nutrient: minValue.key.name),
+        secondMinValue.key: await ref.read(dictionaryItemsLocalRepositoryProvider).getRanking(nutrient: secondMinValue.key.name),
       };
 
       return recommendFoodstuffs;

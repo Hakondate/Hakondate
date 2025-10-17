@@ -24,28 +24,20 @@ class UserSettings extends ConsumerWidget {
     final UserModel currentUser = ref.watch(userViewModelProvider).currentUser!;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('お子様情報一覧'),
-      ),
+      appBar: AppBar(title: const Text('お子様情報一覧')),
       body: SingleChildScrollView(
         child: users.when(
           loading: CircularProgressIndicator.new,
           error: (Object error, StackTrace? stackTrace) {
-            return Center(
-              child: Text(error.toString()),
-            );
+            return Center(child: Text(error.toString()));
           },
           data: (UserSettingsState users) {
             return Column(
               children: <Widget>[
-                const SizedBox(
-                  height: SpaceSize.line,
-                ),
+                const SizedBox(height: SpaceSize.line),
                 for (final UserModel user in users.users!)
                   UserSettingsCard(context: context, user: user, isCurrentUser: user.id == currentUser.id),
-                const SizedBox(
-                  height: SpaceSize.line,
-                ),
+                const SizedBox(height: SpaceSize.line),
                 const UserAddButton(),
               ],
             );
@@ -57,19 +49,14 @@ class UserSettings extends ConsumerWidget {
 }
 
 class UserAddButton extends ConsumerWidget {
-  const UserAddButton({
-    super.key,
-  });
+  const UserAddButton({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Center(
       child: FloatingActionButton(
         elevation: 3,
-        child: Icon(
-          Icons.person_add,
-          color: AppColor.ui.white,
-        ),
+        child: Icon(Icons.person_add, color: AppColor.ui.white),
         onPressed: () {
           ref.read(userSettingsViewModelProvider.notifier).setEditingUser(null);
           routemaster.push('/home/user_settings/${NewUserId.id}}');
@@ -80,12 +67,7 @@ class UserAddButton extends ConsumerWidget {
 }
 
 class UserSettingsCard extends ConsumerWidget {
-  const UserSettingsCard({
-    required this.context,
-    required this.user,
-    required this.isCurrentUser,
-    super.key,
-  });
+  const UserSettingsCard({required this.context, required this.user, required this.isCurrentUser, super.key});
 
   final BuildContext context;
   final UserModel user;
@@ -103,16 +85,10 @@ class UserSettingsCard extends ConsumerWidget {
         }
       },
       child: Card(
-        margin: const EdgeInsets.symmetric(
-          vertical: MarginSize.minimum,
-          horizontal: MarginSize.normal,
-        ),
+        margin: const EdgeInsets.symmetric(vertical: MarginSize.minimum, horizontal: MarginSize.normal),
         elevation: 2,
         shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: isCurrentUser ? AppColor.brand.secondary : AppColor.ui.secondaryUltraLight,
-            width: 3,
-          ),
+          side: BorderSide(color: isCurrentUser ? AppColor.brand.secondary : AppColor.ui.secondaryUltraLight, width: 3),
           borderRadius: const BorderRadius.all(Radius.circular(10)),
         ),
         child: Padding(
@@ -126,54 +102,31 @@ class UserSettingsCard extends ConsumerWidget {
                 children: <Widget>[
                   Text(
                     user.name,
-                    style: const TextStyle(
-                      fontSize: FontSize.heading,
-                      fontWeight: FontWeight.bold,
-                      height: 1,
-                    ),
+                    style: const TextStyle(fontSize: FontSize.heading, fontWeight: FontWeight.bold, height: 1),
                   ),
-                  const SizedBox(
-                    height: SpaceSize.line,
-                  ),
+                  const SizedBox(height: SpaceSize.line),
                   Row(
                     children: <Widget>[
                       FutureBuilder<SchoolModel>(
                         future: ref.read(schoolsLocalRepositoryProvider).getById(user.schoolId),
-                        builder: (
-                          BuildContext context,
-                          AsyncSnapshot<SchoolModel> snapshot,
-                        ) {
+                        builder: (BuildContext context, AsyncSnapshot<SchoolModel> snapshot) {
                           if (snapshot.hasData) {
                             return Text(
                               snapshot.data!.name,
-                              style: TextStyle(
-                                fontSize: FontSize.body,
-                                color: AppColor.text.gray,
-                                height: 1,
-                              ),
+                              style: TextStyle(fontSize: FontSize.body, color: AppColor.text.gray, height: 1),
                             );
                           }
 
                           return Text(
                             '学校情報を取得中...',
-                            style: TextStyle(
-                              fontSize: FontSize.body,
-                              color: AppColor.text.gray,
-                              height: 1,
-                            ),
+                            style: TextStyle(fontSize: FontSize.body, color: AppColor.text.gray, height: 1),
                           );
                         },
                       ),
-                      const SizedBox(
-                        width: SpaceSize.line,
-                      ),
+                      const SizedBox(width: SpaceSize.line),
                       Text(
                         '${user.schoolYear}年',
-                        style: TextStyle(
-                          fontSize: FontSize.body,
-                          color: AppColor.text.gray,
-                          height: 1,
-                        ),
+                        style: TextStyle(fontSize: FontSize.body, color: AppColor.text.gray, height: 1),
                       ),
                     ],
                   ),
@@ -192,11 +145,7 @@ class UserSettingsCard extends ConsumerWidget {
                           builder: (_) => UserDeleteDialog(id: user.id),
                         );
                       },
-                icon: Icon(
-                  isCurrentUser ? Icons.edit : Icons.delete,
-                  color: AppColor.brand.secondary,
-                  size: IconSize.help,
-                ),
+                icon: Icon(isCurrentUser ? Icons.edit : Icons.delete, color: AppColor.brand.secondary, size: IconSize.help),
               ),
             ],
           ),

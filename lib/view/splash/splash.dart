@@ -26,12 +26,11 @@ class Splash extends ConsumerWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image.asset(
-              'assets/images/splash.png',
-              width: screenWidth / 6.0,
-            ),
+            Image.asset('assets/images/splash.png', width: screenWidth / 6.0),
             StatefulWrapper(
-              onInit: () => ref.read(splashViewModelProvider.notifier).initialize(
+              onInit: () => ref
+                  .read(splashViewModelProvider.notifier)
+                  .initialize(
                     termsUpdated: () async => showDialog(
                       context: context,
                       barrierDismissible: false,
@@ -49,16 +48,12 @@ class Splash extends ConsumerWidget {
                       builder: (BuildContext context) {
                         if (error is ConnectionException) {
                           return ConnectionExceptionDialog(
-                            onTapRetry: () => routemaster.pop().whenComplete(
-                                  () => ref.read(appUniqueKeyProvider.notifier).restartApp(),
-                                ),
+                            onTapRetry: () => routemaster.pop().whenComplete(() => ref.read(appUniqueKeyProvider.notifier).restartApp()),
                           );
                         }
 
                         return LocalDatabaseExceptionDialog(
-                          onTapRetry: () => routemaster.pop().whenComplete(
-                                () => ref.read(appUniqueKeyProvider.notifier).restartApp(),
-                              ),
+                          onTapRetry: () => routemaster.pop().whenComplete(() => ref.read(appUniqueKeyProvider.notifier).restartApp()),
                         );
                       },
                     ),

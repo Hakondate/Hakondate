@@ -54,27 +54,25 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
       salt: Value<double>(double.parse(item['salt'].toString())),
       note: Value<String?>(item['note'] as String?),
     );
-    final DictionaryItemsSchema? conflictSchema = await (_db.select(_db.dictionaryItemsTable)
-          ..where(
-            ($DictionaryItemsTableTable t) => t.group.equals(companion.group.value) & t.name.equals(companion.name.value),
-          ))
-        .getSingleOrNull();
+    final DictionaryItemsSchema? conflictSchema =
+        await (_db.select(_db.dictionaryItemsTable)
+              ..where(($DictionaryItemsTableTable t) => t.group.equals(companion.group.value) & t.name.equals(companion.name.value)))
+            .getSingleOrNull();
 
     if (conflictSchema == null) {
       return _db.into(_db.dictionaryItemsTable).insert(companion);
     } else {
       return (_db.update(_db.dictionaryItemsTable)
-            ..where(
-              ($DictionaryItemsTableTable t) => t.group.equals(companion.group.value) & t.name.equals(companion.name.value),
-            ))
+            ..where(($DictionaryItemsTableTable t) => t.group.equals(companion.group.value) & t.name.equals(companion.name.value)))
           .write(companion);
     }
   }
 
   @override
   Future<DictionaryItemModel> getById(int id) async {
-    final DictionaryItemsSchema schema =
-        await (_db.select(_db.dictionaryItemsTable)..where(($DictionaryItemsTableTable t) => t.id.equals(id))).getSingle();
+    final DictionaryItemsSchema schema = await (_db.select(
+      _db.dictionaryItemsTable,
+    )..where(($DictionaryItemsTableTable t) => t.id.equals(id))).getSingle();
 
     return DictionaryItemModel.fromDrift(schema);
   }
@@ -82,8 +80,9 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
   @override
   Future<List<DictionaryItemModel>> listGroup(int group) async {
     final List<DictionaryItemModel> items = <DictionaryItemModel>[];
-    final List<DictionaryItemsSchema> schemas =
-        await (_db.select(_db.dictionaryItemsTable)..where(($DictionaryItemsTableTable t) => t.group.equals(group))).get();
+    final List<DictionaryItemsSchema> schemas = await (_db.select(
+      _db.dictionaryItemsTable,
+    )..where(($DictionaryItemsTableTable t) => t.group.equals(group))).get();
 
     for (final DictionaryItemsSchema schema in schemas) {
       items.add(DictionaryItemModel.fromDrift(schema));
@@ -167,14 +166,12 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
   }
 
   @override
-  Future<List<DictionaryItemModel>> getRadarChartValues({
-    required String nutrient,
-    int limit = 5,
-  }) async {
+  Future<List<DictionaryItemModel>> getRadarChartValues({required String nutrient, int limit = 5}) async {
     final List<DictionaryItemModel> items = <DictionaryItemModel>[];
-    final List<DictionaryItemsSchema> schemas = await (_db.select(_db.dictionaryItemsTable)
-          ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
-            ($DictionaryItemsTableTable t) => OrderingTerm(
+    final List<DictionaryItemsSchema> schemas =
+        await (_db.select(_db.dictionaryItemsTable)
+              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
+                ($DictionaryItemsTableTable t) => OrderingTerm(
                   expression: switch (nutrient) {
                     'energy' => t.energy,
                     'protein' => t.protein,
@@ -197,9 +194,9 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
                   },
                   mode: OrderingMode.desc,
                 ),
-          ])
-          ..limit(limit))
-        .get();
+              ])
+              ..limit(limit))
+            .get();
 
     for (final DictionaryItemsSchema schema in schemas) {
       items.add(DictionaryItemModel.fromDrift(schema));
@@ -208,20 +205,17 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
   }
 
   @override
-  Future<List<DictionaryItemModel>> getRanking({
-    required String nutrient,
-    int limit = 5,
-    int top = 100,
-  }) async {
+  Future<List<DictionaryItemModel>> getRanking({required String nutrient, int limit = 5, int top = 100}) async {
     final List<DictionaryItemModel> items = <DictionaryItemModel>[];
     final List<DictionaryItemsSchema> schemas = <DictionaryItemsSchema>[];
     List<DictionaryItemsSchema> top100Items = <DictionaryItemsSchema>[];
     final Random random = Random();
 
-    top100Items = await (_db.select(_db.dictionaryItemsTable)
-          ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
-          ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
-            ($DictionaryItemsTableTable t) => OrderingTerm(
+    top100Items =
+        await (_db.select(_db.dictionaryItemsTable)
+              ..where(($DictionaryItemsTableTable tbl) => tbl.group.isNotIn(<int>[3, 14, 15, 16, 17, 18]))
+              ..orderBy(<OrderingTerm Function($DictionaryItemsTableTable)>[
+                ($DictionaryItemsTableTable t) => OrderingTerm(
                   expression: switch (nutrient) {
                     'energy' => t.energy,
                     'protein' => t.protein,
@@ -244,9 +238,9 @@ class DictionaryItemsLocalRepository extends DictionaryItemsLocalRepositoryAPI {
                   },
                   mode: OrderingMode.desc,
                 ),
-          ])
-          ..limit(top))
-        .get();
+              ])
+              ..limit(top))
+            .get();
 
     for (int i = 0; i < limit; i++) {
       if (top100Items.isEmpty) break;

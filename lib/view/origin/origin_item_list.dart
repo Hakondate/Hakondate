@@ -14,7 +14,9 @@ class OriginItemList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(originViewModelProvider).maybeWhen(
+    return ref
+        .watch(originViewModelProvider)
+        .maybeWhen(
           data: (OriginState data) {
             if (data.origins.isEmpty) {
               return const SizedBox.shrink();
@@ -34,27 +36,16 @@ class OriginItemList extends ConsumerWidget {
                         ...category.items.map(
                           (OriginItemModel item) => Card(
                             child: ClipPath(
-                              clipper: ShapeBorderClipper(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(4),
-                                ),
-                              ),
+                              clipper: ShapeBorderClipper(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4))),
                               child: Container(
                                 padding: const EdgeInsets.all(PaddingSize.minimum),
                                 decoration: BoxDecoration(
-                                  border: Border(
-                                    left: BorderSide(color: AppColor.brand.secondaryLight, width: 5),
-                                  ),
+                                  border: Border(left: BorderSide(color: AppColor.brand.secondaryLight, width: 5)),
                                 ),
                                 child: Row(
                                   children: <Widget>[
                                     Expanded(
-                                      child: Text(
-                                        item.name,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
+                                      child: Text(item.name, style: const TextStyle(fontWeight: FontWeight.bold)),
                                     ),
                                     Expanded(child: Text(item.prefectures.join('，'))),
                                   ],

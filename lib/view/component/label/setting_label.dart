@@ -39,13 +39,7 @@ class SettingLabel extends StatelessWidget {
                     completed(selected);
                     routemaster.pop(context);
                   },
-                  child: Text(
-                    '完了',
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: AppColor.text.link,
-                    ),
-                  ),
+                  child: Text('完了', style: TextStyle(fontSize: 20, color: AppColor.text.link)),
                 ),
               ],
             ),
@@ -67,20 +61,11 @@ class SettingLabel extends StatelessWidget {
     return Material(
       color: AppColor.brand.primary,
       child: ListTile(
-        contentPadding: const EdgeInsets.only(
-          left: PaddingSize.content,
-          right: PaddingSize.content,
-        ),
-        title: Text(
-          title,
-          style: const TextStyle(fontSize: FontSize.label),
-        ),
+        contentPadding: const EdgeInsets.only(left: PaddingSize.content, right: PaddingSize.content),
+        title: Text(title, style: const TextStyle(fontSize: FontSize.label)),
         trailing: Text(
           trailing,
-          style: TextStyle(
-            color: AppColor.text.blackMid,
-            fontSize: FontSize.label,
-          ),
+          style: TextStyle(color: AppColor.text.blackMid, fontSize: FontSize.label),
         ),
         onTap: () {
           if (disabled) return;

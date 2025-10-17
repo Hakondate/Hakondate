@@ -103,9 +103,7 @@ class ReviewPopup extends StatelessWidget {
                 debugPrint('Context is not mounted, cannot pop the ReviewPopup');
               }
               if (await canLaunchUrl(Uri.parse(AppUrl.reviewFormUrl))) {
-                await launchUrl(
-                  Uri.parse(AppUrl.reviewFormUrl),
-                );
+                await launchUrl(Uri.parse(AppUrl.reviewFormUrl));
               }
             },
           ),

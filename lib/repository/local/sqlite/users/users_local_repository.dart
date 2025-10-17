@@ -50,7 +50,9 @@ class UsersLocalRepository extends UsersLocalRepositoryAPI {
   }
 
   @override
-  Future<int> add(String name, int schoolId, int schoolYear, DateTime? authorizedAt) => _db.into(_db.usersTable).insertOnConflictUpdate(
+  Future<int> add(String name, int schoolId, int schoolYear, DateTime? authorizedAt) => _db
+      .into(_db.usersTable)
+      .insertOnConflictUpdate(
         UsersTableCompanion(
           name: Value<String>(name),
           schoolId: Value<int>(schoolId),
@@ -63,11 +65,7 @@ class UsersLocalRepository extends UsersLocalRepositoryAPI {
   Future<int> update(UserModel user) async {
     final UsersTableCompanion companion = user.toDrift();
 
-    return (_db.update(_db.usersTable)
-          ..where(
-            ($UsersTableTable t) => t.id.equals(companion.id.value),
-          ))
-        .write(companion);
+    return (_db.update(_db.usersTable)..where(($UsersTableTable t) => t.id.equals(companion.id.value))).write(companion);
   }
 
   @override

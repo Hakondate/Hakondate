@@ -14,9 +14,7 @@ class DrawerViewModel extends _$DrawerViewModel {
       state.scaffoldKey.currentState?.dispose();
     });
 
-    return DrawerState(
-      scaffoldKey: GlobalKey<ScaffoldState>(),
-    );
+    return DrawerState(scaffoldKey: GlobalKey<ScaffoldState>());
   }
 
   void openDrawer() => state.scaffoldKey.currentState!.openDrawer();

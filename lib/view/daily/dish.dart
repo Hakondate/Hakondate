@@ -27,9 +27,7 @@ class Dish extends ConsumerWidget {
         }
 
         return Scaffold(
-          appBar: AppBar(
-            title: Text(dish.name),
-          ),
+          appBar: AppBar(title: Text(dish.name)),
           body: SingleChildScrollView(
             child: Column(
               children: <Widget>[
@@ -61,10 +59,7 @@ class Dish extends ConsumerWidget {
                   child: Column(
                     children: <Widget>[
                       Image.asset('assets/images/label/nutrientsLabel.png'),
-                      NutrientsList(
-                        nutrients: dish,
-                        backgroundColor: AppColor.ui.secondaryUltraLight,
-                      ),
+                      NutrientsList(nutrients: dish, backgroundColor: AppColor.ui.secondaryUltraLight),
                     ],
                   ),
                 ),

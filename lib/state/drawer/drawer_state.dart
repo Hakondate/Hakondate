@@ -7,7 +7,5 @@ part 'drawer_state.freezed.dart';
 
 @freezed
 abstract class DrawerState with _$DrawerState {
-  const factory DrawerState({
-    required GlobalKey<ScaffoldState> scaffoldKey,
-  }) = _DrawerState;
+  const factory DrawerState({required GlobalKey<ScaffoldState> scaffoldKey}) = _DrawerState;
 }

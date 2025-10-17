@@ -22,25 +22,16 @@ class LetterPDF extends ConsumerWidget {
 
     if (letter == null) {
       return Scaffold(
-        appBar: const FadeUpAppBar(
-          title: Text('読み込みエラー'),
-        ),
+        appBar: const FadeUpAppBar(title: Text('読み込みエラー')),
         body: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Image.asset(
-                'assets/images/status/error.png',
-                width: MediaQuery.of(context).size.width / 2,
-              ),
+              Image.asset('assets/images/status/error.png', width: MediaQuery.of(context).size.width / 2),
               const SizedBox(height: MarginSize.normal),
               Text(
                 '読み込みに失敗しました',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: AppColor.text.primary,
-                ),
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppColor.text.primary),
               ),
             ],
           ),
@@ -49,18 +40,12 @@ class LetterPDF extends ConsumerWidget {
     }
 
     return Scaffold(
-      appBar: FadeUpAppBar(
-        title: Text(letter.title),
-      ),
+      appBar: FadeUpAppBar(title: Text(letter.title)),
       body: FutureBuilder<Uint8List>(
         future: ref.read(letterViewModelProvider.notifier).getLetterPDF(path: letter.path),
         builder: (BuildContext context, AsyncSnapshot<Uint8List> snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
-            return Center(
-              child: CircularProgressIndicator(
-                color: AppColor.brand.secondary,
-              ),
-            );
+            return Center(child: CircularProgressIndicator(color: AppColor.brand.secondary));
           }
 
           if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
@@ -70,9 +55,8 @@ class LetterPDF extends ConsumerWidget {
               onError: (_) async => showDialog(
                 context: context,
                 builder: (BuildContext context) => DownloadExceptionDialog(
-                  onTapRetry: () => routemaster.pop().whenComplete(
-                        () => ref.read(letterViewModelProvider.notifier).getLetterPDF(path: letter.path),
-                      ),
+                  onTapRetry: () =>
+                      routemaster.pop().whenComplete(() => ref.read(letterViewModelProvider.notifier).getLetterPDF(path: letter.path)),
                   onTapPop: () => routemaster.pop().whenComplete(routemaster.pop),
                 ),
               ),
@@ -83,18 +67,11 @@ class LetterPDF extends ConsumerWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                Image.asset(
-                  'assets/images/status/error.png',
-                  width: MediaQuery.of(context).size.width / 2,
-                ),
+                Image.asset('assets/images/status/error.png', width: MediaQuery.of(context).size.width / 2),
                 const SizedBox(height: MarginSize.normal),
                 Text(
                   '読み込みに失敗しました',
-                  style: TextStyle(
-                    fontSize: FontSize.status,
-                    fontWeight: FontWeight.bold,
-                    color: AppColor.text.primary,
-                  ),
+                  style: TextStyle(fontSize: FontSize.status, fontWeight: FontWeight.bold, color: AppColor.text.primary),
                 ),
               ],
             ),

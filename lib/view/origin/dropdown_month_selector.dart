@@ -14,34 +14,27 @@ class DropdownMonthSelector extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(originViewModelProvider).maybeWhen(
+    return ref
+        .watch(originViewModelProvider)
+        .maybeWhen(
           data: (OriginState data) {
             if (data.origins.isEmpty) {
-              return DescriptionText.body(
-                label: '月毎の産地情報はありません',
-              );
+              return DescriptionText.body(label: '月毎の産地情報はありません');
             }
 
             return DropdownMenu<OriginModel>(
               menuHeight: MediaQuery.of(context).size.height * 0.4,
               initialSelection: data.selectedOrigin,
-              menuStyle: MenuStyle(
-                surfaceTintColor: WidgetStatePropertyAll<Color>(AppColor.ui.white),
-              ),
+              menuStyle: MenuStyle(surfaceTintColor: WidgetStatePropertyAll<Color>(AppColor.ui.white)),
               onSelected: (OriginModel? value) => ref.read(originViewModelProvider.notifier).updateSelectedOrigin(origin: value!),
               dropdownMenuEntries: data.origins
                   .map(
-                    (OriginModel origin) => DropdownMenuEntry<OriginModel>(
-                      value: origin,
-                      label: DateFormat('yyyy年M月').format(origin.date),
-                    ),
+                    (OriginModel origin) => DropdownMenuEntry<OriginModel>(value: origin, label: DateFormat('yyyy年M月').format(origin.date)),
                   )
                   .toList(),
             );
           },
-          orElse: () => DescriptionText.body(
-            label: '月毎の産地情報はありません',
-          ),
+          orElse: () => DescriptionText.body(label: '月毎の産地情報はありません'),
         );
   }
 }

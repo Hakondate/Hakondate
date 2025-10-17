@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hakondate/router/routes.dart';
 
 class FadeUpAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const FadeUpAppBar({
-    super.key,
-    this.title,
-  });
+  const FadeUpAppBar({super.key, this.title});
 
   final Widget? title;
 

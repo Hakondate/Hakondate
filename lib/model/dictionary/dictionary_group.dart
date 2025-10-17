@@ -20,11 +20,7 @@ enum DictionaryGroup {
   seasoningsAndSpices(groupNumber: 17, label: '調味料香辛料類', color: Color(0xFFE590A3)),
   cookedAndProcessed(groupNumber: 18, label: '調理加工食品類', color: Color(0xFF7CBFDF));
 
-  const DictionaryGroup({
-    required this.groupNumber,
-    required this.label,
-    required this.color,
-  });
+  const DictionaryGroup({required this.groupNumber, required this.label, required this.color});
   final int groupNumber;
   final String label;
   final Color color;

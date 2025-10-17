@@ -1,10 +1,6 @@
 import 'package:hakondate/util/exception/parameters_exception.dart';
 
-enum Flavor {
-  dev,
-  stg,
-  prod;
-}
+enum Flavor { dev, stg, prod }
 
 class Environment {
   static Flavor get flavor {

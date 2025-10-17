@@ -7,9 +7,6 @@ part 'calendar_state.freezed.dart';
 
 @freezed
 abstract class CalendarState with _$CalendarState {
-  const factory CalendarState({
-    required DateTime oldestDay,
-    required DateTime latestDay,
-    required ScrollController scrollController,
-  }) = _CalendarState;
+  const factory CalendarState({required DateTime oldestDay, required DateTime latestDay, required ScrollController scrollController}) =
+      _CalendarState;
 }

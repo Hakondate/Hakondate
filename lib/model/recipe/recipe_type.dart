@@ -1,6 +1,1 @@
-enum RecipeType {
-  dupe,
-  original,
-  steamConvectionOven,
-  other;
-}
+enum RecipeType { dupe, original, steamConvectionOven, other }

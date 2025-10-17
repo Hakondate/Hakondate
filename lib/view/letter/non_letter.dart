@@ -18,18 +18,11 @@ class NonLetter extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Image.asset(
-            'assets/images/status/non_letter.png',
-            width: screenWidth / 2,
-          ),
+          Image.asset('assets/images/status/non_letter.png', width: screenWidth / 2),
           const SizedBox(height: MarginSize.normal),
           Text(
             'お便りが見つかりません...',
-            style: TextStyle(
-              fontSize: FontSize.status,
-              fontWeight: FontWeight.bold,
-              color: AppColor.text.primary,
-            ),
+            style: TextStyle(fontSize: FontSize.status, fontWeight: FontWeight.bold, color: AppColor.text.primary),
           ),
           const SizedBox(height: MarginSize.minimum),
           Consumer(
@@ -38,10 +31,7 @@ class NonLetter extends StatelessWidget {
                 onTap: () => ref.read(letterViewModelProvider.notifier).reloadLetters(),
                 child: Text(
                   '更新する',
-                  style: TextStyle(
-                    fontSize: FontSize.body,
-                    color: AppColor.text.link,
-                  ),
+                  style: TextStyle(fontSize: FontSize.body, color: AppColor.text.link),
                 ),
               );
             },

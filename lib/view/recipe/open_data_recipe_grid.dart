@@ -9,10 +9,7 @@ import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/view/component/tile/grid_frame.dart';
 
 class OpenDataRecipeGrid extends StatelessWidget {
-  const OpenDataRecipeGrid({
-    required this.type,
-    super.key,
-  });
+  const OpenDataRecipeGrid({required this.type, super.key});
 
   final RecipeType type;
 
@@ -43,11 +40,7 @@ class OpenDataRecipeGrid extends StatelessWidget {
             child: Text(
               recipe.name,
               textAlign: TextAlign.center,
-              style: TextStyle(
-                color: AppColor.text.white,
-                fontWeight: FontWeight.bold,
-                height: 1.1,
-              ),
+              style: TextStyle(color: AppColor.text.white, fontWeight: FontWeight.bold, height: 1.1),
             ),
           ),
           Expanded(
@@ -58,11 +51,7 @@ class OpenDataRecipeGrid extends StatelessWidget {
                     fit: BoxFit.cover,
                     loadingBuilder: (_, Widget child, ImageChunkEvent? loadingProgress) {
                       if (loadingProgress == null) return child;
-                      return Center(
-                        child: CircularProgressIndicator(
-                          color: AppColor.brand.secondary,
-                        ),
-                      );
+                      return Center(child: CircularProgressIndicator(color: AppColor.brand.secondary));
                     },
                     errorBuilder: (_, __, ___) => _noImage(),
                   )
@@ -77,11 +66,7 @@ class OpenDataRecipeGrid extends StatelessWidget {
     return Container(
       width: double.infinity,
       color: AppColor.ui.unsupported,
-      child: Icon(
-        Icons.image_not_supported_outlined,
-        size: IconSize.noImage,
-        color: AppColor.ui.white,
-      ),
+      child: Icon(Icons.image_not_supported_outlined, size: IconSize.noImage, color: AppColor.ui.white),
     );
   }
 }

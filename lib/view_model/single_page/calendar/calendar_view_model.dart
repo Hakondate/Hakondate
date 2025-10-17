@@ -54,12 +54,7 @@ class CalendarViewModel extends _$CalendarViewModel {
 
       if (dailyStateCache is! AsyncData) throw StateError('DailyState is not AsyncData');
 
-      state = state.copyWith(
-        oldestDay: DateTime(
-          dailyStateCache.value!.selectedDay.year,
-          dailyStateCache.value!.selectedDay.month - 1,
-        ),
-      );
+      state = state.copyWith(oldestDay: DateTime(dailyStateCache.value!.selectedDay.year, dailyStateCache.value!.selectedDay.month - 1));
       state.scrollController.jumpTo(_getInitialScrollPosition(appHeight));
     });
   }
@@ -72,9 +67,7 @@ class CalendarViewModel extends _$CalendarViewModel {
     final DateTime limitMonth = dailyStateCache.value!.calendarTabFirstDay.add(const Duration(days: 1));
 
     if (state.oldestDay.isAfter(limitMonth)) {
-      state = state.copyWith(
-        oldestDay: DateTime(state.oldestDay.year, state.oldestDay.month - 1),
-      );
+      state = state.copyWith(oldestDay: DateTime(state.oldestDay.year, state.oldestDay.month - 1));
     }
   }
 

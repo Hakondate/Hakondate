@@ -52,11 +52,7 @@ class UserViewModel extends _$UserViewModel {
 
       if (school == null) return;
 
-      await createUser(
-        name: name,
-        schoolId: school.id,
-        schoolYear: schoolYear - 6,
-      );
+      await createUser(name: name, schoolId: school.id, schoolYear: schoolYear - 6);
 
       await v1UserFile.delete(recursive: true);
     } on Exception catch (_) {
@@ -71,9 +67,7 @@ class UserViewModel extends _$UserViewModel {
     final int? currentUserId = prefs.getInt(AppKey.sharedPreferencesKey.currentUserId);
 
     if (currentUserId == null) {
-      throw SharedPreferencesException(
-        'Failed to get ${AppKey.sharedPreferencesKey.currentUserId} value',
-      );
+      throw SharedPreferencesException('Failed to get ${AppKey.sharedPreferencesKey.currentUserId} value');
     }
 
     await changeCurrentUser(currentUserId, isSetPrefs: false);
@@ -90,16 +84,10 @@ class UserViewModel extends _$UserViewModel {
       await prefs.setInt(AppKey.sharedPreferencesKey.currentUserId, id);
     }
 
-    state = state.copyWith(
-      currentUser: user.copyWith(slns: slns),
-    );
+    state = state.copyWith(currentUser: user.copyWith(slns: slns));
   }
 
-  Future<void> updateCurrentUser({
-    String? name,
-    int? schoolId,
-    int? schoolYear,
-  }) async {
+  Future<void> updateCurrentUser({String? name, int? schoolId, int? schoolYear}) async {
     if (state.currentUser == null) return;
     final NutrientsModel? slns = (schoolId != null || schoolYear != null) ? await _getSLNS(state.currentUser!.id) : state.currentUser!.slns;
 
@@ -145,11 +133,7 @@ class UserViewModel extends _$UserViewModel {
     return SchoolGrade.junior;
   }
 
-  Future<int> createUser({
-    required String name,
-    required int schoolId,
-    required int schoolYear,
-  }) async {
+  Future<int> createUser({required String name, required int schoolId, required int schoolYear}) async {
     final int id = await _usersLocalRepository.add(name, schoolId, schoolYear, DateTime.now());
     await changeCurrentUser(id);
     await ref.read(analyticsControllerProvider.notifier).logSignup();
@@ -176,9 +160,7 @@ class UserViewModel extends _$UserViewModel {
 
     await _usersLocalRepository.update(user.copyWith(authorizedAt: now));
 
-    state = state.copyWith(
-      currentUser: user.copyWith(authorizedAt: now),
-    );
+    state = state.copyWith(currentUser: user.copyWith(authorizedAt: now));
   }
 
   Future<DateTime?> _getSchoolAuthorizedAt(int schoolId) async {
@@ -187,11 +169,7 @@ class UserViewModel extends _$UserViewModel {
       final List<UserModel> users = await ref.read(usersLocalRepositoryProvider).list();
       final List<UserModel> usersWithaoutCurrent = users.where((UserModel user) => user.id != state.currentUser!.id).toList();
 
-      return usersWithaoutCurrent
-          .firstWhereOrNull(
-            (UserModel user) => user.schoolId == schoolId,
-          )
-          ?.authorizedAt;
+      return usersWithaoutCurrent.firstWhereOrNull((UserModel user) => user.schoolId == schoolId)?.authorizedAt;
     }
     return null;
   }
