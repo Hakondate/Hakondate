@@ -1,7 +1,7 @@
 import 'package:hakondate/model/nutrients/nutrients_model.dart';
 
 /// レーダーチャート用の6軸（エネルギー/たんぱく質/ビタミン/ミネラル/炭水化物/脂質）
-/// をSLNS比で正規化（%）して返す。capで上限を設定可能（既定120）。
+/// をSLNS比で正規化（%）して返す。maxValueで上限を設定可能（既定120）。
 List<double> computeSixAxisPercentFromSlns({
   required double energy,
   required double protein,
@@ -16,7 +16,7 @@ List<double> computeSixAxisPercentFromSlns({
   required double carbohydrate,
   required double lipid,
   required NutrientsModel slns,
-  double cap = 120,
+  double maxValue = 120,
 }) {
   final double vitaminSufficiency =
       (retinol / slns.retinol + vitaminB1 / slns.vitaminB1 + vitaminB2 / slns.vitaminB2 + vitaminC / slns.vitaminC) / 4 * 100.0;
@@ -32,7 +32,7 @@ List<double> computeSixAxisPercentFromSlns({
     lipid / slns.lipid * 100.0,
   ];
 
-  return values.map((double v) => v > cap ? cap : v).toList();
+  return values.map((double v) => v > maxValue ? maxValue : v).toList();
 }
 
 /// レーダーチャート用の実数ラベル6軸を返す。
@@ -44,4 +44,3 @@ List<double> sixAxisRaw({
   required double carbohydrate,
   required double lipid,
 }) => <double>[energy, protein, vitamin, mineral, carbohydrate, lipid];
-
