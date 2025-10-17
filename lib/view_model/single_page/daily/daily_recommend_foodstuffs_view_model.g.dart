@@ -11,18 +11,18 @@ String _$recommendFoodstuffsHash() =>
 
 /// See also [recommendFoodstuffs].
 @ProviderFor(recommendFoodstuffs)
-final recommendFoodstuffsProvider = AutoDisposeFutureProvider<
-  Map<FiveMajorNutrient, List<DictionaryItemModel>>
->.internal(
-  recommendFoodstuffs,
-  name: r'recommendFoodstuffsProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
+final recommendFoodstuffsProvider =
+    AutoDisposeFutureProvider<
+      Map<FiveMajorNutrient, List<DictionaryItemModel>>
+    >.internal(
+      recommendFoodstuffs,
+      name: r'recommendFoodstuffsProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
           ? null
           : _$recommendFoodstuffsHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element

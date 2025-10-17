@@ -14,10 +14,9 @@ final originViewModelProvider =
     AutoDisposeAsyncNotifierProvider<OriginViewModel, OriginState>.internal(
       OriginViewModel.new,
       name: r'originViewModelProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$originViewModelHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$originViewModelHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

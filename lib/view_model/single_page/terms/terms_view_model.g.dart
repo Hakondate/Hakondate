@@ -14,10 +14,9 @@ final termsViewModelProvider =
     AutoDisposeNotifierProvider<TermsViewModel, TermsState>.internal(
       TermsViewModel.new,
       name: r'termsViewModelProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$termsViewModelHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$termsViewModelHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

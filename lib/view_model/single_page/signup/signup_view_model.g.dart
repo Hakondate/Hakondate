@@ -14,10 +14,9 @@ final signupViewModelProvider =
     AutoDisposeAsyncNotifierProvider<SignupViewModel, SignupState>.internal(
       SignupViewModel.new,
       name: r'signupViewModelProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$signupViewModelHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$signupViewModelHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

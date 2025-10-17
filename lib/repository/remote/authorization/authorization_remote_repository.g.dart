@@ -15,10 +15,9 @@ final authorizationRemoteRepositoryProvider =
     Provider<AuthorizationRemoteRepository>.internal(
       authorizationRemoteRepository,
       name: r'authorizationRemoteRepositoryProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$authorizationRemoteRepositoryHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$authorizationRemoteRepositoryHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

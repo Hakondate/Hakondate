@@ -15,10 +15,9 @@ final openDataRecipesLocalRepositoryProvider =
     Provider<OpenDataRecipesLocalRepository>.internal(
       openDataRecipesLocalRepository,
       name: r'openDataRecipesLocalRepositoryProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$openDataRecipesLocalRepositoryHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$openDataRecipesLocalRepositoryHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

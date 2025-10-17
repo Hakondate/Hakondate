@@ -15,10 +15,9 @@ final schoolsLocalRepositoryProvider =
     Provider<SchoolsLocalRepository>.internal(
       schoolsLocalRepository,
       name: r'schoolsLocalRepositoryProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$schoolsLocalRepositoryHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$schoolsLocalRepositoryHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

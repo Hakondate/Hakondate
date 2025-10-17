@@ -14,10 +14,9 @@ final letterViewModelProvider =
     NotifierProvider<LetterViewModel, LetterState>.internal(
       LetterViewModel.new,
       name: r'letterViewModelProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$letterViewModelHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$letterViewModelHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

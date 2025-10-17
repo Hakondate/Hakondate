@@ -11,19 +11,19 @@ String _$authorizationViewModelHash() =>
 
 /// See also [AuthorizationViewModel].
 @ProviderFor(AuthorizationViewModel)
-final authorizationViewModelProvider = AutoDisposeAsyncNotifierProvider<
-  AuthorizationViewModel,
-  AuthorizationState
->.internal(
-  AuthorizationViewModel.new,
-  name: r'authorizationViewModelProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
+final authorizationViewModelProvider =
+    AutoDisposeAsyncNotifierProvider<
+      AuthorizationViewModel,
+      AuthorizationState
+    >.internal(
+      AuthorizationViewModel.new,
+      name: r'authorizationViewModelProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
           ? null
           : _$authorizationViewModelHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$AuthorizationViewModel = AutoDisposeAsyncNotifier<AuthorizationState>;
 // ignore_for_file: type=lint

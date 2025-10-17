@@ -15,10 +15,9 @@ final schoolsRemoteRepositoryProvider =
     AutoDisposeProvider<SchoolsRemoteRepository>.internal(
       schoolsRemoteRepository,
       name: r'schoolsRemoteRepositoryProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$schoolsRemoteRepositoryHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$schoolsRemoteRepositoryHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

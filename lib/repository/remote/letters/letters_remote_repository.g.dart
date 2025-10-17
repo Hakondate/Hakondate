@@ -15,10 +15,9 @@ final lettersRemoteRepositoryProvider =
     Provider<LettersRemoteRepository>.internal(
       lettersRemoteRepository,
       name: r'lettersRemoteRepositoryProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$lettersRemoteRepositoryHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$lettersRemoteRepositoryHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

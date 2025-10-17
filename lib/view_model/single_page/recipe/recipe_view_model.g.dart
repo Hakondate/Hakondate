@@ -14,10 +14,9 @@ final recipeViewModelProvider =
     NotifierProvider<RecipeViewModel, void>.internal(
       RecipeViewModel.new,
       name: r'recipeViewModelProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$recipeViewModelHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$recipeViewModelHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

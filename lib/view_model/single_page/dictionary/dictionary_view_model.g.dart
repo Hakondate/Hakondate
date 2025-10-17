@@ -15,10 +15,9 @@ final dictionaryViewModelProvider =
     AsyncNotifierProvider<DictionaryViewModel, DictionaryState>.internal(
       DictionaryViewModel.new,
       name: r'dictionaryViewModelProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$dictionaryViewModelHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$dictionaryViewModelHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

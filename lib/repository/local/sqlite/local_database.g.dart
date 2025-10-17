@@ -211,46 +211,38 @@ class $SchoolsTableTable extends SchoolsTable
   SchoolsSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return SchoolsSchema(
-      id:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}id'],
-          )!,
-      parentId:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}parent_id'],
-          )!,
-      name:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}name'],
-          )!,
-      lunchBlock:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}lunch_block'],
-          )!,
-      classification:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}classification'],
-          )!,
-      createAt:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.dateTime,
-            data['${effectivePrefix}create_at'],
-          )!,
-      updateAt:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.dateTime,
-            data['${effectivePrefix}update_at'],
-          )!,
-      authorizationRequired:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.bool,
-            data['${effectivePrefix}authorization_required'],
-          )!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      parentId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}parent_id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      lunchBlock: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}lunch_block'],
+      )!,
+      classification: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}classification'],
+      )!,
+      createAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}create_at'],
+      )!,
+      updateAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}update_at'],
+      )!,
+      authorizationRequired: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}authorization_required'],
+      )!,
       authorizationKeyUpdatedAt: attachedDatabase.typeMapping.read(
         DriftSqlType.dateTime,
         data['${effectivePrefix}authorization_key_updated_at'],
@@ -316,8 +308,8 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       authorizationRequired: Value(authorizationRequired),
       authorizationKeyUpdatedAt:
           authorizationKeyUpdatedAt == null && nullToAbsent
-              ? const Value.absent()
-              : Value(authorizationKeyUpdatedAt),
+          ? const Value.absent()
+          : Value(authorizationKeyUpdatedAt),
     );
   }
 
@@ -379,32 +371,29 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
     createAt: createAt ?? this.createAt,
     updateAt: updateAt ?? this.updateAt,
     authorizationRequired: authorizationRequired ?? this.authorizationRequired,
-    authorizationKeyUpdatedAt:
-        authorizationKeyUpdatedAt.present
-            ? authorizationKeyUpdatedAt.value
-            : this.authorizationKeyUpdatedAt,
+    authorizationKeyUpdatedAt: authorizationKeyUpdatedAt.present
+        ? authorizationKeyUpdatedAt.value
+        : this.authorizationKeyUpdatedAt,
   );
   SchoolsSchema copyWithCompanion(SchoolsTableCompanion data) {
     return SchoolsSchema(
       id: data.id.present ? data.id.value : this.id,
       parentId: data.parentId.present ? data.parentId.value : this.parentId,
       name: data.name.present ? data.name.value : this.name,
-      lunchBlock:
-          data.lunchBlock.present ? data.lunchBlock.value : this.lunchBlock,
-      classification:
-          data.classification.present
-              ? data.classification.value
-              : this.classification,
+      lunchBlock: data.lunchBlock.present
+          ? data.lunchBlock.value
+          : this.lunchBlock,
+      classification: data.classification.present
+          ? data.classification.value
+          : this.classification,
       createAt: data.createAt.present ? data.createAt.value : this.createAt,
       updateAt: data.updateAt.present ? data.updateAt.value : this.updateAt,
-      authorizationRequired:
-          data.authorizationRequired.present
-              ? data.authorizationRequired.value
-              : this.authorizationRequired,
-      authorizationKeyUpdatedAt:
-          data.authorizationKeyUpdatedAt.present
-              ? data.authorizationKeyUpdatedAt.value
-              : this.authorizationKeyUpdatedAt,
+      authorizationRequired: data.authorizationRequired.present
+          ? data.authorizationRequired.value
+          : this.authorizationRequired,
+      authorizationKeyUpdatedAt: data.authorizationKeyUpdatedAt.present
+          ? data.authorizationKeyUpdatedAt.value
+          : this.authorizationKeyUpdatedAt,
     );
   }
 
@@ -730,35 +719,30 @@ class $MenusTableTable extends MenusTable
   MenusSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return MenusSchema(
-      id:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}id'],
-          )!,
-      day:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.dateTime,
-            data['${effectivePrefix}day'],
-          )!,
-      schoolId:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}school_id'],
-          )!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      day: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}day'],
+      )!,
+      schoolId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}school_id'],
+      )!,
       event: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}event'],
       ),
-      createAt:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.dateTime,
-            data['${effectivePrefix}create_at'],
-          )!,
-      updateAt:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.dateTime,
-            data['${effectivePrefix}update_at'],
-          )!,
+      createAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}create_at'],
+      )!,
+      updateAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}update_at'],
+      )!,
     );
   }
 
@@ -802,8 +786,9 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
       id: Value(id),
       day: Value(day),
       schoolId: Value(schoolId),
-      event:
-          event == null && nullToAbsent ? const Value.absent() : Value(event),
+      event: event == null && nullToAbsent
+          ? const Value.absent()
+          : Value(event),
       createAt: Value(createAt),
       updateAt: Value(updateAt),
     );
@@ -1067,16 +1052,14 @@ class $DishesTableTable extends DishesTable
   DishesSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return DishesSchema(
-      id:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}id'],
-          )!,
-      name:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}name'],
-          )!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
       category: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}category'],
@@ -1110,10 +1093,9 @@ class DishesSchema extends DataClass implements Insertable<DishesSchema> {
     return DishesTableCompanion(
       id: Value(id),
       name: Value(name),
-      category:
-          category == null && nullToAbsent
-              ? const Value.absent()
-              : Value(category),
+      category: category == null && nullToAbsent
+          ? const Value.absent()
+          : Value(category),
     );
   }
 
@@ -1313,16 +1295,14 @@ class $MenuDishesTableTable extends MenuDishesTable
   MenuDishesSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return MenuDishesSchema(
-      menuId:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}menu_id'],
-          )!,
-      dishId:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}dish_id'],
-          )!,
+      menuId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}menu_id'],
+      )!,
+      dishId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}dish_id'],
+      )!,
     );
   }
 
@@ -1946,16 +1926,14 @@ class $FoodstuffsTableTable extends FoodstuffsTable
   FoodstuffsSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return FoodstuffsSchema(
-      id:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}id'],
-          )!,
-      name:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}name'],
-          )!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
       pieceNumber: attachedDatabase.typeMapping.read(
         DriftSqlType.double,
         data['${effectivePrefix}piece_number'],
@@ -1964,96 +1942,78 @@ class $FoodstuffsTableTable extends FoodstuffsTable
         DriftSqlType.string,
         data['${effectivePrefix}piece_unit'],
       ),
-      gram:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}gram'],
-          )!,
-      energy:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}energy'],
-          )!,
-      protein:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}protein'],
-          )!,
-      lipid:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}lipid'],
-          )!,
-      sodium:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}sodium'],
-          )!,
-      carbohydrate:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}carbohydrate'],
-          )!,
-      calcium:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}calcium'],
-          )!,
-      magnesium:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}magnesium'],
-          )!,
-      iron:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}iron'],
-          )!,
-      zinc:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}zinc'],
-          )!,
-      retinol:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}retinol'],
-          )!,
-      vitaminB1:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}vitamin_b1'],
-          )!,
-      vitaminB2:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}vitamin_b2'],
-          )!,
-      vitaminC:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}vitamin_c'],
-          )!,
-      dietaryFiber:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}dietary_fiber'],
-          )!,
-      salt:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}salt'],
-          )!,
-      isHeat:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.bool,
-            data['${effectivePrefix}is_heat'],
-          )!,
-      isAllergy:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.bool,
-            data['${effectivePrefix}is_allergy'],
-          )!,
+      gram: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}gram'],
+      )!,
+      energy: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}energy'],
+      )!,
+      protein: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}protein'],
+      )!,
+      lipid: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}lipid'],
+      )!,
+      sodium: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}sodium'],
+      )!,
+      carbohydrate: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}carbohydrate'],
+      )!,
+      calcium: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}calcium'],
+      )!,
+      magnesium: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}magnesium'],
+      )!,
+      iron: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}iron'],
+      )!,
+      zinc: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}zinc'],
+      )!,
+      retinol: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}retinol'],
+      )!,
+      vitaminB1: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}vitamin_b1'],
+      )!,
+      vitaminB2: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}vitamin_b2'],
+      )!,
+      vitaminC: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}vitamin_c'],
+      )!,
+      dietaryFiber: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}dietary_fiber'],
+      )!,
+      salt: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}salt'],
+      )!,
+      isHeat: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_heat'],
+      )!,
+      isAllergy: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_allergy'],
+      )!,
       origin: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}origin'],
@@ -2156,14 +2116,12 @@ class FoodstuffsSchema extends DataClass
     return FoodstuffsTableCompanion(
       id: Value(id),
       name: Value(name),
-      pieceNumber:
-          pieceNumber == null && nullToAbsent
-              ? const Value.absent()
-              : Value(pieceNumber),
-      pieceUnit:
-          pieceUnit == null && nullToAbsent
-              ? const Value.absent()
-              : Value(pieceUnit),
+      pieceNumber: pieceNumber == null && nullToAbsent
+          ? const Value.absent()
+          : Value(pieceNumber),
+      pieceUnit: pieceUnit == null && nullToAbsent
+          ? const Value.absent()
+          : Value(pieceUnit),
       gram: Value(gram),
       energy: Value(energy),
       protein: Value(protein),
@@ -2182,8 +2140,9 @@ class FoodstuffsSchema extends DataClass
       salt: Value(salt),
       isHeat: Value(isHeat),
       isAllergy: Value(isAllergy),
-      origin:
-          origin == null && nullToAbsent ? const Value.absent() : Value(origin),
+      origin: origin == null && nullToAbsent
+          ? const Value.absent()
+          : Value(origin),
     );
   }
 
@@ -2301,18 +2260,18 @@ class FoodstuffsSchema extends DataClass
     return FoodstuffsSchema(
       id: data.id.present ? data.id.value : this.id,
       name: data.name.present ? data.name.value : this.name,
-      pieceNumber:
-          data.pieceNumber.present ? data.pieceNumber.value : this.pieceNumber,
+      pieceNumber: data.pieceNumber.present
+          ? data.pieceNumber.value
+          : this.pieceNumber,
       pieceUnit: data.pieceUnit.present ? data.pieceUnit.value : this.pieceUnit,
       gram: data.gram.present ? data.gram.value : this.gram,
       energy: data.energy.present ? data.energy.value : this.energy,
       protein: data.protein.present ? data.protein.value : this.protein,
       lipid: data.lipid.present ? data.lipid.value : this.lipid,
       sodium: data.sodium.present ? data.sodium.value : this.sodium,
-      carbohydrate:
-          data.carbohydrate.present
-              ? data.carbohydrate.value
-              : this.carbohydrate,
+      carbohydrate: data.carbohydrate.present
+          ? data.carbohydrate.value
+          : this.carbohydrate,
       calcium: data.calcium.present ? data.calcium.value : this.calcium,
       magnesium: data.magnesium.present ? data.magnesium.value : this.magnesium,
       iron: data.iron.present ? data.iron.value : this.iron,
@@ -2321,10 +2280,9 @@ class FoodstuffsSchema extends DataClass
       vitaminB1: data.vitaminB1.present ? data.vitaminB1.value : this.vitaminB1,
       vitaminB2: data.vitaminB2.present ? data.vitaminB2.value : this.vitaminB2,
       vitaminC: data.vitaminC.present ? data.vitaminC.value : this.vitaminC,
-      dietaryFiber:
-          data.dietaryFiber.present
-              ? data.dietaryFiber.value
-              : this.dietaryFiber,
+      dietaryFiber: data.dietaryFiber.present
+          ? data.dietaryFiber.value
+          : this.dietaryFiber,
       salt: data.salt.present ? data.salt.value : this.salt,
       isHeat: data.isHeat.present ? data.isHeat.value : this.isHeat,
       isAllergy: data.isAllergy.present ? data.isAllergy.value : this.isAllergy,
@@ -2793,16 +2751,14 @@ class $DishFoodstuffsTableTable extends DishFoodstuffsTable
   DishFoodstuffsSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return DishFoodstuffsSchema(
-      dishId:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}dish_id'],
-          )!,
-      foodstuffId:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}foodstuff_id'],
-          )!,
+      dishId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}dish_id'],
+      )!,
+      foodstuffId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}foodstuff_id'],
+      )!,
     );
   }
 
@@ -2859,8 +2815,9 @@ class DishFoodstuffsSchema extends DataClass
   DishFoodstuffsSchema copyWithCompanion(DishFoodstuffsTableCompanion data) {
     return DishFoodstuffsSchema(
       dishId: data.dishId.present ? data.dishId.value : this.dishId,
-      foodstuffId:
-          data.foodstuffId.present ? data.foodstuffId.value : this.foodstuffId,
+      foodstuffId: data.foodstuffId.present
+          ? data.foodstuffId.value
+          : this.foodstuffId,
     );
   }
 
@@ -3078,26 +3035,22 @@ class $UsersTableTable extends UsersTable
   UsersSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return UsersSchema(
-      id:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}id'],
-          )!,
-      name:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}name'],
-          )!,
-      schoolId:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}school_id'],
-          )!,
-      schoolYear:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}school_year'],
-          )!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      schoolId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}school_id'],
+      )!,
+      schoolYear: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}school_year'],
+      )!,
       authorizedAt: attachedDatabase.typeMapping.read(
         DriftSqlType.dateTime,
         data['${effectivePrefix}authorized_at'],
@@ -3143,10 +3096,9 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
       name: Value(name),
       schoolId: Value(schoolId),
       schoolYear: Value(schoolYear),
-      authorizedAt:
-          authorizedAt == null && nullToAbsent
-              ? const Value.absent()
-              : Value(authorizedAt),
+      authorizedAt: authorizedAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(authorizedAt),
     );
   }
 
@@ -3193,12 +3145,12 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
       id: data.id.present ? data.id.value : this.id,
       name: data.name.present ? data.name.value : this.name,
       schoolId: data.schoolId.present ? data.schoolId.value : this.schoolId,
-      schoolYear:
-          data.schoolYear.present ? data.schoolYear.value : this.schoolYear,
-      authorizedAt:
-          data.authorizedAt.present
-              ? data.authorizedAt.value
-              : this.authorizedAt,
+      schoolYear: data.schoolYear.present
+          ? data.schoolYear.value
+          : this.schoolYear,
+      authorizedAt: data.authorizedAt.present
+          ? data.authorizedAt.value
+          : this.authorizedAt,
     );
   }
 
@@ -3708,96 +3660,78 @@ class $DictionaryItemsTableTable extends DictionaryItemsTable
   DictionaryItemsSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return DictionaryItemsSchema(
-      id:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}id'],
-          )!,
-      group:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}group'],
-          )!,
-      name:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}name'],
-          )!,
-      energy:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}energy'],
-          )!,
-      protein:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}protein'],
-          )!,
-      lipid:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}lipid'],
-          )!,
-      sodium:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}sodium'],
-          )!,
-      carbohydrate:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}carbohydrate'],
-          )!,
-      calcium:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}calcium'],
-          )!,
-      magnesium:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}magnesium'],
-          )!,
-      iron:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}iron'],
-          )!,
-      zinc:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}zinc'],
-          )!,
-      retinol:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}retinol'],
-          )!,
-      vitaminB1:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}vitamin_b1'],
-          )!,
-      vitaminB2:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}vitamin_b2'],
-          )!,
-      vitaminC:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}vitamin_c'],
-          )!,
-      dietaryFiber:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}dietary_fiber'],
-          )!,
-      salt:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}salt'],
-          )!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      group: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}group'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      energy: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}energy'],
+      )!,
+      protein: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}protein'],
+      )!,
+      lipid: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}lipid'],
+      )!,
+      sodium: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}sodium'],
+      )!,
+      carbohydrate: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}carbohydrate'],
+      )!,
+      calcium: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}calcium'],
+      )!,
+      magnesium: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}magnesium'],
+      )!,
+      iron: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}iron'],
+      )!,
+      zinc: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}zinc'],
+      )!,
+      retinol: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}retinol'],
+      )!,
+      vitaminB1: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}vitamin_b1'],
+      )!,
+      vitaminB2: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}vitamin_b2'],
+      )!,
+      vitaminC: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}vitamin_c'],
+      )!,
+      dietaryFiber: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}dietary_fiber'],
+      )!,
+      salt: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}salt'],
+      )!,
       note: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}note'],
@@ -4007,10 +3941,9 @@ class DictionaryItemsSchema extends DataClass
       protein: data.protein.present ? data.protein.value : this.protein,
       lipid: data.lipid.present ? data.lipid.value : this.lipid,
       sodium: data.sodium.present ? data.sodium.value : this.sodium,
-      carbohydrate:
-          data.carbohydrate.present
-              ? data.carbohydrate.value
-              : this.carbohydrate,
+      carbohydrate: data.carbohydrate.present
+          ? data.carbohydrate.value
+          : this.carbohydrate,
       calcium: data.calcium.present ? data.calcium.value : this.calcium,
       magnesium: data.magnesium.present ? data.magnesium.value : this.magnesium,
       iron: data.iron.present ? data.iron.value : this.iron,
@@ -4019,10 +3952,9 @@ class DictionaryItemsSchema extends DataClass
       vitaminB1: data.vitaminB1.present ? data.vitaminB1.value : this.vitaminB1,
       vitaminB2: data.vitaminB2.present ? data.vitaminB2.value : this.vitaminB2,
       vitaminC: data.vitaminC.present ? data.vitaminC.value : this.vitaminC,
-      dietaryFiber:
-          data.dietaryFiber.present
-              ? data.dietaryFiber.value
-              : this.dietaryFiber,
+      dietaryFiber: data.dietaryFiber.present
+          ? data.dietaryFiber.value
+          : this.dietaryFiber,
       salt: data.salt.present ? data.salt.value : this.salt,
       note: data.note.present ? data.note.value : this.note,
     );
@@ -4732,13 +4664,12 @@ class $$SchoolsTableTableTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $$SchoolsTableTableFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => $$SchoolsTableTableOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer:
-              () =>
-                  $$SchoolsTableTableAnnotationComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $$SchoolsTableTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$SchoolsTableTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$SchoolsTableTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -4785,69 +4716,71 @@ class $$SchoolsTableTableTableManager
                 authorizationRequired: authorizationRequired,
                 authorizationKeyUpdatedAt: authorizationKeyUpdatedAt,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          $$SchoolsTableTableReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
-          prefetchHooksCallback: ({
-            menusTableRefs = false,
-            usersTableRefs = false,
-          }) {
-            return PrefetchHooks(
-              db: db,
-              explicitlyWatchedTables: [
-                if (menusTableRefs) db.menusTable,
-                if (usersTableRefs) db.usersTable,
-              ],
-              addJoins: null,
-              getPrefetchedDataCallback: (items) async {
-                return [
-                  if (menusTableRefs)
-                    await $_getPrefetchedData(
-                      currentTable: table,
-                      referencedTable: $$SchoolsTableTableReferences
-                          ._menusTableRefsTable(db),
-                      managerFromTypedResult:
-                          (p0) =>
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$SchoolsTableTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback:
+              ({menusTableRefs = false, usersTableRefs = false}) {
+                return PrefetchHooks(
+                  db: db,
+                  explicitlyWatchedTables: [
+                    if (menusTableRefs) db.menusTable,
+                    if (usersTableRefs) db.usersTable,
+                  ],
+                  addJoins: null,
+                  getPrefetchedDataCallback: (items) async {
+                    return [
+                      if (menusTableRefs)
+                        await $_getPrefetchedData<
+                          SchoolsSchema,
+                          $SchoolsTableTable,
+                          MenusSchema
+                        >(
+                          currentTable: table,
+                          referencedTable: $$SchoolsTableTableReferences
+                              ._menusTableRefsTable(db),
+                          managerFromTypedResult: (p0) =>
                               $$SchoolsTableTableReferences(
                                 db,
                                 table,
                                 p0,
                               ).menusTableRefs,
-                      referencedItemsForCurrentItem:
-                          (item, referencedItems) => referencedItems.where(
-                            (e) => e.schoolId == item.id,
-                          ),
-                      typedResults: items,
-                    ),
-                  if (usersTableRefs)
-                    await $_getPrefetchedData(
-                      currentTable: table,
-                      referencedTable: $$SchoolsTableTableReferences
-                          ._usersTableRefsTable(db),
-                      managerFromTypedResult:
-                          (p0) =>
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.schoolId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                      if (usersTableRefs)
+                        await $_getPrefetchedData<
+                          SchoolsSchema,
+                          $SchoolsTableTable,
+                          UsersSchema
+                        >(
+                          currentTable: table,
+                          referencedTable: $$SchoolsTableTableReferences
+                              ._usersTableRefsTable(db),
+                          managerFromTypedResult: (p0) =>
                               $$SchoolsTableTableReferences(
                                 db,
                                 table,
                                 p0,
                               ).usersTableRefs,
-                      referencedItemsForCurrentItem:
-                          (item, referencedItems) => referencedItems.where(
-                            (e) => e.schoolId == item.id,
-                          ),
-                      typedResults: items,
-                    ),
-                ];
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.schoolId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                    ];
+                  },
+                );
               },
-            );
-          },
         ),
       );
 }
@@ -5167,12 +5100,12 @@ class $$MenusTableTableTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $$MenusTableTableFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => $$MenusTableTableOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer:
-              () => $$MenusTableTableAnnotationComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $$MenusTableTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$MenusTableTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$MenusTableTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -5205,80 +5138,81 @@ class $$MenusTableTableTableManager
                 createAt: createAt,
                 updateAt: updateAt,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          $$MenusTableTableReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
-          prefetchHooksCallback: ({
-            schoolId = false,
-            menuDishesTableRefs = false,
-          }) {
-            return PrefetchHooks(
-              db: db,
-              explicitlyWatchedTables: [
-                if (menuDishesTableRefs) db.menuDishesTable,
-              ],
-              addJoins: <
-                T extends TableManagerState<
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic
-                >
-              >(state) {
-                if (schoolId) {
-                  state =
-                      state.withJoin(
-                            currentTable: table,
-                            currentColumn: table.schoolId,
-                            referencedTable: $$MenusTableTableReferences
-                                ._schoolIdTable(db),
-                            referencedColumn:
-                                $$MenusTableTableReferences
-                                    ._schoolIdTable(db)
-                                    .id,
-                          )
-                          as T;
-                }
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$MenusTableTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback:
+              ({schoolId = false, menuDishesTableRefs = false}) {
+                return PrefetchHooks(
+                  db: db,
+                  explicitlyWatchedTables: [
+                    if (menuDishesTableRefs) db.menuDishesTable,
+                  ],
+                  addJoins:
+                      <
+                        T extends TableManagerState<
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic
+                        >
+                      >(state) {
+                        if (schoolId) {
+                          state =
+                              state.withJoin(
+                                    currentTable: table,
+                                    currentColumn: table.schoolId,
+                                    referencedTable: $$MenusTableTableReferences
+                                        ._schoolIdTable(db),
+                                    referencedColumn:
+                                        $$MenusTableTableReferences
+                                            ._schoolIdTable(db)
+                                            .id,
+                                  )
+                                  as T;
+                        }
 
-                return state;
-              },
-              getPrefetchedDataCallback: (items) async {
-                return [
-                  if (menuDishesTableRefs)
-                    await $_getPrefetchedData(
-                      currentTable: table,
-                      referencedTable: $$MenusTableTableReferences
-                          ._menuDishesTableRefsTable(db),
-                      managerFromTypedResult:
-                          (p0) =>
+                        return state;
+                      },
+                  getPrefetchedDataCallback: (items) async {
+                    return [
+                      if (menuDishesTableRefs)
+                        await $_getPrefetchedData<
+                          MenusSchema,
+                          $MenusTableTable,
+                          MenuDishesSchema
+                        >(
+                          currentTable: table,
+                          referencedTable: $$MenusTableTableReferences
+                              ._menuDishesTableRefsTable(db),
+                          managerFromTypedResult: (p0) =>
                               $$MenusTableTableReferences(
                                 db,
                                 table,
                                 p0,
                               ).menuDishesTableRefs,
-                      referencedItemsForCurrentItem:
-                          (item, referencedItems) =>
-                              referencedItems.where((e) => e.menuId == item.id),
-                      typedResults: items,
-                    ),
-                ];
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.menuId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                    ];
+                  },
+                );
               },
-            );
-          },
         ),
       );
 }
@@ -5559,13 +5493,12 @@ class $$DishesTableTableTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $$DishesTableTableFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => $$DishesTableTableOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer:
-              () =>
-                  $$DishesTableTableAnnotationComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $$DishesTableTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$DishesTableTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$DishesTableTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -5583,67 +5516,71 @@ class $$DishesTableTableTableManager
                 name: name,
                 category: category,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          $$DishesTableTableReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
-          prefetchHooksCallback: ({
-            menuDishesTableRefs = false,
-            dishFoodstuffsTableRefs = false,
-          }) {
-            return PrefetchHooks(
-              db: db,
-              explicitlyWatchedTables: [
-                if (menuDishesTableRefs) db.menuDishesTable,
-                if (dishFoodstuffsTableRefs) db.dishFoodstuffsTable,
-              ],
-              addJoins: null,
-              getPrefetchedDataCallback: (items) async {
-                return [
-                  if (menuDishesTableRefs)
-                    await $_getPrefetchedData(
-                      currentTable: table,
-                      referencedTable: $$DishesTableTableReferences
-                          ._menuDishesTableRefsTable(db),
-                      managerFromTypedResult:
-                          (p0) =>
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$DishesTableTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback:
+              ({menuDishesTableRefs = false, dishFoodstuffsTableRefs = false}) {
+                return PrefetchHooks(
+                  db: db,
+                  explicitlyWatchedTables: [
+                    if (menuDishesTableRefs) db.menuDishesTable,
+                    if (dishFoodstuffsTableRefs) db.dishFoodstuffsTable,
+                  ],
+                  addJoins: null,
+                  getPrefetchedDataCallback: (items) async {
+                    return [
+                      if (menuDishesTableRefs)
+                        await $_getPrefetchedData<
+                          DishesSchema,
+                          $DishesTableTable,
+                          MenuDishesSchema
+                        >(
+                          currentTable: table,
+                          referencedTable: $$DishesTableTableReferences
+                              ._menuDishesTableRefsTable(db),
+                          managerFromTypedResult: (p0) =>
                               $$DishesTableTableReferences(
                                 db,
                                 table,
                                 p0,
                               ).menuDishesTableRefs,
-                      referencedItemsForCurrentItem:
-                          (item, referencedItems) =>
-                              referencedItems.where((e) => e.dishId == item.id),
-                      typedResults: items,
-                    ),
-                  if (dishFoodstuffsTableRefs)
-                    await $_getPrefetchedData(
-                      currentTable: table,
-                      referencedTable: $$DishesTableTableReferences
-                          ._dishFoodstuffsTableRefsTable(db),
-                      managerFromTypedResult:
-                          (p0) =>
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.dishId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                      if (dishFoodstuffsTableRefs)
+                        await $_getPrefetchedData<
+                          DishesSchema,
+                          $DishesTableTable,
+                          DishFoodstuffsSchema
+                        >(
+                          currentTable: table,
+                          referencedTable: $$DishesTableTableReferences
+                              ._dishFoodstuffsTableRefsTable(db),
+                          managerFromTypedResult: (p0) =>
                               $$DishesTableTableReferences(
                                 db,
                                 table,
                                 p0,
                               ).dishFoodstuffsTableRefs,
-                      referencedItemsForCurrentItem:
-                          (item, referencedItems) =>
-                              referencedItems.where((e) => e.dishId == item.id),
-                      typedResults: items,
-                    ),
-                ];
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.dishId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                    ];
+                  },
+                );
               },
-            );
-          },
         ),
       );
 }
@@ -5920,19 +5857,12 @@ class $$MenuDishesTableTableTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () =>
-                  $$MenuDishesTableTableFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => $$MenuDishesTableTableOrderingComposer(
-                $db: db,
-                $table: table,
-              ),
-          createComputedFieldComposer:
-              () => $$MenuDishesTableTableAnnotationComposer(
-                $db: db,
-                $table: table,
-              ),
+          createFilteringComposer: () =>
+              $$MenuDishesTableTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$MenuDishesTableTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$MenuDishesTableTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> menuId = const Value.absent(),
@@ -5953,66 +5883,67 @@ class $$MenuDishesTableTableTableManager
                 dishId: dishId,
                 rowid: rowid,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          $$MenuDishesTableTableReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$MenuDishesTableTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
           prefetchHooksCallback: ({menuId = false, dishId = false}) {
             return PrefetchHooks(
               db: db,
               explicitlyWatchedTables: [],
-              addJoins: <
-                T extends TableManagerState<
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic
-                >
-              >(state) {
-                if (menuId) {
-                  state =
-                      state.withJoin(
-                            currentTable: table,
-                            currentColumn: table.menuId,
-                            referencedTable: $$MenuDishesTableTableReferences
-                                ._menuIdTable(db),
-                            referencedColumn:
-                                $$MenuDishesTableTableReferences
-                                    ._menuIdTable(db)
-                                    .id,
-                          )
-                          as T;
-                }
-                if (dishId) {
-                  state =
-                      state.withJoin(
-                            currentTable: table,
-                            currentColumn: table.dishId,
-                            referencedTable: $$MenuDishesTableTableReferences
-                                ._dishIdTable(db),
-                            referencedColumn:
-                                $$MenuDishesTableTableReferences
-                                    ._dishIdTable(db)
-                                    .id,
-                          )
-                          as T;
-                }
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (menuId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.menuId,
+                                referencedTable:
+                                    $$MenuDishesTableTableReferences
+                                        ._menuIdTable(db),
+                                referencedColumn:
+                                    $$MenuDishesTableTableReferences
+                                        ._menuIdTable(db)
+                                        .id,
+                              )
+                              as T;
+                    }
+                    if (dishId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.dishId,
+                                referencedTable:
+                                    $$MenuDishesTableTableReferences
+                                        ._dishIdTable(db),
+                                referencedColumn:
+                                    $$MenuDishesTableTableReferences
+                                        ._dishIdTable(db)
+                                        .id,
+                              )
+                              as T;
+                    }
 
-                return state;
-              },
+                    return state;
+                  },
               getPrefetchedDataCallback: (items) async {
                 return [];
               },
@@ -6538,19 +6469,12 @@ class $$FoodstuffsTableTableTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () =>
-                  $$FoodstuffsTableTableFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => $$FoodstuffsTableTableOrderingComposer(
-                $db: db,
-                $table: table,
-              ),
-          createComputedFieldComposer:
-              () => $$FoodstuffsTableTableAnnotationComposer(
-                $db: db,
-                $table: table,
-              ),
+          createFilteringComposer: () =>
+              $$FoodstuffsTableTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$FoodstuffsTableTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$FoodstuffsTableTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -6651,16 +6575,14 @@ class $$FoodstuffsTableTableTableManager
                 isAllergy: isAllergy,
                 origin: origin,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          $$FoodstuffsTableTableReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$FoodstuffsTableTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
           prefetchHooksCallback: ({dishFoodstuffsTableRefs = false}) {
             return PrefetchHooks(
               db: db,
@@ -6671,19 +6593,22 @@ class $$FoodstuffsTableTableTableManager
               getPrefetchedDataCallback: (items) async {
                 return [
                   if (dishFoodstuffsTableRefs)
-                    await $_getPrefetchedData(
+                    await $_getPrefetchedData<
+                      FoodstuffsSchema,
+                      $FoodstuffsTableTable,
+                      DishFoodstuffsSchema
+                    >(
                       currentTable: table,
                       referencedTable: $$FoodstuffsTableTableReferences
                           ._dishFoodstuffsTableRefsTable(db),
-                      managerFromTypedResult:
-                          (p0) =>
-                              $$FoodstuffsTableTableReferences(
-                                db,
-                                table,
-                                p0,
-                              ).dishFoodstuffsTableRefs,
-                      referencedItemsForCurrentItem:
-                          (item, referencedItems) => referencedItems.where(
+                      managerFromTypedResult: (p0) =>
+                          $$FoodstuffsTableTableReferences(
+                            db,
+                            table,
+                            p0,
+                          ).dishFoodstuffsTableRefs,
+                      referencedItemsForCurrentItem: (item, referencedItems) =>
+                          referencedItems.where(
                             (e) => e.foodstuffId == item.id,
                           ),
                       typedResults: items,
@@ -6968,18 +6893,15 @@ class $$DishFoodstuffsTableTableTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $$DishFoodstuffsTableTableFilterComposer(
+          createFilteringComposer: () =>
+              $$DishFoodstuffsTableTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$DishFoodstuffsTableTableOrderingComposer(
                 $db: db,
                 $table: table,
               ),
-          createOrderingComposer:
-              () => $$DishFoodstuffsTableTableOrderingComposer(
-                $db: db,
-                $table: table,
-              ),
-          createComputedFieldComposer:
-              () => $$DishFoodstuffsTableTableAnnotationComposer(
+          createComputedFieldComposer: () =>
+              $$DishFoodstuffsTableTableAnnotationComposer(
                 $db: db,
                 $table: table,
               ),
@@ -7003,68 +6925,67 @@ class $$DishFoodstuffsTableTableTableManager
                 foodstuffId: foodstuffId,
                 rowid: rowid,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          $$DishFoodstuffsTableTableReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$DishFoodstuffsTableTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
           prefetchHooksCallback: ({dishId = false, foodstuffId = false}) {
             return PrefetchHooks(
               db: db,
               explicitlyWatchedTables: [],
-              addJoins: <
-                T extends TableManagerState<
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic
-                >
-              >(state) {
-                if (dishId) {
-                  state =
-                      state.withJoin(
-                            currentTable: table,
-                            currentColumn: table.dishId,
-                            referencedTable:
-                                $$DishFoodstuffsTableTableReferences
-                                    ._dishIdTable(db),
-                            referencedColumn:
-                                $$DishFoodstuffsTableTableReferences
-                                    ._dishIdTable(db)
-                                    .id,
-                          )
-                          as T;
-                }
-                if (foodstuffId) {
-                  state =
-                      state.withJoin(
-                            currentTable: table,
-                            currentColumn: table.foodstuffId,
-                            referencedTable:
-                                $$DishFoodstuffsTableTableReferences
-                                    ._foodstuffIdTable(db),
-                            referencedColumn:
-                                $$DishFoodstuffsTableTableReferences
-                                    ._foodstuffIdTable(db)
-                                    .id,
-                          )
-                          as T;
-                }
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (dishId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.dishId,
+                                referencedTable:
+                                    $$DishFoodstuffsTableTableReferences
+                                        ._dishIdTable(db),
+                                referencedColumn:
+                                    $$DishFoodstuffsTableTableReferences
+                                        ._dishIdTable(db)
+                                        .id,
+                              )
+                              as T;
+                    }
+                    if (foodstuffId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.foodstuffId,
+                                referencedTable:
+                                    $$DishFoodstuffsTableTableReferences
+                                        ._foodstuffIdTable(db),
+                                referencedColumn:
+                                    $$DishFoodstuffsTableTableReferences
+                                        ._foodstuffIdTable(db)
+                                        .id,
+                              )
+                              as T;
+                    }
 
-                return state;
-              },
+                    return state;
+                  },
               getPrefetchedDataCallback: (items) async {
                 return [];
               },
@@ -7304,12 +7225,12 @@ class $$UsersTableTableTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $$UsersTableTableFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => $$UsersTableTableOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer:
-              () => $$UsersTableTableAnnotationComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $$UsersTableTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$UsersTableTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$UsersTableTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -7338,52 +7259,50 @@ class $$UsersTableTableTableManager
                 schoolYear: schoolYear,
                 authorizedAt: authorizedAt,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          $$UsersTableTableReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$UsersTableTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
           prefetchHooksCallback: ({schoolId = false}) {
             return PrefetchHooks(
               db: db,
               explicitlyWatchedTables: [],
-              addJoins: <
-                T extends TableManagerState<
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic
-                >
-              >(state) {
-                if (schoolId) {
-                  state =
-                      state.withJoin(
-                            currentTable: table,
-                            currentColumn: table.schoolId,
-                            referencedTable: $$UsersTableTableReferences
-                                ._schoolIdTable(db),
-                            referencedColumn:
-                                $$UsersTableTableReferences
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (schoolId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.schoolId,
+                                referencedTable: $$UsersTableTableReferences
+                                    ._schoolIdTable(db),
+                                referencedColumn: $$UsersTableTableReferences
                                     ._schoolIdTable(db)
                                     .id,
-                          )
-                          as T;
-                }
+                              )
+                              as T;
+                    }
 
-                return state;
-              },
+                    return state;
+                  },
               getPrefetchedDataCallback: (items) async {
                 return [];
               },
@@ -7762,18 +7681,15 @@ class $$DictionaryItemsTableTableTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $$DictionaryItemsTableTableFilterComposer(
+          createFilteringComposer: () =>
+              $$DictionaryItemsTableTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$DictionaryItemsTableTableOrderingComposer(
                 $db: db,
                 $table: table,
               ),
-          createOrderingComposer:
-              () => $$DictionaryItemsTableTableOrderingComposer(
-                $db: db,
-                $table: table,
-              ),
-          createComputedFieldComposer:
-              () => $$DictionaryItemsTableTableAnnotationComposer(
+          createComputedFieldComposer: () =>
+              $$DictionaryItemsTableTableAnnotationComposer(
                 $db: db,
                 $table: table,
               ),
@@ -7861,16 +7777,9 @@ class $$DictionaryItemsTableTableTableManager
                 salt: salt,
                 note: note,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          BaseReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
           prefetchHooksCallback: null,
         ),
       );
@@ -7930,10 +7839,9 @@ String _$localDatabaseHash() => r'85a394115a4fcf2e1aa60a7d7be49fa0afd3a743';
 final localDatabaseProvider = Provider<LocalDatabase>.internal(
   localDatabase,
   name: r'localDatabaseProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$localDatabaseHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$localDatabaseHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

@@ -14,10 +14,9 @@ final firestorageAPIProvider =
     NotifierProvider<FirestorageAPI, FirebaseStorage>.internal(
       FirestorageAPI.new,
       name: r'firestorageAPIProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$firestorageAPIHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$firestorageAPIHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

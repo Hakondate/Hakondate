@@ -1,6 +1,5 @@
-// dart format width=80
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -41,6 +40,154 @@ class $MenuModelCopyWith<$Res>  {
 $MenuModelCopyWith(MenuModel _, $Res Function(MenuModel) __);
 }
 
+
+/// Adds pattern-matching-related methods to [MenuModel].
+extension MenuModelPatterns on MenuModel {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( LunchesDayMenuModel value)?  lunchesDay,TResult Function( HolidayMenuModel value)?  holiday,TResult Function( NoDataMenuModel value)?  noData,TResult Function( UnauthorizedMenuModel value)?  unauthorized,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case LunchesDayMenuModel() when lunchesDay != null:
+return lunchesDay(_that);case HolidayMenuModel() when holiday != null:
+return holiday(_that);case NoDataMenuModel() when noData != null:
+return noData(_that);case UnauthorizedMenuModel() when unauthorized != null:
+return unauthorized(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( LunchesDayMenuModel value)  lunchesDay,required TResult Function( HolidayMenuModel value)  holiday,required TResult Function( NoDataMenuModel value)  noData,required TResult Function( UnauthorizedMenuModel value)  unauthorized,}){
+final _that = this;
+switch (_that) {
+case LunchesDayMenuModel():
+return lunchesDay(_that);case HolidayMenuModel():
+return holiday(_that);case NoDataMenuModel():
+return noData(_that);case UnauthorizedMenuModel():
+return unauthorized(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( LunchesDayMenuModel value)?  lunchesDay,TResult? Function( HolidayMenuModel value)?  holiday,TResult? Function( NoDataMenuModel value)?  noData,TResult? Function( UnauthorizedMenuModel value)?  unauthorized,}){
+final _that = this;
+switch (_that) {
+case LunchesDayMenuModel() when lunchesDay != null:
+return lunchesDay(_that);case HolidayMenuModel() when holiday != null:
+return holiday(_that);case NoDataMenuModel() when noData != null:
+return noData(_that);case UnauthorizedMenuModel() when unauthorized != null:
+return unauthorized(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int id,  DateTime day,  int schoolId,  List<DishModel> dishes,  String? event)?  lunchesDay,TResult Function()?  holiday,TResult Function()?  noData,TResult Function()?  unauthorized,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case LunchesDayMenuModel() when lunchesDay != null:
+return lunchesDay(_that.id,_that.day,_that.schoolId,_that.dishes,_that.event);case HolidayMenuModel() when holiday != null:
+return holiday();case NoDataMenuModel() when noData != null:
+return noData();case UnauthorizedMenuModel() when unauthorized != null:
+return unauthorized();case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int id,  DateTime day,  int schoolId,  List<DishModel> dishes,  String? event)  lunchesDay,required TResult Function()  holiday,required TResult Function()  noData,required TResult Function()  unauthorized,}) {final _that = this;
+switch (_that) {
+case LunchesDayMenuModel():
+return lunchesDay(_that.id,_that.day,_that.schoolId,_that.dishes,_that.event);case HolidayMenuModel():
+return holiday();case NoDataMenuModel():
+return noData();case UnauthorizedMenuModel():
+return unauthorized();case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int id,  DateTime day,  int schoolId,  List<DishModel> dishes,  String? event)?  lunchesDay,TResult? Function()?  holiday,TResult? Function()?  noData,TResult? Function()?  unauthorized,}) {final _that = this;
+switch (_that) {
+case LunchesDayMenuModel() when lunchesDay != null:
+return lunchesDay(_that.id,_that.day,_that.schoolId,_that.dishes,_that.event);case HolidayMenuModel() when holiday != null:
+return holiday();case NoDataMenuModel() when noData != null:
+return noData();case UnauthorizedMenuModel() when unauthorized != null:
+return unauthorized();case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 

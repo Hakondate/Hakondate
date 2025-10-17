@@ -15,10 +15,9 @@ final appStatisticsViewModelProvider =
     AsyncNotifierProvider<AppStatisticsViewModel, AppStatisticsState>.internal(
       AppStatisticsViewModel.new,
       name: r'appStatisticsViewModelProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$appStatisticsViewModelHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$appStatisticsViewModelHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

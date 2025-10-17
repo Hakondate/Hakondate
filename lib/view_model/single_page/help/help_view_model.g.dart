@@ -14,10 +14,9 @@ final helpViewModelProvider =
     AutoDisposeAsyncNotifierProvider<HelpViewModel, HelpState>.internal(
       HelpViewModel.new,
       name: r'helpViewModelProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$helpViewModelHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$helpViewModelHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

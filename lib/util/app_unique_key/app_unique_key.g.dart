@@ -14,10 +14,9 @@ final appUniqueKeyProvider =
     AutoDisposeNotifierProvider<AppUniqueKey, UniqueKey>.internal(
       AppUniqueKey.new,
       name: r'appUniqueKeyProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$appUniqueKeyHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$appUniqueKeyHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

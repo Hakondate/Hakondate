@@ -11,19 +11,19 @@ String _$appPreferencesViewModelHash() =>
 
 /// See also [AppPreferencesViewModel].
 @ProviderFor(AppPreferencesViewModel)
-final appPreferencesViewModelProvider = AsyncNotifierProvider<
-  AppPreferencesViewModel,
-  AppPreferencesState
->.internal(
-  AppPreferencesViewModel.new,
-  name: r'appPreferencesViewModelProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
+final appPreferencesViewModelProvider =
+    AsyncNotifierProvider<
+      AppPreferencesViewModel,
+      AppPreferencesState
+    >.internal(
+      AppPreferencesViewModel.new,
+      name: r'appPreferencesViewModelProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
           ? null
           : _$appPreferencesViewModelHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$AppPreferencesViewModel = AsyncNotifier<AppPreferencesState>;
 // ignore_for_file: type=lint

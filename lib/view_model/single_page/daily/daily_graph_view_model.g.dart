@@ -13,8 +13,9 @@ String _$graphValuesHash() => r'395950f9d34dc6899758b2e10d34a7ee2d41a6b8';
 final graphValuesProvider = AutoDisposeFutureProvider<List<double>>.internal(
   graphValues,
   name: r'graphValuesProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$graphValuesHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$graphValuesHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -29,10 +30,9 @@ String _$graphRawValuesHash() => r'61e5c67c91a39e4e1906bbb9a8c7a415d2cf4aaa';
 final graphRawValuesProvider = AutoDisposeProvider<List<double>>.internal(
   graphRawValues,
   name: r'graphRawValuesProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$graphRawValuesHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$graphRawValuesHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

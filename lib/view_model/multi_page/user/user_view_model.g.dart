@@ -13,10 +13,9 @@ String _$userAuthorizedHash() => r'522577a8a4f15d312ff72e4b63b851f9ec58fff8';
 final userAuthorizedProvider = FutureProvider<bool>.internal(
   userAuthorized,
   name: r'userAuthorizedProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$userAuthorizedHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$userAuthorizedHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -32,10 +31,9 @@ final userViewModelProvider =
     NotifierProvider<UserViewModel, UserState>.internal(
       UserViewModel.new,
       name: r'userViewModelProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$userViewModelHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$userViewModelHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

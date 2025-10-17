@@ -14,10 +14,9 @@ final dailyViewModelProvider =
     AsyncNotifierProvider<DailyViewModel, DailyState>.internal(
       DailyViewModel.new,
       name: r'dailyViewModelProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$dailyViewModelHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$dailyViewModelHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

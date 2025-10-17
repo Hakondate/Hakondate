@@ -14,10 +14,9 @@ String _$usersLocalRepositoryHash() =>
 final usersLocalRepositoryProvider = Provider<UsersLocalRepository>.internal(
   usersLocalRepository,
   name: r'usersLocalRepositoryProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$usersLocalRepositoryHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$usersLocalRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

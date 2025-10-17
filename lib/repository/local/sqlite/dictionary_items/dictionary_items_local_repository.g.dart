@@ -15,10 +15,9 @@ final dictionaryItemsLocalRepositoryProvider =
     Provider<DictionaryItemsLocalRepository>.internal(
       dictionaryItemsLocalRepository,
       name: r'dictionaryItemsLocalRepositoryProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$dictionaryItemsLocalRepositoryHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$dictionaryItemsLocalRepositoryHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

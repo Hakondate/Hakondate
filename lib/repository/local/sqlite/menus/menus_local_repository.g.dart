@@ -14,10 +14,9 @@ String _$menusLocalRepositoryHash() =>
 final menusLocalRepositoryProvider = Provider<MenusLocalRepository>.internal(
   menusLocalRepository,
   name: r'menusLocalRepositoryProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$menusLocalRepositoryHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$menusLocalRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

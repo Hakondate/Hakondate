@@ -14,10 +14,9 @@ final splashViewModelProvider =
     AutoDisposeNotifierProvider<SplashViewModel, SplashState>.internal(
       SplashViewModel.new,
       name: r'splashViewModelProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$splashViewModelHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$splashViewModelHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

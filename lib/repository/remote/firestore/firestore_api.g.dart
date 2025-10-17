@@ -14,10 +14,9 @@ final firestoreAPIProvider =
     NotifierProvider<FirestoreAPI, FirebaseFirestore>.internal(
       FirestoreAPI.new,
       name: r'firestoreAPIProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$firestoreAPIHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$firestoreAPIHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

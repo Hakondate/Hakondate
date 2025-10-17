@@ -14,10 +14,9 @@ final calendarViewModelProvider =
     AutoDisposeNotifierProvider<CalendarViewModel, CalendarState>.internal(
       CalendarViewModel.new,
       name: r'calendarViewModelProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$calendarViewModelHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$calendarViewModelHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

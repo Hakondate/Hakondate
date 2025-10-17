@@ -15,10 +15,9 @@ final userSettingsViewModelProvider =
     AsyncNotifierProvider<UserSettingsViewModel, UserSettingsState>.internal(
       UserSettingsViewModel.new,
       name: r'userSettingsViewModelProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$userSettingsViewModelHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$userSettingsViewModelHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

@@ -11,19 +11,19 @@ String _$dictionarySearchViewModelHash() =>
 
 /// See also [DictionarySearchViewModel].
 @ProviderFor(DictionarySearchViewModel)
-final dictionarySearchViewModelProvider = AutoDisposeAsyncNotifierProvider<
-  DictionarySearchViewModel,
-  DictionarySearchState
->.internal(
-  DictionarySearchViewModel.new,
-  name: r'dictionarySearchViewModelProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
+final dictionarySearchViewModelProvider =
+    AutoDisposeAsyncNotifierProvider<
+      DictionarySearchViewModel,
+      DictionarySearchState
+    >.internal(
+      DictionarySearchViewModel.new,
+      name: r'dictionarySearchViewModelProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
           ? null
           : _$dictionarySearchViewModelHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$DictionarySearchViewModel =
     AutoDisposeAsyncNotifier<DictionarySearchState>;

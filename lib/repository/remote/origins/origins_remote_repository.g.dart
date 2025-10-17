@@ -15,10 +15,9 @@ final originsRemoteRepositoryProvider =
     Provider<OriginsRemoteRepository>.internal(
       originsRemoteRepository,
       name: r'originsRemoteRepositoryProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$originsRemoteRepositoryHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$originsRemoteRepositoryHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

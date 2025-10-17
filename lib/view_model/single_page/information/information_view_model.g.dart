@@ -15,10 +15,9 @@ final informationViewModelProvider =
     AutoDisposeProvider<InformationViewModel>.internal(
       informationViewModel,
       name: r'informationViewModelProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$informationViewModelHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$informationViewModelHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

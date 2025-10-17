@@ -14,10 +14,9 @@ final drawerViewModelProvider =
     NotifierProvider<DrawerViewModel, DrawerState>.internal(
       DrawerViewModel.new,
       name: r'drawerViewModelProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$drawerViewModelHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$drawerViewModelHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

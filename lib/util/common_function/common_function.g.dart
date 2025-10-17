@@ -13,10 +13,9 @@ String _$commonFunctionHash() => r'498a41d713d6629b0bac13c85758699d131986ed';
 final commonFunctionProvider = AutoDisposeProvider<CommonFunction>.internal(
   commonFunction,
   name: r'commonFunctionProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$commonFunctionHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$commonFunctionHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

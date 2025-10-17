@@ -11,19 +11,19 @@ String _$analyticsControllerHash() =>
 
 /// See also [AnalyticsController].
 @ProviderFor(AnalyticsController)
-final analyticsControllerProvider = AutoDisposeNotifierProvider<
-  AnalyticsController,
-  FirebaseAnalytics
->.internal(
-  AnalyticsController.new,
-  name: r'analyticsControllerProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
+final analyticsControllerProvider =
+    AutoDisposeNotifierProvider<
+      AnalyticsController,
+      FirebaseAnalytics
+    >.internal(
+      AnalyticsController.new,
+      name: r'analyticsControllerProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
           ? null
           : _$analyticsControllerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$AnalyticsController = AutoDisposeNotifier<FirebaseAnalytics>;
 // ignore_for_file: type=lint
