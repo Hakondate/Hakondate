@@ -12,12 +12,15 @@ String _$analyticsControllerHash() =>
 /// See also [AnalyticsController].
 @ProviderFor(AnalyticsController)
 final analyticsControllerProvider = AutoDisposeNotifierProvider<
-    AnalyticsController, FirebaseAnalytics>.internal(
+  AnalyticsController,
+  FirebaseAnalytics
+>.internal(
   AnalyticsController.new,
   name: r'analyticsControllerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$analyticsControllerHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$analyticsControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

@@ -12,14 +12,15 @@ String _$calendarViewModelHash() => r'39b0043f355a44828e35a148f228d69b17347054';
 @ProviderFor(CalendarViewModel)
 final calendarViewModelProvider =
     AutoDisposeNotifierProvider<CalendarViewModel, CalendarState>.internal(
-  CalendarViewModel.new,
-  name: r'calendarViewModelProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$calendarViewModelHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      CalendarViewModel.new,
+      name: r'calendarViewModelProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$calendarViewModelHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$CalendarViewModel = AutoDisposeNotifier<CalendarState>;
 // ignore_for_file: type=lint

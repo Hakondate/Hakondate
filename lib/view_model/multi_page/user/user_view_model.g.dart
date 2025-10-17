@@ -13,9 +13,10 @@ String _$userAuthorizedHash() => r'522577a8a4f15d312ff72e4b63b851f9ec58fff8';
 final userAuthorizedProvider = FutureProvider<bool>.internal(
   userAuthorized,
   name: r'userAuthorizedProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$userAuthorizedHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$userAuthorizedHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -29,14 +30,15 @@ String _$userViewModelHash() => r'4b29469389fc1cb5dd6a5c4b37132857021c103d';
 @ProviderFor(UserViewModel)
 final userViewModelProvider =
     NotifierProvider<UserViewModel, UserState>.internal(
-  UserViewModel.new,
-  name: r'userViewModelProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$userViewModelHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      UserViewModel.new,
+      name: r'userViewModelProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$userViewModelHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$UserViewModel = Notifier<UserState>;
 // ignore_for_file: type=lint

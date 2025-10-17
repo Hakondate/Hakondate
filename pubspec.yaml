@@ -3,11 +3,11 @@ description: はこんだて開発用プロジェクト
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-version: 2.1.2+15
+version: 2.2.0+16
 
 environment:
-  sdk: "3.8.1"
-  flutter: "3.32.5"
+  sdk: "3.9.0"
+  flutter: "3.35.1"
 
 dependencies:
   flutter:
@@ -54,11 +54,11 @@ dependencies:
   firebase_analytics: 11.4.1
 
   # URL関連
-  url_launcher: 6.3.1
+  url_launcher: 6.3.2
 
   # Utility
   collection: 1.19.1
-  http: 1.4.0 
+  http: 1.5.0
 
 dependency_overrides:
   url_launcher_ios:
@@ -91,7 +91,6 @@ dev_dependencies:
 
   # ファイルをセーブするたびに build_runner を自動実行するコマンド
   # fvm flutter packages pub run build_runner watch --delete-conflicting-outputs
-
 
   # oss_licenses.dart の生成コマンド（パッケージを追加したら実行する）
   # fvm dart run flutter_oss_licenses:generate.dart -o lib/constant/oss_licenses.dart

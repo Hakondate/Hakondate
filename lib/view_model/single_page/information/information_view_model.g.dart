@@ -13,14 +13,15 @@ String _$informationViewModelHash() =>
 @ProviderFor(informationViewModel)
 final informationViewModelProvider =
     AutoDisposeProvider<InformationViewModel>.internal(
-  informationViewModel,
-  name: r'informationViewModelProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$informationViewModelHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      informationViewModel,
+      name: r'informationViewModelProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$informationViewModelHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element

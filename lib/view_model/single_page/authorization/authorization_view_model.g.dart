@@ -12,12 +12,15 @@ String _$authorizationViewModelHash() =>
 /// See also [AuthorizationViewModel].
 @ProviderFor(AuthorizationViewModel)
 final authorizationViewModelProvider = AutoDisposeAsyncNotifierProvider<
-    AuthorizationViewModel, AuthorizationState>.internal(
+  AuthorizationViewModel,
+  AuthorizationState
+>.internal(
   AuthorizationViewModel.new,
   name: r'authorizationViewModelProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$authorizationViewModelHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$authorizationViewModelHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
