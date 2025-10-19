@@ -39,7 +39,6 @@ Future<List<double>> graphValues(Ref ref) async {
     carbohydrate: menu.carbohydrate,
     lipid: menu.lipid,
     slns: slns,
-    cap: 120,
   );
 }
 

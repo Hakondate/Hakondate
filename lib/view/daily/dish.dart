@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hakondate/constant/app_color.dart';
+import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/model/dish/dish_model.dart';
 import 'package:hakondate/model/foodstuff/foodstuff_model.dart';
 import 'package:hakondate/model/nutrients/nutrient_unit.dart';
@@ -72,34 +73,51 @@ class Dish extends ConsumerWidget {
                           if (slns == null) return const SizedBox.shrink();
 
                           const double maxValue = 120;
+                          final double energy = dish.energy;
+                          final double protein = dish.protein;
+                          final double retinol = dish.retinol;
+                          final double vitaminB1 = dish.vitaminB1;
+                          final double vitaminB2 = dish.vitaminB2;
+                          final double vitaminC = dish.vitaminC;
+                          final double calcium = dish.calcium;
+                          final double magnesium = dish.magnesium;
+                          final double iron = dish.iron;
+                          final double zinc = dish.zinc;
+                          final double carbohydrate = dish.carbohydrate;
+                          final double lipid = dish.lipid;
+                          final double vitamin = dish.vitamin;
+                          final double mineral = dish.mineral;
+                          final List<double> rawValues = sixAxisRaw(
+                            energy: energy,
+                            protein: protein,
+                            vitamin: vitamin,
+                            mineral: mineral,
+                            carbohydrate: carbohydrate,
+                            lipid: lipid,
+                          );
                           final List<double> values = computeSixAxisPercentFromSlns(
-                            energy: dish.energy,
-                            protein: dish.protein,
-                            retinol: dish.retinol,
-                            vitaminB1: dish.vitaminB1,
-                            vitaminB2: dish.vitaminB2,
-                            vitaminC: dish.vitaminC,
-                            calcium: dish.calcium,
-                            magnesium: dish.magnesium,
-                            iron: dish.iron,
-                            zinc: dish.zinc,
-                            carbohydrate: dish.carbohydrate,
-                            lipid: dish.lipid,
+                            energy: energy,
+                            protein: protein,
+                            retinol: retinol,
+                            vitaminB1: vitaminB1,
+                            vitaminB2: vitaminB2,
+                            vitaminC: vitaminC,
+                            calcium: calcium,
+                            magnesium: magnesium,
+                            iron: iron,
+                            zinc: zinc,
+                            carbohydrate: carbohydrate,
+                            lipid: lipid,
                             slns: slns,
                           );
 
                           return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            padding: const EdgeInsets.symmetric(
+                              vertical: PaddingSize.contentLarge,
+                            ),
                             child: DictionaryNutrientsRadarChart(
                               values: values,
-                              rawValues: sixAxisRaw(
-                                energy: dish.energy,
-                                protein: dish.protein,
-                                vitamin: dish.vitamin,
-                                mineral: dish.mineral,
-                                carbohydrate: dish.carbohydrate,
-                                lipid: dish.lipid,
-                              ),
+                              rawValues: rawValues,
                               maxValue: maxValue,
                               size: 0.7,
                             ),
