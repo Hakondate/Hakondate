@@ -20,8 +20,7 @@ List<double> computeSixAxisPercentFromSlns({
 }) {
   final double vitaminSufficiency =
       (retinol / slns.retinol + vitaminB1 / slns.vitaminB1 + vitaminB2 / slns.vitaminB2 + vitaminC / slns.vitaminC) / 4 * 100.0;
-  final double mineralSufficiency =
-      (calcium / slns.calcium + magnesium / slns.magnesium + iron / slns.iron + zinc / slns.zinc) / 4 * 100.0;
+  final double mineralSufficiency = (calcium / slns.calcium + magnesium / slns.magnesium + iron / slns.iron + zinc / slns.zinc) / 4 * 100.0;
 
   final List<double> values = <double>[
     energy / slns.energy * 100.0,
@@ -43,4 +42,5 @@ List<double> sixAxisRaw({
   required double mineral,
   required double carbohydrate,
   required double lipid,
-}) => <double>[energy, protein, vitamin, mineral, carbohydrate, lipid];
+}) =>
+    <double>[energy, protein, vitamin, mineral, carbohydrate, lipid];
