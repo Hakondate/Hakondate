@@ -10,10 +10,6 @@ part 'drawer_view_model.g.dart';
 class DrawerViewModel extends _$DrawerViewModel {
   @override
   DrawerState build() {
-    ref.onDispose(() {
-      state.scaffoldKey.currentState?.dispose();
-    });
-
     return DrawerState(scaffoldKey: GlobalKey<ScaffoldState>());
   }
 
