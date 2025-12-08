@@ -1,81 +1,58 @@
 {
-  /** このファイルの入力補完を有効化 */
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-
-  /** 依存設定 */
-  "extends": [
-    "config:recommended",
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: [
+    'config:recommended',
   ],
-
-  /** タイムゾーン */
-  "timezone": "Asia/Tokyo",
-
-  /** 実行日時設定 */
-  "schedule": [
-    /** 毎週月曜の早朝 */
-    "before 4am on Monday",
+  timezone: 'Asia/Tokyo',
+  schedule: [
+    'before 4am on Monday',
   ],
-
-  /** 監視対象のライブラリ群 */
-  "enabledManagers": [
-    "github-actions",
-    "pub",
+  enabledManagers: [
+    'github-actions',
+    'pub',
   ],
-
-  /** カスタムルール */
-  "packageRules": [
-    /** Firebase関連はまとめる */
+  packageRules: [
     {
-      "groupName": "Firebase Packages",
-      "matchPackageNames": [
-        "cloud_firestore",
-        "firebase_messaging",
-        "firebase_remote_config",
-        "firebase_crashlytics",
-        "firebase_analytics",
-        "firebase_core",
-        "firebase_dynamic_links",
-        "firebase_messaging",
-        "firebase_storage"
+      groupName: 'Firebase Packages',
+      matchPackageNames: [
+        'cloud_firestore',
+        'firebase_messaging',
+        'firebase_remote_config',
+        'firebase_crashlytics',
+        'firebase_analytics',
+        'firebase_core',
+        'firebase_dynamic_links',
+        'firebase_messaging',
+        'firebase_storage',
       ],
     },
-    /** マイナーアップデートはまとめる */
     {
-      "groupName": "All minor and patch dependencies",
-      "matchUpdateTypes": ["minor", "patch"],
-      "excludePackageNames":[
-        "cloud_firestore",
-        "firebase_messaging",
-        "firebase_remote_config",
-        "firebase_crashlytics",
-        "firebase_analytics",
-        "firebase_core",
-        "firebase_dynamic_links",
-        "firebase_messaging",
-        "firebase_storage"
+      groupName: 'All minor and patch dependencies',
+      matchUpdateTypes: [
+        'minor',
+        'patch',
+      ],
+      matchPackageNames: [
+        '!cloud_firestore',
+        '!firebase_messaging',
+        '!firebase_remote_config',
+        '!firebase_crashlytics',
+        '!firebase_analytics',
+        '!firebase_core',
+        '!firebase_dynamic_links',
+        '!firebase_messaging',
+        '!firebase_storage',
       ],
     },
   ],
-
-  /** PRの時間あたり上限数 */
-  "prHourlyLimit": 0,
-
-  /** PRの同時上限数 */
-  "prConcurrentLimit": 0,
-
-  /** PRにつけるラベル */
-  "labels": [
-    "Type: Renovate"
+  prHourlyLimit: 0,
+  prConcurrentLimit: 0,
+  labels: [
+    'Type: Renovate',
   ],
-
-  /** このファイルのマイグレーションPRを発行するか */
-  "configMigration": true,
-
-  /** DependencyDashboardを有効にするか */
-  "dependencyDashboard": false,
-
-  /** fvmの関連ファイルのアップデートを行うかどうか */
-  "fvm": {
-    "enabled": true
-  }
+  configMigration: true,
+  dependencyDashboard: false,
+  fvm: {
+    enabled: true,
+  },
 }
