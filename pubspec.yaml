@@ -26,14 +26,14 @@ dependencies:
 
   # 状態管理関連
   flutter_riverpod: 2.6.1
-  riverpod_annotation: 2.6.1
-  freezed: 3.0.6
-  freezed_annotation: 3.0.0
+  riverpod_annotation: 3.0.3
+  freezed: ^3.0.6
+  freezed_annotation: ^3.1.0
   json_serializable: 6.9.5
   json_annotation: 4.9.0
 
   # Drift(SQLite)関連
-  drift: 2.24.0
+  drift: ^2.24.0
   sqlite3_flutter_libs: 0.5.29+1
 
   # 起動時データ関連
@@ -75,11 +75,11 @@ dev_dependencies:
   import_sorter: 4.6.0
 
   # コード生成
-  build_runner: 2.4.14
+  build_runner: ^2.4.15
   custom_lint: 0.7.5
   riverpod_generator: 2.6.5
   riverpod_lint: 2.6.5
-  drift_dev: 2.24.0
+  drift_dev: ^2.28.0
   flutter_oss_licenses: 3.0.4
 
   # デザイン生成
