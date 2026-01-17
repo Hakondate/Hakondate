@@ -13,14 +13,14 @@ String _$schoolsLocalRepositoryHash() =>
 @ProviderFor(schoolsLocalRepository)
 final schoolsLocalRepositoryProvider =
     Provider<SchoolsLocalRepository>.internal(
-  schoolsLocalRepository,
-  name: r'schoolsLocalRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$schoolsLocalRepositoryHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      schoolsLocalRepository,
+      name: r'schoolsLocalRepositoryProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$schoolsLocalRepositoryHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element

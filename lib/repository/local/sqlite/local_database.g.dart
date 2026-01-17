@@ -12,137 +12,195 @@ class $SchoolsTableTable extends SchoolsTable
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: false);
-  static const VerificationMeta _parentIdMeta =
-      const VerificationMeta('parentId');
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _parentIdMeta = const VerificationMeta(
+    'parentId',
+  );
   @override
   late final GeneratedColumn<int> parentId = GeneratedColumn<int>(
-      'parent_id', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
+    'parent_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _nameMeta = const VerificationMeta('name');
   @override
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
-      'name', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _lunchBlockMeta =
-      const VerificationMeta('lunchBlock');
+    'name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _lunchBlockMeta = const VerificationMeta(
+    'lunchBlock',
+  );
   @override
   late final GeneratedColumn<int> lunchBlock = GeneratedColumn<int>(
-      'lunch_block', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
-  static const VerificationMeta _classificationMeta =
-      const VerificationMeta('classification');
+    'lunch_block',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _classificationMeta = const VerificationMeta(
+    'classification',
+  );
   @override
   late final GeneratedColumn<String> classification = GeneratedColumn<String>(
-      'classification', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _createAtMeta =
-      const VerificationMeta('createAt');
+    'classification',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _createAtMeta = const VerificationMeta(
+    'createAt',
+  );
   @override
   late final GeneratedColumn<DateTime> createAt = GeneratedColumn<DateTime>(
-      'create_at', aliasedName, false,
-      type: DriftSqlType.dateTime,
-      requiredDuringInsert: false,
-      defaultValue: Constant(DateTime.now()));
-  static const VerificationMeta _updateAtMeta =
-      const VerificationMeta('updateAt');
+    'create_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    defaultValue: Constant(DateTime.now()),
+  );
+  static const VerificationMeta _updateAtMeta = const VerificationMeta(
+    'updateAt',
+  );
   @override
   late final GeneratedColumn<DateTime> updateAt = GeneratedColumn<DateTime>(
-      'update_at', aliasedName, false,
-      type: DriftSqlType.dateTime,
-      requiredDuringInsert: false,
-      defaultValue: Constant(DateTime.now()));
+    'update_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    defaultValue: Constant(DateTime.now()),
+  );
   static const VerificationMeta _authorizationRequiredMeta =
       const VerificationMeta('authorizationRequired');
   @override
   late final GeneratedColumn<bool> authorizationRequired =
-      GeneratedColumn<bool>('authorization_required', aliasedName, false,
-          type: DriftSqlType.bool,
-          requiredDuringInsert: false,
-          defaultConstraints: GeneratedColumn.constraintIsAlways(
-              'CHECK ("authorization_required" IN (0, 1))'),
-          defaultValue: const Constant(false));
+      GeneratedColumn<bool>(
+        'authorization_required',
+        aliasedName,
+        false,
+        type: DriftSqlType.bool,
+        requiredDuringInsert: false,
+        defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'CHECK ("authorization_required" IN (0, 1))',
+        ),
+        defaultValue: const Constant(false),
+      );
   static const VerificationMeta _authorizationKeyUpdatedAtMeta =
       const VerificationMeta('authorizationKeyUpdatedAt');
   @override
   late final GeneratedColumn<DateTime> authorizationKeyUpdatedAt =
       GeneratedColumn<DateTime>(
-          'authorization_key_updated_at', aliasedName, true,
-          type: DriftSqlType.dateTime, requiredDuringInsert: false);
+        'authorization_key_updated_at',
+        aliasedName,
+        true,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: false,
+      );
   @override
   List<GeneratedColumn> get $columns => [
-        id,
-        parentId,
-        name,
-        lunchBlock,
-        classification,
-        createAt,
-        updateAt,
-        authorizationRequired,
-        authorizationKeyUpdatedAt
-      ];
+    id,
+    parentId,
+    name,
+    lunchBlock,
+    classification,
+    createAt,
+    updateAt,
+    authorizationRequired,
+    authorizationKeyUpdatedAt,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
   static const String $name = 'schools_table';
   @override
-  VerificationContext validateIntegrity(Insertable<SchoolsSchema> instance,
-      {bool isInserting = false}) {
+  VerificationContext validateIntegrity(
+    Insertable<SchoolsSchema> instance, {
+    bool isInserting = false,
+  }) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
     if (data.containsKey('parent_id')) {
-      context.handle(_parentIdMeta,
-          parentId.isAcceptableOrUnknown(data['parent_id']!, _parentIdMeta));
+      context.handle(
+        _parentIdMeta,
+        parentId.isAcceptableOrUnknown(data['parent_id']!, _parentIdMeta),
+      );
     } else if (isInserting) {
       context.missing(_parentIdMeta);
     }
     if (data.containsKey('name')) {
       context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+        _nameMeta,
+        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
+      );
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
     if (data.containsKey('lunch_block')) {
       context.handle(
-          _lunchBlockMeta,
-          lunchBlock.isAcceptableOrUnknown(
-              data['lunch_block']!, _lunchBlockMeta));
+        _lunchBlockMeta,
+        lunchBlock.isAcceptableOrUnknown(data['lunch_block']!, _lunchBlockMeta),
+      );
     } else if (isInserting) {
       context.missing(_lunchBlockMeta);
     }
     if (data.containsKey('classification')) {
       context.handle(
+        _classificationMeta,
+        classification.isAcceptableOrUnknown(
+          data['classification']!,
           _classificationMeta,
-          classification.isAcceptableOrUnknown(
-              data['classification']!, _classificationMeta));
+        ),
+      );
     } else if (isInserting) {
       context.missing(_classificationMeta);
     }
     if (data.containsKey('create_at')) {
-      context.handle(_createAtMeta,
-          createAt.isAcceptableOrUnknown(data['create_at']!, _createAtMeta));
+      context.handle(
+        _createAtMeta,
+        createAt.isAcceptableOrUnknown(data['create_at']!, _createAtMeta),
+      );
     }
     if (data.containsKey('update_at')) {
-      context.handle(_updateAtMeta,
-          updateAt.isAcceptableOrUnknown(data['update_at']!, _updateAtMeta));
+      context.handle(
+        _updateAtMeta,
+        updateAt.isAcceptableOrUnknown(data['update_at']!, _updateAtMeta),
+      );
     }
     if (data.containsKey('authorization_required')) {
       context.handle(
+        _authorizationRequiredMeta,
+        authorizationRequired.isAcceptableOrUnknown(
+          data['authorization_required']!,
           _authorizationRequiredMeta,
-          authorizationRequired.isAcceptableOrUnknown(
-              data['authorization_required']!, _authorizationRequiredMeta));
+        ),
+      );
     }
     if (data.containsKey('authorization_key_updated_at')) {
       context.handle(
+        _authorizationKeyUpdatedAtMeta,
+        authorizationKeyUpdatedAt.isAcceptableOrUnknown(
+          data['authorization_key_updated_at']!,
           _authorizationKeyUpdatedAtMeta,
-          authorizationKeyUpdatedAt.isAcceptableOrUnknown(
-              data['authorization_key_updated_at']!,
-              _authorizationKeyUpdatedAtMeta));
+        ),
+      );
     }
     return context;
   }
@@ -153,25 +211,42 @@ class $SchoolsTableTable extends SchoolsTable
   SchoolsSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return SchoolsSchema(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      parentId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}parent_id'])!,
-      name: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
-      lunchBlock: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}lunch_block'])!,
-      classification: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}classification'])!,
-      createAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}create_at'])!,
-      updateAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}update_at'])!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      parentId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}parent_id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      lunchBlock: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}lunch_block'],
+      )!,
+      classification: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}classification'],
+      )!,
+      createAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}create_at'],
+      )!,
+      updateAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}update_at'],
+      )!,
       authorizationRequired: attachedDatabase.typeMapping.read(
-          DriftSqlType.bool, data['${effectivePrefix}authorization_required'])!,
+        DriftSqlType.bool,
+        data['${effectivePrefix}authorization_required'],
+      )!,
       authorizationKeyUpdatedAt: attachedDatabase.typeMapping.read(
-          DriftSqlType.dateTime,
-          data['${effectivePrefix}authorization_key_updated_at']),
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}authorization_key_updated_at'],
+      ),
     );
   }
 
@@ -191,16 +266,17 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
   final DateTime updateAt;
   final bool authorizationRequired;
   final DateTime? authorizationKeyUpdatedAt;
-  const SchoolsSchema(
-      {required this.id,
-      required this.parentId,
-      required this.name,
-      required this.lunchBlock,
-      required this.classification,
-      required this.createAt,
-      required this.updateAt,
-      required this.authorizationRequired,
-      this.authorizationKeyUpdatedAt});
+  const SchoolsSchema({
+    required this.id,
+    required this.parentId,
+    required this.name,
+    required this.lunchBlock,
+    required this.classification,
+    required this.createAt,
+    required this.updateAt,
+    required this.authorizationRequired,
+    this.authorizationKeyUpdatedAt,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -213,8 +289,9 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
     map['update_at'] = Variable<DateTime>(updateAt);
     map['authorization_required'] = Variable<bool>(authorizationRequired);
     if (!nullToAbsent || authorizationKeyUpdatedAt != null) {
-      map['authorization_key_updated_at'] =
-          Variable<DateTime>(authorizationKeyUpdatedAt);
+      map['authorization_key_updated_at'] = Variable<DateTime>(
+        authorizationKeyUpdatedAt,
+      );
     }
     return map;
   }
@@ -231,13 +308,15 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       authorizationRequired: Value(authorizationRequired),
       authorizationKeyUpdatedAt:
           authorizationKeyUpdatedAt == null && nullToAbsent
-              ? const Value.absent()
-              : Value(authorizationKeyUpdatedAt),
+          ? const Value.absent()
+          : Value(authorizationKeyUpdatedAt),
     );
   }
 
-  factory SchoolsSchema.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory SchoolsSchema.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return SchoolsSchema(
       id: serializer.fromJson<int>(json['id']),
@@ -247,10 +326,12 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       classification: serializer.fromJson<String>(json['classification']),
       createAt: serializer.fromJson<DateTime>(json['createAt']),
       updateAt: serializer.fromJson<DateTime>(json['updateAt']),
-      authorizationRequired:
-          serializer.fromJson<bool>(json['authorizationRequired']),
-      authorizationKeyUpdatedAt:
-          serializer.fromJson<DateTime?>(json['authorizationKeyUpdatedAt']),
+      authorizationRequired: serializer.fromJson<bool>(
+        json['authorizationRequired'],
+      ),
+      authorizationKeyUpdatedAt: serializer.fromJson<DateTime?>(
+        json['authorizationKeyUpdatedAt'],
+      ),
     );
   }
   @override
@@ -265,42 +346,43 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
       'createAt': serializer.toJson<DateTime>(createAt),
       'updateAt': serializer.toJson<DateTime>(updateAt),
       'authorizationRequired': serializer.toJson<bool>(authorizationRequired),
-      'authorizationKeyUpdatedAt':
-          serializer.toJson<DateTime?>(authorizationKeyUpdatedAt),
+      'authorizationKeyUpdatedAt': serializer.toJson<DateTime?>(
+        authorizationKeyUpdatedAt,
+      ),
     };
   }
 
-  SchoolsSchema copyWith(
-          {int? id,
-          int? parentId,
-          String? name,
-          int? lunchBlock,
-          String? classification,
-          DateTime? createAt,
-          DateTime? updateAt,
-          bool? authorizationRequired,
-          Value<DateTime?> authorizationKeyUpdatedAt = const Value.absent()}) =>
-      SchoolsSchema(
-        id: id ?? this.id,
-        parentId: parentId ?? this.parentId,
-        name: name ?? this.name,
-        lunchBlock: lunchBlock ?? this.lunchBlock,
-        classification: classification ?? this.classification,
-        createAt: createAt ?? this.createAt,
-        updateAt: updateAt ?? this.updateAt,
-        authorizationRequired:
-            authorizationRequired ?? this.authorizationRequired,
-        authorizationKeyUpdatedAt: authorizationKeyUpdatedAt.present
-            ? authorizationKeyUpdatedAt.value
-            : this.authorizationKeyUpdatedAt,
-      );
+  SchoolsSchema copyWith({
+    int? id,
+    int? parentId,
+    String? name,
+    int? lunchBlock,
+    String? classification,
+    DateTime? createAt,
+    DateTime? updateAt,
+    bool? authorizationRequired,
+    Value<DateTime?> authorizationKeyUpdatedAt = const Value.absent(),
+  }) => SchoolsSchema(
+    id: id ?? this.id,
+    parentId: parentId ?? this.parentId,
+    name: name ?? this.name,
+    lunchBlock: lunchBlock ?? this.lunchBlock,
+    classification: classification ?? this.classification,
+    createAt: createAt ?? this.createAt,
+    updateAt: updateAt ?? this.updateAt,
+    authorizationRequired: authorizationRequired ?? this.authorizationRequired,
+    authorizationKeyUpdatedAt: authorizationKeyUpdatedAt.present
+        ? authorizationKeyUpdatedAt.value
+        : this.authorizationKeyUpdatedAt,
+  );
   SchoolsSchema copyWithCompanion(SchoolsTableCompanion data) {
     return SchoolsSchema(
       id: data.id.present ? data.id.value : this.id,
       parentId: data.parentId.present ? data.parentId.value : this.parentId,
       name: data.name.present ? data.name.value : this.name,
-      lunchBlock:
-          data.lunchBlock.present ? data.lunchBlock.value : this.lunchBlock,
+      lunchBlock: data.lunchBlock.present
+          ? data.lunchBlock.value
+          : this.lunchBlock,
       classification: data.classification.present
           ? data.classification.value
           : this.classification,
@@ -333,15 +415,16 @@ class SchoolsSchema extends DataClass implements Insertable<SchoolsSchema> {
 
   @override
   int get hashCode => Object.hash(
-      id,
-      parentId,
-      name,
-      lunchBlock,
-      classification,
-      createAt,
-      updateAt,
-      authorizationRequired,
-      authorizationKeyUpdatedAt);
+    id,
+    parentId,
+    name,
+    lunchBlock,
+    classification,
+    createAt,
+    updateAt,
+    authorizationRequired,
+    authorizationKeyUpdatedAt,
+  );
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -388,10 +471,10 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
     this.updateAt = const Value.absent(),
     this.authorizationRequired = const Value.absent(),
     this.authorizationKeyUpdatedAt = const Value.absent(),
-  })  : parentId = Value(parentId),
-        name = Value(name),
-        lunchBlock = Value(lunchBlock),
-        classification = Value(classification);
+  }) : parentId = Value(parentId),
+       name = Value(name),
+       lunchBlock = Value(lunchBlock),
+       classification = Value(classification);
   static Insertable<SchoolsSchema> custom({
     Expression<int>? id,
     Expression<int>? parentId,
@@ -418,16 +501,17 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
     });
   }
 
-  SchoolsTableCompanion copyWith(
-      {Value<int>? id,
-      Value<int>? parentId,
-      Value<String>? name,
-      Value<int>? lunchBlock,
-      Value<String>? classification,
-      Value<DateTime>? createAt,
-      Value<DateTime>? updateAt,
-      Value<bool>? authorizationRequired,
-      Value<DateTime?>? authorizationKeyUpdatedAt}) {
+  SchoolsTableCompanion copyWith({
+    Value<int>? id,
+    Value<int>? parentId,
+    Value<String>? name,
+    Value<int>? lunchBlock,
+    Value<String>? classification,
+    Value<DateTime>? createAt,
+    Value<DateTime>? updateAt,
+    Value<bool>? authorizationRequired,
+    Value<DateTime?>? authorizationKeyUpdatedAt,
+  }) {
     return SchoolsTableCompanion(
       id: id ?? this.id,
       parentId: parentId ?? this.parentId,
@@ -468,12 +552,14 @@ class SchoolsTableCompanion extends UpdateCompanion<SchoolsSchema> {
       map['update_at'] = Variable<DateTime>(updateAt.value);
     }
     if (authorizationRequired.present) {
-      map['authorization_required'] =
-          Variable<bool>(authorizationRequired.value);
+      map['authorization_required'] = Variable<bool>(
+        authorizationRequired.value,
+      );
     }
     if (authorizationKeyUpdatedAt.present) {
-      map['authorization_key_updated_at'] =
-          Variable<DateTime>(authorizationKeyUpdatedAt.value);
+      map['authorization_key_updated_at'] = Variable<DateTime>(
+        authorizationKeyUpdatedAt.value,
+      );
     }
     return map;
   }
@@ -504,54 +590,87 @@ class $MenusTableTable extends MenusTable
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: false);
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _dayMeta = const VerificationMeta('day');
   @override
   late final GeneratedColumn<DateTime> day = GeneratedColumn<DateTime>(
-      'day', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
-  static const VerificationMeta _schoolIdMeta =
-      const VerificationMeta('schoolId');
+    'day',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _schoolIdMeta = const VerificationMeta(
+    'schoolId',
+  );
   @override
   late final GeneratedColumn<int> schoolId = GeneratedColumn<int>(
-      'school_id', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: true,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('REFERENCES schools_table (id)'));
+    'school_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES schools_table (id)',
+    ),
+  );
   static const VerificationMeta _eventMeta = const VerificationMeta('event');
   @override
   late final GeneratedColumn<String> event = GeneratedColumn<String>(
-      'event', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _createAtMeta =
-      const VerificationMeta('createAt');
+    'event',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _createAtMeta = const VerificationMeta(
+    'createAt',
+  );
   @override
   late final GeneratedColumn<DateTime> createAt = GeneratedColumn<DateTime>(
-      'create_at', aliasedName, false,
-      type: DriftSqlType.dateTime,
-      requiredDuringInsert: false,
-      defaultValue: Constant(DateTime.now()));
-  static const VerificationMeta _updateAtMeta =
-      const VerificationMeta('updateAt');
+    'create_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    defaultValue: Constant(DateTime.now()),
+  );
+  static const VerificationMeta _updateAtMeta = const VerificationMeta(
+    'updateAt',
+  );
   @override
   late final GeneratedColumn<DateTime> updateAt = GeneratedColumn<DateTime>(
-      'update_at', aliasedName, false,
-      type: DriftSqlType.dateTime,
-      requiredDuringInsert: false,
-      defaultValue: Constant(DateTime.now()));
+    'update_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    defaultValue: Constant(DateTime.now()),
+  );
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, day, schoolId, event, createAt, updateAt];
+  List<GeneratedColumn> get $columns => [
+    id,
+    day,
+    schoolId,
+    event,
+    createAt,
+    updateAt,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
   static const String $name = 'menus_table';
   @override
-  VerificationContext validateIntegrity(Insertable<MenusSchema> instance,
-      {bool isInserting = false}) {
+  VerificationContext validateIntegrity(
+    Insertable<MenusSchema> instance, {
+    bool isInserting = false,
+  }) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -559,27 +678,37 @@ class $MenusTableTable extends MenusTable
     }
     if (data.containsKey('day')) {
       context.handle(
-          _dayMeta, day.isAcceptableOrUnknown(data['day']!, _dayMeta));
+        _dayMeta,
+        day.isAcceptableOrUnknown(data['day']!, _dayMeta),
+      );
     } else if (isInserting) {
       context.missing(_dayMeta);
     }
     if (data.containsKey('school_id')) {
-      context.handle(_schoolIdMeta,
-          schoolId.isAcceptableOrUnknown(data['school_id']!, _schoolIdMeta));
+      context.handle(
+        _schoolIdMeta,
+        schoolId.isAcceptableOrUnknown(data['school_id']!, _schoolIdMeta),
+      );
     } else if (isInserting) {
       context.missing(_schoolIdMeta);
     }
     if (data.containsKey('event')) {
       context.handle(
-          _eventMeta, event.isAcceptableOrUnknown(data['event']!, _eventMeta));
+        _eventMeta,
+        event.isAcceptableOrUnknown(data['event']!, _eventMeta),
+      );
     }
     if (data.containsKey('create_at')) {
-      context.handle(_createAtMeta,
-          createAt.isAcceptableOrUnknown(data['create_at']!, _createAtMeta));
+      context.handle(
+        _createAtMeta,
+        createAt.isAcceptableOrUnknown(data['create_at']!, _createAtMeta),
+      );
     }
     if (data.containsKey('update_at')) {
-      context.handle(_updateAtMeta,
-          updateAt.isAcceptableOrUnknown(data['update_at']!, _updateAtMeta));
+      context.handle(
+        _updateAtMeta,
+        updateAt.isAcceptableOrUnknown(data['update_at']!, _updateAtMeta),
+      );
     }
     return context;
   }
@@ -590,18 +719,30 @@ class $MenusTableTable extends MenusTable
   MenusSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return MenusSchema(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      day: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}day'])!,
-      schoolId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}school_id'])!,
-      event: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}event']),
-      createAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}create_at'])!,
-      updateAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}update_at'])!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      day: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}day'],
+      )!,
+      schoolId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}school_id'],
+      )!,
+      event: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}event'],
+      ),
+      createAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}create_at'],
+      )!,
+      updateAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}update_at'],
+      )!,
     );
   }
 
@@ -618,13 +759,14 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
   final String? event;
   final DateTime createAt;
   final DateTime updateAt;
-  const MenusSchema(
-      {required this.id,
-      required this.day,
-      required this.schoolId,
-      this.event,
-      required this.createAt,
-      required this.updateAt});
+  const MenusSchema({
+    required this.id,
+    required this.day,
+    required this.schoolId,
+    this.event,
+    required this.createAt,
+    required this.updateAt,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -644,15 +786,18 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
       id: Value(id),
       day: Value(day),
       schoolId: Value(schoolId),
-      event:
-          event == null && nullToAbsent ? const Value.absent() : Value(event),
+      event: event == null && nullToAbsent
+          ? const Value.absent()
+          : Value(event),
       createAt: Value(createAt),
       updateAt: Value(updateAt),
     );
   }
 
-  factory MenusSchema.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory MenusSchema.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return MenusSchema(
       id: serializer.fromJson<int>(json['id']),
@@ -676,21 +821,21 @@ class MenusSchema extends DataClass implements Insertable<MenusSchema> {
     };
   }
 
-  MenusSchema copyWith(
-          {int? id,
-          DateTime? day,
-          int? schoolId,
-          Value<String?> event = const Value.absent(),
-          DateTime? createAt,
-          DateTime? updateAt}) =>
-      MenusSchema(
-        id: id ?? this.id,
-        day: day ?? this.day,
-        schoolId: schoolId ?? this.schoolId,
-        event: event.present ? event.value : this.event,
-        createAt: createAt ?? this.createAt,
-        updateAt: updateAt ?? this.updateAt,
-      );
+  MenusSchema copyWith({
+    int? id,
+    DateTime? day,
+    int? schoolId,
+    Value<String?> event = const Value.absent(),
+    DateTime? createAt,
+    DateTime? updateAt,
+  }) => MenusSchema(
+    id: id ?? this.id,
+    day: day ?? this.day,
+    schoolId: schoolId ?? this.schoolId,
+    event: event.present ? event.value : this.event,
+    createAt: createAt ?? this.createAt,
+    updateAt: updateAt ?? this.updateAt,
+  );
   MenusSchema copyWithCompanion(MenusTableCompanion data) {
     return MenusSchema(
       id: data.id.present ? data.id.value : this.id,
@@ -751,8 +896,8 @@ class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
     this.event = const Value.absent(),
     this.createAt = const Value.absent(),
     this.updateAt = const Value.absent(),
-  })  : day = Value(day),
-        schoolId = Value(schoolId);
+  }) : day = Value(day),
+       schoolId = Value(schoolId);
   static Insertable<MenusSchema> custom({
     Expression<int>? id,
     Expression<DateTime>? day,
@@ -771,13 +916,14 @@ class MenusTableCompanion extends UpdateCompanion<MenusSchema> {
     });
   }
 
-  MenusTableCompanion copyWith(
-      {Value<int>? id,
-      Value<DateTime>? day,
-      Value<int>? schoolId,
-      Value<String?>? event,
-      Value<DateTime>? createAt,
-      Value<DateTime>? updateAt}) {
+  MenusTableCompanion copyWith({
+    Value<int>? id,
+    Value<DateTime>? day,
+    Value<int>? schoolId,
+    Value<String?>? event,
+    Value<DateTime>? createAt,
+    Value<DateTime>? updateAt,
+  }) {
     return MenusTableCompanion(
       id: id ?? this.id,
       day: day ?? this.day,
@@ -835,25 +981,37 @@ class $DishesTableTable extends DishesTable
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, false,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
   static const VerificationMeta _nameMeta = const VerificationMeta('name');
   @override
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
-      'name', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: true,
-      defaultConstraints: GeneratedColumn.constraintIsAlways('UNIQUE'));
-  static const VerificationMeta _categoryMeta =
-      const VerificationMeta('category');
+    'name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways('UNIQUE'),
+  );
+  static const VerificationMeta _categoryMeta = const VerificationMeta(
+    'category',
+  );
   @override
   late final GeneratedColumn<String> category = GeneratedColumn<String>(
-      'category', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
+    'category',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   @override
   List<GeneratedColumn> get $columns => [id, name, category];
   @override
@@ -862,8 +1020,10 @@ class $DishesTableTable extends DishesTable
   String get actualTableName => $name;
   static const String $name = 'dishes_table';
   @override
-  VerificationContext validateIntegrity(Insertable<DishesSchema> instance,
-      {bool isInserting = false}) {
+  VerificationContext validateIntegrity(
+    Insertable<DishesSchema> instance, {
+    bool isInserting = false,
+  }) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -871,13 +1031,17 @@ class $DishesTableTable extends DishesTable
     }
     if (data.containsKey('name')) {
       context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+        _nameMeta,
+        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
+      );
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
     if (data.containsKey('category')) {
-      context.handle(_categoryMeta,
-          category.isAcceptableOrUnknown(data['category']!, _categoryMeta));
+      context.handle(
+        _categoryMeta,
+        category.isAcceptableOrUnknown(data['category']!, _categoryMeta),
+      );
     }
     return context;
   }
@@ -888,12 +1052,18 @@ class $DishesTableTable extends DishesTable
   DishesSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return DishesSchema(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      name: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
-      category: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}category']),
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      category: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}category'],
+      ),
     );
   }
 
@@ -929,8 +1099,10 @@ class DishesSchema extends DataClass implements Insertable<DishesSchema> {
     );
   }
 
-  factory DishesSchema.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory DishesSchema.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return DishesSchema(
       id: serializer.fromJson<int>(json['id']),
@@ -948,15 +1120,15 @@ class DishesSchema extends DataClass implements Insertable<DishesSchema> {
     };
   }
 
-  DishesSchema copyWith(
-          {int? id,
-          String? name,
-          Value<String?> category = const Value.absent()}) =>
-      DishesSchema(
-        id: id ?? this.id,
-        name: name ?? this.name,
-        category: category.present ? category.value : this.category,
-      );
+  DishesSchema copyWith({
+    int? id,
+    String? name,
+    Value<String?> category = const Value.absent(),
+  }) => DishesSchema(
+    id: id ?? this.id,
+    name: name ?? this.name,
+    category: category.present ? category.value : this.category,
+  );
   DishesSchema copyWithCompanion(DishesTableCompanion data) {
     return DishesSchema(
       id: data.id.present ? data.id.value : this.id,
@@ -1012,8 +1184,11 @@ class DishesTableCompanion extends UpdateCompanion<DishesSchema> {
     });
   }
 
-  DishesTableCompanion copyWith(
-      {Value<int>? id, Value<String>? name, Value<String?>? category}) {
+  DishesTableCompanion copyWith({
+    Value<int>? id,
+    Value<String>? name,
+    Value<String?>? category,
+  }) {
     return DishesTableCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -1056,19 +1231,27 @@ class $MenuDishesTableTable extends MenuDishesTable
   static const VerificationMeta _menuIdMeta = const VerificationMeta('menuId');
   @override
   late final GeneratedColumn<int> menuId = GeneratedColumn<int>(
-      'menu_id', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: true,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('REFERENCES menus_table (id)'));
+    'menu_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES menus_table (id)',
+    ),
+  );
   static const VerificationMeta _dishIdMeta = const VerificationMeta('dishId');
   @override
   late final GeneratedColumn<int> dishId = GeneratedColumn<int>(
-      'dish_id', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: true,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('REFERENCES dishes_table (id)'));
+    'dish_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES dishes_table (id)',
+    ),
+  );
   @override
   List<GeneratedColumn> get $columns => [menuId, dishId];
   @override
@@ -1077,19 +1260,25 @@ class $MenuDishesTableTable extends MenuDishesTable
   String get actualTableName => $name;
   static const String $name = 'menu_dishes_table';
   @override
-  VerificationContext validateIntegrity(Insertable<MenuDishesSchema> instance,
-      {bool isInserting = false}) {
+  VerificationContext validateIntegrity(
+    Insertable<MenuDishesSchema> instance, {
+    bool isInserting = false,
+  }) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('menu_id')) {
-      context.handle(_menuIdMeta,
-          menuId.isAcceptableOrUnknown(data['menu_id']!, _menuIdMeta));
+      context.handle(
+        _menuIdMeta,
+        menuId.isAcceptableOrUnknown(data['menu_id']!, _menuIdMeta),
+      );
     } else if (isInserting) {
       context.missing(_menuIdMeta);
     }
     if (data.containsKey('dish_id')) {
-      context.handle(_dishIdMeta,
-          dishId.isAcceptableOrUnknown(data['dish_id']!, _dishIdMeta));
+      context.handle(
+        _dishIdMeta,
+        dishId.isAcceptableOrUnknown(data['dish_id']!, _dishIdMeta),
+      );
     } else if (isInserting) {
       context.missing(_dishIdMeta);
     }
@@ -1100,16 +1289,20 @@ class $MenuDishesTableTable extends MenuDishesTable
   Set<GeneratedColumn> get $primaryKey => const {};
   @override
   List<Set<GeneratedColumn>> get uniqueKeys => [
-        {menuId, dishId},
-      ];
+    {menuId, dishId},
+  ];
   @override
   MenuDishesSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return MenuDishesSchema(
-      menuId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}menu_id'])!,
-      dishId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}dish_id'])!,
+      menuId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}menu_id'],
+      )!,
+      dishId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}dish_id'],
+      )!,
     );
   }
 
@@ -1139,8 +1332,10 @@ class MenuDishesSchema extends DataClass
     );
   }
 
-  factory MenuDishesSchema.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory MenuDishesSchema.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return MenuDishesSchema(
       menuId: serializer.fromJson<int>(json['menuId']),
@@ -1157,9 +1352,9 @@ class MenuDishesSchema extends DataClass
   }
 
   MenuDishesSchema copyWith({int? menuId, int? dishId}) => MenuDishesSchema(
-        menuId: menuId ?? this.menuId,
-        dishId: dishId ?? this.dishId,
-      );
+    menuId: menuId ?? this.menuId,
+    dishId: dishId ?? this.dishId,
+  );
   MenuDishesSchema copyWithCompanion(MenuDishesTableCompanion data) {
     return MenuDishesSchema(
       menuId: data.menuId.present ? data.menuId.value : this.menuId,
@@ -1199,8 +1394,8 @@ class MenuDishesTableCompanion extends UpdateCompanion<MenuDishesSchema> {
     required int menuId,
     required int dishId,
     this.rowid = const Value.absent(),
-  })  : menuId = Value(menuId),
-        dishId = Value(dishId);
+  }) : menuId = Value(menuId),
+       dishId = Value(dishId);
   static Insertable<MenuDishesSchema> custom({
     Expression<int>? menuId,
     Expression<int>? dishId,
@@ -1213,8 +1408,11 @@ class MenuDishesTableCompanion extends UpdateCompanion<MenuDishesSchema> {
     });
   }
 
-  MenuDishesTableCompanion copyWith(
-      {Value<int>? menuId, Value<int>? dishId, Value<int>? rowid}) {
+  MenuDishesTableCompanion copyWith({
+    Value<int>? menuId,
+    Value<int>? dishId,
+    Value<int>? rowid,
+  }) {
     return MenuDishesTableCompanion(
       menuId: menuId ?? this.menuId,
       dishId: dishId ?? this.dishId,
@@ -1257,174 +1455,280 @@ class $FoodstuffsTableTable extends FoodstuffsTable
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, false,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
   static const VerificationMeta _nameMeta = const VerificationMeta('name');
   @override
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
-      'name', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _pieceNumberMeta =
-      const VerificationMeta('pieceNumber');
+    'name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _pieceNumberMeta = const VerificationMeta(
+    'pieceNumber',
+  );
   @override
   late final GeneratedColumn<double> pieceNumber = GeneratedColumn<double>(
-      'piece_number', aliasedName, true,
-      type: DriftSqlType.double, requiredDuringInsert: false);
-  static const VerificationMeta _pieceUnitMeta =
-      const VerificationMeta('pieceUnit');
+    'piece_number',
+    aliasedName,
+    true,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _pieceUnitMeta = const VerificationMeta(
+    'pieceUnit',
+  );
   @override
   late final GeneratedColumn<String> pieceUnit = GeneratedColumn<String>(
-      'piece_unit', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
+    'piece_unit',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _gramMeta = const VerificationMeta('gram');
   @override
   late final GeneratedColumn<double> gram = GeneratedColumn<double>(
-      'gram', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
+    'gram',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _energyMeta = const VerificationMeta('energy');
   @override
   late final GeneratedColumn<double> energy = GeneratedColumn<double>(
-      'energy', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
-  static const VerificationMeta _proteinMeta =
-      const VerificationMeta('protein');
+    'energy',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _proteinMeta = const VerificationMeta(
+    'protein',
+  );
   @override
   late final GeneratedColumn<double> protein = GeneratedColumn<double>(
-      'protein', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
+    'protein',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _lipidMeta = const VerificationMeta('lipid');
   @override
   late final GeneratedColumn<double> lipid = GeneratedColumn<double>(
-      'lipid', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
+    'lipid',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _sodiumMeta = const VerificationMeta('sodium');
   @override
   late final GeneratedColumn<double> sodium = GeneratedColumn<double>(
-      'sodium', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
-  static const VerificationMeta _carbohydrateMeta =
-      const VerificationMeta('carbohydrate');
+    'sodium',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _carbohydrateMeta = const VerificationMeta(
+    'carbohydrate',
+  );
   @override
   late final GeneratedColumn<double> carbohydrate = GeneratedColumn<double>(
-      'carbohydrate', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
-  static const VerificationMeta _calciumMeta =
-      const VerificationMeta('calcium');
+    'carbohydrate',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _calciumMeta = const VerificationMeta(
+    'calcium',
+  );
   @override
   late final GeneratedColumn<double> calcium = GeneratedColumn<double>(
-      'calcium', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
-  static const VerificationMeta _magnesiumMeta =
-      const VerificationMeta('magnesium');
+    'calcium',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _magnesiumMeta = const VerificationMeta(
+    'magnesium',
+  );
   @override
   late final GeneratedColumn<double> magnesium = GeneratedColumn<double>(
-      'magnesium', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
+    'magnesium',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _ironMeta = const VerificationMeta('iron');
   @override
   late final GeneratedColumn<double> iron = GeneratedColumn<double>(
-      'iron', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
+    'iron',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _zincMeta = const VerificationMeta('zinc');
   @override
   late final GeneratedColumn<double> zinc = GeneratedColumn<double>(
-      'zinc', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
-  static const VerificationMeta _retinolMeta =
-      const VerificationMeta('retinol');
+    'zinc',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _retinolMeta = const VerificationMeta(
+    'retinol',
+  );
   @override
   late final GeneratedColumn<double> retinol = GeneratedColumn<double>(
-      'retinol', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
-  static const VerificationMeta _vitaminB1Meta =
-      const VerificationMeta('vitaminB1');
+    'retinol',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _vitaminB1Meta = const VerificationMeta(
+    'vitaminB1',
+  );
   @override
   late final GeneratedColumn<double> vitaminB1 = GeneratedColumn<double>(
-      'vitamin_b1', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
-  static const VerificationMeta _vitaminB2Meta =
-      const VerificationMeta('vitaminB2');
+    'vitamin_b1',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _vitaminB2Meta = const VerificationMeta(
+    'vitaminB2',
+  );
   @override
   late final GeneratedColumn<double> vitaminB2 = GeneratedColumn<double>(
-      'vitamin_b2', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
-  static const VerificationMeta _vitaminCMeta =
-      const VerificationMeta('vitaminC');
+    'vitamin_b2',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _vitaminCMeta = const VerificationMeta(
+    'vitaminC',
+  );
   @override
   late final GeneratedColumn<double> vitaminC = GeneratedColumn<double>(
-      'vitamin_c', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
-  static const VerificationMeta _dietaryFiberMeta =
-      const VerificationMeta('dietaryFiber');
+    'vitamin_c',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _dietaryFiberMeta = const VerificationMeta(
+    'dietaryFiber',
+  );
   @override
   late final GeneratedColumn<double> dietaryFiber = GeneratedColumn<double>(
-      'dietary_fiber', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
+    'dietary_fiber',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _saltMeta = const VerificationMeta('salt');
   @override
   late final GeneratedColumn<double> salt = GeneratedColumn<double>(
-      'salt', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
+    'salt',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _isHeatMeta = const VerificationMeta('isHeat');
   @override
   late final GeneratedColumn<bool> isHeat = GeneratedColumn<bool>(
-      'is_heat', aliasedName, false,
-      type: DriftSqlType.bool,
-      requiredDuringInsert: true,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('CHECK ("is_heat" IN (0, 1))'));
-  static const VerificationMeta _isAllergyMeta =
-      const VerificationMeta('isAllergy');
+    'is_heat',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("is_heat" IN (0, 1))',
+    ),
+  );
+  static const VerificationMeta _isAllergyMeta = const VerificationMeta(
+    'isAllergy',
+  );
   @override
   late final GeneratedColumn<bool> isAllergy = GeneratedColumn<bool>(
-      'is_allergy', aliasedName, false,
-      type: DriftSqlType.bool,
-      requiredDuringInsert: true,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('CHECK ("is_allergy" IN (0, 1))'));
+    'is_allergy',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("is_allergy" IN (0, 1))',
+    ),
+  );
   static const VerificationMeta _originMeta = const VerificationMeta('origin');
   @override
   late final GeneratedColumn<String> origin = GeneratedColumn<String>(
-      'origin', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
+    'origin',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   @override
   List<GeneratedColumn> get $columns => [
-        id,
-        name,
-        pieceNumber,
-        pieceUnit,
-        gram,
-        energy,
-        protein,
-        lipid,
-        sodium,
-        carbohydrate,
-        calcium,
-        magnesium,
-        iron,
-        zinc,
-        retinol,
-        vitaminB1,
-        vitaminB2,
-        vitaminC,
-        dietaryFiber,
-        salt,
-        isHeat,
-        isAllergy,
-        origin
-      ];
+    id,
+    name,
+    pieceNumber,
+    pieceUnit,
+    gram,
+    energy,
+    protein,
+    lipid,
+    sodium,
+    carbohydrate,
+    calcium,
+    magnesium,
+    iron,
+    zinc,
+    retinol,
+    vitaminB1,
+    vitaminB2,
+    vitaminC,
+    dietaryFiber,
+    salt,
+    isHeat,
+    isAllergy,
+    origin,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
   static const String $name = 'foodstuffs_table';
   @override
-  VerificationContext validateIntegrity(Insertable<FoodstuffsSchema> instance,
-      {bool isInserting = false}) {
+  VerificationContext validateIntegrity(
+    Insertable<FoodstuffsSchema> instance, {
+    bool isInserting = false,
+  }) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -1432,135 +1736,182 @@ class $FoodstuffsTableTable extends FoodstuffsTable
     }
     if (data.containsKey('name')) {
       context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+        _nameMeta,
+        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
+      );
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
     if (data.containsKey('piece_number')) {
       context.handle(
+        _pieceNumberMeta,
+        pieceNumber.isAcceptableOrUnknown(
+          data['piece_number']!,
           _pieceNumberMeta,
-          pieceNumber.isAcceptableOrUnknown(
-              data['piece_number']!, _pieceNumberMeta));
+        ),
+      );
     }
     if (data.containsKey('piece_unit')) {
-      context.handle(_pieceUnitMeta,
-          pieceUnit.isAcceptableOrUnknown(data['piece_unit']!, _pieceUnitMeta));
+      context.handle(
+        _pieceUnitMeta,
+        pieceUnit.isAcceptableOrUnknown(data['piece_unit']!, _pieceUnitMeta),
+      );
     }
     if (data.containsKey('gram')) {
       context.handle(
-          _gramMeta, gram.isAcceptableOrUnknown(data['gram']!, _gramMeta));
+        _gramMeta,
+        gram.isAcceptableOrUnknown(data['gram']!, _gramMeta),
+      );
     } else if (isInserting) {
       context.missing(_gramMeta);
     }
     if (data.containsKey('energy')) {
-      context.handle(_energyMeta,
-          energy.isAcceptableOrUnknown(data['energy']!, _energyMeta));
+      context.handle(
+        _energyMeta,
+        energy.isAcceptableOrUnknown(data['energy']!, _energyMeta),
+      );
     } else if (isInserting) {
       context.missing(_energyMeta);
     }
     if (data.containsKey('protein')) {
-      context.handle(_proteinMeta,
-          protein.isAcceptableOrUnknown(data['protein']!, _proteinMeta));
+      context.handle(
+        _proteinMeta,
+        protein.isAcceptableOrUnknown(data['protein']!, _proteinMeta),
+      );
     } else if (isInserting) {
       context.missing(_proteinMeta);
     }
     if (data.containsKey('lipid')) {
       context.handle(
-          _lipidMeta, lipid.isAcceptableOrUnknown(data['lipid']!, _lipidMeta));
+        _lipidMeta,
+        lipid.isAcceptableOrUnknown(data['lipid']!, _lipidMeta),
+      );
     } else if (isInserting) {
       context.missing(_lipidMeta);
     }
     if (data.containsKey('sodium')) {
-      context.handle(_sodiumMeta,
-          sodium.isAcceptableOrUnknown(data['sodium']!, _sodiumMeta));
+      context.handle(
+        _sodiumMeta,
+        sodium.isAcceptableOrUnknown(data['sodium']!, _sodiumMeta),
+      );
     } else if (isInserting) {
       context.missing(_sodiumMeta);
     }
     if (data.containsKey('carbohydrate')) {
       context.handle(
+        _carbohydrateMeta,
+        carbohydrate.isAcceptableOrUnknown(
+          data['carbohydrate']!,
           _carbohydrateMeta,
-          carbohydrate.isAcceptableOrUnknown(
-              data['carbohydrate']!, _carbohydrateMeta));
+        ),
+      );
     } else if (isInserting) {
       context.missing(_carbohydrateMeta);
     }
     if (data.containsKey('calcium')) {
-      context.handle(_calciumMeta,
-          calcium.isAcceptableOrUnknown(data['calcium']!, _calciumMeta));
+      context.handle(
+        _calciumMeta,
+        calcium.isAcceptableOrUnknown(data['calcium']!, _calciumMeta),
+      );
     } else if (isInserting) {
       context.missing(_calciumMeta);
     }
     if (data.containsKey('magnesium')) {
-      context.handle(_magnesiumMeta,
-          magnesium.isAcceptableOrUnknown(data['magnesium']!, _magnesiumMeta));
+      context.handle(
+        _magnesiumMeta,
+        magnesium.isAcceptableOrUnknown(data['magnesium']!, _magnesiumMeta),
+      );
     } else if (isInserting) {
       context.missing(_magnesiumMeta);
     }
     if (data.containsKey('iron')) {
       context.handle(
-          _ironMeta, iron.isAcceptableOrUnknown(data['iron']!, _ironMeta));
+        _ironMeta,
+        iron.isAcceptableOrUnknown(data['iron']!, _ironMeta),
+      );
     } else if (isInserting) {
       context.missing(_ironMeta);
     }
     if (data.containsKey('zinc')) {
       context.handle(
-          _zincMeta, zinc.isAcceptableOrUnknown(data['zinc']!, _zincMeta));
+        _zincMeta,
+        zinc.isAcceptableOrUnknown(data['zinc']!, _zincMeta),
+      );
     } else if (isInserting) {
       context.missing(_zincMeta);
     }
     if (data.containsKey('retinol')) {
-      context.handle(_retinolMeta,
-          retinol.isAcceptableOrUnknown(data['retinol']!, _retinolMeta));
+      context.handle(
+        _retinolMeta,
+        retinol.isAcceptableOrUnknown(data['retinol']!, _retinolMeta),
+      );
     } else if (isInserting) {
       context.missing(_retinolMeta);
     }
     if (data.containsKey('vitamin_b1')) {
-      context.handle(_vitaminB1Meta,
-          vitaminB1.isAcceptableOrUnknown(data['vitamin_b1']!, _vitaminB1Meta));
+      context.handle(
+        _vitaminB1Meta,
+        vitaminB1.isAcceptableOrUnknown(data['vitamin_b1']!, _vitaminB1Meta),
+      );
     } else if (isInserting) {
       context.missing(_vitaminB1Meta);
     }
     if (data.containsKey('vitamin_b2')) {
-      context.handle(_vitaminB2Meta,
-          vitaminB2.isAcceptableOrUnknown(data['vitamin_b2']!, _vitaminB2Meta));
+      context.handle(
+        _vitaminB2Meta,
+        vitaminB2.isAcceptableOrUnknown(data['vitamin_b2']!, _vitaminB2Meta),
+      );
     } else if (isInserting) {
       context.missing(_vitaminB2Meta);
     }
     if (data.containsKey('vitamin_c')) {
-      context.handle(_vitaminCMeta,
-          vitaminC.isAcceptableOrUnknown(data['vitamin_c']!, _vitaminCMeta));
+      context.handle(
+        _vitaminCMeta,
+        vitaminC.isAcceptableOrUnknown(data['vitamin_c']!, _vitaminCMeta),
+      );
     } else if (isInserting) {
       context.missing(_vitaminCMeta);
     }
     if (data.containsKey('dietary_fiber')) {
       context.handle(
+        _dietaryFiberMeta,
+        dietaryFiber.isAcceptableOrUnknown(
+          data['dietary_fiber']!,
           _dietaryFiberMeta,
-          dietaryFiber.isAcceptableOrUnknown(
-              data['dietary_fiber']!, _dietaryFiberMeta));
+        ),
+      );
     } else if (isInserting) {
       context.missing(_dietaryFiberMeta);
     }
     if (data.containsKey('salt')) {
       context.handle(
-          _saltMeta, salt.isAcceptableOrUnknown(data['salt']!, _saltMeta));
+        _saltMeta,
+        salt.isAcceptableOrUnknown(data['salt']!, _saltMeta),
+      );
     } else if (isInserting) {
       context.missing(_saltMeta);
     }
     if (data.containsKey('is_heat')) {
-      context.handle(_isHeatMeta,
-          isHeat.isAcceptableOrUnknown(data['is_heat']!, _isHeatMeta));
+      context.handle(
+        _isHeatMeta,
+        isHeat.isAcceptableOrUnknown(data['is_heat']!, _isHeatMeta),
+      );
     } else if (isInserting) {
       context.missing(_isHeatMeta);
     }
     if (data.containsKey('is_allergy')) {
-      context.handle(_isAllergyMeta,
-          isAllergy.isAcceptableOrUnknown(data['is_allergy']!, _isAllergyMeta));
+      context.handle(
+        _isAllergyMeta,
+        isAllergy.isAcceptableOrUnknown(data['is_allergy']!, _isAllergyMeta),
+      );
     } else if (isInserting) {
       context.missing(_isAllergyMeta);
     }
     if (data.containsKey('origin')) {
-      context.handle(_originMeta,
-          origin.isAcceptableOrUnknown(data['origin']!, _originMeta));
+      context.handle(
+        _originMeta,
+        origin.isAcceptableOrUnknown(data['origin']!, _originMeta),
+      );
     }
     return context;
   }
@@ -1569,58 +1920,104 @@ class $FoodstuffsTableTable extends FoodstuffsTable
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   List<Set<GeneratedColumn>> get uniqueKeys => [
-        {name, gram, isHeat, isAllergy},
-      ];
+    {name, gram, isHeat, isAllergy},
+  ];
   @override
   FoodstuffsSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return FoodstuffsSchema(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      name: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
-      pieceNumber: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}piece_number']),
-      pieceUnit: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}piece_unit']),
-      gram: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}gram'])!,
-      energy: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}energy'])!,
-      protein: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}protein'])!,
-      lipid: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}lipid'])!,
-      sodium: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}sodium'])!,
-      carbohydrate: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}carbohydrate'])!,
-      calcium: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}calcium'])!,
-      magnesium: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}magnesium'])!,
-      iron: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}iron'])!,
-      zinc: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}zinc'])!,
-      retinol: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}retinol'])!,
-      vitaminB1: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}vitamin_b1'])!,
-      vitaminB2: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}vitamin_b2'])!,
-      vitaminC: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}vitamin_c'])!,
-      dietaryFiber: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}dietary_fiber'])!,
-      salt: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}salt'])!,
-      isHeat: attachedDatabase.typeMapping
-          .read(DriftSqlType.bool, data['${effectivePrefix}is_heat'])!,
-      isAllergy: attachedDatabase.typeMapping
-          .read(DriftSqlType.bool, data['${effectivePrefix}is_allergy'])!,
-      origin: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}origin']),
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      pieceNumber: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}piece_number'],
+      ),
+      pieceUnit: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}piece_unit'],
+      ),
+      gram: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}gram'],
+      )!,
+      energy: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}energy'],
+      )!,
+      protein: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}protein'],
+      )!,
+      lipid: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}lipid'],
+      )!,
+      sodium: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}sodium'],
+      )!,
+      carbohydrate: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}carbohydrate'],
+      )!,
+      calcium: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}calcium'],
+      )!,
+      magnesium: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}magnesium'],
+      )!,
+      iron: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}iron'],
+      )!,
+      zinc: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}zinc'],
+      )!,
+      retinol: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}retinol'],
+      )!,
+      vitaminB1: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}vitamin_b1'],
+      )!,
+      vitaminB2: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}vitamin_b2'],
+      )!,
+      vitaminC: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}vitamin_c'],
+      )!,
+      dietaryFiber: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}dietary_fiber'],
+      )!,
+      salt: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}salt'],
+      )!,
+      isHeat: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_heat'],
+      )!,
+      isAllergy: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_allergy'],
+      )!,
+      origin: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}origin'],
+      ),
     );
   }
 
@@ -1655,30 +2052,31 @@ class FoodstuffsSchema extends DataClass
   final bool isHeat;
   final bool isAllergy;
   final String? origin;
-  const FoodstuffsSchema(
-      {required this.id,
-      required this.name,
-      this.pieceNumber,
-      this.pieceUnit,
-      required this.gram,
-      required this.energy,
-      required this.protein,
-      required this.lipid,
-      required this.sodium,
-      required this.carbohydrate,
-      required this.calcium,
-      required this.magnesium,
-      required this.iron,
-      required this.zinc,
-      required this.retinol,
-      required this.vitaminB1,
-      required this.vitaminB2,
-      required this.vitaminC,
-      required this.dietaryFiber,
-      required this.salt,
-      required this.isHeat,
-      required this.isAllergy,
-      this.origin});
+  const FoodstuffsSchema({
+    required this.id,
+    required this.name,
+    this.pieceNumber,
+    this.pieceUnit,
+    required this.gram,
+    required this.energy,
+    required this.protein,
+    required this.lipid,
+    required this.sodium,
+    required this.carbohydrate,
+    required this.calcium,
+    required this.magnesium,
+    required this.iron,
+    required this.zinc,
+    required this.retinol,
+    required this.vitaminB1,
+    required this.vitaminB2,
+    required this.vitaminC,
+    required this.dietaryFiber,
+    required this.salt,
+    required this.isHeat,
+    required this.isAllergy,
+    this.origin,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -1742,13 +2140,16 @@ class FoodstuffsSchema extends DataClass
       salt: Value(salt),
       isHeat: Value(isHeat),
       isAllergy: Value(isAllergy),
-      origin:
-          origin == null && nullToAbsent ? const Value.absent() : Value(origin),
+      origin: origin == null && nullToAbsent
+          ? const Value.absent()
+          : Value(origin),
     );
   }
 
-  factory FoodstuffsSchema.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory FoodstuffsSchema.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return FoodstuffsSchema(
       id: serializer.fromJson<int>(json['id']),
@@ -1806,61 +2207,62 @@ class FoodstuffsSchema extends DataClass
     };
   }
 
-  FoodstuffsSchema copyWith(
-          {int? id,
-          String? name,
-          Value<double?> pieceNumber = const Value.absent(),
-          Value<String?> pieceUnit = const Value.absent(),
-          double? gram,
-          double? energy,
-          double? protein,
-          double? lipid,
-          double? sodium,
-          double? carbohydrate,
-          double? calcium,
-          double? magnesium,
-          double? iron,
-          double? zinc,
-          double? retinol,
-          double? vitaminB1,
-          double? vitaminB2,
-          double? vitaminC,
-          double? dietaryFiber,
-          double? salt,
-          bool? isHeat,
-          bool? isAllergy,
-          Value<String?> origin = const Value.absent()}) =>
-      FoodstuffsSchema(
-        id: id ?? this.id,
-        name: name ?? this.name,
-        pieceNumber: pieceNumber.present ? pieceNumber.value : this.pieceNumber,
-        pieceUnit: pieceUnit.present ? pieceUnit.value : this.pieceUnit,
-        gram: gram ?? this.gram,
-        energy: energy ?? this.energy,
-        protein: protein ?? this.protein,
-        lipid: lipid ?? this.lipid,
-        sodium: sodium ?? this.sodium,
-        carbohydrate: carbohydrate ?? this.carbohydrate,
-        calcium: calcium ?? this.calcium,
-        magnesium: magnesium ?? this.magnesium,
-        iron: iron ?? this.iron,
-        zinc: zinc ?? this.zinc,
-        retinol: retinol ?? this.retinol,
-        vitaminB1: vitaminB1 ?? this.vitaminB1,
-        vitaminB2: vitaminB2 ?? this.vitaminB2,
-        vitaminC: vitaminC ?? this.vitaminC,
-        dietaryFiber: dietaryFiber ?? this.dietaryFiber,
-        salt: salt ?? this.salt,
-        isHeat: isHeat ?? this.isHeat,
-        isAllergy: isAllergy ?? this.isAllergy,
-        origin: origin.present ? origin.value : this.origin,
-      );
+  FoodstuffsSchema copyWith({
+    int? id,
+    String? name,
+    Value<double?> pieceNumber = const Value.absent(),
+    Value<String?> pieceUnit = const Value.absent(),
+    double? gram,
+    double? energy,
+    double? protein,
+    double? lipid,
+    double? sodium,
+    double? carbohydrate,
+    double? calcium,
+    double? magnesium,
+    double? iron,
+    double? zinc,
+    double? retinol,
+    double? vitaminB1,
+    double? vitaminB2,
+    double? vitaminC,
+    double? dietaryFiber,
+    double? salt,
+    bool? isHeat,
+    bool? isAllergy,
+    Value<String?> origin = const Value.absent(),
+  }) => FoodstuffsSchema(
+    id: id ?? this.id,
+    name: name ?? this.name,
+    pieceNumber: pieceNumber.present ? pieceNumber.value : this.pieceNumber,
+    pieceUnit: pieceUnit.present ? pieceUnit.value : this.pieceUnit,
+    gram: gram ?? this.gram,
+    energy: energy ?? this.energy,
+    protein: protein ?? this.protein,
+    lipid: lipid ?? this.lipid,
+    sodium: sodium ?? this.sodium,
+    carbohydrate: carbohydrate ?? this.carbohydrate,
+    calcium: calcium ?? this.calcium,
+    magnesium: magnesium ?? this.magnesium,
+    iron: iron ?? this.iron,
+    zinc: zinc ?? this.zinc,
+    retinol: retinol ?? this.retinol,
+    vitaminB1: vitaminB1 ?? this.vitaminB1,
+    vitaminB2: vitaminB2 ?? this.vitaminB2,
+    vitaminC: vitaminC ?? this.vitaminC,
+    dietaryFiber: dietaryFiber ?? this.dietaryFiber,
+    salt: salt ?? this.salt,
+    isHeat: isHeat ?? this.isHeat,
+    isAllergy: isAllergy ?? this.isAllergy,
+    origin: origin.present ? origin.value : this.origin,
+  );
   FoodstuffsSchema copyWithCompanion(FoodstuffsTableCompanion data) {
     return FoodstuffsSchema(
       id: data.id.present ? data.id.value : this.id,
       name: data.name.present ? data.name.value : this.name,
-      pieceNumber:
-          data.pieceNumber.present ? data.pieceNumber.value : this.pieceNumber,
+      pieceNumber: data.pieceNumber.present
+          ? data.pieceNumber.value
+          : this.pieceNumber,
       pieceUnit: data.pieceUnit.present ? data.pieceUnit.value : this.pieceUnit,
       gram: data.gram.present ? data.gram.value : this.gram,
       energy: data.energy.present ? data.energy.value : this.energy,
@@ -1920,30 +2322,30 @@ class FoodstuffsSchema extends DataClass
 
   @override
   int get hashCode => Object.hashAll([
-        id,
-        name,
-        pieceNumber,
-        pieceUnit,
-        gram,
-        energy,
-        protein,
-        lipid,
-        sodium,
-        carbohydrate,
-        calcium,
-        magnesium,
-        iron,
-        zinc,
-        retinol,
-        vitaminB1,
-        vitaminB2,
-        vitaminC,
-        dietaryFiber,
-        salt,
-        isHeat,
-        isAllergy,
-        origin
-      ]);
+    id,
+    name,
+    pieceNumber,
+    pieceUnit,
+    gram,
+    energy,
+    protein,
+    lipid,
+    sodium,
+    carbohydrate,
+    calcium,
+    magnesium,
+    iron,
+    zinc,
+    retinol,
+    vitaminB1,
+    vitaminB2,
+    vitaminC,
+    dietaryFiber,
+    salt,
+    isHeat,
+    isAllergy,
+    origin,
+  ]);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -2046,25 +2448,25 @@ class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
     required bool isHeat,
     required bool isAllergy,
     this.origin = const Value.absent(),
-  })  : name = Value(name),
-        gram = Value(gram),
-        energy = Value(energy),
-        protein = Value(protein),
-        lipid = Value(lipid),
-        sodium = Value(sodium),
-        carbohydrate = Value(carbohydrate),
-        calcium = Value(calcium),
-        magnesium = Value(magnesium),
-        iron = Value(iron),
-        zinc = Value(zinc),
-        retinol = Value(retinol),
-        vitaminB1 = Value(vitaminB1),
-        vitaminB2 = Value(vitaminB2),
-        vitaminC = Value(vitaminC),
-        dietaryFiber = Value(dietaryFiber),
-        salt = Value(salt),
-        isHeat = Value(isHeat),
-        isAllergy = Value(isAllergy);
+  }) : name = Value(name),
+       gram = Value(gram),
+       energy = Value(energy),
+       protein = Value(protein),
+       lipid = Value(lipid),
+       sodium = Value(sodium),
+       carbohydrate = Value(carbohydrate),
+       calcium = Value(calcium),
+       magnesium = Value(magnesium),
+       iron = Value(iron),
+       zinc = Value(zinc),
+       retinol = Value(retinol),
+       vitaminB1 = Value(vitaminB1),
+       vitaminB2 = Value(vitaminB2),
+       vitaminC = Value(vitaminC),
+       dietaryFiber = Value(dietaryFiber),
+       salt = Value(salt),
+       isHeat = Value(isHeat),
+       isAllergy = Value(isAllergy);
   static Insertable<FoodstuffsSchema> custom({
     Expression<int>? id,
     Expression<String>? name,
@@ -2117,30 +2519,31 @@ class FoodstuffsTableCompanion extends UpdateCompanion<FoodstuffsSchema> {
     });
   }
 
-  FoodstuffsTableCompanion copyWith(
-      {Value<int>? id,
-      Value<String>? name,
-      Value<double?>? pieceNumber,
-      Value<String?>? pieceUnit,
-      Value<double>? gram,
-      Value<double>? energy,
-      Value<double>? protein,
-      Value<double>? lipid,
-      Value<double>? sodium,
-      Value<double>? carbohydrate,
-      Value<double>? calcium,
-      Value<double>? magnesium,
-      Value<double>? iron,
-      Value<double>? zinc,
-      Value<double>? retinol,
-      Value<double>? vitaminB1,
-      Value<double>? vitaminB2,
-      Value<double>? vitaminC,
-      Value<double>? dietaryFiber,
-      Value<double>? salt,
-      Value<bool>? isHeat,
-      Value<bool>? isAllergy,
-      Value<String?>? origin}) {
+  FoodstuffsTableCompanion copyWith({
+    Value<int>? id,
+    Value<String>? name,
+    Value<double?>? pieceNumber,
+    Value<String?>? pieceUnit,
+    Value<double>? gram,
+    Value<double>? energy,
+    Value<double>? protein,
+    Value<double>? lipid,
+    Value<double>? sodium,
+    Value<double>? carbohydrate,
+    Value<double>? calcium,
+    Value<double>? magnesium,
+    Value<double>? iron,
+    Value<double>? zinc,
+    Value<double>? retinol,
+    Value<double>? vitaminB1,
+    Value<double>? vitaminB2,
+    Value<double>? vitaminC,
+    Value<double>? dietaryFiber,
+    Value<double>? salt,
+    Value<bool>? isHeat,
+    Value<bool>? isAllergy,
+    Value<String?>? origin,
+  }) {
     return FoodstuffsTableCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -2283,20 +2686,29 @@ class $DishFoodstuffsTableTable extends DishFoodstuffsTable
   static const VerificationMeta _dishIdMeta = const VerificationMeta('dishId');
   @override
   late final GeneratedColumn<int> dishId = GeneratedColumn<int>(
-      'dish_id', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: true,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('REFERENCES dishes_table (id)'));
-  static const VerificationMeta _foodstuffIdMeta =
-      const VerificationMeta('foodstuffId');
+    'dish_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES dishes_table (id)',
+    ),
+  );
+  static const VerificationMeta _foodstuffIdMeta = const VerificationMeta(
+    'foodstuffId',
+  );
   @override
   late final GeneratedColumn<int> foodstuffId = GeneratedColumn<int>(
-      'foodstuff_id', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: true,
-      defaultConstraints: GeneratedColumn.constraintIsAlways(
-          'REFERENCES foodstuffs_table (id)'));
+    'foodstuff_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES foodstuffs_table (id)',
+    ),
+  );
   @override
   List<GeneratedColumn> get $columns => [dishId, foodstuffId];
   @override
@@ -2306,21 +2718,27 @@ class $DishFoodstuffsTableTable extends DishFoodstuffsTable
   static const String $name = 'dish_foodstuffs_table';
   @override
   VerificationContext validateIntegrity(
-      Insertable<DishFoodstuffsSchema> instance,
-      {bool isInserting = false}) {
+    Insertable<DishFoodstuffsSchema> instance, {
+    bool isInserting = false,
+  }) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('dish_id')) {
-      context.handle(_dishIdMeta,
-          dishId.isAcceptableOrUnknown(data['dish_id']!, _dishIdMeta));
+      context.handle(
+        _dishIdMeta,
+        dishId.isAcceptableOrUnknown(data['dish_id']!, _dishIdMeta),
+      );
     } else if (isInserting) {
       context.missing(_dishIdMeta);
     }
     if (data.containsKey('foodstuff_id')) {
       context.handle(
+        _foodstuffIdMeta,
+        foodstuffId.isAcceptableOrUnknown(
+          data['foodstuff_id']!,
           _foodstuffIdMeta,
-          foodstuffId.isAcceptableOrUnknown(
-              data['foodstuff_id']!, _foodstuffIdMeta));
+        ),
+      );
     } else if (isInserting) {
       context.missing(_foodstuffIdMeta);
     }
@@ -2333,10 +2751,14 @@ class $DishFoodstuffsTableTable extends DishFoodstuffsTable
   DishFoodstuffsSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return DishFoodstuffsSchema(
-      dishId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}dish_id'])!,
-      foodstuffId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}foodstuff_id'])!,
+      dishId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}dish_id'],
+      )!,
+      foodstuffId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}foodstuff_id'],
+      )!,
     );
   }
 
@@ -2366,8 +2788,10 @@ class DishFoodstuffsSchema extends DataClass
     );
   }
 
-  factory DishFoodstuffsSchema.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory DishFoodstuffsSchema.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return DishFoodstuffsSchema(
       dishId: serializer.fromJson<int>(json['dishId']),
@@ -2391,8 +2815,9 @@ class DishFoodstuffsSchema extends DataClass
   DishFoodstuffsSchema copyWithCompanion(DishFoodstuffsTableCompanion data) {
     return DishFoodstuffsSchema(
       dishId: data.dishId.present ? data.dishId.value : this.dishId,
-      foodstuffId:
-          data.foodstuffId.present ? data.foodstuffId.value : this.foodstuffId,
+      foodstuffId: data.foodstuffId.present
+          ? data.foodstuffId.value
+          : this.foodstuffId,
     );
   }
 
@@ -2429,8 +2854,8 @@ class DishFoodstuffsTableCompanion
     required int dishId,
     required int foodstuffId,
     this.rowid = const Value.absent(),
-  })  : dishId = Value(dishId),
-        foodstuffId = Value(foodstuffId);
+  }) : dishId = Value(dishId),
+       foodstuffId = Value(foodstuffId);
   static Insertable<DishFoodstuffsSchema> custom({
     Expression<int>? dishId,
     Expression<int>? foodstuffId,
@@ -2443,8 +2868,11 @@ class DishFoodstuffsTableCompanion
     });
   }
 
-  DishFoodstuffsTableCompanion copyWith(
-      {Value<int>? dishId, Value<int>? foodstuffId, Value<int>? rowid}) {
+  DishFoodstuffsTableCompanion copyWith({
+    Value<int>? dishId,
+    Value<int>? foodstuffId,
+    Value<int>? rowid,
+  }) {
     return DishFoodstuffsTableCompanion(
       dishId: dishId ?? this.dishId,
       foodstuffId: foodstuffId ?? this.foodstuffId,
@@ -2487,49 +2915,79 @@ class $UsersTableTable extends UsersTable
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, false,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
   static const VerificationMeta _nameMeta = const VerificationMeta('name');
   @override
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
-      'name', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _schoolIdMeta =
-      const VerificationMeta('schoolId');
+    'name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _schoolIdMeta = const VerificationMeta(
+    'schoolId',
+  );
   @override
   late final GeneratedColumn<int> schoolId = GeneratedColumn<int>(
-      'school_id', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: true,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('REFERENCES schools_table (id)'));
-  static const VerificationMeta _schoolYearMeta =
-      const VerificationMeta('schoolYear');
+    'school_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES schools_table (id)',
+    ),
+  );
+  static const VerificationMeta _schoolYearMeta = const VerificationMeta(
+    'schoolYear',
+  );
   @override
   late final GeneratedColumn<int> schoolYear = GeneratedColumn<int>(
-      'school_year', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
-  static const VerificationMeta _authorizedAtMeta =
-      const VerificationMeta('authorizedAt');
+    'school_year',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _authorizedAtMeta = const VerificationMeta(
+    'authorizedAt',
+  );
   @override
   late final GeneratedColumn<DateTime> authorizedAt = GeneratedColumn<DateTime>(
-      'authorized_at', aliasedName, true,
-      type: DriftSqlType.dateTime, requiredDuringInsert: false);
+    'authorized_at',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, name, schoolId, schoolYear, authorizedAt];
+  List<GeneratedColumn> get $columns => [
+    id,
+    name,
+    schoolId,
+    schoolYear,
+    authorizedAt,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
   static const String $name = 'users_table';
   @override
-  VerificationContext validateIntegrity(Insertable<UsersSchema> instance,
-      {bool isInserting = false}) {
+  VerificationContext validateIntegrity(
+    Insertable<UsersSchema> instance, {
+    bool isInserting = false,
+  }) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -2537,29 +2995,36 @@ class $UsersTableTable extends UsersTable
     }
     if (data.containsKey('name')) {
       context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+        _nameMeta,
+        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
+      );
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
     if (data.containsKey('school_id')) {
-      context.handle(_schoolIdMeta,
-          schoolId.isAcceptableOrUnknown(data['school_id']!, _schoolIdMeta));
+      context.handle(
+        _schoolIdMeta,
+        schoolId.isAcceptableOrUnknown(data['school_id']!, _schoolIdMeta),
+      );
     } else if (isInserting) {
       context.missing(_schoolIdMeta);
     }
     if (data.containsKey('school_year')) {
       context.handle(
-          _schoolYearMeta,
-          schoolYear.isAcceptableOrUnknown(
-              data['school_year']!, _schoolYearMeta));
+        _schoolYearMeta,
+        schoolYear.isAcceptableOrUnknown(data['school_year']!, _schoolYearMeta),
+      );
     } else if (isInserting) {
       context.missing(_schoolYearMeta);
     }
     if (data.containsKey('authorized_at')) {
       context.handle(
+        _authorizedAtMeta,
+        authorizedAt.isAcceptableOrUnknown(
+          data['authorized_at']!,
           _authorizedAtMeta,
-          authorizedAt.isAcceptableOrUnknown(
-              data['authorized_at']!, _authorizedAtMeta));
+        ),
+      );
     }
     return context;
   }
@@ -2570,16 +3035,26 @@ class $UsersTableTable extends UsersTable
   UsersSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return UsersSchema(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      name: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
-      schoolId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}school_id'])!,
-      schoolYear: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}school_year'])!,
-      authorizedAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}authorized_at']),
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      schoolId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}school_id'],
+      )!,
+      schoolYear: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}school_year'],
+      )!,
+      authorizedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}authorized_at'],
+      ),
     );
   }
 
@@ -2595,12 +3070,13 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
   final int schoolId;
   final int schoolYear;
   final DateTime? authorizedAt;
-  const UsersSchema(
-      {required this.id,
-      required this.name,
-      required this.schoolId,
-      required this.schoolYear,
-      this.authorizedAt});
+  const UsersSchema({
+    required this.id,
+    required this.name,
+    required this.schoolId,
+    required this.schoolYear,
+    this.authorizedAt,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -2626,8 +3102,10 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
     );
   }
 
-  factory UsersSchema.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory UsersSchema.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return UsersSchema(
       id: serializer.fromJson<int>(json['id']),
@@ -2649,27 +3127,27 @@ class UsersSchema extends DataClass implements Insertable<UsersSchema> {
     };
   }
 
-  UsersSchema copyWith(
-          {int? id,
-          String? name,
-          int? schoolId,
-          int? schoolYear,
-          Value<DateTime?> authorizedAt = const Value.absent()}) =>
-      UsersSchema(
-        id: id ?? this.id,
-        name: name ?? this.name,
-        schoolId: schoolId ?? this.schoolId,
-        schoolYear: schoolYear ?? this.schoolYear,
-        authorizedAt:
-            authorizedAt.present ? authorizedAt.value : this.authorizedAt,
-      );
+  UsersSchema copyWith({
+    int? id,
+    String? name,
+    int? schoolId,
+    int? schoolYear,
+    Value<DateTime?> authorizedAt = const Value.absent(),
+  }) => UsersSchema(
+    id: id ?? this.id,
+    name: name ?? this.name,
+    schoolId: schoolId ?? this.schoolId,
+    schoolYear: schoolYear ?? this.schoolYear,
+    authorizedAt: authorizedAt.present ? authorizedAt.value : this.authorizedAt,
+  );
   UsersSchema copyWithCompanion(UsersTableCompanion data) {
     return UsersSchema(
       id: data.id.present ? data.id.value : this.id,
       name: data.name.present ? data.name.value : this.name,
       schoolId: data.schoolId.present ? data.schoolId.value : this.schoolId,
-      schoolYear:
-          data.schoolYear.present ? data.schoolYear.value : this.schoolYear,
+      schoolYear: data.schoolYear.present
+          ? data.schoolYear.value
+          : this.schoolYear,
       authorizedAt: data.authorizedAt.present
           ? data.authorizedAt.value
           : this.authorizedAt,
@@ -2720,9 +3198,9 @@ class UsersTableCompanion extends UpdateCompanion<UsersSchema> {
     required int schoolId,
     required int schoolYear,
     this.authorizedAt = const Value.absent(),
-  })  : name = Value(name),
-        schoolId = Value(schoolId),
-        schoolYear = Value(schoolYear);
+  }) : name = Value(name),
+       schoolId = Value(schoolId),
+       schoolYear = Value(schoolYear);
   static Insertable<UsersSchema> custom({
     Expression<int>? id,
     Expression<String>? name,
@@ -2739,12 +3217,13 @@ class UsersTableCompanion extends UpdateCompanion<UsersSchema> {
     });
   }
 
-  UsersTableCompanion copyWith(
-      {Value<int>? id,
-      Value<String>? name,
-      Value<int>? schoolId,
-      Value<int>? schoolYear,
-      Value<DateTime?>? authorizedAt}) {
+  UsersTableCompanion copyWith({
+    Value<int>? id,
+    Value<String>? name,
+    Value<int>? schoolId,
+    Value<int>? schoolYear,
+    Value<DateTime?>? authorizedAt,
+  }) {
     return UsersTableCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -2797,133 +3276,218 @@ class $DictionaryItemsTableTable extends DictionaryItemsTable
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, false,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
   static const VerificationMeta _groupMeta = const VerificationMeta('group');
   @override
   late final GeneratedColumn<int> group = GeneratedColumn<int>(
-      'group', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
+    'group',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _nameMeta = const VerificationMeta('name');
   @override
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
-      'name', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _energyMeta = const VerificationMeta('energy');
   @override
   late final GeneratedColumn<double> energy = GeneratedColumn<double>(
-      'energy', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
-  static const VerificationMeta _proteinMeta =
-      const VerificationMeta('protein');
+    'energy',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _proteinMeta = const VerificationMeta(
+    'protein',
+  );
   @override
   late final GeneratedColumn<double> protein = GeneratedColumn<double>(
-      'protein', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
+    'protein',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _lipidMeta = const VerificationMeta('lipid');
   @override
   late final GeneratedColumn<double> lipid = GeneratedColumn<double>(
-      'lipid', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
+    'lipid',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _sodiumMeta = const VerificationMeta('sodium');
   @override
   late final GeneratedColumn<double> sodium = GeneratedColumn<double>(
-      'sodium', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
-  static const VerificationMeta _carbohydrateMeta =
-      const VerificationMeta('carbohydrate');
+    'sodium',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _carbohydrateMeta = const VerificationMeta(
+    'carbohydrate',
+  );
   @override
   late final GeneratedColumn<double> carbohydrate = GeneratedColumn<double>(
-      'carbohydrate', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
-  static const VerificationMeta _calciumMeta =
-      const VerificationMeta('calcium');
+    'carbohydrate',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _calciumMeta = const VerificationMeta(
+    'calcium',
+  );
   @override
   late final GeneratedColumn<double> calcium = GeneratedColumn<double>(
-      'calcium', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
-  static const VerificationMeta _magnesiumMeta =
-      const VerificationMeta('magnesium');
+    'calcium',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _magnesiumMeta = const VerificationMeta(
+    'magnesium',
+  );
   @override
   late final GeneratedColumn<double> magnesium = GeneratedColumn<double>(
-      'magnesium', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
+    'magnesium',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _ironMeta = const VerificationMeta('iron');
   @override
   late final GeneratedColumn<double> iron = GeneratedColumn<double>(
-      'iron', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
+    'iron',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _zincMeta = const VerificationMeta('zinc');
   @override
   late final GeneratedColumn<double> zinc = GeneratedColumn<double>(
-      'zinc', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
-  static const VerificationMeta _retinolMeta =
-      const VerificationMeta('retinol');
+    'zinc',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _retinolMeta = const VerificationMeta(
+    'retinol',
+  );
   @override
   late final GeneratedColumn<double> retinol = GeneratedColumn<double>(
-      'retinol', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
-  static const VerificationMeta _vitaminB1Meta =
-      const VerificationMeta('vitaminB1');
+    'retinol',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _vitaminB1Meta = const VerificationMeta(
+    'vitaminB1',
+  );
   @override
   late final GeneratedColumn<double> vitaminB1 = GeneratedColumn<double>(
-      'vitamin_b1', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
-  static const VerificationMeta _vitaminB2Meta =
-      const VerificationMeta('vitaminB2');
+    'vitamin_b1',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _vitaminB2Meta = const VerificationMeta(
+    'vitaminB2',
+  );
   @override
   late final GeneratedColumn<double> vitaminB2 = GeneratedColumn<double>(
-      'vitamin_b2', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
-  static const VerificationMeta _vitaminCMeta =
-      const VerificationMeta('vitaminC');
+    'vitamin_b2',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _vitaminCMeta = const VerificationMeta(
+    'vitaminC',
+  );
   @override
   late final GeneratedColumn<double> vitaminC = GeneratedColumn<double>(
-      'vitamin_c', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
-  static const VerificationMeta _dietaryFiberMeta =
-      const VerificationMeta('dietaryFiber');
+    'vitamin_c',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _dietaryFiberMeta = const VerificationMeta(
+    'dietaryFiber',
+  );
   @override
   late final GeneratedColumn<double> dietaryFiber = GeneratedColumn<double>(
-      'dietary_fiber', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
+    'dietary_fiber',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _saltMeta = const VerificationMeta('salt');
   @override
   late final GeneratedColumn<double> salt = GeneratedColumn<double>(
-      'salt', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
+    'salt',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _noteMeta = const VerificationMeta('note');
   @override
   late final GeneratedColumn<String> note = GeneratedColumn<String>(
-      'note', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
+    'note',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   @override
   List<GeneratedColumn> get $columns => [
-        id,
-        group,
-        name,
-        energy,
-        protein,
-        lipid,
-        sodium,
-        carbohydrate,
-        calcium,
-        magnesium,
-        iron,
-        zinc,
-        retinol,
-        vitaminB1,
-        vitaminB2,
-        vitaminC,
-        dietaryFiber,
-        salt,
-        note
-      ];
+    id,
+    group,
+    name,
+    energy,
+    protein,
+    lipid,
+    sodium,
+    carbohydrate,
+    calcium,
+    magnesium,
+    iron,
+    zinc,
+    retinol,
+    vitaminB1,
+    vitaminB2,
+    vitaminC,
+    dietaryFiber,
+    salt,
+    note,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -2931,8 +3495,9 @@ class $DictionaryItemsTableTable extends DictionaryItemsTable
   static const String $name = 'dictionary_items_table';
   @override
   VerificationContext validateIntegrity(
-      Insertable<DictionaryItemsSchema> instance,
-      {bool isInserting = false}) {
+    Insertable<DictionaryItemsSchema> instance, {
+    bool isInserting = false,
+  }) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -2940,113 +3505,151 @@ class $DictionaryItemsTableTable extends DictionaryItemsTable
     }
     if (data.containsKey('group')) {
       context.handle(
-          _groupMeta, group.isAcceptableOrUnknown(data['group']!, _groupMeta));
+        _groupMeta,
+        group.isAcceptableOrUnknown(data['group']!, _groupMeta),
+      );
     } else if (isInserting) {
       context.missing(_groupMeta);
     }
     if (data.containsKey('name')) {
       context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+        _nameMeta,
+        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
+      );
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
     if (data.containsKey('energy')) {
-      context.handle(_energyMeta,
-          energy.isAcceptableOrUnknown(data['energy']!, _energyMeta));
+      context.handle(
+        _energyMeta,
+        energy.isAcceptableOrUnknown(data['energy']!, _energyMeta),
+      );
     } else if (isInserting) {
       context.missing(_energyMeta);
     }
     if (data.containsKey('protein')) {
-      context.handle(_proteinMeta,
-          protein.isAcceptableOrUnknown(data['protein']!, _proteinMeta));
+      context.handle(
+        _proteinMeta,
+        protein.isAcceptableOrUnknown(data['protein']!, _proteinMeta),
+      );
     } else if (isInserting) {
       context.missing(_proteinMeta);
     }
     if (data.containsKey('lipid')) {
       context.handle(
-          _lipidMeta, lipid.isAcceptableOrUnknown(data['lipid']!, _lipidMeta));
+        _lipidMeta,
+        lipid.isAcceptableOrUnknown(data['lipid']!, _lipidMeta),
+      );
     } else if (isInserting) {
       context.missing(_lipidMeta);
     }
     if (data.containsKey('sodium')) {
-      context.handle(_sodiumMeta,
-          sodium.isAcceptableOrUnknown(data['sodium']!, _sodiumMeta));
+      context.handle(
+        _sodiumMeta,
+        sodium.isAcceptableOrUnknown(data['sodium']!, _sodiumMeta),
+      );
     } else if (isInserting) {
       context.missing(_sodiumMeta);
     }
     if (data.containsKey('carbohydrate')) {
       context.handle(
+        _carbohydrateMeta,
+        carbohydrate.isAcceptableOrUnknown(
+          data['carbohydrate']!,
           _carbohydrateMeta,
-          carbohydrate.isAcceptableOrUnknown(
-              data['carbohydrate']!, _carbohydrateMeta));
+        ),
+      );
     } else if (isInserting) {
       context.missing(_carbohydrateMeta);
     }
     if (data.containsKey('calcium')) {
-      context.handle(_calciumMeta,
-          calcium.isAcceptableOrUnknown(data['calcium']!, _calciumMeta));
+      context.handle(
+        _calciumMeta,
+        calcium.isAcceptableOrUnknown(data['calcium']!, _calciumMeta),
+      );
     } else if (isInserting) {
       context.missing(_calciumMeta);
     }
     if (data.containsKey('magnesium')) {
-      context.handle(_magnesiumMeta,
-          magnesium.isAcceptableOrUnknown(data['magnesium']!, _magnesiumMeta));
+      context.handle(
+        _magnesiumMeta,
+        magnesium.isAcceptableOrUnknown(data['magnesium']!, _magnesiumMeta),
+      );
     } else if (isInserting) {
       context.missing(_magnesiumMeta);
     }
     if (data.containsKey('iron')) {
       context.handle(
-          _ironMeta, iron.isAcceptableOrUnknown(data['iron']!, _ironMeta));
+        _ironMeta,
+        iron.isAcceptableOrUnknown(data['iron']!, _ironMeta),
+      );
     } else if (isInserting) {
       context.missing(_ironMeta);
     }
     if (data.containsKey('zinc')) {
       context.handle(
-          _zincMeta, zinc.isAcceptableOrUnknown(data['zinc']!, _zincMeta));
+        _zincMeta,
+        zinc.isAcceptableOrUnknown(data['zinc']!, _zincMeta),
+      );
     } else if (isInserting) {
       context.missing(_zincMeta);
     }
     if (data.containsKey('retinol')) {
-      context.handle(_retinolMeta,
-          retinol.isAcceptableOrUnknown(data['retinol']!, _retinolMeta));
+      context.handle(
+        _retinolMeta,
+        retinol.isAcceptableOrUnknown(data['retinol']!, _retinolMeta),
+      );
     } else if (isInserting) {
       context.missing(_retinolMeta);
     }
     if (data.containsKey('vitamin_b1')) {
-      context.handle(_vitaminB1Meta,
-          vitaminB1.isAcceptableOrUnknown(data['vitamin_b1']!, _vitaminB1Meta));
+      context.handle(
+        _vitaminB1Meta,
+        vitaminB1.isAcceptableOrUnknown(data['vitamin_b1']!, _vitaminB1Meta),
+      );
     } else if (isInserting) {
       context.missing(_vitaminB1Meta);
     }
     if (data.containsKey('vitamin_b2')) {
-      context.handle(_vitaminB2Meta,
-          vitaminB2.isAcceptableOrUnknown(data['vitamin_b2']!, _vitaminB2Meta));
+      context.handle(
+        _vitaminB2Meta,
+        vitaminB2.isAcceptableOrUnknown(data['vitamin_b2']!, _vitaminB2Meta),
+      );
     } else if (isInserting) {
       context.missing(_vitaminB2Meta);
     }
     if (data.containsKey('vitamin_c')) {
-      context.handle(_vitaminCMeta,
-          vitaminC.isAcceptableOrUnknown(data['vitamin_c']!, _vitaminCMeta));
+      context.handle(
+        _vitaminCMeta,
+        vitaminC.isAcceptableOrUnknown(data['vitamin_c']!, _vitaminCMeta),
+      );
     } else if (isInserting) {
       context.missing(_vitaminCMeta);
     }
     if (data.containsKey('dietary_fiber')) {
       context.handle(
+        _dietaryFiberMeta,
+        dietaryFiber.isAcceptableOrUnknown(
+          data['dietary_fiber']!,
           _dietaryFiberMeta,
-          dietaryFiber.isAcceptableOrUnknown(
-              data['dietary_fiber']!, _dietaryFiberMeta));
+        ),
+      );
     } else if (isInserting) {
       context.missing(_dietaryFiberMeta);
     }
     if (data.containsKey('salt')) {
       context.handle(
-          _saltMeta, salt.isAcceptableOrUnknown(data['salt']!, _saltMeta));
+        _saltMeta,
+        salt.isAcceptableOrUnknown(data['salt']!, _saltMeta),
+      );
     } else if (isInserting) {
       context.missing(_saltMeta);
     }
     if (data.containsKey('note')) {
       context.handle(
-          _noteMeta, note.isAcceptableOrUnknown(data['note']!, _noteMeta));
+        _noteMeta,
+        note.isAcceptableOrUnknown(data['note']!, _noteMeta),
+      );
     }
     return context;
   }
@@ -3057,44 +3660,82 @@ class $DictionaryItemsTableTable extends DictionaryItemsTable
   DictionaryItemsSchema map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return DictionaryItemsSchema(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      group: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}group'])!,
-      name: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
-      energy: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}energy'])!,
-      protein: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}protein'])!,
-      lipid: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}lipid'])!,
-      sodium: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}sodium'])!,
-      carbohydrate: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}carbohydrate'])!,
-      calcium: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}calcium'])!,
-      magnesium: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}magnesium'])!,
-      iron: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}iron'])!,
-      zinc: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}zinc'])!,
-      retinol: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}retinol'])!,
-      vitaminB1: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}vitamin_b1'])!,
-      vitaminB2: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}vitamin_b2'])!,
-      vitaminC: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}vitamin_c'])!,
-      dietaryFiber: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}dietary_fiber'])!,
-      salt: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}salt'])!,
-      note: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}note']),
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      group: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}group'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      energy: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}energy'],
+      )!,
+      protein: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}protein'],
+      )!,
+      lipid: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}lipid'],
+      )!,
+      sodium: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}sodium'],
+      )!,
+      carbohydrate: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}carbohydrate'],
+      )!,
+      calcium: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}calcium'],
+      )!,
+      magnesium: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}magnesium'],
+      )!,
+      iron: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}iron'],
+      )!,
+      zinc: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}zinc'],
+      )!,
+      retinol: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}retinol'],
+      )!,
+      vitaminB1: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}vitamin_b1'],
+      )!,
+      vitaminB2: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}vitamin_b2'],
+      )!,
+      vitaminC: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}vitamin_c'],
+      )!,
+      dietaryFiber: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}dietary_fiber'],
+      )!,
+      salt: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}salt'],
+      )!,
+      note: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}note'],
+      ),
     );
   }
 
@@ -3125,26 +3766,27 @@ class DictionaryItemsSchema extends DataClass
   final double dietaryFiber;
   final double salt;
   final String? note;
-  const DictionaryItemsSchema(
-      {required this.id,
-      required this.group,
-      required this.name,
-      required this.energy,
-      required this.protein,
-      required this.lipid,
-      required this.sodium,
-      required this.carbohydrate,
-      required this.calcium,
-      required this.magnesium,
-      required this.iron,
-      required this.zinc,
-      required this.retinol,
-      required this.vitaminB1,
-      required this.vitaminB2,
-      required this.vitaminC,
-      required this.dietaryFiber,
-      required this.salt,
-      this.note});
+  const DictionaryItemsSchema({
+    required this.id,
+    required this.group,
+    required this.name,
+    required this.energy,
+    required this.protein,
+    required this.lipid,
+    required this.sodium,
+    required this.carbohydrate,
+    required this.calcium,
+    required this.magnesium,
+    required this.iron,
+    required this.zinc,
+    required this.retinol,
+    required this.vitaminB1,
+    required this.vitaminB2,
+    required this.vitaminC,
+    required this.dietaryFiber,
+    required this.salt,
+    this.note,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -3196,8 +3838,10 @@ class DictionaryItemsSchema extends DataClass
     );
   }
 
-  factory DictionaryItemsSchema.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory DictionaryItemsSchema.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return DictionaryItemsSchema(
       id: serializer.fromJson<int>(json['id']),
@@ -3247,47 +3891,47 @@ class DictionaryItemsSchema extends DataClass
     };
   }
 
-  DictionaryItemsSchema copyWith(
-          {int? id,
-          int? group,
-          String? name,
-          double? energy,
-          double? protein,
-          double? lipid,
-          double? sodium,
-          double? carbohydrate,
-          double? calcium,
-          double? magnesium,
-          double? iron,
-          double? zinc,
-          double? retinol,
-          double? vitaminB1,
-          double? vitaminB2,
-          double? vitaminC,
-          double? dietaryFiber,
-          double? salt,
-          Value<String?> note = const Value.absent()}) =>
-      DictionaryItemsSchema(
-        id: id ?? this.id,
-        group: group ?? this.group,
-        name: name ?? this.name,
-        energy: energy ?? this.energy,
-        protein: protein ?? this.protein,
-        lipid: lipid ?? this.lipid,
-        sodium: sodium ?? this.sodium,
-        carbohydrate: carbohydrate ?? this.carbohydrate,
-        calcium: calcium ?? this.calcium,
-        magnesium: magnesium ?? this.magnesium,
-        iron: iron ?? this.iron,
-        zinc: zinc ?? this.zinc,
-        retinol: retinol ?? this.retinol,
-        vitaminB1: vitaminB1 ?? this.vitaminB1,
-        vitaminB2: vitaminB2 ?? this.vitaminB2,
-        vitaminC: vitaminC ?? this.vitaminC,
-        dietaryFiber: dietaryFiber ?? this.dietaryFiber,
-        salt: salt ?? this.salt,
-        note: note.present ? note.value : this.note,
-      );
+  DictionaryItemsSchema copyWith({
+    int? id,
+    int? group,
+    String? name,
+    double? energy,
+    double? protein,
+    double? lipid,
+    double? sodium,
+    double? carbohydrate,
+    double? calcium,
+    double? magnesium,
+    double? iron,
+    double? zinc,
+    double? retinol,
+    double? vitaminB1,
+    double? vitaminB2,
+    double? vitaminC,
+    double? dietaryFiber,
+    double? salt,
+    Value<String?> note = const Value.absent(),
+  }) => DictionaryItemsSchema(
+    id: id ?? this.id,
+    group: group ?? this.group,
+    name: name ?? this.name,
+    energy: energy ?? this.energy,
+    protein: protein ?? this.protein,
+    lipid: lipid ?? this.lipid,
+    sodium: sodium ?? this.sodium,
+    carbohydrate: carbohydrate ?? this.carbohydrate,
+    calcium: calcium ?? this.calcium,
+    magnesium: magnesium ?? this.magnesium,
+    iron: iron ?? this.iron,
+    zinc: zinc ?? this.zinc,
+    retinol: retinol ?? this.retinol,
+    vitaminB1: vitaminB1 ?? this.vitaminB1,
+    vitaminB2: vitaminB2 ?? this.vitaminB2,
+    vitaminC: vitaminC ?? this.vitaminC,
+    dietaryFiber: dietaryFiber ?? this.dietaryFiber,
+    salt: salt ?? this.salt,
+    note: note.present ? note.value : this.note,
+  );
   DictionaryItemsSchema copyWithCompanion(DictionaryItemsTableCompanion data) {
     return DictionaryItemsSchema(
       id: data.id.present ? data.id.value : this.id,
@@ -3344,25 +3988,26 @@ class DictionaryItemsSchema extends DataClass
 
   @override
   int get hashCode => Object.hash(
-      id,
-      group,
-      name,
-      energy,
-      protein,
-      lipid,
-      sodium,
-      carbohydrate,
-      calcium,
-      magnesium,
-      iron,
-      zinc,
-      retinol,
-      vitaminB1,
-      vitaminB2,
-      vitaminC,
-      dietaryFiber,
-      salt,
-      note);
+    id,
+    group,
+    name,
+    energy,
+    protein,
+    lipid,
+    sodium,
+    carbohydrate,
+    calcium,
+    magnesium,
+    iron,
+    zinc,
+    retinol,
+    vitaminB1,
+    vitaminB2,
+    vitaminC,
+    dietaryFiber,
+    salt,
+    note,
+  );
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -3450,23 +4095,23 @@ class DictionaryItemsTableCompanion
     required double dietaryFiber,
     required double salt,
     this.note = const Value.absent(),
-  })  : group = Value(group),
-        name = Value(name),
-        energy = Value(energy),
-        protein = Value(protein),
-        lipid = Value(lipid),
-        sodium = Value(sodium),
-        carbohydrate = Value(carbohydrate),
-        calcium = Value(calcium),
-        magnesium = Value(magnesium),
-        iron = Value(iron),
-        zinc = Value(zinc),
-        retinol = Value(retinol),
-        vitaminB1 = Value(vitaminB1),
-        vitaminB2 = Value(vitaminB2),
-        vitaminC = Value(vitaminC),
-        dietaryFiber = Value(dietaryFiber),
-        salt = Value(salt);
+  }) : group = Value(group),
+       name = Value(name),
+       energy = Value(energy),
+       protein = Value(protein),
+       lipid = Value(lipid),
+       sodium = Value(sodium),
+       carbohydrate = Value(carbohydrate),
+       calcium = Value(calcium),
+       magnesium = Value(magnesium),
+       iron = Value(iron),
+       zinc = Value(zinc),
+       retinol = Value(retinol),
+       vitaminB1 = Value(vitaminB1),
+       vitaminB2 = Value(vitaminB2),
+       vitaminC = Value(vitaminC),
+       dietaryFiber = Value(dietaryFiber),
+       salt = Value(salt);
   static Insertable<DictionaryItemsSchema> custom({
     Expression<int>? id,
     Expression<int>? group,
@@ -3511,26 +4156,27 @@ class DictionaryItemsTableCompanion
     });
   }
 
-  DictionaryItemsTableCompanion copyWith(
-      {Value<int>? id,
-      Value<int>? group,
-      Value<String>? name,
-      Value<double>? energy,
-      Value<double>? protein,
-      Value<double>? lipid,
-      Value<double>? sodium,
-      Value<double>? carbohydrate,
-      Value<double>? calcium,
-      Value<double>? magnesium,
-      Value<double>? iron,
-      Value<double>? zinc,
-      Value<double>? retinol,
-      Value<double>? vitaminB1,
-      Value<double>? vitaminB2,
-      Value<double>? vitaminC,
-      Value<double>? dietaryFiber,
-      Value<double>? salt,
-      Value<String?>? note}) {
+  DictionaryItemsTableCompanion copyWith({
+    Value<int>? id,
+    Value<int>? group,
+    Value<String>? name,
+    Value<double>? energy,
+    Value<double>? protein,
+    Value<double>? lipid,
+    Value<double>? sodium,
+    Value<double>? carbohydrate,
+    Value<double>? calcium,
+    Value<double>? magnesium,
+    Value<double>? iron,
+    Value<double>? zinc,
+    Value<double>? retinol,
+    Value<double>? vitaminB1,
+    Value<double>? vitaminB2,
+    Value<double>? vitaminC,
+    Value<double>? dietaryFiber,
+    Value<double>? salt,
+    Value<String?>? note,
+  }) {
     return DictionaryItemsTableCompanion(
       id: id ?? this.id,
       group: group ?? this.group,
@@ -3650,10 +4296,12 @@ abstract class _$LocalDatabase extends GeneratedDatabase {
   late final $SchoolsTableTable schoolsTable = $SchoolsTableTable(this);
   late final $MenusTableTable menusTable = $MenusTableTable(this);
   late final $DishesTableTable dishesTable = $DishesTableTable(this);
-  late final $MenuDishesTableTable menuDishesTable =
-      $MenuDishesTableTable(this);
-  late final $FoodstuffsTableTable foodstuffsTable =
-      $FoodstuffsTableTable(this);
+  late final $MenuDishesTableTable menuDishesTable = $MenuDishesTableTable(
+    this,
+  );
+  late final $FoodstuffsTableTable foodstuffsTable = $FoodstuffsTableTable(
+    this,
+  );
   late final $DishFoodstuffsTableTable dishFoodstuffsTable =
       $DishFoodstuffsTableTable(this);
   late final $UsersTableTable usersTable = $UsersTableTable(this);
@@ -3664,74 +4312,80 @@ abstract class _$LocalDatabase extends GeneratedDatabase {
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities => [
-        schoolsTable,
-        menusTable,
-        dishesTable,
-        menuDishesTable,
-        foodstuffsTable,
-        dishFoodstuffsTable,
-        usersTable,
-        dictionaryItemsTable
-      ];
+    schoolsTable,
+    menusTable,
+    dishesTable,
+    menuDishesTable,
+    foodstuffsTable,
+    dishFoodstuffsTable,
+    usersTable,
+    dictionaryItemsTable,
+  ];
 }
 
-typedef $$SchoolsTableTableCreateCompanionBuilder = SchoolsTableCompanion
-    Function({
-  Value<int> id,
-  required int parentId,
-  required String name,
-  required int lunchBlock,
-  required String classification,
-  Value<DateTime> createAt,
-  Value<DateTime> updateAt,
-  Value<bool> authorizationRequired,
-  Value<DateTime?> authorizationKeyUpdatedAt,
-});
-typedef $$SchoolsTableTableUpdateCompanionBuilder = SchoolsTableCompanion
-    Function({
-  Value<int> id,
-  Value<int> parentId,
-  Value<String> name,
-  Value<int> lunchBlock,
-  Value<String> classification,
-  Value<DateTime> createAt,
-  Value<DateTime> updateAt,
-  Value<bool> authorizationRequired,
-  Value<DateTime?> authorizationKeyUpdatedAt,
-});
+typedef $$SchoolsTableTableCreateCompanionBuilder =
+    SchoolsTableCompanion Function({
+      Value<int> id,
+      required int parentId,
+      required String name,
+      required int lunchBlock,
+      required String classification,
+      Value<DateTime> createAt,
+      Value<DateTime> updateAt,
+      Value<bool> authorizationRequired,
+      Value<DateTime?> authorizationKeyUpdatedAt,
+    });
+typedef $$SchoolsTableTableUpdateCompanionBuilder =
+    SchoolsTableCompanion Function({
+      Value<int> id,
+      Value<int> parentId,
+      Value<String> name,
+      Value<int> lunchBlock,
+      Value<String> classification,
+      Value<DateTime> createAt,
+      Value<DateTime> updateAt,
+      Value<bool> authorizationRequired,
+      Value<DateTime?> authorizationKeyUpdatedAt,
+    });
 
 final class $$SchoolsTableTableReferences
     extends BaseReferences<_$LocalDatabase, $SchoolsTableTable, SchoolsSchema> {
   $$SchoolsTableTableReferences(super.$_db, super.$_table, super.$_typedResult);
 
   static MultiTypedResultKey<$MenusTableTable, List<MenusSchema>>
-      _menusTableRefsTable(_$LocalDatabase db) => MultiTypedResultKey.fromTable(
-          db.menusTable,
-          aliasName:
-              $_aliasNameGenerator(db.schoolsTable.id, db.menusTable.schoolId));
+  _menusTableRefsTable(_$LocalDatabase db) => MultiTypedResultKey.fromTable(
+    db.menusTable,
+    aliasName: $_aliasNameGenerator(db.schoolsTable.id, db.menusTable.schoolId),
+  );
 
   $$MenusTableTableProcessedTableManager get menusTableRefs {
-    final manager = $$MenusTableTableTableManager($_db, $_db.menusTable)
-        .filter((f) => f.schoolId.id.sqlEquals($_itemColumn<int>('id')!));
+    final manager = $$MenusTableTableTableManager(
+      $_db,
+      $_db.menusTable,
+    ).filter((f) => f.schoolId.id.sqlEquals($_itemColumn<int>('id')!));
 
     final cache = $_typedResult.readTableOrNull(_menusTableRefsTable($_db));
     return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: cache));
+      manager.$state.copyWith(prefetchedData: cache),
+    );
   }
 
   static MultiTypedResultKey<$UsersTableTable, List<UsersSchema>>
-      _usersTableRefsTable(_$LocalDatabase db) => MultiTypedResultKey.fromTable(
-          db.usersTable,
-          aliasName:
-              $_aliasNameGenerator(db.schoolsTable.id, db.usersTable.schoolId));
+  _usersTableRefsTable(_$LocalDatabase db) => MultiTypedResultKey.fromTable(
+    db.usersTable,
+    aliasName: $_aliasNameGenerator(db.schoolsTable.id, db.usersTable.schoolId),
+  );
 
   $$UsersTableTableProcessedTableManager get usersTableRefs {
-    final manager = $$UsersTableTableTableManager($_db, $_db.usersTable)
-        .filter((f) => f.schoolId.id.sqlEquals($_itemColumn<int>('id')!));
+    final manager = $$UsersTableTableTableManager(
+      $_db,
+      $_db.usersTable,
+    ).filter((f) => f.schoolId.id.sqlEquals($_itemColumn<int>('id')!));
 
     final cache = $_typedResult.readTableOrNull(_usersTableRefsTable($_db));
     return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: cache));
+      manager.$state.copyWith(prefetchedData: cache),
+    );
   }
 }
 
@@ -3745,74 +4399,97 @@ class $$SchoolsTableTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<int> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnFilters(column));
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<int> get parentId => $composableBuilder(
-      column: $table.parentId, builder: (column) => ColumnFilters(column));
+    column: $table.parentId,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get name => $composableBuilder(
-      column: $table.name, builder: (column) => ColumnFilters(column));
+    column: $table.name,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<int> get lunchBlock => $composableBuilder(
-      column: $table.lunchBlock, builder: (column) => ColumnFilters(column));
+    column: $table.lunchBlock,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get classification => $composableBuilder(
-      column: $table.classification,
-      builder: (column) => ColumnFilters(column));
+    column: $table.classification,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<DateTime> get createAt => $composableBuilder(
-      column: $table.createAt, builder: (column) => ColumnFilters(column));
+    column: $table.createAt,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<DateTime> get updateAt => $composableBuilder(
-      column: $table.updateAt, builder: (column) => ColumnFilters(column));
+    column: $table.updateAt,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<bool> get authorizationRequired => $composableBuilder(
-      column: $table.authorizationRequired,
-      builder: (column) => ColumnFilters(column));
+    column: $table.authorizationRequired,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<DateTime> get authorizationKeyUpdatedAt => $composableBuilder(
-      column: $table.authorizationKeyUpdatedAt,
-      builder: (column) => ColumnFilters(column));
+    column: $table.authorizationKeyUpdatedAt,
+    builder: (column) => ColumnFilters(column),
+  );
 
   Expression<bool> menusTableRefs(
-      Expression<bool> Function($$MenusTableTableFilterComposer f) f) {
+    Expression<bool> Function($$MenusTableTableFilterComposer f) f,
+  ) {
     final $$MenusTableTableFilterComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $db.menusTable,
-        getReferencedColumn: (t) => t.schoolId,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$MenusTableTableFilterComposer(
-              $db: $db,
-              $table: $db.menusTable,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.menusTable,
+      getReferencedColumn: (t) => t.schoolId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$MenusTableTableFilterComposer(
+            $db: $db,
+            $table: $db.menusTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return f(composer);
   }
 
   Expression<bool> usersTableRefs(
-      Expression<bool> Function($$UsersTableTableFilterComposer f) f) {
+    Expression<bool> Function($$UsersTableTableFilterComposer f) f,
+  ) {
     final $$UsersTableTableFilterComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $db.usersTable,
-        getReferencedColumn: (t) => t.schoolId,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$UsersTableTableFilterComposer(
-              $db: $db,
-              $table: $db.usersTable,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.usersTable,
+      getReferencedColumn: (t) => t.schoolId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$UsersTableTableFilterComposer(
+            $db: $db,
+            $table: $db.usersTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return f(composer);
   }
 }
@@ -3827,34 +4504,49 @@ class $$SchoolsTableTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<int> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnOrderings(column));
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<int> get parentId => $composableBuilder(
-      column: $table.parentId, builder: (column) => ColumnOrderings(column));
+    column: $table.parentId,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get name => $composableBuilder(
-      column: $table.name, builder: (column) => ColumnOrderings(column));
+    column: $table.name,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<int> get lunchBlock => $composableBuilder(
-      column: $table.lunchBlock, builder: (column) => ColumnOrderings(column));
+    column: $table.lunchBlock,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get classification => $composableBuilder(
-      column: $table.classification,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.classification,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<DateTime> get createAt => $composableBuilder(
-      column: $table.createAt, builder: (column) => ColumnOrderings(column));
+    column: $table.createAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<DateTime> get updateAt => $composableBuilder(
-      column: $table.updateAt, builder: (column) => ColumnOrderings(column));
+    column: $table.updateAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<bool> get authorizationRequired => $composableBuilder(
-      column: $table.authorizationRequired,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.authorizationRequired,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<DateTime> get authorizationKeyUpdatedAt => $composableBuilder(
-      column: $table.authorizationKeyUpdatedAt,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.authorizationKeyUpdatedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$SchoolsTableTableAnnotationComposer
@@ -3876,10 +4568,14 @@ class $$SchoolsTableTableAnnotationComposer
       $composableBuilder(column: $table.name, builder: (column) => column);
 
   GeneratedColumn<int> get lunchBlock => $composableBuilder(
-      column: $table.lunchBlock, builder: (column) => column);
+    column: $table.lunchBlock,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get classification => $composableBuilder(
-      column: $table.classification, builder: (column) => column);
+    column: $table.classification,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<DateTime> get createAt =>
       $composableBuilder(column: $table.createAt, builder: (column) => column);
@@ -3888,68 +4584,84 @@ class $$SchoolsTableTableAnnotationComposer
       $composableBuilder(column: $table.updateAt, builder: (column) => column);
 
   GeneratedColumn<bool> get authorizationRequired => $composableBuilder(
-      column: $table.authorizationRequired, builder: (column) => column);
+    column: $table.authorizationRequired,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<DateTime> get authorizationKeyUpdatedAt => $composableBuilder(
-      column: $table.authorizationKeyUpdatedAt, builder: (column) => column);
+    column: $table.authorizationKeyUpdatedAt,
+    builder: (column) => column,
+  );
 
   Expression<T> menusTableRefs<T extends Object>(
-      Expression<T> Function($$MenusTableTableAnnotationComposer a) f) {
+    Expression<T> Function($$MenusTableTableAnnotationComposer a) f,
+  ) {
     final $$MenusTableTableAnnotationComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $db.menusTable,
-        getReferencedColumn: (t) => t.schoolId,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$MenusTableTableAnnotationComposer(
-              $db: $db,
-              $table: $db.menusTable,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.menusTable,
+      getReferencedColumn: (t) => t.schoolId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$MenusTableTableAnnotationComposer(
+            $db: $db,
+            $table: $db.menusTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return f(composer);
   }
 
   Expression<T> usersTableRefs<T extends Object>(
-      Expression<T> Function($$UsersTableTableAnnotationComposer a) f) {
+    Expression<T> Function($$UsersTableTableAnnotationComposer a) f,
+  ) {
     final $$UsersTableTableAnnotationComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $db.usersTable,
-        getReferencedColumn: (t) => t.schoolId,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$UsersTableTableAnnotationComposer(
-              $db: $db,
-              $table: $db.usersTable,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.usersTable,
+      getReferencedColumn: (t) => t.schoolId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$UsersTableTableAnnotationComposer(
+            $db: $db,
+            $table: $db.usersTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return f(composer);
   }
 }
 
-class $$SchoolsTableTableTableManager extends RootTableManager<
-    _$LocalDatabase,
-    $SchoolsTableTable,
-    SchoolsSchema,
-    $$SchoolsTableTableFilterComposer,
-    $$SchoolsTableTableOrderingComposer,
-    $$SchoolsTableTableAnnotationComposer,
-    $$SchoolsTableTableCreateCompanionBuilder,
-    $$SchoolsTableTableUpdateCompanionBuilder,
-    (SchoolsSchema, $$SchoolsTableTableReferences),
-    SchoolsSchema,
-    PrefetchHooks Function({bool menusTableRefs, bool usersTableRefs})> {
+class $$SchoolsTableTableTableManager
+    extends
+        RootTableManager<
+          _$LocalDatabase,
+          $SchoolsTableTable,
+          SchoolsSchema,
+          $$SchoolsTableTableFilterComposer,
+          $$SchoolsTableTableOrderingComposer,
+          $$SchoolsTableTableAnnotationComposer,
+          $$SchoolsTableTableCreateCompanionBuilder,
+          $$SchoolsTableTableUpdateCompanionBuilder,
+          (SchoolsSchema, $$SchoolsTableTableReferences),
+          SchoolsSchema,
+          PrefetchHooks Function({bool menusTableRefs, bool usersTableRefs})
+        > {
   $$SchoolsTableTableTableManager(_$LocalDatabase db, $SchoolsTableTable table)
-      : super(TableManagerState(
+    : super(
+        TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
@@ -3958,126 +4670,153 @@ class $$SchoolsTableTableTableManager extends RootTableManager<
               $$SchoolsTableTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
               $$SchoolsTableTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback: ({
-            Value<int> id = const Value.absent(),
-            Value<int> parentId = const Value.absent(),
-            Value<String> name = const Value.absent(),
-            Value<int> lunchBlock = const Value.absent(),
-            Value<String> classification = const Value.absent(),
-            Value<DateTime> createAt = const Value.absent(),
-            Value<DateTime> updateAt = const Value.absent(),
-            Value<bool> authorizationRequired = const Value.absent(),
-            Value<DateTime?> authorizationKeyUpdatedAt = const Value.absent(),
-          }) =>
-              SchoolsTableCompanion(
-            id: id,
-            parentId: parentId,
-            name: name,
-            lunchBlock: lunchBlock,
-            classification: classification,
-            createAt: createAt,
-            updateAt: updateAt,
-            authorizationRequired: authorizationRequired,
-            authorizationKeyUpdatedAt: authorizationKeyUpdatedAt,
-          ),
-          createCompanionCallback: ({
-            Value<int> id = const Value.absent(),
-            required int parentId,
-            required String name,
-            required int lunchBlock,
-            required String classification,
-            Value<DateTime> createAt = const Value.absent(),
-            Value<DateTime> updateAt = const Value.absent(),
-            Value<bool> authorizationRequired = const Value.absent(),
-            Value<DateTime?> authorizationKeyUpdatedAt = const Value.absent(),
-          }) =>
-              SchoolsTableCompanion.insert(
-            id: id,
-            parentId: parentId,
-            name: name,
-            lunchBlock: lunchBlock,
-            classification: classification,
-            createAt: createAt,
-            updateAt: updateAt,
-            authorizationRequired: authorizationRequired,
-            authorizationKeyUpdatedAt: authorizationKeyUpdatedAt,
-          ),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<int> parentId = const Value.absent(),
+                Value<String> name = const Value.absent(),
+                Value<int> lunchBlock = const Value.absent(),
+                Value<String> classification = const Value.absent(),
+                Value<DateTime> createAt = const Value.absent(),
+                Value<DateTime> updateAt = const Value.absent(),
+                Value<bool> authorizationRequired = const Value.absent(),
+                Value<DateTime?> authorizationKeyUpdatedAt =
+                    const Value.absent(),
+              }) => SchoolsTableCompanion(
+                id: id,
+                parentId: parentId,
+                name: name,
+                lunchBlock: lunchBlock,
+                classification: classification,
+                createAt: createAt,
+                updateAt: updateAt,
+                authorizationRequired: authorizationRequired,
+                authorizationKeyUpdatedAt: authorizationKeyUpdatedAt,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required int parentId,
+                required String name,
+                required int lunchBlock,
+                required String classification,
+                Value<DateTime> createAt = const Value.absent(),
+                Value<DateTime> updateAt = const Value.absent(),
+                Value<bool> authorizationRequired = const Value.absent(),
+                Value<DateTime?> authorizationKeyUpdatedAt =
+                    const Value.absent(),
+              }) => SchoolsTableCompanion.insert(
+                id: id,
+                parentId: parentId,
+                name: name,
+                lunchBlock: lunchBlock,
+                classification: classification,
+                createAt: createAt,
+                updateAt: updateAt,
+                authorizationRequired: authorizationRequired,
+                authorizationKeyUpdatedAt: authorizationKeyUpdatedAt,
+              ),
           withReferenceMapper: (p0) => p0
-              .map((e) => (
-                    e.readTable(table),
-                    $$SchoolsTableTableReferences(db, table, e)
-                  ))
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$SchoolsTableTableReferences(db, table, e),
+                ),
+              )
               .toList(),
-          prefetchHooksCallback: (
-              {menusTableRefs = false, usersTableRefs = false}) {
-            return PrefetchHooks(
-              db: db,
-              explicitlyWatchedTables: [
-                if (menusTableRefs) db.menusTable,
-                if (usersTableRefs) db.usersTable
-              ],
-              addJoins: null,
-              getPrefetchedDataCallback: (items) async {
-                return [
-                  if (menusTableRefs)
-                    await $_getPrefetchedData(
-                        currentTable: table,
-                        referencedTable: $$SchoolsTableTableReferences
-                            ._menusTableRefsTable(db),
-                        managerFromTypedResult: (p0) =>
-                            $$SchoolsTableTableReferences(db, table, p0)
-                                .menusTableRefs,
-                        referencedItemsForCurrentItem: (item,
-                                referencedItems) =>
-                            referencedItems.where((e) => e.schoolId == item.id),
-                        typedResults: items),
-                  if (usersTableRefs)
-                    await $_getPrefetchedData(
-                        currentTable: table,
-                        referencedTable: $$SchoolsTableTableReferences
-                            ._usersTableRefsTable(db),
-                        managerFromTypedResult: (p0) =>
-                            $$SchoolsTableTableReferences(db, table, p0)
-                                .usersTableRefs,
-                        referencedItemsForCurrentItem: (item,
-                                referencedItems) =>
-                            referencedItems.where((e) => e.schoolId == item.id),
-                        typedResults: items)
-                ];
+          prefetchHooksCallback:
+              ({menusTableRefs = false, usersTableRefs = false}) {
+                return PrefetchHooks(
+                  db: db,
+                  explicitlyWatchedTables: [
+                    if (menusTableRefs) db.menusTable,
+                    if (usersTableRefs) db.usersTable,
+                  ],
+                  addJoins: null,
+                  getPrefetchedDataCallback: (items) async {
+                    return [
+                      if (menusTableRefs)
+                        await $_getPrefetchedData<
+                          SchoolsSchema,
+                          $SchoolsTableTable,
+                          MenusSchema
+                        >(
+                          currentTable: table,
+                          referencedTable: $$SchoolsTableTableReferences
+                              ._menusTableRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$SchoolsTableTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).menusTableRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.schoolId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                      if (usersTableRefs)
+                        await $_getPrefetchedData<
+                          SchoolsSchema,
+                          $SchoolsTableTable,
+                          UsersSchema
+                        >(
+                          currentTable: table,
+                          referencedTable: $$SchoolsTableTableReferences
+                              ._usersTableRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$SchoolsTableTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).usersTableRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.schoolId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                    ];
+                  },
+                );
               },
-            );
-          },
-        ));
+        ),
+      );
 }
 
-typedef $$SchoolsTableTableProcessedTableManager = ProcessedTableManager<
-    _$LocalDatabase,
-    $SchoolsTableTable,
-    SchoolsSchema,
-    $$SchoolsTableTableFilterComposer,
-    $$SchoolsTableTableOrderingComposer,
-    $$SchoolsTableTableAnnotationComposer,
-    $$SchoolsTableTableCreateCompanionBuilder,
-    $$SchoolsTableTableUpdateCompanionBuilder,
-    (SchoolsSchema, $$SchoolsTableTableReferences),
-    SchoolsSchema,
-    PrefetchHooks Function({bool menusTableRefs, bool usersTableRefs})>;
-typedef $$MenusTableTableCreateCompanionBuilder = MenusTableCompanion Function({
-  Value<int> id,
-  required DateTime day,
-  required int schoolId,
-  Value<String?> event,
-  Value<DateTime> createAt,
-  Value<DateTime> updateAt,
-});
-typedef $$MenusTableTableUpdateCompanionBuilder = MenusTableCompanion Function({
-  Value<int> id,
-  Value<DateTime> day,
-  Value<int> schoolId,
-  Value<String?> event,
-  Value<DateTime> createAt,
-  Value<DateTime> updateAt,
-});
+typedef $$SchoolsTableTableProcessedTableManager =
+    ProcessedTableManager<
+      _$LocalDatabase,
+      $SchoolsTableTable,
+      SchoolsSchema,
+      $$SchoolsTableTableFilterComposer,
+      $$SchoolsTableTableOrderingComposer,
+      $$SchoolsTableTableAnnotationComposer,
+      $$SchoolsTableTableCreateCompanionBuilder,
+      $$SchoolsTableTableUpdateCompanionBuilder,
+      (SchoolsSchema, $$SchoolsTableTableReferences),
+      SchoolsSchema,
+      PrefetchHooks Function({bool menusTableRefs, bool usersTableRefs})
+    >;
+typedef $$MenusTableTableCreateCompanionBuilder =
+    MenusTableCompanion Function({
+      Value<int> id,
+      required DateTime day,
+      required int schoolId,
+      Value<String?> event,
+      Value<DateTime> createAt,
+      Value<DateTime> updateAt,
+    });
+typedef $$MenusTableTableUpdateCompanionBuilder =
+    MenusTableCompanion Function({
+      Value<int> id,
+      Value<DateTime> day,
+      Value<int> schoolId,
+      Value<String?> event,
+      Value<DateTime> createAt,
+      Value<DateTime> updateAt,
+    });
 
 final class $$MenusTableTableReferences
     extends BaseReferences<_$LocalDatabase, $MenusTableTable, MenusSchema> {
@@ -4085,34 +4824,45 @@ final class $$MenusTableTableReferences
 
   static $SchoolsTableTable _schoolIdTable(_$LocalDatabase db) =>
       db.schoolsTable.createAlias(
-          $_aliasNameGenerator(db.menusTable.schoolId, db.schoolsTable.id));
+        $_aliasNameGenerator(db.menusTable.schoolId, db.schoolsTable.id),
+      );
 
   $$SchoolsTableTableProcessedTableManager get schoolId {
     final $_column = $_itemColumn<int>('school_id')!;
 
-    final manager = $$SchoolsTableTableTableManager($_db, $_db.schoolsTable)
-        .filter((f) => f.id.sqlEquals($_column));
+    final manager = $$SchoolsTableTableTableManager(
+      $_db,
+      $_db.schoolsTable,
+    ).filter((f) => f.id.sqlEquals($_column));
     final item = $_typedResult.readTableOrNull(_schoolIdTable($_db));
     if (item == null) return manager;
     return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: [item]));
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
   }
 
   static MultiTypedResultKey<$MenuDishesTableTable, List<MenuDishesSchema>>
-      _menuDishesTableRefsTable(_$LocalDatabase db) =>
-          MultiTypedResultKey.fromTable(db.menuDishesTable,
-              aliasName: $_aliasNameGenerator(
-                  db.menusTable.id, db.menuDishesTable.menuId));
+  _menuDishesTableRefsTable(_$LocalDatabase db) =>
+      MultiTypedResultKey.fromTable(
+        db.menuDishesTable,
+        aliasName: $_aliasNameGenerator(
+          db.menusTable.id,
+          db.menuDishesTable.menuId,
+        ),
+      );
 
   $$MenuDishesTableTableProcessedTableManager get menuDishesTableRefs {
-    final manager =
-        $$MenuDishesTableTableTableManager($_db, $_db.menuDishesTable)
-            .filter((f) => f.menuId.id.sqlEquals($_itemColumn<int>('id')!));
+    final manager = $$MenuDishesTableTableTableManager(
+      $_db,
+      $_db.menuDishesTable,
+    ).filter((f) => f.menuId.id.sqlEquals($_itemColumn<int>('id')!));
 
-    final cache =
-        $_typedResult.readTableOrNull(_menuDishesTableRefsTable($_db));
+    final cache = $_typedResult.readTableOrNull(
+      _menuDishesTableRefsTable($_db),
+    );
     return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: cache));
+      manager.$state.copyWith(prefetchedData: cache),
+    );
   }
 }
 
@@ -4126,58 +4876,75 @@ class $$MenusTableTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<int> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnFilters(column));
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<DateTime> get day => $composableBuilder(
-      column: $table.day, builder: (column) => ColumnFilters(column));
+    column: $table.day,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get event => $composableBuilder(
-      column: $table.event, builder: (column) => ColumnFilters(column));
+    column: $table.event,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<DateTime> get createAt => $composableBuilder(
-      column: $table.createAt, builder: (column) => ColumnFilters(column));
+    column: $table.createAt,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<DateTime> get updateAt => $composableBuilder(
-      column: $table.updateAt, builder: (column) => ColumnFilters(column));
+    column: $table.updateAt,
+    builder: (column) => ColumnFilters(column),
+  );
 
   $$SchoolsTableTableFilterComposer get schoolId {
     final $$SchoolsTableTableFilterComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.schoolId,
-        referencedTable: $db.schoolsTable,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$SchoolsTableTableFilterComposer(
-              $db: $db,
-              $table: $db.schoolsTable,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.schoolId,
+      referencedTable: $db.schoolsTable,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$SchoolsTableTableFilterComposer(
+            $db: $db,
+            $table: $db.schoolsTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 
   Expression<bool> menuDishesTableRefs(
-      Expression<bool> Function($$MenuDishesTableTableFilterComposer f) f) {
+    Expression<bool> Function($$MenuDishesTableTableFilterComposer f) f,
+  ) {
     final $$MenuDishesTableTableFilterComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $db.menuDishesTable,
-        getReferencedColumn: (t) => t.menuId,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$MenuDishesTableTableFilterComposer(
-              $db: $db,
-              $table: $db.menuDishesTable,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.menuDishesTable,
+      getReferencedColumn: (t) => t.menuId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$MenuDishesTableTableFilterComposer(
+            $db: $db,
+            $table: $db.menuDishesTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return f(composer);
   }
 }
@@ -4192,37 +4959,50 @@ class $$MenusTableTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<int> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnOrderings(column));
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<DateTime> get day => $composableBuilder(
-      column: $table.day, builder: (column) => ColumnOrderings(column));
+    column: $table.day,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get event => $composableBuilder(
-      column: $table.event, builder: (column) => ColumnOrderings(column));
+    column: $table.event,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<DateTime> get createAt => $composableBuilder(
-      column: $table.createAt, builder: (column) => ColumnOrderings(column));
+    column: $table.createAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<DateTime> get updateAt => $composableBuilder(
-      column: $table.updateAt, builder: (column) => ColumnOrderings(column));
+    column: $table.updateAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   $$SchoolsTableTableOrderingComposer get schoolId {
     final $$SchoolsTableTableOrderingComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.schoolId,
-        referencedTable: $db.schoolsTable,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$SchoolsTableTableOrderingComposer(
-              $db: $db,
-              $table: $db.schoolsTable,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.schoolId,
+      referencedTable: $db.schoolsTable,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$SchoolsTableTableOrderingComposer(
+            $db: $db,
+            $table: $db.schoolsTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 }
@@ -4253,60 +5033,71 @@ class $$MenusTableTableAnnotationComposer
 
   $$SchoolsTableTableAnnotationComposer get schoolId {
     final $$SchoolsTableTableAnnotationComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.schoolId,
-        referencedTable: $db.schoolsTable,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$SchoolsTableTableAnnotationComposer(
-              $db: $db,
-              $table: $db.schoolsTable,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.schoolId,
+      referencedTable: $db.schoolsTable,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$SchoolsTableTableAnnotationComposer(
+            $db: $db,
+            $table: $db.schoolsTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 
   Expression<T> menuDishesTableRefs<T extends Object>(
-      Expression<T> Function($$MenuDishesTableTableAnnotationComposer a) f) {
+    Expression<T> Function($$MenuDishesTableTableAnnotationComposer a) f,
+  ) {
     final $$MenuDishesTableTableAnnotationComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $db.menuDishesTable,
-        getReferencedColumn: (t) => t.menuId,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$MenuDishesTableTableAnnotationComposer(
-              $db: $db,
-              $table: $db.menuDishesTable,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.menuDishesTable,
+      getReferencedColumn: (t) => t.menuId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$MenuDishesTableTableAnnotationComposer(
+            $db: $db,
+            $table: $db.menuDishesTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return f(composer);
   }
 }
 
-class $$MenusTableTableTableManager extends RootTableManager<
-    _$LocalDatabase,
-    $MenusTableTable,
-    MenusSchema,
-    $$MenusTableTableFilterComposer,
-    $$MenusTableTableOrderingComposer,
-    $$MenusTableTableAnnotationComposer,
-    $$MenusTableTableCreateCompanionBuilder,
-    $$MenusTableTableUpdateCompanionBuilder,
-    (MenusSchema, $$MenusTableTableReferences),
-    MenusSchema,
-    PrefetchHooks Function({bool schoolId, bool menuDishesTableRefs})> {
+class $$MenusTableTableTableManager
+    extends
+        RootTableManager<
+          _$LocalDatabase,
+          $MenusTableTable,
+          MenusSchema,
+          $$MenusTableTableFilterComposer,
+          $$MenusTableTableOrderingComposer,
+          $$MenusTableTableAnnotationComposer,
+          $$MenusTableTableCreateCompanionBuilder,
+          $$MenusTableTableUpdateCompanionBuilder,
+          (MenusSchema, $$MenusTableTableReferences),
+          MenusSchema,
+          PrefetchHooks Function({bool schoolId, bool menuDishesTableRefs})
+        > {
   $$MenusTableTableTableManager(_$LocalDatabase db, $MenusTableTable table)
-      : super(TableManagerState(
+    : super(
+        TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
@@ -4315,160 +5106,197 @@ class $$MenusTableTableTableManager extends RootTableManager<
               $$MenusTableTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
               $$MenusTableTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback: ({
-            Value<int> id = const Value.absent(),
-            Value<DateTime> day = const Value.absent(),
-            Value<int> schoolId = const Value.absent(),
-            Value<String?> event = const Value.absent(),
-            Value<DateTime> createAt = const Value.absent(),
-            Value<DateTime> updateAt = const Value.absent(),
-          }) =>
-              MenusTableCompanion(
-            id: id,
-            day: day,
-            schoolId: schoolId,
-            event: event,
-            createAt: createAt,
-            updateAt: updateAt,
-          ),
-          createCompanionCallback: ({
-            Value<int> id = const Value.absent(),
-            required DateTime day,
-            required int schoolId,
-            Value<String?> event = const Value.absent(),
-            Value<DateTime> createAt = const Value.absent(),
-            Value<DateTime> updateAt = const Value.absent(),
-          }) =>
-              MenusTableCompanion.insert(
-            id: id,
-            day: day,
-            schoolId: schoolId,
-            event: event,
-            createAt: createAt,
-            updateAt: updateAt,
-          ),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<DateTime> day = const Value.absent(),
+                Value<int> schoolId = const Value.absent(),
+                Value<String?> event = const Value.absent(),
+                Value<DateTime> createAt = const Value.absent(),
+                Value<DateTime> updateAt = const Value.absent(),
+              }) => MenusTableCompanion(
+                id: id,
+                day: day,
+                schoolId: schoolId,
+                event: event,
+                createAt: createAt,
+                updateAt: updateAt,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required DateTime day,
+                required int schoolId,
+                Value<String?> event = const Value.absent(),
+                Value<DateTime> createAt = const Value.absent(),
+                Value<DateTime> updateAt = const Value.absent(),
+              }) => MenusTableCompanion.insert(
+                id: id,
+                day: day,
+                schoolId: schoolId,
+                event: event,
+                createAt: createAt,
+                updateAt: updateAt,
+              ),
           withReferenceMapper: (p0) => p0
-              .map((e) => (
-                    e.readTable(table),
-                    $$MenusTableTableReferences(db, table, e)
-                  ))
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$MenusTableTableReferences(db, table, e),
+                ),
+              )
               .toList(),
-          prefetchHooksCallback: (
-              {schoolId = false, menuDishesTableRefs = false}) {
-            return PrefetchHooks(
-              db: db,
-              explicitlyWatchedTables: [
-                if (menuDishesTableRefs) db.menuDishesTable
-              ],
-              addJoins: <
-                  T extends TableManagerState<
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic>>(state) {
-                if (schoolId) {
-                  state = state.withJoin(
-                    currentTable: table,
-                    currentColumn: table.schoolId,
-                    referencedTable:
-                        $$MenusTableTableReferences._schoolIdTable(db),
-                    referencedColumn:
-                        $$MenusTableTableReferences._schoolIdTable(db).id,
-                  ) as T;
-                }
+          prefetchHooksCallback:
+              ({schoolId = false, menuDishesTableRefs = false}) {
+                return PrefetchHooks(
+                  db: db,
+                  explicitlyWatchedTables: [
+                    if (menuDishesTableRefs) db.menuDishesTable,
+                  ],
+                  addJoins:
+                      <
+                        T extends TableManagerState<
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic
+                        >
+                      >(state) {
+                        if (schoolId) {
+                          state =
+                              state.withJoin(
+                                    currentTable: table,
+                                    currentColumn: table.schoolId,
+                                    referencedTable: $$MenusTableTableReferences
+                                        ._schoolIdTable(db),
+                                    referencedColumn:
+                                        $$MenusTableTableReferences
+                                            ._schoolIdTable(db)
+                                            .id,
+                                  )
+                                  as T;
+                        }
 
-                return state;
+                        return state;
+                      },
+                  getPrefetchedDataCallback: (items) async {
+                    return [
+                      if (menuDishesTableRefs)
+                        await $_getPrefetchedData<
+                          MenusSchema,
+                          $MenusTableTable,
+                          MenuDishesSchema
+                        >(
+                          currentTable: table,
+                          referencedTable: $$MenusTableTableReferences
+                              ._menuDishesTableRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$MenusTableTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).menuDishesTableRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.menuId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                    ];
+                  },
+                );
               },
-              getPrefetchedDataCallback: (items) async {
-                return [
-                  if (menuDishesTableRefs)
-                    await $_getPrefetchedData(
-                        currentTable: table,
-                        referencedTable: $$MenusTableTableReferences
-                            ._menuDishesTableRefsTable(db),
-                        managerFromTypedResult: (p0) =>
-                            $$MenusTableTableReferences(db, table, p0)
-                                .menuDishesTableRefs,
-                        referencedItemsForCurrentItem: (item,
-                                referencedItems) =>
-                            referencedItems.where((e) => e.menuId == item.id),
-                        typedResults: items)
-                ];
-              },
-            );
-          },
-        ));
+        ),
+      );
 }
 
-typedef $$MenusTableTableProcessedTableManager = ProcessedTableManager<
-    _$LocalDatabase,
-    $MenusTableTable,
-    MenusSchema,
-    $$MenusTableTableFilterComposer,
-    $$MenusTableTableOrderingComposer,
-    $$MenusTableTableAnnotationComposer,
-    $$MenusTableTableCreateCompanionBuilder,
-    $$MenusTableTableUpdateCompanionBuilder,
-    (MenusSchema, $$MenusTableTableReferences),
-    MenusSchema,
-    PrefetchHooks Function({bool schoolId, bool menuDishesTableRefs})>;
-typedef $$DishesTableTableCreateCompanionBuilder = DishesTableCompanion
-    Function({
-  Value<int> id,
-  required String name,
-  Value<String?> category,
-});
-typedef $$DishesTableTableUpdateCompanionBuilder = DishesTableCompanion
-    Function({
-  Value<int> id,
-  Value<String> name,
-  Value<String?> category,
-});
+typedef $$MenusTableTableProcessedTableManager =
+    ProcessedTableManager<
+      _$LocalDatabase,
+      $MenusTableTable,
+      MenusSchema,
+      $$MenusTableTableFilterComposer,
+      $$MenusTableTableOrderingComposer,
+      $$MenusTableTableAnnotationComposer,
+      $$MenusTableTableCreateCompanionBuilder,
+      $$MenusTableTableUpdateCompanionBuilder,
+      (MenusSchema, $$MenusTableTableReferences),
+      MenusSchema,
+      PrefetchHooks Function({bool schoolId, bool menuDishesTableRefs})
+    >;
+typedef $$DishesTableTableCreateCompanionBuilder =
+    DishesTableCompanion Function({
+      Value<int> id,
+      required String name,
+      Value<String?> category,
+    });
+typedef $$DishesTableTableUpdateCompanionBuilder =
+    DishesTableCompanion Function({
+      Value<int> id,
+      Value<String> name,
+      Value<String?> category,
+    });
 
 final class $$DishesTableTableReferences
     extends BaseReferences<_$LocalDatabase, $DishesTableTable, DishesSchema> {
   $$DishesTableTableReferences(super.$_db, super.$_table, super.$_typedResult);
 
   static MultiTypedResultKey<$MenuDishesTableTable, List<MenuDishesSchema>>
-      _menuDishesTableRefsTable(_$LocalDatabase db) =>
-          MultiTypedResultKey.fromTable(db.menuDishesTable,
-              aliasName: $_aliasNameGenerator(
-                  db.dishesTable.id, db.menuDishesTable.dishId));
+  _menuDishesTableRefsTable(_$LocalDatabase db) =>
+      MultiTypedResultKey.fromTable(
+        db.menuDishesTable,
+        aliasName: $_aliasNameGenerator(
+          db.dishesTable.id,
+          db.menuDishesTable.dishId,
+        ),
+      );
 
   $$MenuDishesTableTableProcessedTableManager get menuDishesTableRefs {
-    final manager =
-        $$MenuDishesTableTableTableManager($_db, $_db.menuDishesTable)
-            .filter((f) => f.dishId.id.sqlEquals($_itemColumn<int>('id')!));
+    final manager = $$MenuDishesTableTableTableManager(
+      $_db,
+      $_db.menuDishesTable,
+    ).filter((f) => f.dishId.id.sqlEquals($_itemColumn<int>('id')!));
 
-    final cache =
-        $_typedResult.readTableOrNull(_menuDishesTableRefsTable($_db));
+    final cache = $_typedResult.readTableOrNull(
+      _menuDishesTableRefsTable($_db),
+    );
     return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: cache));
+      manager.$state.copyWith(prefetchedData: cache),
+    );
   }
 
-  static MultiTypedResultKey<$DishFoodstuffsTableTable,
-      List<DishFoodstuffsSchema>> _dishFoodstuffsTableRefsTable(
-          _$LocalDatabase db) =>
-      MultiTypedResultKey.fromTable(db.dishFoodstuffsTable,
-          aliasName: $_aliasNameGenerator(
-              db.dishesTable.id, db.dishFoodstuffsTable.dishId));
+  static MultiTypedResultKey<
+    $DishFoodstuffsTableTable,
+    List<DishFoodstuffsSchema>
+  >
+  _dishFoodstuffsTableRefsTable(_$LocalDatabase db) =>
+      MultiTypedResultKey.fromTable(
+        db.dishFoodstuffsTable,
+        aliasName: $_aliasNameGenerator(
+          db.dishesTable.id,
+          db.dishFoodstuffsTable.dishId,
+        ),
+      );
 
   $$DishFoodstuffsTableTableProcessedTableManager get dishFoodstuffsTableRefs {
-    final manager =
-        $$DishFoodstuffsTableTableTableManager($_db, $_db.dishFoodstuffsTable)
-            .filter((f) => f.dishId.id.sqlEquals($_itemColumn<int>('id')!));
+    final manager = $$DishFoodstuffsTableTableTableManager(
+      $_db,
+      $_db.dishFoodstuffsTable,
+    ).filter((f) => f.dishId.id.sqlEquals($_itemColumn<int>('id')!));
 
-    final cache =
-        $_typedResult.readTableOrNull(_dishFoodstuffsTableRefsTable($_db));
+    final cache = $_typedResult.readTableOrNull(
+      _dishFoodstuffsTableRefsTable($_db),
+    );
     return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: cache));
+      manager.$state.copyWith(prefetchedData: cache),
+    );
   }
 }
 
@@ -4482,53 +5310,67 @@ class $$DishesTableTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<int> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnFilters(column));
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get name => $composableBuilder(
-      column: $table.name, builder: (column) => ColumnFilters(column));
+    column: $table.name,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get category => $composableBuilder(
-      column: $table.category, builder: (column) => ColumnFilters(column));
+    column: $table.category,
+    builder: (column) => ColumnFilters(column),
+  );
 
   Expression<bool> menuDishesTableRefs(
-      Expression<bool> Function($$MenuDishesTableTableFilterComposer f) f) {
+    Expression<bool> Function($$MenuDishesTableTableFilterComposer f) f,
+  ) {
     final $$MenuDishesTableTableFilterComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $db.menuDishesTable,
-        getReferencedColumn: (t) => t.dishId,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$MenuDishesTableTableFilterComposer(
-              $db: $db,
-              $table: $db.menuDishesTable,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.menuDishesTable,
+      getReferencedColumn: (t) => t.dishId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$MenuDishesTableTableFilterComposer(
+            $db: $db,
+            $table: $db.menuDishesTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return f(composer);
   }
 
   Expression<bool> dishFoodstuffsTableRefs(
-      Expression<bool> Function($$DishFoodstuffsTableTableFilterComposer f) f) {
+    Expression<bool> Function($$DishFoodstuffsTableTableFilterComposer f) f,
+  ) {
     final $$DishFoodstuffsTableTableFilterComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $db.dishFoodstuffsTable,
-        getReferencedColumn: (t) => t.dishId,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$DishFoodstuffsTableTableFilterComposer(
-              $db: $db,
-              $table: $db.dishFoodstuffsTable,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.dishFoodstuffsTable,
+      getReferencedColumn: (t) => t.dishId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DishFoodstuffsTableTableFilterComposer(
+            $db: $db,
+            $table: $db.dishFoodstuffsTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return f(composer);
   }
 }
@@ -4543,13 +5385,19 @@ class $$DishesTableTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<int> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnOrderings(column));
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get name => $composableBuilder(
-      column: $table.name, builder: (column) => ColumnOrderings(column));
+    column: $table.name,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get category => $composableBuilder(
-      column: $table.category, builder: (column) => ColumnOrderings(column));
+    column: $table.category,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$DishesTableTableAnnotationComposer
@@ -4571,65 +5419,78 @@ class $$DishesTableTableAnnotationComposer
       $composableBuilder(column: $table.category, builder: (column) => column);
 
   Expression<T> menuDishesTableRefs<T extends Object>(
-      Expression<T> Function($$MenuDishesTableTableAnnotationComposer a) f) {
+    Expression<T> Function($$MenuDishesTableTableAnnotationComposer a) f,
+  ) {
     final $$MenuDishesTableTableAnnotationComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $db.menuDishesTable,
-        getReferencedColumn: (t) => t.dishId,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$MenuDishesTableTableAnnotationComposer(
-              $db: $db,
-              $table: $db.menuDishesTable,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.menuDishesTable,
+      getReferencedColumn: (t) => t.dishId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$MenuDishesTableTableAnnotationComposer(
+            $db: $db,
+            $table: $db.menuDishesTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return f(composer);
   }
 
   Expression<T> dishFoodstuffsTableRefs<T extends Object>(
-      Expression<T> Function($$DishFoodstuffsTableTableAnnotationComposer a)
-          f) {
+    Expression<T> Function($$DishFoodstuffsTableTableAnnotationComposer a) f,
+  ) {
     final $$DishFoodstuffsTableTableAnnotationComposer composer =
         $composerBuilder(
-            composer: this,
-            getCurrentColumn: (t) => t.id,
-            referencedTable: $db.dishFoodstuffsTable,
-            getReferencedColumn: (t) => t.dishId,
-            builder: (joinBuilder,
-                    {$addJoinBuilderToRootComposer,
-                    $removeJoinBuilderFromRootComposer}) =>
-                $$DishFoodstuffsTableTableAnnotationComposer(
-                  $db: $db,
-                  $table: $db.dishFoodstuffsTable,
-                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                  joinBuilder: joinBuilder,
-                  $removeJoinBuilderFromRootComposer:
-                      $removeJoinBuilderFromRootComposer,
-                ));
+          composer: this,
+          getCurrentColumn: (t) => t.id,
+          referencedTable: $db.dishFoodstuffsTable,
+          getReferencedColumn: (t) => t.dishId,
+          builder:
+              (
+                joinBuilder, {
+                $addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer,
+              }) => $$DishFoodstuffsTableTableAnnotationComposer(
+                $db: $db,
+                $table: $db.dishFoodstuffsTable,
+                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                joinBuilder: joinBuilder,
+                $removeJoinBuilderFromRootComposer:
+                    $removeJoinBuilderFromRootComposer,
+              ),
+        );
     return f(composer);
   }
 }
 
-class $$DishesTableTableTableManager extends RootTableManager<
-    _$LocalDatabase,
-    $DishesTableTable,
-    DishesSchema,
-    $$DishesTableTableFilterComposer,
-    $$DishesTableTableOrderingComposer,
-    $$DishesTableTableAnnotationComposer,
-    $$DishesTableTableCreateCompanionBuilder,
-    $$DishesTableTableUpdateCompanionBuilder,
-    (DishesSchema, $$DishesTableTableReferences),
-    DishesSchema,
-    PrefetchHooks Function(
-        {bool menuDishesTableRefs, bool dishFoodstuffsTableRefs})> {
+class $$DishesTableTableTableManager
+    extends
+        RootTableManager<
+          _$LocalDatabase,
+          $DishesTableTable,
+          DishesSchema,
+          $$DishesTableTableFilterComposer,
+          $$DishesTableTableOrderingComposer,
+          $$DishesTableTableAnnotationComposer,
+          $$DishesTableTableCreateCompanionBuilder,
+          $$DishesTableTableUpdateCompanionBuilder,
+          (DishesSchema, $$DishesTableTableReferences),
+          DishesSchema,
+          PrefetchHooks Function({
+            bool menuDishesTableRefs,
+            bool dishFoodstuffsTableRefs,
+          })
+        > {
   $$DishesTableTableTableManager(_$LocalDatabase db, $DishesTableTable table)
-      : super(TableManagerState(
+    : super(
+        TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
@@ -4638,133 +5499,171 @@ class $$DishesTableTableTableManager extends RootTableManager<
               $$DishesTableTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
               $$DishesTableTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback: ({
-            Value<int> id = const Value.absent(),
-            Value<String> name = const Value.absent(),
-            Value<String?> category = const Value.absent(),
-          }) =>
-              DishesTableCompanion(
-            id: id,
-            name: name,
-            category: category,
-          ),
-          createCompanionCallback: ({
-            Value<int> id = const Value.absent(),
-            required String name,
-            Value<String?> category = const Value.absent(),
-          }) =>
-              DishesTableCompanion.insert(
-            id: id,
-            name: name,
-            category: category,
-          ),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<String> name = const Value.absent(),
+                Value<String?> category = const Value.absent(),
+              }) =>
+                  DishesTableCompanion(id: id, name: name, category: category),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required String name,
+                Value<String?> category = const Value.absent(),
+              }) => DishesTableCompanion.insert(
+                id: id,
+                name: name,
+                category: category,
+              ),
           withReferenceMapper: (p0) => p0
-              .map((e) => (
-                    e.readTable(table),
-                    $$DishesTableTableReferences(db, table, e)
-                  ))
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$DishesTableTableReferences(db, table, e),
+                ),
+              )
               .toList(),
-          prefetchHooksCallback: (
-              {menuDishesTableRefs = false, dishFoodstuffsTableRefs = false}) {
-            return PrefetchHooks(
-              db: db,
-              explicitlyWatchedTables: [
-                if (menuDishesTableRefs) db.menuDishesTable,
-                if (dishFoodstuffsTableRefs) db.dishFoodstuffsTable
-              ],
-              addJoins: null,
-              getPrefetchedDataCallback: (items) async {
-                return [
-                  if (menuDishesTableRefs)
-                    await $_getPrefetchedData(
-                        currentTable: table,
-                        referencedTable: $$DishesTableTableReferences
-                            ._menuDishesTableRefsTable(db),
-                        managerFromTypedResult: (p0) =>
-                            $$DishesTableTableReferences(db, table, p0)
-                                .menuDishesTableRefs,
-                        referencedItemsForCurrentItem: (item,
-                                referencedItems) =>
-                            referencedItems.where((e) => e.dishId == item.id),
-                        typedResults: items),
-                  if (dishFoodstuffsTableRefs)
-                    await $_getPrefetchedData(
-                        currentTable: table,
-                        referencedTable: $$DishesTableTableReferences
-                            ._dishFoodstuffsTableRefsTable(db),
-                        managerFromTypedResult: (p0) =>
-                            $$DishesTableTableReferences(db, table, p0)
-                                .dishFoodstuffsTableRefs,
-                        referencedItemsForCurrentItem: (item,
-                                referencedItems) =>
-                            referencedItems.where((e) => e.dishId == item.id),
-                        typedResults: items)
-                ];
+          prefetchHooksCallback:
+              ({menuDishesTableRefs = false, dishFoodstuffsTableRefs = false}) {
+                return PrefetchHooks(
+                  db: db,
+                  explicitlyWatchedTables: [
+                    if (menuDishesTableRefs) db.menuDishesTable,
+                    if (dishFoodstuffsTableRefs) db.dishFoodstuffsTable,
+                  ],
+                  addJoins: null,
+                  getPrefetchedDataCallback: (items) async {
+                    return [
+                      if (menuDishesTableRefs)
+                        await $_getPrefetchedData<
+                          DishesSchema,
+                          $DishesTableTable,
+                          MenuDishesSchema
+                        >(
+                          currentTable: table,
+                          referencedTable: $$DishesTableTableReferences
+                              ._menuDishesTableRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$DishesTableTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).menuDishesTableRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.dishId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                      if (dishFoodstuffsTableRefs)
+                        await $_getPrefetchedData<
+                          DishesSchema,
+                          $DishesTableTable,
+                          DishFoodstuffsSchema
+                        >(
+                          currentTable: table,
+                          referencedTable: $$DishesTableTableReferences
+                              ._dishFoodstuffsTableRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$DishesTableTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).dishFoodstuffsTableRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.dishId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                    ];
+                  },
+                );
               },
-            );
-          },
-        ));
+        ),
+      );
 }
 
-typedef $$DishesTableTableProcessedTableManager = ProcessedTableManager<
-    _$LocalDatabase,
-    $DishesTableTable,
-    DishesSchema,
-    $$DishesTableTableFilterComposer,
-    $$DishesTableTableOrderingComposer,
-    $$DishesTableTableAnnotationComposer,
-    $$DishesTableTableCreateCompanionBuilder,
-    $$DishesTableTableUpdateCompanionBuilder,
-    (DishesSchema, $$DishesTableTableReferences),
-    DishesSchema,
-    PrefetchHooks Function(
-        {bool menuDishesTableRefs, bool dishFoodstuffsTableRefs})>;
-typedef $$MenuDishesTableTableCreateCompanionBuilder = MenuDishesTableCompanion
-    Function({
-  required int menuId,
-  required int dishId,
-  Value<int> rowid,
-});
-typedef $$MenuDishesTableTableUpdateCompanionBuilder = MenuDishesTableCompanion
-    Function({
-  Value<int> menuId,
-  Value<int> dishId,
-  Value<int> rowid,
-});
+typedef $$DishesTableTableProcessedTableManager =
+    ProcessedTableManager<
+      _$LocalDatabase,
+      $DishesTableTable,
+      DishesSchema,
+      $$DishesTableTableFilterComposer,
+      $$DishesTableTableOrderingComposer,
+      $$DishesTableTableAnnotationComposer,
+      $$DishesTableTableCreateCompanionBuilder,
+      $$DishesTableTableUpdateCompanionBuilder,
+      (DishesSchema, $$DishesTableTableReferences),
+      DishesSchema,
+      PrefetchHooks Function({
+        bool menuDishesTableRefs,
+        bool dishFoodstuffsTableRefs,
+      })
+    >;
+typedef $$MenuDishesTableTableCreateCompanionBuilder =
+    MenuDishesTableCompanion Function({
+      required int menuId,
+      required int dishId,
+      Value<int> rowid,
+    });
+typedef $$MenuDishesTableTableUpdateCompanionBuilder =
+    MenuDishesTableCompanion Function({
+      Value<int> menuId,
+      Value<int> dishId,
+      Value<int> rowid,
+    });
 
-final class $$MenuDishesTableTableReferences extends BaseReferences<
-    _$LocalDatabase, $MenuDishesTableTable, MenuDishesSchema> {
+final class $$MenuDishesTableTableReferences
+    extends
+        BaseReferences<
+          _$LocalDatabase,
+          $MenuDishesTableTable,
+          MenuDishesSchema
+        > {
   $$MenuDishesTableTableReferences(
-      super.$_db, super.$_table, super.$_typedResult);
+    super.$_db,
+    super.$_table,
+    super.$_typedResult,
+  );
 
   static $MenusTableTable _menuIdTable(_$LocalDatabase db) =>
       db.menusTable.createAlias(
-          $_aliasNameGenerator(db.menuDishesTable.menuId, db.menusTable.id));
+        $_aliasNameGenerator(db.menuDishesTable.menuId, db.menusTable.id),
+      );
 
   $$MenusTableTableProcessedTableManager get menuId {
     final $_column = $_itemColumn<int>('menu_id')!;
 
-    final manager = $$MenusTableTableTableManager($_db, $_db.menusTable)
-        .filter((f) => f.id.sqlEquals($_column));
+    final manager = $$MenusTableTableTableManager(
+      $_db,
+      $_db.menusTable,
+    ).filter((f) => f.id.sqlEquals($_column));
     final item = $_typedResult.readTableOrNull(_menuIdTable($_db));
     if (item == null) return manager;
     return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: [item]));
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
   }
 
   static $DishesTableTable _dishIdTable(_$LocalDatabase db) =>
       db.dishesTable.createAlias(
-          $_aliasNameGenerator(db.menuDishesTable.dishId, db.dishesTable.id));
+        $_aliasNameGenerator(db.menuDishesTable.dishId, db.dishesTable.id),
+      );
 
   $$DishesTableTableProcessedTableManager get dishId {
     final $_column = $_itemColumn<int>('dish_id')!;
 
-    final manager = $$DishesTableTableTableManager($_db, $_db.dishesTable)
-        .filter((f) => f.id.sqlEquals($_column));
+    final manager = $$DishesTableTableTableManager(
+      $_db,
+      $_db.dishesTable,
+    ).filter((f) => f.id.sqlEquals($_column));
     final item = $_typedResult.readTableOrNull(_dishIdTable($_db));
     if (item == null) return manager;
     return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: [item]));
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
   }
 }
 
@@ -4779,41 +5678,47 @@ class $$MenuDishesTableTableFilterComposer
   });
   $$MenusTableTableFilterComposer get menuId {
     final $$MenusTableTableFilterComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.menuId,
-        referencedTable: $db.menusTable,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$MenusTableTableFilterComposer(
-              $db: $db,
-              $table: $db.menusTable,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.menuId,
+      referencedTable: $db.menusTable,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$MenusTableTableFilterComposer(
+            $db: $db,
+            $table: $db.menusTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 
   $$DishesTableTableFilterComposer get dishId {
     final $$DishesTableTableFilterComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.dishId,
-        referencedTable: $db.dishesTable,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$DishesTableTableFilterComposer(
-              $db: $db,
-              $table: $db.dishesTable,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.dishId,
+      referencedTable: $db.dishesTable,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DishesTableTableFilterComposer(
+            $db: $db,
+            $table: $db.dishesTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 }
@@ -4829,41 +5734,47 @@ class $$MenuDishesTableTableOrderingComposer
   });
   $$MenusTableTableOrderingComposer get menuId {
     final $$MenusTableTableOrderingComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.menuId,
-        referencedTable: $db.menusTable,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$MenusTableTableOrderingComposer(
-              $db: $db,
-              $table: $db.menusTable,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.menuId,
+      referencedTable: $db.menusTable,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$MenusTableTableOrderingComposer(
+            $db: $db,
+            $table: $db.menusTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 
   $$DishesTableTableOrderingComposer get dishId {
     final $$DishesTableTableOrderingComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.dishId,
-        referencedTable: $db.dishesTable,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$DishesTableTableOrderingComposer(
-              $db: $db,
-              $table: $db.dishesTable,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.dishId,
+      referencedTable: $db.dishesTable,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DishesTableTableOrderingComposer(
+            $db: $db,
+            $table: $db.dishesTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 }
@@ -4879,60 +5790,71 @@ class $$MenuDishesTableTableAnnotationComposer
   });
   $$MenusTableTableAnnotationComposer get menuId {
     final $$MenusTableTableAnnotationComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.menuId,
-        referencedTable: $db.menusTable,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$MenusTableTableAnnotationComposer(
-              $db: $db,
-              $table: $db.menusTable,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.menuId,
+      referencedTable: $db.menusTable,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$MenusTableTableAnnotationComposer(
+            $db: $db,
+            $table: $db.menusTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 
   $$DishesTableTableAnnotationComposer get dishId {
     final $$DishesTableTableAnnotationComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.dishId,
-        referencedTable: $db.dishesTable,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$DishesTableTableAnnotationComposer(
-              $db: $db,
-              $table: $db.dishesTable,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.dishId,
+      referencedTable: $db.dishesTable,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DishesTableTableAnnotationComposer(
+            $db: $db,
+            $table: $db.dishesTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 }
 
-class $$MenuDishesTableTableTableManager extends RootTableManager<
-    _$LocalDatabase,
-    $MenuDishesTableTable,
-    MenuDishesSchema,
-    $$MenuDishesTableTableFilterComposer,
-    $$MenuDishesTableTableOrderingComposer,
-    $$MenuDishesTableTableAnnotationComposer,
-    $$MenuDishesTableTableCreateCompanionBuilder,
-    $$MenuDishesTableTableUpdateCompanionBuilder,
-    (MenuDishesSchema, $$MenuDishesTableTableReferences),
-    MenuDishesSchema,
-    PrefetchHooks Function({bool menuId, bool dishId})> {
+class $$MenuDishesTableTableTableManager
+    extends
+        RootTableManager<
+          _$LocalDatabase,
+          $MenuDishesTableTable,
+          MenuDishesSchema,
+          $$MenuDishesTableTableFilterComposer,
+          $$MenuDishesTableTableOrderingComposer,
+          $$MenuDishesTableTableAnnotationComposer,
+          $$MenuDishesTableTableCreateCompanionBuilder,
+          $$MenuDishesTableTableUpdateCompanionBuilder,
+          (MenuDishesSchema, $$MenuDishesTableTableReferences),
+          MenuDishesSchema,
+          PrefetchHooks Function({bool menuId, bool dishId})
+        > {
   $$MenuDishesTableTableTableManager(
-      _$LocalDatabase db, $MenuDishesTableTable table)
-      : super(TableManagerState(
+    _$LocalDatabase db,
+    $MenuDishesTableTable table,
+  ) : super(
+        TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
@@ -4941,38 +5863,41 @@ class $$MenuDishesTableTableTableManager extends RootTableManager<
               $$MenuDishesTableTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
               $$MenuDishesTableTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback: ({
-            Value<int> menuId = const Value.absent(),
-            Value<int> dishId = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              MenuDishesTableCompanion(
-            menuId: menuId,
-            dishId: dishId,
-            rowid: rowid,
-          ),
-          createCompanionCallback: ({
-            required int menuId,
-            required int dishId,
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              MenuDishesTableCompanion.insert(
-            menuId: menuId,
-            dishId: dishId,
-            rowid: rowid,
-          ),
+          updateCompanionCallback:
+              ({
+                Value<int> menuId = const Value.absent(),
+                Value<int> dishId = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => MenuDishesTableCompanion(
+                menuId: menuId,
+                dishId: dishId,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required int menuId,
+                required int dishId,
+                Value<int> rowid = const Value.absent(),
+              }) => MenuDishesTableCompanion.insert(
+                menuId: menuId,
+                dishId: dishId,
+                rowid: rowid,
+              ),
           withReferenceMapper: (p0) => p0
-              .map((e) => (
-                    e.readTable(table),
-                    $$MenuDishesTableTableReferences(db, table, e)
-                  ))
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$MenuDishesTableTableReferences(db, table, e),
+                ),
+              )
               .toList(),
           prefetchHooksCallback: ({menuId = false, dishId = false}) {
             return PrefetchHooks(
               db: db,
               explicitlyWatchedTables: [],
-              addJoins: <
-                  T extends TableManagerState<
+              addJoins:
+                  <
+                    T extends TableManagerState<
                       dynamic,
                       dynamic,
                       dynamic,
@@ -4983,124 +5908,156 @@ class $$MenuDishesTableTableTableManager extends RootTableManager<
                       dynamic,
                       dynamic,
                       dynamic,
-                      dynamic>>(state) {
-                if (menuId) {
-                  state = state.withJoin(
-                    currentTable: table,
-                    currentColumn: table.menuId,
-                    referencedTable:
-                        $$MenuDishesTableTableReferences._menuIdTable(db),
-                    referencedColumn:
-                        $$MenuDishesTableTableReferences._menuIdTable(db).id,
-                  ) as T;
-                }
-                if (dishId) {
-                  state = state.withJoin(
-                    currentTable: table,
-                    currentColumn: table.dishId,
-                    referencedTable:
-                        $$MenuDishesTableTableReferences._dishIdTable(db),
-                    referencedColumn:
-                        $$MenuDishesTableTableReferences._dishIdTable(db).id,
-                  ) as T;
-                }
+                      dynamic
+                    >
+                  >(state) {
+                    if (menuId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.menuId,
+                                referencedTable:
+                                    $$MenuDishesTableTableReferences
+                                        ._menuIdTable(db),
+                                referencedColumn:
+                                    $$MenuDishesTableTableReferences
+                                        ._menuIdTable(db)
+                                        .id,
+                              )
+                              as T;
+                    }
+                    if (dishId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.dishId,
+                                referencedTable:
+                                    $$MenuDishesTableTableReferences
+                                        ._dishIdTable(db),
+                                referencedColumn:
+                                    $$MenuDishesTableTableReferences
+                                        ._dishIdTable(db)
+                                        .id,
+                              )
+                              as T;
+                    }
 
-                return state;
-              },
+                    return state;
+                  },
               getPrefetchedDataCallback: (items) async {
                 return [];
               },
             );
           },
-        ));
+        ),
+      );
 }
 
-typedef $$MenuDishesTableTableProcessedTableManager = ProcessedTableManager<
-    _$LocalDatabase,
-    $MenuDishesTableTable,
-    MenuDishesSchema,
-    $$MenuDishesTableTableFilterComposer,
-    $$MenuDishesTableTableOrderingComposer,
-    $$MenuDishesTableTableAnnotationComposer,
-    $$MenuDishesTableTableCreateCompanionBuilder,
-    $$MenuDishesTableTableUpdateCompanionBuilder,
-    (MenuDishesSchema, $$MenuDishesTableTableReferences),
-    MenuDishesSchema,
-    PrefetchHooks Function({bool menuId, bool dishId})>;
-typedef $$FoodstuffsTableTableCreateCompanionBuilder = FoodstuffsTableCompanion
-    Function({
-  Value<int> id,
-  required String name,
-  Value<double?> pieceNumber,
-  Value<String?> pieceUnit,
-  required double gram,
-  required double energy,
-  required double protein,
-  required double lipid,
-  required double sodium,
-  required double carbohydrate,
-  required double calcium,
-  required double magnesium,
-  required double iron,
-  required double zinc,
-  required double retinol,
-  required double vitaminB1,
-  required double vitaminB2,
-  required double vitaminC,
-  required double dietaryFiber,
-  required double salt,
-  required bool isHeat,
-  required bool isAllergy,
-  Value<String?> origin,
-});
-typedef $$FoodstuffsTableTableUpdateCompanionBuilder = FoodstuffsTableCompanion
-    Function({
-  Value<int> id,
-  Value<String> name,
-  Value<double?> pieceNumber,
-  Value<String?> pieceUnit,
-  Value<double> gram,
-  Value<double> energy,
-  Value<double> protein,
-  Value<double> lipid,
-  Value<double> sodium,
-  Value<double> carbohydrate,
-  Value<double> calcium,
-  Value<double> magnesium,
-  Value<double> iron,
-  Value<double> zinc,
-  Value<double> retinol,
-  Value<double> vitaminB1,
-  Value<double> vitaminB2,
-  Value<double> vitaminC,
-  Value<double> dietaryFiber,
-  Value<double> salt,
-  Value<bool> isHeat,
-  Value<bool> isAllergy,
-  Value<String?> origin,
-});
+typedef $$MenuDishesTableTableProcessedTableManager =
+    ProcessedTableManager<
+      _$LocalDatabase,
+      $MenuDishesTableTable,
+      MenuDishesSchema,
+      $$MenuDishesTableTableFilterComposer,
+      $$MenuDishesTableTableOrderingComposer,
+      $$MenuDishesTableTableAnnotationComposer,
+      $$MenuDishesTableTableCreateCompanionBuilder,
+      $$MenuDishesTableTableUpdateCompanionBuilder,
+      (MenuDishesSchema, $$MenuDishesTableTableReferences),
+      MenuDishesSchema,
+      PrefetchHooks Function({bool menuId, bool dishId})
+    >;
+typedef $$FoodstuffsTableTableCreateCompanionBuilder =
+    FoodstuffsTableCompanion Function({
+      Value<int> id,
+      required String name,
+      Value<double?> pieceNumber,
+      Value<String?> pieceUnit,
+      required double gram,
+      required double energy,
+      required double protein,
+      required double lipid,
+      required double sodium,
+      required double carbohydrate,
+      required double calcium,
+      required double magnesium,
+      required double iron,
+      required double zinc,
+      required double retinol,
+      required double vitaminB1,
+      required double vitaminB2,
+      required double vitaminC,
+      required double dietaryFiber,
+      required double salt,
+      required bool isHeat,
+      required bool isAllergy,
+      Value<String?> origin,
+    });
+typedef $$FoodstuffsTableTableUpdateCompanionBuilder =
+    FoodstuffsTableCompanion Function({
+      Value<int> id,
+      Value<String> name,
+      Value<double?> pieceNumber,
+      Value<String?> pieceUnit,
+      Value<double> gram,
+      Value<double> energy,
+      Value<double> protein,
+      Value<double> lipid,
+      Value<double> sodium,
+      Value<double> carbohydrate,
+      Value<double> calcium,
+      Value<double> magnesium,
+      Value<double> iron,
+      Value<double> zinc,
+      Value<double> retinol,
+      Value<double> vitaminB1,
+      Value<double> vitaminB2,
+      Value<double> vitaminC,
+      Value<double> dietaryFiber,
+      Value<double> salt,
+      Value<bool> isHeat,
+      Value<bool> isAllergy,
+      Value<String?> origin,
+    });
 
-final class $$FoodstuffsTableTableReferences extends BaseReferences<
-    _$LocalDatabase, $FoodstuffsTableTable, FoodstuffsSchema> {
+final class $$FoodstuffsTableTableReferences
+    extends
+        BaseReferences<
+          _$LocalDatabase,
+          $FoodstuffsTableTable,
+          FoodstuffsSchema
+        > {
   $$FoodstuffsTableTableReferences(
-      super.$_db, super.$_table, super.$_typedResult);
+    super.$_db,
+    super.$_table,
+    super.$_typedResult,
+  );
 
-  static MultiTypedResultKey<$DishFoodstuffsTableTable,
-      List<DishFoodstuffsSchema>> _dishFoodstuffsTableRefsTable(
-          _$LocalDatabase db) =>
-      MultiTypedResultKey.fromTable(db.dishFoodstuffsTable,
-          aliasName: $_aliasNameGenerator(
-              db.foodstuffsTable.id, db.dishFoodstuffsTable.foodstuffId));
+  static MultiTypedResultKey<
+    $DishFoodstuffsTableTable,
+    List<DishFoodstuffsSchema>
+  >
+  _dishFoodstuffsTableRefsTable(_$LocalDatabase db) =>
+      MultiTypedResultKey.fromTable(
+        db.dishFoodstuffsTable,
+        aliasName: $_aliasNameGenerator(
+          db.foodstuffsTable.id,
+          db.dishFoodstuffsTable.foodstuffId,
+        ),
+      );
 
   $$DishFoodstuffsTableTableProcessedTableManager get dishFoodstuffsTableRefs {
     final manager = $$DishFoodstuffsTableTableTableManager(
-            $_db, $_db.dishFoodstuffsTable)
-        .filter((f) => f.foodstuffId.id.sqlEquals($_itemColumn<int>('id')!));
+      $_db,
+      $_db.dishFoodstuffsTable,
+    ).filter((f) => f.foodstuffId.id.sqlEquals($_itemColumn<int>('id')!));
 
-    final cache =
-        $_typedResult.readTableOrNull(_dishFoodstuffsTableRefsTable($_db));
+    final cache = $_typedResult.readTableOrNull(
+      _dishFoodstuffsTableRefsTable($_db),
+    );
     return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: cache));
+      manager.$state.copyWith(prefetchedData: cache),
+    );
   }
 }
 
@@ -5114,92 +6071,142 @@ class $$FoodstuffsTableTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<int> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnFilters(column));
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get name => $composableBuilder(
-      column: $table.name, builder: (column) => ColumnFilters(column));
+    column: $table.name,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get pieceNumber => $composableBuilder(
-      column: $table.pieceNumber, builder: (column) => ColumnFilters(column));
+    column: $table.pieceNumber,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get pieceUnit => $composableBuilder(
-      column: $table.pieceUnit, builder: (column) => ColumnFilters(column));
+    column: $table.pieceUnit,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get gram => $composableBuilder(
-      column: $table.gram, builder: (column) => ColumnFilters(column));
+    column: $table.gram,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get energy => $composableBuilder(
-      column: $table.energy, builder: (column) => ColumnFilters(column));
+    column: $table.energy,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get protein => $composableBuilder(
-      column: $table.protein, builder: (column) => ColumnFilters(column));
+    column: $table.protein,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get lipid => $composableBuilder(
-      column: $table.lipid, builder: (column) => ColumnFilters(column));
+    column: $table.lipid,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get sodium => $composableBuilder(
-      column: $table.sodium, builder: (column) => ColumnFilters(column));
+    column: $table.sodium,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get carbohydrate => $composableBuilder(
-      column: $table.carbohydrate, builder: (column) => ColumnFilters(column));
+    column: $table.carbohydrate,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get calcium => $composableBuilder(
-      column: $table.calcium, builder: (column) => ColumnFilters(column));
+    column: $table.calcium,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get magnesium => $composableBuilder(
-      column: $table.magnesium, builder: (column) => ColumnFilters(column));
+    column: $table.magnesium,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get iron => $composableBuilder(
-      column: $table.iron, builder: (column) => ColumnFilters(column));
+    column: $table.iron,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get zinc => $composableBuilder(
-      column: $table.zinc, builder: (column) => ColumnFilters(column));
+    column: $table.zinc,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get retinol => $composableBuilder(
-      column: $table.retinol, builder: (column) => ColumnFilters(column));
+    column: $table.retinol,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get vitaminB1 => $composableBuilder(
-      column: $table.vitaminB1, builder: (column) => ColumnFilters(column));
+    column: $table.vitaminB1,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get vitaminB2 => $composableBuilder(
-      column: $table.vitaminB2, builder: (column) => ColumnFilters(column));
+    column: $table.vitaminB2,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get vitaminC => $composableBuilder(
-      column: $table.vitaminC, builder: (column) => ColumnFilters(column));
+    column: $table.vitaminC,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get dietaryFiber => $composableBuilder(
-      column: $table.dietaryFiber, builder: (column) => ColumnFilters(column));
+    column: $table.dietaryFiber,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get salt => $composableBuilder(
-      column: $table.salt, builder: (column) => ColumnFilters(column));
+    column: $table.salt,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<bool> get isHeat => $composableBuilder(
-      column: $table.isHeat, builder: (column) => ColumnFilters(column));
+    column: $table.isHeat,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<bool> get isAllergy => $composableBuilder(
-      column: $table.isAllergy, builder: (column) => ColumnFilters(column));
+    column: $table.isAllergy,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get origin => $composableBuilder(
-      column: $table.origin, builder: (column) => ColumnFilters(column));
+    column: $table.origin,
+    builder: (column) => ColumnFilters(column),
+  );
 
   Expression<bool> dishFoodstuffsTableRefs(
-      Expression<bool> Function($$DishFoodstuffsTableTableFilterComposer f) f) {
+    Expression<bool> Function($$DishFoodstuffsTableTableFilterComposer f) f,
+  ) {
     final $$DishFoodstuffsTableTableFilterComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $db.dishFoodstuffsTable,
-        getReferencedColumn: (t) => t.foodstuffId,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$DishFoodstuffsTableTableFilterComposer(
-              $db: $db,
-              $table: $db.dishFoodstuffsTable,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.dishFoodstuffsTable,
+      getReferencedColumn: (t) => t.foodstuffId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DishFoodstuffsTableTableFilterComposer(
+            $db: $db,
+            $table: $db.dishFoodstuffsTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return f(composer);
   }
 }
@@ -5214,75 +6221,119 @@ class $$FoodstuffsTableTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<int> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnOrderings(column));
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get name => $composableBuilder(
-      column: $table.name, builder: (column) => ColumnOrderings(column));
+    column: $table.name,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get pieceNumber => $composableBuilder(
-      column: $table.pieceNumber, builder: (column) => ColumnOrderings(column));
+    column: $table.pieceNumber,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get pieceUnit => $composableBuilder(
-      column: $table.pieceUnit, builder: (column) => ColumnOrderings(column));
+    column: $table.pieceUnit,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get gram => $composableBuilder(
-      column: $table.gram, builder: (column) => ColumnOrderings(column));
+    column: $table.gram,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get energy => $composableBuilder(
-      column: $table.energy, builder: (column) => ColumnOrderings(column));
+    column: $table.energy,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get protein => $composableBuilder(
-      column: $table.protein, builder: (column) => ColumnOrderings(column));
+    column: $table.protein,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get lipid => $composableBuilder(
-      column: $table.lipid, builder: (column) => ColumnOrderings(column));
+    column: $table.lipid,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get sodium => $composableBuilder(
-      column: $table.sodium, builder: (column) => ColumnOrderings(column));
+    column: $table.sodium,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get carbohydrate => $composableBuilder(
-      column: $table.carbohydrate,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.carbohydrate,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get calcium => $composableBuilder(
-      column: $table.calcium, builder: (column) => ColumnOrderings(column));
+    column: $table.calcium,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get magnesium => $composableBuilder(
-      column: $table.magnesium, builder: (column) => ColumnOrderings(column));
+    column: $table.magnesium,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get iron => $composableBuilder(
-      column: $table.iron, builder: (column) => ColumnOrderings(column));
+    column: $table.iron,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get zinc => $composableBuilder(
-      column: $table.zinc, builder: (column) => ColumnOrderings(column));
+    column: $table.zinc,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get retinol => $composableBuilder(
-      column: $table.retinol, builder: (column) => ColumnOrderings(column));
+    column: $table.retinol,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get vitaminB1 => $composableBuilder(
-      column: $table.vitaminB1, builder: (column) => ColumnOrderings(column));
+    column: $table.vitaminB1,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get vitaminB2 => $composableBuilder(
-      column: $table.vitaminB2, builder: (column) => ColumnOrderings(column));
+    column: $table.vitaminB2,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get vitaminC => $composableBuilder(
-      column: $table.vitaminC, builder: (column) => ColumnOrderings(column));
+    column: $table.vitaminC,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get dietaryFiber => $composableBuilder(
-      column: $table.dietaryFiber,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.dietaryFiber,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get salt => $composableBuilder(
-      column: $table.salt, builder: (column) => ColumnOrderings(column));
+    column: $table.salt,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<bool> get isHeat => $composableBuilder(
-      column: $table.isHeat, builder: (column) => ColumnOrderings(column));
+    column: $table.isHeat,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<bool> get isAllergy => $composableBuilder(
-      column: $table.isAllergy, builder: (column) => ColumnOrderings(column));
+    column: $table.isAllergy,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get origin => $composableBuilder(
-      column: $table.origin, builder: (column) => ColumnOrderings(column));
+    column: $table.origin,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$FoodstuffsTableTableAnnotationComposer
@@ -5301,7 +6352,9 @@ class $$FoodstuffsTableTableAnnotationComposer
       $composableBuilder(column: $table.name, builder: (column) => column);
 
   GeneratedColumn<double> get pieceNumber => $composableBuilder(
-      column: $table.pieceNumber, builder: (column) => column);
+    column: $table.pieceNumber,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get pieceUnit =>
       $composableBuilder(column: $table.pieceUnit, builder: (column) => column);
@@ -5322,7 +6375,9 @@ class $$FoodstuffsTableTableAnnotationComposer
       $composableBuilder(column: $table.sodium, builder: (column) => column);
 
   GeneratedColumn<double> get carbohydrate => $composableBuilder(
-      column: $table.carbohydrate, builder: (column) => column);
+    column: $table.carbohydrate,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<double> get calcium =>
       $composableBuilder(column: $table.calcium, builder: (column) => column);
@@ -5349,7 +6404,9 @@ class $$FoodstuffsTableTableAnnotationComposer
       $composableBuilder(column: $table.vitaminC, builder: (column) => column);
 
   GeneratedColumn<double> get dietaryFiber => $composableBuilder(
-      column: $table.dietaryFiber, builder: (column) => column);
+    column: $table.dietaryFiber,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<double> get salt =>
       $composableBuilder(column: $table.salt, builder: (column) => column);
@@ -5364,44 +6421,52 @@ class $$FoodstuffsTableTableAnnotationComposer
       $composableBuilder(column: $table.origin, builder: (column) => column);
 
   Expression<T> dishFoodstuffsTableRefs<T extends Object>(
-      Expression<T> Function($$DishFoodstuffsTableTableAnnotationComposer a)
-          f) {
+    Expression<T> Function($$DishFoodstuffsTableTableAnnotationComposer a) f,
+  ) {
     final $$DishFoodstuffsTableTableAnnotationComposer composer =
         $composerBuilder(
-            composer: this,
-            getCurrentColumn: (t) => t.id,
-            referencedTable: $db.dishFoodstuffsTable,
-            getReferencedColumn: (t) => t.foodstuffId,
-            builder: (joinBuilder,
-                    {$addJoinBuilderToRootComposer,
-                    $removeJoinBuilderFromRootComposer}) =>
-                $$DishFoodstuffsTableTableAnnotationComposer(
-                  $db: $db,
-                  $table: $db.dishFoodstuffsTable,
-                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                  joinBuilder: joinBuilder,
-                  $removeJoinBuilderFromRootComposer:
-                      $removeJoinBuilderFromRootComposer,
-                ));
+          composer: this,
+          getCurrentColumn: (t) => t.id,
+          referencedTable: $db.dishFoodstuffsTable,
+          getReferencedColumn: (t) => t.foodstuffId,
+          builder:
+              (
+                joinBuilder, {
+                $addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer,
+              }) => $$DishFoodstuffsTableTableAnnotationComposer(
+                $db: $db,
+                $table: $db.dishFoodstuffsTable,
+                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                joinBuilder: joinBuilder,
+                $removeJoinBuilderFromRootComposer:
+                    $removeJoinBuilderFromRootComposer,
+              ),
+        );
     return f(composer);
   }
 }
 
-class $$FoodstuffsTableTableTableManager extends RootTableManager<
-    _$LocalDatabase,
-    $FoodstuffsTableTable,
-    FoodstuffsSchema,
-    $$FoodstuffsTableTableFilterComposer,
-    $$FoodstuffsTableTableOrderingComposer,
-    $$FoodstuffsTableTableAnnotationComposer,
-    $$FoodstuffsTableTableCreateCompanionBuilder,
-    $$FoodstuffsTableTableUpdateCompanionBuilder,
-    (FoodstuffsSchema, $$FoodstuffsTableTableReferences),
-    FoodstuffsSchema,
-    PrefetchHooks Function({bool dishFoodstuffsTableRefs})> {
+class $$FoodstuffsTableTableTableManager
+    extends
+        RootTableManager<
+          _$LocalDatabase,
+          $FoodstuffsTableTable,
+          FoodstuffsSchema,
+          $$FoodstuffsTableTableFilterComposer,
+          $$FoodstuffsTableTableOrderingComposer,
+          $$FoodstuffsTableTableAnnotationComposer,
+          $$FoodstuffsTableTableCreateCompanionBuilder,
+          $$FoodstuffsTableTableUpdateCompanionBuilder,
+          (FoodstuffsSchema, $$FoodstuffsTableTableReferences),
+          FoodstuffsSchema,
+          PrefetchHooks Function({bool dishFoodstuffsTableRefs})
+        > {
   $$FoodstuffsTableTableTableManager(
-      _$LocalDatabase db, $FoodstuffsTableTable table)
-      : super(TableManagerState(
+    _$LocalDatabase db,
+    $FoodstuffsTableTable table,
+  ) : super(
+        TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
@@ -5410,199 +6475,231 @@ class $$FoodstuffsTableTableTableManager extends RootTableManager<
               $$FoodstuffsTableTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
               $$FoodstuffsTableTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback: ({
-            Value<int> id = const Value.absent(),
-            Value<String> name = const Value.absent(),
-            Value<double?> pieceNumber = const Value.absent(),
-            Value<String?> pieceUnit = const Value.absent(),
-            Value<double> gram = const Value.absent(),
-            Value<double> energy = const Value.absent(),
-            Value<double> protein = const Value.absent(),
-            Value<double> lipid = const Value.absent(),
-            Value<double> sodium = const Value.absent(),
-            Value<double> carbohydrate = const Value.absent(),
-            Value<double> calcium = const Value.absent(),
-            Value<double> magnesium = const Value.absent(),
-            Value<double> iron = const Value.absent(),
-            Value<double> zinc = const Value.absent(),
-            Value<double> retinol = const Value.absent(),
-            Value<double> vitaminB1 = const Value.absent(),
-            Value<double> vitaminB2 = const Value.absent(),
-            Value<double> vitaminC = const Value.absent(),
-            Value<double> dietaryFiber = const Value.absent(),
-            Value<double> salt = const Value.absent(),
-            Value<bool> isHeat = const Value.absent(),
-            Value<bool> isAllergy = const Value.absent(),
-            Value<String?> origin = const Value.absent(),
-          }) =>
-              FoodstuffsTableCompanion(
-            id: id,
-            name: name,
-            pieceNumber: pieceNumber,
-            pieceUnit: pieceUnit,
-            gram: gram,
-            energy: energy,
-            protein: protein,
-            lipid: lipid,
-            sodium: sodium,
-            carbohydrate: carbohydrate,
-            calcium: calcium,
-            magnesium: magnesium,
-            iron: iron,
-            zinc: zinc,
-            retinol: retinol,
-            vitaminB1: vitaminB1,
-            vitaminB2: vitaminB2,
-            vitaminC: vitaminC,
-            dietaryFiber: dietaryFiber,
-            salt: salt,
-            isHeat: isHeat,
-            isAllergy: isAllergy,
-            origin: origin,
-          ),
-          createCompanionCallback: ({
-            Value<int> id = const Value.absent(),
-            required String name,
-            Value<double?> pieceNumber = const Value.absent(),
-            Value<String?> pieceUnit = const Value.absent(),
-            required double gram,
-            required double energy,
-            required double protein,
-            required double lipid,
-            required double sodium,
-            required double carbohydrate,
-            required double calcium,
-            required double magnesium,
-            required double iron,
-            required double zinc,
-            required double retinol,
-            required double vitaminB1,
-            required double vitaminB2,
-            required double vitaminC,
-            required double dietaryFiber,
-            required double salt,
-            required bool isHeat,
-            required bool isAllergy,
-            Value<String?> origin = const Value.absent(),
-          }) =>
-              FoodstuffsTableCompanion.insert(
-            id: id,
-            name: name,
-            pieceNumber: pieceNumber,
-            pieceUnit: pieceUnit,
-            gram: gram,
-            energy: energy,
-            protein: protein,
-            lipid: lipid,
-            sodium: sodium,
-            carbohydrate: carbohydrate,
-            calcium: calcium,
-            magnesium: magnesium,
-            iron: iron,
-            zinc: zinc,
-            retinol: retinol,
-            vitaminB1: vitaminB1,
-            vitaminB2: vitaminB2,
-            vitaminC: vitaminC,
-            dietaryFiber: dietaryFiber,
-            salt: salt,
-            isHeat: isHeat,
-            isAllergy: isAllergy,
-            origin: origin,
-          ),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<String> name = const Value.absent(),
+                Value<double?> pieceNumber = const Value.absent(),
+                Value<String?> pieceUnit = const Value.absent(),
+                Value<double> gram = const Value.absent(),
+                Value<double> energy = const Value.absent(),
+                Value<double> protein = const Value.absent(),
+                Value<double> lipid = const Value.absent(),
+                Value<double> sodium = const Value.absent(),
+                Value<double> carbohydrate = const Value.absent(),
+                Value<double> calcium = const Value.absent(),
+                Value<double> magnesium = const Value.absent(),
+                Value<double> iron = const Value.absent(),
+                Value<double> zinc = const Value.absent(),
+                Value<double> retinol = const Value.absent(),
+                Value<double> vitaminB1 = const Value.absent(),
+                Value<double> vitaminB2 = const Value.absent(),
+                Value<double> vitaminC = const Value.absent(),
+                Value<double> dietaryFiber = const Value.absent(),
+                Value<double> salt = const Value.absent(),
+                Value<bool> isHeat = const Value.absent(),
+                Value<bool> isAllergy = const Value.absent(),
+                Value<String?> origin = const Value.absent(),
+              }) => FoodstuffsTableCompanion(
+                id: id,
+                name: name,
+                pieceNumber: pieceNumber,
+                pieceUnit: pieceUnit,
+                gram: gram,
+                energy: energy,
+                protein: protein,
+                lipid: lipid,
+                sodium: sodium,
+                carbohydrate: carbohydrate,
+                calcium: calcium,
+                magnesium: magnesium,
+                iron: iron,
+                zinc: zinc,
+                retinol: retinol,
+                vitaminB1: vitaminB1,
+                vitaminB2: vitaminB2,
+                vitaminC: vitaminC,
+                dietaryFiber: dietaryFiber,
+                salt: salt,
+                isHeat: isHeat,
+                isAllergy: isAllergy,
+                origin: origin,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required String name,
+                Value<double?> pieceNumber = const Value.absent(),
+                Value<String?> pieceUnit = const Value.absent(),
+                required double gram,
+                required double energy,
+                required double protein,
+                required double lipid,
+                required double sodium,
+                required double carbohydrate,
+                required double calcium,
+                required double magnesium,
+                required double iron,
+                required double zinc,
+                required double retinol,
+                required double vitaminB1,
+                required double vitaminB2,
+                required double vitaminC,
+                required double dietaryFiber,
+                required double salt,
+                required bool isHeat,
+                required bool isAllergy,
+                Value<String?> origin = const Value.absent(),
+              }) => FoodstuffsTableCompanion.insert(
+                id: id,
+                name: name,
+                pieceNumber: pieceNumber,
+                pieceUnit: pieceUnit,
+                gram: gram,
+                energy: energy,
+                protein: protein,
+                lipid: lipid,
+                sodium: sodium,
+                carbohydrate: carbohydrate,
+                calcium: calcium,
+                magnesium: magnesium,
+                iron: iron,
+                zinc: zinc,
+                retinol: retinol,
+                vitaminB1: vitaminB1,
+                vitaminB2: vitaminB2,
+                vitaminC: vitaminC,
+                dietaryFiber: dietaryFiber,
+                salt: salt,
+                isHeat: isHeat,
+                isAllergy: isAllergy,
+                origin: origin,
+              ),
           withReferenceMapper: (p0) => p0
-              .map((e) => (
-                    e.readTable(table),
-                    $$FoodstuffsTableTableReferences(db, table, e)
-                  ))
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$FoodstuffsTableTableReferences(db, table, e),
+                ),
+              )
               .toList(),
           prefetchHooksCallback: ({dishFoodstuffsTableRefs = false}) {
             return PrefetchHooks(
               db: db,
               explicitlyWatchedTables: [
-                if (dishFoodstuffsTableRefs) db.dishFoodstuffsTable
+                if (dishFoodstuffsTableRefs) db.dishFoodstuffsTable,
               ],
               addJoins: null,
               getPrefetchedDataCallback: (items) async {
                 return [
                   if (dishFoodstuffsTableRefs)
-                    await $_getPrefetchedData(
-                        currentTable: table,
-                        referencedTable: $$FoodstuffsTableTableReferences
-                            ._dishFoodstuffsTableRefsTable(db),
-                        managerFromTypedResult: (p0) =>
-                            $$FoodstuffsTableTableReferences(db, table, p0)
-                                .dishFoodstuffsTableRefs,
-                        referencedItemsForCurrentItem:
-                            (item, referencedItems) => referencedItems
-                                .where((e) => e.foodstuffId == item.id),
-                        typedResults: items)
+                    await $_getPrefetchedData<
+                      FoodstuffsSchema,
+                      $FoodstuffsTableTable,
+                      DishFoodstuffsSchema
+                    >(
+                      currentTable: table,
+                      referencedTable: $$FoodstuffsTableTableReferences
+                          ._dishFoodstuffsTableRefsTable(db),
+                      managerFromTypedResult: (p0) =>
+                          $$FoodstuffsTableTableReferences(
+                            db,
+                            table,
+                            p0,
+                          ).dishFoodstuffsTableRefs,
+                      referencedItemsForCurrentItem: (item, referencedItems) =>
+                          referencedItems.where(
+                            (e) => e.foodstuffId == item.id,
+                          ),
+                      typedResults: items,
+                    ),
                 ];
               },
             );
           },
-        ));
+        ),
+      );
 }
 
-typedef $$FoodstuffsTableTableProcessedTableManager = ProcessedTableManager<
-    _$LocalDatabase,
-    $FoodstuffsTableTable,
-    FoodstuffsSchema,
-    $$FoodstuffsTableTableFilterComposer,
-    $$FoodstuffsTableTableOrderingComposer,
-    $$FoodstuffsTableTableAnnotationComposer,
-    $$FoodstuffsTableTableCreateCompanionBuilder,
-    $$FoodstuffsTableTableUpdateCompanionBuilder,
-    (FoodstuffsSchema, $$FoodstuffsTableTableReferences),
-    FoodstuffsSchema,
-    PrefetchHooks Function({bool dishFoodstuffsTableRefs})>;
-typedef $$DishFoodstuffsTableTableCreateCompanionBuilder
-    = DishFoodstuffsTableCompanion Function({
-  required int dishId,
-  required int foodstuffId,
-  Value<int> rowid,
-});
-typedef $$DishFoodstuffsTableTableUpdateCompanionBuilder
-    = DishFoodstuffsTableCompanion Function({
-  Value<int> dishId,
-  Value<int> foodstuffId,
-  Value<int> rowid,
-});
+typedef $$FoodstuffsTableTableProcessedTableManager =
+    ProcessedTableManager<
+      _$LocalDatabase,
+      $FoodstuffsTableTable,
+      FoodstuffsSchema,
+      $$FoodstuffsTableTableFilterComposer,
+      $$FoodstuffsTableTableOrderingComposer,
+      $$FoodstuffsTableTableAnnotationComposer,
+      $$FoodstuffsTableTableCreateCompanionBuilder,
+      $$FoodstuffsTableTableUpdateCompanionBuilder,
+      (FoodstuffsSchema, $$FoodstuffsTableTableReferences),
+      FoodstuffsSchema,
+      PrefetchHooks Function({bool dishFoodstuffsTableRefs})
+    >;
+typedef $$DishFoodstuffsTableTableCreateCompanionBuilder =
+    DishFoodstuffsTableCompanion Function({
+      required int dishId,
+      required int foodstuffId,
+      Value<int> rowid,
+    });
+typedef $$DishFoodstuffsTableTableUpdateCompanionBuilder =
+    DishFoodstuffsTableCompanion Function({
+      Value<int> dishId,
+      Value<int> foodstuffId,
+      Value<int> rowid,
+    });
 
-final class $$DishFoodstuffsTableTableReferences extends BaseReferences<
-    _$LocalDatabase, $DishFoodstuffsTableTable, DishFoodstuffsSchema> {
+final class $$DishFoodstuffsTableTableReferences
+    extends
+        BaseReferences<
+          _$LocalDatabase,
+          $DishFoodstuffsTableTable,
+          DishFoodstuffsSchema
+        > {
   $$DishFoodstuffsTableTableReferences(
-      super.$_db, super.$_table, super.$_typedResult);
+    super.$_db,
+    super.$_table,
+    super.$_typedResult,
+  );
 
   static $DishesTableTable _dishIdTable(_$LocalDatabase db) =>
-      db.dishesTable.createAlias($_aliasNameGenerator(
-          db.dishFoodstuffsTable.dishId, db.dishesTable.id));
+      db.dishesTable.createAlias(
+        $_aliasNameGenerator(db.dishFoodstuffsTable.dishId, db.dishesTable.id),
+      );
 
   $$DishesTableTableProcessedTableManager get dishId {
     final $_column = $_itemColumn<int>('dish_id')!;
 
-    final manager = $$DishesTableTableTableManager($_db, $_db.dishesTable)
-        .filter((f) => f.id.sqlEquals($_column));
+    final manager = $$DishesTableTableTableManager(
+      $_db,
+      $_db.dishesTable,
+    ).filter((f) => f.id.sqlEquals($_column));
     final item = $_typedResult.readTableOrNull(_dishIdTable($_db));
     if (item == null) return manager;
     return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: [item]));
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
   }
 
   static $FoodstuffsTableTable _foodstuffIdTable(_$LocalDatabase db) =>
-      db.foodstuffsTable.createAlias($_aliasNameGenerator(
-          db.dishFoodstuffsTable.foodstuffId, db.foodstuffsTable.id));
+      db.foodstuffsTable.createAlias(
+        $_aliasNameGenerator(
+          db.dishFoodstuffsTable.foodstuffId,
+          db.foodstuffsTable.id,
+        ),
+      );
 
   $$FoodstuffsTableTableProcessedTableManager get foodstuffId {
     final $_column = $_itemColumn<int>('foodstuff_id')!;
 
-    final manager =
-        $$FoodstuffsTableTableTableManager($_db, $_db.foodstuffsTable)
-            .filter((f) => f.id.sqlEquals($_column));
+    final manager = $$FoodstuffsTableTableTableManager(
+      $_db,
+      $_db.foodstuffsTable,
+    ).filter((f) => f.id.sqlEquals($_column));
     final item = $_typedResult.readTableOrNull(_foodstuffIdTable($_db));
     if (item == null) return manager;
     return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: [item]));
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
   }
 }
 
@@ -5617,41 +6714,47 @@ class $$DishFoodstuffsTableTableFilterComposer
   });
   $$DishesTableTableFilterComposer get dishId {
     final $$DishesTableTableFilterComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.dishId,
-        referencedTable: $db.dishesTable,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$DishesTableTableFilterComposer(
-              $db: $db,
-              $table: $db.dishesTable,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.dishId,
+      referencedTable: $db.dishesTable,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DishesTableTableFilterComposer(
+            $db: $db,
+            $table: $db.dishesTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 
   $$FoodstuffsTableTableFilterComposer get foodstuffId {
     final $$FoodstuffsTableTableFilterComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.foodstuffId,
-        referencedTable: $db.foodstuffsTable,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$FoodstuffsTableTableFilterComposer(
-              $db: $db,
-              $table: $db.foodstuffsTable,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.foodstuffId,
+      referencedTable: $db.foodstuffsTable,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$FoodstuffsTableTableFilterComposer(
+            $db: $db,
+            $table: $db.foodstuffsTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 }
@@ -5667,41 +6770,47 @@ class $$DishFoodstuffsTableTableOrderingComposer
   });
   $$DishesTableTableOrderingComposer get dishId {
     final $$DishesTableTableOrderingComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.dishId,
-        referencedTable: $db.dishesTable,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$DishesTableTableOrderingComposer(
-              $db: $db,
-              $table: $db.dishesTable,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.dishId,
+      referencedTable: $db.dishesTable,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DishesTableTableOrderingComposer(
+            $db: $db,
+            $table: $db.dishesTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 
   $$FoodstuffsTableTableOrderingComposer get foodstuffId {
     final $$FoodstuffsTableTableOrderingComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.foodstuffId,
-        referencedTable: $db.foodstuffsTable,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$FoodstuffsTableTableOrderingComposer(
-              $db: $db,
-              $table: $db.foodstuffsTable,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.foodstuffId,
+      referencedTable: $db.foodstuffsTable,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$FoodstuffsTableTableOrderingComposer(
+            $db: $db,
+            $table: $db.foodstuffsTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 }
@@ -5717,102 +6826,120 @@ class $$DishFoodstuffsTableTableAnnotationComposer
   });
   $$DishesTableTableAnnotationComposer get dishId {
     final $$DishesTableTableAnnotationComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.dishId,
-        referencedTable: $db.dishesTable,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$DishesTableTableAnnotationComposer(
-              $db: $db,
-              $table: $db.dishesTable,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.dishId,
+      referencedTable: $db.dishesTable,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DishesTableTableAnnotationComposer(
+            $db: $db,
+            $table: $db.dishesTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 
   $$FoodstuffsTableTableAnnotationComposer get foodstuffId {
     final $$FoodstuffsTableTableAnnotationComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.foodstuffId,
-        referencedTable: $db.foodstuffsTable,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$FoodstuffsTableTableAnnotationComposer(
-              $db: $db,
-              $table: $db.foodstuffsTable,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.foodstuffId,
+      referencedTable: $db.foodstuffsTable,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$FoodstuffsTableTableAnnotationComposer(
+            $db: $db,
+            $table: $db.foodstuffsTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 }
 
-class $$DishFoodstuffsTableTableTableManager extends RootTableManager<
-    _$LocalDatabase,
-    $DishFoodstuffsTableTable,
-    DishFoodstuffsSchema,
-    $$DishFoodstuffsTableTableFilterComposer,
-    $$DishFoodstuffsTableTableOrderingComposer,
-    $$DishFoodstuffsTableTableAnnotationComposer,
-    $$DishFoodstuffsTableTableCreateCompanionBuilder,
-    $$DishFoodstuffsTableTableUpdateCompanionBuilder,
-    (DishFoodstuffsSchema, $$DishFoodstuffsTableTableReferences),
-    DishFoodstuffsSchema,
-    PrefetchHooks Function({bool dishId, bool foodstuffId})> {
+class $$DishFoodstuffsTableTableTableManager
+    extends
+        RootTableManager<
+          _$LocalDatabase,
+          $DishFoodstuffsTableTable,
+          DishFoodstuffsSchema,
+          $$DishFoodstuffsTableTableFilterComposer,
+          $$DishFoodstuffsTableTableOrderingComposer,
+          $$DishFoodstuffsTableTableAnnotationComposer,
+          $$DishFoodstuffsTableTableCreateCompanionBuilder,
+          $$DishFoodstuffsTableTableUpdateCompanionBuilder,
+          (DishFoodstuffsSchema, $$DishFoodstuffsTableTableReferences),
+          DishFoodstuffsSchema,
+          PrefetchHooks Function({bool dishId, bool foodstuffId})
+        > {
   $$DishFoodstuffsTableTableTableManager(
-      _$LocalDatabase db, $DishFoodstuffsTableTable table)
-      : super(TableManagerState(
+    _$LocalDatabase db,
+    $DishFoodstuffsTableTable table,
+  ) : super(
+        TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
               $$DishFoodstuffsTableTableFilterComposer($db: db, $table: table),
           createOrderingComposer: () =>
               $$DishFoodstuffsTableTableOrderingComposer(
-                  $db: db, $table: table),
+                $db: db,
+                $table: table,
+              ),
           createComputedFieldComposer: () =>
               $$DishFoodstuffsTableTableAnnotationComposer(
-                  $db: db, $table: table),
-          updateCompanionCallback: ({
-            Value<int> dishId = const Value.absent(),
-            Value<int> foodstuffId = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              DishFoodstuffsTableCompanion(
-            dishId: dishId,
-            foodstuffId: foodstuffId,
-            rowid: rowid,
-          ),
-          createCompanionCallback: ({
-            required int dishId,
-            required int foodstuffId,
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              DishFoodstuffsTableCompanion.insert(
-            dishId: dishId,
-            foodstuffId: foodstuffId,
-            rowid: rowid,
-          ),
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<int> dishId = const Value.absent(),
+                Value<int> foodstuffId = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => DishFoodstuffsTableCompanion(
+                dishId: dishId,
+                foodstuffId: foodstuffId,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required int dishId,
+                required int foodstuffId,
+                Value<int> rowid = const Value.absent(),
+              }) => DishFoodstuffsTableCompanion.insert(
+                dishId: dishId,
+                foodstuffId: foodstuffId,
+                rowid: rowid,
+              ),
           withReferenceMapper: (p0) => p0
-              .map((e) => (
-                    e.readTable(table),
-                    $$DishFoodstuffsTableTableReferences(db, table, e)
-                  ))
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$DishFoodstuffsTableTableReferences(db, table, e),
+                ),
+              )
               .toList(),
           prefetchHooksCallback: ({dishId = false, foodstuffId = false}) {
             return PrefetchHooks(
               db: db,
               explicitlyWatchedTables: [],
-              addJoins: <
-                  T extends TableManagerState<
+              addJoins:
+                  <
+                    T extends TableManagerState<
                       dynamic,
                       dynamic,
                       dynamic,
@@ -5823,66 +6950,81 @@ class $$DishFoodstuffsTableTableTableManager extends RootTableManager<
                       dynamic,
                       dynamic,
                       dynamic,
-                      dynamic>>(state) {
-                if (dishId) {
-                  state = state.withJoin(
-                    currentTable: table,
-                    currentColumn: table.dishId,
-                    referencedTable:
-                        $$DishFoodstuffsTableTableReferences._dishIdTable(db),
-                    referencedColumn: $$DishFoodstuffsTableTableReferences
-                        ._dishIdTable(db)
-                        .id,
-                  ) as T;
-                }
-                if (foodstuffId) {
-                  state = state.withJoin(
-                    currentTable: table,
-                    currentColumn: table.foodstuffId,
-                    referencedTable: $$DishFoodstuffsTableTableReferences
-                        ._foodstuffIdTable(db),
-                    referencedColumn: $$DishFoodstuffsTableTableReferences
-                        ._foodstuffIdTable(db)
-                        .id,
-                  ) as T;
-                }
+                      dynamic
+                    >
+                  >(state) {
+                    if (dishId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.dishId,
+                                referencedTable:
+                                    $$DishFoodstuffsTableTableReferences
+                                        ._dishIdTable(db),
+                                referencedColumn:
+                                    $$DishFoodstuffsTableTableReferences
+                                        ._dishIdTable(db)
+                                        .id,
+                              )
+                              as T;
+                    }
+                    if (foodstuffId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.foodstuffId,
+                                referencedTable:
+                                    $$DishFoodstuffsTableTableReferences
+                                        ._foodstuffIdTable(db),
+                                referencedColumn:
+                                    $$DishFoodstuffsTableTableReferences
+                                        ._foodstuffIdTable(db)
+                                        .id,
+                              )
+                              as T;
+                    }
 
-                return state;
-              },
+                    return state;
+                  },
               getPrefetchedDataCallback: (items) async {
                 return [];
               },
             );
           },
-        ));
+        ),
+      );
 }
 
-typedef $$DishFoodstuffsTableTableProcessedTableManager = ProcessedTableManager<
-    _$LocalDatabase,
-    $DishFoodstuffsTableTable,
-    DishFoodstuffsSchema,
-    $$DishFoodstuffsTableTableFilterComposer,
-    $$DishFoodstuffsTableTableOrderingComposer,
-    $$DishFoodstuffsTableTableAnnotationComposer,
-    $$DishFoodstuffsTableTableCreateCompanionBuilder,
-    $$DishFoodstuffsTableTableUpdateCompanionBuilder,
-    (DishFoodstuffsSchema, $$DishFoodstuffsTableTableReferences),
-    DishFoodstuffsSchema,
-    PrefetchHooks Function({bool dishId, bool foodstuffId})>;
-typedef $$UsersTableTableCreateCompanionBuilder = UsersTableCompanion Function({
-  Value<int> id,
-  required String name,
-  required int schoolId,
-  required int schoolYear,
-  Value<DateTime?> authorizedAt,
-});
-typedef $$UsersTableTableUpdateCompanionBuilder = UsersTableCompanion Function({
-  Value<int> id,
-  Value<String> name,
-  Value<int> schoolId,
-  Value<int> schoolYear,
-  Value<DateTime?> authorizedAt,
-});
+typedef $$DishFoodstuffsTableTableProcessedTableManager =
+    ProcessedTableManager<
+      _$LocalDatabase,
+      $DishFoodstuffsTableTable,
+      DishFoodstuffsSchema,
+      $$DishFoodstuffsTableTableFilterComposer,
+      $$DishFoodstuffsTableTableOrderingComposer,
+      $$DishFoodstuffsTableTableAnnotationComposer,
+      $$DishFoodstuffsTableTableCreateCompanionBuilder,
+      $$DishFoodstuffsTableTableUpdateCompanionBuilder,
+      (DishFoodstuffsSchema, $$DishFoodstuffsTableTableReferences),
+      DishFoodstuffsSchema,
+      PrefetchHooks Function({bool dishId, bool foodstuffId})
+    >;
+typedef $$UsersTableTableCreateCompanionBuilder =
+    UsersTableCompanion Function({
+      Value<int> id,
+      required String name,
+      required int schoolId,
+      required int schoolYear,
+      Value<DateTime?> authorizedAt,
+    });
+typedef $$UsersTableTableUpdateCompanionBuilder =
+    UsersTableCompanion Function({
+      Value<int> id,
+      Value<String> name,
+      Value<int> schoolId,
+      Value<int> schoolYear,
+      Value<DateTime?> authorizedAt,
+    });
 
 final class $$UsersTableTableReferences
     extends BaseReferences<_$LocalDatabase, $UsersTableTable, UsersSchema> {
@@ -5890,17 +7032,21 @@ final class $$UsersTableTableReferences
 
   static $SchoolsTableTable _schoolIdTable(_$LocalDatabase db) =>
       db.schoolsTable.createAlias(
-          $_aliasNameGenerator(db.usersTable.schoolId, db.schoolsTable.id));
+        $_aliasNameGenerator(db.usersTable.schoolId, db.schoolsTable.id),
+      );
 
   $$SchoolsTableTableProcessedTableManager get schoolId {
     final $_column = $_itemColumn<int>('school_id')!;
 
-    final manager = $$SchoolsTableTableTableManager($_db, $_db.schoolsTable)
-        .filter((f) => f.id.sqlEquals($_column));
+    final manager = $$SchoolsTableTableTableManager(
+      $_db,
+      $_db.schoolsTable,
+    ).filter((f) => f.id.sqlEquals($_column));
     final item = $_typedResult.readTableOrNull(_schoolIdTable($_db));
     if (item == null) return manager;
     return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: [item]));
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
   }
 }
 
@@ -5914,34 +7060,45 @@ class $$UsersTableTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<int> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnFilters(column));
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get name => $composableBuilder(
-      column: $table.name, builder: (column) => ColumnFilters(column));
+    column: $table.name,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<int> get schoolYear => $composableBuilder(
-      column: $table.schoolYear, builder: (column) => ColumnFilters(column));
+    column: $table.schoolYear,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<DateTime> get authorizedAt => $composableBuilder(
-      column: $table.authorizedAt, builder: (column) => ColumnFilters(column));
+    column: $table.authorizedAt,
+    builder: (column) => ColumnFilters(column),
+  );
 
   $$SchoolsTableTableFilterComposer get schoolId {
     final $$SchoolsTableTableFilterComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.schoolId,
-        referencedTable: $db.schoolsTable,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$SchoolsTableTableFilterComposer(
-              $db: $db,
-              $table: $db.schoolsTable,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.schoolId,
+      referencedTable: $db.schoolsTable,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$SchoolsTableTableFilterComposer(
+            $db: $db,
+            $table: $db.schoolsTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 }
@@ -5956,35 +7113,45 @@ class $$UsersTableTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<int> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnOrderings(column));
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get name => $composableBuilder(
-      column: $table.name, builder: (column) => ColumnOrderings(column));
+    column: $table.name,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<int> get schoolYear => $composableBuilder(
-      column: $table.schoolYear, builder: (column) => ColumnOrderings(column));
+    column: $table.schoolYear,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<DateTime> get authorizedAt => $composableBuilder(
-      column: $table.authorizedAt,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.authorizedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   $$SchoolsTableTableOrderingComposer get schoolId {
     final $$SchoolsTableTableOrderingComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.schoolId,
-        referencedTable: $db.schoolsTable,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$SchoolsTableTableOrderingComposer(
-              $db: $db,
-              $table: $db.schoolsTable,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.schoolId,
+      referencedTable: $db.schoolsTable,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$SchoolsTableTableOrderingComposer(
+            $db: $db,
+            $table: $db.schoolsTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 }
@@ -6005,46 +7172,57 @@ class $$UsersTableTableAnnotationComposer
       $composableBuilder(column: $table.name, builder: (column) => column);
 
   GeneratedColumn<int> get schoolYear => $composableBuilder(
-      column: $table.schoolYear, builder: (column) => column);
+    column: $table.schoolYear,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<DateTime> get authorizedAt => $composableBuilder(
-      column: $table.authorizedAt, builder: (column) => column);
+    column: $table.authorizedAt,
+    builder: (column) => column,
+  );
 
   $$SchoolsTableTableAnnotationComposer get schoolId {
     final $$SchoolsTableTableAnnotationComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.schoolId,
-        referencedTable: $db.schoolsTable,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$SchoolsTableTableAnnotationComposer(
-              $db: $db,
-              $table: $db.schoolsTable,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.schoolId,
+      referencedTable: $db.schoolsTable,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$SchoolsTableTableAnnotationComposer(
+            $db: $db,
+            $table: $db.schoolsTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 }
 
-class $$UsersTableTableTableManager extends RootTableManager<
-    _$LocalDatabase,
-    $UsersTableTable,
-    UsersSchema,
-    $$UsersTableTableFilterComposer,
-    $$UsersTableTableOrderingComposer,
-    $$UsersTableTableAnnotationComposer,
-    $$UsersTableTableCreateCompanionBuilder,
-    $$UsersTableTableUpdateCompanionBuilder,
-    (UsersSchema, $$UsersTableTableReferences),
-    UsersSchema,
-    PrefetchHooks Function({bool schoolId})> {
+class $$UsersTableTableTableManager
+    extends
+        RootTableManager<
+          _$LocalDatabase,
+          $UsersTableTable,
+          UsersSchema,
+          $$UsersTableTableFilterComposer,
+          $$UsersTableTableOrderingComposer,
+          $$UsersTableTableAnnotationComposer,
+          $$UsersTableTableCreateCompanionBuilder,
+          $$UsersTableTableUpdateCompanionBuilder,
+          (UsersSchema, $$UsersTableTableReferences),
+          UsersSchema,
+          PrefetchHooks Function({bool schoolId})
+        > {
   $$UsersTableTableTableManager(_$LocalDatabase db, $UsersTableTable table)
-      : super(TableManagerState(
+    : super(
+        TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
@@ -6053,46 +7231,49 @@ class $$UsersTableTableTableManager extends RootTableManager<
               $$UsersTableTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
               $$UsersTableTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback: ({
-            Value<int> id = const Value.absent(),
-            Value<String> name = const Value.absent(),
-            Value<int> schoolId = const Value.absent(),
-            Value<int> schoolYear = const Value.absent(),
-            Value<DateTime?> authorizedAt = const Value.absent(),
-          }) =>
-              UsersTableCompanion(
-            id: id,
-            name: name,
-            schoolId: schoolId,
-            schoolYear: schoolYear,
-            authorizedAt: authorizedAt,
-          ),
-          createCompanionCallback: ({
-            Value<int> id = const Value.absent(),
-            required String name,
-            required int schoolId,
-            required int schoolYear,
-            Value<DateTime?> authorizedAt = const Value.absent(),
-          }) =>
-              UsersTableCompanion.insert(
-            id: id,
-            name: name,
-            schoolId: schoolId,
-            schoolYear: schoolYear,
-            authorizedAt: authorizedAt,
-          ),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<String> name = const Value.absent(),
+                Value<int> schoolId = const Value.absent(),
+                Value<int> schoolYear = const Value.absent(),
+                Value<DateTime?> authorizedAt = const Value.absent(),
+              }) => UsersTableCompanion(
+                id: id,
+                name: name,
+                schoolId: schoolId,
+                schoolYear: schoolYear,
+                authorizedAt: authorizedAt,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required String name,
+                required int schoolId,
+                required int schoolYear,
+                Value<DateTime?> authorizedAt = const Value.absent(),
+              }) => UsersTableCompanion.insert(
+                id: id,
+                name: name,
+                schoolId: schoolId,
+                schoolYear: schoolYear,
+                authorizedAt: authorizedAt,
+              ),
           withReferenceMapper: (p0) => p0
-              .map((e) => (
-                    e.readTable(table),
-                    $$UsersTableTableReferences(db, table, e)
-                  ))
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$UsersTableTableReferences(db, table, e),
+                ),
+              )
               .toList(),
           prefetchHooksCallback: ({schoolId = false}) {
             return PrefetchHooks(
               db: db,
               explicitlyWatchedTables: [],
-              addJoins: <
-                  T extends TableManagerState<
+              addJoins:
+                  <
+                    T extends TableManagerState<
                       dynamic,
                       dynamic,
                       dynamic,
@@ -6103,84 +7284,92 @@ class $$UsersTableTableTableManager extends RootTableManager<
                       dynamic,
                       dynamic,
                       dynamic,
-                      dynamic>>(state) {
-                if (schoolId) {
-                  state = state.withJoin(
-                    currentTable: table,
-                    currentColumn: table.schoolId,
-                    referencedTable:
-                        $$UsersTableTableReferences._schoolIdTable(db),
-                    referencedColumn:
-                        $$UsersTableTableReferences._schoolIdTable(db).id,
-                  ) as T;
-                }
+                      dynamic
+                    >
+                  >(state) {
+                    if (schoolId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.schoolId,
+                                referencedTable: $$UsersTableTableReferences
+                                    ._schoolIdTable(db),
+                                referencedColumn: $$UsersTableTableReferences
+                                    ._schoolIdTable(db)
+                                    .id,
+                              )
+                              as T;
+                    }
 
-                return state;
-              },
+                    return state;
+                  },
               getPrefetchedDataCallback: (items) async {
                 return [];
               },
             );
           },
-        ));
+        ),
+      );
 }
 
-typedef $$UsersTableTableProcessedTableManager = ProcessedTableManager<
-    _$LocalDatabase,
-    $UsersTableTable,
-    UsersSchema,
-    $$UsersTableTableFilterComposer,
-    $$UsersTableTableOrderingComposer,
-    $$UsersTableTableAnnotationComposer,
-    $$UsersTableTableCreateCompanionBuilder,
-    $$UsersTableTableUpdateCompanionBuilder,
-    (UsersSchema, $$UsersTableTableReferences),
-    UsersSchema,
-    PrefetchHooks Function({bool schoolId})>;
-typedef $$DictionaryItemsTableTableCreateCompanionBuilder
-    = DictionaryItemsTableCompanion Function({
-  Value<int> id,
-  required int group,
-  required String name,
-  required double energy,
-  required double protein,
-  required double lipid,
-  required double sodium,
-  required double carbohydrate,
-  required double calcium,
-  required double magnesium,
-  required double iron,
-  required double zinc,
-  required double retinol,
-  required double vitaminB1,
-  required double vitaminB2,
-  required double vitaminC,
-  required double dietaryFiber,
-  required double salt,
-  Value<String?> note,
-});
-typedef $$DictionaryItemsTableTableUpdateCompanionBuilder
-    = DictionaryItemsTableCompanion Function({
-  Value<int> id,
-  Value<int> group,
-  Value<String> name,
-  Value<double> energy,
-  Value<double> protein,
-  Value<double> lipid,
-  Value<double> sodium,
-  Value<double> carbohydrate,
-  Value<double> calcium,
-  Value<double> magnesium,
-  Value<double> iron,
-  Value<double> zinc,
-  Value<double> retinol,
-  Value<double> vitaminB1,
-  Value<double> vitaminB2,
-  Value<double> vitaminC,
-  Value<double> dietaryFiber,
-  Value<double> salt,
-  Value<String?> note,
-});
+typedef $$UsersTableTableProcessedTableManager =
+    ProcessedTableManager<
+      _$LocalDatabase,
+      $UsersTableTable,
+      UsersSchema,
+      $$UsersTableTableFilterComposer,
+      $$UsersTableTableOrderingComposer,
+      $$UsersTableTableAnnotationComposer,
+      $$UsersTableTableCreateCompanionBuilder,
+      $$UsersTableTableUpdateCompanionBuilder,
+      (UsersSchema, $$UsersTableTableReferences),
+      UsersSchema,
+      PrefetchHooks Function({bool schoolId})
+    >;
+typedef $$DictionaryItemsTableTableCreateCompanionBuilder =
+    DictionaryItemsTableCompanion Function({
+      Value<int> id,
+      required int group,
+      required String name,
+      required double energy,
+      required double protein,
+      required double lipid,
+      required double sodium,
+      required double carbohydrate,
+      required double calcium,
+      required double magnesium,
+      required double iron,
+      required double zinc,
+      required double retinol,
+      required double vitaminB1,
+      required double vitaminB2,
+      required double vitaminC,
+      required double dietaryFiber,
+      required double salt,
+      Value<String?> note,
+    });
+typedef $$DictionaryItemsTableTableUpdateCompanionBuilder =
+    DictionaryItemsTableCompanion Function({
+      Value<int> id,
+      Value<int> group,
+      Value<String> name,
+      Value<double> energy,
+      Value<double> protein,
+      Value<double> lipid,
+      Value<double> sodium,
+      Value<double> carbohydrate,
+      Value<double> calcium,
+      Value<double> magnesium,
+      Value<double> iron,
+      Value<double> zinc,
+      Value<double> retinol,
+      Value<double> vitaminB1,
+      Value<double> vitaminB2,
+      Value<double> vitaminC,
+      Value<double> dietaryFiber,
+      Value<double> salt,
+      Value<String?> note,
+    });
 
 class $$DictionaryItemsTableTableFilterComposer
     extends Composer<_$LocalDatabase, $DictionaryItemsTableTable> {
@@ -6192,61 +7381,99 @@ class $$DictionaryItemsTableTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<int> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnFilters(column));
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<int> get group => $composableBuilder(
-      column: $table.group, builder: (column) => ColumnFilters(column));
+    column: $table.group,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get name => $composableBuilder(
-      column: $table.name, builder: (column) => ColumnFilters(column));
+    column: $table.name,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get energy => $composableBuilder(
-      column: $table.energy, builder: (column) => ColumnFilters(column));
+    column: $table.energy,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get protein => $composableBuilder(
-      column: $table.protein, builder: (column) => ColumnFilters(column));
+    column: $table.protein,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get lipid => $composableBuilder(
-      column: $table.lipid, builder: (column) => ColumnFilters(column));
+    column: $table.lipid,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get sodium => $composableBuilder(
-      column: $table.sodium, builder: (column) => ColumnFilters(column));
+    column: $table.sodium,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get carbohydrate => $composableBuilder(
-      column: $table.carbohydrate, builder: (column) => ColumnFilters(column));
+    column: $table.carbohydrate,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get calcium => $composableBuilder(
-      column: $table.calcium, builder: (column) => ColumnFilters(column));
+    column: $table.calcium,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get magnesium => $composableBuilder(
-      column: $table.magnesium, builder: (column) => ColumnFilters(column));
+    column: $table.magnesium,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get iron => $composableBuilder(
-      column: $table.iron, builder: (column) => ColumnFilters(column));
+    column: $table.iron,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get zinc => $composableBuilder(
-      column: $table.zinc, builder: (column) => ColumnFilters(column));
+    column: $table.zinc,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get retinol => $composableBuilder(
-      column: $table.retinol, builder: (column) => ColumnFilters(column));
+    column: $table.retinol,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get vitaminB1 => $composableBuilder(
-      column: $table.vitaminB1, builder: (column) => ColumnFilters(column));
+    column: $table.vitaminB1,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get vitaminB2 => $composableBuilder(
-      column: $table.vitaminB2, builder: (column) => ColumnFilters(column));
+    column: $table.vitaminB2,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get vitaminC => $composableBuilder(
-      column: $table.vitaminC, builder: (column) => ColumnFilters(column));
+    column: $table.vitaminC,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get dietaryFiber => $composableBuilder(
-      column: $table.dietaryFiber, builder: (column) => ColumnFilters(column));
+    column: $table.dietaryFiber,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get salt => $composableBuilder(
-      column: $table.salt, builder: (column) => ColumnFilters(column));
+    column: $table.salt,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get note => $composableBuilder(
-      column: $table.note, builder: (column) => ColumnFilters(column));
+    column: $table.note,
+    builder: (column) => ColumnFilters(column),
+  );
 }
 
 class $$DictionaryItemsTableTableOrderingComposer
@@ -6259,63 +7486,99 @@ class $$DictionaryItemsTableTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<int> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnOrderings(column));
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<int> get group => $composableBuilder(
-      column: $table.group, builder: (column) => ColumnOrderings(column));
+    column: $table.group,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get name => $composableBuilder(
-      column: $table.name, builder: (column) => ColumnOrderings(column));
+    column: $table.name,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get energy => $composableBuilder(
-      column: $table.energy, builder: (column) => ColumnOrderings(column));
+    column: $table.energy,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get protein => $composableBuilder(
-      column: $table.protein, builder: (column) => ColumnOrderings(column));
+    column: $table.protein,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get lipid => $composableBuilder(
-      column: $table.lipid, builder: (column) => ColumnOrderings(column));
+    column: $table.lipid,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get sodium => $composableBuilder(
-      column: $table.sodium, builder: (column) => ColumnOrderings(column));
+    column: $table.sodium,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get carbohydrate => $composableBuilder(
-      column: $table.carbohydrate,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.carbohydrate,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get calcium => $composableBuilder(
-      column: $table.calcium, builder: (column) => ColumnOrderings(column));
+    column: $table.calcium,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get magnesium => $composableBuilder(
-      column: $table.magnesium, builder: (column) => ColumnOrderings(column));
+    column: $table.magnesium,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get iron => $composableBuilder(
-      column: $table.iron, builder: (column) => ColumnOrderings(column));
+    column: $table.iron,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get zinc => $composableBuilder(
-      column: $table.zinc, builder: (column) => ColumnOrderings(column));
+    column: $table.zinc,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get retinol => $composableBuilder(
-      column: $table.retinol, builder: (column) => ColumnOrderings(column));
+    column: $table.retinol,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get vitaminB1 => $composableBuilder(
-      column: $table.vitaminB1, builder: (column) => ColumnOrderings(column));
+    column: $table.vitaminB1,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get vitaminB2 => $composableBuilder(
-      column: $table.vitaminB2, builder: (column) => ColumnOrderings(column));
+    column: $table.vitaminB2,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get vitaminC => $composableBuilder(
-      column: $table.vitaminC, builder: (column) => ColumnOrderings(column));
+    column: $table.vitaminC,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get dietaryFiber => $composableBuilder(
-      column: $table.dietaryFiber,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.dietaryFiber,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get salt => $composableBuilder(
-      column: $table.salt, builder: (column) => ColumnOrderings(column));
+    column: $table.salt,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get note => $composableBuilder(
-      column: $table.note, builder: (column) => ColumnOrderings(column));
+    column: $table.note,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$DictionaryItemsTableTableAnnotationComposer
@@ -6349,7 +7612,9 @@ class $$DictionaryItemsTableTableAnnotationComposer
       $composableBuilder(column: $table.sodium, builder: (column) => column);
 
   GeneratedColumn<double> get carbohydrate => $composableBuilder(
-      column: $table.carbohydrate, builder: (column) => column);
+    column: $table.carbohydrate,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<double> get calcium =>
       $composableBuilder(column: $table.calcium, builder: (column) => column);
@@ -6376,7 +7641,9 @@ class $$DictionaryItemsTableTableAnnotationComposer
       $composableBuilder(column: $table.vitaminC, builder: (column) => column);
 
   GeneratedColumn<double> get dietaryFiber => $composableBuilder(
-      column: $table.dietaryFiber, builder: (column) => column);
+    column: $table.dietaryFiber,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<double> get salt =>
       $composableBuilder(column: $table.salt, builder: (column) => column);
@@ -6385,143 +7652,160 @@ class $$DictionaryItemsTableTableAnnotationComposer
       $composableBuilder(column: $table.note, builder: (column) => column);
 }
 
-class $$DictionaryItemsTableTableTableManager extends RootTableManager<
-    _$LocalDatabase,
-    $DictionaryItemsTableTable,
-    DictionaryItemsSchema,
-    $$DictionaryItemsTableTableFilterComposer,
-    $$DictionaryItemsTableTableOrderingComposer,
-    $$DictionaryItemsTableTableAnnotationComposer,
-    $$DictionaryItemsTableTableCreateCompanionBuilder,
-    $$DictionaryItemsTableTableUpdateCompanionBuilder,
-    (
-      DictionaryItemsSchema,
-      BaseReferences<_$LocalDatabase, $DictionaryItemsTableTable,
-          DictionaryItemsSchema>
-    ),
-    DictionaryItemsSchema,
-    PrefetchHooks Function()> {
+class $$DictionaryItemsTableTableTableManager
+    extends
+        RootTableManager<
+          _$LocalDatabase,
+          $DictionaryItemsTableTable,
+          DictionaryItemsSchema,
+          $$DictionaryItemsTableTableFilterComposer,
+          $$DictionaryItemsTableTableOrderingComposer,
+          $$DictionaryItemsTableTableAnnotationComposer,
+          $$DictionaryItemsTableTableCreateCompanionBuilder,
+          $$DictionaryItemsTableTableUpdateCompanionBuilder,
+          (
+            DictionaryItemsSchema,
+            BaseReferences<
+              _$LocalDatabase,
+              $DictionaryItemsTableTable,
+              DictionaryItemsSchema
+            >,
+          ),
+          DictionaryItemsSchema,
+          PrefetchHooks Function()
+        > {
   $$DictionaryItemsTableTableTableManager(
-      _$LocalDatabase db, $DictionaryItemsTableTable table)
-      : super(TableManagerState(
+    _$LocalDatabase db,
+    $DictionaryItemsTableTable table,
+  ) : super(
+        TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
               $$DictionaryItemsTableTableFilterComposer($db: db, $table: table),
           createOrderingComposer: () =>
               $$DictionaryItemsTableTableOrderingComposer(
-                  $db: db, $table: table),
+                $db: db,
+                $table: table,
+              ),
           createComputedFieldComposer: () =>
               $$DictionaryItemsTableTableAnnotationComposer(
-                  $db: db, $table: table),
-          updateCompanionCallback: ({
-            Value<int> id = const Value.absent(),
-            Value<int> group = const Value.absent(),
-            Value<String> name = const Value.absent(),
-            Value<double> energy = const Value.absent(),
-            Value<double> protein = const Value.absent(),
-            Value<double> lipid = const Value.absent(),
-            Value<double> sodium = const Value.absent(),
-            Value<double> carbohydrate = const Value.absent(),
-            Value<double> calcium = const Value.absent(),
-            Value<double> magnesium = const Value.absent(),
-            Value<double> iron = const Value.absent(),
-            Value<double> zinc = const Value.absent(),
-            Value<double> retinol = const Value.absent(),
-            Value<double> vitaminB1 = const Value.absent(),
-            Value<double> vitaminB2 = const Value.absent(),
-            Value<double> vitaminC = const Value.absent(),
-            Value<double> dietaryFiber = const Value.absent(),
-            Value<double> salt = const Value.absent(),
-            Value<String?> note = const Value.absent(),
-          }) =>
-              DictionaryItemsTableCompanion(
-            id: id,
-            group: group,
-            name: name,
-            energy: energy,
-            protein: protein,
-            lipid: lipid,
-            sodium: sodium,
-            carbohydrate: carbohydrate,
-            calcium: calcium,
-            magnesium: magnesium,
-            iron: iron,
-            zinc: zinc,
-            retinol: retinol,
-            vitaminB1: vitaminB1,
-            vitaminB2: vitaminB2,
-            vitaminC: vitaminC,
-            dietaryFiber: dietaryFiber,
-            salt: salt,
-            note: note,
-          ),
-          createCompanionCallback: ({
-            Value<int> id = const Value.absent(),
-            required int group,
-            required String name,
-            required double energy,
-            required double protein,
-            required double lipid,
-            required double sodium,
-            required double carbohydrate,
-            required double calcium,
-            required double magnesium,
-            required double iron,
-            required double zinc,
-            required double retinol,
-            required double vitaminB1,
-            required double vitaminB2,
-            required double vitaminC,
-            required double dietaryFiber,
-            required double salt,
-            Value<String?> note = const Value.absent(),
-          }) =>
-              DictionaryItemsTableCompanion.insert(
-            id: id,
-            group: group,
-            name: name,
-            energy: energy,
-            protein: protein,
-            lipid: lipid,
-            sodium: sodium,
-            carbohydrate: carbohydrate,
-            calcium: calcium,
-            magnesium: magnesium,
-            iron: iron,
-            zinc: zinc,
-            retinol: retinol,
-            vitaminB1: vitaminB1,
-            vitaminB2: vitaminB2,
-            vitaminC: vitaminC,
-            dietaryFiber: dietaryFiber,
-            salt: salt,
-            note: note,
-          ),
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<int> group = const Value.absent(),
+                Value<String> name = const Value.absent(),
+                Value<double> energy = const Value.absent(),
+                Value<double> protein = const Value.absent(),
+                Value<double> lipid = const Value.absent(),
+                Value<double> sodium = const Value.absent(),
+                Value<double> carbohydrate = const Value.absent(),
+                Value<double> calcium = const Value.absent(),
+                Value<double> magnesium = const Value.absent(),
+                Value<double> iron = const Value.absent(),
+                Value<double> zinc = const Value.absent(),
+                Value<double> retinol = const Value.absent(),
+                Value<double> vitaminB1 = const Value.absent(),
+                Value<double> vitaminB2 = const Value.absent(),
+                Value<double> vitaminC = const Value.absent(),
+                Value<double> dietaryFiber = const Value.absent(),
+                Value<double> salt = const Value.absent(),
+                Value<String?> note = const Value.absent(),
+              }) => DictionaryItemsTableCompanion(
+                id: id,
+                group: group,
+                name: name,
+                energy: energy,
+                protein: protein,
+                lipid: lipid,
+                sodium: sodium,
+                carbohydrate: carbohydrate,
+                calcium: calcium,
+                magnesium: magnesium,
+                iron: iron,
+                zinc: zinc,
+                retinol: retinol,
+                vitaminB1: vitaminB1,
+                vitaminB2: vitaminB2,
+                vitaminC: vitaminC,
+                dietaryFiber: dietaryFiber,
+                salt: salt,
+                note: note,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required int group,
+                required String name,
+                required double energy,
+                required double protein,
+                required double lipid,
+                required double sodium,
+                required double carbohydrate,
+                required double calcium,
+                required double magnesium,
+                required double iron,
+                required double zinc,
+                required double retinol,
+                required double vitaminB1,
+                required double vitaminB2,
+                required double vitaminC,
+                required double dietaryFiber,
+                required double salt,
+                Value<String?> note = const Value.absent(),
+              }) => DictionaryItemsTableCompanion.insert(
+                id: id,
+                group: group,
+                name: name,
+                energy: energy,
+                protein: protein,
+                lipid: lipid,
+                sodium: sodium,
+                carbohydrate: carbohydrate,
+                calcium: calcium,
+                magnesium: magnesium,
+                iron: iron,
+                zinc: zinc,
+                retinol: retinol,
+                vitaminB1: vitaminB1,
+                vitaminB2: vitaminB2,
+                vitaminC: vitaminC,
+                dietaryFiber: dietaryFiber,
+                salt: salt,
+                note: note,
+              ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
               .toList(),
           prefetchHooksCallback: null,
-        ));
+        ),
+      );
 }
 
-typedef $$DictionaryItemsTableTableProcessedTableManager
-    = ProcessedTableManager<
-        _$LocalDatabase,
-        $DictionaryItemsTableTable,
+typedef $$DictionaryItemsTableTableProcessedTableManager =
+    ProcessedTableManager<
+      _$LocalDatabase,
+      $DictionaryItemsTableTable,
+      DictionaryItemsSchema,
+      $$DictionaryItemsTableTableFilterComposer,
+      $$DictionaryItemsTableTableOrderingComposer,
+      $$DictionaryItemsTableTableAnnotationComposer,
+      $$DictionaryItemsTableTableCreateCompanionBuilder,
+      $$DictionaryItemsTableTableUpdateCompanionBuilder,
+      (
         DictionaryItemsSchema,
-        $$DictionaryItemsTableTableFilterComposer,
-        $$DictionaryItemsTableTableOrderingComposer,
-        $$DictionaryItemsTableTableAnnotationComposer,
-        $$DictionaryItemsTableTableCreateCompanionBuilder,
-        $$DictionaryItemsTableTableUpdateCompanionBuilder,
-        (
-          DictionaryItemsSchema,
-          BaseReferences<_$LocalDatabase, $DictionaryItemsTableTable,
-              DictionaryItemsSchema>
-        ),
-        DictionaryItemsSchema,
-        PrefetchHooks Function()>;
+        BaseReferences<
+          _$LocalDatabase,
+          $DictionaryItemsTableTable,
+          DictionaryItemsSchema
+        >,
+      ),
+      DictionaryItemsSchema,
+      PrefetchHooks Function()
+    >;
 
 class $LocalDatabaseManager {
   final _$LocalDatabase _db;

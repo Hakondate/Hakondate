@@ -29,14 +29,14 @@ String _$userViewModelHash() => r'4b29469389fc1cb5dd6a5c4b37132857021c103d';
 @ProviderFor(UserViewModel)
 final userViewModelProvider =
     NotifierProvider<UserViewModel, UserState>.internal(
-  UserViewModel.new,
-  name: r'userViewModelProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$userViewModelHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      UserViewModel.new,
+      name: r'userViewModelProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$userViewModelHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$UserViewModel = Notifier<UserState>;
 // ignore_for_file: type=lint

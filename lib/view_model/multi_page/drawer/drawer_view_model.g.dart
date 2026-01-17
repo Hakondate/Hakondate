@@ -6,20 +6,20 @@ part of 'drawer_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$drawerViewModelHash() => r'438fc563a8c85a2b9f34efd0996b2a043e31dd40';
+String _$drawerViewModelHash() => r'ef7778e9935a97bef7a83bbdf951f866baebff68';
 
 /// See also [DrawerViewModel].
 @ProviderFor(DrawerViewModel)
 final drawerViewModelProvider =
     NotifierProvider<DrawerViewModel, DrawerState>.internal(
-  DrawerViewModel.new,
-  name: r'drawerViewModelProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$drawerViewModelHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      DrawerViewModel.new,
+      name: r'drawerViewModelProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$drawerViewModelHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$DrawerViewModel = Notifier<DrawerState>;
 // ignore_for_file: type=lint

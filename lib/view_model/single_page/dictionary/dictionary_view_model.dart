@@ -21,21 +21,14 @@ class DictionaryViewModel extends _$DictionaryViewModel {
   Future<void> selectGroup(DictionaryGroup group) async {
     state = const AsyncLoading<DictionaryState>();
     state = AsyncData<DictionaryState>(
-      DictionaryState(
-        selectedGroup: group,
-        selectedGroupItems: await _dictionaryItemsLocalRepository.listGroup(group.groupNumber),
-      ),
+      DictionaryState(selectedGroup: group, selectedGroupItems: await _dictionaryItemsLocalRepository.listGroup(group.groupNumber)),
     );
   }
 
   Future<void> selectItem(int id) async {
     state.whenData((DictionaryState data) async {
       state = const AsyncLoading<DictionaryState>();
-      state = AsyncData<DictionaryState>(
-        data.copyWith(
-          selectedItem: await _dictionaryItemsLocalRepository.getById(id),
-        ),
-      );
+      state = AsyncData<DictionaryState>(data.copyWith(selectedItem: await _dictionaryItemsLocalRepository.getById(id)));
     });
 
     await ref.read(analyticsControllerProvider.notifier).logViewDictionary(id);

@@ -12,14 +12,9 @@ class DrawerTerms extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.ui.white,
-      appBar: const FadeUpAppBar(
-        title: Text('利用規約'),
-      ),
+      appBar: const FadeUpAppBar(title: Text('利用規約')),
       body: const SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(PaddingSize.normal),
-          child: TermsContentColumn(),
-        ),
+        child: Padding(padding: EdgeInsets.all(PaddingSize.normal), child: TermsContentColumn()),
       ),
     );
   }

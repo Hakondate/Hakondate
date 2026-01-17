@@ -22,22 +22,14 @@ class DictionarySearchViewModel extends _$DictionarySearchViewModel {
 
   Future<void> getSearchedList(String query) async {
     state.whenData((DictionarySearchState data) async {
-      state = AsyncData<DictionarySearchState>(
-        data.copyWith(
-          searchedItems: await _dictionaryItemsLocalRepository.search(query),
-        ),
-      );
+      state = AsyncData<DictionarySearchState>(data.copyWith(searchedItems: await _dictionaryItemsLocalRepository.search(query)));
     });
   }
 
   Future<void> clearQuery() async {
     state.whenData((DictionarySearchState data) async {
       state = const AsyncLoading<DictionarySearchState>();
-      state = AsyncData<DictionarySearchState>(
-        data.copyWith(
-          searchedItems: await _dictionaryItemsLocalRepository.getAll(),
-        ),
-      );
+      state = AsyncData<DictionarySearchState>(data.copyWith(searchedItems: await _dictionaryItemsLocalRepository.getAll()));
     });
   }
 }

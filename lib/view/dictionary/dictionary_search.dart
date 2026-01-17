@@ -18,7 +18,9 @@ class DictionarySearch extends StatelessWidget {
       appBar: AppBar(
         title: Consumer(
           builder: (BuildContext context, WidgetRef ref, _) {
-            return ref.watch(dictionarySearchViewModelProvider).maybeWhen(
+            return ref
+                .watch(dictionarySearchViewModelProvider)
+                .maybeWhen(
                   data: (DictionarySearchState data) {
                     return TextFormField(
                       controller: data.searchBarTextController,
@@ -31,17 +33,10 @@ class DictionarySearch extends StatelessWidget {
                         enabledBorder: InputBorder.none,
                         suffixIcon: IconButton(
                           onPressed: () async {
-                            await ref
-                                .read(
-                                  dictionarySearchViewModelProvider.notifier,
-                                )
-                                .clearQuery();
+                            await ref.read(dictionarySearchViewModelProvider.notifier).clearQuery();
                             data.searchBarTextController.clear();
                           },
-                          icon: const Icon(
-                            color: Colors.orange,
-                            Icons.clear,
-                          ),
+                          icon: const Icon(color: Colors.orange, Icons.clear),
                         ),
                       ),
                     );
@@ -53,14 +48,14 @@ class DictionarySearch extends StatelessWidget {
       ),
       body: Consumer(
         builder: (BuildContext context, WidgetRef ref, _) {
-          return ref.watch(dictionarySearchViewModelProvider).maybeWhen(
+          return ref
+              .watch(dictionarySearchViewModelProvider)
+              .maybeWhen(
                 data: (DictionarySearchState data) {
                   final List<DictionaryItemModel> searchedItems = data.searchedItems;
                   return ListView.separated(
                     itemCount: searchedItems.length,
-                    separatorBuilder: (_, __) => const Divider(
-                      height: 0,
-                    ),
+                    separatorBuilder: (_, __) => const Divider(height: 0),
                     itemBuilder: (_, int index) {
                       final DictionaryItemModel item = searchedItems[index];
                       return ListTile(

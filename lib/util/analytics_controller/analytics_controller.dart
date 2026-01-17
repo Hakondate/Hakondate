@@ -13,46 +13,22 @@ class AnalyticsController extends _$AnalyticsController {
   }
 
   Future<void> logViewMenu(int id) async {
-    await state.logSelectContent(
-      contentType: 'menu',
-      itemId: id.toString(),
-    );
-    await state.logScreenView(
-      screenClass: 'Daily',
-      screenName: id.toString(),
-    );
+    await state.logSelectContent(contentType: 'menu', itemId: id.toString());
+    await state.logScreenView(screenClass: 'Daily', screenName: id.toString());
   }
 
   Future<void> logViewRecipe(int id) async {
-    await state.logSelectContent(
-      contentType: 'recipe',
-      itemId: id.toString(),
-    );
-    await state.logScreenView(
-      screenClass: 'Recipe',
-      screenName: id.toString(),
-    );
+    await state.logSelectContent(contentType: 'recipe', itemId: id.toString());
+    await state.logScreenView(screenClass: 'Recipe', screenName: id.toString());
   }
 
   Future<void> logViewDictionary(int id) async {
-    await state.logSelectContent(
-      contentType: 'dictionary_item',
-      itemId: id.toString(),
-    );
-    await state.logScreenView(
-      screenClass: 'Dictionary',
-      screenName: id.toString(),
-    );
+    await state.logSelectContent(contentType: 'dictionary_item', itemId: id.toString());
+    await state.logScreenView(screenClass: 'Dictionary', screenName: id.toString());
   }
 
   Future<void> logViewLetter(String path) async {
-    await state.logSelectContent(
-      contentType: 'letter',
-      itemId: path,
-    );
-    await state.logScreenView(
-      screenClass: 'Letter',
-      screenName: path,
-    );
+    await state.logSelectContent(contentType: 'letter', itemId: path);
+    await state.logScreenView(screenClass: 'Letter', screenName: path);
   }
 }

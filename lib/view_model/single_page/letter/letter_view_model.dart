@@ -38,10 +38,7 @@ class LetterViewModel extends _$LetterViewModel {
         status: LetterConnectionStatus.loading,
         letters: <LetterMetadataModel>[
           ...currentLetters,
-          ...List<LetterMetadataModel>.filled(
-            FirestorageConstant.maxResultsSize,
-            const LetterMetadataModel.loading(),
-          ),
+          ...List<LetterMetadataModel>.filled(FirestorageConstant.maxResultsSize, const LetterMetadataModel.loading()),
         ],
       );
 
@@ -55,20 +52,13 @@ class LetterViewModel extends _$LetterViewModel {
           pageToken: listResult.nextPageToken,
         );
       } on Exception catch (_) {
-        state = state.copyWith(
-          status: LetterConnectionStatus.done,
-          letters: currentLetters,
-        );
+        state = state.copyWith(status: LetterConnectionStatus.done, letters: currentLetters);
       }
     });
   }
 
   Future<void> reloadLetters() async {
-    state = state.copyWith(
-      letters: <LetterMetadataModel>[],
-      isEndListing: false,
-      pageToken: null,
-    );
+    state = state.copyWith(letters: <LetterMetadataModel>[], isEndListing: false, pageToken: null);
     await getLetters();
   }
 

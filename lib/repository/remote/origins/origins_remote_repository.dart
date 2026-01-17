@@ -12,7 +12,9 @@ part 'origins_remote_repository.g.dart';
 @Riverpod(keepAlive: true)
 OriginsRemoteRepository originsRemoteRepository(Ref ref) {
   final FirebaseFirestore firestoreAPI = ref.watch(firestoreAPIProvider);
-  final CollectionReference<OriginModel> originCollectionReference = firestoreAPI.collection('origins').withConverter(
+  final CollectionReference<OriginModel> originCollectionReference = firestoreAPI
+      .collection('origins')
+      .withConverter(
         fromFirestore: (DocumentSnapshot<Map<String, dynamic>> doc, _) => OriginModel.fromFirestore(doc),
         toFirestore: (OriginModel origin, _) => origin.toFirestore(),
       );

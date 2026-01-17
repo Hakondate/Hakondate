@@ -34,9 +34,7 @@ final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
 
 final RoutemasterDelegate routemaster = RoutemasterDelegate(
   navigatorKey: _navigatorKey,
-  observers: <RoutemasterObserver>[
-    ReviewPopupObserver(_navigatorKey),
-  ],
+  observers: <RoutemasterObserver>[ReviewPopupObserver(_navigatorKey)],
   routesBuilder: (BuildContext context) => RouteMap(
     onUnknownRoute: (_) => const Redirect('/splash'),
     routes: <String, RouteSettings Function(RouteData)>{
@@ -45,14 +43,9 @@ final RoutemasterDelegate routemaster = RoutemasterDelegate(
       '/signup': (_) => MaterialPage<dynamic>(child: Signup()),
       '/signup/authorization': (_) => const MaterialPage<dynamic>(child: Authorization()),
       '/home': (_) => const TabPage(
-            child: AppBottomNavigationBar(),
-            paths: <String>[
-              '/home/daily',
-              '/home/recipes',
-              '/home/dictionary',
-              '/home/letter',
-            ],
-          ),
+        child: AppBottomNavigationBar(),
+        paths: <String>['/home/daily', '/home/recipes', '/home/dictionary', '/home/letter'],
+      ),
       '/home/daily': (_) => const MaterialPage<dynamic>(child: Daily()),
       '/home/daily/dish': (_) => const MaterialPage<dynamic>(child: Dish()),
       '/home/authorization': (_) => const FadeUpPage(child: Authorization()),
@@ -74,11 +67,7 @@ final RoutemasterDelegate routemaster = RoutemasterDelegate(
       '/home/information': (_) => const FadeUpPage(child: Information()),
       '/home/cache_management': (_) => const FadeUpPage(child: CacheManagement()),
       '/home/license': (_) => const FadeUpPage(child: License()),
-      '/home/license/:index': (RouteData route) => FadeUpPage(
-            child: LicenseDetail(
-              index: int.parse(route.pathParameters['index'] ?? '0'),
-            ),
-          ),
+      '/home/license/:index': (RouteData route) => FadeUpPage(child: LicenseDetail(index: int.parse(route.pathParameters['index'] ?? '0'))),
     },
   ),
 );

@@ -6,14 +6,7 @@ import 'package:multi_charts/multi_charts.dart';
 import 'package:hakondate/constant/app_color.dart';
 
 class DailyNutrientsRadarChart extends ConsumerWidget {
-  const DailyNutrientsRadarChart({
-    required this.values,
-    required this.rawValues,
-    required this.maxValue,
-    this.color,
-    this.size,
-    super.key,
-  });
+  const DailyNutrientsRadarChart({required this.values, required this.rawValues, required this.maxValue, this.color, this.size, super.key});
 
   final List<double> values;
   final List<double> rawValues;
@@ -39,13 +32,7 @@ class DailyNutrientsRadarChart extends ConsumerWidget {
                 children: <Widget>[
                   Align(
                     alignment: Alignment.topRight,
-                    child: Text(
-                      '　　外枠：120%\n 1メモリ：  ${120 ~/ 5}%',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.black54,
-                      ),
-                    ),
+                    child: Text('　　外枠：120%\n 1メモリ：  ${120 ~/ 5}%', style: TextStyle(fontSize: 12, color: Colors.black54)),
                   ),
                 ],
               ),

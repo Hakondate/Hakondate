@@ -34,13 +34,9 @@ abstract class SchoolModel with _$SchoolModel {
   }) = _SchoolModel;
   const SchoolModel._();
 
-  factory SchoolModel.fromFirestore(
-    DocumentSnapshot<Map<String, dynamic>> doc,
-  ) {
+  factory SchoolModel.fromFirestore(DocumentSnapshot<Map<String, dynamic>> doc) {
     if (!doc.exists) {
-      throw const FirestoreException(
-        'Failed to convert Firestore to SchoolModel',
-      );
+      throw const FirestoreException('Failed to convert Firestore to SchoolModel');
     }
 
     final Map<String, dynamic> data = doc.data()!;
@@ -80,23 +76,23 @@ abstract class SchoolModel with _$SchoolModel {
   }
 
   Map<String, Object> toFirestore() => <String, Object>{
-        'id': id,
-        'parentId': parentId,
-        'name': name,
-        'classification': classification.name,
-        'lunchBlock': lunchBlock,
-        'updatedAt': DateTime.now(),
-        'authorizationRequired': authorizationRequired,
-      };
+    'id': id,
+    'parentId': parentId,
+    'name': name,
+    'classification': classification.name,
+    'lunchBlock': lunchBlock,
+    'updatedAt': DateTime.now(),
+    'authorizationRequired': authorizationRequired,
+  };
 
   SchoolsTableCompanion toDrift() => SchoolsTableCompanion(
-        id: Value<int>(id),
-        parentId: Value<int>(parentId),
-        name: Value<String>(name),
-        classification: Value<String>(classification.name),
-        lunchBlock: Value<int>(lunchBlock),
-        updateAt: Value<DateTime>(DateTime.now()),
-        authorizationRequired: Value<bool>(authorizationRequired),
-        authorizationKeyUpdatedAt: Value<DateTime?>(authorizationKeyUpdatedAt),
-      );
+    id: Value<int>(id),
+    parentId: Value<int>(parentId),
+    name: Value<String>(name),
+    classification: Value<String>(classification.name),
+    lunchBlock: Value<int>(lunchBlock),
+    updateAt: Value<DateTime>(DateTime.now()),
+    authorizationRequired: Value<bool>(authorizationRequired),
+    authorizationKeyUpdatedAt: Value<DateTime?>(authorizationKeyUpdatedAt),
+  );
 }

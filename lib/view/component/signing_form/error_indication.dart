@@ -15,10 +15,7 @@ class ErrorIndication extends StatelessWidget {
       builder: (BuildContext context) {
         return Text(
           errorState!,
-          style: TextStyle(
-            fontSize: FontSize.annotation,
-            color: Theme.of(context).colorScheme.error,
-          ),
+          style: TextStyle(fontSize: FontSize.annotation, color: Theme.of(context).colorScheme.error),
         );
       },
     );

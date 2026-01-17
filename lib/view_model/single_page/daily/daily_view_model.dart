@@ -17,7 +17,7 @@ class DailyViewModel extends _$DailyViewModel {
   Future<DailyState> build() async {
     final DateTime selectedDay = switch (Environment.flavor) {
       Flavor.dev => await ref.read(menusLocalRepositoryProvider).getLatestDay(),
-      Flavor.stg || Flavor.prod => DateTime.now()
+      Flavor.stg || Flavor.prod => DateTime.now(),
     };
     final MenuModel menu;
     final AsyncValue<bool> userAuthorizedState = ref.watch(userAuthorizedProvider);
@@ -31,10 +31,7 @@ class DailyViewModel extends _$DailyViewModel {
       selectedDay: selectedDay,
       focusedDay: selectedDay,
       calendarTabFirstDay: await ref.read(menusLocalRepositoryProvider).getOldestDay(),
-      calendarTabLastDay: DateTime(
-        DateTime.now().year,
-        DateTime.now().month + 2,
-      ).add(const Duration(seconds: -1)),
+      calendarTabLastDay: DateTime(DateTime.now().year, DateTime.now().month + 2).add(const Duration(seconds: -1)),
       menu: menu,
     );
   }
@@ -50,11 +47,7 @@ class DailyViewModel extends _$DailyViewModel {
       }
 
       state = AsyncData<DailyState>(
-        data.copyWith(
-          selectedDay: selectedDay,
-          focusedDay: focusedDay ?? selectedDay,
-          menu: menu,
-        ),
+        data.copyWith(selectedDay: selectedDay, focusedDay: focusedDay ?? selectedDay, menu: menu),
       ).copyWithPrevious(state);
 
       if (menu is LunchesDayMenuModel) {
@@ -69,11 +62,7 @@ class DailyViewModel extends _$DailyViewModel {
 
       final MenuModel menu = await ref.read(menusLocalRepositoryProvider).getMenuByDay(data.selectedDay);
 
-      state = AsyncData<DailyState>(
-        data.copyWith(
-          menu: menu,
-        ),
-      );
+      state = AsyncData<DailyState>(data.copyWith(menu: menu));
 
       if (menu is LunchesDayMenuModel) {
         await ref.read(analyticsControllerProvider.notifier).logViewMenu(menu.id);

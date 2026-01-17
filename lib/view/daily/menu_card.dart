@@ -20,7 +20,9 @@ class MenuCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        return ref.watch(dailyViewModelProvider).maybeWhen(
+        return ref
+            .watch(dailyViewModelProvider)
+            .maybeWhen(
               data: (DailyState state) {
                 final MenuModel menu = state.menu;
 
@@ -46,11 +48,7 @@ class MenuCard extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerRight,
                         child: HelpButton(
-                          helpFrame: <HelpFrame>[
-                            HelpFrame.dishDetail(),
-                            HelpFrame.origin(),
-                            HelpFrame.menuScreen(),
-                          ],
+                          helpFrame: <HelpFrame>[HelpFrame.dishDetail(), HelpFrame.origin(), HelpFrame.menuScreen()],
                           key: key,
                         ),
                       ),
@@ -71,37 +69,22 @@ class MenuCard extends StatelessWidget {
           child: DecoratedBox(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                color: AppColor.ui.white.withValues(alpha: .5),
-                width: 3,
-              ),
+              border: Border.all(color: AppColor.ui.white.withValues(alpha: .5), width: 3),
               image: DecorationImage(
                 image: AssetImage('assets/images/menu_tile/${(dish.category != null) ? dish.category!.name : 'side'}.png'),
                 fit: BoxFit.fitWidth,
               ),
               color: AppColor.brand.secondary,
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                  color: AppColor.ui.shadow,
-                  blurRadius: 1,
-                  offset: const Offset(0, MarginSize.shadow),
-                ),
-              ],
+              boxShadow: <BoxShadow>[BoxShadow(color: AppColor.ui.shadow, blurRadius: 1, offset: const Offset(0, MarginSize.shadow))],
             ),
             child: Container(
               width: double.infinity,
               height: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                color: AppColor.ui.white.withValues(alpha: .7),
-              ),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), color: AppColor.ui.white.withValues(alpha: .7)),
               child: Center(
                 child: Text(
                   dish.name,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
               ),

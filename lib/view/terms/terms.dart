@@ -14,20 +14,12 @@ class Terms extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('利用規約'),
-      ),
+      appBar: AppBar(title: const Text('利用規約')),
       body: Container(
-        margin: const EdgeInsets.symmetric(
-          vertical: MarginSize.normalVertical,
-          horizontal: MarginSize.normalHorizontal,
-        ),
+        margin: const EdgeInsets.symmetric(vertical: MarginSize.normalVertical, horizontal: MarginSize.normalHorizontal),
         child: Column(
           children: <Widget>[
-            const Text(
-              '　以下の利用規約に同意の上，はこんだてをご利用ください．',
-              style: TextStyle(fontSize: FontSize.body),
-            ),
+            const Text('　以下の利用規約に同意の上，はこんだてをご利用ください．', style: TextStyle(fontSize: FontSize.body)),
             const SizedBox(height: SpaceSize.paragraph),
             _termsCard(),
             const SizedBox(height: SpaceSize.paragraph),
@@ -41,10 +33,7 @@ class Terms extends StatelessWidget {
   Widget _termsCard() {
     return const Expanded(
       child: Card(
-        child: SingleChildScrollView(
-          padding: EdgeInsets.all(PaddingSize.normal),
-          child: TermsContentColumn(),
-        ),
+        child: SingleChildScrollView(padding: EdgeInsets.all(PaddingSize.normal), child: TermsContentColumn()),
       ),
     );
   }
@@ -64,21 +53,13 @@ class Terms extends StatelessWidget {
                 value: state.isAgree,
                 onChanged: (_) => ref.read(termsViewModelProvider.notifier).onTap(),
               ),
-              const Text(
-                '利用規約に同意する',
-                style: TextStyle(fontSize: FontSize.body),
-              ),
+              const Text('利用規約に同意する', style: TextStyle(fontSize: FontSize.body)),
               const Spacer(),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColor.brand.secondary,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: PaddingSize.buttonVertical,
-                    horizontal: PaddingSize.buttonHorizontal,
-                  ),
-                  textStyle: TextStyle(
-                    color: AppColor.text.white,
-                  ),
+                  padding: const EdgeInsets.symmetric(vertical: PaddingSize.buttonVertical, horizontal: PaddingSize.buttonHorizontal),
+                  textStyle: TextStyle(color: AppColor.text.white),
                   shape: const StadiumBorder(),
                 ),
                 onPressed: state.isAgree ? () => ref.read(termsViewModelProvider.notifier).transition() : null,

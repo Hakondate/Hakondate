@@ -9,10 +9,7 @@ import 'package:hakondate/router/routes.dart';
 import 'package:hakondate/view_model/single_page/dictionary/dictionary_view_model.dart';
 
 class DictionaryGrid extends ConsumerWidget {
-  const DictionaryGrid({
-    required this.group,
-    super.key,
-  });
+  const DictionaryGrid({required this.group, super.key});
 
   final DictionaryGroup group;
 
@@ -30,10 +27,7 @@ class DictionaryGrid extends ConsumerWidget {
         decoration: BoxDecoration(
           color: group.color.withValues(alpha: .1),
           borderRadius: BorderRadius.circular(UiSize.minimumGridCircular),
-          border: Border.all(
-            color: group.color,
-            width: BorderSize.bold,
-          ),
+          border: Border.all(color: group.color, width: BorderSize.bold),
         ),
         child: Stack(
           children: <Widget>[
@@ -44,18 +38,12 @@ class DictionaryGrid extends ConsumerWidget {
                 height: 32,
                 decoration: BoxDecoration(
                   color: group.color,
-                  borderRadius: const BorderRadius.only(
-                    bottomRight: Radius.circular(UiSize.minimumGridCircular),
-                  ),
+                  borderRadius: const BorderRadius.only(bottomRight: Radius.circular(UiSize.minimumGridCircular)),
                 ),
                 child: Center(
                   child: Text(
                     '${group.groupNumber}群',
-                    style: TextStyle(
-                      color: AppColor.text.white,
-                      fontWeight: FontWeight.bold,
-                      height: 1,
-                    ),
+                    style: TextStyle(color: AppColor.text.white, fontWeight: FontWeight.bold, height: 1),
                   ),
                 ),
               ),
@@ -63,11 +51,7 @@ class DictionaryGrid extends ConsumerWidget {
             Align(
               child: Text(
                 group.displayLabel,
-                style: const TextStyle(
-                  fontSize: FontSize.label,
-                  fontWeight: FontWeight.bold,
-                  height: 1,
-                ),
+                style: const TextStyle(fontSize: FontSize.label, fontWeight: FontWeight.bold, height: 1),
                 textAlign: TextAlign.center,
               ),
             ),

@@ -22,9 +22,7 @@ class Calendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const FadeUpAppBar(
-        title: Text('献立リスト'),
-      ),
+      appBar: const FadeUpAppBar(title: Text('献立リスト')),
       body: Consumer(
         builder: (BuildContext context, WidgetRef ref, _) {
           final CalendarState state = ref.watch(calendarViewModelProvider);
@@ -59,17 +57,10 @@ class Calendar extends StatelessWidget {
           },
           child: Card(
             clipBehavior: Clip.antiAliasWithSaveLayer,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             child: SizedBox(
               height: UiSize.calendarTileHeight,
-              child: Row(
-                children: <Widget>[
-                  _dayLabel(day),
-                  _dailyContent(day),
-                ],
-              ),
+              child: Row(children: <Widget>[_dayLabel(day), _dailyContent(day)]),
             ),
           ),
         );
@@ -93,10 +84,7 @@ class Calendar extends StatelessWidget {
                     alignment: Alignment.bottomCenter,
                     child: Text(
                       '今日',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: AppColor.text.white,
-                      ),
+                      style: TextStyle(fontWeight: FontWeight.bold, color: AppColor.text.white),
                     ),
                   );
                 }
@@ -107,22 +95,13 @@ class Calendar extends StatelessWidget {
           Expanded(
             child: Text(
               day.day.toString(),
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-                color: AppColor.text.white,
-                height: 1,
-              ),
+              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: AppColor.text.white, height: 1),
             ),
           ),
           Expanded(
             child: Text(
               DateFormat.EEEE('ja').format(day)[0],
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: AppColor.text.white,
-              ),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColor.text.white),
             ),
           ),
         ],
@@ -147,10 +126,7 @@ class Calendar extends StatelessWidget {
           Positioned(
             right: PaddingSize.minimum,
             bottom: PaddingSize.minimum,
-            child: Image.asset(
-              'assets/images/calendar_hedgehog/${day.month}.png',
-              height: UiSize.calendarTileHeight * 0.65,
-            ),
+            child: Image.asset('assets/images/calendar_hedgehog/${day.month}.png', height: UiSize.calendarTileHeight * 0.65),
           ),
           Positioned.fill(
             child: Align(
@@ -164,9 +140,7 @@ class Calendar extends StatelessWidget {
                         final MenuModel? menu = snapshot.data;
 
                         if (menu is LunchesDayMenuModel) {
-                          return MenuChips(
-                            menu: menu,
-                          );
+                          return MenuChips(menu: menu);
                         } else if (menu is HolidayMenuModel) {
                           return NonLunchesDayCalendarTile.holiday();
                         }

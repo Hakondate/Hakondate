@@ -12,6 +12,6 @@ class MenuDishesTable extends Table {
   //　説明
   // ignore: always_specify_types
   List<Set<Column>> get uniqueKeys => [
-        <Column<Object>>{menuId, dishId},
-      ];
+    <Column<Object>>{menuId, dishId},
+  ];
 }

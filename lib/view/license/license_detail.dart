@@ -5,10 +5,7 @@ import 'package:hakondate/constant/size.dart';
 import 'package:hakondate/view/component/frame/fade_up_app_bar.dart';
 
 class LicenseDetail extends StatelessWidget {
-  const LicenseDetail({
-    required this.index,
-    super.key,
-  });
+  const LicenseDetail({required this.index, super.key});
 
   final int index;
 
@@ -17,9 +14,7 @@ class LicenseDetail extends StatelessWidget {
     final Package package = dependencies[index];
 
     return Scaffold(
-      appBar: FadeUpAppBar(
-        title: Text(package.name),
-      ),
+      appBar: FadeUpAppBar(title: Text(package.name)),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(PaddingSize.normal),

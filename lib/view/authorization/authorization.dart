@@ -38,13 +38,7 @@ class AuthorizationPage extends ConsumerWidget {
     final bool onHomeAuthorization = routemaster.currentConfiguration!.path.startsWith('/home/authorization');
 
     return Scaffold(
-      appBar: onHomeAuthorization
-          ? const FadeUpAppBar(
-              title: Text('招待コード'),
-            )
-          : AppBar(
-              title: const Text('招待コード'),
-            ),
+      appBar: onHomeAuthorization ? const FadeUpAppBar(title: Text('招待コード')) : AppBar(title: const Text('招待コード')),
       body: Center(
         child: Column(
           children: <Widget>[
@@ -52,11 +46,7 @@ class AuthorizationPage extends ConsumerWidget {
             Row(
               children: <Widget>[
                 const SizedBox(width: MarginSize.normal),
-                Flexible(
-                  child: DescriptionText.body(
-                    label: '　この学校の給食を見るには招待コードの入力が必要です．招待コードは学校から案内がございます．給食だより等をご確認ください．',
-                  ),
-                ),
+                Flexible(child: DescriptionText.body(label: '　この学校の給食を見るには招待コードの入力が必要です．招待コードは学校から案内がございます．給食だより等をご確認ください．')),
                 const SizedBox(width: MarginSize.normal),
               ],
             ),
@@ -66,10 +56,7 @@ class AuthorizationPage extends ConsumerWidget {
               children: <Widget>[
                 const Text(
                   '登録する学校：',
-                  style: TextStyle(
-                    fontSize: FontSize.status,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: FontSize.status, fontWeight: FontWeight.bold),
                 ),
                 Text(
                   state.when(
@@ -77,20 +64,14 @@ class AuthorizationPage extends ConsumerWidget {
                     loading: () => '',
                     error: (Object error, StackTrace? stackTrace) => '',
                   ),
-                  style: const TextStyle(
-                    fontSize: FontSize.status,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: const TextStyle(fontSize: FontSize.status, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
             const SizedBox(height: PaddingSize.content),
             const Text(
               '招待コードを入力してください',
-              style: TextStyle(
-                fontSize: FontSize.body,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: FontSize.body, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 5),
             Row(
@@ -103,10 +84,7 @@ class AuthorizationPage extends ConsumerWidget {
                       PinCodeTextField(
                         autoDisposeControllers: false,
                         appContext: context,
-                        pastedTextStyle: TextStyle(
-                          color: Colors.green.shade600,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        pastedTextStyle: TextStyle(color: Colors.green.shade600, fontWeight: FontWeight.bold),
                         length: 6,
                         animationType: AnimationType.none,
                         pinTheme: PinTheme(
@@ -133,10 +111,7 @@ class AuthorizationPage extends ConsumerWidget {
 
                           if (!context.mounted) return;
 
-                          return showDialog(
-                            context: context,
-                            builder: (BuildContext context) => const SigningUpDialog(),
-                          );
+                          return showDialog(context: context, builder: (BuildContext context) => const SigningUpDialog());
                         },
                       ),
                       const SizedBox(height: PaddingSize.minimum),
@@ -168,9 +143,7 @@ class AuthorizationPage extends ConsumerWidget {
 }
 
 class AuthorizationLoadingPage extends StatelessWidget {
-  const AuthorizationLoadingPage({
-    super.key,
-  });
+  const AuthorizationLoadingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -195,24 +168,14 @@ class AuthorizationLoadingPage extends StatelessWidget {
 }
 
 class AuthorizationErrorPage extends StatelessWidget {
-  const AuthorizationErrorPage({
-    super.key,
-  });
+  const AuthorizationErrorPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('招待コード'),
-      ),
+      appBar: AppBar(backgroundColor: Theme.of(context).colorScheme.inversePrimary, title: const Text('招待コード')),
       body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text('エラーが発生しました。\n時間をおいて再度お試しください。'),
-          ],
-        ),
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[Text('エラーが発生しました。\n時間をおいて再度お試しください。')]),
       ),
     );
   }

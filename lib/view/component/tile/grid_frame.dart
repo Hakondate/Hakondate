@@ -4,12 +4,7 @@ import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 
 class GridFrame extends StatelessWidget {
-  const GridFrame({
-    super.key,
-    this.onTap,
-    this.borderColor,
-    this.child,
-  });
+  const GridFrame({super.key, this.onTap, this.borderColor, this.child});
 
   final void Function()? onTap;
   final Color? borderColor;
@@ -27,19 +22,8 @@ class GridFrame extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColor.ui.white,
           borderRadius: BorderRadius.circular(16),
-          border: (borderColor != null)
-              ? Border.all(
-                  color: borderColor!,
-                  width: BorderSize.normal,
-                )
-              : null,
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: AppColor.ui.shadow,
-              blurRadius: 1,
-              offset: const Offset(0, MarginSize.shadow),
-            ),
-          ],
+          border: (borderColor != null) ? Border.all(color: borderColor!, width: BorderSize.normal) : null,
+          boxShadow: <BoxShadow>[BoxShadow(color: AppColor.ui.shadow, blurRadius: 1, offset: const Offset(0, MarginSize.shadow))],
         ),
         child: child,
       ),

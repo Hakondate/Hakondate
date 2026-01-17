@@ -26,14 +26,7 @@ abstract class MenuModel with _$MenuModel {
 
     /// イベント
     String? event, // イベント
-  }) =>
-      MenuModel.lunchesDay(
-        id: id,
-        day: day,
-        schoolId: schoolId,
-        dishes: dishes,
-        event: event,
-      );
+  }) => MenuModel.lunchesDay(id: id, day: day, schoolId: schoolId, dishes: dishes, event: event);
   const MenuModel._();
 
   const factory MenuModel.lunchesDay({
@@ -52,9 +45,7 @@ abstract class MenuModel with _$MenuModel {
 
     final Map<String, dynamic> data = doc.data()!;
     final List<DishModel> dishes = (data['dishes'] as List<dynamic>)
-        .map(
-          (dynamic dish) => DishModel.fromFirestore(dish as Map<String, dynamic>),
-        )
+        .map((dynamic dish) => DishModel.fromFirestore(dish as Map<String, dynamic>))
         .toList();
 
     return MenuModel(
@@ -66,13 +57,8 @@ abstract class MenuModel with _$MenuModel {
     );
   }
 
-  factory MenuModel.fromDrift(MenusSchema schema, List<DishModel> dishes) => MenuModel(
-        id: schema.id,
-        day: schema.day,
-        schoolId: schema.schoolId,
-        dishes: dishes,
-        event: schema.event,
-      );
+  factory MenuModel.fromDrift(MenusSchema schema, List<DishModel> dishes) =>
+      MenuModel(id: schema.id, day: schema.day, schoolId: schema.schoolId, dishes: dishes, event: schema.event);
 
   Map<String, Object> toFirestore() {
     final MenuModel menu = this;
@@ -109,9 +95,7 @@ abstract class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw const ClassTypeException(
-        'Non-LunchesDayMenuModel called MenuModels getter',
-      );
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double sum = 0;
@@ -126,9 +110,7 @@ abstract class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw const ClassTypeException(
-        'Non-LunchesDayMenuModel called MenuModels getter',
-      );
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double sum = 0;
@@ -143,9 +125,7 @@ abstract class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw const ClassTypeException(
-        'Non-LunchesDayMenuModel called MenuModels getter',
-      );
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double sum = 0;
@@ -160,9 +140,7 @@ abstract class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw const ClassTypeException(
-        'Non-LunchesDayMenuModel called MenuModels getter',
-      );
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double sum = 0;
@@ -177,9 +155,7 @@ abstract class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw const ClassTypeException(
-        'Non-LunchesDayMenuModel called MenuModels getter',
-      );
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double sum = 0;
@@ -194,9 +170,7 @@ abstract class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw const ClassTypeException(
-        'Non-LunchesDayMenuModel called MenuModels getter',
-      );
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double sum = 0;
@@ -211,9 +185,7 @@ abstract class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw const ClassTypeException(
-        'Non-LunchesDayMenuModel called MenuModels getter',
-      );
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double sum = 0;
@@ -228,9 +200,7 @@ abstract class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw const ClassTypeException(
-        'Non-LunchesDayMenuModel called MenuModels getter',
-      );
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double sum = 0;
@@ -245,9 +215,7 @@ abstract class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw const ClassTypeException(
-        'Non-LunchesDayMenuModel called MenuModels getter',
-      );
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double sum = 0;
@@ -262,9 +230,7 @@ abstract class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw const ClassTypeException(
-        'Non-LunchesDayMenuModel called MenuModels getter',
-      );
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double sum = 0;
@@ -279,9 +245,7 @@ abstract class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw const ClassTypeException(
-        'Non-LunchesDayMenuModel called MenuModels getter',
-      );
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double sum = 0;
@@ -296,9 +260,7 @@ abstract class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw const ClassTypeException(
-        'Non-LunchesDayMenuModel called MenuModels getter',
-      );
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double sum = 0;
@@ -313,9 +275,7 @@ abstract class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw const ClassTypeException(
-        'Non-LunchesDayMenuModel called MenuModels getter',
-      );
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double sum = 0;
@@ -330,9 +290,7 @@ abstract class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw const ClassTypeException(
-        'Non-LunchesDayMenuModel called MenuModels getter',
-      );
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double sum = 0;
@@ -347,9 +305,7 @@ abstract class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw const ClassTypeException(
-        'Non-LunchesDayMenuModel called MenuModels getter',
-      );
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double sum = 0;
@@ -364,9 +320,7 @@ abstract class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw const ClassTypeException(
-        'Non-LunchesDayMenuModel called MenuModels getter',
-      );
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double sum = 0;
@@ -381,9 +335,7 @@ abstract class MenuModel with _$MenuModel {
     final MenuModel menu = this;
 
     if (menu is! LunchesDayMenuModel) {
-      throw const ClassTypeException(
-        'Non-LunchesDayMenuModel called MenuModels getter',
-      );
+      throw const ClassTypeException('Non-LunchesDayMenuModel called MenuModels getter');
     }
 
     double sum = 0;

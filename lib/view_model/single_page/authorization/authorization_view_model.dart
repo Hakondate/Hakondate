@@ -21,9 +21,7 @@ class AuthorizationViewModel extends _$AuthorizationViewModel {
     } else {
       school = ref.watch(signupViewModelProvider).value!.school!;
     }
-    return AuthorizationState(
-      school: school,
-    );
+    return AuthorizationState(school: school);
   }
 
   Future<bool> authorize() async {
@@ -32,8 +30,9 @@ class AuthorizationViewModel extends _$AuthorizationViewModel {
     final AuthorizationState data = state.value!;
     state = const AsyncLoading<AuthorizationState>();
 
-    final AuthorizationResult result =
-        await ref.watch(authorizationRemoteRepositoryProvider).checkAuthorizationCode(data.school.id, data.authorizationKey);
+    final AuthorizationResult result = await ref
+        .watch(authorizationRemoteRepositoryProvider)
+        .checkAuthorizationCode(data.school.id, data.authorizationKey);
 
     if (!result.authorizationSucceeded) {
       state = AsyncData<AuthorizationState>(data.copyWith(statusMessage: result.message));

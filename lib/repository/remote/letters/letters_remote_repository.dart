@@ -33,12 +33,7 @@ class LettersRemoteRepository extends LettersRemoteRepositoryAPI {
   @override
   Future<ListResult> getListResult({required String? pageToken}) async {
     try {
-      return await _db.list(
-        ListOptions(
-          maxResults: FirestorageConstant.maxResultsSize,
-          pageToken: pageToken,
-        ),
-      );
+      return await _db.list(ListOptions(maxResults: FirestorageConstant.maxResultsSize, pageToken: pageToken));
     } on FirebaseException catch (error, stack) {
       debugPrint(error.toString());
       debugPrint(stack.toString());

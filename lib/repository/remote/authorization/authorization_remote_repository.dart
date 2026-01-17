@@ -21,10 +21,7 @@ class AuthorizationRemoteRepository {
       final Uri url = Uri.https('authorize-mdq5vdl66q-uc.a.run.app');
       final http.Response response = await http.post(
         url,
-        body: <String, Object>{
-          'schoolId': schoolId.toString(),
-          'authorizationKey': authorizationKey,
-        },
+        body: <String, Object>{'schoolId': schoolId.toString(), 'authorizationKey': authorizationKey},
       );
 
       final AuthorizationResult result = await compute(parseAuthorizationResult, response.body);
@@ -33,10 +30,7 @@ class AuthorizationRemoteRepository {
     } on Exception catch (error) {
       debugPrint('error: $error');
 
-      return const AuthorizationResult(
-        authorizationSucceeded: false,
-        message: '正常に処理できませんでした',
-      );
+      return const AuthorizationResult(authorizationSucceeded: false, message: '正常に処理できませんでした');
     }
   }
 }
@@ -48,16 +42,10 @@ AuthorizationResult parseAuthorizationResult(String responseBody) {
 }
 
 class AuthorizationResult {
-  const AuthorizationResult({
-    required this.authorizationSucceeded,
-    required this.message,
-  });
+  const AuthorizationResult({required this.authorizationSucceeded, required this.message});
 
   factory AuthorizationResult.fromJson(Map<String, dynamic> json) {
-    return AuthorizationResult(
-      authorizationSucceeded: json['authorizationSucceeded'] as bool,
-      message: json['message'] as String,
-    );
+    return AuthorizationResult(authorizationSucceeded: json['authorizationSucceeded'] as bool, message: json['message'] as String);
   }
 
   final bool authorizationSucceeded;

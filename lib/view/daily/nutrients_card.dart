@@ -28,10 +28,7 @@ class NutrientsCard extends StatelessWidget {
           _nutrientsGraph(),
           Align(
             alignment: Alignment.centerRight,
-            child: HelpButton(
-              helpFrame: <HelpFrame>[HelpFrame.baseNut(), HelpFrame.formula()],
-              key: key,
-            ),
+            child: HelpButton(helpFrame: <HelpFrame>[HelpFrame.baseNut(), HelpFrame.formula()], key: key),
           ),
           const RecommendedFoodStuffExpansionTile(),
           _nutrientsExpansionTile(),
@@ -48,11 +45,7 @@ class NutrientsCard extends StatelessWidget {
             final AsyncValue<List<double>> graphValues = ref.watch(graphValuesProvider);
             return graphValues.when(
               data: (List<double> graphValue) {
-                return DailyNutrientsRadarChart(
-                  values: graphValue,
-                  rawValues: ref.watch(graphRawValuesProvider),
-                  maxValue: 120,
-                );
+                return DailyNutrientsRadarChart(values: graphValue, rawValues: ref.watch(graphRawValuesProvider), maxValue: 120);
               },
               loading: () {
                 final AsyncValue<List<double>> previousValues = graphValues.copyWithPrevious(graphValues);
@@ -78,13 +71,7 @@ class NutrientsCard extends StatelessWidget {
         ),
         const Padding(
           padding: EdgeInsets.symmetric(vertical: 10),
-          child: Text(
-            '※不足している栄養素がある場合がありますが、\n足りない栄養素はご家庭で補ってください。',
-            style: TextStyle(
-              color: Colors.black54,
-              fontSize: 12,
-            ),
-          ),
+          child: Text('※不足している栄養素がある場合がありますが、\n足りない栄養素はご家庭で補ってください。', style: TextStyle(color: Colors.black54, fontSize: 12)),
         ),
       ],
     );
@@ -93,7 +80,9 @@ class NutrientsCard extends StatelessWidget {
   Widget _nutrientsExpansionTile() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        return ref.watch(dailyViewModelProvider).maybeWhen(
+        return ref
+            .watch(dailyViewModelProvider)
+            .maybeWhen(
               data: (DailyState state) {
                 final MenuModel menu = state.menu;
 
@@ -104,21 +93,11 @@ class NutrientsCard extends StatelessWidget {
                 return Theme(
                   data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
                   child: ExpansionTile(
-                    title: const Text(
-                      '詳細な栄養値',
-                      style: TextStyle(
-                        fontSize: FontSize.heading,
-                      ),
-                    ),
+                    title: const Text('詳細な栄養値', style: TextStyle(fontSize: FontSize.heading)),
                     onExpansionChanged: (bool isExpanded) => !isExpanded,
                     textColor: AppColor.brand.secondary,
                     iconColor: AppColor.brand.secondary,
-                    children: <Widget>[
-                      NutrientsList(
-                        nutrients: menu,
-                        backgroundColor: AppColor.ui.secondaryUltraLight,
-                      ),
-                    ],
+                    children: <Widget>[NutrientsList(nutrients: menu, backgroundColor: AppColor.ui.secondaryUltraLight)],
                   ),
                 );
               },

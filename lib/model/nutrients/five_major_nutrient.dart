@@ -8,10 +8,7 @@ enum FiveMajorNutrient {
   carbohydrate(japaneseName: '炭水化物', unit: NutrientUnit.gram),
   lipid(japaneseName: '脂質', unit: NutrientUnit.gram);
 
-  const FiveMajorNutrient({
-    required this.japaneseName,
-    required this.unit,
-  });
+  const FiveMajorNutrient({required this.japaneseName, required this.unit});
 
   final String japaneseName;
   final NutrientUnit unit;

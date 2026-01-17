@@ -23,9 +23,7 @@ abstract class DishModel with _$DishModel {
 
   factory DishModel.fromFirestore(Map<String, dynamic> data) {
     final List<FoodstuffModel> foodstuffs = (data['foodstuffs'] as List<dynamic>)
-        .map(
-          (dynamic foodstuff) => FoodstuffModel.fromFirestore(foodstuff as Map<String, dynamic>),
-        )
+        .map((dynamic foodstuff) => FoodstuffModel.fromFirestore(foodstuff as Map<String, dynamic>))
         .toList();
     final DishCategory? category = switch (data['category'] as String?) {
       'main' => DishCategory.main,
@@ -34,34 +32,27 @@ abstract class DishModel with _$DishModel {
       _ => null,
     };
 
-    return DishModel(
-      name: data['name'] as String,
-      foodstuffs: foodstuffs,
-      category: category,
-    );
+    return DishModel(name: data['name'] as String, foodstuffs: foodstuffs, category: category);
   }
 
   factory DishModel.fromDrift(DishesSchema schema, List<FoodstuffModel> foodstuffs) => DishModel(
-        name: schema.name,
-        foodstuffs: foodstuffs,
-        category: switch (schema.category) {
-          'main' => DishCategory.main,
-          'side' => DishCategory.side,
-          'drink' => DishCategory.drink,
-          _ => null,
-        },
-      );
+    name: schema.name,
+    foodstuffs: foodstuffs,
+    category: switch (schema.category) {
+      'main' => DishCategory.main,
+      'side' => DishCategory.side,
+      'drink' => DishCategory.drink,
+      _ => null,
+    },
+  );
 
   Map<String, Object> toFirestore() => <String, Object>{
-        'name': name,
-        'foodstuffs': foodstuffs.map((FoodstuffModel foodstuff) => foodstuff.toFirestore()).toList(),
-        if (category != null) 'category': category!.name,
-      };
+    'name': name,
+    'foodstuffs': foodstuffs.map((FoodstuffModel foodstuff) => foodstuff.toFirestore()).toList(),
+    if (category != null) 'category': category!.name,
+  };
 
-  DishesTableCompanion toDrift() => DishesTableCompanion(
-        name: Value<String>(name),
-        category: Value<String?>(category?.name),
-      );
+  DishesTableCompanion toDrift() => DishesTableCompanion(name: Value<String>(name), category: Value<String?>(category?.name));
 
   double get energy {
     double sum = 0;

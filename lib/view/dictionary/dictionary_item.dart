@@ -28,9 +28,7 @@ class DictionaryItem extends ConsumerWidget {
         const double maxValue = 100;
 
         return Scaffold(
-          appBar: FadeUpAppBar(
-            title: Text(selectedItem.name),
-          ),
+          appBar: FadeUpAppBar(title: Text(selectedItem.name)),
           body: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,20 +41,13 @@ class DictionaryItem extends ConsumerWidget {
                         width: UiSize.dictionaryGroupBox,
                         height: UiSize.dictionaryGroupBox,
                         decoration: BoxDecoration(
-                          border: Border.all(
-                            width: BorderSize.normal,
-                            color: selectedItem.group.color,
-                          ),
+                          border: Border.all(width: BorderSize.normal, color: selectedItem.group.color),
                           borderRadius: const BorderRadius.all(Radius.circular(UiSize.minimumGridCircular)),
                         ),
                         child: Center(
                           child: Text(
                             '${selectedItem.group.groupNumber}群',
-                            style: TextStyle(
-                              color: selectedItem.group.color,
-                              fontWeight: FontWeight.bold,
-                              height: 1,
-                            ),
+                            style: TextStyle(color: selectedItem.group.color, fontWeight: FontWeight.bold, height: 1),
                           ),
                         ),
                       ),
@@ -65,16 +56,11 @@ class DictionaryItem extends ConsumerWidget {
                           child: Text(
                             selectedItem.name,
                             textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: FontSize.label,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: const TextStyle(fontSize: FontSize.label, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        width: UiSize.dictionaryGroupBox,
-                      ),
+                      const SizedBox(width: UiSize.dictionaryGroupBox),
                     ],
                   ),
                 ),
@@ -89,9 +75,7 @@ class DictionaryItem extends ConsumerWidget {
                   builder: (BuildContext context, AsyncSnapshot<List<double>> snapshot) {
                     if (snapshot.hasData) {
                       return Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: PaddingSize.contentLarge,
-                        ),
+                        padding: const EdgeInsets.symmetric(vertical: PaddingSize.contentLarge),
                         child: DictionaryNutrientsRadarChart(
                           values: snapshot.data!,
                           rawValues: <double>[
@@ -111,16 +95,9 @@ class DictionaryItem extends ConsumerWidget {
                     return const SizedBox.shrink();
                   },
                 ),
-                const Divider(
-                  height: 0,
-                ),
-                NutrientsList(
-                  nutrients: selectedItem.nutrients,
-                  backgroundColor: AppColor.ui.secondaryUltraLight,
-                ),
-                const Divider(
-                  height: 0,
-                ),
+                const Divider(height: 0),
+                NutrientsList(nutrients: selectedItem.nutrients, backgroundColor: AppColor.ui.secondaryUltraLight),
+                const Divider(height: 0),
                 if (selectedItem.note != null && selectedItem.note != '')
                   Padding(
                     padding: const EdgeInsets.only(
@@ -135,10 +112,7 @@ class DictionaryItem extends ConsumerWidget {
                         Text('備考：\n${selectedItem.note!}'),
                         Align(
                           alignment: Alignment.centerRight,
-                          child: HelpButton(
-                            helpFrame: <HelpFrame>[HelpFrame.tr()],
-                            key: key,
-                          ),
+                          child: HelpButton(helpFrame: <HelpFrame>[HelpFrame.tr()], key: key),
                         ),
                       ],
                     ),
@@ -153,8 +127,6 @@ class DictionaryItem extends ConsumerWidget {
   }
 
   Widget _loading() {
-    return const Scaffold(
-      appBar: FadeUpAppBar(),
-    );
+    return const Scaffold(appBar: FadeUpAppBar());
   }
 }

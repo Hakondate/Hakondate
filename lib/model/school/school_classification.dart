@@ -5,5 +5,5 @@ enum SchoolClassification {
   primary,
 
   /// 中学校
-  secondary;
+  secondary,
 }

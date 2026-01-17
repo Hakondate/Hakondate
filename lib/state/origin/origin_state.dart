@@ -8,8 +8,5 @@ part 'origin_state.freezed.dart';
 
 @freezed
 abstract class OriginState with _$OriginState {
-  const factory OriginState({
-    required List<OriginModel> origins,
-    required OriginModel selectedOrigin,
-  }) = _OriginState;
+  const factory OriginState({required List<OriginModel> origins, required OriginModel selectedOrigin}) = _OriginState;
 }

@@ -18,8 +18,6 @@ class HelpViewModel extends _$HelpViewModel {
 
     final SchoolGrade schoolGrade = await ref.read(userViewModelProvider.notifier).getSchoolGrade(user.id);
 
-    return HelpState(
-      schoolGrade: schoolGrade,
-    );
+    return HelpState(schoolGrade: schoolGrade);
   }
 }

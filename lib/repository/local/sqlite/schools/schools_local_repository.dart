@@ -55,8 +55,9 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryAPI {
 
   @override
   Future<SchoolModel> getById(int id) async {
-    final SchoolsSchema? schoolsSchema =
-        await (_db.select(_db.schoolsTable)..where(($SchoolsTableTable t) => t.id.equals(id))).getSingleOrNull();
+    final SchoolsSchema? schoolsSchema = await (_db.select(
+      _db.schoolsTable,
+    )..where(($SchoolsTableTable t) => t.id.equals(id))).getSingleOrNull();
 
     if (schoolsSchema == null) {
       throw SQLiteException('Failed to select $id from schoolsTable');
@@ -69,10 +70,11 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryAPI {
   Future<List<int>> listParentIdsByUsers(List<UserModel> users) async {
     final List<int> schoolIds = users.map((UserModel user) => user.schoolId).toSet().toList();
 
-    final List<TypedResult> rows = await (_db.selectOnly(_db.schoolsTable, distinct: true)
-          ..where(_db.schoolsTable.id.isIn(schoolIds))
-          ..addColumns(<Expression<int>>[_db.schoolsTable.parentId]))
-        .get();
+    final List<TypedResult> rows =
+        await (_db.selectOnly(_db.schoolsTable, distinct: true)
+              ..where(_db.schoolsTable.id.isIn(schoolIds))
+              ..addColumns(<Expression<int>>[_db.schoolsTable.parentId]))
+            .get();
 
     final List<int> parentIds = rows.map((TypedResult row) => row.read(_db.schoolsTable.parentId)).whereType<int>().toList();
 
@@ -81,8 +83,9 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryAPI {
 
   @override
   Future<SchoolModel?> getByName(String name) async {
-    final SchoolsSchema? schoolsSchema =
-        await (_db.select(_db.schoolsTable)..where(($SchoolsTableTable t) => t.name.equals(name))).getSingleOrNull();
+    final SchoolsSchema? schoolsSchema = await (_db.select(
+      _db.schoolsTable,
+    )..where(($SchoolsTableTable t) => t.name.equals(name))).getSingleOrNull();
 
     if (schoolsSchema == null) return null;
 
@@ -92,8 +95,9 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryAPI {
   @override
   Future<List<SchoolModel>> getByParentId(int parentId) async {
     final List<SchoolModel> schools = <SchoolModel>[];
-    final List<SchoolsSchema> schoolsSchemas =
-        await (_db.select(_db.schoolsTable)..where(($SchoolsTableTable t) => t.parentId.equals(parentId))).get();
+    final List<SchoolsSchema> schoolsSchemas = await (_db.select(
+      _db.schoolsTable,
+    )..where(($SchoolsTableTable t) => t.parentId.equals(parentId))).get();
 
     for (final SchoolsSchema schoolsSchema in schoolsSchemas) {
       schools.add(SchoolModel.fromDrift(schoolsSchema));

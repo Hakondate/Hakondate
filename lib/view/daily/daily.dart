@@ -53,22 +53,20 @@ class Daily extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
-        children: <Widget>[
-          _calendarWidget(),
-          _bodyWidget(),
-        ],
-      ),
+      body: Column(children: <Widget>[_calendarWidget(), _bodyWidget()]),
     );
   }
 
   Widget _appBarTitle() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        return ref.watch(dailyViewModelProvider).when(
+        return ref
+            .watch(dailyViewModelProvider)
+            .when(
               data: (DailyState state) {
-                final String formatted =
-                    (isSameDay(state.selectedDay, DateTime.now())) ? '今日' : DateFormat('M月d日').format(state.selectedDay);
+                final String formatted = (isSameDay(state.selectedDay, DateTime.now()))
+                    ? '今日'
+                    : DateFormat('M月d日').format(state.selectedDay);
 
                 return Text('$formattedの献立');
               },
@@ -85,7 +83,9 @@ class Daily extends StatelessWidget {
       elevation: 4,
       child: Consumer(
         builder: (BuildContext context, WidgetRef ref, _) {
-          return ref.watch(dailyViewModelProvider).maybeWhen(
+          return ref
+              .watch(dailyViewModelProvider)
+              .maybeWhen(
                 data: (DailyState state) => TableCalendar<dynamic>(
                   headerVisible: false,
                   locale: 'ja_JP',
@@ -104,14 +104,9 @@ class Daily extends StatelessWidget {
                     todayTextStyle: const CalendarStyle().defaultTextStyle,
                     todayDecoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: Border.all(
-                        color: AppColor.brand.secondary,
-                      ),
+                      border: Border.all(color: AppColor.brand.secondary),
                     ),
-                    selectedDecoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColor.brand.secondary,
-                    ),
+                    selectedDecoration: BoxDecoration(shape: BoxShape.circle, color: AppColor.brand.secondary),
                     outsideTextStyle: const CalendarStyle().defaultTextStyle,
                   ),
                 ),
@@ -125,30 +120,19 @@ class Daily extends StatelessWidget {
   Widget _bodyWidget() {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, _) {
-        return ref.watch(dailyViewModelProvider).maybeWhen(
+        return ref
+            .watch(dailyViewModelProvider)
+            .maybeWhen(
               data: (DailyState state) {
                 if (state.menu is LunchesDayMenuModel) {
-                  return Expanded(
-                    child: ListView(
-                      children: const <Widget>[
-                        MenuCard(),
-                        NutrientsCard(),
-                      ],
-                    ),
-                  );
+                  return Expanded(child: ListView(children: const <Widget>[MenuCard(), NutrientsCard()]));
                 } else if (state.menu is HolidayMenuModel) {
-                  return const NonLunchesDayBody(
-                    imageFileName: 'holiday.png',
-                    text: '給食はお休みです...',
-                  );
+                  return const NonLunchesDayBody(imageFileName: 'holiday.png', text: '給食はお休みです...');
                 } else if (state.menu is UnauthorizedMenuModel) {
                   return const UnauthorizedDayBody();
                 }
 
-                return const NonLunchesDayBody(
-                  imageFileName: 'no_data.png',
-                  text: '献立は準備中です...',
-                );
+                return const NonLunchesDayBody(imageFileName: 'no_data.png', text: '献立は準備中です...');
               },
               orElse: () => const SizedBox.shrink(),
             );

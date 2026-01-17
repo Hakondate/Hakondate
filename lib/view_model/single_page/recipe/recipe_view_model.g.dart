@@ -12,14 +12,14 @@ String _$recipeViewModelHash() => r'846a858959b61f8358dcdffc46af21f0583017a3';
 @ProviderFor(RecipeViewModel)
 final recipeViewModelProvider =
     NotifierProvider<RecipeViewModel, void>.internal(
-  RecipeViewModel.new,
-  name: r'recipeViewModelProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$recipeViewModelHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      RecipeViewModel.new,
+      name: r'recipeViewModelProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$recipeViewModelHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$RecipeViewModel = Notifier<void>;
 // ignore_for_file: type=lint

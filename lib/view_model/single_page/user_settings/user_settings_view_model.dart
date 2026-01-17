@@ -15,9 +15,7 @@ class UserSettingsViewModel extends _$UserSettingsViewModel {
   Future<UserSettingsState> build() async {
     final List<UserModel> users = await ref.read(usersLocalRepositoryProvider).list();
 
-    return UserSettingsState(
-      users: users,
-    );
+    return UserSettingsState(users: users);
   }
 
   Future<List<int>> listParentIds() async {
@@ -34,22 +32,14 @@ class UserSettingsViewModel extends _$UserSettingsViewModel {
 
     state = await AsyncValue.guard(() async {
       final List<UserModel> users = await ref.read(usersLocalRepositoryProvider).list();
-      return UserSettingsState(
-        users: users,
-      );
+      return UserSettingsState(users: users);
     });
   }
 
   void setEditingUser(UserModel? editingUser) {
-    state.whenData(
-      (UserSettingsState data) {
-        state = AsyncData<UserSettingsState>(
-          data.copyWith(
-            editingUser: editingUser,
-          ),
-        );
-      },
-    );
+    state.whenData((UserSettingsState data) {
+      state = AsyncData<UserSettingsState>(data.copyWith(editingUser: editingUser));
+    });
   }
 
   Future<void> deleteUser(int id) async {

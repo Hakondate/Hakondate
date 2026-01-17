@@ -29,18 +29,18 @@ abstract class UserModel with _$UserModel {
   const UserModel._();
 
   factory UserModel.fromDrift(UsersSchema schema) => UserModel(
-        id: schema.id,
-        name: schema.name,
-        schoolId: schema.schoolId,
-        schoolYear: schema.schoolYear,
-        authorizedAt: schema.authorizedAt,
-      );
+    id: schema.id,
+    name: schema.name,
+    schoolId: schema.schoolId,
+    schoolYear: schema.schoolYear,
+    authorizedAt: schema.authorizedAt,
+  );
 
   UsersTableCompanion toDrift() => UsersTableCompanion(
-        id: Value<int>(id),
-        name: Value<String>(name),
-        schoolId: Value<int>(schoolId),
-        schoolYear: Value<int>(schoolYear),
-        authorizedAt: Value<DateTime?>(authorizedAt),
-      );
+    id: Value<int>(id),
+    name: Value<String>(name),
+    schoolId: Value<int>(schoolId),
+    schoolYear: Value<int>(schoolYear),
+    authorizedAt: Value<DateTime?>(authorizedAt),
+  );
 }

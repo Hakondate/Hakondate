@@ -30,6 +30,6 @@ class FoodstuffsTable extends Table {
   //　説明
   // ignore: always_specify_types
   List<Set<Column>> get uniqueKeys => [
-        <Column<Object>>{name, gram, isHeat, isAllergy},
-      ];
+    <Column<Object>>{name, gram, isHeat, isAllergy},
+  ];
 }

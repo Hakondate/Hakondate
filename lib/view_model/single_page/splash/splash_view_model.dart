@@ -41,10 +41,7 @@ class SplashViewModel extends _$SplashViewModel {
     return SplashState();
   }
 
-  Future<void> initialize({
-    Future<void> Function()? termsUpdated,
-    Future<void> Function(Exception, StackTrace)? errorOccurred,
-  }) async {
+  Future<void> initialize({Future<void> Function()? termsUpdated, Future<void> Function(Exception, StackTrace)? errorOccurred}) async {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       state = SplashState(status: LoadingStatus.reading);
       try {
@@ -63,9 +60,7 @@ class SplashViewModel extends _$SplashViewModel {
           return routemaster.replace('/terms');
         }
 
-        final DateTime termsAgreedDay = DateTime.fromMillisecondsSinceEpoch(
-          prefs.getInt(AppKey.sharedPreferencesKey.agreedTermsDay) ?? 0,
-        );
+        final DateTime termsAgreedDay = DateTime.fromMillisecondsSinceEpoch(prefs.getInt(AppKey.sharedPreferencesKey.agreedTermsDay) ?? 0);
 
         if (termsAgreedDay.isBefore(RecordDate.termsLastUpdateDay)) {
           state = SplashState();
@@ -78,10 +73,7 @@ class SplashViewModel extends _$SplashViewModel {
 
         if (dictionaryInitializedDay.isBefore(RecordDate.dictionaryLastUpdateDay)) {
           await _initializeDictionaries();
-          await prefs.setInt(
-            AppKey.sharedPreferencesKey.initializedDictionaryDay,
-            DateTime.now().millisecondsSinceEpoch,
-          );
+          await prefs.setInt(AppKey.sharedPreferencesKey.initializedDictionaryDay, DateTime.now().millisecondsSinceEpoch);
         }
 
         await _initializeMenus();
@@ -128,10 +120,7 @@ class SplashViewModel extends _$SplashViewModel {
     final DateTime now = DateTime.now();
 
     state = SplashState(status: LoadingStatus.checkingUpdate);
-    final List<MenuModel> menus = await _menusRemoteRepository.get(
-      from: DateTime(now.year, now.month - 2),
-      updateAt: latestUpdate,
-    );
+    final List<MenuModel> menus = await _menusRemoteRepository.get(from: DateTime(now.year, now.month - 2), updateAt: latestUpdate);
 
     state = SplashState(status: LoadingStatus.updating);
     await Future.forEach(menus, (MenuModel menu) async {

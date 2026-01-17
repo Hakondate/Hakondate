@@ -33,27 +33,15 @@ class SigningUpDialog extends ConsumerWidget {
                 isEditing
                     ? '以下の内容でお子様の変更を登録します'
                     : '以下の内容でお子様を登録します\n'
-                        '※ あとで変更することができます',
+                          '※ あとで変更することができます',
               ),
             ),
             DefaultTextStyle(
-              style: TextStyle(
-                color: AppColor.brand.secondary,
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                height: 1.4,
-              ),
+              style: TextStyle(color: AppColor.brand.secondary, fontWeight: FontWeight.bold, fontSize: 16, height: 1.4),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
-                      Text('お名前：　'),
-                      Text('学校：　'),
-                      Text('学年：　'),
-                    ],
-                  ),
+                  const Column(crossAxisAlignment: CrossAxisAlignment.end, children: <Widget>[Text('お名前：　'), Text('学校：　'), Text('学年：　')]),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -79,20 +67,17 @@ class SigningUpDialog extends ConsumerWidget {
             await ref.read(signupViewModelProvider.notifier).signup();
           }
           await routemaster.pop().whenComplete(
-                () async => showDialog(
-                  // 説明
-                  // ignore: use_build_context_synchronously
-                  context: context,
-                  barrierDismissible: false,
-                  builder: (BuildContext context) => _statusDialog(),
-                ),
-              );
+            () async => showDialog(
+              // 説明
+              // ignore: use_build_context_synchronously
+              context: context,
+              barrierDismissible: false,
+              builder: (BuildContext context) => _statusDialog(),
+            ),
+          );
         },
       ),
-      secondAction: HakondateActionButton(
-        text: const Text('修正する'),
-        onTap: routemaster.pop,
-      ),
+      secondAction: HakondateActionButton(text: const Text('修正する'), onTap: routemaster.pop),
     );
   }
 
@@ -122,10 +107,7 @@ class SigningUpDialog extends ConsumerWidget {
           );
         }
 
-        return const HakondateDialog(
-          title: Text('登録中'),
-          body: Text('お子様情報を登録中です'),
-        );
+        return const HakondateDialog(title: Text('登録中'), body: Text('お子様情報を登録中です'));
       },
     );
   }

@@ -4,11 +4,7 @@ import 'package:hakondate/constant/app_color.dart';
 import 'package:hakondate/constant/size.dart';
 
 class NonLunchesDayBody extends StatelessWidget {
-  const NonLunchesDayBody({
-    required this.imageFileName,
-    required this.text,
-    super.key,
-  });
+  const NonLunchesDayBody({required this.imageFileName, required this.text, super.key});
 
   final String imageFileName;
   final String text;
@@ -22,18 +18,11 @@ class NonLunchesDayBody extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Image.asset(
-            'assets/images/status/menu_status/$imageFileName',
-            width: screenWidth / 2,
-          ),
+          Image.asset('assets/images/status/menu_status/$imageFileName', width: screenWidth / 2),
           const SizedBox(height: MarginSize.normal),
           Text(
             text,
-            style: TextStyle(
-              fontSize: FontSize.status,
-              fontWeight: FontWeight.bold,
-              color: AppColor.text.primary,
-            ),
+            style: TextStyle(fontSize: FontSize.status, fontWeight: FontWeight.bold, color: AppColor.text.primary),
           ),
           const SizedBox(height: MarginSize.kTabBarHeight),
         ],

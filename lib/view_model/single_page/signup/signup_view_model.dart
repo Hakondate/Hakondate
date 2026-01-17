@@ -43,9 +43,7 @@ class SignupViewModel extends _$SignupViewModel {
       );
     }
 
-    return SignupState(
-      schools: schools,
-    );
+    return SignupState(schools: schools);
   }
 
   Future<void> signup() async {
@@ -63,11 +61,7 @@ class SignupViewModel extends _$SignupViewModel {
           throw const ParametersException('Do not allow Null parameter');
         }
 
-        await ref.read(userViewModelProvider.notifier).createUser(
-              name: name,
-              schoolId: schoolId,
-              schoolYear: schoolYear,
-            );
+        await ref.read(userViewModelProvider.notifier).createUser(name: name, schoolId: schoolId, schoolYear: schoolYear);
         state = cache;
       } on Exception catch (error, stack) {
         debugPrint(error.toString());
@@ -92,11 +86,7 @@ class SignupViewModel extends _$SignupViewModel {
           throw const ParametersException('Do not allow Null parameter');
         }
 
-        await ref.read(userViewModelProvider.notifier).updateCurrentUser(
-              name: name,
-              schoolId: schoolId,
-              schoolYear: schoolYear,
-            );
+        await ref.read(userViewModelProvider.notifier).updateCurrentUser(name: name, schoolId: schoolId, schoolYear: schoolYear);
 
         state = cache;
       } on Exception catch (error, stack) {
@@ -117,23 +107,11 @@ class SignupViewModel extends _$SignupViewModel {
   }
 
   void updateLastName(String? lastName) {
-    state.whenData(
-      (SignupState data) => state = AsyncData<SignupState>(
-        data.copyWith(
-          lastName: lastName,
-        ),
-      ),
-    );
+    state.whenData((SignupState data) => state = AsyncData<SignupState>(data.copyWith(lastName: lastName)));
   }
 
   void updateFirstName(String? firstName) {
-    state.whenData(
-      (SignupState data) => state = AsyncData<SignupState>(
-        data.copyWith(
-          firstName: firstName,
-        ),
-      ),
-    );
+    state.whenData((SignupState data) => state = AsyncData<SignupState>(data.copyWith(firstName: firstName)));
   }
 
   Future<void> updateSchool(int id) async {
@@ -168,30 +146,18 @@ class SignupViewModel extends _$SignupViewModel {
   }
 
   void updateSchoolYear(int year) {
-    state.whenData(
-      (SignupState data) => state = AsyncData<SignupState>(
-        data.copyWith(
-          schoolYear: year,
-          schoolYearTrailing: '$year年生',
-        ),
-      ),
-    );
+    state.whenData((SignupState data) => state = AsyncData<SignupState>(data.copyWith(schoolYear: year, schoolYearTrailing: '$year年生')));
   }
 
   bool checkValidation() {
     _checkNameValidation();
     _checkSchoolValidation();
 
-    return state.maybeWhen(
-      data: (SignupState data) => data.nameErrorState == null && data.schoolErrorState == null,
-      orElse: () => false,
-    );
+    return state.maybeWhen(data: (SignupState data) => data.nameErrorState == null && data.schoolErrorState == null, orElse: () => false);
   }
 
   void updateAuthorization({required bool authorized}) {
-    state.whenData(
-      (SignupState data) => state = AsyncData<SignupState>(data.copyWith(authorized: authorized)),
-    );
+    state.whenData((SignupState data) => state = AsyncData<SignupState>(data.copyWith(authorized: authorized)));
   }
 
   void _checkNameValidation() {
@@ -211,17 +177,11 @@ class SignupViewModel extends _$SignupViewModel {
       }
 
       if (data.schoolId == null && data.schoolYear == null) {
-        state = AsyncData<SignupState>(
-          data.copyWith(schoolErrorState: '学校・学年を選択してください'),
-        );
+        state = AsyncData<SignupState>(data.copyWith(schoolErrorState: '学校・学年を選択してください'));
       } else if (data.schoolId == null) {
-        state = AsyncData<SignupState>(
-          data.copyWith(schoolErrorState: '学校を選択してください'),
-        );
+        state = AsyncData<SignupState>(data.copyWith(schoolErrorState: '学校を選択してください'));
       } else if (data.schoolYear == null) {
-        state = AsyncData<SignupState>(
-          data.copyWith(schoolErrorState: '学年を選択してください'),
-        );
+        state = AsyncData<SignupState>(data.copyWith(schoolErrorState: '学年を選択してください'));
       }
     });
   }

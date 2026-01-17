@@ -1,7 +1,3 @@
 part of 'dish_model.dart';
 
-enum DishCategory {
-  main,
-  drink,
-  side,
-}
+enum DishCategory { main, drink, side }

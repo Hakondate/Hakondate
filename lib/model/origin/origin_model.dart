@@ -10,10 +10,7 @@ part 'origin_model.freezed.dart';
 
 @freezed
 abstract class OriginModel with _$OriginModel {
-  const factory OriginModel({
-    required DateTime date,
-    required List<OriginCategoryModel> categories,
-  }) = _OriginModel;
+  const factory OriginModel({required DateTime date, required List<OriginCategoryModel> categories}) = _OriginModel;
   const OriginModel._();
 
   factory OriginModel.fromFirestore(DocumentSnapshot<Map<String, dynamic>> doc) {
@@ -28,8 +25,8 @@ abstract class OriginModel with _$OriginModel {
   }
 
   Map<String, Object> toFirestore() => <String, Object>{
-        'date': date,
-        'categories': categories.map((OriginCategoryModel category) => category.toFirestore()).toList(),
-        'updatedAt': DateTime.now(),
-      };
+    'date': date,
+    'categories': categories.map((OriginCategoryModel category) => category.toFirestore()).toList(),
+    'updatedAt': DateTime.now(),
+  };
 }

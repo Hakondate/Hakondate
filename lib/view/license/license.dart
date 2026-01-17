@@ -14,14 +14,10 @@ class License extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColor.ui.white,
-      appBar: const FadeUpAppBar(
-        title: Text('ライセンス'),
-      ),
+      appBar: const FadeUpAppBar(title: Text('ライセンス')),
       body: ListView.separated(
         itemCount: directDependencyLicenses.length,
-        separatorBuilder: (_, __) => const Divider(
-          height: 0,
-        ),
+        separatorBuilder: (_, __) => const Divider(height: 0),
         itemBuilder: (_, int index) {
           final Package package = directDependencyLicenses[index];
           return ListTile(

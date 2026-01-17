@@ -9,7 +9,5 @@ part 'school_grade.dart';
 
 @freezed
 abstract class UserState with _$UserState {
-  const factory UserState({
-    UserModel? currentUser,
-  }) = _UserState;
+  const factory UserState({UserModel? currentUser}) = _UserState;
 }

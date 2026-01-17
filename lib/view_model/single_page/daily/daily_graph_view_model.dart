@@ -26,8 +26,8 @@ Future<List<double>> graphValues(Ref ref) async {
 
   final double vitaminSufficiency =
       (menu.retinol / slns.retinol + menu.vitaminB1 / slns.vitaminB1 + menu.vitaminB2 / slns.vitaminB2 + menu.vitaminC / slns.vitaminC) /
-          4 *
-          100.0;
+      4 *
+      100.0;
   final double mineralSufficiency =
       (menu.calcium / slns.calcium + menu.magnesium / slns.magnesium + menu.iron / slns.iron + menu.zinc / slns.zinc) / 4 * 100.0;
 
@@ -55,12 +55,5 @@ List<double> graphRawValues(Ref ref) {
     return <double>[0, 0, 0, 0, 0, 0];
   }
 
-  return <double>[
-    menu.energy,
-    menu.protein,
-    menu.vitamin,
-    menu.mineral,
-    menu.carbohydrate,
-    menu.lipid,
-  ];
+  return <double>[menu.energy, menu.protein, menu.vitamin, menu.mineral, menu.carbohydrate, menu.lipid];
 }
