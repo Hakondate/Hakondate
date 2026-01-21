@@ -55,8 +55,11 @@ class SchoolsLocalRepository extends SchoolsLocalRepositoryAPI {
 
   @override
   Future<SchoolModel> getById(int id) async {
-    final SchoolsSchema? schoolsSchema =
-        await (_db.select(_db.schoolsTable)..where(($SchoolsTableTable t) => t.id.equals(id))).getSingleOrNull();
+    final SchoolsSchema? schoolsSchema = await (_db.select(_db.schoolsTable)
+          ..where(($SchoolsTableTable t) {
+            return t.id.equals(id);
+          }))
+        .getSingleOrNull();
 
     if (schoolsSchema == null) {
       throw SQLiteException('Failed to select $id from schoolsTable');

@@ -38,6 +38,7 @@ class MenusRemoteRepository extends MenusRemoteRepositoryAPI {
         .where('schoolId', whereIn: schoolIds)
         .where('day', isGreaterThanOrEqualTo: from)
         .where('updateAt', isGreaterThan: updateAt)
+        .where('publishAllowed', isEqualTo: true)
         .get();
 
     return menus.docs.map((QueryDocumentSnapshot<MenuModel> doc) => doc.data()).toList();

@@ -23,7 +23,7 @@ final userAuthorizedProvider = FutureProvider<bool>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef UserAuthorizedRef = FutureProviderRef<bool>;
-String _$userViewModelHash() => r'4b29469389fc1cb5dd6a5c4b37132857021c103d';
+String _$userViewModelHash() => r'70b22bdea9963b4f4cebfad1e3b5ca1033c10e24';
 
 /// See also [UserViewModel].
 @ProviderFor(UserViewModel)

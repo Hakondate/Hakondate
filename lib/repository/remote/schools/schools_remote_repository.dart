@@ -33,7 +33,8 @@ class SchoolsRemoteRepository extends SchoolsRemoteRepositoryAPI {
 
   @override
   Future<List<SchoolModel>> get({required DateTime updateAt}) async {
-    final QuerySnapshot<SchoolModel?> schools = await _db.where('updateAt', isGreaterThan: updateAt).get();
+    final QuerySnapshot<SchoolModel?> schools =
+        await _db.where('updateAt', isGreaterThan: updateAt).where('publishAllowed', isEqualTo: true).get();
 
     return schools.docs.map((QueryDocumentSnapshot<SchoolModel?> doc) => doc.data()).whereType<SchoolModel>().toList();
   }

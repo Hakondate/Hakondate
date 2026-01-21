@@ -1,4 +1,3 @@
-// 説明
 // ignore_for_file: always_specify_types
 
 import 'package:drift/drift.dart';
@@ -14,6 +13,7 @@ class SchoolsTable extends Table {
   DateTimeColumn get updateAt => dateTime().withDefault(Constant(DateTime.now()))();
   BoolColumn get authorizationRequired => boolean().withDefault(const Constant(false))();
   DateTimeColumn get authorizationKeyUpdatedAt => dateTime().nullable()();
+  BoolColumn get publishAllowed => boolean().withDefault(const Constant(false))();
 
   @override
   Set<Column> get primaryKey => {id};

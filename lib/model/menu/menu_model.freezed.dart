@@ -43,6 +43,7 @@ class LunchesDayMenuModel extends MenuModel {
       required this.day,
       required this.schoolId,
       required final List<DishModel> dishes,
+      required this.publishAllowed,
       this.event})
       : _dishes = dishes,
         super._();
@@ -57,6 +58,7 @@ class LunchesDayMenuModel extends MenuModel {
     return EqualUnmodifiableListView(_dishes);
   }
 
+  final bool publishAllowed;
   final String? event;
 
   /// Create a copy of MenuModel
@@ -76,16 +78,18 @@ class LunchesDayMenuModel extends MenuModel {
             (identical(other.schoolId, schoolId) ||
                 other.schoolId == schoolId) &&
             const DeepCollectionEquality().equals(other._dishes, _dishes) &&
+            (identical(other.publishAllowed, publishAllowed) ||
+                other.publishAllowed == publishAllowed) &&
             (identical(other.event, event) || other.event == event));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, id, day, schoolId,
-      const DeepCollectionEquality().hash(_dishes), event);
+      const DeepCollectionEquality().hash(_dishes), publishAllowed, event);
 
   @override
   String toString() {
-    return 'MenuModel.lunchesDay(id: $id, day: $day, schoolId: $schoolId, dishes: $dishes, event: $event)';
+    return 'MenuModel.lunchesDay(id: $id, day: $day, schoolId: $schoolId, dishes: $dishes, publishAllowed: $publishAllowed, event: $event)';
   }
 }
 
@@ -101,6 +105,7 @@ abstract mixin class $LunchesDayMenuModelCopyWith<$Res>
       DateTime day,
       int schoolId,
       List<DishModel> dishes,
+      bool publishAllowed,
       String? event});
 }
 
@@ -120,6 +125,7 @@ class _$LunchesDayMenuModelCopyWithImpl<$Res>
     Object? day = null,
     Object? schoolId = null,
     Object? dishes = null,
+    Object? publishAllowed = null,
     Object? event = freezed,
   }) {
     return _then(LunchesDayMenuModel(
@@ -139,6 +145,10 @@ class _$LunchesDayMenuModelCopyWithImpl<$Res>
           ? _self._dishes
           : dishes // ignore: cast_nullable_to_non_nullable
               as List<DishModel>,
+      publishAllowed: null == publishAllowed
+          ? _self.publishAllowed
+          : publishAllowed // ignore: cast_nullable_to_non_nullable
+              as bool,
       event: freezed == event
           ? _self.event
           : event // ignore: cast_nullable_to_non_nullable

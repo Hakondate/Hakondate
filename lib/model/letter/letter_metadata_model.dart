@@ -9,6 +9,7 @@ abstract class LetterMetadataModel with _$LetterMetadataModel {
     required String path,
     required int parentId,
     required DateTime updateAt,
+    // 本来ならpublishAllowedの項目も追加するべきだが，現在廃止中の機能のため行わない
   }) =>
       LetterMetadataModel.data(
         title: title,

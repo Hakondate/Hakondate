@@ -185,9 +185,9 @@ class UserViewModel extends _$UserViewModel {
     final SchoolModel school = await _schoolsLocalRepository.getById(schoolId);
     if (school.authorizationRequired) {
       final List<UserModel> users = await ref.read(usersLocalRepositoryProvider).list();
-      final List<UserModel> usersWithaoutCurrent = users.where((UserModel user) => user.id != state.currentUser!.id).toList();
+      final List<UserModel> usersWithoutCurrent = users.where((UserModel user) => user.id != state.currentUser!.id).toList();
 
-      return usersWithaoutCurrent
+      return usersWithoutCurrent
           .firstWhereOrNull(
             (UserModel user) => user.schoolId == schoolId,
           )
