@@ -71,6 +71,13 @@ android {
     namespace 'org.hakondate'
     compileSdkVersion 35
 
+    packagingOptions {
+        jniLibs {
+            // AGP 8.2.1 + 16 KB page-size emulator can reject uncompressed native libs.
+            useLegacyPackaging true
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

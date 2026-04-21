@@ -1,6 +1,93 @@
 # はこんだて
 ## サービス概要
 
+## DevContainer (Android)
+このリポジトリでは、VS Code / Cursor 向けに Android 開発用 DevContainer を提供します。  
+正式サポートする構成は以下です。
+
+- コンテナ: Ubuntu 24.04 ベースの `linux/amd64`
+- Flutter: `FVM` で `.fvmrc` の `3.27.3` を利用
+- Android SDK: コンテナ内に導入
+- 実行先: macOS / Windows ホスト側で起動した Android Emulator または実機
+
+### 前提
+- DevContainer は `linux/amd64` で起動します。
+- Apple Silicon Mac では Docker Desktop による x64 エミュレーション実行になるため、ビルド速度はネイティブ arm64 より低下します。
+- Android Emulator はコンテナ内では起動しません。
+- Docker Desktop on macOS arm64 では、Android Emulator に必要な仮想化支援を Linux コンテナへ実用的に渡せないため、コンテナ内 Emulator は正式サポートしません。
+
+### セットアップ
+1. VS Code または Cursor でこのリポジトリを開く。
+2. `Reopen in Container` を実行する。
+3. 初回起動時に `postCreate.sh` が以下を自動実行する。
+   - ホスト依存の Flutter / Gradle 生成物のクリーンアップ
+   - `fvm install`
+   - `fvm use --force`
+   - `fvm flutter config --android-sdk /opt/android-sdk`
+   - `fvm flutter pub get`
+   - `fvm flutter doctor -v`
+
+### 生成物の扱い
+- ホスト macOS 上で作られた `.dart_tool/flutter_build`, `build`, `android/.gradle` などの生成物は、`/Users/...` のようなホスト絶対パスを保持することがあります。
+- その状態で DevContainer 内から `fvm flutter run` を実行すると、コンテナ内に存在しないホストパスを参照してビルドが失敗します。
+- `postCreate.sh` では以下を自動削除し、コンテナ内で再生成させます。
+  - `.dart_tool/flutter_build`
+  - `build`
+  - `android/.gradle`
+  - `.flutter-plugins`
+  - `.flutter-plugins-dependencies`
+- Android の `local.properties` も毎回コンテナ向けに再生成します。
+- さらに、`FLUTTER_BUILD_DIR` を `/home/vscode/.cache/hakondate/flutter-build` に向け、Flutter の中間生成物を bind mount ではなくコンテナローカルへ逃がします。
+
+### トラブルシュート
+`fvm flutter run` がホストパス `/Users/...` を参照して失敗する場合は、コンテナ内で次を実行してから再試行します。
+
+```bash
+rm -rf .dart_tool/flutter_build build android/.gradle .flutter-plugins .flutter-plugins-dependencies
+rm -rf /home/vscode/.cache/hakondate/flutter-build
+fvm flutter pub get
+fvm flutter run --dart-define=FLAVOR=dev
+```
+
+Gradle の file watcher は bind mount 環境で不安定なため、`android/gradle.properties` で無効化しています。
+
+Android 15 の 16 KB page-size エミュレータ (`sdk gphone16k arm64` など) を使う場合は、AGP `8.2.1` では未圧縮 native lib の packaging で `INSTALL_FAILED_INVALID_APK` が起きることがあります。  
+このリポジトリでは `android/app/build.gradle` で `jniLibs.useLegacyPackaging true` を設定し、開発時にインストール失敗しないようにしています。
+
+### ホスト側 Emulator 連携
+Android Emulator はホスト側で起動します。コンテナ内からはホストの ADB サーバーへ接続します。
+
+#### macOS / Windows ホスト側
+1. Android Studio などで Emulator を起動する。
+2. ホスト側で ADB を TCP 5037 で待ち受ける状態にする。
+
+例:
+
+```bash
+adb kill-server
+adb -a nodaemon server start
+```
+
+この状態で DevContainer 側は `ADB_SERVER_SOCKET=tcp:host.docker.internal:5037` を使ってホスト ADB に接続します。
+
+### コンテナ内での基本コマンド
+```bash
+adb devices
+fvm flutter devices
+fvm flutter run --dart-define=FLAVOR=dev
+```
+
+### 確認コマンド
+```bash
+java -version
+sdkmanager --list
+fvm --version
+fvm flutter --version
+fvm flutter doctor -v
+fvm flutter analyze
+fvm flutter build apk --debug --dart-define=FLAVOR=dev
+```
+
 ## 構成
 ### 利用技術・パッケージ
 #### 状態管理

@@ -1,0 +1,43 @@
+{
+  "name": "Hakondate Flutter Android",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "..",
+    "options": [
+      "--platform=linux/amd64"
+    ]
+  },
+  "runArgs": [
+    "--platform=linux/amd64",
+    "--add-host=host.docker.internal:host-gateway"
+  ],
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "containerEnv": {
+    "ANDROID_SDK_ROOT": "/opt/android-sdk",
+    "ANDROID_HOME": "/opt/android-sdk",
+    "FLUTTER_BUILD_DIR": "/home/vscode/.cache/hakondate/flutter-build",
+    "JAVA_HOME": "/usr/lib/jvm/java-17-openjdk-amd64",
+    "PUB_CACHE": "/home/vscode/.pub-cache",
+    "ADB_SERVER_SOCKET": "tcp:host.docker.internal:5037"
+  },
+  "mounts": [
+    "source=hakondate-gradle-cache,target=/home/vscode/.gradle,type=volume",
+    "source=hakondate-pub-cache,target=/home/vscode/.pub-cache,type=volume",
+    "source=hakondate-fvm-cache,target=/home/vscode/.fvm,type=volume",
+    "source=hakondate-android-avd,target=/home/vscode/.android,type=volume"
+  ],
+  "postCreateCommand": "sudo mkdir -p /home/vscode/.gradle /home/vscode/.pub-cache /home/vscode/.fvm /home/vscode/.android /home/vscode/.cache/hakondate/flutter-build && sudo chown -R vscode:vscode /home/vscode/.gradle /home/vscode/.pub-cache /home/vscode/.fvm /home/vscode/.android /home/vscode/.cache/hakondate && bash .devcontainer/postCreate.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Dart-Code.dart-code",
+        "Dart-Code.flutter"
+      ],
+      "settings": {
+        "dart.flutterSdkPath": ".fvm/flutter_sdk",
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+  "remoteUser": "vscode"
+}
