@@ -5,7 +5,10 @@ cd "$(dirname "$0")/.."
 
 source .devcontainer/setup-env.sh
 
-chmod +x .devcontainer/flutter-run-host-adb.sh .vscode/flutter-tool.sh
+chmod +x \
+  .devcontainer/flutter-run-host-adb.sh \
+  .devcontainer/flutter-tool.sh \
+  .devcontainer/vmservice-proxy.sh
 
 cleanup_container_generated_files() {
   # Generated artifacts can capture host-only absolute paths such as /Users/...

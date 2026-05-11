@@ -68,14 +68,39 @@ adb kill-server
 adb -a nodaemon server start
 ```
 
-この状態で DevContainer 側は `ADB_SERVER_SOCKET=tcp:host.docker.internal:5037` を使ってホスト ADB に接続します。
+#### DevContainer 側
+DevContainer 側は `ADB_SERVER_SOCKET=tcp:host.docker.internal:5037` を使ってホスト ADB に接続します。
+
+```bash
+adb devices
+```
+
+`flutter run` は VM Service 接続のために `adb forward` を使います。ホスト ADB サーバーに接続している場合、この転送ポートはホスト側に作られるため、DevContainer からは VM Service proxy を併用します。
 
 ### コンテナ内での基本コマンド
 ```bash
 adb devices
 fvm flutter devices
-fvm flutter run --dart-define=FLAVOR=dev
+.devcontainer/flutter-run-host-adb.sh --dart-define=FLAVOR=dev
 ```
+
+既定では VM Service に `50000`、DDS に `50001` を使います。ホスト側でポートが埋まっている場合は、次のように変更できます。
+
+```bash
+FLUTTER_HOST_VMSERVICE_PORT=50100 FLUTTER_DDS_PORT=50101 .devcontainer/flutter-run-host-adb.sh --dart-define=FLAVOR=dev
+```
+
+VS Code の Run/Debug から通常実行する場合は、`dev` / `stg` / `prod` を選びます。host ADB + VM Service proxy を使う場合は、`dev-devcontainer` / `stg-devcontainer` / `prod-devcontainer` を選びます。
+
+VS Code / Cursor のデバッグ機能を使う場合は、`dev-devcontainer` / `stg-devcontainer` / `prod-devcontainer` を選びます。これらは Dart-Code 標準の debug 経路を使い、`preLaunchTask` で `.devcontainer/vmservice-proxy.sh` を起動します。
+
+ターミナルから手動で起動する場合だけ、次を使います。
+
+```bash
+.devcontainer/flutter-run-host-adb.sh --dart-define=FLAVOR=dev
+```
+
+`flutter-run-host-adb.sh` は手動実行用のラッパーです。VS Code の launch から直接実行すると Dart-Code の Debug UI、ブレークポイント、Variables、Call Stack、Hot Reload ボタンが効かないため、launch では使いません。
 
 ### 確認コマンド
 ```bash

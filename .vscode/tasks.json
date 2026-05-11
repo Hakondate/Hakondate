@@ -1,0 +1,27 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "devcontainer: vmservice proxy",
+      "type": "shell",
+      "command": ".devcontainer/vmservice-proxy.sh",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "devcontainer-vmservice-proxy",
+        "pattern": {
+          "regexp": "$^"
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^Starting VM Service proxy",
+          "endsPattern": "^VM Service proxy ready"
+        }
+      },
+      "presentation": {
+        "reveal": "silent",
+        "panel": "dedicated",
+        "clear": false
+      }
+    }
+  ]
+}

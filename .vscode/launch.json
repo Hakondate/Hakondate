@@ -6,9 +6,7 @@
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
-      "customTool": ".vscode/flutter-tool.sh",
-      "templateFor": "",
-      "toolArgs": [
+      "args": [
         "--dart-define=FLAVOR=dev"
       ]
     },
@@ -17,8 +15,7 @@
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
-      "customTool": ".vscode/flutter-tool.sh",
-      "toolArgs": [
+      "args": [
         "--dart-define=FLAVOR=stg"
       ]
     },
@@ -27,8 +24,43 @@
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
-      "customTool": ".vscode/flutter-tool.sh",
+      "args": [
+        "--dart-define=FLAVOR=prod"
+      ]
+    },
+    {
+      "name": "dev-devcontainer",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "preLaunchTask": "devcontainer: vmservice proxy",
       "toolArgs": [
+        "--host-vmservice-port=50000",
+        "--dds-port=50001",
+        "--dart-define=FLAVOR=dev"
+      ]
+    },
+    {
+      "name": "stg-devcontainer",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "preLaunchTask": "devcontainer: vmservice proxy",
+      "toolArgs": [
+        "--host-vmservice-port=50000",
+        "--dds-port=50001",
+        "--dart-define=FLAVOR=stg"
+      ]
+    },
+    {
+      "name": "prod-devcontainer",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "preLaunchTask": "devcontainer: vmservice proxy",
+      "toolArgs": [
+        "--host-vmservice-port=50000",
+        "--dds-port=50001",
         "--dart-define=FLAVOR=prod"
       ]
     }
