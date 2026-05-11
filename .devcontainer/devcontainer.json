@@ -1,12 +1,6 @@
 {
   "name": "Hakondate Flutter Android",
-  "build": {
-    "dockerfile": "Dockerfile",
-    "context": "..",
-    "options": [
-      "--platform=linux/amd64"
-    ]
-  },
+  "image": "takuto1127/hakondate-devcontainer:2026.05.11",
   "runArgs": [
     "--platform=linux/amd64",
     "--add-host=host.docker.internal:host-gateway"

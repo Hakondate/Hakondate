@@ -5,7 +5,7 @@
 このリポジトリでは、VS Code / Cursor 向けに Android 開発用 DevContainer を提供します。  
 正式サポートする構成は以下です。
 
-- コンテナ: Ubuntu 24.04 ベースの `linux/amd64`
+- コンテナ: Ubuntu 24.04 ベースの `linux/amd64` (`takuto1127/hakondate-devcontainer:2026.05.11`)
 - Flutter: `FVM` で `.fvmrc` の `3.27.3` を利用
 - Android SDK: コンテナ内に導入
 - 実行先: macOS / Windows ホスト側で起動した Android Emulator または実機
@@ -19,6 +19,7 @@
 ### セットアップ
 1. VS Code または Cursor でこのリポジトリを開く。
 2. `Reopen in Container` を実行する。
+   - DevContainer は Dockerfile をローカルビルドせず、`takuto1127/hakondate-devcontainer:2026.05.11` を pull して使います。
 3. 初回起動時に `postCreate.sh` が以下を自動実行する。
    - ホスト依存の Flutter / Gradle 生成物のクリーンアップ
    - `fvm install`
