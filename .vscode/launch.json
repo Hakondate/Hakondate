@@ -6,7 +6,9 @@
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
-      "args": [
+      "customTool": ".vscode/flutter-tool.sh",
+      "templateFor": "",
+      "toolArgs": [
         "--dart-define=FLAVOR=dev"
       ]
     },
@@ -15,7 +17,8 @@
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
-      "args": [
+      "customTool": ".vscode/flutter-tool.sh",
+      "toolArgs": [
         "--dart-define=FLAVOR=stg"
       ]
     },
@@ -24,7 +27,8 @@
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
-      "args": [
+      "customTool": ".vscode/flutter-tool.sh",
+      "toolArgs": [
         "--dart-define=FLAVOR=prod"
       ]
     }

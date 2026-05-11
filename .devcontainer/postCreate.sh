@@ -5,6 +5,8 @@ cd "$(dirname "$0")/.."
 
 source .devcontainer/setup-env.sh
 
+chmod +x .devcontainer/flutter-run-host-adb.sh .vscode/flutter-tool.sh
+
 cleanup_container_generated_files() {
   # Generated artifacts can capture host-only absolute paths such as /Users/...
   # Remove them when entering the container so Flutter/Gradle regenerate safely.
@@ -21,7 +23,10 @@ cleanup_container_generated_files() {
 
 for required_path in \
   "$ANDROID_SDK_ROOT/platform-tools/adb" \
+  "$ANDROID_SDK_ROOT/platforms/android-31" \
+  "$ANDROID_SDK_ROOT/platforms/android-34" \
   "$ANDROID_SDK_ROOT/platforms/android-35" \
+  "$ANDROID_SDK_ROOT/build-tools/34.0.0" \
   "$ANDROID_SDK_ROOT/build-tools/35.0.0"
 do
   if [ ! -e "$required_path" ]; then

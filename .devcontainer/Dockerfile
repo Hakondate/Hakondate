@@ -23,6 +23,7 @@ RUN apt-get update \
         ninja-build \
         openjdk-17-jdk \
         pkg-config \
+        socat \
         unzip \
         xz-utils \
         zip \
@@ -43,7 +44,10 @@ RUN mkdir -p /opt/android-sdk/cmdline-tools \
 RUN yes | sdkmanager --licenses >/dev/null \
     && sdkmanager \
         "platform-tools" \
+        "platforms;android-31" \
+        "platforms;android-34" \
         "platforms;android-35" \
+        "build-tools;34.0.0" \
         "build-tools;35.0.0" \
     && chown -R vscode:vscode /opt/android-sdk /home/vscode
 

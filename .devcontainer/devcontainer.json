@@ -11,6 +11,13 @@
     "--platform=linux/amd64",
     "--add-host=host.docker.internal:host-gateway"
   ],
+  "forwardPorts": [8080],
+  "portsAttributes": {
+    "8080": {
+      "label": "Flutter Web",
+      "onAutoForward": "openBrowser"
+    }
+  },
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   "containerEnv": {
     "ANDROID_SDK_ROOT": "/opt/android-sdk",
