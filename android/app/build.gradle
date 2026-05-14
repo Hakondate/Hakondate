@@ -40,30 +40,27 @@ if (project.hasProperty('dart-defines')) {
             }
 }
 
+def resolvedFlavor = dartEnvironmentVariables.FLAVOR ?: 'dev'
+
 def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file('key.properties')
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
 
-task copySources(type: Copy) {
-    from "src/${dartEnvironmentVariables.FLAVOR}/res"
-    into 'src/main/res'
-}
-
 task selectGoogleServicesJson {
-    doFirst {
-        copy {
-            from "src/firebase/${dartEnvironmentVariables.FLAVOR}/google-services.json"
-            into './'
-        }
+    doLast {
+        def sourceFile = file("src/firebase/${resolvedFlavor}/google-services.json")
+        def destinationFile = file('./google-services.json')
+        destinationFile.text = sourceFile.text
+        destinationFile.setReadable(true, false)
+        destinationFile.setWritable(true, false)
     }
 }
 
-tasks.whenTaskAdded { task ->
-    task.dependsOn copySources
-    if (task.name == 'processDebugGoogleServices' || task.name == 'processReleaseGoogleServices') {
-        task.dependsOn selectGoogleServicesJson
+afterEvaluate {
+    tasks.matching { task -> task.name == 'processDebugGoogleServices' || task.name == 'processReleaseGoogleServices' }.configureEach {
+        dependsOn selectGoogleServicesJson
     }
 }
 
@@ -97,11 +94,11 @@ android {
         targetSdkVersion 35
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
-        if (dartEnvironmentVariables.FLAVOR != 'prod') {
-            applicationIdSuffix ".${dartEnvironmentVariables.FLAVOR}"
+        if (resolvedFlavor != 'prod') {
+            applicationIdSuffix ".${resolvedFlavor}"
         }
         resValue "string", "app_name", "はこんだて" +
-                (dartEnvironmentVariables.FLAVOR == 'prod' ? '' : ".${dartEnvironmentVariables.FLAVOR}")
+                (resolvedFlavor == 'prod' ? '' : ".${resolvedFlavor}")
     }
     
     signingConfigs {
@@ -115,7 +112,7 @@ android {
 
     buildTypes {
         release {
-            if (dartEnvironmentVariables.FLAVOR == 'prod') {
+            if (resolvedFlavor == 'prod') {
                 signingConfig signingConfigs.release
             } else {
                 // TODO: Add your own signing config for the non-prod release build.

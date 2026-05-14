@@ -24,6 +24,22 @@ cleanup_container_generated_files() {
     "${FLUTTER_BUILD_DIR:-/home/vscode/.cache/hakondate/flutter-build}"
 }
 
+repair_android_sdk_package() {
+  local package_name="$1"
+  local package_dir="$2"
+  local package_xml="$package_dir/package.xml"
+
+  if [ ! -s "$package_xml" ]; then
+    echo "Repairing Android SDK package: $package_name" >&2
+    rm -rf "$package_dir"
+    yes | sdkmanager --sdk_root="$ANDROID_SDK_ROOT" "$package_name" >/dev/null
+  fi
+}
+
+repair_android_sdk_package "platforms;android-31" "$ANDROID_SDK_ROOT/platforms/android-31"
+repair_android_sdk_package "platforms;android-34" "$ANDROID_SDK_ROOT/platforms/android-34"
+repair_android_sdk_package "platforms;android-35" "$ANDROID_SDK_ROOT/platforms/android-35"
+
 for required_path in \
   "$ANDROID_SDK_ROOT/platform-tools/adb" \
   "$ANDROID_SDK_ROOT/platforms/android-31" \
