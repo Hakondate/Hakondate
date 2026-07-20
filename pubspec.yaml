@@ -22,7 +22,7 @@ dependencies:
   flutter_svg: 2.0.17
   flutter_pdfview: 1.4.0
   shimmer: 3.0.0
-  pin_code_fields: 8.0.1
+  pin_code_fields: 9.4.0
 
   # 状態管理関連
   flutter_riverpod: 2.6.1

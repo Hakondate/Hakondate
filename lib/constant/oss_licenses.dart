@@ -5732,14 +5732,14 @@ THE SOFTWARE.''',
     dependencies: [PackageRef('meta')]
   );
 
-/// pin_code_fields 8.0.1
+/// pin_code_fields 9.4.0
 const _pin_code_fields = Package(
     name: 'pin_code_fields',
-    description: 'A flutter package which will help you to generate pin code fields. Can be useful for OTP for example.',
-    homepage: 'https://github.com/adar2378',
+    description: 'A highly customizable PIN/OTP input field for Flutter with Material Design support and headless core for custom UIs.',
+    homepage: 'https://github.com/adar2378/pin_code_fields',
     repository: 'https://github.com/adar2378/pin_code_fields',
     authors: [],
-    version: '8.0.1',
+    version: '9.4.0',
     license: '''MIT License
 
 Copyright (c) 2019 A. K. M. Saiful Islam
