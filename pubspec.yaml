@@ -77,7 +77,7 @@ dev_dependencies:
   # コード生成
   build_runner: 2.4.14
   custom_lint: 0.7.5
-  riverpod_generator: 2.6.5
+  riverpod_generator: 4.0.9
   riverpod_lint: 2.6.5
   drift_dev: 2.24.0
   flutter_oss_licenses: 3.0.4
